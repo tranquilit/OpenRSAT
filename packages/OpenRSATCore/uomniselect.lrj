@@ -1,0 +1,10 @@
+{"version":1,"strings":[
+{"hash":170216990,"name":"tvisomniselect.toolbutton_attributeslist.caption","sourcebytes":[83,101,97,114,99,104,32,115,101,108,101,99,116,105,111,110],"value":"Search selection"},
+{"hash":346165,"name":"tvisomniselect.tisgrid_items.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
+{"hash":156067838,"name":"tvisomniselect.tisgrid_items.header.columns[1].text","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110],"value":"Description"},
+{"hash":81144514,"name":"tvisomniselect.tisgrid_items.header.columns[2].text","sourcebytes":[70,111,108,100,101,114],"value":"Folder"},
+{"hash":193503146,"name":"tvisomniselect.label_search.caption","sourcebytes":[83,101,97,114,99,104,32,58],"value":"Search :"},
+{"hash":77089212,"name":"tvisomniselect.button_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
+{"hash":1339,"name":"tvisomniselect.action_ok.caption","sourcebytes":[79,75],"value":"OK"},
+{"hash":51390315,"name":"tvisomniselect.action_menuitemclick.caption","sourcebytes":[65,99,116,105,111,110,95,77,101,110,117,73,116,101,109,67,108,105,99,107],"value":"Action_MenuItemClick"}
+]}

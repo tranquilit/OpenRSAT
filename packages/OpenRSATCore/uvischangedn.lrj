@@ -1,0 +1,5 @@
+{"version":1,"strings":[
+{"hash":139279726,"name":"tvischangedn.caption","sourcebytes":[67,104,97,110,103,101,32,68,78],"value":"Change DN"},
+{"hash":1339,"name":"tvischangedn.bitbtn_ok.caption","sourcebytes":[79,75],"value":"OK"},
+{"hash":77089212,"name":"tvischangedn.bitbtn_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"}
+]}

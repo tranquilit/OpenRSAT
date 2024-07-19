@@ -1,0 +1,126 @@
+object VisSelectNewRecordType: TVisSelectNewRecordType
+  Left = 2349
+  Height = 339
+  Top = 350
+  Width = 304
+  Caption = 'Resource Record Type'
+  ClientHeight = 339
+  ClientWidth = 304
+  Position = poOwnerFormCenter
+  LCLVersion = '4.1.0.0'
+  OnCreate = FormCreate
+  object Panel1: TPanel
+    Left = 8
+    Height = 25
+    Top = 306
+    Width = 288
+    Align = alBottom
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 25
+    ClientWidth = 288
+    TabOrder = 0
+    object BitBtn2: TBitBtn
+      Left = 226
+      Height = 25
+      Top = 0
+      Width = 62
+      Action = Action_Cancel
+      Align = alRight
+      AutoSize = True
+      TabOrder = 0
+    end
+    object BitBtn1: TBitBtn
+      Left = 118
+      Height = 25
+      Top = 0
+      Width = 100
+      Action = Action_CreateRecord
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Right = 8
+      TabOrder = 1
+    end
+  end
+  object Panel2: TPanel
+    Left = 8
+    Height = 290
+    Top = 8
+    Width = 288
+    Align = alClient
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 290
+    ClientWidth = 288
+    TabOrder = 1
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Panel2
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 15
+      Top = 0
+      Width = 288
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Select a resource record type:'
+    end
+    object ListBox1: TListBox
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Label1
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 88
+      Top = 15
+      Width = 288
+      Anchors = [akTop, akLeft, akRight]
+      ItemHeight = 0
+      TabOrder = 0
+      OnSelectionChange = ListBox1SelectionChange
+    end
+    object Label2: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = ListBox1
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 15
+      Top = 119
+      Width = 288
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 16
+      Caption = 'Description:'
+    end
+    object Memo1: TMemo
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Label2
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Panel2
+      AnchorSideBottom.Side = asrBottom
+      Left = 0
+      Height = 156
+      Top = 134
+      Width = 288
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      TabOrder = 1
+    end
+  end
+  object ActionList1: TActionList
+    Left = 112
+    Top = 48
+    object Action_CreateRecord: TAction
+      Caption = 'Create Record'
+      OnExecute = Action_CreateRecordExecute
+    end
+    object Action_Cancel: TAction
+      Caption = 'Cancel'
+      OnExecute = Action_CancelExecute
+    end
+  end
+end

@@ -1,0 +1,624 @@
+object VisSearch: TVisSearch
+  Left = -1247
+  Height = 547
+  Top = 124
+  Width = 779
+  BorderStyle = bsSingle
+  Caption = 'Search'
+  ClientHeight = 547
+  ClientWidth = 779
+  KeyPreview = True
+  Position = poOwnerFormCenter
+  LCLVersion = '4.1.0.0'
+  OnClose = FormClose
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  object Panel_Path: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 42
+    Top = 0
+    Width = 763
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 42
+    ClientWidth = 763
+    TabOrder = 1
+    object Label_Path: TLabel
+      AnchorSideLeft.Control = Panel_Path
+      AnchorSideTop.Control = Panel_Path
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 14
+      Width = 27
+      BorderSpacing.Around = 8
+      Caption = 'Path:'
+    end
+    object Edit_Path: TEdit
+      AnchorSideLeft.Control = Label_Path
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_Path
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = BitBtn_PathChange
+      Left = 43
+      Height = 23
+      Top = 10
+      Width = 637
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      ParentShowHint = False
+      TabOrder = 0
+    end
+    object BitBtn_PathChange: TBitBtn
+      AnchorSideTop.Control = Panel_Path
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_Path
+      AnchorSideRight.Side = asrBottom
+      Left = 688
+      Height = 25
+      Top = 9
+      Width = 67
+      Action = Action_ChangeDN
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 1
+    end
+  end
+  object Shape_LineTop: TShape
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Panel_Path
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 16
+    Height = 1
+    Top = 42
+    Width = 747
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 16
+    BorderSpacing.Right = 16
+    Pen.Color = clMedGray
+  end
+  object Splitter1: TSplitter
+    AnchorSideLeft.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Cursor = crVSplit
+    Left = 0
+    Height = 4
+    Top = 238
+    Width = 779
+    Align = alNone
+    Anchors = [akTop, akLeft, akRight]
+    ResizeAnchor = akTop
+  end
+  object Panel_Search: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Shape_LineTop
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Splitter1
+    Left = 8
+    Height = 195
+    Top = 43
+    Width = 763
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 195
+    ClientWidth = 763
+    Constraints.MinHeight = 150
+    TabOrder = 0
+    object PageControl_Search: TPageControl
+      AnchorSideLeft.Control = Panel_Search
+      AnchorSideTop.Control = Panel_Search
+      AnchorSideRight.Control = Panel_Buttons
+      AnchorSideBottom.Control = Panel_Search
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 179
+      Top = 8
+      Width = 678
+      ActivePage = TabSheet_Advanced
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Around = 8
+      Options = [nboShowCloseButtons]
+      TabIndex = 1
+      TabOrder = 0
+      object TabSheet_Basic: TTabSheet
+        Caption = 'Basic'
+        ClientHeight = 151
+        ClientWidth = 670
+        object Edit_BasicValue: TEdit
+          AnchorSideLeft.Control = TabSheet_Basic
+          AnchorSideLeft.Side = asrCenter
+          AnchorSideTop.Control = TabSheet_Basic
+          AnchorSideTop.Side = asrCenter
+          Left = 117
+          Height = 23
+          Top = 64
+          Width = 437
+          TabOrder = 0
+        end
+        object Label_BasicValue: TLabel
+          AnchorSideLeft.Control = Edit_BasicValue
+          AnchorSideBottom.Control = Edit_BasicValue
+          Left = 119
+          Height = 15
+          Top = 41
+          Width = 80
+          Anchors = [akLeft, akBottom]
+          BorderSpacing.Left = 2
+          BorderSpacing.Bottom = 8
+          Caption = 'Search a name:'
+        end
+      end
+      object TabSheet_Advanced: TTabSheet
+        Caption = 'Advanced'
+        ClientHeight = 151
+        ClientWidth = 670
+        object TisSearchEdit_AdvKey: TTisSearchEdit
+          AnchorSideLeft.Control = TabSheet_Advanced
+          AnchorSideTop.Control = RadioButton_AllCondition
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ComboBox_AdvCondition
+          Left = 8
+          Height = 23
+          Top = 35
+          Width = 269
+          Anchors = [akTop, akLeft, akRight]
+          AutoComplete = True
+          AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
+          AutoDropDown = True
+          BorderSpacing.Around = 8
+          ItemHeight = 15
+          TabOrder = 0
+          Buttons = <>
+        end
+        object Edit_AdvValue: TEdit
+          AnchorSideLeft.Control = ComboBox_AdvCondition
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = ComboBox_AdvCondition
+          AnchorSideTop.Side = asrCenter
+          AnchorSideRight.Control = TabSheet_Advanced
+          AnchorSideRight.Side = asrBottom
+          Left = 393
+          Height = 23
+          Top = 35
+          Width = 269
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 8
+          TabOrder = 1
+        end
+        object ComboBox_AdvCondition: TComboBox
+          AnchorSideLeft.Control = TabSheet_Advanced
+          AnchorSideLeft.Side = asrCenter
+          AnchorSideTop.Control = TisSearchEdit_AdvKey
+          AnchorSideTop.Side = asrCenter
+          Left = 285
+          Height = 23
+          Top = 35
+          Width = 100
+          BorderSpacing.Around = 8
+          ItemHeight = 15
+          ItemIndex = 0
+          Items.Strings = (
+            'Start with'
+            'End with'
+            'Equal'
+            'Is different'
+            'Present'
+            'Absent'
+          )
+          TabOrder = 2
+          Text = 'Start with'
+          OnChange = ComboBox_AdvConditionChange
+        end
+        object RadioButton_AllCondition: TRadioButton
+          AnchorSideLeft.Control = TabSheet_Advanced
+          AnchorSideTop.Control = TabSheet_Advanced
+          Left = 8
+          Height = 19
+          Top = 8
+          Width = 91
+          BorderSpacing.Around = 8
+          Caption = 'All conditions'
+          TabOrder = 4
+        end
+        object RadioButton_OneCondition: TRadioButton
+          AnchorSideLeft.Control = RadioButton_AllCondition
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = TabSheet_Advanced
+          Left = 107
+          Height = 19
+          Top = 8
+          Width = 134
+          BorderSpacing.Around = 8
+          Caption = 'At least one condition'
+          Checked = True
+          TabOrder = 5
+          TabStop = True
+        end
+        object TisGrid_AdvDetails: TTisGrid
+          AnchorSideLeft.Control = TabSheet_Advanced
+          AnchorSideTop.Control = TisSearchEdit_AdvKey
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = BitBtn_Add
+          AnchorSideBottom.Control = TabSheet_Advanced
+          AnchorSideBottom.Side = asrBottom
+          Left = 0
+          Height = 85
+          Top = 66
+          Width = 552
+          Anchors = [akTop, akLeft, akRight, akBottom]
+          Header.AutoSizeIndex = -1
+          Header.Columns = <          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 0
+              Text = 'Key'
+              Width = 152
+              PropertyName = 'key'
+            end          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 1
+              Text = 'Condition'
+              Width = 104
+              PropertyName = 'condition'
+            end          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 2
+              Text = 'Value'
+              Width = 141
+              PropertyName = 'value'
+            end>
+          Header.DefaultHeight = 18
+          Header.Height = 28
+          Header.MaxHeight = 101
+          Header.MinHeight = 19
+          Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+          Header.SortColumn = 1
+          Header.Style = hsFlatButtons
+          TabOrder = 3
+          ZebraColor = 15593713
+        end
+        object BitBtn_Add: TBitBtn
+          AnchorSideTop.Control = TisGrid_AdvDetails
+          AnchorSideRight.Control = TabSheet_Advanced
+          AnchorSideRight.Side = asrBottom
+          Left = 560
+          Height = 25
+          Top = 74
+          Width = 102
+          Action = Action_AdvAdd
+          Anchors = [akTop, akRight]
+          AutoSize = True
+          BorderSpacing.Around = 8
+          TabOrder = 6
+        end
+        object BitBtn_Del: TBitBtn
+          AnchorSideTop.Control = BitBtn_Add
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = TabSheet_Advanced
+          AnchorSideRight.Side = asrBottom
+          Left = 549
+          Height = 25
+          Top = 107
+          Width = 113
+          Action = Action_AdvDel
+          Anchors = [akTop, akRight]
+          AutoSize = True
+          BorderSpacing.Around = 8
+          TabOrder = 7
+        end
+      end
+      object TabSheet_Expert: TTabSheet
+        Caption = 'Expert'
+        ClientHeight = 151
+        ClientWidth = 670
+        object Memo_ExpFilter: TMemo
+          AnchorSideLeft.Control = TabSheet_Expert
+          AnchorSideLeft.Side = asrCenter
+          AnchorSideTop.Control = TabSheet_Expert
+          AnchorSideTop.Side = asrCenter
+          Left = 50
+          Height = 74
+          Top = 38
+          Width = 570
+          TabOrder = 0
+        end
+        object Label_ExpFilter: TLabel
+          AnchorSideLeft.Control = Memo_ExpFilter
+          AnchorSideBottom.Control = Memo_ExpFilter
+          Left = 52
+          Height = 15
+          Top = 15
+          Width = 126
+          Anchors = [akLeft, akBottom]
+          BorderSpacing.Left = 2
+          BorderSpacing.Bottom = 8
+          Caption = 'Search using Ldap filter:'
+        end
+      end
+      object TabSheet_Options: TTabSheet
+        AutoSize = True
+        Caption = 'Options'
+        ClientHeight = 151
+        ClientWidth = 670
+        object Label_SearchScope: TLabel
+          AnchorSideLeft.Control = TabSheet_Options
+          AnchorSideTop.Control = ComboBox_SearchScope
+          AnchorSideTop.Side = asrCenter
+          Left = 8
+          Height = 15
+          Top = 12
+          Width = 150
+          BorderSpacing.Around = 8
+          Caption = 'Search Scope'
+          Constraints.MinWidth = 150
+        end
+        object ComboBox_SearchScope: TComboBox
+          AnchorSideLeft.Control = Label_SearchScope
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = TabSheet_Options
+          Left = 166
+          Height = 23
+          Top = 8
+          Width = 130
+          BorderSpacing.Around = 8
+          ItemHeight = 15
+          ReadOnly = True
+          Style = csDropDownList
+          TabOrder = 0
+        end
+        object Label_PageSize: TLabel
+          AnchorSideLeft.Control = TabSheet_Options
+          AnchorSideTop.Control = Edit_PageSize
+          AnchorSideTop.Side = asrCenter
+          Left = 8
+          Height = 15
+          Top = 43
+          Width = 150
+          BorderSpacing.Around = 8
+          Caption = 'Page size'
+          Constraints.MinWidth = 150
+        end
+        object Edit_PageSize: TEdit
+          AnchorSideLeft.Control = Label_PageSize
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = ComboBox_SearchScope
+          AnchorSideTop.Side = asrBottom
+          Left = 166
+          Height = 23
+          Top = 39
+          Width = 80
+          BorderSpacing.Around = 8
+          TabOrder = 1
+          Text = '2000'
+        end
+        object Label_PageCount: TLabel
+          AnchorSideLeft.Control = TabSheet_Options
+          AnchorSideTop.Control = Edit_PageCount
+          AnchorSideTop.Side = asrCenter
+          Left = 8
+          Height = 15
+          Top = 74
+          Width = 150
+          BorderSpacing.Around = 8
+          Caption = 'Page count'
+          Constraints.MinWidth = 150
+        end
+        object Edit_PageCount: TEdit
+          AnchorSideLeft.Control = Label_PageCount
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Edit_PageSize
+          AnchorSideTop.Side = asrBottom
+          Left = 166
+          Height = 23
+          Top = 70
+          Width = 80
+          TabOrder = 2
+          Text = '1'
+        end
+      end
+    end
+    object Panel_Buttons: TPanel
+      AnchorSideTop.Control = Panel_Search
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_Search
+      AnchorSideRight.Side = asrBottom
+      Left = 694
+      Height = 41
+      Top = 77
+      Width = 61
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Right = 8
+      BevelOuter = bvNone
+      ClientHeight = 41
+      ClientWidth = 61
+      TabOrder = 1
+      object BitBtn_Search: TBitBtn
+        AnchorSideLeft.Control = Panel_Buttons
+        AnchorSideTop.Control = Panel_Buttons
+        AnchorSideRight.Control = Panel_Buttons
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 25
+        Top = 8
+        Width = 61
+        Action = Action_Search
+        Anchors = [akTop, akLeft, akRight]
+        AutoSize = True
+        BorderSpacing.Top = 8
+        BorderSpacing.Bottom = 8
+        Default = True
+        TabOrder = 0
+      end
+    end
+  end
+  object Panel_Result: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Splitter1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 297
+    Top = 242
+    Width = 763
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    BevelOuter = bvNone
+    ClientHeight = 297
+    ClientWidth = 763
+    Constraints.MinHeight = 150
+    TabOrder = 2
+    object TisGrid_Result: TTisGrid
+      AnchorSideLeft.Control = Panel_Result
+      AnchorSideTop.Control = Panel_Result
+      AnchorSideRight.Control = Panel_Result
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Label_ResultCount
+      Left = 8
+      Height = 266
+      Top = 8
+      Width = 747
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Around = 8
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Text = 'Name'
+          Width = 180
+          PropertyName = 'name'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 1
+          Text = 'Type'
+          Width = 128
+          PropertyName = 'objectClass'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 2
+          Text = 'Description'
+          Width = 337
+          PropertyName = 'description'
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MaxHeight = 101
+      Header.MinHeight = 19
+      Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.Style = hsFlatButtons
+      PopupMenu = PopupMenu1
+      TabOrder = 0
+      SelectedAndTotalLabel = Label_ResultCount
+      ZebraColor = 15593713
+      OnGetImageIndex = TisGrid_ResultGetImageIndex
+      OnKeyPress = TisGrid_ResultKeyPress
+    end
+    object Label_ResultCount: TLabel
+      AnchorSideRight.Control = Panel_Result
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Panel_Result
+      AnchorSideBottom.Side = asrBottom
+      Left = 663
+      Height = 15
+      Top = 282
+      Width = 92
+      Anchors = [akRight, akBottom]
+      BorderSpacing.Right = 8
+      Caption = 'Total : 0 elements'
+    end
+  end
+  object ActionList: TActionList
+    Left = 688
+    Top = 416
+    object Action_Search: TAction
+      Caption = 'Search'
+      OnExecute = Action_SearchExecute
+      OnUpdate = Action_SearchUpdate
+    end
+    object Action_ChangeDN: TAction
+      Caption = 'Change'
+      OnExecute = Action_ChangeDNExecute
+    end
+    object Action_SearchFrom: TAction
+      Caption = 'Search from'
+      OnExecute = Action_SearchFromExecute
+      OnUpdate = Action_SearchFromUpdate
+    end
+    object Action_SearchNew: TAction
+      Caption = 'Search New'
+      OnExecute = Action_SearchNewExecute
+      OnUpdate = Action_SearchNewUpdate
+    end
+    object Action_ShowInView: TAction
+      Caption = 'Show in view'
+      OnExecute = Action_ShowInViewExecute
+      OnUpdate = Action_ShowInViewUpdate
+    end
+    object Action_Properties: TAction
+      Caption = 'Properties'
+      ShortCut = 13
+      OnExecute = Action_PropertiesExecute
+      OnUpdate = Action_PropertiesUpdate
+    end
+    object Action_AdvAdd: TAction
+      Category = 'Advanced'
+      Caption = 'Add condition'
+      OnExecute = Action_AdvAddExecute
+      OnUpdate = Action_AdvAddUpdate
+    end
+    object Action_AdvDel: TAction
+      Category = 'Advanced'
+      Caption = 'Delete condition'
+      OnExecute = Action_AdvDelExecute
+      OnUpdate = Action_AdvDelUpdate
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 616
+    Top = 416
+    object MenuItem_SearchFrom: TMenuItem
+      Action = Action_SearchFrom
+    end
+    object MenuItem_SearchNew: TMenuItem
+      Action = Action_SearchNew
+    end
+    object MenuItem_ShowInView: TMenuItem
+      Action = Action_ShowInView
+    end
+    object MenuItem_Properties: TMenuItem
+      Action = Action_Properties
+    end
+  end
+  object Timer_SearchInGrid: TTimer
+    Enabled = False
+    OnTimer = Timer_SearchInGridTimer
+    Left = 80
+    Top = 152
+  end
+end

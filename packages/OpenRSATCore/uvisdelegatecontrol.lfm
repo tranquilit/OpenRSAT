@@ -1,0 +1,817 @@
+object VisDelegateControl: TVisDelegateControl
+  Left = 2771
+  Height = 361
+  Top = 297
+  Width = 499
+  Caption = 'Delegation of Control Wizard'
+  ClientHeight = 361
+  ClientWidth = 499
+  KeyPreview = True
+  Position = poOwnerFormCenter
+  LCLVersion = '4.1.0.0'
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 320
+    Top = 0
+    Width = 499
+    ActivePage = TS_Resume
+    Align = alClient
+    MultiLine = True
+    Options = [nboMultiLine]
+    ShowTabs = False
+    TabIndex = 3
+    TabOrder = 0
+    object TS_Welcome: TTabSheet
+      Caption = 'TS_Welcome'
+      ClientHeight = 312
+      ClientWidth = 491
+      object Panel1: TPanel
+        Left = 0
+        Height = 312
+        Top = 0
+        Width = 160
+        Align = alLeft
+        BevelOuter = bvNone
+        TabOrder = 0
+      end
+      object Panel2: TPanel
+        Left = 160
+        Height = 312
+        Top = 0
+        Width = 331
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 312
+        ClientWidth = 331
+        TabOrder = 1
+        object Label1: TLabel
+          Left = 8
+          Height = 50
+          Top = 8
+          Width = 315
+          Align = alTop
+          BorderSpacing.Around = 8
+          Caption = 'Welcome to the Delegation of Control Wizard'
+          Font.Height = -19
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object Label2: TLabel
+          Left = 8
+          Height = 60
+          Top = 66
+          Width = 315
+          Align = alTop
+          BorderSpacing.Around = 8
+          Caption = 'This wizard helps you delegate control of Active Directory objects. You can grant users permission to manage users, groups, computers, organizational units, and other objects stored in Active Directory Domain Services.'
+          WordWrap = True
+        end
+        object Label3: TLabel
+          Left = 8
+          Height = 15
+          Top = 134
+          Width = 315
+          Align = alTop
+          BorderSpacing.Around = 8
+          Caption = 'To continue, click Next.'
+          WordWrap = True
+        end
+      end
+    end
+    object TS_UsersAndGroups: TTabSheet
+      Caption = 'TS_UsersAndGroups'
+      ClientHeight = 312
+      ClientWidth = 491
+      object Panel3: TPanel
+        Left = 0
+        Height = 54
+        Top = 0
+        Width = 491
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 54
+        ClientWidth = 491
+        TabOrder = 0
+        object Label5: TLabel
+          AnchorSideLeft.Control = Panel3
+          AnchorSideTop.Control = Panel3
+          Left = 16
+          Height = 15
+          Top = 8
+          Width = 97
+          BorderSpacing.Left = 8
+          BorderSpacing.Around = 8
+          Caption = 'Users and Groups'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object Label6: TLabel
+          AnchorSideLeft.Control = Label5
+          AnchorSideTop.Control = Label5
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 31
+          Width = 392
+          BorderSpacing.Left = 8
+          BorderSpacing.Around = 8
+          Caption = 'Select one or more users or groups to whom you want to delegate control.'
+          WordWrap = True
+        end
+      end
+      object Panel4: TPanel
+        Left = 0
+        Height = 258
+        Top = 54
+        Width = 491
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 258
+        ClientWidth = 491
+        TabOrder = 1
+        object Label4: TLabel
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = Panel4
+          Left = 32
+          Height = 15
+          Top = 8
+          Width = 140
+          BorderSpacing.Left = 24
+          BorderSpacing.Right = 24
+          BorderSpacing.Around = 8
+          Caption = 'Selected users and groups:'
+        end
+        object ListBox1: TListBox
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = Label4
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel4
+          AnchorSideRight.Side = asrBottom
+          AnchorSideBottom.Control = BitBtn2
+          Left = 32
+          Height = 186
+          Top = 31
+          Width = 427
+          Anchors = [akTop, akLeft, akRight, akBottom]
+          BorderSpacing.Left = 24
+          BorderSpacing.Right = 24
+          BorderSpacing.Around = 8
+          ItemHeight = 0
+          TabOrder = 0
+        end
+        object BitBtn1: TBitBtn
+          AnchorSideRight.Control = Panel4
+          AnchorSideRight.Side = asrBottom
+          AnchorSideBottom.Control = Panel4
+          AnchorSideBottom.Side = asrBottom
+          Left = 390
+          Height = 25
+          Top = 225
+          Width = 69
+          Action = Action_Remove
+          Anchors = [akRight, akBottom]
+          AutoSize = True
+          BorderSpacing.Right = 24
+          BorderSpacing.Around = 8
+          TabOrder = 1
+        end
+        object BitBtn2: TBitBtn
+          AnchorSideRight.Control = BitBtn1
+          AnchorSideBottom.Control = Panel4
+          AnchorSideBottom.Side = asrBottom
+          Left = 325
+          Height = 25
+          Top = 225
+          Width = 57
+          Action = Action_Add
+          Anchors = [akRight, akBottom]
+          AutoSize = True
+          BorderSpacing.Around = 8
+          TabOrder = 2
+        end
+      end
+    end
+    object TS_TasksToDelegate: TTabSheet
+      Caption = 'TS_TasksToDelegate'
+      ClientHeight = 312
+      ClientWidth = 491
+      object Panel5: TPanel
+        Left = 0
+        Height = 54
+        Top = 0
+        Width = 491
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 54
+        ClientWidth = 491
+        TabOrder = 0
+        object Label7: TLabel
+          AnchorSideLeft.Control = Panel5
+          AnchorSideTop.Control = Panel5
+          Left = 16
+          Height = 15
+          Top = 8
+          Width = 98
+          BorderSpacing.Left = 8
+          BorderSpacing.Around = 8
+          Caption = 'Tasks to Delegate'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label8: TLabel
+          AnchorSideLeft.Control = Label7
+          AnchorSideTop.Control = Label7
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 31
+          Width = 283
+          BorderSpacing.Left = 8
+          BorderSpacing.Around = 8
+          Caption = 'You can select common tasks or customize your own.'
+        end
+      end
+      object Panel6: TPanel
+        Left = 0
+        Height = 258
+        Top = 54
+        Width = 491
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 258
+        ClientWidth = 491
+        TabOrder = 1
+        object RadioButton1: TRadioButton
+          AnchorSideLeft.Control = Panel6
+          AnchorSideTop.Control = Panel6
+          Left = 32
+          Height = 19
+          Top = 8
+          Width = 221
+          BorderSpacing.Left = 24
+          BorderSpacing.Around = 8
+          Caption = 'Delegate the following common tasks:'
+          Checked = True
+          TabOrder = 2
+          TabStop = True
+          OnChange = RadioButton1Change
+        end
+        object RadioButton2: TRadioButton
+          AnchorSideLeft.Control = Panel6
+          AnchorSideTop.Control = CheckListBox1
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 19
+          Top = 168
+          Width = 190
+          BorderSpacing.Left = 24
+          BorderSpacing.Around = 8
+          Caption = 'Create a custom task to delegate'
+          Enabled = False
+          TabOrder = 0
+        end
+        object CheckListBox1: TCheckListBox
+          AnchorSideLeft.Control = Panel6
+          AnchorSideTop.Control = RadioButton1
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel6
+          AnchorSideRight.Side = asrBottom
+          Left = 48
+          Height = 125
+          Top = 35
+          Width = 395
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 40
+          BorderSpacing.Right = 40
+          BorderSpacing.Around = 8
+          Items.Strings = (
+            'Create, delete, and manage computers'
+            'Create, delete, and manage inetOrgPerson accounts'
+            'Create, delete, and manage groups'
+            'Create, delete, and manage user accounts'
+            'Full Control'
+            'Generate Resultant Set of Policy (Logging)'
+            'Generate Resultant Set of Policy (Planning)'
+            'Join a computer to the domain'
+            'Manage Group Policy links'
+            'Modify the membership of a group'
+            'Read all computer information'
+            'Read all inetOrgPerson information'
+            'Read all group information'
+            'Read all user information'
+            'Reset computer passwords and force password change at next logon'
+            'Reset inetOrgPerson passwords and force password change at next logon'
+            'Reset user passwords and force password change at next logon'
+          )
+          ItemHeight = 17
+          TabOrder = 1
+          Data = {
+            110000000000000000000000000000000000000000
+          }
+        end
+      end
+    end
+    object TS_Resume: TTabSheet
+      Caption = 'TS_Resume'
+      ClientHeight = 312
+      ClientWidth = 491
+      OnShow = TS_ResumeShow
+      object Panel7: TPanel
+        Left = 0
+        Height = 312
+        Top = 0
+        Width = 154
+        Align = alLeft
+        BevelOuter = bvNone
+        TabOrder = 0
+      end
+      object Panel8: TPanel
+        Left = 154
+        Height = 312
+        Top = 0
+        Width = 337
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 312
+        ClientWidth = 337
+        TabOrder = 1
+        object Label9: TLabel
+          AnchorSideLeft.Control = Panel8
+          AnchorSideTop.Control = Panel8
+          AnchorSideRight.Control = Panel8
+          AnchorSideRight.Side = asrBottom
+          Left = 8
+          Height = 50
+          Top = 8
+          Width = 321
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 8
+          Caption = 'Completing the Delegation of Control Wizard'
+          Font.Height = -19
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object Label10: TLabel
+          AnchorSideLeft.Control = Panel8
+          AnchorSideTop.Control = Label9
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel8
+          AnchorSideRight.Side = asrBottom
+          Left = 8
+          Height = 30
+          Top = 66
+          Width = 321
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 8
+          Caption = 'You have successfully completed the Delegation of Control wizard.'
+          WordWrap = True
+        end
+        object Memo1: TMemo
+          AnchorSideLeft.Control = Panel8
+          AnchorSideTop.Control = Label10
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel8
+          AnchorSideRight.Side = asrBottom
+          Left = 8
+          Height = 167
+          Top = 104
+          Width = 321
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 8
+          ReadOnly = True
+          ScrollBars = ssAutoVertical
+          TabOrder = 0
+        end
+        object Label11: TLabel
+          AnchorSideLeft.Control = Panel8
+          AnchorSideTop.Control = Memo1
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel8
+          AnchorSideRight.Side = asrBottom
+          Left = 8
+          Height = 15
+          Top = 279
+          Width = 321
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 8
+          Caption = 'To close this wizard, click Finish.'
+          WordWrap = True
+        end
+      end
+    end
+    object TS_ADObjectType: TTabSheet
+      Caption = 'TS_ADObjectType'
+      ClientHeight = 312
+      ClientWidth = 491
+      OnShow = TS_ADObjectTypeShow
+      object Panel9: TPanel
+        Left = 0
+        Height = 54
+        Top = 0
+        Width = 491
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 54
+        ClientWidth = 491
+        TabOrder = 0
+        object Label12: TLabel
+          AnchorSideLeft.Control = Panel9
+          AnchorSideTop.Control = Panel9
+          Left = 16
+          Height = 15
+          Top = 8
+          Width = 161
+          BorderSpacing.Left = 8
+          BorderSpacing.Around = 8
+          Caption = 'Active Directory Object Type'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label13: TLabel
+          AnchorSideLeft.Control = Label12
+          AnchorSideTop.Control = Label12
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 31
+          Width = 271
+          BorderSpacing.Left = 8
+          BorderSpacing.Around = 8
+          Caption = 'Indicate the scope of the task you want to delegate.'
+        end
+      end
+      object Panel10: TPanel
+        Left = 0
+        Height = 258
+        Top = 54
+        Width = 491
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 258
+        ClientWidth = 491
+        TabOrder = 1
+        object Label14: TLabel
+          AnchorSideLeft.Control = Panel10
+          AnchorSideTop.Control = Panel10
+          AnchorSideRight.Control = Panel10
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 8
+          Width = 427
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 24
+          BorderSpacing.Right = 24
+          BorderSpacing.Around = 8
+          Caption = 'Delegate control of:'
+        end
+        object RadioButton3: TRadioButton
+          AnchorSideLeft.Control = Panel10
+          AnchorSideTop.Control = Label14
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel10
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 19
+          Top = 31
+          Width = 427
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 24
+          BorderSpacing.Right = 24
+          BorderSpacing.Around = 8
+          Caption = 'This folder, existing objects in this folder, and creation of new objects in this folder'
+          Checked = True
+          TabOrder = 4
+          TabStop = True
+        end
+        object RadioButton4: TRadioButton
+          AnchorSideLeft.Control = Panel10
+          AnchorSideTop.Control = RadioButton3
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel10
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 19
+          Top = 58
+          Width = 427
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 24
+          BorderSpacing.Right = 24
+          BorderSpacing.Around = 8
+          Caption = 'Only the following objects in the folder:'
+          TabOrder = 0
+          OnChange = RadioButton4Change
+        end
+        object CheckListBox2: TCheckListBox
+          AnchorSideLeft.Control = Panel10
+          AnchorSideTop.Control = RadioButton4
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel10
+          AnchorSideRight.Side = asrBottom
+          Left = 48
+          Height = 80
+          Top = 85
+          Width = 395
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 40
+          BorderSpacing.Right = 40
+          BorderSpacing.Around = 8
+          Enabled = False
+          ItemHeight = 0
+          Sorted = True
+          TabOrder = 1
+        end
+        object CheckBox1: TCheckBox
+          AnchorSideLeft.Control = Panel10
+          AnchorSideTop.Control = CheckListBox2
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel10
+          AnchorSideRight.Side = asrBottom
+          Left = 48
+          Height = 19
+          Top = 173
+          Width = 395
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 40
+          BorderSpacing.Right = 40
+          BorderSpacing.Around = 8
+          Caption = 'Create selected objects in this folder'
+          Enabled = False
+          TabOrder = 2
+        end
+        object CheckBox2: TCheckBox
+          AnchorSideLeft.Control = Panel10
+          AnchorSideTop.Control = CheckBox1
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel10
+          AnchorSideRight.Side = asrBottom
+          Left = 48
+          Height = 19
+          Top = 200
+          Width = 395
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 40
+          BorderSpacing.Right = 40
+          BorderSpacing.Around = 8
+          Caption = 'Delete selected objects in this folder'
+          Enabled = False
+          TabOrder = 3
+        end
+      end
+    end
+    object TS_Permissions: TTabSheet
+      Caption = 'TS_Permissions'
+      ClientHeight = 312
+      ClientWidth = 491
+      OnShow = TS_PermissionsShow
+      object Panel11: TPanel
+        Left = 0
+        Height = 54
+        Top = 0
+        Width = 491
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 54
+        ClientWidth = 491
+        TabOrder = 0
+        object Label15: TLabel
+          AnchorSideLeft.Control = Panel11
+          AnchorSideTop.Control = Panel11
+          Left = 16
+          Height = 15
+          Top = 8
+          Width = 65
+          BorderSpacing.Left = 8
+          BorderSpacing.Around = 8
+          Caption = 'Permissions'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label16: TLabel
+          AnchorSideLeft.Control = Label15
+          AnchorSideTop.Control = Label15
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 31
+          Width = 234
+          BorderSpacing.Left = 8
+          BorderSpacing.Around = 8
+          Caption = 'Select the permissions you want to delegate.'
+        end
+      end
+      object Panel12: TPanel
+        Left = 0
+        Height = 258
+        Top = 54
+        Width = 491
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 258
+        ClientWidth = 491
+        TabOrder = 1
+        object Label17: TLabel
+          AnchorSideLeft.Control = Panel12
+          AnchorSideTop.Control = Panel12
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 8
+          Width = 427
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 24
+          BorderSpacing.Right = 24
+          BorderSpacing.Around = 8
+          Caption = 'Show these permissions:'
+        end
+        object CheckBox3: TCheckBox
+          AnchorSideLeft.Control = Panel12
+          AnchorSideTop.Control = Label17
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 19
+          Top = 31
+          Width = 427
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 28
+          BorderSpacing.Right = 28
+          BorderSpacing.Around = 4
+          Caption = 'General'
+          Checked = True
+          State = cbChecked
+          TabOrder = 0
+          OnChange = CheckBox3Change
+        end
+        object CheckBox4: TCheckBox
+          AnchorSideLeft.Control = Panel12
+          AnchorSideTop.Control = CheckBox3
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 19
+          Top = 54
+          Width = 427
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 28
+          BorderSpacing.Right = 28
+          BorderSpacing.Around = 4
+          Caption = 'Property-specific'
+          TabOrder = 1
+          OnChange = CheckBox4Change
+        end
+        object CheckBox5: TCheckBox
+          AnchorSideLeft.Control = Panel12
+          AnchorSideTop.Control = CheckBox4
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 19
+          Top = 77
+          Width = 427
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 28
+          BorderSpacing.Right = 28
+          BorderSpacing.Around = 4
+          Caption = 'Creation/deletion of specific child objects'
+          TabOrder = 2
+          OnChange = CheckBox5Change
+        end
+        object Label18: TLabel
+          AnchorSideLeft.Control = Panel12
+          AnchorSideTop.Control = CheckBox5
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 104
+          Width = 427
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          Caption = 'Permissions:'
+        end
+        object CheckListBox3: TCheckListBox
+          AnchorSideLeft.Control = Panel12
+          AnchorSideTop.Control = Label18
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 108
+          Top = 123
+          Width = 427
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 4
+          BorderSpacing.Right = 32
+          ItemHeight = 0
+          Sorted = True
+          TabOrder = 3
+        end
+      end
+    end
+  end
+  object Panel_Bottom: TPanel
+    Left = 0
+    Height = 41
+    Top = 320
+    Width = 499
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 499
+    TabOrder = 1
+    object Btn_Back: TBitBtn
+      Left = 225
+      Height = 25
+      Top = 8
+      Width = 62
+      Action = Action_Back
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 0
+    end
+    object Btn_Next: TBitBtn
+      Left = 295
+      Height = 25
+      Top = 8
+      Width = 61
+      Action = Action_Next
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      Default = True
+      TabOrder = 1
+    end
+    object Btn_Cancel: TBitBtn
+      Left = 429
+      Height = 25
+      Top = 8
+      Width = 62
+      Action = Action_Cancel
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      ModalResult = 2
+      TabOrder = 2
+    end
+    object Btn_Finish: TBitBtn
+      Left = 364
+      Height = 25
+      Top = 8
+      Width = 57
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      Caption = 'Finish'
+      ModalResult = 1
+      TabOrder = 3
+      Visible = False
+    end
+  end
+  object ActionList1: TActionList
+    Left = 408
+    Top = 16
+    object Action_Back: TAction
+      Caption = '< Back'
+      OnExecute = Action_BackExecute
+      OnUpdate = Action_BackUpdate
+    end
+    object Action_Next: TAction
+      Caption = 'Next >'
+      OnExecute = Action_NextExecute
+      OnUpdate = Action_NextUpdate
+    end
+    object Action_Cancel: TAction
+      Caption = 'Cancel'
+      DisableIfNoHandler = False
+    end
+    object Action_Add: TAction
+      Caption = 'Add...'
+      OnExecute = Action_AddExecute
+    end
+    object Action_Remove: TAction
+      Caption = 'Remove'
+      OnExecute = Action_RemoveExecute
+      OnUpdate = Action_RemoveUpdate
+    end
+  end
+end

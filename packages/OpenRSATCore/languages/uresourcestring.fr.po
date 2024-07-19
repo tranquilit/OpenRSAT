@@ -1,0 +1,37 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: uresourcestring.rsautoconnect
+msgid "Auto connect"
+msgstr ""
+
+#: uresourcestring.rscancel
+msgid "Cancel"
+msgstr ""
+
+#: uresourcestring.rsconfiguration
+msgid "Configuration:"
+msgstr ""
+
+#: uresourcestring.rsok
+msgid "OK"
+msgstr ""
+
+#: uresourcestring.rspassword
+#, fuzzy
+msgctxt "uresourcestring.rspassword"
+msgid "Password:"
+msgstr "Mot de passe :"
+
+#: uresourcestring.rsserver
+msgid "Server:"
+msgstr ""
+
+#: uresourcestring.rsusername
+msgid "Username:"
+msgstr ""
+
+#: uresourcestring.rsvisconnectconfigstitle
+msgid "RSAT Authentication"
+msgstr ""
+

@@ -1,0 +1,17 @@
+{"version":1,"strings":[
+{"hash":252894898,"name":"tvisattributeeditor.ts_stringeditor.caption","sourcebytes":[84,83,95,83,116,114,105,110,103,69,100,105,116,111,114],"value":"TS_StringEditor"},
+{"hash":97008522,"name":"tvisattributeeditor.label_string.caption","sourcebytes":[86,97,108,117,101,58],"value":"Value:"},
+{"hash":206979346,"name":"tvisattributeeditor.ts_multistringeditor.caption","sourcebytes":[84,83,95,77,117,108,116,105,83,116,114,105,110,103,69,100,105,116,111,114],"value":"TS_MultiStringEditor"},
+{"hash":127257946,"name":"tvisattributeeditor.label_stringlist.caption","sourcebytes":[86,97,108,117,101,32,116,111,32,97,100,100,58],"value":"Value to add:"},
+{"hash":209959994,"name":"tvisattributeeditor.label1.caption","sourcebytes":[86,97,108,117,101,115,58],"value":"Values:"},
+{"hash":3128066,"name":"tvisattributeeditor.ts_timeeditor.caption","sourcebytes":[84,83,95,84,105,109,101,69,100,105,116,111,114],"value":"TS_TimeEditor"},
+{"hash":4885130,"name":"tvisattributeeditor.label2.caption","sourcebytes":[68,97,116,101,58],"value":"Date:"},
+{"hash":342540,"name":"tvisattributeeditor.datetimepicker1.textfornulldate","sourcebytes":[78,85,76,76],"value":"NULL"},
+{"hash":261023634,"name":"tvisattributeeditor.ts_multitimeeditor.caption","sourcebytes":[84,83,95,77,117,108,116,105,84,105,109,101,69,100,105,116,111,114],"value":"TS_MultiTimeEditor"},
+{"hash":1339,"name":"tvisattributeeditor.action_ok.caption","sourcebytes":[79,75],"value":"OK"},
+{"hash":77089212,"name":"tvisattributeeditor.action_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
+{"hash":18340,"name":"tvisattributeeditor.action_add.caption","sourcebytes":[65,100,100],"value":"Add"},
+{"hash":78392485,"name":"tvisattributeeditor.action_delete.caption","sourcebytes":[68,101,108,101,116,101],"value":"Delete"},
+{"hash":74217360,"name":"tvisattributeeditor.action_up.caption","sourcebytes":[77,111,118,101,32,117,112],"value":"Move up"},
+{"hash":209126078,"name":"tvisattributeeditor.action_down.caption","sourcebytes":[77,111,118,101,32,100,111,119,110],"value":"Move down"}
+]}

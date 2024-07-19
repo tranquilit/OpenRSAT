@@ -1,0 +1,69 @@
+object FrmCore: TFrmCore
+  Left = 0
+  Height = 199
+  Top = 0
+  Width = 441
+  Align = alClient
+  ClientHeight = 199
+  ClientWidth = 441
+  Constraints.MinHeight = 100
+  Constraints.MinWidth = 300
+  TabOrder = 0
+  DesignLeft = 2353
+  DesignTop = 766
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 199
+    Top = 0
+    Width = 441
+    Align = alClient
+    TabOrder = 0
+    OnChange = PageControl1Change
+  end
+  object ActionList_Core: TActionList
+    Left = 32
+    Top = 24
+    object Action_Options: TAction
+      Caption = 'Options'
+      ImageIndex = 30
+      OnExecute = Action_OptionsExecute
+      OnUpdate = Action_OptionsUpdate
+    end
+    object Action_LdapConnect: TAction
+      Caption = 'Connect'
+      Hint = 'Open a connection to ldap server'
+      ImageIndex = 32
+      OnExecute = Action_LdapConnectExecute
+      OnUpdate = Action_LdapConnectUpdate
+    end
+    object Action_LdapDisconnect: TAction
+      Caption = 'Disconnect'
+      ImageIndex = 33
+      OnExecute = Action_LdapDisconnectExecute
+      OnUpdate = Action_LdapDisconnectUpdate
+    end
+    object Action_LdapOptions: TAction
+      Caption = 'Connection Options'
+      ImageIndex = 30
+      OnExecute = Action_LdapOptionsExecute
+      OnUpdate = Action_LdapOptionsUpdate
+    end
+    object Action_Properties: TAction
+      Caption = 'Properties'
+      ImageIndex = 4
+      ShortCut = 13
+    end
+    object Action_AdvancedFeatures: TAction
+      Caption = 'Advanced Features'
+      OnExecute = Action_AdvancedFeaturesExecute
+      OnUpdate = Action_AdvancedFeaturesUpdate
+    end
+  end
+  object Timer_AutoConnect: TTimer
+    Enabled = False
+    Interval = 200
+    OnTimer = Timer_AutoConnectTimer
+    Left = 128
+    Top = 40
+  end
+end

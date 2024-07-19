@@ -1,0 +1,318 @@
+object FrmModuleDNS: TFrmModuleDNS
+  Left = 0
+  Height = 400
+  Top = 0
+  Width = 800
+  ClientHeight = 400
+  ClientWidth = 800
+  TabOrder = 0
+  DesignLeft = 2849
+  DesignTop = 540
+  object GridDNS: TTisGrid
+    Left = 200
+    Height = 347
+    Top = 30
+    Width = 600
+    Align = alClient
+    BorderSpacing.Top = 4
+    BorderSpacing.Bottom = 4
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'Name'
+        Width = 200
+        PropertyName = 'name'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Text = 'Type'
+        Width = 150
+        PropertyName = 'type'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 2
+        Text = 'Data'
+        Width = 300
+        PropertyName = 'data'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 3
+        Text = 'Timestamp'
+        Width = 150
+        PropertyName = 'timestamp'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 4
+        Text = 'Status'
+        Width = 100
+        PropertyName = 'status'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 5
+        Text = 'DNSSEC Status'
+        Width = 100
+        PropertyName = 'dnssec'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 6
+        Text = 'Key Master'
+        Width = 100
+        PropertyName = 'keymaster'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 101
+    Header.MinHeight = 19
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowImages, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.Style = hsFlatButtons
+    Images = CoreDataModule.ImageList1
+    PopupMenu = PopupMenu_DNS
+    TabOrder = 0
+    SelectedAndTotalLabel = Label1
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toFullRowDrag]
+    TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+    ZebraColor = 15593713
+    OnDblClick = GridDNSDblClick
+    OnGetImageIndex = GridDNSGetImageIndex
+    OnKeyPress = GridDNSKeyPress
+    OnMouseDown = GridDNSMouseDown
+  end
+  object TreeDNS: TTreeView
+    Left = 0
+    Height = 347
+    Top = 30
+    Width = 195
+    Align = alLeft
+    BorderSpacing.Top = 4
+    BorderSpacing.Bottom = 4
+    Images = CoreDataModule.ImageList1
+    PopupMenu = PopupMenu_DNS
+    ReadOnly = True
+    RightClickSelect = True
+    StateImages = CoreDataModule.ImageList1
+    TabOrder = 1
+    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+    OnChange = TreeDNSChange
+    OnCreateNodeClass = TreeDNSCreateNodeClass
+    OnExpanding = TreeDNSExpanding
+    OnMouseDown = TreeDNSMouseDown
+  end
+  object Splitter1: TSplitter
+    Left = 195
+    Height = 351
+    Top = 26
+    Width = 5
+  end
+  object ToolBar1: TToolBar
+    Left = 0
+    Height = 26
+    Top = 0
+    Width = 800
+    AutoSize = True
+    ButtonHeight = 24
+    ButtonWidth = 24
+    Caption = 'ToolBar1'
+    EdgeBorders = [ebLeft, ebTop]
+    Images = CoreDataModule.ImageList1
+    ImagesWidth = 18
+    Indent = 0
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 3
+    object ToolButton_Previous: TToolButton
+      Left = 2
+      Top = 2
+      Action = Action_Previous
+    end
+    object ToolButton_Next: TToolButton
+      Left = 26
+      Top = 2
+      Action = Action_Next
+    end
+    object ToolButton_Parent: TToolButton
+      Left = 50
+      Top = 2
+      Action = Action_Parent
+    end
+    object ToolButton4: TToolButton
+      Left = 74
+      Height = 24
+      Top = 2
+      Caption = 'ToolButton4'
+      Style = tbsSeparator
+    end
+    object ToolButton_Property: TToolButton
+      Left = 82
+      Top = 2
+      Action = Action_Property
+    end
+    object ToolButton6: TToolButton
+      Left = 106
+      Height = 24
+      Top = 2
+      Caption = 'ToolButton6'
+      Style = tbsSeparator
+    end
+    object ToolButton_NewHost: TToolButton
+      Left = 114
+      Top = 2
+      Action = Action_NewHost
+    end
+    object ToolButton_NewAlias: TToolButton
+      Left = 138
+      Top = 2
+      Action = Action_NewAlias
+    end
+    object ToolButton_NewDomain: TToolButton
+      Left = 162
+      Top = 2
+      Action = Action_NewDomain
+    end
+    object ToolButton10: TToolButton
+      Left = 186
+      Height = 24
+      Top = 2
+      Caption = 'ToolButton10'
+      Style = tbsSeparator
+    end
+    object ToolButton_Delete: TToolButton
+      Left = 194
+      Top = 2
+      Action = Action_Delete
+    end
+  end
+  object Label1: TLabel
+    Left = 4
+    Height = 15
+    Top = 381
+    Width = 792
+    Align = alBottom
+    Alignment = taRightJustify
+    BorderSpacing.Around = 4
+    Caption = 'Total : 0 elements'
+    ParentBidiMode = False
+  end
+  object ActionList_DNS: TActionList
+    Images = CoreDataModule.ImageList1
+    Left = 32
+    Top = 104
+    object Action_Previous: TAction
+      Caption = 'Previous'
+      ImageIndex = 1
+      OnExecute = Action_PreviousExecute
+    end
+    object Action_Next: TAction
+      Caption = 'Next'
+      ImageIndex = 2
+      OnExecute = Action_NextExecute
+    end
+    object Action_Parent: TAction
+      Caption = 'Parent'
+      ImageIndex = 3
+      OnExecute = Action_ParentExecute
+    end
+    object Action_Property: TAction
+      Caption = 'Property'
+      ImageIndex = 4
+      OnExecute = Action_PropertyExecute
+    end
+    object Action_NewHost: TAction
+      Caption = 'New Host (A or AAAA)'
+      ImageIndex = 7
+    end
+    object Action_NewAlias: TAction
+      Caption = 'New Alias (CNAME)'
+      ImageIndex = 16
+    end
+    object Action_NewMailExchange: TAction
+      Caption = 'New Mail Exchanger (MX)'
+    end
+    object Action_NewDomain: TAction
+      Caption = 'New Domain'
+      ImageIndex = 9
+    end
+    object Action_NewDelegation: TAction
+      Caption = 'New Delegation'
+    end
+    object Action_OtherNewRecords: TAction
+      Caption = 'Other New Records'
+      OnExecute = Action_OtherNewRecordsExecute
+      OnUpdate = Action_OtherNewRecordsUpdate
+    end
+    object Action_Delete: TAction
+      Caption = 'Delete'
+      ImageIndex = 13
+      OnExecute = Action_DeleteExecute
+    end
+    object Action_Refresh: TAction
+      Caption = 'Refresh'
+      ImageIndex = 31
+      ShortCut = 116
+      OnExecute = Action_RefreshExecute
+    end
+    object Action_NewZone: TAction
+      Caption = 'New Zone'
+      OnExecute = Action_NewZoneExecute
+      OnUpdate = Action_NewZoneUpdate
+    end
+  end
+  object PopupMenu_DNS: TPopupMenu
+    Images = CoreDataModule.ImageList1
+    Left = 104
+    Top = 104
+    object MenuItem10: TMenuItem
+      Action = Action_NewZone
+    end
+    object MenuItem1: TMenuItem
+      Action = Action_NewHost
+    end
+    object MenuItem2: TMenuItem
+      Action = Action_NewAlias
+    end
+    object MenuItem3: TMenuItem
+      Action = Action_NewMailExchange
+    end
+    object MenuItem4: TMenuItem
+      Action = Action_NewDomain
+    end
+    object MenuItem5: TMenuItem
+      Action = Action_NewDelegation
+    end
+    object MenuItem6: TMenuItem
+      Action = Action_OtherNewRecords
+    end
+    object Separator1: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem7: TMenuItem
+      Action = Action_Delete
+    end
+    object MenuItem8: TMenuItem
+      Action = Action_Refresh
+    end
+    object MenuItem9: TMenuItem
+      Action = Action_Property
+    end
+  end
+  object Timer_SearchInGrid: TTimer
+    Enabled = False
+    OnTimer = Timer_SearchInGridTimer
+    Left = 8
+    Top = 8
+  end
+  object Timer_TreeChangeNode: TTimer
+    Enabled = False
+    Interval = 300
+    OnTimer = Timer_TreeChangeNodeTimer
+    Left = 72
+    Top = 48
+  end
+end

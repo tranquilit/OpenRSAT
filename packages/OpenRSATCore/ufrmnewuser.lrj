@@ -1,0 +1,16 @@
+{"version":1,"strings":[
+{"hash":60337498,"name":"tfrmnewuser.label_firstname.caption","sourcebytes":[70,105,114,115,116,32,110,97,109,101,32,58],"value":"First name :"},
+{"hash":183709754,"name":"tfrmnewuser.label_initials.caption","sourcebytes":[73,110,105,116,105,97,108,115,32,58],"value":"Initials :"},
+{"hash":118930778,"name":"tfrmnewuser.label_lastname.caption","sourcebytes":[76,97,115,116,32,110,97,109,101,32,58],"value":"Last name :"},
+{"hash":118224346,"name":"tfrmnewuser.label_fullname.caption","sourcebytes":[70,117,108,108,32,110,97,109,101,32,58],"value":"Full name :"},
+{"hash":39262340,"name":"tfrmnewuser.edit_fullname.hint","sourcebytes":[84,104,101,32,112,101,114,115,111,110,39,115,32,112,114,101,102,101,114,114,101,100,32,110,97,109,101,32,116,111,32,98,101,32,117,115,101,100,32,119,104,101,110,32,98,101,101,105,110,103,32,100,105,115,112,108,97,121,101,100],"value":"The person's preferred name to be used when beeing displayed"},
+{"hash":47148410,"name":"tfrmnewuser.label_userlogon.caption","sourcebytes":[85,115,101,114,32,108,111,103,111,110,32,110,97,109,101,32,58],"value":"User logon name :"},
+{"hash":181876026,"name":"tfrmnewuser.label_winuserlogonname.caption","sourcebytes":[85,115,101,114,32,108,111,103,111,110,32,110,97,109,101,32,40,112,114,101,45,87,105,110,100,111,119,115,32,50,48,48,48,41,32,58],"value":"User logon name (pre-Windows 2000) :"},
+{"hash":182709914,"name":"tfrmnewuser.label_password.caption","sourcebytes":[80,97,115,115,119,111,114,100,32,58],"value":"Password :"},
+{"hash":110470042,"name":"tfrmnewuser.label_confirm.caption","sourcebytes":[67,111,110,102,105,114,109,32,80,97,115,115,119,111,114,100,32,58],"value":"Confirm Password :"},
+{"hash":61409310,"name":"tfrmnewuser.checkbox_mustchangepassword.caption","sourcebytes":[85,115,101,114,32,109,117,115,116,32,99,104,97,110,103,101,32,112,97,115,115,119,111,114,100,32,97,116,32,110,101,120,116,32,108,111,103,111,110],"value":"User must change password at next logon"},
+{"hash":130487524,"name":"tfrmnewuser.checkbox_cannotchangepassword.caption","sourcebytes":[85,115,101,114,32,99,97,110,110,111,116,32,99,104,97,110,103,101,32,112,97,115,115,119,111,114,100],"value":"User cannot change password"},
+{"hash":47850099,"name":"tfrmnewuser.checkbox_passwordneverexpires.caption","sourcebytes":[80,97,115,115,119,111,114,100,32,110,101,118,101,114,32,101,120,112,105,114,101,115],"value":"Password never expires"},
+{"hash":43894900,"name":"tfrmnewuser.checkbox_accountdisabled.caption","sourcebytes":[65,99,99,111,117,110,116,32,105,115,32,100,105,115,97,98,108,101,100],"value":"Account is disabled"},
+{"hash":32017354,"name":"tfrmnewuser.label_resume.caption","sourcebytes":[87,104,101,110,32,121,111,117,32,99,108,105,99,107,32,70,105,110,105,115,104,44,32,116,104,101,32,102,111,108,108,111,119,105,110,103,32,111,98,106,101,99,116,32,119,105,108,108,32,98,101,32,99,114,101,97,116,101,100,32,58],"value":"When you click Finish, the following object will be created :"}
+]}

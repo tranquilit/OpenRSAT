@@ -1,0 +1,106 @@
+object FrmRsatOptions: TFrmRsatOptions
+  Left = 0
+  Height = 399
+  Top = 0
+  Width = 463
+  ClientHeight = 399
+  ClientWidth = 463
+  TabOrder = 0
+  DesignLeft = 1252
+  DesignTop = 252
+  object Label1: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 12
+    Width = 100
+    BorderSpacing.Around = 8
+    Caption = 'Theme'
+    Constraints.MinWidth = 100
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox2
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 43
+    Width = 100
+    BorderSpacing.Around = 8
+    Caption = 'Lang'
+    Constraints.MinWidth = 100
+  end
+  object Label3: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox3
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 74
+    Width = 100
+    BorderSpacing.Around = 8
+    Caption = 'AdvancedView'
+    Constraints.MinWidth = 100
+  end
+  object ComboBox1: TComboBox
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 116
+    Height = 23
+    Top = 8
+    Width = 100
+    BorderSpacing.Around = 8
+    Enabled = False
+    ItemHeight = 15
+    Items.Strings = (
+      'Light'
+      'Dark'
+      'System'
+    )
+    ReadOnly = True
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object ComboBox2: TComboBox
+    AnchorSideLeft.Control = Label2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    Left = 116
+    Height = 23
+    Top = 39
+    Width = 100
+    BorderSpacing.Around = 8
+    Enabled = False
+    ItemHeight = 15
+    ReadOnly = True
+    Style = csDropDownList
+    TabOrder = 1
+  end
+  object ComboBox3: TComboBox
+    AnchorSideLeft.Control = Label3
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ComboBox2
+    AnchorSideTop.Side = asrBottom
+    Left = 116
+    Height = 23
+    Top = 70
+    Width = 100
+    BorderSpacing.Around = 8
+    ItemHeight = 15
+    ItemIndex = 0
+    Items.Strings = (
+      'False'
+      'True'
+    )
+    Style = csDropDownList
+    TabOrder = 2
+    Text = 'False'
+    OnChange = ComboBox3Change
+  end
+end

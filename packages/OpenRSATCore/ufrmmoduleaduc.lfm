@@ -1,0 +1,635 @@
+object FrmModuleADUC: TFrmModuleADUC
+  Left = 0
+  Height = 400
+  Top = 0
+  Width = 800
+  Align = alClient
+  ClientHeight = 400
+  ClientWidth = 800
+  TabOrder = 0
+  DesignLeft = 1991
+  DesignTop = 74
+  object Splitter1: TSplitter
+    Left = 195
+    Height = 351
+    Top = 26
+    Width = 5
+  end
+  object GridADUC: TTisGrid
+    Left = 200
+    Height = 347
+    Top = 30
+    Width = 600
+    Align = alClient
+    BorderSpacing.Top = 4
+    BorderSpacing.Bottom = 4
+    Constraints.MinWidth = 195
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'Name'
+        Width = 200
+        PropertyName = 'name'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Text = 'Type'
+        Width = 150
+        PropertyName = 'objectClass'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 2
+        Text = 'Description'
+        Width = 300
+        PropertyName = 'description'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 101
+    Header.MinHeight = 19
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.SortColumn = 0
+    Header.Style = hsFlatButtons
+    Images = CoreDataModule.ImageList1
+    PopupMenu = PopupMenu1
+    TabOrder = 0
+    SelectedAndTotalLabel = Label1
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
+    TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+    ZebraColor = 15593713
+    ZebraPaint = True
+    PopupMenuOptions = [pmoShowFind, pmoShowFindNext]
+    FilterOptions.CaseInsensitive = True
+    OnContextPopup = GridADUCContextPopup
+    OnDblClick = GridADUCDblClick
+    OnDragOver = GridADUCDragOver
+    OnDragDrop = GridADUCDragDrop
+    OnEdited = GridADUCEdited
+    OnEndDrag = GridADUCEndDrag
+    OnGetImageIndex = GridADUCGetImageIndex
+    OnKeyDown = GridADUCKeyDown
+    OnKeyPress = GridADUCKeyPress
+    OnMouseDown = GridADUCMouseDown
+    OnGetText = GridADUCGetText
+    OnAfterDataChange = GridADUCAfterDataChange
+  end
+  object Label1: TLabel
+    Left = 4
+    Height = 15
+    Top = 381
+    Width = 792
+    Align = alBottom
+    Alignment = taRightJustify
+    BorderSpacing.Around = 4
+    Caption = 'Total : 0 elements'
+  end
+  object ToolBar1: TToolBar
+    Left = 0
+    Height = 26
+    Top = 0
+    Width = 800
+    AutoSize = True
+    ButtonHeight = 24
+    ButtonWidth = 24
+    Caption = 'ToolBar1'
+    EdgeBorders = [ebLeft, ebTop]
+    Images = CoreDataModule.ImageList1
+    ImagesWidth = 18
+    Indent = 0
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+    object ToolButton_Previous: TToolButton
+      Left = 2
+      Hint = 'Previous'
+      Top = 2
+      Action = Action_Previous
+      AutoSize = True
+    end
+    object ToolButton_Next: TToolButton
+      Left = 26
+      Hint = 'Next'
+      Top = 2
+      Action = Action_Next
+    end
+    object ToolButton_Parent: TToolButton
+      Left = 50
+      Hint = 'Parent'
+      Top = 2
+      Action = Action_Parent
+    end
+    object ToolButton_Divider1: TToolButton
+      Left = 74
+      Height = 24
+      Top = 2
+      Style = tbsDivider
+    end
+    object ToolButton_Property: TToolButton
+      Left = 79
+      Hint = 'Property'
+      Top = 2
+      Action = Action_Properties
+    end
+    object ToolButton_Search: TToolButton
+      Left = 103
+      Hint = 'Search'
+      Top = 2
+      Action = Action_Search
+    end
+    object ToolButton_Filter: TToolButton
+      Left = 127
+      Hint = 'Filter'
+      Top = 2
+      Action = Action_Filter
+    end
+    object ToolButton_Divider2: TToolButton
+      Left = 151
+      Height = 24
+      Top = 2
+      Caption = 'ToolButton_Divider2'
+      Style = tbsDivider
+    end
+    object ToolButton_User: TToolButton
+      Left = 156
+      Hint = 'New User'
+      Top = 2
+      Action = Action_NewUser
+    end
+    object ToolButton_Group: TToolButton
+      Left = 180
+      Hint = 'New Group'
+      Top = 2
+      Action = Action_NewGroup
+    end
+    object ToolButton_OU: TToolButton
+      Left = 204
+      Hint = 'New OU'
+      Top = 2
+      Action = Action_NewOU
+    end
+    object ToolButton_Divider3: TToolButton
+      Left = 228
+      Height = 24
+      Top = 2
+      Caption = 'ToolButton_Divider3'
+      Style = tbsDivider
+    end
+    object ToolButton_Copy: TToolButton
+      Left = 257
+      Hint = 'Copy'
+      Top = 2
+      Action = Action_Copy
+    end
+    object ToolButton_Cut: TToolButton
+      Left = 281
+      Hint = 'Cut'
+      Top = 2
+      Action = Action_Cut
+    end
+    object ToolButton_Paste: TToolButton
+      Left = 305
+      Hint = 'Paste'
+      Top = 2
+      Action = Action_Paste
+    end
+    object ToolButton_Delete: TToolButton
+      Left = 233
+      Hint = 'Delete'
+      Top = 2
+      Action = Action_Delete
+    end
+    object ToolButton_AddToGroup: TToolButton
+      Left = 329
+      Hint = 'Add to a Group'
+      Top = 2
+      Action = Action_TaskAddToAGroup
+    end
+  end
+  object TreeADUC: TTreeView
+    Left = 0
+    Height = 347
+    Top = 30
+    Width = 195
+    Align = alLeft
+    BorderSpacing.Top = 4
+    BorderSpacing.Bottom = 4
+    Constraints.MinWidth = 100
+    Images = CoreDataModule.ImageList1
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    RightClickSelect = True
+    TabOrder = 3
+    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+    OnChange = TreeADUCChange
+    OnContextPopup = TreeADUCContextPopup
+    OnCreateNodeClass = TreeADUCCreateNodeClass
+    OnDragDrop = TreeADUCDragDrop
+    OnDragOver = TreeADUCDragOver
+    OnEndDrag = TreeADUCEndDrag
+    OnExpanded = TreeADUCExpanded
+    OnGetImageIndex = TreeADUCGetImageIndex
+  end
+  object ActionList_ADUC: TActionList
+    Images = CoreDataModule.ImageList1
+    Left = 24
+    Top = 112
+    object Action_Refresh: TAction
+      Caption = 'Refresh'
+      ImageIndex = 1
+      ShortCut = 116
+      OnExecute = Action_RefreshExecute
+      OnUpdate = Action_RefreshUpdate
+    end
+    object Action_Properties: TAction
+      Caption = 'Properties'
+      ImageIndex = 4
+      ShortCut = 13
+      OnExecute = Action_PropertiesExecute
+      OnUpdate = Action_PropertiesUpdate
+    end
+    object Action_NewUser: TAction
+      Category = 'New'
+      Caption = 'New User'
+      ImageIndex = 7
+      OnExecute = Action_NewUserExecute
+      OnUpdate = Action_NewUserUpdate
+    end
+    object Action_NewGroup: TAction
+      Category = 'New'
+      Caption = 'New Group'
+      ImageIndex = 8
+      OnExecute = Action_NewGroupExecute
+      OnUpdate = Action_NewGroupUpdate
+    end
+    object Action_Delete: TAction
+      Caption = 'Delete'
+      ImageIndex = 13
+      ShortCut = 46
+      OnExecute = Action_DeleteExecute
+      OnUpdate = Action_DeleteUpdate
+    end
+    object Action_TaskDelegateControl: TAction
+      Category = 'Tasks'
+      Caption = 'Delagate Control'
+    end
+    object Action_TaskCopy: TAction
+      Category = 'Tasks'
+      Caption = 'Copy'
+    end
+    object Action_TaskAddToAGroup: TAction
+      Category = 'Tasks'
+      Caption = 'Add to a group'
+      ImageIndex = 14
+      OnExecute = Action_TaskAddToAGroupExecute
+      OnUpdate = Action_TaskAddToAGroupUpdate
+    end
+    object Action_TaskNameMappings: TAction
+      Category = 'Tasks'
+      Caption = 'Name mappings'
+    end
+    object Action_TaskDisableAccount: TAction
+      Category = 'Tasks'
+      Caption = 'Disable Account'
+    end
+    object Action_TaskResetPassword: TAction
+      Category = 'Tasks'
+      Caption = 'Reset Password'
+      OnExecute = Action_TaskResetPasswordExecute
+      OnUpdate = Action_TaskResetPasswordUpdate
+    end
+    object Action_TaskMove: TAction
+      Category = 'Tasks'
+      Caption = 'Move'
+      OnExecute = Action_TaskMoveExecute
+      OnUpdate = Action_TaskMoveUpdate
+    end
+    object Action_TaskOpenHomePage: TAction
+      Category = 'Tasks'
+      Caption = 'Open Home Page'
+    end
+    object Action_TaskSendMail: TAction
+      Category = 'Tasks'
+      Caption = 'Send Mail'
+    end
+    object Action_TaskManage: TAction
+      Category = 'Tasks'
+      Caption = 'Manage'
+    end
+    object Action_NewComputer: TAction
+      Category = 'New'
+      Caption = 'Computer'
+      OnExecute = Action_NewComputerExecute
+      OnUpdate = Action_NewComputerUpdate
+    end
+    object Action_NewOU: TAction
+      Category = 'New'
+      Caption = 'New OU'
+      ImageIndex = 9
+      OnExecute = Action_NewOUExecute
+      OnUpdate = Action_NewOUUpdate
+    end
+    object Action_NewAll: TAction
+      Category = 'New'
+      Caption = 'New'
+      DisableIfNoHandler = False
+      OnUpdate = Action_NewAllUpdate
+    end
+    object Action_NewDefault: TAction
+      Category = 'New'
+      Caption = 'Default'
+    end
+    object Action_NewContact: TAction
+      Category = 'New'
+      Caption = 'Contact'
+    end
+    object Action_NewInetOrgPerson: TAction
+      Category = 'New'
+      Caption = 'InetOrgPerson'
+    end
+    object Action_NewSharedFolder: TAction
+      Category = 'New'
+      Caption = 'Shared Folder'
+    end
+    object Action_Search: TAction
+      Caption = 'Search'
+      ImageIndex = 5
+      ShortCut = 16454
+      OnExecute = Action_SearchExecute
+      OnUpdate = Action_SearchUpdate
+    end
+    object Action_Filter: TAction
+      Caption = 'Filter'
+      ImageIndex = 6
+    end
+    object Action_Copy: TAction
+      Caption = 'Copy'
+      DisableIfNoHandler = False
+      ImageIndex = 10
+      ShortCut = 16451
+      OnExecute = Action_CopyExecute
+      OnUpdate = Action_CopyUpdate
+    end
+    object Action_Cut: TAction
+      Caption = 'Cut'
+      DisableIfNoHandler = False
+      ImageIndex = 11
+      ShortCut = 16472
+      OnExecute = Action_CutExecute
+      OnUpdate = Action_CutUpdate
+    end
+    object Action_Paste: TAction
+      Caption = 'Paste'
+      DisableIfNoHandler = False
+      ImageIndex = 12
+      ShortCut = 16470
+      OnExecute = Action_PasteExecute
+      OnUpdate = Action_PasteUpdate
+    end
+    object Action_TreeNewAll: TAction
+      Category = 'TreeNew'
+      Caption = 'New'
+    end
+    object Action_SearchRoot: TAction
+      Caption = 'Search'
+      ShortCut = 24646
+    end
+    object Action_SwitchToolbarCaption: TAction
+      Caption = 'Switch toolbar size'
+      OnExecute = Action_SwitchToolbarCaptionExecute
+    end
+    object Action_Previous: TAction
+      Caption = 'Action_Previous'
+      DisableIfNoHandler = False
+      ImageIndex = 1
+      OnExecute = Action_PreviousExecute
+      OnUpdate = Action_PreviousUpdate
+    end
+    object Action_Next: TAction
+      Caption = 'Action_Next'
+      DisableIfNoHandler = False
+      ImageIndex = 2
+      OnExecute = Action_NextExecute
+      OnUpdate = Action_NextUpdate
+    end
+    object Action_Parent: TAction
+      Caption = 'Action_Parent'
+      DisableIfNoHandler = False
+      ImageIndex = 3
+      OnExecute = Action_ParentExecute
+      OnUpdate = Action_ParentUpdate
+    end
+    object Action_ShowGPO: TAction
+      Caption = 'Show GPO'
+    end
+    object Action_ChangePartition: TAction
+      Caption = 'Change partition'
+    end
+    object Action_SitesAndServices: TAction
+      Caption = 'Sites and services'
+    end
+    object Action_UsersAndComputers: TAction
+      Caption = 'Users and computers'
+    end
+    object Action_DelegateControl: TAction
+      Caption = 'Delegate control'
+      OnExecute = Action_DelegateControlExecute
+      OnUpdate = Action_DelegateControlUpdate
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Images = CoreDataModule.ImageList1
+    Left = 128
+    Top = 112
+    object MenuItem_DelegateControl: TMenuItem
+      Action = Action_DelegateControl
+    end
+    object MenuItem_ChangePartition: TMenuItem
+      Action = Action_ChangePartition
+    end
+    object MenuItem_: TMenuItem
+      Caption = 'MenuItem_'
+    end
+    object MenuItem_AddToAGroup: TMenuItem
+      Action = Action_TaskAddToAGroup
+    end
+    object MenuItem_NameMapping: TMenuItem
+      Action = Action_TaskNameMappings
+    end
+    object MenuItem_DisableAccount: TMenuItem
+      Action = Action_TaskDisableAccount
+    end
+    object MenuItem_ResetPassword: TMenuItem
+      Action = Action_TaskResetPassword
+    end
+    object MenuItem_Move: TMenuItem
+      Action = Action_TaskMove
+    end
+    object MenuItem_OpenHomePage: TMenuItem
+      Action = Action_TaskOpenHomePage
+    end
+    object MenuItem_SendMail: TMenuItem
+      Action = Action_TaskSendMail
+    end
+    object MenuItem_Manage: TMenuItem
+      Action = Action_TaskManage
+    end
+    object MenuItem_Find: TMenuItem
+      Caption = 'Find'
+    end
+    object Separator2: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem_New: TMenuItem
+      Action = Action_NewAll
+      object MenuItem_NewComputer: TMenuItem
+        Action = Action_NewComputer
+      end
+      object MenuItem_NewContact: TMenuItem
+        Action = Action_NewContact
+      end
+      object MenuItem_NewGroup: TMenuItem
+        Action = Action_NewGroup
+      end
+      object MenuItem_NewInetOrgPerson: TMenuItem
+        Action = Action_NewInetOrgPerson
+      end
+      object MenuItem_NewMSMQQueue: TMenuItem
+        Caption = 'MenuItem_NewMSMQQueue'
+      end
+      object MenuItem_NewMSMQRoutingLink: TMenuItem
+        Caption = 'MenuItem_NewMSMQRoutingLink'
+      end
+      object MenuItem_NewMsAuthzCentralAccessPolicy: TMenuItem
+        Caption = 'MenuItem_NewMsAuthzCentralAccessPolicy'
+      end
+      object MenuItem_NewMsAuthzCentralAccessRule: TMenuItem
+        Caption = 'MenuItem_NewMsAuthzCentralAccessRule'
+      end
+      object MenuItem_NewMsDNSServerSettings: TMenuItem
+        Caption = 'MenuItem_NewMsDNSServerSettings'
+      end
+      object MenuItem_NewMsDSAuthNPolicy: TMenuItem
+        Caption = 'MenuItem_NewMsDSAuthNPolicy'
+      end
+      object MenuItem_NewMsDSAuthNPolicySilo: TMenuItem
+        Caption = 'MenuItem_NewMsDSAuthNPolicySilo'
+      end
+      object MenuItem_NewMsDSClaimType: TMenuItem
+        Caption = 'MenuItem_NewMsDSClaimType'
+      end
+      object MenuItem_NewMsDSKeyCredential: TMenuItem
+        Caption = 'MenuItem_NewMsDSKeyCredential'
+      end
+      object MenuItem_NewMsDSResourceProperty: TMenuItem
+        Caption = 'MenuItem_NewMsDSResourceProperty'
+      end
+      object MenuItem_NewMsDSResourcePropertyList: TMenuItem
+        Caption = 'MenuItem_NewMsDSResourcePropertyList'
+      end
+      object MenuItem_NewMsDSShadowPrincipal: TMenuItem
+        Caption = 'MenuItem_NewMsDSShadowPrincipal'
+      end
+      object MenuItem_NewMsDSShadowPrincipalContainer: TMenuItem
+        Caption = 'MenuItem_NewMsDSShadowPrincipalContainer'
+      end
+      object MenuItem_NewMsImagingPSPs: TMenuItem
+        Caption = 'MenuItem_NewMsImagingPSPs'
+      end
+      object MenuItem_NewMsImagingPostScanProcess: TMenuItem
+        Caption = 'MenuItem_NewMsImagingPostScanProcess'
+      end
+      object MenuItem_NewMSMQQueueAlias: TMenuItem
+        Caption = 'MenuItem_NewMSMQQueueAlias'
+      end
+      object MenuItem_NewConnection: TMenuItem
+        Caption = 'MenuItem_NewConnection'
+      end
+      object MenuItem_NewSiteSettings: TMenuItem
+        Caption = 'MenuItem_NewSiteSettings'
+      end
+      object MenuItem_NewOU: TMenuItem
+        Action = Action_NewOU
+      end
+      object MenuItem_NewPrinter: TMenuItem
+        Caption = 'MenuItem_NewPrinter'
+      end
+      object MenuItem_NewServer: TMenuItem
+        Caption = 'MenuItem_NewServer'
+      end
+      object MenuItem_NewServersContainer: TMenuItem
+        Caption = 'MenuItem_NewServersContainer'
+      end
+      object MenuItem_NewSite: TMenuItem
+        Caption = 'MenuItem_NewSite'
+      end
+      object MenuItem_NewSiteLink: TMenuItem
+        Caption = 'MenuItem_NewSiteLink'
+      end
+      object MenuItem_NewSiteLinkBridge: TMenuItem
+        Caption = 'MenuItem_NewSiteLinkBridge'
+      end
+      object MenuItem_NewSiteContainer: TMenuItem
+        Caption = 'MenuItem_NewSiteContainer'
+      end
+      object MenuItem_NewSubnet: TMenuItem
+        Caption = 'MenuItem_NewSubnet'
+      end
+      object MenuItem_NewUser: TMenuItem
+        Action = Action_NewUser
+      end
+      object MenuItem_NewSharedFolder: TMenuItem
+        Action = Action_NewSharedFolder
+      end
+    end
+    object Separator1: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem_Copy: TMenuItem
+      Action = Action_Copy
+    end
+    object MenuItem_Cut: TMenuItem
+      Action = Action_Cut
+    end
+    object MenuItem_Paste: TMenuItem
+      Action = Action_Paste
+    end
+    object Separator3: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem_SwitchToolbarSize: TMenuItem
+      Action = Action_SwitchToolbarCaption
+    end
+    object Separator4: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem_Search: TMenuItem
+      Action = Action_Search
+    end
+    object MenuItem_Delete: TMenuItem
+      Action = Action_Delete
+    end
+    object MenuItem_Refresh: TMenuItem
+      Action = Action_Refresh
+    end
+    object MenuItem_Properties: TMenuItem
+      Action = Action_Properties
+    end
+  end
+  object Timer_SearchInGrid: TTimer
+    Enabled = False
+    OnTimer = Timer_SearchInGridTimer
+    Left = 64
+    Top = 192
+  end
+  object Timer_TreeChangeNode: TTimer
+    Enabled = False
+    Interval = 300
+    OnTimer = Timer_TreeChangeNodeTimer
+    Left = 72
+    Top = 48
+  end
+end

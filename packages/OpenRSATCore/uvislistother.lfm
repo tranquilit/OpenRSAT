@@ -1,0 +1,202 @@
+object VisListOther: TVisListOther
+  Left = 2487
+  Height = 283
+  Top = 57
+  Width = 320
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = '(Other)'
+  ClientHeight = 283
+  ClientWidth = 320
+  KeyPreview = True
+  Position = poOwnerFormCenter
+  LCLVersion = '4.1.0.0'
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  object Label_NewValue: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 8
+    Height = 15
+    Top = 16
+    Width = 61
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 16
+    Caption = 'New value :'
+  end
+  object Edit_NewValue: TEdit
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label_NewValue
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = BitBtn_Remove
+    Left = 8
+    Height = 23
+    Top = 39
+    Width = 227
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    TabOrder = 0
+  end
+  object BitBtn_Add: TBitBtn
+    AnchorSideTop.Control = Edit_NewValue
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 264
+    Height = 25
+    Top = 38
+    Width = 48
+    Action = Action_Add
+    Anchors = [akTop, akRight]
+    AutoSize = True
+    BorderSpacing.Right = 8
+    TabOrder = 3
+  end
+  object Label_Current: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit_NewValue
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 78
+    Width = 82
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 16
+    Caption = 'Current values :'
+  end
+  object ListBox_Current: TListBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label_Current
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = BitBtn_Remove
+    AnchorSideBottom.Control = Panel_Bottom
+    Left = 8
+    Height = 132
+    Top = 101
+    Width = 227
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    ItemHeight = 0
+    Sorted = True
+    TabOrder = 2
+  end
+  object BitBtn_Edit: TBitBtn
+    AnchorSideTop.Control = ListBox_Current
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 266
+    Height = 25
+    Top = 101
+    Width = 46
+    Action = Action_Edit
+    Anchors = [akTop, akRight]
+    AutoSize = True
+    BorderSpacing.Right = 8
+    TabOrder = 4
+  end
+  object BitBtn_Remove: TBitBtn
+    AnchorSideTop.Control = BitBtn_Edit
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 243
+    Height = 25
+    Top = 134
+    Width = 69
+    Action = Action_Remove
+    Anchors = [akTop, akRight]
+    AutoSize = True
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    TabOrder = 5
+  end
+  object Panel_Bottom: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 0
+    Height = 42
+    Top = 241
+    Width = 320
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 42
+    ClientWidth = 320
+    TabOrder = 1
+    TabStop = True
+    object Btn_BottomCancel: TBitBtn
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_Bottom
+      AnchorSideRight.Side = asrBottom
+      Left = 230
+      Height = 26
+      Top = 8
+      Width = 82
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      Caption = 'Cancel'
+      Constraints.MinHeight = 24
+      Constraints.MinWidth = 24
+      ModalResult = 2
+      Images = VisMain.ImageList_RSAT
+      ImageIndex = 6
+      TabOrder = 1
+    end
+    object Btn_BottomOK: TBitBtn
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Btn_BottomCancel
+      Left = 160
+      Height = 26
+      Top = 8
+      Width = 62
+      Action = Action_OK
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      Constraints.MinHeight = 24
+      Constraints.MinWidth = 24
+      Default = True
+      ModalResult = 1
+      Images = VisMain.ImageList_RSAT
+      ImageIndex = 8
+      TabOrder = 0
+    end
+  end
+  object ActionList: TActionList
+    Left = 240
+    Top = 8
+    object Action_Add: TAction
+      Caption = 'Add'
+      OnExecute = Action_AddExecute
+      OnUpdate = Action_AddUpdate
+    end
+    object Action_Edit: TAction
+      Caption = 'Edit'
+      OnExecute = Action_EditExecute
+      OnUpdate = Action_EditUpdate
+    end
+    object Action_Remove: TAction
+      Caption = 'Remove'
+      OnExecute = Action_RemoveExecute
+      OnUpdate = Action_RemoveUpdate
+    end
+    object Action_OK: TAction
+      Caption = 'OK'
+      OnExecute = Action_OKExecute
+    end
+  end
+end

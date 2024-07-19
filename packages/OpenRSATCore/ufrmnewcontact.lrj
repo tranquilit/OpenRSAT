@@ -1,0 +1,8 @@
+{"version":1,"strings":[
+{"hash":104434218,"name":"tfrmnewcontact.label_firstname.caption","sourcebytes":[70,105,114,115,116,32,110,97,109,101,58],"value":"First name:"},
+{"hash":255001440,"name":"tfrmnewcontact.label_initial.caption","sourcebytes":[73,110,105,116,105,97,108,115,32,58,32],"value":"Initials : "},
+{"hash":108096298,"name":"tfrmnewcontact.label_lastname.caption","sourcebytes":[76,97,115,116,32,110,97,109,101,58],"value":"Last name:"},
+{"hash":242270122,"name":"tfrmnewcontact.label_fullname.caption","sourcebytes":[70,117,108,108,32,110,97,109,101,58],"value":"Full name:"},
+{"hash":8261962,"name":"tfrmnewcontact.label_displayname.caption","sourcebytes":[68,105,115,112,108,97,121,32,110,97,109,101,58],"value":"Display name:"},
+{"hash":1339,"name":"tfrmnewcontact.action_next.caption","sourcebytes":[79,75],"value":"OK"}
+]}

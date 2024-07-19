@@ -1,0 +1,17 @@
+*.lps
+*.exe
+*.compiled
+*.o
+*.ppu
+*.res
+*.or
+*.log
+*.mab
+**/backup
+lib
+tisrsat
+**/log
+tmp.json
+*.trc
+graph.txt
+documentation/build

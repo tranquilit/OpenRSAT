@@ -1,0 +1,297 @@
+object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
+  Left = 0
+  Height = 400
+  Top = 0
+  Width = 800
+  ClientHeight = 400
+  ClientWidth = 800
+  TabOrder = 0
+  DesignLeft = 1989
+  DesignTop = 539
+  object ToolBar1: TToolBar
+    Left = 0
+    Height = 26
+    Top = 0
+    Width = 800
+    AutoSize = True
+    ButtonHeight = 24
+    ButtonWidth = 24
+    Caption = 'ToolBar1'
+    EdgeBorders = [ebLeft, ebTop]
+    Images = CoreDataModule.ImageList1
+    ImagesWidth = 18
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+    object ToolButton1: TToolButton
+      Left = 3
+      Top = 2
+      Action = Action_Previous
+    end
+    object ToolButton2: TToolButton
+      Left = 27
+      Top = 2
+      Action = Action_Next
+    end
+    object ToolButton3: TToolButton
+      Left = 51
+      Top = 2
+      Action = Action_Parent
+    end
+    object ToolButton6: TToolButton
+      Left = 75
+      Height = 24
+      Top = 2
+      Caption = 'ToolButton6'
+      Style = tbsSeparator
+    end
+    object ToolButton4: TToolButton
+      Left = 83
+      Top = 2
+      Action = Action_Property
+    end
+    object ToolButton5: TToolButton
+      Left = 107
+      Top = 2
+      Action = Action_Delete
+    end
+  end
+  object TreeView1: TTreeView
+    Left = 0
+    Height = 349
+    Top = 26
+    Width = 195
+    Align = alLeft
+    Images = CoreDataModule.ImageList1
+    PopupMenu = PopupMenu1
+    ReadOnly = True
+    RightClickSelect = True
+    TabOrder = 1
+    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+    OnChange = TreeView1Change
+    OnCreateNodeClass = TreeView1CreateNodeClass
+    OnExpanding = TreeView1Expanding
+    OnGetImageIndex = TreeView1GetImageIndex
+  end
+  object TisGrid1: TTisGrid
+    Left = 200
+    Height = 349
+    Top = 26
+    Width = 600
+    Align = alClient
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'Name'
+        Width = 200
+        PropertyName = 'name'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Text = 'Type'
+        Width = 150
+        PropertyName = 'type'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 2
+        Text = 'Description'
+        Width = 300
+        PropertyName = 'description'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 3
+        Text = 'Location'
+        Width = 100
+        PropertyName = 'location'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 4
+        Text = 'Site'
+        Width = 100
+        PropertyName = 'site'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 5
+        Text = 'Cost'
+        Width = 100
+        PropertyName = 'cost'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 6
+        Text = 'Replication Interval'
+        Width = 100
+        PropertyName = 'replicationInterval'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 7
+        Text = 'Domain'
+        Width = 100
+        PropertyName = 'domain'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 8
+        Text = 'Bridgehead'
+        Width = 100
+        PropertyName = 'bridgehead'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 9
+        Text = 'DC Type'
+        Width = 100
+        PropertyName = 'dcType'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 10
+        Text = 'From Server'
+        Width = 100
+        PropertyName = 'fromServer'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 11
+        Text = 'From Site'
+        Width = 100
+        PropertyName = 'fromSite'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 101
+    Header.MinHeight = 19
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.Style = hsFlatButtons
+    Images = CoreDataModule.ImageList1
+    PopupMenu = PopupMenu1
+    TabOrder = 2
+    SelectedAndTotalLabel = Label1
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toFullRowDrag]
+    ZebraColor = 15593713
+    OnDblClick = TisGrid1DblClick
+    OnGetImageIndex = TisGrid1GetImageIndex
+    OnKeyPress = TisGrid1KeyPress
+    OnCompareByRow = TisGrid1CompareByRow
+  end
+  object Splitter1: TSplitter
+    Left = 195
+    Height = 349
+    Top = 26
+    Width = 5
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 25
+    Top = 375
+    Width = 800
+    Align = alBottom
+    AutoSize = True
+    Caption = 'Panel1'
+    ClientHeight = 25
+    ClientWidth = 800
+    TabOrder = 4
+    object StatusBar1: TStatusBar
+      Left = 1
+      Height = 23
+      Top = 1
+      Width = 698
+      Align = alClient
+      Panels = <>
+    end
+    object Label1: TLabel
+      Left = 703
+      Height = 15
+      Top = 5
+      Width = 92
+      Align = alRight
+      Alignment = taRightJustify
+      BorderSpacing.Around = 4
+      Caption = 'Total : 0 elements'
+    end
+  end
+  object ActionList1: TActionList
+    Images = CoreDataModule.ImageList1
+    Left = 256
+    Top = 160
+    object Action_Refresh: TAction
+      Caption = 'Refresh'
+      ImageIndex = 31
+      ShortCut = 116
+      OnExecute = Action_RefreshExecute
+      OnUpdate = Action_RefreshUpdate
+    end
+    object Action_Previous: TAction
+      Caption = 'Action_Previous'
+      ImageIndex = 1
+    end
+    object Action_Next: TAction
+      Caption = 'Action_Next'
+      ImageIndex = 2
+    end
+    object Action_Parent: TAction
+      Caption = 'Action_Parent'
+      ImageIndex = 3
+    end
+    object Action_NewSite: TAction
+      Caption = 'New Site'
+      OnExecute = Action_NewSiteExecute
+      OnUpdate = Action_NewSiteUpdate
+    end
+    object Action_NewSubnet: TAction
+      Caption = 'New Subnet'
+      OnExecute = Action_NewSubnetExecute
+      OnUpdate = Action_NewSubnetUpdate
+    end
+    object Action_Property: TAction
+      Caption = 'Property'
+      ImageIndex = 4
+      ShortCut = 13
+      OnExecute = Action_PropertyExecute
+      OnUpdate = Action_PropertyUpdate
+    end
+    object Action_Delete: TAction
+      Caption = 'Action_Delete'
+      ImageIndex = 13
+      OnExecute = Action_DeleteExecute
+      OnUpdate = Action_DeleteUpdate
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 256
+    Top = 96
+    object MenuItem1: TMenuItem
+      Action = Action_Refresh
+    end
+    object MenuItem2: TMenuItem
+      Action = Action_NewSite
+    end
+    object MenuItem3: TMenuItem
+      Action = Action_NewSubnet
+    end
+    object MenuItem4: TMenuItem
+      Action = Action_Property
+    end
+  end
+  object Timer_SearchInGrid: TTimer
+    Enabled = False
+    OnTimer = Timer_SearchInGridTimer
+    Left = 8
+    Top = 8
+  end
+  object Timer_TreeChangeNode: TTimer
+    Enabled = False
+    Interval = 300
+    OnTimer = Timer_TreeChangeNodeTimer
+    Left = 8
+    Top = 8
+  end
+end

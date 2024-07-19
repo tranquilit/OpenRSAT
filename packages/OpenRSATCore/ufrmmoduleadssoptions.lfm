@@ -1,0 +1,50 @@
+object FrmModuleADSSOptions: TFrmModuleADSSOptions
+  Left = 0
+  Height = 595
+  Top = 0
+  Width = 524
+  ClientHeight = 595
+  ClientWidth = 524
+  TabOrder = 0
+  DesignLeft = 2373
+  DesignTop = 190
+  object Panel1: TPanel
+    Left = 8
+    Height = 17
+    Top = 8
+    Width = 508
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 17
+    ClientWidth = 508
+    TabOrder = 0
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = CheckBox1
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 1
+      Width = 100
+      Caption = 'Show Service'
+      Constraints.MinWidth = 100
+      WordWrap = True
+    end
+    object CheckBox1: TCheckBox
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 116
+      Height = 17
+      Top = 0
+      Width = 18
+      BorderSpacing.Left = 16
+      TabOrder = 0
+      OnChange = CheckBox1Change
+    end
+  end
+end

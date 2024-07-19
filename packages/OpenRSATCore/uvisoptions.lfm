@@ -1,0 +1,160 @@
+object VisOptions: TVisOptions
+  Left = 2672
+  Height = 478
+  Top = 262
+  Width = 727
+  ActiveControl = TreeView1
+  Caption = 'Options'
+  ClientHeight = 478
+  ClientWidth = 727
+  Constraints.MinHeight = 320
+  Constraints.MinWidth = 320
+  KeyPreview = True
+  Position = poMainFormCenter
+  LCLVersion = '4.1.0.0'
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  object Panel_Bottom: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideBottom.Control = Owner
+    Left = 0
+    Height = 40
+    Top = 438
+    Width = 727
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 40
+    ClientWidth = 727
+    TabOrder = 0
+    object Btn_OK: TBitBtn
+      AnchorSideRight.Control = Btn_Cancel
+      AnchorSideBottom.Side = asrBottom
+      Left = 487
+      Height = 24
+      Top = 8
+      Width = 72
+      Action = Action_OK
+      Anchors = [akRight]
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      ModalResult = 1
+      ImageIndex = 8
+      TabOrder = 0
+    end
+    object Btn_Cancel: TBitBtn
+      AnchorSideBottom.Side = asrBottom
+      Left = 567
+      Height = 24
+      Top = 8
+      Width = 72
+      Action = Action_Cancel
+      Anchors = [akRight]
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      Cancel = True
+      ModalResult = 2
+      ImageIndex = 6
+      TabOrder = 1
+    end
+    object Btn_Apply: TButton
+      AnchorSideRight.Control = Panel_Bottom
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 647
+      Height = 24
+      Top = 8
+      Width = 72
+      Action = Action_Apply
+      Anchors = [akRight]
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      TabOrder = 2
+    end
+  end
+  object PairSplitter1: TPairSplitter
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Panel_Bottom
+    Left = 0
+    Height = 438
+    Top = 0
+    Width = 727
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Position = 208
+    object PairSplitterSide1: TPairSplitterSide
+      Cursor = crArrow
+      Left = 0
+      Height = 438
+      Top = 0
+      Width = 208
+      ClientWidth = 208
+      ClientHeight = 438
+      Constraints.MinWidth = 100
+      object TisSearchEdit1: TTisSearchEdit
+        AnchorSideLeft.Control = PairSplitterSide1
+        AnchorSideTop.Control = PairSplitterSide1
+        AnchorSideRight.Control = PairSplitterSide1
+        AnchorSideRight.Side = asrBottom
+        Left = 8
+        Height = 23
+        Top = 8
+        Width = 200
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Left = 8
+        BorderSpacing.Top = 8
+        BorderSpacing.Bottom = 8
+        ItemHeight = 15
+        TabOrder = 0
+        Buttons = <>
+      end
+      object TreeView1: TTreeView
+        AnchorSideLeft.Control = PairSplitterSide1
+        AnchorSideTop.Control = TisSearchEdit1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = PairSplitterSide1
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = PairSplitterSide1
+        AnchorSideBottom.Side = asrBottom
+        Left = 8
+        Height = 391
+        Top = 39
+        Width = 200
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderSpacing.Left = 8
+        BorderSpacing.Top = 8
+        BorderSpacing.Bottom = 8
+        ReadOnly = True
+        TabOrder = 1
+        Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+        OnChanging = TreeView1Changing
+      end
+    end
+    object PairSplitterSide2: TPairSplitterSide
+      Cursor = crArrow
+      Left = 213
+      Height = 438
+      Top = 0
+      Width = 514
+      Constraints.MinWidth = 200
+    end
+  end
+  object ActionList1: TActionList
+    Left = 312
+    Top = 168
+    object Action_OK: TAction
+      Caption = 'OK'
+      OnExecute = Action_OKExecute
+    end
+    object Action_Cancel: TAction
+      Caption = 'Cancel'
+    end
+    object Action_Apply: TAction
+      Caption = 'Apply'
+      OnExecute = Action_ApplyExecute
+      OnUpdate = Action_ApplyUpdate
+    end
+  end
+end

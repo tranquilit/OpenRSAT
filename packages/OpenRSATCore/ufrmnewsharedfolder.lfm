@@ -1,0 +1,79 @@
+object FrmNewSharedFolder: TFrmNewSharedFolder
+  Left = 0
+  Height = 240
+  Top = 0
+  Width = 320
+  ClientHeight = 240
+  ClientWidth = 320
+  TabOrder = 0
+  DesignLeft = 2149
+  DesignTop = 239
+  object Label_Name: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 312
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    Caption = 'Name:'
+  end
+  object Label_Path: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit_Name
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 54
+    Width = 160
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    Caption = 'Network path (\\server\share):'
+  end
+  object Edit_Name: TEdit
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label_Name
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 23
+    Width = 304
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    TabOrder = 0
+  end
+  object Edit_Path: TEdit
+    AnchorSideTop.Control = Label_Path
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 69
+    Width = 304
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    TabOrder = 1
+    OnChange = Edit_PathChange
+  end
+  object ActionList: TActionList
+    Images = VisMain.ImageList_RSAT
+    Left = 376
+    Top = 168
+    object Action_Next: TAction
+      Caption = 'OK'
+      ImageIndex = 8
+      OnExecute = Action_NextExecute
+      OnUpdate = Action_NextUpdate
+    end
+  end
+end

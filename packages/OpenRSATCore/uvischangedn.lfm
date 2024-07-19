@@ -1,0 +1,82 @@
+object VisChangeDN: TVisChangeDN
+  Left = 2479
+  Height = 342
+  Top = 206
+  Width = 304
+  Caption = 'Change DN'
+  ClientHeight = 342
+  ClientWidth = 304
+  KeyPreview = True
+  Position = poOwnerFormCenter
+  LCLVersion = '4.1.0.0'
+  OnKeyDown = FormKeyDown
+  object TreeView1: TTreeView
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Panel_Bottom
+    Left = 8
+    Height = 293
+    Top = 8
+    Width = 288
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 8
+    ReadOnly = True
+    TabOrder = 0
+    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+    OnChange = TreeView1Change
+    OnCreateNodeClass = TreeView1CreateNodeClass
+  end
+  object Panel_Bottom: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 25
+    Top = 309
+    Width = 288
+    Anchors = [akLeft, akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 25
+    ClientWidth = 288
+    TabOrder = 1
+    object BitBtn_Ok: TBitBtn
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_Bottom
+      AnchorSideRight.Side = asrBottom
+      Left = 246
+      Height = 25
+      Top = 0
+      Width = 42
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      ImageIndex = 8
+      TabOrder = 0
+    end
+    object BitBtn_Cancel: TBitBtn
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = BitBtn_Ok
+      Left = 176
+      Height = 25
+      Top = 0
+      Width = 62
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Right = 8
+      Caption = 'Cancel'
+      ModalResult = 2
+      ImageIndex = 6
+      TabOrder = 1
+    end
+  end
+end

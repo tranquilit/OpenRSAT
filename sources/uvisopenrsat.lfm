@@ -1,0 +1,112 @@
+object VisOpenRSAT: TVisOpenRSAT
+  Left = 2885
+  Height = 347
+  Top = 453
+  Width = 746
+  Caption = 'OpenRSAT'
+  Constraints.MinHeight = 100
+  Constraints.MinWidth = 300
+  Menu = MainMenu
+  Position = poWorkAreaCenter
+  SessionProperties = 'Width;WindowState;Height;Left;Top'
+  LCLVersion = '4.1.0.0'
+  OnActivate = FormActivate
+  OnDeactivate = FormDeactivate
+  OnPaint = FormPaint
+  OnShow = FormShow
+  object MainMenu: TMainMenu
+    Left = 24
+    Top = 56
+    object MenuItem_File: TMenuItem
+      Caption = 'File'
+      object MenuItem_LdapConnect: TMenuItem
+      end
+      object MenuItem_LdapConnectOption: TMenuItem
+      end
+      object MenuItem_LdapDisconnect: TMenuItem
+      end
+      object Separator4: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem3: TMenuItem
+        Caption = 'Change tool'
+        Visible = False
+        object MenuItem4: TMenuItem
+        end
+        object MenuItem5: TMenuItem
+        end
+      end
+      object MenuItem_FileOptions: TMenuItem
+        Caption = 'Options'
+        ImageIndex = 5
+      end
+      object Separator_File: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem_FileQuit: TMenuItem
+        Action = Action_Quit
+      end
+    end
+    object MenuItem_View: TMenuItem
+      Caption = 'View'
+      object MenuItem_ViewWindows: TMenuItem
+        Action = Action_OpenedProperties
+      end
+      object MenuItem_ViewTheme: TMenuItem
+        Caption = 'Theme'
+        object MenuItem_ViewThemeLight: TMenuItem
+          Caption = 'Use light theme (at next launch)'
+          RadioItem = True
+          OnClick = MenuItem_ViewThemeLightClick
+        end
+        object MenuItem_ViewThemeDark: TMenuItem
+          Caption = 'Use dark theme (at next launch)'
+          RadioItem = True
+          OnClick = MenuItem_ViewThemeDarkClick
+        end
+        object MenuItem_ViewThemeSystem: TMenuItem
+          AutoCheck = True
+          Caption = 'Use system theme (at next launch)'
+          Checked = True
+          RadioItem = True
+          OnClick = MenuItem_ViewThemeSystemClick
+        end
+      end
+      object MenuItem_AdvancedFeatures: TMenuItem
+        Caption = 'MenuItem_AdvancedFeatures'
+      end
+      object MenuItem_ShowGPO: TMenuItem
+        Caption = 'Show GPO'
+      end
+    end
+    object MenuItem_DEBUG: TMenuItem
+      Caption = 'Debug options'
+      Visible = False
+    end
+    object MenuItem_Help: TMenuItem
+      Caption = '?'
+      object MenuItem_RetrieveOldConfiguration: TMenuItem
+        Caption = 'Retrieve old configuration'
+      end
+    end
+  end
+  object ActionList: TActionList
+    Left = 24
+    Top = 120
+    object Action_Quit: TAction
+      Caption = 'Quit'
+      ImageIndex = 13
+      OnExecute = Action_QuitExecute
+    end
+    object Action_OpenedProperties: TAction
+      Caption = 'Properties'
+      DisableIfNoHandler = False
+      OnUpdate = Action_OpenedPropertiesUpdate
+    end
+  end
+  object IniPropStorage1: TIniPropStorage
+    StoredValues = <>
+    Left = 8
+    Top = 8
+  end
+end

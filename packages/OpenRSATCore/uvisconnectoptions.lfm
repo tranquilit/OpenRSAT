@@ -1,0 +1,444 @@
+object VisConnectOptions: TVisConnectOptions
+  Left = -969
+  Height = 330
+  Top = 243
+  Width = 530
+  AutoSize = True
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Connection Options'
+  ClientHeight = 330
+  ClientWidth = 530
+  Constraints.MinHeight = 330
+  Constraints.MinWidth = 530
+  KeyPreview = True
+  Position = poMainFormCenter
+  LCLVersion = '4.1.0.0'
+  OnKeyDown = FormKeyDown
+  object PageControl: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 279
+    Top = 8
+    Width = 514
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 279
+    ClientWidth = 514
+    TabOrder = 0
+    object Group_Connection: TGroupBox
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 144
+      Top = 8
+      Width = 493
+      AutoSize = True
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      Caption = 'Connection : '
+      ClientHeight = 124
+      ClientWidth = 489
+      TabOrder = 0
+      object Label_TargetHost: TLabel
+        AnchorSideLeft.Control = Group_Connection
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Side = asrBottom
+        Left = 8
+        Height = 15
+        Top = 12
+        Width = 48
+        Alignment = taRightJustify
+        BorderSpacing.Left = 8
+        Caption = 'Domain :'
+        Layout = tlCenter
+      end
+      object Edit_Domain: TTisSearchEdit
+        AnchorSideLeft.Control = Group_Connection
+        AnchorSideTop.Side = asrCenter
+        AnchorSideBottom.Side = asrBottom
+        Left = 136
+        Height = 23
+        Top = 8
+        Width = 144
+        BorderSpacing.Left = 136
+        BorderSpacing.Right = 8
+        BorderSpacing.Bottom = 8
+        ItemHeight = 15
+        TabOrder = 0
+        Buttons = <>
+      end
+      object Label_Port: TLabel
+        AnchorSideLeft.Control = Edit_Domain
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit_Domain
+        AnchorSideTop.Side = asrCenter
+        Left = 296
+        Height = 15
+        Top = 12
+        Width = 31
+        BorderSpacing.Left = 16
+        BorderSpacing.Top = 8
+        Caption = 'Port : '
+        Layout = tlCenter
+      end
+      object Edit_Port: TEdit
+        AnchorSideLeft.Control = Label_Port
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Label_Port
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Side = asrBottom
+        Left = 335
+        Height = 23
+        Top = 8
+        Width = 40
+        Alignment = taCenter
+        BorderSpacing.Left = 8
+        BorderSpacing.Top = 8
+        BorderSpacing.Right = 8
+        NumbersOnly = True
+        TabOrder = 1
+        Text = '389'
+      end
+      object Label_DC: TLabel
+        AnchorSideLeft.Control = Group_Connection
+        AnchorSideTop.Control = Edit_DomainController
+        AnchorSideTop.Side = asrCenter
+        Left = 8
+        Height = 15
+        Top = 43
+        Width = 98
+        BorderSpacing.Around = 8
+        Caption = 'Domain Controller'
+      end
+      object CheckBox_TLS: TCheckBox
+        AnchorSideLeft.Control = Panel1
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Panel1
+        AnchorSideTop.Side = asrCenter
+        Left = 296
+        Height = 19
+        Top = 84
+        Width = 37
+        BorderSpacing.Around = 8
+        Caption = 'TLS'
+        TabOrder = 6
+        OnChange = CheckBox_TLSChange
+      end
+      object Panel1: TPanel
+        AnchorSideLeft.Control = Edit_Domain
+        AnchorSideTop.Control = Edit_DomainController
+        AnchorSideTop.Side = asrBottom
+        Left = 136
+        Height = 62
+        Top = 62
+        Width = 152
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 62
+        ClientWidth = 152
+        TabOrder = 5
+        object RadioButton_SimpleAuth: TRadioButton
+          AnchorSideLeft.Control = Panel1
+          AnchorSideTop.Control = Panel1
+          Left = 8
+          Height = 19
+          Top = 8
+          Width = 136
+          BorderSpacing.Around = 8
+          Caption = 'Simple Authentication'
+          TabOrder = 0
+          OnChange = RadioButtonChange
+        end
+        object RadioButton_GSSAPI: TRadioButton
+          AnchorSideLeft.Control = Panel1
+          AnchorSideTop.Control = RadioButton_SimpleAuth
+          AnchorSideTop.Side = asrBottom
+          Left = 8
+          Height = 19
+          Top = 35
+          Width = 61
+          BorderSpacing.Around = 8
+          Caption = 'GSS-API'
+          Checked = True
+          TabOrder = 1
+          TabStop = True
+          OnChange = RadioButtonChange
+        end
+        object CheckBox_SASL: TCheckBox
+          AnchorSideLeft.Control = RadioButton_GSSAPI
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = RadioButton_GSSAPI
+          Left = 77
+          Height = 19
+          Top = 35
+          Width = 44
+          Caption = 'SASL'
+          Checked = True
+          State = cbChecked
+          TabOrder = 2
+        end
+      end
+      object BitBtn_RefreshDomain: TBitBtn
+        AnchorSideLeft.Control = Edit_Port
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit_Domain
+        AnchorSideTop.Side = asrCenter
+        Left = 383
+        Height = 10
+        Top = 14
+        Width = 26
+        Action = Action_Domain
+        AutoSize = True
+        ImageIndex = 5
+        TabOrder = 2
+      end
+      object BitBtn_RefreshDC: TBitBtn
+        AnchorSideLeft.Control = Edit_DomainController
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit_DomainController
+        AnchorSideTop.Side = asrCenter
+        Left = 383
+        Height = 10
+        Top = 45
+        Width = 26
+        Action = Action_DomainController
+        AutoSize = True
+        BorderSpacing.Left = 8
+        ImageIndex = 5
+        TabOrder = 4
+      end
+      object Edit_DomainController: TTisSearchEdit
+        AnchorSideLeft.Control = Edit_Domain
+        AnchorSideTop.Control = Edit_Domain
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Edit_Port
+        AnchorSideRight.Side = asrBottom
+        Left = 136
+        Height = 23
+        Top = 39
+        Width = 239
+        Anchors = [akTop, akLeft, akRight]
+        ItemHeight = 15
+        TabOrder = 3
+        Buttons = <>
+      end
+      object cbIgnoreCertErrors: TCheckBox
+        AnchorSideLeft.Control = CheckBox_TLS
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = CheckBox_TLS
+        AnchorSideTop.Side = asrCenter
+        Left = 341
+        Height = 19
+        Top = 84
+        Width = 140
+        BorderSpacing.Around = 8
+        Caption = 'Ignore certificate errors'
+        TabOrder = 7
+      end
+    end
+    object Group_Account: TGroupBox
+      AnchorSideTop.Control = Group_Connection
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Group_Connection
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 119
+      Top = 160
+      Width = 493
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = True
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Account :'
+      ClientHeight = 99
+      ClientWidth = 489
+      TabOrder = 1
+      object Label_User: TLabel
+        AnchorSideTop.Control = Edit_User
+        AnchorSideTop.Side = asrCenter
+        Left = 8
+        Height = 24
+        Top = 8
+        Width = 29
+        Alignment = taRightJustify
+        BorderSpacing.Left = 8
+        BorderSpacing.Top = 8
+        Caption = 'User :'
+        Constraints.MaxHeight = 24
+        Constraints.MinHeight = 24
+        Layout = tlCenter
+      end
+      object Edit_User: TEdit
+        AnchorSideLeft.Control = Group_Account
+        AnchorSideTop.Side = asrCenter
+        Left = 136
+        Height = 24
+        Top = 8
+        Width = 176
+        BorderSpacing.Left = 136
+        Constraints.MaxHeight = 24
+        Constraints.MinHeight = 24
+        TabOrder = 0
+      end
+      object Label_Password: TLabel
+        AnchorSideTop.Control = Edit_Password
+        AnchorSideTop.Side = asrCenter
+        Left = 8
+        Height = 24
+        Top = 40
+        Width = 56
+        Alignment = taRightJustify
+        BorderSpacing.Left = 8
+        BorderSpacing.Top = 8
+        BorderSpacing.Bottom = 8
+        Caption = 'Password :'
+        Constraints.MaxHeight = 24
+        Constraints.MinHeight = 24
+        Layout = tlCenter
+      end
+      object Edit_Password: TEdit
+        AnchorSideLeft.Control = Group_Account
+        AnchorSideTop.Control = Edit_User
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Left = 136
+        Height = 24
+        Top = 40
+        Width = 176
+        BorderSpacing.Left = 136
+        BorderSpacing.Top = 8
+        Constraints.MaxHeight = 24
+        Constraints.MinHeight = 24
+        EchoMode = emPassword
+        Font.Style = [fsBold]
+        ParentFont = False
+        PasswordChar = '*'
+        TabOrder = 1
+      end
+      object CheckBox_Anonyme: TCheckBox
+        AnchorSideLeft.Control = Group_Account
+        AnchorSideTop.Control = Edit_Password
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Side = asrBottom
+        Left = 8
+        Height = 19
+        Top = 72
+        Width = 148
+        BorderSpacing.Around = 8
+        Caption = 'Anonymous Connection'
+        TabOrder = 2
+        OnChange = CheckBox_AnonymeChange
+      end
+    end
+  end
+  object Panel_Bottom: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = PageControl
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 0
+    Height = 41
+    Top = 287
+    Width = 530
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 530
+    TabOrder = 1
+    object Btn_OK: TBitBtn
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideRight.Control = Btn_Cancel
+      AnchorSideBottom.Control = Panel_Bottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 410
+      Height = 25
+      Top = 8
+      Width = 42
+      Action = Action_OK
+      Anchors = [akTop, akRight, akBottom]
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      Default = True
+      ModalResult = 1
+      ImageIndex = 8
+      TabOrder = 1
+    end
+    object Btn_Cancel: TBitBtn
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideRight.Control = Panel_Bottom
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Panel_Bottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 460
+      Height = 25
+      Top = 8
+      Width = 62
+      Action = Action_Cancel
+      Anchors = [akTop, akRight, akBottom]
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      ModalResult = 2
+      ImageIndex = 6
+      TabOrder = 2
+    end
+    object Button_Check: TBitBtn
+      AnchorSideLeft.Control = Panel_Bottom
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideBottom.Control = Panel_Bottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 25
+      Top = 8
+      Width = 59
+      Action = Action_Check
+      Anchors = [akTop, akLeft, akBottom]
+      AutoSize = True
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      TabOrder = 0
+    end
+  end
+  object ActionList1: TActionList
+    Left = 432
+    Top = 208
+    object Action_Check: TAction
+      Caption = 'Check'
+      OnExecute = Action_CheckExecute
+    end
+    object Action_OK: TAction
+      Caption = 'OK'
+      OnExecute = Action_OKExecute
+    end
+    object Action_Cancel: TAction
+      Caption = 'Cancel'
+      DisableIfNoHandler = False
+    end
+    object Action_Domain: TAction
+      ImageIndex = 5
+      OnExecute = Action_DomainExecute
+    end
+    object Action_DomainController: TAction
+      ImageIndex = 5
+      OnExecute = Action_DomainControllerExecute
+    end
+  end
+end

@@ -1,0 +1,1253 @@
+object VisNewZoneWizard: TVisNewZoneWizard
+  Left = 104
+  Height = 362
+  Top = 337
+  Width = 498
+  Caption = 'New Zone Wizard'
+  ClientHeight = 362
+  ClientWidth = 498
+  LCLVersion = '4.1.0.0'
+  OnCreate = FormCreate
+  object Panel2: TPanel
+    Left = 0
+    Height = 41
+    Top = 321
+    Width = 498
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 498
+    TabOrder = 1
+    object BitBtn_Back: TBitBtn
+      Left = 311
+      Height = 25
+      Top = 8
+      Width = 51
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      Caption = 'Back'
+      TabOrder = 0
+    end
+    object BitBtn_Next: TBitBtn
+      Left = 370
+      Height = 25
+      Top = 8
+      Width = 50
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      Caption = 'Next'
+      TabOrder = 1
+    end
+    object BitBtn_Cancel: TBitBtn
+      Left = 428
+      Height = 25
+      Top = 8
+      Width = 62
+      Action = Action_Cancel
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      ModalResult = 2
+      TabOrder = 2
+    end
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 321
+    Top = 0
+    Width = 498
+    ActivePage = TS_ZoneName
+    Align = alClient
+    ShowTabs = False
+    TabIndex = 3
+    TabOrder = 0
+    object TS_Wizard: TTabSheet
+      Caption = 'TS_Wizard'
+      ClientHeight = 313
+      ClientWidth = 490
+      OnShow = TS_WizardShow
+      object Panel1: TPanel
+        Left = 156
+        Height = 313
+        Top = 0
+        Width = 334
+        Align = alRight
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 313
+        ClientWidth = 334
+        TabOrder = 0
+        object Label1: TLabel
+          AnchorSideLeft.Control = Panel1
+          AnchorSideTop.Control = Panel1
+          AnchorSideRight.Control = Panel1
+          AnchorSideRight.Side = asrBottom
+          Left = 8
+          Height = 21
+          Top = 8
+          Width = 318
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Bottom = 8
+          BorderSpacing.Around = 8
+          Caption = 'Welcome to the New Zone Wizard'
+          Font.Height = -16
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label2: TLabel
+          AnchorSideLeft.Control = Panel1
+          AnchorSideTop.Control = Label1
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel1
+          AnchorSideRight.Side = asrBottom
+          Left = 8
+          Height = 15
+          Top = 45
+          Width = 318
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 8
+          Caption = 'This wizard helps you create a new zone for your DNS server.'
+          WordWrap = True
+        end
+        object Label3: TLabel
+          AnchorSideLeft.Control = Panel1
+          AnchorSideTop.Control = Label2
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel1
+          AnchorSideRight.Side = asrBottom
+          Left = 8
+          Height = 30
+          Top = 68
+          Width = 318
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Bottom = 8
+          BorderSpacing.Around = 8
+          Caption = 'A zone translates DNS names to related data, such as IP addresses or network services.'
+          WordWrap = True
+        end
+        object Label4: TLabel
+          AnchorSideLeft.Control = Panel1
+          AnchorSideTop.Control = Label3
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel1
+          AnchorSideRight.Side = asrBottom
+          Left = 8
+          Height = 15
+          Top = 114
+          Width = 318
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 8
+          Caption = 'To continue, click Next.'
+          WordWrap = True
+        end
+      end
+    end
+    object TS_ZoneType: TTabSheet
+      Caption = 'TS_ZoneType'
+      ClientHeight = 313
+      ClientWidth = 490
+      OnShow = TS_ZoneTypeShow
+      object Panel3: TPanel
+        Left = 0
+        Height = 54
+        Top = 0
+        Width = 490
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 54
+        ClientWidth = 490
+        TabOrder = 0
+        object Label5: TLabel
+          AnchorSideLeft.Control = Panel3
+          AnchorSideTop.Control = Panel3
+          AnchorSideRight.Control = Panel3
+          AnchorSideRight.Side = asrBottom
+          Left = 16
+          Height = 15
+          Top = 8
+          Width = 442
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          Caption = 'Zone Type'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label6: TLabel
+          AnchorSideLeft.Control = Label5
+          AnchorSideTop.Control = Label5
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel3
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 23
+          Width = 426
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Right = 32
+          BorderSpacing.Bottom = 16
+          Caption = 'The DNS server supports various types of zones and storage.'
+        end
+      end
+      object Panel4: TPanel
+        Left = 0
+        Height = 259
+        Top = 54
+        Width = 490
+        Align = alClient
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 259
+        ClientWidth = 490
+        TabOrder = 1
+        object Label7: TLabel
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = Panel4
+          AnchorSideRight.Control = Panel4
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 8
+          Width = 418
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 24
+          BorderSpacing.Right = 32
+          BorderSpacing.Around = 8
+          Caption = 'Select the type of zone you want to create:'
+        end
+        object RadioButton1: TRadioButton
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = Label7
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 19
+          Top = 31
+          Width = 87
+          BorderSpacing.Left = 32
+          Caption = 'Primary zone'
+          Checked = True
+          TabOrder = 0
+          TabStop = True
+        end
+        object RadioButton2: TRadioButton
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = Label8
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 19
+          Top = 73
+          Width = 101
+          BorderSpacing.Left = 32
+          Caption = 'Secondary zone'
+          Enabled = False
+          TabOrder = 1
+        end
+        object RadioButton3: TRadioButton
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = Label9
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 19
+          Top = 130
+          Width = 70
+          BorderSpacing.Left = 32
+          Caption = 'Stub zone'
+          Enabled = False
+          TabOrder = 2
+        end
+        object CheckBox1: TCheckBox
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = Label10
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 17
+          Top = 202
+          Width = 18
+          BorderSpacing.Left = 32
+          Checked = True
+          Enabled = False
+          State = cbChecked
+          TabOrder = 3
+        end
+        object Label8: TLabel
+          AnchorSideLeft.Control = RadioButton1
+          AnchorSideTop.Control = RadioButton1
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel4
+          AnchorSideRight.Side = asrBottom
+          Left = 48
+          Height = 15
+          Top = 50
+          Width = 410
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Right = 32
+          BorderSpacing.Bottom = 8
+          Caption = 'Creates a copy of a zone that can be updated directly on this server.'
+        end
+        object Label9: TLabel
+          AnchorSideLeft.Control = RadioButton2
+          AnchorSideTop.Control = RadioButton2
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel4
+          AnchorSideRight.Side = asrBottom
+          Left = 48
+          Height = 30
+          Top = 92
+          Width = 410
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Right = 32
+          BorderSpacing.Bottom = 8
+          Caption = 'Create a copy of a zone that exists on another server. This option helps balance the processing load of primary servers and provides fault tolerance.'
+          WordWrap = True
+        end
+        object Label10: TLabel
+          AnchorSideLeft.Control = RadioButton3
+          AnchorSideTop.Control = RadioButton3
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel4
+          AnchorSideRight.Side = asrBottom
+          Left = 48
+          Height = 45
+          Top = 149
+          Width = 410
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Right = 32
+          BorderSpacing.Bottom = 8
+          Caption = 'Create a copy of a zone containing inly Name Server (NS), Start of Authority (SOA), and possibly glue Host (A) records. A server containing a stub zone is not authoritative for that zone.'
+          WordWrap = True
+        end
+        object Label11: TLabel
+          AnchorSideLeft.Control = CheckBox1
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = CheckBox1
+          AnchorSideRight.Control = Panel4
+          AnchorSideRight.Side = asrBottom
+          Left = 50
+          Height = 30
+          Top = 202
+          Width = 408
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Right = 32
+          Caption = 'Store the zone in Active Directory (available only if DNS server is a writeable domain controller)'
+          WordWrap = True
+        end
+      end
+    end
+    object TS_ZoneReplicationScope: TTabSheet
+      Caption = 'TS_ZoneReplicationScope'
+      ClientHeight = 313
+      ClientWidth = 490
+      OnShow = TS_ZoneReplicationScopeShow
+      object Panel5: TPanel
+        Left = 0
+        Height = 54
+        Top = 0
+        Width = 490
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 54
+        ClientWidth = 490
+        TabOrder = 0
+        object Label12: TLabel
+          AnchorSideLeft.Control = Panel5
+          AnchorSideTop.Control = Panel5
+          AnchorSideRight.Control = Panel5
+          AnchorSideRight.Side = asrBottom
+          Left = 16
+          Height = 15
+          Top = 8
+          Width = 442
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          Caption = 'Active Directory Zone Replication Scope'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object Label13: TLabel
+          AnchorSideLeft.Control = Label12
+          AnchorSideTop.Control = Label12
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel5
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 23
+          Width = 426
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Right = 32
+          BorderSpacing.Bottom = 16
+          Caption = 'You can select how you want DNS data replicated throughout your network.'
+          WordWrap = True
+        end
+      end
+      object Panel6: TPanel
+        Left = 0
+        Height = 259
+        Top = 54
+        Width = 490
+        Align = alClient
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 259
+        ClientWidth = 490
+        TabOrder = 1
+        object Label14: TLabel
+          AnchorSideLeft.Control = Panel6
+          AnchorSideTop.Control = Panel6
+          AnchorSideRight.Control = Panel6
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 8
+          Width = 426
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          Caption = 'Select how you want zone data replicated:'
+          WordWrap = True
+        end
+        object RadioButton4: TRadioButton
+          AnchorSideLeft.Control = Panel6
+          AnchorSideTop.Control = Label14
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 17
+          Top = 31
+          Width = 18
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 8
+          Enabled = False
+          TabOrder = 0
+        end
+        object RadioButton5: TRadioButton
+          AnchorSideLeft.Control = Panel6
+          AnchorSideTop.Control = RadioButton4
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 17
+          Top = 64
+          Width = 18
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 16
+          Checked = True
+          TabOrder = 1
+          TabStop = True
+        end
+        object RadioButton6: TRadioButton
+          AnchorSideLeft.Control = Panel6
+          AnchorSideTop.Control = RadioButton5
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 17
+          Top = 97
+          Width = 18
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 16
+          Enabled = False
+          TabOrder = 2
+        end
+        object RadioButton7: TRadioButton
+          AnchorSideLeft.Control = Panel6
+          AnchorSideTop.Control = RadioButton6
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 17
+          Top = 130
+          Width = 18
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 16
+          Enabled = False
+          TabOrder = 3
+        end
+        object ComboBox1: TComboBox
+          AnchorSideLeft.Control = RadioButton7
+          AnchorSideTop.Control = RadioButton7
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel6
+          AnchorSideRight.Side = asrBottom
+          Left = 56
+          Height = 23
+          Top = 163
+          Width = 402
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 24
+          BorderSpacing.Top = 16
+          BorderSpacing.Right = 32
+          Enabled = False
+          ItemHeight = 15
+          TabOrder = 4
+        end
+        object Label15: TLabel
+          AnchorSideLeft.Control = RadioButton4
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = RadioButton4
+          AnchorSideRight.Control = Panel6
+          AnchorSideRight.Side = asrBottom
+          Left = 50
+          Height = 15
+          Top = 31
+          Width = 408
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Right = 32
+          Caption = 'To all DNS servers running on domain controllers in this forest:'
+          WordWrap = True
+        end
+        object Label16: TLabel
+          AnchorSideLeft.Control = RadioButton5
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = RadioButton5
+          AnchorSideRight.Control = Panel6
+          AnchorSideRight.Side = asrBottom
+          Left = 50
+          Height = 15
+          Top = 64
+          Width = 408
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Right = 32
+          Caption = 'To all DNS servers running on domain controllers in this domain:'
+          WordWrap = True
+        end
+        object Label17: TLabel
+          AnchorSideLeft.Control = RadioButton6
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = RadioButton6
+          AnchorSideRight.Control = Panel6
+          AnchorSideRight.Side = asrBottom
+          Left = 50
+          Height = 15
+          Top = 97
+          Width = 408
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Right = 32
+          Caption = 'To all domain controllers in this domain (for Windows 2000 compatibility):'
+          WordWrap = True
+        end
+        object Label18: TLabel
+          AnchorSideLeft.Control = RadioButton7
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = RadioButton7
+          AnchorSideRight.Control = Panel6
+          AnchorSideRight.Side = asrBottom
+          Left = 50
+          Height = 15
+          Top = 130
+          Width = 408
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Right = 32
+          Caption = 'To all domain controllers specified in the scoper of this directory partition:'
+          WordWrap = True
+        end
+      end
+    end
+    object TS_ZoneName: TTabSheet
+      Caption = 'TS_ZoneName'
+      ClientHeight = 313
+      ClientWidth = 490
+      OnShow = TS_ZoneNameShow
+      object Panel7: TPanel
+        Left = 0
+        Height = 54
+        Top = 0
+        Width = 490
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 54
+        ClientWidth = 490
+        TabOrder = 0
+        object Label19: TLabel
+          AnchorSideLeft.Control = Panel7
+          AnchorSideTop.Control = Panel7
+          AnchorSideRight.Control = Panel7
+          AnchorSideRight.Side = asrBottom
+          Left = 16
+          Height = 15
+          Top = 8
+          Width = 442
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          Caption = 'Zone Name'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+        object Label20: TLabel
+          AnchorSideLeft.Control = Label19
+          AnchorSideTop.Control = Label19
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel7
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 23
+          Width = 426
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Right = 32
+          BorderSpacing.Bottom = 16
+          Caption = 'What is the name of the new zone?'
+          WordWrap = True
+        end
+      end
+      object Panel8: TPanel
+        Left = 0
+        Height = 259
+        Top = 54
+        Width = 490
+        Align = alClient
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 259
+        ClientWidth = 490
+        TabOrder = 1
+        object Label21: TLabel
+          AnchorSideLeft.Control = Panel8
+          AnchorSideTop.Control = Panel8
+          AnchorSideRight.Control = Panel8
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 60
+          Top = 8
+          Width = 426
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          Caption = 'The zone name specifies the portion of the DNS namespace for which this server is autoritative. It might be your organization''s domain name (for example, example.com) or a portion of the domain name (for example, newzone.example.com). The zone name is not the name of the DNS server.'
+          WordWrap = True
+        end
+        object Label22: TLabel
+          AnchorSideLeft.Control = Panel8
+          AnchorSideTop.Control = Label21
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel8
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 100
+          Width = 426
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 32
+          BorderSpacing.Right = 32
+          Caption = 'Zone name:'
+          WordWrap = True
+        end
+        object Edit1: TEdit
+          AnchorSideLeft.Control = Panel8
+          AnchorSideTop.Control = Label22
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel8
+          AnchorSideRight.Side = asrBottom
+          Left = 40
+          Height = 23
+          Top = 123
+          Width = 418
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 40
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          TabOrder = 0
+        end
+      end
+    end
+    object TS_ZoneFile: TTabSheet
+      Caption = 'TS_ZoneFile'
+      ClientHeight = 313
+      ClientWidth = 490
+      OnShow = TS_ZoneFileShow
+      object Panel9: TPanel
+        Left = 0
+        Height = 54
+        Top = 0
+        Width = 490
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 54
+        ClientWidth = 490
+        TabOrder = 0
+        object Label23: TLabel
+          AnchorSideLeft.Control = Panel9
+          AnchorSideTop.Control = Panel9
+          AnchorSideRight.Control = Panel9
+          AnchorSideRight.Side = asrBottom
+          Left = 16
+          Height = 15
+          Top = 8
+          Width = 442
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          Caption = 'Zone File'
+          WordWrap = True
+        end
+        object Label24: TLabel
+          AnchorSideLeft.Control = Label23
+          AnchorSideTop.Control = Label23
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel9
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 23
+          Width = 426
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Right = 32
+          BorderSpacing.Bottom = 16
+          Caption = 'You can create a new zone file or use a file copied from another DNS server.'
+          WordWrap = True
+        end
+      end
+      object Panel10: TPanel
+        Left = 0
+        Height = 259
+        Top = 54
+        Width = 490
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 259
+        ClientWidth = 490
+        TabOrder = 1
+        object Label25: TLabel
+          AnchorSideLeft.Control = Panel10
+          AnchorSideTop.Control = Panel10
+          AnchorSideRight.Control = Panel10
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 30
+          Top = 8
+          Width = 426
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          Caption = 'Do you want to create a new zone file or use an existing file that you have copied from another DNS server?'
+          WordWrap = True
+        end
+        object RadioButton8: TRadioButton
+          AnchorSideLeft.Control = Panel10
+          AnchorSideTop.Control = Label25
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel10
+          Left = 32
+          Height = 17
+          Top = 46
+          Width = 18
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 8
+          TabOrder = 0
+        end
+        object Edit2: TEdit
+          AnchorSideLeft.Control = RadioButton8
+          AnchorSideTop.Control = RadioButton8
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel10
+          AnchorSideRight.Side = asrBottom
+          Left = 48
+          Height = 23
+          Top = 71
+          Width = 410
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          TabOrder = 1
+        end
+        object RadioButton9: TRadioButton
+          AnchorSideLeft.Control = Panel10
+          AnchorSideTop.Control = Edit2
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 17
+          Top = 102
+          Width = 18
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 8
+          TabOrder = 2
+        end
+        object Edit3: TEdit
+          AnchorSideLeft.Control = RadioButton9
+          AnchorSideTop.Control = RadioButton9
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel10
+          AnchorSideRight.Side = asrBottom
+          Left = 48
+          Height = 23
+          Top = 127
+          Width = 410
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          TabOrder = 3
+        end
+        object Label26: TLabel
+          AnchorSideLeft.Control = Edit3
+          AnchorSideTop.Control = Edit3
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel10
+          AnchorSideRight.Side = asrBottom
+          Left = 48
+          Height = 30
+          Top = 158
+          Width = 410
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          Caption = 'To use this existing file, ensure that it has been copied to the folder %SystemRoot%\system32\dns on this server, and then click Next.'
+          WordWrap = True
+        end
+        object Label27: TLabel
+          AnchorSideLeft.Control = RadioButton8
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = RadioButton8
+          AnchorSideRight.Control = Panel10
+          AnchorSideRight.Side = asrBottom
+          Left = 50
+          Height = 15
+          Top = 46
+          Width = 408
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Right = 32
+          Caption = 'Create a new file with this file name:'
+          WordWrap = True
+        end
+        object Label28: TLabel
+          AnchorSideLeft.Control = RadioButton9
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = RadioButton9
+          AnchorSideRight.Control = Panel10
+          AnchorSideRight.Side = asrBottom
+          Left = 50
+          Height = 15
+          Top = 102
+          Width = 408
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Right = 32
+          Caption = 'Use this existing file:'
+          WordWrap = True
+        end
+      end
+    end
+    object TS_DynamicZone: TTabSheet
+      Caption = 'TS_DynamicUpdate'
+      ClientHeight = 313
+      ClientWidth = 490
+      OnShow = TS_DynamicZoneShow
+      object Panel11: TPanel
+        Left = 0
+        Height = 69
+        Top = 0
+        Width = 490
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 69
+        ClientWidth = 490
+        TabOrder = 0
+        object Label29: TLabel
+          AnchorSideLeft.Control = Label30
+          AnchorSideTop.Control = Label30
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel11
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 30
+          Top = 23
+          Width = 426
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Right = 32
+          BorderSpacing.Bottom = 16
+          Caption = 'You can specify that this DNS zone accepts secure, nonsecure, or no dynamic updates.'
+          WordWrap = True
+        end
+        object Label30: TLabel
+          AnchorSideLeft.Control = Panel11
+          AnchorSideTop.Control = Panel11
+          AnchorSideRight.Control = Panel11
+          AnchorSideRight.Side = asrBottom
+          Left = 16
+          Height = 15
+          Top = 8
+          Width = 442
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          Caption = 'Dynamic Update'
+          Font.Style = [fsBold]
+          ParentFont = False
+          WordWrap = True
+        end
+      end
+      object Panel12: TPanel
+        Left = 0
+        Height = 244
+        Top = 69
+        Width = 490
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 244
+        ClientWidth = 490
+        TabOrder = 1
+        object Label31: TLabel
+          AnchorSideLeft.Control = Panel12
+          AnchorSideTop.Control = Panel12
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 30
+          Top = 8
+          Width = 426
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          Caption = 'Dynamic updates enable DNS client computers to register and dynamically update their resource records with a DNS server whenever changes occur.'
+          WordWrap = True
+        end
+        object Label32: TLabel
+          AnchorSideLeft.Control = Panel12
+          AnchorSideTop.Control = Label31
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 32
+          Height = 15
+          Top = 46
+          Width = 426
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 8
+          BorderSpacing.Right = 32
+          Caption = 'Select the type of dynamic updates you want to allow:'
+          WordWrap = True
+        end
+        object RadioButton10: TRadioButton
+          AnchorSideLeft.Control = Panel12
+          AnchorSideTop.Control = Label32
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 17
+          Top = 69
+          Width = 18
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 8
+          Checked = True
+          TabOrder = 0
+          TabStop = True
+        end
+        object RadioButton11: TRadioButton
+          AnchorSideLeft.Control = Panel12
+          AnchorSideTop.Control = Label34
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 17
+          Top = 107
+          Width = 18
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 8
+          Enabled = False
+          TabOrder = 1
+        end
+        object RadioButton12: TRadioButton
+          AnchorSideLeft.Control = Panel12
+          AnchorSideTop.Control = Label37
+          AnchorSideTop.Side = asrBottom
+          Left = 32
+          Height = 17
+          Top = 175
+          Width = 18
+          BorderSpacing.Left = 32
+          BorderSpacing.Top = 8
+          Enabled = False
+          TabOrder = 2
+        end
+        object Label33: TLabel
+          AnchorSideLeft.Control = RadioButton10
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = RadioButton10
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 50
+          Height = 15
+          Top = 69
+          Width = 408
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Right = 32
+          Caption = 'Allow only secure dynamic updates (recommanded for Active Directory)'
+          WordWrap = True
+        end
+        object Label34: TLabel
+          AnchorSideLeft.Control = RadioButton10
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Label33
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 50
+          Height = 15
+          Top = 84
+          Width = 408
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Right = 32
+          Caption = 'This option is available only for Active Directory-integrated zones.'
+          WordWrap = True
+        end
+        object Label35: TLabel
+          AnchorSideLeft.Control = RadioButton11
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = RadioButton11
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 50
+          Height = 15
+          Top = 107
+          Width = 408
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Right = 32
+          Caption = 'Allow both nonsecure and secure dynamic updates'
+          WordWrap = True
+        end
+        object Label36: TLabel
+          AnchorSideLeft.Control = RadioButton11
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Label35
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 50
+          Height = 15
+          Top = 122
+          Width = 408
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Right = 32
+          Caption = 'Dynamic updates of resource records are accepted from any client.'
+          WordWrap = True
+        end
+        object Label37: TLabel
+          AnchorSideLeft.Control = Label36
+          AnchorSideTop.Control = Label36
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 66
+          Height = 30
+          Top = 137
+          Width = 392
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Left = 16
+          BorderSpacing.Right = 32
+          Caption = 'This option is a significant security vulnerability because updates can be accepted from untrusted sources.'
+          WordWrap = True
+        end
+        object Label38: TLabel
+          AnchorSideLeft.Control = RadioButton12
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = RadioButton12
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 50
+          Height = 15
+          Top = 175
+          Width = 408
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Right = 32
+          Caption = 'Do not allow dynamic updates'
+          WordWrap = True
+        end
+        object Label39: TLabel
+          AnchorSideLeft.Control = Label38
+          AnchorSideTop.Control = Label38
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel12
+          AnchorSideRight.Side = asrBottom
+          Left = 50
+          Height = 30
+          Top = 190
+          Width = 408
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Right = 32
+          Caption = 'Dynamic updates of resource records are not accepted by this zone. You must update these records manually.'
+          WordWrap = True
+        end
+      end
+    end
+    object TS_Finish: TTabSheet
+      Caption = 'TS_Finish'
+      ClientHeight = 313
+      ClientWidth = 490
+      OnShow = TS_FinishShow
+      object Panel13: TPanel
+        Left = 144
+        Height = 297
+        Top = 8
+        Width = 338
+        Align = alRight
+        BorderSpacing.Around = 8
+        BevelOuter = bvNone
+        ClientHeight = 297
+        ClientWidth = 338
+        TabOrder = 0
+        object Label40: TLabel
+          AnchorSideLeft.Control = Panel13
+          AnchorSideTop.Control = Panel13
+          AnchorSideRight.Control = Panel13
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 15
+          Top = 0
+          Width = 338
+          Anchors = [akTop, akLeft, akRight]
+          Caption = 'Completing the New Zone Wizard'
+          WordWrap = True
+        end
+        object Label41: TLabel
+          AnchorSideLeft.Control = Panel13
+          AnchorSideTop.Control = Label40
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel13
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 30
+          Top = 47
+          Width = 338
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Top = 32
+          Caption = 'You have successfully completed the New Zone Wizard. You specified the following settings:'
+          WordWrap = True
+        end
+        object Memo1: TMemo
+          AnchorSideLeft.Control = Panel13
+          AnchorSideTop.Control = Label41
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel13
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 90
+          Top = 85
+          Width = 338
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Top = 8
+          Enabled = False
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object Label42: TLabel
+          AnchorSideLeft.Control = Panel13
+          AnchorSideTop.Control = Memo1
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel13
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 45
+          Top = 183
+          Width = 338
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Top = 8
+          Caption = 'Note: You should now add records to the zone or ensure that records are updated dynamically. You can then verify name resolution using nslookup.'
+          WordWrap = True
+        end
+        object Label43: TLabel
+          AnchorSideLeft.Control = Panel13
+          AnchorSideTop.Control = Label42
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel13
+          AnchorSideRight.Side = asrBottom
+          Left = 0
+          Height = 15
+          Top = 244
+          Width = 338
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Top = 16
+          Caption = 'To close this wizard and create the new zone, click Finish.'
+          WordWrap = True
+        end
+      end
+    end
+  end
+  object ActionList1: TActionList
+    Left = 424
+    Top = 16
+    object Action_Cancel: TAction
+      Caption = 'Cancel'
+    end
+    object Action_NextWizard: TAction
+      Caption = 'Next'
+      OnExecute = Action_NextWizardExecute
+    end
+    object Action_NextZoneType: TAction
+      Caption = 'Next'
+      OnExecute = Action_NextZoneTypeExecute
+    end
+    object Action_NextZoneReplicationScope: TAction
+      Caption = 'Next'
+      OnExecute = Action_NextZoneReplicationScopeExecute
+    end
+    object Action_NextZoneName: TAction
+      Caption = 'Next'
+      OnExecute = Action_NextZoneNameExecute
+      OnUpdate = Action_NextZoneNameUpdate
+    end
+    object Action_NextZoneFile: TAction
+      Caption = 'Next'
+      OnExecute = Action_NextZoneFileExecute
+    end
+    object Action_NextDynamicZone: TAction
+      Caption = 'Next'
+      OnExecute = Action_NextDynamicZoneExecute
+    end
+    object Action_NextFinish: TAction
+      Caption = 'Finish'
+      DisableIfNoHandler = False
+    end
+    object Action_BackZoneType: TAction
+      Caption = 'Back'
+      OnExecute = Action_BackZoneTypeExecute
+    end
+    object Action_BackZoneReplicationScope: TAction
+      Caption = 'Back'
+      OnExecute = Action_BackZoneReplicationScopeExecute
+    end
+    object Action_BackZoneName: TAction
+      Caption = 'Back'
+      OnExecute = Action_BackZoneNameExecute
+    end
+    object Action_BackZoneFile: TAction
+      Caption = 'Back'
+      OnExecute = Action_BackZoneFileExecute
+    end
+    object Action_BackDynamicZone: TAction
+      Caption = 'Back'
+      OnExecute = Action_BackDynamicZoneExecute
+    end
+    object Action_BackFinish: TAction
+      Caption = 'Back'
+      OnExecute = Action_BackFinishExecute
+    end
+    object Action_BackWizard: TAction
+      Caption = 'Back'
+    end
+  end
+end

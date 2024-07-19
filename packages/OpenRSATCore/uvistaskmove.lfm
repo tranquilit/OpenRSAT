@@ -1,0 +1,159 @@
+object VisTaskMove: TVisTaskMove
+  Left = 2480
+  Height = 340
+  Top = 191
+  Width = 300
+  Caption = 'Move'
+  ClientHeight = 340
+  ClientWidth = 300
+  KeyPreview = True
+  Position = poScreenCenter
+  LCLVersion = '4.1.0.0'
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  object Label_DN: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 87
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    Caption = 'Object location :'
+  end
+  object Label_RDN: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit_RDN
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 58
+    Width = 41
+    BorderSpacing.Left = 8
+    Caption = 'Name : '
+  end
+  object Edit_DN: TEdit
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label_DN
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 31
+    Width = 284
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BorderStyle = bsNone
+    ParentColor = True
+    ReadOnly = True
+    TabOrder = 1
+  end
+  object Edit_RDN: TEdit
+    AnchorSideLeft.Control = Label_RDN
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit_DN
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 57
+    Height = 23
+    Top = 54
+    Width = 235
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    TabOrder = 2
+  end
+  object PanelBottom: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 0
+    Height = 41
+    Top = 299
+    Width = 300
+    Anchors = [akLeft, akRight, akBottom]
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 300
+    TabOrder = 0
+    object Btn_Ok: TBitBtn
+      AnchorSideTop.Control = PanelBottom
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Btn_Cancel
+      Left = 180
+      Height = 25
+      Top = 8
+      Width = 42
+      Action = Action_OK
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      ModalResult = 1
+      ImageIndex = 8
+      TabOrder = 0
+    end
+    object Btn_Cancel: TBitBtn
+      AnchorSideTop.Control = PanelBottom
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = PanelBottom
+      AnchorSideRight.Side = asrBottom
+      Left = 230
+      Height = 25
+      Top = 8
+      Width = 62
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      Caption = 'Cancel'
+      ModalResult = 2
+      ImageIndex = 6
+      TabOrder = 1
+    end
+  end
+  object TreeView: TTreeView
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit_RDN
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = PanelBottom
+    Left = 8
+    Height = 214
+    Top = 85
+    Width = 284
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    Images = CoreDataModule.ImageList1
+    ReadOnly = True
+    RowSelect = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 3
+    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRowSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+    OnChange = TreeViewChange
+    OnCreateNodeClass = TreeViewCreateNodeClass
+  end
+  object ActionList: TActionList
+    Left = 256
+    Top = 8
+    object Action_OK: TAction
+      Caption = 'OK'
+      OnExecute = Action_OKExecute
+      OnUpdate = Action_OKUpdate
+    end
+  end
+end

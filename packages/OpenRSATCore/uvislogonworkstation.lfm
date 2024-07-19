@@ -1,0 +1,264 @@
+object VisLogonWorkstation: TVisLogonWorkstation
+  Left = 2474
+  Height = 391
+  Top = 51
+  Width = 360
+  AutoSize = True
+  BorderIcons = [biSystemMenu, biHelp]
+  BorderStyle = bsSingle
+  Caption = 'Logon Workstations'
+  ClientHeight = 391
+  ClientWidth = 360
+  Constraints.MaxWidth = 360
+  Constraints.MinWidth = 360
+  KeyPreview = True
+  Position = poOwnerFormCenter
+  LCLVersion = '4.1.0.0'
+  OnKeyDown = FormKeyDown
+  object Label_Info: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 30
+    Top = 8
+    Width = 344
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    Caption = 'In Computer name, type the computer''''s NetBIOS or Domain Name system (DNS) name.'
+    WordWrap = True
+  end
+  object Label_Title: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label_Info
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 46
+    Width = 123
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    Caption = 'This user can logon to :'
+  end
+  object RadioButton_Following: TRadioButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = RadioButton_All
+    AnchorSideTop.Side = asrBottom
+    Left = 16
+    Height = 19
+    Top = 88
+    Width = 154
+    BorderSpacing.Left = 16
+    Caption = 'The following computers '
+    TabOrder = 2
+    OnChange = RadioButton_FollowingChange
+  end
+  object RadioButton_All: TRadioButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label_Title
+    AnchorSideTop.Side = asrBottom
+    Left = 16
+    Height = 19
+    Top = 69
+    Width = 92
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    Caption = 'All computers'
+    TabOrder = 0
+  end
+  object GroupBox_Following: TGroupBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = RadioButton_Following
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 234
+    Top = 115
+    Width = 344
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    ClientHeight = 214
+    ClientWidth = 340
+    TabOrder = 1
+    object Label_Name: TLabel
+      AnchorSideLeft.Control = GroupBox_Following
+      AnchorSideTop.Control = GroupBox_Following
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 93
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Computer name :'
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = GroupBox_Following
+      AnchorSideTop.Control = Label_Name
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Btn_Remove
+      Left = 8
+      Height = 23
+      Top = 31
+      Width = 247
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      TabOrder = 0
+    end
+    object ListBox_Names: TListBox
+      AnchorSideLeft.Control = GroupBox_Following
+      AnchorSideTop.Control = Edit_Name
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Edit_Name
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 144
+      Top = 62
+      Width = 247
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      ItemHeight = 0
+      Sorted = True
+      TabOrder = 1
+    end
+    object Btn_Add: TBitBtn
+      AnchorSideTop.Control = Label_Name
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox_Following
+      AnchorSideRight.Side = asrBottom
+      Left = 284
+      Height = 25
+      Top = 31
+      Width = 48
+      Action = Action_Add
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      TabOrder = 2
+    end
+    object Btn_Edit: TBitBtn
+      AnchorSideTop.Control = Btn_Add
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox_Following
+      AnchorSideRight.Side = asrBottom
+      Left = 286
+      Height = 25
+      Top = 64
+      Width = 46
+      Action = Action_Edit
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      TabOrder = 3
+    end
+    object Btn_Remove: TBitBtn
+      AnchorSideTop.Control = Btn_Edit
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox_Following
+      AnchorSideRight.Side = asrBottom
+      Left = 263
+      Height = 25
+      Top = 97
+      Width = 69
+      Action = Action_Remove
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      TabOrder = 4
+    end
+  end
+  object Panel_Bottom: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = GroupBox_Following
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 0
+    Height = 42
+    Top = 349
+    Width = 360
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 42
+    ClientWidth = 360
+    TabOrder = 3
+    object Btn_OK: TBitBtn
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Btn_Cancel
+      Left = 200
+      Height = 26
+      Top = 8
+      Width = 62
+      Action = Action_OK
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      Default = True
+      ModalResult = 1
+      Images = VisMain.ImageList_RSAT
+      ImageIndex = 8
+      TabOrder = 0
+    end
+    object Btn_Cancel: TBitBtn
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_Bottom
+      AnchorSideRight.Side = asrBottom
+      Left = 270
+      Height = 26
+      Top = 8
+      Width = 82
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      Caption = 'Cancel'
+      ModalResult = 2
+      Images = VisMain.ImageList_RSAT
+      ImageIndex = 6
+      TabOrder = 1
+    end
+  end
+  object ActionList: TActionList
+    Left = 304
+    Top = 64
+    object Action_Add: TAction
+      Caption = 'Add'
+      OnExecute = Action_AddExecute
+      OnUpdate = Action_AddUpdate
+    end
+    object Action_Edit: TAction
+      Caption = 'Edit'
+      OnExecute = Action_EditExecute
+      OnUpdate = Action_EditUpdate
+    end
+    object Action_Remove: TAction
+      Caption = 'Remove'
+      OnExecute = Action_RemoveExecute
+      OnUpdate = Action_RemoveUpdate
+    end
+    object Action_OK: TAction
+      Caption = 'OK'
+      OnExecute = Action_OKExecute
+    end
+  end
+end

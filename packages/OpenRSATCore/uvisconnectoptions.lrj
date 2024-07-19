@@ -1,0 +1,20 @@
+{"version":1,"strings":[
+{"hash":141619539,"name":"tvisconnectoptions.caption","sourcebytes":[67,111,110,110,101,99,116,105,111,110,32,79,112,116,105,111,110,115],"value":"Connection Options"},
+{"hash":10569760,"name":"tvisconnectoptions.group_connection.caption","sourcebytes":[67,111,110,110,101,99,116,105,111,110,32,58,32],"value":"Connection : "},
+{"hash":104334474,"name":"tvisconnectoptions.label_targethost.caption","sourcebytes":[68,111,109,97,105,110,32,58],"value":"Domain :"},
+{"hash":124347280,"name":"tvisconnectoptions.label_port.caption","sourcebytes":[80,111,114,116,32,58,32],"value":"Port : "},
+{"hash":14009,"name":"tvisconnectoptions.edit_port.text","sourcebytes":[51,56,57],"value":"389"},
+{"hash":199636242,"name":"tvisconnectoptions.label_dc.caption","sourcebytes":[68,111,109,97,105,110,32,67,111,110,116,114,111,108,108,101,114],"value":"Domain Controller"},
+{"hash":22803,"name":"tvisconnectoptions.checkbox_tls.caption","sourcebytes":[84,76,83],"value":"TLS"},
+{"hash":121898366,"name":"tvisconnectoptions.radiobutton_simpleauth.caption","sourcebytes":[83,105,109,112,108,101,32,65,117,116,104,101,110,116,105,99,97,116,105,111,110],"value":"Simple Authentication"},
+{"hash":210114057,"name":"tvisconnectoptions.radiobutton_gssapi.caption","sourcebytes":[71,83,83,45,65,80,73],"value":"GSS-API"},
+{"hash":358012,"name":"tvisconnectoptions.checkbox_sasl.caption","sourcebytes":[83,65,83,76],"value":"SASL"},
+{"hash":55184931,"name":"tvisconnectoptions.cbignorecerterrors.caption","sourcebytes":[73,103,110,111,114,101,32,99,101,114,116,105,102,105,99,97,116,101,32,101,114,114,111,114,115],"value":"Ignore certificate errors"},
+{"hash":174854570,"name":"tvisconnectoptions.group_account.caption","sourcebytes":[65,99,99,111,117,110,116,32,58],"value":"Account :"},
+{"hash":97109050,"name":"tvisconnectoptions.label_user.caption","sourcebytes":[85,115,101,114,32,58],"value":"User :"},
+{"hash":182709914,"name":"tvisconnectoptions.label_password.caption","sourcebytes":[80,97,115,115,119,111,114,100,32,58],"value":"Password :"},
+{"hash":227017454,"name":"tvisconnectoptions.checkbox_anonyme.caption","sourcebytes":[65,110,111,110,121,109,111,117,115,32,67,111,110,110,101,99,116,105,111,110],"value":"Anonymous Connection"},
+{"hash":4844443,"name":"tvisconnectoptions.action_check.caption","sourcebytes":[67,104,101,99,107],"value":"Check"},
+{"hash":1339,"name":"tvisconnectoptions.action_ok.caption","sourcebytes":[79,75],"value":"OK"},
+{"hash":77089212,"name":"tvisconnectoptions.action_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"}
+]}

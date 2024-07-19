@@ -1,0 +1,185 @@
+object FrmNewGroup: TFrmNewGroup
+  Left = 0
+  Height = 232
+  Top = 0
+  Width = 424
+  ClientHeight = 232
+  ClientWidth = 424
+  Constraints.MaxHeight = 232
+  Constraints.MinHeight = 232
+  TabOrder = 0
+  DesignLeft = 825
+  DesignTop = 205
+  object Label_Name: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 16
+    Height = 15
+    Top = 8
+    Width = 72
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    Caption = 'Group name :'
+  end
+  object Label_nETBIOSName: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Side = asrBottom
+    Left = 16
+    Height = 15
+    Top = 57
+    Width = 181
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    Caption = 'Group name (pre-Windows 2000) :'
+  end
+  object Edit_nETBIOSName: TEdit
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label_nETBIOSName
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 16
+    Height = 23
+    Top = 72
+    Width = 392
+    Anchors = [akTop, akLeft, akRight]
+    AutoSelect = False
+    BorderSpacing.Left = 16
+    BorderSpacing.Right = 16
+    TabOrder = 1
+  end
+  object RadioGroup_Scope: TRadioGroup
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit_nETBIOSName
+    AnchorSideTop.Side = asrBottom
+    Left = 16
+    Height = 77
+    Top = 111
+    Width = 168
+    AutoFill = True
+    AutoSize = True
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 16
+    Caption = 'Group scope'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 57
+    ClientWidth = 164
+    Constraints.MinWidth = 168
+    TabOrder = 2
+    object RadioBtn_Local: TRadioButton
+      Left = 6
+      Height = 19
+      Top = 0
+      Width = 152
+      Caption = 'Domain local'
+      TabOrder = 0
+    end
+    object RadioBtn_Global: TRadioButton
+      Left = 6
+      Height = 19
+      Top = 19
+      Width = 152
+      Caption = 'Global'
+      Checked = True
+      TabOrder = 1
+      TabStop = True
+    end
+    object RadioBtn_Universal: TRadioButton
+      Left = 6
+      Height = 19
+      Top = 38
+      Width = 152
+      Caption = 'Universal'
+      TabOrder = 2
+    end
+  end
+  object RadioGroup_Type: TRadioGroup
+    AnchorSideTop.Control = Edit_nETBIOSName
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = RadioGroup_Scope
+    AnchorSideBottom.Side = asrBottom
+    Left = 240
+    Height = 77
+    Top = 111
+    Width = 168
+    Anchors = [akTop, akRight, akBottom]
+    AutoFill = True
+    AutoSize = True
+    BorderSpacing.Top = 16
+    BorderSpacing.Right = 16
+    Caption = 'Group type'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 57
+    ClientWidth = 164
+    Constraints.MinWidth = 168
+    TabOrder = 3
+    object RadioBtn_Security: TRadioButton
+      Left = 6
+      Height = 25
+      Top = 0
+      Width = 152
+      Caption = 'Security'
+      Checked = True
+      TabOrder = 0
+      TabStop = True
+    end
+    object RadioBtn_Distribution: TRadioButton
+      Left = 6
+      Height = 25
+      Top = 25
+      Width = 152
+      Caption = 'Distribution'
+      TabOrder = 1
+    end
+    object Panel_Empty: TPanel
+      Left = 6
+      Height = 7
+      Top = 50
+      Width = 152
+      AutoSize = True
+      BevelOuter = bvNone
+      TabOrder = 2
+    end
+  end
+  object Edit_Name: TEdit
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label_Name
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 16
+    Height = 23
+    Top = 23
+    Width = 392
+    Anchors = [akTop, akLeft, akRight]
+    AutoSelect = False
+    BorderSpacing.Left = 16
+    BorderSpacing.Right = 16
+    TabOrder = 0
+    OnChange = Edit_NameChange
+  end
+  object ActionList: TActionList
+    Images = VisMain.ImageList_RSAT
+    Left = 376
+    Top = 168
+    object Action_Next: TAction
+      ImageIndex = 8
+      OnExecute = Action_NextExecute
+      OnUpdate = Action_NextUpdate
+    end
+  end
+end

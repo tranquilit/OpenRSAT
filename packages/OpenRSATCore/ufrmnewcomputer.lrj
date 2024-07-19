@@ -1,0 +1,8 @@
+{"version":1,"strings":[
+{"hash":36949482,"name":"tfrmnewcomputer.label_computername.caption","sourcebytes":[67,111,109,112,117,116,101,114,32,110,97,109,101,58],"value":"Computer name:"},
+{"hash":123531082,"name":"tfrmnewcomputer.label_computername2000.caption","sourcebytes":[67,111,109,112,117,116,101,114,32,110,97,109,101,32,40,112,114,101,45,87,105,110,100,111,119,115,32,50,48,48,48,41,58],"value":"Computer name (pre-Windows 2000):"},
+{"hash":200483262,"name":"tfrmnewcomputer.label1.caption","sourcebytes":[84,104,101,32,102,111,108,108,111,119,105,110,103,32,117,115,101,114,32,111,114,32,103,114,111,117,112,32,99,97,110,32,106,111,105,110,32,116,104,105,115,32,99,111,109,112,117,116,101,114,32,116,111,32,97,32,100,111,109,97,105,110,46],"value":"The following user or group can join this computer to a domain."},
+{"hash":254615482,"name":"tfrmnewcomputer.label_userorgroup.caption","sourcebytes":[85,115,101,114,32,111,114,32,103,114,111,117,112,58],"value":"User or group:"},
+{"hash":139283182,"name":"tfrmnewcomputer.bitbtn_changeuserorgroup.caption","sourcebytes":[67,104,97,110,103,101,46,46,46],"value":"Change..."},
+{"hash":215148626,"name":"tfrmnewcomputer.checkbox_assigncomputer.caption","sourcebytes":[65,115,115,105,103,110,32,116,104,105,115,32,99,111,109,112,117,116,101,114,32,97,99,99,111,117,110,116,32,97,115,32,97,32,112,114,101,45,87,105,110,100,111,119,115,32,50,48,48,48,32,99,111,109,112,117,116,101,114],"value":"Assign this computer account as a pre-Windows 2000 computer"}
+]}

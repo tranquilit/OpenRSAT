@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="5">
+    <PathDelim Value="\"/>
+    <Name Value="OpenRSATCore"/>
+    <Type Value="RunAndDesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Files Count="51">
+      <Item1>
+        <Filename Value="ursatldapclient.pas"/>
+        <UnitName Value="ursatldapclient"/>
+      </Item1>
+      <Item2>
+        <Filename Value="ursatmodules.pas"/>
+        <UnitName Value="ursatmodules"/>
+      </Item2>
+      <Item3>
+        <Filename Value="ufrmcore.pas"/>
+        <UnitName Value="ufrmcore"/>
+      </Item3>
+      <Item4>
+        <Filename Value="ufrmmoduleaduc.pas"/>
+        <UnitName Value="ufrmmoduleaduc"/>
+      </Item4>
+      <Item5>
+        <Filename Value="ucoredatamodule.pas"/>
+        <UnitName Value="ucoredatamodule"/>
+      </Item5>
+      <Item6>
+        <Filename Value="uldapconfigs.pas"/>
+        <UnitName Value="uldapconfigs"/>
+      </Item6>
+      <Item7>
+        <Filename Value="uvisconnectconfigs.pas"/>
+        <UnitName Value="uvisconnectconfigs"/>
+      </Item7>
+      <Item8>
+        <Filename Value="uvisconnectoptions.pas"/>
+        <UnitName Value="uvisconnectoptions"/>
+      </Item8>
+      <Item9>
+        <Filename Value="ufrmmoduledns.pas"/>
+        <UnitName Value="ufrmmoduledns"/>
+      </Item9>
+      <Item10>
+        <Filename Value="uinterfacemodule.pas"/>
+        <UnitName Value="uinterfacemodule"/>
+      </Item10>
+      <Item11>
+        <Filename Value="uinterfacecore.pas"/>
+        <UnitName Value="uinterfacecore"/>
+      </Item11>
+      <Item12>
+        <Filename Value="utreeselectionhistory.pas"/>
+        <UnitName Value="utreeselectionhistory"/>
+      </Item12>
+      <Item13>
+        <Filename Value="uvisproperties.pas"/>
+        <UnitName Value="uvisproperties"/>
+      </Item13>
+      <Item14>
+        <Filename Value="uomniselect.pas"/>
+        <UnitName Value="uOmniselect"/>
+      </Item14>
+      <Item15>
+        <Filename Value="uvisadvancedsecurity.pas"/>
+        <UnitName Value="uvisadvancedsecurity"/>
+      </Item15>
+      <Item16>
+        <Filename Value="uvisattributeeditor.pas"/>
+        <UnitName Value="uvisattributeeditor"/>
+      </Item16>
+      <Item17>
+        <Filename Value="uvislistother.pas"/>
+        <UnitName Value="uvislistother"/>
+      </Item17>
+      <Item18>
+        <Filename Value="uvislogonhours.pas"/>
+        <UnitName Value="uvislogonhours"/>
+      </Item18>
+      <Item19>
+        <Filename Value="uvislogonworkstation.pas"/>
+        <UnitName Value="uvislogonworkstation"/>
+      </Item19>
+      <Item20>
+        <Filename Value="uvisaddaces.pas"/>
+        <UnitName Value="uvisaddaces"/>
+      </Item20>
+      <Item21>
+        <Filename Value="ucommon.pas"/>
+        <UnitName Value="ucommon"/>
+      </Item21>
+      <Item22>
+        <Filename Value="uvissearch.pas"/>
+        <UnitName Value="uvissearch"/>
+      </Item22>
+      <Item23>
+        <Filename Value="ufrmnewcomputer.pas"/>
+        <UnitName Value="ufrmnewcomputer"/>
+      </Item23>
+      <Item24>
+        <Filename Value="ufrmnewcontact.pas"/>
+        <UnitName Value="ufrmnewcontact"/>
+      </Item24>
+      <Item25>
+        <Filename Value="ufrmnewgroup.pas"/>
+        <UnitName Value="ufrmnewgroup"/>
+      </Item25>
+      <Item26>
+        <Filename Value="ufrmnewou.pas"/>
+        <UnitName Value="ufrmnewou"/>
+      </Item26>
+      <Item27>
+        <Filename Value="ufrmnewsharedfolder.pas"/>
+        <UnitName Value="ufrmnewsharedfolder"/>
+      </Item27>
+      <Item28>
+        <Filename Value="ufrmnewuser.pas"/>
+        <UnitName Value="ufrmnewuser"/>
+      </Item28>
+      <Item29>
+        <Filename Value="uvisnewobject.pas"/>
+        <UnitName Value="uvisnewobject"/>
+      </Item29>
+      <Item30>
+        <Filename Value="uvischangedn.pas"/>
+        <UnitName Value="uvischangedn"/>
+      </Item30>
+      <Item31>
+        <Filename Value="uvischangepartition.pas"/>
+        <UnitName Value="uvischangepartition"/>
+      </Item31>
+      <Item32>
+        <Filename Value="uvisdelegatecontrol.pas"/>
+        <UnitName Value="uvisdelegatecontrol"/>
+      </Item32>
+      <Item33>
+        <Filename Value="uvisoptions.pas"/>
+        <UnitName Value="uVisOptions"/>
+      </Item33>
+      <Item34>
+        <Filename Value="uvistaskmove.pas"/>
+        <UnitName Value="uvistaskmove"/>
+      </Item34>
+      <Item35>
+        <Filename Value="uvistaskresetpassword.pas"/>
+        <UnitName Value="uvistaskresetpassword"/>
+      </Item35>
+      <Item36>
+        <Filename Value="utranslation.pas"/>
+        <UnitName Value="utranslation"/>
+      </Item36>
+      <Item37>
+        <Filename Value="usidcache.pas"/>
+        <UnitName Value="usidcache"/>
+      </Item37>
+      <Item38>
+        <Filename Value="ufrmmoduleaducoptions.pas"/>
+        <UnitName Value="ufrmmoduleaducoptions"/>
+      </Item38>
+      <Item39>
+        <Filename Value="ufrmrsatoptions.pas"/>
+        <UnitName Value="ufrmrsatoptions"/>
+      </Item39>
+      <Item40>
+        <Filename Value="udns.pas"/>
+        <UnitName Value="udns"/>
+      </Item40>
+      <Item41>
+        <Filename Value="uvisselectnewrecordtype.pas"/>
+        <UnitName Value="uvisselectnewrecordtype"/>
+      </Item41>
+      <Item42>
+        <Filename Value="uvisnewresourcerecord.pas"/>
+        <UnitName Value="uvisnewresourcerecord"/>
+      </Item42>
+      <Item43>
+        <Filename Value="uvisnewzonewizard.pas"/>
+        <UnitName Value="uvisnewzonewizard"/>
+      </Item43>
+      <Item44>
+        <Filename Value="ufrmmodulesitesandservices.pas"/>
+        <UnitName Value="ufrmmodulesitesandservices"/>
+      </Item44>
+      <Item45>
+        <Filename Value="ufrmmoduleserviceinterfaces.pas"/>
+        <UnitName Value="ufrmmoduleserviceinterfaces"/>
+      </Item45>
+      <Item46>
+        <Filename Value="ufrmnewobject.pas"/>
+        <UnitName Value="ufrmnewobject"/>
+      </Item46>
+      <Item47>
+        <Filename Value="ufrmnewsite.pas"/>
+        <UnitName Value="ufrmnewsite"/>
+      </Item47>
+      <Item48>
+        <Filename Value="ufrmnewsubnet.pas"/>
+        <UnitName Value="ufrmnewsubnet"/>
+      </Item48>
+      <Item49>
+        <Filename Value="uresourcestring.pas"/>
+        <UnitName Value="uresourcestring"/>
+      </Item49>
+      <Item50>
+        <Filename Value="uaductreeview.pas"/>
+        <UnitName Value="uaductreeview"/>
+      </Item50>
+      <Item51>
+        <Filename Value="ufrmmoduleadssoptions.pas"/>
+      </Item51>
+    </Files>
+    <CompatibilityMode Value="True"/>
+    <i18n>
+      <EnableI18N Value="True"/>
+      <OutDir Value="languages"/>
+      <EnableI18NForLFM Value="True"/>
+    </i18n>
+    <RequiredPkgs Count="5">
+      <Item1>
+        <PackageName Value="DateTimeCtrlsDsgn"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="pltis_uicomponents"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="mormot2"/>
+      </Item4>
+      <Item5>
+        <PackageName Value="FCL"/>
+      </Item5>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <UseFileFilters Value="True"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

@@ -1,0 +1,7 @@
+{"version":1,"strings":[
+{"hash":60544277,"name":"tvisselectnewrecordtype.caption","sourcebytes":[82,101,115,111,117,114,99,101,32,82,101,99,111,114,100,32,84,121,112,101],"value":"Resource Record Type"},
+{"hash":174348826,"name":"tvisselectnewrecordtype.label1.caption","sourcebytes":[83,101,108,101,99,116,32,97,32,114,101,115,111,117,114,99,101,32,114,101,99,111,114,100,32,116,121,112,101,58],"value":"Select a resource record type:"},
+{"hash":81166474,"name":"tvisselectnewrecordtype.label2.caption","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110,58],"value":"Description:"},
+{"hash":251669684,"name":"tvisselectnewrecordtype.action_createrecord.caption","sourcebytes":[67,114,101,97,116,101,32,82,101,99,111,114,100],"value":"Create Record"},
+{"hash":77089212,"name":"tvisselectnewrecordtype.action_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"}
+]}

@@ -1,0 +1,11 @@
+{"version":1,"strings":[
+{"hash":61823770,"name":"tfrmnewgroup.label_name.caption","sourcebytes":[71,114,111,117,112,32,110,97,109,101,32,58],"value":"Group name :"},
+{"hash":215372618,"name":"tfrmnewgroup.label_netbiosname.caption","sourcebytes":[71,114,111,117,112,32,110,97,109,101,32,40,112,114,101,45,87,105,110,100,111,119,115,32,50,48,48,48,41,32,58],"value":"Group name (pre-Windows 2000) :"},
+{"hash":37163173,"name":"tfrmnewgroup.radiogroup_scope.caption","sourcebytes":[71,114,111,117,112,32,115,99,111,112,101],"value":"Group scope"},
+{"hash":82141564,"name":"tfrmnewgroup.radiobtn_local.caption","sourcebytes":[68,111,109,97,105,110,32,108,111,99,97,108],"value":"Domain local"},
+{"hash":82008188,"name":"tfrmnewgroup.radiobtn_global.caption","sourcebytes":[71,108,111,98,97,108],"value":"Global"},
+{"hash":13419820,"name":"tfrmnewgroup.radiobtn_universal.caption","sourcebytes":[85,110,105,118,101,114,115,97,108],"value":"Universal"},
+{"hash":203647237,"name":"tfrmnewgroup.radiogroup_type.caption","sourcebytes":[71,114,111,117,112,32,116,121,112,101],"value":"Group type"},
+{"hash":195859753,"name":"tfrmnewgroup.radiobtn_security.caption","sourcebytes":[83,101,99,117,114,105,116,121],"value":"Security"},
+{"hash":187434462,"name":"tfrmnewgroup.radiobtn_distribution.caption","sourcebytes":[68,105,115,116,114,105,98,117,116,105,111,110],"value":"Distribution"}
+]}

@@ -1,0 +1,300 @@
+object VisAttributeEditor: TVisAttributeEditor
+  Left = 2505
+  Height = 300
+  Top = 225
+  Width = 443
+  ClientHeight = 300
+  ClientWidth = 443
+  KeyPreview = True
+  Position = poOwnerFormCenter
+  LCLVersion = '4.1.0.0'
+  OnKeyDown = FormKeyDown
+  object Panel_Bottom: TPanel
+    Left = 8
+    Height = 50
+    Top = 242
+    Width = 427
+    Align = alBottom
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 427
+    TabOrder = 0
+    object BitBtn_OK: TBitBtn
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = BitBtn_Cancel
+      Left = 315
+      Height = 25
+      Top = 13
+      Width = 42
+      Action = Action_OK
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Right = 8
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object BitBtn_Cancel: TBitBtn
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_Bottom
+      AnchorSideRight.Side = asrBottom
+      Left = 365
+      Height = 25
+      Top = 13
+      Width = 62
+      Action = Action_Cancel
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 234
+    Top = 0
+    Width = 443
+    ActivePage = TS_StringEditor
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 1
+    object TS_StringEditor: TTabSheet
+      Caption = 'TS_StringEditor'
+      ClientHeight = 206
+      ClientWidth = 435
+      object Edit_String: TEdit
+        AnchorSideLeft.Control = TS_StringEditor
+        AnchorSideTop.Control = Label_String
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TS_StringEditor
+        AnchorSideRight.Side = asrBottom
+        Left = 8
+        Height = 23
+        Top = 31
+        Width = 419
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 8
+        TabOrder = 0
+      end
+      object Label_String: TLabel
+        AnchorSideLeft.Control = TS_StringEditor
+        AnchorSideTop.Control = TS_StringEditor
+        AnchorSideRight.Control = TS_StringEditor
+        AnchorSideRight.Side = asrBottom
+        Left = 8
+        Height = 15
+        Top = 8
+        Width = 419
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 8
+        Caption = 'Value:'
+      end
+    end
+    object TS_MultiStringEditor: TTabSheet
+      Caption = 'TS_MultiStringEditor'
+      ClientHeight = 206
+      ClientWidth = 435
+      object ListBox_StringList: TListBox
+        AnchorSideLeft.Control = TS_MultiStringEditor
+        AnchorSideTop.Control = Label1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = BitBtn_Down
+        AnchorSideBottom.Control = TS_MultiStringEditor
+        AnchorSideBottom.Side = asrBottom
+        Left = 8
+        Height = 113
+        Top = 85
+        Width = 322
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderSpacing.Around = 8
+        ItemHeight = 0
+        TabOrder = 0
+      end
+      object Label_StringList: TLabel
+        AnchorSideLeft.Control = TS_MultiStringEditor
+        AnchorSideTop.Control = TS_MultiStringEditor
+        AnchorSideRight.Control = TS_MultiStringEditor
+        AnchorSideRight.Side = asrBottom
+        Left = 8
+        Height = 15
+        Top = 8
+        Width = 419
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 8
+        Caption = 'Value to add:'
+      end
+      object Edit1: TEdit
+        AnchorSideLeft.Control = TS_MultiStringEditor
+        AnchorSideTop.Control = Label_StringList
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = BitBtn_Add
+        Left = 8
+        Height = 23
+        Top = 31
+        Width = 363
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 8
+        TabOrder = 1
+      end
+      object BitBtn_Add: TBitBtn
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Edit1
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = TS_MultiStringEditor
+        AnchorSideRight.Side = asrBottom
+        Left = 379
+        Height = 25
+        Top = 30
+        Width = 48
+        Action = Action_Add
+        Anchors = [akTop, akRight]
+        AutoSize = True
+        BorderSpacing.Around = 8
+        TabOrder = 2
+      end
+      object BitBtn_Delete: TBitBtn
+        AnchorSideTop.Control = ListBox_StringList
+        AnchorSideRight.Control = TS_MultiStringEditor
+        AnchorSideRight.Side = asrBottom
+        Left = 368
+        Height = 25
+        Top = 93
+        Width = 59
+        Action = Action_Delete
+        Anchors = [akTop, akRight]
+        AutoSize = True
+        BorderSpacing.Around = 8
+        TabOrder = 3
+      end
+      object Label1: TLabel
+        AnchorSideLeft.Control = TS_MultiStringEditor
+        AnchorSideTop.Control = Edit1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TS_MultiStringEditor
+        AnchorSideRight.Side = asrBottom
+        Left = 8
+        Height = 15
+        Top = 62
+        Width = 419
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 8
+        Caption = 'Values:'
+      end
+      object BitBtn_Up: TBitBtn
+        AnchorSideTop.Control = BitBtn_Delete
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TS_MultiStringEditor
+        AnchorSideRight.Side = asrBottom
+        Left = 354
+        Height = 25
+        Top = 126
+        Width = 73
+        Action = Action_Up
+        Anchors = [akTop, akRight]
+        AutoSize = True
+        BorderSpacing.Around = 8
+        TabOrder = 4
+      end
+      object BitBtn_Down: TBitBtn
+        AnchorSideTop.Control = BitBtn_Up
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Side = asrBottom
+        Left = 338
+        Height = 25
+        Top = 159
+        Width = 89
+        Action = Action_Down
+        Anchors = [akTop, akRight]
+        AutoSize = True
+        BorderSpacing.Around = 8
+        TabOrder = 5
+      end
+    end
+    object TS_TimeEditor: TTabSheet
+      Caption = 'TS_TimeEditor'
+      ClientHeight = 206
+      ClientWidth = 435
+      object Label2: TLabel
+        AnchorSideLeft.Control = TS_TimeEditor
+        AnchorSideTop.Control = TS_TimeEditor
+        AnchorSideRight.Control = TS_TimeEditor
+        AnchorSideRight.Side = asrBottom
+        Left = 8
+        Height = 15
+        Top = 8
+        Width = 419
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 8
+        Caption = 'Date:'
+      end
+      object DateTimePicker1: TDateTimePicker
+        AnchorSideLeft.Control = TS_TimeEditor
+        AnchorSideTop.Control = Label2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TS_TimeEditor
+        AnchorSideRight.Side = asrBottom
+        Left = 8
+        Height = 23
+        Top = 31
+        Width = 419
+        ShowCheckBox = True
+        CenturyFrom = 1941
+        MaxDate = 2958465
+        MinDate = -53780
+        TabOrder = 0
+        BorderSpacing.Around = 8
+        TrailingSeparator = False
+        TextForNullDate = 'NULL'
+        LeadingZeros = True
+        Anchors = [akTop, akLeft, akRight]
+        Kind = dtkDateTime
+        TimeFormat = tf24
+        TimeDisplay = tdHMS
+        DateMode = dmComboBox
+        Date = 1.7E308
+        Time = 1.7E308
+        UseDefaultSeparators = True
+        HideDateTimeParts = []
+        MonthNames = 'Long'
+      end
+    end
+    object TS_MultiTimeEditor: TTabSheet
+      Caption = 'TS_MultiTimeEditor'
+    end
+  end
+  object ActionList1: TActionList
+    Left = 24
+    Top = 248
+    object Action_OK: TAction
+      Caption = 'OK'
+      OnUpdate = Action_OKUpdate
+    end
+    object Action_Cancel: TAction
+      Caption = 'Cancel'
+      OnUpdate = Action_CancelUpdate
+    end
+    object Action_Add: TAction
+      Caption = 'Add'
+      OnExecute = Action_AddExecute
+      OnUpdate = Action_AddUpdate
+    end
+    object Action_Delete: TAction
+      Caption = 'Delete'
+      OnExecute = Action_DeleteExecute
+      OnUpdate = Action_DeleteUpdate
+    end
+    object Action_Up: TAction
+      Caption = 'Move up'
+      OnExecute = Action_UpExecute
+      OnUpdate = Action_UpUpdate
+    end
+    object Action_Down: TAction
+      Caption = 'Move down'
+      OnExecute = Action_DownExecute
+      OnUpdate = Action_DownUpdate
+    end
+  end
+end

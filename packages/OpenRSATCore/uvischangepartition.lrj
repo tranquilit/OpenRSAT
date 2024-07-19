@@ -1,0 +1,5 @@
+{"version":1,"strings":[
+{"hash":226707550,"name":"tvischangepartition.caption","sourcebytes":[67,104,97,110,103,101,32,112,97,114,116,105,116,105,111,110],"value":"Change partition"},
+{"hash":77089212,"name":"tvischangepartition.bitbtn1.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
+{"hash":1339,"name":"tvischangepartition.bitbtn2.caption","sourcebytes":[79,75],"value":"OK"}
+]}

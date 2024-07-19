@@ -1,0 +1,110 @@
+object FrmNewSite: TFrmNewSite
+  Left = 0
+  Height = 240
+  Top = 0
+  Width = 444
+  AutoSize = True
+  ClientHeight = 240
+  ClientWidth = 444
+  TabOrder = 0
+  DesignLeft = 2541
+  DesignTop = 358
+  object Label_Name: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 12
+    Width = 100
+    BorderSpacing.Around = 8
+    Caption = 'Name'
+    Constraints.MinWidth = 100
+  end
+  object Edit1: TEdit
+    AnchorSideLeft.Control = Label_Name
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 116
+    Height = 23
+    Top = 8
+    Width = 320
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 8
+    TabOrder = 0
+  end
+  object Label_Info: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 30
+    Top = 39
+    Width = 428
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 8
+    Caption = 'Select a site link object for this site. Site link objects are located in the Sites/Inter-Site Transports container.'
+    WordWrap = True
+  end
+  object TisGrid1: TTisGrid
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label_Info
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 155
+    Top = 77
+    Width = 428
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 8
+    Constraints.MinHeight = 100
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'Link Name'
+        Width = 246
+        PropertyName = 'linkName'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Text = 'Transport'
+        Width = 101
+        PropertyName = 'transport'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 101
+    Header.MinHeight = 19
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.Style = hsFlatButtons
+    TabOrder = 1
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toFullRowDrag]
+    ZebraColor = 15593713
+    OnKeyPress = TisGrid1KeyPress
+  end
+  object ActionList1: TActionList
+    Left = 40
+    Top = 128
+    object Action_ok: TAction
+      Caption = 'OK'
+      OnExecute = Action_okExecute
+      OnUpdate = Action_okUpdate
+    end
+  end
+  object Timer_SearchInGrid: TTimer
+    Enabled = False
+    OnTimer = Timer_SearchInGridTimer
+    Left = 8
+    Top = 8
+  end
+end

@@ -1,0 +1,10 @@
+{"version":1,"strings":[
+{"hash":225111145,"name":"tvislistother.caption","sourcebytes":[40,79,116,104,101,114,41],"value":"(Other)"},
+{"hash":204963402,"name":"tvislistother.label_newvalue.caption","sourcebytes":[78,101,119,32,118,97,108,117,101,32,58],"value":"New value :"},
+{"hash":16387674,"name":"tvislistother.label_current.caption","sourcebytes":[67,117,114,114,101,110,116,32,118,97,108,117,101,115,32,58],"value":"Current values :"},
+{"hash":77089212,"name":"tvislistother.btn_bottomcancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
+{"hash":18340,"name":"tvislistother.action_add.caption","sourcebytes":[65,100,100],"value":"Add"},
+{"hash":310020,"name":"tvislistother.action_edit.caption","sourcebytes":[69,100,105,116],"value":"Edit"},
+{"hash":93079237,"name":"tvislistother.action_remove.caption","sourcebytes":[82,101,109,111,118,101],"value":"Remove"},
+{"hash":1339,"name":"tvislistother.action_ok.caption","sourcebytes":[79,75],"value":"OK"}
+]}

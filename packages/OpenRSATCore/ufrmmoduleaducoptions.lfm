@@ -1,0 +1,234 @@
+object FrmModuleADUCOptions: TFrmModuleADUCOptions
+  Left = 0
+  Height = 596
+  Top = 0
+  Width = 524
+  HorzScrollBar.Page = 1
+  VertScrollBar.Page = 1
+  VertScrollBar.Tracking = True
+  AutoScroll = True
+  ClientHeight = 596
+  ClientWidth = 524
+  TabOrder = 0
+  DesignLeft = 2978
+  DesignTop = 189
+  object Panel1: TPanel
+    Left = 4
+    Height = 220
+    Top = 4
+    Width = 516
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Around = 4
+    BevelOuter = bvNone
+    ClientHeight = 220
+    ClientWidth = 516
+    TabOrder = 0
+    object Edit_SearchPageSize: TEdit
+      AnchorSideLeft.Control = Label_SearchPageSize
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Label1
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 23
+      Top = 37
+      Width = 342
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      NumbersOnly = True
+      TabOrder = 0
+      OnChange = Edit_SearchPageSizeChange
+    end
+    object Edit_SearchPageNumber: TEdit
+      AnchorSideLeft.Control = Label_SearchPageNumber
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_SearchPageSize
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 23
+      Top = 68
+      Width = 342
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      NumbersOnly = True
+      TabOrder = 1
+      OnChange = Edit_SearchPageNumberChange
+    end
+    object Label_SearchPageSize: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Edit_SearchPageSize
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 41
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Search Page Size'
+      Constraints.MinWidth = 150
+    end
+    object Label_SearchPageNumber: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Edit_SearchPageNumber
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 72
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Search Page Number'
+      Constraints.MinWidth = 150
+    end
+    object Label_Filter: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Edit_SearchPageNumber
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 15
+      Top = 99
+      Width = 26
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Filter'
+    end
+    object Memo_Filter: TMemo
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Label_Filter
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 90
+      Top = 122
+      Width = 500
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      TabOrder = 2
+      OnChange = Memo_FilterChange
+    end
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideLeft.Side = asrCenter
+      AnchorSideTop.Control = Panel1
+      Left = 215
+      Height = 21
+      Top = 8
+      Width = 86
+      BorderSpacing.Around = 8
+      Caption = 'Grid options'
+      Font.Height = -16
+      ParentFont = False
+    end
+  end
+  object Panel2: TPanel
+    Left = 4
+    Height = 396
+    Top = 228
+    Width = 516
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Around = 4
+    BevelOuter = bvNone
+    ClientHeight = 396
+    ClientWidth = 516
+    TabOrder = 1
+    object CheckListBox2: TCheckListBox
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = TisSearchEdit3
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 176
+      Top = 212
+      Width = 500
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      Items.Strings = (
+        'container'
+        'organizationalUnit'
+        'lostAndFound'
+        'builtinDomain'
+        'msDS-QuotaContainer'
+        'msTPM-InformationObjectsContainer'
+      )
+      ItemHeight = 17
+      TabOrder = 0
+      OnClickCheck = CheckListBox2ClickCheck
+      Data = {
+        06000000010101010101
+      }
+    end
+    object Label3: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Label2
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 15
+      Top = 37
+      Width = 26
+      BorderSpacing.Around = 8
+      Caption = 'Filter'
+    end
+    object Label4: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Memo2
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 15
+      Top = 158
+      Width = 79
+      BorderSpacing.Around = 8
+      Caption = 'Ldap attributes'
+    end
+    object Memo2: TMemo
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Label3
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 90
+      Top = 60
+      Width = 500
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      TabOrder = 1
+      OnChange = Memo2Change
+    end
+    object TisSearchEdit3: TTisSearchEdit
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Label4
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 23
+      Top = 181
+      Width = 130
+      BorderSpacing.Around = 8
+      Enabled = False
+      ItemHeight = 15
+      TabOrder = 2
+      Buttons = <>
+    end
+    object Label2: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideLeft.Side = asrCenter
+      AnchorSideTop.Control = Panel2
+      Left = 216
+      Height = 21
+      Top = 8
+      Width = 85
+      BorderSpacing.Around = 8
+      Caption = 'Tree options'
+      Font.Height = -16
+      ParentFont = False
+    end
+  end
+end

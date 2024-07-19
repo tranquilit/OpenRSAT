@@ -1,0 +1,207 @@
+object FrmNewSubnet: TFrmNewSubnet
+  Left = 0
+  Height = 471
+  Top = 0
+  Width = 484
+  AutoSize = True
+  ClientHeight = 471
+  ClientWidth = 484
+  TabOrder = 0
+  DesignLeft = 2875
+  DesignTop = 269
+  object Label1: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 45
+    Top = 8
+    Width = 468
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 8
+    Caption = 'Enter the address prefix using network prefix notation (address/prefix length), where the prefix length indicates the number of fixed bits. You can enter either an IPv4 or an IPv6 subnet prefix.'
+    WordWrap = True
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 61
+    Width = 468
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Bottom = 16
+    BorderSpacing.Around = 8
+    Caption = 'Learn more about entering address prefixes.'
+    Font.Color = clHighlight
+    Font.Style = [fsUnderline]
+    ParentFont = False
+    WordWrap = True
+    OnClick = Label2Click
+    OnMouseEnter = Label2MouseEnter
+    OnMouseLeave = Label2MouseLeave
+  end
+  object Label3: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 100
+    Width = 468
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 8
+    Caption = 'IPv4 example:   157.54.208.0/20'
+    WordWrap = True
+  end
+  object Label4: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 123
+    Width = 468
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Bottom = 8
+    BorderSpacing.Around = 8
+    Caption = 'IPv6 example:   3FFE:FFFF:0:C000::/64'
+    WordWrap = True
+  end
+  object Label5: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label4
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 154
+    Width = 468
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 8
+    Caption = 'Prefix:'
+    WordWrap = True
+  end
+  object Edit1: TEdit
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 177
+    Width = 468
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 8
+    TabOrder = 0
+    OnChange = Edit1Change
+  end
+  object Label6: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 208
+    Width = 468
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 8
+    Caption = 'Prefix name in Active Directory Domain Services:'
+    WordWrap = True
+  end
+  object Edit2: TEdit
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 231
+    Width = 468
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 8
+    Enabled = False
+    ReadOnly = True
+    TabOrder = 1
+  end
+  object Label7: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 278
+    Width = 468
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Top = 16
+    BorderSpacing.Around = 8
+    Caption = 'Select a site object for this prefix.'
+    WordWrap = True
+  end
+  object TisGrid1: TTisGrid
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label7
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 162
+    Top = 301
+    Width = 468
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 8
+    Constraints.MinHeight = 150
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'Site Name'
+        Width = 349
+        PropertyName = 'siteName'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 101
+    Header.MinHeight = 19
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.Style = hsFlatButtons
+    TabOrder = 2
+    TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toFullRowDrag]
+    ZebraColor = 15593713
+    OnKeyPress = TisGrid1KeyPress
+    OnMouseDown = TisGrid1MouseDown
+  end
+  object ActionList1: TActionList
+    Left = 240
+    Top = 352
+    object Action_ok: TAction
+      Caption = 'OK'
+      OnExecute = Action_okExecute
+      OnUpdate = Action_okUpdate
+    end
+  end
+  object Timer_SearchInGrid: TTimer
+    Enabled = False
+    OnTimer = Timer_SearchInGridTimer
+    Left = 8
+    Top = 8
+  end
+end

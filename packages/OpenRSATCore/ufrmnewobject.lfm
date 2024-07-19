@@ -1,0 +1,136 @@
+object FrmNewObject: TFrmNewObject
+  Left = 0
+  Height = 222
+  Top = 0
+  Width = 362
+  ClientHeight = 222
+  ClientWidth = 362
+  TabOrder = 0
+  DesignLeft = 2644
+  DesignTop = 409
+  object Edit2: TEdit
+    AnchorSideLeft.Control = Label2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 116
+    Height = 23
+    Top = 39
+    Width = 238
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 8
+    TabOrder = 0
+  end
+  object ComboBox1: TComboBox
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 116
+    Height = 23
+    Top = 8
+    Width = 238
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Around = 8
+    ItemHeight = 15
+    TabOrder = 1
+    OnChange = ComboBox1Change
+  end
+  object TisGrid1: TTisGrid
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = BitBtn1
+    Left = 8
+    Height = 88
+    Top = 93
+    Width = 346
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 8
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'Name'
+        Width = 96
+        PropertyName = 'name'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Text = 'Value'
+        Width = 125
+        PropertyName = 'value'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 101
+    Header.MinHeight = 19
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.Style = hsFlatButtons
+    TabOrder = 2
+    ZebraColor = 15593713
+  end
+  object Label1: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = ComboBox1
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 12
+    Width = 100
+    BorderSpacing.Around = 8
+    Caption = 'Object class'
+    Constraints.MinWidth = 100
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit2
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 43
+    Width = 100
+    BorderSpacing.Around = 8
+    Caption = 'Object name'
+    Constraints.MinWidth = 100
+  end
+  object Label3: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit2
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 15
+    Top = 70
+    Width = 52
+    BorderSpacing.Around = 8
+    Caption = 'Attributes'
+  end
+  object BitBtn1: TBitBtn
+    AnchorSideLeft.Control = Owner
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 25
+    Top = 189
+    Width = 67
+    Action = Action1
+    Anchors = [akLeft, akBottom]
+    AutoSize = True
+    BorderSpacing.Around = 8
+    TabOrder = 3
+  end
+  object ActionList1: TActionList
+    Left = 256
+    Top = 128
+    object Action1: TAction
+      Caption = 'Action1'
+    end
+  end
+end

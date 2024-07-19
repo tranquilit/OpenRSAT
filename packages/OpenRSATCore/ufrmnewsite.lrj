@@ -1,0 +1,7 @@
+{"version":1,"strings":[
+{"hash":346165,"name":"tfrmnewsite.label_name.caption","sourcebytes":[78,97,109,101],"value":"Name"},
+{"hash":112284894,"name":"tfrmnewsite.label_info.caption","sourcebytes":[83,101,108,101,99,116,32,97,32,115,105,116,101,32,108,105,110,107,32,111,98,106,101,99,116,32,102,111,114,32,116,104,105,115,32,115,105,116,101,46,32,83,105,116,101,32,108,105,110,107,32,111,98,106,101,99,116,115,32,97,114,101,32,108,111,99,97,116,101,100,32,105,110,32,116,104,101,32,83,105,116,101,115,47,73,110,116,101,114,45,83,105,116,101,32,84,114,97,110,115,112,111,114,116,115,32,99,111,110,116,97,105,110,101,114,46],"value":"Select a site link object for this site. Site link objects are located in the Sites/Inter-Site Transports container."},
+{"hash":81073461,"name":"tfrmnewsite.tisgrid1.header.columns[0].text","sourcebytes":[76,105,110,107,32,78,97,109,101],"value":"Link Name"},
+{"hash":140135700,"name":"tfrmnewsite.tisgrid1.header.columns[1].text","sourcebytes":[84,114,97,110,115,112,111,114,116],"value":"Transport"},
+{"hash":1339,"name":"tfrmnewsite.action_ok.caption","sourcebytes":[79,75],"value":"OK"}
+]}

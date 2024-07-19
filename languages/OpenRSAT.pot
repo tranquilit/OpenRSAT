@@ -1,0 +1,82 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: tvisopenrsat.action_openedproperties.caption
+msgctxt "tvisopenrsat.action_openedproperties.caption"
+msgid "Properties"
+msgstr ""
+
+#: tvisopenrsat.action_quit.caption
+msgctxt "tvisopenrsat.action_quit.caption"
+msgid "Quit"
+msgstr ""
+
+#: tvisopenrsat.caption
+msgctxt "tvisopenrsat.caption"
+msgid "OpenRSAT"
+msgstr ""
+
+#: tvisopenrsat.menuitem3.caption
+msgctxt "tvisopenrsat.menuitem3.caption"
+msgid "Change tool"
+msgstr ""
+
+#: tvisopenrsat.menuitem_advancedfeatures.caption
+msgctxt "tvisopenrsat.menuitem_advancedfeatures.caption"
+msgid "MenuItem_AdvancedFeatures"
+msgstr ""
+
+#: tvisopenrsat.menuitem_debug.caption
+msgctxt "tvisopenrsat.menuitem_debug.caption"
+msgid "Debug options"
+msgstr ""
+
+#: tvisopenrsat.menuitem_file.caption
+msgctxt "tvisopenrsat.menuitem_file.caption"
+msgid "File"
+msgstr ""
+
+#: tvisopenrsat.menuitem_fileoptions.caption
+msgctxt "tvisopenrsat.menuitem_fileoptions.caption"
+msgid "Options"
+msgstr ""
+
+#: tvisopenrsat.menuitem_help.caption
+msgctxt "tvisopenrsat.menuitem_help.caption"
+msgid "?"
+msgstr ""
+
+#: tvisopenrsat.menuitem_retrieveoldconfiguration.caption
+msgid "Retrieve old configuration"
+msgstr ""
+
+#: tvisopenrsat.menuitem_showgpo.caption
+msgctxt "tvisopenrsat.menuitem_showgpo.caption"
+msgid "Show GPO"
+msgstr ""
+
+#: tvisopenrsat.menuitem_view.caption
+msgctxt "tvisopenrsat.menuitem_view.caption"
+msgid "View"
+msgstr ""
+
+#: tvisopenrsat.menuitem_viewtheme.caption
+msgctxt "tvisopenrsat.menuitem_viewtheme.caption"
+msgid "Theme"
+msgstr ""
+
+#: tvisopenrsat.menuitem_viewthemedark.caption
+msgctxt "tvisopenrsat.menuitem_viewthemedark.caption"
+msgid "Use dark theme (at next launch)"
+msgstr ""
+
+#: tvisopenrsat.menuitem_viewthemelight.caption
+msgctxt "tvisopenrsat.menuitem_viewthemelight.caption"
+msgid "Use light theme (at next launch)"
+msgstr ""
+
+#: tvisopenrsat.menuitem_viewthemesystem.caption
+msgctxt "tvisopenrsat.menuitem_viewthemesystem.caption"
+msgid "Use system theme (at next launch)"
+msgstr ""
+

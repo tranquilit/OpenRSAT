@@ -1,0 +1,422 @@
+object FrmNewUser: TFrmNewUser
+  Left = 0
+  Height = 232
+  Top = 0
+  Width = 424
+  ClientHeight = 232
+  ClientWidth = 424
+  Constraints.MaxHeight = 232
+  Constraints.MinHeight = 232
+  TabOrder = 0
+  DesignLeft = 3114
+  DesignTop = 538
+  object Panel_Page0: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 0
+    Height = 232
+    Top = 0
+    Width = 424
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BevelOuter = bvNone
+    ClientHeight = 232
+    ClientWidth = 424
+    TabOrder = 0
+    object Label_FirstName: TLabel
+      AnchorSideLeft.Control = Panel_Page0
+      AnchorSideTop.Control = Edit_FirstName
+      AnchorSideTop.Side = asrCenter
+      Left = 16
+      Height = 15
+      Top = 12
+      Width = 61
+      BorderSpacing.Left = 16
+      Caption = 'First name :'
+      Layout = tlCenter
+    end
+    object Edit_FirstName: TEdit
+      AnchorSideLeft.Control = Edit_LastName
+      AnchorSideTop.Control = Panel_Page0
+      AnchorSideRight.Control = Label_Initials
+      Left = 120
+      Height = 23
+      Top = 8
+      Width = 192
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      MaxLength = 64
+      TabOrder = 0
+      OnChange = NameChange
+    end
+    object Label_Initials: TLabel
+      AnchorSideTop.Control = Edit_Initials
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Edit_Initials
+      Left = 320
+      Height = 15
+      Top = 12
+      Width = 40
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 8
+      Caption = 'Initials :'
+      Layout = tlCenter
+    end
+    object Edit_Initials: TEdit
+      AnchorSideTop.Control = Panel_Page0
+      AnchorSideRight.Control = Panel_Page0
+      AnchorSideRight.Side = asrBottom
+      Left = 368
+      Height = 23
+      Top = 8
+      Width = 40
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 16
+      MaxLength = 6
+      TabOrder = 1
+      OnChange = NameChange
+    end
+    object Label_LastName: TLabel
+      AnchorSideLeft.Control = Panel_Page0
+      AnchorSideTop.Control = Edit_LastName
+      AnchorSideTop.Side = asrCenter
+      Left = 16
+      Height = 15
+      Top = 44
+      Width = 60
+      BorderSpacing.Left = 16
+      Caption = 'Last name :'
+      Layout = tlCenter
+    end
+    object Edit_LastName: TEdit
+      AnchorSideTop.Control = Label_LastName
+      AnchorSideRight.Control = Panel_Page0
+      AnchorSideRight.Side = asrBottom
+      Left = 120
+      Height = 23
+      Top = 40
+      Width = 288
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 16
+      MaxLength = 64
+      TabOrder = 2
+      OnChange = NameChange
+    end
+    object Label_FullName: TLabel
+      AnchorSideLeft.Control = Panel_Page0
+      AnchorSideTop.Control = Edit_FullName
+      AnchorSideTop.Side = asrCenter
+      Left = 16
+      Height = 15
+      Top = 76
+      Width = 58
+      BorderSpacing.Left = 16
+      Caption = 'Full name :'
+      Layout = tlCenter
+    end
+    object Edit_FullName: TEdit
+      AnchorSideTop.Control = Label_FullName
+      AnchorSideRight.Control = Panel_Page0
+      AnchorSideRight.Side = asrBottom
+      Left = 120
+      Height = 23
+      Hint = 'The person''s preferred name to be used when beeing displayed'
+      Top = 72
+      Width = 288
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 16
+      MaxLength = 256
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+    end
+    object Label_UserLogon: TLabel
+      AnchorSideLeft.Control = Panel_Page0
+      AnchorSideTop.Control = Edit_FullName
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 15
+      Top = 111
+      Width = 96
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 16
+      Caption = 'User logon name :'
+      Layout = tlCenter
+    end
+    object Edit_UserLogon: TEdit
+      AnchorSideLeft.Control = Panel_Page0
+      AnchorSideTop.Control = Label_UserLogon
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 23
+      Top = 126
+      Width = 200
+      BorderSpacing.Left = 16
+      TabOrder = 4
+      OnChange = Edit_UserLogonChange
+    end
+    object TisSearchEdit_UserLogonDomain: TTisSearchEdit
+      AnchorSideLeft.Control = Edit_UserLogon
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Label_UserLogon
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Page0
+      AnchorSideRight.Side = asrBottom
+      Left = 224
+      Height = 23
+      Top = 126
+      Width = 184
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 16
+      ItemHeight = 15
+      TabOrder = 5
+      Buttons = <>
+    end
+    object Label_WinUserLogonName: TLabel
+      AnchorSideLeft.Control = Panel_Page0
+      AnchorSideTop.Control = Edit_UserLogon
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 15
+      Top = 157
+      Width = 205
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      Caption = 'User logon name (pre-Windows 2000) :'
+      Layout = tlCenter
+    end
+    object Edit_nETBIOSDomain: TEdit
+      AnchorSideLeft.Control = Panel_Page0
+      AnchorSideTop.Control = Label_WinUserLogonName
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 23
+      Top = 172
+      Width = 200
+      BorderSpacing.Left = 16
+      ReadOnly = True
+      TabOrder = 6
+    end
+    object Edit_nETBIOSName: TEdit
+      AnchorSideLeft.Control = Edit_nETBIOSDomain
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Label_WinUserLogonName
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Page0
+      AnchorSideRight.Side = asrBottom
+      Left = 224
+      Height = 23
+      Top = 172
+      Width = 184
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 16
+      MaxLength = 20
+      TabOrder = 7
+    end
+  end
+  object Panel_Page1: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 0
+    Height = 232
+    Top = 0
+    Width = 424
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BevelOuter = bvNone
+    ClientHeight = 232
+    ClientWidth = 424
+    TabOrder = 1
+    Visible = False
+    object Label_Password: TLabel
+      AnchorSideLeft.Control = Panel_Page1
+      AnchorSideTop.Control = Edit_Password
+      AnchorSideTop.Side = asrCenter
+      Left = 16
+      Height = 15
+      Top = 12
+      Width = 56
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      Caption = 'Password :'
+      Layout = tlCenter
+    end
+    object Edit_Password: TEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_Page1
+      AnchorSideRight.Control = Panel_Page1
+      AnchorSideRight.Side = asrBottom
+      Left = 216
+      Height = 23
+      Top = 8
+      Width = 192
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 16
+      EchoMode = emPassword
+      PasswordChar = '*'
+      TabOrder = 0
+      OnChange = Edit_PasswordChange
+    end
+    object Label_Confirm: TLabel
+      AnchorSideLeft.Control = Panel_Page1
+      AnchorSideTop.Control = Edit_Confirm
+      AnchorSideTop.Side = asrCenter
+      Left = 16
+      Height = 15
+      Top = 43
+      Width = 103
+      BorderSpacing.Left = 16
+      Caption = 'Confirm Password :'
+      Layout = tlCenter
+    end
+    object Edit_Confirm: TEdit
+      AnchorSideTop.Control = Edit_Password
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Page1
+      AnchorSideRight.Side = asrBottom
+      Left = 216
+      Height = 23
+      Top = 39
+      Width = 192
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 16
+      EchoMode = emPassword
+      PasswordChar = '*'
+      TabOrder = 1
+      OnChange = Edit_ConfirmChange
+    end
+    object CheckBox_MustChangePassword: TCheckBox
+      AnchorSideLeft.Control = Panel_Page1
+      AnchorSideTop.Control = Edit_Confirm
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 19
+      Top = 78
+      Width = 238
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 16
+      Caption = 'User must change password at next logon'
+      Checked = True
+      State = cbChecked
+      TabOrder = 2
+      OnChange = CheckBox_PwdChange
+    end
+    object CheckBox_CannotChangePassword: TCheckBox
+      AnchorSideLeft.Control = Panel_Page1
+      AnchorSideTop.Control = CheckBox_MustChangePassword
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 19
+      Top = 105
+      Width = 176
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      Caption = 'User cannot change password'
+      TabOrder = 3
+      OnChange = CheckBox_PwdChange
+    end
+    object CheckBox_PasswordNeverExpires: TCheckBox
+      AnchorSideLeft.Control = Panel_Page1
+      AnchorSideTop.Control = CheckBox_CannotChangePassword
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 19
+      Top = 132
+      Width = 139
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      Caption = 'Password never expires'
+      TabOrder = 4
+      OnChange = CheckBox_PwdChange
+    end
+    object CheckBox_AccountDisabled: TCheckBox
+      AnchorSideLeft.Control = Panel_Page1
+      AnchorSideTop.Control = CheckBox_PasswordNeverExpires
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 19
+      Top = 159
+      Width = 121
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      Caption = 'Account is disabled'
+      TabOrder = 5
+    end
+  end
+  object Panel_Page2: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 0
+    Height = 232
+    Top = 0
+    Width = 424
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BevelOuter = bvNone
+    ClientHeight = 232
+    ClientWidth = 424
+    TabOrder = 2
+    Visible = False
+    object Label_Resume: TLabel
+      AnchorSideLeft.Control = Panel_Page2
+      AnchorSideTop.Control = Panel_Page2
+      Left = 16
+      Height = 15
+      Top = 8
+      Width = 312
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      Caption = 'When you click Finish, the following object will be created :'
+      Layout = tlCenter
+    end
+    object ListBox_Resume: TMemo
+      AnchorSideLeft.Control = Panel_Page2
+      AnchorSideTop.Control = Label_Resume
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Page2
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Panel_Page2
+      AnchorSideBottom.Side = asrBottom
+      Left = 16
+      Height = 185
+      Top = 31
+      Width = 392
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 16
+      BorderSpacing.Bottom = 16
+      ReadOnly = True
+      TabOrder = 0
+    end
+  end
+  object ActionList: TActionList
+    Left = 376
+    Top = 168
+    object Action_Next: TAction
+      OnExecute = Action_NextExecute
+      OnUpdate = Action_NextUpdate
+    end
+    object Action_Back: TAction
+      OnExecute = Action_BackExecute
+      OnUpdate = Action_BackUpdate
+    end
+  end
+end

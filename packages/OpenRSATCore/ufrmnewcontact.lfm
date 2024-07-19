@@ -1,0 +1,169 @@
+object FrmNewContact: TFrmNewContact
+  Left = 0
+  Height = 234
+  Top = 0
+  Width = 423
+  AutoSize = True
+  ClientHeight = 234
+  ClientWidth = 423
+  TabOrder = 0
+  DesignLeft = 3088
+  DesignTop = 450
+  object Label_FirstName: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit_FirstName
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 12
+    Width = 58
+    BorderSpacing.Left = 8
+    Caption = 'First name:'
+    WordWrap = True
+  end
+  object Label_Initial: TLabel
+    AnchorSideLeft.Control = Edit_FirstName
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit_Initial
+    AnchorSideTop.Side = asrCenter
+    Left = 307
+    Height = 15
+    Top = 12
+    Width = 50
+    BorderSpacing.Left = 8
+    Caption = 'Initials : '
+    Constraints.MaxWidth = 50
+    Constraints.MinWidth = 50
+    WordWrap = True
+  end
+  object Label_LastName: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit_LastName
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 43
+    Width = 57
+    BorderSpacing.Left = 8
+    Caption = 'Last name:'
+    WordWrap = True
+  end
+  object Label_FullName: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit_FullName
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 74
+    Width = 55
+    BorderSpacing.Left = 8
+    Caption = 'Full name:'
+    WordWrap = True
+  end
+  object Label_DisplayName: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit_DisplayName
+    AnchorSideTop.Side = asrCenter
+    Left = 8
+    Height = 15
+    Top = 105
+    Width = 74
+    BorderSpacing.Left = 8
+    Caption = 'Display name:'
+    WordWrap = True
+  end
+  object Edit_FirstName: TEdit
+    AnchorSideLeft.Control = Edit_LastName
+    AnchorSideTop.Control = Owner
+    Left = 135
+    Height = 23
+    Top = 8
+    Width = 164
+    BorderSpacing.Top = 8
+    MaxLength = 64
+    TabOrder = 0
+    OnChange = Edit_ContactChange
+  end
+  object Edit_Initial: TEdit
+    AnchorSideLeft.Control = Label_Initial
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 365
+    Height = 23
+    Top = 8
+    Width = 50
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    TabOrder = 1
+  end
+  object Edit_LastName: TEdit
+    AnchorSideLeft.Control = Label_LastName
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit_FirstName
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 135
+    Height = 23
+    Top = 39
+    Width = 280
+    Anchors = [akTop, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    MaxLength = 64
+    TabOrder = 2
+    OnChange = Edit_ContactChange
+  end
+  object Edit_FullName: TEdit
+    AnchorSideLeft.Control = Label_FullName
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit_LastName
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 135
+    Height = 23
+    Top = 70
+    Width = 280
+    Anchors = [akTop, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    TabOrder = 3
+  end
+  object Edit_DisplayName: TEdit
+    AnchorSideLeft.Control = Label_DisplayName
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit_FullName
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 135
+    Height = 23
+    Top = 101
+    Width = 280
+    Anchors = [akTop, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    TabOrder = 4
+  end
+  object ActionList1: TActionList
+    Images = VisMain.ImageList_RSAT
+    Left = 360
+    Top = 208
+    object Action_Next: TAction
+      Caption = 'OK'
+      Checked = True
+      ImageIndex = 8
+      OnExecute = Action_NextExecute
+      OnUpdate = Action_NextUpdate
+    end
+  end
+end
