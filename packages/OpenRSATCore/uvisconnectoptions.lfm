@@ -195,11 +195,12 @@ object VisConnectOptions: TVisConnectOptions
         AnchorSideTop.Control = Edit_Domain
         AnchorSideTop.Side = asrCenter
         Left = 383
-        Height = 10
-        Top = 14
-        Width = 26
+        Height = 26
+        Top = 6
+        Width = 46
         Action = Action_Domain
         AutoSize = True
+        Images = CoreDataModule.ImageList1
         ImageIndex = 5
         TabOrder = 2
       end
@@ -209,12 +210,13 @@ object VisConnectOptions: TVisConnectOptions
         AnchorSideTop.Control = Edit_DomainController
         AnchorSideTop.Side = asrCenter
         Left = 383
-        Height = 10
-        Top = 45
-        Width = 26
+        Height = 26
+        Top = 37
+        Width = 46
         Action = Action_DomainController
         AutoSize = True
         BorderSpacing.Left = 8
+        Images = CoreDataModule.ImageList1
         ImageIndex = 5
         TabOrder = 4
       end
@@ -414,10 +416,12 @@ object VisConnectOptions: TVisConnectOptions
       BorderSpacing.Left = 8
       BorderSpacing.Top = 8
       BorderSpacing.Bottom = 8
+      Images = CoreDataModule.ImageList1
       TabOrder = 0
     end
   end
   object ActionList1: TActionList
+    Images = CoreDataModule.ImageList1
     Left = 432
     Top = 208
     object Action_Check: TAction

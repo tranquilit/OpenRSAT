@@ -91,6 +91,7 @@ object VisOpenRSAT: TVisOpenRSAT
     end
   end
   object ActionList: TActionList
+    Images = CoreDataModule.ImageList1
     Left = 24
     Top = 120
     object Action_Quit: TAction
@@ -102,6 +103,11 @@ object VisOpenRSAT: TVisOpenRSAT
       Caption = 'Properties'
       DisableIfNoHandler = False
       OnUpdate = Action_OpenedPropertiesUpdate
+    end
+    object Action_NewWindow: TAction
+      Caption = 'Action_NewWindow'
+      ShortCut = 24654
+      OnExecute = Action_NewWindowExecute
     end
   end
   object IniPropStorage1: TIniPropStorage

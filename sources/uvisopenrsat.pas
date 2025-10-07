@@ -14,7 +14,8 @@ uses
   Menus,
   ComCtrls,
   ActnList,
-  LResources, IniPropStorage,
+  LResources,
+  IniPropStorage,
   ufrmcore,
   {$IFDEF WINDOWS} // Adds dark mode support, must be included after the LCL widgetset
     uDarkStyleParams,
@@ -30,6 +31,7 @@ type
   { TVisOpenRSAT }
 
   TVisOpenRSAT = class(TForm)
+    Action_NewWindow: TAction;
     Action_OpenedProperties: TAction;
     ActionList: TActionList;
     Action_Quit: TAction;
@@ -57,6 +59,7 @@ type
     MenuItem_ViewWindows: TMenuItem;
     Separator4: TMenuItem;
     Separator_File: TMenuItem;
+    procedure Action_NewWindowExecute(Sender: TObject);
     procedure Action_OpenedPropertiesUpdate(Sender: TObject);
     procedure Action_QuitExecute(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -84,6 +87,7 @@ var
 
 implementation
 uses
+  process,
   mormot.core.base,
   mormot.core.text,
   ufrmrsatoptions;
@@ -150,6 +154,21 @@ begin
     Dec(i);
   end;
 
+end;
+
+procedure TVisOpenRSAT.Action_NewWindowExecute(Sender: TObject);
+var
+  CheminExecutable: String;
+begin
+  CheminExecutable := ParamStr(0);
+
+  with TProcess.Create(nil) do
+  try
+    Executable := CheminExecutable;
+    Execute;
+  finally
+    Free;
+  end;
 end;
 
 procedure TVisOpenRSAT.FormActivate(Sender: TObject);

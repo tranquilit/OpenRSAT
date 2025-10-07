@@ -21,6 +21,7 @@ object FrmCore: TFrmCore
     OnChange = PageControl1Change
   end
   object ActionList_Core: TActionList
+    Images = CoreDataModule.ImageList1
     Left = 32
     Top = 24
     object Action_Options: TAction
