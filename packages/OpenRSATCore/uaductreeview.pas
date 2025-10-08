@@ -39,6 +39,9 @@ type
   );
 
   // Node data for query type
+
+  { TADUCTreeNodeQuery }
+
   TADUCTreeNodeQuery = class
     Name: RawUtf8;
     Description: RawUtf8;
@@ -47,7 +50,12 @@ type
     IncludeSubContainers: Boolean;
     QueryString: RawUtf8;
 
-    //class function Create(Name)
+    // Create a folder type node.
+    constructor CreateFolder(AName, ADescription: RawUtf8); overload;
+
+    // Create a query type node.
+    // No BaseDN means it is a folder type node.
+    constructor CreateQuery(AName, ADescription, ABaseDN, AQueryString: RawUtf8; AIncludeSubContainers: Boolean); overload;
   end;
 
   { TADUCTreeNodeObject }
@@ -165,6 +173,27 @@ begin
   fFlag := [];
 
   SetLinks(GPLink);
+end;
+
+{ TADUCTreeNodeQuery }
+
+constructor TADUCTreeNodeQuery.CreateFolder(AName, ADescription: RawUtf8);
+begin
+  Name := AName;
+  Description := ADescription;
+  BaseDN := '';
+  QueryString := '';
+  IncludeSubContainers := False;
+end;
+
+constructor TADUCTreeNodeQuery.CreateQuery(AName, ADescription, ABaseDN,
+  AQueryString: RawUtf8; AIncludeSubContainers: Boolean);
+begin
+  Name := AName;
+  Description := ADescription;
+  BaseDN := ABaseDN;
+  QueryString := AQueryString;
+  IncludeSubContainers := AIncludeSubContainers;
 end;
 
 { TADUCTreeNodeObject }
