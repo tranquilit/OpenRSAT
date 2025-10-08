@@ -58,6 +58,8 @@
 {"hash":259535363,"name":"tfrmmoduleaduc.action_sitesandservices.caption","sourcebytes":[83,105,116,101,115,32,97,110,100,32,115,101,114,118,105,99,101,115],"value":"Sites and services"},
 {"hash":145117667,"name":"tfrmmoduleaduc.action_usersandcomputers.caption","sourcebytes":[85,115,101,114,115,32,97,110,100,32,99,111,109,112,117,116,101,114,115],"value":"Users and computers"},
 {"hash":60404764,"name":"tfrmmoduleaduc.action_delegatecontrol.caption","sourcebytes":[68,101,108,101,103,97,116,101,32,99,111,110,116,114,111,108],"value":"Delegate control"},
+{"hash":169612210,"name":"tfrmmoduleaduc.action_newqueryfolder.caption","sourcebytes":[65,99,116,105,111,110,95,78,101,119,81,117,101,114,121,70,111,108,100,101,114],"value":"Action_NewQueryFolder"},
+{"hash":130955641,"name":"tfrmmoduleaduc.action_newquery.caption","sourcebytes":[65,99,116,105,111,110,95,78,101,119,81,117,101,114,121],"value":"Action_NewQuery"},
 {"hash":94435823,"name":"tfrmmoduleaduc.menuitem_.caption","sourcebytes":[77,101,110,117,73,116,101,109,95],"value":"MenuItem_"},
 {"hash":315460,"name":"tfrmmoduleaduc.menuitem_find.caption","sourcebytes":[70,105,110,100],"value":"Find"},
 {"hash":92596005,"name":"tfrmmoduleaduc.menuitem_newmsmqqueue.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,77,83,77,81,81,117,101,117,101],"value":"MenuItem_NewMSMQQueue"},

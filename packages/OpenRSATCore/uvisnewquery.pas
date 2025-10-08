@@ -13,10 +13,14 @@ uses
   Dialogs,
   StdCtrls,
   Buttons,
-  ExtCtrls, ActnList,
+  ExtCtrls,
+  ActnList,
+  mormot.core.base,
   uinterfacecore;
 
 type
+
+  TCheckNameValidityCallback = function(QueryName: RawUtf8): Boolean of object;
 
   { TVisNewQuery }
 
@@ -43,10 +47,13 @@ type
     Panel2: TPanel;
     procedure Action_OKExecute(Sender: TObject);
     procedure Action_OKUpdate(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     fCore: ICore;
   public
+    CheckNameValidityCallBack: TCheckNameValidityCallback;
+
     constructor Create(TheOwner: TComponent; Core: ICore); reintroduce;
   end;
 
@@ -59,12 +66,18 @@ uses
 
 procedure TVisNewQuery.Action_OKExecute(Sender: TObject);
 begin
-
 end;
 
 procedure TVisNewQuery.Action_OKUpdate(Sender: TObject);
 begin
   Action_OK.Enabled := (Edit_Name.Text <> '') and (Memo_QueryString.Text <> '');
+end;
+
+procedure TVisNewQuery.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  CanClose := (ModalResult <> mrOK) or CheckNameValidityCallBack(Edit_Name.Text);
+  if not CanClose then
+    ShowMessage('Name already exists');
 end;
 
 procedure TVisNewQuery.FormKeyDown(Sender: TObject; var Key: Word;

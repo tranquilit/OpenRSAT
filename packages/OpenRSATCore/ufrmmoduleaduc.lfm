@@ -439,6 +439,16 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExecute = Action_DelegateControlExecute
       OnUpdate = Action_DelegateControlUpdate
     end
+    object Action_NewQueryFolder: TAction
+      Category = 'New'
+      Caption = 'Action_NewQueryFolder'
+      OnExecute = Action_NewQueryFolderExecute
+    end
+    object Action_NewQuery: TAction
+      Category = 'New'
+      Caption = 'Action_NewQuery'
+      OnExecute = Action_NewQueryExecute
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
@@ -583,6 +593,12 @@ object FrmModuleADUC: TFrmModuleADUC
       end
       object MenuItem_NewSharedFolder: TMenuItem
         Action = Action_NewSharedFolder
+      end
+      object MenuItem_NewQueryFolder: TMenuItem
+        Action = Action_NewQueryFolder
+      end
+      object MenuItem_NewQuery: TMenuItem
+        Action = Action_NewQuery
       end
     end
     object Separator1: TMenuItem

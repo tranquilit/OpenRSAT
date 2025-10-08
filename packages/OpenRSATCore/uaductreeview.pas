@@ -51,11 +51,13 @@ type
     QueryString: RawUtf8;
 
     // Create a folder type node.
-    constructor CreateFolder(AName, ADescription: RawUtf8); overload;
+    procedure FolderNode(AName, ADescription: RawUtf8);
 
     // Create a query type node.
     // No BaseDN means it is a folder type node.
-    constructor CreateQuery(AName, ADescription, ABaseDN, AQueryString: RawUtf8; AIncludeSubContainers: Boolean); overload;
+    procedure QueryNode(AName, ADescription, ABaseDN, AQueryString: RawUtf8; AIncludeSubContainers: Boolean);
+
+    function IsQuery: Boolean;
   end;
 
   { TADUCTreeNodeObject }
@@ -177,7 +179,7 @@ end;
 
 { TADUCTreeNodeQuery }
 
-constructor TADUCTreeNodeQuery.CreateFolder(AName, ADescription: RawUtf8);
+procedure TADUCTreeNodeQuery.FolderNode(AName, ADescription: RawUtf8);
 begin
   Name := AName;
   Description := ADescription;
@@ -186,7 +188,7 @@ begin
   IncludeSubContainers := False;
 end;
 
-constructor TADUCTreeNodeQuery.CreateQuery(AName, ADescription, ABaseDN,
+procedure TADUCTreeNodeQuery.QueryNode(AName, ADescription, ABaseDN,
   AQueryString: RawUtf8; AIncludeSubContainers: Boolean);
 begin
   Name := AName;
@@ -194,6 +196,11 @@ begin
   BaseDN := ABaseDN;
   QueryString := AQueryString;
   IncludeSubContainers := AIncludeSubContainers;
+end;
+
+function TADUCTreeNodeQuery.IsQuery: Boolean;
+begin
+  result := (BaseDN <> '');
 end;
 
 { TADUCTreeNodeObject }

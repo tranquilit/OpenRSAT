@@ -5,8 +5,8 @@
 {"hash":186776298,"name":"tvisnewquery.label_queryroot.caption","sourcebytes":[81,117,101,114,121,32,114,111,111,116,58],"value":"Query root:"},
 {"hash":184369139,"name":"tvisnewquery.checkbox_includesubcontainers.caption","sourcebytes":[73,110,99,108,117,100,101,32,115,117,98,99,111,110,116,97,105,110,101,114,115],"value":"Include subcontainers"},
 {"hash":33849226,"name":"tvisnewquery.label_querystring.caption","sourcebytes":[81,117,101,114,121,32,115,116,114,105,110,103,58],"value":"Query string:"},
-{"hash":184976795,"name":"tvisnewquery.action_ok.caption","sourcebytes":[65,99,116,105,111,110,95,79,75],"value":"Action_OK"},
-{"hash":71126844,"name":"tvisnewquery.action_cancel.caption","sourcebytes":[65,99,116,105,111,110,95,67,97,110,99,101,108],"value":"Action_Cancel"},
-{"hash":70543381,"name":"tvisnewquery.action_browse.caption","sourcebytes":[65,99,116,105,111,110,95,66,114,111,119,115,101],"value":"Action_Browse"},
-{"hash":216576057,"name":"tvisnewquery.action_definequery.caption","sourcebytes":[65,99,116,105,111,110,95,68,101,102,105,110,101,81,117,101,114,121],"value":"Action_DefineQuery"}
+{"hash":1339,"name":"tvisnewquery.action_ok.caption","sourcebytes":[79,75],"value":"OK"},
+{"hash":77089212,"name":"tvisnewquery.action_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
+{"hash":115952286,"name":"tvisnewquery.action_browse.caption","sourcebytes":[66,114,111,119,115,101,46,46,46],"value":"Browse..."},
+{"hash":114139198,"name":"tvisnewquery.action_definequery.caption","sourcebytes":[68,101,102,105,110,101,32,81,117,101,114,121,46,46,46],"value":"Define Query..."}
 ]}

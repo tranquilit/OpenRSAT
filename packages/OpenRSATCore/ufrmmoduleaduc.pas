@@ -43,6 +43,8 @@ type
   { TFrmModuleADUC }
 
   TFrmModuleADUC = class(TFrameModule)
+    Action_NewQueryFolder: TAction;
+    Action_NewQuery: TAction;
     ActionList_ADUC: TActionList;
     Action_ChangePartition: TAction;
     Action_Copy: TAction;
@@ -82,6 +84,8 @@ type
     Action_TaskSendMail: TAction;
     Action_TreeNewAll: TAction;
     Action_UsersAndComputers: TAction;
+    MenuItem_NewQueryFolder: TMenuItem;
+    MenuItem_NewQuery: TMenuItem;
     MenuItem_NewSubnet: TMenuItem;
     MenuItem_NewUser: TMenuItem;
     MenuItem_NewSharedFolder: TMenuItem;
@@ -180,6 +184,8 @@ type
     procedure Action_NewGroupUpdate(Sender: TObject);
     procedure Action_NewOUExecute(Sender: TObject);
     procedure Action_NewOUUpdate(Sender: TObject);
+    procedure Action_NewQueryExecute(Sender: TObject);
+    procedure Action_NewQueryFolderExecute(Sender: TObject);
     procedure Action_NewUserExecute(Sender: TObject);
     procedure Action_NewUserUpdate(Sender: TObject);
     procedure Action_NextExecute(Sender: TObject);
@@ -272,6 +278,8 @@ type
     function GetFocusedObject(OnlyContainer: Boolean = False): RawUtf8;
     function GetFocusedObjectClass: RawUtf8;
 
+    function CheckQueryNameValidity(QueryName: RawUtf8): Boolean;
+
     procedure ObserverRsatOptions(Options: TOptions);
 
     procedure OnLdapClientConnect(LdapClient: TLdapClient);
@@ -307,7 +315,8 @@ uses
   uvischangedn,
   uvistaskresetpassword,
   ucommon,
-  ufrmrsatoptions;
+  ufrmrsatoptions,
+  uvisnewquery;
 
 {$R *.lfm}
 
@@ -346,7 +355,9 @@ type
     naSitesContainer,                // New Sites Container
     naSubnet,                        // New Subnet
     naUser,                          // New User
-    naSharedFolder                   // New Shared Folder
+    naSharedFolder,                  // New Shared Folder
+    naQueryFolder,                   // New Query Folder
+    naQuery                          // New Query
   );
 
 function TRawUtf8DynArrayContains(Values: TRawUtf8DynArray; Contain: String): Boolean;
@@ -597,6 +608,12 @@ const
     naUser,
     nasharedFolder
   ];
+
+  QueryFolderNew = [
+    naQueryFolder,
+    naQuery
+  ];
+
 begin
   // List of MenuItem_TreeNew that can be enabled as new buttons
   // Must follow the size and order of enum TNewAction
@@ -633,7 +650,9 @@ begin
     MenuItem_NewSiteContainer,                  // naSitesContainer
     MenuItem_NewSubnet,                         // naSubnet
     MenuItem_NewUser,                           // naUser
-    MenuItem_NewSharedFolder                    // naSharedFolder
+    MenuItem_NewSharedFolder,                   // naSharedFolder
+    MenuItem_NewQueryFolder,                    // naQueryFolder
+    MenuItem_NewQuery                           // naQuery
   ];
   filter := 0;
   newList := [];
@@ -646,6 +665,7 @@ begin
     'organizationalUnit': newList := OUNew;
     'lostAndFound': newList := LostAndFoundNew;
     'domainDNS': newList := DomainDNSNew;
+    '__queryFolder__': newList := QueryFolderNew;
     else
       TSynLog.Add.Log(sllWarning, FormatUtf8('"objectClass" not yet implemented: %', [ObjectClass]));
   end;
@@ -728,6 +748,72 @@ end;
 procedure TFrmModuleADUC.Action_NewOUUpdate(Sender: TObject);
 begin
   Action_NewOU.Enabled := Assigned(Core.LdapClient) and Core.LdapClient.Connected;
+end;
+
+procedure TFrmModuleADUC.Action_NewQueryExecute(Sender: TObject);
+var
+  Vis: TVisNewQuery;
+  ModalResult: Integer;
+  NewFolderNode: TADUCTreeNode;
+  NewFolderNodeData: TADUCTreeNodeQuery;
+begin
+  Vis := TVisNewQuery.Create(Self, fCore);
+
+  try
+    Vis.CheckNameValidityCallBack := @CheckQueryNameValidity;
+    ModalResult := Vis.ShowModal;
+    if (ModalResult <> mrOK) then
+      Exit;
+
+    // Add the new node
+    NewFolderNode := (TreeADUC.Items.AddChild(TreeADUC.Selected, vis.Edit_Name.Text) as TADUCTreeNode);
+    NewFolderNode.NodeType := atntQuery;
+    NewFolderNodeData := NewFolderNode.GetNodeDataQuery;
+    NewFolderNodeData.QueryNode(vis.Edit_Name.Text,
+                                vis.Edit_Description.Text,
+                                vis.Edit_QueryRoot.Text,
+                                vis.Memo_QueryString.Text,
+                                Vis.CheckBox_IncludeSubcontainers.Checked);
+    NewFolderNode.ImageIndex := Ord(ileADUnknown);
+    NewFolderNode.SelectedIndex := NewFolderNode.ImageIndex;
+    TreeADUC.Selected := NewFolderNode;
+  finally
+    FreeAndNil(Vis);
+  end;
+end;
+
+procedure TFrmModuleADUC.Action_NewQueryFolderExecute(Sender: TObject);
+var
+  FolderName, FolderNameFormat: RawUtf8;
+  Available: Boolean;
+  Index: Integer;
+  NewFolderNode: TADUCTreeNode;
+  NewFolderNodeData: TADUCTreeNodeQuery;
+begin
+  FolderNameFormat := 'New Folder (%)';
+  Index := 1;
+
+  // Check default folder name availability
+  FolderName := 'New Folder';
+  Available := not Assigned(TreeADUC.Selected.FindNode(FolderName));
+
+  // Loop until folder name is available
+  while not Available do
+  begin
+    Inc(Index);
+    FolderName := FormatUtf8(FolderNameFormat, [Index]);
+    Available := not Assigned(TreeADUC.Selected.FindNode(FolderName));
+  end;
+
+  // Add the new node
+  NewFolderNode := (TreeADUC.Items.AddChild(TreeADUC.Selected, FolderName) as TADUCTreeNode);
+  NewFolderNode.NodeType := atntQuery;
+  NewFolderNodeData := NewFolderNode.GetNodeDataQuery;
+  NewFolderNodeData.FolderNode(FolderName, '');
+  TreeADUC.Selected := NewFolderNode;
+  TreeADUC.Selected.EditText;
+  NewFolderNode.ImageIndex := Ord(ileADContainer);
+  NewFolderNode.SelectedIndex := NewFolderNode.ImageIndex;
 end;
 
 procedure TFrmModuleADUC.Action_NewUserExecute(Sender: TObject);
@@ -1200,18 +1286,23 @@ var
   end;
 
 begin
-  VisibleItems := [
-    MenuItem_DelegateControl,
-    MenuItem_ChangePartition,
-    MenuItem_New,
-    MenuItem_SwitchToolbarSize,
-    MenuItem_Search,
-    MenuItem_Delete,
-    MenuItem_Refresh,
-    MenuItem_Properties
-  ];
-
   Handled := not Assigned(Core.LdapClient) or not Core.LdapClient.Connected;
+
+  case (TreeADUC.Selected as TADUCTreeNode).NodeType of
+    atntObject: VisibleItems := [
+      MenuItem_DelegateControl,
+      MenuItem_ChangePartition,
+      MenuItem_New,
+      MenuItem_SwitchToolbarSize,
+      MenuItem_Search,
+      MenuItem_Delete,
+      MenuItem_Refresh,
+      MenuItem_Properties
+    ];
+    atntQuery: VisibleItems := [
+      MenuItem_New
+    ];
+  end;
 
   for Item in PopupMenu1.Items do
     Item.Visible := Contains(VisibleItems, Item);
@@ -2076,13 +2167,9 @@ begin
 end;
 
 function TFrmModuleADUC.GetFocusedObjectClass: RawUtf8;
-var
-  Row: PDocVariantData;
-  NodeData: TADUCTreeNodeObject;
-begin
-  result := '';
-
-  if GridADUC.Focused then
+  function GetFocusedObjectClassInGrid: RawUtf8;
+  var
+    Row: PDocVariantData;
   begin
     Row := GridADUC.FocusedRow;
     if not Assigned(Row) or not Row^.Exists('objectClass') then
@@ -2092,8 +2179,12 @@ begin
       Exit;
     end;
     Result := Row^.U['objectClass'];
-  end
-  else if TreeADUC.Focused then
+  end;
+
+  function GetFocusedObjectClassInTree: RawUtf8;
+  var
+    NodeDataObject: TADUCTreeNodeObject;
+    NodeDataQuery: TADUCTreeNodeQuery;
   begin
     if not Assigned(TreeADUC.Selected) then
     begin
@@ -2102,22 +2193,55 @@ begin
       Exit;
     end;
 
-    NodeData := (TreeADUC.Selected as TADUCTreeNode).GetNodeDataObject;
-    if not Assigned(NodeData) then
+    if (TreeADUC.Selected as TADUCTreeNode).IsObjectType then
     begin
-      if Assigned(fLog) then
-        fLog.Log(sllTrace, 'No data assigned to selected node', Self);
-      Exit;
+      NodeDataObject := (TreeADUC.Selected as TADUCTreeNode).GetNodeDataObject;
+      if not Assigned(NodeDataObject) then
+      begin
+        if Assigned(fLog) then
+          fLog.Log(sllTrace, 'No data assigned to selected node', Self);
+        Exit;
+      end;
+
+      result := NodeDataObject.LastObjectClass;
     end;
 
-    result := NodeData.LastObjectClass;
+    if (TreeADUC.Selected as TADUCTreeNode).IsQueryType then
+    begin
+      NodeDataQuery := (TreeADUC.Selected as TADUCTreeNode).GetNodeDataQuery;
+      if not Assigned(NodeDataQuery) then
+      begin
+        if Assigned(fLog) then
+          fLog.Log(sllTrace, 'No data assigned to selected node', Self);
+        Exit;
+      end;
+      if NodeDataQuery.IsQuery then
+        result := '__query__'
+      else
+        result := '__queryFolder__';
+    end;
+  end;
+
+begin
+  result := '';
+
+  if GridADUC.Focused then
+  begin
+    result := GetFocusedObjectClassInGrid;
   end
+  else if TreeADUC.Focused then
+    result := GetFocusedObjectClassInTree
   else
   begin
     if Assigned(fLog) then
       fLog.Log(sllWarning, 'Focus is not on grid nor tree.', Self);
     Exit;
   end;
+end;
+
+function TFrmModuleADUC.CheckQueryNameValidity(QueryName: RawUtf8): Boolean;
+begin
+  result := not Assigned(TreeADUC.Selected.FindNode(QueryName));
 end;
 
 procedure TFrmModuleADUC.ObserverRsatOptions(Options: TOptions);
@@ -2171,6 +2295,7 @@ begin
   fADUCRootNode.SelectedIndex := fADUCRootNode.ImageIndex;
 
   fADUCQueryNode := (TreeADUC.Items.Add(nil, 'Saved Query') as TADUCTreeNode);
+  fADUCQueryNode.NodeType := atntQuery;
   fADUCQueryNode.ImageIndex := Ord(ileADContainer);
   fADUCQueryNode.SelectedIndex := fADUCQueryNode.ImageIndex;
 
