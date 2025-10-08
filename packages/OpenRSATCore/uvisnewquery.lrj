@@ -1,0 +1,12 @@
+{"version":1,"strings":[
+{"hash":211137753,"name":"tvisnewquery.caption","sourcebytes":[86,105,115,78,101,119,81,117,101,114,121],"value":"VisNewQuery"},
+{"hash":5538698,"name":"tvisnewquery.label_name.caption","sourcebytes":[78,97,109,101,58],"value":"Name:"},
+{"hash":81166474,"name":"tvisnewquery.label_description.caption","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110,58],"value":"Description:"},
+{"hash":186776298,"name":"tvisnewquery.label_queryroot.caption","sourcebytes":[81,117,101,114,121,32,114,111,111,116,58],"value":"Query root:"},
+{"hash":184369139,"name":"tvisnewquery.checkbox_includesubcontainers.caption","sourcebytes":[73,110,99,108,117,100,101,32,115,117,98,99,111,110,116,97,105,110,101,114,115],"value":"Include subcontainers"},
+{"hash":33849226,"name":"tvisnewquery.label_querystring.caption","sourcebytes":[81,117,101,114,121,32,115,116,114,105,110,103,58],"value":"Query string:"},
+{"hash":184976795,"name":"tvisnewquery.action_ok.caption","sourcebytes":[65,99,116,105,111,110,95,79,75],"value":"Action_OK"},
+{"hash":71126844,"name":"tvisnewquery.action_cancel.caption","sourcebytes":[65,99,116,105,111,110,95,67,97,110,99,101,108],"value":"Action_Cancel"},
+{"hash":70543381,"name":"tvisnewquery.action_browse.caption","sourcebytes":[65,99,116,105,111,110,95,66,114,111,119,115,101],"value":"Action_Browse"},
+{"hash":216576057,"name":"tvisnewquery.action_definequery.caption","sourcebytes":[65,99,116,105,111,110,95,68,101,102,105,110,101,81,117,101,114,121],"value":"Action_DefineQuery"}
+]}

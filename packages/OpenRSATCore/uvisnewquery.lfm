@@ -1,0 +1,239 @@
+object VisNewQuery: TVisNewQuery
+  Left = 3107
+  Height = 320
+  Top = 412
+  Width = 378
+  Caption = 'VisNewQuery'
+  ClientHeight = 320
+  ClientWidth = 378
+  LCLVersion = '4.1.0.0'
+  OnKeyDown = FormKeyDown
+  object Panel1: TPanel
+    Left = 8
+    Height = 25
+    Top = 287
+    Width = 362
+    Align = alBottom
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 25
+    ClientWidth = 362
+    TabOrder = 0
+    object BitBtn_Cancel: TBitBtn
+      Left = 260
+      Height = 25
+      Top = 0
+      Width = 102
+      Action = Action_Cancel
+      Align = alRight
+      AutoSize = True
+      Cancel = True
+      ModalResult = 2
+      TabOrder = 0
+    end
+    object BitBtn_OK: TBitBtn
+      Left = 178
+      Height = 25
+      Top = 0
+      Width = 82
+      Action = Action_OK
+      Align = alRight
+      AutoSize = True
+      ModalResult = 1
+      TabOrder = 1
+    end
+  end
+  object Panel2: TPanel
+    Left = 8
+    Height = 271
+    Top = 8
+    Width = 362
+    Align = alClient
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 271
+    ClientWidth = 362
+    TabOrder = 1
+    object Label_Name: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Panel2
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 15
+      Top = 0
+      Width = 362
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 4
+      Caption = 'Name:'
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Label_Name
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 23
+      Top = 19
+      Width = 362
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 8
+      TabOrder = 0
+    end
+    object Label_Description: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Edit_Name
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 15
+      Top = 50
+      Width = 362
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 4
+      Caption = 'Description:'
+    end
+    object Edit_Description: TEdit
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Label_Description
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 23
+      Top = 69
+      Width = 362
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 8
+      TabOrder = 1
+    end
+    object Label_QueryRoot: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Edit_Description
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 15
+      Top = 100
+      Width = 362
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 4
+      Caption = 'Query root:'
+    end
+    object Edit_QueryRoot: TEdit
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Label_QueryRoot
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = BitBtn_Browse
+      Left = 0
+      Height = 23
+      Top = 119
+      Width = 250
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      Enabled = False
+      ReadOnly = True
+      TabOrder = 2
+    end
+    object BitBtn_Browse: TBitBtn
+      AnchorSideTop.Control = Edit_QueryRoot
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 258
+      Height = 25
+      Top = 118
+      Width = 104
+      Action = Action_Browse
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      TabOrder = 3
+    end
+    object CheckBox_IncludeSubcontainers: TCheckBox
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Edit_QueryRoot
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 19
+      Top = 150
+      Width = 362
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 8
+      Caption = 'Include subcontainers'
+      Checked = True
+      State = cbChecked
+      TabOrder = 4
+    end
+    object Label_QueryString: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = CheckBox_IncludeSubcontainers
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 15
+      Top = 177
+      Width = 362
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 4
+      Caption = 'Query string:'
+    end
+    object Memo_QueryString: TMemo
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Label_QueryString
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = BitBtn_DefineQueryString
+      AnchorSideBottom.Control = Panel2
+      AnchorSideBottom.Side = asrBottom
+      Left = 0
+      Height = 75
+      Top = 196
+      Width = 222
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Right = 8
+      Enabled = False
+      ReadOnly = True
+      TabOrder = 5
+    end
+    object BitBtn_DefineQueryString: TBitBtn
+      AnchorSideTop.Control = Memo_QueryString
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 230
+      Height = 25
+      Top = 196
+      Width = 132
+      Action = Action_DefineQuery
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      TabOrder = 6
+    end
+  end
+  object ActionList1: TActionList
+    Left = 16
+    Top = 16
+    object Action_OK: TAction
+      Caption = 'Action_OK'
+      OnExecute = Action_OKExecute
+      OnUpdate = Action_OKUpdate
+    end
+    object Action_Cancel: TAction
+      Caption = 'Action_Cancel'
+      DisableIfNoHandler = False
+    end
+    object Action_Browse: TAction
+      Caption = 'Action_Browse'
+    end
+    object Action_DefineQuery: TAction
+      Caption = 'Action_DefineQuery'
+    end
+  end
+end
