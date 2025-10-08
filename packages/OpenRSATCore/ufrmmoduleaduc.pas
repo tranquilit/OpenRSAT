@@ -1930,10 +1930,8 @@ var
   SelectedRows: TDocVariantData;
   Row: PDocVariantData;
   NodeData: TADUCTreeNodeObject;
-begin
-  result := [];
 
-  if GridADUC.Focused then
+  function GetSelectedObjectsInGrid: TRawUtf8DynArray;
   begin
     if Assigned(fLog) then
       fLog.Log(sllTrace, 'Focus on Grid', Self);
@@ -1957,8 +1955,9 @@ begin
       if Row^.Exists('distinguishedName') then
         Insert(Row^.U['distinguishedName'], result, Length(result));
     end;
-  end
-  else if TreeADUC.Focused then
+  end;
+
+  function GetSelectedObjectsInTree: TRawUtf8DynArray;
   begin
     if Assigned(fLog) then
       fLog.Log(sllTrace, 'Focus on TreeView', Self);
@@ -1978,6 +1977,20 @@ begin
       Exit;
     end;
     Insert(NodeData.DistinguishedName, result, 0);
+  end;
+
+begin
+  result := [];
+
+  if GridADUC.Focused then
+  begin
+    result := GetSelectedObjectsInGrid;
+    if (Length(result) = 0) then // If no result, fallback to tree selection
+      result := GetSelectedObjectsInTree;
+  end
+  else if TreeADUC.Focused then
+  begin
+    result := GetSelectedObjectsInTree;
   end
   else
   begin
@@ -1988,13 +2001,11 @@ end;
 
 function TFrmModuleADUC.GetFocusedObject(OnlyContainer: Boolean): RawUtf8;
 var
-  Row: PDocVariantData;
-  NodeData: TADUCTreeNodeObject;
   ObjectClass: RawUtf8;
-begin
-  result := '';
 
-  if GridADUC.Focused then
+  function GetFocusedObjectInGrid(var ObjectClass: RawUtf8): RawUtf8;
+  var
+    Row: PDocVariantData;
   begin
     Row := GridADUC.FocusedRow;
     if not Assigned(Row) or not Row^.Exists('distinguishedName') then
@@ -2006,8 +2017,11 @@ begin
 
     result := Row^.U['distinguishedName'];
     ObjectClass := Row^.U['objectClass'];
-  end
-  else if TreeADUC.Focused then
+  end;
+
+  function GetFocusedObjectInTree(var ObjectClass: RawUtf8): RawUtf8;
+  var
+    NodeData: TADUCTreeNodeObject;
   begin
     if not Assigned(TreeADUC.Selected) then
     begin
@@ -2026,6 +2040,20 @@ begin
 
     result := NodeData.DistinguishedName;
     ObjectClass := NodeData.LastObjectClass;
+  end;
+
+begin
+  result := '';
+
+  if GridADUC.Focused then
+  begin
+    result := GetFocusedObjectInGrid(ObjectClass);
+    if (result = '') then // If no result, fallback to tree selection
+      result := GetFocusedObjectInTree(ObjectClass);
+  end
+  else if TreeADUC.Focused then
+  begin
+    result := GetFocusedObjectInTree(ObjectClass);
   end
   else
   begin
