@@ -374,6 +374,7 @@ begin
   try
     fTreeSelectionHistory.Clear;
     RefreshADUCTreeNode((TreeADUC.Selected as TADUCTreeNode));
+    UpdateGridADUC((TreeADUC.Selected as TADUCTreeNode));
   finally
     Screen.Cursor := c;
   end;
@@ -469,6 +470,8 @@ begin
   MessageResult := mrNone;
   for SelectedObject in SelectedObjects do
   begin
+    if (SelectedObject = '') then
+      continue;
     if MessageResult <> mrYesToAll then
     begin
       MessageResult := MessageDlg(rsDelete, FormatUtf8(rsDeleteConfirm, [SelectedObject]), mtConfirmation, [mbYesToAll, mbYes, mbNo, mbNoToAll, mbCancel], 0);
@@ -1932,6 +1935,8 @@ var
   NodeData: TADUCTreeNodeObject;
 
   function GetSelectedObjectsInGrid: TRawUtf8DynArray;
+  var
+    Count: Integer;
   begin
     if Assigned(fLog) then
       fLog.Log(sllTrace, 'Focus on Grid', Self);
@@ -1946,6 +1951,7 @@ var
     SelectedRows := GridADUC.SelectedRows;
     SetLength(result, SelectedRows.Count);
 
+    Count := 0;
     for Row in SelectedRows.Objects do
     begin
       // Invalid row
@@ -1953,7 +1959,10 @@ var
         continue;
 
       if Row^.Exists('distinguishedName') then
-        Insert(Row^.U['distinguishedName'], result, Length(result));
+      begin
+        Insert(Row^.U['distinguishedName'], result, Count);
+        Inc(Count);
+      end;
     end;
   end;
 
