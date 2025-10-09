@@ -1,0 +1,128 @@
+name: Cross-Platform Build OpenRSAT
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        target:
+          - name: win64
+            os: windows-latest
+
+          - name: win32
+            os: windows-latest
+
+          - name: linux-x64
+            os: ubuntu-latest
+
+          - name: linux-arm64
+            os: ubuntu-latest
+
+    name: Build OpenRSAT — ${{ matrix.target.name }}
+    runs-on: ${{ matrix.target.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          submodules: recursive
+
+      - name: Setup 7-zip
+        uses: milliewalky/setup-7-zip@v2
+
+      - name: Download and extract mORMot2 static (Unix based)
+        if: matrix.target.os != 'windows-latest'
+        run: |
+          echo "Download mORMot2 static"
+          curl -L -o mormot2static.7z https://synopse.info/files/mormot2static.7z
+
+          7z x -y mormot2static.7z -ostatic
+
+          rm -rf submodules/mORMot2/static
+          mv static submodules/mORMot2/static
+
+          rm mormot2static.7z
+
+      - name: Download and extract mORMot2 static (Windows)
+        if: matrix.target.os == 'windows-latest'
+        run: |
+          echo "Download mORMot2 static"
+          curl -L -o mormot2static.7z https://synopse.info/files/mormot2static.7z
+
+          7z x -y mormot2static.7z -ostatic
+
+          rm "submodules/mORMot2/static" -r -force
+          mv static submodules/mORMot2/static
+
+          rm mormot2static.7z -r -force
+
+      - name: Install dependencies (Ubuntu only)
+        if: matrix.target.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential git subversion unzip \
+            libx11-dev libgtk2.0-dev libgdk-pixbuf2.0-dev \
+            libcairo2-dev libpango1.0-dev texinfo bison
+
+      - name: Build windres (Ubuntu only)
+        if: matrix.target.os == 'ubuntu-latest'
+        run: |
+          echo "Dowload"
+          curl -L -o binutils-2.45.tar.xz https://ftp.gnu.org/gnu/binutils/binutils-2.45.tar.xz
+          echo "Untar"
+          tar -xf binutils-2.45.tar.xz
+          echo "Change folder"
+          cd binutils-2.45
+          echo "configure"
+          ./configure
+          echo "make"
+          make
+          echo "make windres"
+          cd binutils && make windres
+
+      - name: Cache build windres (Ubuntu only)
+        if: matrix.target.os == 'ubuntu-latest'
+        uses: actions/cache@v4
+        with:
+          path: binutils-2.45
+          key: ${{ matrix.target.name }}-binutils-2.45
+
+      - name: Copy windres
+        if: matrix.target.os == 'ubuntu-latest'
+        run: |
+          cp binutils-2.45/binutils/windres .
+          cp ./windres /usr/local/bin/windres
+
+      - name: Install FPC and Lazarus IDE
+        uses: osvegn/setup-lazarus-fpcup@v1.0.1
+        with:
+          laz: lazarus_4_0
+          fpc: release_3_2_2
+
+      - name: Link dependencies
+        run: |
+          lazbuild --version
+          lazbuild --add-package-link submodules/mORMot2/packages/lazarus/mormot2.lpk
+          lazbuild --add-package-link submodules/pltis_uicomponents/pack/pltis_uicomponents.lpk
+          lazbuild --add-package-link submodules/pltis_tsmbios/Packages/tsmbios.lpk
+          lazbuild --add-package-link submodules/pltis_utils/pltis_utils.lpk
+          lazbuild --add-package-link submodules/pltis_virtualtrees/virtualtreeview_package.lpk
+          lazbuild --add-package-link submodules/metadarkstyle/metadarkstyle.lpk
+          lazbuild --add-package-link submodules/metadarkstyle/metadarkstyledsgn.lpk
+          lazbuild --add-package-link packages/OpenRSATCore/OpenRSATCore.lpk
+
+      - name: Build OpenRSAT for ${{ matrix.target.name }}
+        run: |
+          lazbuild --build-mode=${{ matrix.target.name }} sources/OpenRSAT.lpi
+
+      - name: Upload binary
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenRSAT-${{ matrix.target.name }}
+          path: |
+            ./bin/
