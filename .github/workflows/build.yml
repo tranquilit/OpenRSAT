@@ -1,6 +1,10 @@
 name: Cross-Platform Build OpenRSAT
 
 on:
+  # push:
+    # tags:
+      # - 'v*'
+
   workflow_dispatch:
 
 jobs:
@@ -19,6 +23,12 @@ jobs:
 
           - name: linux-arm64
             os: ubuntu-latest
+          
+          # - name: macosx-intel
+          #   os: macos-latest
+
+          # - name: macosx-arm64
+          #   os: macos-latest
 
     name: Build OpenRSAT — ${{ matrix.target.name }}
     runs-on: ${{ matrix.target.os }}
@@ -71,8 +81,8 @@ jobs:
       - name: Build windres (Ubuntu only)
         if: matrix.target.os == 'ubuntu-latest'
         run: |
-          echo "Dowload"
-          curl -L -o binutils-2.45.tar.xz https://ftp.gnu.org/gnu/binutils/binutils-2.45.tar.xz
+          echo "Download"
+          curl -L -o binutils-2.45.tar.xz https://github.com/osvegn/binutils/raw/refs/heads/main/binutils-2.45.tar.xz
           echo "Untar"
           tar -xf binutils-2.45.tar.xz
           echo "Change folder"
@@ -83,18 +93,29 @@ jobs:
           make
           echo "make windres"
           cd binutils && make windres
+          cp ./windres ../../
+
+      - name: Download windres (Macos intel)
+        if: matrix.target.name == 'macosx-intel'
+        run: |
+          curl -L -o windres https://github.com/osvegn/binutils/raw/refs/heads/main/darwin/intel/windres
+
+      - name: Download windres (Macos arm64)
+        if: matrix.target.name == 'macosx-arm64'
+        run: |
+          curl -L -o windres https://github.com/osvegn/binutils/raw/refs/heads/main/darwin/arm64/windres
 
       - name: Cache build windres (Ubuntu only)
-        if: matrix.target.os == 'ubuntu-latest'
+        if: matrix.target.os != 'windows-latest'
         uses: actions/cache@v4
         with:
           path: binutils-2.45
           key: ${{ matrix.target.name }}-binutils-2.45
 
       - name: Copy windres
-        if: matrix.target.os == 'ubuntu-latest'
+        if: matrix.target.os != 'windows-latest'
         run: |
-          cp binutils-2.45/binutils/windres .
+          chmod 755 ./windres
           cp ./windres /usr/local/bin/windres
 
       - name: Install FPC and Lazarus IDE
@@ -119,10 +140,78 @@ jobs:
         run: |
           lazbuild --build-mode=${{ matrix.target.name }} sources/OpenRSAT.lpi
 
+      - name: Install create-dmg
+        if: matrix.target.os == 'macos-latest'
+        run: |
+          brew install create-dmg
+
+      - name: Create OpenRSAT.app folder
+        if:  matrix.target.os == 'macos-latest'
+        run: |
+          mkdir -p OpenRSAT.app/Contents/MacOS
+          echo """
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>CFBundleExecutable</key>
+              <string>OpenRSAT</string>
+              <key>CFBundleIdentifier</key>
+              <string>com.yourcompany.OpenRSAT</string>
+              <key>CFBundleName</key>
+              <string>OpenRSAT</string>
+              <key>CFBundleVersion</key>
+              <string>1.0</string>
+              <key>CFBundleShortVersionString</key>
+              <string>1.0.0</string>
+              <key>NSHumanReadableCopyright</key>
+              <string>Copyright © 2025 Tranquil IT. All rights reserved.</string>
+              <key>CFBundleIconFile</key>
+              <string>app.icns</string>
+              <key>LSMinimumSystemVersion</key>
+              <string>10.15</string>
+              <key>NSHighResolutionCapable</key>
+              <true/>
+          </dict>
+          </plist>
+          """ > OpenRSAT.app/Contents/Info.plist
+          mv ./bin/${{ matrix.target.name }}/OpenRSAT OpenRSAT.app/Contents/MacOS
+
+      - name: Create a temp dir for the DMG
+        if: matrix.target.os == 'macos-latest'
+        run: |
+          mkdir -p dmg
+          cp -R OpenRSAT.app dmg/
+
+      - name: Create the DMG file
+        if: matrix.target.os == 'macos-latest'
+        run: |
+          create-dmg \
+            --volname "OpenRSAT" \
+            "OpenRSAT.dmg" \
+            "dmg/"
+          mv OpenRSAT.dmg ./bin/${{ matrix.target.name }}/
+
       - name: Upload binary
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: OpenRSAT-${{ matrix.target.name }}
-          path: |
-            ./bin/
+          path: ./bin/
+
+  # release:
+    # needs: build
+    # runs-on: ubuntu-latest
+    # steps:
+      # - name: Download binaries
+        # uses: actions/download-artifact@v4
+        # with:
+          # path: ./bin/
+      
+      # - name: Create Draft Release
+        # uses: softprops/action-gh-release@v2
+        # with:
+          # tag_name: ${{ github.ref_name }}
+          # name: Release ${{ github.ref_name }}
+          # draft: true
+          # files: ./bin/
