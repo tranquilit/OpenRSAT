@@ -280,6 +280,8 @@ type
 
     function CheckQueryNameValidity(QueryName: RawUtf8): Boolean;
 
+    function SerializeQueryFolder: Boolean;
+
     procedure ObserverRsatOptions(Options: TOptions);
 
     procedure OnLdapClientConnect(LdapClient: TLdapClient);
@@ -2244,6 +2246,35 @@ begin
   result := not Assigned(TreeADUC.Selected.FindNode(QueryName));
 end;
 
+function TFrmModuleADUC.SerializeQueryFolder: Boolean;
+var
+  data: TDocVariantData;
+  i: Integer;
+
+  function InnerSerializeQueryFolder(data: PDocVariantData; node: TADUCTreeNode): Boolean;
+  var
+    i: Integer;
+    NodeData: TADUCTreeNodeQuery;
+  begin
+    NodeData := node.GetNodeDataQuery;
+    data^.O_[node.Text]^.S['baseDN'] := NodeData.BaseDN;
+    data^.O_[node.Text]^.S['description'] := NodeData.Description;
+    data^.O_[node.Text]^.B['includeSubContainers'] := NodeData.IncludeSubContainers;
+    data^.O_[Node.Text]^.S['queryString'] := NodeData.QueryString;
+    for i := 0 to node.Count - 1 do
+      InnerSerializeQueryFolder(data^.O_[node.Text]^.O_['children'], (Node.Items[i] as TADUCTreeNode));
+    result := True;
+  end;
+
+begin
+  data.init();
+
+  for i := 0 to fADUCQueryNode.Count - 1 do
+    result := InnerSerializeQueryFolder(@data, (fADUCQueryNode.Items[i] as TADUCTreeNode));
+
+  data.SaveToJsonFile('QueryFolder.json');
+end;
+
 procedure TFrmModuleADUC.ObserverRsatOptions(Options: TOptions);
 var
   RsatOptions: TRsatOptions absolute Options;
@@ -2310,6 +2341,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Destroy', [Self.Name]);
 
+  SerializeQueryFolder;
   FreeAndNil(fModuleOptions);
   FreeAndNil(fTreeSelectionHistory);
 
