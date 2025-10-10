@@ -63,6 +63,7 @@ type
   private
     function GetConfigFilePath: String;
     function GetConfigFolderPath: String;
+    function GetQueryFolderPath: String;
   public
     constructor Create(AOwner: TComponent); override;
 
@@ -70,6 +71,7 @@ type
   published
     property ConfigFolderPath: String read GetConfigFolderPath;
     property ConfigFilePath: String read GetConfigFilePath;
+    property QueryFolderPath: String read GetQueryFolderPath;
   end;
 
 var
@@ -92,6 +94,11 @@ end;
 function TCoreDataModule.GetConfigFolderPath: String;
 begin
   result := GetAppConfigDir(False);
+end;
+
+function TCoreDataModule.GetQueryFolderPath: String;
+begin
+  result := EnsureDirectoryExists([ConfigFolderPath, 'QueryFolder']);
 end;
 
 constructor TCoreDataModule.Create(AOwner: TComponent);

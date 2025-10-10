@@ -247,9 +247,9 @@ end;
 
 function TRsatLdapClient.Close: boolean;
 begin
-  Result := inherited Close;
-
   NotifyClose;
+
+  Result := inherited Close;
 end;
 
 end.

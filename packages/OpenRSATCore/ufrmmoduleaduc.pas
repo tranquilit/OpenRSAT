@@ -280,7 +280,9 @@ type
 
     function CheckQueryNameValidity(QueryName: RawUtf8): Boolean;
 
+    function BuildQueryFolderFileName: RawUtf8;
     function SerializeQueryFolder: Boolean;
+    function DeserializeQueryFolder: Boolean;
 
     procedure ObserverRsatOptions(Options: TOptions);
 
@@ -2246,10 +2248,27 @@ begin
   result := not Assigned(TreeADUC.Selected.FindNode(QueryName));
 end;
 
+function TFrmModuleADUC.BuildQueryFolderFileName: RawUtf8;
+begin
+  result := '';
+  if not Assigned(fCore) or not Assigned(fCore.LdapClient) then
+    Exit;
+  result := fCore.LdapClient.DefaultDN();
+  if result = '' then
+    Exit;
+  result := DNToCN(result);
+  if result = '' then
+    Exit;
+  if Pos('/', FileName) >= 0 then
+    result := String(result).Split('/')[0];
+  result := MakePath([CoreDataModule.QueryFolderPath, FormatUtf8('%.json', [result])]);
+end;
+
 function TFrmModuleADUC.SerializeQueryFolder: Boolean;
 var
   data: TDocVariantData;
   i: Integer;
+  FileName: RawUtf8;
 
   function InnerSerializeQueryFolder(data: PDocVariantData; node: TADUCTreeNode): Boolean;
   var
@@ -2272,7 +2291,14 @@ begin
   for i := 0 to fADUCQueryNode.Count - 1 do
     result := InnerSerializeQueryFolder(@data, (fADUCQueryNode.Items[i] as TADUCTreeNode));
 
-  data.SaveToJsonFile('QueryFolder.json');
+  data.SaveToJsonFile(BuildQueryFolderFileName);
+end;
+
+function TFrmModuleADUC.DeserializeQueryFolder: Boolean;
+var
+  data: TDocVariantData;
+begin
+  data.InitJsonFromFile(BuildQueryFolderFileName);
 end;
 
 procedure TFrmModuleADUC.ObserverRsatOptions(Options: TOptions);
@@ -2301,6 +2327,7 @@ procedure TFrmModuleADUC.OnLdapClientClose(LdapClient: TLdapClient);
 begin
   TreeADUC.BeginUpdate;
   try
+    SerializeQueryFolder;
     if Assigned(fADUCDomainNode) and fADUCDomainNode.HasChildren then
       fADUCDomainNode.DeleteChildren;
     FreeAndNil(fADUCDomainNode);
@@ -2341,7 +2368,6 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Destroy', [Self.Name]);
 
-  SerializeQueryFolder;
   FreeAndNil(fModuleOptions);
   FreeAndNil(fTreeSelectionHistory);
 

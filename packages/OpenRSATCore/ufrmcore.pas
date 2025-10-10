@@ -362,6 +362,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Destroy', [Self.Name]);
 
+  fLdapClient.Close;
   FreeAndNil(fLdapClient);
   FreeAndNil(fOptions);
   FreeAndNil(fLdapConfigs);
