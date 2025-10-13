@@ -1,7 +1,7 @@
 object VisSearch: TVisSearch
-  Left = -1247
+  Left = -1246
   Height = 547
-  Top = 124
+  Top = 125
   Width = 779
   BorderStyle = bsSingle
   Caption = 'Search'

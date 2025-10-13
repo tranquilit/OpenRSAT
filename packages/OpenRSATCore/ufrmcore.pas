@@ -175,10 +175,7 @@ begin
       Screen.Cursor := crDefault;
       if Assigned(fLog) then
         fLog.Log(sllError, 'Ldap connection failed: %', [LdapClient.ResultString]);
-      if String(LdapClient.ResultString).ToLower.Contains('52e') then
-        MessageDlg(rsLdapError, FormatUtf8(rsLdapConnectFailed, ['Invalid credentials']), mtError, [mbOK], 0)
-      else
-        MessageDlg(rsLdapError, FormatUtf8(rsLdapConnectFailed, [LdapClient.ResultString]), mtError, [mbOK], 0);
+      ShowLdapConnectError(LdapClient.ResultString);
       Action_LdapOptions.Execute();
       Exit;
     end;

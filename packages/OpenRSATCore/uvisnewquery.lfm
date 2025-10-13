@@ -1,5 +1,5 @@
 object VisNewQuery: TVisNewQuery
-  Left = 3107
+  Left = 1187
   Height = 320
   Top = 412
   Width = 378

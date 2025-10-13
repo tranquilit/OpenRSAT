@@ -83,6 +83,7 @@ uses
   mormot.core.text,
   mormot.net.dns,
   mormot.net.sock,
+  ursatldapclient,
   ucommon;
 
 {$R *.lfm}
@@ -196,10 +197,7 @@ begin
       fLdap.TlsContext^.IgnoreCertificateErrors := fLdap.Settings.AllowUnsafePasswordBind;
       if not fLdap.Connect() then
       begin
-        if fLdap.ResultError = leInvalidCredentials then
-          MessageDlg(rsLdapError, FormatUtf8(rsLdapConnectFailed, ['Invalid credentials']), mtError, [mbOK], 0)
-        else
-          MessageDlg(rsLdapError, FormatUtf8(rsLdapConnectFailed, [fLdap.ResultString]), mtError, [mbOK], 0);
+        ShowLdapConnectError(fLdap.ResultString);
         Exit;
       end;
       MessageDlg(rsTitleConnectSuccess, FormatUtf8(rsConnectSuccess, [fLdap.Settings.TargetUri]) + LineEnding +

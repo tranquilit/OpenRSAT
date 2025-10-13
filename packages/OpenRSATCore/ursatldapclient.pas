@@ -8,6 +8,7 @@ uses
   Classes,
   SysUtils,
   Dialogs,
+  System.UITypes,
   mormot.core.base,
   mormot.core.variants,
   mormot.net.ldap;
@@ -39,7 +40,7 @@ type
       TypesOnly: boolean; const Filter: RawUtf8;
       const Attributes: array of RawUtf8): Boolean;
     procedure SearchPagingEnd;
-    procedure MoveLdapEntries(oldDN, newDN: Array of String);
+    function MoveLdapEntries(oldDN, newDN: Array of String): Boolean;
     function MoveLdapEntry(oldDN, newDN: string): Boolean;
     function RenameLdapEntry(DN, newName: string): Boolean;
 
@@ -57,14 +58,41 @@ type
     function Close: boolean;
   end;
 
+  function ShowLdapSearchError(Message: RawUtf8): TModalResult;
+  function ShowLdapModifyError(Message: RawUtf8): TModalResult;
+  function ShowLdapDeleteError(Message: RawUtf8): TModalResult;
+  function ShowLdapConnectError(Message: RawUtf8): TModalResult;
+
 implementation
 
 uses
-  System.UITypes,
   mormot.core.log,
   mormot.core.text,
   mormot.core.rtti,
   ucommon;
+
+function ShowLdapSearchError(Message: RawUtf8): TModalResult;
+begin
+  result := MessageDlg(rsLdapError, FormatUtf8(rsLdapSearchFailed, [Message]), mtError, mbOKCancel, 0);
+end;
+
+function ShowLdapModifyError(Message: RawUtf8): TModalResult;
+begin
+  result := MessageDlg(rsLdapError, FormatUtf8(rsLdapModifyFailed, [Message]), mtError, mbOKCancel, 0);
+end;
+
+function ShowLdapDeleteError(Message: RawUtf8): TModalResult;
+begin
+  result := MessageDlg(rsLdapError, FormatUtf8(rsLdapDeleteFailed, [Message]), mtError, mbOKCancel, 0);
+end;
+
+function ShowLdapConnectError(Message: RawUtf8): TModalResult;
+begin
+  if String(Message).ToLower.Contains('52e') then
+    result := MessageDlg(rsLdapError, FormatUtf8(rsLdapConnectFailed, ['Invalid credentials']), mtError, mbOKCancel, 0)
+  else
+    result := MessageDlg(rsLdapError, FormatUtf8(rsLdapConnectFailed, [Message]), mtError, mbOKCancel, 0);
+end;
 
 { TRsatLdapClient }
 
@@ -139,17 +167,25 @@ begin
   fPageNumber := 0;
 end;
 
-procedure TRsatLdapClient.MoveLdapEntries(oldDN, newDN: array of String);
+function TRsatLdapClient.MoveLdapEntries(oldDN, newDN: array of String
+  ): Boolean;
 var
   i: Integer;
 begin
+  result := False;
+
   if Length(oldDN) <> Length(newDN) then
     Exit;
+
+  result := True;
   if MessageDlg(rsWarning, rsLdapMoveWarningMessage, mtWarning, [mbYes, mbNo, mbCancel], 0) <> mrYes then
     Exit;
+
   for i := 0 to Length(oldDN) - 1 do
   begin
-    MoveLdapEntry(oldDN[i], newDN[i]);
+    result := MoveLdapEntry(oldDN[i], newDN[i]);
+    if not result then
+      Exit;
   end;
 end;
 
@@ -169,7 +205,8 @@ begin
 
   if (oldDN = '') or (newDN = '') then
   begin
-    aLog.Log(sllDebug, 'oldDN or newDN is empty');
+    if Assigned(aLog) then
+      aLog.Log(sllDebug, 'oldDN or newDN is empty');
     Exit;
   end;
   ParseDN(newDN, DNs);
@@ -177,7 +214,8 @@ begin
   newParentDN := DNs[1].Name + '=' + DNs[1].Value;
   for i := 2 to High(DNs) do
     newParentDN += ',' + DNs[i].Name + '=' + DNs[i].Value;
-  aLog.Log(sllDebug, FormatUtf8('Moving Ldap entry "%" as "%" to "%".', [oldDN, newRDN, newParentDN]));
+  if Assigned(aLog) then
+    aLog.Log(sllDebug, FormatUtf8('Moving Ldap entry "%" as "%" to "%".', [oldDN, newRDN, newParentDN]));
 
   result := ModifyDN(oldDN, newRdn, newParentDN, True);
 end;
@@ -195,10 +233,12 @@ begin
 
   if (DN = '') or (newName = '') then
   begin
-    aLog.Log(sllDebug, 'DN or NewName is empty');
+    if Assigned(aLog) then
+      aLog.Log(sllDebug, 'DN or NewName is empty');
     Exit;
   end;
-  aLog.Log(sllDebug, FormatUtf8('Renaming Ldap entry "%" as "%".', [DN, newName]));
+  if Assigned(aLog) then
+    aLog.Log(sllDebug, FormatUtf8('Renaming Ldap entry "%" as "%".', [DN, newName]));
 
   result := ModifyDN(DN, newName, '', True);
 end;
@@ -242,7 +282,8 @@ function TRsatLdapClient.Connect(DiscoverMode: TLdapClientConnect;
 begin
   Result := inherited Connect(DiscoverMode, DelayMS);
 
-  NotifyConnect;
+  if Result then
+    NotifyConnect;
 end;
 
 function TRsatLdapClient.Close: boolean;

@@ -492,6 +492,7 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, 'Ldap deletion failed: "%"', [Core.LdapClient.ResultString], Action_Delete);
+        ShowLdapDeleteError(Core.LdapClient.ResultString);
         Exit;
       end;
     end;
@@ -944,7 +945,7 @@ var
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, '% - Ldap modify error: "%"', [Action_TaskAddToAGroup.Caption, Core.LdapClient.ResultString]);
-      MessageDlg(rsLdapError, Core.LdapClient.ResultString, mtError, [mbOK], 0);
+      ShowLdapModifyError(Core.LdapClient.ResultString);
     end;
   end;
 
@@ -971,7 +972,7 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, '% - Ldap search error: "%"', [Action_TaskAddToAGroup.Caption, Core.LdapClient.ResultString]);
-      MessageDlg(rsLdapError, FormatUtf8(rsLdapSearchFailed, [Core.LdapClient.ResultString]), mtError, [mbOK], 0);
+      ShowLdapSearchError(Core.LdapClient.ResultString);
       Exit;
     end;
 
@@ -1017,6 +1018,7 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, '% - Failed to move ldap entry "%" to "%": %', [DistinguishedName, SelectedDN, fCore.LdapClient.ResultString]);
+      ShowLdapDeleteError(fCore.LdapClient.ResultString);
       Exit;
     end;
   finally
@@ -1050,6 +1052,7 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, '% - Cannot retrieve information about "%". (%)', [Action_TaskResetPassword.Caption, userDN, fCore.LdapClient.ResultString]);
+      ShowLdapSearchError(fCore.LdapClient.ResultString);
       Exit;
     end;
     res := userData.Attributes.Find('objectClass');
@@ -1097,12 +1100,12 @@ begin
         begin
           if Assigned(fLog) then
             fLog.Log(sllError, '% - Ldap Modify Error: %', [Action_TaskResetPassword.Caption, fCore.LdapClient.ResultString]);
-          MessageDlg(rsLdapError, FormatUtf8(rsLdapModifyFailed, [fCore.LdapClient.ResultString]), mtError, [mbOK], 0);
+          ShowLdapModifyError(fCore.LdapClient.ResultString);
+          Exit;
         end;
       finally
         FreeAndNil(attr);
       end;
-
     end;
     attr := TLdapAttribute.Create('unicodePwd', atUndefined);
     try
@@ -1111,12 +1114,12 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, '% - Ldap Modify Error: %', [Action_TaskResetPassword.Caption, fCore.LdapClient.ResultString]);
-        Dialogs.MessageDlg(rsLdapError, FormatUtf8(rsLdapModifyFailed, [fCore.LdapClient.ResultString]), mtError, [mbOK], 0);
+        ShowLdapModifyError(fCore.LdapClient.ResultString);
+        Exit;
       end;
     finally
       FreeAndNil(attr);
     end;
-
 
     // Set reset password
     if CheckBox_Change.Checked then
@@ -1128,7 +1131,8 @@ begin
         begin
           if Assigned(fLog) then
             fLog.Log(sllError, '% - Ldap Modify Error: %', [Action_TaskResetPassword.Caption, fCore.LdapClient.ResultString]);
-          Dialogs.MessageDlg(rsLdapError, FormatUtf8(rsLdapModifyFailed, [fcore.LdapClient.ResultString]), mtError, [mbOK], 0);
+          ShowLdapModifyError(fCore.LdapClient.ResultString);
+          Exit;
         end;
       finally
         FreeAndNil(attr);
@@ -1536,7 +1540,13 @@ begin
     Exit;
   end;
   newRDN := Join([DistinguishedNameParsed[0].Name + '=' + newRDN]);
-  Core.LdapClient.RenameLdapEntry(DistinguishedName, newRDN);
+  if not Core.LdapClient.RenameLdapEntry(DistinguishedName, newRDN) then
+  begin
+    if Assigned(fLog) then
+      fLog.Log(sllError, 'Rename Ldap Entry: "%"', [Core.LdapClient.ResultString], Self);
+    ShowLdapModifyError(Core.LdapClient.ResultString);
+    Exit;
+  end;
 
   DistinguishedName := newRDN;
   for i := 1 to High(DistinguishedNameParsed) do
@@ -1705,6 +1715,7 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, 'Ldap search object failed: "%"', [Ldap.ResultString], Self);
+      ShowLdapSearchError(Ldap.ResultString);
       Exit;
     end;
 
@@ -1754,6 +1765,7 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, 'Fail to refresh ADUCTreeNode(%): %', [Node.Text, Ldap.ResultString], Self);
+        ShowLdapSearchError(Ldap.ResultString);
         Exit;
       end;
 
@@ -1883,6 +1895,7 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, '% - Ldap search error: "%"', [GridADUC.Name, Core.LdapClient.ResultString]);
+      ShowLdapSearchError(Core.LdapClient.ResultString);
       Exit;
     end;
 
