@@ -1,0 +1,23 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: ufrmnewcomputer.rsaddfailed
+msgid "Ldap Add Failed: \"%\""
+msgstr ""
+
+#: ufrmnewcomputer.rsnewobjectbtnok
+msgid "OK"
+msgstr ""
+
+#: ufrmnewcomputer.rsnewobjecttitlecomputer
+msgid "New object - Computer"
+msgstr ""
+
+#: ufrmnewcomputer.rstitleldap
+msgid "Ldap Error"
+msgstr ""
+
+#: ufrmnewcomputer.rstitleselectowner
+msgid "Select owner"
+msgstr ""
+

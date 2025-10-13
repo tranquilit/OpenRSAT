@@ -1,0 +1,19 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: ufrmnewsharedfolder.rsaddfailed
+msgid "Ldap Add Failed: \"%\""
+msgstr ""
+
+#: ufrmnewsharedfolder.rsnewobjectbtnok
+msgid "OK"
+msgstr ""
+
+#: ufrmnewsharedfolder.rsnewobjecttitlesharedfolder
+msgid "New object - Shared Folder"
+msgstr ""
+
+#: ufrmnewsharedfolder.rstitleldap
+msgid "Ldap Error"
+msgstr ""
+

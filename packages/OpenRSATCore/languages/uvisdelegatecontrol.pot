@@ -1,0 +1,15 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: uvisdelegatecontrol.rsdelegatecontrolfolder
+msgid "You chose to delegate control of objects in the following Active Directory folder:"
+msgstr ""
+
+#: uvisdelegatecontrol.rsdelegatecontrolobjects
+msgid "The groups, users, or computers to which you have given control are:"
+msgstr ""
+
+#: uvisdelegatecontrol.rsdelegatecontroltasks
+msgid "You chose to delegate the following tasks:"
+msgstr ""
+

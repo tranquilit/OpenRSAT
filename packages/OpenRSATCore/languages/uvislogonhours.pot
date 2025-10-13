@@ -1,0 +1,31 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: uvislogonhours.rsfriday
+msgid "Friday"
+msgstr ""
+
+#: uvislogonhours.rsmonday
+msgid "Monday"
+msgstr ""
+
+#: uvislogonhours.rssaturday
+msgid "Saturday"
+msgstr ""
+
+#: uvislogonhours.rssunday
+msgid "Sunday"
+msgstr ""
+
+#: uvislogonhours.rsthursday
+msgid "Thursday"
+msgstr ""
+
+#: uvislogonhours.rstuesday
+msgid "Tuesday"
+msgstr ""
+
+#: uvislogonhours.rswednesday
+msgid "Wednesday"
+msgstr ""
+

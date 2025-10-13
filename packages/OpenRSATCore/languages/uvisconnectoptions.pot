@@ -1,0 +1,31 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: uvisconnectoptions.rsanonymousconnection
+msgid "Anonymous Connection"
+msgstr ""
+
+#: uvisconnectoptions.rsconnectedondomainas
+msgid "You are connected as \"%\"."
+msgstr ""
+
+#: uvisconnectoptions.rsconnectedondomainwithdc
+msgid "The DC of this domain is \"%\"."
+msgstr ""
+
+#: uvisconnectoptions.rsconnectsuccess
+msgid "Successfully connected to domain \"%\""
+msgstr ""
+
+#: uvisconnectoptions.rstitleconnectorbind
+msgid "Connect or bind error."
+msgstr ""
+
+#: uvisconnectoptions.rstitleconnectsuccess
+msgid "Successful connection"
+msgstr ""
+
+#: uvisconnectoptions.rsusecurrentcreds
+msgid "Current user credentials"
+msgstr ""
+

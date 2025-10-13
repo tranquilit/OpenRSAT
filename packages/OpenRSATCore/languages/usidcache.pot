@@ -1,0 +1,395 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: usidcache.rswellknownsidanonymous
+msgid "Anonymous"
+msgstr ""
+
+#: usidcache.rswellknownsidauthenticateduser
+msgid "Authenticated User"
+msgstr ""
+
+#: usidcache.rswellknownsidauthenticationauthorityasserted
+msgid "Authentication Authority Asserted"
+msgstr ""
+
+#: usidcache.rswellknownsidauthenticationfreshkeyauth
+msgid "Authentication Fresh Key Auth"
+msgstr ""
+
+#: usidcache.rswellknownsidauthenticationkeypropertyattestation
+msgid "Authentication Key Property Attestation"
+msgstr ""
+
+#: usidcache.rswellknownsidauthenticationkeypropertymfa
+msgid "Authentication Key Property Mfa"
+msgstr ""
+
+#: usidcache.rswellknownsidauthenticationkeytrust
+msgid "Authentication Key Trust"
+msgstr ""
+
+#: usidcache.rswellknownsidauthenticationserviceasserted
+msgid "Authentication Service Asserted"
+msgstr ""
+
+#: usidcache.rswellknownsidbatch
+msgid "Batch"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinaccesscontrolassistanceoperators
+msgid "Builtin Access Control Assistance Operators"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinaccountoperators
+msgid "Builtin Account Operators"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinadministrators
+msgid "Builtin Administrators"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinanypackage
+msgid "Builtin Any Package"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinanyrestrictedpackage
+msgid "Builtin Any Restricted Package"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinauthorizationaccess
+msgid "Builtin Authorization Access"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinbackupoperators
+msgid "Builtin Backup Operators"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltincacheableprincipalsgroups
+msgid "Builtin Cacheable Principals Groups"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltincertsvcdcomaccessgroup
+msgid "Builtin Cert Svc DCom Access Group"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltincryptooperators
+msgid "Builtin Crypto Operators"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltindcomusers
+msgid "Builtin Dcom Users"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltindefaultsystemmanagedgroup
+msgid "Builtin Default System Managed Group"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltindeviceowners
+msgid "Builtin Device Owners"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltindomain
+msgid "Builtin Domain"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltineventlogreadersgroup
+msgid "Builtin Event Log Readers Group"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinguests
+msgid "Builtin Guests"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinhypervadmins
+msgid "Builtin Hyper VAdmins"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinincomingforesttrustbuilders
+msgid "Builtin Incoming Forest Trust Builders"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltiniusers
+msgid "Builtin IUsers"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinnetworkconfigurationoperators
+msgid "Builtin Network Configuration Operators"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinnoncacheableprincipalsgroups
+msgid "Builtin Non Cacheable Principals Groups"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinperfloggingusers
+msgid "Builtin Perf Logging Users"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinperfmonitoringusers
+msgid "Builtin Perf Monitoring Users"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinpowerusers
+msgid "Builtin Power Users"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinprewindows2000compatibleaccess
+msgid "Builtin Pre Windows 200 Compatible Access"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinprintoperators
+msgid "Builtin Print Operators"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinrasservers
+msgid "Builtin Ras Servers"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinrdsendpointservers
+msgid "Builtin Rds Endpoint Servers"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinrdsmanagementservers
+msgid "Builtin Rds Management Servers"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinrdsremoteaccessservers
+msgid "Builtin Rds Remote Access Servers"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinremotedesktopusers
+msgid "Builtin Remote Desktop Users"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinremotemanagementusers
+msgid "Builtin Remote Management Users"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinreplicator
+msgid "Builtin Replicator"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinstoragereplicaadmins
+msgid "Builtin Storage Replica Admins"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinsystemoperators
+msgid "Builtin System Operators"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinterminalserverlicenseservers
+msgid "Builtin Terminal Server License Servers"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinunknown
+msgid "Builtin Unknown"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinusermodedriver
+msgid "Builtin User Mode Driver"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinusers
+msgid "Builtin Users"
+msgstr ""
+
+#: usidcache.rswellknownsidbuiltinwriterestrictedcode
+msgid "Builtin Write Restricted Code"
+msgstr ""
+
+#: usidcache.rswellknownsidcapabilityappointments
+msgid "Capability Appointments"
+msgstr ""
+
+#: usidcache.rswellknownsidcapabilitycontacts
+msgid "Capability Contacts"
+msgstr ""
+
+#: usidcache.rswellknownsidcapabilitydocumentslibrary
+msgid "Capability Documents Library"
+msgstr ""
+
+#: usidcache.rswellknownsidcapabilityenterpriseauthentication
+msgid "Capability Enterprise Authentication"
+msgstr ""
+
+#: usidcache.rswellknownsidcapabilityinternetclient
+msgid "Capability Internet Client"
+msgstr ""
+
+#: usidcache.rswellknownsidcapabilityinternetclientserver
+msgid "Capability Internet Client Server"
+msgstr ""
+
+#: usidcache.rswellknownsidcapabilitymusiclibrary
+msgid "Capability Music Library"
+msgstr ""
+
+#: usidcache.rswellknownsidcapabilitypictureslibrary
+msgid "Capability Pictures Library"
+msgstr ""
+
+#: usidcache.rswellknownsidcapabilityprivatenetworkclientserver
+msgid "Capability Private Network Client Server"
+msgstr ""
+
+#: usidcache.rswellknownsidcapabilityremovablestorage
+msgid "Capability Removable Storage"
+msgstr ""
+
+#: usidcache.rswellknownsidcapabilitysharedusercertificates
+msgid "Capability Shared User Certificates"
+msgstr ""
+
+#: usidcache.rswellknownsidcapabilityvideoslibrary
+msgid "Capability Videos Library"
+msgstr ""
+
+#: usidcache.rswellknownsidconsolelogon
+msgid "Console Logon"
+msgstr ""
+
+#: usidcache.rswellknownsidcreatorgroup
+msgid "Creator Group"
+msgstr ""
+
+#: usidcache.rswellknownsidcreatorgroupserver
+msgid "Creator Group Server"
+msgstr ""
+
+#: usidcache.rswellknownsidcreatorowner
+msgid "Creator Owner"
+msgstr ""
+
+#: usidcache.rswellknownsidcreatorownerrights
+msgid "Creator Owner Rights"
+msgstr ""
+
+#: usidcache.rswellknownsidcreatorownerserver
+msgid "Creator Owner Server"
+msgstr ""
+
+#: usidcache.rswellknownsiddialup
+msgid "Dialup"
+msgstr ""
+
+#: usidcache.rswellknownsiddigestauthentication
+msgid "Digest Authentication"
+msgstr ""
+
+#: usidcache.rswellknownsidenterprisecontrollers
+msgid "Enterprise Controllers"
+msgstr ""
+
+#: usidcache.rswellknownsidiisuser
+msgid "Iis User"
+msgstr ""
+
+#: usidcache.rswellknownsidintegrityhigh
+msgid "Integrity High"
+msgstr ""
+
+#: usidcache.rswellknownsidintegritylow
+msgid "Integrity Low"
+msgstr ""
+
+#: usidcache.rswellknownsidintegritymedium
+msgid "Integrity Medium"
+msgstr ""
+
+#: usidcache.rswellknownsidintegritymediumplus
+msgid "Integrity Medium Plus"
+msgstr ""
+
+#: usidcache.rswellknownsidintegrityprotectedprocess
+msgid "Integrity Protected Process"
+msgstr ""
+
+#: usidcache.rswellknownsidintegritysecureprocess
+msgid "Integrity Secure Process"
+msgstr ""
+
+#: usidcache.rswellknownsidintegritysystem
+msgid "Integrity System"
+msgstr ""
+
+#: usidcache.rswellknownsidintegrityuntrusted
+msgid "Integrity Untrusted"
+msgstr ""
+
+#: usidcache.rswellknownsidinteractive
+msgid "Interactive"
+msgstr ""
+
+#: usidcache.rswellknownsidlocal
+msgid "Local"
+msgstr ""
+
+#: usidcache.rswellknownsidlocalaccount
+msgid "Local Account"
+msgstr ""
+
+#: usidcache.rswellknownsidlocalaccountandadministrator
+msgid "Local Account And Administrator"
+msgstr ""
+
+#: usidcache.rswellknownsidlocalservice
+msgid "Local Service"
+msgstr ""
+
+#: usidcache.rswellknownsidlocalsystem
+msgid "Local System"
+msgstr ""
+
+#: usidcache.rswellknownsidnetwork
+msgid "Network"
+msgstr ""
+
+#: usidcache.rswellknownsidnetworkservice
+msgid "Network Service"
+msgstr ""
+
+#: usidcache.rswellknownsidntauthority
+msgid "Nt Authority"
+msgstr ""
+
+#: usidcache.rswellknownsidntlmauthentication
+msgid "Ntlm Authentication"
+msgstr ""
+
+#: usidcache.rswellknownsidproxy
+msgid "Proxy"
+msgstr ""
+
+#: usidcache.rswellknownsidremotelogonid
+msgid "Remote Logon Id"
+msgstr ""
+
+#: usidcache.rswellknownsidrestrictedcode
+msgid "Restricted Code"
+msgstr ""
+
+#: usidcache.rswellknownsidschannelauthentication
+msgid "SChannel Authentication"
+msgstr ""
+
+#: usidcache.rswellknownsidself
+msgid "Self"
+msgstr ""
+
+#: usidcache.rswellknownsidservice
+msgid "Service"
+msgstr ""
+
+#: usidcache.rswellknownsidterminalserver
+msgid "Terminal Server"
+msgstr ""
+
+#: usidcache.rswellknownsidthisorganisation
+msgid "This Organisation"
+msgstr ""
+
+#: usidcache.rswellknownsidworld
+msgid "Everyone"
+msgstr ""
+

@@ -1,0 +1,42 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: uvisaddaces.rsace_flags
+msgid ""
+"Container Inherit (CI)\n"
+"Object Inherit (OI)\n"
+"No Propagate (NP)\n"
+"Inherit Only (E/S)"
+msgstr ""
+
+#: uvisaddaces.rsace_mask
+msgid ""
+"Full Control\n"
+"List Content\n"
+"Read (WP)\n"
+"Write (RP)\n"
+"Create Child (CC)\n"
+"Delete Child (DC)\n"
+"List Child (LC)\n"
+"List Object (be visible) (LO)\n"
+"Delete (SD)\n"
+"Delete Tree (DT)\n"
+"Read Security (RC)\n"
+"Write Security (WD)\n"
+"Write Owner (WO)\n"
+"Validated Write (SW)\n"
+"Control Access (CR)"
+msgstr ""
+
+#: uvisaddaces.rstitleconfirmation
+msgid "Confirmation"
+msgstr ""
+
+#: uvisaddaces.rstitleldap
+msgid "LDAP Error"
+msgstr ""
+
+#: uvisaddaces.rstitlewarning
+msgid "Warning"
+msgstr ""
+

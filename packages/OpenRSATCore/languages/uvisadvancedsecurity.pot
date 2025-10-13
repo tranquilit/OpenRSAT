@@ -1,0 +1,63 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: uvisadvancedsecurity.rsallow
+msgid "Allow"
+msgstr ""
+
+#: uvisadvancedsecurity.rsand
+msgid "% and %"
+msgstr ""
+
+#: uvisadvancedsecurity.rsdeny
+msgid "Deny"
+msgstr ""
+
+#: uvisadvancedsecurity.rsflagalldescendants
+msgid "all descendants"
+msgstr ""
+
+#: uvisadvancedsecurity.rsflagdirectdesendants
+msgid "direct descendants"
+msgstr ""
+
+#: uvisadvancedsecurity.rsflagthisobject
+msgid "this object"
+msgstr ""
+
+#: uvisadvancedsecurity.rssafauditfailure
+msgid "Audit Failure"
+msgstr ""
+
+#: uvisadvancedsecurity.rssafauditsuccess
+msgid "Audit Success"
+msgstr ""
+
+#: uvisadvancedsecurity.rssafcontainerinherit
+msgid "Container Inherit"
+msgstr ""
+
+#: uvisadvancedsecurity.rssafinherited
+msgid "Inherited"
+msgstr ""
+
+#: uvisadvancedsecurity.rssafinheritonly
+msgid "Inherit Only"
+msgstr ""
+
+#: uvisadvancedsecurity.rssafnopropagate
+msgid "No Propagate"
+msgstr ""
+
+#: uvisadvancedsecurity.rssafobjectinherit
+msgid "Object Inherit"
+msgstr ""
+
+#: uvisadvancedsecurity.rssecaccessfullcontrol
+msgid "Full control"
+msgstr ""
+
+#: uvisadvancedsecurity.rssecaccesslistcontent
+msgid "List content"
+msgstr ""
+
