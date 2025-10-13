@@ -4499,6 +4499,12 @@ begin
 
   TSynLog.Add.Log(sllDebug, FormatUtf8('Open new view: %.', [AName]));
 
+  if (AName = '') then
+  begin
+    ShowMessage('Cannot open property with empty name.');
+    Exit;
+  end;
+
   if Exists(AName) then // Already exists
   begin
     Focus(ADistinguishedName);
