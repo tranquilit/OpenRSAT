@@ -58,10 +58,11 @@ type
     function Close: boolean;
   end;
 
-  function ShowLdapSearchError(Message: RawUtf8): TModalResult;
-  function ShowLdapModifyError(Message: RawUtf8): TModalResult;
-  function ShowLdapDeleteError(Message: RawUtf8): TModalResult;
-  function ShowLdapConnectError(Message: RawUtf8): TModalResult;
+  function ShowLdapSearchError(LdapClient: TLdapClient): TModalResult;
+  function ShowLdapModifyError(LdapClient: TLdapClient): TModalResult;
+  function ShowLdapDeleteError(LdapClient: TLdapClient): TModalResult;
+  function ShowLdapConnectError(LdapClient: TLdapClient): TModalResult;
+  function ShowLdapAddError(LdapClient: TLdapClient): TModalResult;
 
 implementation
 
@@ -71,27 +72,71 @@ uses
   mormot.core.rtti,
   ucommon;
 
-function ShowLdapSearchError(Message: RawUtf8): TModalResult;
+function GetLdapErrorCustomMessage(LdapClient: TLdapClient): RawUtf8;
 begin
-  result := MessageDlg(rsLdapError, FormatUtf8(rsLdapSearchFailed, [Message]), mtError, mbOKCancel, 0);
+  result := '';
+
+  case LdapClient.ResultError of
+
+    leInsufficientAccessRights: result := rsInsufficientAccessRights;
+    leConstraintViolation: result := rsConstraintViolation;
+  end;
+
+  if (result = '') then
+    result := LdapClient.ResultString;
 end;
 
-function ShowLdapModifyError(Message: RawUtf8): TModalResult;
+function ShowLdapError(Message: RawUtf8): TModalResult;
 begin
-  result := MessageDlg(rsLdapError, FormatUtf8(rsLdapModifyFailed, [Message]), mtError, mbOKCancel, 0);
+  result := MessageDlg(rsLdapError, Message, mtError, mbOKCancel, 0);
 end;
 
-function ShowLdapDeleteError(Message: RawUtf8): TModalResult;
+function ShowLdapSearchError(LdapClient: TLdapClient): TModalResult;
+var
+  Message: RawUtf8;
 begin
-  result := MessageDlg(rsLdapError, FormatUtf8(rsLdapDeleteFailed, [Message]), mtError, mbOKCancel, 0);
+  Message := GetLdapErrorCustomMessage(LdapClient);
+
+  result := ShowLdapError(FormatUtf8(rsLdapSearchFailed, [Message]));
 end;
 
-function ShowLdapConnectError(Message: RawUtf8): TModalResult;
+function ShowLdapModifyError(LdapClient: TLdapClient): TModalResult;
+var
+  Message: RawUtf8;
 begin
+  Message := GetLdapErrorCustomMessage(LdapClient);
+
+  result := ShowLdapError(FormatUtf8(rsLdapModifyFailed, [Message]));
+end;
+
+function ShowLdapDeleteError(LdapClient: TLdapClient): TModalResult;
+var
+  Message: RawUtf8;
+begin
+  Message := GetLdapErrorCustomMessage(LdapClient);
+
+  result := ShowLdapError(FormatUtf8(rsLdapDeleteFailed, [Message]));
+end;
+
+function ShowLdapConnectError(LdapClient: TLdapClient): TModalResult;
+var
+  Message: RawUtf8;
+begin
+  Message := GetLdapErrorCustomMessage(LdapClient);
+
   if String(Message).ToLower.Contains('52e') then
-    result := MessageDlg(rsLdapError, FormatUtf8(rsLdapConnectFailed, ['Invalid credentials']), mtError, mbOKCancel, 0)
-  else
-    result := MessageDlg(rsLdapError, FormatUtf8(rsLdapConnectFailed, [Message]), mtError, mbOKCancel, 0);
+    Message := 'Invalid credentials.';
+
+  result := ShowLdapError(FormatUtf8(rsLdapConnectFailed, [Message]));
+end;
+
+function ShowLdapAddError(LdapClient: TLdapClient): TModalResult;
+var
+  Message: RawUtf8;
+begin
+  Message := GetLdapErrorCustomMessage(LdapClient);
+
+  result := ShowLdapError(FormatUtf8(rsLdapAddFailed, [Message]));
 end;
 
 { TRsatLdapClient }

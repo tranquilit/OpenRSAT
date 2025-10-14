@@ -58,6 +58,7 @@ uses
   uOmniselect,
   ucommon,
   ucoredatamodule,
+  ursatldapclient,
   uvisnewobject;
 {$R *.lfm}
 
@@ -108,7 +109,7 @@ begin
   Attr := (owner as TVisNewObject).Ldap.SearchObject(atObjectSid, DNarr[0], '');
   if not Assigned(Attr) then
   begin
-    Dialogs.MessageDlg(rsLdapError, (owner as TVisNewObject).Ldap.ResultString, mtError, [mbOK], 0);
+    ShowLdapSearchError((owner as TVisNewObject).Ldap);
     Exit;
   end;
   Edit_UserOrGroup.Text := DNarr[0];
@@ -156,7 +157,7 @@ begin
     DN := FormatUtf8('CN=%,%', [Edit_ComputerName.Text, VisNewObject.ObjectOU]);
     if not VisNewObject.Ldap.Add(DN, Attr) then
     begin
-      Dialogs.MessageDlg(rsLdapError, FormatUtf8(rsLdapAddFailed, [VisNewObject.Ldap.ResultString]), mtError, [mbOK], 0);
+      ShowLdapAddError(VisNewObject.Ldap);
       Exit;
     end;
   finally
@@ -173,7 +174,7 @@ begin
   Att := VisNewObject.Ldap.SearchObject(atNTSecurityDescriptor, DN, '');
   if not Assigned(Att) then
   begin
-    Dialogs.MessageDlg(rsLdapError, VisNewObject.Ldap.ResultString, mtError, [mbOK], 0);
+    ShowLdapSearchError(VisNewObject.Ldap);
     Exit;
   end;
 
@@ -197,7 +198,7 @@ begin
 
   if not VisNewObject.Ldap.Modify(DN, lmoReplace, atNTSecurityDescriptor, SecDesc.ToBinary()) then
   begin
-    Dialogs.MessageDlg(rsLdapError, VisNewObject.Ldap.ResultString, mtError, [mbOK], 0);
+    ShowLdapModifyError(VisNewObject.Ldap);
     Exit;
   end;
 

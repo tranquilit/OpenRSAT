@@ -174,8 +174,8 @@ begin
     begin
       Screen.Cursor := crDefault;
       if Assigned(fLog) then
-        fLog.Log(sllError, 'Ldap connection failed: %', [LdapClient.ResultString]);
-      ShowLdapConnectError(LdapClient.ResultString);
+        fLog.Log(sllError, 'Ldap connection failed: %', [LdapClient]);
+      ShowLdapConnectError(LdapClient);
       Action_LdapOptions.Execute();
       Exit;
     end;

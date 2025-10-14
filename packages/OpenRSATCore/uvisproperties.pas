@@ -1056,7 +1056,7 @@ begin
   res := Ldap.SearchObject(Ldap.DefaultDN(fBaseDN), '', ['objectSid']);
   if res = nil then
   begin
-    ShowLdapSearchError(Ldap.ResultString);
+    ShowLdapSearchError(Ldap);
     Exit;
   end;
   res.CopyObjectSid(DomainSID);
@@ -1069,7 +1069,7 @@ begin
   res := Ldap.SearchObject(Ldap.DefaultDN(fBaseDN), filter, ['distinguishedName'], lssWholeSubtree);
   if res = nil then
   begin
-    ShowLdapSearchError(Ldap.ResultString);
+    ShowLdapSearchError(Ldap);
     Exit;
   end;
   result := res.Attributes.GetByName('distinguishedName');
@@ -1157,7 +1157,7 @@ begin
     Ldap.SearchScope := lssWholeSubtree;
     if not Ldap.Search(SitesDN, False, filter, ['serverReference']) then
     begin
-      ShowLdapSearchError(Ldap.ResultString);
+      ShowLdapSearchError(Ldap);
       Exit;
     end;
     // Find Server
@@ -1230,7 +1230,7 @@ begin
     repeat
       if not Ldap.Search(Format('CN=Subnets,CN=Sites,%s', [Ldap.ConfigDN]), False, Format('(siteObject=%s)', [DistinguishedName]), ['cn']) then
       begin
-        ShowLdapSearchError(Ldap.ResultString);
+        ShowLdapSearchError(Ldap);
         Exit;
       end;
 
@@ -1264,7 +1264,7 @@ begin
     repeat
       if not Ldap.Search(Format('CN=Sites,%s', [Ldap.ConfigDN]), False, '(objectClass=site)', ['name', 'distinguishedName']) then
       begin
-        ShowLdapSearchError(Ldap.ResultString);
+        ShowLdapSearchError(Ldap);
         Exit;
       end;
 
@@ -1330,7 +1330,7 @@ begin
     repeat
       if not Ldap.Search(Join(['CN=Partitions,', Ldap.ConfigDN()]), False, '(nETBIOSName=*)', ['dnsRoot']) then
       begin
-        ShowLdapSearchError(Ldap.ResultString);
+        ShowLdapSearchError(Ldap);
         Exit;
       end;
 
@@ -1484,7 +1484,7 @@ begin
       repeat
         if not Ldap.Search(Ldap.DefaultDN(), False, filter, ['name']) then
         begin
-          ShowLdapSearchError(Ldap.ResultString);
+          ShowLdapSearchError(Ldap);
           Exit;
         end;
 
@@ -1618,7 +1618,7 @@ begin
   ]);
   if not Assigned(res) then
   begin
-    ShowLdapSearchError(Ldap.ResultString);
+    ShowLdapSearchError(Ldap);
     Exit;
   end;
   Sid := res.Attributes.Find(atObjectSid).GetRaw();
@@ -1679,7 +1679,7 @@ begin
     data := Ldap.SearchObject(atNTSecurityDescriptor, GetParentDN(DistinguishedName), '');
     if not Assigned(data) then
     begin
-      ShowLdapSearchError(Ldap.ResultString);
+      ShowLdapSearchError(Ldap);
       Exit;
     end;
 
@@ -1724,7 +1724,7 @@ begin
     repeat
       if not Ldap.Search(DistinguishedName, False, 'objectClass=msFVE-RecoveryInformation', ['cn', 'msFVE-RecoveryPassword']) then
       begin
-        ShowLdapSearchError(Ldap.ResultString);
+        ShowLdapSearchError(Ldap);
         Exit;
       end;
       TisGrid1.BeginUpdate;
@@ -1763,7 +1763,7 @@ begin
   res := Ldap.SearchObject(DistinguishedName, '', ['msLAPS-Password', 'ms-Mcs-AdmPwd', 'msLAPS-PasswordExpirationTime', 'ms-Mcs-AdmPwdExpirationTime']);
   if not Assigned(res) then
   begin
-    ShowLdapSearchError(Ldap.ResultString);
+    ShowLdapSearchError(Ldap);
     Exit;
   end;
   expirationTime := res.Find('msLAPS-PasswordExpirationTime');
@@ -2053,7 +2053,7 @@ begin
   Ldap.SearchRangeEnd;
   if not Assigned(res) then
   begin
-    ShowLdapSearchError(Ldap.ResultString);
+    ShowLdapSearchError(Ldap);
     Close();
     Exit;
   end;
@@ -3019,7 +3019,7 @@ begin
   attr := Ldap.SearchObject(atName, DNarr[0], '');
   if not Assigned(attr) then
   begin
-    ShowLdapSearchError(Ldap.ResultString);
+    ShowLdapSearchError(Ldap);
     Close();
     Exit;
   end;
@@ -3302,7 +3302,7 @@ begin
     repeat
       if not Ldap.Search([atName, atObjectClass, atDistinguishedName], Filter, Ldap.DefaultDN(fBaseDN)) then // todo
       begin
-        ShowLdapSearchError(Ldap.ResultString);
+        ShowLdapSearchError(Ldap);
         Exit;
       end;
       // Fill TisGrid_mem
@@ -3451,7 +3451,7 @@ begin
       repeat
         if not Ldap.Search(Ldap.DefaultDN(), False, Filter, ['name', 'objectClass', 'distinguishedName']) then
         begin
-          ShowLdapSearchError(Ldap.ResultString);
+          ShowLdapSearchError(Ldap);
           Exit;
         end;
 
@@ -3709,7 +3709,7 @@ begin
   ]);
   if not Assigned(res) then
   begin
-    ShowLdapSearchError(Ldap.ResultString);
+    ShowLdapSearchError(Ldap);
     Close();
     Exit;
   end;
@@ -3879,7 +3879,7 @@ begin
   data := Ldap.SearchObject(atNTSecurityDescriptor, GetParentDN(DistinguishedName), '');
   if not Assigned(data) then
   begin
-    ShowLdapSearchError(Ldap.ResultString);
+    ShowLdapSearchError(Ldap);
     CheckBox_obj_protect.Checked := not CheckBox_obj_protect.Checked;
     Exit;
   end;
@@ -4012,7 +4012,7 @@ begin
       repeat
         if not Ldap.Search(Ldap.DefaultDN(), False, Filter, ['name', 'objectSid']) then
         begin
-          ShowLdapSearchError(Ldap.ResultString);
+          ShowLdapSearchError(Ldap);
           Exit;
         end;
 
@@ -4366,7 +4366,7 @@ procedure TVisProperties.Action_ApplyExecute(Sender: TObject); // Apply
       res := Ldap.SearchObject(group, '', ['member']);
       if not Assigned(res) then
       begin
-        ShowLdapSearchError(Ldap.ResultString);
+        ShowLdapSearchError(Ldap);
         result := False;
         Exit;
       end;
@@ -4381,7 +4381,7 @@ procedure TVisProperties.Action_ApplyExecute(Sender: TObject); // Apply
         AttDiff.Add(DistinguishedName);
         if not Ldap.Modify(group, modif, AttDiff) then
         begin
-          ShowLdapSearchError(Ldap.ResultString);
+          ShowLdapSearchError(Ldap);
           result := False;
           Exit;
         end;
@@ -4393,16 +4393,13 @@ procedure TVisProperties.Action_ApplyExecute(Sender: TObject); // Apply
 
   function ApplyDefault(item: TLdapAttribute; DiffType: TLdapModifyOp): Boolean;
   begin
-    result := True;
-
+    result := False;
     if not Ldap.Modify(DistinguishedName, DiffType, item) then
-    begin // Handle error
-      if Ldap.ResultCode = LDAP_RES_INSUFFICIENT_ACCESS_RIGHTS then
-        Dialogs.MessageDlg(rsLdapError, rsRights, mtError, [mbOK], 0)
-      else
-        Dialogs.MessageDlg(rsLdapError, Ldap.ResultString, mtError, [mbOK], 0);
-      result := False;
+    begin
+      ShowLdapModifyError(Ldap);
+      Exit;
     end;
+    result := True;
   end;
 
 var
@@ -4454,7 +4451,7 @@ begin
     res := Ldap.SearchObject(DistinguishedName, '', ['*']);
     if not Assigned(res) then
     begin
-      Dialogs.MessageDlg(rsLdapError, Ldap.ResultString, mtError, [mbOK], 0);
+      ShowLdapSearchError(Ldap);
       Close();
       Exit;
     end;

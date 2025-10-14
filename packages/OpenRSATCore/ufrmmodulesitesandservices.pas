@@ -160,6 +160,7 @@ uses
   math,
   mormot.core.text,
   ucommon,
+  ursatldapclient,
   uvisnewobject;
 
 {$R *.lfm}
@@ -359,7 +360,10 @@ var
           if (mResultNonLeaf <> mrYes) and (mResultNonLeaf <> mrYesToAll) then
             Exit;
           if not fCore.LdapClient.Delete((TreeView1.Selected as TADSSTreeNode).DistinguishedName, True) then
+          begin
+            ShowLdapDeleteError(fCore.LdapClient);
             Exit;
+          end;
         end;
       end;
     end;
@@ -572,7 +576,10 @@ begin
     Filter := '(&(!(objectClass=nTDSSiteSettings))(!(objectClass=nTDSConnection)))';
     repeat
       if not fCore.LdapClient.Search(Node.DistinguishedName, False, Filter, ['*']) then
+      begin
+        ShowLdapSearchError(fCore.LdapClient);
         Exit;
+      end;
 
       for SearchResult in fCore.LdapClient.SearchResult.Items do
       begin
@@ -682,7 +689,10 @@ begin
     Filter := '';
     repeat
       if not fCore.LdapClient.Search(Node.DistinguishedName, False, Filter, ['*']) then
-        continue;
+      begin
+        ShowLdapSearchError(fCore.LdapClient);
+        Exit;
+      end;
 
       for SearchResult in fCore.LdapClient.SearchResult.Items do
       begin
@@ -842,7 +852,10 @@ begin
     Filter := '(|(cn=Sites)(cn=Services))';
     repeat
       if not LdapClient.Search(LdapClient.ConfigDN, False, Filter, ['*']) then
+      begin
+        ShowLdapSearchError(LdapClient);
         Exit;
+      end;
       for SearchResult in LdapClient.SearchResult.Items do
       begin
         if not Assigned(SearchResult) then

@@ -44,6 +44,7 @@ uses
   mormot.net.ldap,
   // Rsat
   ucommon,
+  ursatldapclient,
   uvisnewobject;
 {$R *.lfm}
 
@@ -74,7 +75,7 @@ begin
     DN := FormatUtf8('CN=%,%', [Edit_Name.Text, VisNewObject.ObjectOU]);
     if not VisNewObject.Ldap.Add(DN, Attr) then
     begin
-      Dialogs.MessageDlg(rsLdapError, FormatUtf8(rsLdapAddFailed, [VisNewObject.Ldap.ResultString]), mtError, [mbOK], 0);
+      ShowLdapAddError(VisNewObject.Ldap);
       Exit;
     end;
   finally

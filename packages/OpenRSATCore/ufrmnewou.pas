@@ -41,9 +41,10 @@ uses
   mormot.core.text,
   mormot.net.ldap,
   // Rsat
-  uvisnewobject,
   ucommon,
-  ucoredatamodule;
+  ucoredatamodule,
+  ursatldapclient,
+  uvisnewobject;
 {$R *.lfm}
 
 { TFrmNewOU }
@@ -66,7 +67,7 @@ begin
     Att.Add('objectClass', 'top').Add('organizationalUnit');
     if not NewObject.Ldap.Add(DN, Att) then
     begin
-      Dialogs.MessageDlg(rsLdapError, FormatUtf8(rsLdapAddFailed, [NewObject.Ldap.ResultString]), mtError, [mbOK], 0);
+      ShowLdapAddError(NewObject.Ldap);
       Exit;
     end;
   finally
@@ -84,7 +85,7 @@ begin
   data := NewObject.Ldap.SearchObject(atNTSecurityDescriptor, DN, '');
   if not Assigned(data) then
   begin
-    Dialogs.MessageDlg(rsLdapError, (owner as TVisNewObject).Ldap.ResultString, mtError, [mbOK], 0);
+    ShowLdapSearchError(NewObject.Ldap);
     Exit;
   end;
   if not SecDesc.FromBinary(data.GetRaw()) then
@@ -98,7 +99,7 @@ begin
 
   if not NewObject.Ldap.Modify(DN, lmoReplace, atNTSecurityDescriptor, SecDesc.ToBinary()) then // Modify
   begin
-    Dialogs.MessageDlg(rsLdapError, NewObject.Ldap.ResultString, mtError, [mbOK], 0);
+    ShowLdapModifyError(NewObject.Ldap);
     Exit;
   end;
 

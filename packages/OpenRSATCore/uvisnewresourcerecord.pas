@@ -224,6 +224,7 @@ begin
       if not fLdapClient.Modify(DistinguishedName, lmoAdd, NewAttribute) then
       begin
         TSynLog.Add.Log(sllError, '% - Ldap Modify Error: %', [Self.Name, fLdapClient.ResultString]);
+        ShowLdapModifyError(fLdapClient);
         Exit;
       end;
     finally
@@ -242,6 +243,7 @@ begin
       if not fLdapClient.Add(DistinguishedName, NewAttributeList) then
       begin
         TSynLog.Add.Log(sllError, '% - Ldap Add Error: %', [Self.Name, fLdapClient.ResultString]);
+        ShowLdapAddError(fLdapClient);
         Exit;
       end;
     finally

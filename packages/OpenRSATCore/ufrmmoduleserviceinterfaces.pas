@@ -128,6 +128,7 @@ implementation
 uses
   mormot.core.variants,
   ucommon,
+  ursatldapclient,
   uvisnewobject;
 
 {$R *.lfm}
@@ -178,7 +179,10 @@ begin
     begin
       SearchResult := fCore.LdapClient.SearchObject(Context, '', ['description', 'distinguishedName', 'name', 'objectClass']);
       if not Assigned(SearchResult) then
+      begin
+        ShowLdapSearchError(fCore.LdapClient);
         continue;
+      end;
       NodeName := DNToCN(SearchResult.ObjectName);
       RootNode := (TreeView1.Items.Add(nil, NodeName) as TADSITreeNode);
       RootNode.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone);
@@ -267,6 +271,7 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, fCore.LdapClient.ResultString);
+      ShowLdapDeleteError(fCore.LdapClient);
       continue;
     end;
   end;
@@ -416,6 +421,7 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, fCore.LdapClient.ResultString]);
+        ShowLdapSearchError(fCore.LdapClient);
         Exit;
       end;
 
@@ -488,6 +494,7 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, fCore.LdapClient.ResultString]);
+        ShowLdapSearchError(fCore.LdapClient);
         Exit;
       end;
 
@@ -556,6 +563,7 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, '% - Ldap Search Object Error: "%"', [Self.Name, fCore.LdapClient.ResultString]);
+      ShowLdapSearchError(fCore.LdapClient);
       Exit;
     end;
 

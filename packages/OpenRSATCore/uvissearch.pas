@@ -116,9 +116,10 @@ uses
   mormot.core.data,
   mormot.core.log,
   mormot.core.text,
-  uvischangedn,
   ucommon,
-  ucoredatamodule;
+  ucoredatamodule,
+  ursatldapclient,
+  uvischangedn;
 {$R *.lfm}
 
 { TVisSearch }
@@ -147,7 +148,10 @@ begin
 
     repeat
       if not fModule.Core.LdapClient.Search(fModule.Core.LdapClient.DefaultDN(), False, '', ['lDAPDisplayName']) then
+      begin
+        ShowLdapSearchError(fModule.Core.LdapClient);
         Exit;
+      end;
 
       for SearchResult in fModule.Core.LdapClient.SearchResult.Items do
       begin
@@ -408,7 +412,7 @@ begin
     repeat
       if not fModule.Core.LdapClient.Search(Trim(Edit_Path.Text), False, Filter, Attributes) then
       begin
-        //LdapErrorMessage(Ldap, Ldap.Log);
+        ShowLdapSearchError(fModule.Core.LdapClient);
         Exit;
       end;
       for item in fModule.Core.LdapClient.SearchResult.Items do

@@ -75,6 +75,7 @@ uses
   mormot.core.text,
   mormot.core.unicode,
   ucoredatamodule,
+  ursatldapclient,
   ucommon;
 {$R *.lfm}
 
@@ -195,7 +196,7 @@ begin
     repeat
       if not fLdap.Search(fLdap.DefaultDN(fBaseDN), False, SearchFilter, ['name', 'objectClass', 'description', 'distinguishedName']) then
       begin
-        MessageDlg(rsLdapError, FormatUtf8(rsLdapSearchFailed, [fLdap.ResultString]), mtError, [mbOK], 0);
+        ShowLdapSearchError(fLdap);
         Exit;
       end;
       for item in fLdap.SearchResult.Items do

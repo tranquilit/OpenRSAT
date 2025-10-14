@@ -376,7 +376,7 @@ begin
 
     if not LdapClient.Add(DistinguishedName, AttributeList) then
     begin
-      ShowMessage(LdapClient.ResultString);
+      ShowLdapAddError(LdapClient);
       Exit;
     end;
   finally
@@ -414,7 +414,7 @@ begin
 
     if not LdapClient.Add(Format('DC=@,%s', [DistinguishedName]), AttributeList) then
     begin
-      ShowMessage(LdapClient.ResultString);
+      ShowLdapAddError(LdapClient);
       Exit;
     end;
   finally

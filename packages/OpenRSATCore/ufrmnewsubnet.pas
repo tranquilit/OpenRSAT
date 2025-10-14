@@ -57,14 +57,14 @@ type
 
 implementation
 uses
-  mormot.net.sock,
-  StrUtils,
-  uregexpr,
-  mormot.core.variants,
-  uvisnewobject,
-  ucommon,
   lclintf,
-  ucoredatamodule;
+  StrUtils,
+  mormot.net.sock,
+  mormot.core.variants,
+  ucommon,
+  ucoredatamodule,
+  ursatldapclient,
+  uvisnewobject;
 
 {$R *.lfm}
 
@@ -244,7 +244,10 @@ begin
 
     repeat
       if not fLdap.Search(Format('CN=Sites,%s', [fLdap.ConfigDN]), False, '(objectClass=site)', ['name', 'distinguishedName']) then
+      begin
+        ShowLdapSearchError(fLdap);
         Exit;
+      end;
 
       for SearchResult in fLdap.SearchResult.Items do
       begin
@@ -286,7 +289,10 @@ begin
       AttributeList.Add('siteObject', SelectedData^.S['distinguishedName']);
     end;
     if not fLdap.Add(DistinguishedName, AttributeList) then
+    begin
+      ShowLdapAddError(fLdap);
       Exit;
+    end;
   finally
     FreeAndNil(AttributeList);
   end;

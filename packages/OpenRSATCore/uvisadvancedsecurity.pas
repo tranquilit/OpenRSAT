@@ -275,10 +275,11 @@ implementation
 
 uses
   SysUtils,
-  uvisaddaces,
-  ucoredatamodule,
   mormot.core.data,
-  mormot.core.text;
+  mormot.core.text,
+  ucoredatamodule,
+  ursatldapclient,
+  uvisaddaces;
 
 {$R *.lfm}
 
@@ -318,7 +319,7 @@ begin
   Ldap.SearchScope := lssWholeSubtree;
   if not Ldap.Search(FormatUtf8('%,%', [CN_SCHEMA, Ldap.ConfigDN]), False, Filter, ['name', 'schemaIDGUID']) then
   begin
-    Dialogs.MessageDlg(rsLdapError, Ldap.ResultString, mtError, [mbOK], 0);
+    ShowLdapSearchError(Ldap);
     Exit;
   end;
   for res in Ldap.SearchResult.Items do
@@ -334,8 +335,8 @@ begin
     Filter += FormatUtf8('(rightsGuid=%)', [toSearch[i]]);
   Ldap.SearchScope := lssWholeSubtree;
   if not Ldap.Search(FormatUtf8('%,%', [CN_EXTENDED_RIGHTS, Ldap.ConfigDN]), False, Filter, ['name', 'rightsGuid']) then
-    begin
-    Dialogs.MessageDlg(rsLdapError, Ldap.ResultString, mtError, [mbOK], 0);
+  begin
+    ShowLdapSearchError(Ldap);
     Exit;
   end;
   for res in Ldap.SearchResult.Items do
@@ -373,7 +374,7 @@ begin
   Ldap.SearchScope := lssWholeSubtree;
   if not Ldap.Search([atNTSecurityDescriptor], Filter) then
   begin
-    Dialogs.MessageDlg(rsLdapError, Ldap.ResultString, mtError, [mbOK], 0);
+    ShowLdapSearchError(Ldap);
     Exit;
   end;
 
@@ -510,7 +511,7 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, '% - Ldap Modify Error: "%"', [Action_Apply.Caption, Ldap.ResultString]);
-      MessageDlg(rsLdapError, Ldap.ResultString, mtError, [mbOK], 0);
+      ShowLdapModifyError(Ldap);
       Exit;
     end;
   finally
@@ -521,6 +522,7 @@ begin
   begin
     if Assigned(fLog) then
       fLog.Log(sllError, '% - Ldap Search Object Error: "%"', [Action_Apply.Caption, Ldap.ResultString]);
+    ShowLdapSearchError(Ldap);
     Exit;
   end;
   SecurityDescriptor^.FromBinary(attr.GetRaw());
@@ -628,7 +630,7 @@ begin
         begin
           if Assigned(fLog) then
             fLog.Log(sllError, '% - Ldap Search Error: "%"', [Action_EditAce.Caption, Ldap.ResultString]);
-          MessageDlg(rsLdapError, Ldap.ResultString, mtError, [mbOK], 0);
+          ShowLdapSearchError(Ldap);
           Exit;
         end;
 
@@ -651,7 +653,7 @@ begin
         begin
           if Assigned(fLog) then
             fLog.Log(sllTrace, '% - Ldap Search Error: "%"', [Action_EditAce.Caption, Ldap.ResultString]);
-          MessageDlg(rsLdapError, Ldap.ResultString, mtError, [mbOK], 0);
+          ShowLdapSearchError(Ldap);
           Exit;
         end;
 
@@ -744,6 +746,7 @@ begin
   begin
     if Assigned(fLog) then
       fLog.Log(sllError, '% - Ldap Search Object Error: "%"', [Action_Restore.Caption, Ldap.ResultString]);
+    ShowLdapSearchError(Ldap);
     Exit;
   end;
 
@@ -769,6 +772,7 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, '% - Ldap Search Error: "%"', [Action_Restore.Caption, Ldap.ResultString]);
+        ShowLdapSearchError(Ldap);
         Exit;
       end;
 
@@ -996,7 +1000,7 @@ var
         begin
           if Assigned(fLog) then
             fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, Ldap.ResultString]);
-          MessageDlg(rsLdapError, FormatUtf8(rsLdapSearchFailed, [LdapClient.ResultString]), mtError, [mbOK], 0);
+          ShowLdapSearchError(LdapClient);
           Exit;
         end;
 
@@ -1020,7 +1024,7 @@ var
         begin
           if Assigned(fLog) then
             fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, Ldap.ResultString]);
-          MessageDlg(rsLdapError, FormatUtf8(rsLdapSearchFailed, [LdapClient.ResultString]), mtError, [mbOK], 0);
+          ShowLdapSearchError(LdapClient);
           Exit;
         end;
 
@@ -1154,7 +1158,7 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, Ldap.ResultString]);
-      MessageDlg(rsLdapError, FormatUtf8(rsLdapSearchFailed, [Ldap.ResultString]), mtError, [mbOK], 0);
+      ShowLdapSearchError(Ldap);
       Exit;
     end;
 

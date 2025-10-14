@@ -45,10 +45,11 @@ type
 
 implementation
 uses
-  uvisnewobject,
   mormot.core.variants,
+  ucommon,
   ucoredatamodule,
-  ucommon;
+  ursatldapclient,
+  uvisnewobject;
 
 {$R *.lfm}
 
@@ -68,7 +69,10 @@ begin
     Attribute.Add('site');
     DistinguishedName := Format('CN=%s,CN=Sites,%s', [LdapEscape(Edit1.Text), fLdap.ConfigDN]);
     if not fLdap.Add(DistinguishedName, AttributeList) then
+    begin
+      ShowLdapAddError(fLdap);
       Exit;
+    end;
   finally
     FreeAndNil(AttributeList);
   end;
@@ -79,7 +83,10 @@ begin
     Attribute := AttributeList.Add('objectClass', 'top');
     Attribute.Add('serversContainer');
     if not fLdap.Add(Format('CN=Servers,%s', [DistinguishedName]), AttributeList) then
+    begin
+      ShowLdapAddError(fLdap);
       Exit;
+    end;
   finally
     FreeAndNil(AttributeList);
   end;
@@ -91,7 +98,10 @@ begin
     Attribute.Add('applicationSiteSettings');
     Attribute.Add('nTDSSiteSettings');
     if not fLdap.Add(Format('CN=NTDS Site Settings,%s', [DistinguishedName]), AttributeList) then
+    begin
+      ShowLdapAddError(fLdap);
       Exit;
+    end;
   finally
     FreeAndNil(AttributeList);
   end;
@@ -102,7 +112,10 @@ begin
     NodeData := TisGrid1.GetNodeAsPDocVariantData(TisGrid1.GetFirstSelected);
     Attribute.Add(DistinguishedName);
     if not fLdap.Modify(NodeData^.S['distinguishedName'], lmoAdd, Attribute) then
+    begin
+      ShowLdapModifyError(fLdap);
       Exit;
+    end;
   finally
     FreeAndNil(Attribute);
   end;
@@ -142,7 +155,10 @@ begin
 
     repeat
       if not fLdap.Search(fLdap.ConfigDN, False, '(objectClass=siteLink)', ['name', 'distinguishedName']) then
+      begin
+        ShowLdapSearchError(fLdap);
         Exit;
+      end;
 
       for SearchResult in fLdap.SearchResult.Items do
       begin

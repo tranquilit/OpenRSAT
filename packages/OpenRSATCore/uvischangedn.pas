@@ -56,7 +56,8 @@ uses
   mormot.core.text,
   uaductreeview,
   ucoredatamodule,
-  ucommon;
+  ucommon,
+  ursatldapclient;
 {$R *.lfm}
 
 const
@@ -122,7 +123,7 @@ begin
       repeat
         if not fLdap.Search(NodeData.DistinguishedName, False, TreeViewLdapFilter, ['distinguishedName', 'objectClass']) then
         begin
-          //LdapErrorMessage(fLdap, fLdap.Log);
+          ShowLdapSearchError(fLdap);
           Exit;
         end;
 
@@ -190,7 +191,7 @@ begin
   res := fLdap.SearchObject(fLdap.DefaultDN(fBaseDN), '', ['distinguishedName', 'objectClass']);
   if not Assigned(res) then
   begin
-    MessageDlg(rsLdapError, fLdap.ResultString, mtError, [mbOK], 0);
+    ShowLdapSearchError(fLdap);
     Exit;
   end;
 

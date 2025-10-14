@@ -116,7 +116,8 @@ implementation
 
 uses
   mormot.core.data,
-  ucommon;
+  ucommon,
+  ursatldapclient;
 {$R *.lfm}
 
 { TVisAddACEs }
@@ -196,7 +197,10 @@ begin
     Ldap.SearchScope := lssSingleLevel;
     repeat
       if not Ldap.Search(FormatUtf8('%,%', [CN_EXTENDED_RIGHTS, Ldap.ConfigDN]), False, '', ['displayName', 'objectGUID']) then
+      begin
+        ShowLdapSearchError(Ldap);
         Exit;
+      end;
       for item in Ldap.SearchResult.Items do
       begin
         ComboBox_Property.Items.Add(item.Find('displayName').GetReadable());
@@ -258,7 +262,7 @@ begin
     Ldap.SearchScope := lssWholeSubtree;
     if not Ldap.Search(Ldap.DefaultDN(fBaseDN), False, Filter, ['distinguishedName', 'objectSid']) then
     begin
-      MessageDlg(rsLdapError, Ldap.ResultString, mtError, [mbOK], 0);
+      ShowLdapSearchError(Ldap);
       Exit;
     end;
   finally
@@ -287,7 +291,7 @@ begin
     Ldap.SearchScope := lssWholeSubtree;
     if not Ldap.Search(FormatUtf8('CN=WellKnown Security Principals,%', [Ldap.ConfigDN()]), False, Filter, ['name', 'objectSid']) then
     begin
-      MessageDlg(rsLdapError, Ldap.ResultString, mtError, [mbOK], 0);
+      ShowLdapSearchError(Ldap);
       Exit;
     end;
   finally

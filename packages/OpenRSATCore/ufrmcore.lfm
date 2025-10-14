@@ -8,6 +8,7 @@ object FrmCore: TFrmCore
   ClientWidth = 441
   Constraints.MinHeight = 100
   Constraints.MinWidth = 300
+  LCLVersion = '4.1.0.0'
   TabOrder = 0
   DesignLeft = 2353
   DesignTop = 766
@@ -21,7 +22,6 @@ object FrmCore: TFrmCore
     OnChange = PageControl1Change
   end
   object ActionList_Core: TActionList
-    Images = CoreDataModule.ImageList1
     Left = 32
     Top = 24
     object Action_Options: TAction

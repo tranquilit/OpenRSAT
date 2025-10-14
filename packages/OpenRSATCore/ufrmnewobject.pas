@@ -41,6 +41,8 @@ type
   end;
 
 implementation
+uses
+  ursatldapclient;
 
 {$R *.lfm}
 
@@ -136,7 +138,10 @@ begin
 
     repeat
       if not fLdap.Search(Format('CN=Schema,%s', [fLdap.ConfigDN]), False, '', ['*']) then
+      begin
+        ShowLdapSearchError(fLdap);
         Exit;
+      end;
 
       for Item in fLdap.SearchResult.Items do
       begin

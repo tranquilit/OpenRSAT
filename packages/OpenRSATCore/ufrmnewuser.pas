@@ -79,8 +79,9 @@ uses
   mormot.net.ldap,
   // Rsat
   ucommon,
-  uvisnewobject,
-  ucoredatamodule;
+  ucoredatamodule,
+  ursatldapclient,
+  uvisnewobject;
 {$R *.lfm}
 
 { TFrmNewUser - private }
@@ -134,7 +135,7 @@ begin
     DN := FormatUtf8('CN=%,%', [Edit_FullName.Text, NewObject.ObjectOU]);
     if not NewObject.Ldap.Add(DN, AttList) then
     begin
-      Dialogs.MessageDlg(rsLdapError, FormatUtf8(rsLdapAddFailed, [NewObject.Ldap.ResultString]), mtError, [mbOK], 0);
+      ShowLdapAddError(NewObject.Ldap);
       Exit;
     end;
   finally
@@ -148,7 +149,7 @@ begin
     Att := NewObject.Ldap.SearchObject(atNTSecurityDescriptor, DN, '');
     if not Assigned(Att) then
     begin
-      Dialogs.MessageDlg(rsLdapError, NewObject.Ldap.ResultString, mtError, [mbOK], 0);
+      ShowLdapSearchError(NewObject.Ldap);
       Exit;
     end;
 
@@ -165,7 +166,7 @@ begin
 
     if not NewObject.Ldap.Modify(DN, lmoReplace, atNTSecurityDescriptor, SecDesc.ToBinary()) then
     begin
-      Dialogs.MessageDlg(rsLdapError, NewObject.Ldap.ResultString, mtError, [mbOK], 0);
+      ShowLdapModifyError(NewObject.Ldap);
       Exit;
     end;
   end;

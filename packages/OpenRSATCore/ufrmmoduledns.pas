@@ -465,7 +465,7 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, '% - Ldap Search Error: %', [Self.Name, fCore.LdapClient.ResultString]);
-        ShowLdapSearchError(fCore.LdapClient.ResultString);
+        ShowLdapSearchError(fCore.LdapClient);
         Exit;
       end;
 
@@ -553,7 +553,7 @@ var
           begin
             if Assigned(fLog) then
               fLog.Log(sllError, '% - Ldap Search Error: %', [Self.Name, fCore.LdapClient.ResultString]);
-            ShowLdapSearchError(fCore.LdapClient.ResultString);
+            ShowLdapSearchError(fCore.LdapClient);
             Exit;
           end;
         finally
@@ -779,7 +779,7 @@ var
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, '% - Ldap Search Error: %', [Action_Delete.Caption, fCore.LdapClient.ResultString]);
-        ShowLdapSearchError(fCore.LdapClient.ResultString);
+        ShowLdapSearchError(fCore.LdapClient);
         Exit;
       end;
 
@@ -801,7 +801,7 @@ var
           begin
             if Assigned(fLog) then
               fLog.Log(sllError, '% - Ldap Delete Error: %', [Action_Delete.Caption, fCore.LdapClient.ResultString]);
-            ShowLdapDeleteError(fCore.LdapClient.ResultString);
+            ShowLdapDeleteError(fCore.LdapClient);
             Exit;
           end;
         end
@@ -813,7 +813,7 @@ var
           begin
             if Assigned(fLog) then
               fLog.Log(sllError, '% - Ldap Modify Error: %', [Action_Delete.Caption, fCore.LdapClient.ResultString]);
-            ShowLdapModifyError(fCore.LdapClient.ResultString);
+            ShowLdapModifyError(fCore.LdapClient);
             Exit;
           end;
         end;

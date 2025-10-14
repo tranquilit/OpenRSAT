@@ -53,6 +53,9 @@ resourcestring
   rsLdapSearchFailed = 'Ldap search failed: "%"';
   rsLdapModifyFailed = 'Ldap modify failed: "%"';
 
+  rsInsufficientAccessRights = 'Insufficient rights access.';
+  rsConstraintViolation = 'The requests violates some constraint defined within the server.';
+
   rsACEpaadParent = 'A Deny Delete-Tree right will be added to the ACL of the parent of this object. Do you wish to continue?';
 
   rsDeleteConfirm = 'Are you sure you want to delete the following object: %';
@@ -274,7 +277,6 @@ resourcestring
   rsACECreateFailure = 'Failed to create ACE for object % in ACL.';
   rsTitleAdvancedSecurity = 'Advanced Security Settings for %';
   rsTitlePermissionsFor = 'Permissions for %';
-  rsRights = 'Insufficient rights access.';
 
   // Search Scope
   rsSearchScopeBaseObject = 'Base object';
@@ -420,10 +422,11 @@ procedure UnifyButtonsWidth(Butons: array of TControl; default: Integer = -1);
 implementation
 uses
   DateUtils,
+  Dialogs,
+  RegExpr,
   mormot.core.log,
   mormot.core.text,
-  RegExpr,
-  Dialogs;
+  ursatldapclient;
 
 function AceInDacl(Dacl: TSecAcl; Ace: TSecAce): Boolean;
 var
@@ -478,9 +481,16 @@ var
   sd: TSecurityDescriptor;
   pace: TSecAce;
   pDN: RawUtf8;
+  LdapObject: TLdapAttribute;
 begin
   pDN := GetParentDN(DN);
-  sd.FromBinary(Ldap.SearchObject(atNTSecurityDescriptor, pDN, '').GetRaw());
+  LdapObject := Ldap.SearchObject(atNTSecurityDescriptor, pDN, '');
+  if not Assigned(LdapObject) then
+  begin
+    ShowLdapSearchError(Ldap);
+    Exit;
+  end;
+  sd.FromBinary(LdapObject.GetRaw());
   for pace in sd.Dacl do
   begin
     if (TSecAceFlag.safInherited in Ace.Flags) and (AceIsEqual(ace, pace)) then
@@ -691,7 +701,7 @@ begin
     data := Ldap.SearchObject(atNTSecurityDescriptor, DN, '');
     if not Assigned(data) then
     begin
-      //Dialogs.MessageDlg(rsLdapError, Ldap.ResultString, mtError, [mbOK], 0);
+      ShowLdapSearchError(Ldap);
       Exit; // Failure
     end;
     if not SecDescParent.FromBinary(data.GetRaw()) then
@@ -715,7 +725,7 @@ begin
 
       if not Ldap.Modify(DN, lmoReplace, atNTSecurityDescriptor, SecDescParent.ToBinary()) then // Modify
       begin
-        //Dialogs.MessageDlg(rsLdapError, Ldap.ResultString, mtError, [mbOK], 0);
+        ShowLdapModifyError(Ldap);
         Exit; // Failure
       end;
     end;
@@ -774,7 +784,7 @@ begin
       Ldap.SearchScope := lssWholeSubtree;
       if not Ldap.Search([atNTSecurityDescriptor], filter) then
       begin
-        //LdapErrorMessage(Ldap, TSynLog);
+        ShowLdapSearchError(Ldap);
         Exit;
       end;
       for res in Ldap.SearchResult.Items do

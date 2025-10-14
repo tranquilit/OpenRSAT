@@ -72,6 +72,10 @@ msgstr ""
 msgid "Successfully connected to domain \"%\""
 msgstr ""
 
+#: ucommon.rsconstraintviolation
+msgid "The requests violates some constraint defined within the server."
+msgstr ""
+
 #: ucommon.rsdelegatecontrolfolder
 msgid "You chose to delegate control of objects in the following Active Directory folder:"
 msgstr ""
@@ -286,6 +290,11 @@ msgstr ""
 msgid "Delete selected rows"
 msgstr ""
 
+#: ucommon.rsinsufficientaccessrights
+msgctxt "ucommon.rsinsufficientaccessrights"
+msgid "Insufficient rights access."
+msgstr ""
+
 #: ucommon.rsldapaddfailed
 msgid "Ldap add failed: \"%\""
 msgstr ""
@@ -436,10 +445,6 @@ msgstr ""
 
 #: ucommon.rsrename
 msgid "Rename"
-msgstr ""
-
-#: ucommon.rsrights
-msgid "Insufficient rights access."
 msgstr ""
 
 #: ucommon.rssafauditfailure

@@ -197,7 +197,7 @@ begin
       fLdap.TlsContext^.IgnoreCertificateErrors := fLdap.Settings.AllowUnsafePasswordBind;
       if not fLdap.Connect() then
       begin
-        ShowLdapConnectError(fLdap.ResultString);
+        ShowLdapConnectError(fLdap);
         Exit;
       end;
       MessageDlg(rsTitleConnectSuccess, FormatUtf8(rsConnectSuccess, [fLdap.Settings.TargetUri]) + LineEnding +
