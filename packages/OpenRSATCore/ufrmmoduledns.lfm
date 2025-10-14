@@ -227,6 +227,7 @@ object FrmModuleDNS: TFrmModuleDNS
     object Action_NewHost: TAction
       Caption = 'New Host (A or AAAA)'
       ImageIndex = 7
+      OnExecute = Action_NewHostExecute
     end
     object Action_NewAlias: TAction
       Caption = 'New Alias (CNAME)'
@@ -270,21 +271,6 @@ object FrmModuleDNS: TFrmModuleDNS
     Top = 104
     object MenuItem10: TMenuItem
       Action = Action_NewZone
-    end
-    object MenuItem1: TMenuItem
-      Action = Action_NewHost
-    end
-    object MenuItem2: TMenuItem
-      Action = Action_NewAlias
-    end
-    object MenuItem3: TMenuItem
-      Action = Action_NewMailExchange
-    end
-    object MenuItem4: TMenuItem
-      Action = Action_NewDomain
-    end
-    object MenuItem5: TMenuItem
-      Action = Action_NewDelegation
     end
     object MenuItem6: TMenuItem
       Action = Action_OtherNewRecords

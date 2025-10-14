@@ -72,12 +72,7 @@ type
     Action_Refresh: TAction;
     ActionList_DNS: TActionList;
     Label1: TLabel;
-    MenuItem1: TMenuItem;
     MenuItem10: TMenuItem;
-    MenuItem2: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
-    MenuItem5: TMenuItem;
     MenuItem6: TMenuItem;
     MenuItem7: TMenuItem;
     MenuItem8: TMenuItem;
@@ -182,6 +177,7 @@ uses
   uvisselectnewrecordtype,
   ucommon,
   uvisnewzonewizard,
+  uvisnewresourcerecord,
   ursatldapclient,
   udns;
 
