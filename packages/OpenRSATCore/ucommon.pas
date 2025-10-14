@@ -53,8 +53,23 @@ resourcestring
   rsLdapSearchFailed = 'Ldap search failed: "%"';
   rsLdapModifyFailed = 'Ldap modify failed: "%"';
 
+  // https://ldap.com/ldap-result-code-reference-core-ldapv3-result-codes/#rc-constraintViolation
+  rsOperationsError = 'Operation occurs in a wrong order.'; // leOperationsError (1)
+  rsProtocolError = 'Malformed LDAP message. Unrecognized operation.'; // leProtocolError (2)
+  rsTimeLimitExceeded = 'The request time limit has been reached.'; // leTimeLimitExceeded (3)
+  rsSizeLimitExceeded = 'The result retrieved more objects than the server allowed.'; // leSizeLimitExceeded (4)
+  rsAuthMethodNotSupported = 'The server does not allow this kind of auth method.'; // leAuthMethodNotSupported (7)
+  rsStrongerAuthRequired = 'The server requires the client to authenticate with a stronger authentication.'; // leStrongerAuthRequired (8)
+  rsReferral = 'This should not be an error. Client should follow referral. Please try the action on a different server.'; // leReferral (9)
+  rsAdminLimitExceeded = '';
+  rsUnavailableCriticalExtension = '';
+  rsConfidentialityRequired = 'The server do not allow your operation, cause your connection is not secured enought.'; // leConfidentialityRequired (13)
+  rsSaslBindInProgress = 'The server is working on a bind request. Try again later.'; // leSaslBindInProgress (14)
+  rsNoSuchAttribute = 'The targeted attribute does not exist in the specified entry.'; // leNoSuchAttribute (16)
+  rsUndefinedAttributeType = 'The targeted attribute does not exist in the server schema.'; // leUndefinedAttributeType (17)
+  rsInappropriateMatching = 'The matching condition is not supported for this attributeType.'; // leInappropriateMatching (18)
+  rsConstraintViolation = 'The requests violates some constraint defined within the server.'; // leConstraintViolation (19)
   rsInsufficientAccessRights = 'Insufficient rights access.';
-  rsConstraintViolation = 'The requests violates some constraint defined within the server.';
 
   rsACEpaadParent = 'A Deny Delete-Tree right will be added to the ACL of the parent of this object. Do you wish to continue?';
 

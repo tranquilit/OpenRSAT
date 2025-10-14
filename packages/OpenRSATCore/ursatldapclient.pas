@@ -77,9 +77,22 @@ begin
   result := '';
 
   case LdapClient.ResultError of
-
-    leInsufficientAccessRights: result := rsInsufficientAccessRights;
+    leOperationsError: result := rsOperationsError;
+    leProtocolError: result := rsProtocolError;
+    leTimeLimitExceeded: result := rsTimeLimitExceeded;
+    leSizeLimitExceeded: result := rsSizeLimitExceeded;
+    leAuthMethodNotSupported: result := rsAuthMethodNotSupported;
+    leStrongerAuthRequired: result := rsStrongerAuthRequired;
+    leReferral: result := rsReferral;
+    //leAdminLimitExceeded: Result := rsAdminLimitExceeded;
+    //leUnavailableCriticalExtension: result := rsUnavailableCriticalExtension;
+    leConfidentalityRequired: result := rsConfidentialityRequired;
+    leSaslBindInProgress: result := rsSaslBindInProgress;
+    leNoSuchAttribute: result := rsNoSuchAttribute;
+    leUndefinedAttributeType: result := rsUndefinedAttributeType;
+    leInappropriateMatching: result := rsInappropriateMatching;
     leConstraintViolation: result := rsConstraintViolation;
+    leInsufficientAccessRights: result := rsInsufficientAccessRights;
   end;
 
   if (result = '') then

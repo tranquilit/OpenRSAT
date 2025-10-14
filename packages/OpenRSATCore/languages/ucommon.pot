@@ -56,6 +56,14 @@ msgstr ""
 msgid "Anonymous Connection"
 msgstr ""
 
+#: ucommon.rsauthmethodnotsupported
+msgid "The server does not allow this kind of auth method."
+msgstr ""
+
+#: ucommon.rsconfidentialityrequired
+msgid "The server do not allow your operation, cause your connection is not secured enought."
+msgstr ""
+
 #: ucommon.rsconfirmation
 msgid "Confirmation"
 msgstr ""
@@ -290,6 +298,10 @@ msgstr ""
 msgid "Delete selected rows"
 msgstr ""
 
+#: ucommon.rsinappropriatematching
+msgid "The matching condition is not supported for this attributeType."
+msgstr ""
+
 #: ucommon.rsinsufficientaccessrights
 msgctxt "ucommon.rsinsufficientaccessrights"
 msgid "Insufficient rights access."
@@ -443,6 +455,22 @@ msgstr ""
 msgid "The Password never expires."
 msgstr ""
 
+#: ucommon.rsnosuchattribute
+msgid "The targeted attribute does not exist in the specified entry."
+msgstr ""
+
+#: ucommon.rsoperationserror
+msgid "Operation occurs in a wrong order."
+msgstr ""
+
+#: ucommon.rsprotocolerror
+msgid "Malformed LDAP message. Unrecognized operation."
+msgstr ""
+
+#: ucommon.rsreferral
+msgid "This should not be an error. Client should follow referral. Please try the action on a different server."
+msgstr ""
+
 #: ucommon.rsrename
 msgid "Rename"
 msgstr ""
@@ -473,6 +501,10 @@ msgstr ""
 
 #: ucommon.rssafobjectinherit
 msgid "Object Inherit"
+msgstr ""
+
+#: ucommon.rssaslbindinprogress
+msgid "The server is working on a bind request. Try again later."
 msgstr ""
 
 #: ucommon.rssaturday
@@ -580,12 +612,24 @@ msgstr ""
 msgid "Single Time Editor"
 msgstr ""
 
+#: ucommon.rssizelimitexceeded
+msgid "The result retrieved more objects than the server allowed."
+msgstr ""
+
+#: ucommon.rsstrongerauthrequired
+msgid "The server requires the client to authenticate with a stronger authentication."
+msgstr ""
+
 #: ucommon.rssunday
 msgid "Sunday"
 msgstr ""
 
 #: ucommon.rsthursday
 msgid "Thursday"
+msgstr ""
+
+#: ucommon.rstimelimitexceeded
+msgid "The request time limit has been reached."
 msgstr ""
 
 #: ucommon.rstitleadvancedsecurity
@@ -638,6 +682,10 @@ msgstr ""
 
 #: ucommon.rsuacworkstation
 msgid "Workstation or server"
+msgstr ""
+
+#: ucommon.rsundefinedattributetype
+msgid "The targeted attribute does not exist in the server schema."
 msgstr ""
 
 #: ucommon.rsunsavedchangequit
