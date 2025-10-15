@@ -24,7 +24,7 @@ uses
   mormot.core.base,
   mormot.core.os,
   mormot.core.text,
-  mormot.lib.openssl11,
+  mormot.crypt.openssl,
   // Rsat
   uvisopenrsat,
   utranslation;
@@ -166,6 +166,8 @@ begin
     DeleteFile('heap.trc');
   SetHeapTraceOutput('heap.trc');
   {$ENDIF DEBUG}
+
+  RegisterOpenSsl;
 
   OnGetApplicationName := @GetApplicationName;
   Application.CreateForm(TVisOpenRSAT, VisOpenRSAT);

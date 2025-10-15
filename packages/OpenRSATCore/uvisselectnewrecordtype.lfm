@@ -1,7 +1,7 @@
 object VisSelectNewRecordType: TVisSelectNewRecordType
-  Left = 2349
+  Left = 431
   Height = 339
-  Top = 350
+  Top = 353
   Width = 304
   Caption = 'Resource Record Type'
   ClientHeight = 339

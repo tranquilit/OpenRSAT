@@ -1,7 +1,7 @@
 object VisNewResourceRecord: TVisNewResourceRecord
-  Left = 2006
+  Left = 89
   Height = 401
-  Top = 258
+  Top = 260
   Width = 404
   Caption = 'New Record Resource'
   ClientHeight = 401
@@ -404,8 +404,8 @@ object VisNewResourceRecord: TVisNewResourceRecord
     end
     object TS_PTR: TTabSheet
       Caption = 'Pointer (PTR)'
-      ClientHeight = 308
-      ClientWidth = 364
+      ClientHeight = 324
+      ClientWidth = 380
       TabVisible = False
       object Label_PTRHost: TLabel
         AnchorSideLeft.Control = TS_PTR
@@ -415,7 +415,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 15
         Top = 0
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         Caption = 'Host IP Address:'
         WordWrap = True
@@ -429,7 +429,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 23
         Top = 15
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         TabOrder = 0
       end
@@ -442,7 +442,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 15
         Top = 46
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Top = 8
         Caption = 'Fully qualified domain name (FQDN):'
@@ -457,7 +457,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 23
         Top = 61
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         Enabled = False
         ReadOnly = True
@@ -472,7 +472,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 15
         Top = 92
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Top = 8
         Caption = 'Host name:'
@@ -486,7 +486,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 23
         Top = 107
-        Width = 292
+        Width = 308
         Anchors = [akTop, akLeft, akRight]
         TabOrder = 2
       end
@@ -495,7 +495,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = TS_PTR
         AnchorSideRight.Side = asrBottom
-        Left = 300
+        Left = 316
         Height = 25
         Top = 106
         Width = 64
@@ -526,7 +526,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 18
         Height = 45
         Top = 162
-        Width = 346
+        Width = 362
         Anchors = [akTop, akLeft, akRight]
         Caption = 'Allow any authenticated user to update all DNS records with the same name. This setting applies only to DNS records for a new name.'
         WordWrap = True
@@ -534,8 +534,8 @@ object VisNewResourceRecord: TVisNewResourceRecord
     end
     object TS_MX: TTabSheet
       Caption = 'Mail Exchanger (MX)'
-      ClientHeight = 308
-      ClientWidth = 364
+      ClientHeight = 324
+      ClientWidth = 380
       TabVisible = False
       object Label_MXHost: TLabel
         AnchorSideLeft.Control = TS_MX
@@ -545,7 +545,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 15
         Top = 0
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         Caption = 'Host or child domain:'
         WordWrap = True
@@ -559,7 +559,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 23
         Top = 15
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         TabOrder = 0
       end
@@ -572,7 +572,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 45
         Top = 46
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Top = 8
         Caption = 'By default. DNS uses the parent domain name when creating a Mail Exchange record. You can specify a host or child name, but in most deployements, the above field is left blank.'
@@ -587,7 +587,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 15
         Top = 99
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Top = 8
         Caption = 'Fully qualified domain name (FQDN):'
@@ -602,7 +602,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 23
         Top = 114
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         TabOrder = 1
       end
@@ -615,7 +615,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 15
         Top = 145
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Top = 8
         Caption = 'Fully qualified domain name (FQDN) of mail server:'
@@ -629,7 +629,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 23
         Top = 160
-        Width = 292
+        Width = 308
         Anchors = [akTop, akLeft, akRight]
         TabOrder = 2
       end
@@ -639,7 +639,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = TS_MX
         AnchorSideRight.Side = asrBottom
-        Left = 300
+        Left = 316
         Height = 25
         Top = 159
         Width = 64
@@ -658,7 +658,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 15
         Top = 191
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Top = 8
         Caption = 'Mail server priority:'
@@ -673,7 +673,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 23
         Top = 206
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         NumbersOnly = True
         TabOrder = 4
@@ -682,8 +682,8 @@ object VisNewResourceRecord: TVisNewResourceRecord
     end
     object TS_SRV: TTabSheet
       Caption = 'Service Location (SRV)'
-      ClientHeight = 308
-      ClientWidth = 364
+      ClientHeight = 324
+      ClientWidth = 380
       TabVisible = False
       object Label1: TLabel
         AnchorSideLeft.Control = TS_SRV
@@ -773,7 +773,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 15
         Top = 186
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Top = 8
         Caption = 'Host offering this service:'
@@ -786,9 +786,9 @@ object VisNewResourceRecord: TVisNewResourceRecord
         AnchorSideRight.Control = TS_SRV
         AnchorSideRight.Side = asrBottom
         Left = 18
-        Height = 45
+        Height = 30
         Top = 256
-        Width = 346
+        Width = 362
         Anchors = [akTop, akLeft, akRight]
         Caption = 'Allow any authenticated user to update all DNS records with the same nam. This setting applies only to DNS records for a new name.'
         WordWrap = True
@@ -802,7 +802,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 100
         Height = 23
         Top = 0
-        Width = 264
+        Width = 280
         Anchors = [akTop, akLeft, akRight]
         Enabled = False
         ReadOnly = True
@@ -818,7 +818,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 100
         Height = 23
         Top = 31
-        Width = 264
+        Width = 280
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Top = 8
         ItemHeight = 15
@@ -846,7 +846,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 100
         Height = 23
         Top = 62
-        Width = 264
+        Width = 280
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Top = 8
         ItemHeight = 15
@@ -906,7 +906,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Left = 0
         Height = 23
         Top = 201
-        Width = 364
+        Width = 380
         Anchors = [akTop, akLeft, akRight]
         TabOrder = 6
       end

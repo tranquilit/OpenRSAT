@@ -52,6 +52,8 @@ type
     Action_Parent: TAction;
     Action_Refresh: TAction;
     ActionList1: TActionList;
+    Image1: TImage;
+    Image2: TImage;
     Label1: TLabel;
     MenuItem1: TMenuItem;
     Panel1: TPanel;
@@ -64,6 +66,7 @@ type
     TisGrid1: TTisGrid;
     TisGrid2: TTisGrid;
     ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
     ToolSeparator1: TToolButton;
     ToolButton_Property: TToolButton;
     ToolButton_NewObject: TToolButton;
@@ -128,6 +131,7 @@ implementation
 uses
   mormot.core.variants,
   ucommon,
+  uDarkStyleParams,
   ursatldapclient,
   uvisnewobject;
 
@@ -609,6 +613,11 @@ begin
 
   fCore.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
   fCore.LdapClient.RegisterObserverClose(@OnLdapClientClose);
+
+  {$IFDEF WINDOWS}
+  Image1.Visible := not IsDarkModeEnabled;
+  Image2.Visible := IsDarkModeEnabled;
+  {$ENDIF}
 end;
 
 function TFrmModuleADSI.GetModuleEnabled: Boolean;

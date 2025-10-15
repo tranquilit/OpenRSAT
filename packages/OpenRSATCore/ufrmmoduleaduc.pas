@@ -82,6 +82,8 @@ type
     Action_TaskSendMail: TAction;
     Action_TreeNewAll: TAction;
     Action_UsersAndComputers: TAction;
+    Image1: TImage;
+    Image2: TImage;
     MenuItem_NewSubnet: TMenuItem;
     MenuItem_NewUser: TMenuItem;
     MenuItem_NewSharedFolder: TMenuItem;
@@ -146,6 +148,7 @@ type
     Splitter1: TSplitter;
     GridADUC: TTisGrid;
     ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
     ToolButton_AddToGroup: TToolButton;
     ToolButton_Copy: TToolButton;
     ToolButton_Cut: TToolButton;
@@ -300,6 +303,7 @@ implementation
 uses
   dialogs,
   uvissearch,
+  uDarkStyleParams,
   uvisnewobject,
   uOmniselect,
   uvisdelegatecontrol,
@@ -2199,6 +2203,11 @@ begin
 
   fCore.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
   fCore.LdapClient.RegisterObserverClose(@OnLdapClientClose);
+
+  {$IFDEF WINDOWS}
+  Image1.Visible := not IsDarkModeEnabled;
+  Image2.Visible := IsDarkModeEnabled;
+  {$ENDIF}
 end;
 
 destructor TFrmModuleADUC.Destroy;

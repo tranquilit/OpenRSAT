@@ -59,6 +59,8 @@ type
     Action_Parent: TAction;
     Action_Refresh: TAction;
     ActionList1: TActionList;
+    Image1: TImage;
+    Image2: TImage;
     Label1: TLabel;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
@@ -78,6 +80,7 @@ type
     ToolButton4: TToolButton;
     ToolButton5: TToolButton;
     ToolButton6: TToolButton;
+    ToolButton7: TToolButton;
     TreeView1: TTreeView;
     {$push}{$warn 5024 off}
     procedure Action_DeleteExecute(Sender: TObject);
@@ -160,6 +163,7 @@ uses
   math,
   mormot.core.text,
   ucommon,
+  uDarkStyleParams,
   ursatldapclient,
   uvisnewobject;
 
@@ -955,6 +959,11 @@ begin
   fCore.LdapClient.RegisterObserverClose(@OnLdapClientClose);
 
   fOptions.RegisterObserver(@OnADSSOptionsChanged);
+
+  {$IFDEF WINDOWS}
+  Image1.Visible := not IsDarkModeEnabled;
+  Image2.Visible := IsDarkModeEnabled;
+  {$ENDIF}
 end;
 
 destructor TFrmModuleSitesAndServices.Destroy;

@@ -1,6 +1,7 @@
 {"version":1,"strings":[
 {"hash":106991073,"name":"tfrmmodulesitesandservices.toolbar1.caption","sourcebytes":[84,111,111,108,66,97,114,49],"value":"ToolBar1"},
 {"hash":160486422,"name":"tfrmmodulesitesandservices.toolbutton6.caption","sourcebytes":[84,111,111,108,66,117,116,116,111,110,54],"value":"ToolButton6"},
+{"hash":160486423,"name":"tfrmmodulesitesandservices.toolbutton7.caption","sourcebytes":[84,111,111,108,66,117,116,116,111,110,55],"value":"ToolButton7"},
 {"hash":346165,"name":"tfrmmodulesitesandservices.tisgrid1.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
 {"hash":376933,"name":"tfrmmodulesitesandservices.tisgrid1.header.columns[1].text","sourcebytes":[84,121,112,101],"value":"Type"},
 {"hash":156067838,"name":"tfrmmodulesitesandservices.tisgrid1.header.columns[2].text","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110],"value":"Description"},

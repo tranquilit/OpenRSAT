@@ -13,6 +13,7 @@
 {"hash":68758809,"name":"tfrmmoduledns.toolbutton_newalias.caption","sourcebytes":[78,101,119,32,65,108,105,97,115,32,40,67,78,65,77,69,41],"value":"New Alias (CNAME)"},
 {"hash":78740334,"name":"tfrmmoduledns.toolbutton_newdomain.caption","sourcebytes":[78,101,119,32,68,111,109,97,105,110],"value":"New Domain"},
 {"hash":151863760,"name":"tfrmmoduledns.toolbutton10.caption","sourcebytes":[84,111,111,108,66,117,116,116,111,110,49,48],"value":"ToolButton10"},
+{"hash":160486417,"name":"tfrmmoduledns.toolbutton1.caption","sourcebytes":[84,111,111,108,66,117,116,116,111,110,49],"value":"ToolButton1"},
 {"hash":81151187,"name":"tfrmmoduledns.label1.caption","sourcebytes":[84,111,116,97,108,32,58,32,48,32,101,108,101,109,101,110,116,115],"value":"Total : 0 elements"},
 {"hash":147653555,"name":"tfrmmoduledns.action_previous.caption","sourcebytes":[80,114,101,118,105,111,117,115],"value":"Previous"},
 {"hash":347380,"name":"tfrmmoduledns.action_next.caption","sourcebytes":[78,101,120,116],"value":"Next"},

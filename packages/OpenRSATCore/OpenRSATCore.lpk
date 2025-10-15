@@ -214,6 +214,7 @@
       </Item50>
       <Item51>
         <Filename Value="ufrmmoduleadssoptions.pas"/>
+        <UnitName Value="ufrmmoduleadssoptions"/>
       </Item51>
     </Files>
     <CompatibilityMode Value="True"/>
@@ -222,22 +223,25 @@
       <OutDir Value="languages"/>
       <EnableI18NForLFM Value="True"/>
     </i18n>
-    <RequiredPkgs Count="5">
+    <RequiredPkgs Count="6">
       <Item1>
-        <PackageName Value="DateTimeCtrlsDsgn"/>
+        <PackageName Value="MetaDarkStyle"/>
       </Item1>
       <Item2>
-        <PackageName Value="pltis_uicomponents"/>
+        <PackageName Value="DateTimeCtrlsDsgn"/>
       </Item2>
       <Item3>
-        <PackageName Value="LCL"/>
+        <PackageName Value="pltis_uicomponents"/>
       </Item3>
       <Item4>
-        <PackageName Value="mormot2"/>
+        <PackageName Value="LCL"/>
       </Item4>
       <Item5>
-        <PackageName Value="FCL"/>
+        <PackageName Value="mormot2"/>
       </Item5>
+      <Item6>
+        <PackageName Value="FCL"/>
+      </Item6>
     </RequiredPkgs>
     <UsageOptions>
       <UnitPath Value="$(PkgOutDir)"/>

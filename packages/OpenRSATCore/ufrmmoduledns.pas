@@ -66,6 +66,8 @@ type
     Action_Delete: TAction;
     Action_Refresh: TAction;
     ActionList_DNS: TActionList;
+    Image1: TImage;
+    Image2: TImage;
     Label1: TLabel;
     MenuItem10: TMenuItem;
     MenuItem6: TMenuItem;
@@ -79,6 +81,7 @@ type
     Timer_TreeChangeNode: TTimer;
     Timer_SearchInGrid: TTimer;
     ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
     ToolButton_Previous: TToolButton;
     ToolButton10: TToolButton;
     ToolButton_Delete: TToolButton;
@@ -171,6 +174,7 @@ uses
   mormot.core.text,
   uvisselectnewrecordtype,
   ucommon,
+  uDarkStyleParams,
   uvisnewzonewizard,
   uvisnewresourcerecord,
   ursatldapclient,
@@ -943,6 +947,12 @@ begin
 
   fCore.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
   fCore.LdapClient.RegisterObserverClose(@OnLdapClientClose);
+
+  {$IFDEF WINDOWS}
+  Image1.Visible := not IsDarkModeEnabled;
+  Image2.Visible := IsDarkModeEnabled;
+  {$ENDIF}
+
 end;
 
 destructor TFrmModuleDNS.Destroy;

@@ -37,10 +37,14 @@ type
     Edit_Server: TEdit;
     Edit_Username: TEdit;
     Edit_Password: TEdit;
+    Image1: TImage;
+    Image2: TImage;
     Label_Config: TLabel;
     Label_Server: TLabel;
     Label_Username: TLabel;
     Label_Password: TLabel;
+    Panel1: TPanel;
+    Panel2: TPanel;
     Panel_Bottom: TPanel;
     TisSearchEdit_Configs: TTisSearchEdit;
     procedure Action_EditConfigExecute(Sender: TObject);
@@ -64,6 +68,7 @@ uses
   mormot.core.text,
   mormot.core.rtti,
   tisinifiles,
+  uDarkStyleParams,
   uvisconnectoptions,
   ucoredatamodule,
   uresourcestring,
@@ -182,6 +187,7 @@ begin
   TisSearchEdit_Configs.ItemIndex := index;
   TisSearchEdit_ConfigsSelect(Sender);
   CheckBox_AutoConnect.Checked := fLdapConfigs.AutoConnect;
+
   //UnifyButtonsWidth([BitBtn_Cancel, BitBtn_OK]);
 end;
 
@@ -235,6 +241,10 @@ begin
   CheckBox_AutoConnect.Caption := rsAutoConnect;
   Action_Cancel.Caption := rsCancel;
   Action_OK.Caption := rsOK;
+  {$IFDEF WINDOWS}
+  Image1.Visible := not IsDarkModeEnabled;
+  Image2.Visible := IsDarkModeEnabled;
+  {$ENDIF}
 end;
 
 end.
