@@ -149,6 +149,11 @@ begin
   ChangeLang(lang);
 end;
 
+function GetApplicationName: String;
+begin
+  result := 'OpenRSAT';
+end;
+
 begin
   InitLoggingFromCommandLine;
   TSynLog.Add.Log(sllDebug, 'Logger Initialization');
@@ -162,6 +167,7 @@ begin
   SetHeapTraceOutput('heap.trc');
   {$ENDIF DEBUG}
 
+  OnGetApplicationName := @GetApplicationName;
   Application.CreateForm(TVisOpenRSAT, VisOpenRSAT);
   Application.Run();
 end.
