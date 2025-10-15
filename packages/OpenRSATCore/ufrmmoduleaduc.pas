@@ -2091,22 +2091,10 @@ end;
 function TFrmModuleADUC.GetFocusedObjectClass: RawUtf8;
 var
   Row: PDocVariantData;
-  NodeData: TADUCTreeNodeObject;
-begin
-  result := '';
 
-  if GridADUC.Focused then
-  begin
-    Row := GridADUC.FocusedRow;
-    if not Assigned(Row) or not Row^.Exists('objectClass') then
-    begin
-      if Assigned(fLog) then
-        fLog.Log(sllTrace, 'Not assigned Row in grid or no objectClass', Self);
-      Exit;
-    end;
-    Result := Row^.U['objectClass'];
-  end
-  else if TreeADUC.Focused then
+  function GetFocusedObjectClassInTree: RawUtf8;
+  var
+    NodeData: TADUCTreeNodeObject;
   begin
     if not Assigned(TreeADUC.Selected) then
     begin
@@ -2124,6 +2112,26 @@ begin
     end;
 
     result := NodeData.LastObjectClass;
+  end;
+
+begin
+  result := '';
+
+  if GridADUC.Focused then
+  begin
+    Row := GridADUC.FocusedRow;
+    if not Assigned(Row) or not Row^.Exists('objectClass') then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllTrace, 'Not assigned Row in grid or no objectClass', Self);
+      result := GetFocusedObjectClassInTree;
+    end
+    else
+      Result := Row^.U['objectClass'];
+  end
+  else if TreeADUC.Focused then
+  begin
+    result := GetFocusedObjectClassInTree;
   end
   else
   begin
