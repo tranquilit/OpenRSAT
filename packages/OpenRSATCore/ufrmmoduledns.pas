@@ -58,16 +58,11 @@ type
 
   TFrmModuleDNS = class(TFrameModule)
     Action_NewZone: TAction;
-    Action_NewMailExchange: TAction;
-    Action_NewDelegation: TAction;
     Action_OtherNewRecords: TAction;
     Action_Previous: TAction;
     Action_Next: TAction;
     Action_Parent: TAction;
     Action_Property: TAction;
-    Action_NewHost: TAction;
-    Action_NewAlias: TAction;
-    Action_NewDomain: TAction;
     Action_Delete: TAction;
     Action_Refresh: TAction;
     ActionList_DNS: TActionList;

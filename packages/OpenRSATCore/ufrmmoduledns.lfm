@@ -164,17 +164,20 @@ object FrmModuleDNS: TFrmModuleDNS
     object ToolButton_NewHost: TToolButton
       Left = 114
       Top = 2
-      Action = Action_NewHost
+      Caption = 'New Host (A or AAAA)'
+      ImageIndex = 7
     end
     object ToolButton_NewAlias: TToolButton
       Left = 138
       Top = 2
-      Action = Action_NewAlias
+      Caption = 'New Alias (CNAME)'
+      ImageIndex = 16
     end
     object ToolButton_NewDomain: TToolButton
       Left = 162
       Top = 2
-      Action = Action_NewDomain
+      Caption = 'New Domain'
+      ImageIndex = 9
     end
     object ToolButton10: TToolButton
       Left = 186
@@ -223,25 +226,6 @@ object FrmModuleDNS: TFrmModuleDNS
       Caption = 'Property'
       ImageIndex = 4
       OnExecute = Action_PropertyExecute
-    end
-    object Action_NewHost: TAction
-      Caption = 'New Host (A or AAAA)'
-      ImageIndex = 7
-      OnExecute = Action_NewHostExecute
-    end
-    object Action_NewAlias: TAction
-      Caption = 'New Alias (CNAME)'
-      ImageIndex = 16
-    end
-    object Action_NewMailExchange: TAction
-      Caption = 'New Mail Exchanger (MX)'
-    end
-    object Action_NewDomain: TAction
-      Caption = 'New Domain'
-      ImageIndex = 9
-    end
-    object Action_NewDelegation: TAction
-      Caption = 'New Delegation'
     end
     object Action_OtherNewRecords: TAction
       Caption = 'Other New Records'
