@@ -124,7 +124,6 @@ type
     MenuItem_Manage: TMenuItem;
     MenuItem_Find: TMenuItem;
     MenuItem_ChangePartition: TMenuItem;
-    MenuItem_: TMenuItem;
     MenuItem_AddToAGroup: TMenuItem;
     MenuItem_NameMapping: TMenuItem;
     MenuItem_DisableAccount: TMenuItem;
@@ -824,6 +823,8 @@ var
       Exit;
     SelectedText := NodeData.Find('name').GetReadable();
     DistinguishedName := NodeData.DistinguishedName;
+    if (SelectedText = '') and (DistinguishedName <> '') then
+      SelectedText := DNToCN(DistinguishedName);
   end;
 begin
   if Assigned(fLog) then
@@ -1365,7 +1366,6 @@ var
 begin
   VisibleItems := [
     MenuItem_DelegateControl,
-    MenuItem_,
     MenuItem_AddToAGroup,
     MenuItem_NameMapping,
     MenuItem_DisableAccount,

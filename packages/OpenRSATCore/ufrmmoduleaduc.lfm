@@ -450,9 +450,6 @@ object FrmModuleADUC: TFrmModuleADUC
     object MenuItem_ChangePartition: TMenuItem
       Action = Action_ChangePartition
     end
-    object MenuItem_: TMenuItem
-      Caption = 'MenuItem_'
-    end
     object MenuItem_AddToAGroup: TMenuItem
       Action = Action_TaskAddToAGroup
     end
