@@ -598,6 +598,7 @@ end;
 procedure TFrmModuleADSI.OnLdapClientClose(LdapClient: TLdapClient);
 begin
   TreeView1.Items.Clear;
+  TisGrid1.Clear;
 end;
 
 constructor TFrmModuleADSI.Create(TheOwner: TComponent; ACore: ICore);

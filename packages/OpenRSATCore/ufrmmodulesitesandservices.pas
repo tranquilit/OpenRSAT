@@ -885,6 +885,7 @@ end;
 procedure TFrmModuleSitesAndServices.OnLdapClientClose(LdapClient: TLdapClient);
 begin
   TreeView1.Items.Clear;
+  TisGrid1.Clear;
 end;
 
 procedure TFrmModuleSitesAndServices.OnADSSOptionsChanged(Options: TOptions);

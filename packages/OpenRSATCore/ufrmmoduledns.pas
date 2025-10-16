@@ -515,7 +515,7 @@ end;
 
 procedure TFrmModuleDNS.OnLdapClientClose(LdapClient: TLdapClient);
 begin
-
+  GridDNS.Clear;
 end;
 
 procedure TFrmModuleDNS.TreeDNSChange(Sender: TObject; Node: TTreeNode);

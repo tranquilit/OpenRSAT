@@ -2173,6 +2173,7 @@ begin
   try
     if Assigned(fADUCDomainNode) and fADUCDomainNode.HasChildren then
       fADUCDomainNode.DeleteChildren;
+    GridADUC.Clear;
     FreeAndNil(fADUCDomainNode);
   finally
     TreeADUC.EndUpdate;
