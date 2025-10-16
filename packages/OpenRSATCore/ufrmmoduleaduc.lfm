@@ -680,7 +680,7 @@ object FrmModuleADUC: TFrmModuleADUC
       Action = Action_TaskManage
     end
     object MenuItem_Find: TMenuItem
-      Caption = 'Find'
+      Action = Action_Search
     end
     object Separator2: TMenuItem
       Caption = '-'

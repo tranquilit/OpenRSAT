@@ -24,6 +24,7 @@ uses
   mormot.core.base,
   mormot.core.os,
   mormot.core.text,
+  mormot.lib.openssl11,
   mormot.crypt.openssl,
   // Rsat
   uvisopenrsat,
@@ -167,7 +168,11 @@ begin
   SetHeapTraceOutput('heap.trc');
   {$ENDIF DEBUG}
 
+  {$IFDEF DARWIN}
+  if not OpenSslInitialize(MakePath(['lib', 'libcrypto.dylib']), MakePath(['lib', 'libssl.dylib']), '') then
+    raise Exception.CreateFmt('Unable to load OpenSSL from %s', [MakePath(['lib', 'libssl.dylib'])]);
   RegisterOpenSsl;
+  {$ENDIF}
 
   OnGetApplicationName := @GetApplicationName;
   Application.CreateForm(TVisOpenRSAT, VisOpenRSAT);
