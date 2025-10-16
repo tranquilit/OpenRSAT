@@ -2207,6 +2207,9 @@ begin
   {$IFDEF WINDOWS}
   Image1.Visible := not IsDarkModeEnabled;
   Image2.Visible := IsDarkModeEnabled;
+  {$ELSE}
+  Image1.Visible := True;
+  Image2.Visible := False;
   {$ENDIF}
 end;
 

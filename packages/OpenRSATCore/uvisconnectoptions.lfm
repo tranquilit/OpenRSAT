@@ -1,7 +1,7 @@
 object VisConnectOptions: TVisConnectOptions
-  Left = -969
+  Left = 1070
   Height = 330
-  Top = 243
+  Top = 348
   Width = 530
   AutoSize = True
   BorderIcons = [biSystemMenu]
