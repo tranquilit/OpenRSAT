@@ -33,6 +33,11 @@ uses
 const
   LOG_TRC = LOG_NFO + [sllTrace];
 
+{$IFDEF DARWIN}
+var
+  AppPath: String;
+{$ENDIF}
+
 {$R *.res}
 
 function GetCmdParamsEx(LongName:String;ShortName:String='';DefaultValue:String=''):String;
@@ -169,8 +174,9 @@ begin
   {$ENDIF DEBUG}
 
   {$IFDEF DARWIN}
-  if not OpenSslInitialize(MakePath(['lib', 'libcrypto.dylib']), MakePath(['lib', 'libssl.dylib']), '') then
-    raise Exception.CreateFmt('Unable to load OpenSSL from %s', [MakePath(['lib', 'libssl.dylib'])]);
+  AppPath := ExtractFilePath(ParamStr(0));
+  if not OpenSslInitialize(MakePath([AppPath, 'lib', 'libcrypto.dylib']), MakePath([AppPath, 'lib', 'libssl.dylib']), '') then
+    raise Exception.CreateFmt('Unable to load OpenSSL from %s', [MakePath([AppPath, 'lib', 'libssl.dylib'])]);
   RegisterOpenSsl;
   {$ENDIF}
 
