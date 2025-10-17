@@ -90,9 +90,6 @@ type
     ToolButton4: TToolButton;
     ToolButton_Property: TToolButton;
     ToolButton6: TToolButton;
-    ToolButton_NewHost: TToolButton;
-    ToolButton_NewAlias: TToolButton;
-    ToolButton_NewDomain: TToolButton;
     TreeDNS: TTreeView;
     procedure Action_DeleteExecute(Sender: TObject);
     procedure Action_NewZoneExecute(Sender: TObject);

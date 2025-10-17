@@ -161,33 +161,15 @@ object FrmModuleDNS: TFrmModuleDNS
       Caption = 'ToolButton6'
       Style = tbsSeparator
     end
-    object ToolButton_NewHost: TToolButton
-      Left = 114
-      Top = 2
-      Caption = 'New Host (A or AAAA)'
-      ImageIndex = 7
-    end
-    object ToolButton_NewAlias: TToolButton
-      Left = 138
-      Top = 2
-      Caption = 'New Alias (CNAME)'
-      ImageIndex = 16
-    end
-    object ToolButton_NewDomain: TToolButton
-      Left = 162
-      Top = 2
-      Caption = 'New Domain'
-      ImageIndex = 9
-    end
     object ToolButton10: TToolButton
-      Left = 186
+      Left = 114
       Height = 24
       Top = 2
       Caption = 'ToolButton10'
       Style = tbsSeparator
     end
     object ToolButton_Delete: TToolButton
-      Left = 194
+      Left = 122
       Top = 2
       Action = Action_Delete
     end
@@ -196,7 +178,7 @@ object FrmModuleDNS: TFrmModuleDNS
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Control = ToolBar1
       AnchorSideBottom.Side = asrBottom
-      Left = 226
+      Left = 154
       Height = 22
       Top = 2
       Width = 90
@@ -310,7 +292,7 @@ object FrmModuleDNS: TFrmModuleDNS
       }
     end
     object ToolButton1: TToolButton
-      Left = 218
+      Left = 146
       Height = 24
       Top = 2
       Caption = 'ToolButton1'
@@ -321,7 +303,7 @@ object FrmModuleDNS: TFrmModuleDNS
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Control = ToolBar1
       AnchorSideBottom.Side = asrBottom
-      Left = 316
+      Left = 244
       Height = 22
       Top = 2
       Width = 90
