@@ -182,6 +182,8 @@ end;
 constructor TFrmNewUser.Create(TheOwner: TComponent);
 var
   OwnerNewObject: TVisNewObject absolute TheOwner;
+  SearchObject: TLdapResult;
+  Item: String;
 begin
   inherited Create(TheOwner);
 
@@ -194,9 +196,19 @@ begin
   OwnerNewObject.Image_Object.ImageIndex := Ord(ileADUser);
   OwnerNewObject.CallBack := @Load;
 
-  TisSearchEdit_UserLogonDomain.Items.Add('@' + DNToCN((TheOwner as TVisNewObject).Ldap.DefaultDN((TheOwner as TVisNewObject).BaseDN)));
+  TisSearchEdit_UserLogonDomain.Items.Add('@' + DNToCN((TheOwner as TVisNewObject).Ldap.DefaultDN));
+  if (TheOwner as TVisNewObject).Ldap.DefaultDN <> (TheOwner as TVisNewObject).Ldap.RootDN then
+    TisSearchEdit_UserLogonDomain.Items.Add('@' + DNToCN((TheOwner as TVisNewObject).Ldap.RootDN));
+
   TisSearchEdit_UserLogonDomain.ItemIndex := 0;
   Edit_nETBIOSDomain.Caption := (TheOwner as TVisNewObject).Ldap.NetbiosDN + '\';
+
+  SearchObject := (TheOwner as TVisNewObject).Ldap.SearchObject(FormatUtf8('CN=Partitions,%', [(TheOwner as TVisNewObject).Ldap.ConfigDN]), '', ['uPNSuffixes']);
+  if Assigned(SearchObject) then
+  begin
+    for Item in SearchObject.Find('uPNSuffixes').GetAllReadable do
+      TisSearchEdit_UserLogonDomain.Items.Add('@' + Item);
+  end;
 end;
 
 { TFrmNewUser - public }

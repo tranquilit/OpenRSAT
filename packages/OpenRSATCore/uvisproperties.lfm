@@ -27,7 +27,7 @@ object VisProperties: TVisProperties
     Height = 446
     Top = 8
     Width = 464
-    ActivePage = Tab_dnsRecords
+    ActivePage = Tab_Account
     Anchors = [akTop, akLeft, akRight, akBottom]
     AutoSize = True
     BorderSpacing.Left = 8
@@ -36,7 +36,7 @@ object VisProperties: TVisProperties
     BorderSpacing.Bottom = 8
     MultiLine = True
     Options = [nboMultiLine]
-    TabIndex = 26
+    TabIndex = 11
     TabOrder = 0
     OnChange = PageControlChange
     object Tab_DefaultGeneral: TTabSheet

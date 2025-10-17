@@ -1318,6 +1318,7 @@ var
   UAC, msDS_SET, AceSelf, AceWorld: Integer;
   SecDesc: TSecurityDescriptor;
   SearchResult: TLdapResult;
+  item: RawUtf8;
 begin
   Tab_Account.TabVisible := True;
 
@@ -1327,21 +1328,18 @@ begin
   try
     Ldap.SearchScope := lssWholeSubtree;
 
-    repeat
-      if not Ldap.Search(Join(['CN=Partitions,', Ldap.ConfigDN()]), False, '(nETBIOSName=*)', ['dnsRoot']) then
-      begin
-        ShowLdapSearchError(Ldap);
-        Exit;
-      end;
+    SearchResult := Ldap.SearchObject(FormatUtf8('CN=Partitions,%', [Ldap.ConfigDN]), '', ['uPNSuffixes']);
+    if not Assigned(SearchResult) then
+    begin
+      ShowLdapSearchError(Ldap);
+      Exit;
+    end;
 
-      for SearchResult in Ldap.SearchResult.Items do
-      begin
-        if not Assigned(SearchResult) then
-          continue;
-        ComboBox_acc_Domain.Items.Add('@' + SearchResult.Find('dnsRoot').GetReadable());
-      end;
-
-    until Ldap.SearchCookie = '';
+    ComboBox_acc_Domain.Items.Add('@' + DNToCN(Ldap.ConfigDN));
+    if (Ldap.ConfigDN <> Ldap.RootDN) then
+      ComboBox_acc_Domain.Items.Add('@' + DNToCN(Ldap.RootDN));
+    for item in SearchResult.Find('uPNSuffixes').GetAllReadable do
+      ComboBox_acc_Domain.Items.Add('@' + item);
   finally
     Ldap.SearchEnd;
     ComboBox_acc_Domain.Items.EndUpdate;
