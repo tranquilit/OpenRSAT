@@ -471,18 +471,19 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
     end
   end
   object PopupMenu1: TPopupMenu
+    OnPopup = PopupMenu1Popup
     Left = 256
     Top = 96
-    object MenuItem1: TMenuItem
+    object MenuItem_Refresh: TMenuItem
       Action = Action_Refresh
     end
-    object MenuItem2: TMenuItem
+    object MenuItem_NewSite: TMenuItem
       Action = Action_NewSite
     end
-    object MenuItem3: TMenuItem
+    object MenuItem_NewSubnet: TMenuItem
       Action = Action_NewSubnet
     end
-    object MenuItem4: TMenuItem
+    object MenuItem_Property: TMenuItem
       Action = Action_Property
     end
   end

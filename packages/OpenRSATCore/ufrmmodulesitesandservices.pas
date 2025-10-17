@@ -24,7 +24,7 @@ uses
   ufrmmoduleadssoptions,
   ucoredatamodule,
   uinterfacecore,
-  uinterfacemodule;
+  uinterfacemodule, Types;
 
 type
 
@@ -62,10 +62,10 @@ type
     Image1: TImage;
     Image2: TImage;
     Label1: TLabel;
-    MenuItem1: TMenuItem;
-    MenuItem2: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
+    MenuItem_Refresh: TMenuItem;
+    MenuItem_NewSite: TMenuItem;
+    MenuItem_NewSubnet: TMenuItem;
+    MenuItem_Property: TMenuItem;
     Panel1: TPanel;
     PopupMenu1: TPopupMenu;
     Splitter1: TSplitter;
@@ -93,6 +93,7 @@ type
     procedure Action_PropertyUpdate(Sender: TObject);
     procedure Action_RefreshExecute(Sender: TObject);
     procedure Action_RefreshUpdate(Sender: TObject);
+    procedure PopupMenu1Popup(Sender: TObject);
     procedure Timer_TreeChangeNodeTimer(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
     function TisGrid1CompareByRow(aSender: TTisGrid;
@@ -132,6 +133,10 @@ type
     procedure RestoreNodes(BackupData: PDocVariantData; RootNode: TADSSTreeNode);
     procedure BeginUpdate;
     procedure EndUpdate;
+
+    function GetSelectedObjects: TRawUtf8DynArray;
+    function GetFocusedObject(OnlyContainer: Boolean = False): RawUtf8;
+    function GetFocusedObjectClass: RawUtf8;
 
     procedure OnLdapClientConnect(LdapClient: TLdapClient);
     procedure OnLdapClientClose(LdapClient: TLdapClient);
@@ -290,6 +295,12 @@ end;
 procedure TFrmModuleSitesAndServices.Action_RefreshUpdate(Sender: TObject);
 begin
   Action_Refresh.Enabled := Assigned(fCore) and Assigned(fCore.LdapClient) and fCore.LdapClient.Connected;
+end;
+
+procedure TFrmModuleSitesAndServices.PopupMenu1Popup(Sender: TObject);
+begin
+  MenuItem_NewSite.Visible := (GetFocusedObjectClass = 'sitesContainer');
+  MenuItem_NewSubnet.Visible := (GetFocusedObjectClass = 'site');
 end;
 
 procedure TFrmModuleSitesAndServices.Timer_TreeChangeNodeTimer(Sender: TObject);
@@ -830,6 +841,172 @@ procedure TFrmModuleSitesAndServices.EndUpdate;
 begin
   TreeView1.EndUpdate;
   Dec(fUpdating);
+end;
+
+function TFrmModuleSitesAndServices.GetSelectedObjects: TRawUtf8DynArray;
+
+  function GetSelecteedObjectsInTree: TRawUtf8DynArray;
+  begin
+    if Assigned(fLog) then
+      fLog.Log(sllTrace, 'Focus on TreeView', Self);
+
+    if not Assigned(TreeView1.Selected) then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllTrace, 'No selected node.', Self);
+      Exit;
+    end;
+
+    Insert((TreeView1.Selected as TADSSTreeNode).DistinguishedName, result, 0);
+  end;
+
+  function GetSelecteedObjectsInGrid: TRawUtf8DynArray;
+  var
+    SelectedRows: TDocVariantData;
+    Count: Integer;
+    Row: PDocVariantData;
+  begin
+    if Assigned(fLog) then
+      fLog.Log(sllTrace, 'Focus on Grid', Self);
+    if (TisGrid1.SelectedCount <= 0) then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllTrace, 'No selected item', Self);
+      Exit;
+    end;
+
+    SelectedRows := TisGrid1.SelectedRows;
+    SetLength(result, SelectedRows.Count);
+
+    Count := 0;
+    for Row in SelectedRows.Objects do
+    begin
+      if not Assigned(Row) then
+        continue;
+
+       if Row^.Exists('distinguishedName') then
+       begin
+         Insert(Row^.U['distinguishedName'], result, Count);
+         Inc(Count);
+       end;
+    end;
+  end;
+begin
+  result := [];
+
+  if TisGrid1.Focused then
+  begin
+    result := GetSelecteedObjectsInGrid;
+    if (Length(result) = 0) then
+      result := GetSelecteedObjectsInTree;
+  end
+  else
+  if TreeView1.Focused then
+  begin
+    result := GetSelecteedObjectsInTree;
+  end
+  else
+    if Assigned(fLog) then
+      fLog.Log(sllWarning, 'Focus is not on grid nor tree.', Self);
+end;
+
+function TFrmModuleSitesAndServices.GetFocusedObject(OnlyContainer: Boolean
+  ): RawUtf8;
+var
+  ObjectClass: RawUtf8;
+
+  function GetFocusedObjectInGrid(var ObjectClass: RawUtf8): RawUtf8;
+  var
+    Row: PDocVariantData;
+  begin
+    Row := TisGrid1.FocusedRow;
+    if not Assigned(Row) or not Row^.Exists('distinguishedName') then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllTrace, 'No focused Row on Grid', Self);
+      Exit;
+    end;
+
+    result := Row^.U['distinguishedName'];
+    ObjectClass := Row^.U['objectClass'];
+  end;
+
+  function GetFocusedObjectInTree(var ObjectClass: RawUtf8): RawUtf8;
+  begin
+    if not Assigned(TreeView1.Selected) then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllTrace, 'No node selected on TreeView', Self);
+      Exit;
+    end;
+
+    result := (TreeView1.Selected as TADSSTreeNode).DistinguishedName;
+    ObjectClass := (TreeView1.Selected as TADSSTreeNode).ObjectType;
+  end;
+begin
+  result := '';
+
+  if TisGrid1.Focused then
+  begin
+    result := GetFocusedObjectInGrid(ObjectClass);
+    if (result = '') then // If no result, fallback to tree selection
+      result := GetFocusedObjectInTree(ObjectClass);
+  end
+  else if TreeView1.Focused then
+  begin
+    result := GetFocusedObjectInTree(ObjectClass);
+  end
+  else
+  begin
+    if Assigned(fLog) then
+      fLog.Log(sllWarning, 'Focus is not on grid nor tree.', Self);
+    Exit;
+  end;
+
+  if OnlyContainer and not IsContainer(ObjectClass) then
+    result := GetParentDN(result);
+end;
+
+function TFrmModuleSitesAndServices.GetFocusedObjectClass: RawUtf8;
+var
+  Row: PDocVariantData;
+
+  function GetFocusedObjectClassInTree: RawUtf8;
+  begin
+    if not Assigned(TreeView1.Selected) then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllTrace, 'No node selected', Self);
+      Exit;
+    end;
+
+    result := (TreeView1.Selected as TADSSTreeNode).ObjectType;
+  end;
+begin
+  result := '';
+
+  if TisGrid1.Focused then
+  begin
+    Row := TisGrid1.FocusedRow;
+    if not Assigned(Row) or not Row^.Exists('objectClass') then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllTrace, 'Not assigned Row in grid or no objectClass', Self);
+      result := GetFocusedObjectClassInTree;
+    end
+    else
+      Result := Row^.U['objectClass'];
+  end
+  else if TreeView1.Focused then
+  begin
+    result := GetFocusedObjectClassInTree;
+  end
+  else
+  begin
+    if Assigned(fLog) then
+      fLog.Log(sllWarning, 'Focus is not on grid nor tree.', Self);
+    Exit;
+  end;
 end;
 
 procedure TFrmModuleSitesAndServices.OnLdapClientConnect(LdapClient: TLdapClient

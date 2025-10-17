@@ -857,6 +857,7 @@ begin
   finally
     FreeAndNil(NewZone);
   end;
+  Action_Refresh.Execute;
 end;
 
 procedure TFrmModuleDNS.Action_NewZoneUpdate(Sender: TObject);
