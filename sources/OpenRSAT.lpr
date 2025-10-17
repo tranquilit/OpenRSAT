@@ -164,7 +164,6 @@ begin
   InitLoggingFromCommandLine;
   TSynLog.Add.Log(sllDebug, 'Logger Initialization');
   RequireDerivedFormResource := True;
-  Application.Scaled:=True;
   Application.Initialize;
 
   {$IFDEF DEBUG}
