@@ -18,6 +18,10 @@ Features are splitted in different modules:
 - Services and Interfaces: Overview of all objects in your AD.
 
 # Screenshots
+Overview of OpenRSAT:
+![](./assets/Screenshots/OpenRSAT%20-%20Overview.gif "OpenRSAT overview")
+Users and Computers of OpenRSAT:
+![](./assets/Screenshots/OpenRSAT%20-%20ADUC.gif "OpenRSAT Users and Computers")
 No screenshots yet, but work is in progress.
 
 # Get started
