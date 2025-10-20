@@ -3275,7 +3275,7 @@ begin
   begin
     for i := 0 to TisGrid_mem.Data.Count - 1 do
       Filter += FormatUtf8('(distinguishedName=%)', [LdapEscape(TisGrid_mem.Data._[i]^.U['distinguishedName'])]);
-    Filter := FormatUtf8('!(|%)', [Filter]);
+    Filter := FormatUtf8('(!(|%))', [Filter]);
   end;
   // Omniselect
   DNarr := [];
