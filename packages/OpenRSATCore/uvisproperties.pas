@@ -1319,6 +1319,7 @@ var
   SecDesc: TSecurityDescriptor;
   SearchResult: TLdapResult;
   item: RawUtf8;
+  UPNSplitted: TStringArray;
 begin
   Tab_Account.TabVisible := True;
 
@@ -1346,10 +1347,11 @@ begin
   end;
 
   UPN := GetAttributeIndex('userPrincipalName', 0, '@');
-  if UPN <> '@' then
+  UPNSplitted := UPN.Split('@');
+  if (UPN <> '@') and (Length(UPNSplitted) = 2) then
   begin
-    ComboBox_acc_Domain.ItemIndex := ComboBox_acc_Domain.Items.IndexOf('@' + UPN.Split(['@'])[1]);
-    Edit_acc_Name.Text := UPN.Split(['@'])[0];
+    ComboBox_acc_Domain.ItemIndex := ComboBox_acc_Domain.Items.IndexOf('@' + UPNSplitted[1]);
+    Edit_acc_Name.Text := UPNSplitted[0];
   end
   else
   begin
