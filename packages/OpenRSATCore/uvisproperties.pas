@@ -2361,6 +2361,8 @@ begin
 
   if index < 0 then
     index := Attributes.Items[at].Count + index;
+  if (index < 0) or (Index > Attributes.Items[at].Count - 1) then
+    Exit;
   result := Attributes.Items[at].GetRaw(index);
 end;
 
