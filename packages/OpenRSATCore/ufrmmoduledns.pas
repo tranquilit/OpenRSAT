@@ -74,6 +74,7 @@ type
     MenuItem7: TMenuItem;
     MenuItem8: TMenuItem;
     MenuItem9: TMenuItem;
+    Panel1: TPanel;
     PopupMenu_DNS: TPopupMenu;
     Separator1: TMenuItem;
     Splitter1: TSplitter;

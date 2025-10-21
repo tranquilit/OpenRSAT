@@ -1,7 +1,4 @@
 {"version":1,"strings":[
-{"hash":106991073,"name":"tfrmmodulesitesandservices.toolbar1.caption","sourcebytes":[84,111,111,108,66,97,114,49],"value":"ToolBar1"},
-{"hash":160486422,"name":"tfrmmodulesitesandservices.toolbutton6.caption","sourcebytes":[84,111,111,108,66,117,116,116,111,110,54],"value":"ToolButton6"},
-{"hash":160486423,"name":"tfrmmodulesitesandservices.toolbutton7.caption","sourcebytes":[84,111,111,108,66,117,116,116,111,110,55],"value":"ToolButton7"},
 {"hash":346165,"name":"tfrmmodulesitesandservices.tisgrid1.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
 {"hash":376933,"name":"tfrmmodulesitesandservices.tisgrid1.header.columns[1].text","sourcebytes":[84,121,112,101],"value":"Type"},
 {"hash":156067838,"name":"tfrmmodulesitesandservices.tisgrid1.header.columns[2].text","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110],"value":"Description"},
@@ -16,6 +13,10 @@
 {"hash":100003125,"name":"tfrmmodulesitesandservices.tisgrid1.header.columns[11].text","sourcebytes":[70,114,111,109,32,83,105,116,101],"value":"From Site"},
 {"hash":90721265,"name":"tfrmmodulesitesandservices.panel1.caption","sourcebytes":[80,97,110,101,108,49],"value":"Panel1"},
 {"hash":81151187,"name":"tfrmmodulesitesandservices.label1.caption","sourcebytes":[84,111,116,97,108,32,58,32,48,32,101,108,101,109,101,110,116,115],"value":"Total : 0 elements"},
+{"hash":90721266,"name":"tfrmmodulesitesandservices.panel2.caption","sourcebytes":[80,97,110,101,108,50],"value":"Panel2"},
+{"hash":106991073,"name":"tfrmmodulesitesandservices.toolbar1.caption","sourcebytes":[84,111,111,108,66,97,114,49],"value":"ToolBar1"},
+{"hash":160486422,"name":"tfrmmodulesitesandservices.toolbutton6.caption","sourcebytes":[84,111,111,108,66,117,116,116,111,110,54],"value":"ToolButton6"},
+{"hash":160486423,"name":"tfrmmodulesitesandservices.toolbutton7.caption","sourcebytes":[84,111,111,108,66,117,116,116,111,110,55],"value":"ToolButton7"},
 {"hash":146640072,"name":"tfrmmodulesitesandservices.action_refresh.caption","sourcebytes":[82,101,102,114,101,115,104],"value":"Refresh"},
 {"hash":63603987,"name":"tfrmmodulesitesandservices.action_previous.caption","sourcebytes":[65,99,116,105,111,110,95,80,114,101,118,105,111,117,115],"value":"Action_Previous"},
 {"hash":109438964,"name":"tfrmmodulesitesandservices.action_next.caption","sourcebytes":[65,99,116,105,111,110,95,78,101,120,116],"value":"Action_Next"},

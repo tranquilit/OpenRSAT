@@ -67,6 +67,7 @@ type
     MenuItem_NewSubnet: TMenuItem;
     MenuItem_Property: TMenuItem;
     Panel1: TPanel;
+    Panel2: TPanel;
     PopupMenu1: TPopupMenu;
     Splitter1: TSplitter;
     StatusBar1: TStatusBar;

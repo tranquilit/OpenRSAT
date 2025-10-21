@@ -136,6 +136,7 @@ type
     MenuItem_Refresh: TMenuItem;
     MenuItem_Properties: TMenuItem;
     MenuItem_New: TMenuItem;
+    Panel3: TPanel;
     PopupMenu1: TPopupMenu;
     Separator1: TMenuItem;
     Separator2: TMenuItem;
