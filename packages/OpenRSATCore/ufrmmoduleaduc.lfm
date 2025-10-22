@@ -10,7 +10,7 @@ object FrmModuleADUC: TFrmModuleADUC
   DesignLeft = 708
   DesignTop = 150
   object Splitter1: TSplitter
-    Left = 0
+    Left = 168
     Height = 349
     Top = 28
     Width = 5
@@ -108,7 +108,7 @@ object FrmModuleADUC: TFrmModuleADUC
       ButtonHeight = 24
       ButtonWidth = 24
       Caption = 'ToolBar1'
-      EdgeBorders = [ebLeft, ebTop]
+      EdgeBorders = [ebLeft, ebTop, ebRight]
       Images = CoreDataModule.ImageList1
       ImagesWidth = 18
       Indent = 0
@@ -471,7 +471,7 @@ object FrmModuleADUC: TFrmModuleADUC
     end
   end
   object TreeADUC: TTreeView
-    Left = 5
+    Left = 0
     Height = 345
     Top = 32
     Width = 168
