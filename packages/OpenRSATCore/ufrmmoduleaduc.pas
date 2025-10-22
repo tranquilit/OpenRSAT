@@ -941,27 +941,76 @@ procedure TFrmModuleADUC.Action_TaskAddToAGroupExecute(Sender: TObject);
 var
   DistinguishedName, SelectedDistinguishedName: String;
   selectedDistinguishedNameArray: TStringArray;
-  LdapObject: TLdapResult;
-  AttributeMember: TLdapAttribute;
 
-  procedure ModifyMembers;
+  // Create an attribute to add a member to a group.
+  // It does a modify ldap request with an Add operation.
+  // In case of error, it shows a message to the user.
+  procedure AddMemberToGroup(Member, Group: RawUtf8);
+  var
+    AttributeMember: TLdapAttribute;
   begin
-    AttributeMember.Add(DistinguishedName);
-    if not Core.LdapClient.Modify(SelectedDistinguishedName, lmoAdd, AttributeMember) then
-    begin
-      if Assigned(fLog) then
-        fLog.Log(sllError, '% - Ldap modify error: "%"', [Action_TaskAddToAGroup.Caption, Core.LdapClient.ResultString]);
-      ShowLdapModifyError(Core.LdapClient);
+    AttributeMember := TLdapAttribute.Create('member', atMember);
+    try
+      AttributeMember.Add(Member);
+
+      if not Core.LdapClient.Modify(Group, lmoAdd, AttributeMember) then
+      begin
+        if Assigned(fLog) then
+          fLog.Log(sllError, 'Ldap modify error: "%"', [Core.LdapClient.ResultString]);
+        ShowLdapModifyError(Core.LdapClient);
+      end;
+    finally
+      FreeAndNil(AttributeMember);
     end;
+  end;
+
+  // Search for groups that contains the focused object.
+  // If so, create a ldap filter to exclude those groups.
+  // It prevents the addition of a member in a group that already contains this member.
+  function ExclusionFilter(Member: RawUtf8): RawUtf8;
+  var
+    SearchResult: TLdapResult;
+    memberOf: RawUtf8;
+  begin
+    Result := '';
+    Core.LdapClient.SearchBegin();
+    try
+      Core.LdapClient.SearchScope := lssWholeSubtree;
+
+      repeat
+        if not Core.LdapClient.Search(Core.LdapClient.DefaultDN, False, FormatUtf8('(member=%)', [LdapEscape(Member)]), ['distinguishedName']) then
+        begin
+          if Assigned(fLog) then
+            fLog.Log(sllError, 'Ldap Search Error: "%"', [Core.LdapClient.ResultString]);
+          ShowLdapSearchError(Core.LdapClient);
+          Exit;
+        end;
+
+        for SearchResult in Core.LdapClient.SearchResult.Items do
+        begin
+          if not Assigned(SearchResult) then
+            continue;
+
+          memberOf := SearchResult.Find('distinguishedName').GetReadable();
+          Result := FormatUtf8('%(distinguishedName=%)', [Result, memberOf]);
+        end;
+      until Core.LdapClient.SearchCookie = '';
+    finally
+      Core.LdapClient.SearchEnd();
+    end;
+    if (Result <> '') then
+      Result := FormatUtf8('(!(|%))', [Result]);
   end;
 
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Execute', [Action_TaskAddToAGroup.Caption]);
 
+  // Retrieve Focused object distinguishedName
   DistinguishedName := GridADUC.FocusedRow^.S['distinguishedName'];
 
-  With TVisOmniselect.Create(Self, Core.LdapClient, ['group']) do
+  // Open the vis to let the user select groups
+  With TVisOmniselect.Create(Self, Core.LdapClient, ['group'], Core.LdapClient.DefaultDN, True, ExclusionFilter(DistinguishedName)) do
   try
     Caption := rsTitleSelectGroups;
     if (ShowModal <> mrOK) then
@@ -971,31 +1020,12 @@ begin
     Free;
   end;
 
+  // Add the member to the selected groups
   for SelectedDistinguishedName in selectedDistinguishedNameArray do
   begin
-    LdapObject := Core.LdapClient.SearchObject(SelectedDistinguishedName, '', ['member']);
-    if not Assigned(LdapObject) then
-    begin
-      if Assigned(fLog) then
-        fLog.Log(sllError, '% - Ldap search error: "%"', [Action_TaskAddToAGroup.Caption, Core.LdapClient.ResultString]);
-      ShowLdapSearchError(Core.LdapClient);
-      Exit;
-    end;
-
-    AttributeMember := LdapObject.Attributes.Find('member');
-    if not Assigned(AttributeMember) then
-    begin
-      AttributeMember := TLdapAttribute.Create('member', atMember);
-      try
-        ModifyMembers;
-      finally
-        FreeAndNil(AttributeMember);
-      end;
-    end
-    else
-    begin
-      ModifyMembers;
-    end;
+    if SelectedDistinguishedName = '' then
+      continue;
+    AddMemberToGroup(DistinguishedName, SelectedDistinguishedName);
   end;
 end;
 
