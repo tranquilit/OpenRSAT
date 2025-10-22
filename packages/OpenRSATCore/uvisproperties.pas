@@ -1336,8 +1336,8 @@ begin
       Exit;
     end;
 
-    ComboBox_acc_Domain.Items.Add('@' + DNToCN(Ldap.ConfigDN));
-    if (Ldap.ConfigDN <> Ldap.RootDN) then
+    ComboBox_acc_Domain.Items.Add('@' + DNToCN(Ldap.DefaultDN));
+    if (Ldap.DefaultDN <> Ldap.RootDN) then
       ComboBox_acc_Domain.Items.Add('@' + DNToCN(Ldap.RootDN));
     for item in SearchResult.Find('uPNSuffixes').GetAllReadable do
       ComboBox_acc_Domain.Items.Add('@' + item);
