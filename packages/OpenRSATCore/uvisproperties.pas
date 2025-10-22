@@ -4478,7 +4478,7 @@ end;
 
 procedure TVisProperties.Action_OKUpdate(Sender: TObject);
 begin
-  Action_OK.Enabled := Action_Apply.Enabled;
+  Action_OK.Enabled := True;
 end;
 
 { TVisPropertiesList }
