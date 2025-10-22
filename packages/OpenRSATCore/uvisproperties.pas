@@ -1553,6 +1553,23 @@ begin
 end;
 
 procedure TVisProperties.InitPanelMemberOf();
+
+  function GetPrimaryGroupName(PrimaryGroupDN: RawUtf8): RawUtf8;
+  var
+    Splitted, SplittedName: TStringArray;
+  begin
+    Result := '';
+
+    Splitted := String(PrimaryGroupDN).Split(',');
+    if not Assigned(Splitted) or (Length(Splitted) <= 0) then
+      Exit;
+
+    SplittedName := Splitted[0].Split('=');
+    if not Assigned(SplittedName) or (Length(SplittedName) <> 2) then
+      Exit;
+    Result := SplittedName[1];
+  end;
+
 begin
   Tab_MemberOf.TabVisible := True;
   PrimaryGroupDN := GetPrimaryGroupDN(Utf8ToInteger(GetAttributeIndex('primaryGroupID', 0, '-1'), -1));
@@ -1561,7 +1578,7 @@ begin
     Panel_mof_primaryGroup.Enabled := True;
     Panel_mof_noPrimaryGroup.Visible := False;
     Panel_mof_noPrimaryGroup.Enabled := False;
-    Edit_mof_primaryGroup.Text := PrimaryGroupDN.Split([','])[0].Split(['='])[1];
+    Edit_mof_primaryGroup.Text := GetPrimaryGroupName(PrimaryGroupDN);
     AddAttribute('memberOf', PrimaryGroupDN);
   end
   else
