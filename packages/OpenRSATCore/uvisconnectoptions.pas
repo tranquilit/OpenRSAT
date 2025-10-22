@@ -84,7 +84,8 @@ uses
   mormot.net.dns,
   mormot.net.sock,
   ursatldapclient,
-  ucommon;
+  ucommon,
+  uvisconnectiondetails;
 
 {$R *.lfm}
 
@@ -186,27 +187,25 @@ end;
 
 procedure TVisConnectOptions.Action_CheckExecute(Sender: TObject);
 var
-  fLdap: TLdapClient;
+  ALdap: TLdapClient;
   ASettings: TMLdapClientSettings;
+  vis: TVisConnectionDetails;
 begin
   ASettings := TMLdapClientSettings.Create();
   try
     GetSettings(ASettings);
-    fLdap := TLdapClient.Create(ASettings);
+    ALdap := TLdapClient.Create(ASettings);
     try
-      fLdap.TlsContext^.IgnoreCertificateErrors := fLdap.Settings.AllowUnsafePasswordBind;
-      if not fLdap.Connect() then
-      begin
-        ShowLdapConnectError(fLdap);
-        Exit;
+      ALdap.TlsContext^.IgnoreCertificateErrors := ALdap.Settings.AllowUnsafePasswordBind;
+      vis := TVisConnectionDetails.Create(Self, ALdap);
+      try
+        if not vis.ShouldClose then
+          vis.ShowModal;
+      finally
+        FreeAndNil(vis);
       end;
-      MessageDlg(rsTitleConnectSuccess, FormatUtf8(rsConnectSuccess, [fLdap.Settings.TargetUri]) + LineEnding +
-        FormatUtf8(rsConnectedOnDomainAs, [fLdap.BoundUser]) + LineEnding +
-        FormatUtf8(rsConnectedOnDomainWithDC, [fLdap.DefaultDN()]),
-      mtInformation, [mbOK], 0);
-      fLdap.Close;
     finally
-      FreeAndNil(fLdap);
+      FreeAndNil(ALdap);
     end;
   finally
     FreeAndNil(ASettings);

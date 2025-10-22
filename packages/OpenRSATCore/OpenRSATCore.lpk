@@ -11,7 +11,7 @@
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Files Count="51">
+    <Files Count="52">
       <Item1>
         <Filename Value="ursatldapclient.pas"/>
         <UnitName Value="ursatldapclient"/>
@@ -216,6 +216,10 @@
         <Filename Value="ufrmmoduleadssoptions.pas"/>
         <UnitName Value="ufrmmoduleadssoptions"/>
       </Item51>
+      <Item52>
+        <Filename Value="uvisconnectiondetails.pas"/>
+        <UnitName Value="uvisconnectiondetails"/>
+      </Item52>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>

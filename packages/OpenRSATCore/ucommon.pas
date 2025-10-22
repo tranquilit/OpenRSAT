@@ -46,6 +46,7 @@ resourcestring
   rsDelete = 'Delete';
   rsRename = 'Rename';
 
+  rsLdapSuccess = 'Ldap Success';
   rsLdapError = 'Ldap Error';
   rsLdapAddFailed = 'Ldap add failed: "%"';
   rsLdapDeleteFailed = 'Ldap delete failed: "%"';
@@ -259,7 +260,7 @@ resourcestring
   rsUseCurrentCreds = 'Current user credentials';
   rsTitleConnectOrBind = 'Connect or bind error.';
   rsTitleConnectSuccess = 'Successful connection';
-  rsConnectSuccess = 'Successfully connected to domain "%"';
+  rsConnectSuccess = 'Successfully connected to domain controller "%"';
   rsConnectedOnDomainAs = 'You are connected as "%".';
   rsConnectedOnDomainWithDC = 'The DC of this domain is "%".';
 

@@ -77,7 +77,7 @@ msgid "The DC of this domain is \"%\"."
 msgstr ""
 
 #: ucommon.rsconnectsuccess
-msgid "Successfully connected to domain \"%\""
+msgid "Successfully connected to domain controller \"%\""
 msgstr ""
 
 #: ucommon.rsconstraintviolation
@@ -335,6 +335,10 @@ msgstr ""
 
 #: ucommon.rsldapsearchfailed
 msgid "Ldap search failed: \"%\""
+msgstr ""
+
+#: ucommon.rsldapsuccess
+msgid "Ldap Success"
 msgstr ""
 
 #: ucommon.rsmoduleadsidisplayname
