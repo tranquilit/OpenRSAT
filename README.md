@@ -34,6 +34,7 @@ To use the tool, you need an access to an Active Directory. You can refer to the
 As the product is made by Tranquil IT, which provide WAPT to deploy software on machines in a domain, you can find the tool in a WAPT package in our store just [here](https://wapt.tranquil.it/store/fr/tis-openrsat).
 ### Binary
 The binaries are packaged manually from the WAPT packages. \
+You can download latest binary just [here](https://github.com/tranquilit/OpenRSAT/releases). \
 /!\\ On MacOS, you should run this command to remove the app from the quarantine: `xattr -dr com.apple.quarantine /Applications/OpenRSAT.app`. The reason is that the application has not yet been signed or notarized, either by Apple or Tranquil IT. \
 We'll also provide a workflow on github that will build new release.
 ### Build from source
