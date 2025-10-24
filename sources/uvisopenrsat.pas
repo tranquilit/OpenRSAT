@@ -195,6 +195,7 @@ begin
   MenuItem_FileOptions.Action := fFrmCore.Action_Options;
   MenuItem_AdvancedFeatures.Action := fFrmCore.Action_AdvancedFeatures;
   MakeFullyVisible();
+  Activate;
 
   fFrmCore.Timer_AutoConnect.Enabled := fFrmCore.LdapConfigs.AutoConnect;
   UpdateViewThemeButtons;
