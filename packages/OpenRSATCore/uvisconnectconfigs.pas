@@ -26,10 +26,13 @@ type
   { TFormConnectConfigs }
 
   TFormConnectConfigs = class(TForm)
+    Action_AddConfig: TAction;
+    Action_DeleteConfig: TAction;
     Action_OK: TAction;
     Action_Cancel: TAction;
     Action_EditConfig: TAction;
     ActionList1: TActionList;
+    BitBtn_DeleteConfig: TBitBtn;
     BitBtn_OK: TBitBtn;
     BitBtn_Cancel: TBitBtn;
     BitBtn_EditConfig: TBitBtn;
@@ -39,12 +42,15 @@ type
     Edit_Password: TEdit;
     Image1: TImage;
     Image2: TImage;
+    Label1: TLabel;
     Label_Config: TLabel;
     Label_Server: TLabel;
     Label_Username: TLabel;
     Label_Password: TLabel;
     Panel1: TPanel;
-    Panel2: TPanel;
+    Panel_Config: TPanel;
+    Panel_Image: TPanel;
+    Panel_Client: TPanel;
     Panel_Bottom: TPanel;
     TisSearchEdit_Configs: TTisSearchEdit;
     procedure Action_EditConfigExecute(Sender: TObject);
