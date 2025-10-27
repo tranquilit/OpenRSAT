@@ -1,0 +1,5 @@
+#!/bin/bash
+
+rm -f /usr/bin/OpenRSAT
+
+[ -f $(which update-desktop-database) ] && update-desktop-database

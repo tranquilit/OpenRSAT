@@ -1,0 +1,9 @@
+Package:	OpenRSAT
+Version:	VERSION
+Section:	base
+Priority:	optional
+Architecture:	amd64
+Depends:	bash,libgtk2.0-0
+Maintainer:	Tranquil-IT <packages@tranquil.it>
+Description:	OpenRSAT by Tranquil IT
+Homepage:	https://www.tranquil.it
