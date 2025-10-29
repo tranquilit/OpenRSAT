@@ -73,6 +73,7 @@ type
     fFrmCore: TFrmCore;
     fLog: TSynLog;
 
+    procedure RestoreOldConfig;
     procedure UpdateViewThemeButtons;
   public
     constructor Create(TheOwner: TComponent); override;
@@ -220,6 +221,27 @@ begin
   UpdateViewThemeButtons;
 end;
 
+procedure TVisOpenRSAT.RestoreOldConfig;
+var
+  Paths: TStringArray;
+  oldPath: TFileName;
+  newPath: String;
+begin
+  newPath := GetAppConfigDir(False);
+  Paths := newPath.Split(PathDelim);
+  if Paths[high(Paths)] = '' then
+    Delete(Paths, high(Paths), 1);
+  Paths[high(Paths)] := 'RsatConsole';
+  oldPath := String.Join(PathDelim, Paths);
+  oldPath := MakePath([oldPath]);
+  if DirectoryExists(oldPath) then
+  begin
+    oldPath := IncludeTrailingPathDelimiter(oldPath);
+    newPath := IncludeTrailingPathDelimiter(newPath);
+    RenameFile(oldPath, newPath);
+  end;
+end;
+
 procedure TVisOpenRSAT.UpdateViewThemeButtons;
 begin
   MenuItem_ViewThemeDark.Checked := fFrmCore.RsatOptions.Theme = tmDark;
@@ -228,10 +250,6 @@ begin
 end;
 
 constructor TVisOpenRSAT.Create(TheOwner: TComponent);
-var
-  Paths: TStringArray;
-  oldPath: TFileName;
-  newPath: String;
 begin
   inherited Create(TheOwner);
 
@@ -240,10 +258,12 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Create', [Self.Name]);
 
+  // Setup OpenRSATCore
   fFrmCore := TFrmCore.Create(Self);
   fFrmCore.Parent := Self;
   fFrmCore.Align := alClient;
 
+  // Setup theme for windows
   {$IFDEF WINDOWS}
   if fFrmCore.RsatOptions.Theme = tmDark then
     PreferredAppMode := pamForceDark
@@ -254,22 +274,10 @@ begin
   uMetaDarkStyle.ApplyMetaDarkStyle(DefaultDark);
   {$ENDIF}
 
+  // Check for old config
   if not DirectoryExists(GetAppConfigDir(False)) then
-  begin
-    newPath := GetAppConfigDir(False);
-    Paths := newPath.Split(PathDelim);
-    if Paths[high(Paths)] = '' then
-      Delete(Paths, high(Paths), 1);
-    Paths[high(Paths)] := 'RsatConsole';
-    oldPath := String.Join(PathDelim, Paths);
-    oldPath := MakePath([oldPath]);
-    if DirectoryExists(oldPath) then
-    begin
-      oldPath := IncludeTrailingPathDelimiter(oldPath);
-      newPath := IncludeTrailingPathDelimiter(newPath);
-      RenameFile(oldPath, newPath);
-    end;
-  end;
+    RestoreOldConfig;
+
   IniPropStorage1.IniFileName := MakePath([GetAppConfigDir(False), 'OpenRSAT.ini']);
 end;
 

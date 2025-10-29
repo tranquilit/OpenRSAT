@@ -63,6 +63,9 @@ type
     fLog: ISynLog;
     fLdapConfigs: TLdapConfigs;
 
+    procedure CreateDefaultConfig;
+    function RetrieveConfigs(out LastConfig: String): Integer;
+
   public
     constructor Create(TheOwner: TComponent; ALdapConfigs: TLdapConfigs; aLog: ISynLog = nil); overload;
   end;
@@ -78,7 +81,8 @@ uses
   uvisconnectoptions,
   ucoredatamodule,
   uresourcestring,
-  utranslation;
+  utranslation,
+  ucommon;
 {$R *.lfm}
 
 { TFormConnectConfigs }
@@ -140,52 +144,18 @@ end;
 
 procedure TFormConnectConfigs.FormShow(Sender: TObject);
 var
-  index: Integer;
+  index, ConfigCount: Integer;
   ini: TTisInifiles;
   sections: TStringArray;
-  lastConfig, section: String;
+  LastConfig, section: String;
   connectOptions: TVisConnectOptions;
 begin
-  TisSearchEdit_Configs.Items.BeginUpdate;
-  try
-    TisSearchEdit_Configs.Items.Clear;
-    if Assigned(fLog) then
-      fLog.Log(sllDebug, 'Retrieve config files from "' + CoreDataModule.ConfigFilePath + '".');
-    ini := TTisIniFiles.Create(CoreDataModule.ConfigFilePath);
-    try
-      sections := ini.GetSections;
-      lastConfig := fLdapConfigs.LastConfig;
-      if lastConfig = '' then
-        lastConfig := ini.ReadString('global', 'lastConfig', '');
-      for section in sections do
-      begin
-        if (section = 'global') then
-          continue;
-        if (lastConfig = section) then
-          TisSearchEdit_Configs.Text := lastConfig;
-        TisSearchEdit_Configs.Items.add(section);
-      end;
-    finally
-      FreeAndNil(ini);
-    end;
-    // No configs
-    if TisSearchEdit_Configs.Items.Count <= 0 then
-    begin
-      TisSearchEdit_Configs.Items.Add('default');
-      connectOptions := TVisConnectOptions.Create(Self);
-      try
-        connectOptions.Settings := fLdapConfigs.LdapConnectionSettings;
-        connectOptions.Action_Domain.Execute;
-        connectOptions.Action_OK.Execute;
-      finally
-        FreeAndNil(connectOptions);
-      end;
-      fLdapConfigs.SaveConfig('default');
-      BitBtn_OK.Click;
-    end;
-  finally
-    TisSearchEdit_Configs.Items.EndUpdate;
-  end;
+  TisSearchEdit_Configs.Items.Clear;
+
+  ConfigCount := RetrieveConfigs(LastConfig);
+
+  if ConfigCount <= 0 then
+    CreateDefaultConfig;
 
   index := TisSearchEdit_Configs.Items.IndexOf(TisSearchEdit_Configs.Text);
   if index < 0 then
@@ -194,7 +164,7 @@ begin
   TisSearchEdit_ConfigsSelect(Sender);
   CheckBox_AutoConnect.Checked := fLdapConfigs.AutoConnect;
 
-  //UnifyButtonsWidth([BitBtn_Cancel, BitBtn_OK]);
+  UnifyButtonsWidth([BitBtn_Cancel, BitBtn_OK]);
 end;
 
 procedure TFormConnectConfigs.TisSearchEdit_ConfigsSelect(Sender: TObject);
@@ -226,6 +196,57 @@ begin
   end;
   if  Edit_Server.Text = '' then
     BitBtn_EditConfig.SetFocus;
+end;
+
+procedure TFormConnectConfigs.CreateDefaultConfig;
+const
+  DEFAULT_NAME = 'default';
+var
+  connectOptions: TVisConnectOptions;
+begin
+  TisSearchEdit_Configs.Items.Add(DEFAULT_NAME);
+  TisSearchEdit_Configs.ItemIndex := TisSearchEdit_Configs.Items.IndexOf(DEFAULT_NAME);
+
+  connectOptions := TVisConnectOptions.Create(Self);
+  try
+    connectOptions.Settings := fLdapConfigs.LdapConnectionSettings;
+    connectOptions.Action_Domain.Execute;
+    connectOptions.Action_OK.Execute;
+  finally
+    FreeAndNil(connectOptions);
+  end;
+  // Check connection here
+  fLdapConfigs.SaveConfig(DEFAULT_NAME);
+  BitBtn_OK.Click;
+end;
+
+function TFormConnectConfigs.RetrieveConfigs(out LastConfig: String): Integer;
+var
+  ini: TTisInifiles;
+  sections: TStringArray;
+  section: String;
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllDebug, 'Retrieve config files from "%".', [CoreDataModule.ConfigFilePath]);
+
+  TisSearchEdit_Configs.Items.BeginUpdate;
+  ini := TTisIniFiles.Create(CoreDataModule.ConfigFilePath);
+  try
+    sections := ini.GetSections;
+    LastConfig := fLdapConfigs.LastConfig;
+    if LastConfig = '' then
+      LastConfig := ini.ReadString('global', 'lastConfig', '');
+    for section in sections do
+    begin
+      if (section = 'global') then
+        continue;
+      TisSearchEdit_Configs.Items.add(section);
+    end;
+    TisSearchEdit_Configs.Text := LastConfig;
+  finally
+    FreeAndNil(ini);
+    TisSearchEdit_Configs.Items.EndUpdate;
+  end;
 end;
 
 constructor TFormConnectConfigs.Create(TheOwner: TComponent;

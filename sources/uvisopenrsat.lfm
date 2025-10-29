@@ -91,7 +91,6 @@ object VisOpenRSAT: TVisOpenRSAT
     end
   end
   object ActionList: TActionList
-    Images = CoreDataModule.ImageList1
     Left = 24
     Top = 120
     object Action_Quit: TAction
