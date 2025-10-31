@@ -10,7 +10,9 @@ uses
   Forms,
   Controls,
   ComCtrls,
-  ActnList, ExtCtrls,
+  ActnList,
+  ExtCtrls,
+  StdCtrls,
   mormot.core.log,
   uldapconfigs,
   ursatldapclient,
@@ -34,6 +36,7 @@ type
     Action_Options: TAction;
     Action_Properties: TAction;
     PageControl1: TPageControl;
+    StatusBar1: TStatusBar;
     Timer_AutoConnect: TTimer;
     {$push}{$warn 5024 off}
     procedure Action_AdvancedFeaturesExecute(Sender: TObject);
@@ -67,6 +70,7 @@ type
 
     fVisPropertiesList: TVisPropertiesList;
 
+    procedure SetStatusBarText(ItemIndex: Integer; ItemText: RawUtf8);
     /// Register all modules to the core.
     procedure LoadModules;
   public
@@ -182,6 +186,8 @@ begin
   finally
     Screen.Cursor := crDefault;
   end;
+
+  SetStatusBarText(0, FormatUtf8('User: %', [LdapClient.BoundUser]));
 end;
 
 procedure TFrmCore.Action_AdvancedFeaturesExecute(Sender: TObject);
@@ -206,6 +212,8 @@ begin
     fLog.Log(sllTrace, '% - Execute', [Action_LdapDisconnect.Name]);
 
   LdapClient.Close;
+
+  SetStatusBarText(0, 'User: NA');
 end;
 
 procedure TFrmCore.Action_LdapDisconnectUpdate(Sender: TObject);
@@ -269,6 +277,12 @@ procedure TFrmCore.Timer_AutoConnectTimer(Sender: TObject);
 begin
   Timer_AutoConnect.Enabled := False;
   Action_LdapConnect.Execute;
+end;
+
+procedure TFrmCore.SetStatusBarText(ItemIndex: Integer; ItemText: RawUtf8);
+begin
+  StatusBar1.Panels.Items[ItemIndex].Text := ItemText;
+  StatusBar1.Panels.Items[ItemIndex].Width := StatusBar1.Canvas.TextWidth(StatusBar1.Panels.Items[ItemIndex].Text) + 8;
 end;
 
 procedure TFrmCore.LoadModules;
@@ -352,6 +366,8 @@ begin
   RsatOptions.Load;
 
   fVisPropertiesList := TVisPropertiesList.Create(Self);
+
+  StatusBar1.Canvas.Font.Assign(StatusBar1.Font);
 end;
 
 destructor TFrmCore.Destroy;
