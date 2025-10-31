@@ -629,7 +629,6 @@ type
     {$pop}
   private
     fSearchWord: RawUtf8;
-    fBaseDN: RawUtf8;
 
     IsLoading: Boolean;
 
@@ -689,30 +688,8 @@ type
     LdapDiff: TLdiff;
     SecurityDescriptor: TSecurityDescriptor;
     DistinguishedName, PrimaryGroupDN, ObjClass: string;
-    constructor Create(TheOwner: TComponent; ACore: ICore; _Ldap: TLdapClient; DN, baseDN: string); reintroduce;
+    constructor Create(TheOwner: TComponent; ACore: ICore; _Ldap: TLdapClient; DN: RawUtf8); reintroduce;
     destructor Destroy(); override;
-  end;
-
-  TVisPropertiesDynArray = Array of TVisProperties;
-
-  { TVisPropertiesList }
-
-  TVisPropertiesList = class
-  private
-    fLog: TSynLog;
-    fItems: TVisPropertiesDynArray;
-    fCore: ICore;
-  public
-    constructor Create(ACore: ICore);
-    function Open(AName: String; ADistinguishedName: String): boolean;
-    function New(AName: String; ADistinguishedName: String): boolean;
-    function Close(aForm: TVisProperties): boolean;
-    function CloseAll: boolean;
-    function Exists(AName: String): boolean;
-    function Focus(DN: String): boolean;
-    function Focus(index: Integer): boolean;
-    function Count: Integer;
-    function GetNames: TStringArray;
   end;
 
 const
@@ -854,6 +831,7 @@ uses
   mormot.core.os,
   mormot.crypt.secure,
   uOmniselect,
+  uvispropertieslist,
   uvisadvancedsecurity,
   uvislogonhours,
   uvislogonworkstation,
@@ -1053,7 +1031,7 @@ begin
   if (primaryGroupID = -1) then
     Exit;
   // get DefaultDN SID
-  res := Ldap.SearchObject(Ldap.DefaultDN(fBaseDN), '', ['objectSid']);
+  res := Ldap.SearchObject(Ldap.DefaultDN(), '', ['objectSid']);
   if res = nil then
   begin
     ShowLdapSearchError(Ldap);
@@ -1066,7 +1044,7 @@ begin
   SID.SubAuthority[SID.SubAuthorityCount - 1] := primaryGroupID;
   // get primary group distinguished name
   filter := FormatUtf8('(objectSid=%)', [LdapEscape(SidToText(@SID))]);
-  res := Ldap.SearchObject(Ldap.DefaultDN(fBaseDN), filter, ['distinguishedName'], lssWholeSubtree);
+  res := Ldap.SearchObject(Ldap.DefaultDN(), filter, ['distinguishedName'], lssWholeSubtree);
   if res = nil then
   begin
     ShowLdapSearchError(Ldap);
@@ -1689,7 +1667,7 @@ begin
     [samDelete, samDeleteTree], @ATTR_UUID[kaNull]) <> -1;
 
   // Parent
-  if DistinguishedName = Ldap.DefaultDN(fBaseDN) then
+  if DistinguishedName = Ldap.DefaultDN() then
     FoundParent := True
   else
   begin
@@ -2050,20 +2028,23 @@ end;
 { TVisProperties - public}
 // Form
 constructor TVisProperties.Create(TheOwner: TComponent; ACore: ICore;
-  _Ldap: TLdapClient; DN, baseDN: string);
+  _Ldap: TLdapClient; DN: RawUtf8);
 var
   res: TLdapResult;
 begin
   Inherited Create(TheOwner);
 
   fCore := ACore;
-  fBaseDN := baseDN;
   Ldap := _Ldap;
   DistinguishedName := DN;
   UnifyButtonsWidth([Btn_BottomApply, Btn_BottomCancel, Btn_BottomOK]);
 
   IniPropStorage1.IniFileName := MakePath([GetAppConfigDir(false), 'RsatConsole.ini']);
 
+  if not Assigned(Ldap) or
+     not Assigned(fCore) or
+     (DN = '') then
+    Exit;
   // Fetch data
   Ldap.SearchRangeBegin;
   res := Ldap.SearchObject(DistinguishedName, '', ['*']);
@@ -2647,7 +2628,7 @@ begin
       AceWorld^.AceType := ModSecAceType;
 
       // Order
-      OrderAcl(Ldap, DistinguishedName, fBaseDN, @SecDesc.Dacl);
+      OrderAcl(Ldap, DistinguishedName, Ldap.DefaultDN(), @SecDesc.Dacl);
 
       // Ldiff
       data := TLdapAttribute.Create('nTSecurityDescriptor', atNTSecurityDescriptor);
@@ -3024,7 +3005,7 @@ begin
 
   // Omniselect
   DNarr := [''];
-  Omniselect := TVisOmniselect.Create(self, Ldap, ['user'], fBaseDN, False, Filter);
+  Omniselect := TVisOmniselect.Create(self, Ldap, ['user'], Ldap.DefaultDN(), False, Filter);
   try
     Omniselect.Caption := rsTitleSelectNewManager;
     if Omniselect.ShowModal() <> mrOK then
@@ -3300,7 +3281,7 @@ begin
   end;
   // Omniselect
   DNarr := [];
-  Omniselect := TVisOmniselect.Create(self, Ldap, ['group', 'user', 'computer', 'contact', 'Managed Service Accounts'], fBaseDN, True, Filter);
+  Omniselect := TVisOmniselect.Create(self, Ldap, ['group', 'user', 'computer', 'contact', 'Managed Service Accounts'], Ldap.DefaultDN(), True, Filter);
   try
     Omniselect.Caption := rsTitleSelectGroups;
     if Omniselect.ShowModal() <> mrOK then
@@ -3319,7 +3300,7 @@ begin
   try
     Ldap.SearchScope := lssWholeSubtree;
     repeat
-      if not Ldap.Search([atName, atObjectClass, atDistinguishedName], Filter, Ldap.DefaultDN(fBaseDN)) then // todo
+      if not Ldap.Search([atName, atObjectClass, atDistinguishedName], Filter, Ldap.DefaultDN()) then // todo
       begin
         ShowLdapSearchError(Ldap);
         Exit;
@@ -3435,7 +3416,7 @@ begin
 
   // Select groups to add
   DNarr := [];
-  Omniselect := TVisOmniselect.Create(self, Ldap, ['group'], fBaseDN, True, Filter);
+  Omniselect := TVisOmniselect.Create(self, Ldap, ['group'], Ldap.DefaultDN(), True, Filter);
   try
     Omniselect.Caption := rsTitleSelectGroups;
     if Omniselect.ShowModal() <> mrOK then
@@ -3643,7 +3624,7 @@ begin
     // Delete ACE
     SecDescDeleteACE(@SecDesc, RawUtf8ToGuid(SELF_MEMBERSHIP_TEXT_GUID),
       Sid, satObjectAccessAllowed, [samWriteProp]);
-    OrderAcl(Ldap, DistinguishedName, fBaseDN, @SecDesc.Dacl);
+    OrderAcl(Ldap, DistinguishedName, Ldap.DefaultDN(), @SecDesc.Dacl);
 
     // Diff
     data := TLdapAttribute.Create('nTSecurityDescriptor', atNTSecurityDescriptor);
@@ -3679,7 +3660,7 @@ begin
 
   // Omniselect
   DNarr := [''];
-  Omniselect := TVisOmniselect.Create(self, Ldap, ['user', 'group', 'contacts'], fBaseDN, False, Filter);
+  Omniselect := TVisOmniselect.Create(self, Ldap, ['user', 'group', 'contacts'], Ldap.DefaultDN(), False, Filter);
   try
     Omniselect.Caption := rsTitleSelectNewManager;
     if Omniselect.ShowModal() <> mrOK then
@@ -3767,7 +3748,7 @@ begin
       Dialogs.MessageDlg(rsTitleNotFound, FormatUtf8(rsACENotFound, [RawSidToText(Sid)]), mtError, [mbOK], 0);
       Exit;
     end;
-    OrderAcl(Ldap, DistinguishedName, fBaseDN, @SecDesc.Dacl);
+    OrderAcl(Ldap, DistinguishedName, Ldap.DefaultDN(), @SecDesc.Dacl);
 
     // Diff
     data := TLdapAttribute.Create('nTSecurityDescriptor', atNTSecurityDescriptor);
@@ -3823,7 +3804,7 @@ begin
     end;
   end;
 
-  OrderAcl(Ldap, DistinguishedName, fBaseDN, @SecDesc.Dacl);
+  OrderAcl(Ldap, DistinguishedName, Ldap.DefaultDN(), @SecDesc.Dacl);
 
   // LDiff
   data := TLdapAttribute.Create('nTSecurityDescriptor', atNTSecurityDescriptor);
@@ -3881,7 +3862,7 @@ begin
     SecDesc.Dacl[i].Mask -= [samDelete, samDeleteTree];
   end;
 
-  OrderAcl(Ldap, DistinguishedName, fBaseDN, @SecDesc.Dacl); // Order
+  OrderAcl(Ldap, DistinguishedName, Ldap.DefaultDN(), @SecDesc.Dacl); // Order
 
   data := TLdapAttribute.Create('nTSecurityDescriptor', atNTSecurityDescriptor);
   try
@@ -3892,7 +3873,7 @@ begin
   end;
 
   // Parent
-  if DistinguishedName = Ldap.DefaultDN(fBaseDN) then
+  if DistinguishedName = Ldap.DefaultDN() then
     Exit;
 
   data := Ldap.SearchObject(atNTSecurityDescriptor, GetParentDN(DistinguishedName), '');
@@ -3936,7 +3917,7 @@ procedure TVisProperties.Action_SecurityAdvancedExecute(Sender: TObject);
 var
   vas: TVisAdvancedSecurity;
 begin
-  vas := TVisAdvancedSecurity.Create(self, Ldap, @SecurityDescriptor, DistinguishedName, fBaseDN);
+  vas := TVisAdvancedSecurity.Create(self, Ldap, @SecurityDescriptor, DistinguishedName, Ldap.DefaultDN());
   try
     vas.Caption := FormatUtf8(rsTitleAdvancedSecurity, [GetAttributeIndex('name', 0)]);
     vas.ShowModal();
@@ -4453,7 +4434,7 @@ begin
             Dialogs.MessageDlg(rsTitleParsing, rsACEParsing, mtError, [mbOK], 0);
             Exit;
           end;
-          OrderAcl(Ldap, DistinguishedName, fBaseDN, @SecDesc.Dacl);
+          OrderAcl(Ldap, DistinguishedName, Ldap.DefaultDN(), @SecDesc.Dacl);
           diffList.Add(atNTSecurityDescriptor, SecDesc.ToBinary(), aoReplaceValue);
           if not ApplyDefault(diffList.Items[i], DiffType) then
             Exit;
@@ -4496,130 +4477,6 @@ end;
 procedure TVisProperties.Action_OKUpdate(Sender: TObject);
 begin
   Action_OK.Enabled := True;
-end;
-
-{ TVisPropertiesList }
-
-constructor TVisPropertiesList.Create(ACore: ICore);
-begin
-  fLog := TSynLog.Add;
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Create', [Self.ClassName]);
-
-  fCore := ACore;
-end;
-
-function TVisPropertiesList.Open(AName: String; ADistinguishedName: String): boolean;
-begin
-  result := True;
-
-  TSynLog.Add.Log(sllDebug, FormatUtf8('Open new view: %.', [AName]));
-
-  if (AName = '') then
-  begin
-    ShowMessage('Cannot open property with empty name.');
-    Exit;
-  end;
-
-  if Exists(AName) then // Already exists
-  begin
-    Focus(ADistinguishedName);
-    Exit;
-  end;
-
-  // Create new
-  New(AName, ADistinguishedName);
-end;
-
-function TVisPropertiesList.New(AName: String; ADistinguishedName: String
-  ): boolean;
-var
-  c: SizeInt;
-begin
-  result := True;
-  c := Count;
-  SetLength(fItems, c + 1);
-
-  fItems[c] := TVisProperties.Create((fCore as TFrmCore), fCore, fCore.LdapClient, ADistinguishedName, fCore.LdapClient.DefaultDN());
-  fItems[c].Caption := AName;
-  fItems[c].Show();
-end;
-
-function TVisPropertiesList.Close(aForm: TVisProperties): boolean;
-var
-  i: Integer;
-  c: SizeInt;
-begin
-  result := True;
-  TSynLog.Add.Log(sllDebug, FormatUtf8('Close view: %', [aForm.Name]));
-  c := Count;
-
-  for i := 0 to c - 1 do
-    if fItems[i] = aForm then
-    begin
-      Delete(fItems, i, 1);
-      //VisMain.MenuItem_ViewWindows.Delete(i);
-      Exit;
-    end;
-  result := False;
-end;
-
-function TVisPropertiesList.CloseAll: boolean;
-var
-  item: TVisProperties;
-begin
-  result := True;
-
-  for item in fItems do
-    result := (result and Close(item));
-end;
-
-function TVisPropertiesList.Exists(AName: String): boolean;
-var
-  item: TVisProperties;
-begin
-  result := True;
-
-  for item in fItems do
-    if item.Caption = AName then
-      Exit;
-  result := False;
-end;
-
-function TVisPropertiesList.Focus(DN: String): boolean;
-var
-  item: TVisProperties;
-begin
-  result := True;
-  for item in fItems do
-    if item.DistinguishedName = DN then
-    begin
-      item.Show();
-      item.SetFocus();
-      Exit;
-    end;
-  result := False;
-end;
-
-function TVisPropertiesList.Focus(index: Integer): boolean;
-begin
-  result := True;
-  fItems[index].Show;
-  fItems[index].SetFocus;
-end;
-
-function TVisPropertiesList.Count: Integer;
-begin
-  result := Length(fItems);
-end;
-
-function TVisPropertiesList.GetNames: TStringArray;
-var
-  i: Integer;
-begin
-  result := [];
-  for i := 0 to High(fItems) do
-    Insert(fItems[i].Caption, result, i);
 end;
 
 end.

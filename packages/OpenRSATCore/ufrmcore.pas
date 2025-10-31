@@ -20,6 +20,7 @@ uses
   uinterfacemodule,
   uinterfacecore,
   uvisproperties,
+  uvispropertieslist,
   ufrmrsatoptions,
   mormot.core.base;
 
