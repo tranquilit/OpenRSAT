@@ -10,8 +10,6 @@ object VisOpenRSAT: TVisOpenRSAT
   Position = poWorkAreaCenter
   SessionProperties = 'Width;WindowState;Height;Left;Top'
   LCLVersion = '4.1.0.0'
-  OnActivate = FormActivate
-  OnDeactivate = FormDeactivate
   OnPaint = FormPaint
   OnShow = FormShow
   object MainMenu: TMainMenu

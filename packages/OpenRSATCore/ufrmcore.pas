@@ -90,9 +90,7 @@ type
     function GetModules: TRsatModules;
     function GetRsatOptions: TRsatOptions;
 
-    procedure Activate;
     procedure CloseProperty(VisProperty: TForm);
-    procedure Deactivate;
     procedure OpenProperty(AName, DistinguishedName: String);
     procedure Load;
 
@@ -419,19 +417,9 @@ begin
   result := fOptions;
 end;
 
-procedure TFrmCore.Activate;
-begin
-  //fActive := True;
-end;
-
 procedure TFrmCore.CloseProperty(VisProperty: TForm);
 begin
   fVisPropertiesList.Close((VisProperty as TVisProperties));
-end;
-
-procedure TFrmCore.Deactivate;
-begin
-  //fActive := False;
 end;
 
 procedure TFrmCore.OpenProperty(AName, DistinguishedName: String);

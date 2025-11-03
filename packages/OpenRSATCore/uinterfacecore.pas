@@ -24,9 +24,7 @@ type
     function GetModules: TRsatModules; virtual;
     function GetRsatOptions: TRsatOptions; virtual;
 
-    procedure Activate; virtual;
     procedure CloseProperty(VisProperty: TForm); virtual;
-    procedure Deactivate; virtual;
     procedure OpenProperty(Name, DistinguishedName: String); virtual;
     procedure Load; virtual;
 

@@ -62,8 +62,6 @@ type
     procedure Action_NewWindowExecute(Sender: TObject);
     procedure Action_OpenedPropertiesUpdate(Sender: TObject);
     procedure Action_QuitExecute(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
-    procedure FormDeactivate(Sender: TObject);
     procedure FormPaint(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure MenuItem_ViewThemeDarkClick(Sender: TObject);
@@ -170,16 +168,6 @@ begin
   finally
     Free;
   end;
-end;
-
-procedure TVisOpenRSAT.FormActivate(Sender: TObject);
-begin
-  fFrmCore.Activate;
-end;
-
-procedure TVisOpenRSAT.FormDeactivate(Sender: TObject);
-begin
-  fFrmCore.Deactivate;
 end;
 
 procedure TVisOpenRSAT.FormPaint(Sender: TObject);
