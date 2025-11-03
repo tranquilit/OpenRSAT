@@ -55,7 +55,7 @@ type
     {$pop}
   private
     fLog: TSynLog;
-    fActive: Boolean;
+    //fActive: Boolean;
 
     /// Centralized LdapClient connexion.
     fLdapClient: TRsatLdapClient;
@@ -396,7 +396,7 @@ end;
 
 function TFrmCore.GetActive: Boolean;
 begin
-  result := fActive;
+  result := true;
 end;
 
 function TFrmCore.GetLdapClient: TRsatLdapClient;
@@ -421,7 +421,7 @@ end;
 
 procedure TFrmCore.Activate;
 begin
-  fActive := True;
+  //fActive := True;
 end;
 
 procedure TFrmCore.CloseProperty(VisProperty: TForm);
@@ -431,7 +431,7 @@ end;
 
 procedure TFrmCore.Deactivate;
 begin
-  fActive := False;
+  //fActive := False;
 end;
 
 procedure TFrmCore.OpenProperty(AName, DistinguishedName: String);
