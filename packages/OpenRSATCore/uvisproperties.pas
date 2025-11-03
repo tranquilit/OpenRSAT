@@ -680,7 +680,7 @@ type
     procedure DeleteAttribute(Attribute: RawUtf8);
     function GetAttribute(Attribute: RawUtf8): TRawUtf8DynArray;
     function GetAttributeAsRawUtf8(Attribute: RawUtf8): RawUtf8;
-    function GetAttributeIndex(Attribute: RawUtf8; index: Integer; default: RawUtf8=''): RawUtf8;
+    function GetAttributeIndex(Attribute: RawUtf8; index: Integer; default: RawUtf8=''; readable: Boolean=False): RawUtf8;
   public
     Ldap: TLdapClient;
     CountryCodes: TDocVariantData;
@@ -1293,7 +1293,8 @@ end;
 procedure TVisProperties.InitPanelAccount();
 var
   UPN, AE: String;
-  UAC, msDS_SET, AceSelf, AceWorld: Integer;
+  UAC: TUserAccountControls;
+  msDS_SET, AceSelf, AceWorld: Integer;
   SecDesc: TSecurityDescriptor;
   SearchResult: TLdapResult;
   item: RawUtf8;
@@ -1345,20 +1346,21 @@ begin
 
   // Account Options
   // https://ldapwiki.com/wiki/Wiki.jsp?page=User-Account-Control%20Attribute
-  UAC      := String(GetAttributeIndex('userAccountControl', 0, '0')).ToInteger();
+  UAC := UserAccountControlsFromText(GetAttributeIndex('userAccountControl', 0, '0'));
+
   // https://ldapwiki.com/wiki/Wiki.jsp?page=MsDS-SupportedEncryptionTypes
   msDS_SET := String(GetAttributeIndex('msDS-SupportedEncryptionTypes', 0, '0')).ToInteger();
   CheckBox_acc_opt_MustChange.Checked   := GetAttributeIndex('pwdLastSet', 0, '0') = '0';
-  CheckBox_acc_opt_CannotChange.Checked          := (UAC and PASSWD_CANT_CHANGE)         > 0; // readonly
-  CheckBox_acc_opt_NeverExpires.Checked          := (UAC and DONT_EXPIRE_PASSWORD)       > 0;
-  CheckBox_acc_opt_ReversibleEncryption.Checked  := (UAC and ENCRYPTED_TEXT_PWD_ALLOWED) > 0;
-  CheckBox_acc_opt_Disabled.Checked              := (UAC and ACCOUNTDISABLE)             > 0;
-  CheckBox_acc_opt_SmartCard.Checked             := (UAC and SMARTCARD_REQUIRED)         > 0;
-  CheckBox_acc_opt_Sensitive.Checked             := (UAC and NOT_DELEGATED)              > 0;
-  CheckBox_acc_opt_KerberosDESEncryption.Checked := (UAC and USE_DES_KEY_ONLY)           > 0;
+  CheckBox_acc_opt_CannotChange.Checked          := uacPasswordCannotChange in UAC;
+  CheckBox_acc_opt_NeverExpires.Checked          := uacPasswordDoNotExpire in UAC;
+  CheckBox_acc_opt_ReversibleEncryption.Checked  := uacPasswordUnencrypted in UAC;
+  CheckBox_acc_opt_Disabled.Checked              := uacAccountDisable in UAC;
+  CheckBox_acc_opt_SmartCard.Checked             := uacSmartcardRequired in UAC;
+  CheckBox_acc_opt_Sensitive.Checked             := uacKerberosNotDelegated in UAC;
+  CheckBox_acc_opt_KerberosDESEncryption.Checked := uacKerberosDesOnly in UAC;
   CheckBox_acc_opt_KerberosAES128Encryption.Checked := (msDS_SET and AES128) > 0;
   CheckBox_acc_opt_KerberosAES256Encryption.Checked := (msDS_SET and AES256) > 0;
-  CheckBox_acc_opt_NoKerberosPreauth.Checked     := (UAC and DONT_REQUIRE_PREAUTH)       > 0;
+  CheckBox_acc_opt_NoKerberosPreauth.Checked     := uacKerberosRequirePreAuth in UAC;
 
   // accountExpires
   // 0 and 9223372036854775807 (0x7FFFFFFFFFFFFFFF) mean "never expire"
@@ -1653,8 +1655,8 @@ begin
   Tab_Object.TabVisible := True;
   Edit_obj_cn.Text := DNToCN(DistinguishedName);
   Edit_obj_objectClass.Text   := GetAttributeIndex('objectClass', -1);
-  Edit_obj_whenCreated.Text   := ISOToTimeFormat(GetAttributeIndex('whenCreated', 0));
-  Edit_obj_whenChanged.Text   := ISOToTimeFormat(GetAttributeIndex('whenChanged', 0));
+  Edit_obj_whenCreated.Text   := ISOToTimeFormat(GetAttributeIndex('whenCreated', 0, '', True));
+  Edit_obj_whenChanged.Text   := ISOToTimeFormat(GetAttributeIndex('whenChanged', 0, '', True));
   Edit_obj_uSNChanged.Text    := GetAttributeIndex('uSNChanged', 0);
   Edit_obj_uSNCreated.Text    := GetAttributeIndex('uSNCreated', 0);
 
@@ -2349,7 +2351,8 @@ begin
   result := String.join('; ', Attributes.Items[at].List);
 end;
 
-function TVisProperties.GetAttributeIndex(Attribute: RawUtf8; index: Integer; default: RawUtf8 = ''): RawUtf8;
+function TVisProperties.GetAttributeIndex(Attribute: RawUtf8; index: Integer;
+  default: RawUtf8; readable: Boolean): RawUtf8;
 var
   at: PtrInt;
 begin
@@ -2363,7 +2366,10 @@ begin
     index := Attributes.Items[at].Count + index;
   if (index < 0) or (Index > Attributes.Items[at].Count - 1) then
     Exit;
-  result := Attributes.Items[at].GetRaw(index);
+  if readable then
+    result := Attributes.Items[at].GetReadable(index)
+  else
+    result := Attributes.Items[at].GetRaw(index);
 end;
 
 // Diff
