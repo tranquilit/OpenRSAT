@@ -214,10 +214,9 @@ begin
     connectOptions.Action_OK.Execute;
   finally
     FreeAndNil(connectOptions);
+    fLdapConfigs.SaveConfig(DEFAULT_NAME);
+    BitBtn_OK.Click;
   end;
-  // Check connection here
-  fLdapConfigs.SaveConfig(DEFAULT_NAME);
-  BitBtn_OK.Click;
 end;
 
 function TFormConnectConfigs.RetrieveConfigs(out LastConfig: String): Integer;
@@ -228,11 +227,12 @@ var
 begin
   if Assigned(fLog) then
     fLog.Log(sllDebug, 'Retrieve config files from "%".', [CoreDataModule.ConfigFilePath]);
-
+  result := 0;
   TisSearchEdit_Configs.Items.BeginUpdate;
   ini := TTisIniFiles.Create(CoreDataModule.ConfigFilePath);
   try
     sections := ini.GetSections;
+    result := Length(sections);
     LastConfig := fLdapConfigs.LastConfig;
     if LastConfig = '' then
       LastConfig := ini.ReadString('global', 'lastConfig', '');
