@@ -493,7 +493,7 @@ end;
 
 procedure TFrmModuleSitesAndServices.Action_PropertyUpdate(Sender: TObject);
 begin
-  Action_Property.Enabled := Assigned(fCore) and fCore.Active and Assigned(fCore.LdapClient) and fCore.LdapClient.Connected;
+  Action_Property.Enabled := Assigned(fCore) and Assigned(fCore.LdapClient) and fCore.LdapClient.Connected;
 end;
 
 procedure TFrmModuleSitesAndServices.TisGrid1DblClick(Sender: TObject);

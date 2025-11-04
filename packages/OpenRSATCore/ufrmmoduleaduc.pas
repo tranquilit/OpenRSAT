@@ -392,7 +392,7 @@ end;
 
 procedure TFrmModuleADUC.Action_CopyUpdate(Sender: TObject);
 begin
-  Action_Copy.Enabled := Core.Active;
+
 end;
 
 procedure TFrmModuleADUC.Action_CutExecute(Sender: TObject);
@@ -403,7 +403,7 @@ end;
 
 procedure TFrmModuleADUC.Action_CutUpdate(Sender: TObject);
 begin
-  Action_Cut.Enabled := Core.Active;
+
 end;
 
 procedure TFrmModuleADUC.Action_DelegateControlExecute(Sender: TObject);
@@ -511,7 +511,7 @@ end;
 
 procedure TFrmModuleADUC.Action_DeleteUpdate(Sender: TObject);
 begin
-  Action_delete.Enabled := Core.Active and Assigned(Core.LdapClient) and Core.LdapClient.Connected and ((GridADUC.SelectedCount > 0) or (Assigned(TreeADUC.Selected)));
+  Action_delete.Enabled := Assigned(Core.LdapClient) and Core.LdapClient.Connected and ((GridADUC.SelectedCount > 0) or (Assigned(TreeADUC.Selected)));
 end;
 
 procedure TFrmModuleADUC.Action_NewAllUpdate(Sender: TObject);
@@ -793,7 +793,6 @@ end;
 
 procedure TFrmModuleADUC.Action_PasteUpdate(Sender: TObject);
 begin
-  Action_Paste.Enabled := Core.Active;
 end;
 
 procedure TFrmModuleADUC.Action_PreviousExecute(Sender: TObject);
@@ -866,7 +865,7 @@ end;
 
 procedure TFrmModuleADUC.Action_PropertiesUpdate(Sender: TObject);
 begin
-  Action_Properties.Enabled := Core.Active and Assigned(Core.LdapClient) and Core.LdapClient.Connected and ((GridADUC.SelectedCount > 0) or (Assigned(TreeADUC.Selected)));
+  Action_Properties.Enabled := Assigned(Core.LdapClient) and Core.LdapClient.Connected and ((GridADUC.SelectedCount > 0) or (Assigned(TreeADUC.Selected)));
 end;
 
 procedure TFrmModuleADUC.Action_RefreshUpdate(Sender: TObject);
@@ -898,7 +897,7 @@ end;
 
 procedure TFrmModuleADUC.Action_SearchUpdate(Sender: TObject);
 begin
-  Action_Search.Enabled := Core.Active and Assigned(Core.LdapClient) and Core.LdapClient.Connected;
+  Action_Search.Enabled := Assigned(Core.LdapClient) and Core.LdapClient.Connected;
 end;
 
 procedure TFrmModuleADUC.Action_SwitchToolbarCaptionExecute(Sender: TObject);

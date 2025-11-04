@@ -13,7 +13,9 @@ uses
   ActnList,
   ExtCtrls,
   StdCtrls,
+  mormot.core.base,
   mormot.core.log,
+  mormot.core.test,
   uldapconfigs,
   ursatldapclient,
   ursatmodules,
@@ -21,8 +23,7 @@ uses
   uinterfacecore,
   uvisproperties,
   uvispropertieslist,
-  ufrmrsatoptions,
-  mormot.core.base;
+  ufrmrsatoptions;
 
 type
 
@@ -84,7 +85,6 @@ type
 
     //////////
     /// ICore
-    function GetActive: Boolean;
     function GetLdapClient: TRsatLdapClient;
     function GetLdapConfigs: TLdapConfigs;
     function GetModules: TRsatModules;
@@ -94,7 +94,6 @@ type
     procedure OpenProperty(AName, DistinguishedName: String);
     procedure Load;
 
-    property Active: Boolean read GetActive;
     property LdapClient: TRsatLdapClient read GetLdapClient;
     property LdapConfigs: TLdapConfigs read GetLdapConfigs;
     property Modules: TRsatModules read GetModules;
@@ -102,6 +101,13 @@ type
     /// ICore
     //////////
   end;
+
+  {$IFDEF OPENRSATTESTS}
+  TTestFrmCore = class(TSynTestCase)
+  published
+
+  end;
+  {$ENDIF}
 
 implementation
 
@@ -392,11 +398,6 @@ begin
   result := fModules.RegisterModule(AModule);
 end;
 
-function TFrmCore.GetActive: Boolean;
-begin
-  result := true;
-end;
-
 function TFrmCore.GetLdapClient: TRsatLdapClient;
 begin
   result := fLdapClient;
@@ -431,6 +432,11 @@ procedure TFrmCore.Load;
 begin
   LoadModules;
 end;
+
+
+{$IFDEF OPENRSATTESTS}
+
+{$ENDIF}
 
 end.
 

@@ -18,7 +18,6 @@ type
   { ICore }
 
   ICore = Interface
-    function GetActive: Boolean; virtual;
     function GetLdapClient: TRsatLdapClient; virtual;
     function GetLdapConfigs: TLdapConfigs; virtual;
     function GetModules: TRsatModules; virtual;
@@ -28,7 +27,6 @@ type
     procedure OpenProperty(Name, DistinguishedName: String); virtual;
     procedure Load; virtual;
 
-    property Active: Boolean read GetActive;
     property LdapClient: TRsatLdapClient read GetLdapClient;
     property LdapConfigs: TLdapConfigs read GetLdapConfigs;
     property Modules: TRsatModules read GetModules;
