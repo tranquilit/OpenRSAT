@@ -27,13 +27,14 @@ type
     fCore: ICore;
   public
     constructor Create(ACore: ICore);
-    function Open(AName: String; ADistinguishedName: String): boolean;
-    function New(AName: String; ADistinguishedName: String): boolean;
+    function Open(AName: String; ADistinguishedName: String): TVisProperties;
+    function New(AName: String; ADistinguishedName: String): TVisProperties;
     function Close(aForm: TVisProperties): boolean;
     function CloseAll: boolean;
     function Exists(AName: String): boolean;
-    function Focus(DN: String): boolean;
-    function Focus(index: Integer): boolean;
+    function Focus(DN: String): TVisProperties;
+    function Focus(VisProperties: TVisProperties): TVisProperties;
+    function Focus(index: Integer): TVisProperties;
     function Count: Integer;
     function GetNames: TStringArray;
   end;
@@ -75,9 +76,10 @@ begin
   fCore := ACore;
 end;
 
-function TVisPropertiesList.Open(AName: String; ADistinguishedName: String): boolean;
+function TVisPropertiesList.Open(AName: String; ADistinguishedName: String
+  ): TVisProperties;
 begin
-  result := True;
+  result := nil;
 
   TSynLog.Add.Log(sllDebug, FormatUtf8('Open new view: %.', [AName]));
 
@@ -89,21 +91,21 @@ begin
 
   if Exists(AName) then // Already exists
   begin
-    Focus(ADistinguishedName);
+    result := Focus(ADistinguishedName);
     Exit;
   end;
 
   // Create new
-  New(AName, ADistinguishedName);
+  result := New(AName, ADistinguishedName);
 end;
 
 function TVisPropertiesList.New(AName: String; ADistinguishedName: String
-  ): boolean;
+  ): TVisProperties;
 var
   c: SizeInt;
   LdapClient: TRsatLdapClient;
 begin
-  result := True;
+  result := nil;
 
   LdapClient := nil;
   if Assigned(fCore) then
@@ -116,6 +118,7 @@ begin
   fItems[c].Caption := AName;
   if Assigned(fItems[c].Owner) then
     fItems[c].Show();
+  result := fItems[c];
 end;
 
 function TVisPropertiesList.Close(aForm: TVisProperties): boolean;
@@ -159,11 +162,11 @@ begin
   result := False;
 end;
 
-function TVisPropertiesList.Focus(DN: String): boolean;
+function TVisPropertiesList.Focus(DN: String): TVisProperties;
 var
   item: TVisProperties;
 begin
-  result := True;
+  result := nil;
   for item in fItems do
     if item.DistinguishedName = DN then
     begin
@@ -172,21 +175,43 @@ begin
         item.Show();
         item.SetFocus();
       end;
+      result := item;
       Exit;
     end;
-  result := False;
 end;
 
-function TVisPropertiesList.Focus(index: Integer): boolean;
+function TVisPropertiesList.Focus(VisProperties: TVisProperties
+  ): TVisProperties;
+var
+  item: TVisProperties;
 begin
-  result := (index >= 0) and (index < Count);
-  if not result then
+  result := nil;
+  for item in fItems do
+    if item = VisProperties then
+    begin
+      if Assigned(item.Owner) then
+      begin
+        item.Show;
+        item.SetFocus;
+      end;
+      result := item;
+      Exit;
+    end;
+end;
+
+function TVisPropertiesList.Focus(index: Integer): TVisProperties;
+begin
+  result := nil;
+
+  if (index < 0) or (index >= Count) then
     Exit;
+
   if Assigned(fItems[index].Owner) then
   begin
     fItems[index].Show;
     fItems[index].SetFocus;
   end;
+  result := fItems[index];
 end;
 
 function TVisPropertiesList.Count: Integer;
@@ -245,10 +270,10 @@ var
 begin
   Vis := TVisPropertiesList.Create(nil);
   try
-    Check(Vis.New('Test', 'Test'));
+    Check(Assigned(Vis.New('Test', 'Test')));
     Check(Length(Vis.fItems) = 1);
     Check(Assigned(Vis.fItems[0]));
-    Check(Vis.New('Test', 'Test'));
+    Check(Assigned(Vis.New('Test', 'Test')));
     Check(Length(Vis.fItems) = 2);
     Check(Assigned(Vis.fItems[1]));
   finally
@@ -259,10 +284,10 @@ begin
   try
     Vis := TVisPropertiesList.Create(Core);
     try
-      Check(Vis.New('Test', 'Test'));
+      Check(Assigned(Vis.New('Test', 'Test')));
       Check(Length(Vis.fItems) = 1);
       Check(Assigned(Vis.fItems[0]));
-      Check(Vis.New('Test', 'Test'));
+      Check(Assigned(Vis.New('Test', 'Test')));
       Check(Length(Vis.fItems) = 2);
       Check(Assigned(Vis.fItems[1]));
     finally
@@ -281,11 +306,11 @@ var
 begin
   Vis := TVisPropertiesList.Create(nil);
   try
-    Check(Vis.Open('Test', 'Test'));
+    Check(Assigned(Vis.Open('Test', 'Test')));
     Check(Length(Vis.fItems) = 1);
     Check(Assigned(Vis.fItems[0]));
     PItem := Vis.fItems[0];
-    Check(Vis.Open('Test', 'Test'));
+    Check(Assigned(Vis.Open('Test', 'Test')));
     Check(Length(Vis.fItems) = 1);
     Check(vis.fItems[0] = PItem);
   finally
@@ -297,11 +322,11 @@ begin
   try
     Vis := TVisPropertiesList.Create(Core);
     try
-      Check(Vis.Open('Test', 'Test'));
+      Check(Assigned(Vis.Open('Test', 'Test')));
       Check(Length(Vis.fItems) = 1);
       Check(Assigned(Vis.fItems[0]));
       PItem := Vis.fItems[0];
-      Check(Vis.Open('Test', 'Test'));
+      Check(Assigned(Vis.Open('Test', 'Test')));
       Check(Length(Vis.fItems) = 1);
       Check(Vis.fItems[0] = PItem);
     finally
@@ -335,7 +360,7 @@ begin
   try
     Vis := TVisPropertiesList.Create(Core);
     try
-      Check(Vis.New('Test', 'Test'));
+      Check(Assigned(Vis.New('Test', 'Test')));
       Check(Length(Vis.fItems) = 1);
       PItem := Vis.fItems[0];
       Check(Vis.Close(PItem));
@@ -358,7 +383,7 @@ begin
   Vis := TVisPropertiesList.Create(nil);
   try
     for i := 0 to 10 do
-      Check(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i])));
+      Check(Assigned(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i]))));
     Check(Length(Vis.fItems) = 11);
     Check(Vis.CloseAll);
     Check(Length(Vis.fItems) = 0);
@@ -371,7 +396,7 @@ begin
     Vis := TVisPropertiesList.Create(Core);
     try
       for i := 0 to 10 do
-        Check(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i])));
+        Check(Assigned(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i]))));
       Check(Length(Vis.fItems) = 11);
       Check(Vis.CloseAll);
       Check(Length(Vis.fItems) = 0);
@@ -390,7 +415,7 @@ var
 begin
   Vis := TVisPropertiesList.Create(nil);
   try
-    Check(Vis.New('Test', 'TestTest'));
+    Check(Assigned(Vis.New('Test', 'TestTest')));
     Check(Vis.Exists('Test'));
     Check(Not Vis.Exists('TestTest'));
   finally
@@ -401,7 +426,7 @@ begin
   try
     Vis := TVisPropertiesList.Create(Core);
     try
-      Check(Vis.New('Test', 'TestTest'));
+      Check(Assigned(Vis.New('Test', 'TestTest')));
       Check(Vis.Exists('Test'));
       Check(not Vis.Exists('TestTest'));
     finally
@@ -416,34 +441,43 @@ procedure TTestVisPropertiesList.MethodFocus;
 var
   Vis: TVisPropertiesList;
   Core: TFrmCore;
+  VisProperty: TVisProperties;
 begin
   Vis := TVisPropertiesList.Create(nil);
   try
-    Check(Vis.New('Test', 'TestTest'));
-    Check(not Vis.Focus('Test'));
-    Check(Vis.Focus('TestTest'));
-    Check(Vis.Focus(0));
-    Check(not Vis.Focus(1));
-    Check(not Vis.Focus(-1));
+    VisProperty := Vis.New('Test', 'TestTest');
+    Check(Assigned(VisProperty));
+    Check(Assigned(Vis.Focus(VisProperty)));
+    Check(not Assigned(Vis.Focus(nil)));
+    Check(not Assigned(Vis.Focus('Test')));
+    Check(Assigned(Vis.Focus('TestTest')));
+    Check(Assigned(Vis.Focus(0)));
+    Check(not Assigned(Vis.Focus(1)));
+    Check(not Assigned(Vis.Focus(-1)));
   finally
     FreeAndNil(Vis);
+    VisProperty := nil;
   end;
 
   Core := TFrmCore.Create(nil);
   try
     Vis := TVisPropertiesList.Create(Core);
     try
-      Check(Vis.New('Test', 'TestTest'));
-      Check(not Vis.Focus('Test'));
-      Check(Vis.Focus('TestTest'));
-      Check(Vis.Focus(0));
-      Check(not Vis.Focus(1));
-      Check(not Vis.Focus(-1));
+      VisProperty := Vis.New('Test', 'TestTest');
+      Check(Assigned(VisProperty));
+      Check(not Assigned(Vis.Focus('Test')));
+      Check(Assigned(Vis.Focus('TestTest')));
+      Check(Assigned(Vis.Focus(VisProperty)));
+      Check(not Assigned(Vis.Focus(nil)));
+      Check(Assigned(Vis.Focus(0)));
+      Check(not Assigned(Vis.Focus(1)));
+      Check(not Assigned(Vis.Focus(-1)));
     finally
       FreeAndNil(Vis);
     end;
   finally
     FreeAndNil(Core);
+    VisProperty := nil;
   end;
 end;
 
@@ -456,7 +490,7 @@ begin
   Vis := TVisPropertiesList.Create(nil);
   try
     for i := 0 to 10 do
-      Check(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i])));
+      Check(Assigned(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i]))));
     Check(Vis.Count = 11);
   finally
     FreeAndNil(Vis);
@@ -467,7 +501,7 @@ begin
     Vis := TVisPropertiesList.Create(Core);
     try
       for i := 0 to 10 do
-        Check(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i])));
+        Check(Assigned(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i]))));
       Check(Vis.Count = 11);
     finally
       FreeAndNil(Vis);
@@ -487,7 +521,7 @@ begin
   Vis := TVisPropertiesList.Create(nil);
   try
     for i := 0 to 10 do
-      Check(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i])));
+      Check(Assigned(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i]))));
     Names := Vis.GetNames;
     Check(Length(Names) = Length(Vis.fItems));
     for i := 0 to 10 do
@@ -502,7 +536,7 @@ begin
     Vis := TVisPropertiesList.Create(Core);
     try
       for i := 0 to 10 do
-        Check(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i])));
+        Check(Assigned(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i]))));
       Names := Vis.GetNames;
       Check(Length(Names) = Length(Vis.fItems));
       for i := 0 to 10 do

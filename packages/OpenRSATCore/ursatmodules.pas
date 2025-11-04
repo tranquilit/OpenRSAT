@@ -65,14 +65,14 @@ var
   Module: IModule;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - RegisterModule', [Self.ClassName]);
+    fLog.Log(sllTrace, 'RegisterModule', Self);
 
   result := False;
 
   if not Assigned(AModule) then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllWarning, '% - Module not assigned.', [Self.ClassName]);
+      fLog.Log(sllWarning, 'Module not assigned.', Self);
     Exit;
   end;
 
@@ -80,13 +80,13 @@ begin
     if (Module = AModule) or (Module.GetModuleName = AModule.GetModuleName) then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllWarning, '% - Module "%" already exists.', [Self.ClassName, AModule.GetModuleName]);
+        fLog.Log(sllWarning, 'Module "%" already exists.', [AModule.GetModuleName], self);
       Exit;
     end;
 
   Insert(AModule, fModules, 0);
   if Assigned(fLog) then
-    fLog.Log(sllInfo, '% - Module "%" added.', [Self.ClassName, AModule.GetModuleName]);
+    fLog.Log(sllInfo, 'Module "%" added.', [AModule.GetModuleName], self);
   result := True;
 end;
 

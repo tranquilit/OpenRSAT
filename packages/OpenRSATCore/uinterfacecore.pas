@@ -24,7 +24,7 @@ type
     function GetRsatOptions: TRsatOptions; virtual;
 
     procedure CloseProperty(VisProperty: TForm); virtual;
-    procedure OpenProperty(Name, DistinguishedName: String); virtual;
+    function OpenProperty(Name, DistinguishedName: String): TForm; virtual;
     procedure Load; virtual;
 
     property LdapClient: TRsatLdapClient read GetLdapClient;

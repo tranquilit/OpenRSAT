@@ -3,6 +3,7 @@ program openrsattests;
 uses
   interfaces,
   mormot.core.test,
+  ufrmcore,
   uvispropertieslist;
 
 type
@@ -19,7 +20,8 @@ type
 procedure TOpenRSATTests.Units;
 begin
   AddCase([
-    TTestVisPropertiesList
+    TTestVisPropertiesList,
+    TTestFrmCore
   ]);
 end;
 

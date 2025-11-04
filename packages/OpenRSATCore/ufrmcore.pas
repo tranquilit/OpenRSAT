@@ -91,7 +91,7 @@ type
     function GetRsatOptions: TRsatOptions;
 
     procedure CloseProperty(VisProperty: TForm);
-    procedure OpenProperty(AName, DistinguishedName: String);
+    function OpenProperty(AName, DistinguishedName: String): TForm;
     procedure Load;
 
     property LdapClient: TRsatLdapClient read GetLdapClient;
@@ -103,9 +103,31 @@ type
   end;
 
   {$IFDEF OPENRSATTESTS}
+
+  { TTestFrmCore }
+
+  { TTestModule }
+
+  TTestModule = class(TInterfacedObject, IModule)
+    function GetModuleEnabled: Boolean;
+    procedure SetModuleEnabled(AValue: Boolean);
+    function GetModuleName: String;
+    function GetModuleDisplayName: String;
+    function GetOptions: TOptions;
+    procedure Refresh;
+    procedure Load;
+  end;
+
   TTestFrmCore = class(TSynTestCase)
   published
-
+    procedure MethodCreate;
+    procedure MethodRegisterModule;
+    procedure MethodGetLdapClient;
+    procedure MethodGetLdapConfigs;
+    procedure MethodGetModules;
+    procedure MethodGetRsatOptions;
+    procedure MethodCloseProperty;
+    procedure MethodOpenProperty;
   end;
   {$ENDIF}
 
@@ -423,9 +445,9 @@ begin
   fVisPropertiesList.Close((VisProperty as TVisProperties));
 end;
 
-procedure TFrmCore.OpenProperty(AName, DistinguishedName: String);
+function TFrmCore.OpenProperty(AName, DistinguishedName: String): TForm;
 begin
-  fVisPropertiesList.Open(AName, DistinguishedName);
+  result := fVisPropertiesList.Open(AName, DistinguishedName);
 end;
 
 procedure TFrmCore.Load;
@@ -433,8 +455,165 @@ begin
   LoadModules;
 end;
 
-
 {$IFDEF OPENRSATTESTS}
+
+{ TTestModule }
+
+function TTestModule.GetModuleEnabled: Boolean;
+begin
+  result := True;
+end;
+
+procedure TTestModule.SetModuleEnabled(AValue: Boolean);
+begin
+
+end;
+
+function TTestModule.GetModuleName: String;
+begin
+  result := 'TestModule';
+end;
+
+function TTestModule.GetModuleDisplayName: String;
+begin
+  result := 'Test Module';
+end;
+
+function TTestModule.GetOptions: TOptions;
+begin
+  result := nil;
+end;
+
+procedure TTestModule.Refresh;
+begin
+
+end;
+
+procedure TTestModule.Load;
+begin
+
+end;
+
+{ TTestFrmCore }
+
+procedure TTestFrmCore.MethodCreate;
+var
+  Core: TFrmCore;
+begin
+  Core := TFrmCore.Create(nil);
+  try
+    Check(Assigned(Core));
+    Check(Assigned(Core.fLog));
+    Check(Assigned(Core.fLdapClient));
+    Check(Assigned(Core.fOptions));
+    Check(Assigned(Core.fLdapConfigs));
+    Check(Assigned(Core.fModules));
+    Check(Assigned(Core.fVisPropertiesList));
+  finally
+    FreeAndNil(Core);
+  end;
+end;
+
+procedure TTestFrmCore.MethodRegisterModule;
+var
+  Core: TFrmCore;
+  Module: IModule;
+begin
+  Core := TFrmCore.Create(nil);
+  try
+    Check(not Core.RegisterModule(nil));
+  finally
+    FreeAndNil(Core);
+  end;
+
+  Module := TTestModule.Create;
+  Core := TFrmCore.Create(nil);
+  try
+    Check(Core.RegisterModule(Module));
+  finally
+    FreeAndNil(Core);
+  end;
+end;
+
+procedure TTestFrmCore.MethodGetLdapClient;
+var
+  Core: TFrmCore;
+begin
+  Core := TFrmCore.Create(nil);
+  try
+    Check(Assigned(Core.GetLdapClient));
+  finally
+    FreeAndNil(Core);
+  end;
+end;
+
+procedure TTestFrmCore.MethodGetLdapConfigs;
+var
+  Core: TFrmCore;
+begin
+  Core := TFrmCore.Create(nil);
+  try
+    Check(Assigned(Core.GetLdapConfigs));
+  finally
+    FreeAndNil(Core);
+  end;
+end;
+
+procedure TTestFrmCore.MethodGetModules;
+var
+  Core: TFrmCore;
+begin
+  Core := TFrmCore.Create(nil);
+  try
+    Check(Assigned(Core.GetModules));
+  finally
+    FreeAndNil(Core);
+  end;
+end;
+
+procedure TTestFrmCore.MethodGetRsatOptions;
+var
+  Core: TFrmCore;
+begin
+  Core := TFrmCore.Create(nil);
+  try
+    Check(Assigned(Core.GetRsatOptions));
+  finally
+    FreeAndNil(Core);
+  end;
+end;
+
+procedure TTestFrmCore.MethodCloseProperty;
+var
+  Core: TFrmCore;
+  VisProperties: TForm;
+begin
+  Core := TFrmCore.Create(nil);
+  try
+    Check(Core.VisPropertiesList.Count = 0);
+    VisProperties := Core.OpenProperty('test', 'testtest');
+    Check(Core.VisPropertiesList.Count = 1);
+    Core.CloseProperty(VisProperties);
+    Check(Core.VisPropertiesList.Count = 0);
+  finally
+    FreeAndNil(Core);
+  end;
+end;
+
+procedure TTestFrmCore.MethodOpenProperty;
+var
+  Core: TFrmCore;
+  VisProperties: TForm;
+begin
+  Core := TFrmCore.Create(nil);
+  try
+    Check(Core.VisPropertiesList.Count = 0);
+    VisProperties := Core.OpenProperty('test', 'testtest');
+    Check(Assigned(VisProperties));
+  finally
+    FreeAndNil(Core);
+  end;
+end;
 
 {$ENDIF}
 
