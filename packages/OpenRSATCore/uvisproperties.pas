@@ -626,6 +626,8 @@ type
       var Ghosted: Boolean; var ImageIndex: Integer);
     procedure RadioBtn_Change(Sender: TObject);
     procedure TisGrid_SecurityListUserKeyPress(Sender: TObject; var Key: char);
+    procedure Show; reintroduce;
+    procedure SetFocus; reintroduce;
     {$pop}
   private
     fSearchWord: RawUtf8;
@@ -2044,6 +2046,7 @@ begin
   IniPropStorage1.IniFileName := MakePath([GetAppConfigDir(false), 'RsatConsole.ini']);
 
   if not Assigned(Ldap) or
+     not Ldap.Connected or
      not Assigned(fCore) or
      (DN = '') then
     Exit;
@@ -2436,6 +2439,20 @@ procedure TVisProperties.TisGrid_SecurityListUserKeyPress(Sender: TObject;
   var Key: char);
 begin
   SearchInGrid(Timer_TisGridSearch, TisGrid_SecurityListUser, fSearchWord, Key);
+end;
+
+procedure TVisProperties.Show;
+begin
+  {$ifndef OPENRSATTESTS}
+  inherited Show();
+  {$endif}
+end;
+
+procedure TVisProperties.SetFocus;
+begin
+  {$ifndef OPENRSATTESTS}
+  inherited SetFocus;
+  {$endif}
 end;
 
 // VolumeGeneral

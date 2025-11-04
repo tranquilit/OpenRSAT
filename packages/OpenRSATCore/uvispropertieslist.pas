@@ -210,6 +210,7 @@ end;
 procedure TTestVisPropertiesList.MethodCreate;
 var
   Vis: TVisPropertiesList;
+  Core: TFrmCore;
 begin
   Vis := TVisPropertiesList.Create(nil);
   try
@@ -220,11 +221,27 @@ begin
   finally
     FreeAndNil(Vis);
   end;
+
+  Core := TFrmCore.Create(nil);
+  try
+    Vis := TVisPropertiesList.Create(Core);
+    try
+      Check(Assigned(Vis));
+      Check(Assigned(Vis.fCore));
+      Check(Assigned(Vis.fLog));
+      Check(not Assigned(Vis.fItems));
+    finally
+      FreeAndNil(Vis);
+    end;
+  finally
+    FreeAndNil(Vis);
+  end;
 end;
 
 procedure TTestVisPropertiesList.MethodNew;
 var
   Vis: TVisPropertiesList;
+  Core: TFrmCore;
 begin
   Vis := TVisPropertiesList.Create(nil);
   try
@@ -237,12 +254,30 @@ begin
   finally
     FreeAndNil(Vis);
   end;
+
+  Core := TFrmCore.Create(nil);
+  try
+    Vis := TVisPropertiesList.Create(Core);
+    try
+      Check(Vis.New('Test', 'Test'));
+      Check(Length(Vis.fItems) = 1);
+      Check(Assigned(Vis.fItems[0]));
+      Check(Vis.New('Test', 'Test'));
+      Check(Length(Vis.fItems) = 2);
+      Check(Assigned(Vis.fItems[1]));
+    finally
+      FreeAndNil(Vis);
+    end;
+  finally
+    FreeAndNil(Core);
+  end;
 end;
 
 procedure TTestVisPropertiesList.MethodOpen;
 var
   Vis: TVisPropertiesList;
   PItem: TVisProperties;
+  Core: TFrmCore;
 begin
   Vis := TVisPropertiesList.Create(nil);
   try
@@ -255,6 +290,26 @@ begin
     Check(vis.fItems[0] = PItem);
   finally
     FreeAndNil(Vis);
+    PItem := nil;
+  end;
+
+  Core := TFrmCore.Create(nil);
+  try
+    Vis := TVisPropertiesList.Create(Core);
+    try
+      Check(Vis.Open('Test', 'Test'));
+      Check(Length(Vis.fItems) = 1);
+      Check(Assigned(Vis.fItems[0]));
+      PItem := Vis.fItems[0];
+      Check(Vis.Open('Test', 'Test'));
+      Check(Length(Vis.fItems) = 1);
+      Check(Vis.fItems[0] = PItem);
+    finally
+      FreeAndNil(Vis);
+      PItem := nil;
+    end;
+  finally
+    FreeAndNil(Core);
   end;
 end;
 
@@ -262,6 +317,7 @@ procedure TTestVisPropertiesList.MethodClose;
 var
   Vis: TVisPropertiesList;
   PItem: TVisProperties;
+  Core: TFrmCore;
 begin
   Vis := TVisPropertiesList.Create(nil);
   try
@@ -272,6 +328,24 @@ begin
     Check(Length(Vis.fItems) = 0);
   finally
     FreeAndNil(Vis);
+    PItem := nil;
+  end;
+
+  Core := TFrmCore.Create(nil);
+  try
+    Vis := TVisPropertiesList.Create(Core);
+    try
+      Check(Vis.New('Test', 'Test'));
+      Check(Length(Vis.fItems) = 1);
+      PItem := Vis.fItems[0];
+      Check(Vis.Close(PItem));
+      Check(Length(Vis.fItems) = 0);
+    finally
+      FreeAndNil(Vis);
+      PItem := nil;
+    end;
+  finally
+    FreeAndNil(Core);
   end;
 end;
 
@@ -279,6 +353,7 @@ procedure TTestVisPropertiesList.MethodCloseAll;
 var
   Vis: TVisPropertiesList;
   i: Integer;
+  Core: TFrmCore;
 begin
   Vis := TVisPropertiesList.Create(nil);
   try
@@ -290,11 +365,28 @@ begin
   finally
     FreeAndNil(Vis);
   end;
+
+  Core := TFrmCore.Create(nil);
+  try
+    Vis := TVisPropertiesList.Create(Core);
+    try
+      for i := 0 to 10 do
+        Check(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i])));
+      Check(Length(Vis.fItems) = 11);
+      Check(Vis.CloseAll);
+      Check(Length(Vis.fItems) = 0);
+    finally
+      FreeAndNil(Vis);
+    end;
+  finally
+    FreeAndNil(Core);
+  end;
 end;
 
 procedure TTestVisPropertiesList.MethodExists;
 var
   Vis: TVisPropertiesList;
+  Core: TFrmCore;
 begin
   Vis := TVisPropertiesList.Create(nil);
   try
@@ -304,11 +396,26 @@ begin
   finally
     FreeAndNil(Vis);
   end;
+
+  Core := TFrmCore.Create(nil);
+  try
+    Vis := TVisPropertiesList.Create(Core);
+    try
+      Check(Vis.New('Test', 'TestTest'));
+      Check(Vis.Exists('Test'));
+      Check(not Vis.Exists('TestTest'));
+    finally
+      FreeAndNil(Vis);
+    end;
+  finally
+    FreeAndNil(Core);
+  end;
 end;
 
 procedure TTestVisPropertiesList.MethodFocus;
 var
   Vis: TVisPropertiesList;
+  Core: TFrmCore;
 begin
   Vis := TVisPropertiesList.Create(nil);
   try
@@ -321,12 +428,30 @@ begin
   finally
     FreeAndNil(Vis);
   end;
+
+  Core := TFrmCore.Create(nil);
+  try
+    Vis := TVisPropertiesList.Create(Core);
+    try
+      Check(Vis.New('Test', 'TestTest'));
+      Check(not Vis.Focus('Test'));
+      Check(Vis.Focus('TestTest'));
+      Check(Vis.Focus(0));
+      Check(not Vis.Focus(1));
+      Check(not Vis.Focus(-1));
+    finally
+      FreeAndNil(Vis);
+    end;
+  finally
+    FreeAndNil(Core);
+  end;
 end;
 
 procedure TTestVisPropertiesList.MethodCount;
 var
   Vis: TVisPropertiesList;
   i: Integer;
+  Core: TFrmCore;
 begin
   Vis := TVisPropertiesList.Create(nil);
   try
@@ -336,6 +461,20 @@ begin
   finally
     FreeAndNil(Vis);
   end;
+
+  Core := TFrmCore.Create(nil);
+  try
+    Vis := TVisPropertiesList.Create(Core);
+    try
+      for i := 0 to 10 do
+        Check(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i])));
+      Check(Vis.Count = 11);
+    finally
+      FreeAndNil(Vis);
+    end;
+  finally
+    FreeAndNil(Core);
+  end;
 end;
 
 procedure TTestVisPropertiesList.MethodGetNames;
@@ -343,6 +482,7 @@ var
   Vis: TVisPropertiesList;
   i: Integer;
   Names: TStringArray;
+  Core: TFrmCore;
 begin
   Vis := TVisPropertiesList.Create(nil);
   try
@@ -354,6 +494,25 @@ begin
       Check(Names[i] = Vis.fItems[i].Caption);
   finally
     FreeAndNil(Vis);
+    Names := nil;
+  end;
+
+  Core := TFrmCore.Create(nil);
+  try
+    Vis := TVisPropertiesList.Create(Core);
+    try
+      for i := 0 to 10 do
+        Check(Vis.New(FormatUtf8('Test%', [i]), FormatUtf8('Test%', [i])));
+      Names := Vis.GetNames;
+      Check(Length(Names) = Length(Vis.fItems));
+      for i := 0 to 10 do
+        Check(Names[i] = Vis.fItems[i].Caption);
+    finally
+      FreeAndNil(Vis);
+      Names := nil;
+    end;
+  finally
+    FreeAndNil(Core);
   end;
 end;
 
