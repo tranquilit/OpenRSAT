@@ -191,6 +191,7 @@ begin
   fFrmCore.Timer_AutoConnect.Enabled := fFrmCore.LdapConfigs.AutoConnect;
   UpdateViewThemeButtons;
   IniPropStorage1.Restore;
+  fFrmCore.SetStatusBarText(fFrmCore.StatusBar1.Panels.Add.Index, FormatUtf8('Version: %', [VERSION]));
 end;
 
 procedure TVisOpenRSAT.MenuItem_ViewThemeDarkClick(Sender: TObject);

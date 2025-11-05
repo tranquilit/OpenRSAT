@@ -72,7 +72,6 @@ type
 
     fVisPropertiesList: TVisPropertiesList;
 
-    procedure SetStatusBarText(ItemIndex: Integer; ItemText: RawUtf8);
     /// Register all modules to the core.
     procedure LoadModules;
   public
@@ -82,6 +81,8 @@ type
     /// Register a new module to the core.
     function RegisterModule(AModule: IModule {TAbstractModule}): boolean;
     property VisPropertiesList: TVisPropertiesList read fVisPropertiesList;
+
+    procedure SetStatusBarText(ItemIndex: Integer; ItemText: RawUtf8);
 
     //////////
     /// ICore

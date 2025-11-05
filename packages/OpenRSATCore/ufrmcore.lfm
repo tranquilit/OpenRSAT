@@ -28,9 +28,6 @@ object FrmCore: TFrmCore
     Panels = <    
       item
         Width = 50
-      end    
-      item
-        Width = 50
       end>
     ParentFont = False
     SimplePanel = False
