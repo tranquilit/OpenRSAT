@@ -1,7 +1,7 @@
 object VisOpenRSAT: TVisOpenRSAT
-  Left = 2885
+  Left = 568
   Height = 347
-  Top = 453
+  Top = 338
   Width = 746
   Caption = 'OpenRSAT'
   Constraints.MinHeight = 100

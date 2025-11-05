@@ -81,6 +81,8 @@ type
 
   end;
 
+{$I version.inc}
+
 var
   VisOpenRSAT: TVisOpenRSAT;
 
