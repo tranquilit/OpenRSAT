@@ -406,10 +406,7 @@ begin
 
   try
     Vis.Core := fCore;
-    if Vis.ShowModal <> mrOK then
-      Exit;
-    if Vis.RadioButton2.Checked then
-      fCore.ChangeDomainController(Vis.DomainController);
+    Vis.ShowModal;
   finally
     FreeAndNil(Vis);
   end;

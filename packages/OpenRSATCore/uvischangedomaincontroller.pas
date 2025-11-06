@@ -85,6 +85,7 @@ type
     function GetCurrentServer: RawUtf8;
     function RetrieveServers(CallBack: TCallBack; RetrieveExtra: Boolean = True): Boolean;
     function RetrieveServersExtra(CallBack: TCallBack): Boolean;
+    function ChangeConnection(DomainController: RawUtf8): Boolean;
   end;
 
   { TVisChangeDomainController }
@@ -92,8 +93,8 @@ type
   TVisChangeDomainController = class(TForm)
     Action_OK: TAction;
     ActionList1: TActionList;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
+    BitBtn_Cancel: TBitBtn;
+    BitBtn_OK: TBitBtn;
     CheckBox1: TCheckBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -104,8 +105,12 @@ type
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
     TisGrid1: TTisGrid;
+    procedure Action_OKExecute(Sender: TObject);
     procedure Action_OKUpdate(Sender: TObject);
+    procedure BitBtn_CancelKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure TisGrid1DblClick(Sender: TObject);
   private
     fLog: TSynLog;
     fChangeDomainController: TChangeDomainController;
@@ -339,18 +344,60 @@ begin
   result := True;
 end;
 
+function TChangeDomainController.ChangeConnection(DomainController: RawUtf8
+  ): Boolean;
+var
+  test: TLdapClient;
+begin
+  result := False;
+  test := TLdapClient.Create(fCore.LdapClient.Settings);
+  try
+    test.Settings.TargetHost := DomainController;
+    test.Settings.KerberosSpn := '';
+    if not test.Connect() then
+    begin
+      ShowLdapConnectError(test);
+      Exit;
+    end;
+    fCore.ChangeDomainController(DomainController);
+    result := True;
+  finally
+    FreeAndNil(test);
+  end;
+end;
+
 { TVisChangeDomainController }
 
 procedure TVisChangeDomainController.FormShow(Sender: TObject);
 begin
-  UnifyButtonsWidth([BitBtn1, BitBtn2]);
+  UnifyButtonsWidth([BitBtn_Cancel, BitBtn_OK]);
   UpdateCurrentServer;
   FillGrid;
+end;
+
+procedure TVisChangeDomainController.TisGrid1DblClick(Sender: TObject);
+begin
+  BitBtn_OK.Click;
 end;
 
 procedure TVisChangeDomainController.Action_OKUpdate(Sender: TObject);
 begin
   Action_OK.Enabled := (RadioButton1.Checked) or (RadioButton2.Checked and (TisGrid1.SelectedCount = 1));
+end;
+
+procedure TVisChangeDomainController.BitBtn_CancelKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  case Key of
+    27: Close;
+  end;
+end;
+
+procedure TVisChangeDomainController.Action_OKExecute(Sender: TObject);
+begin
+  if not fChangeDomainController.ChangeConnection(TisGrid1.SelectedRows._[0]^.S['name']) then
+    Exit;
+  Close;
 end;
 
 procedure TVisChangeDomainController.UpdateCurrentServer;

@@ -147,6 +147,7 @@ object VisChangeDomainController: TVisChangeDomainController
       Header.Style = hsFlatButtons
       TabOrder = 0
       ZebraColor = 15593713
+      OnDblClick = TisGrid1DblClick
     end
   end
   object CheckBox1: TCheckBox
@@ -172,7 +173,7 @@ object VisChangeDomainController: TVisChangeDomainController
     ClientHeight = 25
     ClientWidth = 640
     TabOrder = 3
-    object BitBtn1: TBitBtn
+    object BitBtn_Cancel: TBitBtn
       Left = 578
       Height = 25
       Top = 0
@@ -183,8 +184,9 @@ object VisChangeDomainController: TVisChangeDomainController
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 0
+      OnKeyDown = BitBtn_CancelKeyDown
     end
-    object BitBtn2: TBitBtn
+    object BitBtn_OK: TBitBtn
       Left = 528
       Height = 25
       Top = 0
@@ -194,7 +196,6 @@ object VisChangeDomainController: TVisChangeDomainController
       AutoSize = True
       BorderSpacing.Right = 8
       Default = True
-      ModalResult = 1
       TabOrder = 1
     end
   end
@@ -203,6 +204,7 @@ object VisChangeDomainController: TVisChangeDomainController
     Top = 16
     object Action_OK: TAction
       Caption = 'OK'
+      OnExecute = Action_OKExecute
       OnUpdate = Action_OKUpdate
     end
   end
