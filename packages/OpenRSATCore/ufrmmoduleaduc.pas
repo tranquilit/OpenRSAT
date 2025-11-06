@@ -583,6 +583,7 @@ const
     naMsDSShadowPrincipalContainer,
     naMsImagingPSPs,
     naMSMQQueueAlias,
+    naOrganizationalUnit,
     naPrinter,
     naUser,
     naSharedFolder
