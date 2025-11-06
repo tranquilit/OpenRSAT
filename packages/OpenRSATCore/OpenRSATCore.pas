@@ -20,8 +20,8 @@ uses
   ufrmrsatoptions, udns, uvisselectnewrecordtype, uvisnewresourcerecord, 
   uvisnewzonewizard, ufrmmodulesitesandservices, ufrmmoduleserviceinterfaces, 
   ufrmnewobject, ufrmnewsite, ufrmnewsubnet, uresourcestring, uaductreeview, 
-  ufrmmoduleadssoptions, uvisconnectiondetails, uvispropertieslist, 
-  uproperty, LazarusPackageIntf;
+  ufrmmoduleadssoptions, uvisconnectiondetails, uvispropertieslist, uproperty, 
+  uvischangedomaincontroller, LazarusPackageIntf;
 
 implementation
 

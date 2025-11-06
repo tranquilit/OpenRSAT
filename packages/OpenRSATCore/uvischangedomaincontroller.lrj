@@ -1,0 +1,16 @@
+{"version":1,"strings":[
+{"hash":50638258,"name":"tvischangedomaincontroller.caption","sourcebytes":[67,104,97,110,103,101,32,68,105,114,101,99,116,111,114,121,32,83,101,114,118,101,114],"value":"Change Directory Server"},
+{"hash":268161962,"name":"tvischangedomaincontroller.label1.caption","sourcebytes":[67,117,114,114,101,110,116,32,68,105,114,101,99,116,111,114,121,32,83,101,114,118,101,114,58],"value":"Current Directory Server:"},
+{"hash":12876686,"name":"tvischangedomaincontroller.label2.caption","sourcebytes":[60,69,109,112,116,121,62],"value":"<Empty>"},
+{"hash":80995754,"name":"tvischangedomaincontroller.label3.caption","sourcebytes":[67,104,97,110,103,101,32,116,111,58],"value":"Change to:"},
+{"hash":223888674,"name":"tvischangedomaincontroller.radiobutton1.caption","sourcebytes":[65,110,121,32,119,114,105,116,97,98,108,101,32,68,111,109,97,105,110,32,67,111,110,116,114,111,108,108,101,114],"value":"Any writable Domain Controller"},
+{"hash":199162229,"name":"tvischangedomaincontroller.radiobutton2.caption","sourcebytes":[84,104,105,115,32,68,111,109,97,105,110,32,67,111,110,116,114,111,108,108,101,114,32,111,114,32,65,68,32,76,68,83,32,105,110,115,116,97,110,99,101],"value":"This Domain Controller or AD LDS instance"},
+{"hash":346165,"name":"tvischangedomaincontroller.tisgrid1.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
+{"hash":368805,"name":"tvischangedomaincontroller.tisgrid1.header.columns[1].text","sourcebytes":[83,105,116,101],"value":"Site"},
+{"hash":139837477,"name":"tvischangedomaincontroller.tisgrid1.header.columns[2].text","sourcebytes":[68,67,32,84,121,112,101],"value":"DC Type"},
+{"hash":214768398,"name":"tvischangedomaincontroller.tisgrid1.header.columns[3].text","sourcebytes":[68,67,32,86,101,114,115,105,111,110],"value":"DC Version"},
+{"hash":95062979,"name":"tvischangedomaincontroller.tisgrid1.header.columns[4].text","sourcebytes":[83,116,97,116,117,115],"value":"Status"},
+{"hash":241761205,"name":"tvischangedomaincontroller.checkbox1.caption","sourcebytes":[83,97,118,101,32,116,104,105,115,32,115,101,116,116,105,110,103,32,102,111,114,32,116,104,101,32,99,117,114,114,101,110,116,32,99,111,110,115,111,108,101],"value":"Save this setting for the current console"},
+{"hash":151558993,"name":"tvischangedomaincontroller.bitbtn1.caption","sourcebytes":[66,105,116,66,116,110,49],"value":"BitBtn1"},
+{"hash":151558994,"name":"tvischangedomaincontroller.bitbtn2.caption","sourcebytes":[66,105,116,66,116,110,50],"value":"BitBtn2"}
+]}

@@ -1,0 +1,209 @@
+object VisChangeDomainController: TVisChangeDomainController
+  Left = 404
+  Height = 425
+  Top = 238
+  Width = 656
+  Caption = 'Change Directory Server'
+  ClientHeight = 425
+  ClientWidth = 656
+  LCLVersion = '4.1.0.0'
+  OnShow = FormShow
+  object Panel1: TPanel
+    Left = 8
+    Height = 30
+    Top = 8
+    Width = 640
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 30
+    ClientWidth = 640
+    TabOrder = 0
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 0
+      Height = 15
+      Top = 0
+      Width = 129
+      Caption = 'Current Directory Server:'
+    end
+    object Label2: TLabel
+      AnchorSideLeft.Control = Label1
+      AnchorSideTop.Control = Label1
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 15
+      Top = 15
+      Width = 50
+      BorderSpacing.Left = 16
+      Caption = '<Empty>'
+    end
+  end
+  object Panel2: TPanel
+    Left = 8
+    Height = 311
+    Top = 46
+    Width = 640
+    Align = alClient
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 311
+    ClientWidth = 640
+    TabOrder = 1
+    object Label3: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Panel2
+      Left = 0
+      Height = 15
+      Top = 0
+      Width = 58
+      Caption = 'Change to:'
+    end
+    object RadioButton1: TRadioButton
+      AnchorSideLeft.Control = Label3
+      AnchorSideTop.Control = Label3
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 19
+      Top = 15
+      Width = 185
+      BorderSpacing.Left = 16
+      Caption = 'Any writable Domain Controller'
+      Enabled = False
+      TabOrder = 2
+    end
+    object RadioButton2: TRadioButton
+      AnchorSideLeft.Control = RadioButton1
+      AnchorSideTop.Control = RadioButton1
+      AnchorSideTop.Side = asrBottom
+      Left = 16
+      Height = 19
+      Top = 34
+      Width = 244
+      Caption = 'This Domain Controller or AD LDS instance'
+      Checked = True
+      TabOrder = 1
+      TabStop = True
+    end
+    object TisGrid1: TTisGrid
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = RadioButton2
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Panel2
+      AnchorSideBottom.Side = asrBottom
+      Left = 32
+      Height = 258
+      Top = 53
+      Width = 608
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Left = 32
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Text = 'Name'
+          Width = 199
+          PropertyName = 'name'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 1
+          Text = 'Site'
+          Width = 125
+          PropertyName = 'site'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 2
+          Text = 'DC Type'
+          Width = 80
+          PropertyName = 'dctype'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 3
+          Text = 'DC Version'
+          Width = 88
+          PropertyName = 'dcversion'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 4
+          Text = 'Status'
+          Width = 102
+          PropertyName = 'status'
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MaxHeight = 101
+      Header.MinHeight = 19
+      Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.Style = hsFlatButtons
+      TabOrder = 0
+      ZebraColor = 15593713
+    end
+  end
+  object CheckBox1: TCheckBox
+    Left = 8
+    Height = 19
+    Top = 365
+    Width = 640
+    Align = alBottom
+    BorderSpacing.Around = 8
+    Caption = 'Save this setting for the current console'
+    Enabled = False
+    TabOrder = 2
+  end
+  object Panel3: TPanel
+    Left = 8
+    Height = 25
+    Top = 392
+    Width = 640
+    Align = alBottom
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 25
+    ClientWidth = 640
+    TabOrder = 3
+    object BitBtn1: TBitBtn
+      Left = 578
+      Height = 25
+      Top = 0
+      Width = 62
+      Align = alRight
+      AutoSize = True
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 0
+    end
+    object BitBtn2: TBitBtn
+      Left = 528
+      Height = 25
+      Top = 0
+      Width = 42
+      Action = Action_OK
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Right = 8
+      Default = True
+      ModalResult = 1
+      TabOrder = 1
+    end
+  end
+  object ActionList1: TActionList
+    Left = 296
+    Top = 16
+    object Action_OK: TAction
+      Caption = 'OK'
+      OnUpdate = Action_OKUpdate
+    end
+  end
+end

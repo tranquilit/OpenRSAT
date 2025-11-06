@@ -160,7 +160,9 @@ begin
     Exit;
   fDomainControllerName := AValue;
   Settings.TargetHost := fDomainControllerName;
+  Settings.KerberosSpn := '';
   Reconnect('Change Domain Controller');
+  NotifyConnect;
 end;
 
 procedure TRsatLdapClient.SetDomainName(AValue: RawUtf8);
@@ -170,6 +172,7 @@ begin
   fDomainName := AValue;
   Settings.KerberosDN := fDomainName;
   Reconnect('Change Domain');
+  NotifyConnect;
 end;
 
 procedure TRsatLdapClient.NotifyConnect;

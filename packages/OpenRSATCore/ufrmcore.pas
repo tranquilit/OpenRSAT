@@ -94,6 +94,7 @@ type
     procedure CloseProperty(VisProperty: TForm);
     function OpenProperty(AName, DistinguishedName: String): TForm;
     procedure Load;
+    procedure ChangeDomainController(DomainController: RawUtf8);
 
     property LdapClient: TRsatLdapClient read GetLdapClient;
     property LdapConfigs: TLdapConfigs read GetLdapConfigs;
@@ -216,6 +217,7 @@ begin
   end;
 
   SetStatusBarText(0, FormatUtf8('User: %', [LdapClient.BoundUser]));
+  SetStatusBarText(1, FormatUtf8('DC: %', [LdapClient.Settings.TargetHost]));
 end;
 
 procedure TFrmCore.Action_AdvancedFeaturesExecute(Sender: TObject);
@@ -454,6 +456,12 @@ end;
 procedure TFrmCore.Load;
 begin
   LoadModules;
+end;
+
+procedure TFrmCore.ChangeDomainController(DomainController: RawUtf8);
+begin
+  LdapClient.DomainControllerName := DomainController;
+  SetStatusBarText(1, FormatUtf8('DC: %', [DomainController]));
 end;
 
 {$IFDEF OPENRSATTESTS}

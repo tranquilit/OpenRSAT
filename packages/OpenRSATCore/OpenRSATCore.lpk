@@ -11,7 +11,7 @@
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Files Count="54">
+    <Files Count="55">
       <Item1>
         <Filename Value="ursatldapclient.pas"/>
         <UnitName Value="ursatldapclient"/>
@@ -228,6 +228,10 @@
         <Filename Value="uproperty.pas"/>
         <UnitName Value="uproperty"/>
       </Item54>
+      <Item55>
+        <Filename Value="uvischangedomaincontroller.pas"/>
+        <UnitName Value="uvischangedomaincontroller"/>
+      </Item55>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>

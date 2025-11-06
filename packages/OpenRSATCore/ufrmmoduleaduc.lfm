@@ -686,8 +686,10 @@ object FrmModuleADUC: TFrmModuleADUC
     object Action_ShowGPO: TAction
       Caption = 'Show GPO'
     end
-    object Action_ChangePartition: TAction
-      Caption = 'Change partition'
+    object Action_ChangeDomainController: TAction
+      Caption = 'Change Domain Controller'
+      OnExecute = Action_ChangeDomainControllerExecute
+      OnUpdate = Action_ChangeDomainControllerUpdate
     end
     object Action_SitesAndServices: TAction
       Caption = 'Sites and services'
@@ -708,8 +710,8 @@ object FrmModuleADUC: TFrmModuleADUC
     object MenuItem_DelegateControl: TMenuItem
       Action = Action_DelegateControl
     end
-    object MenuItem_ChangePartition: TMenuItem
-      Action = Action_ChangePartition
+    object MenuItem_ChangeDomainController: TMenuItem
+      Action = Action_ChangeDomainController
     end
     object MenuItem_AddToAGroup: TMenuItem
       Action = Action_TaskAddToAGroup

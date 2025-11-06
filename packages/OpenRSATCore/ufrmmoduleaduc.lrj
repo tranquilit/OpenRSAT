@@ -56,7 +56,7 @@
 {"hash":109438964,"name":"tfrmmoduleaduc.action_next.caption","sourcebytes":[65,99,116,105,111,110,95,78,101,120,116],"value":"Action_Next"},
 {"hash":63147732,"name":"tfrmmoduleaduc.action_parent.caption","sourcebytes":[65,99,116,105,111,110,95,80,97,114,101,110,116],"value":"Action_Parent"},
 {"hash":258558431,"name":"tfrmmoduleaduc.action_showgpo.caption","sourcebytes":[83,104,111,119,32,71,80,79],"value":"Show GPO"},
-{"hash":226707550,"name":"tfrmmoduleaduc.action_changepartition.caption","sourcebytes":[67,104,97,110,103,101,32,112,97,114,116,105,116,105,111,110],"value":"Change partition"},
+{"hash":107327794,"name":"tfrmmoduleaduc.action_changedomaincontroller.caption","sourcebytes":[67,104,97,110,103,101,32,68,111,109,97,105,110,32,67,111,110,116,114,111,108,108,101,114],"value":"Change Domain Controller"},
 {"hash":259535363,"name":"tfrmmoduleaduc.action_sitesandservices.caption","sourcebytes":[83,105,116,101,115,32,97,110,100,32,115,101,114,118,105,99,101,115],"value":"Sites and services"},
 {"hash":145117667,"name":"tfrmmoduleaduc.action_usersandcomputers.caption","sourcebytes":[85,115,101,114,115,32,97,110,100,32,99,111,109,112,117,116,101,114,115],"value":"Users and computers"},
 {"hash":60404764,"name":"tfrmmoduleaduc.action_delegatecontrol.caption","sourcebytes":[68,101,108,101,103,97,116,101,32,99,111,110,116,114,111,108],"value":"Delegate control"},

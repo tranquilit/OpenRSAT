@@ -8,6 +8,7 @@ uses
   Classes,
   SysUtils,
   Forms,
+  mormot.core.base,
   uldapconfigs,
   ursatldapclient,
   ursatmodules,
@@ -26,6 +27,7 @@ type
     procedure CloseProperty(VisProperty: TForm); virtual;
     function OpenProperty(Name, DistinguishedName: String): TForm; virtual;
     procedure Load; virtual;
+    procedure ChangeDomainController(DomainController: RawUtf8); virtual;
 
     property LdapClient: TRsatLdapClient read GetLdapClient;
     property LdapConfigs: TLdapConfigs read GetLdapConfigs;

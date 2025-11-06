@@ -44,7 +44,7 @@ type
 
   TFrmModuleADUC = class(TFrameModule)
     ActionList_ADUC: TActionList;
-    Action_ChangePartition: TAction;
+    Action_ChangeDomainController: TAction;
     Action_Copy: TAction;
     Action_Cut: TAction;
     Action_DelegateControl: TAction;
@@ -125,7 +125,7 @@ type
     MenuItem_SendMail: TMenuItem;
     MenuItem_Manage: TMenuItem;
     MenuItem_Find: TMenuItem;
-    MenuItem_ChangePartition: TMenuItem;
+    MenuItem_ChangeDomainController: TMenuItem;
     MenuItem_AddToAGroup: TMenuItem;
     MenuItem_NameMapping: TMenuItem;
     MenuItem_DisableAccount: TMenuItem;
@@ -168,6 +168,8 @@ type
     ToolButton_Search: TToolButton;
     ToolButton_User: TToolButton;
     TreeADUC: TTreeView;
+    procedure Action_ChangeDomainControllerExecute(Sender: TObject);
+    procedure Action_ChangeDomainControllerUpdate(Sender: TObject);
     procedure Action_CopyExecute(Sender: TObject);
     procedure Action_CopyUpdate(Sender: TObject);
     procedure Action_CutExecute(Sender: TObject);
@@ -310,6 +312,7 @@ uses
   uvisdelegatecontrol,
   uvischangedn,
   uvistaskresetpassword,
+  uvischangedomaincontroller,
   ucommon,
   ufrmrsatoptions;
 
@@ -388,6 +391,28 @@ procedure TFrmModuleADUC.Action_CopyExecute(Sender: TObject);
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Execute', [Action_Copy.Name]);
+end;
+
+procedure TFrmModuleADUC.Action_ChangeDomainControllerUpdate(Sender: TObject);
+begin
+
+end;
+
+procedure TFrmModuleADUC.Action_ChangeDomainControllerExecute(Sender: TObject);
+var
+  Vis: TVisChangeDomainController;
+begin
+  Vis := TVisChangeDomainController.Create(Self);
+
+  try
+    Vis.Core := fCore;
+    if Vis.ShowModal <> mrOK then
+      Exit;
+    if Vis.RadioButton2.Checked then
+      fCore.ChangeDomainController(Vis.DomainController);
+  finally
+    FreeAndNil(Vis);
+  end;
 end;
 
 procedure TFrmModuleADUC.Action_CopyUpdate(Sender: TObject);
@@ -1241,7 +1266,7 @@ var
 begin
   VisibleItems := [
     MenuItem_DelegateControl,
-    MenuItem_ChangePartition,
+    MenuItem_ChangeDomainController,
     MenuItem_New,
     MenuItem_SwitchToolbarSize,
     MenuItem_Search,
