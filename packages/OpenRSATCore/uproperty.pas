@@ -9,7 +9,9 @@ uses
   SysUtils,
   mormot.core.base,
   mormot.net.ldap,
-  uinterfaceproperty;
+  uinterfacecore,
+  uinterfaceproperty,
+  ursatldapclient;
 
 type
 
@@ -19,17 +21,20 @@ type
   private
     fBaseAttributes, fAttributes: TLdapAttributeList;
 
+    fCore: ICore;
+
     function GetReadable(Name: RawUtf8; index: Integer = 0): RawUtf8;
     function GetRaw(Name: RawUtf8; index: Integer = 0): RawByteString;
     procedure Add(Name: RawUtf8; Value: RawUtf8; Option: TLdapAddOption = aoReplaceValue);
-
   public
+    constructor Create(Core: ICore = nil);
     destructor Destroy; override;
   private
     function GetcanonicalName: RawUtf8;
     function GetCN: RawUtf8;
     function Getdescription: RawUtf8;
     function GetdistinguishedName: RawUtf8;
+    function GetLdapClient: TRsatLdapClient;
     function Getname: RawUtf8;
     function GetobjectGuid: RawUtf8;
     function GetobjectSid: RawUtf8;
@@ -47,6 +52,9 @@ type
     procedure SetwhenChanged(AValue: TDateTime);
     procedure SetwhenCreated(AValue: TDateTime);
   public
+    property Core: ICore read fCore write fCore;
+    property LdapClient: TRsatLdapClient read GetLdapClient;
+
     property Attributes: TLdapAttributeList read fAttributes write SetAttributes;
     property sAMAccountName: RawUtf8 read GetsAMAccountName write SetsAMAccountName;
     property distinguishedName: RawUtf8 read GetdistinguishedName write SetdistinguishedName;
@@ -85,6 +93,14 @@ end;
 function TProperty.GetdistinguishedName: RawUtf8;
 begin
   result := GetReadable('distinguishedName');
+end;
+
+function TProperty.GetLdapClient: TRsatLdapClient;
+begin
+  result := nil;
+
+  if Assigned(fCore) then
+    result := fCore.LdapClient;
 end;
 
 function TProperty.Getname: RawUtf8;
@@ -195,6 +211,11 @@ begin
     Attribute := fAttributes.Add(Name);
 
   Attribute.Add(Value, Option);
+end;
+
+constructor TProperty.Create(Core: ICore);
+begin
+
 end;
 
 destructor TProperty.Destroy;
