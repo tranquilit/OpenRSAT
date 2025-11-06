@@ -10,7 +10,6 @@ uses
   mormot.core.base,
   mormot.net.ldap,
   uinterfacecore,
-  uinterfaceproperty,
   ursatldapclient;
 
 type
