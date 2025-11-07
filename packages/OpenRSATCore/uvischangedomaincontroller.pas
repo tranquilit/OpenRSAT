@@ -104,16 +104,20 @@ type
     Panel3: TPanel;
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
+    Timer_SearchInGrid: TTimer;
     TisGrid1: TTisGrid;
     procedure Action_OKExecute(Sender: TObject);
     procedure Action_OKUpdate(Sender: TObject);
     procedure BitBtn_CancelKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure Timer_SearchInGridTimer(Sender: TObject);
     procedure TisGrid1DblClick(Sender: TObject);
+    procedure TisGrid1KeyPress(Sender: TObject; var Key: char);
   private
     fLog: TSynLog;
     fChangeDomainController: TChangeDomainController;
+    fSearchWord: RawUtf8;
 
     function GetCore: ICore;
     procedure SetCore(AValue: ICore);
@@ -389,9 +393,20 @@ begin
   FillGrid;
 end;
 
+procedure TVisChangeDomainController.Timer_SearchInGridTimer(Sender: TObject);
+begin
+  Timer_SearchInGrid.Enabled := False;
+end;
+
 procedure TVisChangeDomainController.TisGrid1DblClick(Sender: TObject);
 begin
   BitBtn_OK.Click;
+end;
+
+procedure TVisChangeDomainController.TisGrid1KeyPress(Sender: TObject;
+  var Key: char);
+begin
+  SearchInGrid(Timer_SearchInGrid, TisGrid1, fSearchWord, Key);
 end;
 
 procedure TVisChangeDomainController.Action_OKUpdate(Sender: TObject);

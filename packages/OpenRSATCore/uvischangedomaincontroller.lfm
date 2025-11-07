@@ -148,6 +148,7 @@ object VisChangeDomainController: TVisChangeDomainController
       TabOrder = 0
       ZebraColor = 15593713
       OnDblClick = TisGrid1DblClick
+      OnKeyPress = TisGrid1KeyPress
     end
   end
   object CheckBox1: TCheckBox
@@ -207,5 +208,11 @@ object VisChangeDomainController: TVisChangeDomainController
       OnExecute = Action_OKExecute
       OnUpdate = Action_OKUpdate
     end
+  end
+  object Timer_SearchInGrid: TTimer
+    Enabled = False
+    OnTimer = Timer_SearchInGridTimer
+    Left = 8
+    Top = 8
   end
 end
