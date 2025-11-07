@@ -608,6 +608,10 @@ msgstr ""
 msgid "Write"
 msgstr ""
 
+#: ucommon.rssecuritydescriptorinvalid
+msgid "Fail to read security descriptor"
+msgstr ""
+
 #: ucommon.rssinglestringeditor
 msgid "Single String Editor"
 msgstr ""

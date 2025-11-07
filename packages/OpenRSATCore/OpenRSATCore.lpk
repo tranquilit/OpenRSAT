@@ -8,10 +8,11 @@
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
+        <OtherUnitFiles Value="PropertyPages"/>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Files Count="55">
+    <Files Count="58">
       <Item1>
         <Filename Value="ursatldapclient.pas"/>
         <UnitName Value="ursatldapclient"/>
@@ -232,6 +233,18 @@
         <Filename Value="uvischangedomaincontroller.pas"/>
         <UnitName Value="uvischangedomaincontroller"/>
       </Item55>
+      <Item56>
+        <Filename Value="PropertyPages\upropertyframe.pas"/>
+        <UnitName Value="upropertyframe"/>
+      </Item56>
+      <Item57>
+        <Filename Value="PropertyPages\ufrmpropertyobject.pas"/>
+        <UnitName Value="ufrmpropertyobject"/>
+      </Item57>
+      <Item58>
+        <Filename Value="PropertyPages\ufrmpropertymanagedby.pas"/>
+        <UnitName Value="ufrmpropertymanagedby"/>
+      </Item58>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>

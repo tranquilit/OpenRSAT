@@ -54,6 +54,8 @@ resourcestring
   rsLdapSearchFailed = 'Ldap search failed: "%"';
   rsLdapModifyFailed = 'Ldap modify failed: "%"';
 
+  rsSecurityDescriptorInvalid = 'Fail to read security descriptor';
+
   // https://ldap.com/ldap-result-code-reference-core-ldapv3-result-codes/#rc-constraintViolation
   rsOperationsError = 'Operation occurs in a wrong order.'; // leOperationsError (1)
   rsProtocolError = 'Malformed LDAP message. Unrecognized operation.'; // leProtocolError (2)
