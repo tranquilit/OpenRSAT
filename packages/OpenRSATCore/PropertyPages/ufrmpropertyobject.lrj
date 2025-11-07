@@ -1,0 +1,10 @@
+{"version":1,"strings":[
+{"hash":230053525,"name":"tfrmpropertyobject.label_canonicalname.caption","sourcebytes":[79,98,106,101,99,116,115,39,115,32,99,97,110,111,110,105,99,97,108,32,110,97,109,101],"value":"Objects's canonical name"},
+{"hash":59447674,"name":"tfrmpropertyobject.label_objectclass.caption","sourcebytes":[79,98,106,101,99,116,39,115,32,67,108,97,115,115,32,58],"value":"Object's Class :"},
+{"hash":193658042,"name":"tfrmpropertyobject.label_whencreated.caption","sourcebytes":[67,114,101,97,116,101,100,32,58],"value":"Created :"},
+{"hash":264958874,"name":"tfrmpropertyobject.label_whenchanged.caption","sourcebytes":[77,111,100,105,102,105,101,100,32,58],"value":"Modified :"},
+{"hash":40021434,"name":"tfrmpropertyobject.label_usnupdate.caption","sourcebytes":[65,109,111,117,110,116,32,111,102,32,115,101,113,117,101,110,116,105,97,108,32,117,112,100,97,116,101,115,32,40,85,83,78,41,58],"value":"Amount of sequential updates (USN):"},
+{"hash":180058698,"name":"tfrmpropertyobject.label_usnactual.caption","sourcebytes":[65,99,116,117,97,108,32,58],"value":"Actual :"},
+{"hash":234952394,"name":"tfrmpropertyobject.label_usnoriginal.caption","sourcebytes":[79,114,105,103,105,110,97,108,32,58],"value":"Original :"},
+{"hash":234267966,"name":"tfrmpropertyobject.action_protection.caption","sourcebytes":[80,114,111,116,101,99,116,32,111,98,106,101,99,116,32,102,114,111,109,32,97,99,99,105,100,101,110,116,97,108,32,100,101,108,101,116,105,111,110],"value":"Protect object from accidental deletion"}
+]}

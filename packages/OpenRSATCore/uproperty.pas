@@ -8,7 +8,9 @@ uses
   Classes,
   SysUtils,
   mormot.core.base,
+  mormot.core.os.security,
   mormot.net.ldap,
+  ucommon,
   uinterfacecore,
   ursatldapclient;
 
@@ -29,25 +31,31 @@ type
     constructor Create(Core: ICore = nil);
     destructor Destroy; override;
   private
+    fSecurityDescriptor: TSecurityDescriptor;
+
     function GetcanonicalName: RawUtf8;
     function GetCN: RawUtf8;
     function Getdescription: RawUtf8;
     function GetdistinguishedName: RawUtf8;
     function GetLdapClient: TRsatLdapClient;
+    function GetmanagedBy: RawUtf8;
     function Getname: RawUtf8;
     function GetobjectGuid: RawUtf8;
     function GetobjectSid: RawUtf8;
     function GetsAMAccountName: RawUtf8;
+    function GetSecurityDescriptor: PSecurityDescriptor;
     function GetwhenChanged: TDateTime;
     function GetwhenCreated: TDateTime;
     procedure SetAttributes(AValue: TLdapAttributeList);
     procedure SetCN(AValue: RawUtf8);
     procedure Setdescription(AValue: RawUtf8);
     procedure SetdistinguishedName(AValue: RawUtf8);
+    procedure SetmanagedBy(AValue: RawUtf8);
     procedure Setname(AValue: RawUtf8);
     procedure SetobjectGuid(AValue: RawUtf8);
     procedure SetobjectSid(AValue: RawUtf8);
     procedure SetsAMAccountName(AValue: RawUtf8);
+    procedure SetSecurityDescriptor(AValue: PSecurityDescriptor);
     procedure SetwhenChanged(AValue: TDateTime);
     procedure SetwhenCreated(AValue: TDateTime);
   public
@@ -61,8 +69,10 @@ type
     property name: RawUtf8 read Getname write Setname;
     property CN: RawUtf8 read GetCN write SetCN;
     property description: RawUtf8 read Getdescription write Setdescription;
+    property managedBy: RawUtf8 read GetmanagedBy write SetmanagedBy;
     property objectSid: RawUtf8 read GetobjectSid write SetobjectSid;
     property objectGuid: RawUtf8 read GetobjectGuid write SetobjectGuid;
+    property SecurityDescriptor: PSecurityDescriptor read GetSecurityDescriptor write SetSecurityDescriptor;
     property whenCreated: TDateTime read GetwhenCreated write SetwhenCreated;
     property whenChanged: TDateTime read GetwhenChanged write SetwhenChanged;
   end;
@@ -102,6 +112,11 @@ begin
     result := fCore.LdapClient;
 end;
 
+function TProperty.GetmanagedBy: RawUtf8;
+begin
+  result := GetReadable('managedBy');
+end;
+
 function TProperty.Getname: RawUtf8;
 begin
   result := GetReadable('name');
@@ -120,6 +135,20 @@ end;
 function TProperty.GetsAMAccountName: RawUtf8;
 begin
   result := GetReadable('sAMAccountName');
+end;
+
+function TProperty.GetSecurityDescriptor: PSecurityDescriptor;
+var
+  Attribute: TLdapAttribute;
+begin
+  result := nil;
+  Attribute := Attributes.Find('nTSecurityDescriptor');
+  if not Assigned(Attribute) then
+    Exit;
+  fSecurityDescriptor.Clear;
+  if not fSecurityDescriptor.FromBinary(Attribute.GetRaw()) then
+    Exit;
+  result := @fSecurityDescriptor;
 end;
 
 function TProperty.GetwhenChanged: TDateTime;
@@ -158,6 +187,11 @@ begin
   Add('distinguishedName', AValue);
 end;
 
+procedure TProperty.SetmanagedBy(AValue: RawUtf8);
+begin
+  Add('managedBy', AValue);
+end;
+
 procedure TProperty.Setname(AValue: RawUtf8);
 begin
   Add('name', AValue);
@@ -176,6 +210,16 @@ end;
 procedure TProperty.SetsAMAccountName(AValue: RawUtf8);
 begin
   Add('sAMAccountName', AValue);
+end;
+
+procedure TProperty.SetSecurityDescriptor(AValue: PSecurityDescriptor);
+var
+  Attribute: TLdapAttribute;
+begin
+  if not Assigned(AValue) then
+    Exit;
+
+  Add('nTSecurityDescriptor', AValue^.ToBinary);
 end;
 
 procedure TProperty.SetwhenChanged(AValue: TDateTime);
