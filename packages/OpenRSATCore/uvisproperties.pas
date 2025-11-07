@@ -1233,6 +1233,7 @@ var
   SearchResult: TLdapResult;
 begin
   Tab_SubnetGeneral.TabVisible := True;
+  PageControl.ActivePage := Tab_SubnetGeneral;
 
   fSubnetInfo.Init();
   Ldap.SearchBegin();
@@ -1262,6 +1263,7 @@ begin
     until Ldap.SearchCookie = '';
   finally
     ComboBox_subnet_site.Items.EndUpdate;
+    ComboBox_subnet_site.Sorted := True;
     Ldap.SearchEnd;
   end;
   Edit_subnet_description.Text := GetAttributeIndex('description', 0);
