@@ -212,14 +212,28 @@ procedure TThreadIsDCOnline.Execute;
 var
   LdapClient: TLdapClient;
 begin
+  TSynLog.Add.Log(sllTrace, 'Is DC online?', self);
   fSettings.TargetHost := fDomainController;
+  fSettings.KerberosSpn := '';
   fSettings.UserName := '';
   fSettings.Password := '';
   LdapClient := TLdapClient.Create(fSettings);
   try
-    fSuccess := LdapClient.Connect and Assigned(LdapClient.SearchObject('', '', 'dnsHostName'));
-    Synchronize(@SendResult);
+    fSuccess := False;
+    if not LdapClient.Connect then
+    begin
+      TSynLog.Add.Log(sllTrace, 'Connection failure. (%)', [LdapClient.ResultString], self);
+      Exit;
+    end;
+    if not Assigned(LdapClient.SearchObject('', '', 'dnsHostName')) then
+    begin
+      TSynLog.Add.Log(sllTrace, 'Cannot retrieve root object "dnsHostName" attribute.', self);
+      Exit;
+    end;
+    TSynLog.Add.Log(sllTrace, 'DC is online!');
+    fSuccess := True;
   finally
+    Synchronize(@SendResult);
     FreeAndNil(LdapClient);
     FreeAndNil(fSettings);
   end;
