@@ -144,6 +144,7 @@ object VisChangeDomainController: TVisChangeDomainController
       Header.MaxHeight = 101
       Header.MinHeight = 19
       Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.SortColumn = 0
       Header.Style = hsFlatButtons
       TabOrder = 0
       ZebraColor = 15593713
