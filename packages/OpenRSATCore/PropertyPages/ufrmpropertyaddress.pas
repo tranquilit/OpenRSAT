@@ -48,6 +48,7 @@ type
     fProperty: TProperty;
     fCountryCodes: TDocVariantData;
     fLog: TSynLog;
+    IsUpdating: Boolean;
 
     // Expose TLdapAttributeList.Add with default replace value option.
     procedure Add(AttributeName, AttributeValue: RawUtf8; Option: TLdapAddOption = aoReplaceValue);
@@ -76,6 +77,8 @@ var
   PCountryCode: PDocVariantData;
   c, co, countryCode: RawUtf8;
 begin
+  if IsUpdating then
+    Exit;
   idx := ComboBox_adr_CountryCode.ItemIndex;
   PCountryCode := fCountryCodes._[idx];
 
@@ -122,7 +125,8 @@ end;
 procedure TFrmPropertyAddress.Add(AttributeName, AttributeValue: RawUtf8;
   Option: TLdapAddOption);
 begin
-  fProperty.Attributes.Add(AttributeName, AttributeValue, Option);
+  if Assigned(fProperty) then
+    fProperty.Attributes.Add(AttributeName, AttributeValue, Option);
 end;
 
 procedure TFrmPropertyAddress.LoadCountryCodes;
@@ -159,6 +163,8 @@ begin
     fLog.Log(sllTrace, 'Create', Self);
 
   LoadCountryCodes;
+  Caption := 'Address';
+  IsUpdating := False;
 end;
 
 procedure TFrmPropertyAddress.Update(Props: TProperty);
@@ -171,7 +177,12 @@ begin
   Edit_adr_st.Text := Props.Attributes.GetByName('st');
   Edit_adr_PostalCode.Text := Props.Attributes.GetByName('postalCode');
 
-  ComboBox_adr_CountryCode.ItemIndex := ComboBox_adr_CountryCode.Items.IndexOf(Props.Attributes.GetByName('co'));
+  IsUpdating := True;
+  try
+    ComboBox_adr_CountryCode.ItemIndex := ComboBox_adr_CountryCode.Items.IndexOf(Props.Attributes.GetByName('co'));
+  finally
+    IsUpdating := False;
+  end;
 end;
 
 end.

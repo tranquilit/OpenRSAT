@@ -12,7 +12,7 @@
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Files Count="59">
+    <Files Count="60">
       <Item1>
         <Filename Value="ursatldapclient.pas"/>
         <UnitName Value="ursatldapclient"/>
@@ -249,6 +249,10 @@
         <Filename Value="PropertyPages\ufrmpropertyaddress.pas"/>
         <UnitName Value="ufrmpropertyaddress"/>
       </Item59>
+      <Item60>
+        <Filename Value="PropertyPages\ufrmpropertymemberof.pas"/>
+        <UnitName Value="ufrmpropertymemberof"/>
+      </Item60>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>
