@@ -325,6 +325,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create', Self);
 
+  Caption := 'Managed By';
   UnifyButtonsWidth([Btn_Clear, Btn_Change, Btn_Property]);
 end;
 

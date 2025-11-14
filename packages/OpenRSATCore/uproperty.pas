@@ -258,7 +258,7 @@ end;
 
 constructor TProperty.Create(Core: ICore);
 begin
-
+  fCore := Core;
 end;
 
 destructor TProperty.Destroy;

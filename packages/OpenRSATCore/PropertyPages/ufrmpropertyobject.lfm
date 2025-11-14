@@ -6,8 +6,8 @@ object FrmPropertyObject: TFrmPropertyObject
   ClientHeight = 370
   ClientWidth = 412
   TabOrder = 0
-  DesignLeft = 2803
-  DesignTop = 282
+  DesignLeft = 325
+  DesignTop = 377
   object Panel_Object: TPanel
     Left = 8
     Height = 54

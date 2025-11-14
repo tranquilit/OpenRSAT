@@ -7,8 +7,8 @@ object FrmModuleADUC: TFrmModuleADUC
   ClientHeight = 400
   ClientWidth = 800
   TabOrder = 0
-  DesignLeft = 708
-  DesignTop = 150
+  DesignLeft = 709
+  DesignTop = 152
   object Splitter1: TSplitter
     Left = 168
     Height = 349

@@ -1,7 +1,7 @@
 object VisProperties: TVisProperties
-  Left = 963
+  Left = 965
   Height = 504
-  Top = 195
+  Top = 197
   Width = 480
   BorderIcons = [biSystemMenu, biHelp]
   ClientHeight = 504
@@ -27,7 +27,7 @@ object VisProperties: TVisProperties
     Height = 446
     Top = 8
     Width = 464
-    ActivePage = Tab_Address
+    ActivePage = Tab_MemberOf
     Anchors = [akTop, akLeft, akRight, akBottom]
     AutoSize = True
     BorderSpacing.Left = 8
@@ -36,7 +36,7 @@ object VisProperties: TVisProperties
     BorderSpacing.Bottom = 8
     MultiLine = True
     Options = [nboMultiLine]
-    TabIndex = 10
+    TabIndex = 20
     TabOrder = 0
     OnChange = PageControlChange
     object Tab_DefaultGeneral: TTabSheet

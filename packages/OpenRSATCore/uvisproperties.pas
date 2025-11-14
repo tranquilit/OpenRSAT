@@ -32,7 +32,9 @@ uses
   Controls,
   uinterfacecore,
   ucommon,
-  ucoredatamodule;
+  ucoredatamodule,
+  upropertyframe,
+  uproperty;
 
 type
 
@@ -637,6 +639,12 @@ type
     fCore: ICore;
 
     fSubnetInfo: TDocVariantData;
+
+    fProperty: TProperty;
+
+    fPropertyFrameList: Array of TPropertyFrame;
+
+    procedure NewTab(NewFrameClass: TPropertyFrameClass);
     procedure GetMemberOf(attrName: RawUtf8; Doc: PDocVariantData);
     function GetPrimaryGroupDN(primaryGroupID: Integer): String;
     function CertToDoc(s: RawByteString): TDocVariantData;
@@ -840,6 +848,9 @@ uses
   uvislistother,
   uvisattributeeditor,
   ufrmcore,
+  ufrmpropertyaddress,
+  ufrmpropertymanagedby,
+  ufrmpropertyobject,
   ursatldapclient,
   udns;
 
@@ -1292,6 +1303,8 @@ begin
   Edit_adr_st.Text              := GetAttributeIndex('st', 0);
   Edit_adr_PostalCode.Text      := GetAttributeIndex('PostalCode', 0);
   ComboBox_adr_CountryCode.ItemIndex := ComboBox_adr_CountryCode.Items.Add(GetAttributeIndex('co', 0));
+
+  NewTab(TFrmPropertyAddress);
 end;
 
 procedure TVisProperties.InitPanelAccount();
@@ -1598,6 +1611,8 @@ var
 begin
   Tab_ManagedBy.TabVisible := True;
 
+  NewTab(TFrmPropertyManagedBy);
+
   UnifyButtonsWidth([Btn_man_properties, Btn_man_modify, Btn_man_clear]);
 
   managedBy := GetAttributeIndex('managedBy', 0, '');
@@ -1692,6 +1707,8 @@ begin
 
   // Protect against accidental deletion
   CheckBox_obj_protect.Checked := FoundSelf and FoundParent;
+
+  NewTab(TFrmPropertyObject);
 end;
 
 procedure TVisProperties.InitPanelSecurity();
@@ -2037,6 +2054,7 @@ constructor TVisProperties.Create(TheOwner: TComponent; ACore: ICore;
   _Ldap: TLdapClient; DN: RawUtf8);
 var
   res: TLdapResult;
+  PropertyFrame: TPropertyFrame;
 begin
   Inherited Create(TheOwner);
 
@@ -2065,6 +2083,8 @@ begin
   // Fill Attributes
   Attributes := TLdapAttributeList(res.Attributes.Clone());
   ManagedByAttributes := nil;
+  fProperty := TProperty.Create(fCore);
+  fProperty.Attributes := Attributes;
   // Init
   LdapDiff.Initialize();
 
@@ -2197,6 +2217,8 @@ begin
     InitPanelSecurity();
     InitPanelAttributes();
   end;
+  for PropertyFrame in fPropertyFrameList do
+    PropertyFrame.Update(fProperty);
   IsLoading := False;
 end;
 
@@ -2208,6 +2230,7 @@ begin
   if Assigned(ManagedByAttributes) then
     FreeAndNil(ManagedByAttributes);
   LdapDiff.Finalize();
+  FreeAndNil(fProperty);
   Inherited;
 end;
 
@@ -2455,6 +2478,19 @@ begin
   {$ifndef OPENRSATTESTS}
   inherited SetFocus;
   {$endif}
+end;
+
+procedure TVisProperties.NewTab(NewFrameClass: TPropertyFrameClass);
+var
+  Tab: TTabSheet;
+  Frame: TPropertyFrame;
+begin
+  Tab := PageControl.AddTabSheet;
+  Frame := NewFrameClass.Create(Tab);
+  Frame.Parent := Tab;
+  Frame.Align := alClient;
+  Tab.Caption := Frame.Caption;
+  Insert(Frame, fPropertyFrameList, High(fPropertyFrameList));
 end;
 
 // VolumeGeneral

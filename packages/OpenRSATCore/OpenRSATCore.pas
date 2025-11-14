@@ -22,7 +22,8 @@ uses
   ufrmnewobject, ufrmnewsite, ufrmnewsubnet, uresourcestring, uaductreeview, 
   ufrmmoduleadssoptions, uvisconnectiondetails, uvispropertieslist, uproperty, 
   uvischangedomaincontroller, upropertyframe, ufrmpropertyobject, 
-  ufrmpropertymanagedby, ufrmpropertyaddress, LazarusPackageIntf;
+  ufrmpropertymanagedby, ufrmpropertyaddress, ufrmpropertymemberof, 
+  LazarusPackageIntf;
 
 implementation
 
