@@ -70,6 +70,7 @@ type
     fProperty: TProperty;
   public
     constructor Create(TheOwner: TComponent); override;
+    destructor Destroy; override;
     procedure Update(Props: TProperty); override;
   end;
 
@@ -221,7 +222,15 @@ begin
   fLog := TSynLog.Add;
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create', Self);
-  Caption := 'Object';
+
+  Caption := '_Object';
+end;
+
+destructor TFrmPropertyObject.Destroy;
+begin
+  FreeAndNil(fPropertyObject);
+
+  inherited Destroy;
 end;
 
 procedure TFrmPropertyObject.Update(Props: TProperty);

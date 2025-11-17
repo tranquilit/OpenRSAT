@@ -90,7 +90,7 @@ end;
 
 procedure TFrmNewComputer.BitBtn_ChangeUserOrGroupClick(Sender: TObject);
 var
-  DNarr: TStringArray;
+  DNarr: TRawUtf8DynArray;
   Omniselect: TVisOmniselect;
   Attr: TLdapAttribute;
 begin

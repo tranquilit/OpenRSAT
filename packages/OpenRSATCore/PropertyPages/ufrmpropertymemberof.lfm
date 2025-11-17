@@ -6,8 +6,8 @@ object FrmPropertyMemberOf: TFrmPropertyMemberOf
   ClientHeight = 438
   ClientWidth = 446
   TabOrder = 0
-  DesignLeft = 137
-  DesignTop = 253
+  DesignLeft = 2066
+  DesignTop = 299
   object Label_mof_title: TLabel
     Left = 8
     Height = 15
@@ -62,6 +62,7 @@ object FrmPropertyMemberOf: TFrmPropertyMemberOf
     ZebraColor = 15593713
     PopupMenuOptions = [pmoShowFind, pmoShowFindNext, pmoShowCopy, pmoShowCopyCell, pmoShowCopySpecial, pmoShowSelectAll, pmoShowCustomizeColumns, pmoShowChart, pmoShowExport]
     FilterOptions.CaseInsensitive = True
+    OnBeforeDeleteRows = Grid_MemberOfBeforeDeleteRows
   end
   object Panel_Buttons: TPanel
     AnchorSideRight.Side = asrBottom
@@ -239,12 +240,18 @@ object FrmPropertyMemberOf: TFrmPropertyMemberOf
     Top = 360
     object Action_Add: TAction
       Caption = 'Add'
+      OnExecute = Action_AddExecute
+      OnUpdate = Action_AddUpdate
     end
     object Action_Delete: TAction
       Caption = 'Delete'
+      OnExecute = Action_DeleteExecute
+      OnUpdate = Action_DeleteUpdate
     end
     object Action_PrimaryGroup: TAction
       Caption = 'Define primary group'
+      OnExecute = Action_PrimaryGroupExecute
+      OnUpdate = Action_PrimaryGroupUpdate
     end
   end
 end

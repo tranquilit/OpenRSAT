@@ -84,6 +84,7 @@ type
     fProperty: TProperty;
   public
     constructor Create(TheOwner: TComponent); override;
+    destructor Destroy; override;
 
     procedure Update(Props: TProperty); override;
   end;
@@ -280,7 +281,7 @@ procedure TFrmPropertyManagedBy.Action_ChangeExecute(Sender: TObject);
 var
   Filter, ManagerDN: RawUtf8;
   Omniselect: TVisOmniselect;
-  DNarr: TStringArray;
+  DNarr: TRawUtf8DynArray;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Change managedBy', Self);
@@ -325,8 +326,16 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create', Self);
 
-  Caption := 'Managed By';
+  Caption := '_Managed By';
+
   UnifyButtonsWidth([Btn_Clear, Btn_Change, Btn_Property]);
+end;
+
+destructor TFrmPropertyManagedBy.Destroy;
+begin
+  FreeAndNil(fPropertyManagedBy);
+
+  inherited Destroy;
 end;
 
 procedure TFrmPropertyManagedBy.Update(Props: TProperty);

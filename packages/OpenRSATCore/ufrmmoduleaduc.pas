@@ -962,7 +962,7 @@ end;
 procedure TFrmModuleADUC.Action_TaskAddToAGroupExecute(Sender: TObject);
 var
   DistinguishedName, SelectedDistinguishedName: String;
-  selectedDistinguishedNameArray: TStringArray;
+  selectedDistinguishedNameArray: TRawUtf8DynArray;
 
   // Create an attribute to add a member to a group.
   // It does a modify ldap request with an Add operation.

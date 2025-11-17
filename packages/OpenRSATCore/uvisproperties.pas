@@ -850,6 +850,7 @@ uses
   ufrmcore,
   ufrmpropertyaddress,
   ufrmpropertymanagedby,
+  ufrmpropertymemberof,
   ufrmpropertyobject,
   ursatldapclient,
   udns;
@@ -1568,6 +1569,8 @@ procedure TVisProperties.InitPanelMemberOf();
   end;
 
 begin
+  NewTab(TFrmPropertyMemberOf);
+
   Tab_MemberOf.TabVisible := True;
   PrimaryGroupDN := GetPrimaryGroupDN(Utf8ToInteger(GetAttributeIndex('primaryGroupID', 0, '-1'), -1));
   if PrimaryGroupDN <> '' then
@@ -2406,6 +2409,8 @@ var
   ModName, ModValue: String;
   data: TLdapAttribute;
 begin
+  if IsLoading then
+    Exit;
   ModName := (Sender as TComponent).Name;
   case ModName.Split('_')[0] of
     'Edit':
@@ -2762,6 +2767,8 @@ procedure TVisProperties.acc_userPrincipalNameChange(Sender: TObject);
 var
   data: TLdapAttribute;
 begin
+  if IsLoading then
+    Exit;
   data := TLdapAttribute.Create('userPrincipalName', atUserPrincipalName);
   try
     if Edit_acc_Name.Text <> '' then
@@ -3057,7 +3064,7 @@ end;
 procedure TVisProperties.BitBtn_org_changeClick(Sender: TObject);
 var
   Filter: RawUtf8;
-  DNarr: TStringArray;
+  DNarr: TRawUtf8DynArray;
   Omniselect: TVisOmniselect;
   attr, data: TLdapAttribute;
 begin
@@ -3326,7 +3333,7 @@ procedure TVisProperties.Action_MembersAddExecute(Sender: TObject); // Member Ad
   Filter: RawUtf8;
   i: Integer;
   Omniselect: TVisOmniselect;
-  DNarr: TStringArray;
+  DNarr: TRawUtf8DynArray;
   res: TLdapResult;
   Doc: TDocVariantData;
   item: PDocVariantData;
@@ -3460,7 +3467,7 @@ var
   Filter, ADistinguishedName: RawUtf8;
   i: Integer;
   Omniselect: TVisOmniselect;
-  DNarr: TStringArray;
+  DNarr: TRawUtf8DynArray;
   Doc: TDocVariantData;
   tmp: TLdapAttribute;
   data: TLdapAttribute = nil;
@@ -3709,7 +3716,7 @@ var
   Filter: RawUtf8;
   Sid: RawSid;
   SecDesc: TSecurityDescriptor;
-  DNarr: TStringArray;
+  DNarr: TRawUtf8DynArray;
   Omniselect: TVisOmniselect;
   data: TLdapAttribute;
   res: TLdapResult;
@@ -4524,7 +4531,7 @@ end;
 
 procedure TVisProperties.Action_ApplyUpdate(Sender: TObject);
 begin
-  Action_Apply.Enabled := not LdapDiff.IsEmpty();
+  Action_Apply.Enabled := not LdapDiff.IsEmpty() or fProperty.IsModified;
 end;
 
 procedure TVisProperties.Action_OKExecute(Sender: TObject); // OK

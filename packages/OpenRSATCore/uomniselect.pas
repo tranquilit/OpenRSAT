@@ -60,11 +60,11 @@ type
     fAllowMultiselect: Boolean;
     fFilter: RawUtf8;
 
-    function GetSelectedObjects: TStringArray;
+    function GetSelectedObjects: TRawUtf8DynArray;
     procedure ListRefresh();
   public
     constructor Create(TheOwner: TComponent; Ldap: TLdapClient; AllowedObjectClass: TStringArray; baseDN: RawUtf8 = ''; AllowMultiselect: Boolean = True; Filter: RawUtf8 = ''); reintroduce;
-    property SelectedObjects: TStringArray read GetSelectedObjects;
+    property SelectedObjects: TRawUtf8DynArray read GetSelectedObjects;
   end;
 
 implementation
@@ -233,7 +233,7 @@ begin
   TisGrid_Items.FocusedNode := TisGrid_Items.GetFirstSelected();
 end;
 
-function TVisOmniselect.GetSelectedObjects: TStringArray;
+function TVisOmniselect.GetSelectedObjects: TRawUtf8DynArray;
 var
   row: PDocVariantData;
   count: Integer;

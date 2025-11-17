@@ -163,7 +163,7 @@ begin
     fLog.Log(sllTrace, 'Create', Self);
 
   LoadCountryCodes;
-  Caption := 'Address';
+  Caption := '_Address';
   IsUpdating := False;
 end;
 

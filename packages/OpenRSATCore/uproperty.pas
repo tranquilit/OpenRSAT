@@ -9,27 +9,36 @@ uses
   SysUtils,
   mormot.core.base,
   mormot.core.os.security,
+  mormot.core.variants,
   mormot.net.ldap,
   ucommon,
   uinterfacecore,
   ursatldapclient;
 
 type
-
   { TProperty }
 
   TProperty = class
   private
     fBaseAttributes, fAttributes: TLdapAttributeList;
+    fTempModify: TDocVariantData;
 
     fCore: ICore;
 
     function GetReadable(Name: RawUtf8; index: Integer = 0): RawUtf8;
     function GetRaw(Name: RawUtf8; index: Integer = 0): RawByteString;
     procedure Add(Name: RawUtf8; Value: RawUtf8; Option: TLdapAddOption = aoReplaceValue);
+
+    procedure UpdateMemberOf(MemberOfList: TRawUtf8DynArray; AddModify: Boolean = True);
   public
     constructor Create(Core: ICore = nil);
     destructor Destroy; override;
+
+    function IsModified(Fast: Boolean = True): Boolean;
+    function IsModified(AttributeName: RawUtf8): Boolean;
+
+    procedure AddMemberOf(MemberOfList: TRawUtf8DynArray);
+    procedure DeleteMemberOf(MemberOfList: TRawUtf8DynArray);
   private
     fSecurityDescriptor: TSecurityDescriptor;
 
@@ -256,9 +265,45 @@ begin
   Attribute.Add(Value, Option);
 end;
 
+procedure TProperty.UpdateMemberOf(MemberOfList: TRawUtf8DynArray;
+  AddModify: Boolean);
+const
+  MODIFY_VALUE: Array[Boolean] of String = (
+    'delete',
+    'add'
+  );
+var
+  MemberOf: RawUtf8;
+  MemberObject: PDocVariantData;
+begin
+  for MemberOf in MemberOfList do
+  begin
+    if MemberOf = '' then
+      continue;
+    // Update member
+    if not fTempModify.Exists(MemberOf) or not fTempModify.O[MemberOf]^.Exists('member') then
+    begin
+      fTempModify.O_[MemberOf]^.O_['member']^.A_[MODIFY_VALUE[AddModify]]^.AddItem(distinguishedName);
+      continue;
+    end;
+    MemberObject := fTempModify.O[MemberOf]^.O['member'];
+    // Error: Should exists
+    if not Assigned(MemberObject) then
+      Exit;
+    // Already Exists
+    if MemberObject^.Exists(MODIFY_VALUE[AddModify]) then
+      continue;
+    // Cancel previous modification
+    if MemberObject^.Exists(MODIFY_VALUE[not AddModify]) then
+      fTempModify.O_[MemberOf]^.Delete('member');
+  end;
+end;
+
 constructor TProperty.Create(Core: ICore);
 begin
   fCore := Core;
+
+  fTempModify.Init();
 end;
 
 destructor TProperty.Destroy;
@@ -267,6 +312,72 @@ begin
   FreeAndNil(fBaseAttributes);
 
   inherited Destroy;
+end;
+
+function TProperty.IsModified(Fast: Boolean): Boolean;
+var
+  i: Integer;
+begin
+  result := fAttributes.Count <> fBaseAttributes.Count;
+  if result then
+    Exit;
+
+  result := True;
+
+  for i := 0 to fAttributes.Count - 1 do
+  begin
+    if IsModified(fAttributes.Items[i].AttributeName) then
+      Exit;
+  end;
+  result := False;
+end;
+
+function TProperty.IsModified(AttributeName: RawUtf8): Boolean;
+var
+  Attribute, BaseAttribute: TLdapAttribute;
+  i: Integer;
+  ModifiedDistinguishedName, ModifiedAttribute: RawUtf8;
+begin
+  Attribute := fAttributes.Find(AttributeName);
+  BaseAttribute := fBaseAttributes.Find(AttributeName);
+
+  result := False;
+  if not Assigned(Attribute) and not Assigned(BaseAttribute) then
+    Exit;
+
+  result := (not Assigned(Attribute) and Assigned(BaseAttribute)) or
+            (Assigned(Attribute) and not Assigned(BaseAttribute)) or
+            (Attribute.Count <> BaseAttribute.Count);
+  if result then
+    Exit;
+
+  result := True;
+  for i := 0 to Attribute.Count - 1 do
+    if Attribute.GetReadable(i) <> BaseAttribute.GetReadable(i) then
+      Exit;
+
+  for ModifiedDistinguishedName in fTempModify.GetNames do
+  begin
+    if ModifiedDistinguishedName = '' then
+      continue;
+    for ModifiedAttribute in fTempModify.O[ModifiedDistinguishedName]^.GetNames do
+    begin
+      if ModifiedAttribute = '' then
+        continue;
+      Exit;
+    end;
+  end;
+  result := False;
+end;
+
+procedure TProperty.AddMemberOf(MemberOfList: TRawUtf8DynArray);
+begin
+  UpdateMemberOf(MemberOfList, True);
+end;
+
+procedure TProperty.DeleteMemberOf(MemberOfList: TRawUtf8DynArray);
+begin
+  UpdateMemberOf(MemberOfList, False);
 end;
 
 end.
