@@ -145,10 +145,7 @@ end;
 procedure TFormConnectConfigs.FormShow(Sender: TObject);
 var
   index, ConfigCount: Integer;
-  ini: TTisInifiles;
-  sections: TStringArray;
-  LastConfig, section: String;
-  connectOptions: TVisConnectOptions;
+  LastConfig: String;
 begin
   TisSearchEdit_Configs.Items.Clear;
 
@@ -210,12 +207,11 @@ begin
   connectOptions := TVisConnectOptions.Create(Self);
   try
     connectOptions.Settings := fLdapConfigs.LdapConnectionSettings;
-    connectOptions.Action_Domain.Execute;
-    connectOptions.Action_OK.Execute;
+    if (connectOptions.ShowModal <> mrOK) then
+      Exit;
+    fLdapConfigs.SaveConfig(DEFAULT_NAME);
   finally
     FreeAndNil(connectOptions);
-    fLdapConfigs.SaveConfig(DEFAULT_NAME);
-    BitBtn_OK.Click;
   end;
 end;
 
