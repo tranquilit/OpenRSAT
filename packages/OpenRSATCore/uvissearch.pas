@@ -325,7 +325,7 @@ end;
 procedure TVisSearch.Action_PropertiesExecute(Sender: TObject);
 begin
   Action_ShowInView.Execute;
-  fModule.Core.OpenProperty(TisGrid_Result.FocusedRow^.S['name'], TisGrid_Result.FocusedRow^.S['distinguishedName']);
+  fModule.Core.OpenProperty(TisGrid_Result.FocusedRow^.S['distinguishedName'], TisGrid_Result.FocusedRow^.S['name']);
 end;
 
 procedure TVisSearch.Action_PropertiesUpdate(Sender: TObject);

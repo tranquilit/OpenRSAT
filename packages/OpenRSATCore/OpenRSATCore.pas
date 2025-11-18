@@ -23,7 +23,7 @@ uses
   ufrmmoduleadssoptions, uvisconnectiondetails, uvispropertieslist, uproperty, 
   uvischangedomaincontroller, upropertyframe, ufrmpropertyobject, 
   ufrmpropertymanagedby, ufrmpropertyaddress, ufrmpropertymemberof, 
-  LazarusPackageIntf;
+  ufrmpropertygeneraldefault, ufrmpropertygeneraluser, LazarusPackageIntf;
 
 implementation
 

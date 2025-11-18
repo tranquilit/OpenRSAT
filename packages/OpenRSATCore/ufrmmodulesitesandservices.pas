@@ -488,7 +488,7 @@ begin
     PropertyName := TisGrid1.SelectedRows._[0]^.S['name'];
     DistinguishedName := TisGrid1.SelectedRows._[0]^.S['distinguishedName'];
   end;
-  fCore.OpenProperty(PropertyName, DistinguishedName);
+  fCore.OpenProperty(DistinguishedName, PropertyName);
 end;
 
 procedure TFrmModuleSitesAndServices.Action_PropertyUpdate(Sender: TObject);
@@ -508,7 +508,7 @@ begin
   if Assigned(Node) then
     Node.Selected := True
   else
-    fCore.OpenProperty(TisGrid1.FocusedRow^.S['name'], TisGrid1.FocusedRow^.S['distinguishedName']);
+    fCore.OpenProperty(TisGrid1.FocusedRow^.S['distinguishedName'], TisGrid1.FocusedRow^.S['name']);
 end;
 
 procedure TFrmModuleSitesAndServices.TisGrid1GetImageIndex(

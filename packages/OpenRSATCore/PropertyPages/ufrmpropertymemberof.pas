@@ -212,7 +212,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create', Self);
 
-  Caption := '_Member Of';
+  Caption := 'Member Of';
 end;
 
 destructor TFrmPropertyMemberOf.Destroy;

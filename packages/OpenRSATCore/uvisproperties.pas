@@ -849,6 +849,8 @@ uses
   uvisattributeeditor,
   ufrmcore,
   ufrmpropertyaddress,
+  ufrmpropertygeneraldefault,
+  ufrmpropertygeneraluser,
   ufrmpropertymanagedby,
   ufrmpropertymemberof,
   ufrmpropertyobject,
@@ -1082,6 +1084,8 @@ procedure TVisProperties.InitPanelUserGeneral();
 begin
   Tab_UserGeneral.TabVisible := True;
   PageControl.ActivePage := Tab_UserGeneral;
+
+  NewTab(TFrmPropertyGeneralUser);
 
   Edit_usr_cn.Text                          := GetAttributeIndex('name', 0);
   Edit_usr_givenName.Text                   := GetAttributeIndex('givenName', 0);
@@ -2441,6 +2445,8 @@ var
   GTArray: TGroupTypes = [];
   data: TLdapAttribute;
 begin
+  if IsLoading then
+    Exit;
   if not (Sender as TRadioButton).Checked then
     Exit;
 
@@ -3053,8 +3059,8 @@ begin
   if not Assigned(TisGrid_org_directReports.FocusedRow) then
     Exit;
   fCore.OpenProperty(
-    TisGrid_org_directReports.FocusedRow^.S['name'],
-    TisGrid_org_directReports.FocusedRow^.S['distinguishedName']
+    TisGrid_org_directReports.FocusedRow^.S['distinguishedName'],
+    TisGrid_org_directReports.FocusedRow^.S['name']
   );
   //VisMain.VisPropertiesList.Open(
   //  TisGrid_org_directReports.FocusedRow^.S['name'],
@@ -3110,7 +3116,7 @@ var
 begin
   data := LdapDiff.Get(Attributes, 'manager');
   if Assigned(data) then
-    fCore.OpenProperty(Edit_org_manager.Text, data.GetRaw(data.Count - 1));
+    fCore.OpenProperty(data.GetRaw(data.Count - 1), Edit_org_manager.Text);
     //VisMain.VisPropertiesList.Open(Edit_org_manager.Text, data.GetRaw(data.Count - 1));
 end;
 
@@ -3304,7 +3310,7 @@ end;
 // Member
 procedure TVisProperties.TisGrid_memDblClick(Sender: TObject);
 begin
-  fCore.OpenProperty(TisGrid_mem.FocusedRow^.S['name'], TisGrid_mem.FocusedRow^.S['distinguishedName']);
+  fCore.OpenProperty(TisGrid_mem.FocusedRow^.S['distinguishedName'], TisGrid_mem.FocusedRow^.S['name']);
   //VisMain.VisPropertiesList.Open(TisGrid_mem.FocusedRow^.S['name'], TisGrid_mem.FocusedRow^.S['distinguishedName']);
 end;
 
@@ -3458,7 +3464,7 @@ end;
 
 procedure TVisProperties.List_mofDblClick(Sender: TObject);
 begin
-  fCore.OpenProperty(List_mof.FocusedRow^.S['name'], List_mof.FocusedRow^.S['distinguishedName']);
+  fCore.OpenProperty(List_mof.FocusedRow^.S['distinguishedName'], List_mof.FocusedRow^.S['name']);
   //VisMain.VisPropertiesList.Open(List_mof.FocusedRow^.S['name'], List_mof.FocusedRow^.S['distinguishedName']);
 end;
 
@@ -3643,7 +3649,7 @@ var
 begin
   data := LdapDiff.Get(Attributes, 'managedBy');
   if Assigned(data) then
-    fCore.OpenProperty(ManagedByAttributes.Get(atName), data.GetRaw());
+    fCore.OpenProperty(data.GetRaw(), ManagedByAttributes.Get(atName));
     //VisMain.VisPropertiesList.Open(ManagedByAttributes.Get(atName), data.GetRaw());
 end;
 
@@ -4527,6 +4533,7 @@ begin
   finally
     Btn_BottomApply.Cursor := crDefault;
   end;
+  fProperty.ApplyModification;
 end;
 
 procedure TVisProperties.Action_ApplyUpdate(Sender: TObject);

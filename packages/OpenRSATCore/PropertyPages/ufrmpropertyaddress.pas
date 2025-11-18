@@ -125,8 +125,8 @@ end;
 procedure TFrmPropertyAddress.Add(AttributeName, AttributeValue: RawUtf8;
   Option: TLdapAddOption);
 begin
-  if Assigned(fProperty) then
-    fProperty.Attributes.Add(AttributeName, AttributeValue, Option);
+  if not IsUpdating and Assigned(fProperty) then
+    fProperty.Add(AttributeName, AttributeValue, Option);
 end;
 
 procedure TFrmPropertyAddress.LoadCountryCodes;
@@ -163,7 +163,7 @@ begin
     fLog.Log(sllTrace, 'Create', Self);
 
   LoadCountryCodes;
-  Caption := '_Address';
+  Caption := 'Address';
   IsUpdating := False;
 end;
 
@@ -171,13 +171,13 @@ procedure TFrmPropertyAddress.Update(Props: TProperty);
 begin
   fProperty := Props;
 
+  IsUpdating := True;
   Memo_adr_streetAddress.Text := Props.Attributes.GetByName('streetAddress');
   Edit_adr_postOfficeBox.Text := Props.Attributes.GetByName('postOfficeBox');
   Edit_adr_l.Text := Props.Attributes.GetByName('l');
   Edit_adr_st.Text := Props.Attributes.GetByName('st');
   Edit_adr_PostalCode.Text := Props.Attributes.GetByName('postalCode');
 
-  IsUpdating := True;
   try
     ComboBox_adr_CountryCode.ItemIndex := ComboBox_adr_CountryCode.Items.IndexOf(Props.Attributes.GetByName('co'));
   finally

@@ -269,7 +269,7 @@ end;
 
 procedure TFrmPropertyManagedBy.Action_PropertyExecute(Sender: TObject);
 begin
-  fProperty.Core.OpenProperty(fProperty.name, fProperty.distinguishedName);
+  fProperty.Core.OpenProperty(fProperty.managedBy);
 end;
 
 procedure TFrmPropertyManagedBy.Action_PropertyUpdate(Sender: TObject);
@@ -326,7 +326,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create', Self);
 
-  Caption := '_Managed By';
+  Caption := 'Managed By';
 
   UnifyButtonsWidth([Btn_Clear, Btn_Change, Btn_Property]);
 end;
@@ -341,10 +341,6 @@ end;
 procedure TFrmPropertyManagedBy.Update(Props: TProperty);
 var
   ManagedBy: RawUtf8;
-  Manager: TLdapResult;
-  Sid: RawByteString;
-  SecDesc: TSecurityDescriptor;
-  guid: TGuid;
   ManagedByAttributes: TLdapAttributeList;
 begin
   if Assigned(fLog) then
@@ -352,23 +348,23 @@ begin
 
   fProperty := Props;
 
-  ManagedBy := fProperty.Attributes.Find('managedBy').GetReadable();
+  ManagedBy := fProperty.managedBy;
 
   fPropertyManagedBy.UpdateManagedByAttributes(ManagedBy, fProperty);
 
   ManagedByAttributes := fPropertyManagedBy.fManagerAttributes;
 
-  Edit_ManagedBy.Text                  := DNToCN(ManagedByAttributes.GetByName('distinguishedName'));
+  Edit_ManagedBy.Text := DNToCN(ManagedByAttributes.GetByName('distinguishedName'));
   Edit_Office.Text := ManagedByAttributes.GetByName('physicalDeliveryOfficeName');
-  Edit_StreetAddress.Text              := ManagedByAttributes.GetByName('streetAddress');
-  Edit_City.Text                          := ManagedByAttributes.GetByName('l');
-  Edit_StateProvince.Text                         := ManagedByAttributes.GetByName('st');
-  Edit_CountryRegion.Text                         := ManagedByAttributes.GetByName('co');
-  Edit_TelephoneNumber.Text            := ManagedByAttributes.GetByName('telephoneNumber');
-  Edit_FaxNumber.Text   := ManagedByAttributes.GetByName('facsimileTelephoneNumber');
+  Edit_StreetAddress.Text := ManagedByAttributes.GetByName('streetAddress');
+  Edit_City.Text := ManagedByAttributes.GetByName('l');
+  Edit_StateProvince.Text := ManagedByAttributes.GetByName('st');
+  Edit_CountryRegion.Text := ManagedByAttributes.GetByName('co');
+  Edit_TelephoneNumber.Text := ManagedByAttributes.GetByName('telephoneNumber');
+  Edit_FaxNumber.Text := ManagedByAttributes.GetByName('facsimileTelephoneNumber');
 
   // Manager can update membership list
-  CheckBox_AllowManage.Checked :=  fPropertyManagedBy.AllowMembershipList(fProperty);
+  CheckBox_AllowManage.Checked := fPropertyManagedBy.AllowMembershipList(fProperty);
 end;
 
 end.

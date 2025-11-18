@@ -883,7 +883,7 @@ begin
     Exit;
   end;
 
-  fCore.OpenProperty(SelectedText, DistinguishedName);
+  fCore.OpenProperty(DistinguishedName, SelectedText);
 end;
 
 procedure TFrmModuleADUC.Action_PropertiesUpdate(Sender: TObject);

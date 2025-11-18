@@ -224,11 +224,11 @@ begin
   if TisGrid1.SelectedCount = 1 then
   begin
     NodeData := TisGrid1.GetNodeAsPDocVariantData(TisGrid1.GetFirstSelected());
-    fCore.OpenProperty(NodeData^.S['name'], NodeData^.S['distinguishedName']);
+    fCore.OpenProperty(NodeData^.S['distinguishedName'], NodeData^.S['name']);
   end
   else if Assigned(TreeView1.Selected) then
   begin
-    fCore.OpenProperty(TreeView1.Selected.Text, (TreeView1.Selected as TADSITreeNode).DistinguishedName);
+    fCore.OpenProperty((TreeView1.Selected as TADSITreeNode).DistinguishedName, TreeView1.Selected.Text);
   end;
 end;
 
@@ -323,7 +323,7 @@ begin
   end
   else
   begin
-    fCore.OpenProperty(NodeData^.S['name'], NodeData^.S['distinguishedName']);
+    fCore.OpenProperty(NodeData^.S['distinguishedName'], NodeData^.S['name']);
   end;
 end;
 

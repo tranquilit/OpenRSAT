@@ -223,7 +223,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create', Self);
 
-  Caption := '_Object';
+  Caption := 'Object';
 end;
 
 destructor TFrmPropertyObject.Destroy;

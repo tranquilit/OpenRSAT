@@ -20,22 +20,30 @@ type
 
   TProperty = class
   private
-    fBaseAttributes, fAttributes: TLdapAttributeList;
+    fModifiedAttributes, fAttributes: TLdapAttributeList;
     fTempModify: TDocVariantData;
 
     fCore: ICore;
 
-    function GetReadable(Name: RawUtf8; index: Integer = 0): RawUtf8;
-    function GetRaw(Name: RawUtf8; index: Integer = 0): RawByteString;
-    procedure Add(Name: RawUtf8; Value: RawUtf8; Option: TLdapAddOption = aoReplaceValue);
-
     procedure UpdateMemberOf(MemberOfList: TRawUtf8DynArray; AddModify: Boolean = True);
+
+    function ApplyAttributeDifference: Boolean;
+    function ApplyAttributeDifference(AttributeName: RawUtf8): Boolean;
+    function ApplyTempModification: Boolean;
   public
     constructor Create(Core: ICore = nil);
     destructor Destroy; override;
 
-    function IsModified(Fast: Boolean = True): Boolean;
+    function IsModified: Boolean;
     function IsModified(AttributeName: RawUtf8): Boolean;
+
+    function ApplyModification: Boolean;
+
+    function GetAllReadable(Name: RawUtf8): TRawUtf8DynArray;
+    function GetReadable(Name: RawUtf8; index: Integer = 0): RawUtf8;
+    function GetRaw(Name: RawUtf8; index: Integer = 0): RawByteString;
+
+    procedure Add(Name: RawUtf8; Value: RawUtf8; Option: TLdapAddOption = aoReplaceValue);
 
     procedure AddMemberOf(MemberOfList: TRawUtf8DynArray);
     procedure DeleteMemberOf(MemberOfList: TRawUtf8DynArray);
@@ -172,12 +180,12 @@ end;
 
 procedure TProperty.SetAttributes(AValue: TLdapAttributeList);
 begin
-  if Assigned(fBaseAttributes) then
-    FreeAndNil(fBaseAttributes);
+  if Assigned(fModifiedAttributes) then
+    FreeAndNil(fModifiedAttributes);
   if Assigned(fAttributes) then
     FreeAndNil(fAttributes);
 
-  fBaseAttributes := TLdapAttributeList(AValue.Clone);
+  fModifiedAttributes := TLdapAttributeList.Create;
   fAttributes := TLdapAttributeList(AValue.Clone);
 end;
 
@@ -222,8 +230,6 @@ begin
 end;
 
 procedure TProperty.SetSecurityDescriptor(AValue: PSecurityDescriptor);
-var
-  Attribute: TLdapAttribute;
 begin
   if not Assigned(AValue) then
     Exit;
@@ -242,25 +248,47 @@ begin
 end;
 
 function TProperty.GetReadable(Name: RawUtf8; index: Integer): RawUtf8;
+var
+  Attribute: TLdapAttribute;
 begin
-  fAttributes.Find(Name).GetReadable(index, result);
+  Attribute := fModifiedAttributes.Find(Name);
+  if Assigned(Attribute) then
+    Attribute.GetReadable(index, result)
+  else
+    fAttributes.Find(Name).GetReadable(index, result);
 end;
 
 function TProperty.GetRaw(Name: RawUtf8; index: Integer): RawByteString;
+var
+  Attribute: TLdapAttribute;
 begin
-  result := fAttributes.Find(Name).GetRaw(index);
+  Attribute := fModifiedAttributes.Find(Name);
+  if Assigned(Attribute) then
+    result := Attribute.GetRaw(index)
+  else
+    result := fAttributes.Find(Name).GetRaw(index);
 end;
 
 procedure TProperty.Add(Name: RawUtf8; Value: RawUtf8; Option: TLdapAddOption);
 var
-  Attribute: TLdapAttribute;
+  Attribute, BaseAttribute: TLdapAttribute;
+  i: Integer;
 begin
-  if not Assigned(fAttributes) then
-    fAttributes := TLdapAttributeList.Create;
+  // Create missing attribute list
+  if not Assigned(fModifiedAttributes) then
+    fModifiedAttributes := TLdapAttributeList.Create;
 
-  Attribute := fAttributes.Find(Name);
+  // Get Attribute from name
+  Attribute := fModifiedAttributes.Find(Name);
+  // If Attribute is missing, copy from base Attribute value
   if not Assigned(Attribute) then
-    Attribute := fAttributes.Add(Name);
+  begin
+    Attribute := fModifiedAttributes.Add(Name);
+    BaseAttribute := fAttributes.Find(Name);
+    if Assigned(BaseAttribute) then
+      for i := 0 to BaseAttribute.Count - 1 do
+        Attribute.Add(BaseAttribute.GetReadable(i));
+  end;
 
   Attribute.Add(Value, Option);
 end;
@@ -299,6 +327,164 @@ begin
   end;
 end;
 
+function TProperty.ApplyAttributeDifference: Boolean;
+var
+  i: Integer;
+begin
+  result := not Assigned(fModifiedAttributes);
+  if result then
+    Exit;
+
+  result := True;
+  for i := 0 to fModifiedAttributes.Count - 1 do
+  begin
+    if fModifiedAttributes.Items[i].AttributeName = '' then
+      continue;
+    result := result and ApplyAttributeDifference(fModifiedAttributes.Items[i].AttributeName);
+    if not result and (LdapClient.ResultString <> '') then
+    begin
+      ShowLdapModifyError(LdapClient);
+      break;
+    end;
+  end;
+  FreeAndNil(fModifiedAttributes);
+end;
+
+function TProperty.ApplyAttributeDifference(AttributeName: RawUtf8): Boolean;
+var
+  ModifiedAttribute, Attribute: TLdapAttribute;
+  ToAdd, ToDelete: TRawUtf8DynArray;
+  i, idx: Integer;
+  Value: RawByteString;
+begin
+  result := False;
+  if AttributeName = '' then
+    Exit;
+  ModifiedAttribute := fModifiedAttributes.Find(AttributeName);
+  Attribute := fAttributes.Find(AttributeName);
+
+  // No value, should not happen
+  if not Assigned(Attribute) and not Assigned(ModifiedAttribute) then
+    Exit;
+
+  result := True;
+
+  // New value, add it
+  if not Assigned(Attribute) and Assigned(ModifiedAttribute) then
+  begin
+    result := LdapClient.Modify(distinguishedName, lmoAdd, ModifiedAttribute);
+    Exit;
+  end;
+
+  // No more value, delete it
+  if Assigned(Attribute) and not Assigned(ModifiedAttribute) then
+  begin
+    result := LdapClient.Modify(distinguishedName, lmoDelete, Attribute);
+    Exit;
+  end;
+
+  // Unique value changed, replace it
+  if (Attribute.Count = 1) and (Attribute.Count = ModifiedAttribute.Count) then
+  begin
+    result := LdapClient.Modify(distinguishedName, lmoReplace, ModifiedAttribute);
+    Exit;
+  end;
+
+  // Array updated. List new and old values
+  ToAdd := [];
+  ToDelete := [];
+  for i := 0 to Attribute.Count - 1 do
+  begin
+    Value := Attribute.GetRaw(i);
+    idx := ModifiedAttribute.FindIndex(Value);
+    if idx < 0 then
+      Insert(Value, ToDelete, 0);
+  end;
+  for i := 0 to ModifiedAttribute.Count - 1 do
+  begin
+    Value := ModifiedAttribute.GetRaw(i);
+    idx := Attribute.FindIndex(Value);
+    if idx < 0 then
+      Insert(Value, ToAdd, 0);
+  end;
+
+  // Add new values
+  Attribute := TLdapAttribute.Create;
+  try
+    for Value in ToAdd do
+      Attribute.Add(Value);
+    result := LdapClient.Modify(distinguishedName, lmoAdd, Attribute);
+  finally
+    FreeAndNil(Attribute);
+  end;
+
+  // Remove old values
+  Attribute := TLdapAttribute.Create;
+  try
+    for Value in ToDelete do
+      Attribute.Add(Value);
+    result := LdapClient.Modify(distinguishedName, lmoDelete, Attribute);
+  finally
+    FreeAndNil(Attribute);
+  end;
+end;
+
+function TProperty.ApplyTempModification: Boolean;
+var
+  DistinguishedNameArray, AttributeNameArray: TRawUtf8DynArray;
+  ADistinguishedName, AttributeName, Value: RawUtf8;
+
+  function InnerModify(DistinguishedName, AttributeName: RawUtf8; Modifier: TLdapModifyOp): Boolean;
+  var
+    ModifierString: RawUtf8;
+    Attribute: TLdapAttribute;
+    AttributeObject: PDocVariantData;
+  begin
+    result := False;
+    case Modifier of
+      lmoAdd: ModifierString := 'add';
+      lmoDelete: ModifierString := 'delete';
+      lmoReplace: ModifierString := 'replace';
+      else
+        Exit;
+    end;
+
+    AttributeObject := fTempModify.O[DistinguishedName]^.O[AttributeName];
+    if AttributeObject^.Exists(ModifierString) then
+    begin
+      Attribute := TLdapAttribute.Create(AttributeName, atUndefined);
+      try
+        for Value in AttributeObject^.A[ModifierString]^.ToRawUtf8DynArray do
+          Attribute.Add(Value);
+        result := LdapClient.Modify(DistinguishedName, Modifier, Attribute);
+        if not result then
+        begin
+          ShowLdapModifyError(LdapClient);
+          Exit;
+        end;
+      finally
+        FreeAndNil(Attribute);
+      end;
+    end;
+  end;
+
+begin
+  result := True;
+  DistinguishedNameArray := fTempModify.GetNames;
+
+  for ADistinguishedName in DistinguishedNameArray do
+  begin
+    AttributeNameArray := fTempModify.O[ADistinguishedName]^.GetNames;
+    for AttributeName in AttributeNameArray do
+    begin
+      InnerModify(ADistinguishedName, AttributeName, lmoAdd);
+      InnerModify(ADistinguishedName, AttributeName, lmoDelete);
+      InnerModify(ADistinguishedName, AttributeName, lmoReplace);
+    end;
+  end;
+  fTempModify.Clear;
+end;
+
 constructor TProperty.Create(Core: ICore);
 begin
   fCore := Core;
@@ -309,65 +495,52 @@ end;
 destructor TProperty.Destroy;
 begin
   FreeAndNil(fAttributes);
-  FreeAndNil(fBaseAttributes);
+  FreeAndNil(fModifiedAttributes);
 
   inherited Destroy;
 end;
 
-function TProperty.IsModified(Fast: Boolean): Boolean;
-var
-  i: Integer;
+function TProperty.IsModified: Boolean;
 begin
-  result := fAttributes.Count <> fBaseAttributes.Count;
-  if result then
-    Exit;
-
-  result := True;
-
-  for i := 0 to fAttributes.Count - 1 do
-  begin
-    if IsModified(fAttributes.Items[i].AttributeName) then
-      Exit;
-  end;
-  result := False;
+  result := (Assigned(fModifiedAttributes) and (fModifiedAttributes.Count > 0)) or (fTempModify.Count > 0);
 end;
 
 function TProperty.IsModified(AttributeName: RawUtf8): Boolean;
 var
-  Attribute, BaseAttribute: TLdapAttribute;
+  ModifiedAttribute, BaseAttribute: TLdapAttribute;
   i: Integer;
-  ModifiedDistinguishedName, ModifiedAttribute: RawUtf8;
 begin
-  Attribute := fAttributes.Find(AttributeName);
-  BaseAttribute := fBaseAttributes.Find(AttributeName);
-
   result := False;
-  if not Assigned(Attribute) and not Assigned(BaseAttribute) then
-    Exit;
-
-  result := (not Assigned(Attribute) and Assigned(BaseAttribute)) or
-            (Assigned(Attribute) and not Assigned(BaseAttribute)) or
-            (Attribute.Count <> BaseAttribute.Count);
-  if result then
+  ModifiedAttribute := fModifiedAttributes.Find(AttributeName);
+  if not Assigned(ModifiedAttribute) then
     Exit;
 
   result := True;
-  for i := 0 to Attribute.Count - 1 do
-    if Attribute.GetReadable(i) <> BaseAttribute.GetReadable(i) then
+  BaseAttribute := fAttributes.Find(AttributeName);
+  if BaseAttribute.Count <> ModifiedAttribute.Count then
+    Exit;
+  for i := 0 to BaseAttribute.Count - 1 do
+    if BaseAttribute.GetReadable(i) <> ModifiedAttribute.GetReadable(i) then
       Exit;
-
-  for ModifiedDistinguishedName in fTempModify.GetNames do
-  begin
-    if ModifiedDistinguishedName = '' then
-      continue;
-    for ModifiedAttribute in fTempModify.O[ModifiedDistinguishedName]^.GetNames do
-    begin
-      if ModifiedAttribute = '' then
-        continue;
-      Exit;
-    end;
-  end;
   result := False;
+end;
+
+function TProperty.ApplyModification: Boolean;
+begin
+  ApplyAttributeDifference;
+  ApplyTempModification;
+end;
+
+function TProperty.GetAllReadable(Name: RawUtf8): TRawUtf8DynArray;
+var
+  Attribute: TLdapAttribute;
+begin
+  result := nil;
+  Attribute := fModifiedAttributes.Find(Name);
+  if Assigned(Attribute) then
+    result := Attribute.GetAllReadable
+  else
+    result := fAttributes.Find(Name).GetAllReadable;
 end;
 
 procedure TProperty.AddMemberOf(MemberOfList: TRawUtf8DynArray);

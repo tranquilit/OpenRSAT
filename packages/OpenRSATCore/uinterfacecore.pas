@@ -25,7 +25,7 @@ type
     function GetRsatOptions: TRsatOptions; virtual;
 
     procedure CloseProperty(VisProperty: TForm); virtual;
-    function OpenProperty(Name, DistinguishedName: String): TForm; virtual;
+    function OpenProperty(DistinguishedName: RawUtf8; Name: RawUtf8 = ''): TForm; virtual;
     procedure Load; virtual;
     procedure ChangeDomainController(DomainController: RawUtf8); virtual;
 

@@ -24,8 +24,10 @@ uses
   mormot.core.base,
   mormot.core.os,
   mormot.core.text,
+  {$IFDEF DARWIN}
   mormot.lib.openssl11,
   mormot.crypt.openssl,
+  {$ENDIF}
   // Rsat
   uvisopenrsat,
   utranslation;
