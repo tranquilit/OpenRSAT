@@ -27,6 +27,7 @@ type
 
     function GetDCTypeFromUAC: RawUtf8;
     function GetSiteFromServerReference: RawUtf8;
+    function GetSubnetsFromSiteObject: TRawUtf8DynArray;
     procedure UpdateMemberOf(MemberOfList: TRawUtf8DynArray; AddModify: Boolean = True);
 
     function ApplyAttributeDifference: Boolean;
@@ -52,6 +53,7 @@ type
     procedure Subnets(Data: PDocVariantData);
 
     property SiteFromServerReference: RawUtf8 read GetSiteFromServerReference;
+    property SubnetsFromSiteObject: TRawUtf8DynArray read GetSubnetsFromSiteObject;
     property DCTypeFromUAC: RawUtf8 read GetDCTypeFromUAC;
   private
     fSecurityDescriptor: TSecurityDescriptor;
@@ -348,6 +350,37 @@ begin
   if Length(Pairs) < 3 then
     Exit;
   result := Pairs[2].Value;
+end;
+
+function TProperty.GetSubnetsFromSiteObject: TRawUtf8DynArray;
+var
+  SearchResult: TLdapResult;
+  Count: Integer;
+begin
+  result := nil;
+  Count := 0;
+
+  LdapClient.SearchBegin();
+  try
+    LdapClient.SearchScope := lssWholeSubtree;
+    repeat
+      if not LdapClient.Search(LdapClient.ConfigDN, False, FormatUtf8('(siteObject=%)', [LdapEscape(distinguishedName)]), ['cn']) then
+      begin
+        ShowLdapSearchError(LdapClient);
+        Exit;
+      end;
+      SetLength(result, Count + LdapClient.SearchResult.Count);
+      for SearchResult in LdapClient.SearchResult.Items do
+      begin
+        if not Assigned(SearchResult) then
+          continue;
+        Insert(SearchResult.Find('cn').GetReadable(), result, Count);
+        Inc(Count);
+      end;
+    until LdapClient.SearchCookie = '';
+  finally
+    LdapClient.SearchEnd;
+  end;
 end;
 
 function TProperty.GetDCTypeFromUAC: RawUtf8;

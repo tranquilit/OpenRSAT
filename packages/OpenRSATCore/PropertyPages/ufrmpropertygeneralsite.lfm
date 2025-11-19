@@ -1,0 +1,149 @@
+object FrmPropertyGeneralSite: TFrmPropertyGeneralSite
+  Left = 0
+  Height = 354
+  Top = 0
+  Width = 445
+  ClientHeight = 354
+  ClientWidth = 445
+  TabOrder = 0
+  DesignLeft = 2145
+  DesignTop = 174
+  object Panel_Header: TPanel
+    Left = 8
+    Height = 56
+    Top = 0
+    Width = 429
+    Align = alTop
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 56
+    ClientWidth = 429
+    TabOrder = 0
+    object Image: TImage
+      AnchorSideLeft.Control = Panel_Header
+      AnchorSideTop.Control = Panel_Header
+      AnchorSideBottom.Control = Panel_Header
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 40
+      Top = 8
+      Width = 40
+      Anchors = [akTop, akLeft, akBottom]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      ImageIndex = 12
+      Proportional = True
+      Stretch = True
+      Transparent = True
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = Image
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Image
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_Header
+      AnchorSideRight.Side = asrBottom
+      Left = 80
+      Height = 15
+      Top = 21
+      Width = 341
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 32
+      BorderSpacing.Right = 8
+      BorderStyle = bsNone
+      Color = clWindow
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+  end
+  object Line_top: TShape
+    Left = 16
+    Height = 1
+    Top = 59
+    Width = 413
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 3
+    BorderSpacing.Right = 16
+    BorderSpacing.Bottom = 4
+    Pen.Color = clMedGray
+  end
+  object Panel_Content: TPanel
+    Left = 8
+    Height = 200
+    Top = 64
+    Width = 429
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 200
+    ClientWidth = 429
+    TabOrder = 1
+    object Label_Description: TLabel
+      AnchorSideLeft.Control = Panel_Content
+      AnchorSideTop.Control = Edit_Description
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 12
+      Width = 63
+      BorderSpacing.Left = 8
+      Caption = 'Description:'
+      Constraints.MaxWidth = 100
+    end
+    object Edit_Description: TEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_Content
+      AnchorSideRight.Control = Panel_Content
+      AnchorSideRight.Side = asrBottom
+      Left = 121
+      Height = 23
+      Top = 8
+      Width = 300
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      Constraints.MaxWidth = 300
+      MaxLength = 1024
+      TabOrder = 0
+    end
+    object Label_Subnet: TLabel
+      AnchorSideLeft.Control = Panel_Content
+      AnchorSideTop.Control = Edit_Description
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Content
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 15
+      Top = 39
+      Width = 413
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      Caption = 'Subnets:'
+    end
+    object ListBox_Subnet: TListBox
+      AnchorSideLeft.Control = Panel_Content
+      AnchorSideTop.Control = Label_Subnet
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Content
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 146
+      Top = 54
+      Width = 413
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 8
+      ItemHeight = 0
+      TabOrder = 1
+    end
+  end
+end

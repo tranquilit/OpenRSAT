@@ -25,7 +25,8 @@ uses
   ufrmpropertymanagedby, ufrmpropertyaddress, ufrmpropertymemberof, 
   ufrmpropertygeneraldefault, ufrmpropertygeneraluser, 
   ufrmpropertygeneralgroup, uhelpers, ufrmpropertygeneralcomputer, 
-  ufrmpropertygeneralou, ufrmpropertygeneralsubnet, LazarusPackageIntf;
+  ufrmpropertygeneralou, ufrmpropertygeneralsubnet, ufrmpropertygeneralsite, 
+  LazarusPackageIntf;
 
 implementation
 
