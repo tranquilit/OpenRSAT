@@ -25,25 +25,25 @@ type
 
   TFrmPropertyAddress = class(TPropertyFrame)
     Action1: TAction;
-    ComboBox_adr_CountryCode: TComboBox;
-    Edit_adr_l: TEdit;
-    Edit_adr_PostalCode: TEdit;
-    Edit_adr_postOfficeBox: TEdit;
-    Edit_adr_st: TEdit;
-    Label_adr_CountryCode: TLabel;
-    Label_adr_l: TLabel;
-    Label_adr_PostalCode: TLabel;
-    Label_adr_postOfficeBox: TLabel;
-    Label_adr_st: TLabel;
-    Label_adr_streetAddress: TLabel;
-    Memo_adr_streetAddress: TMemo;
+    ComboBox_CountryCode: TComboBox;
+    Edit_City: TEdit;
+    Edit_PostalCode: TEdit;
+    Edit_PostOfficeBox: TEdit;
+    Edit_State: TEdit;
+    Label_CountryCode: TLabel;
+    Label_City: TLabel;
+    Label_PostalCode: TLabel;
+    Label_PostOfficeBox: TLabel;
+    Label_State: TLabel;
+    Label_Street: TLabel;
+    Memo_Street: TMemo;
     Panel1: TPanel;
-    procedure ComboBox_adr_CountryCodeChange(Sender: TObject);
-    procedure Edit_adr_lChange(Sender: TObject);
-    procedure Edit_adr_PostalCodeChange(Sender: TObject);
-    procedure Edit_adr_postOfficeBoxChange(Sender: TObject);
-    procedure Edit_adr_stChange(Sender: TObject);
-    procedure Memo_adr_streetAddressChange(Sender: TObject);
+    procedure ComboBox_CountryCodeChange(Sender: TObject);
+    procedure Edit_CityChange(Sender: TObject);
+    procedure Edit_PostalCodeChange(Sender: TObject);
+    procedure Edit_PostOfficeBoxChange(Sender: TObject);
+    procedure Edit_StateChange(Sender: TObject);
+    procedure Memo_StreetChange(Sender: TObject);
   private
     fProperty: TProperty;
     fCountryCodes: TDocVariantData;
@@ -71,7 +71,7 @@ uses
 
 { TFrmPropertyAddress }
 
-procedure TFrmPropertyAddress.ComboBox_adr_CountryCodeChange(Sender: TObject);
+procedure TFrmPropertyAddress.ComboBox_CountryCodeChange(Sender: TObject);
 var
   idx: Integer;
   PCountryCode: PDocVariantData;
@@ -79,7 +79,7 @@ var
 begin
   if IsUpdating then
     Exit;
-  idx := ComboBox_adr_CountryCode.ItemIndex;
+  idx := ComboBox_CountryCode.ItemIndex;
   PCountryCode := fCountryCodes._[idx];
 
   if not Assigned(PCountryCode) then
@@ -97,29 +97,29 @@ begin
   Add('countryCode', countryCode);
 end;
 
-procedure TFrmPropertyAddress.Edit_adr_lChange(Sender: TObject);
+procedure TFrmPropertyAddress.Edit_CityChange(Sender: TObject);
 begin
-  Add('l', Edit_adr_l.Text);
+  Add('l', Edit_City.Text);
 end;
 
-procedure TFrmPropertyAddress.Edit_adr_PostalCodeChange(Sender: TObject);
+procedure TFrmPropertyAddress.Edit_PostalCodeChange(Sender: TObject);
 begin
-  Add('postalCode', Edit_adr_PostalCode.Text);
+  Add('postalCode', Edit_PostalCode.Text);
 end;
 
-procedure TFrmPropertyAddress.Edit_adr_postOfficeBoxChange(Sender: TObject);
+procedure TFrmPropertyAddress.Edit_PostOfficeBoxChange(Sender: TObject);
 begin
-  Add('postOfficeBox', Edit_adr_postOfficeBox.Text);
+  Add('postOfficeBox', Edit_PostOfficeBox.Text);
 end;
 
-procedure TFrmPropertyAddress.Edit_adr_stChange(Sender: TObject);
+procedure TFrmPropertyAddress.Edit_StateChange(Sender: TObject);
 begin
-  Add('st', Edit_adr_st.Text);
+  Add('st', Edit_State.Text);
 end;
 
-procedure TFrmPropertyAddress.Memo_adr_streetAddressChange(Sender: TObject);
+procedure TFrmPropertyAddress.Memo_StreetChange(Sender: TObject);
 begin
-  Add('streetAddress', Memo_adr_streetAddress.Text);
+  Add('streetAddress', Memo_Street.Text);
 end;
 
 procedure TFrmPropertyAddress.Add(AttributeName, AttributeValue: RawUtf8;
@@ -144,13 +144,13 @@ begin
     FreeAndNil(Resource);
   end;
 
-  ComboBox_adr_CountryCode.Clear();
-  ComboBox_adr_CountryCode.Items.BeginUpdate;
+  ComboBox_CountryCode.Clear();
+  ComboBox_CountryCode.Items.BeginUpdate;
   try
     for CountryCode in fCountryCodes.Objects do
-      ComboBox_adr_CountryCode.Items.Add(CountryCode^.S['name']);
+      ComboBox_CountryCode.Items.Add(CountryCode^.S['name']);
   finally
-    ComboBox_adr_CountryCode.Items.EndUpdate;
+    ComboBox_CountryCode.Items.EndUpdate;
   end;
 end;
 
@@ -172,14 +172,14 @@ begin
   fProperty := Props;
 
   IsUpdating := True;
-  Memo_adr_streetAddress.Text := Props.Attributes.GetByName('streetAddress');
-  Edit_adr_postOfficeBox.Text := Props.Attributes.GetByName('postOfficeBox');
-  Edit_adr_l.Text := Props.Attributes.GetByName('l');
-  Edit_adr_st.Text := Props.Attributes.GetByName('st');
-  Edit_adr_PostalCode.Text := Props.Attributes.GetByName('postalCode');
+  Memo_Street.Text := Props.Attributes.GetByName('streetAddress');
+  Edit_PostOfficeBox.Text := Props.Attributes.GetByName('postOfficeBox');
+  Edit_City.Text := Props.Attributes.GetByName('l');
+  Edit_State.Text := Props.Attributes.GetByName('st');
+  Edit_PostalCode.Text := Props.Attributes.GetByName('postalCode');
 
   try
-    ComboBox_adr_CountryCode.ItemIndex := ComboBox_adr_CountryCode.Items.IndexOf(Props.Attributes.GetByName('co'));
+    ComboBox_CountryCode.ItemIndex := ComboBox_CountryCode.Items.IndexOf(Props.Attributes.GetByName('co'));
   finally
     IsUpdating := False;
   end;

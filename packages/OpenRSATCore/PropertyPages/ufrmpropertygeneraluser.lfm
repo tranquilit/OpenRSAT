@@ -337,7 +337,7 @@ object FrmPropertyGeneralUser: TFrmPropertyGeneralUser
       Height = 23
       Hint = 'The person''s phone number'
       Top = 8
-      Width = 128
+      Width = 207
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Top = 8
       BorderSpacing.Right = 8
@@ -356,7 +356,7 @@ object FrmPropertyGeneralUser: TFrmPropertyGeneralUser
       Height = 23
       Hint = 'A web page that is the primary landing page of a website'
       Top = 70
-      Width = 147
+      Width = 207
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Top = 8
       BorderSpacing.Right = 8
@@ -392,10 +392,10 @@ object FrmPropertyGeneralUser: TFrmPropertyGeneralUser
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Panel_Bottom
       AnchorSideRight.Side = asrBottom
-      Left = 245
+      Left = 324
       Height = 25
       Top = 7
-      Width = 144
+      Width = 65
       Action = Action_OtherPhoneNumber
       Anchors = [akTop, akRight]
       AutoSize = True
@@ -408,10 +408,10 @@ object FrmPropertyGeneralUser: TFrmPropertyGeneralUser
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Panel_Bottom
       AnchorSideRight.Side = asrBottom
-      Left = 264
+      Left = 324
       Height = 25
       Top = 69
-      Width = 125
+      Width = 65
       Action = Action_HomePage
       Anchors = [akTop, akRight]
       AutoSize = True
@@ -421,13 +421,13 @@ object FrmPropertyGeneralUser: TFrmPropertyGeneralUser
     end
   end
   object ActionList1: TActionList
-    Left = 8
-    Top = 8
+    Left = 104
+    Top = 120
     object Action_HomePage: TAction
-      Caption = 'Action_HomePage'
+      Caption = 'Other...'
     end
     object Action_OtherPhoneNumber: TAction
-      Caption = 'Action_PhoneNumber'
+      Caption = 'Other...'
       OnExecute = Action_OtherPhoneNumberExecute
     end
   end

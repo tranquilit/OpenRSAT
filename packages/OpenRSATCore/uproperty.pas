@@ -25,6 +25,8 @@ type
 
     fCore: ICore;
 
+    function GetDCTypeFromUAC: RawUtf8;
+    function GetSiteFromServerReference: RawUtf8;
     procedure UpdateMemberOf(MemberOfList: TRawUtf8DynArray; AddModify: Boolean = True);
 
     function ApplyAttributeDifference: Boolean;
@@ -36,7 +38,6 @@ type
 
     function IsModified: Boolean;
     function IsModified(AttributeName: RawUtf8): Boolean;
-
     function ApplyModification: Boolean;
 
     function GetAllReadable(Name: RawUtf8): TRawUtf8DynArray;
@@ -47,6 +48,11 @@ type
 
     procedure AddMemberOf(MemberOfList: TRawUtf8DynArray);
     procedure DeleteMemberOf(MemberOfList: TRawUtf8DynArray);
+
+    procedure Subnets(Data: PDocVariantData);
+
+    property SiteFromServerReference: RawUtf8 read GetSiteFromServerReference;
+    property DCTypeFromUAC: RawUtf8 read GetDCTypeFromUAC;
   private
     fSecurityDescriptor: TSecurityDescriptor;
 
@@ -97,7 +103,8 @@ type
 implementation
 
 uses
-  mormot.core.datetime;
+  mormot.core.datetime,
+  mormot.core.text;
 
 { TProperty }
 
@@ -327,6 +334,35 @@ begin
   end;
 end;
 
+function TProperty.GetSiteFromServerReference: RawUtf8;
+var
+  Attribute: TLdapAttribute;
+  Pairs: TNameValueDNs;
+begin
+  result := '';
+  Attribute := LdapClient.SearchObject(LdapClient.ConfigDN, FormatUtf8('(serverReference=%)', [distinguishedName]), 'distinguishedName', lssWholeSubtree);
+  if not Assigned(Attribute) then
+    Exit;
+  if not ParseDN(Attribute.GetReadable(), Pairs, True) then
+    Exit;
+  if Length(Pairs) < 3 then
+    Exit;
+  result := Pairs[2].Value;
+end;
+
+function TProperty.GetDCTypeFromUAC: RawUtf8;
+var
+  UserAccountControls: TUserAccountControls;
+begin
+  result := '';
+
+  UserAccountControls := UserAccountControlsFromText(GetReadable('userAccountControl'));
+  if uacWorkstationTrusted in UserAccountControls then
+    result := rsUACWorkstation
+  else if uacServerTrusted in UserAccountControls then
+    result := rsUACServer
+end;
+
 function TProperty.ApplyAttributeDifference: Boolean;
 var
   i: Integer;
@@ -551,6 +587,36 @@ end;
 procedure TProperty.DeleteMemberOf(MemberOfList: TRawUtf8DynArray);
 begin
   UpdateMemberOf(MemberOfList, False);
+end;
+
+procedure TProperty.Subnets(Data: PDocVariantData);
+var
+  SearchResult: TLdapResult;
+  SiteName, SiteDistinguishedName: RawUtf8;
+begin
+  LdapClient.SearchBegin();
+  try
+    LdapClient.SearchScope := lssWholeSubtree;
+    repeat
+      if not LdapClient.Search(LdapClient.ConfigDN, False, '(objectClass=site)', ['name', 'distinguishedName']) then
+      begin
+        ShowLdapSearchError(LdapClient);
+        Exit;
+      end;
+
+      for SearchResult in LdapClient.SearchResult.Items do
+      begin
+        if not Assigned(SearchResult) then
+          continue;
+        SiteName := SearchResult.Find('name').GetReadable();
+        SiteDistinguishedName := SearchResult.Find('distinguishedName').GetReadable();
+        Data^.O_['name']^.S[SiteName] := SiteDistinguishedName;
+        Data^.O_['dn']^.S[SiteDistinguishedName] := SiteName;
+      end;
+    until LdapClient.SearchCookie = '';
+  finally
+    LdapClient.SearchEnd;
+  end;
 end;
 
 end.

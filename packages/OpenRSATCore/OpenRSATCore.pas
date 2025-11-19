@@ -23,7 +23,9 @@ uses
   ufrmmoduleadssoptions, uvisconnectiondetails, uvispropertieslist, uproperty, 
   uvischangedomaincontroller, upropertyframe, ufrmpropertyobject, 
   ufrmpropertymanagedby, ufrmpropertyaddress, ufrmpropertymemberof, 
-  ufrmpropertygeneraldefault, ufrmpropertygeneraluser, LazarusPackageIntf;
+  ufrmpropertygeneraldefault, ufrmpropertygeneraluser, 
+  ufrmpropertygeneralgroup, uhelpers, ufrmpropertygeneralcomputer, 
+  ufrmpropertygeneralou, ufrmpropertygeneralsubnet, LazarusPackageIntf;
 
 implementation
 

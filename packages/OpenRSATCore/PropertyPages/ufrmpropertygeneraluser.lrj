@@ -16,6 +16,6 @@
 {"hash":62260338,"name":"tfrmpropertygeneraluser.edit_telephonenumber.hint","sourcebytes":[84,104,101,32,112,101,114,115,111,110,39,115,32,112,104,111,110,101,32,110,117,109,98,101,114],"value":"The person's phone number"},
 {"hash":155655893,"name":"tfrmpropertygeneraluser.edit_homepage.hint","sourcebytes":[65,32,119,101,98,32,112,97,103,101,32,116,104,97,116,32,105,115,32,116,104,101,32,112,114,105,109,97,114,121,32,108,97,110,100,105,110,103,32,112,97,103,101,32,111,102,32,97,32,119,101,98,115,105,116,101],"value":"A web page that is the primary landing page of a website"},
 {"hash":115653315,"name":"tfrmpropertygeneraluser.edit_mail.hint","sourcebytes":[84,104,101,32,112,101,114,115,111,110,39,115,32,69,45,109,97,105,108,32,97,100,100,114,101,115,115],"value":"The person's E-mail address"},
-{"hash":255648645,"name":"tfrmpropertygeneraluser.action_homepage.caption","sourcebytes":[65,99,116,105,111,110,95,72,111,109,101,80,97,103,101],"value":"Action_HomePage"},
-{"hash":40394466,"name":"tfrmpropertygeneraluser.action_otherphonenumber.caption","sourcebytes":[65,99,116,105,111,110,95,80,104,111,110,101,78,117,109,98,101,114],"value":"Action_PhoneNumber"}
+{"hash":183260782,"name":"tfrmpropertygeneraluser.action_homepage.caption","sourcebytes":[79,116,104,101,114,46,46,46],"value":"Other..."},
+{"hash":183260782,"name":"tfrmpropertygeneraluser.action_otherphonenumber.caption","sourcebytes":[79,116,104,101,114,46,46,46],"value":"Other..."}
 ]}

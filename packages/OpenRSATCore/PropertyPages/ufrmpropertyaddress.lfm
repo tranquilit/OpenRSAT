@@ -6,8 +6,8 @@ object FrmPropertyAddress: TFrmPropertyAddress
   ClientHeight = 377
   ClientWidth = 440
   TabOrder = 0
-  DesignLeft = 1841
-  DesignTop = 285
+  DesignLeft = 2082
+  DesignTop = 377
   object Panel1: TPanel
     Left = 8
     Height = 249
@@ -20,9 +20,9 @@ object FrmPropertyAddress: TFrmPropertyAddress
     ClientHeight = 249
     ClientWidth = 424
     TabOrder = 0
-    object Label_adr_streetAddress: TLabel
+    object Label_Street: TLabel
       AnchorSideLeft.Control = Panel1
-      AnchorSideTop.Control = Memo_adr_streetAddress
+      AnchorSideTop.Control = Memo_Street
       Left = 8
       Height = 15
       Top = 8
@@ -33,9 +33,9 @@ object FrmPropertyAddress: TFrmPropertyAddress
       Constraints.MinWidth = 150
       WordWrap = True
     end
-    object Label_adr_postOfficeBox: TLabel
+    object Label_PostOfficeBox: TLabel
       AnchorSideLeft.Control = Panel1
-      AnchorSideTop.Control = Edit_adr_postOfficeBox
+      AnchorSideTop.Control = Edit_PostOfficeBox
       AnchorSideTop.Side = asrCenter
       Left = 8
       Height = 15
@@ -47,9 +47,9 @@ object FrmPropertyAddress: TFrmPropertyAddress
       Constraints.MinWidth = 150
       WordWrap = True
     end
-    object Label_adr_l: TLabel
+    object Label_City: TLabel
       AnchorSideLeft.Control = Panel1
-      AnchorSideTop.Control = Edit_adr_l
+      AnchorSideTop.Control = Edit_City
       AnchorSideTop.Side = asrCenter
       Left = 8
       Height = 15
@@ -61,9 +61,9 @@ object FrmPropertyAddress: TFrmPropertyAddress
       Constraints.MinWidth = 150
       WordWrap = True
     end
-    object Label_adr_st: TLabel
+    object Label_State: TLabel
       AnchorSideLeft.Control = Panel1
-      AnchorSideTop.Control = Edit_adr_st
+      AnchorSideTop.Control = Edit_State
       AnchorSideTop.Side = asrCenter
       Left = 8
       Height = 15
@@ -75,9 +75,9 @@ object FrmPropertyAddress: TFrmPropertyAddress
       Constraints.MinWidth = 150
       WordWrap = True
     end
-    object Label_adr_PostalCode: TLabel
+    object Label_PostalCode: TLabel
       AnchorSideLeft.Control = Panel1
-      AnchorSideTop.Control = Edit_adr_PostalCode
+      AnchorSideTop.Control = Edit_PostalCode
       AnchorSideTop.Side = asrCenter
       Left = 8
       Height = 15
@@ -89,9 +89,9 @@ object FrmPropertyAddress: TFrmPropertyAddress
       Constraints.MinWidth = 150
       WordWrap = True
     end
-    object Label_adr_CountryCode: TLabel
+    object Label_CountryCode: TLabel
       AnchorSideLeft.Control = Panel1
-      AnchorSideTop.Control = ComboBox_adr_CountryCode
+      AnchorSideTop.Control = ComboBox_CountryCode
       AnchorSideTop.Side = asrCenter
       Left = 8
       Height = 15
@@ -103,8 +103,8 @@ object FrmPropertyAddress: TFrmPropertyAddress
       Constraints.MinWidth = 150
       WordWrap = True
     end
-    object Memo_adr_streetAddress: TMemo
-      AnchorSideLeft.Control = Label_adr_streetAddress
+    object Memo_Street: TMemo
+      AnchorSideLeft.Control = Label_Street
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = Panel1
       AnchorSideRight.Control = Panel1
@@ -121,12 +121,12 @@ object FrmPropertyAddress: TFrmPropertyAddress
       ScrollBars = ssVertical
       ShowHint = True
       TabOrder = 0
-      OnChange = Memo_adr_streetAddressChange
+      OnChange = Memo_StreetChange
     end
-    object Edit_adr_postOfficeBox: TEdit
-      AnchorSideLeft.Control = Label_adr_postOfficeBox
+    object Edit_PostOfficeBox: TEdit
+      AnchorSideLeft.Control = Label_PostOfficeBox
       AnchorSideLeft.Side = asrBottom
-      AnchorSideTop.Control = Memo_adr_streetAddress
+      AnchorSideTop.Control = Memo_Street
       AnchorSideTop.Side = asrBottom
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
@@ -141,12 +141,12 @@ object FrmPropertyAddress: TFrmPropertyAddress
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
-      OnChange = Edit_adr_postOfficeBoxChange
+      OnChange = Edit_PostOfficeBoxChange
     end
-    object Edit_adr_l: TEdit
-      AnchorSideLeft.Control = Label_adr_l
+    object Edit_City: TEdit
+      AnchorSideLeft.Control = Label_City
       AnchorSideLeft.Side = asrBottom
-      AnchorSideTop.Control = Edit_adr_postOfficeBox
+      AnchorSideTop.Control = Edit_PostOfficeBox
       AnchorSideTop.Side = asrBottom
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
@@ -161,12 +161,12 @@ object FrmPropertyAddress: TFrmPropertyAddress
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
-      OnChange = Edit_adr_lChange
+      OnChange = Edit_CityChange
     end
-    object Edit_adr_st: TEdit
-      AnchorSideLeft.Control = Label_adr_st
+    object Edit_State: TEdit
+      AnchorSideLeft.Control = Label_State
       AnchorSideLeft.Side = asrBottom
-      AnchorSideTop.Control = Edit_adr_l
+      AnchorSideTop.Control = Edit_City
       AnchorSideTop.Side = asrBottom
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
@@ -181,12 +181,12 @@ object FrmPropertyAddress: TFrmPropertyAddress
       ParentShowHint = False
       ShowHint = True
       TabOrder = 3
-      OnChange = Edit_adr_stChange
+      OnChange = Edit_StateChange
     end
-    object Edit_adr_PostalCode: TEdit
-      AnchorSideLeft.Control = Label_adr_PostalCode
+    object Edit_PostalCode: TEdit
+      AnchorSideLeft.Control = Label_PostalCode
       AnchorSideLeft.Side = asrBottom
-      AnchorSideTop.Control = Edit_adr_st
+      AnchorSideTop.Control = Edit_State
       AnchorSideTop.Side = asrBottom
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
@@ -201,12 +201,12 @@ object FrmPropertyAddress: TFrmPropertyAddress
       ParentShowHint = False
       ShowHint = True
       TabOrder = 4
-      OnChange = Edit_adr_PostalCodeChange
+      OnChange = Edit_PostalCodeChange
     end
-    object ComboBox_adr_CountryCode: TComboBox
-      AnchorSideLeft.Control = Label_adr_CountryCode
+    object ComboBox_CountryCode: TComboBox
+      AnchorSideLeft.Control = Label_CountryCode
       AnchorSideLeft.Side = asrBottom
-      AnchorSideTop.Control = Edit_adr_PostalCode
+      AnchorSideTop.Control = Edit_PostalCode
       AnchorSideTop.Side = asrBottom
       AnchorSideRight.Control = Panel1
       AnchorSideRight.Side = asrBottom
@@ -223,7 +223,7 @@ object FrmPropertyAddress: TFrmPropertyAddress
       ShowHint = True
       Style = csDropDownList
       TabOrder = 5
-      OnChange = ComboBox_adr_CountryCodeChange
+      OnChange = ComboBox_CountryCodeChange
     end
   end
 end

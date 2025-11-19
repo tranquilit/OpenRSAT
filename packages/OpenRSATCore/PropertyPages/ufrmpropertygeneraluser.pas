@@ -74,6 +74,7 @@ implementation
 uses
   mormot.core.variants,
   mormot.net.ldap,
+  uhelpers,
   uvislistother;
 
 {$R *.lfm}
@@ -168,15 +169,16 @@ begin
 
   fProperty := Props;
 
-  Edit_Name.Text := Props.name;
-  Edit_GivenName.Text := Props.GetReadable('givenName');
-  Edit_Initials.Text := Props.GetReadable('initials');
-  Edit_Surname.Text := Props.GetReadable('sn');
-  Edit_DisplayName.Text := Props.GetReadable('displayName');
-  Edit_PhysicalDeliveryOfficeName.Text := Props.GetReadable('physicalDeliveryOfficeName');
-  Edit_TelephoneNumber.Text := Props.GetReadable('telephoneNumber');
-  Edit_Mail.Text := Props.GetReadable('mail');
-  Edit_HomePage.Text := Props.GetReadable('wWWHomePage');
+  Edit_Name.CaptionNoChange := Props.name;
+  Edit_GivenName.CaptionNoChange := Props.GetReadable('givenName');
+  Edit_Initials.CaptionNoChange := Props.GetReadable('initials');
+  Edit_Surname.CaptionNoChange := Props.GetReadable('sn');
+  Edit_DisplayName.CaptionNoChange := Props.GetReadable('displayName');
+  Edit_Description.CaptionNoChange := Props.description;
+  Edit_PhysicalDeliveryOfficeName.CaptionNoChange := Props.GetReadable('physicalDeliveryOfficeName');
+  Edit_TelephoneNumber.CaptionNoChange := Props.GetReadable('telephoneNumber');
+  Edit_Mail.CaptionNoChange := Props.GetReadable('mail');
+  Edit_HomePage.CaptionNoChange := Props.GetReadable('wWWHomePage');
 end;
 
 end.

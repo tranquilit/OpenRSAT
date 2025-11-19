@@ -1,0 +1,13 @@
+{"version":1,"strings":[
+{"hash":81166474,"name":"tfrmpropertygeneralou.label_description.caption","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110,58],"value":"Description:"},
+{"hash":179878954,"name":"tfrmpropertygeneralou.label_street.caption","sourcebytes":[83,116,114,101,101,116,58],"value":"Street:"},
+{"hash":4852682,"name":"tfrmpropertygeneralou.label_city.caption","sourcebytes":[67,105,116,121,58],"value":"City:"},
+{"hash":241726650,"name":"tfrmpropertygeneralou.label_state.caption","sourcebytes":[83,116,97,116,101,47,112,114,111,118,105,110,99,101,58],"value":"State/province:"},
+{"hash":171630794,"name":"tfrmpropertygeneralou.label_zip.caption","sourcebytes":[90,105,112,47,80,111,115,116,97,108,32,67,111,100,101,58],"value":"Zip/Postal Code:"},
+{"hash":82196506,"name":"tfrmpropertygeneralou.label_country.caption","sourcebytes":[67,111,117,110,116,114,121,47,114,101,103,105,111,110,58],"value":"Country/region:"},
+{"hash":203717987,"name":"tfrmpropertygeneralou.memo_street.hint","sourcebytes":[65,32,115,116,114,101,101,116,32,97,100,100,114,101,115,115],"value":"A street address"},
+{"hash":200417657,"name":"tfrmpropertygeneralou.edit_l.hint","sourcebytes":[82,101,112,114,101,115,101,110,116,115,32,116,104,101,32,110,97,109,101,32,111,102,32,97,32,108,111,99,97,108,105,116,121,44,32,115,117,99,104,32,97,115,32,97,32,116,111,119,110,32,111,114,32,99,105,116,121],"value":"Represents the name of a locality, such as a town or city"},
+{"hash":116541205,"name":"tfrmpropertygeneralou.edit_st.hint","sourcebytes":[84,104,101,32,110,97,109,101,32,111,102,32,97,32,115,116,97,116,101,32,111,114,32,112,114,111,118,105,110,99,101],"value":"The name of a state or province"},
+{"hash":121614297,"name":"tfrmpropertygeneralou.edit_postalcode.hint","sourcebytes":[84,104,101,32,112,111,115,116,97,108,32,111,114,32,122,105,112,32,99,111,100,101,32,102,111,114,32,109,97,105,108,32,100,101,108,105,118,101,114,121],"value":"The postal or zip code for mail delivery"},
+{"hash":38627396,"name":"tfrmpropertygeneralou.combobox_co.hint","sourcebytes":[84,104,101,32,99,111,117,110,116,114,121,47,114,101,103,105,111,110,32,105,110,32,119,104,105,99,104,32,116,104,101,32,117,115,101,114,32,105,115,32,108,111,99,97,116,101,100],"value":"The country/region in which the user is located"}
+]}

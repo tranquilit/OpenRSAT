@@ -112,6 +112,7 @@ object FrmPropertyGeneralDefault: TFrmPropertyGeneralDefault
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
+      OnChange = Edit_DescriptionChange
     end
   end
 end

@@ -850,6 +850,7 @@ uses
   ufrmcore,
   ufrmpropertyaddress,
   ufrmpropertygeneraldefault,
+  ufrmpropertygeneralsubnet,
   ufrmpropertygeneraluser,
   ufrmpropertymanagedby,
   ufrmpropertymemberof,
@@ -1251,6 +1252,7 @@ begin
   Tab_SubnetGeneral.TabVisible := True;
   PageControl.ActivePage := Tab_SubnetGeneral;
 
+  NewTab(TFrmPropertyGeneralSubnet);
   fSubnetInfo.Init();
   Ldap.SearchBegin();
   ComboBox_subnet_site.Items.Clear;
