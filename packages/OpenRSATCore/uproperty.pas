@@ -46,15 +46,18 @@ type
     function GetRaw(Name: RawUtf8; index: Integer = 0): RawByteString;
 
     procedure Add(Name: RawUtf8; Value: RawUtf8; Option: TLdapAddOption = aoReplaceValue);
+    procedure Restore(Name: RawUtf8);
 
     procedure AddMemberOf(MemberOfList: TRawUtf8DynArray);
     procedure DeleteMemberOf(MemberOfList: TRawUtf8DynArray);
 
     procedure Subnets(Data: PDocVariantData);
+    function UPNSuffixes: TRawUtf8DynArray;
 
     property SiteFromServerReference: RawUtf8 read GetSiteFromServerReference;
     property SubnetsFromSiteObject: TRawUtf8DynArray read GetSubnetsFromSiteObject;
     property DCTypeFromUAC: RawUtf8 read GetDCTypeFromUAC;
+    function CannotChangePassword: Boolean;
   private
     fSecurityDescriptor: TSecurityDescriptor;
 
@@ -300,6 +303,12 @@ begin
   end;
 
   Attribute.Add(Value, Option);
+end;
+
+procedure TProperty.Restore(Name: RawUtf8);
+begin
+  if Assigned(fModifiedAttributes) then
+    fModifiedAttributes.Delete(Name);
 end;
 
 procedure TProperty.UpdateMemberOf(MemberOfList: TRawUtf8DynArray;
@@ -650,6 +659,49 @@ begin
   finally
     LdapClient.SearchEnd;
   end;
+end;
+
+function TProperty.UPNSuffixes: TRawUtf8DynArray;
+var
+  Attribute: TLdapAttribute;
+begin
+  LdapClient.SearchRangeBegin;
+  try
+    Attribute := LdapClient.SearchObject(FormatUtf8('CN=Partitions,%', [LdapClient.ConfigDN]), '', 'uPNSuffixes');
+    if not Assigned(Attribute) then
+    begin
+      ShowLdapSearchError(LdapClient);
+      Exit;
+    end;
+  finally
+    LdapClient.SearchRangeEnd;
+  end;
+  result := Attribute.GetAllReadable;
+  Insert(FormatUtf8('@%', [DNToCN(LdapClient.DefaultDN)]), result, 0);
+  if (LdapClient.DefaultDN <> LdapClient.RootDN) then
+    Insert(FormatUtf8('@%', [DNToCN(LdapClient.RootDN)]), result, 1);
+end;
+
+function TProperty.CannotChangePassword: Boolean;
+var
+  PSecDesc: PSecurityDescriptor;
+  AceSelf, AceWorld: Integer;
+begin
+  // https://learn.microsoft.com/fr-fr/windows/win32/adsi/reading-user-cannot-change-password-ldap-provider
+  result := False;
+  PSecDesc := SecurityDescriptor;
+
+  if not Assigned(PSecDesc) then
+    Exit;
+
+  AceSelf  := SecDescFindACE(PSecDesc,
+    satObjectAccessDenied, KnownRawSid(wksSelf),
+    [samControlAccess], @ATTR_UUID[kaUserChangePassword]);
+  AceWorld := SecDescFindACE(PSecDesc,
+    satObjectAccessDenied, KnownRawSid(wksWorld),
+    [samControlAccess], @ATTR_UUID[kaUserChangePassword]);
+
+  result := (AceSelf <> -1) and (AceWorld <> -1);
 end;
 
 end.

@@ -1,0 +1,8 @@
+{"version":1,"strings":[
+{"hash":5538698,"name":"tfrmpropertyoperatingsystem.label_operatingsystem.caption","sourcebytes":[78,97,109,101,58],"value":"Name:"},
+{"hash":211419610,"name":"tfrmpropertyoperatingsystem.label_operatingsystemversion.caption","sourcebytes":[86,101,114,115,105,111,110,58],"value":"Version:"},
+{"hash":245347882,"name":"tfrmpropertyoperatingsystem.label_operatingsystemservicepack.caption","sourcebytes":[83,101,114,118,105,99,101,32,80,97,99,107,58],"value":"Service Pack:"},
+{"hash":226775477,"name":"tfrmpropertyoperatingsystem.edit_operatingsystem.hint","sourcebytes":[84,104,101,32,79,112,101,114,97,116,105,110,103,32,83,121,115,116,101,109,32,110,97,109,101,44,32,102,111,114,32,101,120,97,109,112,108,101,44,32,87,105,110,100,111,119,115,32,86,105,115,116,97,32,69,110,116,101,114,112,114,105,115,101],"value":"The Operating System name, for example, Windows Vista Enterprise"},
+{"hash":93476752,"name":"tfrmpropertyoperatingsystem.edit_operatingsystemversion.hint","sourcebytes":[84,104,101,32,111,112,101,114,97,116,105,110,103,32,115,121,115,116,101,109,32,118,101,114,115,105,111,110,44,32,102,111,114,32,101,120,97,109,112,108,101,44,32,52,46,48],"value":"The operating system version, for example, 4.0"},
+{"hash":107730521,"name":"tfrmpropertyoperatingsystem.edit_operatingsystemservicepack.hint","sourcebytes":[84,104,101,32,111,112,101,114,97,116,105,110,103,32,115,121,115,116,101,109,32,115,101,114,118,105,99,101,32,112,97,99,107,32,73,68,32,40,102,111,114,32,101,120,97,109,112,108,101,44,32,83,80,51,41],"value":"The operating system service pack ID (for example, SP3)"}
+]}

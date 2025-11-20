@@ -26,6 +26,7 @@ uses
   ufrmpropertygeneraldefault, ufrmpropertygeneraluser, 
   ufrmpropertygeneralgroup, uhelpers, ufrmpropertygeneralcomputer, 
   ufrmpropertygeneralou, ufrmpropertygeneralsubnet, ufrmpropertygeneralsite, 
+  ufrmpropertygeneralvolume, ufrmpropertyoperatingsystem, ufrmpropertyaccount, 
   LazarusPackageIntf;
 
 implementation

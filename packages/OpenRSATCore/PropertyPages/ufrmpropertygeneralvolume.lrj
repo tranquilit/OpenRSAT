@@ -1,0 +1,8 @@
+{"version":1,"strings":[
+{"hash":81166474,"name":"tfrmpropertygeneralvolume.label_description.caption","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110,58],"value":"Description:"},
+{"hash":2918761,"name":"tfrmpropertygeneralvolume.label_uncname.caption","sourcebytes":[85,78,67,32,110,97,109,101,58,32,40,69,120,97,109,112,108,101,58,32,92,92,115,101,114,118,101,114,92,115,104,97,114,101,41],"value":"UNC name: (Example: \\\\server\\share)"},
+{"hash":81662499,"name":"tfrmpropertygeneralvolume.edit_uncname.hint","sourcebytes":[84,104,101,32,117,110,105,118,101,114,115,97,108,32,110,97,109,105,110,103,32,99,111,110,118,101,110,116,105,111,110,32,110,97,109,101,32,102,111,114,32,115,104,97,114,101,100,32,118,111,108,117,109,101,115,32,97,110,100,32,112,114,105,110,116,101,114,115],"value":"The universal naming convention name for shared volumes and printers"},
+{"hash":19557668,"name":"tfrmpropertygeneralvolume.bitbtn_keywords.hint","sourcebytes":[65,32,108,105,115,116,32,111,102,32,107,101,121,119,111,114,100,115,32,116,104,97,116,32,99,97,110,32,98,101,32,117,115,101,100,32,116,111,32,108,111,99,97,116,101,32,97,32,103,105,118,101,110,32,99,111,110,110,101,99,116,105,111,110,32,112,111,105,110,116],"value":"A list of keywords that can be used to locate a given connection point"},
+{"hash":114987502,"name":"tfrmpropertygeneralvolume.bitbtn_keywords.caption","sourcebytes":[75,101,121,119,111,114,100,115,46,46,46],"value":"Keywords..."},
+{"hash":128648785,"name":"tfrmpropertygeneralvolume.action1.caption","sourcebytes":[65,99,116,105,111,110,49],"value":"Action1"}
+]}

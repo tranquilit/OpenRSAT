@@ -1,0 +1,177 @@
+object FrmPropertyGeneralVolume: TFrmPropertyGeneralVolume
+  Left = 0
+  Height = 288
+  Top = 0
+  Width = 469
+  ClientHeight = 288
+  ClientWidth = 469
+  TabOrder = 0
+  DesignLeft = 2197
+  DesignTop = 246
+  object Panel_Header: TPanel
+    Left = 8
+    Height = 56
+    Top = 0
+    Width = 453
+    Align = alTop
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 56
+    ClientWidth = 453
+    TabOrder = 0
+    object Image: TImage
+      AnchorSideLeft.Control = Panel_Header
+      AnchorSideTop.Control = Panel_Header
+      AnchorSideBottom.Control = Panel_Header
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 40
+      Top = 8
+      Width = 40
+      Anchors = [akTop, akLeft, akBottom]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      ImageIndex = 12
+      Proportional = True
+      Stretch = True
+      Transparent = True
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = Image
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Image
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_Header
+      AnchorSideRight.Side = asrBottom
+      Left = 80
+      Height = 15
+      Top = 21
+      Width = 365
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 32
+      BorderSpacing.Right = 8
+      BorderStyle = bsNone
+      Color = clWindow
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+  end
+  object Line_Top: TShape
+    Left = 16
+    Height = 1
+    Top = 59
+    Width = 437
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 3
+    BorderSpacing.Right = 16
+    BorderSpacing.Bottom = 4
+    Pen.Color = clMedGray
+  end
+  object Panel_Content: TPanel
+    Left = 8
+    Height = 126
+    Top = 64
+    Width = 453
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 126
+    ClientWidth = 453
+    TabOrder = 1
+    object Label_Description: TLabel
+      AnchorSideLeft.Control = Panel_Content
+      AnchorSideTop.Control = Edit_Description
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 12
+      Width = 63
+      BorderSpacing.Left = 8
+      Caption = 'Description:'
+      Constraints.MaxWidth = 100
+    end
+    object Edit_Description: TEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_Content
+      AnchorSideRight.Control = Panel_Content
+      AnchorSideRight.Side = asrBottom
+      Left = 145
+      Height = 23
+      Top = 8
+      Width = 300
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      Constraints.MaxWidth = 300
+      MaxLength = 1024
+      TabOrder = 0
+      OnChange = Edit_DescriptionChange
+    end
+    object Label_UNCName: TLabel
+      AnchorSideLeft.Control = Panel_Content
+      AnchorSideTop.Control = Edit_Description
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Content
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 15
+      Top = 39
+      Width = 437
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      Caption = 'UNC name: (Example: \\server\share)'
+    end
+    object Edit_UNCName: TEdit
+      AnchorSideLeft.Control = Panel_Content
+      AnchorSideTop.Control = Label_UNCName
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Content
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 23
+      Hint = 'The universal naming convention name for shared volumes and printers'
+      Top = 62
+      Width = 437
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnChange = Edit_UNCNameChange
+    end
+    object BitBtn_Keywords: TBitBtn
+      AnchorSideLeft.Control = Panel_Content
+      AnchorSideTop.Control = Edit_UNCName
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 25
+      Hint = 'A list of keywords that can be used to locate a given connection point'
+      Top = 101
+      Width = 86
+      AutoSize = True
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 16
+      Caption = 'Keywords...'
+      TabOrder = 2
+    end
+  end
+  object ActionList1: TActionList
+    Left = 160
+    Top = 160
+    object Action1: TAction
+      Caption = 'Action1'
+      OnExecute = Action1Execute
+    end
+  end
+end
