@@ -7,6 +7,7 @@ object VisChangeDomainController: TVisChangeDomainController
   ClientHeight = 425
   ClientWidth = 656
   LCLVersion = '4.1.0.0'
+  OnCloseQuery = FormCloseQuery
   OnShow = FormShow
   object Panel1: TPanel
     Left = 8
@@ -198,6 +199,7 @@ object VisChangeDomainController: TVisChangeDomainController
       AutoSize = True
       BorderSpacing.Right = 8
       Default = True
+      ModalResult = 1
       TabOrder = 1
     end
   end

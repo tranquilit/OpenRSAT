@@ -702,6 +702,10 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExecute = Action_DelegateControlExecute
       OnUpdate = Action_DelegateControlUpdate
     end
+    object Action_OperationsMasters: TAction
+      Caption = 'Operations masters'
+      OnExecute = Action_OperationsMastersExecute
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
@@ -712,6 +716,9 @@ object FrmModuleADUC: TFrmModuleADUC
     end
     object MenuItem_ChangeDomainController: TMenuItem
       Action = Action_ChangeDomainController
+    end
+    object MenuItem_OperationsMasters: TMenuItem
+      Action = Action_OperationsMasters
     end
     object MenuItem_AddToAGroup: TMenuItem
       Action = Action_TaskAddToAGroup

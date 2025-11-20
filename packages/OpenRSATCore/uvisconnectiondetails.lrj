@@ -1,12 +1,5 @@
 {"version":1,"strings":[
-{"hash":18536579,"name":"tvisconnectiondetails.caption","sourcebytes":[86,105,115,67,111,110,110,101,99,116,105,111,110,68,101,116,97,105,108,115],"value":"VisConnectionDetails"},
-{"hash":79050750,"name":"tvisconnectiondetails.label_domain.caption","sourcebytes":[68,111,109,97,105,110],"value":"Domain"},
-{"hash":199636242,"name":"tvisconnectiondetails.label_domaincontroller.caption","sourcebytes":[68,111,109,97,105,110,32,67,111,110,116,114,111,108,108,101,114],"value":"Domain Controller"},
-{"hash":123206708,"name":"tvisconnectiondetails.tabsheet_formatted.caption","sourcebytes":[84,97,98,83,104,101,101,116,95,70,111,114,109,97,116,116,101,100],"value":"TabSheet_Formatted"},
-{"hash":86162772,"name":"tvisconnectiondetails.tabsheet_advanced.caption","sourcebytes":[84,97,98,83,104,101,101,116,95,65,100,118,97,110,99,101,100],"value":"TabSheet_Advanced"},
-{"hash":346165,"name":"tvisconnectiondetails.tisgrid1.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
-{"hash":6063029,"name":"tvisconnectiondetails.tisgrid1.header.columns[1].text","sourcebytes":[86,97,108,117,101],"value":"Value"},
-{"hash":156788553,"name":"tvisconnectiondetails.label1.caption","sourcebytes":[83,101,114,118,101,114,32,105,110,102,111,114,109,97,116,105,111,110,115,32,40,97,118,97,105,108,97,98,108,101,32,102,114,111,109,32,82,111,111,116,68,83,69,32,79,98,106,101,99,116,41],"value":"Server informations (available from RootDSE Object)"},
+{"hash":79719651,"name":"tvisconnectiondetails.caption","sourcebytes":[67,111,110,110,101,99,116,105,111,110,32,100,101,116,97,105,108,115],"value":"Connection details"},
 {"hash":164185077,"name":"tvisconnectiondetails.label_username.caption","sourcebytes":[85,115,101,114,110,97,109,101],"value":"Username"},
 {"hash":145417188,"name":"tvisconnectiondetails.label_password.caption","sourcebytes":[80,97,115,115,119,111,114,100],"value":"Password"},
 {"hash":184796820,"name":"tvisconnectiondetails.label_timeout.caption","sourcebytes":[84,105,109,101,111,117,116],"value":"Timeout"},
@@ -15,5 +8,15 @@
 {"hash":139294228,"name":"tvisconnectiondetails.label_allowunsafepasswordbind.caption","sourcebytes":[65,108,108,111,119,32,117,110,115,97,102,101,32,112,97,115,115,119,111,114,100,32,98,105,110,100],"value":"Allow unsafe password bind"},
 {"hash":242532551,"name":"tvisconnectiondetails.label_kerberosdisablechannelbinding.caption","sourcebytes":[75,101,114,98,101,114,111,115,32,100,105,115,97,98,108,101,32,99,104,97,110,110,101,108,32,98,105,110,100,105,110,103],"value":"Kerberos disable channel binding"},
 {"hash":116799380,"name":"tvisconnectiondetails.label_autoreconnect.caption","sourcebytes":[65,117,116,111,32,114,101,99,111,110,110,101,99,116],"value":"Auto reconnect"},
-{"hash":186042500,"name":"tvisconnectiondetails.label_autobind.caption","sourcebytes":[65,117,116,111,32,98,105,110,100],"value":"Auto bind"}
+{"hash":186042500,"name":"tvisconnectiondetails.label_autobind.caption","sourcebytes":[65,117,116,111,32,98,105,110,100],"value":"Auto bind"},
+{"hash":90721269,"name":"tvisconnectiondetails.panel5.caption","sourcebytes":[80,97,110,101,108,53],"value":"Panel5"},
+{"hash":110837370,"name":"tvisconnectiondetails.label2.caption","sourcebytes":[76,100,97,112,32,101,114,114,111,114,58],"value":"Ldap error:"},
+{"hash":176476567,"name":"tvisconnectiondetails.bitbtn1.caption","sourcebytes":[72,105,100,101,47,83,104,111,119],"value":"Hide/Show"},
+{"hash":79050750,"name":"tvisconnectiondetails.label_domain.caption","sourcebytes":[68,111,109,97,105,110],"value":"Domain"},
+{"hash":199636242,"name":"tvisconnectiondetails.label_domaincontroller.caption","sourcebytes":[68,111,109,97,105,110,32,67,111,110,116,114,111,108,108,101,114],"value":"Domain Controller"},
+{"hash":154728404,"name":"tvisconnectiondetails.tabsheet_formatted.caption","sourcebytes":[70,111,114,109,97,116,116,101,100],"value":"Formatted"},
+{"hash":197676484,"name":"tvisconnectiondetails.tabsheet_advanced.caption","sourcebytes":[65,100,118,97,110,99,101,100],"value":"Advanced"},
+{"hash":346165,"name":"tvisconnectiondetails.tisgrid1.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
+{"hash":6063029,"name":"tvisconnectiondetails.tisgrid1.header.columns[1].text","sourcebytes":[86,97,108,117,101],"value":"Value"},
+{"hash":156788553,"name":"tvisconnectiondetails.label1.caption","sourcebytes":[83,101,114,118,101,114,32,105,110,102,111,114,109,97,116,105,111,110,115,32,40,97,118,97,105,108,97,98,108,101,32,102,114,111,109,32,82,111,111,116,68,83,69,32,79,98,106,101,99,116,41],"value":"Server informations (available from RootDSE Object)"}
 ]}

@@ -21,7 +21,7 @@ uses
   uvisnewzonewizard, ufrmmodulesitesandservices, ufrmmoduleserviceinterfaces, 
   ufrmnewobject, ufrmnewsite, ufrmnewsubnet, uresourcestring, uaductreeview, 
   ufrmmoduleadssoptions, uvisconnectiondetails, uvispropertieslist, uproperty, 
-  uvischangedomaincontroller, LazarusPackageIntf;
+  uvischangedomaincontroller, uvisoperationmasters, LazarusPackageIntf;
 
 implementation
 

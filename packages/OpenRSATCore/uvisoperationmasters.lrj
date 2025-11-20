@@ -1,0 +1,13 @@
+{"version":1,"strings":[
+{"hash":204353859,"name":"tvisoperationmasters.caption","sourcebytes":[79,112,101,114,97,116,105,111,110,115,32,77,97,115,116,101,114,115],"value":"Operations Masters"},
+{"hash":10906034,"name":"tvisoperationmasters.label_schemamaster.caption","sourcebytes":[83,99,104,101,109,97,32,109,97,115,116,101,114],"value":"Schema master"},
+{"hash":90483378,"name":"tvisoperationmasters.label_domainnamingmaster.caption","sourcebytes":[68,111,109,97,105,110,32,110,97,109,105,110,103,32,109,97,115,116,101,114],"value":"Domain naming master"},
+{"hash":21635,"name":"tvisoperationmasters.label_pdc.caption","sourcebytes":[80,68,67],"value":"PDC"},
+{"hash":22228,"name":"tvisoperationmasters.label_rid.caption","sourcebytes":[82,73,68],"value":"RID"},
+{"hash":18585954,"name":"tvisoperationmasters.label_infrastructuremaster.caption","sourcebytes":[73,110,102,114,97,115,116,114,117,99,116,117,114,101,32,109,97,115,116,101,114],"value":"Infrastructure master"},
+{"hash":139283182,"name":"tvisoperationmasters.action_schemamaster.caption","sourcebytes":[67,104,97,110,103,101,46,46,46],"value":"Change..."},
+{"hash":139283182,"name":"tvisoperationmasters.action_domainnamingmaster.caption","sourcebytes":[67,104,97,110,103,101,46,46,46],"value":"Change..."},
+{"hash":139283182,"name":"tvisoperationmasters.action_pdc.caption","sourcebytes":[67,104,97,110,103,101,46,46,46],"value":"Change..."},
+{"hash":139283182,"name":"tvisoperationmasters.action_rid.caption","sourcebytes":[67,104,97,110,103,101,46,46,46],"value":"Change..."},
+{"hash":139283182,"name":"tvisoperationmasters.action_infrastructuremaster.caption","sourcebytes":[67,104,97,110,103,101,46,46,46],"value":"Change..."}
+]}

@@ -1,0 +1,307 @@
+object VisOperationMasters: TVisOperationMasters
+  Left = 2132
+  Height = 250
+  Top = 250
+  Width = 400
+  Caption = 'Operations Masters'
+  ClientHeight = 250
+  ClientWidth = 400
+  Constraints.MinHeight = 200
+  Constraints.MinWidth = 400
+  Position = poOwnerFormCenter
+  LCLVersion = '4.1.0.0'
+  object Panel_SchemaMaster: TPanel
+    Left = 0
+    Height = 40
+    Top = 0
+    Width = 400
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 40
+    ClientWidth = 400
+    TabOrder = 0
+    object Label_SchemaMaster: TLabel
+      AnchorSideLeft.Control = Panel_SchemaMaster
+      AnchorSideTop.Control = Edit_SchemaMaster
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 12
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Schema master'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+    end
+    object Edit_SchemaMaster: TEdit
+      AnchorSideLeft.Control = Label_SchemaMaster
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_SchemaMaster
+      AnchorSideRight.Control = BitBtn_SchemaMaster
+      Left = 166
+      Height = 23
+      Top = 8
+      Width = 142
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      TabOrder = 0
+    end
+    object BitBtn_SchemaMaster: TBitBtn
+      AnchorSideTop.Control = Edit_SchemaMaster
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_SchemaMaster
+      AnchorSideRight.Side = asrBottom
+      Left = 316
+      Height = 25
+      Top = 7
+      Width = 76
+      Action = Action_SchemaMaster
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 1
+    end
+  end
+  object Panel_DomainNamingMaster: TPanel
+    Left = 0
+    Height = 40
+    Top = 40
+    Width = 400
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 40
+    ClientWidth = 400
+    TabOrder = 1
+    object BitBtn_DomainNamingMaster: TBitBtn
+      AnchorSideTop.Control = Edit_DomainNamingMaster
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_DomainNamingMaster
+      AnchorSideRight.Side = asrBottom
+      Left = 316
+      Height = 25
+      Top = 7
+      Width = 76
+      Action = Action_DomainNamingMaster
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 0
+    end
+    object Label_DomainNamingMaster: TLabel
+      AnchorSideLeft.Control = Panel_DomainNamingMaster
+      AnchorSideTop.Control = Edit_DomainNamingMaster
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 12
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Domain naming master'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+    end
+    object Edit_DomainNamingMaster: TEdit
+      AnchorSideLeft.Control = Label_DomainNamingMaster
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_DomainNamingMaster
+      AnchorSideRight.Control = BitBtn_DomainNamingMaster
+      Left = 166
+      Height = 23
+      Top = 8
+      Width = 142
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      ReadOnly = True
+      TabOrder = 1
+    end
+  end
+  object Panel_PDC: TPanel
+    Left = 0
+    Height = 40
+    Top = 80
+    Width = 400
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 40
+    ClientWidth = 400
+    TabOrder = 2
+    object BitBtn_PDC: TBitBtn
+      AnchorSideTop.Control = Edit_PDC
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_PDC
+      AnchorSideRight.Side = asrBottom
+      Left = 316
+      Height = 25
+      Top = 7
+      Width = 76
+      Action = Action_PDC
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 0
+    end
+    object Label_PDC: TLabel
+      AnchorSideLeft.Control = Panel_PDC
+      AnchorSideTop.Control = Edit_PDC
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 12
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'PDC'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+    end
+    object Edit_PDC: TEdit
+      AnchorSideLeft.Control = Label_PDC
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_PDC
+      AnchorSideRight.Control = BitBtn_PDC
+      Left = 166
+      Height = 23
+      Top = 8
+      Width = 142
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = False
+      BorderSpacing.Around = 8
+      ReadOnly = True
+      TabOrder = 1
+    end
+  end
+  object Panel_RID: TPanel
+    Left = 0
+    Height = 40
+    Top = 120
+    Width = 400
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 40
+    ClientWidth = 400
+    TabOrder = 3
+    object BitBtn_RID: TBitBtn
+      AnchorSideTop.Control = Edit_RID
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_RID
+      AnchorSideRight.Side = asrBottom
+      Left = 316
+      Height = 25
+      Top = 7
+      Width = 76
+      Action = Action_RID
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 0
+    end
+    object Label_RID: TLabel
+      AnchorSideLeft.Control = Panel_RID
+      AnchorSideTop.Control = Edit_RID
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 12
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'RID'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+    end
+    object Edit_RID: TEdit
+      AnchorSideLeft.Control = Label_RID
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_RID
+      AnchorSideRight.Control = BitBtn_RID
+      Left = 166
+      Height = 23
+      Top = 8
+      Width = 142
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      ReadOnly = True
+      TabOrder = 1
+    end
+  end
+  object Panel_InfrastructureMaster: TPanel
+    Left = 0
+    Height = 40
+    Top = 160
+    Width = 400
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 40
+    ClientWidth = 400
+    TabOrder = 4
+    object BitBtn_InfrastructureMaster: TBitBtn
+      AnchorSideTop.Control = Edit_InfrastructureMaster
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_InfrastructureMaster
+      AnchorSideRight.Side = asrBottom
+      Left = 316
+      Height = 25
+      Top = 7
+      Width = 76
+      Action = Action_InfrastructureMaster
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 0
+    end
+    object Label_InfrastructureMaster: TLabel
+      AnchorSideLeft.Control = Panel_InfrastructureMaster
+      AnchorSideTop.Control = Edit_InfrastructureMaster
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 12
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Infrastructure master'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+    end
+    object Edit_InfrastructureMaster: TEdit
+      AnchorSideLeft.Control = Label_InfrastructureMaster
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_InfrastructureMaster
+      AnchorSideRight.Control = BitBtn_InfrastructureMaster
+      Left = 166
+      Height = 23
+      Top = 8
+      Width = 142
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      ReadOnly = True
+      TabOrder = 1
+    end
+  end
+  object Actions: TActionList
+    Left = 200
+    Top = 208
+    object Action_SchemaMaster: TAction
+      Caption = 'Change...'
+      OnExecute = Action_SchemaMasterExecute
+    end
+    object Action_DomainNamingMaster: TAction
+      Caption = 'Change...'
+      OnExecute = Action_DomainNamingMasterExecute
+    end
+    object Action_PDC: TAction
+      Caption = 'Change...'
+      OnExecute = Action_PDCExecute
+    end
+    object Action_RID: TAction
+      Caption = 'Change...'
+      OnExecute = Action_RIDExecute
+    end
+    object Action_InfrastructureMaster: TAction
+      Caption = 'Change...'
+      OnExecute = Action_InfrastructureMasterExecute
+    end
+  end
+end

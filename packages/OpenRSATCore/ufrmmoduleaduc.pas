@@ -43,6 +43,7 @@ type
   { TFrmModuleADUC }
 
   TFrmModuleADUC = class(TFrameModule)
+    Action_OperationsMasters: TAction;
     ActionList_ADUC: TActionList;
     Action_ChangeDomainController: TAction;
     Action_Copy: TAction;
@@ -84,6 +85,7 @@ type
     Action_UsersAndComputers: TAction;
     Image1: TImage;
     Image2: TImage;
+    MenuItem_OperationsMasters: TMenuItem;
     MenuItem_NewSubnet: TMenuItem;
     MenuItem_NewUser: TMenuItem;
     MenuItem_NewSharedFolder: TMenuItem;
@@ -189,6 +191,7 @@ type
     procedure Action_NewUserUpdate(Sender: TObject);
     procedure Action_NextExecute(Sender: TObject);
     procedure Action_NextUpdate(Sender: TObject);
+    procedure Action_OperationsMastersExecute(Sender: TObject);
     procedure Action_ParentExecute(Sender: TObject);
     procedure Action_ParentUpdate(Sender: TObject);
     procedure Action_PasteExecute(Sender: TObject);
@@ -313,6 +316,7 @@ uses
   uvischangedn,
   uvistaskresetpassword,
   uvischangedomaincontroller,
+  uvisoperationmasters,
   ucommon,
   ufrmrsatoptions;
 
@@ -401,12 +405,16 @@ end;
 procedure TFrmModuleADUC.Action_ChangeDomainControllerExecute(Sender: TObject);
 var
   Vis: TVisChangeDomainController;
+  mr: Integer;
 begin
   Vis := TVisChangeDomainController.Create(Self);
 
   try
     Vis.Core := fCore;
-    Vis.ShowModal;
+    mr := Vis.ShowModal;
+    if (mr <> mrOK) or (Vis.DomainController = '') then
+      Exit;
+    fCore.ChangeDomainController(Vis.DomainController);
   finally
     FreeAndNil(Vis);
   end;
@@ -794,6 +802,18 @@ begin
 
 end;
 
+procedure TFrmModuleADUC.Action_OperationsMastersExecute(Sender: TObject);
+var
+  Vis: TVisOperationMasters;
+begin
+  Vis := TVisOperationMasters.Create(Self, fCore);
+  try
+    Vis.ShowModal();
+  finally
+    FreeAndNil(Vis);
+  end;
+end;
+
 procedure TFrmModuleADUC.Action_ParentExecute(Sender: TObject);
 begin
   if Assigned(fLog) then
@@ -883,7 +903,7 @@ begin
     Exit;
   end;
 
-  fCore.OpenProperty(SelectedText, DistinguishedName);
+  fCore.OpenProperty(DistinguishedName, SelectedText);
 end;
 
 procedure TFrmModuleADUC.Action_PropertiesUpdate(Sender: TObject);
@@ -1265,6 +1285,7 @@ begin
   VisibleItems := [
     MenuItem_DelegateControl,
     MenuItem_ChangeDomainController,
+    MenuItem_OperationsMasters,
     MenuItem_New,
     MenuItem_SwitchToolbarSize,
     MenuItem_Search,

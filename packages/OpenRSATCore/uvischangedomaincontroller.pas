@@ -86,6 +86,7 @@ type
     function RetrieveServers(CallBack: TCallBack; RetrieveExtra: Boolean = True): Boolean;
     function RetrieveServersExtra(CallBack: TCallBack): Boolean;
     function ChangeConnection(DomainController: RawUtf8): Boolean;
+    function TestConnection(DomainController: RawUtf8): Boolean;
   end;
 
   { TVisChangeDomainController }
@@ -110,6 +111,7 @@ type
     procedure Action_OKUpdate(Sender: TObject);
     procedure BitBtn_CancelKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormShow(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
     procedure TisGrid1DblClick(Sender: TObject);
@@ -118,6 +120,7 @@ type
     fLog: TSynLog;
     fChangeDomainController: TChangeDomainController;
     fSearchWord: RawUtf8;
+    fAllowClose: Boolean;
 
     function GetCore: ICore;
     procedure SetCore(AValue: ICore);
@@ -214,21 +217,17 @@ end;
 
 procedure TThreadIsDCOnline.Execute;
 var
-  LdapClient: TLdapClient;
+  LdapClient: TRsatLdapClient;
 begin
   TSynLog.Add.Log(sllTrace, 'Is DC online?', self);
   fSettings.TargetHost := fDomainController;
   fSettings.KerberosSpn := '';
   fSettings.UserName := '';
   fSettings.Password := '';
-  LdapClient := TLdapClient.Create(fSettings);
+  LdapClient := TRsatLdapClient.Create(fSettings);
   try
     fSuccess := False;
-    if not LdapClient.Connect then
-    begin
-      TSynLog.Add.Log(sllTrace, 'Connection failure. (%)', [LdapClient.ResultString], self);
-      Exit;
-    end;
+    LdapClient.Connect(); // Don't care about the success for an anonymous connection.
     if not Assigned(LdapClient.SearchObject('', '', 'dnsHostName')) then
     begin
       TSynLog.Add.Log(sllTrace, 'Cannot retrieve root object "dnsHostName" attribute.', self);
@@ -384,6 +383,26 @@ begin
   end;
 end;
 
+function TChangeDomainController.TestConnection(DomainController: RawUtf8): Boolean;
+var
+  test: TLdapClient;
+begin
+  result := False;
+  test := TLdapClient.Create(fCore.LdapClient.Settings);
+  try
+    test.Settings.TargetHost := DomainController;
+    test.Settings.KerberosSpn := '';
+    if not test.Connect() then
+    begin
+      ShowLdapConnectError(test);
+      Exit;
+    end;
+    result := True;
+  finally
+    FreeAndNil(test);
+  end;
+end;
+
 { TVisChangeDomainController }
 
 procedure TVisChangeDomainController.FormShow(Sender: TObject);
@@ -422,11 +441,15 @@ begin
   end;
 end;
 
+procedure TVisChangeDomainController.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  CanClose := fAllowClose;
+end;
+
 procedure TVisChangeDomainController.Action_OKExecute(Sender: TObject);
 begin
-  if not fChangeDomainController.ChangeConnection(TisGrid1.SelectedRows._[0]^.S['name']) then
-    Exit;
-  Close;
+  fAllowClose := fChangeDomainController.TestConnection(TisGrid1.SelectedRows._[0]^.S['name']);
 end;
 
 procedure TVisChangeDomainController.UpdateCurrentServer;
@@ -507,6 +530,8 @@ constructor TVisChangeDomainController.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
+  fAllowClose := True;
+
   fChangeDomainController := TChangeDomainController.Create;
   fLog := TSynLog.Add;
   if Assigned(fLog) then
@@ -522,7 +547,6 @@ end;
 
 function TVisChangeDomainController.DomainController: RawUtf8;
 begin
-
   result := TisGrid1.SelectedRows._[0]^.S['name'];
 end;
 
