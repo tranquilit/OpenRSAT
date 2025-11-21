@@ -1,0 +1,284 @@
+object FrmPropertyTelephone: TFrmPropertyTelephone
+  Left = 0
+  Height = 329
+  Top = 0
+  Width = 468
+  ClientHeight = 329
+  ClientWidth = 468
+  TabOrder = 0
+  DesignLeft = 2090
+  DesignTop = 214
+  object GroupBox_Numbers: TGroupBox
+    Left = 16
+    Height = 183
+    Top = 8
+    Width = 436
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 16
+    Caption = 'Telephone numbers'
+    ClientHeight = 163
+    ClientWidth = 432
+    TabOrder = 0
+    object Label_HomePhone: TLabel
+      AnchorSideLeft.Control = GroupBox_Numbers
+      AnchorSideTop.Control = Edit_HomePhone
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 12
+      Width = 39
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Home :'
+    end
+    object Label_Pager: TLabel
+      AnchorSideLeft.Control = GroupBox_Numbers
+      AnchorSideTop.Control = Edit_Pager
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 43
+      Width = 36
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Pager :'
+    end
+    object Label_Mobile: TLabel
+      AnchorSideLeft.Control = GroupBox_Numbers
+      AnchorSideTop.Control = Edit_Mobile
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 74
+      Width = 43
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Mobile :'
+    end
+    object Label_FacsimileTelephoneNumber: TLabel
+      AnchorSideLeft.Control = GroupBox_Numbers
+      AnchorSideTop.Control = Edit_FacsimileTelephoneNumber
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 105
+      Width = 23
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Fax :'
+    end
+    object Label_IpPhone: TLabel
+      AnchorSideLeft.Control = GroupBox_Numbers
+      AnchorSideTop.Control = Edit_IpPhone
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 136
+      Width = 53
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'IP phone :'
+    end
+    object Edit_HomePhone: TEdit
+      AnchorSideTop.Control = GroupBox_Numbers
+      AnchorSideRight.Control = BitBtn_OtherIpPhone
+      Left = 115
+      Height = 23
+      Hint = 'The user''s main home phone number'
+      Top = 8
+      Width = 236
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      MaxLength = 64
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnChange = Edit_HomePhoneChange
+    end
+    object Edit_Pager: TEdit
+      AnchorSideTop.Control = Edit_HomePhone
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = BitBtn_OtherIpPhone
+      Left = 115
+      Height = 23
+      Hint = 'The user''s main pager number'
+      Top = 39
+      Width = 236
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      MaxLength = 64
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnChange = Edit_PagerChange
+    end
+    object Edit_Mobile: TEdit
+      AnchorSideTop.Control = Edit_Pager
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = BitBtn_OtherIpPhone
+      Left = 115
+      Height = 23
+      Hint = 'The user''s main mobile phone number'
+      Top = 70
+      Width = 236
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      MaxLength = 64
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+      OnChange = Edit_MobileChange
+    end
+    object Edit_FacsimileTelephoneNumber: TEdit
+      AnchorSideTop.Control = Edit_Mobile
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = BitBtn_OtherIpPhone
+      Left = 115
+      Height = 23
+      Hint = 'The user''s main fax number'
+      Top = 101
+      Width = 236
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      MaxLength = 64
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 6
+      OnChange = Edit_FacsimileTelephoneNumberChange
+    end
+    object Edit_IpPhone: TEdit
+      AnchorSideTop.Control = Edit_FacsimileTelephoneNumber
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = BitBtn_OtherIpPhone
+      Left = 115
+      Height = 23
+      Hint = 'The TCP/IP address for the phone. Used by Telephony'
+      Top = 132
+      Width = 236
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      MaxLength = 64
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 8
+      OnChange = Edit_IpPhoneChange
+    end
+    object BitBtn_OtherHomePhone: TBitBtn
+      AnchorSideTop.Control = Edit_HomePhone
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = GroupBox_Numbers
+      AnchorSideRight.Side = asrBottom
+      Left = 359
+      Height = 25
+      Top = 7
+      Width = 65
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Right = 8
+      Caption = 'Other...'
+      TabOrder = 1
+      OnClick = BitBtn_OtherHomePhoneClick
+    end
+    object BitBtn_OtherPager: TBitBtn
+      AnchorSideTop.Control = Edit_Pager
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = GroupBox_Numbers
+      AnchorSideRight.Side = asrBottom
+      Left = 359
+      Height = 25
+      Top = 38
+      Width = 65
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Right = 8
+      Caption = 'Other...'
+      TabOrder = 3
+      OnClick = BitBtn_OtherPagerClick
+    end
+    object BitBtn_OtherMobile: TBitBtn
+      AnchorSideTop.Control = Edit_Mobile
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = GroupBox_Numbers
+      AnchorSideRight.Side = asrBottom
+      Left = 359
+      Height = 25
+      Top = 69
+      Width = 65
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Right = 8
+      Caption = 'Other...'
+      TabOrder = 5
+      OnClick = BitBtn_OtherMobileClick
+    end
+    object BitBtn_OtherFacsimileTelephoneNumber: TBitBtn
+      AnchorSideTop.Control = Edit_FacsimileTelephoneNumber
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = GroupBox_Numbers
+      AnchorSideRight.Side = asrBottom
+      Left = 359
+      Height = 25
+      Top = 100
+      Width = 65
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Right = 8
+      Caption = 'Other...'
+      TabOrder = 7
+      OnClick = BitBtn_OtherFacsimileTelephoneNumberClick
+    end
+    object BitBtn_OtherIpPhone: TBitBtn
+      AnchorSideTop.Control = Edit_IpPhone
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = GroupBox_Numbers
+      AnchorSideRight.Side = asrBottom
+      Left = 359
+      Height = 25
+      Top = 131
+      Width = 65
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Right = 8
+      Caption = 'Other...'
+      TabOrder = 9
+      OnClick = BitBtn_OtherIpPhoneClick
+    end
+  end
+  object Label_Info: TLabel
+    Left = 16
+    Height = 15
+    Top = 199
+    Width = 452
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    Caption = 'Notes :'
+  end
+  object Memo_Info: TMemo
+    AnchorSideBottom.Side = asrBottom
+    Left = 16
+    Height = 100
+    Hint = 'The group/user comments'
+    Top = 214
+    Width = 436
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Right = 16
+    BorderSpacing.Bottom = 8
+    MaxLength = 1024
+    ParentShowHint = False
+    ScrollBars = ssVertical
+    ShowHint = True
+    TabOrder = 1
+    OnChange = Memo_InfoChange
+  end
+end

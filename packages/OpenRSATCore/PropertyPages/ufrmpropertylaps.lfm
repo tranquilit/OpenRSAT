@@ -1,0 +1,201 @@
+object FrmPropertyLAPS: TFrmPropertyLAPS
+  Left = 0
+  Height = 317
+  Top = 0
+  Width = 416
+  ClientHeight = 317
+  ClientWidth = 416
+  TabOrder = 0
+  DesignLeft = 2095
+  DesignTop = 201
+  object GroupBox1: TGroupBox
+    Left = 8
+    Height = 301
+    Top = 8
+    Width = 400
+    Align = alTop
+    BorderSpacing.Around = 8
+    Caption = 'Solution du mot de passe de l''administrateur local'
+    ClientHeight = 281
+    ClientWidth = 396
+    TabOrder = 0
+    object Label_CurrentExpiration: TLabel
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = GroupBox1
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 222
+      BorderSpacing.Around = 8
+      Caption = 'Expiration actuelle du mot de passe LAPS :'
+    end
+    object Edit_CurrentExpiration: TEdit
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = Label_CurrentExpiration
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox1
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 23
+      Top = 31
+      Width = 380
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object Label_NewExpiration: TLabel
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = Edit_CurrentExpiration
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 15
+      Top = 62
+      Width = 271
+      BorderSpacing.Around = 8
+      Caption = 'Définir l''expiration du nouveau mot de passe LAPS :'
+    end
+    object DateTimePicker_NewExpiration: TDateTimePicker
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = Label_NewExpiration
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = BitBtn_ExpireNow
+      Left = 8
+      Height = 23
+      Top = 85
+      Width = 289
+      CenturyFrom = 1941
+      MaxDate = 2958465
+      MinDate = -53780
+      TabOrder = 1
+      BorderSpacing.Around = 8
+      TrailingSeparator = False
+      TextForNullDate = 'NULL'
+      LeadingZeros = True
+      Anchors = [akTop, akLeft, akRight]
+      Kind = dtkDateTime
+      TimeFormat = tf24
+      TimeDisplay = tdHMS
+      DateMode = dmComboBox
+      Date = 45728
+      Time = 0.449409027780348
+      UseDefaultSeparators = True
+      HideDateTimeParts = []
+      MonthNames = 'Long'
+      OnChange = DateTimePicker_NewExpirationChange
+    end
+    object BitBtn_ExpireNow: TBitBtn
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = DateTimePicker_NewExpiration
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = GroupBox1
+      AnchorSideRight.Side = asrBottom
+      Left = 305
+      Height = 25
+      Top = 84
+      Width = 83
+      Action = Action_ExpireNow
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 2
+    end
+    object Label_LocalAdminAccountName: TLabel
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = DateTimePicker_NewExpiration
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 15
+      Top = 116
+      Width = 242
+      BorderSpacing.Around = 8
+      Caption = 'Nom du compte d''administrateur local LAPS :'
+    end
+    object Edit_LocalAdminAccountName: TEdit
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = Label_LocalAdminAccountName
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox1
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 23
+      Top = 139
+      Width = 380
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      ReadOnly = True
+      TabOrder = 3
+    end
+    object Label_LocalAdminAccountPassword: TLabel
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = Edit_LocalAdminAccountName
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 15
+      Top = 170
+      Width = 285
+      BorderSpacing.Around = 8
+      Caption = 'Mot de passe du compte d''administrateur local LAPS :'
+    end
+    object Edit_LocalAdminAccountPassword: TEdit
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = Label_LocalAdminAccountPassword
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox1
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 23
+      Top = 193
+      Width = 380
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      EchoMode = emPassword
+      PasswordChar = '*'
+      ReadOnly = True
+      TabOrder = 4
+    end
+    object BitBtn_CopyPassword: TBitBtn
+      AnchorSideLeft.Control = GroupBox1
+      AnchorSideTop.Control = Edit_LocalAdminAccountPassword
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 25
+      Top = 224
+      Width = 107
+      Action = Action_CopyPassword
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 5
+    end
+    object BitBtn_ShowPassword: TBitBtn
+      AnchorSideLeft.Control = BitBtn_CopyPassword
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = BitBtn_CopyPassword
+      AnchorSideTop.Side = asrCenter
+      Left = 123
+      Height = 25
+      Top = 224
+      Width = 108
+      Action = Action_ShowPassword
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 6
+    end
+  end
+  object ActionList1: TActionList
+    Left = 328
+    Top = 256
+    object Action_ExpireNow: TAction
+      Caption = 'Expire now'
+      OnExecute = Action_ExpireNowExecute
+    end
+    object Action_CopyPassword: TAction
+      Caption = 'Copy password'
+      OnExecute = Action_CopyPasswordExecute
+    end
+    object Action_ShowPassword: TAction
+      Caption = 'Show password'
+      OnExecute = Action_ShowPasswordExecute
+    end
+  end
+end

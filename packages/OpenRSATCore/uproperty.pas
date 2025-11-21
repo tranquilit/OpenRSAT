@@ -47,6 +47,7 @@ type
 
     procedure Add(Name: RawUtf8; Value: RawUtf8; Option: TLdapAddOption = aoReplaceValue);
     procedure Restore(Name: RawUtf8);
+    procedure SearchObject(Attributes: TRawUtf8DynArray);
 
     procedure AddMemberOf(MemberOfList: TRawUtf8DynArray);
     procedure DeleteMemberOf(MemberOfList: TRawUtf8DynArray);
@@ -58,6 +59,7 @@ type
     property SubnetsFromSiteObject: TRawUtf8DynArray read GetSubnetsFromSiteObject;
     property DCTypeFromUAC: RawUtf8 read GetDCTypeFromUAC;
     function CannotChangePassword: Boolean;
+    function msFVERecoveryInformation: TLdapResultList;
 
     procedure UserAccountControlExclude(UserAccountControl: TUserAccountControl);
     procedure UserAccountControlInclude(UserAccountControl: TUserAccountControl);
@@ -314,6 +316,26 @@ procedure TProperty.Restore(Name: RawUtf8);
 begin
   if Assigned(fModifiedAttributes) then
     fModifiedAttributes.Delete(Name);
+end;
+
+procedure TProperty.SearchObject(Attributes: TRawUtf8DynArray);
+var
+  Obj: TLdapResult;
+  Attribute: TLdapAttribute;
+  i: Integer;
+begin
+  if not Assigned(Attributes) or (Length(Attributes) = 0) then
+    Exit;
+  Obj := LdapClient.SearchObject(distinguishedName, '', Attributes);
+
+  for Attribute in Obj.Attributes.Items do
+  begin
+    if not Assigned(Attribute) then
+      continue;
+    fAttributes.Add(Attribute.AttributeName, Attribute.GetReadable(), aoReplaceValue);
+    for i := 1 to Attribute.Count - 1 do
+      fAttributes.Add(Attribute.AttributeName, Attribute.GetReadable(i));
+  end;
 end;
 
 procedure TProperty.UpdateMemberOf(MemberOfList: TRawUtf8DynArray;
@@ -707,6 +729,44 @@ begin
     [samControlAccess], @ATTR_UUID[kaUserChangePassword]);
 
   result := (AceSelf <> -1) and (AceWorld <> -1);
+end;
+
+function TProperty.msFVERecoveryInformation: TLdapResultList;
+var
+  SearchResult, ResultItem: TLdapResult;
+  Attribute, ResultAttribute: TLdapAttribute;
+  i: Integer;
+begin
+  result := TLdapResultList.Create;
+
+  LdapClient.SearchBegin();
+  try
+    LdapClient.SearchScope := lssSingleLevel;
+    repeat
+      if not LdapClient.Search(DistinguishedName, False, '(objectClass=msFVE-RecoveryInformation)', ['cn', 'msFVE-RecoveryPassword']) then
+      begin
+        ShowLdapSearchError(LdapClient);
+        Exit;
+      end;
+      ResultItem := result.Add;
+
+      for SearchResult in LdapClient.SearchResult.Items do
+      begin
+        if not Assigned(SearchResult) then
+          continue;
+        for Attribute in SearchResult.Attributes.Items do
+        begin
+          if not Assigned(Attribute) then
+            continue;
+          ResultAttribute := ResultItem.Attributes.Add(Attribute.AttributeName, Attribute.GetReadable());
+          for i := 1 to Attribute.Count - 1 do
+            ResultAttribute.Add(Attribute.GetReadable(i));
+        end;
+      end;
+    until (LdapClient.SearchCookie = '');
+  finally
+    LdapClient.SearchEnd;
+  end;
 end;
 
 procedure TProperty.UserAccountControlExclude(
