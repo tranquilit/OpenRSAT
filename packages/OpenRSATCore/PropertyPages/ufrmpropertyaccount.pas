@@ -15,6 +15,7 @@ uses
   StdCtrls, ActnList,
   mormot.core.base,
   mormot.core.log,
+  mormot.net.ldap,
   uproperty,
   upropertyframe;
 
@@ -57,7 +58,17 @@ type
     ScrollBox_Options: TScrollBox;
     procedure Action1Execute(Sender: TObject);
     procedure Action2Execute(Sender: TObject);
+    procedure CheckBox_CannotChangeChange(Sender: TObject);
+    procedure CheckBox_DisabledChange(Sender: TObject);
+    procedure CheckBox_KerberosAES128EncryptionChange(Sender: TObject);
+    procedure CheckBox_KerberosAES256EncryptionChange(Sender: TObject);
+    procedure CheckBox_KerberosDESEncryptionChange(Sender: TObject);
     procedure CheckBox_MustChangeChange(Sender: TObject);
+    procedure CheckBox_NeverExpiresChange(Sender: TObject);
+    procedure CheckBox_NoKerberosPreauthChange(Sender: TObject);
+    procedure CheckBox_ReversibleEncryptionChange(Sender: TObject);
+    procedure CheckBox_SensitiveChange(Sender: TObject);
+    procedure CheckBox_SmartCardChange(Sender: TObject);
     procedure CheckBox_UnlockChange(Sender: TObject);
     procedure ComboBox_DomainChange(Sender: TObject);
     procedure DateTimePicker_ExpiresChange(Sender: TObject);
@@ -73,6 +84,11 @@ type
     procedure UpdateSamaccountName;
     procedure UpdateOptions;
     procedure UpdateExpires;
+
+    procedure UserAccountControlUpdate(UserAccountControl: TUserAccountControl; Include: Boolean);
+    procedure msDSSupportedEncryptionTypeUpdate(
+      msDSSupportedEncryptionType: TMsdsSupportedEncryptionType;
+  Include: Boolean);
   public
     constructor Create(TheOwner: TComponent); override;
     procedure Update(Props: TProperty); override;
@@ -80,8 +96,8 @@ type
 
 implementation
 uses
+  mormot.core.os.security,
   mormot.core.text,
-  mormot.net.ldap,
   ucommon,
   uhelpers,
   uvislogonhours,
@@ -173,9 +189,94 @@ begin
   fProperty.Add('userWorkstations', Workstations);
 end;
 
+procedure TFrmPropertyAccount.CheckBox_CannotChangeChange(Sender: TObject);
+const
+  SECACETYPE: Array[Boolean] of TSecAceType = (
+    satObjectAccessAllowed,
+    satObjectAccessDenied
+  );
+var
+  PSecDesc: PSecurityDescriptor;
+  AceSelf, AceWorld: PSecAce;
+  ModSecAceType: TSecAceType;
+begin
+  // https://learn.microsoft.com/en-us/windows/win32/adsi/modifying-user-cannot-change-password-ldap-provider
+
+  // Retrieve Security Descriptor
+  PSecDesc := fProperty.SecurityDescriptor;
+  if not Assigned(PSecDesc) then
+    Exit;
+
+  // Get ACE Self and World with previous AceType
+  ModSecAceType := SECACETYPE[not CheckBox_CannotChange.Checked];
+  AceSelf := SecDescAddOrUpdateACE(PSecDesc, ATTR_UUID[kaUserChangePassword],
+    KnownRawSid(wksSelf), ModSecAceType, [samControlAccess]);
+  AceWorld := SecDescAddOrUpdateACE(PSecDesc, ATTR_UUID[kaUserChangePassword],
+    KnownRawSid(wksWorld), ModSecAceType, [samControlAccess]);
+
+  // Modify ACE Self and World with new AceType
+  ModSecAceType := SECACETYPE[CheckBox_CannotChange.Checked];
+  AceSelf^.AceType  := ModSecAceType;
+  AceWorld^.AceType := ModSecAceType;
+  OrderAcl(fProperty.LdapClient, fProperty.DistinguishedName, fProperty.LdapClient.DefaultDN(), @PSecDesc^.Dacl);
+  fProperty.SecurityDescriptor := PSecDesc;
+end;
+
+procedure TFrmPropertyAccount.CheckBox_DisabledChange(Sender: TObject);
+begin
+  UserAccountControlUpdate(uacAccountDisable, CheckBox_Disabled.Checked);
+end;
+
+procedure TFrmPropertyAccount.CheckBox_KerberosAES128EncryptionChange(
+  Sender: TObject);
+begin
+  msDSSupportedEncryptionTypeUpdate(metAes128CtsHmacSha1, CheckBox_KerberosAES128Encryption.Checked);
+end;
+
+procedure TFrmPropertyAccount.CheckBox_KerberosAES256EncryptionChange(
+  Sender: TObject);
+begin
+  msDSSupportedEncryptionTypeUpdate(metAes256CtsHmacSha1, CheckBox_KerberosAES256Encryption.Checked);
+end;
+
+procedure TFrmPropertyAccount.CheckBox_KerberosDESEncryptionChange(
+  Sender: TObject);
+begin
+  UserAccountControlUpdate(uacKerberosDesOnly, CheckBox_KerberosDESEncryption.Checked);
+end;
+
 procedure TFrmPropertyAccount.CheckBox_MustChangeChange(Sender: TObject);
 begin
+  if CheckBox_MustChange.Checked then
+    fProperty.Add('pwdLastSet', '0')
+  else
+    fProperty.Add('pwdLastSet', '-1');
+end;
 
+procedure TFrmPropertyAccount.CheckBox_NeverExpiresChange(Sender: TObject);
+begin
+  UserAccountControlUpdate(uacPasswordDoNotExpire, CheckBox_NeverExpires.Checked);
+end;
+
+procedure TFrmPropertyAccount.CheckBox_NoKerberosPreauthChange(Sender: TObject);
+begin
+  UserAccountControlUpdate(uacKerberosRequirePreAuth, CheckBox_NoKerberosPreauth.Checked);
+end;
+
+procedure TFrmPropertyAccount.CheckBox_ReversibleEncryptionChange(
+  Sender: TObject);
+begin
+  UserAccountControlUpdate(uacPasswordUnencrypted, CheckBox_ReversibleEncryption.Checked);
+end;
+
+procedure TFrmPropertyAccount.CheckBox_SensitiveChange(Sender: TObject);
+begin
+  UserAccountControlUpdate(uacKerberosNotDelegated, CheckBox_Sensitive.Checked);
+end;
+
+procedure TFrmPropertyAccount.CheckBox_SmartCardChange(Sender: TObject);
+begin
+  UserAccountControlUpdate(uacSmartcardRequired, CheckBox_SmartCard.Checked);
 end;
 
 procedure TFrmPropertyAccount.CheckBox_UnlockChange(Sender: TObject);
@@ -231,8 +332,8 @@ const
   AES256 = $10;
 var
   UserAccountControl: TUserAccountControls;
-  msDSSETstr, pwdLastSet: RawUtf8;
-  msDSSET: Longint;
+  pwdLastSet: RawUtf8;
+  MsdsSupportedEncryptionTypes: TMsdsSupportedEncryptionTypes;
 begin
   pwdLastSet := fProperty.GetReadable('pwdLastSet');
   CheckBox_MustChange.Checked := (pwdLastSet = '') or (pwdLastSet = '0');
@@ -250,12 +351,10 @@ begin
   CheckBox_NoKerberosPreauth.Checked := uacKerberosRequirePreAuth in UserAccountControl;
 
   // https://ldapwiki.com/wiki/Wiki.jsp?page=MsDS-SupportedEncryptionTypes
-  msDSSETstr := fProperty.GetReadable('msDS-SupportedEncryptionTypes');
+  MsdsSupportedEncryptionTypes := MsdsSupportedEncryptionTypesFromText(fProperty.GetReadable('msDS-SupportedEncryptionTypes'));
 
-  if not TryStrToInt(msDSSETstr, msDSSET) then
-    msDSSET := 0;
-  CheckBox_KerberosAES128Encryption.Checked := (msDSSET and AES128) > 0;
-  CheckBox_KerberosAES256Encryption.Checked := (msDSSET and AES256) > 0;
+  CheckBox_KerberosAES128Encryption.Checked := metAes128CtsHmacSha1 in MsdsSupportedEncryptionTypes;
+  CheckBox_KerberosAES256Encryption.Checked := metAes256CtsHmacSha1 in MsdsSupportedEncryptionTypes;
 end;
 
 procedure TFrmPropertyAccount.UpdateExpires;
@@ -284,6 +383,24 @@ begin
 
   if not CheckBox_CannotChange.Checked then
     CheckBox_CannotChange.Checked := fProperty.CannotChangePassword;
+end;
+
+procedure TFrmPropertyAccount.UserAccountControlUpdate(
+  UserAccountControl: TUserAccountControl; Include: Boolean);
+begin
+  if Include then
+    fProperty.UserAccountControlInclude(UserAccountControl)
+  else
+    fProperty.UserAccountControlExclude(UserAccountControl);
+end;
+
+procedure TFrmPropertyAccount.msDSSupportedEncryptionTypeUpdate(
+  msDSSupportedEncryptionType: TMsdsSupportedEncryptionType; Include: Boolean);
+begin
+  if Include then
+    fProperty.msDSSupportedEncryptionTypeInclude(msDSSupportedEncryptionType)
+  else
+    fProperty.msDSSupportedEncryptionTypeExclude(msDSSupportedEncryptionType);
 end;
 
 constructor TFrmPropertyAccount.Create(TheOwner: TComponent);

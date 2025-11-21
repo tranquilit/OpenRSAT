@@ -58,6 +58,11 @@ type
     property SubnetsFromSiteObject: TRawUtf8DynArray read GetSubnetsFromSiteObject;
     property DCTypeFromUAC: RawUtf8 read GetDCTypeFromUAC;
     function CannotChangePassword: Boolean;
+
+    procedure UserAccountControlExclude(UserAccountControl: TUserAccountControl);
+    procedure UserAccountControlInclude(UserAccountControl: TUserAccountControl);
+    procedure msDSSupportedEncryptionTypeInclude(msDSSupportedEncrytionType: TMsdsSupportedEncryptionType);
+    procedure msDSSupportedEncryptionTypeExclude(msDSSupportedEncrytionType: TMsdsSupportedEncryptionType);
   private
     fSecurityDescriptor: TSecurityDescriptor;
 
@@ -702,6 +707,46 @@ begin
     [samControlAccess], @ATTR_UUID[kaUserChangePassword]);
 
   result := (AceSelf <> -1) and (AceWorld <> -1);
+end;
+
+procedure TProperty.UserAccountControlExclude(
+  UserAccountControl: TUserAccountControl);
+var
+  UserAccountControls: TUserAccountControls;
+begin
+  UserAccountControls := UserAccountControlsFromText(GetReadable('userAccountControl'));
+  Exclude(UserAccountControls, UserAccountControl);
+  Add('userAccountControl', IntToStr(UserAccountControlsValue(UserAccountControls)));
+end;
+
+procedure TProperty.UserAccountControlInclude(
+  UserAccountControl: TUserAccountControl);
+var
+  UserAccountControls: TUserAccountControls;
+begin
+  UserAccountControls := UserAccountControlsFromText(GetReadable('userAccountControl'));
+  Include(UserAccountControls, UserAccountControl);
+  Add('userAccountControl', IntToStr(UserAccountControlsValue(UserAccountControls)));
+end;
+
+procedure TProperty.msDSSupportedEncryptionTypeInclude(
+  msDSSupportedEncrytionType: TMsdsSupportedEncryptionType);
+var
+  msDSSupportedEncrytionTypes: TMsdsSupportedEncryptionTypes;
+begin
+  msDSSupportedEncrytionTypes := MsdsSupportedEncryptionTypesFromText(GetReadable('msDS-SupportedEncryptionTypes'));
+  Include(msDSSupportedEncrytionTypes, msDSSupportedEncrytionType);
+  Add('msDS-SupportedEncryptionTypes', IntToStr(MsdsSupportedEncryptionTypesValue(msDSSupportedEncrytionTypes)));
+end;
+
+procedure TProperty.msDSSupportedEncryptionTypeExclude(
+  msDSSupportedEncrytionType: TMsdsSupportedEncryptionType);
+var
+  msDSSupportedEncrytionTypes: TMsdsSupportedEncryptionTypes;
+begin
+  msDSSupportedEncrytionTypes := MsdsSupportedEncryptionTypesFromText(GetReadable('msDS-SupportedEncryptionTypes'));
+  Exclude(msDSSupportedEncrytionTypes, msDSSupportedEncrytionType);
+  Add('msDS-SupportedEncryptionTypes', IntToStr(MsdsSupportedEncryptionTypesValue(msDSSupportedEncrytionTypes)));
 end;
 
 end.

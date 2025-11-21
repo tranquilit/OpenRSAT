@@ -212,6 +212,7 @@ object FrmPropertyAccount: TFrmPropertyAccount
       BorderSpacing.Left = 8
       Caption = 'User cannot change password'
       TabOrder = 1
+      OnChange = CheckBox_CannotChangeChange
     end
     object CheckBox_NeverExpires: TCheckBox
       AnchorSideLeft.Control = ScrollBox_Options
@@ -224,6 +225,7 @@ object FrmPropertyAccount: TFrmPropertyAccount
       BorderSpacing.Left = 8
       Caption = 'Password never expires'
       TabOrder = 2
+      OnChange = CheckBox_NeverExpiresChange
     end
     object CheckBox_ReversibleEncryption: TCheckBox
       AnchorSideLeft.Control = ScrollBox_Options
@@ -236,6 +238,7 @@ object FrmPropertyAccount: TFrmPropertyAccount
       BorderSpacing.Left = 8
       Caption = 'Store password using reversible encryption'
       TabOrder = 3
+      OnChange = CheckBox_ReversibleEncryptionChange
     end
     object CheckBox_Disabled: TCheckBox
       AnchorSideLeft.Control = ScrollBox_Options
@@ -248,6 +251,7 @@ object FrmPropertyAccount: TFrmPropertyAccount
       BorderSpacing.Left = 8
       Caption = 'Account is disabled'
       TabOrder = 4
+      OnChange = CheckBox_DisabledChange
     end
     object CheckBox_SmartCard: TCheckBox
       AnchorSideLeft.Control = ScrollBox_Options
@@ -260,6 +264,7 @@ object FrmPropertyAccount: TFrmPropertyAccount
       BorderSpacing.Left = 8
       Caption = 'Smart card is required for interactive logon'
       TabOrder = 5
+      OnChange = CheckBox_SmartCardChange
     end
     object CheckBox_Sensitive: TCheckBox
       AnchorSideLeft.Control = ScrollBox_Options
@@ -272,6 +277,7 @@ object FrmPropertyAccount: TFrmPropertyAccount
       BorderSpacing.Left = 8
       Caption = 'Account is sensitive and cannot be delegated'
       TabOrder = 6
+      OnChange = CheckBox_SensitiveChange
     end
     object CheckBox_KerberosDESEncryption: TCheckBox
       AnchorSideLeft.Control = ScrollBox_Options
@@ -284,6 +290,7 @@ object FrmPropertyAccount: TFrmPropertyAccount
       BorderSpacing.Left = 8
       Caption = 'Use only Kerberos DES encryption types for this account'
       TabOrder = 7
+      OnChange = CheckBox_KerberosDESEncryptionChange
     end
     object CheckBox_KerberosAES128Encryption: TCheckBox
       AnchorSideLeft.Control = ScrollBox_Options
@@ -296,6 +303,7 @@ object FrmPropertyAccount: TFrmPropertyAccount
       BorderSpacing.Left = 8
       Caption = 'This account supports Kerberos AES 128 bit encryption'
       TabOrder = 8
+      OnChange = CheckBox_KerberosAES128EncryptionChange
     end
     object CheckBox_KerberosAES256Encryption: TCheckBox
       AnchorSideLeft.Control = ScrollBox_Options
@@ -308,6 +316,7 @@ object FrmPropertyAccount: TFrmPropertyAccount
       BorderSpacing.Left = 8
       Caption = 'This account supports Kerberos AES 256 bit encryption'
       TabOrder = 9
+      OnChange = CheckBox_KerberosAES256EncryptionChange
     end
     object CheckBox_NoKerberosPreauth: TCheckBox
       AnchorSideLeft.Control = ScrollBox_Options
@@ -321,6 +330,7 @@ object FrmPropertyAccount: TFrmPropertyAccount
       BorderSpacing.Bottom = 8
       Caption = 'Do not require Kerberos preauthentification'
       TabOrder = 10
+      OnChange = CheckBox_NoKerberosPreauthChange
     end
   end
   object GoupBox_Expires: TGroupBox
