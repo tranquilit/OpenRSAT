@@ -183,6 +183,8 @@ type
     procedure Action_NewAllUpdate(Sender: TObject);
     procedure Action_NewComputerExecute(Sender: TObject);
     procedure Action_NewComputerUpdate(Sender: TObject);
+    procedure Action_NewContactExecute(Sender: TObject);
+    procedure Action_NewContactUpdate(Sender: TObject);
     procedure Action_NewGroupExecute(Sender: TObject);
     procedure Action_NewGroupUpdate(Sender: TObject);
     procedure Action_NewOUExecute(Sender: TObject);
@@ -726,6 +728,25 @@ end;
 procedure TFrmModuleADUC.Action_NewComputerUpdate(Sender: TObject);
 begin
   Action_NewComputer.Enabled := Assigned(Core.LdapClient) and Core.LdapClient.Connected;
+end;
+
+procedure TFrmModuleADUC.Action_NewContactExecute(Sender: TObject);
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewContact.Caption]);
+
+  With TVisNewObject.Create(Self, vnotContact, GetFocusedObject(True), Core.LdapClient.DefaultDN) do
+  begin
+    PageCount := 1;
+    Ldap := Core.LdapClient;
+    if ShowModal = mrOK then
+      Action_Refresh.Execute;
+  end;
+end;
+
+procedure TFrmModuleADUC.Action_NewContactUpdate(Sender: TObject);
+begin
+  Action_NewContact.Enabled := Assigned(Core.LdapClient) and Core.LdapClient.Connected;
 end;
 
 procedure TFrmModuleADUC.Action_NewGroupExecute(Sender: TObject);

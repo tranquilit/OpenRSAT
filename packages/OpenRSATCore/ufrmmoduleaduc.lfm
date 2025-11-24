@@ -606,6 +606,8 @@ object FrmModuleADUC: TFrmModuleADUC
     object Action_NewContact: TAction
       Category = 'New'
       Caption = 'Contact'
+      OnExecute = Action_NewContactExecute
+      OnUpdate = Action_NewContactUpdate
     end
     object Action_NewInetOrgPerson: TAction
       Category = 'New'
