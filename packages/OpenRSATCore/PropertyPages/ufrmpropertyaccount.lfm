@@ -1,0 +1,444 @@
+object FrmPropertyAccount: TFrmPropertyAccount
+  Left = 0
+  Height = 379
+  Top = 0
+  Width = 467
+  ClientHeight = 379
+  ClientWidth = 467
+  TabOrder = 0
+  DesignLeft = 2148
+  DesignTop = 237
+  object Panel_LogonName: TPanel
+    Left = 16
+    Height = 38
+    Top = 8
+    Width = 435
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 16
+    BevelOuter = bvNone
+    ClientHeight = 38
+    ClientWidth = 435
+    TabOrder = 0
+    object Label_UserLogonName: TLabel
+      AnchorSideLeft.Control = Panel_LogonName
+      AnchorSideTop.Control = Panel_LogonName
+      Left = 0
+      Height = 15
+      Top = 0
+      Width = 96
+      Caption = 'User logon name :'
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = Panel_LogonName
+      AnchorSideTop.Control = Label_UserLogonName
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 23
+      Hint = 'This attribute contains the UPN for a user based on the Internet standard RFC 822'#13#10'(name@domain.lan)'
+      Top = 15
+      Width = 208
+      TabOrder = 0
+      OnChange = Edit_NameChange
+    end
+    object ComboBox_Domain: TComboBox
+      AnchorSideLeft.Side = asrCenter
+      AnchorSideTop.Control = Label_UserLogonName
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_LogonName
+      AnchorSideRight.Side = asrBottom
+      Left = 227
+      Height = 23
+      Top = 15
+      Width = 208
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 8
+      ItemHeight = 15
+      Style = csDropDownList
+      TabOrder = 1
+      OnChange = ComboBox_DomainChange
+    end
+  end
+  object Panel_SAMAccountName: TPanel
+    Left = 16
+    Height = 38
+    Top = 54
+    Width = 435
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 16
+    BevelOuter = bvNone
+    ClientHeight = 38
+    ClientWidth = 435
+    TabOrder = 1
+    object Label_UserSAMAccountName: TLabel
+      AnchorSideLeft.Control = Panel_SAMAccountName
+      AnchorSideTop.Control = Panel_SAMAccountName
+      Left = 0
+      Height = 15
+      Top = 0
+      Width = 205
+      Caption = 'User logon name (pre-Windows 2000) :'
+    end
+    object Edit_SAMDomain: TEdit
+      AnchorSideLeft.Control = Panel_SAMAccountName
+      AnchorSideTop.Control = Label_UserSAMAccountName
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 23
+      Top = 15
+      Width = 208
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object Edit_SAMAccountName: TEdit
+      AnchorSideTop.Control = Label_UserSAMAccountName
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_SAMAccountName
+      AnchorSideRight.Side = asrBottom
+      Left = 227
+      Height = 23
+      Hint = 'The logon name used to support clients and servers running earlier versions of the operating system'#13#10'Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager'
+      Top = 15
+      Width = 208
+      Anchors = [akTop, akRight]
+      MaxLength = 20
+      TabOrder = 1
+      OnChange = Edit_SAMAccountNameChange
+    end
+  end
+  object Panel_LogonTime: TPanel
+    Left = 16
+    Height = 25
+    Top = 100
+    Width = 451
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    BevelOuter = bvNone
+    ClientHeight = 25
+    ClientWidth = 451
+    TabOrder = 2
+    object Btn_LogonHours: TBitBtn
+      AnchorSideLeft.Control = Panel_LogonTime
+      AnchorSideTop.Control = Panel_LogonTime
+      Left = 0
+      Height = 25
+      Top = 0
+      Width = 95
+      Action = Action_LogonHours
+      AutoSize = True
+      TabOrder = 0
+    end
+    object Btn_LogOnTo: TBitBtn
+      AnchorSideLeft.Control = Btn_LogonHours
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_LogonTime
+      Left = 103
+      Height = 25
+      Top = 0
+      Width = 82
+      Action = Action_LogonTo
+      AutoSize = True
+      BorderSpacing.Left = 8
+      TabOrder = 1
+    end
+  end
+  object CheckBox_Unlock: TCheckBox
+    Left = 16
+    Height = 19
+    Top = 141
+    Width = 451
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 16
+    Caption = 'Unlock account'
+    TabOrder = 3
+    OnChange = CheckBox_UnlockChange
+  end
+  object Label_Options: TLabel
+    Left = 16
+    Height = 15
+    Top = 176
+    Width = 451
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 16
+    Caption = 'Account options :'
+  end
+  object ScrollBox_Options: TScrollBox
+    Left = 16
+    Height = 102
+    Top = 191
+    Width = 435
+    HorzScrollBar.Page = 1
+    HorzScrollBar.Visible = False
+    VertScrollBar.Page = 98
+    VertScrollBar.Tracking = True
+    Align = alClient
+    BorderSpacing.Left = 16
+    BorderSpacing.Right = 16
+    ClientHeight = 98
+    ClientWidth = 414
+    Constraints.MinHeight = 80
+    ParentBackground = False
+    TabOrder = 4
+    object CheckBox_MustChange: TCheckBox
+      AnchorSideLeft.Control = ScrollBox_Options
+      AnchorSideTop.Control = ScrollBox_Options
+      Left = 8
+      Height = 19
+      Top = 8
+      Width = 238
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'User must change password at next logon'
+      TabOrder = 0
+      OnChange = CheckBox_MustChangeChange
+    end
+    object CheckBox_CannotChange: TCheckBox
+      AnchorSideLeft.Control = ScrollBox_Options
+      AnchorSideTop.Control = CheckBox_MustChange
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 19
+      Top = 27
+      Width = 176
+      BorderSpacing.Left = 8
+      Caption = 'User cannot change password'
+      TabOrder = 1
+      OnChange = CheckBox_CannotChangeChange
+    end
+    object CheckBox_NeverExpires: TCheckBox
+      AnchorSideLeft.Control = ScrollBox_Options
+      AnchorSideTop.Control = CheckBox_CannotChange
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 19
+      Top = 46
+      Width = 139
+      BorderSpacing.Left = 8
+      Caption = 'Password never expires'
+      TabOrder = 2
+      OnChange = CheckBox_NeverExpiresChange
+    end
+    object CheckBox_ReversibleEncryption: TCheckBox
+      AnchorSideLeft.Control = ScrollBox_Options
+      AnchorSideTop.Control = CheckBox_NeverExpires
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 19
+      Top = 65
+      Width = 243
+      BorderSpacing.Left = 8
+      Caption = 'Store password using reversible encryption'
+      TabOrder = 3
+      OnChange = CheckBox_ReversibleEncryptionChange
+    end
+    object CheckBox_Disabled: TCheckBox
+      AnchorSideLeft.Control = ScrollBox_Options
+      AnchorSideTop.Control = CheckBox_ReversibleEncryption
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 19
+      Top = 84
+      Width = 121
+      BorderSpacing.Left = 8
+      Caption = 'Account is disabled'
+      TabOrder = 4
+      OnChange = CheckBox_DisabledChange
+    end
+    object CheckBox_SmartCard: TCheckBox
+      AnchorSideLeft.Control = ScrollBox_Options
+      AnchorSideTop.Control = CheckBox_Disabled
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 19
+      Top = 103
+      Width = 243
+      BorderSpacing.Left = 8
+      Caption = 'Smart card is required for interactive logon'
+      TabOrder = 5
+      OnChange = CheckBox_SmartCardChange
+    end
+    object CheckBox_Sensitive: TCheckBox
+      AnchorSideLeft.Control = ScrollBox_Options
+      AnchorSideTop.Control = CheckBox_SmartCard
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 19
+      Top = 122
+      Width = 256
+      BorderSpacing.Left = 8
+      Caption = 'Account is sensitive and cannot be delegated'
+      TabOrder = 6
+      OnChange = CheckBox_SensitiveChange
+    end
+    object CheckBox_KerberosDESEncryption: TCheckBox
+      AnchorSideLeft.Control = ScrollBox_Options
+      AnchorSideTop.Control = CheckBox_Sensitive
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 19
+      Top = 141
+      Width = 312
+      BorderSpacing.Left = 8
+      Caption = 'Use only Kerberos DES encryption types for this account'
+      TabOrder = 7
+      OnChange = CheckBox_KerberosDESEncryptionChange
+    end
+    object CheckBox_KerberosAES128Encryption: TCheckBox
+      AnchorSideLeft.Control = ScrollBox_Options
+      AnchorSideTop.Control = CheckBox_KerberosDESEncryption
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 19
+      Top = 160
+      Width = 305
+      BorderSpacing.Left = 8
+      Caption = 'This account supports Kerberos AES 128 bit encryption'
+      TabOrder = 8
+      OnChange = CheckBox_KerberosAES128EncryptionChange
+    end
+    object CheckBox_KerberosAES256Encryption: TCheckBox
+      AnchorSideLeft.Control = ScrollBox_Options
+      AnchorSideTop.Control = CheckBox_KerberosAES128Encryption
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 19
+      Top = 179
+      Width = 305
+      BorderSpacing.Left = 8
+      Caption = 'This account supports Kerberos AES 256 bit encryption'
+      TabOrder = 9
+      OnChange = CheckBox_KerberosAES256EncryptionChange
+    end
+    object CheckBox_NoKerberosPreauth: TCheckBox
+      AnchorSideLeft.Control = ScrollBox_Options
+      AnchorSideTop.Control = CheckBox_KerberosAES256Encryption
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 19
+      Top = 198
+      Width = 247
+      BorderSpacing.Left = 8
+      BorderSpacing.Bottom = 8
+      Caption = 'Do not require Kerberos preauthentification'
+      TabOrder = 10
+      OnChange = CheckBox_NoKerberosPreauthChange
+    end
+  end
+  object GoupBox_Expires: TGroupBox
+    Left = 16
+    Height = 70
+    Top = 301
+    Width = 435
+    Align = alBottom
+    AutoSize = True
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 16
+    BorderSpacing.Bottom = 8
+    Caption = 'Account expires'
+    ClientHeight = 50
+    ClientWidth = 431
+    TabOrder = 5
+    object RadioButton_Never: TRadioButton
+      AnchorSideLeft.Control = GoupBox_Expires
+      AnchorSideTop.Control = GoupBox_Expires
+      Left = 8
+      Height = 19
+      Top = 0
+      Width = 49
+      BorderSpacing.Left = 8
+      Caption = 'Never'
+      Checked = True
+      TabOrder = 0
+      TabStop = True
+      OnChange = RadioButton_NeverChange
+    end
+    object RadioButton_EndOf: TRadioButton
+      AnchorSideLeft.Control = GoupBox_Expires
+      AnchorSideTop.Control = DateTimePicker_Expires
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 19
+      Top = 21
+      Width = 58
+      BorderSpacing.Left = 8
+      BorderSpacing.Bottom = 8
+      Caption = 'End of :'
+      TabOrder = 1
+      TabStop = True
+      OnChange = RadioButton_EndOfChange
+    end
+    object DateTimePicker_Expires: TDateTimePicker
+      AnchorSideTop.Control = RadioButton_Never
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GoupBox_Expires
+      AnchorSideRight.Side = asrBottom
+      Left = 300
+      Height = 23
+      Top = 19
+      Width = 123
+      CenturyFrom = 1941
+      MaxDate = 2958465
+      MinDate = -53780
+      TabOrder = 2
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      Enabled = False
+      DateSeparator = ','
+      TrailingSeparator = False
+      TextForNullDate = 'NULL'
+      LeadingZeros = True
+      Anchors = [akTop, akRight]
+      NullInputAllowed = False
+      Kind = dtkDate
+      TimeSeparator = ':'
+      DecimalSeparator = ','
+      TimeFormat = tf24
+      TimeDisplay = tdHMS
+      DateMode = dmComboBox
+      Date = 45579
+      Time = 0.503107800926955
+      UseDefaultSeparators = False
+      HideDateTimeParts = []
+      MonthNames = 'Long'
+      MonthDisplay = mdCustom
+      CustomMonthNames.Strings = (
+        'january'
+        'february'
+        'march'
+        'april'
+        'may'
+        'june'
+        'july'
+        'august'
+        'september'
+        'october'
+        'november'
+        'december'
+      )
+      ShowMonthNames = True
+      OnChange = DateTimePicker_ExpiresChange
+    end
+  end
+  object ActionList1: TActionList
+    Left = 264
+    Top = 96
+    object Action_LogonHours: TAction
+      Caption = 'Logon Hours'
+      OnExecute = Action_LogonHoursExecute
+    end
+    object Action_LogonTo: TAction
+      Caption = 'Log On To'
+      OnExecute = Action_LogonToExecute
+    end
+  end
+end
