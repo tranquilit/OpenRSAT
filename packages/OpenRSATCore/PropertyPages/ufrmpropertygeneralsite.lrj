@@ -1,0 +1,4 @@
+{"version":1,"strings":[
+{"hash":81166474,"name":"tfrmpropertygeneralsite.label_description.caption","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110,58],"value":"Description:"},
+{"hash":194301642,"name":"tfrmpropertygeneralsite.label_subnet.caption","sourcebytes":[83,117,98,110,101,116,115,58],"value":"Subnets:"}
+]}
