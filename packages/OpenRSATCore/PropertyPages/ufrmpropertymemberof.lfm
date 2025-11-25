@@ -1,0 +1,257 @@
+object FrmPropertyMemberOf: TFrmPropertyMemberOf
+  Left = 0
+  Height = 438
+  Top = 0
+  Width = 446
+  ClientHeight = 438
+  ClientWidth = 446
+  TabOrder = 0
+  DesignLeft = 2066
+  DesignTop = 299
+  object Label_mof_title: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 65
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    Caption = 'Member of :'
+    Layout = tlCenter
+  end
+  object Grid_MemberOf: TTisGrid
+    AnchorSideTop.Control = Label_mof_title
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Panel_Buttons
+    Left = 8
+    Height = 189
+    Top = 31
+    Width = 440
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    Colors.SelectionRectangleBlendColor = clBtnShadow
+    Colors.SelectionTextColor = clWindowText
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'Name'
+        Width = 128
+        PropertyName = 'name'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Text = 'Active Directory''s Services Folder'
+        Width = 308
+        PropertyName = 'ADSF'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 101
+    Header.MinHeight = 19
+    Header.Options = [hoAutoResize, hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.SortColumn = 0
+    Header.Style = hsFlatButtons
+    TabOrder = 0
+    TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes, toDisableAutoscrollOnFocus, toAutoChangeScale]
+    TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+    ZebraColor = 15593713
+    PopupMenuOptions = [pmoShowFind, pmoShowFindNext, pmoShowCopy, pmoShowCopyCell, pmoShowCopySpecial, pmoShowSelectAll, pmoShowCustomizeColumns, pmoShowChart, pmoShowExport]
+    FilterOptions.CaseInsensitive = True
+    OnBeforeDeleteRows = Grid_MemberOfBeforeDeleteRows
+  end
+  object Panel_Buttons: TPanel
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Line_mof
+    Left = 8
+    Height = 41
+    Top = 220
+    Width = 440
+    Anchors = [akLeft, akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 440
+    TabOrder = 1
+    object Btn_Add: TBitBtn
+      AnchorSideLeft.Control = Panel_Buttons
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 25
+      Top = 8
+      Width = 48
+      Action = Action_Add
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      ImageIndex = 10
+      TabOrder = 0
+    end
+    object Btn_Delete: TBitBtn
+      AnchorSideLeft.Control = Btn_Add
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Side = asrCenter
+      Left = 56
+      Height = 25
+      Top = 8
+      Width = 59
+      Action = Action_Delete
+      AutoSize = True
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      ImageIndex = 9
+      TabOrder = 1
+    end
+  end
+  object Panel_NoPrimaryGroup: TPanel
+    AnchorSideTop.Control = Panel_PrimaryGroup
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Panel_PrimaryGroup
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 61
+    Top = 269
+    Width = 440
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 61
+    ClientWidth = 440
+    Enabled = False
+    TabOrder = 2
+    Visible = False
+    object Label_mof_noPrimaryGroup: TLabel
+      AnchorSideLeft.Control = Panel_NoPrimaryGroup
+      AnchorSideTop.Control = Panel_NoPrimaryGroup
+      AnchorSideRight.Control = Panel_NoPrimaryGroup
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Panel_NoPrimaryGroup
+      AnchorSideBottom.Side = asrBottom
+      Left = 0
+      Height = 53
+      Top = 8
+      Width = 440
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Top = 8
+      Caption = 'This list  shows only the current domain''s groups and the groups handled in the Global catalog, such as unviversals groups.'
+      ParentFont = False
+      WordWrap = True
+    end
+  end
+  object Panel_PrimaryGroup: TPanel
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 61
+    Top = 269
+    Width = 440
+    Anchors = [akLeft, akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    BevelOuter = bvNone
+    ClientHeight = 61
+    ClientWidth = 440
+    Enabled = False
+    TabOrder = 3
+    object Label_PrimaryGroupKey: TLabel
+      AnchorSideLeft.Control = Panel_PrimaryGroup
+      AnchorSideTop.Control = Edit_PrimaryGroup
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 8
+      Width = 82
+      Caption = 'Primary group :'
+      Layout = tlCenter
+    end
+    object Btn_DefinePrimaryGroup: TBitBtn
+      AnchorSideLeft.Control = Panel_PrimaryGroup
+      AnchorSideTop.Control = Label_PrimaryGroupKey
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Label_DefinePrimaryGroup
+      Left = 0
+      Height = 25
+      Top = 31
+      Width = 139
+      Action = Action_PrimaryGroup
+      AutoSize = True
+      BorderSpacing.Top = 8
+      Constraints.MinWidth = 24
+      TabOrder = 1
+    end
+    object Edit_PrimaryGroup: TEdit
+      AnchorSideLeft.Control = Label_DefinePrimaryGroup
+      AnchorSideTop.Control = Panel_PrimaryGroup
+      AnchorSideRight.Control = Panel_PrimaryGroup
+      AnchorSideRight.Side = asrBottom
+      Left = 147
+      Height = 15
+      Top = 8
+      Width = 293
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 8
+      BorderStyle = bsNone
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+    object Label_DefinePrimaryGroup: TLabel
+      AnchorSideLeft.Control = Btn_DefinePrimaryGroup
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Btn_DefinePrimaryGroup
+      AnchorSideRight.Control = Panel_PrimaryGroup
+      AnchorSideRight.Side = asrBottom
+      Left = 147
+      Height = 30
+      Top = 31
+      Width = 293
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      Caption = 'It is useless to modify the primary goup, unless you''re using Macintosh or other POSIX compliant apps.'
+      WordWrap = True
+    end
+  end
+  object Line_mof: TShape
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Panel_PrimaryGroup
+    Left = 16
+    Height = 1
+    Top = 264
+    Width = 424
+    Anchors = [akLeft, akRight, akBottom]
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 3
+    BorderSpacing.Right = 16
+    BorderSpacing.Bottom = 4
+    Pen.Color = clMedGray
+  end
+  object ActionList1: TActionList
+    Left = 216
+    Top = 360
+    object Action_Add: TAction
+      Caption = 'Add'
+      OnExecute = Action_AddExecute
+      OnUpdate = Action_AddUpdate
+    end
+    object Action_Delete: TAction
+      Caption = 'Delete'
+      OnExecute = Action_DeleteExecute
+      OnUpdate = Action_DeleteUpdate
+    end
+    object Action_PrimaryGroup: TAction
+      Caption = 'Define primary group'
+      OnExecute = Action_PrimaryGroupExecute
+      OnUpdate = Action_PrimaryGroupUpdate
+    end
+  end
+end
