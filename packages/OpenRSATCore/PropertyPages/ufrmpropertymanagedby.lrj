@@ -1,0 +1,14 @@
+{"version":1,"strings":[
+{"hash":5538698,"name":"tfrmpropertymanagedby.label_managedby.caption","sourcebytes":[78,97,109,101,58],"value":"Name:"},
+{"hash":97319386,"name":"tfrmpropertymanagedby.labe_office.caption","sourcebytes":[79,102,102,105,99,101,58],"value":"Office:"},
+{"hash":179878954,"name":"tfrmpropertymanagedby.label_streetaddress.caption","sourcebytes":[83,116,114,101,101,116,58],"value":"Street:"},
+{"hash":4852682,"name":"tfrmpropertymanagedby.label_city.caption","sourcebytes":[67,105,116,121,58],"value":"City:"},
+{"hash":241726650,"name":"tfrmpropertymanagedby.label_stateprovince.caption","sourcebytes":[83,116,97,116,101,47,112,114,111,118,105,110,99,101,58],"value":"State/province:"},
+{"hash":82196506,"name":"tfrmpropertymanagedby.label_countryregion.caption","sourcebytes":[67,111,117,110,116,114,121,47,114,101,103,105,111,110,58],"value":"Country/region:"},
+{"hash":57870826,"name":"tfrmpropertymanagedby.label_telephonenumber.caption","sourcebytes":[84,101,108,101,112,104,111,110,101,32,110,117,109,98,101,114,58],"value":"Telephone number:"},
+{"hash":101647914,"name":"tfrmpropertymanagedby.label_faxnumber.caption","sourcebytes":[70,97,120,32,110,117,109,98,101,114,58],"value":"Fax number:"},
+{"hash":77497557,"name":"tfrmpropertymanagedby.action_change.caption","sourcebytes":[67,104,97,110,103,101],"value":"Change"},
+{"hash":157732041,"name":"tfrmpropertymanagedby.action_property.caption","sourcebytes":[80,114,111,112,101,114,116,121],"value":"Property"},
+{"hash":4860802,"name":"tfrmpropertymanagedby.action_clear.caption","sourcebytes":[67,108,101,97,114],"value":"Clear"},
+{"hash":181691108,"name":"tfrmpropertymanagedby.action_manage.caption","sourcebytes":[77,97,110,97,103,101,114,32,99,97,110,32,117,112,100,97,116,101,32,109,101,109,98,101,114,115,104,105,112,32,108,105,115,116],"value":"Manager can update membership list"}
+]}

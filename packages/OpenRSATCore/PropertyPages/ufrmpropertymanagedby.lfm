@@ -1,0 +1,382 @@
+object FrmPropertyManagedBy: TFrmPropertyManagedBy
+  Left = 0
+  Height = 400
+  Top = 0
+  Width = 404
+  ClientHeight = 400
+  ClientWidth = 404
+  TabOrder = 0
+  DesignLeft = 2341
+  DesignTop = 265
+  object Panel_Top: TPanel
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 244
+    Top = 8
+    Width = 388
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelColor = clNone
+    BevelOuter = bvNone
+    ClientHeight = 244
+    ClientWidth = 388
+    TabOrder = 0
+    object Label_ManagedBy: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_ManagedBy
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 4
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Name:'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      Layout = tlCenter
+      WordWrap = True
+    end
+    object Labe_Office: TLabel
+      AnchorSideTop.Control = Edit_Office
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 84
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Office:'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      Layout = tlCenter
+      WordWrap = True
+    end
+    object Label_StreetAddress: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_StreetAddress
+      Left = 8
+      Height = 15
+      Top = 115
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Street:'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      Layout = tlCenter
+      WordWrap = True
+    end
+    object Label_City: TLabel
+      AnchorSideTop.Control = Edit_City
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 175
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'City:'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      Layout = tlCenter
+      WordWrap = True
+    end
+    object Label_StateProvince: TLabel
+      AnchorSideTop.Control = Edit_StateProvince
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 198
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'State/province:'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      Layout = tlCenter
+      WordWrap = True
+    end
+    object Label_CountryRegion: TLabel
+      AnchorSideTop.Control = Edit_CountryRegion
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 221
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Country/region:'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      Layout = tlCenter
+      WordWrap = True
+    end
+    object Edit_ManagedBy: TEdit
+      AnchorSideLeft.Control = Label_ManagedBy
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_Top
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 23
+      Top = 0
+      Width = 222
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 4
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object CheckBox_AllowManage: TCheckBox
+      AnchorSideLeft.Control = Btn_Change
+      AnchorSideTop.Control = Btn_Property
+      AnchorSideTop.Side = asrBottom
+      Left = 166
+      Height = 24
+      Top = 52
+      Width = 215
+      Action = Action_Manage
+      BorderSpacing.Bottom = 8
+      Constraints.MinHeight = 24
+      TabOrder = 1
+    end
+    object Edit_Office: TEdit
+      AnchorSideLeft.Control = Labe_Office
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = CheckBox_AllowManage
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 15
+      Top = 84
+      Width = 222
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 8
+      BorderStyle = bsNone
+      ReadOnly = True
+      TabOrder = 2
+    end
+    object Edit_StreetAddress: TMemo
+      AnchorSideLeft.Control = Label_StreetAddress
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_Office
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 60
+      Top = 107
+      Width = 222
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 8
+      ReadOnly = True
+      TabOrder = 6
+    end
+    object Edit_City: TEdit
+      AnchorSideLeft.Control = Label_City
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_StreetAddress
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 15
+      Top = 175
+      Width = 222
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 8
+      BorderStyle = bsNone
+      ReadOnly = True
+      TabOrder = 3
+    end
+    object Edit_StateProvince: TEdit
+      AnchorSideLeft.Control = Label_StateProvince
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_City
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 15
+      Top = 198
+      Width = 222
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 8
+      BorderStyle = bsNone
+      ReadOnly = True
+      TabOrder = 4
+    end
+    object Edit_CountryRegion: TEdit
+      AnchorSideLeft.Control = Label_CountryRegion
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_StateProvince
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 15
+      Top = 221
+      Width = 222
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 8
+      BorderStyle = bsNone
+      ReadOnly = True
+      TabOrder = 5
+    end
+    object Btn_Change: TBitBtn
+      AnchorSideLeft.Control = Edit_ManagedBy
+      AnchorSideTop.Control = Edit_ManagedBy
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Btn_Property
+      Left = 166
+      Height = 25
+      Top = 27
+      Width = 67
+      Action = Action_Change
+      AutoSize = True
+      BorderSpacing.Right = 8
+      Constraints.MinHeight = 24
+      TabOrder = 7
+    end
+    object Btn_Property: TBitBtn
+      AnchorSideLeft.Control = Btn_Change
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Btn_Clear
+      AnchorSideTop.Side = asrCenter
+      Left = 241
+      Height = 25
+      Top = 27
+      Width = 71
+      Action = Action_Property
+      AutoSize = True
+      BorderSpacing.Right = 8
+      Constraints.MinHeight = 24
+      TabOrder = 8
+    end
+    object Btn_Clear: TBitBtn
+      AnchorSideLeft.Control = Btn_Property
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_ManagedBy
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Edit_ManagedBy
+      AnchorSideRight.Side = asrBottom
+      Left = 320
+      Height = 25
+      Top = 27
+      Width = 53
+      Action = Action_Clear
+      AutoSize = True
+      BorderSpacing.Right = 8
+      Constraints.MinHeight = 24
+      TabOrder = 9
+    end
+  end
+  object Line_Middle: TShape
+    Left = 16
+    Height = 1
+    Top = 260
+    Width = 372
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 3
+    BorderSpacing.Right = 16
+    BorderSpacing.Bottom = 4
+    Pen.Color = clMedGray
+  end
+  object Panel_Bottom: TPanel
+    Left = 8
+    Height = 46
+    Top = 269
+    Width = 388
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelColor = clNone
+    BevelOuter = bvNone
+    ClientHeight = 46
+    ClientWidth = 388
+    TabOrder = 1
+    object Label_TelephoneNumber: TLabel
+      AnchorSideLeft.Control = Panel_Bottom
+      AnchorSideTop.Control = Edit_TelephoneNumber
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 0
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Telephone number:'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
+    end
+    object Label_FaxNumber: TLabel
+      AnchorSideLeft.Control = Panel_Bottom
+      AnchorSideTop.Control = Edit_FaxNumber
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 23
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Fax number:'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
+    end
+    object Edit_TelephoneNumber: TEdit
+      AnchorSideLeft.Control = Label_TelephoneNumber
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideRight.Control = Panel_Bottom
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 15
+      Top = 0
+      Width = 222
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 8
+      BorderStyle = bsNone
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object Edit_FaxNumber: TEdit
+      AnchorSideLeft.Control = Label_FaxNumber
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_TelephoneNumber
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Bottom
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 15
+      Top = 23
+      Width = 222
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 8
+      BorderStyle = bsNone
+      ReadOnly = True
+      TabOrder = 1
+    end
+  end
+  object ActionList1: TActionList
+    Left = 88
+    Top = 128
+    object Action_Change: TAction
+      Caption = 'Change'
+      OnExecute = Action_ChangeExecute
+      OnUpdate = Action_ChangeUpdate
+    end
+    object Action_Property: TAction
+      Caption = 'Property'
+      OnExecute = Action_PropertyExecute
+      OnUpdate = Action_PropertyUpdate
+    end
+    object Action_Clear: TAction
+      Caption = 'Clear'
+      OnExecute = Action_ClearExecute
+      OnUpdate = Action_ClearUpdate
+    end
+    object Action_Manage: TAction
+      Caption = 'Manager can update membership list'
+      OnUpdate = Action_ManageUpdate
+    end
+  end
+end
