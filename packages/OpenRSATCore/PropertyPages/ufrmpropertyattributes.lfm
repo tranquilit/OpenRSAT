@@ -1,0 +1,121 @@
+object FrmPropertyAttributes: TFrmPropertyAttributes
+  Left = 0
+  Height = 400
+  Top = 0
+  Width = 447
+  ClientHeight = 400
+  ClientWidth = 447
+  TabOrder = 0
+  DesignLeft = 2136
+  DesignTop = 287
+  object Label_Attributes: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 439
+    Align = alTop
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    Caption = 'Attributes :'
+    Layout = tlCenter
+  end
+  object List_Attributes: TTisGrid
+    Left = 8
+    Height = 328
+    Top = 31
+    Width = 431
+    Align = alClient
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'Attribute'
+        Width = 124
+        PropertyName = 'attribute'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Text = 'value'
+        Width = 345
+        PropertyName = 'value'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 100
+    Header.MinHeight = 18
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.SortColumn = 0
+    Header.Style = hsFlatButtons
+    ScrollBarOptions.AlwaysVisible = True
+    TabOrder = 0
+    TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes, toDisableAutoscrollOnFocus, toAutoChangeScale]
+    TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+    ZebraColor = 15593713
+    ZebraPaint = True
+    PopupMenuOptions = [pmoShowFind, pmoShowFindNext, pmoShowCopy, pmoShowCopyCell, pmoShowCopySpecial, pmoShowSelectAll, pmoShowCustomizeColumns, pmoShowChart, pmoShowExport]
+    FilterOptions.CaseInsensitive = True
+    OnDblClick = List_AttributesDblClick
+    OnDrawText = List_AttributesDrawText
+    OnKeyPress = List_AttributesKeyPress
+    OnGetText = List_AttributesGetText
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 33
+    Top = 367
+    Width = 447
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 33
+    ClientWidth = 447
+    TabOrder = 1
+    object BitBtn_Filter: TBitBtn
+      Left = 387
+      Height = 25
+      Top = 0
+      Width = 52
+      Action = Action_Filter
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      TabOrder = 0
+    end
+    object BitBtn_Modify: TBitBtn
+      Left = 8
+      Height = 25
+      Top = 0
+      Width = 64
+      Action = Action_Modify
+      Align = alLeft
+      AutoSize = True
+      BorderSpacing.Left = 8
+      BorderSpacing.Bottom = 8
+      TabOrder = 1
+    end
+  end
+  object ActionList1: TActionList
+    Left = 192
+    Top = 104
+    object Action_Filter: TAction
+      Caption = 'Filter'
+    end
+    object Action_Modify: TAction
+      Caption = 'Modify'
+      OnExecute = Action_ModifyExecute
+      OnUpdate = Action_ModifyUpdate
+    end
+  end
+  object Timer_SearchInGrid: TTimer
+    OnTimer = Timer_SearchInGridTimer
+    Left = 280
+    Top = 104
+  end
+end
