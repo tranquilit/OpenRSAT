@@ -1,0 +1,7 @@
+{"version":1,"strings":[
+{"hash":205048922,"name":"tfrmpropertymember.label_members.caption","sourcebytes":[77,101,109,98,101,114,115,58],"value":"Members:"},
+{"hash":477237,"name":"tfrmpropertymember.tisgrid_members.header.columns[0].text","sourcebytes":[110,97,109,101],"value":"name"},
+{"hash":149602066,"name":"tfrmpropertymember.tisgrid_members.header.columns[1].text","sourcebytes":[65,99,116,105,118,101,32,68,105,114,101,99,116,111,114,121,32,68,111,109,97,105,110,32,83,101,114,118,105,99,101,115,32,70,111,108,100,101,114],"value":"Active Directory Domain Services Folder"},
+{"hash":75133198,"name":"tfrmpropertymember.action_add.caption","sourcebytes":[65,100,100,46,46,46],"value":"Add..."},
+{"hash":78392485,"name":"tfrmpropertymember.action_delete.caption","sourcebytes":[68,101,108,101,116,101],"value":"Delete"}
+]}
