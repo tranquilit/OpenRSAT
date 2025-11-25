@@ -1,0 +1,93 @@
+object FrmPropertyLocation: TFrmPropertyLocation
+  Left = 0
+  Height = 274
+  Top = 0
+  Width = 407
+  ClientHeight = 274
+  ClientWidth = 407
+  TabOrder = 0
+  DesignLeft = 2133
+  DesignTop = 98
+  object Line: TShape
+    Left = 16
+    Height = 1
+    Top = 75
+    Width = 375
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 11
+    BorderSpacing.Right = 16
+    BorderSpacing.Bottom = 4
+    Pen.Color = clMedGray
+  end
+  object Panel_Content: TPanel
+    Left = 8
+    Height = 50
+    Top = 84
+    Width = 391
+    Align = alTop
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 391
+    TabOrder = 0
+    object Label_Location: TLabel
+      AnchorSideLeft.Control = Panel_Content
+      AnchorSideTop.Control = Edit_Location
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 12
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Location:'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+    end
+    object Edit_Location: TEdit
+      AnchorSideLeft.Control = Label_Location
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_Content
+      AnchorSideRight.Control = Panel_Content
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 23
+      Hint = 'The user''s location, such as office number'
+      Top = 8
+      Width = 217
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      MaxLength = 1024
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnChange = Edit_LocationChange
+    end
+  end
+  object Panel_Header: TPanel
+    Left = 8
+    Height = 56
+    Top = 8
+    Width = 391
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 56
+    ClientWidth = 391
+    TabOrder = 1
+    object Image: TImage
+      Left = 8
+      Height = 40
+      Top = 8
+      Width = 40
+      Align = alLeft
+      BorderSpacing.Around = 8
+      Constraints.MaxHeight = 40
+      Constraints.MaxWidth = 40
+      Constraints.MinHeight = 40
+      Constraints.MinWidth = 40
+      Stretch = True
+    end
+  end
+end

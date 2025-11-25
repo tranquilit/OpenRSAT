@@ -1,0 +1,4 @@
+{"version":1,"strings":[
+{"hash":160085834,"name":"tfrmpropertylocation.label_location.caption","sourcebytes":[76,111,99,97,116,105,111,110,58],"value":"Location:"},
+{"hash":34416162,"name":"tfrmpropertylocation.edit_location.hint","sourcebytes":[84,104,101,32,117,115,101,114,39,115,32,108,111,99,97,116,105,111,110,44,32,115,117,99,104,32,97,115,32,111,102,102,105,99,101,32,110,117,109,98,101,114],"value":"The user's location, such as office number"}
+]}
