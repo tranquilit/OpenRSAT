@@ -1,0 +1,434 @@
+object FrmPropertyGeneralUser: TFrmPropertyGeneralUser
+  Left = 0
+  Height = 406
+  Top = 0
+  Width = 421
+  ClientHeight = 406
+  ClientWidth = 421
+  TabOrder = 0
+  DesignLeft = 1336
+  DesignTop = 235
+  object Panel_Header: TPanel
+    Left = 8
+    Height = 64
+    Top = 0
+    Width = 405
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 64
+    ClientWidth = 405
+    TabOrder = 0
+    object Image: TImage
+      AnchorSideLeft.Control = Panel_Header
+      AnchorSideTop.Control = Panel_Header
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 48
+      Top = 8
+      Width = 48
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      ImageIndex = 15
+      Proportional = True
+      Stretch = True
+      Transparent = True
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = Image
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Image
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_Header
+      AnchorSideRight.Side = asrBottom
+      Left = 88
+      Height = 15
+      Top = 25
+      Width = 309
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 32
+      BorderSpacing.Right = 8
+      BorderStyle = bsNone
+      Color = clWindow
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+  end
+  object Line_Top: TShape
+    Left = 16
+    Height = 1
+    Top = 67
+    Width = 389
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 3
+    BorderSpacing.Right = 16
+    BorderSpacing.Bottom = 4
+    Pen.Color = clMedGray
+  end
+  object Panel_Top: TPanel
+    Left = 16
+    Height = 155
+    Top = 76
+    Width = 389
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 16
+    BevelOuter = bvNone
+    ClientHeight = 155
+    ClientWidth = 389
+    TabOrder = 1
+    object Label_GivenName: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_GivenName
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 4
+      Width = 38
+      Caption = 'Name :'
+      Layout = tlCenter
+    end
+    object Label_Initials: TLabel
+      AnchorSideTop.Control = Edit_Initials
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Edit_Initials
+      Left = 247
+      Height = 15
+      Top = 4
+      Width = 40
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 8
+      Caption = 'Initials :'
+      Layout = tlCenter
+    end
+    object Label_Surname: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_Surname
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 35
+      Width = 60
+      Caption = 'Last name :'
+      Layout = tlCenter
+    end
+    object Label_DisplayName: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_DisplayName
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 66
+      Width = 58
+      Caption = 'Full name :'
+      Layout = tlCenter
+    end
+    object Label_Description: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_Description
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 97
+      Width = 66
+      Caption = 'Description :'
+      Layout = tlCenter
+    end
+    object Label_DesktopProfile: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_PhysicalDeliveryOfficeName
+      AnchorSideTop.Side = asrCenter
+      AnchorSideBottom.Side = asrBottom
+      Left = 0
+      Height = 15
+      Top = 128
+      Width = 49
+      BorderSpacing.Bottom = 8
+      Caption = 'Desktop :'
+      Layout = tlCenter
+    end
+    object Edit_GivenName: TEdit
+      AnchorSideLeft.Control = Edit_Surname
+      AnchorSideTop.Control = Panel_Top
+      AnchorSideRight.Control = Label_Initials
+      Left = 109
+      Height = 23
+      Hint = 'The person''s First Name'
+      Top = 0
+      Width = 130
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Right = 8
+      MaxLength = 64
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnChange = Edit_GivenNameChange
+    end
+    object Edit_Initials: TEdit
+      AnchorSideTop.Control = Panel_Top
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 295
+      Height = 23
+      Hint = 'The person''s initals'
+      Top = 0
+      Width = 94
+      Anchors = [akTop, akRight]
+      Constraints.MaxWidth = 94
+      Constraints.MinWidth = 94
+      MaxLength = 6
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnChange = Edit_InitialsChange
+    end
+    object Edit_Surname: TEdit
+      AnchorSideTop.Control = Edit_GivenName
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 109
+      Height = 23
+      Hint = 'The person''s family name or last name'
+      Top = 31
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      Constraints.MaxWidth = 280
+      Constraints.MinWidth = 280
+      MaxLength = 64
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnChange = Edit_SurnameChange
+    end
+    object Edit_DisplayName: TEdit
+      AnchorSideTop.Control = Edit_Surname
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 109
+      Height = 23
+      Hint = 'The person''s preferred name to be used when beeing displayed'
+      Top = 62
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      Constraints.MaxWidth = 280
+      Constraints.MinWidth = 280
+      MaxLength = 256
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      OnChange = Edit_DisplayNameChange
+    end
+    object Edit_Description: TEdit
+      AnchorSideTop.Control = Edit_DisplayName
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 109
+      Height = 23
+      Top = 93
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      Constraints.MaxWidth = 280
+      Constraints.MinWidth = 280
+      MaxLength = 1024
+      TabOrder = 4
+      OnChange = Edit_DescriptionChange
+    end
+    object Edit_PhysicalDeliveryOfficeName: TEdit
+      AnchorSideTop.Control = Edit_Description
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 109
+      Height = 23
+      Hint = 'The person''s office location in the user''s place of business'
+      Top = 124
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      Constraints.MaxWidth = 280
+      Constraints.MinWidth = 280
+      MaxLength = 128
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
+      OnChange = Edit_PhysicalDeliveryOfficeNameChange
+    end
+  end
+  object Line_Bottom: TShape
+    Left = 16
+    Height = 1
+    Top = 234
+    Width = 389
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 3
+    BorderSpacing.Right = 16
+    BorderSpacing.Bottom = 4
+    Pen.Color = clMedGray
+  end
+  object Panel_Bottom: TPanel
+    Left = 16
+    Height = 101
+    Top = 239
+    Width = 389
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 16
+    BorderSpacing.Right = 16
+    BevelOuter = bvNone
+    ClientHeight = 101
+    ClientWidth = 389
+    Constraints.MinHeight = 24
+    TabOrder = 2
+    object Label_TelephoneNumber: TLabel
+      AnchorSideTop.Control = Edit_TelephoneNumber
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 12
+      Width = 87
+      BorderSpacing.Top = 8
+      Caption = 'Phone Number :'
+      Layout = tlCenter
+    end
+    object Label_Mail: TLabel
+      AnchorSideTop.Control = Edit_Mail
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 43
+      Width = 71
+      BorderSpacing.Top = 8
+      Caption = 'Email adress :'
+      Layout = tlCenter
+    end
+    object Label_HomePage: TLabel
+      AnchorSideTop.Control = Edit_HomePage
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 74
+      Width = 59
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      Caption = 'Web page :'
+      Layout = tlCenter
+    end
+    object Edit_TelephoneNumber: TEdit
+      AnchorSideLeft.Control = Edit_Mail
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideRight.Control = Btn_OtherTelephone
+      Left = 109
+      Height = 23
+      Hint = 'The person''s phone number'
+      Top = 8
+      Width = 207
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      MaxLength = 64
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnChange = Edit_TelephoneNumberChange
+    end
+    object Edit_HomePage: TEdit
+      AnchorSideLeft.Control = Edit_Mail
+      AnchorSideTop.Control = Edit_Mail
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Btn_HomePage
+      Left = 109
+      Height = 23
+      Hint = 'A web page that is the primary landing page of a website'
+      Top = 70
+      Width = 207
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      MaxLength = 2048
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnChange = Edit_HomePageChange
+    end
+    object Edit_Mail: TEdit
+      AnchorSideTop.Control = Edit_TelephoneNumber
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Bottom
+      AnchorSideRight.Side = asrBottom
+      Left = 109
+      Height = 23
+      Hint = 'The person''s E-mail address'
+      Top = 39
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      Constraints.MaxWidth = 280
+      Constraints.MinWidth = 280
+      MaxLength = 256
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnChange = Edit_MailChange
+    end
+    object Btn_OtherTelephone: TBitBtn
+      AnchorSideTop.Control = Edit_TelephoneNumber
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_Bottom
+      AnchorSideRight.Side = asrBottom
+      Left = 324
+      Height = 25
+      Top = 7
+      Width = 65
+      Action = Action_OtherPhoneNumber
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+    end
+    object Btn_HomePage: TBitBtn
+      AnchorSideTop.Control = Edit_HomePage
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_Bottom
+      AnchorSideRight.Side = asrBottom
+      Left = 324
+      Height = 25
+      Top = 69
+      Width = 65
+      Action = Action_HomePage
+      Anchors = [akTop, akRight]
+      AutoSize = True
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+    end
+  end
+  object ActionList1: TActionList
+    Left = 104
+    Top = 120
+    object Action_HomePage: TAction
+      Caption = 'Other...'
+    end
+    object Action_OtherPhoneNumber: TAction
+      Caption = 'Other...'
+      OnExecute = Action_OtherPhoneNumberExecute
+    end
+  end
+end
