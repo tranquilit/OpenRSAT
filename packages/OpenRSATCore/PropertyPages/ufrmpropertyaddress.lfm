@@ -1,0 +1,229 @@
+object FrmPropertyAddress: TFrmPropertyAddress
+  Left = 0
+  Height = 377
+  Top = 0
+  Width = 440
+  ClientHeight = 377
+  ClientWidth = 440
+  TabOrder = 0
+  DesignLeft = 2082
+  DesignTop = 377
+  object Panel1: TPanel
+    Left = 8
+    Height = 249
+    Top = 8
+    Width = 424
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 249
+    ClientWidth = 424
+    TabOrder = 0
+    object Label_Street: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Memo_Street
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 150
+      BorderSpacing.Left = 8
+      Caption = 'Street :'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
+    end
+    object Label_PostOfficeBox: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Edit_PostOfficeBox
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 98
+      Width = 150
+      BorderSpacing.Left = 8
+      Caption = 'P.O Box :'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
+    end
+    object Label_City: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Edit_City
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 129
+      Width = 150
+      BorderSpacing.Left = 8
+      Caption = 'City :'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
+    end
+    object Label_State: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Edit_State
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 160
+      Width = 150
+      BorderSpacing.Left = 8
+      Caption = 'State/province :'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
+    end
+    object Label_PostalCode: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Edit_PostalCode
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 191
+      Width = 150
+      BorderSpacing.Left = 8
+      Caption = 'ZIP/Postal Code :'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
+    end
+    object Label_CountryCode: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = ComboBox_CountryCode
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 222
+      Width = 150
+      BorderSpacing.Left = 8
+      Caption = 'Country :'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
+    end
+    object Memo_Street: TMemo
+      AnchorSideLeft.Control = Label_Street
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 78
+      Hint = 'A street address'
+      Top = 8
+      Width = 250
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      MaxLength = 1024
+      ParentShowHint = False
+      ScrollBars = ssVertical
+      ShowHint = True
+      TabOrder = 0
+      OnChange = Memo_StreetChange
+    end
+    object Edit_PostOfficeBox: TEdit
+      AnchorSideLeft.Control = Label_PostOfficeBox
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Memo_Street
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 23
+      Hint = 'The post office box number for this object'
+      Top = 94
+      Width = 250
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      MaxLength = 40
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnChange = Edit_PostOfficeBoxChange
+    end
+    object Edit_City: TEdit
+      AnchorSideLeft.Control = Label_City
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_PostOfficeBox
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 23
+      Hint = 'Represents the name of a locality, such as a town or city'
+      Top = 125
+      Width = 250
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      MaxLength = 128
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnChange = Edit_CityChange
+    end
+    object Edit_State: TEdit
+      AnchorSideLeft.Control = Label_State
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_City
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 23
+      Hint = 'The name of a state or province'
+      Top = 156
+      Width = 250
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      MaxLength = 128
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      OnChange = Edit_StateChange
+    end
+    object Edit_PostalCode: TEdit
+      AnchorSideLeft.Control = Label_PostalCode
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_State
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 23
+      Hint = 'The postal or zip code for mail delivery'
+      Top = 187
+      Width = 250
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      MaxLength = 40
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+      OnChange = Edit_PostalCodeChange
+    end
+    object ComboBox_CountryCode: TComboBox
+      AnchorSideLeft.Control = Label_CountryCode
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_PostalCode
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 23
+      Hint = 'The country/region in which the user is located'
+      Top = 218
+      Width = 250
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      ItemHeight = 15
+      ParentShowHint = False
+      ReadOnly = True
+      ShowHint = True
+      Style = csDropDownList
+      TabOrder = 5
+      OnChange = ComboBox_CountryCodeChange
+    end
+  end
+end
