@@ -1,0 +1,318 @@
+object FrmPropertyGeneralGroup: TFrmPropertyGeneralGroup
+  Left = 0
+  Height = 374
+  Top = 0
+  Width = 418
+  ClientHeight = 374
+  ClientWidth = 418
+  TabOrder = 0
+  DesignLeft = 2084
+  DesignTop = 118
+  object Panel_Header: TPanel
+    Left = 8
+    Height = 64
+    Top = 0
+    Width = 402
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 64
+    ClientWidth = 402
+    TabOrder = 0
+    object Image: TImage
+      AnchorSideLeft.Control = Panel_Header
+      AnchorSideTop.Control = Panel_Header
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 48
+      Top = 8
+      Width = 48
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      Proportional = True
+      Stretch = True
+      Transparent = True
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = Image
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Image
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_Header
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Side = asrBottom
+      Left = 88
+      Height = 15
+      Top = 25
+      Width = 306
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 32
+      BorderSpacing.Right = 8
+      BorderStyle = bsNone
+      Color = clWindow
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+  end
+  object Line_Top: TShape
+    Left = 16
+    Height = 1
+    Top = 67
+    Width = 386
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 3
+    BorderSpacing.Right = 16
+    BorderSpacing.Bottom = 4
+    Pen.Color = clMedGray
+  end
+  object Panel_Top: TPanel
+    Left = 16
+    Height = 93
+    Top = 76
+    Width = 386
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 16
+    BevelOuter = bvNone
+    ClientHeight = 93
+    ClientWidth = 386
+    TabOrder = 1
+    object Label_SamaccountName: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_SamaccountName
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Edit_SamaccountName
+      Left = 0
+      Height = 45
+      Top = -3
+      Width = 98
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Right = 8
+      Caption = 'Group Name (pre-windows 2000) :'
+      Layout = tlCenter
+      WordWrap = True
+    end
+    object Edit_SamaccountName: TEdit
+      AnchorSideTop.Control = Panel_Top
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 106
+      Height = 23
+      Hint = 'The logon name used to support clients and servers running earlier versions of the operating system'#13#10'Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager'
+      Top = 8
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      Constraints.MaxWidth = 280
+      Constraints.MinWidth = 280
+      MaxLength = 20
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnChange = Edit_SamaccountNameChange
+    end
+    object Label_Description: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_Description
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 43
+      Width = 66
+      Caption = 'Description :'
+      Layout = tlCenter
+    end
+    object Edit_Description: TEdit
+      AnchorSideTop.Control = Edit_SamaccountName
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 106
+      Height = 23
+      Top = 39
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      Constraints.MaxWidth = 280
+      Constraints.MinWidth = 280
+      MaxLength = 1024
+      TabOrder = 1
+      OnChange = Edit_DescriptionChange
+    end
+    object Label_Mail: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_Mail
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 74
+      Width = 40
+      Caption = 'E-mail :'
+      Layout = tlCenter
+    end
+    object Edit_Mail: TEdit
+      AnchorSideTop.Control = Edit_Description
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 106
+      Height = 23
+      Hint = 'The group''s E-mail address'
+      Top = 70
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      Constraints.MaxWidth = 280
+      Constraints.MinWidth = 280
+      MaxLength = 256
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnChange = Edit_MailChange
+    end
+  end
+  object Label_Info: TLabel
+    Left = 16
+    Height = 15
+    Top = 270
+    Width = 402
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    Caption = 'Notes :'
+    Layout = tlCenter
+  end
+  object Memo_Info: TMemo
+    Left = 16
+    Height = 64
+    Hint = 'The group''s comments'
+    Top = 285
+    Width = 386
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Right = 16
+    BorderSpacing.Bottom = 8
+    Constraints.MinHeight = 64
+    MaxLength = 1024
+    ParentShowHint = False
+    ScrollBars = ssVertical
+    ShowHint = True
+    TabOrder = 2
+    OnChange = Memo_InfoChange
+  end
+  object Panel_GroupType: TPanel
+    Left = 8
+    Height = 85
+    Top = 177
+    Width = 402
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 85
+    ClientWidth = 402
+    TabOrder = 3
+    object RadioGroup_Type: TRadioGroup
+      AnchorSideLeft.Side = asrBottom
+      Left = 210
+      Height = 77
+      Top = 8
+      Width = 176
+      Align = alRight
+      AutoFill = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 16
+      Caption = 'Group type'
+      ChildSizing.LeftRightSpacing = 6
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 57
+      ClientWidth = 172
+      Constraints.MinWidth = 176
+      TabOrder = 0
+      object RB_Security: TRadioButton
+        Left = 6
+        Height = 28
+        Top = 0
+        Width = 160
+        Caption = 'Security'
+        TabOrder = 1
+        TabStop = True
+        OnChange = OnChangeGroupType
+      end
+      object RB_Distribution: TRadioButton
+        Left = 6
+        Height = 29
+        Top = 28
+        Width = 160
+        Caption = 'Distribution'
+        TabOrder = 0
+        TabStop = True
+        OnChange = OnChangeGroupType
+      end
+    end
+    object RadioGroup_Scope: TRadioGroup
+      Left = 16
+      Height = 77
+      Top = 8
+      Width = 176
+      Align = alLeft
+      AutoFill = True
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      Caption = 'Group scope'
+      ChildSizing.LeftRightSpacing = 6
+      ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+      ChildSizing.EnlargeVertical = crsHomogenousChildResize
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 1
+      ClientHeight = 57
+      ClientWidth = 172
+      Constraints.MinWidth = 176
+      TabOrder = 1
+      object RB_Local: TRadioButton
+        Left = 6
+        Height = 19
+        Top = 0
+        Width = 160
+        Caption = 'Domain local'
+        TabOrder = 0
+        TabStop = True
+        OnChange = OnChangeGroupType
+      end
+      object RB_Global: TRadioButton
+        Left = 6
+        Height = 19
+        Top = 19
+        Width = 160
+        Caption = 'Global'
+        TabOrder = 2
+        TabStop = True
+        OnChange = OnChangeGroupType
+      end
+      object RB_Universal: TRadioButton
+        Left = 6
+        Height = 19
+        Top = 38
+        Width = 160
+        Caption = 'Universal'
+        TabOrder = 1
+        TabStop = True
+        OnChange = OnChangeGroupType
+      end
+    end
+  end
+end
