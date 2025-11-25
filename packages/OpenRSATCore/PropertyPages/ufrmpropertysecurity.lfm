@@ -1,0 +1,209 @@
+object FrmPropertySecurity: TFrmPropertySecurity
+  Left = 0
+  Height = 421
+  Top = 0
+  Width = 465
+  ClientHeight = 421
+  ClientWidth = 465
+  TabOrder = 0
+  DesignLeft = 2137
+  DesignTop = 347
+  object Panel_Top: TPanel
+    Left = 8
+    Height = 150
+    Top = 8
+    Width = 449
+    Align = alTop
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 150
+    ClientWidth = 449
+    TabOrder = 0
+    object TisGrid_SecurityListUser: TTisGrid
+      Left = 8
+      Height = 134
+      Top = 8
+      Width = 433
+      Align = alClient
+      BorderSpacing.Around = 8
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Text = 'Group or user names'
+          Width = 429
+          PropertyName = 'name'
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MaxHeight = 101
+      Header.MinHeight = 19
+      Header.Options = [hoAutoResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.SortColumn = 0
+      Header.Style = hsFlatButtons
+      TabOrder = 0
+      ZebraColor = 15593713
+      FilterOptions.CaseInsensitive = True
+      OnFocusChanged = TisGrid_SecurityListUserFocusChanged
+      OnKeyPress = TisGrid_SecurityListUserKeyPress
+    end
+  end
+  object Panel_Bottom: TPanel
+    Left = 8
+    Height = 234
+    Top = 179
+    Width = 449
+    Align = alClient
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 234
+    ClientWidth = 449
+    TabOrder = 1
+    object TisGrid_SecurityListRight: TTisGrid
+      Left = 8
+      Height = 151
+      Top = 42
+      Width = 433
+      Align = alClient
+      BorderSpacing.Around = 8
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Tag = 1
+          Text = 'Permissions for'
+          Width = 322
+          PropertyName = 'name'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 1
+          Tag = 2
+          Text = 'Allow'
+          Width = 53
+          DataType = cdtBoolean
+          PropertyName = 'allow'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 2
+          Tag = 3
+          Text = 'Deny'
+          Width = 54
+          DataType = cdtBoolean
+          PropertyName = 'deny'
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MainColumn = 1
+      Header.MaxHeight = 101
+      Header.MinHeight = 19
+      Header.Options = [hoAutoResize, hoColumnResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.SortColumn = 0
+      Header.Style = hsFlatButtons
+      Images = CoreDataModule.ImageList1
+      TabOrder = 0
+      ZebraColor = 15593713
+      FilterOptions.CaseInsensitive = True
+      OnGetImageIndex = TisGrid_SecurityListRightGetImageIndex
+      OnKeyPress = TisGrid_SecurityListRightKeyPress
+      OnGetText = TisGrid_SecurityListRightGetText
+    end
+    object Panel_SecurityBottomButtons: TPanel
+      Left = 8
+      Height = 26
+      Top = 8
+      Width = 433
+      Align = alTop
+      AutoSize = True
+      BorderSpacing.Around = 8
+      BevelOuter = bvNone
+      ClientHeight = 26
+      ClientWidth = 433
+      TabOrder = 1
+      object BitBtn_SecurityAddUser: TBitBtn
+        AnchorSideTop.Control = Panel_SecurityBottomButtons
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = BitBtn_SecurityDeleteUser
+        Left = 318
+        Height = 25
+        Top = 1
+        Width = 48
+        Action = Action_Add
+        Anchors = [akTop, akRight]
+        AutoSize = True
+        BorderSpacing.Right = 8
+        TabOrder = 0
+      end
+      object BitBtn_SecurityDeleteUser: TBitBtn
+        AnchorSideTop.Control = Panel_SecurityBottomButtons
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = Panel_SecurityBottomButtons
+        AnchorSideRight.Side = asrBottom
+        Left = 374
+        Height = 25
+        Top = 1
+        Width = 59
+        Action = Action_Delete
+        Anchors = [akTop, akRight]
+        AutoSize = True
+        TabOrder = 1
+      end
+    end
+    object Panel1: TPanel
+      Left = 0
+      Height = 33
+      Top = 201
+      Width = 449
+      Align = alBottom
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 33
+      ClientWidth = 449
+      TabOrder = 2
+      object BitBtn_AdvSecurity: TBitBtn
+        Left = 362
+        Height = 25
+        Top = 0
+        Width = 79
+        Action = Action_Advanced
+        Align = alRight
+        AutoSize = True
+        BorderSpacing.Right = 8
+        BorderSpacing.Bottom = 8
+        TabOrder = 0
+      end
+    end
+  end
+  object Splitter1: TSplitter
+    Cursor = crVSplit
+    Left = 8
+    Height = 5
+    Top = 166
+    Width = 449
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+  object ActionList1: TActionList
+    Left = 88
+    Top = 72
+    object Action_Add: TAction
+      Caption = 'Add'
+    end
+    object Action_Delete: TAction
+      Caption = 'Delete'
+    end
+    object Action_Advanced: TAction
+      Caption = 'Advanced'
+      OnExecute = Action_AdvancedExecute
+    end
+  end
+  object Timer_TisGridSearch: TTimer
+    Enabled = False
+    OnTimer = Timer_TisGridSearchTimer
+    Left = 160
+    Top = 72
+  end
+end

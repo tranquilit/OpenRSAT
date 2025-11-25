@@ -1,0 +1,9 @@
+{"version":1,"strings":[
+{"hash":214272051,"name":"tfrmpropertysecurity.tisgrid_securitylistuser.header.columns[0].text","sourcebytes":[71,114,111,117,112,32,111,114,32,117,115,101,114,32,110,97,109,101,115],"value":"Group or user names"},
+{"hash":219517986,"name":"tfrmpropertysecurity.tisgrid_securitylistright.header.columns[0].text","sourcebytes":[80,101,114,109,105,115,115,105,111,110,115,32,102,111,114],"value":"Permissions for"},
+{"hash":4731751,"name":"tfrmpropertysecurity.tisgrid_securitylistright.header.columns[1].text","sourcebytes":[65,108,108,111,119],"value":"Allow"},
+{"hash":306265,"name":"tfrmpropertysecurity.tisgrid_securitylistright.header.columns[2].text","sourcebytes":[68,101,110,121],"value":"Deny"},
+{"hash":18340,"name":"tfrmpropertysecurity.action_add.caption","sourcebytes":[65,100,100],"value":"Add"},
+{"hash":78392485,"name":"tfrmpropertysecurity.action_delete.caption","sourcebytes":[68,101,108,101,116,101],"value":"Delete"},
+{"hash":197676484,"name":"tfrmpropertysecurity.action_advanced.caption","sourcebytes":[65,100,118,97,110,99,101,100],"value":"Advanced"}
+]}
