@@ -1,0 +1,16 @@
+{"version":1,"strings":[
+{"hash":215364394,"name":"tfrmpropertygeneralgroup.label_samaccountname.caption","sourcebytes":[71,114,111,117,112,32,78,97,109,101,32,40,112,114,101,45,119,105,110,100,111,119,115,32,50,48,48,48,41,32,58],"value":"Group Name (pre-windows 2000) :"},
+{"hash":123313410,"name":"tfrmpropertygeneralgroup.edit_samaccountname.hint","sourcebytes":[84,104,101,32,108,111,103,111,110,32,110,97,109,101,32,117,115,101,100,32,116,111,32,115,117,112,112,111,114,116,32,99,108,105,101,110,116,115,32,97,110,100,32,115,101,114,118,101,114,115,32,114,117,110,110,105,110,103,32,101,97,114,108,105,101,114,32,118,101,114,115,105,111,110,115,32,111,102,32,116,104,101,32,111,112,101,114,97,116,105,110,103,32,115,121,115,116,101,109,13,10,83,117,99,104,32,97,115,32,87,105,110,100,111,119,115,32,78,84,32,52,46,48,44,32,87,105,110,100,111,119,115,32,57,53,44,32,87,105,110,100,111,119,115,32,57,56,44,32,97,110,100,32,76,65,78,32,77,97,110,97,103,101,114],"value":"The logon name used to support clients and servers running earlier versions of the operating system\r\nSuch as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager"},
+{"hash":224921978,"name":"tfrmpropertygeneralgroup.label_description.caption","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110,32,58],"value":"Description :"},
+{"hash":70777530,"name":"tfrmpropertygeneralgroup.label_mail.caption","sourcebytes":[69,45,109,97,105,108,32,58],"value":"E-mail :"},
+{"hash":96782339,"name":"tfrmpropertygeneralgroup.edit_mail.hint","sourcebytes":[84,104,101,32,103,114,111,117,112,39,115,32,69,45,109,97,105,108,32,97,100,100,114,101,115,115],"value":"The group's E-mail address"},
+{"hash":90883434,"name":"tfrmpropertygeneralgroup.label_info.caption","sourcebytes":[78,111,116,101,115,32,58],"value":"Notes :"},
+{"hash":142286291,"name":"tfrmpropertygeneralgroup.memo_info.hint","sourcebytes":[84,104,101,32,103,114,111,117,112,39,115,32,99,111,109,109,101,110,116,115],"value":"The group's comments"},
+{"hash":203647237,"name":"tfrmpropertygeneralgroup.radiogroup_type.caption","sourcebytes":[71,114,111,117,112,32,116,121,112,101],"value":"Group type"},
+{"hash":195859753,"name":"tfrmpropertygeneralgroup.rb_security.caption","sourcebytes":[83,101,99,117,114,105,116,121],"value":"Security"},
+{"hash":187434462,"name":"tfrmpropertygeneralgroup.rb_distribution.caption","sourcebytes":[68,105,115,116,114,105,98,117,116,105,111,110],"value":"Distribution"},
+{"hash":37163173,"name":"tfrmpropertygeneralgroup.radiogroup_scope.caption","sourcebytes":[71,114,111,117,112,32,115,99,111,112,101],"value":"Group scope"},
+{"hash":82141564,"name":"tfrmpropertygeneralgroup.rb_local.caption","sourcebytes":[68,111,109,97,105,110,32,108,111,99,97,108],"value":"Domain local"},
+{"hash":82008188,"name":"tfrmpropertygeneralgroup.rb_global.caption","sourcebytes":[71,108,111,98,97,108],"value":"Global"},
+{"hash":13419820,"name":"tfrmpropertygeneralgroup.rb_universal.caption","sourcebytes":[85,110,105,118,101,114,115,97,108],"value":"Universal"}
+]}
