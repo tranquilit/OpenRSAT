@@ -1,0 +1,299 @@
+object FrmPropertyGeneralOU: TFrmPropertyGeneralOU
+  Left = 0
+  Height = 370
+  Top = 0
+  Width = 434
+  ClientHeight = 370
+  ClientWidth = 434
+  TabOrder = 0
+  DesignLeft = 2176
+  DesignTop = 264
+  object Panel_Header: TPanel
+    Left = 8
+    Height = 56
+    Top = 0
+    Width = 418
+    Align = alTop
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 56
+    ClientWidth = 418
+    TabOrder = 0
+    object Image: TImage
+      AnchorSideLeft.Control = Panel_Header
+      AnchorSideTop.Control = Panel_Header
+      AnchorSideBottom.Control = Panel_Header
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 40
+      Top = 8
+      Width = 40
+      Anchors = [akTop, akLeft, akBottom]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      ImageIndex = 12
+      Proportional = True
+      Stretch = True
+      Transparent = True
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = Image
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Image
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_Header
+      AnchorSideRight.Side = asrBottom
+      Left = 80
+      Height = 15
+      Top = 21
+      Width = 330
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 32
+      BorderSpacing.Right = 8
+      BorderStyle = bsNone
+      Color = clWindow
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+  end
+  object Line_Top: TShape
+    Left = 16
+    Height = 1
+    Top = 59
+    Width = 402
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 3
+    BorderSpacing.Right = 16
+    BorderSpacing.Bottom = 4
+    Pen.Color = clMedGray
+  end
+  object Panel_Content: TPanel
+    Left = 8
+    Height = 241
+    Top = 64
+    Width = 418
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 241
+    ClientWidth = 418
+    TabOrder = 1
+    object Label_Description: TLabel
+      AnchorSideLeft.Control = Panel_Content
+      AnchorSideTop.Control = Edit_Description
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 4
+      Width = 63
+      BorderSpacing.Left = 8
+      Caption = 'Description:'
+      Constraints.MaxWidth = 100
+      WordWrap = True
+    end
+    object Label_Street: TLabel
+      AnchorSideLeft.Control = Panel_Content
+      AnchorSideTop.Control = Memo_Street
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 69
+      Width = 33
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 8
+      Caption = 'Street:'
+      Constraints.MaxWidth = 100
+    end
+    object Label_City: TLabel
+      AnchorSideLeft.Control = Panel_Content
+      AnchorSideTop.Control = Edit_L
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 133
+      Width = 24
+      BorderSpacing.Left = 8
+      Caption = 'City:'
+      Constraints.MaxWidth = 100
+    end
+    object Label_State: TLabel
+      AnchorSideLeft.Control = Panel_Content
+      AnchorSideTop.Control = Edit_ST
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 160
+      Width = 80
+      BorderSpacing.Left = 8
+      Caption = 'State/province:'
+      Constraints.MaxWidth = 100
+    end
+    object Label_ZIP: TLabel
+      AnchorSideLeft.Control = Panel_Content
+      AnchorSideTop.Control = Edit_PostalCode
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 191
+      Width = 88
+      BorderSpacing.Left = 8
+      Caption = 'Zip/Postal Code:'
+      Constraints.MaxWidth = 100
+    end
+    object Label_Country: TLabel
+      AnchorSideLeft.Control = Panel_Content
+      AnchorSideTop.Control = ComboBox_co
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 222
+      Width = 85
+      BorderSpacing.Left = 8
+      Caption = 'Country/region:'
+      Constraints.MaxWidth = 100
+    end
+    object Edit_Description: TEdit
+      AnchorSideLeft.Control = Label_Description
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_Content
+      AnchorSideRight.Control = Panel_Content
+      AnchorSideRight.Side = asrBottom
+      Left = 110
+      Height = 23
+      Top = 0
+      Width = 300
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 16
+      BorderSpacing.Right = 8
+      Constraints.MaxWidth = 300
+      MaxLength = 1024
+      ParentBidiMode = False
+      TabOrder = 0
+      OnChange = Edit_DescriptionChange
+    end
+    object Memo_Street: TMemo
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_Description
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Content
+      AnchorSideRight.Side = asrBottom
+      Left = 110
+      Height = 90
+      Hint = 'A street address'
+      Top = 31
+      Width = 300
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      Constraints.MaxWidth = 300
+      MaxLength = 1024
+      ParentBidiMode = False
+      ParentShowHint = False
+      ScrollBars = ssVertical
+      ShowHint = True
+      TabOrder = 1
+      OnChange = Memo_StreetChange
+    end
+    object Edit_L: TEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Memo_Street
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Content
+      AnchorSideRight.Side = asrBottom
+      Left = 110
+      Height = 23
+      Hint = 'Represents the name of a locality, such as a town or city'
+      Top = 129
+      Width = 300
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      Constraints.MaxWidth = 300
+      MaxLength = 128
+      ParentBidiMode = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnChange = Edit_LChange
+    end
+    object Edit_ST: TEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Label_City
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Content
+      AnchorSideRight.Side = asrBottom
+      Left = 110
+      Height = 23
+      Hint = 'The name of a state or province'
+      Top = 156
+      Width = 300
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      Constraints.MaxWidth = 300
+      MaxLength = 128
+      ParentBidiMode = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      OnChange = Edit_STChange
+    end
+    object Edit_PostalCode: TEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_ST
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Content
+      AnchorSideRight.Side = asrBottom
+      Left = 110
+      Height = 23
+      Hint = 'The postal or zip code for mail delivery'
+      Top = 187
+      Width = 300
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      Constraints.MaxWidth = 300
+      MaxLength = 40
+      ParentBidiMode = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+      OnChange = Edit_PostalCodeChange
+    end
+    object ComboBox_co: TComboBox
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_PostalCode
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Content
+      AnchorSideRight.Side = asrBottom
+      Left = 110
+      Height = 23
+      Hint = 'The country/region in which the user is located'
+      Top = 218
+      Width = 300
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 16
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      Constraints.MaxWidth = 300
+      ItemHeight = 15
+      MaxLength = 128
+      ParentBidiMode = False
+      ParentShowHint = False
+      ShowHint = True
+      Style = csDropDownList
+      TabOrder = 5
+      OnChange = ComboBox_coChange
+    end
+  end
+end
