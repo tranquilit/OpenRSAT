@@ -1,0 +1,101 @@
+object FrmPropertyBitLocker: TFrmPropertyBitLocker
+  Left = 0
+  Height = 324
+  Top = 0
+  Width = 466
+  ClientHeight = 324
+  ClientWidth = 466
+  TabOrder = 0
+  DesignLeft = 2104
+  DesignTop = 212
+  object Label_BitlockerPassword: TLabel
+    Left = 10
+    Height = 15
+    Top = 8
+    Width = 456
+    Align = alTop
+    BorderSpacing.Left = 10
+    BorderSpacing.Top = 8
+    Caption = 'Mot de passe de récupération BitLocker :'
+  end
+  object Label_BitclockerDetails: TLabel
+    Left = 10
+    Height = 15
+    Top = 177
+    Width = 456
+    Align = alTop
+    BorderSpacing.Left = 10
+    Caption = 'Détails :'
+  end
+  object Memo1: TMemo
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 138
+    Top = 192
+    Width = 450
+    Align = alTop
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    Lines.Strings = (
+      'Aucun élément dans cette vue.'
+      ''
+      'Pour rechercher un mot de passe de récupération, cliquez avec le bouton droit sur l''object domaine dans l''arborescence, puis sélectionnez " Rechercher le mot de passe de récupération BitLocker... ".'
+    )
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 8
+    Height = 146
+    Top = 23
+    Width = 450
+    Align = alTop
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    BevelOuter = bvNone
+    Caption = 'Panel1'
+    ClientHeight = 146
+    ClientWidth = 450
+    TabOrder = 1
+    object TisGrid1: TTisGrid
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Panel1
+      AnchorSideBottom.Side = asrBottom
+      Left = 0
+      Height = 146
+      Top = 0
+      Width = 450
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Text = 'Date d''ajout'
+          Width = 190
+          PropertyName = 'date'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 1
+          Text = 'ID de mdp'
+          Width = 185
+          PropertyName = 'passwordID'
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MaxHeight = 101
+      Header.MinHeight = 19
+      Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.Style = hsFlatButtons
+      TabOrder = 0
+      ZebraColor = 15593713
+    end
+  end
+end
