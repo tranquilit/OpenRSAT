@@ -1,0 +1,130 @@
+object FrmPropertyMember: TFrmPropertyMember
+  Left = 0
+  Height = 360
+  Top = 0
+  Width = 447
+  ClientHeight = 360
+  ClientWidth = 447
+  TabOrder = 0
+  DesignLeft = 2085
+  DesignTop = 175
+  object Label_Members: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 439
+    Align = alTop
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    Caption = 'Members:'
+  end
+  object TisGrid_Members: TTisGrid
+    AnchorSideBottom.Control = Panel_Bottom
+    Left = 8
+    Height = 279
+    Top = 31
+    Width = 431
+    Align = alTop
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'name'
+        Width = 113
+        PropertyName = 'name'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Text = 'Active Directory Domain Services Folder'
+        Width = 285
+        PropertyName = 'ADSF'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 101
+    Header.MinHeight = 19
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.Style = hsFlatButtons
+    Images = CoreDataModule.ImageList1
+    TabOrder = 0
+    TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes, toDisableAutoscrollOnFocus, toAutoChangeScale]
+    ZebraColor = 15593713
+    FilterOptions.CaseInsensitive = True
+    OnDblClick = TisGrid_MembersDblClick
+    OnGetImageIndex = TisGrid_MembersGetImageIndex
+    OnKeyPress = TisGrid_MembersKeyPress
+  end
+  object Panel_Bottom: TPanel
+    Left = 8
+    Height = 42
+    Top = 310
+    Width = 431
+    Align = alBottom
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    BevelColor = clNone
+    BevelOuter = bvNone
+    ClientHeight = 42
+    ClientWidth = 431
+    TabOrder = 1
+    object BitBtn_Add: TBitBtn
+      AnchorSideLeft.Control = Panel_Bottom
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 25
+      Top = 9
+      Width = 57
+      Action = Action_Add
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      ImageIndex = 10
+      TabOrder = 0
+    end
+    object BitBtn_Delete: TBitBtn
+      AnchorSideLeft.Control = BitBtn_Add
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_Bottom
+      AnchorSideTop.Side = asrCenter
+      Left = 65
+      Height = 25
+      Top = 9
+      Width = 59
+      Action = Action_Delete
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      ImageIndex = 9
+      TabOrder = 1
+    end
+  end
+  object ActionList1: TActionList
+    Left = 96
+    Top = 120
+    object Action_Add: TAction
+      Caption = 'Add...'
+      OnExecute = Action_AddExecute
+    end
+    object Action_Delete: TAction
+      Caption = 'Delete'
+      OnExecute = Action_DeleteExecute
+      OnUpdate = Action_DeleteUpdate
+    end
+  end
+  object Timer_SearchInGrid: TTimer
+    Enabled = False
+    OnTimer = Timer_SearchInGridTimer
+    Left = 184
+    Top = 120
+  end
+end
