@@ -1,0 +1,293 @@
+object FrmPropertyObject: TFrmPropertyObject
+  Left = 0
+  Height = 370
+  Top = 0
+  Width = 412
+  ClientHeight = 370
+  ClientWidth = 412
+  TabOrder = 0
+  DesignLeft = 2113
+  DesignTop = 357
+  object Panel_Object: TPanel
+    Left = 8
+    Height = 54
+    Top = 8
+    Width = 396
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 54
+    ClientWidth = 396
+    TabOrder = 0
+    object Label_CanonicalName: TLabel
+      AnchorSideLeft.Control = Panel_Object
+      AnchorSideTop.Control = Panel_Object
+      AnchorSideRight.Control = Panel_Object
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 15
+      Top = 0
+      Width = 380
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 8
+      Caption = 'Objects''s canonical name'
+      Layout = tlCenter
+      WordWrap = True
+    end
+    object Edit_CanonicalName: TEdit
+      AnchorSideLeft.Control = Panel_Object
+      AnchorSideTop.Control = Label_CanonicalName
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Object
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 23
+      Top = 23
+      Width = 380
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      ReadOnly = True
+      TabOrder = 0
+    end
+  end
+  object Panel_ObjectInfo: TPanel
+    AnchorSideBottom.Side = asrBottom
+    Left = 16
+    Height = 77
+    Top = 62
+    Width = 388
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 16
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 77
+    ClientWidth = 388
+    TabOrder = 1
+    object Edit_ObjectClass: TEdit
+      AnchorSideLeft.Control = Label_ObjectClass
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_ObjectInfo
+      AnchorSideRight.Control = Panel_ObjectInfo
+      AnchorSideRight.Side = asrBottom
+      Left = 158
+      Height = 15
+      Top = 8
+      Width = 222
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderStyle = bsNone
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+    object Edit_WhenCreated: TEdit
+      AnchorSideLeft.Control = Label_WhenCreated
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_ObjectClass
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_ObjectInfo
+      AnchorSideRight.Side = asrBottom
+      Left = 158
+      Height = 15
+      Top = 31
+      Width = 222
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderStyle = bsNone
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 1
+    end
+    object Edit_WhenChanged: TEdit
+      AnchorSideLeft.Control = Label_WhenChanged
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_WhenCreated
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_ObjectInfo
+      AnchorSideRight.Side = asrBottom
+      Left = 158
+      Height = 15
+      Top = 54
+      Width = 222
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      BorderStyle = bsNone
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 2
+    end
+    object Label_ObjectClass: TLabel
+      AnchorSideLeft.Control = Panel_ObjectInfo
+      AnchorSideTop.Control = Edit_ObjectClass
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 8
+      Width = 150
+      BorderSpacing.Top = 8
+      Caption = 'Object''s Class :'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      Layout = tlCenter
+      WordWrap = True
+    end
+    object Label_WhenCreated: TLabel
+      AnchorSideLeft.Control = Panel_ObjectInfo
+      AnchorSideTop.Control = Edit_WhenCreated
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 31
+      Width = 150
+      Caption = 'Created :'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      Layout = tlCenter
+      WordWrap = True
+    end
+    object Label_WhenChanged: TLabel
+      AnchorSideLeft.Control = Panel_ObjectInfo
+      AnchorSideTop.Control = Edit_WhenChanged
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 54
+      Width = 150
+      Caption = 'Modified :'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      Layout = tlCenter
+      WordWrap = True
+    end
+  end
+  object Label_USNUpdate: TLabel
+    Left = 16
+    Height = 15
+    Top = 147
+    Width = 380
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 16
+    Caption = 'Amount of sequential updates (USN):'
+    Layout = tlCenter
+    WordWrap = True
+  end
+  object Panel_ObjectExtra: TPanel
+    AnchorSideBottom.Side = asrBottom
+    Left = 16
+    Height = 54
+    Top = 162
+    Width = 388
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 16
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 54
+    ClientWidth = 388
+    TabOrder = 2
+    object Edit_USNActual: TEdit
+      AnchorSideLeft.Control = Label_USNActual
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_ObjectExtra
+      AnchorSideRight.Control = Panel_ObjectExtra
+      AnchorSideRight.Side = asrBottom
+      Left = 158
+      Height = 15
+      Top = 8
+      Width = 222
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderStyle = bsNone
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 0
+    end
+    object Edit_USNOriginal: TEdit
+      AnchorSideLeft.Control = Label_USNOriginal
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_USNActual
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_ObjectExtra
+      AnchorSideRight.Side = asrBottom
+      Left = 158
+      Height = 15
+      Top = 31
+      Width = 222
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      BorderStyle = bsNone
+      ReadOnly = True
+      TabStop = False
+      TabOrder = 1
+    end
+    object Label_USNActual: TLabel
+      AnchorSideLeft.Control = Panel_ObjectExtra
+      AnchorSideTop.Control = Edit_USNActual
+      AnchorSideTop.Side = asrCenter
+      Left = 16
+      Height = 15
+      Top = 8
+      Width = 134
+      BorderSpacing.Left = 16
+      Caption = 'Actual :'
+      Constraints.MaxWidth = 134
+      Constraints.MinWidth = 134
+      Layout = tlCenter
+      WordWrap = True
+    end
+    object Label_USNOriginal: TLabel
+      AnchorSideLeft.Control = Panel_ObjectExtra
+      AnchorSideTop.Control = Edit_USNOriginal
+      AnchorSideTop.Side = asrCenter
+      Left = 16
+      Height = 15
+      Top = 31
+      Width = 134
+      BorderSpacing.Left = 16
+      Caption = 'Original :'
+      Constraints.MaxWidth = 134
+      Constraints.MinWidth = 134
+      Layout = tlCenter
+      WordWrap = True
+    end
+  end
+  object CheckBox_Protection: TCheckBox
+    Left = 16
+    Height = 19
+    Top = 224
+    Width = 380
+    Action = Action_Protection
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 16
+    TabOrder = 3
+  end
+  object ActionList1: TActionList
+    Left = 120
+    Top = 280
+    object Action_Protection: TAction
+      Caption = 'Protect object from accidental deletion'
+      OnExecute = Action_ProtectionExecute
+    end
+  end
+end
