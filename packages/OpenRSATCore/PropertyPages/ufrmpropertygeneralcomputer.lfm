@@ -1,0 +1,237 @@
+object FrmPropertyGeneralComputer: TFrmPropertyGeneralComputer
+  Left = 0
+  Height = 304
+  Top = 0
+  Width = 459
+  ClientHeight = 304
+  ClientWidth = 459
+  TabOrder = 0
+  DesignLeft = 2498
+  DesignTop = 539
+  object Panel_Header: TPanel
+    Left = 8
+    Height = 56
+    Top = 0
+    Width = 443
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 56
+    ClientWidth = 443
+    TabOrder = 0
+    object Image: TImage
+      AnchorSideLeft.Control = Panel_Header
+      AnchorSideTop.Control = Panel_Header
+      AnchorSideTop.Side = asrCenter
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 40
+      Top = 8
+      Width = 40
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      ImageIndex = 14
+      Proportional = True
+      Stretch = True
+      Transparent = True
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = Image
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_Header
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel_Header
+      AnchorSideRight.Side = asrBottom
+      Left = 80
+      Height = 15
+      Top = 21
+      Width = 363
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 32
+      BorderStyle = bsNone
+      Color = clWindow
+      TabOrder = 0
+    end
+  end
+  object Line_Top: TShape
+    Left = 16
+    Height = 1
+    Top = 59
+    Width = 427
+    Align = alTop
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 3
+    BorderSpacing.Right = 16
+    BorderSpacing.Bottom = 4
+    Pen.Color = clMedGray
+  end
+  object Panel_Top: TPanel
+    Left = 8
+    Height = 155
+    Top = 68
+    Width = 443
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 155
+    ClientWidth = 443
+    TabOrder = 1
+    object Label_SamaccountName: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_SamaccountName
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Edit_SamaccountName
+      Left = 0
+      Height = 30
+      Top = 4
+      Width = 155
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Right = 8
+      Caption = 'Computer name (pre-Windows 2000):'
+      WordWrap = True
+    end
+    object Label_DNSHostName: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_DNSHostName
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 43
+      Width = 59
+      Caption = 'DNS name:'
+    end
+    object Label_dcType: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_dcType
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 74
+      Width = 47
+      Caption = 'DC Type:'
+    end
+    object Label_Site: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_Site
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 105
+      Width = 22
+      Caption = 'Site:'
+    end
+    object Label_Description: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit_Description
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 136
+      Width = 63
+      Caption = 'Description:'
+    end
+    object Edit_SamaccountName: TEdit
+      AnchorSideLeft.Side = asrCenter
+      AnchorSideTop.Control = Panel_Top
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 163
+      Height = 23
+      Hint = 'The logon name used to support clients and servers running earlier versions of the operating system'#13#10'Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager'
+      Top = 8
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Constraints.MaxWidth = 280
+      Constraints.MinWidth = 280
+      MaxLength = 20
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnChange = Edit_SamaccountNameChange
+    end
+    object Edit_DNSHostName: TEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_SamaccountName
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Edit_SamaccountName
+      AnchorSideRight.Side = asrBottom
+      Left = 163
+      Height = 23
+      Hint = 'Name of computer as registered in DNS.'
+      Top = 39
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Constraints.MaxWidth = 280
+      Constraints.MinWidth = 280
+      ParentShowHint = False
+      ReadOnly = True
+      ShowHint = True
+      TabOrder = 1
+    end
+    object Edit_dcType: TEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_DNSHostName
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Edit_DNSHostName
+      AnchorSideRight.Side = asrBottom
+      Left = 163
+      Height = 23
+      Top = 70
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Constraints.MaxWidth = 280
+      Constraints.MinWidth = 280
+      ReadOnly = True
+      TabOrder = 2
+    end
+    object Edit_Site: TEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_dcType
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 163
+      Height = 23
+      Top = 101
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Constraints.MaxWidth = 280
+      Constraints.MinWidth = 280
+      ReadOnly = True
+      TabOrder = 3
+    end
+    object Edit_Description: TEdit
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_Site
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 163
+      Height = 23
+      Top = 132
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Constraints.MaxWidth = 280
+      Constraints.MinWidth = 280
+      MaxLength = 1024
+      TabOrder = 4
+      OnChange = Edit_DescriptionChange
+    end
+  end
+end
