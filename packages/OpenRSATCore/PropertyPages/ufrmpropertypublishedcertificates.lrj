@@ -1,0 +1,11 @@
+{"version":1,"strings":[
+{"hash":197770708,"name":"tfrmpropertypublishedcertificates.label_listx509.caption","sourcebytes":[76,105,115,116,32,111,102,32,88,53,48,57,32,99,101,114,116,105,102,105,99,97,116,101,115,32,112,117,98,108,105,115,104,101,100,32,102,111,114,32,116,104,101,32,117,115,101,114,32,97,99,99,111,117,110,116],"value":"List of X509 certificates published for the user account"},
+{"hash":180040975,"name":"tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[0].text","sourcebytes":[73,115,115,117,101,100,32,84,111],"value":"Issued To"},
+{"hash":180040761,"name":"tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[1].text","sourcebytes":[73,115,115,117,101,100,32,66,121],"value":"Issued By"},
+{"hash":141448819,"name":"tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[2].text","sourcebytes":[73,110,116,101,110,100,101,100,32,80,117,114,112,111,115,101,115],"value":"Intended Purposes"},
+{"hash":51146421,"name":"tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[3].text","sourcebytes":[69,120,112,105,114,97,116,105,111,110,32,68,97,116,101],"value":"Expiration Date"},
+{"hash":109289157,"name":"tfrmpropertypublishedcertificates.action_view.caption","sourcebytes":[86,105,101,119,32,67,101,114,116,105,102,105,99,97,116,101],"value":"View Certificate"},
+{"hash":38970357,"name":"tfrmpropertypublishedcertificates.action_add.caption","sourcebytes":[65,100,100,32,102,114,111,109,32,70,105,108,101],"value":"Add from File"},
+{"hash":93079237,"name":"tfrmpropertypublishedcertificates.action_remove.caption","sourcebytes":[82,101,109,111,118,101],"value":"Remove"},
+{"hash":263370069,"name":"tfrmpropertypublishedcertificates.action_copy.caption","sourcebytes":[67,111,112,121,32,116,111,32,70,105,108,101],"value":"Copy to File"}
+]}

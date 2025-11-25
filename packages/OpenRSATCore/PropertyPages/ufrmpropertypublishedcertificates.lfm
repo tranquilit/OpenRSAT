@@ -1,0 +1,155 @@
+object FrmPropertyPublishedCertificates: TFrmPropertyPublishedCertificates
+  Left = 0
+  Height = 349
+  Top = 0
+  Width = 446
+  ClientHeight = 349
+  ClientWidth = 446
+  TabOrder = 0
+  DesignLeft = 2132
+  DesignTop = 129
+  object Label_ListX509: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 430
+    Align = alTop
+    BorderSpacing.Around = 8
+    Caption = 'List of X509 certificates published for the user account'
+  end
+  object BitBtn_View: TBitBtn
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 330
+    Height = 25
+    Top = 264
+    Width = 108
+    Action = Action_View
+    Anchors = [akTop, akRight]
+    AutoSize = True
+    BorderSpacing.Around = 8
+    TabOrder = 0
+  end
+  object BitBtn_Add: TBitBtn
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = BitBtn_View
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 25
+    Top = 297
+    Width = 98
+    Action = Action_Add
+    AutoSize = True
+    BorderSpacing.Around = 8
+    TabOrder = 1
+  end
+  object BitBtn_Remove: TBitBtn
+    AnchorSideLeft.Control = BitBtn_Add
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = BitBtn_Add
+    AnchorSideTop.Side = asrCenter
+    AnchorSideBottom.Side = asrBottom
+    Left = 114
+    Height = 25
+    Top = 297
+    Width = 69
+    Action = Action_Remove
+    AutoSize = True
+    BorderSpacing.Around = 8
+    TabOrder = 2
+  end
+  object BitBtn_Copy: TBitBtn
+    AnchorSideLeft.Control = BitBtn_Remove
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = BitBtn_Remove
+    AnchorSideTop.Side = asrCenter
+    AnchorSideBottom.Side = asrBottom
+    Left = 191
+    Height = 25
+    Top = 297
+    Width = 89
+    Action = Action_Copy
+    AutoSize = True
+    BorderSpacing.Around = 8
+    TabOrder = 3
+  end
+  object TisGrid_ListX509: TTisGrid
+    Left = 8
+    Height = 220
+    Top = 31
+    Width = 430
+    Align = alTop
+    BorderSpacing.Around = 8
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'Issued To'
+        Width = 100
+        PropertyName = 'issuedTo'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Text = 'Issued By'
+        Width = 100
+        PropertyName = 'issuedBy'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 2
+        Text = 'Intended Purposes'
+        Width = 100
+        PropertyName = 'intendedPurposes'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 3
+        Text = 'Expiration Date'
+        Width = 100
+        PropertyName = 'expirationDate'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 101
+    Header.MinHeight = 19
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.Style = hsFlatButtons
+    TabOrder = 4
+    ZebraColor = 15593713
+  end
+  object ActionList1: TActionList
+    Left = 104
+    Top = 104
+    object Action_View: TAction
+      Caption = 'View Certificate'
+      OnExecute = Action_ViewExecute
+      OnUpdate = Action_ViewUpdate
+    end
+    object Action_Add: TAction
+      Caption = 'Add from File'
+      OnExecute = Action_AddExecute
+    end
+    object Action_Remove: TAction
+      Caption = 'Remove'
+      OnExecute = Action_RemoveExecute
+      OnUpdate = Action_RemoveUpdate
+    end
+    object Action_Copy: TAction
+      Caption = 'Copy to File'
+      OnExecute = Action_CopyExecute
+      OnUpdate = Action_CopyUpdate
+    end
+  end
+  object OpenDialog: TOpenDialog
+    Left = 176
+    Top = 104
+  end
+  object SaveDialog: TSaveDialog
+    Left = 248
+    Top = 104
+  end
+end
