@@ -1,0 +1,14 @@
+{"version":1,"strings":[
+{"hash":193708954,"name":"tfrmpropertyaddress.label_street.caption","sourcebytes":[83,116,114,101,101,116,32,58],"value":"Street :"},
+{"hash":21575946,"name":"tfrmpropertyaddress.label_postofficebox.caption","sourcebytes":[80,46,79,32,66,111,120,32,58],"value":"P.O Box :"},
+{"hash":77642554,"name":"tfrmpropertyaddress.label_city.caption","sourcebytes":[67,105,116,121,32,58],"value":"City :"},
+{"hash":109528282,"name":"tfrmpropertyaddress.label_state.caption","sourcebytes":[83,116,97,116,101,47,112,114,111,118,105,110,99,101,32,58],"value":"State/province :"},
+{"hash":61989786,"name":"tfrmpropertyaddress.label_postalcode.caption","sourcebytes":[90,73,80,47,80,111,115,116,97,108,32,67,111,100,101,32,58],"value":"ZIP/Postal Code :"},
+{"hash":207343962,"name":"tfrmpropertyaddress.label_countrycode.caption","sourcebytes":[67,111,117,110,116,114,121,32,58],"value":"Country :"},
+{"hash":203717987,"name":"tfrmpropertyaddress.memo_street.hint","sourcebytes":[65,32,115,116,114,101,101,116,32,97,100,100,114,101,115,115],"value":"A street address"},
+{"hash":79668964,"name":"tfrmpropertyaddress.edit_postofficebox.hint","sourcebytes":[84,104,101,32,112,111,115,116,32,111,102,102,105,99,101,32,98,111,120,32,110,117,109,98,101,114,32,102,111,114,32,116,104,105,115,32,111,98,106,101,99,116],"value":"The post office box number for this object"},
+{"hash":200417657,"name":"tfrmpropertyaddress.edit_city.hint","sourcebytes":[82,101,112,114,101,115,101,110,116,115,32,116,104,101,32,110,97,109,101,32,111,102,32,97,32,108,111,99,97,108,105,116,121,44,32,115,117,99,104,32,97,115,32,97,32,116,111,119,110,32,111,114,32,99,105,116,121],"value":"Represents the name of a locality, such as a town or city"},
+{"hash":116541205,"name":"tfrmpropertyaddress.edit_state.hint","sourcebytes":[84,104,101,32,110,97,109,101,32,111,102,32,97,32,115,116,97,116,101,32,111,114,32,112,114,111,118,105,110,99,101],"value":"The name of a state or province"},
+{"hash":121614297,"name":"tfrmpropertyaddress.edit_postalcode.hint","sourcebytes":[84,104,101,32,112,111,115,116,97,108,32,111,114,32,122,105,112,32,99,111,100,101,32,102,111,114,32,109,97,105,108,32,100,101,108,105,118,101,114,121],"value":"The postal or zip code for mail delivery"},
+{"hash":38627396,"name":"tfrmpropertyaddress.combobox_countrycode.hint","sourcebytes":[84,104,101,32,99,111,117,110,116,114,121,47,114,101,103,105,111,110,32,105,110,32,119,104,105,99,104,32,116,104,101,32,117,115,101,114,32,105,115,32,108,111,99,97,116,101,100],"value":"The country/region in which the user is located"}
+]}
