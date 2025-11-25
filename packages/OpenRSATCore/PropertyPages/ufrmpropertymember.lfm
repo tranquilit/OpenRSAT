@@ -51,7 +51,6 @@ object FrmPropertyMember: TFrmPropertyMember
     Header.MinHeight = 19
     Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
     Header.Style = hsFlatButtons
-    Images = CoreDataModule.ImageList1
     TabOrder = 0
     TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes, toDisableAutoscrollOnFocus, toAutoChangeScale]
     ZebraColor = 15593713
@@ -59,6 +58,7 @@ object FrmPropertyMember: TFrmPropertyMember
     OnDblClick = TisGrid_MembersDblClick
     OnGetImageIndex = TisGrid_MembersGetImageIndex
     OnKeyPress = TisGrid_MembersKeyPress
+    OnBeforeDeleteRows = TisGrid_MembersBeforeDeleteRows
   end
   object Panel_Bottom: TPanel
     Left = 8

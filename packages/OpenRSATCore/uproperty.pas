@@ -621,7 +621,7 @@ begin
   end;
 
   // Remove old values
-  Attribute := TLdapAttribute.Create;
+  Attribute := TLdapAttribute.Create(AttributeName, atUndefined);
   try
     if Length(ToDelete) > 0 then
     begin

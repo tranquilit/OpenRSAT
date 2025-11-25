@@ -38,6 +38,8 @@ type
     procedure Action_DeleteExecute(Sender: TObject);
     procedure Action_DeleteUpdate(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
+    procedure TisGrid_MembersBeforeDeleteRows(aSender: TTisGrid;
+      aRows: PDocVariantData; var aAskUser, aAbort: Boolean);
     procedure TisGrid_MembersDblClick(Sender: TObject);
     procedure TisGrid_MembersGetImageIndex(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
@@ -103,6 +105,8 @@ begin
   if mrYes <> MessageDlg(rsTitleDeleteMember, FormatUtf8(rsDeleteMemberFromGroups, [TisGrid_Members.SelectedCount]), mtConfirmation, mbYesNoCancel, 0) then
     Exit;
 
+  TisGrid_Members.DeleteSelectedRows;
+
   Node := TisGrid_Members.GetFirst();
   if not Assigned(Node) then
   begin
@@ -162,6 +166,12 @@ end;
 procedure TFrmPropertyMember.Timer_SearchInGridTimer(Sender: TObject);
 begin
   Timer_SearchInGrid.Enabled := False;
+end;
+
+procedure TFrmPropertyMember.TisGrid_MembersBeforeDeleteRows(aSender: TTisGrid;
+  aRows: PDocVariantData; var aAskUser, aAbort: Boolean);
+begin
+  aAskUser := False;
 end;
 
 constructor TFrmPropertyMember.Create(TheOwner: TComponent);
