@@ -1,0 +1,7 @@
+{"version":1,"strings":[
+{"hash":222395850,"name":"tfrmpropertyattributes.label_attributes.caption","sourcebytes":[65,116,116,114,105,98,117,116,101,115,32,58],"value":"Attributes :"},
+{"hash":193975317,"name":"tfrmpropertyattributes.list_attributes.header.columns[0].text","sourcebytes":[65,116,116,114,105,98,117,116,101],"value":"Attribute"},
+{"hash":8160181,"name":"tfrmpropertyattributes.list_attributes.header.columns[1].text","sourcebytes":[118,97,108,117,101],"value":"value"},
+{"hash":80755394,"name":"tfrmpropertyattributes.action_filter.caption","sourcebytes":[70,105,108,116,101,114],"value":"Filter"},
+{"hash":88453081,"name":"tfrmpropertyattributes.action_modify.caption","sourcebytes":[77,111,100,105,102,121],"value":"Modify"}
+]}
