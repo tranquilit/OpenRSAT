@@ -1,0 +1,20 @@
+{"version":1,"strings":[
+{"hash":57870627,"name":"tfrmpropertytelephone.groupbox_numbers.caption","sourcebytes":[84,101,108,101,112,104,111,110,101,32,110,117,109,98,101,114,115],"value":"Telephone numbers"},
+{"hash":83244858,"name":"tfrmpropertytelephone.label_homephone.caption","sourcebytes":[72,111,109,101,32,58],"value":"Home :"},
+{"hash":108905578,"name":"tfrmpropertytelephone.label_pager.caption","sourcebytes":[80,97,103,101,114,32,58],"value":"Pager :"},
+{"hash":93332090,"name":"tfrmpropertytelephone.label_mobile.caption","sourcebytes":[77,111,98,105,108,101,32,58],"value":"Mobile :"},
+{"hash":5016122,"name":"tfrmpropertytelephone.label_facsimiletelephonenumber.caption","sourcebytes":[70,97,120,32,58],"value":"Fax :"},
+{"hash":116565322,"name":"tfrmpropertytelephone.label_ipphone.caption","sourcebytes":[73,80,32,112,104,111,110,101,32,58],"value":"IP phone :"},
+{"hash":158584482,"name":"tfrmpropertytelephone.edit_homephone.hint","sourcebytes":[84,104,101,32,117,115,101,114,39,115,32,109,97,105,110,32,104,111,109,101,32,112,104,111,110,101,32,110,117,109,98,101,114],"value":"The user's main home phone number"},
+{"hash":75821586,"name":"tfrmpropertytelephone.edit_pager.hint","sourcebytes":[84,104,101,32,117,115,101,114,39,115,32,109,97,105,110,32,112,97,103,101,114,32,110,117,109,98,101,114],"value":"The user's main pager number"},
+{"hash":160642962,"name":"tfrmpropertytelephone.edit_mobile.hint","sourcebytes":[84,104,101,32,117,115,101,114,39,115,32,109,97,105,110,32,109,111,98,105,108,101,32,112,104,111,110,101,32,110,117,109,98,101,114],"value":"The user's main mobile phone number"},
+{"hash":30429042,"name":"tfrmpropertytelephone.edit_facsimiletelephonenumber.hint","sourcebytes":[84,104,101,32,117,115,101,114,39,115,32,109,97,105,110,32,102,97,120,32,110,117,109,98,101,114],"value":"The user's main fax number"},
+{"hash":77548665,"name":"tfrmpropertytelephone.edit_ipphone.hint","sourcebytes":[84,104,101,32,84,67,80,47,73,80,32,97,100,100,114,101,115,115,32,102,111,114,32,116,104,101,32,112,104,111,110,101,46,32,85,115,101,100,32,98,121,32,84,101,108,101,112,104,111,110,121],"value":"The TCP/IP address for the phone. Used by Telephony"},
+{"hash":183260782,"name":"tfrmpropertytelephone.bitbtn_otherhomephone.caption","sourcebytes":[79,116,104,101,114,46,46,46],"value":"Other..."},
+{"hash":183260782,"name":"tfrmpropertytelephone.bitbtn_otherpager.caption","sourcebytes":[79,116,104,101,114,46,46,46],"value":"Other..."},
+{"hash":183260782,"name":"tfrmpropertytelephone.bitbtn_othermobile.caption","sourcebytes":[79,116,104,101,114,46,46,46],"value":"Other..."},
+{"hash":183260782,"name":"tfrmpropertytelephone.bitbtn_otherfacsimiletelephonenumber.caption","sourcebytes":[79,116,104,101,114,46,46,46],"value":"Other..."},
+{"hash":183260782,"name":"tfrmpropertytelephone.bitbtn_otheripphone.caption","sourcebytes":[79,116,104,101,114,46,46,46],"value":"Other..."},
+{"hash":90883434,"name":"tfrmpropertytelephone.label_info.caption","sourcebytes":[78,111,116,101,115,32,58],"value":"Notes :"},
+{"hash":139715859,"name":"tfrmpropertytelephone.memo_info.hint","sourcebytes":[84,104,101,32,103,114,111,117,112,47,117,115,101,114,32,99,111,109,109,101,110,116,115],"value":"The group/user comments"}
+]}
