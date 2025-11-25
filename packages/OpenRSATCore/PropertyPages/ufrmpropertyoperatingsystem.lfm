@@ -1,0 +1,119 @@
+object FrmPropertyOperatingSystem: TFrmPropertyOperatingSystem
+  Left = 0
+  Height = 247
+  Top = 0
+  Width = 408
+  ClientHeight = 247
+  ClientWidth = 408
+  TabOrder = 0
+  DesignLeft = 2215
+  DesignTop = 262
+  object Panel1: TPanel
+    Left = 8
+    Height = 101
+    Top = 8
+    Width = 392
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 101
+    ClientWidth = 392
+    TabOrder = 0
+    object Label_OperatingSystem: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Edit_OperatingSystem
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 12
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Name:'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+    end
+    object Label_OperatingSystemVersion: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Edit_OperatingSystemVersion
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 43
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Version:'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+    end
+    object Label_OperatingSystemServicePack: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Edit_OperatingSystemServicePack
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 74
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Service Pack:'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+    end
+    object Edit_OperatingSystem: TEdit
+      AnchorSideLeft.Control = Label_OperatingSystem
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 23
+      Hint = 'The Operating System name, for example, Windows Vista Enterprise'
+      Top = 8
+      Width = 218
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      ParentShowHint = False
+      ReadOnly = True
+      ShowHint = True
+      TabOrder = 0
+    end
+    object Edit_OperatingSystemVersion: TEdit
+      AnchorSideLeft.Control = Label_OperatingSystemVersion
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_OperatingSystem
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 23
+      Hint = 'The operating system version, for example, 4.0'
+      Top = 39
+      Width = 218
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      ParentShowHint = False
+      ReadOnly = True
+      ShowHint = True
+      TabOrder = 1
+    end
+    object Edit_OperatingSystemServicePack: TEdit
+      AnchorSideLeft.Control = Label_OperatingSystemServicePack
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_OperatingSystemVersion
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 23
+      Hint = 'The operating system service pack ID (for example, SP3)'
+      Top = 70
+      Width = 218
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      ParentShowHint = False
+      ReadOnly = True
+      ShowHint = True
+      TabOrder = 2
+    end
+  end
+end
