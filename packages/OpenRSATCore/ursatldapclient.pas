@@ -307,24 +307,26 @@ end;
 function TRsatLdapClient.RegisterObserverConnect(Func: TProcLdapClientObject
   ): Boolean;
 begin
-  MultiEventAdd(fObserversConnect, TMethod(Func));
+  result := MultiEventAdd(fObserversConnect, TMethod(Func));
 end;
 
 function TRsatLdapClient.RemoveObserverConnect(Func: TProcLdapClientObject
   ): Boolean;
 begin
+  result := True;
   MultiEventRemove(fObserversConnect, TMethod(Func));
 end;
 
 function TRsatLdapClient.RegisterObserverClose(Func: TProcLdapClientObject
   ): Boolean;
 begin
-  MultiEventAdd(fObserversClose, TMethod(Func));
+  result := MultiEventAdd(fObserversClose, TMethod(Func));
 end;
 
 function TRsatLdapClient.RemoveObserverClose(Func: TProcLdapClientObject
   ): Boolean;
 begin
+  result := True;
   MultiEventRemove(fObserversClose, TMethod(Func));
 end;
 

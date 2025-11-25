@@ -274,7 +274,7 @@ type
 
     procedure UpdateTreeImages(ANode: TADUCTreeNode);
 
-    procedure InsertGPLink(ANode: TADUCTreeNode);
+    //procedure InsertGPLink(ANode: TADUCTreeNode);
     procedure RefreshADUCTreeNode(Node: TADUCTreeNode);
     procedure UpdateGridADUC(ANode: TADUCTreeNode);
 
@@ -552,7 +552,6 @@ var
   newList: Set of TNewAction;
   item, i: Integer;
   filter: UInt64;
-  nodeData: PDocVariantData;
   listItem: TNewAction;
   ObjectClass: String;
 const
@@ -1003,7 +1002,7 @@ end;
 procedure TFrmModuleADUC.Action_TaskAddToAGroupExecute(Sender: TObject);
 var
   DistinguishedName, SelectedDistinguishedName: String;
-  selectedDistinguishedNameArray: TStringArray;
+  selectedDistinguishedNameArray: TRawUtf8DynArray;
 
   // Create an attribute to add a member to a group.
   // It does a modify ldap request with an Add operation.
@@ -1760,11 +1759,11 @@ begin
     fLog.Log(sllInfo, '% - Node "%" and subnodes (%) have been updated.', [Self.Name, ANode.Text, IntToStr(ANode.Count)]);
 end;
 
-procedure TFrmModuleADUC.InsertGPLink(ANode: TADUCTreeNode);
-begin
-  if not Assigned(ANode) or not Assigned(ANode.GetNodeDataObject) or not Assigned(ANode.GetNodeDataObject.GPLinks) then
-    Exit;
-end;
+//procedure TFrmModuleADUC.InsertGPLink(ANode: TADUCTreeNode);
+//begin
+//  if not Assigned(ANode) or not Assigned(ANode.GetNodeDataObject) or not Assigned(ANode.GetNodeDataObject.GPLinks) then
+//    Exit;
+//end;
 
 procedure TFrmModuleADUC.RefreshADUCTreeNode(Node: TADUCTreeNode);
 var
@@ -1939,8 +1938,8 @@ begin
 
   // Sort nodes
   Node.AlphaSort;
-  if fModuleOptions.ShowGPO then
-    InsertGPLink(Node);
+  //if fModuleOptions.ShowGPO then
+  //  InsertGPLink(Node);
 end;
 
 procedure TFrmModuleADUC.UpdateGridADUC(ANode: TADUCTreeNode);
@@ -2050,6 +2049,7 @@ var
   var
     Count: Integer;
   begin
+    result := nil;
     if Assigned(fLog) then
       fLog.Log(sllTrace, 'Focus on Grid', Self);
 
@@ -2080,6 +2080,7 @@ var
 
   function GetSelectedObjectsInTree: TRawUtf8DynArray;
   begin
+    result := nil;
     if Assigned(fLog) then
       fLog.Log(sllTrace, 'Focus on TreeView', Self);
 

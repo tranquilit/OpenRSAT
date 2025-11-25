@@ -61,7 +61,6 @@ end;
 procedure TFrmNewObject.ReloadGrid;
   procedure AddObjectAttribute(ObjectClass: RawUtf8);
   var
-    SubClassOf, Aux: RawUtf8;
     NewItem: TDocVariantData;
 
     procedure InnerAddObjectAttribute(AttributeName: RawUtf8);

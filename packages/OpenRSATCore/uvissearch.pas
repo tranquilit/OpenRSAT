@@ -127,7 +127,7 @@ uses
 // Form
 procedure TVisSearch.FormShow(Sender: TObject);
 var
-  attribute, LdapDisplayName: RawUtf8;
+  LdapDisplayName: RawUtf8;
   SearchResult: TLdapResult;
 begin
   ComboBox_SearchScope.Items.AddStrings([
@@ -325,7 +325,7 @@ end;
 procedure TVisSearch.Action_PropertiesExecute(Sender: TObject);
 begin
   Action_ShowInView.Execute;
-  fModule.Core.OpenProperty(TisGrid_Result.FocusedRow^.S['name'], TisGrid_Result.FocusedRow^.S['distinguishedName']);
+  fModule.Core.OpenProperty(TisGrid_Result.FocusedRow^.S['distinguishedName'], TisGrid_Result.FocusedRow^.S['name']);
 end;
 
 procedure TVisSearch.Action_PropertiesUpdate(Sender: TObject);
