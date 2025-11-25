@@ -54,6 +54,8 @@ resourcestring
   rsLdapSearchFailed = 'Ldap search failed: "%"';
   rsLdapModifyFailed = 'Ldap modify failed: "%"';
 
+  rsSecurityDescriptorInvalid = 'Fail to read security descriptor';
+
   // https://ldap.com/ldap-result-code-reference-core-ldapv3-result-codes/#rc-constraintViolation
   rsOperationsError = 'Operation occurs in a wrong order.'; // leOperationsError (1)
   rsProtocolError = 'Malformed LDAP message. Unrecognized operation.'; // leProtocolError (2)
@@ -407,6 +409,7 @@ function AceIsInherited(Ace: PSecAce): Boolean;
 function AttributesEquals(a1, a2: TLdapAttribute): Boolean;
 function DateTimeToMSTime(const t: TDateTime): Int64;
 function GetAceParentCount(Ace: TSecAce; sdArr: Array of TSecurityDescriptor; count: Integer = 0): Integer;
+function GetDNName(DistinguishedName: RawUtf8): RawUtf8;
 function GetParentDN(DN: RawUtf8): RawUtf8;
 function IsContainer(ObjectClass: RawUtf8): Boolean;
 function IsLocalPath(path: RawUtf8): Boolean;
@@ -459,6 +462,23 @@ end;
 function AceIsInherited(Ace: PSecAce): Boolean;
 begin
   result := safInherited in Ace^.Flags;
+end;
+
+function GetDNName(DistinguishedName: RawUtf8): RawUtf8;
+var
+  CanonicalName: RawUtf8;
+  Splitted: TStringArray;
+  Len: SizeInt;
+begin
+  result := '';
+  CanonicalName := DNToCN(DistinguishedName);
+  Splitted := String(CanonicalName).Split('/');
+  if not Assigned(Splitted) then
+    Exit;
+  Len := Length(Splitted);
+  if Len <= 0 then
+    Exit;
+  result := Splitted[Len - 1];
 end;
 
 function GetParentDN(DN: RawUtf8): RawUtf8;
@@ -825,7 +845,6 @@ var
   RowData: PDocVariantData;
   ColumnName: RawUtf8;
   Node, NextNode: PVirtualNode;
-  PropertyValues: TRawUtf8DynArray;
 begin
   case Timer.Enabled of
     True: Timer.Enabled := False;

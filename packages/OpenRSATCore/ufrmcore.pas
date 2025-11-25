@@ -92,7 +92,7 @@ type
     function GetRsatOptions: TRsatOptions;
 
     procedure CloseProperty(VisProperty: TForm);
-    function OpenProperty(AName, DistinguishedName: String): TForm;
+    function OpenProperty(DistinguishedName: RawUtf8; AName: RawUtf8 = ''): TForm;
     procedure Load;
     procedure ChangeDomainController(DomainController: RawUtf8);
 
@@ -448,8 +448,10 @@ begin
   fVisPropertiesList.Close((VisProperty as TVisProperties));
 end;
 
-function TFrmCore.OpenProperty(AName, DistinguishedName: String): TForm;
+function TFrmCore.OpenProperty(DistinguishedName: RawUtf8; AName: RawUtf8): TForm;
 begin
+  if AName = '' then
+    AName := GetDNName(DistinguishedName);
   result := fVisPropertiesList.Open(AName, DistinguishedName);
 end;
 

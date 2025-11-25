@@ -415,8 +415,6 @@ end;
 
 constructor TVisAdvancedSecurity.Create(TheOwner: TComponent;
   _Ldap: TLdapClient; _SD: PSecurityDescriptor; _dn, abaseDN: RawUtf8);
-var
-  SearchResult: TLdapResult;
 begin
   inherited Create(TheOwner);
 

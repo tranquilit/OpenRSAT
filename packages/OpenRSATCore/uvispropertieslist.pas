@@ -103,18 +103,13 @@ function TVisPropertiesList.New(AName: String; ADistinguishedName: String
   ): TVisProperties;
 var
   c: SizeInt;
-  LdapClient: TRsatLdapClient;
 begin
   result := nil;
-
-  LdapClient := nil;
-  if Assigned(fCore) then
-    LdapClient := fCore.LdapClient;
 
   c := Count;
   SetLength(fItems, c + 1);
 
-  fItems[c] := TVisProperties.Create((fCore as TFrmCore), fCore, LdapClient, ADistinguishedName);
+  fItems[c] := TVisProperties.Create((fCore as TFrmCore), fCore, ADistinguishedName);
   fItems[c].Caption := AName;
   if Assigned(fItems[c].Owner) then
     fItems[c].Show();

@@ -6,8 +6,8 @@ object FrmModuleDNS: TFrmModuleDNS
   ClientHeight = 400
   ClientWidth = 800
   TabOrder = 0
-  DesignLeft = 747
-  DesignTop = 304
+  DesignLeft = 749
+  DesignTop = 305
   object GridDNS: TTisGrid
     Left = 200
     Height = 345

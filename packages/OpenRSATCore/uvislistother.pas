@@ -12,6 +12,8 @@ uses
   ExtCtrls,
   Forms,
   StdCtrls,
+  mormot.core.base,
+  mormot.core.text,
   mormot.core.variants;
 
 type
@@ -44,34 +46,40 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
   private
-    PdocArr: PDocVariantData;
+    fItems: PDocVariantData;
   public
-    constructor Create(TheOwner: TComponent; _caption: String ; _PdocArr: PDocVariantData; _MaxLength: Integer); overload;
+    constructor Create(TheOwner: TComponent; AttributeName: RawUtf8;
+      Items: PDocVariantData; MaxItemLength: Integer); overload;
   end;
 
 implementation
 uses
   Dialogs,
   SysUtils,
-  mormot.core.base,
   ucommon;
 {$R *.lfm}
 
 { TVisListOther }
 
-constructor TVisListOther.Create(TheOwner: TComponent; _caption: String; _PdocArr: PDocVariantData; _MaxLength: Integer);
+constructor TVisListOther.Create(TheOwner: TComponent; AttributeName: RawUtf8; Items: PDocVariantData; MaxItemLength: Integer);
 var
-  pv: PVariant;
+  Item: RawUtf8;
 begin
   Inherited Create(TheOwner);
 
-  self.Caption := _caption + ' ' + self.Caption;
+  Caption := FormatUtf8('% %', [AttributeName, Self.Caption]);
 
-  self.Edit_NewValue.MaxLength := _MaxLength;
+  Edit_NewValue.MaxLength := MaxItemLength;
 
-  PdocArr := _PdocArr;
-  for pv in PdocArr^.Items do
-    ListBox_Current.Items.Add(pv^);
+  fItems := Items;
+
+  ListBox_Current.Items.BeginUpdate;
+  try
+    for Item in fItems^.ToRawUtf8DynArray do
+      ListBox_Current.Items.Add(Item);
+  finally
+    ListBox_Current.Items.EndUpdate;
+  end;
 end;
 
 procedure TVisListOther.FormShow(Sender: TObject);
@@ -92,12 +100,10 @@ begin
 end;
 
 procedure TVisListOther.Action_EditExecute(Sender: TObject); // Edit
-var
-  s: String;
 begin
-  s := Dialogs.InputBox(rsRename, '', ListBox_Current.Items.Strings[ListBox_Current.ItemIndex]);
-  ListBox_Current.Items.Delete(ListBox_Current.ItemIndex);
-  ListBox_Current.ItemIndex := ListBox_Current.Items.Add(s);
+  ListBox_Current.Sorted := False;
+  ListBox_Current.Items.Strings[ListBox_Current.ItemIndex] := Dialogs.InputBox(rsRename, '', ListBox_Current.Items.Strings[ListBox_Current.ItemIndex]);
+  ListBox_Current.Sorted := True;
 end;
 
 procedure TVisListOther.Action_EditUpdate(Sender: TObject);
@@ -127,8 +133,8 @@ end;
 
 procedure TVisListOther.Action_OKExecute(Sender: TObject); // OK
 begin
-  PdocArr^.Clear();
-  PdocArr^.InitArrayFrom(TRawUtf8DynArray(ListBox_Current.Items.ToStringArray()), []);
+  fItems^.Clear();
+  fItems^.InitArrayFrom(TRawUtf8DynArray(ListBox_Current.Items.ToStringArray()), []);
 end;
 
 end.

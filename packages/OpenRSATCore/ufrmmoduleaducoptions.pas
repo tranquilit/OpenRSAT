@@ -78,7 +78,6 @@ type
   TModuleADUCOptions = class(TOptions)
 
   private
-    fSection: String;
     fLog: TSynLog;
     fChanged: Boolean;
     fFrame: TFrmModuleADUCOptions;

@@ -19,7 +19,7 @@ implementation
 
 function TranslateTo(Lang, unitname: string): boolean;
 var
-  res: TLResource;
+  //res: TLResource;
   ii: Integer;
   POFile: TPOFile;
   LocalTranslator: TUpdateTranslator;

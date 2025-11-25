@@ -744,7 +744,7 @@ begin
     DNSNode := (TreeDNS.Selected as TDNSTreeNode);
 
   if Assigned(DNSNode) and Assigned(DNSNode.fAttributes) then
-    fCore.OpenProperty(DNSNode.fAttributes.Find('name').GetReadable(), DNSNode.fAttributes.Find('distinguishedName').GetReadable());
+    fCore.OpenProperty(DNSNode.fAttributes.Find('distinguishedName').GetReadable(), DNSNode.fAttributes.Find('name').GetReadable());
 end;
 
 procedure TFrmModuleDNS.Action_NextExecute(Sender: TObject);

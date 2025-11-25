@@ -94,8 +94,14 @@ begin
 end;
 
 function TMoveTreeNode.GetLastObjectClass: RawUtf8;
+var
+  c: SizeInt;
 begin
-
+  result := '';
+  c := Length(ObjectClass);
+  if (c <= 0) then
+    Exit;
+  result := ObjectClass[c - 1];
 end;
 
 procedure TMoveTreeNode.SetName(AValue: RawUtf8);

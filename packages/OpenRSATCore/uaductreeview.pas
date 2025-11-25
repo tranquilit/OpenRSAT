@@ -63,7 +63,7 @@ type
   TADUCTreeNodeObject = class
   private
     fAttributes: TLdapAttributeList;
-    fGPLinks: TGPLinks;
+    //fGPLinks: TGPLinks;
 
     function GetFirstAttribute(AttributeName: RawUtf8): RawUtf8;
     function GetLastAttribute(AttributeName: RawUtf8): RawUtf8;
@@ -73,7 +73,7 @@ type
 
     function GetDistinguishedName: String;
     function GetGPLink: String;
-    function GetGPLinks: TGPLinks;
+    //function GetGPLinks: TGPLinks;
     function GetLastObjectClass: String;
     function GetObjectClass: TRawUtf8DynArray;
     procedure SetDistinguishedName(AValue: String);
@@ -90,7 +90,7 @@ type
     property ObjectClass: TRawUtf8DynArray read GetObjectClass write SetObjectClass;
     property LastObjectClass: String read GetLastObjectClass;
     property GPLink: String read GetGPLink write SetGPLink;
-    property GPLinks: TGPLinks read GetGPLinks;
+    //property GPLinks: TGPLinks read GetGPLinks;
   end;
 
 
@@ -103,6 +103,7 @@ type
     procedure SetNodeType(AValue: TADUCTreeNodeType);
     procedure ClearData;
   public
+    destructor Destroy; override;
     property NodeType: TADUCTreeNodeType read fNodeType write SetNodeType;
     function IsType(ANodeType: TADUCTreeNodeType): Boolean;
     function IsNoneType: Boolean;
@@ -110,8 +111,6 @@ type
     function IsQueryType: Boolean;
     function GetNodeDataObject: TADUCTreeNodeObject;
     function GetNodeDataQuery: TADUCTreeNodeQuery;
-  published
-    destructor Destroy; override;
   end;
 
 
@@ -146,7 +145,7 @@ end;
 
 procedure TGPLinks.SetLinks(GPLink: String);
 var
-  Link, NewLink: String;
+  Link: String;
   LinkStart, LinkEnd: SizeInt;
   LinkArr: TStringArray;
 begin
@@ -280,9 +279,10 @@ begin
   result := GetFirstAttribute('gPLink');
 end;
 
-function TADUCTreeNodeObject.GetGPLinks: TGPLinks;
-begin
-end;
+//function TADUCTreeNodeObject.GetGPLinks: TGPLinks;
+//begin
+//  result := fGPLinks;
+//end;
 
 function TADUCTreeNodeObject.GetLastObjectClass: String;
 begin
