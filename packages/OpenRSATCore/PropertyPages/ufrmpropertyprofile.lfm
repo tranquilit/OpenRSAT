@@ -1,0 +1,220 @@
+object FrmPropertyProfile: TFrmPropertyProfile
+  Left = 0
+  Height = 306
+  Top = 0
+  Width = 466
+  ClientHeight = 306
+  ClientWidth = 466
+  TabOrder = 0
+  DesignLeft = 2103
+  DesignTop = 211
+  object GroupBox_UserProfile: TGroupBox
+    Left = 16
+    Height = 90
+    Top = 8
+    Width = 434
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 16
+    Caption = 'User profile'
+    ClientHeight = 70
+    ClientWidth = 430
+    TabOrder = 0
+    object Label_ProfilePath: TLabel
+      AnchorSideLeft.Control = GroupBox_UserProfile
+      AnchorSideTop.Control = Edit_ProfilePath
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 12
+      Width = 67
+      BorderSpacing.Left = 8
+      Caption = 'Profile path :'
+      WordWrap = True
+    end
+    object Edit_ProfilePath: TEdit
+      AnchorSideTop.Control = GroupBox_UserProfile
+      AnchorSideRight.Control = GroupBox_UserProfile
+      AnchorSideRight.Side = asrBottom
+      Left = 142
+      Height = 23
+      Hint = 'Specifies a path to the user''s profile'
+      Top = 8
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      OnChange = Edit_ProfilePathChange
+    end
+    object Label_ScriptPath: TLabel
+      AnchorSideLeft.Control = GroupBox_UserProfile
+      AnchorSideTop.Control = Edit_ScriptPath
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Edit_ScriptPath
+      Left = 8
+      Height = 15
+      Top = 43
+      Width = 126
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 8
+      Caption = 'Logon script path :'
+      WordWrap = True
+    end
+    object Edit_ScriptPath: TEdit
+      AnchorSideTop.Control = Edit_ProfilePath
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox_UserProfile
+      AnchorSideRight.Side = asrBottom
+      Left = 142
+      Height = 23
+      Hint = 'The path for the user''s logon script'
+      Top = 39
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      OnChange = Edit_ScriptPathChange
+    end
+  end
+  object GroupBox_HomeFolder: TGroupBox
+    Left = 16
+    Height = 80
+    Top = 106
+    Width = 434
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 16
+    Caption = 'Home folder'
+    ClientHeight = 60
+    ClientWidth = 430
+    TabOrder = 1
+    object RadioButton_HomeDirectory: TRadioButton
+      AnchorSideLeft.Control = GroupBox_HomeFolder
+      AnchorSideTop.Control = Edit_HomeDirectory
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 19
+      Top = 2
+      Width = 82
+      BorderSpacing.Left = 8
+      Caption = ' Local path :'
+      TabOrder = 0
+      OnChange = RadioButton_HomeDirectoryChange
+    end
+    object Edit_HomeDirectory: TEdit
+      AnchorSideRight.Control = GroupBox_HomeFolder
+      AnchorSideRight.Side = asrBottom
+      Left = 142
+      Height = 23
+      Hint = 'The home directory for the account'#13#10'If homeDrive is set and specifies a drive letter, homeDirectory must be a UNC path'#13#10'Otherwise, homeDirectory is a fully qualified local path including the drive letter'#13#10'(for example, DriveLetter**:\Directory\**Folder)'
+      Top = 0
+      Width = 280
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 8
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnChange = Edit_HomeDirectoryChange
+    end
+    object RadioButton_ConnectTo: TRadioButton
+      AnchorSideLeft.Control = GroupBox_HomeFolder
+      AnchorSideTop.Control = Edit_ConnectTo
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 19
+      Top = 31
+      Width = 69
+      BorderSpacing.Left = 8
+      Caption = 'Connect :'
+      TabOrder = 1
+      OnChange = RadioButton_ConnectToChange
+    end
+    object ComboBox_ConnectTo: TComboBox
+      AnchorSideLeft.Control = Edit_HomeDirectory
+      AnchorSideTop.Control = Edit_ConnectTo
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Side = asrCenter
+      Left = 142
+      Height = 23
+      Hint = 'Specifies the drive letter to which to map the UNC path specified by homeDirectory'
+      Top = 29
+      Width = 44
+      Anchors = [akTop, akLeft, akRight]
+      ItemHeight = 15
+      Items.Strings = (
+        'D:'
+        'E:'
+        'F:'
+        'G:'
+        'H:'
+        'I:'
+        'J:'
+        'K:'
+        'L:'
+        'M:'
+        'N:'
+        'O:'
+        'P:'
+        'Q:'
+        'S:'
+        'T:'
+        'U:'
+        'V:'
+        'W:'
+        'X:'
+        'Y:'
+        'Z:'
+      )
+      MaxLength = 2
+      Style = csDropDownList
+      TabOrder = 4
+      OnChange = ComboBox_ConnectToChange
+    end
+    object Label_ConnectTo: TLabel
+      AnchorSideLeft.Control = ComboBox_ConnectTo
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_ConnectTo
+      AnchorSideTop.Side = asrCenter
+      Left = 194
+      Height = 15
+      Top = 33
+      Width = 19
+      BorderSpacing.Left = 8
+      Caption = 'To :'
+    end
+    object Edit_ConnectTo: TEdit
+      AnchorSideLeft.Control = Label_ConnectTo
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = RadioButton_HomeDirectory
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = GroupBox_HomeFolder
+      AnchorSideRight.Side = asrBottom
+      Left = 222
+      Height = 23
+      Hint = 'The home directory for the account'#13#10'HomeDirectory must be a UNC path'#13#10'(for example, \\**servername\**path)'
+      Top = 29
+      Width = 200
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 9
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      OnChange = Edit_ConnectToChange
+    end
+  end
+end
