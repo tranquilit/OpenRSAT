@@ -178,7 +178,8 @@ begin
   aLog := TSynLog.Enter('Fill Properties ComboBox', []);
   ComboBox_Property.Items.BeginUpdate;
   ComboBox_Property.Items.Clear;
-  aLog.Log(sllDebug, 'Search in Schema Cache.');
+  if Assigned(aLog) then
+    aLog.Log(sllDebug, 'Search in Schema Cache.');
 
   data.init();
   //VisMain.Storage.ListSchemaAttributes(@data, ['lDAPDisplayName', 'schemaIDGUID']);
@@ -191,7 +192,8 @@ begin
     ComboBox_Property.Items.Add(rowData^.A['lDAPDisplayName']^.ToRawUtf8DynArray[0]);
     Properties.AddOrUpdateValue(rowData^.A['lDAPDisplayName']^.ToRawUtf8DynArray[0], rowData^.A['schemaIDGUID']^.ToRawUtf8DynArray[0]);
   end;
-  aLog.Log(sllDebug, 'Search in Extended-Rights.');
+  if Assigned(aLog) then
+    aLog.Log(sllDebug, 'Search in Extended-Rights.');
   Ldap.SearchBegin();
   try
     Ldap.SearchScope := lssSingleLevel;
@@ -223,7 +225,8 @@ begin
   aLog := TSynLog.Enter('Fill Inheritance ComboBox.', []);
   ComboBox_Inheritance.Items.BeginUpdate;
   ComboBox_Inheritance.Items.Clear;
-  aLog.log(sllDebug, 'Search in Schema Cache');
+  if Assigned(aLog) then
+    aLog.log(sllDebug, 'Search in Schema Cache');
   data.init();
   {vismain.Storage.ListSchemaAttributes(@data, ['lDAPDisplayName', 'objectClass', 'schemaIDGUID']);}
 

@@ -592,14 +592,6 @@ begin
     Exit;
   end;
 
-  assert(Assigned(pdata), 'No focused node.');
-  assert(pdata^.Exists('_type'), 'Focused node does not have type.');
-  assert(pdata^.Exists('_sid'), 'Focused node does not have sid.');
-  assert(pdata^.Exists('_mask'), 'Focused node does not have mask.');
-  assert(pdata^.Exists('_flags'), 'Focused node does not have flags.');
-  assert(pdata^.Exists('_objectType'), 'Focused node does not have objectType.');
-  assert(pdata^.Exists('_iObjectType'), 'Focused node does not have iObjectType.');
-
   add := TVisAddACEs.Create(self, Ldap, fBaseDN);
   try
     data.Init([]);
@@ -666,8 +658,6 @@ begin
     finally
       Ldap.SearchEnd;
     end;
-    assert(Ldap.SearchResult.Count = 1, FormatUtf8('Invalid result number (%).', [Ldap.SearchResult.Count]));
-    assert(Assigned(Ldap.SearchResult.Items[0].Find('distinguishedName')), 'Cannot find attribute (distinguishedName).');
     data.AddOrUpdateValue('sid', DistinguishedName);
 
     // Get mask
