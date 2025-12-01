@@ -812,7 +812,7 @@ begin
   LdapClient.SearchRangeBegin;
   try
     Attribute := LdapClient.SearchObject(FormatUtf8('CN=Partitions,%', [LdapClient.ConfigDN]), '', 'uPNSuffixes');
-    if not Assigned(Attribute) then
+    if not Assigned(Attribute) and (LdapClient.ResultCode > 0) then
     begin
       ShowLdapSearchError(LdapClient);
       Exit;

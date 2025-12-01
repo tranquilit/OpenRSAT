@@ -294,6 +294,7 @@ var
   UserPrincipalName: RawUtf8;
   Splitted: TStringArray;
   i: Integer;
+  UPNSuffixes: TRawUtf8DynArray;
 begin
   // Default value
   Edit_Name.CaptionNoChange := '';
@@ -302,8 +303,9 @@ begin
   // Fill UPN Suffixes
   ComboBox_Domain.Items.BeginUpdate;
   try
-    for i := 0 to High(fProperty.UPNSuffixes) do
-      ComboBox_Domain.Items.Add(FormatUtf8('@%', [fProperty.UPNSuffixes[i]]));
+    UPNSuffixes := fProperty.UPNSuffixes;
+    for i := 0 to High(UPNSuffixes) do
+      ComboBox_Domain.Items.Add(FormatUtf8('@%', [UPNSuffixes[i]]));
   finally
     ComboBox_Domain.Items.EndUpdate;
   end;
