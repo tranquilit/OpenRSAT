@@ -144,7 +144,6 @@ begin
 
   if CheckBox_CannotChangePassword.Checked then
   begin
-    AttList.Clear();
     // https://learn.microsoft.com/en-us/windows/win32/adsi/modifying-user-cannot-change-password-ldap-provider
     Att := NewObject.Ldap.SearchObject(atNTSecurityDescriptor, DN, '');
     if not Assigned(Att) then
