@@ -381,8 +381,11 @@ begin
   begin
     RadioButton_EndOf.CheckedNoChange := True;
     if not TryStrToInt64(AccountExpires, Value) then
+    begin
+      Value := 0;
       if Assigned(fLog) then
-        fLog.Log(sllError, 'Cannot convert str(%) to int.', [AccountExpires], Self);
+        fLog.Log(sllWarning, 'Cannot convert str(%) to int.', [AccountExpires], Self);
+    end;
     DateTimePicker_Expires.DateTimeNoChange := MSTimeToDateTime(Value);
   end;
   DateTimePicker_Expires.Enabled := RadioButton_EndOf.Checked;
