@@ -200,8 +200,9 @@ begin
   Filter := '';
   for Member in fProperty.GetAllReadable('member') do
     Filter := FormatUtf8('%(distinguishedName=%)', [Filter, LdapEscape(Member)]);
-  if Filter <> '' then
-    Filter := FormatUtf8('(|%)', [Filter]);
+  if Filter = '' then
+    Exit;
+  Filter := FormatUtf8('(|%)', [Filter]);
 
   TisGrid_Members.Clear;
 
