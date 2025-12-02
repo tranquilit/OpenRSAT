@@ -105,7 +105,7 @@ begin
    'organizationalUnit':    result := Ord(ileADOU);
    'domain', 'domainDNS':   result := Ord(ileADDomain);
    'computer' :             result := Ord(ileADComputer);
-   'user', 'inetOrgPerson': result := Ord(ileADUser);
+   'user', 'inetOrgPerson', 'contact': result := Ord(ileADUser);
    'group':                 result := Ord(ileADGroup);
    'container', 'builtinDomain', 'lostAndFound', 'interSiteTransport':             result := Ord(ileADContainer);
    'groupPolicyContainer': result := Ord(ileADGroupPolicyContainer);
