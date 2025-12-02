@@ -247,7 +247,7 @@
       </Item>
       <Item Name="macosx-intel">
         <MacroValues Count="1">
-          <Macro2 Name="LCLWidgetType" Value="cocoa"/>
+          <Macro3 Name="LCLWidgetType" Value="cocoa"/>
         </MacroValues>
         <CompilerOptions>
           <Version Value="11"/>
@@ -289,7 +289,7 @@
       </Item>
       <Item Name="macosx-arm64">
         <MacroValues Count="1">
-          <Macro2 Name="LCLWidgetType" Value="cocoa"/>
+          <Macro3 Name="LCLWidgetType" Value="cocoa"/>
         </MacroValues>
         <CompilerOptions>
           <Version Value="11"/>
@@ -405,11 +405,12 @@
           </Other>
         </CompilerOptions>
       </Item>
-      <SharedMatrixOptions Count="4">
+      <SharedMatrixOptions Count="5">
         <Item1 ID="341349997921" Modes="Default,win32,win64,MemCheck,linux-x64,linux-i386,macosx-intel,macosx-arm64,linux-arm32,linux-arm64" Value="-dPUREMORMOT2"/>
-        <Item2 ID="905935975356" Modes="macosx-intel,macosx-arm64" Type="IDEMacro" MacroName="LCLWidgetType" Value="cocoa"/>
-        <Item3 ID="546235392333" Modes="MemCheck" Value="-dDEBUG"/>
-        <Item4 ID="884816521549" Modes="MemCheck,Default" Value="-dDEVMODE"/>
+        <Item2 ID="191197069007" Modes="MemCheck,Default,win32,win64,linux-x64,linux-i386,macosx-intel,macosx-arm64,linux-arm32,linux-arm64" Value="-dFORCE_OPENSSL"/>
+        <Item3 ID="905935975356" Modes="macosx-intel,macosx-arm64" Type="IDEMacro" MacroName="LCLWidgetType" Value="cocoa"/>
+        <Item4 ID="546235392333" Modes="MemCheck" Value="-dDEBUG"/>
+        <Item5 ID="884816521549" Modes="MemCheck,Default" Value="-dDEVMODE"/>
       </SharedMatrixOptions>
     </BuildModes>
     <PublishOptions>

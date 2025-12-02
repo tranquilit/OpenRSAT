@@ -24,76 +24,23 @@ uses
   mormot.core.base,
   mormot.core.os,
   mormot.core.text,
-  {$IFDEF DARWIN}
+  mormot.lib.gssapi,
   mormot.lib.openssl11,
   mormot.crypt.openssl,
-  {$ENDIF}
   // Rsat
   uvisopenrsat,
   utranslation;
 
 const
   LOG_TRC = LOG_NFO + [sllTrace];
-
-{$IFDEF DARWIN}
 var
+  cmd: TExecutableCommandLine;
+  {$IFDEF DARWIN}
   AppPath: String;
-{$ENDIF}
+  {$ENDIF}
 
 {$R *.res}
-
-function GetCmdParamsEx(LongName:String;ShortName:String='';DefaultValue:String=''):String;
-var
-  i: integer;
-  S: String;
-  found, NextIsValue: Boolean;
-begin
-  Result := DefaultValue;
-  Found := False;
-  NextIsValue := False;
-  i := 1;
-
-  while (i <= ParamCount) and not Found do
-  begin
-    S:=ParamStrUTF8(i);
-    if NextIsValue then
-    begin
-      Found := True;
-      Result := S;
-      Break;
-    end;
-
-    if longname<>'' then
-      if
-          (UTF8CompareStr(Copy(S, 1, Length(LongName)+2), '/'+LongName+'=') = 0) or
-          (UTF8CompareStr(Copy(S, 1, Length(LongName)+3), '--'+LongName+'=') = 0) then
-      begin
-        found := True;
-        NextIsValue := False;
-        Result:=Copy(S,pos('=',S)+1,MaxInt);
-        found := True;
-        Break;
-      end;
-
-    if shortname<>'' then
-      if
-          (UTF8CompareStr(Copy(S, 1, 2), '/'+ShortName) = 0) or
-          (UTF8CompareStr(Copy(S, 1, 2), '-'+ShortName) = 0) then
-      begin
-        if length(S)>2 then
-        // short form like -ldebug
-        begin
-          Result:=Copy(S,3,MaxInt);
-          found := True;
-          Break;
-        end
-        else
-          NextIsValue := True;
-      end;
-
-    inc(i);
-  end;
-end;
+{$I mormot.defines.inc}
 
 procedure InitLogging(SynlogClass: TSynLogClass=Nil; LogLevel: String=''; AFileName:String='');
 begin
@@ -139,7 +86,7 @@ var
   loglevel: String;
 begin
   Executable.Version.RetrieveInformationFromFileName;
-  loglevel := GetCmdParamsEx('loglevel','l'{$ifdef DEBUG}, 'debug'{$endif});
+  loglevel := Executable.Command.ParamS('loglevel', 'Define the level of log (trace, debug, warning, info)'{$ifdef DEBUG}, 'debug'{$endif});
   {$ifdef DEVMODE}
   AllocConsole;
   System.IsConsole := True; // in System unit
@@ -152,7 +99,7 @@ procedure InitLangFromCommandLine;
 var
   lang: String;
 begin
-  lang := GetCmdParamsEx('lang');
+  lang := Executable.Command.ParamS('lang');
 
   ChangeLang(lang);
 end;
@@ -178,8 +125,20 @@ begin
   AppPath := ExtractFilePath(ParamStr(0));
   if not OpenSslInitialize(MakePath([AppPath, 'lib', 'libcrypto.dylib']), MakePath([AppPath, 'lib', 'libssl.dylib']), '') then
     raise Exception.CreateFmt('Unable to load OpenSSL from %s', [MakePath([AppPath, 'lib', 'libssl.dylib'])]);
-  RegisterOpenSsl;
   {$ENDIF}
+
+  cmd := Executable.Command;
+
+  {$IFDEF USE_OPENSSL}
+  // refine the OpenSSL library path - RegisterOpenSsl is done in Run method
+  OpenSslDefaultCrypto := cmd.ParamS('lib&crypto',   'the OpenSSL libcrypto #filename');
+  OpenSslDefaultSsl    := cmd.ParamS('lib&ssl',      'the OpenSSL libssl #filename');
+  OpenSslDefaultPath   := cmd.ParamS('openssl&path', 'the OpenSSL library #path');
+  {$ENDIF USE_OPENSSL}
+  {$IFDEF OSPOSIX}
+  GssLib_Custom := cmd.ParamS('lib&krb5', 'the Kerberos libgssapi #filename');
+  {$ENDIF OSPOSIX}
+  RegisterOpenSsl;
 
   OnGetApplicationName := @GetApplicationName;
   Application.CreateForm(TVisOpenRSAT, VisOpenRSAT);
