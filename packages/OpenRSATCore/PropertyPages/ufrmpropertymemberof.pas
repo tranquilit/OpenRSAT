@@ -71,6 +71,7 @@ type
     procedure Action_PrimaryGroupUpdate(Sender: TObject);
     procedure Grid_MemberOfBeforeDeleteRows(aSender: TTisGrid;
       aRows: PDocVariantData; var aAskUser, aAbort: Boolean);
+    procedure Grid_MemberOfDblClick(Sender: TObject);
   private
     fLog: TSynLog;
     fPropertyMemberOf: TPropertyMemberOf;
@@ -288,6 +289,12 @@ procedure TFrmPropertyMemberOf.Grid_MemberOfBeforeDeleteRows(aSender: TTisGrid;
 begin
   aAskUser := False;
   aAskUser := False;
+end;
+
+procedure TFrmPropertyMemberOf.Grid_MemberOfDblClick(Sender: TObject);
+begin
+  if Assigned(fProperty) and Assigned(fProperty.Core) and Assigned(Grid_MemberOf.FocusedRow) then
+    fProperty.Core.OpenProperty(Grid_MemberOf.FocusedRow^.S['distinguishedName']);
 end;
 
 procedure TFrmPropertyMemberOf.FillMemberOf;

@@ -62,6 +62,7 @@ object FrmPropertyMemberOf: TFrmPropertyMemberOf
     ZebraColor = 15593713
     PopupMenuOptions = [pmoShowFind, pmoShowFindNext, pmoShowCopy, pmoShowCopyCell, pmoShowCopySpecial, pmoShowSelectAll, pmoShowCustomizeColumns, pmoShowChart, pmoShowExport]
     FilterOptions.CaseInsensitive = True
+    OnDblClick = Grid_MemberOfDblClick
     OnBeforeDeleteRows = Grid_MemberOfBeforeDeleteRows
   end
   object Panel_Buttons: TPanel
