@@ -229,6 +229,7 @@ begin
 
   Row.Init();
   List_Attributes.Clear;
+  List_Attributes.FocusedColumn := 0;
   List_Attributes.BeginUpdate;
   try
     for Attribute in Attributes do

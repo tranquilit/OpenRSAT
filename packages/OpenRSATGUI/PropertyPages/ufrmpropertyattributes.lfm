@@ -54,7 +54,7 @@ object FrmPropertyAttributes: TFrmPropertyAttributes
     Header.Style = hsFlatButtons
     ScrollBarOptions.AlwaysVisible = True
     TabOrder = 0
-    TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes, toDisableAutoscrollOnFocus, toAutoChangeScale]
+    TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes, toDisableAutoscrollOnFocus, toAutoChangeScale, toDisableAutoscrollOnEdit]
     ZebraColor = 15593713
     ZebraPaint = True
     PopupMenuOptions = [pmoShowFind, pmoShowFindNext, pmoShowCopy, pmoShowCopyCell, pmoShowCopySpecial, pmoShowSelectAll, pmoShowCustomizeColumns, pmoShowChart, pmoShowExport]
