@@ -65,6 +65,7 @@ type
     property DirectReportsNames: TRawUtf8DynArray read GetDirectReportsNames;
     function CannotChangePassword: Boolean;
     function msFVERecoveryInformation: TLdapResultList;
+    function AttributesFromSchema: TRawUtf8DynArray;
 
     procedure UserAccountControlExclude(UserAccountControl: TUserAccountControl);
     procedure UserAccountControlInclude(UserAccountControl: TUserAccountControl);
@@ -884,6 +885,79 @@ begin
   finally
     LdapClient.SearchEnd;
   end;
+end;
+
+function TProperty.AttributesFromSchema: TRawUtf8DynArray;
+var
+  AObjectClass: TRawUtf8DynArray;
+  ObjClass: RawUtf8;
+  SearchResult: TLdapResult;
+  Attribute: TLdapAttribute;
+  Filter, Value, r: RawUtf8;
+  Count: Integer;
+  found: Boolean;
+begin
+  result := [];
+  AObjectClass := ObjectClass;
+  Count := 0;
+
+  repeat
+    if not assigned(AObjectClass) or (Length(AObjectClass) <= 0) then
+      Exit;
+    Filter := '';
+    for ObjClass in AObjectClass do
+      Filter := FormatUtf8('%(lDAPDisplayName=%)', [Filter, LdapEscape(ObjClass)]);
+    if Filter <> '' then
+      Filter := FormatUtf8('(|%)', [Filter]);
+    AObjectClass := [];
+
+    Core.LdapClient.SearchBegin();
+    try
+      Core.LdapClient.SearchScope := lssWholeSubtree;
+      repeat
+        if not Core.LdapClient.Search(Core.LdapClient.SchemaDN, False, Filter, ['mustContain', 'systemMustContain', 'mayContain', 'systemMayContain', 'auxiliaryClass', 'systemAuxiliaryClass']) then
+        begin
+          ShowLdapSearchError(Core.LdapClient);
+          Exit;
+        end;
+
+        for SearchResult in Core.LdapClient.SearchResult.Items do
+        begin
+          if not Assigned(SearchResult) then
+            continue;
+          for Attribute in SearchResult.Attributes.Items do
+          begin
+            if not Assigned(Attribute) then
+              continue;
+
+            case Attribute.AttributeName of
+              'mustContain', 'systemMustContain', 'mayContain', 'systemMayContain':
+              begin
+                for Value in Attribute.GetAllReadable do
+                begin
+                  found := False;
+                  for r in result do
+                  begin
+                    found := (r = value);
+                    if found then
+                      break;
+                  end;
+                  if not found then
+                  begin
+                    Insert(value, result, Count);
+                    Inc(Count);
+                  end;
+                end;
+              end;
+              'auxiliaryClass', 'systemAuxiliaryClass': AObjectClass := Concat(AObjectClass, Attribute.GetAllReadable);
+            end;
+          end;
+        end;
+      until Core.LdapClient.SearchCookie = '';
+    finally
+      Core.LdapClient.SearchEnd;
+    end;
+  until not Assigned(AObjectClass) or (Length(AObjectClass) <= 0);
 end;
 
 procedure TProperty.UserAccountControlExclude(

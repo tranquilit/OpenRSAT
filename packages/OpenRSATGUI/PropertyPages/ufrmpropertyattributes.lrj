@@ -1,0 +1,17 @@
+{"version":1,"strings":[
+{"hash":222395850,"name":"tfrmpropertyattributes.label_attributes.caption","sourcebytes":[65,116,116,114,105,98,117,116,101,115,32,58],"value":"Attributes :"},
+{"hash":193975317,"name":"tfrmpropertyattributes.list_attributes.header.columns[0].text","sourcebytes":[65,116,116,114,105,98,117,116,101],"value":"Attribute"},
+{"hash":8160181,"name":"tfrmpropertyattributes.list_attributes.header.columns[1].text","sourcebytes":[118,97,108,117,101],"value":"value"},
+{"hash":80755394,"name":"tfrmpropertyattributes.bitbtn_filter.caption","sourcebytes":[70,105,108,116,101,114],"value":"Filter"},
+{"hash":80755394,"name":"tfrmpropertyattributes.action_filter.caption","sourcebytes":[70,105,108,116,101,114],"value":"Filter"},
+{"hash":88453081,"name":"tfrmpropertyattributes.action_modify.caption","sourcebytes":[77,111,100,105,102,121],"value":"Modify"},
+{"hash":146635315,"name":"tfrmpropertyattributes.menuitem1.caption","sourcebytes":[83,104,111,119,32,111,110,108,121,32,97,116,116,114,105,98,117,116,101,115,32,116,104,97,116,32,104,97,118,101,32,118,97,108,117,101,115],"value":"Show only attributes that have values"},
+{"hash":52505347,"name":"tfrmpropertyattributes.menuitem2.caption","sourcebytes":[83,104,111,119,32,111,110,108,121,32,119,114,105,116,97,98,108,101,32,97,116,116,114,105,98,117,116,101,115],"value":"Show only writable attributes"},
+{"hash":116492426,"name":"tfrmpropertyattributes.menuitem3.caption","sourcebytes":[83,104,111,119,32,97,116,116,114,105,98,117,116,101,115,58],"value":"Show attributes:"},
+{"hash":76219673,"name":"tfrmpropertyattributes.menuitem4.caption","sourcebytes":[32,32,77,97,110,100,97,116,111,114,121],"value":"  Mandatory"},
+{"hash":128876828,"name":"tfrmpropertyattributes.menuitem5.caption","sourcebytes":[32,32,79,112,116,105,111,110,97,108],"value":"  Optional"},
+{"hash":217001466,"name":"tfrmpropertyattributes.menuitem6.caption","sourcebytes":[83,104,111,119,32,114,101,97,100,45,111,110,108,121,32,97,116,116,114,105,98,117,116,101,115,58],"value":"Show read-only attributes:"},
+{"hash":198299412,"name":"tfrmpropertyattributes.menuitem7.caption","sourcebytes":[67,111,110,115,116,114,117,99,116,101,100],"value":"Constructed"},
+{"hash":170052947,"name":"tfrmpropertyattributes.menuitem8.caption","sourcebytes":[66,97,99,107,108,105,110,107,115],"value":"Backlinks"},
+{"hash":196702105,"name":"tfrmpropertyattributes.menuitem9.caption","sourcebytes":[83,121,115,116,101,109,45,111,110,108,121],"value":"System-only"}
+]}

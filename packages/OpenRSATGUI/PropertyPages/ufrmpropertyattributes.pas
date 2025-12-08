@@ -15,7 +15,7 @@ uses
   mormot.core.base,
   mormot.core.log, mormot.core.variants, mormot.net.ldap,
   uproperty,
-  upropertyframe, VirtualTrees, Graphics;
+  upropertyframe, VirtualTrees, Graphics, Menus;
 
 type
 
@@ -29,10 +29,26 @@ type
     BitBtn_Filter: TBitBtn;
     Label_Attributes: TLabel;
     List_Attributes: TTisGrid;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
+    MenuItem5: TMenuItem;
+    MenuItem6: TMenuItem;
+    MenuItem7: TMenuItem;
+    MenuItem8: TMenuItem;
+    MenuItem9: TMenuItem;
     Panel1: TPanel;
+    PopupMenu1: TPopupMenu;
+    Separator1: TMenuItem;
+    Separator2: TMenuItem;
     Timer_SearchInGrid: TTimer;
     procedure Action_ModifyExecute(Sender: TObject);
     procedure Action_ModifyUpdate(Sender: TObject);
+    procedure BitBtn_FilterClick(Sender: TObject);
+    function List_AttributesCompareByRow(aSender: TTisGrid;
+      const aPropertyName: RawUtf8; const aRow1, aRow2: PDocVariantData;
+      var aHandled: Boolean): PtrInt;
     procedure List_AttributesDblClick(Sender: TObject);
     procedure List_AttributesDrawText(Sender: TBaseVirtualTree;
       TargetCanvas: TCanvas; Node: PVirtualNode; Column: TColumnIndex;
@@ -41,6 +57,7 @@ type
       aNode: PVirtualNode; const aCell: TDocVariantData; aColumn: TColumnIndex;
       aTextType: TVSTTextType; var aText: string);
     procedure List_AttributesKeyPress(Sender: TObject; var Key: char);
+    procedure MenuItem1Click(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
   private
     fLog: TSynLog;
@@ -73,6 +90,11 @@ begin
   SearchInGrid(Timer_SearchInGrid, List_Attributes, fSearchWord, Key);
 end;
 
+procedure TFrmPropertyAttributes.MenuItem1Click(Sender: TObject);
+begin
+  Update(fProperty);
+end;
+
 procedure TFrmPropertyAttributes.List_AttributesDblClick(Sender: TObject);
 begin
   Action_Modify.Execute;
@@ -81,6 +103,24 @@ end;
 procedure TFrmPropertyAttributes.Action_ModifyUpdate(Sender: TObject);
 begin
   Action_Modify.Enabled := Assigned(List_Attributes.FocusedRow);
+end;
+
+procedure TFrmPropertyAttributes.BitBtn_FilterClick(Sender: TObject);
+var
+  P: TPoint;
+begin
+  P := Point(BitBtn_Filter.ClientRect.Left, BitBtn_Filter.ClientRect.Bottom);
+  P := BitBtn_Filter.ControlToScreen(P);
+  PopupMenu1.PopUp(P.X, P.Y);
+end;
+
+function TFrmPropertyAttributes.List_AttributesCompareByRow(aSender: TTisGrid;
+  const aPropertyName: RawUtf8; const aRow1, aRow2: PDocVariantData;
+  var aHandled: Boolean): PtrInt;
+begin
+  aHandled := Assigned(aRow1) and Assigned(aRow2) and (aPropertyName <> '') and aRow1^.Exists(aPropertyName) and aRow2^.Exists(aPropertyName);
+  if aHandled then
+    result := String.Compare(aRow1^.S[aPropertyName], aRow2^.S[aPropertyName], True);
 end;
 
 procedure TFrmPropertyAttributes.Action_ModifyExecute(Sender: TObject);
@@ -177,25 +217,29 @@ end;
 
 procedure TFrmPropertyAttributes.Update(Props: TProperty);
 var
-  attribute: TLdapAttribute;
   Row: TDocVariantData;
+  Attributes, value: TRawUtf8DynArray;
+  Attribute: RawUtf8;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
+  Attributes := fProperty.AttributesFromSchema;
 
+  Row.Init();
+  List_Attributes.Clear;
   List_Attributes.BeginUpdate;
   try
-    Row.init();
-    for attribute in fProperty.Attributes.Items do
+    for Attribute in Attributes do
     begin
-      if not Assigned(attribute) then
-        continue;
-      Row.AddOrUpdateValue('attribute', attribute.AttributeName);
-      Row.AddOrUpdateValue('value', attribute.GetVariant());
-      List_Attributes.Data.AddItem(Row);
-      Row.Clear;
+      value := fProperty.GetAllReadable(Attribute);
+      if (not MenuItem1.Checked) or (MenuItem1.Checked and Assigned(value)) then
+      begin
+        Row.AddOrUpdateValue('attribute', Attribute);
+        List_Attributes.Data.AddItem(Row);
+        Row.Clear;
+      end;
     end;
   finally
     List_Attributes.EndUpdate;

@@ -377,8 +377,11 @@ var
   Attributes: TLdapResult;
 begin
   inherited Create(TheOwner);
-  fData := Data;
   fAttributeName := AttributeName;
+  if Assigned(Data) then
+    fData := TLdapAttribute(Data.Clone)
+  else
+    fData := TLdapAttribute.Create(fAttributeName, atUndefined);
 
   fCore := ACore;
 
@@ -430,6 +433,7 @@ end;
 
 destructor TVisAttributeEditor.Destroy;
 begin
+  FreeAndNil(fData);
   FreeAndNil(fAttr);
   inherited Destroy;
 end;

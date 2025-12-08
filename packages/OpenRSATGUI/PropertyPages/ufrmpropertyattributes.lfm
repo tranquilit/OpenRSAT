@@ -55,7 +55,6 @@ object FrmPropertyAttributes: TFrmPropertyAttributes
     ScrollBarOptions.AlwaysVisible = True
     TabOrder = 0
     TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes, toDisableAutoscrollOnFocus, toAutoChangeScale]
-    TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
     ZebraColor = 15593713
     ZebraPaint = True
     PopupMenuOptions = [pmoShowFind, pmoShowFindNext, pmoShowCopy, pmoShowCopyCell, pmoShowCopySpecial, pmoShowSelectAll, pmoShowCustomizeColumns, pmoShowChart, pmoShowExport]
@@ -64,6 +63,7 @@ object FrmPropertyAttributes: TFrmPropertyAttributes
     OnDrawText = List_AttributesDrawText
     OnKeyPress = List_AttributesKeyPress
     OnGetText = List_AttributesGetText
+    OnCompareByRow = List_AttributesCompareByRow
   end
   object Panel1: TPanel
     Left = 0
@@ -81,12 +81,14 @@ object FrmPropertyAttributes: TFrmPropertyAttributes
       Height = 25
       Top = 0
       Width = 52
-      Action = Action_Filter
       Align = alRight
       AutoSize = True
       BorderSpacing.Right = 8
       BorderSpacing.Bottom = 8
+      Caption = 'Filter'
+      PopupMenu = PopupMenu1
       TabOrder = 0
+      OnClick = BitBtn_FilterClick
     end
     object BitBtn_Modify: TBitBtn
       Left = 8
@@ -117,5 +119,60 @@ object FrmPropertyAttributes: TFrmPropertyAttributes
     OnTimer = Timer_SearchInGridTimer
     Left = 280
     Top = 104
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 8
+    Top = 8
+    object MenuItem1: TMenuItem
+      AutoCheck = True
+      Caption = 'Show only attributes that have values'
+      OnClick = MenuItem1Click
+    end
+    object MenuItem2: TMenuItem
+      AutoCheck = True
+      Caption = 'Show only writable attributes'
+      Enabled = False
+    end
+    object Separator1: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem3: TMenuItem
+      AutoCheck = True
+      Caption = 'Show attributes:'
+      Enabled = False
+    end
+    object MenuItem4: TMenuItem
+      AutoCheck = True
+      Caption = '  Mandatory'
+      Enabled = False
+    end
+    object MenuItem5: TMenuItem
+      AutoCheck = True
+      Caption = '  Optional'
+      Enabled = False
+    end
+    object Separator2: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem6: TMenuItem
+      AutoCheck = True
+      Caption = 'Show read-only attributes:'
+      Enabled = False
+    end
+    object MenuItem7: TMenuItem
+      AutoCheck = True
+      Caption = 'Constructed'
+      Enabled = False
+    end
+    object MenuItem8: TMenuItem
+      AutoCheck = True
+      Caption = 'Backlinks'
+      Enabled = False
+    end
+    object MenuItem9: TMenuItem
+      AutoCheck = True
+      Caption = 'System-only'
+      Enabled = False
+    end
   end
 end
