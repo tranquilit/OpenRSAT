@@ -72,7 +72,7 @@ implementation
 uses
   mormot.core.text,
   ucommon,
-  uhelpers,
+  uhelpersui,
   uvisattributeeditor;
 
 {$R *.lfm}

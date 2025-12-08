@@ -37,7 +37,7 @@ type
 implementation
 uses
   ucommon,
-  uhelpers;
+  uhelpersui;
 
 {$R *.lfm}
 

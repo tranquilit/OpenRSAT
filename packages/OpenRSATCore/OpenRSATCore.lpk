@@ -8,10 +8,19 @@
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
+    <Files>
+      <Item>
+        <Filename Value="uhelpers.pas"/>
+        <UnitName Value="uhelpers"/>
+      </Item>
+    </Files>
     <RequiredPkgs>
+      <Item>
+        <PackageName Value="mormot2"/>
+      </Item>
       <Item>
         <PackageName Value="FCL"/>
       </Item>

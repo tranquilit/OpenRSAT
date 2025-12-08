@@ -74,7 +74,7 @@ implementation
 uses
   mormot.core.variants,
   mormot.net.ldap,
-  uhelpers,
+  uhelpersui,
   uvislistother;
 
 {$R *.lfm}

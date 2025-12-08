@@ -21,17 +21,16 @@ uses
   uvisnewzonewizard, ufrmmodulesitesandservices, ufrmmoduleserviceinterfaces, 
   ufrmnewobject, ufrmnewsite, ufrmnewsubnet, uresourcestring, uaductreeview, 
   ufrmmoduleadssoptions, uvisconnectiondetails, uvispropertieslist, uproperty, 
-  uvischangedomaincontroller, uvisoperationmasters,
-  upropertyframe, ufrmpropertyobject, 
-  ufrmpropertymanagedby, ufrmpropertyaddress, ufrmpropertymemberof, 
-  ufrmpropertygeneraldefault, ufrmpropertygeneraluser, 
-  ufrmpropertygeneralgroup, uhelpers, ufrmpropertygeneralcomputer, 
+  uvischangedomaincontroller, uvisoperationmasters, upropertyframe, 
+  ufrmpropertyobject, ufrmpropertymanagedby, ufrmpropertyaddress, 
+  ufrmpropertymemberof, ufrmpropertygeneraldefault, ufrmpropertygeneraluser, 
+  ufrmpropertygeneralgroup, ufrmpropertygeneralcomputer, 
   ufrmpropertygeneralou, ufrmpropertygeneralsubnet, ufrmpropertygeneralsite, 
   ufrmpropertygeneralvolume, ufrmpropertyoperatingsystem, ufrmpropertyaccount, 
   ufrmpropertyprofile, ufrmpropertybitlocker, ufrmpropertylaps, 
   ufrmpropertytelephone, ufrmpropertylocation, ufrmpropertyorganization, 
   ufrmpropertypublishedcertificates, ufrmpropertymember, ufrmpropertysecurity, 
-  ufrmpropertyattributes, LazarusPackageIntf;
+  ufrmpropertyattributes, uhelpersui, LazarusPackageIntf;
 
 implementation
 

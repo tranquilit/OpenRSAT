@@ -60,7 +60,7 @@ uses
   mormot.net.ldap,
   ucoredatamodule,
   ucommon,
-  uhelpers,
+  uhelpersui,
   uOmniselect,
   ursatldapclient;
 

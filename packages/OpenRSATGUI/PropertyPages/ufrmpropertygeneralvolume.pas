@@ -52,7 +52,7 @@ uses
   mormot.core.variants,
   mormot.net.ldap,
   ucommon,
-  uhelpers,
+  uhelpersui,
   uvislistother;
 
 {$R *.lfm}

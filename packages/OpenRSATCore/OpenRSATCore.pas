@@ -8,7 +8,7 @@ unit OpenRSATCore;
 interface
 
 uses
-  LazarusPackageIntf;
+  uhelpers, LazarusPackageIntf;
 
 implementation
 

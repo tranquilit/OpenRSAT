@@ -99,7 +99,7 @@ uses
   mormot.core.os.security,
   mormot.core.text,
   ucommon,
-  uhelpers,
+  uhelpersui,
   uvislogonhours,
   uvislogonworkstation;
 

@@ -74,7 +74,7 @@ uses
   mormot.crypt.x509,
   mormot.net.ldap,
   ucommon,
-  uhelpers;
+  uhelpersui;
 
 const
   /// standard long identifier of Certificate usage

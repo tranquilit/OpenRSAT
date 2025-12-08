@@ -13,7 +13,7 @@ uses
   StdCtrls,
   mormot.core.base,
   mormot.core.log,
-  uhelpers,
+  uhelpersui,
   uproperty,
   upropertyframe;
 

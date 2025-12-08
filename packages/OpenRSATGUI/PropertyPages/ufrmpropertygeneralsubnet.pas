@@ -14,7 +14,7 @@ uses
   mormot.core.base,
   mormot.core.log,
   mormot.core.variants,
-  uhelpers,
+  uhelpersui,
   uproperty,
   upropertyframe;
 

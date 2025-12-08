@@ -37,7 +37,7 @@ type
 
 implementation
 uses
-  uhelpers;
+  uhelpersui;
 
 {$R *.lfm}
 

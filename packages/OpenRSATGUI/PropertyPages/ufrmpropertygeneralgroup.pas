@@ -59,7 +59,7 @@ implementation
 
 uses
   mormot.net.ldap,
-  uhelpers;
+  uhelpersui;
 
 {$R *.lfm}
 

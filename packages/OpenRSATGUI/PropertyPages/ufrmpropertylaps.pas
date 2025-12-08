@@ -55,7 +55,7 @@ implementation
 uses
   mormot.core.variants,
   ucommon,
-  uhelpers;
+  uhelpersui;
 
 {$R *.lfm}
 
