@@ -99,7 +99,8 @@ uses
   ucommon,
   ucommonui,
   ursatldapclientui,
-  uOmniselect;
+  uOmniselect,
+  ufrmrsat;
 
 {$R *.lfm}
 
@@ -165,7 +166,7 @@ begin
       Exit;
     end;
   end;
-  Props.Core.LdapClient.OrderAcl(Props.distinguishedName, Props.Core.LdapClient.DefaultDN, @PSecDesc^.Dacl);
+  Props.RSAT.LdapClient.OrderAcl(Props.distinguishedName, Props.RSAT.LdapClient.DefaultDN, @PSecDesc^.Dacl);
 
   Props.SecurityDescriptor := PSecDesc;
   result := True;
@@ -215,7 +216,7 @@ begin
 
   if (ManagedBy <> '') then
   begin
-    LdapResult := Props.Core.LdapClient.SearchObject(ManagedBy, '', [
+    LdapResult := Props.RSAT.LdapClient.SearchObject(ManagedBy, '', [
       'name',
       'distinguishedName',
       'physicalDeliveryOfficeName',
@@ -231,8 +232,8 @@ begin
     if not Assigned(LdapResult) then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllError, 'Ldap Search Error: "%"', [Props.Core.LdapClient.ResultString], Self);
-      ShowLdapSearchError(Props.Core.LdapClient);
+        fLog.Log(sllError, 'Ldap Search Error: "%"', [Props.RSAT.LdapClient.ResultString], Self);
+      ShowLdapSearchError(Props.RSAT.LdapClient);
       Exit;
     end;
     fManagerAttributes := TLdapAttributeList(LdapResult.Attributes.Clone);
@@ -268,7 +269,7 @@ end;
 
 procedure TFrmPropertyManagedBy.Action_PropertyExecute(Sender: TObject);
 begin
-  fProperty.Core.OpenProperty(fProperty.managedBy);
+  FrmRSAT.OpenProperty(fProperty.managedBy);
 end;
 
 procedure TFrmPropertyManagedBy.Action_PropertyUpdate(Sender: TObject);
@@ -290,7 +291,7 @@ begin
 
   // Omniselect
   DNarr := [''];
-  Omniselect := TVisOmniselect.Create(self, fProperty.Core.LdapClient, ['user', 'group', 'contacts'], fProperty.Core.LdapClient.DefaultDN(), False, Filter);
+  Omniselect := TVisOmniselect.Create(self, fProperty.RSAT.LdapClient, ['user', 'group', 'contacts'], fProperty.RSAT.LdapClient.DefaultDN(), False, Filter);
   try
     Omniselect.Caption := rsTitleSelectNewManager;
     if Omniselect.ShowModal() <> mrOK then

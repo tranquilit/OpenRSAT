@@ -60,16 +60,10 @@ type
   TCoreDataModule = class(TDataModule)
     ImageList1: TImageList;
     ImageList2: TImageList;
-  private
-    function GetConfigFilePath: String;
-    function GetConfigFolderPath: String;
   public
     constructor Create(AOwner: TComponent); override;
 
     function objectClassToImageIndex(ObjectClass: String): Integer;
-  published
-    property ConfigFolderPath: String read GetConfigFolderPath;
-    property ConfigFilePath: String read GetConfigFilePath;
   end;
 
 var
@@ -84,15 +78,6 @@ uses
 
 { TCoreDataModule }
 
-function TCoreDataModule.GetConfigFilePath: String;
-begin
-  result := MakePath([ConfigFolderPath, 'config.ini']);
-end;
-
-function TCoreDataModule.GetConfigFolderPath: String;
-begin
-  result := GetAppConfigDir(False);
-end;
 
 constructor TCoreDataModule.Create(AOwner: TComponent);
 begin

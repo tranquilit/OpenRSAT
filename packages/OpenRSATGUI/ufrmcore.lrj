@@ -1,9 +1,0 @@
-{"version":1,"strings":[
-{"hash":108725763,"name":"tfrmcore.action_options.caption","sourcebytes":[79,112,116,105,111,110,115],"value":"Options"},
-{"hash":174410724,"name":"tfrmcore.action_ldapconnect.caption","sourcebytes":[67,111,110,110,101,99,116],"value":"Connect"},
-{"hash":210706114,"name":"tfrmcore.action_ldapconnect.hint","sourcebytes":[79,112,101,110,32,97,32,99,111,110,110,101,99,116,105,111,110,32,116,111,32,108,100,97,112,32,115,101,114,118,101,114],"value":"Open a connection to ldap server"},
-{"hash":174193460,"name":"tfrmcore.action_ldapdisconnect.caption","sourcebytes":[68,105,115,99,111,110,110,101,99,116],"value":"Disconnect"},
-{"hash":141619539,"name":"tfrmcore.action_ldapoptions.caption","sourcebytes":[67,111,110,110,101,99,116,105,111,110,32,79,112,116,105,111,110,115],"value":"Connection Options"},
-{"hash":114087587,"name":"tfrmcore.action_properties.caption","sourcebytes":[80,114,111,112,101,114,116,105,101,115],"value":"Properties"},
-{"hash":257364099,"name":"tfrmcore.action_advancedfeatures.caption","sourcebytes":[65,100,118,97,110,99,101,100,32,70,101,97,116,117,114,101,115],"value":"Advanced Features"}
-]}

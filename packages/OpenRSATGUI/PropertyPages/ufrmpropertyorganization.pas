@@ -67,7 +67,8 @@ uses
   ucommon,
   ucommonui,
   uhelpersui,
-  uOmniselect;
+  uOmniselect,
+  ufrmrsat;
 
 {$R *.lfm}
 
@@ -126,7 +127,7 @@ end;
 
 procedure TFrmPropertyOrganization.Action_PropertiesExecute(Sender: TObject);
 begin
-  fProperty.Core.OpenProperty(fProperty.GetReadable('manager'));
+  FrmRSAT.OpenProperty(fProperty.GetReadable('manager'));
 end;
 
 procedure TFrmPropertyOrganization.Action_PropertiesUpdate(Sender: TObject);

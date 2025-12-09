@@ -97,7 +97,8 @@ uses
   mormot.core.text,
   ucommon,
   ursatldapclientui,
-  uOmniselect;
+  uOmniselect,
+  ufrmrsat;
 
 {$R *.lfm}
 
@@ -294,8 +295,8 @@ end;
 
 procedure TFrmPropertyMemberOf.Grid_MemberOfDblClick(Sender: TObject);
 begin
-  if Assigned(fProperty) and Assigned(fProperty.Core) and Assigned(Grid_MemberOf.FocusedRow) then
-    fProperty.Core.OpenProperty(Grid_MemberOf.FocusedRow^.S['distinguishedName']);
+  if Assigned(FrmRSAT) and Assigned(Grid_MemberOf.FocusedRow) then
+    FrmRSAT.OpenProperty(Grid_MemberOf.FocusedRow^.S['distinguishedName']);
 end;
 
 procedure TFrmPropertyMemberOf.FillMemberOf;

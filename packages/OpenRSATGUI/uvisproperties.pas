@@ -30,7 +30,6 @@ uses
   mormot.crypt.x509,
   mormot.net.ldap,
   Controls,
-  uinterfacecore,
   ucommon,
   ucoredatamodule,
   upropertyframe,
@@ -110,7 +109,6 @@ type
     procedure Show; reintroduce;
     procedure SetFocus; reintroduce;
   private
-    fCore: ICore;
     fProperty: TProperty;
     fPropertyFrameList: Array of TPropertyFrame;
     fDistinguishedName: RawUtf8;
@@ -120,7 +118,7 @@ type
     procedure UpdateTabs;
     procedure NewTab(NewFrameClass: TPropertyFrameClass);
   public
-    constructor Create(TheOwner: TComponent; ACore: ICore; ADistinguishedName: RawUtf8); reintroduce;
+    constructor Create(TheOwner: TComponent; ADistinguishedName: RawUtf8); reintroduce;
     destructor Destroy(); override;
 
     property DistinguishedName: RawUtf8 read fDistinguishedName;
@@ -271,7 +269,7 @@ uses
   uvislogonworkstation,
   uvislistother,
   uvisattributeeditor,
-  ufrmcore,
+  ufrmrsat,
   ufrmpropertyattributes,
   ufrmpropertyaccount,
   ufrmpropertyaddress,
@@ -471,24 +469,23 @@ const
 
 { TVisProperties }
 
-constructor TVisProperties.Create(TheOwner: TComponent; ACore: ICore;
+constructor TVisProperties.Create(TheOwner: TComponent;
   ADistinguishedName: RawUtf8);
 begin
   Inherited Create(TheOwner);
 
-  fCore := ACore;
   fDistinguishedName := ADistinguishedName;
 
-  if not Assigned(fCore) or
-     not Assigned(fCore.LdapClient) or
-     not fCore.LdapClient.Connected or
+  if not Assigned(FrmRSAT) or
+     not Assigned(FrmRSAT.LdapClient) or
+     not FrmRSAT.LdapClient.Connected or
      (fDistinguishedName = '') then
     Exit;
 
   IniPropStorage1.IniFileName := MakePath([GetAppConfigDir(false), 'RsatConsole.ini']);
   UnifyButtonsWidth([Btn_BottomApply, Btn_BottomCancel, Btn_BottomOK]);
 
-  fProperty := TProperty.Create(fCore);
+  fProperty := TProperty.Create(FrmRSAT.RSAT);
 end;
 
 destructor TVisProperties.Destroy();
@@ -501,7 +498,7 @@ end;
 procedure TVisProperties.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   CloseAction := caFree;
-  fCore.CloseProperty(Self);
+  FrmRSAT.CloseProperty(Self);
 end;
 
 procedure TVisProperties.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -555,15 +552,15 @@ var
   LdapObject: TLdapResult;
 begin
   // Fetch data
-  fCore.LdapClient.SearchRangeBegin;
+  fProperty.RSAT.LdapClient.SearchRangeBegin;
   try
-    LdapObject := fCore.LdapClient.SearchObject(DistinguishedName, '', ['*']);
+    LdapObject := fProperty.RSAT.LdapClient.SearchObject(DistinguishedName, '', ['*']);
   finally
-    fCore.LdapClient.SearchRangeEnd;
+    fProperty.RSAT.LdapClient.SearchRangeEnd;
   end;
   if not Assigned(LdapObject) then
   begin
-    ShowLdapSearchError(fCore.LdapClient);
+    ShowLdapSearchError(fProperty.RSAT.LdapClient);
     Close();
     Exit;
   end;

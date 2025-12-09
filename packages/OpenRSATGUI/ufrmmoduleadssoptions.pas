@@ -12,8 +12,7 @@ uses
   ExtCtrls,
   StdCtrls,
   IniFiles,
-  mormot.core.log,
-  uinterfacemodule;
+  mormot.core.log;
 
 type
 

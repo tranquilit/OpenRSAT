@@ -1,4 +1,4 @@
-object FrmRsatOptions: TFrmRsatOptions
+object FrmRSATOption: TFrmRSATOption
   Left = 0
   Height = 399
   Top = 0

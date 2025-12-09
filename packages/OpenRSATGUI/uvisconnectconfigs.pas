@@ -67,7 +67,7 @@ type
     function RetrieveConfigs(out LastConfig: String): Integer;
 
   public
-    constructor Create(TheOwner: TComponent; ALdapConfigs: TLdapConfigs; aLog: ISynLog = nil); overload;
+    constructor Create(TheOwner: TComponent; ALdapConfigs: TLdapConfigs; aLog: ISynLog = nil); reintroduce;
   end;
 
 implementation
@@ -82,7 +82,9 @@ uses
   ucoredatamodule,
   uresourcestring,
   utranslation,
-  ucommonui;
+  ucommonui,
+  uconfig;
+
 {$R *.lfm}
 
 { TFormConnectConfigs }
@@ -170,7 +172,7 @@ begin
   fLdapConfigs.LoadConfig(TisSearchEdit_Configs.Text);
 
   if Assigned(fLog) then
-    fLog.Log(sllDebug, 'Config selected: %', [CoreDataModule.ConfigFilePath]);
+    fLog.Log(sllDebug, 'Config selected: %', [ConfigFilePath]);
 
   Edit_Password.Enabled := True;
   Edit_Username.Enabled := True;
@@ -222,10 +224,10 @@ var
   section: String;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllDebug, 'Retrieve config files from "%".', [CoreDataModule.ConfigFilePath]);
+    fLog.Log(sllDebug, 'Retrieve config files from "%".', [ConfigFilePath]);
   result := 0;
   TisSearchEdit_Configs.Items.BeginUpdate;
-  ini := TTisIniFiles.Create(CoreDataModule.ConfigFilePath);
+  ini := TTisIniFiles.Create(ConfigFilePath);
   try
     sections := ini.GetSections;
     result := Length(sections);

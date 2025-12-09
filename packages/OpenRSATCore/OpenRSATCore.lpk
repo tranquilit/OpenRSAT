@@ -24,6 +24,37 @@
         <Filename Value="ucommon.pas"/>
         <UnitName Value="ucommon"/>
       </Item>
+      <Item>
+        <Filename Value="uldapconfigs.pas"/>
+        <UnitName Value="uldapconfigs"/>
+      </Item>
+      <Item>
+        <Filename Value="uconfig.pas"/>
+        <UnitName Value="uconfig"/>
+      </Item>
+      <Item>
+        <Filename Value="uoption.pas"/>
+        <UnitName Value="uoption"/>
+      </Item>
+      <Item>
+        <Filename Value="umodule.pas"/>
+        <UnitName Value="umodule"/>
+      </Item>
+      <Item>
+        <Filename Value="umoduleaducoption.pas"/>
+        <UnitName Value="umoduleaducoption"/>
+      </Item>
+      <Item>
+        <Filename Value="umoduleaduc.pas"/>
+      </Item>
+      <Item>
+        <Filename Value="ursat.pas"/>
+        <UnitName Value="ursat"/>
+      </Item>
+      <Item>
+        <Filename Value="ursatoption.pas"/>
+        <UnitName Value="ursatoption"/>
+      </Item>
     </Files>
     <i18n>
       <EnableI18N Value="True"/>

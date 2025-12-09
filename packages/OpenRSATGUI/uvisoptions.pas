@@ -19,7 +19,7 @@ uses
   mormot.net.ldap,
   Controls,
   ufrmrsatoptions,
-  uinterfacemodule;
+  ufrmmodule;
 
 type
 
@@ -51,12 +51,9 @@ type
   private
     fLog: TSynLog;
 
-    fRsatOptions: TRsatOptions;
-
     procedure LoadOptionPages;
-    procedure UnloadOptionPages;
   public
-    constructor Create(TheOwner: TComponent; ARsatOptions: TRsatOptions); reintroduce;
+    constructor Create(TheOwner: TComponent); reintroduce;
     destructor Destroy; override;
   end;
 
@@ -66,7 +63,10 @@ uses
   mormot.core.text,
   mormot.core.base,
   ucoredatamodule,
-  IniFiles;
+  IniFiles,
+  ufrmoption,
+  ufrmrsat;
+
 {$R *.lfm}
 
 { TVisOptions }
@@ -89,7 +89,7 @@ begin
       fLog.Log(sllError, 'TreeView: No SelectedNode or no data assigned to SelectedNode', Self);
     Exit;
   end;
-  TOptions(TreeView1.Selected.Data).GetFrame.Visible := False;
+  TFrameOption(TreeView1.Selected.Data).Visible := False;
 
   if not Assigned(Node) or not Assigned(Node.Data) then
   begin
@@ -97,58 +97,39 @@ begin
       fLog.Log(sllError, 'TreeView: No Node or no data assigned to node', Self);
     Exit;
   end;
-  TOptions(Node.Data).GetFrame.Visible := True;
+  TFrameOption(Node.Data).Visible := True;
 end;
 
 procedure TVisOptions.LoadOptionPages;
 var
   Node: TTreeNode;
-  Option: TOptions;
+  Frame: TFrameModule;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'LoadOptionPages', Self);
 
-  fRsatOptions.Load;
+  FrmRSAT.FrmRSATOption.Load;
   Node := TreeView1.Items.Add(nil, 'Global');
-  Node.Data := fRsatOptions;
-  fRsatOptions.CreateFrame(Self);
+  Node.Data := FrmRSAT.FrmRSATOption;
 
-  fRsatOptions.GetFrame.Align := alClient;
-  fRsatOptions.GetFrame.Parent := PairSplitterSide2;
-  fRsatOptions.GetFrame.Visible := True;
+  TFrameOption(Node.Data).Align := alClient;
+  TFrameOption(Node.Data).Parent := PairSplitterSide2;
+  TFrameOption(Node.Data).Visible := True;
   Node.Selected := True;
 
-  for Option in fRsatOptions.ModulesOptions do
+  for Frame in FrmRSAT.FrmModules.Items do
   begin
-    if not Assigned(Option) then
+    if not Assigned(Frame) then
       continue;
-    Node := TreeView1.Items.Add(nil, Option.OptionName);
-    Node.Data := Option;
-    Option.CreateFrame(Self);
-    Option.GetFrame.Align := alClient;
-    Option.GetFrame.Parent := PairSplitterSide2;
-    Option.GetFrame.Visible := False;
+    Node := TreeView1.Items.Add(nil, Frame.Module.GetOption.OptionName);
+    Node.Data := Frame.FrmOption;
+    TFrameOption(Node.Data).Align := alClient;
+    TFrameOption(Node.Data).Parent := PairSplitterSide2;
+    TFrameOption(Node.Data).Visible := False;
   end;
 end;
 
-procedure TVisOptions.UnloadOptionPages;
-var
-  Option: TOptions;
-begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, 'UnloadOptionPages', Self);
-
-  fRsatOptions.DeleteFrame;
-  for Option in fRsatOptions.ModulesOptions do
-  begin
-    if not Assigned(Option) then
-      continue;
-    Option.DeleteFrame;
-  end;
-end;
-
-constructor TVisOptions.Create(TheOwner: TComponent; ARsatOptions: TRsatOptions
-  );
+constructor TVisOptions.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
@@ -156,17 +137,13 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create', Self);
 
-  fRsatOptions := ARsatOptions;
-
   LoadOptionPages;
 end;
 
 destructor TVisOptions.Destroy;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Destoy', Self);
-
-  UnloadOptionPages;
+    fLog.Log(sllTrace, 'Destroy', Self);
 
   inherited Destroy;
 end;
@@ -187,17 +164,17 @@ end;
 procedure TVisOptions.Action_ApplyUpdate(Sender: TObject);
 var
   Change: Boolean;
-  Module: TOptions;
+  Frame: TFrameModule;
 begin
-  Change := fRsatOptions.Changed;
+  Change := FrmRSAT.FrmRSATOption.OptionChanged;
 
   if not Change then
   begin
-    for Module in fRsatOptions.ModulesOptions do
+    for Frame in FrmRSAT.FrmModules.Items do
     begin
-      if not Assigned(Module) then
+      if not Assigned(Frame) then
         Continue;
-      Change := Module.Changed;
+      Change := Frame.FrmOption.OptionChanged;
       if Change then
         Break;
     end;
@@ -218,6 +195,7 @@ end;
 procedure TVisOptions.Action_ApplyExecute(Sender: TObject);
 var
   MessageResult: TModalResult;
+  Frame: TFrameModule;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Execute', [Action_Apply.Name], Self);
@@ -230,7 +208,13 @@ begin
       if Assigned(fLog) then
         fLog.Log(sllInfo, 'User confirm to apply Options modifications.', Self);
 
-      fRsatOptions.Save();
+      FrmRSAT.FrmRSATOption.Save;
+
+      for Frame in FrmRSAT.FrmModules.Items do
+      begin
+        if not Assigned(Frame) then
+          Frame.FrmOption.Save;
+      end;
     end;
     else
       if Assigned(fLog) then

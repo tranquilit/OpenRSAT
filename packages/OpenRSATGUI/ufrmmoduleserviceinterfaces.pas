@@ -15,8 +15,6 @@ uses
   ExtCtrls,
   ActnList,
   Menus,
-  uinterfacemodule,
-  uinterfacecore,
   tis.ui.grid.core,
   mormot.core.log,
   mormot.core.base,

@@ -12,8 +12,8 @@ uses
   mormot.core.variants,
   mormot.net.ldap,
   ucommon,
-  uinterfacecore,
-  ursatldapclient;
+  ursatldapclient,
+  ursat;
 
 type
   { TProperty }
@@ -23,7 +23,7 @@ type
     fModifiedAttributes, fAttributes: TLdapAttributeList;
     fTempModify: TDocVariantData;
 
-    fCore: ICore;
+    fRSAT: TRSAT;
 
     function GetDCTypeFromUAC: RawUtf8;
     function GetDirectReportsNames: TRawUtf8DynArray;
@@ -36,7 +36,7 @@ type
     function ApplyAttributeDifference(AttributeName: RawUtf8): Boolean;
     function ApplyTempModification: Boolean;
   public
-    constructor Create(Core: ICore = nil);
+    constructor Create(ARSAT: TRSAT = nil);
     destructor Destroy; override;
 
     function IsModified: Boolean;
@@ -103,7 +103,7 @@ type
     procedure SetwhenChanged(AValue: TDateTime);
     procedure SetwhenCreated(AValue: TDateTime);
   public
-    property Core: ICore read fCore write fCore;
+    property RSAT: TRSAT read fRSAT write fRSAT;
     property LdapClient: TRsatLdapClient read GetLdapClient;
 
     property Attributes: TLdapAttributeList read fAttributes write SetAttributes;
@@ -156,8 +156,8 @@ function TProperty.GetLdapClient: TRsatLdapClient;
 begin
   result := nil;
 
-  if Assigned(fCore) then
-    result := fCore.LdapClient;
+  if Assigned(fRSAT) then
+    result := fRSAT.LdapClient;
 end;
 
 function TProperty.GetmanagedBy: RawUtf8;
@@ -692,9 +692,9 @@ begin
   fTempModify.Clear;
 end;
 
-constructor TProperty.Create(Core: ICore);
+constructor TProperty.Create(ARSAT: TRSAT);
 begin
-  fCore := Core;
+  fRSAT := ARSAT;
 
   fTempModify.Init();
 end;
@@ -912,17 +912,17 @@ begin
       Filter := FormatUtf8('(|%)', [Filter]);
     AObjectClass := [];
 
-    Core.LdapClient.SearchBegin();
+    RSAT.LdapClient.SearchBegin();
     try
-      Core.LdapClient.SearchScope := lssWholeSubtree;
+      RSAT.LdapClient.SearchScope := lssWholeSubtree;
       repeat
-        if not Core.LdapClient.Search(Core.LdapClient.SchemaDN, False, Filter, ['mustContain', 'systemMustContain', 'mayContain', 'systemMayContain', 'auxiliaryClass', 'systemAuxiliaryClass']) then
+        if not RSAT.LdapClient.Search(RSAT.LdapClient.SchemaDN, False, Filter, ['mustContain', 'systemMustContain', 'mayContain', 'systemMayContain', 'auxiliaryClass', 'systemAuxiliaryClass']) then
         begin
-          ShowLdapSearchError(Core.LdapClient);
+          ShowLdapSearchError(RSAT.LdapClient);
           Exit;
         end;
 
-        for SearchResult in Core.LdapClient.SearchResult.Items do
+        for SearchResult in RSAT.LdapClient.SearchResult.Items do
         begin
           if not Assigned(SearchResult) then
             continue;
@@ -954,9 +954,9 @@ begin
             end;
           end;
         end;
-      until Core.LdapClient.SearchCookie = '';
+      until RSAT.LdapClient.SearchCookie = '';
     finally
-      Core.LdapClient.SearchEnd;
+      RSAT.LdapClient.SearchEnd;
     end;
   until not Assigned(AObjectClass) or (Length(AObjectClass) <= 0);
 end;

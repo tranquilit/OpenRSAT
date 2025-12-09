@@ -23,7 +23,6 @@ uses
   mormot.net.ldap,
   ufrmmoduleadssoptions,
   ucoredatamodule,
-  uinterfacecore,
   uinterfacemodule, Types;
 
 type

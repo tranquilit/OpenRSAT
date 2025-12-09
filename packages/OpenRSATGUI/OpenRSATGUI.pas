@@ -8,18 +8,15 @@ unit OpenRSATGUI;
 interface
 
 uses
-  ursatmodules, ufrmcore, ufrmmoduleaduc, ucoredatamodule, uldapconfigs, 
-  uvisconnectconfigs, uvisconnectoptions, ufrmmoduledns, uinterfacemodule, 
-  uinterfacecore, utreeselectionhistory, uvisproperties, uOmniselect, 
-  uvisadvancedsecurity, uvisattributeeditor, uvislistother, uvislogonhours, 
-  uvislogonworkstation, uvisaddaces, uvissearch, ufrmnewcomputer, 
-  ufrmnewcontact, ufrmnewgroup, ufrmnewou, ufrmnewsharedfolder, ufrmnewuser, 
-  uvisnewobject, uvischangedn, uvischangepartition, uvisdelegatecontrol, 
-  uVisOptions, uvistaskmove, uvistaskresetpassword, utranslation, usidcache, 
-  ufrmmoduleaducoptions, ufrmrsatoptions, udns, uvisselectnewrecordtype, 
-  uvisnewresourcerecord, uvisnewzonewizard, ufrmmodulesitesandservices, 
-  ufrmmoduleserviceinterfaces, ufrmnewobject, ufrmnewsite, ufrmnewsubnet, 
-  uresourcestring, uaductreeview, ufrmmoduleadssoptions, 
+  ufrmmoduleaduc, ucoredatamodule, uvisconnectconfigs, uvisconnectoptions, 
+  utreeselectionhistory, uvisproperties, uOmniselect, uvisadvancedsecurity, 
+  uvisattributeeditor, uvislistother, uvislogonhours, uvislogonworkstation, 
+  uvisaddaces, uvissearch, ufrmnewcomputer, ufrmnewcontact, ufrmnewgroup, 
+  ufrmnewou, ufrmnewsharedfolder, ufrmnewuser, uvisnewobject, uvischangedn, 
+  uvischangepartition, uvisdelegatecontrol, uVisOptions, uvistaskmove, 
+  uvistaskresetpassword, utranslation, usidcache, ufrmrsatoptions, udns, 
+  uvisselectnewrecordtype, uvisnewresourcerecord, uvisnewzonewizard, 
+  ufrmnewobject, ufrmnewsite, ufrmnewsubnet, uresourcestring, uaductreeview, 
   uvisconnectiondetails, uvispropertieslist, uproperty, 
   uvischangedomaincontroller, uvisoperationmasters, upropertyframe, 
   ufrmpropertyobject, ufrmpropertymanagedby, ufrmpropertyaddress, 
@@ -31,6 +28,7 @@ uses
   ufrmpropertytelephone, ufrmpropertylocation, ufrmpropertyorganization, 
   ufrmpropertypublishedcertificates, ufrmpropertymember, ufrmpropertysecurity, 
   ufrmpropertyattributes, uhelpersui, ucommonui, ursatldapclientui, 
+  ufrmoption, ufrmmodule, ufrmmoduleaducoption, ufrmrsat, ufrmmodules, 
   LazarusPackageIntf;
 
 implementation

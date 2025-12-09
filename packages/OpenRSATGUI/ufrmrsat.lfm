@@ -1,4 +1,4 @@
-object FrmCore: TFrmCore
+object FrmRSAT: TFrmRSAT
   Left = 0
   Height = 199
   Top = 0

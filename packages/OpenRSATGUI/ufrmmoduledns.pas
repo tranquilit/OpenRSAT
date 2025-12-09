@@ -16,8 +16,6 @@ uses
   Graphics,
   Dialogs,
   StdCtrls,
-  uinterfacemodule,
-  uinterfacecore,
   mormot.net.ldap,
   mormot.core.base,
   tis.ui.grid.core,
