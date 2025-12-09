@@ -16,7 +16,20 @@
         <Filename Value="uhelpers.pas"/>
         <UnitName Value="uhelpers"/>
       </Item>
+      <Item>
+        <Filename Value="ursatldapclient.pas"/>
+        <UnitName Value="ursatldapclient"/>
+      </Item>
+      <Item>
+        <Filename Value="ucommon.pas"/>
+        <UnitName Value="ucommon"/>
+      </Item>
     </Files>
+    <i18n>
+      <EnableI18N Value="True"/>
+      <OutDir Value="languages"/>
+      <EnableI18NForLFM Value="True"/>
+    </i18n>
     <RequiredPkgs>
       <Item>
         <PackageName Value="mormot2"/>

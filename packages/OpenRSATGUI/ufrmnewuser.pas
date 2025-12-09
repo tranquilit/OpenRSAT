@@ -81,6 +81,7 @@ uses
   ucommon,
   ucoredatamodule,
   ursatldapclient,
+  ursatldapclientui,
   uvisnewobject;
 {$R *.lfm}
 
@@ -161,7 +162,7 @@ begin
     AceSelf^.AceType  := satObjectAccessDenied;
     AceWorld^.AceType := satObjectAccessDenied;
 
-    OrderAcl(NewObject.Ldap, DN, (Owner as TVisNewObject).BaseDN, @SecDesc.Dacl);
+    (NewObject.Ldap as TRsatLdapClient).OrderAcl(DN, (Owner as TVisNewObject).BaseDN, @SecDesc.Dacl);
 
     if not NewObject.Ldap.Modify(DN, lmoReplace, atNTSecurityDescriptor, SecDesc.ToBinary()) then
     begin

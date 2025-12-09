@@ -83,7 +83,7 @@ uses
   mormot.core.text,
   mormot.net.dns,
   mormot.net.sock,
-  ursatldapclient,
+  //ursatldapclient,
   ucommon,
   uvisconnectiondetails;
 

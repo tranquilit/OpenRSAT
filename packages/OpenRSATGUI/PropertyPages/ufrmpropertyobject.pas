@@ -79,7 +79,7 @@ uses
   mormot.core.base,
   mormot.core.datetime,
   mormot.net.ldap,
-  ursatldapclient;
+  ursatldapclientui;
 
 {$R *.lfm}
 
@@ -201,7 +201,7 @@ begin
   if not result then
     Exit;
 
-  OrderAcl(Props.LdapClient, Props.DistinguishedName, Props.LdapClient.DefaultDN(), @PSecDesc^.Dacl);
+  Props.LdapClient.OrderAcl(Props.DistinguishedName, Props.LdapClient.DefaultDN(), @PSecDesc^.Dacl);
 
   Props.SecurityDescriptor := PSecDesc;
 end;

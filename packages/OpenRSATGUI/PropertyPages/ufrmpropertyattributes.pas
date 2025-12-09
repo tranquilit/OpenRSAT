@@ -72,6 +72,7 @@ implementation
 uses
   mormot.core.text,
   ucommon,
+  ucommonui,
   uhelpersui,
   uvisattributeeditor;
 

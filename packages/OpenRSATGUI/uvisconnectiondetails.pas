@@ -75,7 +75,7 @@ uses
   mormot.core.text,
   mormot.core.variants,
   ucommon,
-  ursatldapclient;
+  ursatldapclientui;
 
 {$R *.lfm}
 

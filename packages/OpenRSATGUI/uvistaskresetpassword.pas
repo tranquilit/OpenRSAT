@@ -42,7 +42,7 @@ var
 
 implementation
 uses
-  ucommon;
+  ucommonui;
 {$R *.lfm}
 
 { TVisTaskResetPassword }

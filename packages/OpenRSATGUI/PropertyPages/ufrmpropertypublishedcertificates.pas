@@ -74,6 +74,7 @@ uses
   mormot.crypt.x509,
   mormot.net.ldap,
   ucommon,
+  ucommonui,
   uhelpersui;
 
 const

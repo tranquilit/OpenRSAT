@@ -127,7 +127,8 @@ implementation
 
 uses
   mormot.core.datetime,
-  mormot.core.text;
+  mormot.core.text,
+  ursatldapclientui;
 
 { TProperty }
 

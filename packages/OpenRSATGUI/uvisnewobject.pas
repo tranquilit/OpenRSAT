@@ -76,7 +76,7 @@ uses
   ufrmnewsite,
   ufrmnewsubnet,
   ufrmnewuser,
-  ucommon;
+  ucommonui;
 
 {$R *.lfm}
 

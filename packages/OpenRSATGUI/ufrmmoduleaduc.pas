@@ -320,6 +320,8 @@ uses
   uvischangedomaincontroller,
   uvisoperationmasters,
   ucommon,
+  ucommonui,
+  ursatldapclientui,
   ufrmrsatoptions;
 
 {$R *.lfm}

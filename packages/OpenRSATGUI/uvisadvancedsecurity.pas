@@ -278,7 +278,9 @@ uses
   mormot.core.data,
   mormot.core.text,
   ucoredatamodule,
+  ucommonui,
   ursatldapclient,
+  ursatldapclientui,
   uvisaddaces;
 
 {$R *.lfm}
@@ -482,7 +484,7 @@ begin
       Exit;
     end;
     SecurityDescriptor^.Dacl := Concat(SecurityDescriptor^.Dacl, add.Acl);
-    OrderAcl(Ldap, DN, fBaseDN, @SecurityDescriptor^.Dacl);
+    (Ldap as TRsatLdapClient).OrderAcl(DN, fBaseDN, @SecurityDescriptor^.Dacl);
     UpdateGridACL();
   finally
     FreeAndNil(add);
@@ -698,7 +700,7 @@ begin
     end;
     Delete(SecurityDescriptor^.Dacl, TisGrid_ACL.FocusedNode^.Index, 1);
     SecurityDescriptor^.Dacl := Concat(SecurityDescriptor^.Dacl, add.Acl);
-    OrderAcl(Ldap, DN, fBaseDN, @SecurityDescriptor^.Dacl);
+    (Ldap as TRsatLdapClient).OrderAcl(DN, fBaseDN, @SecurityDescriptor^.Dacl);
     UpdateGridACL();
   finally
     FreeAndNil(add);
@@ -784,7 +786,7 @@ begin
   finally
     Ldap.SearchEnd;
   end;
-  OrderAcl(Ldap, DN, fBaseDN, @SecurityDescriptor^.Dacl);
+  (Ldap as TRsatLdapClient).OrderAcl(DN, fBaseDN, @SecurityDescriptor^.Dacl);
   UpdateGridACL;
 end;
 

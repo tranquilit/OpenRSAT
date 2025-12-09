@@ -147,7 +147,8 @@ uses
   uVisOptions,
   uvisconnectconfigs,
   mormot.net.dns,
-  ucommon;
+  ucommon,
+  ursatldapclientui;
 
 {$R *.lfm}
 

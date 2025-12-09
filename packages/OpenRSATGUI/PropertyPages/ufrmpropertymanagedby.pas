@@ -97,7 +97,8 @@ uses
   mormot.core.os.security,
   mormot.core.text,
   ucommon,
-  ursatldapclient,
+  ucommonui,
+  ursatldapclientui,
   uOmniselect;
 
 {$R *.lfm}
@@ -164,7 +165,7 @@ begin
       Exit;
     end;
   end;
-  OrderAcl(Props.Core.LdapClient, Props.distinguishedName, Props.Core.LdapClient.DefaultDN, @PSecDesc^.Dacl);
+  Props.Core.LdapClient.OrderAcl(Props.distinguishedName, Props.Core.LdapClient.DefaultDN, @PSecDesc^.Dacl);
 
   Props.SecurityDescriptor := PSecDesc;
   result := True;

@@ -156,7 +156,9 @@ uses
   mormot.core.text,
   mormot.net.dns,
   ucommon,
-  ursatldapclient;
+  ucommonui,
+  ursatldapclient,
+  ursatldapclientui;
 
 var
   MsdsBehaviorVersionValue: Array[TMsdsBehaviorVersion] of String;

@@ -62,7 +62,7 @@ uses
   // Rsat
   ucommon,
   ucoredatamodule,
-  ursatldapclient,
+  ursatldapclientui,
   uvisnewobject;
 {$R *.lfm}
 

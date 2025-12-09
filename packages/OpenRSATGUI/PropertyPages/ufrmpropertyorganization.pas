@@ -65,6 +65,7 @@ uses
   mormot.core.variants,
   mormot.net.ldap,
   ucommon,
+  ucommonui,
   uhelpersui,
   uOmniselect;
 

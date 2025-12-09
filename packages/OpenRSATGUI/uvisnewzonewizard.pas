@@ -158,6 +158,7 @@ implementation
 uses
   mormot.net.dns,
   mormot.core.base,
+  ursatldapclientui,
   udns;
 
 {$R *.lfm}

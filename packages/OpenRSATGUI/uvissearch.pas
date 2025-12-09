@@ -117,8 +117,9 @@ uses
   mormot.core.log,
   mormot.core.text,
   ucommon,
+  ucommonui,
   ucoredatamodule,
-  ursatldapclient,
+  ursatldapclientui,
   uvischangedn;
 {$R *.lfm}
 

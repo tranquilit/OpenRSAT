@@ -7,14 +7,10 @@ interface
 uses
   Classes,
   SysUtils,
-  controls,
-  ExtCtrls,
   mormot.core.base,
   mormot.net.ldap,
   mormot.core.os.security,
-  mormot.core.variants,
-  tis.ui.grid.core,
-  VirtualTrees;
+  mormot.core.variants;
 
 type
   PSecurityDescriptor = ^TSecurityDescriptor;
@@ -417,9 +413,6 @@ function ISOToTimeFormat(str: String): String;
 function IsServerPath(path: RawUtf8): Boolean;
 function MSTimeToDateTime(mst: Int64): TDateTime;
 function MSTimeEqual(mst1: Int64; mst2: Int64): Boolean;
-function ProtectAgainstAccidentalDeletion(Ldap: TLdapClient; DN, BaseDN: RawUtf8; out NewSecDesc: TSecurityDescriptor; Enabled: Boolean): Boolean;
-procedure OrderAcl(Ldap: TLdapClient; DN, baseDN: RawUtf8; Acl: PSecAcl);
-procedure SearchInGrid(const Timer: TTimer; const TisGrid: TTisGrid; var SearchWord: RawUtf8; const Key: Char);
 function SecDescAddACE(PSecDesc: PSecurityDescriptor;
     GUID: TGuid; Sid: RawSid; SecType: TSecAceType; mask: TSecAccessMask): PSecAce;
 function SecDescAddOrUpdateACE(PSecDesc: PSecurityDescriptor; GUID: TGuid;
@@ -434,18 +427,13 @@ function SecDescFindACE(PSecDesc: PSecurityDescriptor;
   Flags: TSecAceFlags  = [];
   iGUID: PGuid         = nil
   ): Integer;
-procedure TTisGridClearSelection(grid: TTisGrid);
-function TTisGridGetNextUnselected(grid: TTisGrid; Node: PVirtualNode): PVirtualNode;
-procedure UnifyButtonsWidth(Butons: array of TControl; default: Integer = -1);
 
 implementation
 uses
   DateUtils,
-  Dialogs,
   RegExpr,
   mormot.core.log,
-  mormot.core.text,
-  ursatldapclient;
+  mormot.core.text;
 
 function AceInDacl(Dacl: TSecAcl; Ace: TSecAce): Boolean;
 var
@@ -496,11 +484,6 @@ begin
   end;
 end;
 
-function AceIsUseless(Ace: PSecAce): Boolean;
-begin
-  result := Ace^.Mask = [];
-end;
-
 function AceIsEqual(a, b: TSecAce): Boolean;
 begin
   result := (a.AceType = b.AceType) and
@@ -510,32 +493,6 @@ begin
               (a.Opaque = b.Opaque) and
               IsEqualGuid(a.ObjectType, b.ObjectType) and
               IsEqualGuid(a.InheritedObjectType, b.InheritedObjectType);
-end;
-
-function GetAceRoot(Ldap: TLdapClient; DN: RawUtf8; Ace: TSecAce): RawUtf8;
-var
-  sd: TSecurityDescriptor;
-  pace: TSecAce;
-  pDN: RawUtf8;
-  LdapObject: TLdapAttribute;
-begin
-  pDN := GetParentDN(DN);
-  LdapObject := Ldap.SearchObject(atNTSecurityDescriptor, pDN, '');
-  if not Assigned(LdapObject) then
-  begin
-    ShowLdapSearchError(Ldap);
-    Exit;
-  end;
-  sd.FromBinary(LdapObject.GetRaw());
-  for pace in sd.Dacl do
-  begin
-    if (TSecAceFlag.safInherited in Ace.Flags) and (AceIsEqual(ace, pace)) then
-    begin
-      result := GetAceRoot(Ldap, pDN, ace);
-      Exit;
-    end;
-  end;
-  result := DN;
 end;
 
 function AttributesEquals(a1, a2: TLdapAttribute): Boolean;
@@ -581,72 +538,6 @@ begin
     end;
 
   result := count;
-end;
-
-function CompareAce(p1, p2: PSecAce; sdArr: array of TSecurityDescriptor
-  ): Integer;
-const
-  DENY: set of TSecAceType = [satAccessDenied, satObjectAccessDenied, satCallbackAccessDenied, satCallbackObjectAccessDenied];
-begin
-  result := 0;
-
-  if not Assigned(p1) or not Assigned(p2) then
-    Exit;
-
-  // Compare inheritance
-  result := GetAceParentCount(p1^, sdArr) - GetAceParentCount(p2^, sdArr);
-  if result <> 0 then
-    Exit;
-
-  // Compare deny / allow
-  if (p1^.AceType in DENY) = (p2^.AceType in DENY) then
-    result := Ord(p1^.AceType) - Ord(p2^.AceType)
-  else if p1^.AceType in DENY then
-    result := -1
-  else
-    result := 1;
-  if result <> 0 then
-    Exit;
-
-  // Compare global or object access
-  if IsNullGuid(p1^.ObjectType) then
-    result := -1;
-  if IsNullGuid(p2^.ObjectType) then
-    result := result + 1;
-  if result <> 0 then
-    Exit;
-
-  // Compare sid
-  result := CompareStr(RawSidToText(p1^.sid), RawSidToText(p2^.Sid));
-end;
-
-procedure InnerOrderAcl(Acl: PSecAcl; sdArr: Array of TSecurityDescriptor);
-var
-  ace: TSecAce;
-  idx, j, lowest: Integer;
-begin
-  idx := 0;
-  while idx < Length(acl^) do // select sort
-  begin
-    if AceIsUseless(@acl^[idx]) then
-    begin
-      Delete(acl^, idx, 1);
-      continue;
-    end;
-
-    lowest := idx;
-    for j := idx to High(acl^) do
-      if CompareAce(@acl^[j], @acl^[lowest], sdArr) < 0 then
-        lowest := j;
-
-    if lowest > idx then
-    begin
-      ace := acl^[lowest];
-      Delete(acl^, lowest, 1);
-      Insert(ace, acl^, idx);
-    end;
-    Inc(idx);
-  end;
 end;
 
 function IsContainer(objectClass: RawUtf8): Boolean;
@@ -716,163 +607,6 @@ end;
 function MSTimeEqual(mst1: Int64; mst2: Int64): Boolean;
 begin
   result := Abs(mst1 - mst2) < 10000000; // one second
-end;
-
-function ProtectAgainstAccidentalDeletion(Ldap: TLdapClient; DN,
-  BaseDN: RawUtf8; out NewSecDesc: TSecurityDescriptor; Enabled: Boolean
-  ): Boolean;
-var
-  Sid: RawSid;
-  SecDescParent: TSecurityDescriptor;
-  data: TLdapAttribute;
-  i: Integer;
-begin
-  result := False;
-  Sid := KnownRawSid(wksWorld);
-
-  // Parent
-  if Enabled then
-  begin
-    DN := GetParentDN(DN); // Get Parent SecDesc
-    data := Ldap.SearchObject(atNTSecurityDescriptor, DN, '');
-    if not Assigned(data) then
-    begin
-      ShowLdapSearchError(Ldap);
-      Exit; // Failure
-    end;
-    if not SecDescParent.FromBinary(data.GetRaw()) then
-    begin
-      //Dialogs.MessageDlg(rsTitleParsing, rsACEParsing, mtError, [mbOK], 0);
-      Exit; // Failure
-    end;
-
-    if SecDescFindACE(@SecDescParent, satAccessDenied, Sid, [samDeleteChild], @ATTR_UUID[kaNull]) = -1 then // Search if ACE already exists
-    begin
-      if MessageDlg(rsConfirmation, rsACEpaadParent, mtConfirmation, mbYesNo, 0) <> mrYes then // User Confirmation
-        Exit; // Failure
-
-      if not Assigned(SecDescAddOrUpdateACE(@SecDescParent, ATTR_UUID[kaNull], Sid, satAccessDenied, [samDeleteChild])) then // Add ACE
-      begin
-        //Dialogs.MessageDlg(rsTitleParsing, FormatUtf8(rsACECreateFailure, [DN]), mtError, [mbOK], 0);
-        Exit; // Failure
-      end;
-
-      OrderAcl(Ldap, DN, BaseDN, @SecDescParent.Dacl); // Order
-
-      if not Ldap.Modify(DN, lmoReplace, atNTSecurityDescriptor, SecDescParent.ToBinary()) then // Modify
-      begin
-        ShowLdapModifyError(Ldap);
-        Exit; // Failure
-      end;
-    end;
-  end;
-
-  // Self
-  if Enabled then
-  begin // Add ACE
-    if not Assigned(SecDescAddOrUpdateACE(@NewSecDesc, ATTR_UUID[kaNull], Sid, satAccessDenied, [samDelete, samDeleteTree])) then
-    begin
-      //Dialogs.MessageDlg(rsTitleParsing, FormatUtf8(rsACECreateFailure, [DN]), mtError, [mbOK], 0);
-      Exit; // Failure
-    end
-  end
-  else
-  begin // Remove ACE
-    i := SecDescFindACE(@NewSecDesc, satAccessDenied, Sid, [samDelete, samDeleteTree], @ATTR_UUID[kaNull]);
-    if i = -1 then
-    begin
-      //Dialogs.MessageDlg(rsTitleNotFound, FormatUtf8(rsACENotFound, [DN]), mtError, [mbOK], 0);
-      Exit; // Failure
-    end;
-    NewSecDesc.Dacl[i].Mask -= [samDelete, samDeleteTree];
-  end;
-
-  OrderAcl(Ldap, DN, BaseDN, @NewSecDesc.Dacl); // Order
-
-  result := True; // Success
-end;
-
-// https://learn.microsoft.com/en-us/windows/win32/secauthz/order-of-aces-in-a-dacl
-procedure OrderAcl(Ldap: TLdapClient; DN, baseDN: RawUtf8; Acl: PSecAcl);
-var
-  sdArr: Array of TSecurityDescriptor;
-  sd: TSecurityDescriptor;
-  parent, filter: RawUtf8;
-  res: TLdapResult;
-begin
-  TSynLog.Add.Log(sllDebug, FormatUtf8('Start ordering ACL for %...', [DN]));
-  sdArr := [];
-
-  parent := DN;
-  filter := '';
-  while not (parent = ldap.DefaultDN(baseDN)) and not (parent = '') do
-  begin
-    if (filter = '') then
-      filter := '|';
-    parent := GetParentDN(parent);
-    filter := FormatUtf8('%(distinguishedName=%)', [filter, LdapEscape(parent)]);
-  end;
-
-  // Get SDs
-  Ldap.SearchBegin();
-  try
-    repeat
-      Ldap.SearchScope := lssWholeSubtree;
-      if not Ldap.Search([atNTSecurityDescriptor], filter) then
-      begin
-        ShowLdapSearchError(Ldap);
-        Exit;
-      end;
-      for res in Ldap.SearchResult.Items do
-      begin
-        if not sd.FromBinary(res.Attributes.Find(atNTSecurityDescriptor).GetRaw()) then
-          continue;
-        Insert(sd, sdArr, Length(sdArr));
-      end;
-    until (Ldap.SearchCookie = '');
-  finally
-    Ldap.SearchEnd();
-  end;
-
-  // Order acl
-  InnerOrderAcl(acl, sdArr);
-  TSynLog.Add.Log(sllDebug, 'End ordering ACL for.');
-end;
-
-procedure SearchInGrid(const Timer: TTimer;
-  const TisGrid: TTisGrid; var SearchWord: RawUtf8; const Key: Char);
-var
-  RowData: PDocVariantData;
-  ColumnName: RawUtf8;
-  Node, NextNode: PVirtualNode;
-begin
-  case Timer.Enabled of
-    True: Timer.Enabled := False;
-    False: SearchWord := '';
-  end;
-
-  Insert(Key, SearchWord, Length(SearchWord) + 1);
-  ColumnName := TisGrid.FocusedColumnObject.PropertyName;
-  NextNode := TisGrid.GetFirst();
-  TisGrid.FocusedNode := nil;
-  TisGrid.ClearSelection;
-  while Assigned(NextNode) do
-  begin
-    RowData := TisGrid.GetNodeAsPDocVariantData(NextNode);
-    Node := NextNode;
-    NextNode := TisGrid.GetNext(NextNode);
-    if not Assigned(RowData) or not RowData^.Exists(ColumnName) then
-      continue;
-
-    if RowData^.S[ColumnName].StartsWith(SearchWord, True) then
-    begin
-      TisGrid.FocusedNode := Node;
-      TisGrid.AddToSelection(Node);
-      Break;
-    end;
-  end;
-  Timer.Enabled := True;
-  TisGrid.ScrollIntoView(TisGrid.FocusedNode, True);
 end;
 
 function SecDescAddACE(PSecDesc: PSecurityDescriptor; GUID: TGuid; Sid: RawSid;
@@ -965,46 +699,6 @@ begin
 
   if result = Length(PSecDesc^.Dacl) then
     result := -1;
-end;
-
-procedure TTisGridClearSelection(grid: TTisGrid);
-var
-  i: Integer;
-  Selection: TNodeArray;
-begin
-  Selection := grid.GetSortedSelection(True);
-  for i := Length(Selection) - 1 downto 0 do
-    grid.RemoveFromSelection(Selection[i]);
-  grid.FocusedNode := grid.RootNode;
-end;
-
-function TTisGridGetNextUnselected(grid: TTisGrid; Node: PVirtualNode
-  ): PVirtualNode;
-begin
-  repeat
-    Node := grid.GetNext(Node);
-  until not grid.Selected[Node];
-  result := Node;
-end;
-
-// Laz
-procedure UnifyButtonsWidth(Butons: array of TControl; default: Integer);
-var
-  BtnWidth, i: Integer;
-begin
-  BtnWidth := 0;
-  if default = -1 then
-  begin
-    for i := 0 to Length(Butons) - 1 do
-      if BtnWidth < Butons[i].Width then
-        BtnWidth := Butons[i].Width;
-  end else
-    BtnWidth := default;
-  for i := 0 to Length(Butons) - 1 do
-  begin
-    Butons[i].Constraints.MinWidth := BtnWidth;
-    Butons[i].Width := BtnWidth;
-  end;
 end;
 
 end.

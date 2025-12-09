@@ -7,7 +7,6 @@ interface
 uses
   Classes,
   SysUtils,
-  Dialogs,
   System.UITypes,
   mormot.core.base,
   mormot.core.variants,
@@ -40,7 +39,6 @@ type
       TypesOnly: boolean; const Filter: RawUtf8;
       const Attributes: array of RawUtf8): Boolean;
     procedure SearchPagingEnd;
-    function MoveLdapEntries(oldDN, newDN: Array of String): Boolean;
     function MoveLdapEntry(oldDN, newDN: string): Boolean;
     function RenameLdapEntry(DN, newName: string): Boolean;
 
@@ -58,99 +56,12 @@ type
     function Close: boolean;
   end;
 
-  function ShowLdapSearchError(LdapClient: TLdapClient): TModalResult;
-  function ShowLdapModifyError(LdapClient: TLdapClient): TModalResult;
-  function ShowLdapDeleteError(LdapClient: TLdapClient): TModalResult;
-  function ShowLdapConnectError(LdapClient: TLdapClient): TModalResult;
-  function ShowLdapAddError(LdapClient: TLdapClient): TModalResult;
-
 implementation
 
 uses
   mormot.core.log,
   mormot.core.text,
-  mormot.core.rtti,
-  ucommon;
-
-function GetLdapErrorCustomMessage(LdapClient: TLdapClient): RawUtf8;
-begin
-  result := '';
-
-  case LdapClient.ResultError of
-    leOperationsError: result := rsOperationsError;
-    leProtocolError: result := rsProtocolError;
-    leTimeLimitExceeded: result := rsTimeLimitExceeded;
-    leSizeLimitExceeded: result := rsSizeLimitExceeded;
-    leAuthMethodNotSupported: result := rsAuthMethodNotSupported;
-    leStrongerAuthRequired: result := rsStrongerAuthRequired;
-    leReferral: result := rsReferral;
-    //leAdminLimitExceeded: Result := rsAdminLimitExceeded;
-    //leUnavailableCriticalExtension: result := rsUnavailableCriticalExtension;
-    leConfidentalityRequired: result := rsConfidentialityRequired;
-    leSaslBindInProgress: result := rsSaslBindInProgress;
-    leNoSuchAttribute: result := rsNoSuchAttribute;
-    leUndefinedAttributeType: result := rsUndefinedAttributeType;
-    leInappropriateMatching: result := rsInappropriateMatching;
-    leConstraintViolation: result := rsConstraintViolation;
-    leInsufficientAccessRights: result := rsInsufficientAccessRights;
-  end;
-
-  if (result = '') then
-    result := LdapClient.ResultString;
-end;
-
-function ShowLdapError(Message: RawUtf8): TModalResult;
-begin
-  result := MessageDlg(rsLdapError, Message, mtError, mbOKCancel, 0);
-end;
-
-function ShowLdapSearchError(LdapClient: TLdapClient): TModalResult;
-var
-  Message: RawUtf8;
-begin
-  Message := GetLdapErrorCustomMessage(LdapClient);
-
-  result := ShowLdapError(FormatUtf8(rsLdapSearchFailed, [Message]));
-end;
-
-function ShowLdapModifyError(LdapClient: TLdapClient): TModalResult;
-var
-  Message: RawUtf8;
-begin
-  Message := GetLdapErrorCustomMessage(LdapClient);
-
-  result := ShowLdapError(FormatUtf8(rsLdapModifyFailed, [Message]));
-end;
-
-function ShowLdapDeleteError(LdapClient: TLdapClient): TModalResult;
-var
-  Message: RawUtf8;
-begin
-  Message := GetLdapErrorCustomMessage(LdapClient);
-
-  result := ShowLdapError(FormatUtf8(rsLdapDeleteFailed, [Message]));
-end;
-
-function ShowLdapConnectError(LdapClient: TLdapClient): TModalResult;
-var
-  Message: RawUtf8;
-begin
-  Message := GetLdapErrorCustomMessage(LdapClient);
-
-  if String(Message).ToLower.Contains('52e') then
-    Message := 'Invalid credentials.';
-
-  result := ShowLdapError(FormatUtf8(rsLdapConnectFailed, [Message]));
-end;
-
-function ShowLdapAddError(LdapClient: TLdapClient): TModalResult;
-var
-  Message: RawUtf8;
-begin
-  Message := GetLdapErrorCustomMessage(LdapClient);
-
-  result := ShowLdapError(FormatUtf8(rsLdapAddFailed, [Message]));
-end;
+  mormot.core.rtti;
 
 { TRsatLdapClient }
 
@@ -226,28 +137,6 @@ end;
 procedure TRsatLdapClient.SearchPagingEnd;
 begin
   fPageNumber := 0;
-end;
-
-function TRsatLdapClient.MoveLdapEntries(oldDN, newDN: array of String
-  ): Boolean;
-var
-  i: Integer;
-begin
-  result := False;
-
-  if Length(oldDN) <> Length(newDN) then
-    Exit;
-
-  result := True;
-  if MessageDlg(rsWarning, rsLdapMoveWarningMessage, mtWarning, [mbYes, mbNo, mbCancel], 0) <> mrYes then
-    Exit;
-
-  for i := 0 to Length(oldDN) - 1 do
-  begin
-    result := MoveLdapEntry(oldDN[i], newDN[i]);
-    if not result then
-      Exit;
-  end;
 end;
 
 function TRsatLdapClient.MoveLdapEntry(oldDN, newDN: string): Boolean;

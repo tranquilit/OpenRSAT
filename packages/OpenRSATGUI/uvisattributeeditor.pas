@@ -120,7 +120,8 @@ uses
   mormot.core.text,
   mormot.core.datetime,
   mormot.core.os,
-  ucommon;
+  ucommon,
+  ucommonui;
 
 function TLdapSyntaxFromString(AttributeSyntax, oMSyntax, oMObjectClass: RawUtf8): TLdapSyntax;
 begin

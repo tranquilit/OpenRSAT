@@ -63,6 +63,7 @@ implementation
 uses
   Graphics,
   SysUtils,
+  ucommonui,
   mormot.core.text;
 {$R *.lfm}
 

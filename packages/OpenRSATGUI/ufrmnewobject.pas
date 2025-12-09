@@ -42,7 +42,7 @@ type
 
 implementation
 uses
-  ursatldapclient;
+  ursatldapclientui;
 
 {$R *.lfm}
 

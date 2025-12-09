@@ -60,9 +60,10 @@ uses
   mormot.net.ldap,
   ucoredatamodule,
   ucommon,
+  ucommonui,
   uhelpersui,
   uOmniselect,
-  ursatldapclient;
+  ursatldapclientui;
 
 {$R *.lfm}
 

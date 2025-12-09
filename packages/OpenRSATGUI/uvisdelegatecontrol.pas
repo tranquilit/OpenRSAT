@@ -141,7 +141,7 @@ uses
   mormot.core.variants,
   ucommon,
   uOmniselect,
-  ursatldapclient;
+  ursatldapclientui;
 
 {$R *.lfm}
 
@@ -795,7 +795,7 @@ begin
   finally
     fCore.LdapClient.SearchEnd;
   end;
-  OrderAcl(fCore.LdapClient, SelectedObject, fBaseDN, @SecurityDescriptor.Dacl);
+  fCore.LdapClient.OrderAcl(SelectedObject, fBaseDN, @SecurityDescriptor.Dacl);
   NewAttr := TLdapAttribute.Create('nTSecurityDescriptor', atNTSecurityDescriptor);
   try
     NewAttr.Add(SecurityDescriptor.ToBinary);

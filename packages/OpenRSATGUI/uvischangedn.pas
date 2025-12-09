@@ -56,8 +56,8 @@ uses
   mormot.core.text,
   uaductreeview,
   ucoredatamodule,
-  ucommon,
-  ursatldapclient;
+  ucommonui,
+  ursatldapclientui;
 {$R *.lfm}
 
 const

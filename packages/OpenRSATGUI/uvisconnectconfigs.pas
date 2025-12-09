@@ -82,7 +82,7 @@ uses
   ucoredatamodule,
   uresourcestring,
   utranslation,
-  ucommon;
+  ucommonui;
 {$R *.lfm}
 
 { TFormConnectConfigs }

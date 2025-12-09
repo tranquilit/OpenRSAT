@@ -100,6 +100,7 @@ uses
   mormot.core.text,
   ucommon,
   uhelpersui,
+  ursatldapclientui,
   uvislogonhours,
   uvislogonworkstation;
 
@@ -220,7 +221,7 @@ begin
   ModSecAceType := SECACETYPE[CheckBox_CannotChange.Checked];
   AceSelf^.AceType  := ModSecAceType;
   AceWorld^.AceType := ModSecAceType;
-  OrderAcl(fProperty.LdapClient, fProperty.DistinguishedName, fProperty.LdapClient.DefaultDN(), @PSecDesc^.Dacl);
+  fProperty.LdapClient.OrderAcl(fProperty.DistinguishedName, fProperty.LdapClient.DefaultDN(), @PSecDesc^.Dacl);
   fProperty.SecurityDescriptor := PSecDesc;
 end;
 

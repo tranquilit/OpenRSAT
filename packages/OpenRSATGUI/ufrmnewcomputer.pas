@@ -59,6 +59,7 @@ uses
   ucommon,
   ucoredatamodule,
   ursatldapclient,
+  ursatldapclientui,
   uvisnewobject;
 {$R *.lfm}
 
@@ -194,7 +195,7 @@ begin
   ace := SecDescAddACE(@SecDesc, ATTR_UUID[kaDisplayName],      Sid, satObjectAccessAllowed, [samWriteProp]);
   ace^.InheritedObjectType := ATTR_UUID[kaComputer];
 
-  OrderAcl(VisNewObject.Ldap, DN, (owner as TVisNewObject).BaseDN, @SecDesc.Dacl);
+  (VisNewObject.Ldap as TRsatLdapClient).OrderAcl(DN, (owner as TVisNewObject).BaseDN, @SecDesc.Dacl);
 
   if not VisNewObject.Ldap.Modify(DN, lmoReplace, atNTSecurityDescriptor, SecDesc.ToBinary()) then
   begin

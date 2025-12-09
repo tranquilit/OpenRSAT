@@ -44,7 +44,7 @@ uses
   mormot.net.ldap,
   // Rsat
   ucommon,
-  ursatldapclient,
+  ursatldapclientui,
   uvisnewobject;
 {$R *.lfm}
 

@@ -132,8 +132,9 @@ implementation
 uses
   mormot.core.variants,
   ucommon,
+  ucommonui,
   uDarkStyleParams,
-  ursatldapclient,
+  ursatldapclientui,
   uvisnewobject;
 
 {$R *.lfm}

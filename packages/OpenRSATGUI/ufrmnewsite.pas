@@ -47,8 +47,9 @@ implementation
 uses
   mormot.core.variants,
   ucommon,
+  ucommonui,
   ucoredatamodule,
-  ursatldapclient,
+  ursatldapclientui,
   uvisnewobject;
 
 {$R *.lfm}

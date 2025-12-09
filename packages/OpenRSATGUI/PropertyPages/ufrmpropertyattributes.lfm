@@ -6,8 +6,8 @@ object FrmPropertyAttributes: TFrmPropertyAttributes
   ClientHeight = 400
   ClientWidth = 447
   TabOrder = 0
-  DesignLeft = 2136
-  DesignTop = 287
+  DesignLeft = 217
+  DesignTop = 288
   object Label_Attributes: TLabel
     Left = 8
     Height = 15

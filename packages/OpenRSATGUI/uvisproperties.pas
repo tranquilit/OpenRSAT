@@ -297,6 +297,8 @@ uses
   ufrmpropertysecurity,
   ufrmpropertytelephone,
   ursatldapclient,
+  ursatldapclientui,
+  ucommonui,
   udns;
 
 {$R *.lfm}

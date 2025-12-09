@@ -8,19 +8,19 @@ unit OpenRSATGUI;
 interface
 
 uses
-  ursatldapclient, ursatmodules, ufrmcore, ufrmmoduleaduc, ucoredatamodule, 
-  uldapconfigs, uvisconnectconfigs, uvisconnectoptions, ufrmmoduledns, 
-  uinterfacemodule, uinterfacecore, utreeselectionhistory, uvisproperties, 
-  uOmniselect, uvisadvancedsecurity, uvisattributeeditor, uvislistother, 
-  uvislogonhours, uvislogonworkstation, uvisaddaces, ucommon, uvissearch, 
-  ufrmnewcomputer, ufrmnewcontact, ufrmnewgroup, ufrmnewou, 
-  ufrmnewsharedfolder, ufrmnewuser, uvisnewobject, uvischangedn, 
-  uvischangepartition, uvisdelegatecontrol, uVisOptions, uvistaskmove, 
-  uvistaskresetpassword, utranslation, usidcache, ufrmmoduleaducoptions, 
-  ufrmrsatoptions, udns, uvisselectnewrecordtype, uvisnewresourcerecord, 
-  uvisnewzonewizard, ufrmmodulesitesandservices, ufrmmoduleserviceinterfaces, 
-  ufrmnewobject, ufrmnewsite, ufrmnewsubnet, uresourcestring, uaductreeview, 
-  ufrmmoduleadssoptions, uvisconnectiondetails, uvispropertieslist, uproperty, 
+  ursatmodules, ufrmcore, ufrmmoduleaduc, ucoredatamodule, uldapconfigs, 
+  uvisconnectconfigs, uvisconnectoptions, ufrmmoduledns, uinterfacemodule, 
+  uinterfacecore, utreeselectionhistory, uvisproperties, uOmniselect, 
+  uvisadvancedsecurity, uvisattributeeditor, uvislistother, uvislogonhours, 
+  uvislogonworkstation, uvisaddaces, uvissearch, ufrmnewcomputer, 
+  ufrmnewcontact, ufrmnewgroup, ufrmnewou, ufrmnewsharedfolder, ufrmnewuser, 
+  uvisnewobject, uvischangedn, uvischangepartition, uvisdelegatecontrol, 
+  uVisOptions, uvistaskmove, uvistaskresetpassword, utranslation, usidcache, 
+  ufrmmoduleaducoptions, ufrmrsatoptions, udns, uvisselectnewrecordtype, 
+  uvisnewresourcerecord, uvisnewzonewizard, ufrmmodulesitesandservices, 
+  ufrmmoduleserviceinterfaces, ufrmnewobject, ufrmnewsite, ufrmnewsubnet, 
+  uresourcestring, uaductreeview, ufrmmoduleadssoptions, 
+  uvisconnectiondetails, uvispropertieslist, uproperty, 
   uvischangedomaincontroller, uvisoperationmasters, upropertyframe, 
   ufrmpropertyobject, ufrmpropertymanagedby, ufrmpropertyaddress, 
   ufrmpropertymemberof, ufrmpropertygeneraldefault, ufrmpropertygeneraluser, 
@@ -30,7 +30,8 @@ uses
   ufrmpropertyprofile, ufrmpropertybitlocker, ufrmpropertylaps, 
   ufrmpropertytelephone, ufrmpropertylocation, ufrmpropertyorganization, 
   ufrmpropertypublishedcertificates, ufrmpropertymember, ufrmpropertysecurity, 
-  ufrmpropertyattributes, uhelpersui, LazarusPackageIntf;
+  ufrmpropertyattributes, uhelpersui, ucommonui, ursatldapclientui, 
+  LazarusPackageIntf;
 
 implementation
 

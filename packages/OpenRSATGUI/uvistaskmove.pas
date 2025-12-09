@@ -81,6 +81,8 @@ uses
   System.UITypes,
   mormot.core.text,
   ucommon,
+  ucommonui,
+  ursatldapclientui,
   ucoredatamodule;
 {$R *.lfm}
 

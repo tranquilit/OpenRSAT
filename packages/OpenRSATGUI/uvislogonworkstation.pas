@@ -57,7 +57,8 @@ implementation
 uses
   Dialogs,
   SysUtils,
-  ucommon;
+  ucommon,
+  ucommonui;
 {$R *.lfm}
 
 { TVisLogonWorkstation }

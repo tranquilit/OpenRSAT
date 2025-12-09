@@ -8,7 +8,7 @@ unit OpenRSATCore;
 interface
 
 uses
-  uhelpers, LazarusPackageIntf;
+  uhelpers, ursatldapclient, ucommon, LazarusPackageIntf;
 
 implementation
 

@@ -85,6 +85,7 @@ uses
   mormot.core.variants,
   mormot.core.text,
   ursatldapclient,
+  ursatldapclientui,
   uvischangedomaincontroller,
   ucommon;
 

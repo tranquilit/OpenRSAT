@@ -96,6 +96,7 @@ uses
   mormot.core.os.security,
   mormot.core.text,
   ucommon,
+  ursatldapclientui,
   uOmniselect;
 
 {$R *.lfm}

@@ -129,6 +129,8 @@ type
   end;
 
 implementation
+uses
+  ursatldapclientui;
 
 {$R *.lfm}
 

@@ -44,6 +44,7 @@ uses
   ucommon,
   ucoredatamodule,
   ursatldapclient,
+  ursatldapclientui,
   uvisnewobject;
 {$R *.lfm}
 
@@ -94,7 +95,7 @@ begin
     Exit;
   end;
 
-  if not ProtectAgainstAccidentalDeletion(NewObject.Ldap, DN, (owner as TVisNewObject).BaseDN, SecDesc, True) then
+  if not (NewObject.Ldap as TRsatLdapClient).ProtectAgainstAccidentalDeletion(DN, (owner as TVisNewObject).BaseDN, SecDesc, True) then
     Exit;
 
   if not NewObject.Ldap.Modify(DN, lmoReplace, atNTSecurityDescriptor, SecDesc.ToBinary()) then // Modify

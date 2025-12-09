@@ -73,9 +73,11 @@ uses
   mormot.core.data,
   mormot.core.text,
   ucommon,
+  ucommonui,
   ucoredatamodule,
   uhelpersui,
-  ursatldapclient;
+  ursatldapclient,
+  ursatldapclientui;
 
 {$R *.lfm}
 

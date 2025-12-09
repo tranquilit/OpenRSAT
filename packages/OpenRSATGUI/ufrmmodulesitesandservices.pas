@@ -169,8 +169,9 @@ uses
   math,
   mormot.core.text,
   ucommon,
+  ucommonui,
   uDarkStyleParams,
-  ursatldapclient,
+  ursatldapclientui,
   uvisnewobject;
 
 {$R *.lfm}

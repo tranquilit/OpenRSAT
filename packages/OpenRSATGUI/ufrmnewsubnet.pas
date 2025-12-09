@@ -62,8 +62,9 @@ uses
   mormot.net.sock,
   mormot.core.variants,
   ucommon,
+  ucommonui,
   ucoredatamodule,
-  ursatldapclient,
+  ursatldapclientui,
   uvisnewobject;
 
 {$R *.lfm}

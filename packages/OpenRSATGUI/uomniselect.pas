@@ -75,8 +75,8 @@ uses
   mormot.core.text,
   mormot.core.unicode,
   ucoredatamodule,
-  ursatldapclient,
-  ucommon;
+  ursatldapclientui,
+  ucommonui;
 {$R *.lfm}
 
 { TVisOmniselect }

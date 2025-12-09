@@ -117,7 +117,7 @@ implementation
 uses
   mormot.core.data,
   ucommon,
-  ursatldapclient;
+  ursatldapclientui;
 {$R *.lfm}
 
 { TVisAddACEs }

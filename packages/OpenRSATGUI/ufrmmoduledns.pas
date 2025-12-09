@@ -172,10 +172,11 @@ uses
   mormot.core.text,
   uvisselectnewrecordtype,
   ucommon,
+  ucommonui,
   uDarkStyleParams,
   uvisnewzonewizard,
   uvisnewresourcerecord,
-  ursatldapclient,
+  ursatldapclientui,
   udns;
 
 {$R *.lfm}
