@@ -54,6 +54,7 @@ type
 implementation
 uses
   mormot.core.variants,
+  mormot.net.ldap,
   ucommon,
   uhelpersui;
 
@@ -125,6 +126,8 @@ begin
   Edit_CurrentExpiration.CaptionNoChange := fProperty.GetReadable('msLAPS-PasswordExpirationTime');
   if Edit_CurrentExpiration.Caption = '' then
     Edit_CurrentExpiration.CaptionNoChange := fProperty.GetReadable('ms-Mcs-AdmPwdExpirationTime');
+  if Edit_CurrentExpiration.Caption <> '' then
+    Edit_CurrentExpiration.Caption := DateTimeToIsoString(LdapToDate(Edit_CurrentExpiration.Caption));
 
   Password := fProperty.GetReadable('msLAPS-Password');
   if Password <> '' then
