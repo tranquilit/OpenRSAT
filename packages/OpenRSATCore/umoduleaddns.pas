@@ -46,6 +46,7 @@ end;
 
 destructor TModuleADDNS.Destroy;
 begin
+  FreeAndNil(fOption);
   inherited Destroy;
 end;
 
