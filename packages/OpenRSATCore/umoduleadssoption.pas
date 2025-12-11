@@ -28,15 +28,20 @@ type
     procedure SetShowService(AValue: Boolean);
 
     procedure Notify;
+
   public
-    // TOptions
+    constructor Create;
+    destructor Destroy; override;
+
+    property ShowService: Boolean read GetShowService write SetShowService;
+  
+  /// TOption
+  public
     procedure Load(IniFile: TIniFile); override;
     procedure Save(IniFile: TIniFile); override;
     function Changed: Boolean; override;
     procedure RegisterObserver(Observer: TProcRsatOptionOfObject); override;
     procedure RemoveObserver(Observer: TProcRsatOptionOfObject); override;
-
-    property ShowService: Boolean read GetShowService write SetShowService;
   end;
 
 implementation
@@ -66,6 +71,21 @@ begin
 
   for Observer in fObservers do
     Observer(Self);
+end;
+
+constructor TModuleADSSOption.Create;
+begin
+  fLog := TSynLog.Add;
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, 'Create', Self);
+
+  fObservers := [];
+  fChanged := False;
+end;
+
+destructor TModuleADSSOption.Destroy;
+begin
+  inherited Destroy;
 end;
 
 procedure TModuleADSSOption.Load(IniFile: TIniFile);

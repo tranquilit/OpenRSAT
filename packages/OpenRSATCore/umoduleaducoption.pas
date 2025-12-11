@@ -17,7 +17,6 @@ type
   { TModuleADUCOption }
 
   TModuleADUCOption = class(TOption)
-
   private
     fLog: TSynLog;
     fChanged: Boolean;
@@ -37,13 +36,10 @@ type
     procedure SetShowGPO(AValue: Boolean);
     procedure SetTreeFilter(AValue: RawUtf8);
     procedure SetTreeObjectClasses(AValue: TRawUtf8DynArray);
+
   public
-    // Inherited TOptions
-    procedure Load(IniFile: TIniFile); override;
-    procedure Save(IniFile: TIniFile); override;
-    function Changed: Boolean; override;
-    procedure RegisterObserver(Observer: TProcRsatOptionOfObject); override;
-    procedure RemoveObserver(Observer: TProcRsatOptionOfObject); override;
+    constructor Create;
+    destructor Destroy; override;
 
     property SearchPageSize: Integer read fSearchPageSize write SetSearchPageSize;
     property SearchPageNumber: Integer read fSearchPageNumber write SetSearchPageNumber;
@@ -51,6 +47,14 @@ type
     property TreeFilter: RawUtf8 read fTreeFilter write SetTreeFilter;
     property TreeObjectClasses: TRawUtf8DynArray read fTreeObjectClasses write SetTreeObjectClasses;
     property ShowGPO: Boolean read fShowGPO write SetShowGPO;
+
+  /// TOption
+  public
+    procedure Load(IniFile: TIniFile); override;
+    procedure Save(IniFile: TIniFile); override;
+    function Changed: Boolean; override;
+    procedure RegisterObserver(Observer: TProcRsatOptionOfObject); override;
+    procedure RemoveObserver(Observer: TProcRsatOptionOfObject); override;
   end;
 
 implementation
@@ -109,6 +113,21 @@ begin
   fTreeObjectClasses := AValue;
 
   fChanged := True;
+end;
+
+constructor TModuleADUCOption.Create;
+begin
+  fLog := TSynLog.Add;
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, 'Create', Self);
+
+  fObservers := [];
+  fChanged := False;
+end;
+
+destructor TModuleADUCOption.Destroy;
+begin
+  inherited Destroy;
 end;
 
 procedure TModuleADUCOption.Load(IniFile: TIniFile);

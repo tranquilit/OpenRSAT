@@ -41,7 +41,7 @@ uses
 constructor TModuleADDNS.Create;
 begin
   fEnabled := True;
-  fOption := nil;
+  fOption := TModuleADDNSOption.Create;
 end;
 
 destructor TModuleADDNS.Destroy;
