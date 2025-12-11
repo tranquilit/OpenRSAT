@@ -79,16 +79,16 @@ begin
   end;
 
   for fm in fFrmModules do
-    if (fm = AFrmModule) or (fm.GetModuleName = AFrmModule.GetModuleName) then
+    if (fm = AFrmModule) or (fm.ModuleName = AFrmModule.ModuleName) then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllWarning, 'Module "%" already exists.', [AFrmModule.Module.GetModuleName], self);
+        fLog.Log(sllWarning, 'Module "%" already exists.', [AFrmModule.ModuleName], self);
       Exit;
     end;
 
   Insert(AFrmModule, fFrmModules, 0);
   if Assigned(fLog) then
-    fLog.Log(sllInfo, 'Module "%" added.', [AFrmModule.Module.GetModuleName], self);
+    fLog.Log(sllInfo, 'Module "%" added.', [AFrmModule.ModuleName], self);
   result := True;
 end;
 
@@ -102,7 +102,7 @@ begin
   result := True;
 
   for fm in fFrmModules do
-    if (fm.Module.GetModuleName = AName) then
+    if (fm.ModuleName = AName) then
     begin
       if Assigned(fLog) then
         fLog.Log(sllInfo, '% - Found module "%".', [Self.ClassName, AName]);

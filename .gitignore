@@ -1,3 +1,4 @@
+# binaries
 *.lps
 *.exe
 *.compiled
@@ -7,11 +8,21 @@
 *.or
 *.log
 *.mab
-**/backup
-lib
-tisrsat
-**/log
-tmp.json
 *.trc
+*.ini
+openrsattests
+
+# Files
+.tgitconfig
+configure_lazarus.bat
 graph.txt
-documentation/build
+update_language.py
+update_version.py
+
+# Folder
+.idea
+backup
+bin
+doc
+lib
+log

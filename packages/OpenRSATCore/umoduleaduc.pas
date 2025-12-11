@@ -28,10 +28,11 @@ type
     property ADUCOption: TModuleADUCOption read fModuleADUCOption;
 
     /// TModule
-    function GetModuleEnabled: Boolean; override;
-    procedure SetModuleEnabled(AValue: Boolean); override;
-    function GetModuleName: RawUtf8; override;
-    function GetModuleDisplayName: RawUtf8; override;
+  protected
+    function GetEnabled: Boolean; override;
+    procedure SetEnabled(AValue: Boolean); override;
+    function GetName: RawUtf8; override;
+    function GetDisplayName: RawUtf8; override;
     function GetOption: TOption; override;
   end;
 
@@ -55,24 +56,24 @@ begin
   inherited Destroy;
 end;
 
-function TModuleADUC.GetModuleEnabled: Boolean;
+function TModuleADUC.GetEnabled: Boolean;
 begin
   result := fEnabled;
 end;
 
-procedure TModuleADUC.SetModuleEnabled(AValue: Boolean);
+procedure TModuleADUC.SetEnabled(AValue: Boolean);
 begin
   if AValue = fEnabled then
     Exit;
   fEnabled := AValue;
 end;
 
-function TModuleADUC.GetModuleName: RawUtf8;
+function TModuleADUC.GetName: RawUtf8;
 begin
   result := rsModuleADUCName;
 end;
 
-function TModuleADUC.GetModuleDisplayName: RawUtf8;
+function TModuleADUC.GetDisplayName: RawUtf8;
 begin
   result := rsModuleADUCDisplayName;
 end;

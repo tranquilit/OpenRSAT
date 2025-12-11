@@ -127,7 +127,7 @@ begin
 
   for Frame in FrmRSAT.FrmModules.Items do
     if Assigned(Frame) and Assigned(Frame.FrmOptionClass) then
-      AddFrame(Frame.FrmOptionClass.Create(Self, Frame.GetOption), Frame.GetModuleDisplayName);
+      AddFrame(Frame.FrmOptionClass.Create(Self, Frame.ModuleOption), Frame.ModuleDisplayName);
 end;
 
 constructor TVisOptions.Create(TheOwner: TComponent);

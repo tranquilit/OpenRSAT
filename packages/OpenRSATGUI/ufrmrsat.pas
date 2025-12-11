@@ -343,17 +343,17 @@ var
   var
     NewTab: TTabSheet;
   begin
-    if not FrameModule.Module.GetModuleEnabled then
+    if not FrameModule.ModuleEnabled then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllInfo, '% - Module "%" not enabled.', [Self.Name, FrameModule.GetModuleName]);
+        fLog.Log(sllInfo, '% - Module "%" not enabled.', [Self.Name, FrameModule.ModuleName]);
       Exit;
     end;
 
     FrameModule.Load;
     NewTab := PageControl1.AddTabSheet;
-    NewTab.Caption := FrameModule.GetModuleDisplayName;
-    NewTab.Name := FrameModule.GetModuleName;
+    NewTab.Caption := FrameModule.ModuleDisplayName;
+    NewTab.Name := FrameModule.ModuleName;
 
     FrameModule.Parent := NewTab;
     FrameModule.Align := alClient;
@@ -361,7 +361,7 @@ var
     PageControl1.ShowTabs := (PageControl1.PageCount <> 1);
 
     if Assigned(fLog) then
-      fLog.Log(sllInfo, '% - Module "%" loaded.', [Self.Name, FrameModule.GetModuleName]);
+      fLog.Log(sllInfo, '% - Module "%" loaded.', [Self.Name, FrameModule.ModuleName]);
   end;
 
 begin
@@ -371,7 +371,7 @@ begin
   FrameModule := TFrmModuleADUC.Create(Self);
   if RegisterModule(FrameModule) then
     LoadModule(FrameModule);
-  FrmModules.Change(FrameModule.GetModuleName);
+  FrmModules.Change(FrameModule.ModuleName);
 
   FrameModule := TFrmModuleDNS.Create(Self);
   if RegisterModule(FrameModule) then

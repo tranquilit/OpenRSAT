@@ -25,10 +25,11 @@ type
     destructor Destroy; override;
 
     /// TModule
-    function GetModuleEnabled: Boolean; override;
-    procedure SetModuleEnabled(AValue: Boolean); override;
-    function GetModuleName: RawUtf8; override;
-    function GetModuleDisplayName: RawUtf8; override;
+  protected
+    function GetEnabled: Boolean; override;
+    procedure SetEnabled(AValue: Boolean); override;
+    function GetName: RawUtf8; override;
+    function GetDisplayName: RawUtf8; override;
     function GetOption: TOption; override;
   end;
 
@@ -51,24 +52,24 @@ begin
   inherited Destroy;
 end;
 
-function TModuleADSI.GetModuleEnabled: Boolean;
+function TModuleADSI.GetEnabled: Boolean;
 begin
   result := fEnabled;
 end;
 
-procedure TModuleADSI.SetModuleEnabled(AValue: Boolean);
+procedure TModuleADSI.SetEnabled(AValue: Boolean);
 begin
   if AValue = fEnabled then
     Exit;
   fEnabled := AValue;
 end;
 
-function TModuleADSI.GetModuleName: RawUtf8;
+function TModuleADSI.GetName: RawUtf8;
 begin
   result := rsModuleADSIName;
 end;
 
-function TModuleADSI.GetModuleDisplayName: RawUtf8;
+function TModuleADSI.GetDisplayName: RawUtf8;
 begin
   result := rsModuleADSIDisplayName;
 end;

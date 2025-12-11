@@ -11,13 +11,24 @@ uses
   uoption;
 
 type
+  /// TModule provide an Abstract interface to a RSAT module.
   TModule = class
-  public
-    function GetModuleEnabled: Boolean; virtual; abstract;
-    procedure SetModuleEnabled(AValue: Boolean); virtual; abstract;
-    function GetModuleName: RawUtf8; virtual; abstract;
-    function GetModuleDisplayName: RawUtf8; virtual; abstract;
+  protected
+    function GetEnabled: Boolean; virtual; abstract;
+    procedure SetEnabled(AValue: Boolean); virtual; abstract;
+    function GetName: RawUtf8; virtual; abstract;
+    function GetDisplayName: RawUtf8; virtual; abstract;
     function GetOption: TOption; virtual; abstract;
+
+  public
+    // Module status
+    property Enabled: Boolean read GetEnabled write SetEnabled;
+    // Retrieve module name
+    property Name: RawUtf8 read GetName;
+    // Retrieve module display name
+    property DisplayName: RawUtf8 read GetDisplayName;
+    // Retrieve module option
+    property Option: TOption read GetOption;
   end;
 
 implementation

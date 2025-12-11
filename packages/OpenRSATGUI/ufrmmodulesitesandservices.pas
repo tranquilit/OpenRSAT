@@ -1142,7 +1142,7 @@ begin
   FrmRSAT.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
   FrmRSAT.LdapClient.RegisterObserverClose(@OnLdapClientClose);
 
-  fModule.GetOption.RegisterObserver(@OnADSSOptionsChanged);
+  fModule.Option.RegisterObserver(@OnADSSOptionsChanged);
 
   {$IFDEF WINDOWS}
   Image1.Visible := not IsDarkModeEnabled;

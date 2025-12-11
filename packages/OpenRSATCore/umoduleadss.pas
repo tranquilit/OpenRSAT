@@ -31,10 +31,11 @@ type
     property ShowService: Boolean read GetShowService;
 
     /// TModule
-    function GetModuleEnabled: Boolean; override;
-    procedure SetModuleEnabled(AValue: Boolean); override;
-    function GetModuleName: RawUtf8; override;
-    function GetModuleDisplayName: RawUtf8; override;
+  protected
+    function GetEnabled: Boolean; override;
+    procedure SetEnabled(AValue: Boolean); override;
+    function GetName: RawUtf8; override;
+    function GetDisplayName: RawUtf8; override;
     function GetOption: TOption; override;
   end;
 
@@ -68,24 +69,24 @@ begin
   result := fOption;
 end;
 
-function TModuleADSS.GetModuleEnabled: Boolean;
+function TModuleADSS.GetEnabled: Boolean;
 begin
   result := fEnabled;
 end;
 
-procedure TModuleADSS.SetModuleEnabled(AValue: Boolean);
+procedure TModuleADSS.SetEnabled(AValue: Boolean);
 begin
   if AValue = fEnabled then
     Exit;
   fEnabled := AValue;
 end;
 
-function TModuleADSS.GetModuleName: RawUtf8;
+function TModuleADSS.GetName: RawUtf8;
 begin
   result := rsModuleADSSName;
 end;
 
-function TModuleADSS.GetModuleDisplayName: RawUtf8;
+function TModuleADSS.GetDisplayName: RawUtf8;
 begin
   result := rsModuleADSIDisplayName;
 end;
