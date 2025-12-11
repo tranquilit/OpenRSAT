@@ -1,4 +1,4 @@
-unit ucore;
+unit umoduleadsioption;
 
 {$mode objfpc}{$H+}
 
@@ -6,13 +6,11 @@ interface
 
 uses
   Classes,
-  SysUtils;
+  SysUtils,
+  uoption;
 
 type
-
-  { TRsatCore }
-
-  TRsatCore = class
+  TModuleADSIOption = class(TOption)
 
   end;
 

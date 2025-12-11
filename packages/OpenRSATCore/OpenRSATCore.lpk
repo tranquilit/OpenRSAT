@@ -24,6 +24,62 @@
         <Filename Value="ucommon.pas"/>
         <UnitName Value="ucommon"/>
       </Item>
+      <Item>
+        <Filename Value="uldapconfigs.pas"/>
+        <UnitName Value="uldapconfigs"/>
+      </Item>
+      <Item>
+        <Filename Value="uconfig.pas"/>
+        <UnitName Value="uconfig"/>
+      </Item>
+      <Item>
+        <Filename Value="uoption.pas"/>
+        <UnitName Value="uoption"/>
+      </Item>
+      <Item>
+        <Filename Value="umodule.pas"/>
+        <UnitName Value="umodule"/>
+      </Item>
+      <Item>
+        <Filename Value="umoduleaducoption.pas"/>
+        <UnitName Value="umoduleaducoption"/>
+      </Item>
+      <Item>
+        <Filename Value="umoduleaduc.pas"/>
+        <UnitName Value="umoduleaduc"/>
+      </Item>
+      <Item>
+        <Filename Value="ursat.pas"/>
+        <UnitName Value="ursat"/>
+      </Item>
+      <Item>
+        <Filename Value="ursatoption.pas"/>
+        <UnitName Value="ursatoption"/>
+      </Item>
+      <Item>
+        <Filename Value="umoduleadssoption.pas"/>
+        <UnitName Value="umoduleadssoption"/>
+      </Item>
+      <Item>
+        <Filename Value="umoduleadss.pas"/>
+        <UnitName Value="umoduleadss"/>
+      </Item>
+      <Item>
+        <Filename Value="umoduleaddns.pas"/>
+        <UnitName Value="umoduleaddns"/>
+      </Item>
+      <Item>
+        <Filename Value="umoduleaddnsoption.pas"/>
+        <UnitName Value="umoduleaddnsoption"/>
+      </Item>
+      <Item>
+        <Filename Value="umoduleadsi.pas"/>
+        <UnitName Value="umoduleadsi"/>
+      </Item>
+      <Item>
+        <Filename Value="umoduleadsioption.pas"/>
+        <UnitName Value="umoduleadsioption"/>
+      </Item>
     </Files>
     <i18n>
       <EnableI18N Value="True"/>

@@ -12,7 +12,7 @@ uses
   mormot.core.test,
   {$ENDIF}
   uvisproperties,
-  uinterfacecore, ursatldapclient;
+  ursatldapclient;
 
 type
 
@@ -24,9 +24,8 @@ type
   private
     fLog: TSynLog;
     fItems: TVisPropertiesDynArray;
-    fCore: ICore;
   public
-    constructor Create(ACore: ICore);
+    constructor Create;
     function Open(AName: String; ADistinguishedName: String): TVisProperties;
     function New(AName: String; ADistinguishedName: String): TVisProperties;
     function Close(aForm: TVisProperties): boolean;
@@ -62,18 +61,17 @@ uses
   dialogs,
   mormot.core.base,
   mormot.core.text,
-  ufrmcore;
+  ufrmrsat;
 
 { TVisPropertiesList }
 
-constructor TVisPropertiesList.Create(ACore: ICore);
+constructor TVisPropertiesList.Create;
 begin
   fLog := TSynLog.Add;
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Create', [Self.ClassName]);
 
   fItems := [];
-  fCore := ACore;
 end;
 
 function TVisPropertiesList.Open(AName: String; ADistinguishedName: String
@@ -109,7 +107,7 @@ begin
   c := Count;
   SetLength(fItems, c + 1);
 
-  fItems[c] := TVisProperties.Create((fCore as TFrmCore), fCore, ADistinguishedName);
+  fItems[c] := TVisProperties.Create(FrmRSAT, ADistinguishedName);
   fItems[c].Caption := AName;
   if Assigned(fItems[c].Owner) then
     fItems[c].Show();

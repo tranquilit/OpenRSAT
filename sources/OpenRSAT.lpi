@@ -10,7 +10,6 @@
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
       <XPManifest>
-        <DpiAware Value="True"/>
         <LongPathAware Value="True"/>
         <TextName Value="TranquilIT.OpenRSAT.OpenRSAT"/>
         <TextDesc Value="RSAT console by TranquilIT."/>

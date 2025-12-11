@@ -1,4 +1,4 @@
-unit ufrmcore;
+unit ufrmrsat;
 
 {$mode objfpc}{$H+}
 
@@ -18,18 +18,22 @@ uses
   mormot.core.test,
   uldapconfigs,
   ursatldapclient,
-  ursatmodules,
-  uinterfacemodule,
-  uinterfacecore,
   uvisproperties,
   uvispropertieslist,
-  ufrmrsatoptions;
+  ufrmrsatoptions,
+  ufrmmodule,
+  ufrmmodules,
+  ufrmoption,
+  ursat,
+  ursatoption;
 
 type
 
-  { TFrmCore }
+  TFrmRSATOptionClass = class of TFrmRSATOption;
 
-  TFrmCore = class(TFrame, ICore)
+  { TFrmRSAT }
+
+  TFrmRSAT = class(TFrame)
     Action_AdvancedFeatures: TAction;
     ActionList_Core: TActionList;
     Action_LdapConnect: TAction;
@@ -56,52 +60,54 @@ type
     {$pop}
   private
     fLog: TSynLog;
-    //fActive: Boolean;
 
-    /// Centralized LdapClient connexion.
-    fLdapClient: TRsatLdapClient;
+    // Self core
+    fRSAT: TRSAT;
 
-    /// Manage all options in the project. Usefull to easely save and load all
-    /// tool options.
-    fOptions: TRsatOptions;
+    // Frame for option.
+    fFrmRSATOption: TFrmRSATOption;
 
-    fLdapConfigs: TLdapConfigs;
+    // Frame for modules.
+    fFrmModules: TFrmModules;
 
-    /// Manage all rsat modules in the tool.
-    fModules: TRsatModules;
-
+    // Opened properties
     fVisPropertiesList: TVisPropertiesList;
 
-    /// Register all modules to the core.
     procedure LoadModules;
   public
+    FrmRSATOptionClass: TFrameOptionClass;
+
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
 
     /// Register a new module to the core.
-    function RegisterModule(AModule: IModule {TAbstractModule}): boolean;
+    function RegisterModule(FrameModule: TFrameModule): boolean;
     property VisPropertiesList: TVisPropertiesList read fVisPropertiesList;
 
     procedure SetStatusBarText(ItemIndex: Integer; ItemText: RawUtf8);
 
-    //////////
-    /// ICore
-    function GetLdapClient: TRsatLdapClient;
-    function GetLdapConfigs: TLdapConfigs;
-    function GetModules: TRsatModules;
-    function GetRsatOptions: TRsatOptions;
+    // Self core
+    property RSAT: TRSAT read fRSAT;
+
+    // Frame for option.
+    property FrmRSATOption: TFrmRSATOption read fFrmRSATOption;
+
+    property FrmModules: TFrmModules read fFrmModules;
 
     procedure CloseProperty(VisProperty: TForm);
     function OpenProperty(DistinguishedName: RawUtf8; AName: RawUtf8 = ''): TForm;
     procedure Load;
     procedure ChangeDomainController(DomainController: RawUtf8);
 
+  // Expose RSAT
+  private
+    function GetLdapClient: TRsatLdapClient;
+    function GetLdapConfigs: TLdapConfigs;
+    function GetRsatOption: TRsatOption;
+  public
     property LdapClient: TRsatLdapClient read GetLdapClient;
     property LdapConfigs: TLdapConfigs read GetLdapConfigs;
-    property Modules: TRsatModules read GetModules;
-    property RsatOptions: TRsatOptions read GetRsatOptions;
-    /// ICore
-    //////////
+    property RsatOption: TRsatOption read GetRsatOption;
   end;
 
   {$IFDEF OPENRSATTESTS}
@@ -133,6 +139,9 @@ type
   end;
   {$ENDIF}
 
+var
+  FrmRSAT: TFrmRSAT;
+
 implementation
 
 uses
@@ -152,11 +161,12 @@ uses
 
 {$R *.lfm}
 
-{ TFrmCore }
+{ TFrmRSAT }
 
-procedure TFrmCore.Action_LdapConnectExecute(Sender: TObject);
+procedure TFrmRSAT.Action_LdapConnectExecute(Sender: TObject);
 var
   conf: TConnectionSettings;
+  pwd: TFormConnectConfigs;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Execute', [Action_LdapConnect.Name]);
@@ -177,9 +187,17 @@ begin
 
   if not LdapConfigs.IsConfigValid then
   begin
-    if Assigned(fLog) then
-      fLog.Log(sllError, 'Invalid connection entries.');
-    Exit;
+    pwd := TFormConnectConfigs.Create(CoreDataModule, LdapConfigs);
+    try
+      if (pwd.ShowModal <> mrOK) then
+      begin
+        if Assigned(fLog) then
+          fLog.Log(sllError, 'Invalid connection entries.');
+        Exit;
+      end;
+    finally
+      FreeAndNil(pwd);
+    end;
   end;
 
   Screen.Cursor := crHourGlass;
@@ -221,23 +239,23 @@ begin
   SetStatusBarText(1, FormatUtf8('DC: %', [LdapClient.Settings.TargetHost]));
 end;
 
-procedure TFrmCore.Action_AdvancedFeaturesExecute(Sender: TObject);
+procedure TFrmRSAT.Action_AdvancedFeaturesExecute(Sender: TObject);
 begin
-  RsatOptions.AdvancedView := not RsatOptions.AdvancedView;
-  Modules.Refresh;
+  RSAT.RsatOption.AdvancedView := not RSAT.RsatOption.AdvancedView;
+  fFrmModules.Refresh;
 end;
 
-procedure TFrmCore.Action_AdvancedFeaturesUpdate(Sender: TObject);
+procedure TFrmRSAT.Action_AdvancedFeaturesUpdate(Sender: TObject);
 begin
-  Action_AdvancedFeatures.Checked := RsatOptions.AdvancedView;
+  Action_AdvancedFeatures.Checked := RSAT.RsatOption.AdvancedView;
 end;
 
-procedure TFrmCore.Action_LdapConnectUpdate(Sender: TObject);
+procedure TFrmRSAT.Action_LdapConnectUpdate(Sender: TObject);
 begin
 
 end;
 
-procedure TFrmCore.Action_LdapDisconnectExecute(Sender: TObject);
+procedure TFrmRSAT.Action_LdapDisconnectExecute(Sender: TObject);
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Execute', [Action_LdapDisconnect.Name]);
@@ -247,12 +265,12 @@ begin
   SetStatusBarText(0, 'User: NA');
 end;
 
-procedure TFrmCore.Action_LdapDisconnectUpdate(Sender: TObject);
+procedure TFrmRSAT.Action_LdapDisconnectUpdate(Sender: TObject);
 begin
   Action_LdapDisconnect.Enabled := Assigned(LdapClient) and LdapClient.Connected();
 end;
 
-procedure TFrmCore.Action_LdapOptionsExecute(Sender: TObject);
+procedure TFrmRSAT.Action_LdapOptionsExecute(Sender: TObject);
 var
   ConnectionConfig: TFormConnectConfigs;
 begin
@@ -272,110 +290,108 @@ begin
   end;
 end;
 
-procedure TFrmCore.Action_LdapOptionsUpdate(Sender: TObject);
+procedure TFrmRSAT.Action_LdapOptionsUpdate(Sender: TObject);
 begin
   Action_LdapOptions.Enabled := True;
 end;
 
-procedure TFrmCore.Action_OptionsExecute(Sender: TObject);
+procedure TFrmRSAT.Action_OptionsExecute(Sender: TObject);
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Execute');
 
-  With TVisOptions.Create(Self, Self.RsatOptions) do
+  With TVisOptions.Create(Self) do
   try
     ShowModal;
-    Modules.RefreshAll;
+    fFrmModules.RefreshAll;
   finally
     Free;
   end;
 end;
 
-procedure TFrmCore.Action_OptionsUpdate(Sender: TObject);
+procedure TFrmRSAT.Action_OptionsUpdate(Sender: TObject);
 begin
   Action_Options.Enabled := True;
 end;
 
-procedure TFrmCore.PageControl1Change(Sender: TObject);
+procedure TFrmRSAT.PageControl1Change(Sender: TObject);
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Change', [Self.Name]);
 
-  Modules.Change(PageControl1.ActivePage.Name);
+  fFrmModules.Change(PageControl1.ActivePage.Name);
 end;
 
-procedure TFrmCore.Timer_AutoConnectTimer(Sender: TObject);
+procedure TFrmRSAT.Timer_AutoConnectTimer(Sender: TObject);
 begin
   Timer_AutoConnect.Enabled := False;
   Action_LdapConnect.Execute;
 end;
 
-procedure TFrmCore.SetStatusBarText(ItemIndex: Integer; ItemText: RawUtf8);
+procedure TFrmRSAT.SetStatusBarText(ItemIndex: Integer; ItemText: RawUtf8);
 begin
   StatusBar1.Panels.Items[ItemIndex].Text := ItemText;
   StatusBar1.Panels.Items[ItemIndex].Width := StatusBar1.Canvas.TextWidth(StatusBar1.Panels.Items[ItemIndex].Text) + 8;
 end;
 
-procedure TFrmCore.LoadModules;
+procedure TFrmRSAT.LoadModules;
 var
-  AModule: TFrameModule;
   aLog: ISynLog;
+  FrameModule: TFrameModule;
 
-  procedure LoadModule(AModule: TFrameModule);
+  procedure LoadModule(FrameModule: TFrameModule);
   var
     NewTab: TTabSheet;
   begin
-    if not AModule.GetModuleEnabled then
+    if not FrameModule.Module.GetModuleEnabled then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllInfo, '% - Module "%" not enabled.', [Self.Name, AModule.GetModuleName]);
+        fLog.Log(sllInfo, '% - Module "%" not enabled.', [Self.Name, FrameModule.GetModuleName]);
       Exit;
     end;
 
-    AModule.Load;
-    if Assigned(AModule.GetOptions) then
-      RsatOptions.AddOptions(AModule.GetOptions);
+    FrameModule.Load;
     NewTab := PageControl1.AddTabSheet;
-    NewTab.Caption := AModule.GetModuleDisplayName;
-    NewTab.Name := AModule.GetModuleName;
+    NewTab.Caption := FrameModule.GetModuleDisplayName;
+    NewTab.Name := FrameModule.GetModuleName;
 
-    AModule.Parent := NewTab;
-    AModule.Align := alClient;
+    FrameModule.Parent := NewTab;
+    FrameModule.Align := alClient;
 
     PageControl1.ShowTabs := (PageControl1.PageCount <> 1);
 
     if Assigned(fLog) then
-      fLog.Log(sllInfo, '% - Module "%" loaded.', [Self.Name, AModule.GetModuleName]);
+      fLog.Log(sllInfo, '% - Module "%" loaded.', [Self.Name, FrameModule.GetModuleName]);
   end;
 
 begin
   if Assigned(fLog) then
     aLog := fLog.Enter('% - LoadModules', [Self.Name]);
 
-  AModule := TFrmModuleADUC.Create(Self, Self);
-  if RegisterModule(AModule) then
-    LoadModule(AModule);
-  Modules.Change(AModule.GetModuleName);
+  FrameModule := TFrmModuleADUC.Create(Self);
+  if RegisterModule(FrameModule) then
+    LoadModule(FrameModule);
+  FrmModules.Change(FrameModule.GetModuleName);
 
-  AModule := TFrmModuleDNS.Create(Self, Self);
-  if RegisterModule(AModule) then
-    LoadModule(AModule);
+  FrameModule := TFrmModuleDNS.Create(Self);
+  if RegisterModule(FrameModule) then
+    LoadModule(FrameModule);
 
-  AModule := TFrmModuleSitesAndServices.Create(Self, Self);
-  if RegisterModule(AModule) then
-    LoadModule(AModule);
+  FrameModule := TFrmModuleSitesAndServices.Create(Self);
+  if RegisterModule(FrameModule) then
+    LoadModule(FrameModule);
 
-  AModule := TFrmModuleADSI.Create(Self, Self);
-  if RegisterModule(AModule) then
-    LoadModule(AModule);
+  FrameModule := TFrmModuleADSI.Create(Self);
+  if RegisterModule(FrameModule) then
+    LoadModule(FrameModule);
 
-  fOptions.Load;
+  RsatOption.Load;
 
-  if fLdapConfigs.AutoConnect then
+  if LdapConfigs.AutoConnect then
     Timer_AutoConnect.Enabled := True;
 end;
 
-constructor TFrmCore.Create(TheOwner: TComponent);
+constructor TFrmRSAT.Create(TheOwner: TComponent);
 var
   aLog: ISynLog;
 begin
@@ -388,80 +404,74 @@ begin
 
   Application.CreateForm(TCoreDataModule, CoreDataModule);
 
-  fLdapClient := TRsatLdapClient.Create;
-  fOptions := TRsatOptions.Create;
-  fLdapConfigs := TLdapConfigs.Create;
-  fModules := TRsatModules.Create;
+  FrmRSATOptionClass := TFrmRSATOption;
 
-  fLdapConfigs.LoadConfig();
-  RsatOptions.Load;
+  fRSAT := TRSAT.Create;
+  fFrmRSATOption := TFrmRSATOption.Create(Self);
+  fFrmModules := TFrmModules.Create;
 
-  fVisPropertiesList := TVisPropertiesList.Create(Self);
+  fRSAT.Load;
+
+  fVisPropertiesList := TVisPropertiesList.Create;
 
   StatusBar1.Canvas.Font.Assign(StatusBar1.Font);
 end;
 
-destructor TFrmCore.Destroy;
+destructor TFrmRSAT.Destroy;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Destroy', [Self.Name]);
 
-  FreeAndNil(fLdapClient);
-  FreeAndNil(fOptions);
-  FreeAndNil(fLdapConfigs);
-  FreeAndNil(fModules);
+  FreeAndNil(fRSAT);
+  FreeAndNil(fFrmRSATOption);
+  FreeAndNil(fFrmModules);
 
   FreeAndNil(fVisPropertiesList);
 
   inherited Destroy;
 end;
 
-function TFrmCore.RegisterModule(AModule: IModule): boolean;
+function TFrmRSAT.RegisterModule(FrameModule: TFrameModule): boolean;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Register Module', [Self.Name]);
 
-  result := fModules.RegisterModule(AModule);
+  result := FrmModules.RegisterModule(FrameModule);
 end;
 
-function TFrmCore.GetLdapClient: TRsatLdapClient;
+function TFrmRSAT.GetLdapClient: TRsatLdapClient;
 begin
-  result := fLdapClient;
+  result := RSAT.LdapClient;
 end;
 
-function TFrmCore.GetLdapConfigs: TLdapConfigs;
+function TFrmRSAT.GetLdapConfigs: TLdapConfigs;
 begin
-  result := fLdapConfigs;
+  result := RSAT.LdapConfigs;
 end;
 
-function TFrmCore.GetModules: TRsatModules;
+function TFrmRSAT.GetRsatOption: TRsatOption;
 begin
-  result := fModules;
+  result := RSAT.RsatOption;
 end;
 
-function TFrmCore.GetRsatOptions: TRsatOptions;
-begin
-  result := fOptions;
-end;
-
-procedure TFrmCore.CloseProperty(VisProperty: TForm);
+procedure TFrmRSAT.CloseProperty(VisProperty: TForm);
 begin
   fVisPropertiesList.Close((VisProperty as TVisProperties));
 end;
 
-function TFrmCore.OpenProperty(DistinguishedName: RawUtf8; AName: RawUtf8): TForm;
+function TFrmRSAT.OpenProperty(DistinguishedName: RawUtf8; AName: RawUtf8): TForm;
 begin
   if AName = '' then
     AName := GetDNName(DistinguishedName);
   result := fVisPropertiesList.Open(AName, DistinguishedName);
 end;
 
-procedure TFrmCore.Load;
+procedure TFrmRSAT.Load;
 begin
   LoadModules;
 end;
 
-procedure TFrmCore.ChangeDomainController(DomainController: RawUtf8);
+procedure TFrmRSAT.ChangeDomainController(DomainController: RawUtf8);
 begin
   LdapClient.DomainControllerName := DomainController;
   SetStatusBarText(1, FormatUtf8('DC: %', [DomainController]));
@@ -510,9 +520,9 @@ end;
 
 procedure TTestFrmCore.MethodCreate;
 var
-  Core: TFrmCore;
+  Core: TFrmRSAT;
 begin
-  Core := TFrmCore.Create(nil);
+  Core := TFrmRSAT.Create(nil);
   try
     Check(Assigned(Core));
     Check(Assigned(Core.fLog));
@@ -528,10 +538,10 @@ end;
 
 procedure TTestFrmCore.MethodRegisterModule;
 var
-  Core: TFrmCore;
+  Core: TFrmRSAT;
   Module: IModule;
 begin
-  Core := TFrmCore.Create(nil);
+  Core := TFrmRSAT.Create(nil);
   try
     Check(not Core.RegisterModule(nil));
   finally
@@ -539,7 +549,7 @@ begin
   end;
 
   Module := TTestModule.Create;
-  Core := TFrmCore.Create(nil);
+  Core := TFrmRSAT.Create(nil);
   try
     Check(Core.RegisterModule(Module));
   finally
@@ -549,9 +559,9 @@ end;
 
 procedure TTestFrmCore.MethodGetLdapClient;
 var
-  Core: TFrmCore;
+  Core: TFrmRSAT;
 begin
-  Core := TFrmCore.Create(nil);
+  Core := TFrmRSAT.Create(nil);
   try
     Check(Assigned(Core.GetLdapClient));
   finally
@@ -561,9 +571,9 @@ end;
 
 procedure TTestFrmCore.MethodGetLdapConfigs;
 var
-  Core: TFrmCore;
+  Core: TFrmRSAT;
 begin
-  Core := TFrmCore.Create(nil);
+  Core := TFrmRSAT.Create(nil);
   try
     Check(Assigned(Core.GetLdapConfigs));
   finally
@@ -573,9 +583,9 @@ end;
 
 procedure TTestFrmCore.MethodGetModules;
 var
-  Core: TFrmCore;
+  Core: TFrmRSAT;
 begin
-  Core := TFrmCore.Create(nil);
+  Core := TFrmRSAT.Create(nil);
   try
     Check(Assigned(Core.GetModules));
   finally
@@ -585,9 +595,9 @@ end;
 
 procedure TTestFrmCore.MethodGetRsatOptions;
 var
-  Core: TFrmCore;
+  Core: TFrmRSAT;
 begin
-  Core := TFrmCore.Create(nil);
+  Core := TFrmRSAT.Create(nil);
   try
     Check(Assigned(Core.GetRsatOptions));
   finally
@@ -597,10 +607,10 @@ end;
 
 procedure TTestFrmCore.MethodCloseProperty;
 var
-  Core: TFrmCore;
+  Core: TFrmRSAT;
   VisProperties: TForm;
 begin
-  Core := TFrmCore.Create(nil);
+  Core := TFrmRSAT.Create(nil);
   try
     Check(Core.VisPropertiesList.Count = 0);
     VisProperties := Core.OpenProperty('test', 'testtest');
@@ -614,10 +624,10 @@ end;
 
 procedure TTestFrmCore.MethodOpenProperty;
 var
-  Core: TFrmCore;
+  Core: TFrmRSAT;
   VisProperties: TForm;
 begin
-  Core := TFrmCore.Create(nil);
+  Core := TFrmRSAT.Create(nil);
   try
     Check(Core.VisPropertiesList.Count = 0);
     VisProperties := Core.OpenProperty('test', 'testtest');

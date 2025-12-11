@@ -1,7 +1,7 @@
 object VisOptions: TVisOptions
-  Left = 2672
+  Left = 2421
   Height = 478
-  Top = 262
+  Top = 167
   Width = 727
   ActiveControl = TreeView1
   Caption = 'Options'
@@ -48,11 +48,11 @@ object VisOptions: TVisOptions
       Height = 24
       Top = 8
       Width = 72
-      Action = Action_Cancel
       Anchors = [akRight]
       BorderSpacing.Right = 8
       BorderSpacing.Bottom = 8
       Cancel = True
+      Caption = 'Cancel'
       ModalResult = 2
       ImageIndex = 6
       TabOrder = 1

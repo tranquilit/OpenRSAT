@@ -19,8 +19,7 @@ uses
   mormot.core.base,
   mormot.core.log,
   mormot.core.variants,
-  mormot.net.ldap,
-  uinterfacecore;
+  mormot.net.ldap;
 
 type
 
@@ -74,14 +73,11 @@ type
 
   TChangeDomainController = class
   private
-    fCore: ICore;
     fLog: TSynLog;
     fSitesData: TDocVariantData;
 
     function GetSite(DistinguishedName: RawUtf8): RawUtf8;
   public
-    property Core: ICore read fCore write fCore;
-
     function GetCurrentServer: RawUtf8;
     function RetrieveServers(CallBack: TCallBack; RetrieveExtra: Boolean = True): Boolean;
     function RetrieveServersExtra(CallBack: TCallBack): Boolean;
@@ -122,8 +118,6 @@ type
     fSearchWord: RawUtf8;
     fAllowClose: Boolean;
 
-    function GetCore: ICore;
-    procedure SetCore(AValue: ICore);
     procedure UpdateCurrentServer;
     procedure FillGrid;
     procedure OnRetrievedServers(data: Pointer);
@@ -132,7 +126,6 @@ type
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
 
-    property Core: ICore read GetCore write SetCore;
     function DomainController: RawUtf8;
   end;
 
@@ -158,7 +151,8 @@ uses
   ucommon,
   ucommonui,
   ursatldapclient,
-  ursatldapclientui;
+  ursatldapclientui,
+  ufrmrsat;
 
 var
   MsdsBehaviorVersionValue: Array[TMsdsBehaviorVersion] of String;
@@ -266,8 +260,8 @@ end;
 function TChangeDomainController.GetCurrentServer: RawUtf8;
 begin
   result := '';
-  if Assigned(fCore) and Assigned(fCore.LdapClient) and Assigned(fCore.LdapClient.Settings) then
-    result := fCore.LdapClient.Settings.TargetHost;
+  if Assigned(FrmRSAT) and Assigned(FrmRSAT.LdapClient) and Assigned(FrmRSAT.LdapClient.Settings) then
+    result := FrmRSAT.LdapClient.Settings.TargetHost;
 end;
 
 function TChangeDomainController.RetrieveServers(CallBack: TCallBack;
@@ -279,10 +273,10 @@ var
   NewObject: PDocVariantData;
 begin
   result := False;
-  if not Assigned(fCore) or not Assigned(fCore.LdapClient) then
+  if not Assigned(FrmRSAT) or not Assigned(FrmRSAT.LdapClient) then
     Exit;
 
-  Ldap := fCore.LdapClient;
+  Ldap := FrmRSAT.LdapClient;
 
   Ldap.SearchBegin();
   try
@@ -330,7 +324,7 @@ var
   DistinguishedName: RawUtf8;
 begin
   result := False;
-  Ldap := fCore.LdapClient;
+  Ldap := FrmRSAT.LdapClient;
 
   Ldap.SearchBegin();
   try
@@ -369,7 +363,7 @@ var
   test: TLdapClient;
 begin
   result := False;
-  test := TLdapClient.Create(fCore.LdapClient.Settings);
+  test := TLdapClient.Create(FrmRSAT.LdapClient.Settings);
   try
     test.Settings.TargetHost := DomainController;
     test.Settings.KerberosSpn := '';
@@ -378,7 +372,7 @@ begin
       ShowLdapConnectError(test);
       Exit;
     end;
-    fCore.ChangeDomainController(DomainController);
+    FrmRSAT.ChangeDomainController(DomainController);
     result := True;
   finally
     FreeAndNil(test);
@@ -390,7 +384,7 @@ var
   test: TLdapClient;
 begin
   result := False;
-  test := TLdapClient.Create(fCore.LdapClient.Settings);
+  test := TLdapClient.Create(FrmRSAT.LdapClient.Settings);
   try
     test.Settings.TargetHost := DomainController;
     test.Settings.KerberosSpn := '';
@@ -459,19 +453,6 @@ begin
   Label2.Caption := fChangeDomainController.GetCurrentServer;
 end;
 
-function TVisChangeDomainController.GetCore: ICore;
-begin
-  result := nil;
-  if Assigned(fChangeDomainController) then
-    result := fChangeDomainController.Core;
-end;
-
-procedure TVisChangeDomainController.SetCore(AValue: ICore);
-begin
-  if Assigned(fChangeDomainController) then
-    fChangeDomainController.Core := AValue;
-end;
-
 procedure TVisChangeDomainController.FillGrid;
 begin
   fChangeDomainController.RetrieveServers(@OnRetrievedServers);
@@ -504,7 +485,7 @@ begin
       continue;
     thread := TThreadIsDCOnline.Create(True);
     thread.SetDomainController(Row^.S['name']);
-    thread.SetSettings(fChangeDomainController.Core.LdapClient.Settings);
+    thread.SetSettings(FrmRSAT.LdapClient.Settings);
     thread.SetCallBack(@UpdateRow);
     thread.FreeOnTerminate := True;
     thread.Start;

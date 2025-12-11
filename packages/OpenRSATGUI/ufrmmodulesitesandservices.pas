@@ -15,16 +15,21 @@ uses
   ActnList,
   Dialogs,
   Menus,
+  Types,
   VirtualTrees,
   tis.ui.grid.core,
   mormot.core.base,
   mormot.core.log,
   mormot.core.variants,
   mormot.net.ldap,
-  ufrmmoduleadssoptions,
   ucoredatamodule,
-  uinterfacecore,
-  uinterfacemodule, Types;
+  ufrmmodule,
+  ufrmmoduleadssoptions,
+  ufrmoption,
+  umoduleadss,
+  umoduleadssoption,
+  umodule,
+  uoption;
 
 type
 
@@ -113,7 +118,6 @@ type
     procedure TreeView1GetImageIndex(Sender: TObject; Node: TTreeNode);
     {$pop}
   private
-    fCore: ICore;
     fLog: TSynLog;
     fEnabled: Boolean;
     fUpdating: Integer;
@@ -123,7 +127,8 @@ type
     fADSSSiteNode: TADSSTreeNode;
     fADSSServiceNode: TADSSTreeNode;
 
-    fOptions: TModuleADSSOptions;
+    fFrmOption: TFrmModuleADSSOptions;
+    fModule: TModuleADSS;
 
     procedure RefreshLdapNode(Node: TADSSTreeNode = nil);
 
@@ -142,22 +147,21 @@ type
     procedure OnLdapClientConnect(LdapClient: TLdapClient);
     procedure OnLdapClientClose(LdapClient: TLdapClient);
 
-    procedure OnADSSOptionsChanged(Options: TOptions);
+    procedure OnADSSOptionsChanged(Option: TOption);
 
     function CustomSortSitesNode(Node1, Node2: TTreeNode): integer;
     function CustomSortSubnetsNode(Node1, Node2: TTreeNode): integer;
   public
-    constructor Create(TheOwner: TComponent; ACore: ICore); reintroduce;
+    constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
 
+  protected
+    function GetModule: TModule; override;
+    function GetFrmOption: TFrameOption; override;
+    function GetFrmOptionClass: TFrameOptionClass; override;
   published
     ////////////////
     /// TFrameModule
-    function GetModuleEnabled: Boolean; override;
-    procedure SetModuleEnabled(AValue: Boolean); override;
-    function GetModuleName: String; override;
-    function GetModuleDisplayName: String; override;
-    function GetOptions: TOptions; override;
     procedure Refresh; override;
     procedure Load; override;
     ///
@@ -172,7 +176,8 @@ uses
   ucommonui,
   uDarkStyleParams,
   ursatldapclientui,
-  uvisnewobject;
+  uvisnewobject,
+  ufrmrsat;
 
 {$R *.lfm}
 
@@ -296,7 +301,7 @@ end;
 
 procedure TFrmModuleSitesAndServices.Action_RefreshUpdate(Sender: TObject);
 begin
-  Action_Refresh.Enabled := Assigned(fCore) and Assigned(fCore.LdapClient) and fCore.LdapClient.Connected;
+  Action_Refresh.Enabled := Assigned(FrmRSAT) and Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
 procedure TFrmModuleSitesAndServices.PopupMenu1Popup(Sender: TObject);
@@ -341,9 +346,9 @@ procedure TFrmModuleSitesAndServices.Action_NewSiteExecute(Sender: TObject);
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotSite, Format('CN=Sites,%s', [fCore.LdapClient.ConfigDN]), fCore.LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotSite, Format('CN=Sites,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
   try
-    vis.Ldap := fCore.LdapClient;
+    vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
     RefreshLdapNode();
   finally
@@ -364,9 +369,9 @@ var
     if (mResult <> mrYes) and (mResult <> mrYesToAll) then
       Exit;
 
-    if not fCore.LdapClient.Delete(distinguishedName) then
+    if not FrmRSAT.LdapClient.Delete(distinguishedName) then
     begin
-      case fCore.LdapClient.ResultError of
+      case FrmRSAT.LdapClient.ResultError of
         leNotAllowedOnNonLeaf:
         begin
           if (mResultNonLeaf = mrNoToAll) or (mResultNonLeaf = mrCancel) then
@@ -376,9 +381,9 @@ var
 
           if (mResultNonLeaf <> mrYes) and (mResultNonLeaf <> mrYesToAll) then
             Exit;
-          if not fCore.LdapClient.Delete((TreeView1.Selected as TADSSTreeNode).DistinguishedName, True) then
+          if not FrmRSAT.LdapClient.Delete((TreeView1.Selected as TADSSTreeNode).DistinguishedName, True) then
           begin
-            ShowLdapDeleteError(fCore.LdapClient);
+            ShowLdapDeleteError(FrmRSAT.LdapClient);
             Exit;
           end;
         end;
@@ -446,16 +451,16 @@ end;
 
 procedure TFrmModuleSitesAndServices.Action_NewSiteUpdate(Sender: TObject);
 begin
-  Action_NewSite.Enabled := Assigned(fCore.LdapClient) and fCore.LdapClient.Connected;
+  Action_NewSite.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
 procedure TFrmModuleSitesAndServices.Action_NewSubnetExecute(Sender: TObject);
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotSubnet, Format('CN=Subnets,CN=Sites,%s', [fCore.LdapClient.ConfigDN]), fCore.LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotSubnet, Format('CN=Subnets,CN=Sites,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
   try
-    vis.Ldap := fCore.LdapClient;
+    vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
     RefreshLdapNode();
   finally
@@ -465,7 +470,7 @@ end;
 
 procedure TFrmModuleSitesAndServices.Action_NewSubnetUpdate(Sender: TObject);
 begin
-  Action_NewSubnet.Enabled := Assigned(fCore.LdapClient) and fCore.LdapClient.Connected;
+  Action_NewSubnet.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
 procedure TFrmModuleSitesAndServices.Action_PropertyExecute(Sender: TObject);
@@ -487,12 +492,12 @@ begin
     PropertyName := TisGrid1.SelectedRows._[0]^.S['name'];
     DistinguishedName := TisGrid1.SelectedRows._[0]^.S['distinguishedName'];
   end;
-  fCore.OpenProperty(DistinguishedName, PropertyName);
+  FrmRSAT.OpenProperty(DistinguishedName, PropertyName);
 end;
 
 procedure TFrmModuleSitesAndServices.Action_PropertyUpdate(Sender: TObject);
 begin
-  Action_Property.Enabled := Assigned(fCore) and Assigned(fCore.LdapClient) and fCore.LdapClient.Connected;
+  Action_Property.Enabled := Assigned(FrmRSAT) and Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
 procedure TFrmModuleSitesAndServices.TisGrid1DblClick(Sender: TObject);
@@ -507,7 +512,7 @@ begin
   if Assigned(Node) then
     Node.Selected := True
   else
-    fCore.OpenProperty(TisGrid1.FocusedRow^.S['distinguishedName'], TisGrid1.FocusedRow^.S['name']);
+    FrmRSAT.OpenProperty(TisGrid1.FocusedRow^.S['distinguishedName'], TisGrid1.FocusedRow^.S['name']);
 end;
 
 procedure TFrmModuleSitesAndServices.TisGrid1GetImageIndex(
@@ -524,7 +529,7 @@ begin
     'name':
     begin
       if ImageIndex < 0 then
-        ImageIndex := CoreDataModule.objectClassToImageIndex(NodeData^.S['type']);
+        ImageIndex := ObjectClassToImageIndex(NodeData^.S['type']);
     end;
   end;
 end;
@@ -563,7 +568,7 @@ procedure TFrmModuleSitesAndServices.TreeView1GetImageIndex(Sender: TObject;
 begin
   if Node.ImageIndex >= 0 then
     Exit;
-  Node.ImageIndex := CoreDataModule.objectClassToImageIndex((Node as TADSSTreeNode).ObjectType);
+  Node.ImageIndex := ObjectClassToImageIndex((Node as TADSSTreeNode).ObjectType);
   Node.SelectedIndex := Node.ImageIndex;
 end;
 
@@ -583,20 +588,20 @@ begin
   if not Assigned(Node) or (fUpdating > 0) then
     Exit;
   ChildCache.Init;
-  fCore.LdapClient.SearchBegin();
+  FrmRSAT.LdapClient.SearchBegin();
   try
     c := Screen.Cursor;
     Screen.Cursor := crHourGlass;
-    fCore.LdapClient.SearchScope := lssSingleLevel;
+    FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
     Filter := '(&(!(objectClass=nTDSSiteSettings))(!(objectClass=nTDSConnection)))';
     repeat
-      if not fCore.LdapClient.Search(Node.DistinguishedName, False, Filter, ['*']) then
+      if not FrmRSAT.LdapClient.Search(Node.DistinguishedName, False, Filter, ['*']) then
       begin
-        ShowLdapSearchError(fCore.LdapClient);
+        ShowLdapSearchError(FrmRSAT.LdapClient);
         Exit;
       end;
 
-      for SearchResult in fCore.LdapClient.SearchResult.Items do
+      for SearchResult in FrmRSAT.LdapClient.SearchResult.Items do
       begin
         if not Assigned(SearchResult) then
           Continue;
@@ -612,7 +617,7 @@ begin
           FreeAndNil(ChildNode.fAttributes);
         ChildNode.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone);
       end;
-    until fCore.LdapClient.SearchCookie = '';
+    until FrmRSAT.LdapClient.SearchCookie = '';
     for i := 0 to Node.Count - 1 do
     begin
       if not ChildCache.Exists(Node.Items[Node.Count - 1 - i].Text) then
@@ -620,7 +625,7 @@ begin
     end;
     Node.HasChildren := Node.Count > 0;
   finally
-    fCore.LdapClient.SearchEnd;
+    FrmRSAT.LdapClient.SearchEnd;
     Screen.Cursor := c;
   end;
   if node = fADSSSiteNode then
@@ -696,20 +701,20 @@ begin
       UpdateGridColumns(['name', 'type', 'description']);
   end;
   TisGrid1.BeginUpdate;
-  fCore.LdapClient.SearchBegin();
+  FrmRSAT.LdapClient.SearchBegin();
   try
     c := Screen.Cursor;
     Screen.Cursor := crHourGlass;
-    fCore.LdapClient.SearchScope := lssSingleLevel;
+    FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
     Filter := '';
     repeat
-      if not fCore.LdapClient.Search(Node.DistinguishedName, False, Filter, ['*']) then
+      if not FrmRSAT.LdapClient.Search(Node.DistinguishedName, False, Filter, ['*']) then
       begin
-        ShowLdapSearchError(fCore.LdapClient);
+        ShowLdapSearchError(FrmRSAT.LdapClient);
         Exit;
       end;
 
-      for SearchResult in fCore.LdapClient.SearchResult.Items do
+      for SearchResult in FrmRSAT.LdapClient.SearchResult.Items do
       begin
         if not Assigned(SearchResult) then
           continue;
@@ -732,9 +737,9 @@ begin
         TisGrid1.Data.AddItem(RowData);
         RowData.Clear;
       end;
-    until fCore.LdapClient.SearchCookie = '';
+    until FrmRSAT.LdapClient.SearchCookie = '';
   finally
-    fcore.LdapClient.SearchEnd;
+    FrmRSAT.LdapClient.SearchEnd;
     TisGrid1.EndUpdate;
     TisGrid1.LoadData();
     Screen.Cursor := c;
@@ -1022,7 +1027,7 @@ begin
   fADSSSiteNode.HasChildren := True;
   fADSSServiceNode := (TreeView1.Items.Add(nil, 'Services') as TADSSTreeNode);
   fADSSServiceNode.HasChildren := True;
-  fADSSServiceNode.Visible := fOptions.ShowService;
+  fADSSServiceNode.Visible := fModule.ShowService;
 
   LdapClient.SearchBegin();
   BeginUpdate;
@@ -1067,9 +1072,9 @@ begin
   TisGrid1.Clear;
 end;
 
-procedure TFrmModuleSitesAndServices.OnADSSOptionsChanged(Options: TOptions);
+procedure TFrmModuleSitesAndServices.OnADSSOptionsChanged(Option: TOption);
 var
-  ADSSOptions: TModuleADSSOptions absolute Options;
+  ADSSOption: TModuleADSSOption absolute Option;
 begin
   if Assigned(fADSSSiteNode) then
   begin
@@ -1080,7 +1085,7 @@ begin
   if Assigned(fADSSServiceNode) then
   begin
     fADSSServiceNode.DeleteChildren;
-    fADSSServiceNode.Visible := ADSSOptions.ShowService;
+    fADSSServiceNode.Visible := ADSSOption.ShowService;
   end;
 end;
 
@@ -1121,24 +1126,23 @@ begin
   result := CompareIP(ParseIP(IP1), ParseIP(IP2));
 end;
 
-constructor TFrmModuleSitesAndServices.Create(TheOwner: TComponent; ACore: ICore
-  );
+constructor TFrmModuleSitesAndServices.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
   fEnabled := True;
-  fCore := ACore;
   fUpdating := 0;
   fLog := TSynLog.Add;
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create', Self);
 
-  fOptions := TModuleADSSOptions.Create;
+  fModule := TModuleADSS.Create;
+  fFrmOption := TFrmModuleADSSOptions.Create(Self, fModule.ADSSOption);
 
-  fCore.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
-  fCore.LdapClient.RegisterObserverClose(@OnLdapClientClose);
+  FrmRSAT.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
+  FrmRSAT.LdapClient.RegisterObserverClose(@OnLdapClientClose);
 
-  fOptions.RegisterObserver(@OnADSSOptionsChanged);
+  fModule.GetOption.RegisterObserver(@OnADSSOptionsChanged);
 
   {$IFDEF WINDOWS}
   Image1.Visible := not IsDarkModeEnabled;
@@ -1151,34 +1155,10 @@ end;
 
 destructor TFrmModuleSitesAndServices.Destroy;
 begin
-  FreeAndNil(fOptions);
+  FreeAndNil(fModule);
+  FreeAndNil(fFrmOption);
 
   inherited Destroy;
-end;
-
-function TFrmModuleSitesAndServices.GetModuleEnabled: Boolean;
-begin
-  result := fEnabled;
-end;
-
-procedure TFrmModuleSitesAndServices.SetModuleEnabled(AValue: Boolean);
-begin
-  fEnabled := AValue;
-end;
-
-function TFrmModuleSitesAndServices.GetModuleName: String;
-begin
-  result := rsModuleADSSName;
-end;
-
-function TFrmModuleSitesAndServices.GetModuleDisplayName: String;
-begin
-  result := rsModuleADSSDisplayName;
-end;
-
-function TFrmModuleSitesAndServices.GetOptions: TOptions;
-begin
-  result := fOptions;
 end;
 
 procedure TFrmModuleSitesAndServices.Refresh;
@@ -1189,6 +1169,21 @@ end;
 procedure TFrmModuleSitesAndServices.Load;
 begin
 
+end;
+
+function TFrmModuleSitesAndServices.GetModule: TModule;
+begin
+  result := fModule;
+end;
+
+function TFrmModuleSitesAndServices.GetFrmOption: TFrameOption;
+begin
+  result := fFrmOption;
+end;
+
+function TFrmModuleSitesAndServices.GetFrmOptionClass: TFrameOptionClass;
+begin
+  result := TFrmModuleADSSOptions;
 end;
 
 end.

@@ -121,7 +121,7 @@ begin
     Exit;
   fObjectClass := AValue;
 
-  ImageIndex := CoreDataModule.objectClassToImageIndex(LastObjectClass);
+  ImageIndex := ObjectClassToImageIndex(LastObjectClass);
   SelectedIndex := ImageIndex;
 end;
 
@@ -243,8 +243,8 @@ begin
     NodeData := PDocVariantData(Node.Data)^.A['objectClass'];
     if NodeData^.Count > 0 then
     begin
-      Node.ImageIndex    := CoreDataModule.objectClassToImageIndex(NodeData^.ToRawUtf8DynArray[NodeData^.Count - 1]);
-      Node.SelectedIndex := CoreDataModule.objectClassToImageIndex(NodeData^.ToRawUtf8DynArray[NodeData^.Count - 1]);
+      Node.ImageIndex    := ObjectClassToImageIndex(NodeData^.ToRawUtf8DynArray[NodeData^.Count - 1]);
+      Node.SelectedIndex := ObjectClassToImageIndex(NodeData^.ToRawUtf8DynArray[NodeData^.Count - 1]);
     end;
     Node := Node.GetNext();
   end;

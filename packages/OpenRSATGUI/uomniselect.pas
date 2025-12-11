@@ -108,7 +108,7 @@ begin
     Item.ShowAlwaysCheckable := True;
     Item.RightJustify := True;
     Item.Caption := objectClass;
-    Item.ImageIndex := CoreDataModule.objectClassToImageIndex(objectClass);
+    Item.ImageIndex := ObjectClassToImageIndex(objectClass);
     Item.OnClick := @Action_MenuItemClickExecute;
     PopupMenu_objList.Items.Add(Item); // Item is stored inside so no memleak
   end;
@@ -258,7 +258,7 @@ begin
   if TisGrid_Items.FindColumnByIndex(Column).PropertyName <> 'name' then
     Exit;
   objectClass := TisGrid_Items.GetNodeAsPDocVariantData(Node)^.A['objectClass']^.ToRawUtf8DynArray;
-  ImageIndex := CoreDataModule.objectClassToImageIndex(objectClass[Length(objectClass) - 1]);
+  ImageIndex := ObjectClassToImageIndex(objectClass[Length(objectClass) - 1]);
 end;
 
 procedure TVisOmniselect.ToolButton_AttributesListClick(Sender: TObject);

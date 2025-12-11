@@ -19,8 +19,7 @@ uses
   DateTimePicker,
   mormot.core.variants,
   mormot.net.ldap,
-  mormot.core.base,
-  uinterfacecore;
+  mormot.core.base;
 
 type
 
@@ -95,7 +94,6 @@ type
     fData: TLdapAttribute;
     fAttributeName: RawUtf8;
     fAttr: TLdapAttribute;
-    fCore: ICore;
 
     procedure EditString(isSingleValue: Boolean);
     procedure EditTime(isSingleValue: Boolean);
@@ -106,7 +104,7 @@ type
     procedure GetAttrSingleTime;
     procedure GetAttrMultiTime;
   public
-    constructor Create(TheOwner: TComponent; ACore: ICore; Data: TLdapAttribute; AttributeName: RawUtf8); reintroduce;
+    constructor Create(TheOwner: TComponent; Data: TLdapAttribute; AttributeName: RawUtf8); reintroduce;
     destructor Destroy; override;
 
     property Attr: TLdapAttribute read GetAttr;
@@ -120,6 +118,7 @@ uses
   mormot.core.text,
   mormot.core.datetime,
   mormot.core.os,
+  ufrmrsat,
   ucommon,
   ucommonui;
 
@@ -369,7 +368,7 @@ begin
   Caption := rsMultiTimeEditor;
 end;
 
-constructor TVisAttributeEditor.Create(TheOwner: TComponent; ACore: ICore;
+constructor TVisAttributeEditor.Create(TheOwner: TComponent;
   Data: TLdapAttribute; AttributeName: RawUtf8);
 var
   attributeSyntax, oMSyntax, oMObjectClass: RawUtf8;
@@ -384,12 +383,10 @@ begin
   else
     fData := TLdapAttribute.Create(fAttributeName, atUndefined);
 
-  fCore := ACore;
-
   PageControl1.ShowTabs := False;
 
-  Attributes := fCore.LdapClient.SearchObject(
-    FormatUtf8('CN=Schema,%', [fcore.LdapClient.ConfigDN]),
+  Attributes := FrmRSAT.LdapClient.SearchObject(
+    FormatUtf8('CN=Schema,%', [FrmRSAT.LdapClient.ConfigDN]),
     FormatUtf8('(lDAPDisplayName=%)', [LdapEscape(fData.AttributeName)]),
     ['attributeSyntax', 'oMSyntax', 'oMObjectClass', 'isSingleValued'],
     lssSingleLevel

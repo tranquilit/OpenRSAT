@@ -6,7 +6,9 @@ interface
 
 uses
   Classes,
-  SysUtils, Controls,
+  SysUtils,
+  Controls,
+  mormot.core.base,
   mormot.net.ldap;
 
 type
@@ -60,17 +62,11 @@ type
   TCoreDataModule = class(TDataModule)
     ImageList1: TImageList;
     ImageList2: TImageList;
-  private
-    function GetConfigFilePath: String;
-    function GetConfigFolderPath: String;
   public
     constructor Create(AOwner: TComponent); override;
-
-    function objectClassToImageIndex(ObjectClass: String): Integer;
-  published
-    property ConfigFolderPath: String read GetConfigFolderPath;
-    property ConfigFilePath: String read GetConfigFilePath;
   end;
+
+function ObjectClassToImageIndex(ObjectClass: RawUtf8): Integer;
 
 var
   CoreDataModule: TCoreDataModule;
@@ -80,26 +76,7 @@ implementation
 uses
   mormot.core.text;
 
-{$R *.lfm}
-
-{ TCoreDataModule }
-
-function TCoreDataModule.GetConfigFilePath: String;
-begin
-  result := MakePath([ConfigFolderPath, 'config.ini']);
-end;
-
-function TCoreDataModule.GetConfigFolderPath: String;
-begin
-  result := GetAppConfigDir(False);
-end;
-
-constructor TCoreDataModule.Create(AOwner: TComponent);
-begin
-  inherited Create(AOwner);
-end;
-
-function TCoreDataModule.objectClassToImageIndex(ObjectClass: String): Integer;
+function ObjectClassToImageIndex(ObjectClass: RawUtf8): Integer;
 begin
   case objectClass of
    'organizationalUnit':    result := Ord(ileADOU);
@@ -117,10 +94,18 @@ begin
    else
      result := Ord(ileADUnknown);
    end;
-   if (result = Ord(ileADUnknown)) and objectClass.Contains('Container') then
+   if (result = Ord(ileADUnknown)) and String(objectClass).Contains('Container') then
      result := Ord(ileADContainer);
 end;
 
+{$R *.lfm}
+
+{ TCoreDataModule }
+
+constructor TCoreDataModule.Create(AOwner: TComponent);
+begin
+  inherited Create(AOwner);
+end;
 
 end.
 

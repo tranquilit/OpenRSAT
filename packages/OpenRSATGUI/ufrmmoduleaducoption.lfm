@@ -1,4 +1,4 @@
-object FrmModuleADUCOptions: TFrmModuleADUCOptions
+object FrmModuleADUCOption: TFrmModuleADUCOption
   Left = 0
   Height = 596
   Top = 0

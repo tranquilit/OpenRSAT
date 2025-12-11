@@ -132,7 +132,7 @@ var
 begin
   Attribute := fProperty.Get(List_Attributes.FocusedRow^.S['attribute']);
 
-  vis := TVisAttributeEditor.Create(self, fProperty.Core, Attribute, List_Attributes.FocusedRow^.S['attribute']);
+  vis := TVisAttributeEditor.Create(self, Attribute, List_Attributes.FocusedRow^.S['attribute']);
   try
     if (vis.ShowModal <> mrOK) then
       Exit;

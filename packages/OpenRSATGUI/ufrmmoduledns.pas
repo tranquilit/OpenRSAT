@@ -16,8 +16,6 @@ uses
   Graphics,
   Dialogs,
   StdCtrls,
-  uinterfacemodule,
-  uinterfacecore,
   mormot.net.ldap,
   mormot.core.base,
   tis.ui.grid.core,
@@ -25,7 +23,11 @@ uses
   mormot.core.variants,
   mormot.core.log,
   utreeselectionhistory,
-  VirtualTrees;
+  VirtualTrees,
+  ufrmmodule,
+  ufrmoption,
+  umodule,
+  umoduleaddns;
 
 type
 
@@ -120,9 +122,10 @@ type
       Shift: TShiftState; X, Y: Integer);
   private
     fLog: TSynLog;
-    fCore: ICore;
     fTreeSelectionHistory: TTreeSelectionHistory;
-    fEnabled: Boolean;
+
+    fModule: TModuleADDNS;
+    fFrmOption: TFrameOption;
 
     fRootNode: TDNSTreeNode;
     fForwardLookupZonesNode: TDNSTreeNode;
@@ -148,17 +151,16 @@ type
     procedure OnLdapClientConnect(LdapClient: TLdapClient);
     procedure OnLdapClientClose(LdapClient: TLdapClient);
   public
-    constructor Create(TheOwner: TComponent; ACore: ICore); overload;
+    constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
 
+  protected
+    function GetFrmOption: TFrameOption; override;
+    function GetModule: TModule; override;
+    function GetFrmOptionClass: TFrameOptionClass; override;
   published
     ////////////////
     /// TFrameModule
-    function GetModuleEnabled: Boolean; override;
-    procedure SetModuleEnabled(AValue: Boolean); override;
-    function GetModuleName: String; override;
-    function GetModuleDisplayName: String; override;
-    function GetOptions: TOptions; override;
     procedure Refresh; override;
     procedure Load; override;
     ///
@@ -177,7 +179,8 @@ uses
   uvisnewzonewizard,
   uvisnewresourcerecord,
   ursatldapclientui,
-  udns;
+  udns,
+  ufrmrsat;
 
 {$R *.lfm}
 
@@ -450,20 +453,20 @@ var
 
 begin
   Node.DeleteChildren;
-  fCore.LdapClient.SearchBegin();
+  FrmRSAT.LdapClient.SearchBegin();
   try
-    fCore.LdapClient.SearchScope := lssSingleLevel;
+    FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
 
     repeat
-      if not fCore.LdapClient.Search(Node.DistinguishedName, False, '', ['*']) then
+      if not FrmRSAT.LdapClient.Search(Node.DistinguishedName, False, '', ['*']) then
       begin
         if Assigned(fLog) then
-          fLog.Log(sllError, '% - Ldap Search Error: %', [Self.Name, fCore.LdapClient.ResultString]);
-        ShowLdapSearchError(fCore.LdapClient);
+          fLog.Log(sllError, '% - Ldap Search Error: %', [Self.Name, FrmRSAT.LdapClient.ResultString]);
+        ShowLdapSearchError(FrmRSAT.LdapClient);
         Exit;
       end;
 
-      for SearchResult in fCore.LdapClient.SearchResult.Items do
+      for SearchResult in FrmRSAT.LdapClient.SearchResult.Items do
       begin
         if not Assigned(SearchResult) then
           continue;
@@ -472,9 +475,9 @@ begin
         NewNode.fDistinguishedName := SearchResult.ObjectName;
         NewNode.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone);
       end;
-    until fCore.LdapClient.SearchCookie = '';
+    until FrmRSAT.LdapClient.SearchCookie = '';
   finally
-    fCore.LdapClient.SearchEnd;
+    FrmRSAT.LdapClient.SearchEnd;
   end;
   Node.fRetrieved := True;
 end;
@@ -537,24 +540,24 @@ var
     Node: TDNSTreeNode;
     dc: String;
   begin
-    fCore.LdapClient.SearchBegin();
+    FrmRSAT.LdapClient.SearchBegin();
     try
-      fCore.LdapClient.SearchScope := lssSingleLevel;
+      FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
       repeat
-        fCore.LdapClient.SearchRangeBegin;
+        FrmRSAT.LdapClient.SearchRangeBegin;
         try
-          if not fCore.LdapClient.Search(distinguishedName, False, '', ['*']) then
+          if not FrmRSAT.LdapClient.Search(distinguishedName, False, '', ['*']) then
           begin
             if Assigned(fLog) then
-              fLog.Log(sllError, '% - Ldap Search Error: %', [Self.Name, fCore.LdapClient.ResultString]);
-            ShowLdapSearchError(fCore.LdapClient);
+              fLog.Log(sllError, '% - Ldap Search Error: %', [Self.Name, FrmRSAT.LdapClient.ResultString]);
+            ShowLdapSearchError(FrmRSAT.LdapClient);
             Exit;
           end;
         finally
-          fCore.LdapClient.SearchRangeEnd;
+          FrmRSAT.LdapClient.SearchRangeEnd;
         end;
 
-        for SearchResult in fCore.LdapClient.SearchResult.Items do
+        for SearchResult in FrmRSAT.LdapClient.SearchResult.Items do
         begin
           if not Assigned(SearchResult) then
             continue;
@@ -588,9 +591,9 @@ var
           Node.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone);
           dcCache^.B[dc] := True;
         end;
-      until fCore.LdapClient.SearchCookie = '';
+      until FrmRSAT.LdapClient.SearchCookie = '';
     finally
-      fCore.LdapClient.SearchEnd;
+      FrmRSAT.LdapClient.SearchEnd;
     end;
   end;
 
@@ -611,8 +614,8 @@ begin
   dcCache.Init();
   TreeDNS.BeginUpdate;
   try
-    UpdateZones(Format('%s,%s', [DOMAIN_DNS_ZONES, fCore.LdapClient.DefaultDN()]), @dcCache);
-    UpdateZones(Format('%s,%s', [FOREST_DNS_ZONES, fCore.LdapClient.RootDN]), @dcCache);
+    UpdateZones(Format('%s,%s', [DOMAIN_DNS_ZONES, FrmRSAT.LdapClient.DefaultDN()]), @dcCache);
+    UpdateZones(Format('%s,%s', [FOREST_DNS_ZONES, FrmRSAT.LdapClient.RootDN]), @dcCache);
 
     RemoveOldNodes(fReverseLookupZonesNode, @dcCache);
     RemoveOldNodes(fForwardLookupZonesNode, @dcCache);
@@ -745,7 +748,7 @@ begin
     DNSNode := (TreeDNS.Selected as TDNSTreeNode);
 
   if Assigned(DNSNode) and Assigned(DNSNode.fAttributes) then
-    fCore.OpenProperty(DNSNode.fAttributes.Find('distinguishedName').GetReadable(), DNSNode.fAttributes.Find('name').GetReadable());
+    FrmRSAT.OpenProperty(DNSNode.fAttributes.Find('distinguishedName').GetReadable(), DNSNode.fAttributes.Find('name').GetReadable());
 end;
 
 procedure TFrmModuleDNS.Action_NextExecute(Sender: TObject);
@@ -769,15 +772,15 @@ var
   procedure InnerDelete(DC: String);
   begin
     repeat
-      if not fCore.LdapClient.Search(DC, False, Filter, ['dnsRecord']) then
+      if not FrmRSAT.LdapClient.Search(DC, False, Filter, ['dnsRecord']) then
       begin
         if Assigned(fLog) then
-          fLog.Log(sllError, '% - Ldap Search Error: %', [Action_Delete.Caption, fCore.LdapClient.ResultString]);
-        ShowLdapSearchError(fCore.LdapClient);
+          fLog.Log(sllError, '% - Ldap Search Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
+        ShowLdapSearchError(FrmRSAT.LdapClient);
         Exit;
       end;
 
-      for SearchResult in fCore.LdapClient.SearchResult.Items do
+      for SearchResult in FrmRSAT.LdapClient.SearchResult.Items do
       begin
         if not Assigned(SearchResult) or not data.Exists(SearchResult.ObjectName) then
           continue;
@@ -791,11 +794,11 @@ var
         begin
           if Assigned(fLog) then
             fLog.Log(sllInfo, '% - Delete "%"', [Action_Delete.Caption, SearchResult.ObjectName]);
-          if not fCore.LdapClient.Delete(SearchResult.ObjectName) then
+          if not FrmRSAT.LdapClient.Delete(SearchResult.ObjectName) then
           begin
             if Assigned(fLog) then
-              fLog.Log(sllError, '% - Ldap Delete Error: %', [Action_Delete.Caption, fCore.LdapClient.ResultString]);
-            ShowLdapDeleteError(fCore.LdapClient);
+              fLog.Log(sllError, '% - Ldap Delete Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
+            ShowLdapDeleteError(FrmRSAT.LdapClient);
             Exit;
           end;
         end
@@ -803,16 +806,16 @@ var
         begin
           if Assigned(fLog) then
             fLog.Log(sllInfo, '% - Modify "%"', [Action_Delete.Caption, SearchResult.ObjectName]);
-          if not fCore.LdapClient.Modify(SearchResult.ObjectName, lmoDelete, AttributeToRemove) then
+          if not FrmRSAT.LdapClient.Modify(SearchResult.ObjectName, lmoDelete, AttributeToRemove) then
           begin
             if Assigned(fLog) then
-              fLog.Log(sllError, '% - Ldap Modify Error: %', [Action_Delete.Caption, fCore.LdapClient.ResultString]);
-            ShowLdapModifyError(fCore.LdapClient);
+              fLog.Log(sllError, '% - Ldap Modify Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
+            ShowLdapModifyError(FrmRSAT.LdapClient);
             Exit;
           end;
         end;
       end;
-    until fCore.LdapClient.SearchCookie = '';
+    until FrmRSAT.LdapClient.SearchCookie = '';
   end;
 
 begin
@@ -832,15 +835,15 @@ begin
     Filter := FormatUtf8('(|%)', [Filter]);
   end;
 
-  fCore.LdapClient.SearchBegin();
+  FrmRSAT.LdapClient.SearchBegin();
   AttributeToRemove := TLdapAttribute.Create('dnsRecord', atUndefined);
   try
-    fCore.LdapClient.SearchScope := lssWholeSubtree;
+    FrmRSAT.LdapClient.SearchScope := lssWholeSubtree;
 
-    InnerDelete(FormatUtf8('%,%', [DOMAIN_DNS_ZONES, fCore.LdapClient.DefaultDN]));
-    InnerDelete(FormatUtf8('%,%', [FOREST_DNS_ZONES, fCore.LdapClient.RootDN]));
+    InnerDelete(FormatUtf8('%,%', [DOMAIN_DNS_ZONES, FrmRSAT.LdapClient.DefaultDN]));
+    InnerDelete(FormatUtf8('%,%', [FOREST_DNS_ZONES, FrmRSAT.LdapClient.RootDN]));
   finally
-    fCore.LdapClient.SearchEnd;
+    FrmRSAT.LdapClient.SearchEnd;
     FreeAndNilSafe(AttributeToRemove);
     Action_Refresh.Execute;
   end;
@@ -855,7 +858,7 @@ begin
   try
     if NewZone.ShowModal <> mrOK then
       Exit;
-    NewZone.Apply(fCore.LdapClient);
+    NewZone.Apply(FrmRSAT.LdapClient);
   finally
     FreeAndNil(NewZone);
   end;
@@ -909,7 +912,7 @@ begin
     Exit;
 
 
-  With TVisSelectNewRecordType.Create(Self, Serial, fCore.LdapClient, DNSNodeZone.DistinguishedName, dcPrefix) do
+  With TVisSelectNewRecordType.Create(Self, Serial, FrmRSAT.LdapClient, DNSNodeZone.DistinguishedName, dcPrefix) do
   begin
     ShowModal;
   end;
@@ -934,7 +937,7 @@ begin
   TreeDNS.Select(NewNode);
 end;
 
-constructor TFrmModuleDNS.Create(TheOwner: TComponent; ACore: ICore);
+constructor TFrmModuleDNS.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
@@ -942,11 +945,11 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Create', [Self.Name]);
 
-  fEnabled := True;
-  fCore := ACore;
+  fModule := TModuleADDNS.Create;
+  fFrmOption := nil;
 
-  fCore.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
-  fCore.LdapClient.RegisterObserverClose(@OnLdapClientClose);
+  FrmRSAT.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
+  FrmRSAT.LdapClient.RegisterObserverClose(@OnLdapClientClose);
 
   {$IFDEF WINDOWS}
   Image1.Visible := not IsDarkModeEnabled;
@@ -961,37 +964,14 @@ end;
 destructor TFrmModuleDNS.Destroy;
 begin
   FreeAndNil(fTreeSelectionHistory);
+  FreeAndNil(fModule);
+
   inherited Destroy;
-end;
-
-function TFrmModuleDNS.GetModuleEnabled: Boolean;
-begin
-  result := fEnabled;
-end;
-
-procedure TFrmModuleDNS.SetModuleEnabled(AValue: Boolean);
-begin
-  fEnabled := AValue;
-end;
-
-function TFrmModuleDNS.GetModuleName: String;
-begin
-  result := rsModuleDNSName;
-end;
-
-function TFrmModuleDNS.GetModuleDisplayName: String;
-begin
-  result := rsModuleDNSDisplayName;
-end;
-
-function TFrmModuleDNS.GetOptions: TOptions;
-begin
-  result := nil;
 end;
 
 procedure TFrmModuleDNS.Refresh;
 begin
-  fRootNode.Text := fCore.LdapClient.Settings.TargetHost;
+  fRootNode.Text := FrmRSAT.LdapClient.Settings.TargetHost;
   Action_Refresh.Execute;
 end;
 
@@ -1006,6 +986,21 @@ begin
   fReverseLookupZonesNode.NodeType := dtntCustom;
   fRootNode.Expand(False);
   fRootNode.Selected := True;
+end;
+
+function TFrmModuleDNS.GetModule: TModule;
+begin
+  result := fModule;
+end;
+
+function TFrmModuleDNS.GetFrmOption: TFrameOption;
+begin
+  result := fFrmOption;
+end;
+
+function TFrmModuleDNS.GetFrmOptionClass: TFrameOptionClass;
+begin
+  result := nil;
 end;
 
 end.

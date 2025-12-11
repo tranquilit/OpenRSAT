@@ -6,8 +6,8 @@ object FrmModuleADSSOptions: TFrmModuleADSSOptions
   ClientHeight = 595
   ClientWidth = 524
   TabOrder = 0
-  DesignLeft = 2373
-  DesignTop = 190
+  DesignLeft = 2222
+  DesignTop = 51
   object Panel1: TPanel
     Left = 8
     Height = 17

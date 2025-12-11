@@ -55,13 +55,11 @@ type
 implementation
 
 uses
-  Controls,
-  tisinifiles,
+  IniFiles,
   mormot.core.data,
   mormot.core.os,
   mormot.core.variants,
-  uvisconnectconfigs,
-  ucoredatamodule;
+  uconfig;
 
 { TLdapConfigs }
 
@@ -81,13 +79,13 @@ end;
 
 procedure TLdapConfigs.LoadConfig(AConfigName: String);
 begin
-  IniToObject(StringFromFile(CoreDataModule.ConfigFilePath), Self, 'global');
+  IniToObject(StringFromFile(ConfigFilePath), Self, 'global');
 
   if AConfigName <> '' then
     LastConfig := AConfigName;
   fLdapConnectionSettings.Tls := False;
   fLdapConnectionSettings.AutoBind := lcbKerberos;
-  IniToObject(StringFromFile(CoreDataModule.ConfigFilePath), fLdapConnectionSettings, LastConfig);
+  IniToObject(StringFromFile(ConfigFilePath), fLdapConnectionSettings, LastConfig);
 end;
 
 procedure TLdapConfigs.LoadConfig(const AConfigName: String; out
@@ -99,12 +97,12 @@ begin
   aConfig := TMLdapClientSettings.Create;
   aConfig.Tls := False;
   aConfig.AutoBind := lcbKerberos;
-  IniToObject(StringFromFile(CoreDataModule.ConfigFilePath), aConfig, LastConfig);
+  IniToObject(StringFromFile(ConfigFilePath), aConfig, LastConfig);
 end;
 
 procedure TLdapConfigs.SaveConfig(AConfigName: String);
 var
-  ini: TTisInifiles;
+  ini: TIniFile;
   aSettings: TDocVariantData;
   aField: TDocVariantFields;
 begin
@@ -113,10 +111,10 @@ begin
 
   ObjectToVariant(Self, Variant(aSettings), []);
   aSettings.Delete('Password');
-  ini := TTisInifiles.Create(CoreDataModule.ConfigFilePath);
+  ini := TIniFile.Create(ConfigFilePath);
   try
     for aField in aSettings.Fields do
-      ini.writeString('global', aField.Name^, VariantToString(aField.Value^));
+      ini.WriteString('global', aField.Name^, VariantToString(aField.Value^));
     SaveConfig(LastConfig, fLdapConnectionSettings);
   finally
     FreeAndNil(ini);
@@ -126,11 +124,11 @@ end;
 procedure TLdapConfigs.SaveConfig(const AConfigName: String;
   const aConfig: TMLdapClientSettings);
 var
-  ini: TTisInifiles;
+  ini: TIniFile;
   aSettings: TDocVariantData;
   aField: TDocVariantFields;
 begin
-  ini := TTisInifiles.Create(CoreDataModule.ConfigFilePath);
+  ini := TIniFile.Create(ConfigFilePath);
   try
     ObjectToVariant(aConfig, Variant(aSettings), []);
     aSettings.Delete('Password');
@@ -142,8 +140,6 @@ begin
 end;
 
 function TLdapConfigs.IsConfigValid: Boolean;
-var
-  pwd: TFormConnectConfigs;
 begin
   Result := False;
   if (fLdapConnectionSettings.TargetHost = '') and fLdapConnectionSettings.Tls then
@@ -152,18 +148,8 @@ begin
     Exit;
   if fLdapConnectionSettings.UseCredentials then
   begin
-    if (fLdapConnectionSettings.UserName = '') then
+    if (fLdapConnectionSettings.UserName = '') or (fLdapConnectionSettings.Password = '') then
       Exit;
-    if (fLdapConnectionSettings.Password = '') then
-    begin
-      pwd := TFormConnectConfigs.Create(CoreDataModule, Self);
-      try
-        result := pwd.ShowModal = mrOK;
-      finally
-        FreeAndNil(pwd);
-      end;
-      Exit;
-    end;
   end;
   result := True;
 end;

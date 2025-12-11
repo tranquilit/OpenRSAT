@@ -63,7 +63,8 @@ uses
   ucommonui,
   uhelpersui,
   uOmniselect,
-  ursatldapclientui;
+  ursatldapclientui,
+  ufrmrsat;
 
 {$R *.lfm}
 
@@ -71,7 +72,8 @@ uses
 
 procedure TFrmPropertyMember.TisGrid_MembersDblClick(Sender: TObject);
 begin
-  fProperty.Core.OpenProperty(TisGrid_Members.FocusedRow^.S['distinguishedName'], TisGrid_Members.FocusedRow^.S['name']);
+  if Assigned(FrmRSAT) and Assigned(TisGrid_Members.FocusedRow) then
+    FrmRSAT.OpenProperty(TisGrid_Members.FocusedRow^.S['distinguishedName'], TisGrid_Members.FocusedRow^.S['name']);
 end;
 
 procedure TFrmPropertyMember.TisGrid_MembersGetImageIndex(Sender: TBaseVirtualTree;
@@ -89,7 +91,7 @@ begin
   if not Assigned(NodeData) then
     Exit;
 
-  ImageIndex := CoreDataModule.objectClassToImageIndex(NodeData^.U['objectClass']);
+  ImageIndex := ObjectClassToImageIndex(NodeData^.U['objectClass']);
 end;
 
 procedure TFrmPropertyMember.TisGrid_MembersKeyPress(Sender: TObject; var Key: char

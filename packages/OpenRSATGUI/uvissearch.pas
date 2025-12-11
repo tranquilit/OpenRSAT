@@ -19,7 +19,6 @@ uses
   mormot.net.ldap,
   VirtualTrees,
   Controls,
-  uinterfacecore,
   ufrmmoduleaduc;
 
 type
@@ -120,7 +119,9 @@ uses
   ucommonui,
   ucoredatamodule,
   ursatldapclientui,
-  uvischangedn;
+  uvischangedn,
+  ufrmrsat;
+
 {$R *.lfm}
 
 { TVisSearch }
@@ -143,18 +144,18 @@ begin
 
   TisSearchEdit_AdvKey.Clear;
   TisSearchEdit_AdvKey.Items.BeginUpdate;
-  fModule.Core.LdapClient.SearchBegin();
+  FrmRSAT.RSAT.LdapClient.SearchBegin();
   try
-    fModule.Core.LdapClient.SearchScope := lssWholeSubtree;
+    FrmRSAT.RSAT.LdapClient.SearchScope := lssWholeSubtree;
 
     repeat
-      if not fModule.Core.LdapClient.Search(fModule.Core.LdapClient.DefaultDN(), False, '', ['lDAPDisplayName']) then
+      if not FrmRSAT.RSAT.LdapClient.Search(FrmRSAT.RSAT.LdapClient.DefaultDN(), False, '', ['lDAPDisplayName']) then
       begin
-        ShowLdapSearchError(fModule.Core.LdapClient);
+        ShowLdapSearchError(FrmRSAT.RSAT.LdapClient);
         Exit;
       end;
 
-      for SearchResult in fModule.Core.LdapClient.SearchResult.Items do
+      for SearchResult in FrmRSAT.RSAT.LdapClient.SearchResult.Items do
       begin
         if not Assigned(SearchResult) then
           continue;
@@ -163,15 +164,9 @@ begin
           continue;
         TisSearchEdit_AdvKey.Items.Add(LdapDisplayName);
       end;
-    until fModule.Core.LdapClient.SearchCookie = '';
-    //for attribute in VisMain.Storage.ListSchemaAttributeNames('lDAPDisplayName') do
-    //begin
-    //  if attribute = '' then
-    //    continue;
-    //  TisSearchEdit_AdvKey.Items.add(attribute);
-    //end;
+    until FrmRSAT.RSAT.LdapClient.SearchCookie = '';
   finally
-    fModule.Core.LdapClient.SearchEnd;
+    FrmRSAT.RSAT.LdapClient.SearchEnd;
     TisSearchEdit_AdvKey.Items.EndUpdate;
   end;
 end;
@@ -191,7 +186,7 @@ begin
   begin
     data := TisGrid_Result.GetNodeAsPDocVariantData(Node);
     if Assigned(data) and data^.Exists('objectClass') then
-      ImageIndex := CoreDataModule.objectClassToImageIndex(data^.S['objectClass']);
+      ImageIndex := ObjectClassToImageIndex(data^.S['objectClass']);
   end;
 end;
 
@@ -285,7 +280,7 @@ end;
 
 procedure TVisSearch.Action_ChangeDNExecute(Sender: TObject); // ChangeDN
 begin
-  with TVisChangeDN.create(self, fModule.Core.LdapClient, Edit_Path.Text, fModule.Core.LdapClient.DefaultDN) do
+  with TVisChangeDN.create(self, FrmRSAT.RSAT.LdapClient, Edit_Path.Text, FrmRSAT.RSAT.LdapClient.DefaultDN) do
   try
     if ShowModal = mrOk then
       Edit_Path.Text := SelectedDN;
@@ -326,7 +321,7 @@ end;
 procedure TVisSearch.Action_PropertiesExecute(Sender: TObject);
 begin
   Action_ShowInView.Execute;
-  fModule.Core.OpenProperty(TisGrid_Result.FocusedRow^.S['distinguishedName'], TisGrid_Result.FocusedRow^.S['name']);
+  FrmRSAT.OpenProperty(TisGrid_Result.FocusedRow^.S['distinguishedName'], TisGrid_Result.FocusedRow^.S['name']);
 end;
 
 procedure TVisSearch.Action_PropertiesUpdate(Sender: TObject);
@@ -401,22 +396,22 @@ begin
      not TryStrToInt(Edit_PageCount.Text, pageCount) then
     aLog.Log(sllWarning, 'Cannot search.');
 
-  fModule.Core.LdapClient.SearchBegin(pageSize);
+  FrmRSAT.RSAT.LdapClient.SearchBegin(pageSize);
   case ComboBox_SearchScope.ItemIndex of
-    0: fModule.Core.LdapClient.SearchScope := lssBaseObject;
-    1: fModule.Core.LdapClient.SearchScope := lssSingleLevel;
-    2: fModule.Core.LdapClient.SearchScope := lssWholeSubtree;
+    0: FrmRSAT.RSAT.LdapClient.SearchScope := lssBaseObject;
+    1: FrmRSAT.RSAT.LdapClient.SearchScope := lssSingleLevel;
+    2: FrmRSAT.RSAT.LdapClient.SearchScope := lssWholeSubtree;
   end;
 
   TisGrid_Result.BeginUpdate;
   try
     repeat
-      if not fModule.Core.LdapClient.Search(Trim(Edit_Path.Text), False, Filter, Attributes) then
+      if not FrmRSAT.RSAT.LdapClient.Search(Trim(Edit_Path.Text), False, Filter, Attributes) then
       begin
-        ShowLdapSearchError(fModule.Core.LdapClient);
+        ShowLdapSearchError(FrmRSAT.RSAT.LdapClient);
         Exit;
       end;
-      for item in fModule.Core.LdapClient.SearchResult.Items do
+      for item in FrmRSAT.RSAT.LdapClient.SearchResult.Items do
       begin
         if not Assigned(item) or (item.Attributes.Count <= 0) then
           continue;
@@ -435,9 +430,9 @@ begin
         data.Clear;
       end;
       Inc(count);
-    until (fModule.Core.LdapClient.SearchCookie = '') or (count = pageCount);
+    until (FrmRSAT.RSAT.LdapClient.SearchCookie = '') or (count = pageCount);
   finally
-    fModule.Core.LdapClient.SearchEnd;
+    FrmRSAT.RSAT.LdapClient.SearchEnd;
     TisGrid_Result.EndUpdate;
     TisGrid_Result.LoadData;
   end;

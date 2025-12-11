@@ -12,14 +12,17 @@ uses
   ExtCtrls,
   StdCtrls,
   IniFiles,
+  mormot.core.base,
   mormot.core.log,
-  uinterfacemodule;
+  umoduleadssoption,
+  uoption,
+  ufrmoption;
 
 type
 
   { TFrmModuleADSSOptions }
 
-  TFrmModuleADSSOptions = class(TFrameOptions)
+  TFrmModuleADSSOptions = class(TFrameOption)
     CheckBox1: TCheckBox;
     Label1: TLabel;
     Panel1: TPanel;
@@ -27,52 +30,29 @@ type
   private
     fLog: TSynLog;
     fChanged: Boolean;
+
+    fOption: TModuleADSSOption;
+
     function GetShowService: Boolean;
     procedure SetShowService(AValue: Boolean);
 
   published
     // TFrameOptions
     function OptionChanged: Boolean; override;
-    procedure Load(Options: TOptions); override;
-    procedure Save(Options: TOptions); override;
+    procedure Load; override;
+    procedure Save; override;
 
   public
-    property ShowService: Boolean read GetShowService write SetShowService;
-  end;
+    constructor Create(TheOwner: TComponent; Option: TOption); override;
 
-  { TModuleADSSOptions }
-
-  TModuleADSSOptions = class(TOptions)
-  private
-    fLog: TSynLog;
-    fFrame: TFrmModuleADSSOptions;
-    fChanged: Boolean;
-
-    fObservers: Array of TProcRsatOptionsOfObject;
-
-    fShowService: Boolean;
-    function GetShowService: Boolean;
-    procedure SetShowService(AValue: Boolean);
-
-    procedure Notify;
-  public
-    // TOptions
-    procedure Load(IniFile: TIniFile); override;
-    procedure Save(IniFile: TIniFile); override;
-    function Changed: Boolean; override;
-    function OptionName: String; override;
-    procedure CreateFrame(TheOwner: TComponent); override;
-    function GetFrame: TFrameOptions; override;
-    procedure DeleteFrame; override;
-    procedure RegisterObserver(Observer: TProcRsatOptionsOfObject); override;
-    procedure RemoveObserver(Observer: TProcRsatOptionsOfObject); override;
-
+    property Option: TModuleADSSOption read fOption;
     property ShowService: Boolean read GetShowService write SetShowService;
   end;
 
 implementation
 uses
-  mormot.core.base;
+  uconfig,
+  mormot.core.text;
 
 {$R *.lfm}
 
@@ -102,138 +82,56 @@ begin
   result := fChanged;
 end;
 
-procedure TFrmModuleADSSOptions.Load(Options: TOptions);
+procedure TFrmModuleADSSOptions.Load;
 var
-  ADSSOptions: TModuleADSSOptions absolute Options;
+  IniFile: TIniFile;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Load', Self);
 
-  if not Assigned(Self) or not Assigned(ADSSOptions) then
+  if not Assigned(Self) or not Assigned(Option) then
   begin
     if Assigned(fLog) then
       fLog.Log(sllWarning, 'Could not be loaded: Self of Options not assigned', Self);
     Exit;
   end;
 
-  ShowService := ADSSOptions.ShowService;
+  IniFile := TIniFile.Create(OptionFilePath);
+  try
+    Option.Load(IniFile);
+  finally
+    FreeAndNil(IniFile);
+  end;
+
+  ShowService := Option.ShowService;
 
   fChanged := False;
 end;
 
-procedure TFrmModuleADSSOptions.Save(Options: TOptions);
+procedure TFrmModuleADSSOptions.Save;
 var
-  ADSSOptions: TModuleADSSOptions absolute Options;
+  IniFile: TIniFile;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Save', Self);
 
-  ADSSOptions.ShowService := ShowService;
+  Option.ShowService := ShowService;
+
+  IniFile := TIniFile.Create(OptionFilePath);
+  try
+    Option.Save(IniFile);
+  finally
+    FreeAndNil(IniFile);
+  end;
 
   fChanged := False;
 end;
 
-{ TModuleADSSOptions }
-
-function TModuleADSSOptions.GetShowService: Boolean;
+constructor TFrmModuleADSSOptions.Create(TheOwner: TComponent; Option: TOption);
 begin
-  result := fShowService;
-end;
+  inherited Create(TheOwner);
 
-procedure TModuleADSSOptions.SetShowService(AValue: Boolean);
-begin
-  if AValue = fShowService then
-    Exit;
-
-  fShowService := Avalue;
-  fChanged := True;
-end;
-
-procedure TModuleADSSOptions.Notify;
-var
-  Observer: TProcRsatOptionsOfObject;
-begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Notify', Self);
-
-  for Observer in fObservers do
-    Observer(Self);
-end;
-
-procedure TModuleADSSOptions.Load(IniFile: TIniFile);
-begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Load', Self);
-
-  fShowService := IniFile.ReadBool(OptionName, 'ShowService', False);
-
-  fChanged := False;
-  Notify;
-end;
-
-procedure TModuleADSSOptions.Save(IniFile: TIniFile);
-begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Save', Self);
-
-  if Assigned(fFrame) and fFrame.OptionChanged then
-    fFrame.Save(Self);
-
-  IniFile.WriteBool(OptionName, 'ShowService', fShowService);
-
-  fChanged := False;
-  Notify;
-end;
-
-function TModuleADSSOptions.Changed: Boolean;
-begin
-  result := fChanged or fFrame.OptionChanged;
-end;
-
-function TModuleADSSOptions.OptionName: String;
-begin
-  result := 'ADSS';
-end;
-
-procedure TModuleADSSOptions.CreateFrame(TheOwner: TComponent);
-begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, 'CreateFrame', Self);
-
-  fFrame := TFrmModuleADSSOptions.Create(TheOwner);
-  fFrame.Load(Self);
-  RegisterObserver(@fFrame.Load);
-end;
-
-function TModuleADSSOptions.GetFrame: TFrameOptions;
-begin
-  result := fFrame;
-end;
-
-procedure TModuleADSSOptions.DeleteFrame;
-begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, 'DeleteFrame', Self);
-
-  RemoveObserver(@fFrame.Load);
-  FreeAndNil(fFrame);
-end;
-
-procedure TModuleADSSOptions.RegisterObserver(Observer: TProcRsatOptionsOfObject
-  );
-begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, 'RegisterObserver', Self);
-
-  MultiEventAdd(fObservers, TMethod(Observer));
-end;
-
-procedure TModuleADSSOptions.RemoveObserver(Observer: TProcRsatOptionsOfObject);
-begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, 'RemoveObserver', Self);
-
-  MultiEventRemove(fObservers, TMethod(Observer));
+  fOption := TModuleADSSOption(Option);
 end;
 
 end.

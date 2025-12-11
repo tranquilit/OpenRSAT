@@ -162,7 +162,7 @@ begin
       if not Assigned(ChildData) then
         continue;
       ChildData.DistinguishedName := obj^.S['distinguishedName'];
-      child.ImageIndex := CoreDataModule.objectClassToImageIndex(obj^.S['objectClass']);
+      child.ImageIndex := ObjectClassToImageIndex(obj^.S['objectClass']);
       child.SelectedIndex := child.ImageIndex;
     end;
     node.Expand(False);
@@ -207,7 +207,7 @@ begin
   if not Assigned(NodeData) then
     Exit;
   NodeData.DistinguishedName := distinguishedName;
-  node.ImageIndex := CoreDataModule.objectClassToImageIndex(objectClass);
+  node.ImageIndex := ObjectClassToImageIndex(objectClass);
   node.SelectedIndex := node.ImageIndex;
 
   node.Selected := True;

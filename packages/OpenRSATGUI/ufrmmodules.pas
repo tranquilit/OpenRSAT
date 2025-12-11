@@ -1,4 +1,4 @@
-unit ursatmodules;
+unit ufrmmodules;
 
 {$mode objfpc}{$H+}
 
@@ -7,37 +7,39 @@ interface
 uses
   Classes,
   SysUtils,
+  mormot.core.base,
   mormot.core.log,
-  uinterfacemodule;
+  ufrmmodule;
 
 type
 
-  { TRsatModules }
+  TFrameModuleDynArray = Array of TFrameModule;
 
-  TRsatModules = class
+  { TFrmModules }
+
+  TFrmModules = class
   private
     fLog: TSynLog;
-    fModules: Array of IModule;
-    fActiveModule: IModule;
+    fFrmModules: TFrameModuleDynArray;
+    fActiveModule: TFrameModule;
 
-    function InternalRefresh(AModule: IModule): Boolean;
+    function InternalRefresh(AModule: TFrameModule): Boolean;
   public
     constructor Create;
     destructor Destroy; override;
 
-    function RegisterModule(AModule: IModule): Boolean;
-    function Change(AName: String): Boolean;
+    function RegisterModule(AFrmModule: TFrameModule): Boolean;
+    function Change(AName: RawUtf8): Boolean;
     function Refresh: Boolean;
     function RefreshAll: Boolean;
+    property Items: TFrameModuleDynArray read fFrmModules;
   end;
 
 implementation
-uses
-  mormot.core.base;
 
-{ TRsatModules }
+{ TFrmModules }
 
-function TRsatModules.InternalRefresh(AModule: IModule): Boolean;
+function TFrmModules.InternalRefresh(AModule: TFrameModule): Boolean;
 begin
   result := False;
   if Assigned(AModule) then
@@ -45,14 +47,14 @@ begin
   result := True;
 end;
 
-constructor TRsatModules.Create;
+constructor TFrmModules.Create;
 begin
   fLog := TSynLog.Add;
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Create', [Self.ClassName]);
 end;
 
-destructor TRsatModules.Destroy;
+destructor TFrmModules.Destroy;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Destroy', [Self.ClassName]);
@@ -60,51 +62,51 @@ begin
   inherited Destroy;
 end;
 
-function TRsatModules.RegisterModule(AModule: IModule): Boolean;
+function TFrmModules.RegisterModule(AFrmModule: TFrameModule): Boolean;
 var
-  Module: IModule;
+  fm: TFrameModule;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'RegisterModule', Self);
 
   result := False;
 
-  if not Assigned(AModule) then
+  if not Assigned(AFrmModule) then
   begin
     if Assigned(fLog) then
       fLog.Log(sllWarning, 'Module not assigned.', Self);
     Exit;
   end;
 
-  for Module in fModules do
-    if (Module = AModule) or (Module.GetModuleName = AModule.GetModuleName) then
+  for fm in fFrmModules do
+    if (fm = AFrmModule) or (fm.GetModuleName = AFrmModule.GetModuleName) then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllWarning, 'Module "%" already exists.', [AModule.GetModuleName], self);
+        fLog.Log(sllWarning, 'Module "%" already exists.', [AFrmModule.Module.GetModuleName], self);
       Exit;
     end;
 
-  Insert(AModule, fModules, 0);
+  Insert(AFrmModule, fFrmModules, 0);
   if Assigned(fLog) then
-    fLog.Log(sllInfo, 'Module "%" added.', [AModule.GetModuleName], self);
+    fLog.Log(sllInfo, 'Module "%" added.', [AFrmModule.Module.GetModuleName], self);
   result := True;
 end;
 
-function TRsatModules.Change(AName: String): Boolean;
+function TFrmModules.Change(AName: RawUtf8): Boolean;
 var
-  Module: IModule;
+  fm: TFrameModule;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Change', [Self.ClassName]);
 
   result := True;
 
-  for Module in fModules do
-    if (Module.GetModuleName = AName) then
+  for fm in fFrmModules do
+    if (fm.Module.GetModuleName = AName) then
     begin
       if Assigned(fLog) then
         fLog.Log(sllInfo, '% - Found module "%".', [Self.ClassName, AName]);
-      fActiveModule := Module;
+      fActiveModule := fm;
       Exit;
     end;
 
@@ -114,7 +116,7 @@ begin
   fActiveModule := nil;
 end;
 
-function TRsatModules.Refresh: Boolean;
+function TFrmModules.Refresh: Boolean;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Refresh', [Self.ClassName]);
@@ -122,16 +124,16 @@ begin
   result := InternalRefresh(fActiveModule);
 end;
 
-function TRsatModules.RefreshAll: Boolean;
+function TFrmModules.RefreshAll: Boolean;
 var
-  Module: IModule;
+  fm: TFrameModule;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - RefreshAll', [Self.ClassName]);
 
   result := True;
-  for Module in fModules do
-    result := InternalRefresh(Module) and result;
+  for fm in fFrmModules do
+    result := InternalRefresh(fm) and result;
 end;
 
 end.

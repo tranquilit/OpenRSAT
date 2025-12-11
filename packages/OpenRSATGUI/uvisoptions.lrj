@@ -1,5 +1,6 @@
 {"version":1,"strings":[
 {"hash":108725763,"name":"tvisoptions.caption","sourcebytes":[79,112,116,105,111,110,115],"value":"Options"},
+{"hash":77089212,"name":"tvisoptions.btn_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
 {"hash":1339,"name":"tvisoptions.action_ok.caption","sourcebytes":[79,75],"value":"OK"},
 {"hash":77089212,"name":"tvisoptions.action_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
 {"hash":4749113,"name":"tvisoptions.action_apply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"}

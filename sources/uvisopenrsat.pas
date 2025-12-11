@@ -16,7 +16,6 @@ uses
   ActnList,
   LResources,
   IniPropStorage,
-  ufrmcore,
   {$IFDEF WINDOWS} // Adds dark mode support, must be included after the LCL widgetset
     uDarkStyleParams,
     uMetaDarkStyle,
@@ -68,7 +67,6 @@ type
     procedure MenuItem_ViewThemeLightClick(Sender: TObject);
     procedure MenuItem_ViewThemeSystemClick(Sender: TObject);
   private
-    fFrmCore: TFrmCore;
     fLog: TSynLog;
 
     procedure RestoreOldConfig;
@@ -91,7 +89,9 @@ uses
   process,
   mormot.core.base,
   mormot.core.text,
-  ufrmrsatoptions;
+  ufrmrsatoptions,
+  ufrmrsat,
+  ursatoption;
 
 {$R *.lfm}
 
@@ -122,11 +122,11 @@ var
   end;
 
 begin
-  if fFrmCore.VisPropertiesList.Count = MenuItem_ViewWindows.Count then
+  if FrmRSAT.VisPropertiesList.Count = MenuItem_ViewWindows.Count then
     Exit;
   ItemsFound := [];
 
-  for AName in fFrmCore.VisPropertiesList.GetNames do
+  for AName in FrmRSAT.VisPropertiesList.GetNames do
   begin
     found := False;
     for i := 0 to MenuItem_ViewWindows.Count - 1 do
@@ -174,41 +174,41 @@ end;
 
 procedure TVisOpenRSAT.FormPaint(Sender: TObject);
 begin
-  fFrmCore.Refresh;
+  FrmRSAT.Refresh;
 end;
 
 procedure TVisOpenRSAT.FormShow(Sender: TObject);
 begin
-  fFrmCore.Load;
-  MenuItem_LdapConnect.Action := fFrmCore.Action_LdapConnect;
-  MenuItem_LdapConnectOption.Action := fFrmCore.Action_LdapOptions;
-  MenuItem_LdapDisconnect.Action := fFrmCore.Action_LdapDisconnect;
-  MenuItem_FileOptions.Action := fFrmCore.Action_Options;
-  MenuItem_AdvancedFeatures.Action := fFrmCore.Action_AdvancedFeatures;
+  FrmRSAT.Load;
+  MenuItem_LdapConnect.Action := FrmRSAT.Action_LdapConnect;
+  MenuItem_LdapConnectOption.Action := FrmRSAT.Action_LdapOptions;
+  MenuItem_LdapDisconnect.Action := FrmRSAT.Action_LdapDisconnect;
+  MenuItem_FileOptions.Action := FrmRSAT.Action_Options;
+  MenuItem_AdvancedFeatures.Action := FrmRSAT.Action_AdvancedFeatures;
   MakeFullyVisible();
   Activate;
 
-  fFrmCore.Timer_AutoConnect.Enabled := fFrmCore.LdapConfigs.AutoConnect;
+  FrmRSAT.Timer_AutoConnect.Enabled := FrmRSAT.LdapConfigs.AutoConnect;
   UpdateViewThemeButtons;
   IniPropStorage1.Restore;
-  fFrmCore.SetStatusBarText(2, FormatUtf8('Version: %', [VERSION]));
+  FrmRSAT.SetStatusBarText(2, FormatUtf8('Version: %', [VERSION]));
 end;
 
 procedure TVisOpenRSAT.MenuItem_ViewThemeDarkClick(Sender: TObject);
 begin
-  fFrmCore.RsatOptions.Theme := tmDark;
+  FrmRSAT.RsatOption.Theme := tmDark;
   UpdateViewThemeButtons;
 end;
 
 procedure TVisOpenRSAT.MenuItem_ViewThemeLightClick(Sender: TObject);
 begin
-  fFrmCore.RsatOptions.Theme := tmLight;
+  FrmRSAT.RsatOption.Theme := tmLight;
   UpdateViewThemeButtons;
 end;
 
 procedure TVisOpenRSAT.MenuItem_ViewThemeSystemClick(Sender: TObject);
 begin
-  fFrmCore.RsatOptions.Theme := tmSystem;
+  FrmRSAT.RsatOption.Theme := tmSystem;
   UpdateViewThemeButtons;
 end;
 
@@ -235,9 +235,9 @@ end;
 
 procedure TVisOpenRSAT.UpdateViewThemeButtons;
 begin
-  MenuItem_ViewThemeDark.Checked := fFrmCore.RsatOptions.Theme = tmDark;
-  MenuItem_ViewThemeLight.Checked := fFrmCore.RsatOptions.Theme = tmLight;
-  MenuItem_ViewThemeSystem.Checked := fFrmCore.RsatOptions.Theme = tmSystem;
+  MenuItem_ViewThemeDark.Checked := FrmRSAT.RsatOption.Theme = tmDark;
+  MenuItem_ViewThemeLight.Checked := FrmRSAT.RsatOption.Theme = tmLight;
+  MenuItem_ViewThemeSystem.Checked := FrmRSAT.RsatOption.Theme = tmSystem;
 end;
 
 constructor TVisOpenRSAT.Create(TheOwner: TComponent);
@@ -250,15 +250,15 @@ begin
     fLog.Log(sllTrace, '% - Create', [Self.Name]);
 
   // Setup OpenRSATCore
-  fFrmCore := TFrmCore.Create(Self);
-  fFrmCore.Parent := Self;
-  fFrmCore.Align := alClient;
+  FrmRSAT := TFrmRSAT.Create(Self);
+  FrmRSAT.Parent := Self;
+  FrmRSAT.Align := alClient;
 
   // Setup theme for windows
   {$IFDEF WINDOWS}
-  if fFrmCore.RsatOptions.Theme = tmDark then
+  if FrmRSAT.RsatOption.Theme = tmDark then
     PreferredAppMode := pamForceDark
-  else if fFrmCore.RsatOptions.Theme = tmLight then
+  else if FrmRSAT.RsatOption.Theme = tmLight then
     PreferredAppMode := pamForceLight
   else
     PreferredAppMode := pamAllowDark;
@@ -287,7 +287,7 @@ begin
   i := MenuItem_ViewWindows.IndexOf(sender as TMenuItem);
   if i = -1 then
     Exit;
-  fFrmCore.VisPropertiesList.Focus(i);
+  FrmRSAT.VisPropertiesList.Focus(i);
 end;
 
 //initialization
