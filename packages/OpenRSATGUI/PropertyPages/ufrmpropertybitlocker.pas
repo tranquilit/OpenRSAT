@@ -85,6 +85,7 @@ begin
       Row.Clear;
     end;
   finally
+    FreeAndNil(MsFVERecoveryInformation);
     TisGrid1.EndUpdate;
     TisGrid1.LoadData;
   end;
