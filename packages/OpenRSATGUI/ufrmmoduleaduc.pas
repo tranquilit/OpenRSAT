@@ -255,9 +255,6 @@ type
     // Define if the module is enabled
     fEnabled: Boolean;
 
-    // Self frame option
-    fFrmModuleAducOption: TFrmModuleADUCOption;
-
     // Self core
     fModuleAduc: TModuleADUC;
 
@@ -301,7 +298,6 @@ type
     procedure EndUpdate;
 
   protected
-    function GetFrmOption: TFrameOption; override;
     function GetModule: TModule; override;
     function GetFrmOptionClass: TFrameOptionClass; override;
   published
@@ -2293,8 +2289,6 @@ begin
   fModuleAduc := TModuleADUC.Create;
   fTreeSelectionHistory := TTreeSelectionHistory.Create;
 
-  fFrmModuleAducOption := TFrmModuleADUCOption.Create(Self, fModuleAduc.ADUCOption);
-
   fADUCRootNode := (TreeADUC.Items.Add(nil, 'Active Directory Users and Computers') as TADUCTreeNode);
   fADUCRootNode.ImageIndex := Ord(ileAppIcon);
   fADUCRootNode.SelectedIndex := fADUCRootNode.ImageIndex;
@@ -2322,7 +2316,6 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Destroy', [Self.Name]);
 
-  FreeAndNil(fFrmModuleAducOption);
   FreeAndNil(fTreeSelectionHistory);
   FreeAndNil(fModuleAduc);
 
@@ -2423,11 +2416,6 @@ end;
 procedure TFrmModuleADUC.EndUpdate;
 begin
   Dec(fUpdating);
-end;
-
-function TFrmModuleADUC.GetFrmOption: TFrameOption;
-begin
-  result := fFrmModuleAducOption;
 end;
 
 function TFrmModuleADUC.GetModule: TModule;

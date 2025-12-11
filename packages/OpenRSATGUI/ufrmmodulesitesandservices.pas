@@ -127,7 +127,6 @@ type
     fADSSSiteNode: TADSSTreeNode;
     fADSSServiceNode: TADSSTreeNode;
 
-    fFrmOption: TFrmModuleADSSOptions;
     fModule: TModuleADSS;
 
     procedure RefreshLdapNode(Node: TADSSTreeNode = nil);
@@ -157,7 +156,6 @@ type
 
   protected
     function GetModule: TModule; override;
-    function GetFrmOption: TFrameOption; override;
     function GetFrmOptionClass: TFrameOptionClass; override;
   published
     ////////////////
@@ -1137,7 +1135,6 @@ begin
     fLog.Log(sllTrace, 'Create', Self);
 
   fModule := TModuleADSS.Create;
-  fFrmOption := TFrmModuleADSSOptions.Create(Self, fModule.ADSSOption);
 
   FrmRSAT.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
   FrmRSAT.LdapClient.RegisterObserverClose(@OnLdapClientClose);
@@ -1156,7 +1153,6 @@ end;
 destructor TFrmModuleSitesAndServices.Destroy;
 begin
   FreeAndNil(fModule);
-  FreeAndNil(fFrmOption);
 
   inherited Destroy;
 end;
@@ -1174,11 +1170,6 @@ end;
 function TFrmModuleSitesAndServices.GetModule: TModule;
 begin
   result := fModule;
-end;
-
-function TFrmModuleSitesAndServices.GetFrmOption: TFrameOption;
-begin
-  result := fFrmOption;
 end;
 
 function TFrmModuleSitesAndServices.GetFrmOptionClass: TFrameOptionClass;

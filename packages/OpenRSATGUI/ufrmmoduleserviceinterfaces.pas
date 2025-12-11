@@ -107,7 +107,6 @@ type
     fLog: TSynLog;
 
     fModule: TModuleADSI;
-    fFrmOption: TFrameOption;
 
     fSearchWord: RawUtf8;
 
@@ -123,7 +122,6 @@ type
     destructor Destroy; override;
   protected
     function GetModule: TModule; override;
-    function GetFrmOption: TFrameOption; override;
     function GetFrmOptionClass: TFrameOptionClass; override;
   published
     procedure Refresh; override;
@@ -615,7 +613,6 @@ begin
     fLog.Log(sllTrace, '% - Create', [Self.Name]);
 
   fModule := TModuleADSI.Create;
-  fFrmOption := nil;
 
   FrmRSAT.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
   FrmRSAT.LdapClient.RegisterObserverClose(@OnLdapClientClose);
@@ -649,11 +646,6 @@ end;
 function TFrmModuleADSI.GetModule: TModule;
 begin
   result := fModule;
-end;
-
-function TFrmModuleADSI.GetFrmOption: TFrameOption;
-begin
-  result := fFrmOption;
 end;
 
 function TFrmModuleADSI.GetFrmOptionClass: TFrameOptionClass;

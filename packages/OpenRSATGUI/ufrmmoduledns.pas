@@ -125,7 +125,6 @@ type
     fTreeSelectionHistory: TTreeSelectionHistory;
 
     fModule: TModuleADDNS;
-    fFrmOption: TFrameOption;
 
     fRootNode: TDNSTreeNode;
     fForwardLookupZonesNode: TDNSTreeNode;
@@ -155,7 +154,6 @@ type
     destructor Destroy; override;
 
   protected
-    function GetFrmOption: TFrameOption; override;
     function GetModule: TModule; override;
     function GetFrmOptionClass: TFrameOptionClass; override;
   published
@@ -946,7 +944,6 @@ begin
     fLog.Log(sllTrace, '% - Create', [Self.Name]);
 
   fModule := TModuleADDNS.Create;
-  fFrmOption := nil;
 
   FrmRSAT.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
   FrmRSAT.LdapClient.RegisterObserverClose(@OnLdapClientClose);
@@ -991,11 +988,6 @@ end;
 function TFrmModuleDNS.GetModule: TModule;
 begin
   result := fModule;
-end;
-
-function TFrmModuleDNS.GetFrmOption: TFrameOption;
-begin
-  result := fFrmOption;
 end;
 
 function TFrmModuleDNS.GetFrmOptionClass: TFrameOptionClass;
