@@ -77,8 +77,8 @@ object FrmPropertyLAPS: TFrmPropertyLAPS
       TimeFormat = tf24
       TimeDisplay = tdHMS
       DateMode = dmComboBox
-      Date = 45728
-      Time = 0.449409027780348
+      Date = 1.7E308
+      Time = 1.7E308
       UseDefaultSeparators = True
       HideDateTimeParts = []
       MonthNames = 'Long'

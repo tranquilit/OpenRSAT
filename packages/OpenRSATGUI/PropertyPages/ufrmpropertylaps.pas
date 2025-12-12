@@ -139,7 +139,12 @@ begin
       Edit_LocalAdminAccountPassword.CaptionNoChange := PasswordData.U['p'];
   end
   else
-    Edit_LocalAdminAccountPassword.CaptionNoChange := fProperty.GetReadable('ms-Mcs-AdmPwd');
+  begin
+    Password := fProperty.GetReadable('ms-Mcs-AdmPwd');
+    if Password = '' then
+      Password := fProperty.GetReadable('msLAPS-EncryptedPassword');
+    Edit_LocalAdminAccountPassword.CaptionNoChange := Password;
+  end;
 end;
 
 end.
