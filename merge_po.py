@@ -14,4 +14,4 @@ def main():
         f.write(full_content)
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()
