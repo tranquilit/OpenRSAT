@@ -51,9 +51,9 @@ object VisLogonWorkstation: TVisLogonWorkstation
     Left = 16
     Height = 19
     Top = 88
-    Width = 154
+    Width = 151
     BorderSpacing.Left = 16
-    Caption = 'The following computers '
+    Caption = 'The following computers'
     TabOrder = 2
     OnChange = RadioButton_FollowingChange
   end

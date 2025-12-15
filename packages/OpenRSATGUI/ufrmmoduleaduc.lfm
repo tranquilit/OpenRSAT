@@ -94,7 +94,6 @@ object FrmModuleADUC: TFrmModuleADUC
     Width = 800
     Align = alTop
     AutoSize = True
-    Caption = 'Panel3'
     ClientHeight = 28
     ClientWidth = 800
     TabOrder = 2
@@ -107,7 +106,6 @@ object FrmModuleADUC: TFrmModuleADUC
       AutoSize = True
       ButtonHeight = 24
       ButtonWidth = 24
-      Caption = 'ToolBar1'
       EdgeBorders = [ebLeft, ebTop, ebRight]
       Images = CoreDataModule.ImageList1
       ImagesWidth = 18
@@ -224,7 +222,6 @@ object FrmModuleADUC: TFrmModuleADUC
         Left = 151
         Height = 24
         Top = 2
-        Caption = 'ToolButton1'
         Style = tbsSeparator
       end
     end
@@ -665,14 +662,14 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExecute = Action_SwitchToolbarCaptionExecute
     end
     object Action_Previous: TAction
-      Caption = 'Action_Previous'
+      Caption = 'Previous'
       DisableIfNoHandler = False
       ImageIndex = 1
       OnExecute = Action_PreviousExecute
       OnUpdate = Action_PreviousUpdate
     end
     object Action_Next: TAction
-      Caption = 'Action_Next'
+      Caption = 'Next'
       DisableIfNoHandler = False
       ImageIndex = 2
       OnExecute = Action_NextExecute

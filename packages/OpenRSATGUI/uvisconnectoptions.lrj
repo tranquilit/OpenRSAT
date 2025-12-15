@@ -1,8 +1,8 @@
 {"version":1,"strings":[
 {"hash":141619539,"name":"tvisconnectoptions.caption","sourcebytes":[67,111,110,110,101,99,116,105,111,110,32,79,112,116,105,111,110,115],"value":"Connection Options"},
-{"hash":10569760,"name":"tvisconnectoptions.group_connection.caption","sourcebytes":[67,111,110,110,101,99,116,105,111,110,32,58,32],"value":"Connection : "},
+{"hash":235541642,"name":"tvisconnectoptions.group_connection.caption","sourcebytes":[67,111,110,110,101,99,116,105,111,110,32,58],"value":"Connection :"},
 {"hash":104334474,"name":"tvisconnectoptions.label_targethost.caption","sourcebytes":[68,111,109,97,105,110,32,58],"value":"Domain :"},
-{"hash":124347280,"name":"tvisconnectoptions.label_port.caption","sourcebytes":[80,111,114,116,32,58,32],"value":"Port : "},
+{"hash":91657786,"name":"tvisconnectoptions.label_port.caption","sourcebytes":[80,111,114,116,32,58],"value":"Port :"},
 {"hash":14009,"name":"tvisconnectoptions.edit_port.text","sourcebytes":[51,56,57],"value":"389"},
 {"hash":199636242,"name":"tvisconnectoptions.label_dc.caption","sourcebytes":[68,111,109,97,105,110,32,67,111,110,116,114,111,108,108,101,114],"value":"Domain Controller"},
 {"hash":22803,"name":"tvisconnectoptions.checkbox_tls.caption","sourcebytes":[84,76,83],"value":"TLS"},

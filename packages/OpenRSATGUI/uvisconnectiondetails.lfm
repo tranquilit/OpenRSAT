@@ -308,7 +308,6 @@ object VisConnectionDetails: TVisConnectionDetails
         AutoSize = True
         BorderSpacing.Bottom = 8
         BevelOuter = bvNone
-        Caption = 'Panel5'
         ClientHeight = 90
         ClientWidth = 423
         TabOrder = 9

@@ -86,37 +86,37 @@ msgctxt "tfrmaducoption.label_searchpagesize.caption"
 msgid "Search Page Size"
 msgstr ""
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[19].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[15].value
 msgctxt "tfrmmoduleadsi.action_deleteobject.caption"
 msgid "Delete"
 msgstr ""
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[18].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[14].value
 msgctxt "tfrmmoduleadsi.action_newobject.caption"
 msgid "New"
 msgstr ""
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[15].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[11].value
 msgctxt "tfrmmoduleadsi.action_next.caption"
 msgid "Next"
 msgstr ""
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[16].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[12].value
 msgctxt "tfrmmoduleadsi.action_parent.caption"
 msgid "Parent"
 msgstr ""
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[14].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[10].value
 msgctxt "tfrmmoduleadsi.action_previous.caption"
 msgid "Previous"
 msgstr ""
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[17].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[13].value
 msgctxt "tfrmmoduleadsi.action_property.caption"
 msgid "Property"
 msgstr ""
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[13].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[9].value
 msgctxt "tfrmmoduleadsi.action_refresh.caption"
 msgid "Refresh"
 msgstr ""
@@ -124,11 +124,6 @@ msgstr ""
 #: ufrmmoduleserviceinterfaces.lrj:$.strings.[4].value
 msgctxt "tfrmmoduleadsi.label1.caption"
 msgid "Total : 0 elements"
-msgstr ""
-
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[9].value
-msgctxt "tfrmmoduleadsi.panel2.caption"
-msgid "Panel2"
 msgstr ""
 
 #: ufrmmoduleserviceinterfaces.lrj:$.strings.[1].value
@@ -166,197 +161,192 @@ msgctxt "tfrmmoduleadsi.tisgrid2.header.columns[3].text"
 msgid "Size"
 msgstr ""
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[10].value
-msgctxt "tfrmmoduleadsi.toolbar1.caption"
-msgid "ToolBar1"
-msgstr ""
-
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[12].value
-msgctxt "tfrmmoduleadsi.toolbutton1.caption"
-msgid "ToolButton1"
-msgstr ""
-
 #: ufrmmoduleadssoptions.lrj:$.strings.[0].value
 msgctxt "tfrmmoduleadssoptions.label1.caption"
 msgid "Show Service"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[57].value
+#: ufrmmoduleaduc.lrj:$.strings.[54].value
 msgctxt "tfrmmoduleaduc.action_changedomaincontroller.caption"
 msgid "Change Domain Controller"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[47].value
+#: ufrmmoduleaduc.lrj:$.strings.[44].value
 msgctxt "tfrmmoduleaduc.action_copy.caption"
 msgid "Copy"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[48].value
+#: ufrmmoduleaduc.lrj:$.strings.[45].value
 msgctxt "tfrmmoduleaduc.action_cut.caption"
 msgid "Cut"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[60].value
+#: ufrmmoduleaduc.lrj:$.strings.[57].value
 msgctxt "tfrmmoduleaduc.action_delegatecontrol.caption"
 msgid "Delegate control"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[27].value
+#: ufrmmoduleaduc.lrj:$.strings.[24].value
 msgctxt "tfrmmoduleaduc.action_delete.caption"
 msgid "Delete"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[46].value
+#: ufrmmoduleaduc.lrj:$.strings.[43].value
 msgctxt "tfrmmoduleaduc.action_filter.caption"
 msgid "Filter"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[40].value
+#: ufrmmoduleaduc.lrj:$.strings.[37].value
 msgctxt "tfrmmoduleaduc.action_newall.caption"
 msgid "New"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[38].value
+#: ufrmmoduleaduc.lrj:$.strings.[35].value
 msgctxt "tfrmmoduleaduc.action_newcomputer.caption"
 msgid "Computer"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[42].value
+#: ufrmmoduleaduc.lrj:$.strings.[39].value
 msgctxt "tfrmmoduleaduc.action_newcontact.caption"
 msgid "Contact"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[41].value
+#: ufrmmoduleaduc.lrj:$.strings.[38].value
 msgctxt "tfrmmoduleaduc.action_newdefault.caption"
 msgid "Default"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[26].value
+#: ufrmmoduleaduc.lrj:$.strings.[23].value
 msgctxt "tfrmmoduleaduc.action_newgroup.caption"
 msgid "New Group"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[39].value
+#: ufrmmoduleaduc.lrj:$.strings.[36].value
 msgctxt "tfrmmoduleaduc.action_newou.caption"
 msgid "New OU"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[44].value
+#: ufrmmoduleaduc.lrj:$.strings.[41].value
 msgctxt "tfrmmoduleaduc.action_newsharedfolder.caption"
 msgid "Shared Folder"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[25].value
+#: ufrmmoduleaduc.lrj:$.strings.[22].value
 msgctxt "tfrmmoduleaduc.action_newuser.caption"
 msgid "New User"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[54].value
+#: ufrmmoduleaduc.lrj:$.strings.[51].value
 msgctxt "tfrmmoduleaduc.action_next.caption"
-msgid "Action_Next"
+msgid "Next"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[61].value
+#: ufrmmoduleaduc.lrj:$.strings.[58].value
 msgctxt "tfrmmoduleaduc.action_operationsmasters.caption"
 msgid "Operations masters"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[49].value
+#: ufrmmoduleaduc.lrj:$.strings.[46].value
 msgctxt "tfrmmoduleaduc.action_paste.caption"
 msgid "Paste"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[24].value
+#: ufrmmoduleaduc.lrj:$.strings.[50].value
+msgctxt "tfrmmoduleaduc.action_previous.caption"
+msgid "Previous"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[21].value
 msgctxt "tfrmmoduleaduc.action_properties.caption"
 msgid "Properties"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[23].value
+#: ufrmmoduleaduc.lrj:$.strings.[20].value
 msgctxt "tfrmmoduleaduc.action_refresh.caption"
 msgid "Refresh"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[45].value
+#: ufrmmoduleaduc.lrj:$.strings.[42].value
 msgctxt "tfrmmoduleaduc.action_search.caption"
 msgid "Search"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[51].value
+#: ufrmmoduleaduc.lrj:$.strings.[48].value
 msgctxt "tfrmmoduleaduc.action_searchroot.caption"
 msgid "Search"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[56].value
+#: ufrmmoduleaduc.lrj:$.strings.[53].value
 msgctxt "tfrmmoduleaduc.action_showgpo.caption"
 msgid "Show GPO"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[58].value
+#: ufrmmoduleaduc.lrj:$.strings.[55].value
 msgctxt "tfrmmoduleaduc.action_sitesandservices.caption"
 msgid "Sites and services"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[52].value
+#: ufrmmoduleaduc.lrj:$.strings.[49].value
 msgctxt "tfrmmoduleaduc.action_switchtoolbarcaption.caption"
 msgid "Switch toolbar size"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[30].value
+#: ufrmmoduleaduc.lrj:$.strings.[27].value
 msgctxt "tfrmmoduleaduc.action_taskaddtoagroup.caption"
 msgid "Add to a group"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[29].value
+#: ufrmmoduleaduc.lrj:$.strings.[26].value
 msgctxt "tfrmmoduleaduc.action_taskcopy.caption"
 msgid "Copy"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[28].value
+#: ufrmmoduleaduc.lrj:$.strings.[25].value
 msgctxt "tfrmmoduleaduc.action_taskdelegatecontrol.caption"
 msgid "Delagate Control"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[32].value
+#: ufrmmoduleaduc.lrj:$.strings.[29].value
 msgctxt "tfrmmoduleaduc.action_taskdisableaccount.caption"
 msgid "Disable Account"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[37].value
+#: ufrmmoduleaduc.lrj:$.strings.[34].value
 msgctxt "tfrmmoduleaduc.action_taskmanage.caption"
 msgid "Manage"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[34].value
+#: ufrmmoduleaduc.lrj:$.strings.[31].value
 msgctxt "tfrmmoduleaduc.action_taskmove.caption"
 msgid "Move"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[31].value
+#: ufrmmoduleaduc.lrj:$.strings.[28].value
 msgctxt "tfrmmoduleaduc.action_tasknamemappings.caption"
 msgid "Name mappings"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[35].value
+#: ufrmmoduleaduc.lrj:$.strings.[32].value
 msgctxt "tfrmmoduleaduc.action_taskopenhomepage.caption"
 msgid "Open Home Page"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[33].value
+#: ufrmmoduleaduc.lrj:$.strings.[30].value
 msgctxt "tfrmmoduleaduc.action_taskresetpassword.caption"
 msgid "Reset Password"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[36].value
+#: ufrmmoduleaduc.lrj:$.strings.[33].value
 msgctxt "tfrmmoduleaduc.action_tasksendmail.caption"
 msgid "Send Mail"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[50].value
+#: ufrmmoduleaduc.lrj:$.strings.[47].value
 msgctxt "tfrmmoduleaduc.action_treenewall.caption"
 msgid "New"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[59].value
+#: ufrmmoduleaduc.lrj:$.strings.[56].value
 msgctxt "tfrmmoduleaduc.action_usersandcomputers.caption"
 msgid "Users and computers"
 msgstr ""
@@ -381,127 +371,112 @@ msgctxt "tfrmmoduleaduc.label1.caption"
 msgid "Total : 0 elements"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[4].value
-msgctxt "tfrmmoduleaduc.panel3.caption"
-msgid "Panel3"
-msgstr ""
-
-#: ufrmmoduleaduc.lrj:$.strings.[5].value
-msgctxt "tfrmmoduleaduc.toolbar1.caption"
-msgid "ToolBar1"
-msgstr ""
-
-#: ufrmmoduleaduc.lrj:$.strings.[22].value
-msgctxt "tfrmmoduleaduc.toolbutton1.caption"
-msgid "ToolButton1"
-msgstr ""
-
-#: ufrmmoduleaduc.lrj:$.strings.[21].value
+#: ufrmmoduleaduc.lrj:$.strings.[19].value
 msgctxt "tfrmmoduleaduc.toolbutton_addtogroup.hint"
 msgid "Add to a Group"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[17].value
+#: ufrmmoduleaduc.lrj:$.strings.[15].value
 msgctxt "tfrmmoduleaduc.toolbutton_copy.hint"
 msgid "Copy"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[18].value
+#: ufrmmoduleaduc.lrj:$.strings.[16].value
 msgctxt "tfrmmoduleaduc.toolbutton_cut.hint"
 msgid "Cut"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[20].value
+#: ufrmmoduleaduc.lrj:$.strings.[18].value
 msgctxt "tfrmmoduleaduc.toolbutton_delete.hint"
 msgid "Delete"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[11].value
+#: ufrmmoduleaduc.lrj:$.strings.[9].value
 msgctxt "tfrmmoduleaduc.toolbutton_filter.hint"
 msgid "Filter"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[14].value
+#: ufrmmoduleaduc.lrj:$.strings.[12].value
 msgctxt "tfrmmoduleaduc.toolbutton_group.hint"
 msgid "New Group"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[7].value
+#: ufrmmoduleaduc.lrj:$.strings.[5].value
 msgctxt "tfrmmoduleaduc.toolbutton_next.hint"
 msgid "Next"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[15].value
+#: ufrmmoduleaduc.lrj:$.strings.[13].value
 msgctxt "tfrmmoduleaduc.toolbutton_ou.hint"
 msgid "New OU"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[8].value
+#: ufrmmoduleaduc.lrj:$.strings.[6].value
 msgctxt "tfrmmoduleaduc.toolbutton_parent.hint"
 msgid "Parent"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[19].value
+#: ufrmmoduleaduc.lrj:$.strings.[17].value
 msgctxt "tfrmmoduleaduc.toolbutton_paste.hint"
 msgid "Paste"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[6].value
+#: ufrmmoduleaduc.lrj:$.strings.[4].value
 msgctxt "tfrmmoduleaduc.toolbutton_previous.hint"
 msgid "Previous"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[9].value
+#: ufrmmoduleaduc.lrj:$.strings.[7].value
 msgctxt "tfrmmoduleaduc.toolbutton_property.hint"
 msgid "Property"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[10].value
+#: ufrmmoduleaduc.lrj:$.strings.[8].value
 msgctxt "tfrmmoduleaduc.toolbutton_search.hint"
 msgid "Search"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[13].value
+#: ufrmmoduleaduc.lrj:$.strings.[11].value
 msgctxt "tfrmmoduleaduc.toolbutton_user.hint"
 msgid "New User"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[19].value
+#: ufrmmoduledns.lrj:$.strings.[13].value
 msgctxt "tfrmmoduledns.action_delete.caption"
 msgid "Delete"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[21].value
+#: ufrmmoduledns.lrj:$.strings.[15].value
 msgctxt "tfrmmoduledns.action_newzone.caption"
 msgid "New Zone"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[15].value
+#: ufrmmoduledns.lrj:$.strings.[9].value
 msgctxt "tfrmmoduledns.action_next.caption"
 msgid "Next"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[18].value
+#: ufrmmoduledns.lrj:$.strings.[12].value
 msgctxt "tfrmmoduledns.action_othernewrecords.caption"
 msgid "Other New Records"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[16].value
+#: ufrmmoduledns.lrj:$.strings.[10].value
 msgctxt "tfrmmoduledns.action_parent.caption"
 msgid "Parent"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[14].value
+#: ufrmmoduledns.lrj:$.strings.[8].value
 msgctxt "tfrmmoduledns.action_previous.caption"
 msgid "Previous"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[17].value
+#: ufrmmoduledns.lrj:$.strings.[11].value
 msgctxt "tfrmmoduledns.action_property.caption"
 msgid "Property"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[20].value
+#: ufrmmoduledns.lrj:$.strings.[14].value
 msgctxt "tfrmmoduledns.action_refresh.caption"
 msgid "Refresh"
 msgstr ""
@@ -546,74 +521,34 @@ msgctxt "tfrmmoduledns.label1.caption"
 msgid "Total : 0 elements"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[8].value
-msgctxt "tfrmmoduledns.panel1.caption"
-msgid "Panel1"
-msgstr ""
-
-#: ufrmmoduledns.lrj:$.strings.[9].value
-msgctxt "tfrmmoduledns.toolbar1.caption"
-msgid "ToolBar1"
-msgstr ""
-
-#: ufrmmoduledns.lrj:$.strings.[13].value
-msgctxt "tfrmmoduledns.toolbutton1.caption"
-msgid "ToolButton1"
-msgstr ""
-
-#: ufrmmoduledns.lrj:$.strings.[12].value
-msgctxt "tfrmmoduledns.toolbutton10.caption"
-msgid "ToolButton10"
-msgstr ""
-
-#: ufrmmoduledns.lrj:$.strings.[10].value
-msgctxt "tfrmmoduledns.toolbutton4.caption"
-msgid "ToolButton4"
-msgstr ""
-
-#: ufrmmoduledns.lrj:$.strings.[11].value
-msgctxt "tfrmmoduledns.toolbutton6.caption"
-msgid "ToolButton6"
-msgstr ""
-
-#: ufrmmodulesitesandservices.lrj:$.strings.[22].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[17].value
 msgctxt "tfrmmodulesitesandservices.action_newsite.caption"
 msgid "New Site"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[23].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[18].value
 msgctxt "tfrmmodulesitesandservices.action_newsubnet.caption"
 msgid "New Subnet"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[20].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[15].value
 msgctxt "tfrmmodulesitesandservices.action_next.caption"
 msgid "Action_Next"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[24].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[19].value
 msgctxt "tfrmmodulesitesandservices.action_property.caption"
 msgid "Property"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[18].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[13].value
 msgctxt "tfrmmodulesitesandservices.action_refresh.caption"
 msgid "Refresh"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[13].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[12].value
 msgctxt "tfrmmodulesitesandservices.label1.caption"
 msgid "Total : 0 elements"
-msgstr ""
-
-#: ufrmmodulesitesandservices.lrj:$.strings.[12].value
-msgctxt "tfrmmodulesitesandservices.panel1.caption"
-msgid "Panel1"
-msgstr ""
-
-#: ufrmmodulesitesandservices.lrj:$.strings.[14].value
-msgctxt "tfrmmodulesitesandservices.panel2.caption"
-msgid "Panel2"
 msgstr ""
 
 #: ufrmmodulesitesandservices.lrj:$.strings.[0].value
@@ -676,21 +611,6 @@ msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[9].text"
 msgid "DC Type"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[15].value
-msgctxt "tfrmmodulesitesandservices.toolbar1.caption"
-msgid "ToolBar1"
-msgstr ""
-
-#: ufrmmodulesitesandservices.lrj:$.strings.[16].value
-msgctxt "tfrmmodulesitesandservices.toolbutton6.caption"
-msgid "ToolButton6"
-msgstr ""
-
-#: ufrmmodulesitesandservices.lrj:$.strings.[17].value
-msgctxt "tfrmmodulesitesandservices.toolbutton7.caption"
-msgid "ToolButton7"
-msgstr ""
-
 #: ufrmnewcomputer.lrj:$.strings.[4].value
 msgctxt "tfrmnewcomputer.bitbtn_changeuserorgroup.caption"
 msgid "Change..."
@@ -743,7 +663,7 @@ msgstr ""
 
 #: ufrmnewcontact.lrj:$.strings.[1].value
 msgctxt "tfrmnewcontact.label_initial.caption"
-msgid "Initials : "
+msgid "Initials :"
 msgstr ""
 
 #: ufrmnewcontact.lrj:$.strings.[2].value
@@ -794,11 +714,6 @@ msgstr ""
 #: ufrmnewgroup.lrj:$.strings.[6].value
 msgctxt "tfrmnewgroup.radiogroup_type.caption"
 msgid "Group type"
-msgstr ""
-
-#: ufrmnewobject.lrj:$.strings.[5].value
-msgctxt "tfrmnewobject.action1.caption"
-msgid "Action1"
 msgstr ""
 
 #: ufrmnewobject.lrj:$.strings.[2].value
@@ -1258,16 +1173,11 @@ msgid "Mot de passe de récupération BitLocker :"
 msgstr ""
 
 #: ufrmpropertybitlocker.lrj:$.strings.[2].value
-msgctxt "tfrmpropertybitlocker.panel1.caption"
-msgid "Panel1"
-msgstr ""
-
-#: ufrmpropertybitlocker.lrj:$.strings.[3].value
 msgctxt "tfrmpropertybitlocker.tisgrid1.header.columns[0].text"
 msgid "Date d'ajout"
 msgstr ""
 
-#: ufrmpropertybitlocker.lrj:$.strings.[4].value
+#: ufrmpropertybitlocker.lrj:$.strings.[3].value
 msgctxt "tfrmpropertybitlocker.tisgrid1.header.columns[1].text"
 msgid "ID de mdp"
 msgstr ""
@@ -1559,11 +1469,6 @@ msgstr ""
 #: ufrmpropertygeneraluser.lrj:$.strings.[11].value
 msgctxt "tfrmpropertygeneraluser.label_telephonenumber.caption"
 msgid "Phone Number :"
-msgstr ""
-
-#: ufrmpropertygeneralvolume.lrj:$.strings.[5].value
-msgctxt "tfrmpropertygeneralvolume.action1.caption"
-msgid "Action1"
 msgstr ""
 
 #: ufrmpropertygeneralvolume.lrj:$.strings.[4].value
@@ -1882,7 +1787,7 @@ msgstr ""
 
 #: ufrmpropertyorganization.lrj:$.strings.[0].value
 msgctxt "tfrmpropertyorganization.groupbox_manager.caption"
-msgid "Manager : "
+msgid "Manager :"
 msgstr ""
 
 #: ufrmpropertyorganization.lrj:$.strings.[4].value
@@ -1977,7 +1882,7 @@ msgstr ""
 
 #: ufrmpropertyprofile.lrj:$.strings.[6].value
 msgctxt "tfrmpropertyprofile.radiobutton_homedirectory.caption"
-msgid " Local path :"
+msgid "Local path :"
 msgstr ""
 
 #: ufrmpropertypublishedcertificates.lrj:$.strings.[6].value
@@ -2205,192 +2110,187 @@ msgctxt "tfrmrsatoptions.label3.caption"
 msgid "AdvancedView"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[33].value
+#: uvisaddaces.lrj:$.strings.[32].value
 msgctxt "tvisaddaces.action_add.caption"
 msgid "Add"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[36].value
+#: uvisaddaces.lrj:$.strings.[35].value
 msgctxt "tvisaddaces.action_clear.caption"
 msgid "Clear"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[34].value
+#: uvisaddaces.lrj:$.strings.[33].value
 msgctxt "tvisaddaces.action_delete.caption"
 msgid "Delete"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[35].value
+#: uvisaddaces.lrj:$.strings.[34].value
 msgctxt "tvisaddaces.action_ok.caption"
 msgid "OK"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[37].value
+#: uvisaddaces.lrj:$.strings.[36].value
 msgctxt "tvisaddaces.action_replace.caption"
 msgid "Replace"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[32].value
+#: uvisaddaces.lrj:$.strings.[31].value
 msgctxt "tvisaddaces.bitbtn_cancel.caption"
 msgid "Cancel"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[0].value
-msgctxt "tvisaddaces.caption"
-msgid "VisAddACEs"
-msgstr ""
-
-#: uvisaddaces.lrj:$.strings.[4].value
+#: uvisaddaces.lrj:$.strings.[3].value
 msgctxt "tvisaddaces.checkbox_cc.caption"
 msgid "Create Child"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[19].value
+#: uvisaddaces.lrj:$.strings.[18].value
 msgctxt "tvisaddaces.checkbox_ci.caption"
 msgid "Container Inherited"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[12].value
+#: uvisaddaces.lrj:$.strings.[11].value
 msgctxt "tvisaddaces.checkbox_cr.caption"
 msgid "Control Access"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[5].value
+#: uvisaddaces.lrj:$.strings.[4].value
 msgctxt "tvisaddaces.checkbox_dc.caption"
 msgid "Delete Child"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[10].value
+#: uvisaddaces.lrj:$.strings.[9].value
 msgctxt "tvisaddaces.checkbox_dt.caption"
 msgid "Delete Tree"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[20].value
+#: uvisaddaces.lrj:$.strings.[19].value
 msgctxt "tvisaddaces.checkbox_io.caption"
 msgid "Inherit Only"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[6].value
+#: uvisaddaces.lrj:$.strings.[5].value
 msgctxt "tvisaddaces.checkbox_lc.caption"
 msgid "List Children"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[11].value
+#: uvisaddaces.lrj:$.strings.[10].value
 msgctxt "tvisaddaces.checkbox_lo.caption"
 msgid "List Object"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[21].value
+#: uvisaddaces.lrj:$.strings.[20].value
 msgctxt "tvisaddaces.checkbox_np.caption"
 msgid "No Propagate"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[18].value
+#: uvisaddaces.lrj:$.strings.[17].value
 msgctxt "tvisaddaces.checkbox_oi.caption"
 msgid "Object Inherited"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[14].value
+#: uvisaddaces.lrj:$.strings.[13].value
 msgctxt "tvisaddaces.checkbox_rc.caption"
 msgid "Read Control"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[8].value
+#: uvisaddaces.lrj:$.strings.[7].value
 msgctxt "tvisaddaces.checkbox_rp.caption"
 msgid "Read Property"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[13].value
+#: uvisaddaces.lrj:$.strings.[12].value
 msgctxt "tvisaddaces.checkbox_sd.caption"
 msgid "Delete"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[7].value
+#: uvisaddaces.lrj:$.strings.[6].value
 msgctxt "tvisaddaces.checkbox_sw.caption"
 msgid "Self Write"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[15].value
+#: uvisaddaces.lrj:$.strings.[14].value
 msgctxt "tvisaddaces.checkbox_wd.caption"
 msgid "Write Dac"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[16].value
+#: uvisaddaces.lrj:$.strings.[15].value
 msgctxt "tvisaddaces.checkbox_wo.caption"
 msgid "Write Owner"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[9].value
+#: uvisaddaces.lrj:$.strings.[8].value
 msgctxt "tvisaddaces.checkbox_wp.caption"
 msgid "Write Property"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[3].value
+#: uvisaddaces.lrj:$.strings.[2].value
 msgctxt "tvisaddaces.checkgroup_access.caption"
 msgid "Access"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[17].value
+#: uvisaddaces.lrj:$.strings.[16].value
 msgctxt "tvisaddaces.checkgroup_inheritance.caption"
 msgid "Inheritance"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[23].value
+#: uvisaddaces.lrj:$.strings.[22].value
 msgctxt "tvisaddaces.label_inheritance.caption"
 msgid "Inheritance:"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[22].value
+#: uvisaddaces.lrj:$.strings.[21].value
 msgctxt "tvisaddaces.label_property.caption"
 msgid "Target Property :"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[1].value
+#: uvisaddaces.lrj:$.strings.[0].value
 msgctxt "tvisaddaces.label_title.caption"
 msgid "Create and add new Rights (ACEs) :"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[2].value
+#: uvisaddaces.lrj:$.strings.[1].value
 msgctxt "tvisaddaces.label_trustee.caption"
 msgid "Trustee :"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[24].value
+#: uvisaddaces.lrj:$.strings.[23].value
 msgctxt "tvisaddaces.radiobutton_allow.caption"
 msgid "Allow"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[25].value
+#: uvisaddaces.lrj:$.strings.[24].value
 msgctxt "tvisaddaces.radiobutton_deny.caption"
 msgid "Deny"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[26].value
+#: uvisaddaces.lrj:$.strings.[25].value
 msgctxt "tvisaddaces.tisgrid1.header.columns[0].text"
 msgid "Type"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[27].value
+#: uvisaddaces.lrj:$.strings.[26].value
 msgctxt "tvisaddaces.tisgrid1.header.columns[1].text"
 msgid "Trustee"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[28].value
+#: uvisaddaces.lrj:$.strings.[27].value
 msgctxt "tvisaddaces.tisgrid1.header.columns[2].text"
 msgid "Access"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[29].value
+#: uvisaddaces.lrj:$.strings.[28].value
 msgctxt "tvisaddaces.tisgrid1.header.columns[3].text"
 msgid "Target Property"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[30].value
+#: uvisaddaces.lrj:$.strings.[29].value
 msgctxt "tvisaddaces.tisgrid1.header.columns[4].text"
 msgid "Applies to"
 msgstr ""
 
-#: uvisaddaces.lrj:$.strings.[31].value
+#: uvisaddaces.lrj:$.strings.[30].value
 msgctxt "tvisaddaces.tisgrid1.header.columns[5].text"
 msgid "Inherit to"
 msgstr ""
@@ -2607,12 +2507,12 @@ msgstr ""
 
 #: uvisadvancedsecurity.lrj:$.strings.[2].value
 msgctxt "tvisadvancedsecurity.label_group.caption"
-msgid "Group: "
+msgid "Group:"
 msgstr ""
 
 #: uvisadvancedsecurity.lrj:$.strings.[1].value
 msgctxt "tvisadvancedsecurity.label_owner.caption"
-msgid "Owner: "
+msgid "Owner:"
 msgstr ""
 
 #: uvisadvancedsecurity.lrj:$.strings.[37].value
@@ -2805,7 +2705,7 @@ msgctxt "tvischangepartition.caption"
 msgid "Change partition"
 msgstr ""
 
-#: uvisconnectiondetails.lrj:$.strings.[12].value
+#: uvisconnectiondetails.lrj:$.strings.[11].value
 msgctxt "tvisconnectiondetails.bitbtn1.caption"
 msgid "Hide/Show"
 msgstr ""
@@ -2815,12 +2715,12 @@ msgctxt "tvisconnectiondetails.caption"
 msgid "Connection details"
 msgstr ""
 
-#: uvisconnectiondetails.lrj:$.strings.[19].value
+#: uvisconnectiondetails.lrj:$.strings.[18].value
 msgctxt "tvisconnectiondetails.label1.caption"
 msgid "Server informations (available from RootDSE Object)"
 msgstr ""
 
-#: uvisconnectiondetails.lrj:$.strings.[11].value
+#: uvisconnectiondetails.lrj:$.strings.[10].value
 msgctxt "tvisconnectiondetails.label2.caption"
 msgid "Ldap error:"
 msgstr ""
@@ -2840,12 +2740,12 @@ msgctxt "tvisconnectiondetails.label_autoreconnect.caption"
 msgid "Auto reconnect"
 msgstr ""
 
-#: uvisconnectiondetails.lrj:$.strings.[13].value
+#: uvisconnectiondetails.lrj:$.strings.[12].value
 msgctxt "tvisconnectiondetails.label_domain.caption"
 msgid "Domain"
 msgstr ""
 
-#: uvisconnectiondetails.lrj:$.strings.[14].value
+#: uvisconnectiondetails.lrj:$.strings.[13].value
 msgctxt "tvisconnectiondetails.label_domaincontroller.caption"
 msgid "Domain Controller"
 msgstr ""
@@ -2880,27 +2780,22 @@ msgctxt "tvisconnectiondetails.label_username.caption"
 msgid "Username"
 msgstr ""
 
-#: uvisconnectiondetails.lrj:$.strings.[10].value
-msgctxt "tvisconnectiondetails.panel5.caption"
-msgid "Panel5"
-msgstr ""
-
-#: uvisconnectiondetails.lrj:$.strings.[16].value
+#: uvisconnectiondetails.lrj:$.strings.[15].value
 msgctxt "tvisconnectiondetails.tabsheet_advanced.caption"
 msgid "Advanced"
 msgstr ""
 
-#: uvisconnectiondetails.lrj:$.strings.[15].value
+#: uvisconnectiondetails.lrj:$.strings.[14].value
 msgctxt "tvisconnectiondetails.tabsheet_formatted.caption"
 msgid "Formatted"
 msgstr ""
 
-#: uvisconnectiondetails.lrj:$.strings.[17].value
+#: uvisconnectiondetails.lrj:$.strings.[16].value
 msgctxt "tvisconnectiondetails.tisgrid1.header.columns[0].text"
 msgid "Name"
 msgstr ""
 
-#: uvisconnectiondetails.lrj:$.strings.[18].value
+#: uvisconnectiondetails.lrj:$.strings.[17].value
 msgctxt "tvisconnectiondetails.tisgrid1.header.columns[1].text"
 msgid "Value"
 msgstr ""
@@ -2952,7 +2847,7 @@ msgstr ""
 
 #: uvisconnectoptions.lrj:$.strings.[1].value
 msgctxt "tvisconnectoptions.group_connection.caption"
-msgid "Connection : "
+msgid "Connection :"
 msgstr ""
 
 #: uvisconnectoptions.lrj:$.strings.[5].value
@@ -2967,7 +2862,7 @@ msgstr ""
 
 #: uvisconnectoptions.lrj:$.strings.[3].value
 msgctxt "tvisconnectoptions.label_port.caption"
-msgid "Port : "
+msgid "Port :"
 msgstr ""
 
 #: uvisconnectoptions.lrj:$.strings.[2].value
@@ -2990,32 +2885,32 @@ msgctxt "tvisconnectoptions.radiobutton_simpleauth.caption"
 msgid "Simple Authentication"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[38].value
+#: uvisdelegatecontrol.lrj:$.strings.[32].value
 msgctxt "tvisdelegatecontrol.action_add.caption"
 msgid "Add..."
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[35].value
+#: uvisdelegatecontrol.lrj:$.strings.[29].value
 msgctxt "tvisdelegatecontrol.action_back.caption"
 msgid "< Back"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[37].value
+#: uvisdelegatecontrol.lrj:$.strings.[31].value
 msgctxt "tvisdelegatecontrol.action_cancel.caption"
 msgid "Cancel"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[36].value
+#: uvisdelegatecontrol.lrj:$.strings.[30].value
 msgctxt "tvisdelegatecontrol.action_next.caption"
 msgid "Next >"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[39].value
+#: uvisdelegatecontrol.lrj:$.strings.[33].value
 msgctxt "tvisdelegatecontrol.action_remove.caption"
 msgid "Remove"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[34].value
+#: uvisdelegatecontrol.lrj:$.strings.[28].value
 msgctxt "tvisdelegatecontrol.btn_finish.caption"
 msgid "Finish"
 msgstr ""
@@ -3025,152 +2920,142 @@ msgctxt "tvisdelegatecontrol.caption"
 msgid "Delegation of Control Wizard"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[24].value
+#: uvisdelegatecontrol.lrj:$.strings.[19].value
 msgctxt "tvisdelegatecontrol.checkbox1.caption"
 msgid "Create selected objects in this folder"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[25].value
+#: uvisdelegatecontrol.lrj:$.strings.[20].value
 msgctxt "tvisdelegatecontrol.checkbox2.caption"
 msgid "Delete selected objects in this folder"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[30].value
+#: uvisdelegatecontrol.lrj:$.strings.[24].value
 msgctxt "tvisdelegatecontrol.checkbox3.caption"
 msgid "General"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[31].value
+#: uvisdelegatecontrol.lrj:$.strings.[25].value
 msgctxt "tvisdelegatecontrol.checkbox4.caption"
 msgid "Property-specific"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[32].value
+#: uvisdelegatecontrol.lrj:$.strings.[26].value
 msgctxt "tvisdelegatecontrol.checkbox5.caption"
 msgid "Creation/deletion of specific child objects"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[2].value
+#: uvisdelegatecontrol.lrj:$.strings.[1].value
 msgctxt "tvisdelegatecontrol.label1.caption"
 msgid "Welcome to the Delegation of Control Wizard"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[16].value
+#: uvisdelegatecontrol.lrj:$.strings.[12].value
 msgctxt "tvisdelegatecontrol.label10.caption"
 msgid "You have successfully completed the Delegation of Control wizard."
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[17].value
+#: uvisdelegatecontrol.lrj:$.strings.[13].value
 msgctxt "tvisdelegatecontrol.label11.caption"
 msgid "To close this wizard, click Finish."
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[19].value
+#: uvisdelegatecontrol.lrj:$.strings.[14].value
 msgctxt "tvisdelegatecontrol.label12.caption"
 msgid "Active Directory Object Type"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[20].value
+#: uvisdelegatecontrol.lrj:$.strings.[15].value
 msgctxt "tvisdelegatecontrol.label13.caption"
 msgid "Indicate the scope of the task you want to delegate."
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[21].value
+#: uvisdelegatecontrol.lrj:$.strings.[16].value
 msgctxt "tvisdelegatecontrol.label14.caption"
 msgid "Delegate control of:"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[27].value
+#: uvisdelegatecontrol.lrj:$.strings.[21].value
 msgctxt "tvisdelegatecontrol.label15.caption"
 msgid "Permissions"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[28].value
+#: uvisdelegatecontrol.lrj:$.strings.[22].value
 msgctxt "tvisdelegatecontrol.label16.caption"
 msgid "Select the permissions you want to delegate."
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[29].value
+#: uvisdelegatecontrol.lrj:$.strings.[23].value
 msgctxt "tvisdelegatecontrol.label17.caption"
 msgid "Show these permissions:"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[33].value
+#: uvisdelegatecontrol.lrj:$.strings.[27].value
 msgctxt "tvisdelegatecontrol.label18.caption"
 msgid "Permissions:"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[3].value
+#: uvisdelegatecontrol.lrj:$.strings.[2].value
 msgctxt "tvisdelegatecontrol.label2.caption"
 msgid "This wizard helps you delegate control of Active Directory objects. You can "
 "grant users permission to manage users, groups, computers, organizational un"
 "its, and other objects stored in Active Directory Domain Services."
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[4].value
+#: uvisdelegatecontrol.lrj:$.strings.[3].value
 msgctxt "tvisdelegatecontrol.label3.caption"
 msgid "To continue, click Next."
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[8].value
+#: uvisdelegatecontrol.lrj:$.strings.[6].value
 msgctxt "tvisdelegatecontrol.label4.caption"
 msgid "Selected users and groups:"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[6].value
+#: uvisdelegatecontrol.lrj:$.strings.[4].value
 msgctxt "tvisdelegatecontrol.label5.caption"
 msgid "Users and Groups"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[7].value
+#: uvisdelegatecontrol.lrj:$.strings.[5].value
 msgctxt "tvisdelegatecontrol.label6.caption"
 msgid "Select one or more users or groups to whom you want to delegate control."
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[10].value
+#: uvisdelegatecontrol.lrj:$.strings.[7].value
 msgctxt "tvisdelegatecontrol.label7.caption"
 msgid "Tasks to Delegate"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[11].value
+#: uvisdelegatecontrol.lrj:$.strings.[8].value
 msgctxt "tvisdelegatecontrol.label8.caption"
 msgid "You can select common tasks or customize your own."
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[15].value
+#: uvisdelegatecontrol.lrj:$.strings.[11].value
 msgctxt "tvisdelegatecontrol.label9.caption"
 msgid "Completing the Delegation of Control Wizard"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[12].value
+#: uvisdelegatecontrol.lrj:$.strings.[9].value
 msgctxt "tvisdelegatecontrol.radiobutton1.caption"
 msgid "Delegate the following common tasks:"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[13].value
+#: uvisdelegatecontrol.lrj:$.strings.[10].value
 msgctxt "tvisdelegatecontrol.radiobutton2.caption"
 msgid "Create a custom task to delegate"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[22].value
+#: uvisdelegatecontrol.lrj:$.strings.[17].value
 msgctxt "tvisdelegatecontrol.radiobutton3.caption"
 msgid "This folder, existing objects in this folder, and creation of new objects in"
 " this folder"
 msgstr ""
 
-#: uvisdelegatecontrol.lrj:$.strings.[23].value
+#: uvisdelegatecontrol.lrj:$.strings.[18].value
 msgctxt "tvisdelegatecontrol.radiobutton4.caption"
 msgid "Only the following objects in the folder:"
-msgstr ""
-
-#: uvisdelegatecontrol.lrj:$.strings.[14].value
-msgctxt "tvisdelegatecontrol.ts_resume.caption"
-msgid "TS_Resume"
-msgstr ""
-
-#: uvisdelegatecontrol.lrj:$.strings.[1].value
-msgctxt "tvisdelegatecontrol.ts_welcome.caption"
-msgid "TS_Welcome"
 msgstr ""
 
 #: uvislistother.lrj:$.strings.[4].value
@@ -3296,7 +3181,7 @@ msgstr ""
 
 #: uvislogonworkstation.lrj:$.strings.[3].value
 msgctxt "tvislogonworkstation.radiobutton_following.caption"
-msgid "The following computers "
+msgid "The following computers"
 msgstr ""
 
 #: uvisnewobject.lrj:$.strings.[1].value
@@ -3306,7 +3191,7 @@ msgstr ""
 
 #: uvisnewobject.lrj:$.strings.[0].value
 msgctxt "tvisnewobject.label_dn.caption"
-msgid "Create in : "
+msgid "Create in :"
 msgstr ""
 
 #: uvisnewquery.lrj:$.strings.[6].value
@@ -3555,77 +3440,77 @@ msgctxt "tvisnewresourcerecord.ts_srv.caption"
 msgid "Service Location (SRV)"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[68].value
+#: uvisnewzonewizard.lrj:$.strings.[61].value
 msgctxt "tvisnewzonewizard.action_backdynamiczone.caption"
 msgid "Back"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[69].value
+#: uvisnewzonewizard.lrj:$.strings.[62].value
 msgctxt "tvisnewzonewizard.action_backfinish.caption"
 msgid "Back"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[70].value
+#: uvisnewzonewizard.lrj:$.strings.[63].value
 msgctxt "tvisnewzonewizard.action_backwizard.caption"
 msgid "Back"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[67].value
+#: uvisnewzonewizard.lrj:$.strings.[60].value
 msgctxt "tvisnewzonewizard.action_backzonefile.caption"
 msgid "Back"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[66].value
+#: uvisnewzonewizard.lrj:$.strings.[59].value
 msgctxt "tvisnewzonewizard.action_backzonename.caption"
 msgid "Back"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[65].value
+#: uvisnewzonewizard.lrj:$.strings.[58].value
 msgctxt "tvisnewzonewizard.action_backzonereplicationscope.caption"
 msgid "Back"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[64].value
+#: uvisnewzonewizard.lrj:$.strings.[57].value
 msgctxt "tvisnewzonewizard.action_backzonetype.caption"
 msgid "Back"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[56].value
+#: uvisnewzonewizard.lrj:$.strings.[49].value
 msgctxt "tvisnewzonewizard.action_cancel.caption"
 msgid "Cancel"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[62].value
+#: uvisnewzonewizard.lrj:$.strings.[55].value
 msgctxt "tvisnewzonewizard.action_nextdynamiczone.caption"
 msgid "Next"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[63].value
+#: uvisnewzonewizard.lrj:$.strings.[56].value
 msgctxt "tvisnewzonewizard.action_nextfinish.caption"
 msgid "Finish"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[57].value
+#: uvisnewzonewizard.lrj:$.strings.[50].value
 msgctxt "tvisnewzonewizard.action_nextwizard.caption"
 msgid "Next"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[61].value
+#: uvisnewzonewizard.lrj:$.strings.[54].value
 msgctxt "tvisnewzonewizard.action_nextzonefile.caption"
 msgid "Next"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[60].value
+#: uvisnewzonewizard.lrj:$.strings.[53].value
 msgctxt "tvisnewzonewizard.action_nextzonename.caption"
 msgid "Next"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[59].value
+#: uvisnewzonewizard.lrj:$.strings.[52].value
 msgctxt "tvisnewzonewizard.action_nextzonereplicationscope.caption"
 msgid "Next"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[58].value
+#: uvisnewzonewizard.lrj:$.strings.[51].value
 msgctxt "tvisnewzonewizard.action_nextzonetype.caption"
 msgid "Next"
 msgstr ""
@@ -3645,76 +3530,76 @@ msgctxt "tvisnewzonewizard.caption"
 msgid "New Zone Wizard"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[4].value
+#: uvisnewzonewizard.lrj:$.strings.[3].value
 msgctxt "tvisnewzonewizard.label1.caption"
 msgid "Welcome to the New Zone Wizard"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[17].value
+#: uvisnewzonewizard.lrj:$.strings.[15].value
 msgctxt "tvisnewzonewizard.label10.caption"
 msgid "Create a copy of a zone containing inly Name Server (NS), Start of Authority"
 " (SOA), and possibly glue Host (A) records. A server containing a stub zone "
 "is not authoritative for that zone."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[18].value
+#: uvisnewzonewizard.lrj:$.strings.[16].value
 msgctxt "tvisnewzonewizard.label11.caption"
 msgid "Store the zone in Active Directory (available only if DNS server is a writea"
 "ble domain controller)"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[20].value
+#: uvisnewzonewizard.lrj:$.strings.[17].value
 msgctxt "tvisnewzonewizard.label12.caption"
 msgid "Active Directory Zone Replication Scope"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[21].value
+#: uvisnewzonewizard.lrj:$.strings.[18].value
 msgctxt "tvisnewzonewizard.label13.caption"
 msgid "You can select how you want DNS data replicated throughout your network."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[22].value
+#: uvisnewzonewizard.lrj:$.strings.[19].value
 msgctxt "tvisnewzonewizard.label14.caption"
 msgid "Select how you want zone data replicated:"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[23].value
+#: uvisnewzonewizard.lrj:$.strings.[20].value
 msgctxt "tvisnewzonewizard.label15.caption"
 msgid "To all DNS servers running on domain controllers in this forest:"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[24].value
+#: uvisnewzonewizard.lrj:$.strings.[21].value
 msgctxt "tvisnewzonewizard.label16.caption"
 msgid "To all DNS servers running on domain controllers in this domain:"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[25].value
+#: uvisnewzonewizard.lrj:$.strings.[22].value
 msgctxt "tvisnewzonewizard.label17.caption"
 msgid "To all domain controllers in this domain (for Windows 2000 compatibility):"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[26].value
+#: uvisnewzonewizard.lrj:$.strings.[23].value
 msgctxt "tvisnewzonewizard.label18.caption"
 msgid "To all domain controllers specified in the scoper of this directory partitio"
 "n:"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[28].value
+#: uvisnewzonewizard.lrj:$.strings.[24].value
 msgctxt "tvisnewzonewizard.label19.caption"
 msgid "Zone Name"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[5].value
+#: uvisnewzonewizard.lrj:$.strings.[4].value
 msgctxt "tvisnewzonewizard.label2.caption"
 msgid "This wizard helps you create a new zone for your DNS server."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[29].value
+#: uvisnewzonewizard.lrj:$.strings.[25].value
 msgctxt "tvisnewzonewizard.label20.caption"
 msgid "What is the name of the new zone?"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[30].value
+#: uvisnewzonewizard.lrj:$.strings.[26].value
 msgctxt "tvisnewzonewizard.label21.caption"
 msgid "The zone name specifies the portion of the DNS namespace for which this serv"
 "er is autoritative. It might be your organization's domain name (for example"
@@ -3722,199 +3607,174 @@ msgid "The zone name specifies the portion of the DNS namespace for which this s
 ".com). The zone name is not the name of the DNS server."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[31].value
+#: uvisnewzonewizard.lrj:$.strings.[27].value
 msgctxt "tvisnewzonewizard.label22.caption"
 msgid "Zone name:"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[33].value
+#: uvisnewzonewizard.lrj:$.strings.[28].value
 msgctxt "tvisnewzonewizard.label23.caption"
 msgid "Zone File"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[34].value
+#: uvisnewzonewizard.lrj:$.strings.[29].value
 msgctxt "tvisnewzonewizard.label24.caption"
 msgid "You can create a new zone file or use a file copied from another DNS server."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[35].value
+#: uvisnewzonewizard.lrj:$.strings.[30].value
 msgctxt "tvisnewzonewizard.label25.caption"
 msgid "Do you want to create a new zone file or use an existing file that you have "
 "copied from another DNS server?"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[36].value
+#: uvisnewzonewizard.lrj:$.strings.[31].value
 msgctxt "tvisnewzonewizard.label26.caption"
 msgid "To use this existing file, ensure that it has been copied to the folder %Sys"
 "temRoot%\\system32\\dns on this server, and then click Next."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[37].value
+#: uvisnewzonewizard.lrj:$.strings.[32].value
 msgctxt "tvisnewzonewizard.label27.caption"
 msgid "Create a new file with this file name:"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[38].value
+#: uvisnewzonewizard.lrj:$.strings.[33].value
 msgctxt "tvisnewzonewizard.label28.caption"
 msgid "Use this existing file:"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[40].value
+#: uvisnewzonewizard.lrj:$.strings.[34].value
 msgctxt "tvisnewzonewizard.label29.caption"
 msgid "You can specify that this DNS zone accepts secure, nonsecure, or no dynamic "
 "updates."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[6].value
+#: uvisnewzonewizard.lrj:$.strings.[5].value
 msgctxt "tvisnewzonewizard.label3.caption"
 msgid "A zone translates DNS names to related data, such as IP addresses or network"
 " services."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[41].value
+#: uvisnewzonewizard.lrj:$.strings.[35].value
 msgctxt "tvisnewzonewizard.label30.caption"
 msgid "Dynamic Update"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[42].value
+#: uvisnewzonewizard.lrj:$.strings.[36].value
 msgctxt "tvisnewzonewizard.label31.caption"
 msgid "Dynamic updates enable DNS client computers to register and dynamically upda"
 "te their resource records with a DNS server whenever changes occur."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[43].value
+#: uvisnewzonewizard.lrj:$.strings.[37].value
 msgctxt "tvisnewzonewizard.label32.caption"
 msgid "Select the type of dynamic updates you want to allow:"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[44].value
+#: uvisnewzonewizard.lrj:$.strings.[38].value
 msgctxt "tvisnewzonewizard.label33.caption"
 msgid "Allow only secure dynamic updates (recommanded for Active Directory)"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[45].value
+#: uvisnewzonewizard.lrj:$.strings.[39].value
 msgctxt "tvisnewzonewizard.label34.caption"
 msgid "This option is available only for Active Directory-integrated zones."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[46].value
+#: uvisnewzonewizard.lrj:$.strings.[40].value
 msgctxt "tvisnewzonewizard.label35.caption"
 msgid "Allow both nonsecure and secure dynamic updates"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[47].value
+#: uvisnewzonewizard.lrj:$.strings.[41].value
 msgctxt "tvisnewzonewizard.label36.caption"
 msgid "Dynamic updates of resource records are accepted from any client."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[48].value
+#: uvisnewzonewizard.lrj:$.strings.[42].value
 msgctxt "tvisnewzonewizard.label37.caption"
 msgid "This option is a significant security vulnerability because updates can be a"
 "ccepted from untrusted sources."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[49].value
+#: uvisnewzonewizard.lrj:$.strings.[43].value
 msgctxt "tvisnewzonewizard.label38.caption"
 msgid "Do not allow dynamic updates"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[50].value
+#: uvisnewzonewizard.lrj:$.strings.[44].value
 msgctxt "tvisnewzonewizard.label39.caption"
 msgid "Dynamic updates of resource records are not accepted by this zone. You must "
 "update these records manually."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[7].value
+#: uvisnewzonewizard.lrj:$.strings.[6].value
 msgctxt "tvisnewzonewizard.label4.caption"
 msgid "To continue, click Next."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[52].value
+#: uvisnewzonewizard.lrj:$.strings.[45].value
 msgctxt "tvisnewzonewizard.label40.caption"
 msgid "Completing the New Zone Wizard"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[53].value
+#: uvisnewzonewizard.lrj:$.strings.[46].value
 msgctxt "tvisnewzonewizard.label41.caption"
 msgid "You have successfully completed the New Zone Wizard. You specified the follo"
 "wing settings:"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[54].value
+#: uvisnewzonewizard.lrj:$.strings.[47].value
 msgctxt "tvisnewzonewizard.label42.caption"
 msgid "Note: You should now add records to the zone or ensure that records are upda"
 "ted dynamically. You can then verify name resolution using nslookup."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[55].value
+#: uvisnewzonewizard.lrj:$.strings.[48].value
 msgctxt "tvisnewzonewizard.label43.caption"
 msgid "To close this wizard and create the new zone, click Finish."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[9].value
+#: uvisnewzonewizard.lrj:$.strings.[7].value
 msgctxt "tvisnewzonewizard.label5.caption"
 msgid "Zone Type"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[10].value
+#: uvisnewzonewizard.lrj:$.strings.[8].value
 msgctxt "tvisnewzonewizard.label6.caption"
 msgid "The DNS server supports various types of zones and storage."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[11].value
+#: uvisnewzonewizard.lrj:$.strings.[9].value
 msgctxt "tvisnewzonewizard.label7.caption"
 msgid "Select the type of zone you want to create:"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[15].value
+#: uvisnewzonewizard.lrj:$.strings.[13].value
 msgctxt "tvisnewzonewizard.label8.caption"
 msgid "Creates a copy of a zone that can be updated directly on this server."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[16].value
+#: uvisnewzonewizard.lrj:$.strings.[14].value
 msgctxt "tvisnewzonewizard.label9.caption"
 msgid "Create a copy of a zone that exists on another server. This option helps bal"
 "ance the processing load of primary servers and provides fault tolerance."
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[12].value
+#: uvisnewzonewizard.lrj:$.strings.[10].value
 msgctxt "tvisnewzonewizard.radiobutton1.caption"
 msgid "Primary zone"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[13].value
+#: uvisnewzonewizard.lrj:$.strings.[11].value
 msgctxt "tvisnewzonewizard.radiobutton2.caption"
 msgid "Secondary zone"
 msgstr ""
 
-#: uvisnewzonewizard.lrj:$.strings.[14].value
+#: uvisnewzonewizard.lrj:$.strings.[12].value
 msgctxt "tvisnewzonewizard.radiobutton3.caption"
 msgid "Stub zone"
-msgstr ""
-
-#: uvisnewzonewizard.lrj:$.strings.[51].value
-msgctxt "tvisnewzonewizard.ts_finish.caption"
-msgid "TS_Finish"
-msgstr ""
-
-#: uvisnewzonewizard.lrj:$.strings.[3].value
-msgctxt "tvisnewzonewizard.ts_wizard.caption"
-msgid "TS_Wizard"
-msgstr ""
-
-#: uvisnewzonewizard.lrj:$.strings.[32].value
-msgctxt "tvisnewzonewizard.ts_zonefile.caption"
-msgid "TS_ZoneFile"
-msgstr ""
-
-#: uvisnewzonewizard.lrj:$.strings.[27].value
-msgctxt "tvisnewzonewizard.ts_zonename.caption"
-msgid "TS_ZoneName"
-msgstr ""
-
-#: uvisnewzonewizard.lrj:$.strings.[8].value
-msgctxt "tvisnewzonewizard.ts_zonetype.caption"
-msgid "TS_ZoneType"
 msgstr ""
 
 #: uomniselect.lrj:$.strings.[6].value
@@ -4379,7 +4239,7 @@ msgstr ""
 
 #: uvistaskmove.lrj:$.strings.[2].value
 msgctxt "tvistaskmove.label_rdn.caption"
-msgid "Name : "
+msgid "Name :"
 msgstr ""
 
 #: uvistaskresetpassword.lrj:$.strings.[8].value

@@ -1,5 +1,4 @@
 {"version":1,"strings":[
-{"hash":128812979,"name":"tvisaddaces.caption","sourcebytes":[86,105,115,65,100,100,65,67,69,115],"value":"VisAddACEs"},
 {"hash":42608554,"name":"tvisaddaces.label_title.caption","sourcebytes":[67,114,101,97,116,101,32,97,110,100,32,97,100,100,32,110,101,119,32,82,105,103,104,116,115,32,40,65,67,69,115,41,32,58],"value":"Create and add new Rights (ACEs) :"},
 {"hash":212528298,"name":"tvisaddaces.label_trustee.caption","sourcebytes":[84,114,117,115,116,101,101,32,58],"value":"Trustee :"},
 {"hash":75078819,"name":"tvisaddaces.checkgroup_access.caption","sourcebytes":[65,99,99,101,115,115],"value":"Access"},

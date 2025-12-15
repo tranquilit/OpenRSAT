@@ -29,9 +29,9 @@ object VisTaskMove: TVisTaskMove
     Left = 8
     Height = 15
     Top = 58
-    Width = 41
+    Width = 38
     BorderSpacing.Left = 8
-    Caption = 'Name : '
+    Caption = 'Name :'
   end
   object Edit_DN: TEdit
     AnchorSideLeft.Control = Owner
@@ -59,10 +59,10 @@ object VisTaskMove: TVisTaskMove
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 57
+    Left = 54
     Height = 23
     Top = 54
-    Width = 235
+    Width = 238
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 8
     BorderSpacing.Top = 8

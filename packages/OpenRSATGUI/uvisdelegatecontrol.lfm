@@ -24,7 +24,6 @@ object VisDelegateControl: TVisDelegateControl
     TabIndex = 3
     TabOrder = 0
     object TS_Welcome: TTabSheet
-      Caption = 'TS_Welcome'
       ClientHeight = 312
       ClientWidth = 491
       object Panel1: TPanel
@@ -82,7 +81,6 @@ object VisDelegateControl: TVisDelegateControl
       end
     end
     object TS_UsersAndGroups: TTabSheet
-      Caption = 'TS_UsersAndGroups'
       ClientHeight = 312
       ClientWidth = 491
       object Panel3: TPanel
@@ -197,7 +195,6 @@ object VisDelegateControl: TVisDelegateControl
       end
     end
     object TS_TasksToDelegate: TTabSheet
-      Caption = 'TS_TasksToDelegate'
       ClientHeight = 312
       ClientWidth = 491
       object Panel5: TPanel
@@ -318,7 +315,6 @@ object VisDelegateControl: TVisDelegateControl
       end
     end
     object TS_Resume: TTabSheet
-      Caption = 'TS_Resume'
       ClientHeight = 312
       ClientWidth = 491
       OnShow = TS_ResumeShow
@@ -407,7 +403,6 @@ object VisDelegateControl: TVisDelegateControl
       end
     end
     object TS_ADObjectType: TTabSheet
-      Caption = 'TS_ADObjectType'
       ClientHeight = 312
       ClientWidth = 491
       OnShow = TS_ADObjectTypeShow
@@ -568,7 +563,6 @@ object VisDelegateControl: TVisDelegateControl
       end
     end
     object TS_Permissions: TTabSheet
-      Caption = 'TS_Permissions'
       ClientHeight = 312
       ClientWidth = 491
       OnShow = TS_PermissionsShow

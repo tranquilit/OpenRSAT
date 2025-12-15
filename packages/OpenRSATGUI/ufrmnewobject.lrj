@@ -3,6 +3,5 @@
 {"hash":6063029,"name":"tfrmnewobject.tisgrid1.header.columns[1].text","sourcebytes":[86,97,108,117,101],"value":"Value"},
 {"hash":53551875,"name":"tfrmnewobject.label1.caption","sourcebytes":[79,98,106,101,99,116,32,99,108,97,115,115],"value":"Object class"},
 {"hash":171235461,"name":"tfrmnewobject.label2.caption","sourcebytes":[79,98,106,101,99,116,32,110,97,109,101],"value":"Object name"},
-{"hash":150815091,"name":"tfrmnewobject.label3.caption","sourcebytes":[65,116,116,114,105,98,117,116,101,115],"value":"Attributes"},
-{"hash":128648785,"name":"tfrmnewobject.action1.caption","sourcebytes":[65,99,116,105,111,110,49],"value":"Action1"}
+{"hash":150815091,"name":"tfrmnewobject.label3.caption","sourcebytes":[65,116,116,114,105,98,117,116,101,115],"value":"Attributes"}
 ]}

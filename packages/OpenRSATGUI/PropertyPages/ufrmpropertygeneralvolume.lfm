@@ -170,7 +170,6 @@ object FrmPropertyGeneralVolume: TFrmPropertyGeneralVolume
     Left = 160
     Top = 160
     object Action1: TAction
-      Caption = 'Action1'
       OnExecute = Action1Execute
     end
   end

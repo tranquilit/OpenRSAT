@@ -68,7 +68,7 @@ object VisAdvancedSecurity: TVisAdvancedSecurity
       Top = 8
       Width = 100
       BorderSpacing.Around = 8
-      Caption = 'Owner: '
+      Caption = 'Owner:'
       Constraints.MaxWidth = 100
       Constraints.MinWidth = 100
       WordWrap = True
@@ -82,7 +82,7 @@ object VisAdvancedSecurity: TVisAdvancedSecurity
       Top = 31
       Width = 100
       BorderSpacing.Around = 8
-      Caption = 'Group: '
+      Caption = 'Group:'
       Constraints.MaxWidth = 100
       Constraints.MinWidth = 100
       WordWrap = True

@@ -57,9 +57,9 @@ object VisNewObject: TVisNewObject
       Left = 72
       Height = 16
       Top = 19
-      Width = 56
+      Width = 53
       BorderSpacing.Left = 16
-      Caption = 'Create in : '
+      Caption = 'Create in :'
       Constraints.MaxHeight = 16
       Constraints.MinHeight = 16
       Layout = tlCenter
@@ -72,10 +72,10 @@ object VisNewObject: TVisNewObject
       AnchorSideRight.Control = Panel_Header
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Side = asrBottom
-      Left = 152
+      Left = 149
       Height = 15
       Top = 20
-      Width = 256
+      Width = 259
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Left = 24
       BorderSpacing.Right = 16

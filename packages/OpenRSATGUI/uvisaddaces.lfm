@@ -4,7 +4,6 @@ object VisAddACEs: TVisAddACEs
   Top = 155
   Width = 555
   AutoSize = True
-  Caption = 'VisAddACEs'
   ClientHeight = 703
   ClientWidth = 555
   KeyPreview = True

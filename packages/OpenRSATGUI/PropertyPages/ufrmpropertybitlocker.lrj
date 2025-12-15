@@ -1,7 +1,6 @@
 {"version":1,"strings":[
 {"hash":234895034,"name":"tfrmpropertybitlocker.label_bitlockerpassword.caption","sourcebytes":[77,111,116,32,100,101,32,112,97,115,115,101,32,100,101,32,114,195,169,99,117,112,195,169,114,97,116,105,111,110,32,66,105,116,76,111,99,107,101,114,32,58],"value":"Mot de passe de r\u00E9cup\u00E9ration BitLocker :"},
 {"hash":175848250,"name":"tfrmpropertybitlocker.label_bitclockerdetails.caption","sourcebytes":[68,195,169,116,97,105,108,115,32,58],"value":"D\u00E9tails :"},
-{"hash":90721265,"name":"tfrmpropertybitlocker.panel1.caption","sourcebytes":[80,97,110,101,108,49],"value":"Panel1"},
 {"hash":41988516,"name":"tfrmpropertybitlocker.tisgrid1.header.columns[0].text","sourcebytes":[68,97,116,101,32,100,39,97,106,111,117,116],"value":"Date d'ajout"},
 {"hash":111623888,"name":"tfrmpropertybitlocker.tisgrid1.header.columns[1].text","sourcebytes":[73,68,32,100,101,32,109,100,112],"value":"ID de mdp"}
 ]}

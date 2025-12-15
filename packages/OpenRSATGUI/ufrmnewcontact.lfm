@@ -31,7 +31,7 @@ object FrmNewContact: TFrmNewContact
     Top = 12
     Width = 50
     BorderSpacing.Left = 8
-    Caption = 'Initials : '
+    Caption = 'Initials :'
     Constraints.MaxWidth = 50
     Constraints.MinWidth = 50
     WordWrap = True

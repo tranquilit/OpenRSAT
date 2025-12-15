@@ -56,7 +56,6 @@ object FrmPropertyBitLocker: TFrmPropertyBitLocker
     BorderSpacing.Right = 8
     BorderSpacing.Bottom = 8
     BevelOuter = bvNone
-    Caption = 'Panel1'
     ClientHeight = 146
     ClientWidth = 450
     TabOrder = 1

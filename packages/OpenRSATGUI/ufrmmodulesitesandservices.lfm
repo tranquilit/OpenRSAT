@@ -147,7 +147,6 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
     Width = 800
     Align = alBottom
     AutoSize = True
-    Caption = 'Panel1'
     ClientHeight = 25
     ClientWidth = 800
     TabOrder = 3
@@ -177,7 +176,6 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
     Width = 800
     Align = alTop
     AutoSize = True
-    Caption = 'Panel2'
     ClientHeight = 28
     ClientWidth = 800
     TabOrder = 4
@@ -190,7 +188,6 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       AutoSize = True
       ButtonHeight = 24
       ButtonWidth = 24
-      Caption = 'ToolBar1'
       EdgeBorders = [ebLeft, ebTop, ebRight]
       Images = CoreDataModule.ImageList1
       ImagesWidth = 18
@@ -216,7 +213,6 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
         Left = 75
         Height = 24
         Top = 2
-        Caption = 'ToolButton6'
         Style = tbsSeparator
       end
       object ToolButton4: TToolButton
@@ -233,7 +229,6 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
         Left = 131
         Height = 24
         Top = 2
-        Caption = 'ToolButton7'
         Style = tbsSeparator
       end
     end

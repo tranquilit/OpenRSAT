@@ -1,7 +1,7 @@
 {"version":1,"strings":[
 {"hash":169920115,"name":"tvisadvancedsecurity.caption","sourcebytes":[65,100,118,97,110,99,101,100,32,83,101,99,117,114,105,116,121,32,83,101,116,116,105,110,103,115],"value":"Advanced Security Settings"},
-{"hash":115656080,"name":"tvisadvancedsecurity.label_owner.caption","sourcebytes":[79,119,110,101,114,58,32],"value":"Owner: "},
-{"hash":244761472,"name":"tvisadvancedsecurity.label_group.caption","sourcebytes":[71,114,111,117,112,58,32],"value":"Group: "},
+{"hash":91114586,"name":"tvisadvancedsecurity.label_owner.caption","sourcebytes":[79,119,110,101,114,58],"value":"Owner:"},
+{"hash":82406458,"name":"tvisadvancedsecurity.label_group.caption","sourcebytes":[71,114,111,117,112,58],"value":"Group:"},
 {"hash":74071921,"name":"tvisadvancedsecurity.checkbox_raw.caption","sourcebytes":[86,105,101,119,32,114,97,119,32,100,97,116,97],"value":"View raw data"},
 {"hash":239952531,"name":"tvisadvancedsecurity.checkgroup_aclflags.caption","sourcebytes":[65,67,76,32,70,108,97,103,115],"value":"ACL Flags"},
 {"hash":1410,"name":"tvisadvancedsecurity.checkbox_sr.hint","sourcebytes":[83,82],"value":"SR"},

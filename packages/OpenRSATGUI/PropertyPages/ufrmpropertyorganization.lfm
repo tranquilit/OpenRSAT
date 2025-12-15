@@ -17,7 +17,7 @@ object FrmPropertyOrganization: TFrmPropertyOrganization
     AutoSize = True
     BorderSpacing.Top = 8
     BorderSpacing.Around = 8
-    Caption = 'Manager : '
+    Caption = 'Manager :'
     ClientHeight = 72
     ClientWidth = 381
     TabOrder = 0

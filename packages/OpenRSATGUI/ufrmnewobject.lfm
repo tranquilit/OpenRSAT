@@ -130,7 +130,6 @@ object FrmNewObject: TFrmNewObject
     Left = 256
     Top = 128
     object Action1: TAction
-      Caption = 'Action1'
     end
   end
 end

@@ -1,5 +1,5 @@
 {"version":1,"strings":[
-{"hash":131693440,"name":"tfrmpropertyorganization.groupbox_manager.caption","sourcebytes":[77,97,110,97,103,101,114,32,58,32],"value":"Manager : "},
+{"hash":75339706,"name":"tfrmpropertyorganization.groupbox_manager.caption","sourcebytes":[77,97,110,97,103,101,114,32,58],"value":"Manager :"},
 {"hash":88618810,"name":"tfrmpropertyorganization.label_manager.caption","sourcebytes":[78,97,109,101,32,58],"value":"Name :"},
 {"hash":190608234,"name":"tfrmpropertyorganization.label_title.caption","sourcebytes":[74,111,98,32,84,105,116,108,101,32,58],"value":"Job Title :"},
 {"hash":50257882,"name":"tfrmpropertyorganization.label_department.caption","sourcebytes":[68,101,112,97,114,116,101,109,101,110,116,32,58],"value":"Departement :"},

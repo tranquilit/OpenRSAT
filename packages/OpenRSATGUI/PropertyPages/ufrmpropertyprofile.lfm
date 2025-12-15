@@ -107,9 +107,9 @@ object FrmPropertyProfile: TFrmPropertyProfile
       Left = 8
       Height = 19
       Top = 2
-      Width = 82
+      Width = 79
       BorderSpacing.Left = 8
-      Caption = ' Local path :'
+      Caption = 'Local path :'
       TabOrder = 0
       OnChange = RadioButton_HomeDirectoryChange
     end
