@@ -17,7 +17,7 @@ uses
   uVisOptions, uvistaskmove, uvistaskresetpassword, utranslation, usidcache, 
   ufrmrsatoptions, udns, uvisselectnewrecordtype, uvisnewresourcerecord, 
   uvisnewzonewizard, ufrmmodulesitesandservices, ufrmmoduleserviceinterfaces, 
-  ufrmnewobject, ufrmnewsite, ufrmnewsubnet, uresourcestring, uaductreeview, 
+  ufrmnewobject, ufrmnewsite, ufrmnewsubnet, uaductreeview, 
   ufrmmoduleadssoptions, uvisconnectiondetails, uvispropertieslist, uproperty, 
   uvischangedomaincontroller, uvisoperationmasters, upropertyframe, 
   ufrmpropertyobject, ufrmpropertymanagedby, ufrmpropertyaddress, 

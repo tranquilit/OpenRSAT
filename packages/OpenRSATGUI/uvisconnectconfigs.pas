@@ -80,7 +80,6 @@ uses
   uDarkStyleParams,
   uvisconnectoptions,
   ucoredatamodule,
-  uresourcestring,
   utranslation,
   ucommonui,
   uconfig;
@@ -258,14 +257,6 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllInfo, 'Vis Connect Config');
 
-  Label_Config.Caption := rsConfiguration;
-  Label_Server.Caption := rsServer;
-  Label_Username.Caption := rsUsername;
-  Label_Password.Caption := rsPassword;
-  Self.Caption := rsVisConnectConfigsTitle;
-  CheckBox_AutoConnect.Caption := rsAutoConnect;
-  Action_Cancel.Caption := rsCancel;
-  Action_OK.Caption := rsOK;
   {$IFDEF WINDOWS}
   Image1.Visible := not IsDarkModeEnabled;
   Image2.Visible := IsDarkModeEnabled;
