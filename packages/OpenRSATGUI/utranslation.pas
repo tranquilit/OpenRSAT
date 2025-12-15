@@ -7,60 +7,56 @@ interface
 uses
   Classes,
   SysUtils,
-  Forms,
-  LCLTranslator,
-  LResources,
-  Translations;
+  LCLType,
+  mormot.core.base;
 
-function TranslateTo(Lang, unitname: string): boolean;
-procedure ChangeLang(Lang: String);
+function TranslateFromResource(const ALang: RawUtf8; ForceUpdate: Boolean = True;
+  const ResBaseName: RawUtf8 = 'TRANSLATION'): Boolean;
 
 implementation
+uses
+  LCLTranslator,
+  LResources,
+  Translations,
+  Forms,
+  mormot.core.text;
 
-function TranslateTo(Lang, unitname: string): boolean;
+function TranslateFromResource(const ALang: RawUtf8; ForceUpdate: Boolean;
+  const ResBaseName: RawUtf8): Boolean;
 var
-  //res: TLResource;
-  ii: Integer;
-  POFile: TPOFile;
-  LocalTranslator: TUpdateTranslator;
-  tmp: TAbstractTranslator;
+  Res: TResourceStream;
+  PoFile: TPOFile;
+  LocalTr: TUpdateTranslator;
+  I: Integer;
+  ResName: RawUtf8;
 begin
-  Result := false;
+  Result := False;
 
-  //res := LazarusResources.Find(POFileName);
-  //if not Assigned(res) then
-  //  Exit;
+  ResName := FormatUtf8('%.%', [ResBaseName, ALang]);
 
-
-  POFile := TPOFile.Create(Format('%slanguages\%s.%s.po', [Application.Location, unitname, Lang]));
+  Res := TResourceStream.Create(HInstance, ResName, RT_RCDATA);
   try
-    //POFile.ReadPOText(res.Value);
-    Result := Translations.TranslateResourceStrings(POFile);
-    if not Result then
-      Exit;
-
-    LocalTranslator := TPOTranslator.Create(POFile);
+    PoFile := TPOFile.Create(Res);
     try
-      tmp := LRSTranslator;
-      LRSTranslator := LocalTranslator;
-      for ii := 0 to Screen.CustomFormCount-1
-        do LocalTranslator.UpdateTranslation(Screen.CustomForms[ii]);
-      for ii := 0 to Screen.DataModuleCount-1
-        do LocalTranslator.UpdateTranslation(Screen.DataModules[ii]);
-      LRSTranslator := tmp;
-    finally
-      LocalTranslator.free;
-    end;
-    //POFile.Destroy; //DONT! Already done in LocalTranslator.Destroy
-  finally
-    //POFile.Free;
-  end;
-end;
+      Result := TranslateResourceStrings(PoFile);
+      LocalTr := TPOTranslator.Create(PoFile);
 
-procedure ChangeLang(Lang: String);
-begin
-  SetDefaultLang(lang);
-  TranslateTo(Lang, 'uresourcestring');
+      if Assigned(LRSTranslator) then
+        LRSTranslator.Free;
+      LRSTranslator := LocalTr;
+
+      if ForceUpdate then
+      begin
+        for I := 0 to Pred(Screen.CustomFormCount) do
+          LocalTr.UpdateTranslation(Screen.CustomForms[I]);
+        for I := 0 to Pred(Screen.DataModuleCount) do
+          LocalTr.UpdateTranslation(Screen.DataModules[I]);
+      end;
+    finally
+    end;
+  finally
+    Res.Free;
+  end;
 end;
 
 end.

@@ -28,8 +28,7 @@ uses
   mormot.lib.openssl11,
   mormot.crypt.openssl,
   // Rsat
-  uvisopenrsat,
-  utranslation;
+  uvisopenrsat;
 
 const
   LOG_TRC = LOG_NFO + [sllTrace];
@@ -93,15 +92,6 @@ begin
   System.SysInitStdIO;      // in System unit
   {$endif}
   InitLogging(TSynLog, LogLevel);
-end;
-
-procedure InitLangFromCommandLine;
-var
-  lang: String;
-begin
-  lang := Executable.Command.ParamS('lang');
-
-  ChangeLang(lang);
 end;
 
 function GetApplicationName: String;

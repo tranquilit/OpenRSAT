@@ -88,7 +88,7 @@ end;
 
 function TModuleADSS.GetDisplayName: RawUtf8;
 begin
-  result := rsModuleADSIDisplayName;
+  result := rsModuleADSSDisplayName;
 end;
 
 function TModuleADSS.GetOption: TOption;
