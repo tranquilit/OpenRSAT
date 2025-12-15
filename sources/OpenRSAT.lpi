@@ -15,9 +15,10 @@
         <TextDesc Value="RSAT console by TranquilIT."/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="2">
+      <Resources Count="3">
         <Resource_0 FileName="..\languages\country_codes_en.json" Type="RCDATA" ResourceName="COUNTRY_CODES_EN"/>
         <Resource_1 FileName="..\languages\Translation.fr.po" Type="RCDATA" ResourceName="TRANSLATION.FR"/>
+        <Resource_2 FileName="..\languages\Translation.en.po" Type="RCDATA" ResourceName="TRANSLATION.EN"/>
       </Resources>
     </General>
     <i18n>

@@ -1,0 +1,83 @@
+#: tvisopenrsat.action_newwindow.caption
+msgid "Action_NewWindow"
+msgstr "Action_NewWindow"
+
+#: tvisopenrsat.action_openedproperties.caption
+msgctxt "tvisopenrsat.action_openedproperties.caption"
+msgid "Properties"
+msgstr "Properties"
+
+#: tvisopenrsat.action_quit.caption
+msgctxt "tvisopenrsat.action_quit.caption"
+msgid "Quit"
+msgstr "Quit"
+
+#: tvisopenrsat.caption
+msgctxt "tvisopenrsat.caption"
+msgid "OpenRSAT"
+msgstr "OpenRSAT"
+
+#: tvisopenrsat.menuitem3.caption
+msgctxt "tvisopenrsat.menuitem3.caption"
+msgid "Change tool"
+msgstr "Change tool"
+
+#: tvisopenrsat.menuitem_advancedfeatures.caption
+msgctxt "tvisopenrsat.menuitem_advancedfeatures.caption"
+msgid "MenuItem_AdvancedFeatures"
+msgstr "MenuItem_AdvancedFeatures"
+
+#: tvisopenrsat.menuitem_debug.caption
+msgctxt "tvisopenrsat.menuitem_debug.caption"
+msgid "Debug options"
+msgstr "Debug options"
+
+#: tvisopenrsat.menuitem_file.caption
+msgctxt "tvisopenrsat.menuitem_file.caption"
+msgid "File"
+msgstr "File"
+
+#: tvisopenrsat.menuitem_fileoptions.caption
+msgctxt "tvisopenrsat.menuitem_fileoptions.caption"
+msgid "Options"
+msgstr "Options"
+
+#: tvisopenrsat.menuitem_help.caption
+msgctxt "tvisopenrsat.menuitem_help.caption"
+msgid "?"
+msgstr "?"
+
+#: tvisopenrsat.menuitem_retrieveoldconfiguration.caption
+msgid "Retrieve old configuration"
+msgstr "Retrieve old configuration"
+
+#: tvisopenrsat.menuitem_showgpo.caption
+msgctxt "tvisopenrsat.menuitem_showgpo.caption"
+msgid "Show GPO"
+msgstr "Show GPO"
+
+#: tvisopenrsat.menuitem_view.caption
+msgctxt "tvisopenrsat.menuitem_view.caption"
+msgid "View"
+msgstr "View"
+
+#: tvisopenrsat.menuitem_viewtheme.caption
+msgctxt "tvisopenrsat.menuitem_viewtheme.caption"
+msgid "Theme"
+msgstr "Theme"
+
+#: tvisopenrsat.menuitem_viewthemedark.caption
+msgctxt "tvisopenrsat.menuitem_viewthemedark.caption"
+msgid "Use dark theme (at next launch)"
+msgstr "Use dark theme (at next launch)"
+
+#: tvisopenrsat.menuitem_viewthemelight.caption
+msgctxt "tvisopenrsat.menuitem_viewthemelight.caption"
+msgid "Use light theme (at next launch)"
+msgstr "Use light theme (at next launch)"
+
+#: tvisopenrsat.menuitem_viewthemesystem.caption
+msgctxt "tvisopenrsat.menuitem_viewthemesystem.caption"
+msgid "Use system theme (at next launch)"
+msgstr "Use system theme (at next launch)"
+

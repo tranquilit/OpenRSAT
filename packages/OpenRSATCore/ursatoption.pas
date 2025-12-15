@@ -128,7 +128,7 @@ begin
   // Load own options.
   fTheme := TThemeMode(IniFile.ReadInt64('General', 'theme', Ord(tmSystem)));
   fLang := IniFile.ReadString('General', 'lang', '');
-  AdvancedView := IniFile.ReadBool('General', 'advancedView', False);
+  fAdvancedView := IniFile.ReadBool('General', 'advancedView', False);
 
   fChanged := False;
 

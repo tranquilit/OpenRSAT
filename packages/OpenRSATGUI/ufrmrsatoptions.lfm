@@ -5,6 +5,7 @@ object FrmRSATOption: TFrmRSATOption
   Width = 463
   ClientHeight = 399
   ClientWidth = 463
+  LCLVersion = '4.5.0.0'
   TabOrder = 0
   DesignLeft = 1252
   DesignTop = 252
@@ -76,11 +77,16 @@ object FrmRSATOption: TFrmRSATOption
     Top = 39
     Width = 100
     BorderSpacing.Around = 8
-    Enabled = False
     ItemHeight = 15
+    Items.Strings = (
+      ''
+      'en'
+      'fr'
+    )
     ReadOnly = True
     Style = csDropDownList
     TabOrder = 1
+    OnChange = ComboBox2Change
   end
   object ComboBox3: TComboBox
     AnchorSideLeft.Control = Label3

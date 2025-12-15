@@ -8,6 +8,7 @@ object FrmRSAT: TFrmRSAT
   ClientWidth = 441
   Constraints.MinHeight = 100
   Constraints.MinWidth = 300
+  LCLVersion = '4.5.0.0'
   TabOrder = 0
   DesignLeft = 2376
   DesignTop = 652

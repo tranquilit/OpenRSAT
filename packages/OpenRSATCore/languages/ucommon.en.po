@@ -3,19 +3,19 @@ msgstr "Content-Type: text/plain; charset=UTF-8"
 
 #: ucommon.rsacecreatefailure
 msgid "Failed to create ACE for object % in ACL."
-msgstr ""
+msgstr "Failed to create ACE for object % in ACL."
 
 #: ucommon.rsacenotfound
 msgid "ACE for object % not found in ACL."
-msgstr ""
+msgstr "ACE for object % not found in ACL."
 
 #: ucommon.rsacepaadparent
 msgid "A Deny Delete-Tree right will be added to the ACL of the parent of this object. Do you wish to continue?"
-msgstr ""
+msgstr "A Deny Delete-Tree right will be added to the ACL of the parent of this object. Do you wish to continue?"
 
 #: ucommon.rsaceparsing
 msgid "Failed to parse ACL."
-msgstr ""
+msgstr "Failed to parse ACL."
 
 #: ucommon.rsace_flags
 msgid ""
@@ -24,6 +24,10 @@ msgid ""
 "No Propagate (NP)\n"
 "Inherit Only (E/S)"
 msgstr ""
+"Container Inherit (CI)\n"
+"Object Inherit (OI)\n"
+"No Propagate (NP)\n"
+"Inherit Only (E/S)"
 
 #: ucommon.rsace_mask
 msgid ""
@@ -43,22 +47,37 @@ msgid ""
 "Validated Write (SW)\n"
 "Control Access (CR)"
 msgstr ""
+"Full Control\n"
+"List Content\n"
+"Read (WP)\n"
+"Write (RP)\n"
+"Create Child (CC)\n"
+"Delete Child (DC)\n"
+"List Child (LC)\n"
+"List Object (be visible) (LO)\n"
+"Delete (SD)\n"
+"Delete Tree (DT)\n"
+"Read Security (RC)\n"
+"Write Security (WD)\n"
+"Write Owner (WO)\n"
+"Validated Write (SW)\n"
+"Control Access (CR)"
 
 #: ucommon.rsallow
 msgid "Allow"
-msgstr ""
+msgstr "Allow"
 
 #: ucommon.rsand
 msgid "% and %"
-msgstr ""
+msgstr "% and %"
 
 #: ucommon.rsanonymousconnection
 msgid "Anonymous Connection"
-msgstr ""
+msgstr "Anonymous Connection"
 
 #: ucommon.rsauthmethodnotsupported
 msgid "The server does not allow this kind of auth method."
-msgstr ""
+msgstr "The server does not allow this kind of auth method."
 
 #: ucommon.rschangeoptionrequiredrestart
 msgid "The changes you have made require a console restart. Restart now?"
@@ -66,419 +85,421 @@ msgstr ""
 
 #: ucommon.rsconfidentialityrequired
 msgid "The server do not allow your operation, cause your connection is not secured enought."
-msgstr ""
+msgstr "The server do not allow your operation, cause your connection is not secured enought."
 
 #: ucommon.rsconfirmation
 msgid "Confirmation"
-msgstr ""
+msgstr "Confirmation"
 
 #: ucommon.rsconnectedondomainas
 msgid "You are connected as \"%\"."
-msgstr ""
+msgstr "You are connected as \"%\"."
 
 #: ucommon.rsconnectedondomainwithdc
 msgid "The DC of this domain is \"%\"."
-msgstr ""
+msgstr "The DC of this domain is \"%\"."
 
 #: ucommon.rsconnectsuccess
 msgid "Successfully connected to domain controller \"%\""
-msgstr ""
+msgstr "Successfully connected to domain controller \"%\""
 
 #: ucommon.rsconstraintviolation
 msgid "The requests violates some constraint defined within the server."
-msgstr ""
+msgstr "The requests violates some constraint defined within the server."
 
 #: ucommon.rsdelegatecontrolfolder
 msgid "You chose to delegate control of objects in the following Active Directory folder:"
-msgstr ""
+msgstr "You chose to delegate control of objects in the following Active Directory folder:"
 
 #: ucommon.rsdelegatecontrolobjects
 msgid "The groups, users, or computers to which you have given control are:"
-msgstr ""
+msgstr "The groups, users, or computers to which you have given control are:"
 
 #: ucommon.rsdelegatecontroltasks
 msgid "You chose to delegate the following tasks:"
-msgstr ""
+msgstr "You chose to delegate the following tasks:"
 
 #: ucommon.rsdelete
 msgctxt "ucommon.rsdelete"
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: ucommon.rsdeleteconfirm
 msgid "Are you sure you want to delete the following object: %"
-msgstr ""
+msgstr "Are you sure you want to delete the following object: %"
 
 #: ucommon.rsdeletememberfromgroups
 msgid "Are you sure that you want to delete % from the selected group(s)?"
-msgstr ""
+msgstr "Are you sure that you want to delete % from the selected group(s)?"
 
 #: ucommon.rsdeleteprimarygroup
 msgid "The primary group cannot be deleted. You need to define another if you wish to delete this one."
-msgstr ""
+msgstr "The primary group cannot be deleted. You need to define another if you wish to delete this one."
 
 #: ucommon.rsdeny
 msgid "Deny"
-msgstr ""
+msgstr "Deny"
 
 #: ucommon.rsdnspropertyzoneagingenabledtime
 msgid "Aging enabled time"
-msgstr ""
+msgstr "Aging enabled time"
 
 #: ucommon.rsdnspropertyzoneagingstate
 msgid "Aging state"
-msgstr ""
+msgstr "Aging state"
 
 #: ucommon.rsdnspropertyzoneallowupdate
 msgid "Allow Update"
-msgstr ""
+msgstr "Allow Update"
 
 #: ucommon.rsdnspropertyzoneautonsservers
 msgid "Auto NS servers"
-msgstr ""
+msgstr "Auto NS servers"
 
 #: ucommon.rsdnspropertyzoneautonsserversda
 msgid "Auto NS servers DA"
-msgstr ""
+msgstr "Auto NS servers DA"
 
 #: ucommon.rsdnspropertyzonedcpromoconvert
 msgid "DC promo convert"
-msgstr ""
+msgstr "DC promo convert"
 
 #: ucommon.rsdnspropertyzonedeletedfromhostname
 msgid "Deleted from hostname"
-msgstr ""
+msgstr "Deleted from hostname"
 
 #: ucommon.rsdnspropertyzonemasterservers
 msgid "Master servers"
-msgstr ""
+msgstr "Master servers"
 
 #: ucommon.rsdnspropertyzonemasterserversda
 msgid "Master servers DA"
-msgstr ""
+msgstr "Master servers DA"
 
 #: ucommon.rsdnspropertyzonenodedbflags
 msgid "Node DB flags"
-msgstr ""
+msgstr "Node DB flags"
 
 #: ucommon.rsdnspropertyzonenorefreshinterval
 msgid "No Refresh Interval"
-msgstr ""
+msgstr "No Refresh Interval"
 
 #: ucommon.rsdnspropertyzonerefreshinterval
 msgid "Refresh Interval"
-msgstr ""
+msgstr "Refresh Interval"
 
 #: ucommon.rsdnspropertyzonescavengingservers
 msgid "Scavenging servers"
-msgstr ""
+msgstr "Scavenging servers"
 
 #: ucommon.rsdnspropertyzonescavengingserversda
 msgid "Scavenging servers DA"
-msgstr ""
+msgstr "Scavenging servers DA"
 
 #: ucommon.rsdnspropertyzonesecuretime
 msgid "Secure Time"
-msgstr ""
+msgstr "Secure Time"
 
 #: ucommon.rsdnspropertyzonetype
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: ucommon.rsdnsrecorda
 msgid "Host (A or AAAA)"
-msgstr ""
+msgstr "Host (A or AAAA)"
 
 #: ucommon.rsdnsrecordadescription
 msgid "Host address (A or AAAA) record. Maps a DNS domain name to a 32-bit IP version 4 address (RFC 1035) or a 128-bit IP version 6 address (RFC 1886)."
-msgstr ""
+msgstr "Host address (A or AAAA) record. Maps a DNS domain name to a 32-bit IP version 4 address (RFC 1035) or a 128-bit IP version 6 address (RFC 1886)."
 
 #: ucommon.rsdnsrecordcname
 msgid "Alias (CNAME)"
-msgstr ""
+msgstr "Alias (CNAME)"
 
 #: ucommon.rsdnsrecordcnamedescription
 msgid "Alias record. Indicates an alternate or alias DNS domain name for a name already specified in other resource record types used in this zone. The record is also known as the canonical name (CNAME) record type. (RFC 1035)"
-msgstr ""
+msgstr "Alias record. Indicates an alternate or alias DNS domain name for a name already specified in other resource record types used in this zone. The record is also known as the canonical name (CNAME) record type. (RFC 1035)"
 
 #: ucommon.rsdnsrecordmx
 msgid "Mail Exchanger (MX)"
-msgstr ""
+msgstr "Mail Exchanger (MX)"
 
 #: ucommon.rsdnsrecordmxdescription
 msgid "Mail exchanger (MX) record. Provides message routing to a specified mail exchange host that is acting as a mail exchanger for a specified DNS domain name. MX records use a 16-bit integer to indicate host priority in message routing where multiple mail exchange hosts are specified. For each mail exchange host specified in this record type, a corresponding host address (A) type record is needed. (RFC 1035)"
-msgstr ""
+msgstr "Mail exchanger (MX) record. Provides message routing to a specified mail exchange host that is acting as a mail exchanger for a specified DNS domain name. MX records use a 16-bit integer to indicate host priority in message routing where multiple mail exchange hosts are specified. For each mail exchange host specified in this record type, a corresponding host address (A) type record is needed. (RFC 1035)"
 
 #: ucommon.rsdnsrecordptr
 msgid "Pointer (PTR)"
-msgstr ""
+msgstr "Pointer (PTR)"
 
 #: ucommon.rsdnsrecordptrdescription
 msgid "Pointer (PTR) record. Points to a location in the domain name space. PTR records are typically used in special domains to perform reverse lookups of address-to-name mappings. Each record provides simple data that points to some other location in the domain name space (usually a forward lookup zone). Where PTR records are used, no additional section processing is implied or caused by their presence. (RFC 1035)"
-msgstr ""
+msgstr "Pointer (PTR) record. Points to a location in the domain name space. PTR records are typically used in special domains to perform reverse lookups of address-to-name mappings. Each record provides simple data that points to some other location in the domain name space (usually a forward lookup zone). Where PTR records are used, no additional section processing is implied or caused by their presence. (RFC 1035)"
 
 #: ucommon.rsdnsrecordsrv
 msgid "Service Location (SRV)"
-msgstr ""
+msgstr "Service Location (SRV)"
 
 #: ucommon.rsdnsrecordsrvdescription
 msgid "Service (SRV) record. Allows administrators to use several servers for a single DNS domain, to easily move a TCP/IP service from one host to another host with administration, and to designate some service provider hosts as primary servers for a service and other hosts as backups. DNS clients that use a SRV-type query ask for a specific TCP/IP service and protocol mapped to a specific DNS domain and receive the names of any available servers. (RFC 2052)"
-msgstr ""
+msgstr "Service (SRV) record. Allows administrators to use several servers for a single DNS domain, to easily move a TCP/IP service from one host to another host with administration, and to designate some service provider hosts as primary servers for a service and other hosts as backups. DNS clients that use a SRV-type query ask for a specific TCP/IP service and protocol mapped to a specific DNS domain and receive the names of any available servers. (RFC 2052)"
 
 #: ucommon.rsdnszonedcpromoconvertdomain
 msgid "Domain"
-msgstr ""
+msgstr "Domain"
 
 #: ucommon.rsdnszonedcpromoconvertforest
 msgid "Forest"
-msgstr ""
+msgstr "Forest"
 
 #: ucommon.rsdnszonedcpromoconvertnone
 msgid "None"
-msgstr ""
+msgstr "None"
 
 #: ucommon.rsdnszonetypecache
 msgid "Cache"
-msgstr ""
+msgstr "Cache"
 
 #: ucommon.rsdnszonetypeforwarder
 msgid "Forwarder"
-msgstr ""
+msgstr "Forwarder"
 
 #: ucommon.rsdnszonetypeprimary
 msgid "Primary"
-msgstr ""
+msgstr "Primary"
 
 #: ucommon.rsdnszonetypesecondary
 msgid "Secondary"
-msgstr ""
+msgstr "Secondary"
 
 #: ucommon.rsdnszonetypesecondarycache
 msgid "Secondary cache"
-msgstr ""
+msgstr "Secondary cache"
 
 #: ucommon.rsdnszonetypestub
 msgid "Stub"
-msgstr ""
+msgstr "Stub"
 
 #: ucommon.rsdnszoneupdateoff
 msgid "OFF"
-msgstr ""
+msgstr "OFF"
 
 #: ucommon.rsdnszoneupdatesecure
 msgid "Secure"
-msgstr ""
+msgstr "Secure"
 
 #: ucommon.rsdnszoneupdateunsecure
 msgid "Unsecure"
-msgstr ""
+msgstr "Unsecure"
 
 #: ucommon.rserror
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: ucommon.rsflagalldescendants
 msgid "all descendants"
-msgstr ""
+msgstr "all descendants"
 
 #: ucommon.rsflagdirectdesendants
 msgid "direct descendants"
-msgstr ""
+msgstr "direct descendants"
 
 #: ucommon.rsflagthisobject
 msgid "this object"
-msgstr ""
+msgstr "this object"
 
 #: ucommon.rsfriday
 msgid "Friday"
-msgstr ""
+msgstr "Friday"
 
 #: ucommon.rsgridconfdeleterow
 #, object-pascal-format
 msgid "Confirm the deletion of the %d selected rows?"
-msgstr ""
+msgstr "Confirm the deletion of the %d selected rows?"
 
 #: ucommon.rsgriddeleterows
 msgid "Delete selected rows"
-msgstr ""
+msgstr "Delete selected rows"
 
 #: ucommon.rsinappropriatematching
 msgid "The matching condition is not supported for this attributeType."
-msgstr ""
+msgstr "The matching condition is not supported for this attributeType."
 
 #: ucommon.rsinsufficientaccessrights
 msgid "Insufficient rights access."
-msgstr ""
+msgstr "Insufficient rights access."
 
 #: ucommon.rsldapaddfailed
 msgid "Ldap add failed: \"%\""
-msgstr ""
+msgstr "Ldap add failed: \"%\""
 
 #: ucommon.rsldapconnectfailed
 msgid "Ldap connect failed: \"%\""
-msgstr ""
+msgstr "Ldap connect failed: \"%\""
 
 #: ucommon.rsldapdeletefailed
 msgid "Ldap delete failed: \"%\""
-msgstr ""
+msgstr "Ldap delete failed: \"%\""
 
 #: ucommon.rsldaperror
 msgid "Ldap Error"
-msgstr ""
+msgstr "Ldap Error"
 
 #: ucommon.rsldapmodifyfailed
 msgid "Ldap modify failed: \"%\""
-msgstr ""
+msgstr "Ldap modify failed: \"%\""
 
 #: ucommon.rsldapmovewarningmessage
 msgid ""
 "Moving objects in Active Directory Domain Services can prevent your existing system from working the way it was designed. For exemple, moving an organizational unit (OU) can affect the way that group policies are applied to the accounts within the OU.\n"
 "Are you sure you want to move this object?"
 msgstr ""
+"Moving objects in Active Directory Domain Services can prevent your existing system from working the way it was designed. For exemple, moving an organizational unit (OU) can affect the way that group policies are applied to the accounts within the OU.\n"
+"Are you sure you want to move this object?"
 
 #: ucommon.rsldapsearchfailed
 msgid "Ldap search failed: \"%\""
-msgstr ""
+msgstr "Ldap search failed: \"%\""
 
 #: ucommon.rsldapsuccess
 msgid "Ldap Success"
-msgstr ""
+msgstr "Ldap Success"
 
 #: ucommon.rsmoduleadsidisplayname
 msgid "Services and Interfaces"
-msgstr ""
+msgstr "Services and Interfaces"
 
 #: ucommon.rsmoduleadsiname
 msgid "ServicesAndInterfaces"
-msgstr ""
+msgstr "ServicesAndInterfaces"
 
 #: ucommon.rsmoduleadssdisplayname
 msgid "Sites and Services"
-msgstr ""
+msgstr "Sites and Services"
 
 #: ucommon.rsmoduleadssname
 msgid "SitesAndServices"
-msgstr ""
+msgstr "SitesAndServices"
 
 #: ucommon.rsmoduleaducdisplayname
 msgid "Users and Computers"
-msgstr ""
+msgstr "Users and Computers"
 
 #: ucommon.rsmoduleaducname
 msgid "UsersAndComputers"
-msgstr ""
+msgstr "UsersAndComputers"
 
 #: ucommon.rsmodulednsdisplayname
 msgid "Domain Name System"
-msgstr ""
+msgstr "Domain Name System"
 
 #: ucommon.rsmodulednsname
 msgid "DomainNameSystem"
-msgstr ""
+msgstr "DomainNameSystem"
 
 #: ucommon.rsmonday
 msgid "Monday"
-msgstr ""
+msgstr "Monday"
 
 #: ucommon.rsmultistringeditor
 msgid "Multi-valued String Editor"
-msgstr ""
+msgstr "Multi-valued String Editor"
 
 #: ucommon.rsmultitimeeditor
 msgid "Multi-valued Time Editor"
-msgstr ""
+msgstr "Multi-valued Time Editor"
 
 #: ucommon.rsnewconfirmpassdifferent
 msgid "The New and Confirm passwords must match. Please re-type them."
-msgstr ""
+msgstr "The New and Confirm passwords must match. Please re-type them."
 
 #: ucommon.rsnewobjectbtnback
 msgid "< Back"
-msgstr ""
+msgstr "< Back"
 
 #: ucommon.rsnewobjectbtnnext
 msgid "Next >"
-msgstr ""
+msgstr "Next >"
 
 #: ucommon.rsnewobjectbtnok
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ucommon.rsnewobjectcomputer
 msgid "New object - Computer"
-msgstr ""
+msgstr "New object - Computer"
 
 #: ucommon.rsnewobjectcontact
 msgid "New object - Contact"
-msgstr ""
+msgstr "New object - Contact"
 
 #: ucommon.rsnewobjectgroup
 msgid "New object - Group"
-msgstr ""
+msgstr "New object - Group"
 
 #: ucommon.rsnewobjectou
 msgid "New object - OU"
-msgstr ""
+msgstr "New object - OU"
 
 #: ucommon.rsnewobjectsharedfolder
 msgid "New object - Shared Folder"
-msgstr ""
+msgstr "New object - Shared Folder"
 
 #: ucommon.rsnewobjectsite
 msgid "New object - Site"
-msgstr ""
+msgstr "New object - Site"
 
 #: ucommon.rsnewobjectsubnet
 msgid "New object - Subnet"
-msgstr ""
+msgstr "New object - Subnet"
 
 #: ucommon.rsnewobjectuser
 msgid "New object - User"
-msgstr ""
+msgstr "New object - User"
 
 #: ucommon.rsnewuserchangepassword
 msgid "The user will have to change his password at next logon."
-msgstr ""
+msgstr "The user will have to change his password at next logon."
 
 #: ucommon.rsnewuserdisabled
 msgid "The account is disabled."
-msgstr ""
+msgstr "The account is disabled."
 
 #: ucommon.rsnewuserfullname
 msgid "Full name: %"
-msgstr ""
+msgstr "Full name: %"
 
 #: ucommon.rsnewuserlogonname
 msgid "User logon name: %"
-msgstr ""
+msgstr "User logon name: %"
 
 #: ucommon.rsnewusernochangepassword
 msgid "The user cannot change his password."
-msgstr ""
+msgstr "The user cannot change his password."
 
 #: ucommon.rsnewuserpasswordnoexpire
 msgid "The Password never expires."
-msgstr ""
+msgstr "The Password never expires."
 
 #: ucommon.rsnosuchattribute
 msgid "The targeted attribute does not exist in the specified entry."
-msgstr ""
+msgstr "The targeted attribute does not exist in the specified entry."
 
 #: ucommon.rsoperationserror
 msgid "Operation occurs in a wrong order."
-msgstr ""
+msgstr "Operation occurs in a wrong order."
 
 #: ucommon.rsprotocolerror
 msgid "Malformed LDAP message. Unrecognized operation."
-msgstr ""
+msgstr "Malformed LDAP message. Unrecognized operation."
 
 #: ucommon.rsreferral
 msgid "This should not be an error. Client should follow referral. Please try the action on a different server."
-msgstr ""
+msgstr "This should not be an error. Client should follow referral. Please try the action on a different server."
 
 #: ucommon.rsrename
 msgid "Rename"
-msgstr ""
+msgstr "Rename"
 
 #: ucommon.rsrestarttitle
 msgid "Restart confirmation"
@@ -486,628 +507,630 @@ msgstr ""
 
 #: ucommon.rssafauditfailure
 msgid "Audit Failure"
-msgstr ""
+msgstr "Audit Failure"
 
 #: ucommon.rssafauditsuccess
 msgid "Audit Success"
-msgstr ""
+msgstr "Audit Success"
 
 #: ucommon.rssafcontainerinherit
 msgid "Container Inherit"
-msgstr ""
+msgstr "Container Inherit"
 
 #: ucommon.rssafinherited
 msgid "Inherited"
-msgstr ""
+msgstr "Inherited"
 
 #: ucommon.rssafinheritonly
 msgid "Inherit Only"
-msgstr ""
+msgstr "Inherit Only"
 
 #: ucommon.rssafnopropagate
 msgid "No Propagate"
-msgstr ""
+msgstr "No Propagate"
 
 #: ucommon.rssafobjectinherit
 msgid "Object Inherit"
-msgstr ""
+msgstr "Object Inherit"
 
 #: ucommon.rssaslbindinprogress
 msgid "The server is working on a bind request. Try again later."
-msgstr ""
+msgstr "The server is working on a bind request. Try again later."
 
 #: ucommon.rssaturday
 msgid "Saturday"
-msgstr ""
+msgstr "Saturday"
 
 #: ucommon.rssearchscopebaseobject
 msgid "Base object"
-msgstr ""
+msgstr "Base object"
 
 #: ucommon.rssearchscopesinglelevel
 msgid "Single level"
-msgstr ""
+msgstr "Single level"
 
 #: ucommon.rssearchscopewholesubtree
 msgid "Whole subtree"
-msgstr ""
+msgstr "Whole subtree"
 
 #: ucommon.rssecaccesscontrolaccess
 msgid "Control Access"
-msgstr ""
+msgstr "Control Access"
 
 #: ucommon.rssecaccesscreatechild
 msgid "Create child"
-msgstr ""
+msgstr "Create child"
 
 #: ucommon.rssecaccessdelete
 msgctxt "ucommon.rssecaccessdelete"
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: ucommon.rssecaccessdeletechild
 msgid "Delete child"
-msgstr ""
+msgstr "Delete child"
 
 #: ucommon.rssecaccessdeletetree
 msgid "Delete Tree"
-msgstr ""
+msgstr "Delete Tree"
 
 #: ucommon.rssecaccessfullcontrol
 msgid "Full control"
-msgstr ""
+msgstr "Full control"
 
 #: ucommon.rssecaccessgenericall
 msgid "Generic All"
-msgstr ""
+msgstr "Generic All"
 
 #: ucommon.rssecaccessgenericexecute
 msgid "Generic Execute"
-msgstr ""
+msgstr "Generic Execute"
 
 #: ucommon.rssecaccessgenericread
 msgid "Generic Read"
-msgstr ""
+msgstr "Generic Read"
 
 #: ucommon.rssecaccessgenericwrite
 msgid "Generic Write"
-msgstr ""
+msgstr "Generic Write"
 
 #: ucommon.rssecaccesslistchildren
 msgid "List Children"
-msgstr ""
+msgstr "List Children"
 
 #: ucommon.rssecaccesslistcontent
 msgid "List content"
-msgstr ""
+msgstr "List content"
 
 #: ucommon.rssecaccesslistobject
 msgid "List Object"
-msgstr ""
+msgstr "List Object"
 
 #: ucommon.rssecaccessreadcontrol
 msgid "Read Control"
-msgstr ""
+msgstr "Read Control"
 
 #: ucommon.rssecaccessreadprop
 msgid "Read"
-msgstr ""
+msgstr "Read"
 
 #: ucommon.rssecaccessselfwrite
 msgid "Self Write"
-msgstr ""
+msgstr "Self Write"
 
 #: ucommon.rssecaccesssynchronize
 msgid "Synchronize"
-msgstr ""
+msgstr "Synchronize"
 
 #: ucommon.rssecaccesswritedac
 msgid "Write Dac"
-msgstr ""
+msgstr "Write Dac"
 
 #: ucommon.rssecaccesswriteowner
 msgid "Write Owner"
-msgstr ""
+msgstr "Write Owner"
 
 #: ucommon.rssecaccesswriteprop
 msgid "Write"
-msgstr ""
+msgstr "Write"
 
 #: ucommon.rssecuritydescriptorinvalid
 msgid "Fail to read security descriptor"
-msgstr ""
+msgstr "Fail to read security descriptor"
 
 #: ucommon.rssinglestringeditor
 msgid "Single String Editor"
-msgstr ""
+msgstr "Single String Editor"
 
 #: ucommon.rssingletimeeditor
 msgid "Single Time Editor"
-msgstr ""
+msgstr "Single Time Editor"
 
 #: ucommon.rssizelimitexceeded
 msgid "The result retrieved more objects than the server allowed."
-msgstr ""
+msgstr "The result retrieved more objects than the server allowed."
 
 #: ucommon.rsstrongerauthrequired
 msgid "The server requires the client to authenticate with a stronger authentication."
-msgstr ""
+msgstr "The server requires the client to authenticate with a stronger authentication."
 
 #: ucommon.rssunday
 msgid "Sunday"
-msgstr ""
+msgstr "Sunday"
 
 #: ucommon.rsthursday
 msgid "Thursday"
-msgstr ""
+msgstr "Thursday"
 
 #: ucommon.rstimelimitexceeded
 msgid "The request time limit has been reached."
-msgstr ""
+msgstr "The request time limit has been reached."
 
 #: ucommon.rstitleadvancedsecurity
 msgid "Advanced Security Settings for %"
-msgstr ""
+msgstr "Advanced Security Settings for %"
 
 #: ucommon.rstitleconnectorbind
 msgid "Connect or bind error."
-msgstr ""
+msgstr "Connect or bind error."
 
 #: ucommon.rstitleconnectsuccess
 msgid "Successful connection"
-msgstr ""
+msgstr "Successful connection"
 
 #: ucommon.rstitledeletemember
 msgid "Delete a group user"
-msgstr ""
+msgstr "Delete a group user"
 
 #: ucommon.rstitlenotfound
 msgid "Error not found"
-msgstr ""
+msgstr "Error not found"
 
 #: ucommon.rstitleparsing
 msgid "Parsing error"
-msgstr ""
+msgstr "Parsing error"
 
 #: ucommon.rstitlepermissionsfor
 msgid "Permissions for %"
-msgstr ""
+msgstr "Permissions for %"
 
 #: ucommon.rstitleselectgroups
 msgid "Select groups"
-msgstr ""
+msgstr "Select groups"
 
 #: ucommon.rstitleselectnewmanager
 msgid "Select new Manager"
-msgstr ""
+msgstr "Select new Manager"
 
 #: ucommon.rstitleselectowner
 msgid "Select owner"
-msgstr ""
+msgstr "Select owner"
 
 #: ucommon.rstuesday
 msgid "Tuesday"
-msgstr ""
+msgstr "Tuesday"
 
 #: ucommon.rsuacserver
 msgid "Domain controller"
-msgstr ""
+msgstr "Domain controller"
 
 #: ucommon.rsuacworkstation
 msgid "Workstation or server"
-msgstr ""
+msgstr "Workstation or server"
 
 #: ucommon.rsundefinedattributetype
 msgid "The targeted attribute does not exist in the server schema."
-msgstr ""
+msgstr "The targeted attribute does not exist in the server schema."
 
 #: ucommon.rsunsavedchangequit
 msgid ""
 "There are unsaved changes.\n"
 "Are you sure you want to quit?"
 msgstr ""
+"There are unsaved changes.\n"
+"Are you sure you want to quit?"
 
 #: ucommon.rsusecurrentcreds
 msgid "Current user credentials"
-msgstr ""
+msgstr "Current user credentials"
 
 #: ucommon.rswarning
 msgid "Warning"
-msgstr ""
+msgstr "Warning"
 
 #: ucommon.rswednesday
 msgid "Wednesday"
-msgstr ""
+msgstr "Wednesday"
 
 #: ucommon.rswellknownsidanonymous
 msgid "Anonymous"
-msgstr ""
+msgstr "Anonymous"
 
 #: ucommon.rswellknownsidauthenticateduser
 msgid "Authenticated User"
-msgstr ""
+msgstr "Authenticated User"
 
 #: ucommon.rswellknownsidauthenticationauthorityasserted
 msgid "Authentication Authority Asserted"
-msgstr ""
+msgstr "Authentication Authority Asserted"
 
 #: ucommon.rswellknownsidauthenticationfreshkeyauth
 msgid "Authentication Fresh Key Auth"
-msgstr ""
+msgstr "Authentication Fresh Key Auth"
 
 #: ucommon.rswellknownsidauthenticationkeypropertyattestation
 msgid "Authentication Key Property Attestation"
-msgstr ""
+msgstr "Authentication Key Property Attestation"
 
 #: ucommon.rswellknownsidauthenticationkeypropertymfa
 msgid "Authentication Key Property Mfa"
-msgstr ""
+msgstr "Authentication Key Property Mfa"
 
 #: ucommon.rswellknownsidauthenticationkeytrust
 msgid "Authentication Key Trust"
-msgstr ""
+msgstr "Authentication Key Trust"
 
 #: ucommon.rswellknownsidauthenticationserviceasserted
 msgid "Authentication Service Asserted"
-msgstr ""
+msgstr "Authentication Service Asserted"
 
 #: ucommon.rswellknownsidbatch
 msgid "Batch"
-msgstr ""
+msgstr "Batch"
 
 #: ucommon.rswellknownsidbuiltinaccesscontrolassistanceoperators
 msgid "Builtin Access Control Assistance Operators"
-msgstr ""
+msgstr "Builtin Access Control Assistance Operators"
 
 #: ucommon.rswellknownsidbuiltinaccountoperators
 msgid "Builtin Account Operators"
-msgstr ""
+msgstr "Builtin Account Operators"
 
 #: ucommon.rswellknownsidbuiltinadministrators
 msgid "Builtin Administrators"
-msgstr ""
+msgstr "Builtin Administrators"
 
 #: ucommon.rswellknownsidbuiltinanypackage
 msgid "Builtin Any Package"
-msgstr ""
+msgstr "Builtin Any Package"
 
 #: ucommon.rswellknownsidbuiltinanyrestrictedpackage
 msgid "Builtin Any Restricted Package"
-msgstr ""
+msgstr "Builtin Any Restricted Package"
 
 #: ucommon.rswellknownsidbuiltinauthorizationaccess
 msgid "Builtin Authorization Access"
-msgstr ""
+msgstr "Builtin Authorization Access"
 
 #: ucommon.rswellknownsidbuiltinbackupoperators
 msgid "Builtin Backup Operators"
-msgstr ""
+msgstr "Builtin Backup Operators"
 
 #: ucommon.rswellknownsidbuiltincacheableprincipalsgroups
 msgid "Builtin Cacheable Principals Groups"
-msgstr ""
+msgstr "Builtin Cacheable Principals Groups"
 
 #: ucommon.rswellknownsidbuiltincertsvcdcomaccessgroup
 msgid "Builtin Cert Svc DCom Access Group"
-msgstr ""
+msgstr "Builtin Cert Svc DCom Access Group"
 
 #: ucommon.rswellknownsidbuiltincryptooperators
 msgid "Builtin Crypto Operators"
-msgstr ""
+msgstr "Builtin Crypto Operators"
 
 #: ucommon.rswellknownsidbuiltindcomusers
 msgid "Builtin Dcom Users"
-msgstr ""
+msgstr "Builtin Dcom Users"
 
 #: ucommon.rswellknownsidbuiltindefaultsystemmanagedgroup
 msgid "Builtin Default System Managed Group"
-msgstr ""
+msgstr "Builtin Default System Managed Group"
 
 #: ucommon.rswellknownsidbuiltindeviceowners
 msgid "Builtin Device Owners"
-msgstr ""
+msgstr "Builtin Device Owners"
 
 #: ucommon.rswellknownsidbuiltindomain
 msgid "Builtin Domain"
-msgstr ""
+msgstr "Builtin Domain"
 
 #: ucommon.rswellknownsidbuiltineventlogreadersgroup
 msgid "Builtin Event Log Readers Group"
-msgstr ""
+msgstr "Builtin Event Log Readers Group"
 
 #: ucommon.rswellknownsidbuiltinguests
 msgid "Builtin Guests"
-msgstr ""
+msgstr "Builtin Guests"
 
 #: ucommon.rswellknownsidbuiltinhypervadmins
 msgid "Builtin Hyper VAdmins"
-msgstr ""
+msgstr "Builtin Hyper VAdmins"
 
 #: ucommon.rswellknownsidbuiltinincomingforesttrustbuilders
 msgid "Builtin Incoming Forest Trust Builders"
-msgstr ""
+msgstr "Builtin Incoming Forest Trust Builders"
 
 #: ucommon.rswellknownsidbuiltiniusers
 msgid "Builtin IUsers"
-msgstr ""
+msgstr "Builtin IUsers"
 
 #: ucommon.rswellknownsidbuiltinnetworkconfigurationoperators
 msgid "Builtin Network Configuration Operators"
-msgstr ""
+msgstr "Builtin Network Configuration Operators"
 
 #: ucommon.rswellknownsidbuiltinnoncacheableprincipalsgroups
 msgid "Builtin Non Cacheable Principals Groups"
-msgstr ""
+msgstr "Builtin Non Cacheable Principals Groups"
 
 #: ucommon.rswellknownsidbuiltinperfloggingusers
 msgid "Builtin Perf Logging Users"
-msgstr ""
+msgstr "Builtin Perf Logging Users"
 
 #: ucommon.rswellknownsidbuiltinperfmonitoringusers
 msgid "Builtin Perf Monitoring Users"
-msgstr ""
+msgstr "Builtin Perf Monitoring Users"
 
 #: ucommon.rswellknownsidbuiltinpowerusers
 msgid "Builtin Power Users"
-msgstr ""
+msgstr "Builtin Power Users"
 
 #: ucommon.rswellknownsidbuiltinprewindows2000compatibleaccess
 msgid "Builtin Pre Windows 200 Compatible Access"
-msgstr ""
+msgstr "Builtin Pre Windows 200 Compatible Access"
 
 #: ucommon.rswellknownsidbuiltinprintoperators
 msgid "Builtin Print Operators"
-msgstr ""
+msgstr "Builtin Print Operators"
 
 #: ucommon.rswellknownsidbuiltinrasservers
 msgid "Builtin Ras Servers"
-msgstr ""
+msgstr "Builtin Ras Servers"
 
 #: ucommon.rswellknownsidbuiltinrdsendpointservers
 msgid "Builtin Rds Endpoint Servers"
-msgstr ""
+msgstr "Builtin Rds Endpoint Servers"
 
 #: ucommon.rswellknownsidbuiltinrdsmanagementservers
 msgid "Builtin Rds Management Servers"
-msgstr ""
+msgstr "Builtin Rds Management Servers"
 
 #: ucommon.rswellknownsidbuiltinrdsremoteaccessservers
 msgid "Builtin Rds Remote Access Servers"
-msgstr ""
+msgstr "Builtin Rds Remote Access Servers"
 
 #: ucommon.rswellknownsidbuiltinremotedesktopusers
 msgid "Builtin Remote Desktop Users"
-msgstr ""
+msgstr "Builtin Remote Desktop Users"
 
 #: ucommon.rswellknownsidbuiltinremotemanagementusers
 msgid "Builtin Remote Management Users"
-msgstr ""
+msgstr "Builtin Remote Management Users"
 
 #: ucommon.rswellknownsidbuiltinreplicator
 msgid "Builtin Replicator"
-msgstr ""
+msgstr "Builtin Replicator"
 
 #: ucommon.rswellknownsidbuiltinstoragereplicaadmins
 msgid "Builtin Storage Replica Admins"
-msgstr ""
+msgstr "Builtin Storage Replica Admins"
 
 #: ucommon.rswellknownsidbuiltinsystemoperators
 msgid "Builtin System Operators"
-msgstr ""
+msgstr "Builtin System Operators"
 
 #: ucommon.rswellknownsidbuiltinterminalserverlicenseservers
 msgid "Builtin Terminal Server License Servers"
-msgstr ""
+msgstr "Builtin Terminal Server License Servers"
 
 #: ucommon.rswellknownsidbuiltinunknown
 msgid "Builtin Unknown"
-msgstr ""
+msgstr "Builtin Unknown"
 
 #: ucommon.rswellknownsidbuiltinusermodedriver
 msgid "Builtin User Mode Driver"
-msgstr ""
+msgstr "Builtin User Mode Driver"
 
 #: ucommon.rswellknownsidbuiltinusers
 msgid "Builtin Users"
-msgstr ""
+msgstr "Builtin Users"
 
 #: ucommon.rswellknownsidbuiltinwriterestrictedcode
 msgid "Builtin Write Restricted Code"
-msgstr ""
+msgstr "Builtin Write Restricted Code"
 
 #: ucommon.rswellknownsidcapabilityappointments
 msgid "Capability Appointments"
-msgstr ""
+msgstr "Capability Appointments"
 
 #: ucommon.rswellknownsidcapabilitycontacts
 msgid "Capability Contacts"
-msgstr ""
+msgstr "Capability Contacts"
 
 #: ucommon.rswellknownsidcapabilitydocumentslibrary
 msgid "Capability Documents Library"
-msgstr ""
+msgstr "Capability Documents Library"
 
 #: ucommon.rswellknownsidcapabilityenterpriseauthentication
 msgid "Capability Enterprise Authentication"
-msgstr ""
+msgstr "Capability Enterprise Authentication"
 
 #: ucommon.rswellknownsidcapabilityinternetclient
 msgid "Capability Internet Client"
-msgstr ""
+msgstr "Capability Internet Client"
 
 #: ucommon.rswellknownsidcapabilityinternetclientserver
 msgid "Capability Internet Client Server"
-msgstr ""
+msgstr "Capability Internet Client Server"
 
 #: ucommon.rswellknownsidcapabilitymusiclibrary
 msgid "Capability Music Library"
-msgstr ""
+msgstr "Capability Music Library"
 
 #: ucommon.rswellknownsidcapabilitypictureslibrary
 msgid "Capability Pictures Library"
-msgstr ""
+msgstr "Capability Pictures Library"
 
 #: ucommon.rswellknownsidcapabilityprivatenetworkclientserver
 msgid "Capability Private Network Client Server"
-msgstr ""
+msgstr "Capability Private Network Client Server"
 
 #: ucommon.rswellknownsidcapabilityremovablestorage
 msgid "Capability Removable Storage"
-msgstr ""
+msgstr "Capability Removable Storage"
 
 #: ucommon.rswellknownsidcapabilitysharedusercertificates
 msgid "Capability Shared User Certificates"
-msgstr ""
+msgstr "Capability Shared User Certificates"
 
 #: ucommon.rswellknownsidcapabilityvideoslibrary
 msgid "Capability Videos Library"
-msgstr ""
+msgstr "Capability Videos Library"
 
 #: ucommon.rswellknownsidconsolelogon
 msgid "Console Logon"
-msgstr ""
+msgstr "Console Logon"
 
 #: ucommon.rswellknownsidcreatorgroup
 msgid "Creator Group"
-msgstr ""
+msgstr "Creator Group"
 
 #: ucommon.rswellknownsidcreatorgroupserver
 msgid "Creator Group Server"
-msgstr ""
+msgstr "Creator Group Server"
 
 #: ucommon.rswellknownsidcreatorowner
 msgid "Creator Owner"
-msgstr ""
+msgstr "Creator Owner"
 
 #: ucommon.rswellknownsidcreatorownerrights
 msgid "Creator Owner Rights"
-msgstr ""
+msgstr "Creator Owner Rights"
 
 #: ucommon.rswellknownsidcreatorownerserver
 msgid "Creator Owner Server"
-msgstr ""
+msgstr "Creator Owner Server"
 
 #: ucommon.rswellknownsiddialup
 msgid "Dialup"
-msgstr ""
+msgstr "Dialup"
 
 #: ucommon.rswellknownsiddigestauthentication
 msgid "Digest Authentication"
-msgstr ""
+msgstr "Digest Authentication"
 
 #: ucommon.rswellknownsidenterprisecontrollers
 msgid "Enterprise Controllers"
-msgstr ""
+msgstr "Enterprise Controllers"
 
 #: ucommon.rswellknownsidiisuser
 msgid "Iis User"
-msgstr ""
+msgstr "Iis User"
 
 #: ucommon.rswellknownsidintegrityhigh
 msgid "Integrity High"
-msgstr ""
+msgstr "Integrity High"
 
 #: ucommon.rswellknownsidintegritylow
 msgid "Integrity Low"
-msgstr ""
+msgstr "Integrity Low"
 
 #: ucommon.rswellknownsidintegritymedium
 msgid "Integrity Medium"
-msgstr ""
+msgstr "Integrity Medium"
 
 #: ucommon.rswellknownsidintegritymediumplus
 msgid "Integrity Medium Plus"
-msgstr ""
+msgstr "Integrity Medium Plus"
 
 #: ucommon.rswellknownsidintegrityprotectedprocess
 msgid "Integrity Protected Process"
-msgstr ""
+msgstr "Integrity Protected Process"
 
 #: ucommon.rswellknownsidintegritysecureprocess
 msgid "Integrity Secure Process"
-msgstr ""
+msgstr "Integrity Secure Process"
 
 #: ucommon.rswellknownsidintegritysystem
 msgid "Integrity System"
-msgstr ""
+msgstr "Integrity System"
 
 #: ucommon.rswellknownsidintegrityuntrusted
 msgid "Integrity Untrusted"
-msgstr ""
+msgstr "Integrity Untrusted"
 
 #: ucommon.rswellknownsidinteractive
 msgid "Interactive"
-msgstr ""
+msgstr "Interactive"
 
 #: ucommon.rswellknownsidlocal
 msgid "Local"
-msgstr ""
+msgstr "Local"
 
 #: ucommon.rswellknownsidlocalaccount
 msgid "Local Account"
-msgstr ""
+msgstr "Local Account"
 
 #: ucommon.rswellknownsidlocalaccountandadministrator
 msgid "Local Account And Administrator"
-msgstr ""
+msgstr "Local Account And Administrator"
 
 #: ucommon.rswellknownsidlocalservice
 msgid "Local Service"
-msgstr ""
+msgstr "Local Service"
 
 #: ucommon.rswellknownsidlocalsystem
 msgid "Local System"
-msgstr ""
+msgstr "Local System"
 
 #: ucommon.rswellknownsidnetwork
 msgid "Network"
-msgstr ""
+msgstr "Network"
 
 #: ucommon.rswellknownsidnetworkservice
 msgid "Network Service"
-msgstr ""
+msgstr "Network Service"
 
 #: ucommon.rswellknownsidntauthority
 msgid "Nt Authority"
-msgstr ""
+msgstr "Nt Authority"
 
 #: ucommon.rswellknownsidntlmauthentication
 msgid "Ntlm Authentication"
-msgstr ""
+msgstr "Ntlm Authentication"
 
 #: ucommon.rswellknownsidproxy
 msgid "Proxy"
-msgstr ""
+msgstr "Proxy"
 
 #: ucommon.rswellknownsidremotelogonid
 msgid "Remote Logon Id"
-msgstr ""
+msgstr "Remote Logon Id"
 
 #: ucommon.rswellknownsidrestrictedcode
 msgid "Restricted Code"
-msgstr ""
+msgstr "Restricted Code"
 
 #: ucommon.rswellknownsidschannelauthentication
 msgid "SChannel Authentication"
-msgstr ""
+msgstr "SChannel Authentication"
 
 #: ucommon.rswellknownsidself
 msgid "Self"
-msgstr ""
+msgstr "Self"
 
 #: ucommon.rswellknownsidservice
 msgid "Service"
-msgstr ""
+msgstr "Service"
 
 #: ucommon.rswellknownsidterminalserver
 msgid "Terminal Server"
-msgstr ""
+msgstr "Terminal Server"
 
 #: ucommon.rswellknownsidthisorganisation
 msgid "This Organisation"
-msgstr ""
+msgstr "This Organisation"
 
 #: ucommon.rswellknownsidworld
 msgid "Everyone"
-msgstr ""
+msgstr "Everyone"
 

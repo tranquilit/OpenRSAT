@@ -360,6 +360,9 @@ resourcestring
   rsModuleADSIName = 'ServicesAndInterfaces';
   rsModuleADSIDisplayName = 'Services and Interfaces';
 
+  rsRestartTitle = 'Restart confirmation';
+  rsChangeOptionRequiredRestart = 'The changes you have made require a console restart. Restart now?';
+
 const
   DAYS_BETWEEN_1601_AND_1900 = 109205;
   HUNDRED_OF_MS_IN_A_DAY = 864000000000;

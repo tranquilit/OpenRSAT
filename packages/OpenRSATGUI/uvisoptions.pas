@@ -207,7 +207,7 @@ begin
 
       for Frame in fOptionFrames do
       begin
-        if Assigned(Frame) then
+        if Assigned(Frame) and Frame.OptionChanged then
           Frame.Save;
       end;
     end;

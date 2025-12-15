@@ -9,7 +9,8 @@ uses
   SysUtils,
   ursatldapclient,
   uldapconfigs,
-  ursatoption;
+  ursatoption,
+  uoption;
 
 type
 
@@ -21,13 +22,8 @@ type
     fLdapConfig: TLdapConfigs;
     fRSATOption: TRSATOption;
 
-    //procedure CloseProperty(VisProperty: TForm); virtual;
-    //function OpenProperty(DistinguishedName: RawUtf8; Name: RawUtf8 = ''): TForm; virtual;
-    //procedure Load; virtual;
-    //procedure ChangeDomainController(DomainController: RawUtf8); virtual;
-
   public
-    constructor Create;
+    constructor Create(AOnOptionChange: TProcRsatOptionOfObject);
     destructor Destroy; override;
     procedure Load;
   published
@@ -40,11 +36,12 @@ implementation
 
 { TRSAT }
 
-constructor TRSAT.Create;
+constructor TRSAT.Create(AOnOptionChange: TProcRsatOptionOfObject);
 begin
   fLdapClient := TRsatLdapClient.Create;
   fLdapConfig := TLdapConfigs.Create;
   fRSATOption := TRsatOption.Create;
+  fRSATOption.RegisterObserver(AOnOptionChange);
 end;
 
 destructor TRSAT.Destroy;

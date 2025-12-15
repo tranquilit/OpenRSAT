@@ -1,6 +1,6 @@
 {"version":1,"strings":[
-{"hash":5958709,"name":"tfrmrsatoptions.label1.caption","sourcebytes":[84,104,101,109,101],"value":"Theme"},
-{"hash":337991,"name":"tfrmrsatoptions.label2.caption","sourcebytes":[76,97,110,103],"value":"Lang"},
-{"hash":230819719,"name":"tfrmrsatoptions.label3.caption","sourcebytes":[65,100,118,97,110,99,101,100,86,105,101,119],"value":"AdvancedView"},
-{"hash":5014421,"name":"tfrmrsatoptions.combobox3.text","sourcebytes":[70,97,108,115,101],"value":"False"}
+{"hash":5958709,"name":"tfrmrsatoption.label1.caption","sourcebytes":[84,104,101,109,101],"value":"Theme"},
+{"hash":337991,"name":"tfrmrsatoption.label2.caption","sourcebytes":[76,97,110,103],"value":"Lang"},
+{"hash":230819719,"name":"tfrmrsatoption.label3.caption","sourcebytes":[65,100,118,97,110,99,101,100,86,105,101,119],"value":"AdvancedView"},
+{"hash":5014421,"name":"tfrmrsatoption.combobox3.text","sourcebytes":[70,97,108,115,101],"value":"False"}
 ]}

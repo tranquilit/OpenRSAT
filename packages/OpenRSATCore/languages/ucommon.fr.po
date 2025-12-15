@@ -7,12 +7,8 @@ msgid "ACE for object % not found in ACL."
 msgstr "L'ACE de l'objet % n'est pas trouvé dans l'ACL."
 
 #: ucommon.rsacepaadparent
-msgid ""
-"A Deny Delete-Tree right will be added to the ACL of the parent of this "
-"object. Do you wish to continue?"
-msgstr ""
-"Un droit « Refuser la suppression d'arborescence » sera ajouté à la liste "
-"ACL du parent de cet objet. Voulez-vous continuer ?"
+msgid "A Deny Delete-Tree right will be added to the ACL of the parent of this object. Do you wish to continue?"
+msgstr "Un droit « Refuser la suppression d'arborescence » sera ajouté à la liste ACL du parent de cet objet. Voulez-vous continuer ?"
 
 #: ucommon.rsaceparsing
 msgid "Failed to parse ACL."
@@ -80,13 +76,13 @@ msgstr "Connexion anonyme"
 msgid "The server does not allow this kind of auth method."
 msgstr "Le serveur n'authoriser pas ce type de méthode d'authentification."
 
+#: ucommon.rschangeoptionrequiredrestart
+msgid "The changes you have made require a console restart. Restart now?"
+msgstr "Les modifications que vous avez apportées nécessitent un redémarrage de la console. Voulez-vous redémarrer maintenant ?"
+
 #: ucommon.rsconfidentialityrequired
-msgid ""
-"The server do not allow your operation, cause your connection is not secured "
-"enought."
-msgstr ""
-"Le serveur n'authorise pas votre operation, car votre connexion n'est pas "
-"assez sécurisé."
+msgid "The server do not allow your operation, cause your connection is not secured enought."
+msgstr "Le serveur n'authorise pas votre operation, car votre connexion n'est pas assez sécurisé."
 
 #: ucommon.rsconfirmation
 msgid "Confirmation"
@@ -109,18 +105,12 @@ msgid "The requests violates some constraint defined within the server."
 msgstr "La requête enfreint certaines contraintes définies au sein du serveur."
 
 #: ucommon.rsdelegatecontrolfolder
-msgid ""
-"You chose to delegate control of objects in the following Active Directory "
-"folder:"
-msgstr ""
-"Vous avez choisi de déléguer le contrôle des objets dans le dossier Active "
-"Directory suivant :"
+msgid "You chose to delegate control of objects in the following Active Directory folder:"
+msgstr "Vous avez choisi de déléguer le contrôle des objets dans le dossier Active Directory suivant :"
 
 #: ucommon.rsdelegatecontrolobjects
 msgid "The groups, users, or computers to which you have given control are:"
-msgstr ""
-"Les groupes, utilisateurs ou ordinateurs auxquels vous avez donné le "
-"contrôle sont les suivants :"
+msgstr "Les groupes, utilisateurs ou ordinateurs auxquels vous avez donné le contrôle sont les suivants :"
 
 #: ucommon.rsdelegatecontroltasks
 msgid "You chose to delegate the following tasks:"
@@ -140,12 +130,8 @@ msgid "Are you sure that you want to delete % from the selected group(s)?"
 msgstr "Êtes-vous sûr de vouloir supprimer % du ou des groupes sélectionnés ?"
 
 #: ucommon.rsdeleteprimarygroup
-msgid ""
-"The primary group cannot be deleted. You need to define another if you wish "
-"to delete this one."
-msgstr ""
-"Le groupe principal ne peut pas être supprimé. Vous devez en définir un "
-"autre si vous souhaitez supprimer celui-ci."
+msgid "The primary group cannot be deleted. You need to define another if you wish to delete this one."
+msgstr "Le groupe principal ne peut pas être supprimé. Vous devez en définir un autre si vous souhaitez supprimer celui-ci."
 
 #: ucommon.rsdeny
 msgid "Deny"
@@ -220,94 +206,40 @@ msgid "Host (A or AAAA)"
 msgstr "Hôte (A ou AAAA)"
 
 #: ucommon.rsdnsrecordadescription
-msgid ""
-"Host address (A or AAAA) record. Maps a DNS domain name to a 32-bit IP "
-"version 4 address (RFC 1035) or a 128-bit IP version 6 address (RFC 1886)."
-msgstr ""
-"Enregistrement d'adresse hôte (A ou AAAA). Associe un nom de domaine DNS à "
-"une adresse IP version 4 32 bits (RFC 1035) ou à une adresse IP version 6 "
-"128 bits (RFC 1886)."
+msgid "Host address (A or AAAA) record. Maps a DNS domain name to a 32-bit IP version 4 address (RFC 1035) or a 128-bit IP version 6 address (RFC 1886)."
+msgstr "Enregistrement d'adresse hôte (A ou AAAA). Associe un nom de domaine DNS à une adresse IP version 4 32 bits (RFC 1035) ou à une adresse IP version 6 128 bits (RFC 1886)."
 
 #: ucommon.rsdnsrecordcname
 msgid "Alias (CNAME)"
 msgstr "Alias (CNAME)"
 
 #: ucommon.rsdnsrecordcnamedescription
-msgid ""
-"Alias record. Indicates an alternate or alias DNS domain name for a name "
-"already specified in other resource record types used in this zone. The "
-"record is also known as the canonical name (CNAME) record type. (RFC 1035)"
-msgstr ""
-"Enregistrement alias. Indique un nom de domaine DNS alternatif ou alias pour "
-"un nom déjà spécifié dans d'autres types d'enregistrements de ressources "
-"utilisés dans cette zone. Cet enregistrement est également appelé "
-"enregistrement de nom canonique (CNAME). (RFC 1035)"
+msgid "Alias record. Indicates an alternate or alias DNS domain name for a name already specified in other resource record types used in this zone. The record is also known as the canonical name (CNAME) record type. (RFC 1035)"
+msgstr "Enregistrement alias. Indique un nom de domaine DNS alternatif ou alias pour un nom déjà spécifié dans d'autres types d'enregistrements de ressources utilisés dans cette zone. Cet enregistrement est également appelé enregistrement de nom canonique (CNAME). (RFC 1035)"
 
 #: ucommon.rsdnsrecordmx
 msgid "Mail Exchanger (MX)"
 msgstr "Échangeur de courrier (MX)"
 
 #: ucommon.rsdnsrecordmxdescription
-msgid ""
-"Mail exchanger (MX) record. Provides message routing to a specified mail "
-"exchange host that is acting as a mail exchanger for a specified DNS domain "
-"name. MX records use a 16-bit integer to indicate host priority in message "
-"routing where multiple mail exchange hosts are specified. For each mail "
-"exchange host specified in this record type, a corresponding host address "
-"(A) type record is needed. (RFC 1035)"
-msgstr ""
-"Enregistrement MX (Mail Exchanger). Permet le routage des messages vers un "
-"hôte de messagerie spécifié qui agit en tant que serveur de messagerie pour "
-"un nom de domaine DNS spécifié. Les enregistrements MX utilisent un entier "
-"de 16 bits pour indiquer la priorité de l'hôte dans le routage des messages "
-"lorsque plusieurs hôtes de messagerie sont spécifiés. Pour chaque hôte de "
-"messagerie spécifié dans ce type d'enregistrement, un enregistrement de type "
-"adresse hôte (A) correspondant est nécessaire. (RFC 1035)"
+msgid "Mail exchanger (MX) record. Provides message routing to a specified mail exchange host that is acting as a mail exchanger for a specified DNS domain name. MX records use a 16-bit integer to indicate host priority in message routing where multiple mail exchange hosts are specified. For each mail exchange host specified in this record type, a corresponding host address (A) type record is needed. (RFC 1035)"
+msgstr "Enregistrement MX (Mail Exchanger). Permet le routage des messages vers un hôte de messagerie spécifié qui agit en tant que serveur de messagerie pour un nom de domaine DNS spécifié. Les enregistrements MX utilisent un entier de 16 bits pour indiquer la priorité de l'hôte dans le routage des messages lorsque plusieurs hôtes de messagerie sont spécifiés. Pour chaque hôte de messagerie spécifié dans ce type d'enregistrement, un enregistrement de type adresse hôte (A) correspondant est nécessaire. (RFC 1035)"
 
 #: ucommon.rsdnsrecordptr
 msgid "Pointer (PTR)"
 msgstr "Pointeur (PTR)"
 
 #: ucommon.rsdnsrecordptrdescription
-msgid ""
-"Pointer (PTR) record. Points to a location in the domain name space. PTR "
-"records are typically used in special domains to perform reverse lookups of "
-"address-to-name mappings. Each record provides simple data that points to "
-"some other location in the domain name space (usually a forward lookup "
-"zone). Where PTR records are used, no additional section processing is "
-"implied or caused by their presence. (RFC 1035)"
-msgstr ""
-"Enregistrement Pointer (PTR). Pointe vers un emplacement dans l'espace de "
-"noms de domaine. Les enregistrements PTR sont généralement utilisés dans des "
-"domaines spéciaux pour effectuer des recherches inversées de correspondances "
-"entre adresses et noms. Chaque enregistrement fournit des données simples "
-"qui pointent vers un autre emplacement dans l'espace de noms de domaine "
-"(généralement une zone de recherche directe). Lorsque des enregistrements "
-"PTR sont utilisés, leur présence n'implique ni ne provoque aucun traitement "
-"supplémentaire de la section. (RFC 1035)"
+msgid "Pointer (PTR) record. Points to a location in the domain name space. PTR records are typically used in special domains to perform reverse lookups of address-to-name mappings. Each record provides simple data that points to some other location in the domain name space (usually a forward lookup zone). Where PTR records are used, no additional section processing is implied or caused by their presence. (RFC 1035)"
+msgstr "Enregistrement Pointer (PTR). Pointe vers un emplacement dans l'espace de noms de domaine. Les enregistrements PTR sont généralement utilisés dans des domaines spéciaux pour effectuer des recherches inversées de correspondances entre adresses et noms. Chaque enregistrement fournit des données simples qui pointent vers un autre emplacement dans l'espace de noms de domaine (généralement une zone de recherche directe). Lorsque des enregistrements PTR sont utilisés, leur présence n'implique ni ne provoque aucun traitement supplémentaire de la section. (RFC 1035)"
 
 #: ucommon.rsdnsrecordsrv
 msgid "Service Location (SRV)"
 msgstr "Service de localisation (SRV)"
 
 #: ucommon.rsdnsrecordsrvdescription
-msgid ""
-"Service (SRV) record. Allows administrators to use several servers for a "
-"single DNS domain, to easily move a TCP/IP service from one host to another "
-"host with administration, and to designate some service provider hosts as "
-"primary servers for a service and other hosts as backups. DNS clients that "
-"use a SRV-type query ask for a specific TCP/IP service and protocol mapped "
-"to a specific DNS domain and receive the names of any available servers. "
-"(RFC 2052)"
-msgstr ""
-"Enregistrement de service (SRV). Permet aux administrateurs d'utiliser "
-"plusieurs serveurs pour un seul domaine DNS, de déplacer facilement un "
-"service TCP/IP d'un hôte à un autre avec administration, et de désigner "
-"certains hôtes de fournisseurs de services comme serveurs principaux pour un "
-"service et d'autres hôtes comme serveurs de secours. Les clients DNS qui "
-"utilisent une requête de type SRV demandent un service TCP/IP et un "
-"protocole spécifiques mappés à un domaine DNS spécifique et reçoivent les "
-"noms de tous les serveurs disponibles. (RFC 2052)"
+msgid "Service (SRV) record. Allows administrators to use several servers for a single DNS domain, to easily move a TCP/IP service from one host to another host with administration, and to designate some service provider hosts as primary servers for a service and other hosts as backups. DNS clients that use a SRV-type query ask for a specific TCP/IP service and protocol mapped to a specific DNS domain and receive the names of any available servers. (RFC 2052)"
+msgstr "Enregistrement de service (SRV). Permet aux administrateurs d'utiliser plusieurs serveurs pour un seul domaine DNS, de déplacer facilement un service TCP/IP d'un hôte à un autre avec administration, et de désigner certains hôtes de fournisseurs de services comme serveurs principaux pour un service et d'autres hôtes comme serveurs de secours. Les clients DNS qui utilisent une requête de type SRV demandent un service TCP/IP et un protocole spécifiques mappés à un domaine DNS spécifique et reçoivent les noms de tous les serveurs disponibles. (RFC 2052)"
 
 #: ucommon.rsdnszonedcpromoconvertdomain
 msgid "Domain"
@@ -388,9 +320,7 @@ msgstr "Supprimer les lignes sélectionnées"
 
 #: ucommon.rsinappropriatematching
 msgid "The matching condition is not supported for this attributeType."
-msgstr ""
-"La condition de correspondance n'est pas prise en charge pour ce type "
-"d'attribut."
+msgstr "La condition de correspondance n'est pas prise en charge pour ce type d'attribut."
 
 #: ucommon.rsinsufficientaccessrights
 msgid "Insufficient rights access."
@@ -418,16 +348,10 @@ msgstr "Echec de modification LDAP : \"%\""
 
 #: ucommon.rsldapmovewarningmessage
 msgid ""
-"Moving objects in Active Directory Domain Services can prevent your existing "
-"system from working the way it was designed. For exemple, moving an "
-"organizational unit (OU) can affect the way that group policies are applied "
-"to the accounts within the OU.\n"
+"Moving objects in Active Directory Domain Services can prevent your existing system from working the way it was designed. For exemple, moving an organizational unit (OU) can affect the way that group policies are applied to the accounts within the OU.\n"
 "Are you sure you want to move this object?"
 msgstr ""
-"Le déplacement d'objets dans les services de domaine Active Directory peut "
-"empêcher votre système existant de fonctionner comme prévu. Par exemple, le "
-"déplacement d'une unité d'organisation (OU) peut affecter la manière dont "
-"les stratégies de groupe sont appliquées aux comptes au sein de l'OU.\n"
+"Le déplacement d'objets dans les services de domaine Active Directory peut empêcher votre système existant de fonctionner comme prévu. Par exemple, le déplacement d'une unité d'organisation (OU) peut affecter la manière dont les stratégies de groupe sont appliquées aux comptes au sein de l'OU.\n"
 "Êtes-vous sûr de vouloir déplacer cet objet ?"
 
 #: ucommon.rsldapsearchfailed
@@ -484,9 +408,7 @@ msgstr "Éditeur de temps à valeurs multiples"
 
 #: ucommon.rsnewconfirmpassdifferent
 msgid "The New and Confirm passwords must match. Please re-type them."
-msgstr ""
-"Les mots de passe « Nouveau » et « Confirmer » doivent être identiques. "
-"Veuillez les saisir à nouveau."
+msgstr "Les mots de passe « Nouveau » et « Confirmer » doivent être identiques. Veuillez les saisir à nouveau."
 
 #: ucommon.rsnewobjectbtnback
 msgid "< Back"
@@ -569,16 +491,16 @@ msgid "Malformed LDAP message. Unrecognized operation."
 msgstr "Message LDAP malformé. Opération non reconnu."
 
 #: ucommon.rsreferral
-msgid ""
-"This should not be an error. Client should follow referral. Please try the "
-"action on a different server."
-msgstr ""
-"Ceci ne devrait pas être une erreur. Le client doit suivre la redirection. "
-"Veuillez essayer l'action sur un autre serveur."
+msgid "This should not be an error. Client should follow referral. Please try the action on a different server."
+msgstr "Ceci ne devrait pas être une erreur. Le client doit suivre la redirection. Veuillez essayer l'action sur un autre serveur."
 
 #: ucommon.rsrename
 msgid "Rename"
 msgstr "Renommer"
+
+#: ucommon.rsrestarttitle
+msgid "Restart confirmation"
+msgstr "Confirmer le redémarrage"
 
 #: ucommon.rssafauditfailure
 msgid "Audit Failure"
@@ -610,9 +532,7 @@ msgstr "Héritage d'objet (OI)"
 
 #: ucommon.rssaslbindinprogress
 msgid "The server is working on a bind request. Try again later."
-msgstr ""
-"Le serveur traite actuellement une demande de connexion. Veuillez réessayer "
-"plus tard."
+msgstr "Le serveur traite actuellement une demande de connexion. Veuillez réessayer plus tard."
 
 #: ucommon.rssaturday
 msgid "Saturday"
@@ -728,12 +648,8 @@ msgid "The result retrieved more objects than the server allowed."
 msgstr "Le résultat a récupéré plus d'objets que le serveur n'en autorisait."
 
 #: ucommon.rsstrongerauthrequired
-msgid ""
-"The server requires the client to authenticate with a stronger "
-"authentication."
-msgstr ""
-"Le serveur exige que le client s'authentifie à l'aide d'une authentification "
-"plus forte."
+msgid "The server requires the client to authenticate with a stronger authentication."
+msgstr "Le serveur exige que le client s'authentifie à l'aide d'une authentification plus forte."
 
 #: ucommon.rssunday
 msgid "Sunday"
@@ -1214,3 +1130,4 @@ msgstr "Cette organisation"
 #: ucommon.rswellknownsidworld
 msgid "Everyone"
 msgstr "Tout le monde"
+

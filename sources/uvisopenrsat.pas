@@ -87,13 +87,11 @@ var
 implementation
 uses
   process,
-  Translations,
   mormot.core.base,
   mormot.core.text,
   ufrmrsatoptions,
   ufrmrsat,
-  ursatoption,
-  utranslation;
+  ursatoption;
 
 {$R *.lfm}
 
@@ -243,8 +241,6 @@ begin
 end;
 
 constructor TVisOpenRSAT.Create(TheOwner: TComponent);
-var
-  Lang: RawUtf8;
 begin
   inherited Create(TheOwner);
 
@@ -257,19 +253,6 @@ begin
   FrmRSAT := TFrmRSAT.Create(Self);
   FrmRSAT.Parent := Self;
   FrmRSAT.Align := alClient;
-
-  try
-    Lang := FrmRSAT.RsatOption.Lang;
-    if Lang = '' then
-      Lang := GetLanguageID.CountryCode;
-    TranslateFromResource(Lang);
-  except
-    on E: EResNotFound do
-      if Assigned(fLog) then
-        fLog.Log(sllWarning, 'Translation resource not found', Self);
-    on E: Exception do
-      raise E;
-  end;
 
   // Setup theme for windows
   {$IFDEF WINDOWS}

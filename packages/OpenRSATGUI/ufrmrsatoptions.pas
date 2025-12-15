@@ -27,6 +27,7 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    procedure ComboBox2Change(Sender: TObject);
     procedure ComboBox3Change(Sender: TObject);
   private
     fLog: TSynLog;
@@ -49,8 +50,10 @@ type
 implementation
 
 uses
+  Dialogs,
   mormot.core.text,
   mormot.core.base,
+  ucommon,
   ufrmrsat;
 
 {$R *.lfm}
@@ -61,6 +64,14 @@ procedure TFrmRSATOption.ComboBox3Change(Sender: TObject);
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Change AdvancedView (%)', [ComboBox3.Text], Self);
+
+  fChanged := True;
+end;
+
+procedure TFrmRSATOption.ComboBox2Change(Sender: TObject);
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, 'Change Lang (%)', [ComboBox2.Text], Self);
 
   fChanged := True;
 end;
@@ -97,15 +108,16 @@ begin
     Exit;
   end;
 
-  RSATOption.Load;
-
   ComboBox1.ItemIndex := Ord(RSATOption.Theme);
+  ComboBox2.Text := RSATOption.Lang;
   ComboBox3.ItemIndex := Ord(RSATOption.AdvancedView);
 
   fChanged := False;
 end;
 
 procedure TFrmRSATOption.Save;
+var
+  ShouldRestart: Boolean;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Save', Self);
@@ -117,10 +129,19 @@ begin
     Exit;
   end;
 
-  RSATOption.Theme := TThemeMode(ComboBox1.ItemIndex);
-  RSATOption.AdvancedView := Boolean(ComboBox3.ItemIndex);
+  ShouldRestart := (ComboBox2.Text <> RSATOption.Lang);
 
-  RSATOption.Save;
+  RSATOption.BeginUpdate;
+  try
+    RSATOption.Theme := TThemeMode(ComboBox1.ItemIndex);
+    RSATOption.Lang := ComboBox2.Text;
+    RSATOption.AdvancedView := Boolean(ComboBox3.ItemIndex);
+  finally
+    RSATOption.Save;
+  end;
+
+  if ShouldRestart and (MessageDlg(rsRestartTitle, rsChangeOptionRequiredRestart, mtConfirmation, mbYesNoCancel, 0) = mrYes) then
+    FrmRSAT.Restart;
 
   fChanged := False;
 end;

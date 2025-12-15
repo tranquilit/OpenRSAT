@@ -17,6 +17,7 @@ uses
   mormot.core.log,
   mormot.core.test,
   uldapconfigs,
+  uoption,
   ursatldapclient,
   uvisproperties,
   uvispropertieslist,
@@ -74,6 +75,8 @@ type
     fVisPropertiesList: TVisPropertiesList;
 
     procedure LoadModules;
+
+    procedure OnOptionChange(Option: TOption);
   public
     FrmRSATOptionClass: TFrameOptionClass;
 
@@ -85,6 +88,8 @@ type
     property VisPropertiesList: TVisPropertiesList read fVisPropertiesList;
 
     procedure SetStatusBarText(ItemIndex: Integer; ItemText: RawUtf8);
+    procedure UpdateLang;
+    procedure Restart;
 
     // Self core
     property RSAT: TRSAT read fRSAT;
@@ -146,6 +151,7 @@ implementation
 
 uses
   Dialogs,
+  Translations,
   mormot.core.text,
   mormot.net.ldap,
   ufrmmoduleaduc,
@@ -157,7 +163,8 @@ uses
   uvisconnectconfigs,
   mormot.net.dns,
   ucommon,
-  ursatldapclientui;
+  ursatldapclientui,
+  utranslation;
 
 {$R *.lfm}
 
@@ -334,6 +341,29 @@ begin
   StatusBar1.Panels.Items[ItemIndex].Width := StatusBar1.Canvas.TextWidth(StatusBar1.Panels.Items[ItemIndex].Text) + 8;
 end;
 
+procedure TFrmRSAT.UpdateLang;
+var
+  Lang: RawUtf8;
+begin
+  try
+    Lang := RsatOption.Lang;
+    if Lang = '' then
+      Lang := GetLanguageID.CountryCode;
+    TranslateFromResource(Lang);
+  except
+    on E: EResNotFound do
+      if Assigned(fLog) then
+        fLog.Log(sllWarning, 'Translation resource not found', Self);
+    on E: Exception do
+      raise E;
+  end;
+end;
+
+procedure TFrmRSAT.Restart;
+begin
+  (Parent as TForm).Close;
+end;
+
 procedure TFrmRSAT.LoadModules;
 var
   aLog: ISynLog;
@@ -385,10 +415,13 @@ begin
   if RegisterModule(FrameModule) then
     LoadModule(FrameModule);
 
-  RsatOption.Load;
-
   if LdapConfigs.AutoConnect then
     Timer_AutoConnect.Enabled := True;
+end;
+
+procedure TFrmRSAT.OnOptionChange(Option: TOption);
+begin
+  UpdateLang;
 end;
 
 constructor TFrmRSAT.Create(TheOwner: TComponent);
@@ -406,7 +439,7 @@ begin
 
   FrmRSATOptionClass := TFrmRSATOption;
 
-  fRSAT := TRSAT.Create;
+  fRSAT := TRSAT.Create(@OnOptionChange);
   fFrmRSATOption := TFrmRSATOption.Create(Self);
   fFrmModules := TFrmModules.Create;
 
