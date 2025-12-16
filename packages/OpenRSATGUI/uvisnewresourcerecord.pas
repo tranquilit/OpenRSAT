@@ -106,18 +106,32 @@ type
     procedure Action_OKExecute(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure Edit_AHostChange(Sender: TObject);
+    procedure Edit_AIPAddressChange(Sender: TObject);
+    procedure Edit_CNAMEAliasChange(Sender: TObject);
+    procedure Edit_MXHostChange(Sender: TObject);
+    procedure Edit_PTRHostChange(Sender: TObject);
     procedure Label_CNAMEDeleteClick(Sender: TObject);
     procedure Label_CNAMEAllowClick(Sender: TObject);
     procedure TS_AShow(Sender: TObject);
+    procedure TS_CNAMEShow(Sender: TObject);
+    procedure TS_MXShow(Sender: TObject);
+    procedure TS_PTRShow(Sender: TObject);
+    procedure TS_SRVShow(Sender: TObject);
   private
     fRecordType: TDnsResourceRecord;
     fSerial: Cardinal;
     fLdapClient: TRsatLdapClient;
     fDcPrefix: String;
     fDistinguishedName: String;
+    fDomainName: RawUtf8;
     fLog: TSynLog;
 
+
+    function UpdateFQDN(HostName: RawUtf8): RawUtf8;
+
     function CreateOrUpdateRecord(const dnsRecord: TDNSRecord; const DistinguishedName: String): Boolean;
+
+    function OKUpdateA(): Boolean;
 
     procedure OKExecuteA(var dnsRecord: TDNSRecord);
     procedure OKExecuteCNAME(var dnsRecord: TDNSRecord);
@@ -131,6 +145,7 @@ type
 
 implementation
 uses
+  mormot.core.text,
   ursatldapclientui,
   ucommon;
 
@@ -184,15 +199,28 @@ begin
 end;
 
 procedure TVisNewResourceRecord.Edit_AHostChange(Sender: TObject);
-var
-  s: String;
 begin
-  s := Format('%s.', [DNToCN(fLdapClient.DefaultDN())]);
-  if fDcPrefix <> '' then
-    s := Format('%s.%s', [fDcPrefix, s]);
-  if Edit_AHost.Text <> '' then
-    s := Format('%s.%s', [Edit_AHost.Text, s]);
-  Edit_AFQDN.Text := s;
+  Edit_AFQDN.Text := UpdateFQDN(Edit_AHost.Text);
+end;
+
+procedure TVisNewResourceRecord.Edit_AIPAddressChange(Sender: TObject);
+begin
+  Action_OK.Enabled := IsValidIP(Edit_AIPAddress.Text, False, True);
+end;
+
+procedure TVisNewResourceRecord.Edit_CNAMEAliasChange(Sender: TObject);
+begin
+  Edit_CNAMEFQDN.Text := UpdateFQDN(Edit_CNAMEAlias.Text);
+end;
+
+procedure TVisNewResourceRecord.Edit_MXHostChange(Sender: TObject);
+begin
+  Edit_MXFQDN.Text := UpdateFQDN(Edit_MXHost.Text);
+end;
+
+procedure TVisNewResourceRecord.Edit_PTRHostChange(Sender: TObject);
+begin
+  Edit_PTRFQDN.Text := UpdateFQDN(Edit_PTRHost.Text);
 end;
 
 procedure TVisNewResourceRecord.Label_CNAMEAllowClick(Sender: TObject);
@@ -203,6 +231,36 @@ end;
 procedure TVisNewResourceRecord.TS_AShow(Sender: TObject);
 begin
   Edit_AHostChange(Sender);
+  Edit_AIPAddressChange(Sender);
+end;
+
+procedure TVisNewResourceRecord.TS_CNAMEShow(Sender: TObject);
+begin
+  Edit_CNAMEAliasChange(Sender);
+end;
+
+procedure TVisNewResourceRecord.TS_MXShow(Sender: TObject);
+begin
+  Edit_MXHostChange(Sender);
+end;
+
+procedure TVisNewResourceRecord.TS_PTRShow(Sender: TObject);
+begin
+  Edit_PTRHostChange(Sender);
+end;
+
+procedure TVisNewResourceRecord.TS_SRVShow(Sender: TObject);
+begin
+  Edit1.Text := fDomainName;
+end;
+
+function TVisNewResourceRecord.UpdateFQDN(HostName: RawUtf8): RawUtf8;
+begin
+  result := FormatUtf8('%.', [fDomainName]);
+  if fDcPrefix <> '' then
+    result := FormatUtf8('%.%', [fDcPrefix, result]);
+  if HostName <> '' then
+    result := FormatUtf8('%.%', [HostName, result]);
 end;
 
 function TVisNewResourceRecord.CreateOrUpdateRecord(
@@ -260,6 +318,11 @@ begin
     end;
   end;
   result := True;
+end;
+
+function TVisNewResourceRecord.OKUpdateA(): Boolean;
+begin
+  result := IsValidIP(Edit_AIPAddress.Text, False, True);
 end;
 
 procedure TVisNewResourceRecord.OKExecuteA(var dnsRecord: TDNSRecord);
@@ -362,6 +425,8 @@ end;
 constructor TVisNewResourceRecord.Create(TheOwner: TComponent;
   RecordType: TDnsResourceRecord; Serial: Cardinal;
   LdapClient: TRsatLdapClient; distinguishedName, dcPrefix: String);
+var
+  pairs: TNameValueDNs;
 begin
   Inherited Create(TheOwner);
 
@@ -374,6 +439,8 @@ begin
   fDcPrefix := dcPrefix;
   fRecordType := RecordType;
   fDistinguishedName := distinguishedName;
+  if ParseDN(fDistinguishedName, pairs) then
+    fDomainName := pairs[0].Value;
 
   // Disable active page
   PageControl1.ActivePage := nil;

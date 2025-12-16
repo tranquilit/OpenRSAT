@@ -23,6 +23,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
       ClientHeight = 324
       ClientWidth = 380
       TabVisible = False
+      OnShow = TS_CNAMEShow
       object Label_CNAMEAlias: TLabel
         AnchorSideLeft.Control = TS_CNAME
         AnchorSideTop.Control = TS_CNAME
@@ -47,6 +48,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Width = 380
         Anchors = [akTop, akLeft, akRight]
         TabOrder = 0
+        OnChange = Edit_CNAMEAliasChange
       end
       object Label_CNAMEFQDN: TLabel
         AnchorSideLeft.Control = TS_CNAME
@@ -117,6 +119,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         AutoSize = True
         BorderSpacing.Left = 8
         Caption = 'Browse'
+        Enabled = False
         TabOrder = 3
       end
       object CheckBox_CNAMEDelete: TCheckBox
@@ -294,6 +297,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Width = 380
         Anchors = [akTop, akLeft, akRight]
         TabOrder = 2
+        OnChange = Edit_AIPAddressChange
       end
       object CheckBox_APtr: TCheckBox
         AnchorSideLeft.Control = TS_A
@@ -407,6 +411,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
       ClientHeight = 324
       ClientWidth = 380
       TabVisible = False
+      OnShow = TS_PTRShow
       object Label_PTRHost: TLabel
         AnchorSideLeft.Control = TS_PTR
         AnchorSideTop.Control = TS_PTR
@@ -432,6 +437,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Width = 380
         Anchors = [akTop, akLeft, akRight]
         TabOrder = 0
+        OnChange = Edit_PTRHostChange
       end
       object Label_PTRFQDN: TLabel
         AnchorSideLeft.Control = TS_PTR
@@ -537,6 +543,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
       ClientHeight = 324
       ClientWidth = 380
       TabVisible = False
+      OnShow = TS_MXShow
       object Label_MXHost: TLabel
         AnchorSideLeft.Control = TS_MX
         AnchorSideTop.Control = TS_MX
@@ -562,6 +569,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
         Width = 380
         Anchors = [akTop, akLeft, akRight]
         TabOrder = 0
+        OnChange = Edit_MXHostChange
       end
       object Label_MXDefault: TLabel
         AnchorSideLeft.Control = TS_MX
@@ -685,6 +693,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
       ClientHeight = 324
       ClientWidth = 380
       TabVisible = False
+      OnShow = TS_SRVShow
       object Label1: TLabel
         AnchorSideLeft.Control = TS_SRV
         AnchorSideTop.Control = Edit1

@@ -410,6 +410,7 @@ function AceIsEqual(a, b: TSecAce): Boolean;
 function AceIsInherited(Ace: PSecAce): Boolean;
 function AttributesEquals(a1, a2: TLdapAttribute): Boolean;
 function DateTimeToMSTime(const t: TDateTime): Int64;
+function ExpandIPv6(ShortIPv6: RawUtf8): RawUtf8;
 function GetAceParentCount(Ace: TSecAce; sdArr: Array of TSecurityDescriptor; count: Integer = 0): Integer;
 function GetDNName(DistinguishedName: RawUtf8): RawUtf8;
 function GetParentDN(DN: RawUtf8): RawUtf8;
@@ -417,6 +418,9 @@ function IsContainer(ObjectClass: RawUtf8): Boolean;
 function IsLocalPath(path: RawUtf8): Boolean;
 function ISOToTimeFormat(str: String): String;
 function IsServerPath(path: RawUtf8): Boolean;
+function IsValidIP(IP: RawUtf8; IsPrefix: Boolean = False; NoRaise: Boolean = False): Boolean;
+function IsValidIP4(IP4: RawUtf8; IsPrefix: Boolean = False; NoRaise: Boolean = False): Boolean;
+function IsValidIP6(IP6: RawUtf8; IsPrefix: Boolean = False; NoRaise: Boolean = False): Boolean;
 function MSTimeToDateTime(mst: Int64): TDateTime;
 function MSTimeEqual(mst1: Int64; mst2: Int64): Boolean;
 function SecDescAddACE(PSecDesc: PSecurityDescriptor;
@@ -438,8 +442,10 @@ implementation
 uses
   DateUtils,
   RegExpr,
+  StrUtils,
   mormot.core.log,
-  mormot.core.text;
+  mormot.core.text,
+  mormot.net.sock;
 
 function AceInDacl(Dacl: TSecAcl; Ace: TSecAce): Boolean;
 var
@@ -525,6 +531,40 @@ begin
   result := round((t + DAYS_BETWEEN_1601_AND_1900) * HUNDRED_OF_MS_IN_A_DAY)
 end;
 
+function ExpandIPv6(ShortIPv6: RawUtf8): RawUtf8;
+var
+  IPv6Parts: TStringArray;
+  SubPos, MissingParts, j, i: Integer;
+begin
+  IPv6Parts := String(ShortIPv6).Split(':');
+
+  // Find substitution
+  SubPos := -1;
+  for i := 0 to High(IPv6Parts) do
+  begin
+    if IPv6Parts[i] = '' then
+    begin
+      SubPos := i;
+      break;
+    end;
+  end;
+
+  // Add missing parts
+  MissingParts := 7 - Length(IPv6Parts);
+  for i := 0 to MissingParts do
+    Insert('', IPv6Parts, SubPos);
+
+  // Fill missing zero
+  for i := 0 to High(IPv6Parts) do
+  begin
+    for j := 0 to 3 - Length(IPv6Parts[i]) do
+      Insert('0', IPv6Parts[i], 0);
+  end;
+
+  result := String.Join(':', IPv6Parts);
+end;
+
+
 function GetAceParentCount(Ace: TSecAce; sdArr: array of TSecurityDescriptor;
   count: Integer): Integer;
 var
@@ -546,7 +586,7 @@ begin
   result := count;
 end;
 
-function IsContainer(objectClass: RawUtf8): Boolean;
+function IsContainer(ObjectClass: RawUtf8): Boolean;
 const
   CONTAINERS: Array of String = ('organizationalUnit', 'container', 'domainDNS');
 var
@@ -603,6 +643,164 @@ begin
   finally
     FreeAndNil(re);
   end;
+end;
+
+function IsValidIP(IP: RawUtf8; IsPrefix: Boolean; NoRaise: Boolean): Boolean;
+var
+  IPAddr: TNetAddr;
+begin
+  result := False;
+  if IPAddr.SetFrom(IP, '0', nlTcp) <> nrOK then
+    if NoRaise then
+      Exit
+    else
+      raise Exception.Create('Invalid IP');
+  case IPAddr.Family of
+    nfIP4: result := IsValidIP4(IP, IsPrefix, True);
+    nfIP6: result := IsValidIP6(IP, IsPrefix, True);
+  end;
+end;
+
+function IsValidIP4(IP4: RawUtf8; IsPrefix: Boolean; NoRaise: Boolean): Boolean;
+var
+  Values: TStringArray;
+  IPAddress: RawUtf8;
+  PrefixMask, Value: Longint;
+  Bytes: Array[0..15] of Byte;
+  i, IPv4Address: Integer;
+begin
+  result := False;
+
+  if IsPrefix then
+  begin
+    Values := String(IP4).Split('/');
+    if (Length(Values) <> 2) then
+      if NoRaise then
+        Exit
+      else
+        raise Exception.Create('Missing prefix length');
+    IPAddress := Values[0];
+    if not TryStrToInt(Values[1], PrefixMask) or (PrefixMask < 0) or (PrefixMask > 128) then
+      if NoRaise then
+        Exit
+      else
+        raise Exception.Create('Invalid prefix length');
+  end
+  else
+    IPAddress := IP4;
+
+  Values := String(IPAddress).Split('.');
+  if (Length(Values) <> 4) then
+    if NoRaise then
+      Exit
+    else
+      raise Exception.Create('Invalid IP4 format');
+
+  for i := 0 to 3 do
+  begin
+    if not (TryStrToInt(Values[i], Value) and (Value >= 0) and (Value <= 255)) then
+      if NoRaise then
+        Exit
+      else
+        raise Exception.Create('Invalid value in IP');
+    Bytes[i] := Value;
+  end;
+
+  if IsPrefix then
+  begin
+    IPv4Address := (Integer(Bytes[0]) shl 24) or (Integer(Bytes[1]) shl 16) or (Integer(Bytes[2]) shl 8) or Integer(Bytes[3]);
+    result := (PrefixMask = 32) or (IPv4Address and ((1 shl (32 - PrefixMask)) - 1) = 0);
+    if not result then
+      if NoRaise then
+        Exit
+      else
+        raise Exception.Create('Invalid prefix mask');
+  end
+  else
+    result := True;
+end;
+
+function IsValidIP6(IP6: RawUtf8; IsPrefix: Boolean; NoRaise: Boolean): Boolean;
+var
+  Values, IPBlocs: TStringArray;
+  IPAddress: RawUtf8;
+  PrefixMask, Value: Longint;
+  i, bitPos, BitMask: Integer;
+  Bytes: Array[0..15] of Byte;
+begin
+  result := False;
+  PrefixMask := 0;
+
+  if IsPrefix then
+  begin
+    Values := String(IP6).Split('/');
+    if (Length(Values) <> 2) then
+      if NoRaise then
+        Exit
+      else
+        raise Exception.Create('Missing prefix length');
+    IPAddress := Values[0];
+    if not TryStrToInt(Values[1], PrefixMask) or (PrefixMask < 0) or (PrefixMask > 128) then
+      if NoRaise then
+        Exit
+      else
+        raise Exception.Create('Invalid prefix length');
+  end
+  else
+    IPAddress := IP6;
+
+  IPaddress := ExpandIPv6(IPaddress);
+  IPBlocs := String(IPaddress).Split(':');
+
+  try
+    for i := 0 to High(IPBlocs) do
+    begin
+      Value := Hex2Dec(IPBlocs[i]);
+      Bytes[i * 2] := (Value shr 8) and $ff;
+      Bytes[i * 2 + 1] := Value and $ff;
+    end;
+  except
+    on E: Exception do
+      if NoRaise then
+        Exit
+      else
+        raise E;
+  end;
+  if IsPrefix then
+  begin
+    bitPos := 0;
+    for i := 0 to 15 do
+    begin
+      if bitPos + 8 <= PrefixMask then
+      begin
+        bitPos := bitPos + 8;
+        continue;
+      end;
+      if bitPos >= PrefixMask then
+      begin
+        if Bytes[i] <> 0 then
+        begin
+          if NoRaise then
+            Exit
+          else
+            raise Exception.Create('Invalid prefix mask');
+        end;
+      end
+      else
+      begin
+        BitMask := PrefixMask - bitPos;
+        if (Bytes[i] and ((1 shl (8 - BitMask)) - 1)) <> 0 then
+        begin
+          if NoRaise then
+            Exit
+          else
+            raise Exception.Create('Invalid prefix mask');
+        end;
+      end;
+      bitPos := bitPos + 8;
+    end;
+  end;
+  result := True;
 end;
 
 function MSTimeToDateTime(mst: Int64): TDateTime;
