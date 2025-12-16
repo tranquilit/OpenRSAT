@@ -1,7 +1,8 @@
 program openrsattests;
 
 uses
-  mormot.core.test;
+  mormot.core.test,
+  ucommon;
 
 type
 
@@ -17,6 +18,7 @@ type
 procedure TOpenRSATTests.Units;
 begin
   AddCase([
+    TCommonTests
   ]);
 end;
 

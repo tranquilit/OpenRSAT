@@ -9,11 +9,27 @@ uses
   SysUtils,
   mormot.core.base,
   mormot.net.ldap,
+  {$IFDEF OPENRSATTESTS}
+  mormot.core.test,
+  {$ENDIF OPENRSATTESTS}
   mormot.core.os.security,
   mormot.core.variants;
 
 type
   PSecurityDescriptor = ^TSecurityDescriptor;
+
+  {$IFDEF OPENRSATTESTS}
+
+  { TCommonTests }
+
+  TCommonTests = class(TSynTestCase)
+  published
+    procedure FuncExpandIPv6;
+    procedure FuncIsValidIP6;
+    procedure FuncIsValidIP4;
+  end;
+
+  {$ENDIF OPENRSATTESTS}
 
 resourcestring
   // Ldap SDDL names
@@ -409,6 +425,10 @@ const
     rsSecAccessGenericRead        // samGenericRead
   );
 
+  PREFIX_REGEX = '(\/(12[0-8]|(1[0-1]|[1-9]|)\d))';
+  IPV4_REGEX = '((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}';
+  IPV6_REGEX = '((?:[0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4}|(?:[0-9A-Fa-f]{1,4}:){1,7}:|:(?::[0-9A-Fa-f]{1,4}){1,7}|(?:[0-9A-Fa-f]{1,4}:){1,6}:[0-9A-Fa-f]{1,4}|(?:[0-9A-Fa-f]{1,4}:){1,5}(?::[0-9A-Fa-f]{1,4}){1,2}|(?:[0-9A-Fa-f]{1,4}:){1,4}(?::[0-9A-Fa-f]{1,4}){1,3}|(?:[0-9A-Fa-f]{1,4}:){1,3}(?::[0-9A-Fa-f]{1,4}){1,4}|(?:[0-9A-Fa-f]{1,4}:){1,2}(?::[0-9A-Fa-f]{1,4}){1,5}|[0-9A-Fa-f]{1,4}:(?:(?::[0-9A-Fa-f]{1,4}){1,6})|:(?:(?::[0-9A-Fa-f]{1,4}){1,6}))';
+
 function AceInDacl(Dacl: TSecAcl; Ace: TSecAce): Boolean;
 function AceIsEqual(a, b: TSecAce): Boolean;
 function AceIsInherited(Ace: PSecAce): Boolean;
@@ -422,9 +442,9 @@ function IsContainer(ObjectClass: RawUtf8): Boolean;
 function IsLocalPath(path: RawUtf8): Boolean;
 function ISOToTimeFormat(str: String): String;
 function IsServerPath(path: RawUtf8): Boolean;
-function IsValidIP(IP: RawUtf8; IsPrefix: Boolean = False; NoRaise: Boolean = False): Boolean;
-function IsValidIP4(IP4: RawUtf8; IsPrefix: Boolean = False; NoRaise: Boolean = False): Boolean;
-function IsValidIP6(IP6: RawUtf8; IsPrefix: Boolean = False; NoRaise: Boolean = False): Boolean;
+function IsValidIP(IP: RawUtf8): Boolean;
+function IsValidIP4(IP4: RawUtf8): Boolean;
+function IsValidIP6(IP6: RawUtf8): Boolean;
 function MSTimeToDateTime(mst: Int64): TDateTime;
 function MSTimeEqual(mst1: Int64; mst2: Int64): Boolean;
 function SecDescAddACE(PSecDesc: PSecurityDescriptor;
@@ -649,162 +669,59 @@ begin
   end;
 end;
 
-function IsValidIP(IP: RawUtf8; IsPrefix: Boolean; NoRaise: Boolean): Boolean;
+function IsValidIP(IP: RawUtf8): Boolean;
 var
   IPAddr: TNetAddr;
 begin
   result := False;
   if IPAddr.SetFrom(IP, '0', nlTcp) <> nrOK then
-    if NoRaise then
-      Exit
-    else
-      raise Exception.Create('Invalid IP');
+    Exit;
   case IPAddr.Family of
-    nfIP4: result := IsValidIP4(IP, IsPrefix, True);
-    nfIP6: result := IsValidIP6(IP, IsPrefix, True);
+    nfIP4: result := IsValidIP4(IP);
+    nfIP6: result := IsValidIP6(IP);
   end;
 end;
 
-function IsValidIP4(IP4: RawUtf8; IsPrefix: Boolean; NoRaise: Boolean): Boolean;
+function IsValidIP4(IP4: RawUtf8): Boolean;
 var
-  Values: TStringArray;
-  IPAddress: RawUtf8;
-  PrefixMask, Value: Longint;
-  Bytes: Array[0..15] of Byte;
-  i, IPv4Address: Integer;
+  Regex: RawUtf8;
+  re: TRegExpr;
 begin
   result := False;
-
-  if IsPrefix then
-  begin
-    Values := String(IP4).Split('/');
-    if (Length(Values) <> 2) then
-      if NoRaise then
-        Exit
-      else
-        raise Exception.Create('Missing prefix length');
-    IPAddress := Values[0];
-    if not TryStrToInt(Values[1], PrefixMask) or (PrefixMask < 0) or (PrefixMask > 128) then
-      if NoRaise then
-        Exit
-      else
-        raise Exception.Create('Invalid prefix length');
-  end
-  else
-    IPAddress := IP4;
-
-  Values := String(IPAddress).Split('.');
-  if (Length(Values) <> 4) then
-    if NoRaise then
-      Exit
-    else
-      raise Exception.Create('Invalid IP4 format');
-
-  for i := 0 to 3 do
-  begin
-    if not (TryStrToInt(Values[i], Value) and (Value >= 0) and (Value <= 255)) then
-      if NoRaise then
-        Exit
-      else
-        raise Exception.Create('Invalid value in IP');
-    Bytes[i] := Value;
-  end;
-
-  if IsPrefix then
-  begin
-    IPv4Address := (Integer(Bytes[0]) shl 24) or (Integer(Bytes[1]) shl 16) or (Integer(Bytes[2]) shl 8) or Integer(Bytes[3]);
-    result := (PrefixMask = 32) or (IPv4Address and ((1 shl (32 - PrefixMask)) - 1) = 0);
-    if not result then
-      if NoRaise then
-        Exit
-      else
-        raise Exception.Create('Invalid prefix mask');
-  end
-  else
-    result := True;
-end;
-
-function IsValidIP6(IP6: RawUtf8; IsPrefix: Boolean; NoRaise: Boolean): Boolean;
-var
-  Values, IPBlocs: TStringArray;
-  IPAddress: RawUtf8;
-  PrefixMask, Value: Longint;
-  i, bitPos, BitMask: Integer;
-  Bytes: Array[0..15] of Byte;
-begin
-  result := False;
-  PrefixMask := 0;
-
-  if IsPrefix then
-  begin
-    Values := String(IP6).Split('/');
-    if (Length(Values) <> 2) then
-      if NoRaise then
-        Exit
-      else
-        raise Exception.Create('Missing prefix length');
-    IPAddress := Values[0];
-    if not TryStrToInt(Values[1], PrefixMask) or (PrefixMask < 0) or (PrefixMask > 128) then
-      if NoRaise then
-        Exit
-      else
-        raise Exception.Create('Invalid prefix length');
-  end
-  else
-    IPAddress := IP6;
-
-  IPaddress := ExpandIPv6(IPaddress);
-  IPBlocs := String(IPaddress).Split(':');
 
   try
-    for i := 0 to High(IPBlocs) do
-    begin
-      Value := Hex2Dec(IPBlocs[i]);
-      Bytes[i * 2] := (Value shr 8) and $ff;
-      Bytes[i * 2 + 1] := Value and $ff;
+    try
+      Regex := FormatUtf8('^%$', [IPV4_REGEX]);
+      re := TRegExpr.Create(Regex);
+      result := re.Exec(IP4);
+    except
+      on E: Exception do
+        Exit;
     end;
-  except
-    on E: Exception do
-      if NoRaise then
-        Exit
-      else
-        raise E;
+  finally
+    FreeAndNil(re);
   end;
-  if IsPrefix then
-  begin
-    bitPos := 0;
-    for i := 0 to 15 do
-    begin
-      if bitPos + 8 <= PrefixMask then
-      begin
-        bitPos := bitPos + 8;
-        continue;
-      end;
-      if bitPos >= PrefixMask then
-      begin
-        if Bytes[i] <> 0 then
-        begin
-          if NoRaise then
-            Exit
-          else
-            raise Exception.Create('Invalid prefix mask');
-        end;
-      end
-      else
-      begin
-        BitMask := PrefixMask - bitPos;
-        if (Bytes[i] and ((1 shl (8 - BitMask)) - 1)) <> 0 then
-        begin
-          if NoRaise then
-            Exit
-          else
-            raise Exception.Create('Invalid prefix mask');
-        end;
-      end;
-      bitPos := bitPos + 8;
+end;
+
+function IsValidIP6(IP6: RawUtf8): Boolean;
+var
+  regex: RawUtf8;
+  re: TRegExpr;
+begin
+  result := False;
+
+  try
+    try
+      regex := FormatUtf8('^%$', [IPV6_REGEX]);
+      re := TRegExpr.Create(regex);
+      result := re.Exec(IP6);
+    except
+      on E: Exception do
+        Exit;
     end;
+  finally
+    FreeAndNil(re);
   end;
-  result := True;
 end;
 
 function MSTimeToDateTime(mst: Int64): TDateTime;
@@ -909,5 +826,51 @@ begin
     result := -1;
 end;
 
+{$IFDEF OPENRSATTESTS}
+
+{ TCommonTests }
+
+procedure TCommonTests.FuncExpandIPv6;
+begin
+  Check(ExpandIPv6('0000:0000:0000:0000:0000:0000:0000:0000') = '0000:0000:0000:0000:0000:0000:0000:0000', 'Full zero IP6');
+  Check(ExpandIPv6('0000::') = '0000:0000:0000:0000:0000:0000:0000:0000', 'Ultra short zero IP6');
+  Check(ExpandIPv6('0000::00') = '0000:0000:0000:0000:0000:0000:0000:0000', 'Very short zero IP6');
+  Check(ExpandIPv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334') = '2001:0db8:85a3:0000:0000:8a2e:0370:7334', 'Random IP6');
+  Check(ExpandIPv6('2001:db8::1') = '2001:0db8:0000:0000:0000:0000:0000:0001', 'IP6 fill middle');
+  Check(ExpandIPv6('::1') = '0000:0000:0000:0000:0000:0000:0000:0001', 'IP6 fill before');
+  Check(ExpandIPv6('fe80::') = 'fe80:0000:0000:0000:0000:0000:0000:0000', 'IP6 fill after');
+  Check(ExpandIPv6('0:0:0:0:0:0:0:1') = '0000:0000:0000:0000:0000:0000:0000:0001');
+end;
+
+procedure TCommonTests.FuncIsValidIP6;
+begin
+  Check(IsValidIP6('2001:0db8:85a3:0000:0000:8a2e:0370:7334'), 'Valid test');
+  Check(IsValidIP6('2001:db8::1'), 'Valid test');
+  Check(IsValidIP6('::1'), 'Valid test');
+  Check(IsValidIP6('fe80::'), 'Valid test');
+  Check(IsValidIP6('0:0:0:0:0:0:0:1'), 'Valid test');
+  Check(not IsValidIP6('2001::85a3::8a2e'), 'Double "::" not allowed');
+  Check(not IsValidIP6('2001:db8:85a3'), 'Too few groups');
+  Check(not IsValidIP6('12345::abcd'), 'Invalid hex (12345 is too long)');
+  Check(not IsValidIP6('::1::'), 'Double compression');
+  Check(not IsValidIP6('fe80:::1'), 'triple colon not valid');
+end;
+
+procedure TCommonTests.FuncIsValidIP4;
+begin
+  Check(IsValidIP4('192.168.1.255'), 'Valid test');
+  Check(IsValidIP4('10.0.0.255'), 'Valid test');
+  Check(IsValidIP4('172.16.254.3'), 'Valid test');
+  Check(IsValidIP4('255.255.255.255'), 'Valid test');
+  Check(IsValidIP4('0.0.0.0'), 'Valid test');
+  Check(not IsValidIP4('192.168.1'), 'Only three octets');
+  Check(not IsValidIP4('192.168.01.1'), 'Leading zero');
+  Check(not IsValidIP4('192.168.1.1.1'), 'Too many octets');
+  Check(not IsValidIP4('192.168.1.'), 'Trailing dot');
+  Check(not IsValidIP4('256.100.100.100'), '256 is outside valid range');
+end;
+
+
+{$ENDIF OPENRSATTESTS}
 end.
 

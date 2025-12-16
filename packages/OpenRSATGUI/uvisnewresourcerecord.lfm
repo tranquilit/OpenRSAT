@@ -7,7 +7,7 @@ object VisNewResourceRecord: TVisNewResourceRecord
   ClientHeight = 401
   ClientWidth = 404
   Position = poOwnerFormCenter
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   object PageControl1: TPageControl
     Left = 8
     Height = 352

@@ -205,7 +205,7 @@ end;
 
 procedure TVisNewResourceRecord.Edit_AIPAddressChange(Sender: TObject);
 begin
-  Action_OK.Enabled := IsValidIP(Edit_AIPAddress.Text, False, True);
+  Action_OK.Enabled := IsValidIP(Edit_AIPAddress.Text);
 end;
 
 procedure TVisNewResourceRecord.Edit_CNAMEAliasChange(Sender: TObject);
@@ -322,7 +322,7 @@ end;
 
 function TVisNewResourceRecord.OKUpdateA(): Boolean;
 begin
-  result := IsValidIP(Edit_AIPAddress.Text, False, True);
+  result := IsValidIP(Edit_AIPAddress.Text);
 end;
 
 procedure TVisNewResourceRecord.OKExecuteA(var dnsRecord: TDNSRecord);
