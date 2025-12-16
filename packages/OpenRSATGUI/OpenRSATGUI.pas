@@ -15,7 +15,7 @@ uses
   ufrmnewcontact, ufrmnewgroup, ufrmnewou, ufrmnewsharedfolder, ufrmnewuser, 
   uvisnewobject, uvischangedn, uvischangepartition, uvisdelegatecontrol, 
   uVisOptions, uvistaskmove, uvistaskresetpassword, utranslation, usidcache, 
-  ufrmrsatoptions, udns, uvisselectnewrecordtype, uvisnewresourcerecord, 
+  ufrmrsatoptions, uvisselectnewrecordtype, uvisnewresourcerecord, 
   uvisnewzonewizard, ufrmmodulesitesandservices, ufrmmoduleserviceinterfaces, 
   ufrmnewobject, ufrmnewsite, ufrmnewsubnet, uaductreeview, 
   ufrmmoduleadssoptions, uvisconnectiondetails, uvispropertieslist, uproperty, 

@@ -11,7 +11,7 @@ uses
   uhelpers, ursatldapclient, ucommon, uldapconfigs, uconfig, uoption, umodule, 
   umoduleaducoption, umoduleaduc, ursat, ursatoption, umoduleadssoption, 
   umoduleadss, umoduleaddns, umoduleaddnsoption, umoduleadsi, 
-  umoduleadsioption, LazarusPackageIntf;
+  umoduleadsioption, udns, LazarusPackageIntf;
 
 implementation
 

@@ -212,6 +212,7 @@ type
 
   { TDNSRecord }
 
+  // https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dnsp/6912b338-5472-4f59-b912-0edb536b6ed8
   TDNSRecord = record
     DataLength: Word;
     RecType: Word;
@@ -302,97 +303,96 @@ type
     nameTarget: TDNSCOUNTNAME;
   end;
 
-// Convert a TDnsResourceRecord enum into human readable.
-function DnsResourceRecordToStr(AValue: TDnsResourceRecord): String;
+  ExceptionInvalidIPFormat = class(Exception) end;
 
-function DnsPropertyIdToString(AValue: TDnsPropertyId): String;
+// Convert a TDnsResourceRecord enum into human readable.
+function DnsResourceRecordToStr(AValue: TDnsResourceRecord): RawUtf8;
+
+function DnsPropertyIdToString(AValue: TDnsPropertyId): RawUtf8;
 
 operator = (Destination: TDNSCOUNTNAME; Source: TDNSCOUNTNAME): Boolean;
 
-//function StrToIP4(str: String): Cardinal;
-//function IP4ToStr(ip4: cardinal): String;
-
 function DNSIPArrayBytesToRecord(out DNSIPArray: TDNSIPArray; const Buffer: TByteArray): Boolean;
 function DNSIPArrayRecordToBytes(out Buffer: TByteArray; const DNSIPArray: TDNSIPArray): Integer;
-function DNSIPArrayToString(const DNSIPArray: TDNSIPArray): String;
-function DNSIPArrayToStringFromBytes(const Buffer: TByteArray): String;
+function DNSIPArrayToString(const DNSIPArray: TDNSIPArray): RawUtf8;
+function DNSIPArrayToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 procedure DNSIPArrayBuild(out DNSIPArray: TDNSIPArray; const IPARRAY: TStringArray);
 
 function DNSAddrBytesToRecord(out DNSAddr: TDNSAddr; const Buffer: TByteArray): Boolean;
 function DNSAddrRecordToBytes(out Buffer: TByteArray; const DNSAddr: TDNSAddr): Boolean;
-function DNSAddrToString(const DNSAddr: TDNSAddr): String;
-function DNSAddrToStringFromBytes(const Buffer: TByteArray): String;
+function DNSAddrToString(const DNSAddr: TDNSAddr): RawUtf8;
+function DNSAddrToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 function DNSAddrArrayBytesToRecord(out DNSAddrArray: TDNSAddrArray; const Buffer: TByteArray): Boolean;
 function DNSAddrArrayRecordToBytes(out Buffer: TByteArray; const DNSAddrArray: TDNSAddrArray): Integer;
-function DNSAddrArrayToString(const DNSAddrArray: TDNSAddrArray): String;
-function DNSAddrArrayToStringFromBytes(const Buffer: TByteArray): String;
+function DNSAddrArrayToString(const DNSAddrArray: TDNSAddrArray): RawUtf8;
+function DNSAddrArrayToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 function DNSPropertyBytesToRecord(out DNSProperty: TDNSProperty; const Buffer: TByteArray): Boolean;
 function DNSPropertyRecordToBytes(out Buffer: TByteArray; const DNSProperty: TDNSProperty): Integer;
-function DNSPropertyToString(const DNSProperty: TDNSProperty): String;
-function DNSPropertyToStringFromBytes(const Buffer: TByteArray): String;
-function DNSPropertyDataToString(const DNSProperty: TDNSProperty): String;
+function DNSPropertyToString(const DNSProperty: TDNSProperty): RawUtf8;
+function DNSPropertyToStringFromBytes(const Buffer: TByteArray): RawUtf8;
+function DNSPropertyDataToString(const DNSProperty: TDNSProperty): RawUtf8;
 
 function DNSPropertyZoneTypeBytesToRecord(out DNSPropertyZoneType: TDNSPropertyZoneType; const Buffer: TByteArray): Boolean;
 function DNSPropertyZoneTypeRecordToBytes(out Buffer: TByteArray; const DNSPropertyZoneType: TDNSPropertyZoneType): Integer;
-function DNSPropertyZoneTypeToString(const DNSPropertyZoneType: TDNSPropertyZoneType): String;
-function DNSPropertyZoneTypeToStringFromBytes(const Buffer: TByteArray): String;
+function DNSPropertyZoneTypeToString(const DNSPropertyZoneType: TDNSPropertyZoneType): RawUtf8;
+function DNSPropertyZoneTypeToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 function DNSPropertyZoneAllowUpdateBytesToRecord(out DNSPropertyZoneAllowUpdate: TDNSPropertyZoneAllowUpdate; const Buffer: TByteArray): Boolean;
 function DNSPropertyZoneAllowUpdateRecordToBytes(out Buffer: TByteArray; const DNSPropertyZoneAllowUpdate: TDNSPropertyZoneAllowUpdate): Integer;
-function DNSPropertyZoneAllowUpdateToString(const DNSPropertyZoneAllowUpdate: TDNSPropertyZoneAllowUpdate): String;
-function DNSPropertyZoneAllowUpdateToStringFromBytes(const Buffer: TByteArray): String;
+function DNSPropertyZoneAllowUpdateToString(const DNSPropertyZoneAllowUpdate: TDNSPropertyZoneAllowUpdate): RawUtf8;
+function DNSPropertyZoneAllowUpdateToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 function DNSPropertyZoneSecureTimeBytesToRecord(out DNSPropertyZoneSecureTime: TDNSPropertyZoneSecureTime; const Buffer: TByteArray): Boolean;
 function DNSPropertyZoneSecureTimeRecordToBytes(out Buffer: TByteArray; const DNSPropertyZoneSecureTime: TDNSPropertyZoneSecureTime): Integer;
-function DNSPropertyZoneSecureTimeToString(const DNSPropertyZoneSecureTime: TDNSPropertyZoneSecureTime): String;
-function DNSPropertyZoneSecureTimeToStringFromBytes(const Buffer: TByteArray): String;
+function DNSPropertyZoneSecureTimeToString(const DNSPropertyZoneSecureTime: TDNSPropertyZoneSecureTime): RawUtf8;
+function DNSPropertyZoneSecureTimeToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 function DNSPropertyZoneNoRefreshIntervalBytesToRecord(out DNSPropertyZoneNoRefreshInterval: TDNSPropertyZoneNoRefreshInterval; const Buffer: TByteArray): Boolean;
 function DNSPropertyZoneNoRefreshIntervalRecordToBytes(out Buffer: TByteArray; const DNSPropertyZoneNoRefreshInterval: TDNSPropertyZoneNoRefreshInterval): Integer;
-function DNSPropertyZoneNoRefreshIntervalToString(const DNSPropertyZoneNoRefreshInterval: TDNSPropertyZoneNoRefreshInterval): String;
-function DNSPropertyZoneNoRefreshIntervalToStringFromBytes(const Buffer: TByteArray): String;
+function DNSPropertyZoneNoRefreshIntervalToString(const DNSPropertyZoneNoRefreshInterval: TDNSPropertyZoneNoRefreshInterval): RawUtf8;
+function DNSPropertyZoneNoRefreshIntervalToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 function DNSPropertyZoneRefreshIntervalBytesToRecord(out DNSPropertyZoneRefreshInterval: TDNSPropertyZoneRefreshInterval; const Buffer: TByteArray): Boolean;
 function DNSPropertyZoneRefreshIntervalRecordToBytes(out Buffer: TByteArray; const DNSPropertyZoneRefreshInterval: TDNSPropertyZoneRefreshInterval): Integer;
-function DNSPropertyZoneRefreshIntervalToString(const DNSPropertyZoneRefreshInterval: TDNSPropertyZoneRefreshInterval): String;
-function DNSPropertyZoneRefreshIntervalToStringFromBytes(const Buffer: TByteArray): String;
+function DNSPropertyZoneRefreshIntervalToString(const DNSPropertyZoneRefreshInterval: TDNSPropertyZoneRefreshInterval): RawUtf8;
+function DNSPropertyZoneRefreshIntervalToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 function DNSPropertyZoneAgingStateBytesToRecord(out DNSPropertyZoneAgingState: TDNSPropertyZoneAgingState; const Buffer: TByteArray): Boolean;
 function DNSPropertyZoneAgingStateRecordToBytes(out Buffer: TByteArray; const DNSPropertyZoneAgingState: TDNSPropertyZoneAgingState): Integer;
-function DNSPropertyZoneAgingStateToString(const DNSPropertyZoneAgingState: TDNSPropertyZoneAgingState): String;
-function DNSPropertyZoneAgingStateToStringFromBytes(const Buffer: TByteArray): String;
+function DNSPropertyZoneAgingStateToString(const DNSPropertyZoneAgingState: TDNSPropertyZoneAgingState): RawUtf8;
+function DNSPropertyZoneAgingStateToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 function DNSPropertyZoneScavengingServersBytesToRecord(out DNSPropertyZoneScavengingServers: TDNSPropertyZoneScavengingServers; const Buffer: TByteArray): Boolean;
 function DNSPropertyZoneScavengingServersRecordToBytes(out Buffer: TByteArray; const DNSPropertyZoneScavengingServers: TDNSPropertyZoneScavengingServers): Integer;
-function DNSPropertyZoneScavengingServersToString(const DNSPropertyZoneScavengingServers: TDNSPropertyZoneScavengingServers): String;
-function DNSPropertyZoneScavengingServersToStringFromBytes(const Buffer: TByteArray): String;
+function DNSPropertyZoneScavengingServersToString(const DNSPropertyZoneScavengingServers: TDNSPropertyZoneScavengingServers): RawUtf8;
+function DNSPropertyZoneScavengingServersToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 function DNSPropertyZoneAgingEnabledTimeBytesToRecord(out DNSPropertyZoneAgingEnabledTime: TDNSPropertyZoneAgingEnabledTime; const Buffer: TByteArray): Boolean;
 function DNSPropertyZoneAgingEnabledTimeRecordToBytes(out Buffer: TByteArray; const DNSPropertyZoneAgingEnabledTime: TDNSPropertyZoneAgingEnabledTime): Integer;
-function DNSPropertyZoneAgingEnabledTimeToString(const DNSPropertyZoneAgingEnabledTime: TDNSPropertyZoneAgingEnabledTime): String;
-function DNSPropertyZoneAgingEnabledTimeToStringFromBytes(const Buffer: TByteArray): String;
+function DNSPropertyZoneAgingEnabledTimeToString(const DNSPropertyZoneAgingEnabledTime: TDNSPropertyZoneAgingEnabledTime): RawUtf8;
+function DNSPropertyZoneAgingEnabledTimeToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 function DNSPropertyZoneDeletedFromHostnameBytesToRecord(out DNSPropertyZoneDeletedFromHostname: TDNSPropertyZoneDeletedFromHostname; const Buffer: TByteArray): Boolean;
 function DNSPropertyZoneDeletedFromHostnameRecordToBytes(out Buffer: TByteArray; const DNSPropertyZoneDeletedFromHostname: TDNSPropertyZoneDeletedFromHostname): Boolean;
-function DNSPropertyZoneDeletedFromHostnameToString(const DNSPropertyZoneDeletedFromHostname: TDNSPropertyZoneDeletedFromHostname): String;
-function DNSPropertyZoneDeletedFromHostnameToStringFromBytes(const Buffer: TByteArray): String;
+function DNSPropertyZoneDeletedFromHostnameToString(const DNSPropertyZoneDeletedFromHostname: TDNSPropertyZoneDeletedFromHostname): RawUtf8;
+function DNSPropertyZoneDeletedFromHostnameToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 function DNSPropertyZoneMasterServersBytesToRecord(out DNSPropertyZoneMasterServers: TDNSPropertyZoneMasterServers; const Buffer: TByteArray): Boolean;
 function DNSPropertyZoneMasterServersRecordToBytes(out Buffer: TByteArray; const DNSPropertyZoneMasterServers: TDNSPropertyZoneMasterServers): Integer;
-function DNSPropertyZoneMasterServersToString(const DNSPropertyZoneMasterServers: TDNSPropertyZoneMasterServers): String;
-function DNSPropertyZoneMasterServersToStringFromBytes(const Buffer: TByteArray): String;
+function DNSPropertyZoneMasterServersToString(const DNSPropertyZoneMasterServers: TDNSPropertyZoneMasterServers): RawUtf8;
+function DNSPropertyZoneMasterServersToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 function DNSPropertyZoneAutoNSServersBytesToRecord(out DNSPropertyZoneAutoNSServers: TDNSPropertyZoneAutoNSServers; const Buffer: TByteArray): Boolean;
 function DNSPropertyZoneAutoNSServersRecordToBytes(out Buffer: TByteArray; const DNSPropertyZoneAutoNSServers: TDNSPropertyZoneAutoNSServers): Integer;
-function DNSPropertyZoneAutoNSServersToString(const DNSPropertyZoneAutoNSServers: TDNSPropertyZoneAutoNSServers): String;
-function DNSPropertyZoneAutoNSServersToStringFromBytes(const Buffer: TByteArray): String;
+function DNSPropertyZoneAutoNSServersToString(const DNSPropertyZoneAutoNSServers: TDNSPropertyZoneAutoNSServers): RawUtf8;
+function DNSPropertyZoneAutoNSServersToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 function DNSPropertyZoneDCPromoConvertBytesToRecord(out DNSPropertyZoneDCPromoConvert: TDNSPropertyZoneDCPromoConvert; const Buffer: TByteArray): Boolean;
 function DNSPropertyZoneDCPromoConvertRecordToBytes(out Buffer: TByteArray; const DNSPropertyZoneDCPromoConvert: TDNSPropertyZoneDCPromoConvert): Boolean;
-function DNSPropertyZoneDCPromoConvertToString(const DNSPropertyZoneDCPromoConvert: TDNSPropertyZoneDCPromoConvert): String;
-function DNSPropertyZoneDCPromoConvertToStringFromBytes(const Buffer: TByteArray): String;
+function DNSPropertyZoneDCPromoConvertToString(const DNSPropertyZoneDCPromoConvert: TDNSPropertyZoneDCPromoConvert): RawUtf8;
+function DNSPropertyZoneDCPromoConvertToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 // Decode a dnsRecord bytes array into a TDNSRecord record.
 // https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dnsp/6912b338-5472-4f59-b912-0edb536b6ed8
@@ -402,10 +402,10 @@ function DNSRecordBytesToRecord(out DNSRecord: TDNSRecord; const Buffer: TByteAr
 function DNSRecordRecordToBytes(out Buffer: TByteArray; const DNSRecord: TDNSRecord): Integer;
 // Make a TDNSRecord record human readable.
 // https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dnsp/6912b338-5472-4f59-b912-0edb536b6ed8
-function DNSRecordToString(const DNSRecord: TDNSRecord): String;
+function DNSRecordToString(const DNSRecord: TDNSRecord): RawUtf8;
 // Make a TDNSRecord.RData record human readable.
 // https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dnsp/6912b338-5472-4f59-b912-0edb536b6ed8
-function DNSRecordDataToString(const DNSRecord: TDNSRecord): String;
+function DNSRecordDataToString(const DNSRecord: TDNSRecord): RawUtf8;
 
 // Decode a DNS_COUNT_NAME bytes array into a TDNSCOUNTNAME record.
 // https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dnsp/2af86306-3bd9-4c86-b763-fd33e16e3e5b
@@ -415,8 +415,8 @@ function DNSCOUNTNAMEBytesToRecord(out DNSCOUNTNAME: TDNSCOUNTNAME; const Buffer
 function DNSCOUNTNAMERecordToBytes(out Buffer: TByteArray; const DNSCOUNTNAME: TDNSCOUNTNAME): Integer;
 // Make a DNSCOUNTNAME human readable.
 // https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-dnsp/2af86306-3bd9-4c86-b763-fd33e16e3e5b
-function DNSCOUNTNAMEToString(const DNSCOUNTNAME: TDNSCOUNTNAME): String;
-procedure DNSCOUNTNAMEBuild(var DNSCOUNTNAME: TDNSCOUNTNAME; const AValue: String);
+function DNSCOUNTNAMEToString(const DNSCOUNTNAME: TDNSCOUNTNAME): RawUtf8;
+procedure DNSCOUNTNAMEBuild(var DNSCOUNTNAME: TDNSCOUNTNAME; const AValue: RawUtf8);
 
 // Decode a DNS record CNAME bytes array into a TRRCname record.
 function DNSRRCNAMEBytesToRecord(out CNAME: TRRCname; const Buffer: TByteArray): Boolean;
@@ -425,35 +425,35 @@ function DNSRRCNAMERecordToBytes(out Buffer: TByteArray; const CNAME: TRRCname):
 // Make a TRRCname record human readable.
 function DNSRRCNAMEToString(const CNAME: TRRCname): String;
 // Make a DNS record CNAME bytes array human readable.
-function DNSRRCNAMEToStringFromBytes(const Buffer: TByteArray): String;
-procedure DNSRRCNAMEBuild(var CNAME: TRRCname; const AValue: String);
+function DNSRRCNAMEToStringFromBytes(const Buffer: TByteArray): RawUtf8;
+procedure DNSRRCNAMEBuild(var CNAME: TRRCname; const AValue: RawUtf8);
 
 // Decode a DNS record A bytes array into a TRRA record.
 function DNSRRABytesToRecord(out A: TRRA; const Buffer: TByteArray): Boolean;
 // Encode a TRRA record into a DNS record A bytes array.
 function DNSRRARecordToBytes(out Buffer: TByteArray; const A: TRRA): Integer;
 // Make a TRRA record human readable.
-function DNSRRAToString(const A: TRRA): String;
+function DNSRRAToString(const A: TRRA): RawUtf8;
 // Make a DNS record A bytes array human readable.
-function DNSRRAToStringFromBytes(const Buffer: TByteArray): String;
-procedure DNSRRABuild(var A: TRRA; const AValue: String);
+function DNSRRAToStringFromBytes(const Buffer: TByteArray): RawUtf8;
+procedure DNSRRABuild(var A: TRRA; const AValue: RawUtf8);
 
 // Decode a DNS record SOA bytes array into a TRRSOA record.
 function DNSRRSOABytesToRecord(out SOA: TRRSOA; const Buffer: TByteArray): Boolean;
 // Encode a TRRSOA record into a DNS record A bytes array.
 function DNSRRSOARecordToBytes(out Buffer: TByteArray; const SOA: TRRSOA): Integer;
 // Make a TRRSOA human readable.
-function DNSRRSOAToString(const SOA: TRRSOA): String;
+function DNSRRSOAToString(const SOA: TRRSOA): RawUtf8;
 // Make a DNS record SOA bytes array human readable.
-function DNSRRSOAToStringFromBytes(const Buffer: TByteArray): String;
+function DNSRRSOAToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 procedure DNSRRSOABuild(var SOA: TRRSOA;
   const Serial: Cardinal;
   const Refresh: Cardinal;
   const Retry: Cardinal;
   const Expire: Cardinal;
   const Minimum: Cardinal;
-  const MName: String;
-  const RName: String
+  const MName: RawUtf8;
+  const RName: RawUtf8
 );
 
 // Decode a DNS record PTR bytes array into a TRRPTR record.
@@ -463,37 +463,37 @@ function DNSRRPTRRecordToBytes(out Buffer: TByteArray; const APTR: TRRPTR): Inte
 // Make a TRRPTR human readable.
 function DNSRRPTRToString(const APTR: TRRPTR): String;
 // Make a DNS record PTR bytes array human readable.
-function DNSRRPTRToStringFromBytes(const Buffer: TByteArray): String;
+function DNSRRPTRToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 // Build a TRRPTR from arguments.
-procedure DNSRRPTRBuild(var APTR: TRRPTR; const AValue: String);
+procedure DNSRRPTRBuild(var APTR: TRRPTR; const AValue: RawUtf8);
 
 // Decode a DNS record MX bytes array into a TRRMX record.
 function DNSRRMXBytesToRecord(out MX: TRRMX; const Buffer: TByteArray): Boolean;
 // Encode a TRRMX record into a DNS record MX bytes array.
 function DNSRRMXRecordToBytes(out Buffer: TByteArray; const MX: TRRMX): Integer;
 // Make a TRRMX record human readable.
-function DNSRRMXToString(const MX: TRRMX): String;
+function DNSRRMXToString(const MX: TRRMX): RawUtf8;
 // Make a DNS record MX human readable.
-function DNSRRMXToStringFromBytes(const Buffer: TByteArray): String;
+function DNSRRMXToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 // Build a TRRMX from arguments.
-procedure DNSRRMXBuild(var MX: TRRMX; const Exchange: String; const Preference: Cardinal);
+procedure DNSRRMXBuild(var MX: TRRMX; const Exchange: RawUtf8; const Preference: Cardinal);
 
 // Decode a DNS record SRV bytes array into a TRRSRV record.
 function DNSRRSRVBytesToRecord(out SRV: TRRSRV; const Buffer: TByteArray): Boolean;
 // Encode a TRRSRV record into a DNS record SRV bytes array.
 function DNSRRSRVRecordToBytes(out Buffer: TByteArray; const SRV: TRRSRV): Integer;
 // Make a TRRSRV record human readable.
-function DNSRRSRVToString(const SRV: TRRSRV): String;
+function DNSRRSRVToString(const SRV: TRRSRV): RawUtf8;
 // Make a DNS record SRV human readable.
-function DNSRRSRVToStringFromBytes(const Buffer: TByteArray): String;
+function DNSRRSRVToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 // Build a TRRSRV from arguments.
-procedure DNSRRSRVBuild(var SRV: TRRSRV; const Priority: Word; const Weight: Word; const Port: Word; const NameTarget: String);
+procedure DNSRRSRVBuild(var SRV: TRRSRV; const Priority: Word; const Weight: Word; const Port: Word; const NameTarget: RawUtf8);
 
 function DNSRRNSBytesToRecord(out NS: TRRNS; const Buffer: TByteArray): Boolean;
 function DNSRRNSRecordToBytes(out Buffer: TByteArray; const NS: TRRNS): Integer;
-function DNSRRNSToString(const NS: TRRNS): String;
-function DNSRRNSToStringFromBytes(const Buffer: TByteArray): String;
-procedure DNSRRNSBuild(var NS: TRRNS; const AValue: String);
+function DNSRRNSToString(const NS: TRRNS): RawUtf8;
+function DNSRRNSToStringFromBytes(const Buffer: TByteArray): RawUtf8;
+procedure DNSRRNSBuild(var NS: TRRNS; const AValue: RawUtf8);
 
 implementation
 uses
@@ -533,10 +533,11 @@ begin
   end;
 end;
 
-function DNSIPArrayToString(const DNSIPArray: TDNSIPArray): String;
+function DNSIPArrayToString(const DNSIPArray: TDNSIPArray): RawUtf8;
 var
   i: Integer;
 begin
+  result := '';
   if Length(DNSIPArray.AddrArray) <= 0 then
     Exit;
   result := Format('[%s', [DNSIPArray.AddrArray[0]]);
@@ -545,7 +546,7 @@ begin
   result := Format('%s]', [result]);
 end;
 
-function DNSIPArrayToStringFromBytes(const Buffer: TByteArray): String;
+function DNSIPArrayToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 var
   DNSIPArray: TDNSIPArray;
 begin
@@ -615,12 +616,12 @@ begin
   end;
 end;
 
-function DNSAddrToString(const DNSAddr: TDNSAddr): String;
+function DNSAddrToString(const DNSAddr: TDNSAddr): RawUtf8;
 begin
   result := '';
 end;
 
-function DNSAddrToStringFromBytes(const Buffer: TByteArray): String;
+function DNSAddrToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 var
   DNSAddr: TDNSAddr;
 begin
@@ -678,12 +679,12 @@ begin
   end;
 end;
 
-function DNSAddrArrayToString(const DNSAddrArray: TDNSAddrArray): String;
+function DNSAddrArrayToString(const DNSAddrArray: TDNSAddrArray): RawUtf8;
 begin
   result := '';
 end;
 
-function DNSAddrArrayToStringFromBytes(const Buffer: TByteArray): String;
+function DNSAddrArrayToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 var
   DNSAddrArray: TDNSAddrArray;
 begin
@@ -732,12 +733,12 @@ begin
   end;
 end;
 
-function DNSPropertyToString(const DNSProperty: TDNSProperty): String;
+function DNSPropertyToString(const DNSProperty: TDNSProperty): RawUtf8;
 begin
   result := Format('[%d][%d][%d][%d][%d][%s][%d]', [DNSProperty.DataLength, DNSProperty.NameLength, DNSProperty.Flag, DNSProperty.Version, DNSProperty.Id, DNSPropertyDataToString(DNSProperty), DNSProperty.Name]);
 end;
 
-function DNSPropertyToStringFromBytes(const Buffer: TByteArray): String;
+function DNSPropertyToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 var
   DNSProperty: TDNSProperty;
 begin
@@ -746,7 +747,7 @@ begin
     result := DNSPropertyToString(DNSProperty);
 end;
 
-function DNSPropertyDataToString(const DNSProperty: TDNSProperty): String;
+function DNSPropertyDataToString(const DNSProperty: TDNSProperty): RawUtf8;
 var
   pdata: PByteArray;
 begin
@@ -788,7 +789,7 @@ begin
 end;
 
 function DNSPropertyZoneTypeToString(
-  const DNSPropertyZoneType: TDNSPropertyZoneType): String;
+  const DNSPropertyZoneType: TDNSPropertyZoneType): RawUtf8;
 begin
   result := '';
   case DNSPropertyZoneType of
@@ -801,7 +802,8 @@ begin
   end;
 end;
 
-function DNSPropertyZoneTypeToStringFromBytes(const Buffer: TByteArray): String;
+function DNSPropertyZoneTypeToStringFromBytes(const Buffer: TByteArray
+  ): RawUtf8;
 var
   DNSPropertyZoneType: TDNSPropertyZoneType;
 begin
@@ -830,7 +832,7 @@ begin
 end;
 
 function DNSPropertyZoneAllowUpdateToString(
-  const DNSPropertyZoneAllowUpdate: TDNSPropertyZoneAllowUpdate): String;
+  const DNSPropertyZoneAllowUpdate: TDNSPropertyZoneAllowUpdate): RawUtf8;
 begin
   result := '';
   case DNSPropertyZoneAllowUpdate of
@@ -841,7 +843,7 @@ begin
 end;
 
 function DNSPropertyZoneAllowUpdateToStringFromBytes(const Buffer: TByteArray
-  ): String;
+  ): RawUtf8;
 var
   DNSPropertyZoneAllowUpdate: TDNSPropertyZoneAllowUpdate;
 begin
@@ -866,7 +868,7 @@ begin
 end;
 
 function DNSPropertyZoneSecureTimeToString(
-  const DNSPropertyZoneSecureTime: TDNSPropertyZoneSecureTime): String;
+  const DNSPropertyZoneSecureTime: TDNSPropertyZoneSecureTime): RawUtf8;
 var
   BaseDate: TDateTime;
 begin
@@ -876,7 +878,7 @@ begin
 end;
 
 function DNSPropertyZoneSecureTimeToStringFromBytes(const Buffer: TByteArray
-  ): String;
+  ): RawUtf8;
 var
   DNSPropertyZoneSecureTime: TDNSPropertyZoneSecureTime;
 begin
@@ -911,13 +913,13 @@ end;
 
 function DNSPropertyZoneNoRefreshIntervalToString(
   const DNSPropertyZoneNoRefreshInterval: TDNSPropertyZoneNoRefreshInterval
-  ): String;
+  ): RawUtf8;
 begin
   result := Format('%dh', [DNSPropertyZoneNoRefreshInterval]);
 end;
 
 function DNSPropertyZoneNoRefreshIntervalToStringFromBytes(
-  const Buffer: TByteArray): String;
+  const Buffer: TByteArray): RawUtf8;
 var
   DNSPropertyZoneNoRefreshInterval: TDNSPropertyZoneNoRefreshInterval;
 begin
@@ -952,13 +954,13 @@ end;
 
 function DNSPropertyZoneRefreshIntervalToString(
   const DNSPropertyZoneRefreshInterval: TDNSPropertyZoneRefreshInterval
-  ): String;
+  ): RawUtf8;
 begin
   result := Format('%dh', [DNSPropertyZoneRefreshInterval]);
 end;
 
 function DNSPropertyZoneRefreshIntervalToStringFromBytes(
-  const Buffer: TByteArray): String;
+  const Buffer: TByteArray): RawUtf8;
 var
   DNSPropertyZoneRefreshInterval: TDNSPropertyZoneRefreshInterval;
 begin
@@ -993,13 +995,13 @@ begin
 end;
 
 function DNSPropertyZoneAgingStateToString(
-  const DNSPropertyZoneAgingState: TDNSPropertyZoneAgingState): String;
+  const DNSPropertyZoneAgingState: TDNSPropertyZoneAgingState): RawUtf8;
 begin
   result := Format('%s', [BoolToStr(DNSPropertyZoneAgingState, 'TRUE', 'FALSE')]);
 end;
 
 function DNSPropertyZoneAgingStateToStringFromBytes(const Buffer: TByteArray
-  ): String;
+  ): RawUtf8;
 var
   DNSPropertyZoneAgingState: TDNSPropertyZoneAgingState;
 begin
@@ -1024,13 +1026,13 @@ end;
 
 function DNSPropertyZoneScavengingServersToString(
   const DNSPropertyZoneScavengingServers: TDNSPropertyZoneScavengingServers
-  ): String;
+  ): RawUtf8;
 begin
   result := DNSIPArrayToString(DNSPropertyZoneScavengingServers);
 end;
 
 function DNSPropertyZoneScavengingServersToStringFromBytes(
-  const Buffer: TByteArray): String;
+  const Buffer: TByteArray): RawUtf8;
 begin
   result := DNSIPArrayToStringFromBytes(Buffer);
 end;
@@ -1061,13 +1063,13 @@ end;
 
 function DNSPropertyZoneAgingEnabledTimeToString(
   const DNSPropertyZoneAgingEnabledTime: TDNSPropertyZoneAgingEnabledTime
-  ): String;
+  ): RawUtf8;
 begin
   result := Format('%d', [DNSPropertyZoneAgingEnabledTime]);
 end;
 
 function DNSPropertyZoneAgingEnabledTimeToStringFromBytes(
-  const Buffer: TByteArray): String;
+  const Buffer: TByteArray): RawUtf8;
 var
   DNSPropertyZoneAgingEnabledTime: TDNSPropertyZoneAgingEnabledTime;
 begin
@@ -1103,13 +1105,13 @@ end;
 
 function DNSPropertyZoneDeletedFromHostnameToString(
   const DNSPropertyZoneDeletedFromHostname: TDNSPropertyZoneDeletedFromHostname
-  ): String;
+  ): RawUtf8;
 begin
   result := DNSPropertyZoneDeletedFromHostname;
 end;
 
 function DNSPropertyZoneDeletedFromHostnameToStringFromBytes(
-  const Buffer: TByteArray): String;
+  const Buffer: TByteArray): RawUtf8;
 begin
   result := String(PByteArray(@Buffer));
 end;
@@ -1128,13 +1130,13 @@ begin
 end;
 
 function DNSPropertyZoneMasterServersToString(
-  const DNSPropertyZoneMasterServers: TDNSPropertyZoneMasterServers): String;
+  const DNSPropertyZoneMasterServers: TDNSPropertyZoneMasterServers): RawUtf8;
 begin
   result := DNSIPArrayToString(DNSPropertyZoneMasterServers);
 end;
 
 function DNSPropertyZoneMasterServersToStringFromBytes(const Buffer: TByteArray
-  ): String;
+  ): RawUtf8;
 begin
   result := DNSIPArrayToStringFromBytes(Buffer);
 end;
@@ -1153,13 +1155,13 @@ begin
 end;
 
 function DNSPropertyZoneAutoNSServersToString(
-  const DNSPropertyZoneAutoNSServers: TDNSPropertyZoneAutoNSServers): String;
+  const DNSPropertyZoneAutoNSServers: TDNSPropertyZoneAutoNSServers): RawUtf8;
 begin
   result := DNSIPArrayToString(DNSPropertyZoneAutoNSServers);
 end;
 
 function DNSPropertyZoneAutoNSServersToStringFromBytes(const Buffer: TByteArray
-  ): String;
+  ): RawUtf8;
 begin
   result := DNSIPArrayToStringFromBytes(Buffer);
 end;
@@ -1184,7 +1186,7 @@ begin
 end;
 
 function DNSPropertyZoneDCPromoConvertToString(
-  const DNSPropertyZoneDCPromoConvert: TDNSPropertyZoneDCPromoConvert): String;
+  const DNSPropertyZoneDCPromoConvert: TDNSPropertyZoneDCPromoConvert): RawUtf8;
 begin
   result := '';
   case DNSPropertyZoneDCPromoConvert of
@@ -1195,7 +1197,7 @@ begin
 end;
 
 function DNSPropertyZoneDCPromoConvertToStringFromBytes(const Buffer: TByteArray
-  ): String;
+  ): RawUtf8;
 var
   DNSPropertyZoneDCPromoConvert: TDNSPropertyZoneDCPromoConvert;
 begin
@@ -1268,7 +1270,7 @@ begin
   result := idx + 1;
 end;
 
-function DNSCOUNTNAMEToString(const DNSCOUNTNAME: TDNSCOUNTNAME): String;
+function DNSCOUNTNAMEToString(const DNSCOUNTNAME: TDNSCOUNTNAME): RawUtf8;
 var
   i: Integer;
 begin
@@ -1283,12 +1285,12 @@ begin
 end;
 
 procedure DNSCOUNTNAMEBuild(var DNSCOUNTNAME: TDNSCOUNTNAME;
-  const AValue: String);
+  const AValue: RawUtf8);
 var
   AValueArray: TStringArray;
   i, Count: Integer;
 begin
-  AValueArray := AValue.Split('.');
+  AValueArray := String(AValue).Split('.');
 
   Count := 0;
   DNSCOUNTNAME.LabelCount := Length(AValueArray);
@@ -1302,8 +1304,8 @@ begin
   DNSCOUNTNAME.Length := Count + 1; // to be defined
 end;
 
-function DNSRecordRecordToBytes(out Buffer: TByteArray; const DNSRecord: TDNSRecord
-  ): Integer;
+function DNSRecordRecordToBytes(out Buffer: TByteArray;
+  const DNSRecord: TDNSRecord): Integer;
 var
   i: Integer;
 begin
@@ -1348,12 +1350,12 @@ begin
   result := 24 + i + 1;
 end;
 
-function DNSRecordToString(const DNSRecord: TDNSRecord): String;
+function DNSRecordToString(const DNSRecord: TDNSRecord): RawUtf8;
 begin
   result := DNSRecordDataToString(DNSRecord);
 end;
 
-function DNSRecordDataToString(const DNSRecord: TDNSRecord): String;
+function DNSRecordDataToString(const DNSRecord: TDNSRecord): RawUtf8;
 var
   BytesData: PByteArray;
 begin
@@ -1387,7 +1389,7 @@ begin
   result := DNSCOUNTNAMEToString(CNAME);
 end;
 
-function DNSRRCNAMEToStringFromBytes(const Buffer: TByteArray): String;
+function DNSRRCNAMEToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 var
   cname: TDNSCOUNTNAME;
 begin
@@ -1396,7 +1398,7 @@ begin
     result := DNSCOUNTNAMEToString(cname);
 end;
 
-procedure DNSRRCNAMEBuild(var CNAME: TRRCname; const AValue: String);
+procedure DNSRRCNAMEBuild(var CNAME: TRRCname; const AValue: RawUtf8);
 begin
   DNSCOUNTNAMEBuild(CNAME, AValue);
 end;
@@ -1421,7 +1423,7 @@ begin
   end;
 end;
 
-function DNSRRAToString(const A: TRRA): String;
+function DNSRRAToString(const A: TRRA): RawUtf8;
 var
   v: Array[0..3] of String;
 begin
@@ -1433,7 +1435,7 @@ begin
   result := String.Join('.', v);
 end;
 
-function DNSRRAToStringFromBytes(const Buffer: TByteArray): String;
+function DNSRRAToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 var
   A: TRRA;
 begin
@@ -1442,11 +1444,14 @@ begin
     result := DNSRRAToString(A);
 end;
 
-procedure DNSRRABuild(var A: TRRA; const AValue: String);
+procedure DNSRRABuild(var A: TRRA; const AValue: RawUtf8);
 var
   AValueArray: TStringArray;
 begin
-  AValueArray := AValue.Split('.');
+  AValueArray := String(AValue).Split('.');
+
+  if (Length(AValueArray) <> 4) then
+    raise ExceptionInvalidIPFormat.Create('Invalid IP4 format.');
 
   A := ((StrToInt(AValueArray[3]) and $ff) shl 24) or ((StrToInt(AValueArray[2]) and $ff) shl 16) or ((StrToInt(AValueArray[1]) and $ff) shl 8) or (StrToInt(AValueArray[0]) and $ff);
 end;
@@ -1487,12 +1492,12 @@ begin
   end;
 end;
 
-function DNSRRSOAToString(const SOA: TRRSOA): String;
+function DNSRRSOAToString(const SOA: TRRSOA): RawUtf8;
 begin
   result := Format('[%d],%s,%s', [SOA.Serial, DNSCOUNTNAMEToString(SOA.MName), DNSCOUNTNAMEToString(SOA.RName)]);
 end;
 
-function DNSRRSOAToStringFromBytes(const Buffer: TByteArray): String;
+function DNSRRSOAToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 var
   soa: TRRSOA;
 begin
@@ -1504,7 +1509,7 @@ end;
 
 procedure DNSRRSOABuild(var SOA: TRRSOA; const Serial: Cardinal;
   const Refresh: Cardinal; const Retry: Cardinal; const Expire: Cardinal;
-  const Minimum: Cardinal; const MName: String; const RName: String);
+  const Minimum: Cardinal; const MName: RawUtf8; const RName: RawUtf8);
 begin
   SOA.Serial := Serial;
   SOA.Refresh := Refresh;
@@ -1532,7 +1537,7 @@ begin
   result := DNSCOUNTNAMEToString(APTR);
 end;
 
-function DNSRRPTRToStringFromBytes(const Buffer: TByteArray): String;
+function DNSRRPTRToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 var
   APTR: TRRPTR;
 begin
@@ -1541,7 +1546,7 @@ begin
     result := DNSRRPTRToString(APTR);
 end;
 
-procedure DNSRRPTRBuild(var APTR: TRRPTR; const AValue: String);
+procedure DNSRRPTRBuild(var APTR: TRRPTR; const AValue: RawUtf8);
 begin
   DNSCOUNTNAMEBuild(APTR, AValue);
 end;
@@ -1565,12 +1570,12 @@ begin
   result := DNSCOUNTNAMERecordToBytes(PByteArray(@Buffer[2])^, MX.Exchange) + 2;
 end;
 
-function DNSRRMXToString(const MX: TRRMX): String;
+function DNSRRMXToString(const MX: TRRMX): RawUtf8;
 begin
   result := Format('[%d] %s', [mx.Preference, DNSCOUNTNAMEToString(mx.Exchange)]);
 end;
 
-function DNSRRMXToStringFromBytes(const Buffer: TByteArray): String;
+function DNSRRMXToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 var
   MX: TRRMX;
 begin
@@ -1579,7 +1584,7 @@ begin
     result := DNSRRMXToString(MX);
 end;
 
-procedure DNSRRMXBuild(var MX: TRRMX; const Exchange: String;
+procedure DNSRRMXBuild(var MX: TRRMX; const Exchange: RawUtf8;
   const Preference: Cardinal);
 begin
   MX.Preference := Preference;
@@ -1614,12 +1619,12 @@ begin
   result := DNSCOUNTNAMERecordToBytes(PByteArray(@Buffer[6])^, SRV.nameTarget) + 6;
 end;
 
-function DNSRRSRVToString(const SRV: TRRSRV): String;
+function DNSRRSRVToString(const SRV: TRRSRV): RawUtf8;
 begin
   result := Format('[%d][%d][%d] %s', [SRV.wPriority, SRV.wWeight, SRV.wPort, DNSCOUNTNAMEToString(SRV.nameTarget)]);
 end;
 
-function DNSRRSRVToStringFromBytes(const Buffer: TByteArray): String;
+function DNSRRSRVToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 var
   SRV: TRRSRV;
 begin
@@ -1629,7 +1634,7 @@ begin
 end;
 
 procedure DNSRRSRVBuild(var SRV: TRRSRV; const Priority: Word;
-  const Weight: Word; const Port: Word; const NameTarget: String);
+  const Weight: Word; const Port: Word; const NameTarget: RawUtf8);
 begin
   SRV.wPriority := Priority;
   SRV.wWeight := Weight;
@@ -1647,12 +1652,12 @@ begin
   result := DNSCOUNTNAMERecordToBytes(Buffer, NS);
 end;
 
-function DNSRRNSToString(const NS: TRRNS): String;
+function DNSRRNSToString(const NS: TRRNS): RawUtf8;
 begin
   result := DNSCOUNTNAMEToString(NS);
 end;
 
-function DNSRRNSToStringFromBytes(const Buffer: TByteArray): String;
+function DNSRRNSToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 var
   NS: TRRNS;
 begin
@@ -1661,12 +1666,12 @@ begin
     result := DNSRRNSToString(NS);
 end;
 
-procedure DNSRRNSBuild(var NS: TRRNS; const AValue: String);
+procedure DNSRRNSBuild(var NS: TRRNS; const AValue: RawUtf8);
 begin
   DNSCOUNTNAMEBuild(NS, AValue);
 end;
 
-function DnsResourceRecordToStr(AValue: TDnsResourceRecord): String;
+function DnsResourceRecordToStr(AValue: TDnsResourceRecord): RawUtf8;
 begin
   result := '';
   case AValue of
@@ -1682,7 +1687,7 @@ begin
   end;
 end;
 
-function DnsPropertyIdToString(AValue: TDnsPropertyId): String;
+function DnsPropertyIdToString(AValue: TDnsPropertyId): RawUtf8;
 begin
   result := '';
   case AValue of
@@ -1718,39 +1723,6 @@ begin
         Exit;
     end;
 end;
-
-//function StrToIP4(str: String): Cardinal;
-//var
-//  values: TStringArray;
-//  v: LongInt;
-//begin
-//  result := 0;
-//  values := str.Split('.');
-//  if Length(values) <> 4 then
-//    raise Exception.Create(Format('Invalid IP4 format. (%s)', [str]));
-//  if TryStrToInt(values[0], v) then
-//  begin
-//    v := (v shl 24);
-//    result := result or Cardinal(v);
-//  end;
-//  if TryStrToInt(values[1], v) then
-//    result := result or (v shl 16);
-//  if TryStrToInt(values[2], v) then
-//    result := result or (v shl 8);
-//  if TryStrToInt(values[3], v) then
-//    result := result or v;
-//end;
-//
-//function IP4ToStr(ip4: cardinal): String;
-//var
-//  values: Array[0..3] of String;
-//begin
-//  values[0] := IntToStr((ip4 shr 24) and $ff);
-//  values[1] := IntToStr((ip4 shr 16) and $ff);
-//  values[2] := IntToStr((ip4 shr 8) and $ff);
-//  values[3] := IntToStr(ip4 and $ff);
-//  result := String.Join('.', values);
-//end;
 
 end.
 

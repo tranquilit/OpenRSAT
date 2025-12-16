@@ -80,6 +80,10 @@
         <Filename Value="umoduleadsioption.pas"/>
         <UnitName Value="umoduleadsioption"/>
       </Item>
+      <Item>
+        <Filename Value="udns.pas"/>
+        <UnitName Value="udns"/>
+      </Item>
     </Files>
     <i18n>
       <EnableI18N Value="True"/>
