@@ -310,6 +310,10 @@ msgstr ""
 msgid "Insufficient rights access."
 msgstr ""
 
+#: ucommon.rsinvalidipformat
+msgid "Invalid IP format"
+msgstr ""
+
 #: ucommon.rsldapaddfailed
 msgid "Ldap add failed: \"%\""
 msgstr ""
@@ -659,6 +663,10 @@ msgstr ""
 
 #: ucommon.rstitledeletemember
 msgid "Delete a group user"
+msgstr ""
+
+#: ucommon.rstitleinvalidformat
+msgid "Invalid format"
 msgstr ""
 
 #: ucommon.rstitlenotfound

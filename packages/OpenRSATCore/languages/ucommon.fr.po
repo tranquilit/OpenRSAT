@@ -326,6 +326,10 @@ msgstr "La condition de correspondance n'est pas prise en charge pour ce type d'
 msgid "Insufficient rights access."
 msgstr "Droits d'accès insuffisant."
 
+#: ucommon.rsinvalidipformat
+msgid "Invalid IP format"
+msgstr "Format d'IP invalide"
+
 #: ucommon.rsldapaddfailed
 msgid "Ldap add failed: \"%\""
 msgstr "Echec de l'ajout LDAP : \"%\""
@@ -678,6 +682,10 @@ msgstr "Succès de la connexion"
 #: ucommon.rstitledeletemember
 msgid "Delete a group user"
 msgstr "Supprimer un utilisateur du groupe"
+
+#: ucommon.rstitleinvalidformat
+msgid "Invalid format"
+msgstr "Format invalide"
 
 #: ucommon.rstitlenotfound
 msgid "Error not found"

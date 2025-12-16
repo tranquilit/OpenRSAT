@@ -115,6 +115,7 @@ type
     fLdapClient: TRsatLdapClient;
     fDcPrefix: String;
     fDistinguishedName: String;
+    fLog: TSynLog;
 
     function CreateOrUpdateRecord(const dnsRecord: TDNSRecord; const DistinguishedName: String): Boolean;
 
@@ -130,7 +131,8 @@ type
 
 implementation
 uses
-  ursatldapclientui;
+  ursatldapclientui,
+  ucommon;
 
 {$R *.lfm}
 
@@ -145,6 +147,9 @@ procedure TVisNewResourceRecord.Action_OKExecute(Sender: TObject);
 var
   DnsRecord: TDNSRecord;
 begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, 'OK', Self);
+
   DnsRecord.RecType := Ord(fRecordType);
   DnsRecord.Version := $05;
   DnsRecord.Rank := $f0;
@@ -225,7 +230,8 @@ begin
       NewAttribute.Add(ARawByteString);
       if not fLdapClient.Modify(DistinguishedName, lmoAdd, NewAttribute) then
       begin
-        TSynLog.Add.Log(sllError, '% - Ldap Modify Error: %', [Self.Name, fLdapClient.ResultString]);
+        if Assigned(fLog) then
+          fLog.Log(sllError, 'Ldap Modify Error: %', [fLdapClient.ResultString]);
         ShowLdapModifyError(fLdapClient);
         Exit;
       end;
@@ -244,7 +250,8 @@ begin
 
       if not fLdapClient.Add(DistinguishedName, NewAttributeList) then
       begin
-        TSynLog.Add.Log(sllError, '% - Ldap Add Error: %', [Self.Name, fLdapClient.ResultString]);
+        if Assigned(fLog) then
+          fLog.Log(sllError, 'Ldap Add Error: %', [fLdapClient.ResultString], Self);
         ShowLdapAddError(fLdapClient);
         Exit;
       end;
@@ -260,7 +267,17 @@ var
   A: TRRA;
   DistinguishedName, s: String;
 begin
-  DNSRRABuild(A, Edit_AIPAddress.Text);
+  try
+    DNSRRABuild(A, Edit_AIPAddress.Text);
+  except
+    on E: ExceptionInvalidIPFormat do
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllError, 'Invalid IP format: %', [E.Message], Self);
+      MessageDlg(rsTitleInvalidFormat, rsInvalidIpFormat, mtError, mbOKCancel, 0);
+      Exit;
+    end;
+  end;
   dnsRecord.DataLength := Word(DNSRRARecordToBytes(PByteArray(@dnsRecord.RData[0])^, A));
 
   s := Edit_AHost.Text;
@@ -348,6 +365,10 @@ constructor TVisNewResourceRecord.Create(TheOwner: TComponent;
 begin
   Inherited Create(TheOwner);
 
+  fLog := TSynLog.Add;
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, 'Create', Self);
+
   fSerial := Serial;
   fLdapClient := LdapClient;
   fDcPrefix := dcPrefix;
@@ -356,6 +377,9 @@ begin
 
   // Disable active page
   PageControl1.ActivePage := nil;
+
+  if Assigned(fLog) then
+    fLog.Log(sllInfo, 'Record Type: %', [fRecordType], Self);
 
   // Active a page
   case fRecordType of

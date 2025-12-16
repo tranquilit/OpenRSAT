@@ -1,6 +1,3 @@
-msgid ""
-msgstr "Content-Type: text/plain; charset=UTF-8"
-
 #: ucommon.rsacecreatefailure
 msgid "Failed to create ACE for object % in ACL."
 msgstr "Failed to create ACE for object % in ACL."
@@ -328,6 +325,10 @@ msgstr "The matching condition is not supported for this attributeType."
 #: ucommon.rsinsufficientaccessrights
 msgid "Insufficient rights access."
 msgstr "Insufficient rights access."
+
+#: ucommon.rsinvalidipformat
+msgid "Invalid IP format"
+msgstr "Invalid IP format"
 
 #: ucommon.rsldapaddfailed
 msgid "Ldap add failed: \"%\""
@@ -681,6 +682,10 @@ msgstr "Successful connection"
 #: ucommon.rstitledeletemember
 msgid "Delete a group user"
 msgstr "Delete a group user"
+
+#: ucommon.rstitleinvalidformat
+msgid "Invalid format"
+msgstr "Invalid format"
 
 #: ucommon.rstitlenotfound
 msgid "Error not found"
