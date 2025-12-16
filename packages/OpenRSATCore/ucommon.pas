@@ -366,6 +366,10 @@ resourcestring
   rsTitleInvalidFormat = 'Invalid format';
   rsInvalidIpFormat = 'Invalid IP format';
 
+  rsTitleDeleteObject = 'Delete object';
+  rsDeleteObjectConfirmation = 'Do you want to delete the record % from the server?';
+  rsDeleteObjectsConfirmation = 'Do you want to delete the selected records from the server?';
+
 const
   DAYS_BETWEEN_1601_AND_1900 = 109205;
   HUNDRED_OF_MS_IN_A_DAY = 864000000000;

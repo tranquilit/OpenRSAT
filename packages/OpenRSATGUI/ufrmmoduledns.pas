@@ -95,6 +95,7 @@ type
     ToolButton6: TToolButton;
     TreeDNS: TTreeView;
     procedure Action_DeleteExecute(Sender: TObject);
+    procedure Action_DeleteUpdate(Sender: TObject);
     procedure Action_NewZoneExecute(Sender: TObject);
     procedure Action_NewZoneUpdate(Sender: TObject);
     procedure Action_NextExecute(Sender: TObject);
@@ -765,7 +766,7 @@ var
   distinguishedName: RawUtf8;
   AttributeToRemove: TLdapAttribute;
   SearchResult: TLdapResult;
-  Filter: String;
+  Filter, Message: String;
 
   procedure InnerDelete(DC: String);
   begin
@@ -782,7 +783,7 @@ var
       begin
         if not Assigned(SearchResult) or not data.Exists(SearchResult.ObjectName) then
           continue;
-        for Item in data.A[distinguishedName]^.Objects do
+        for Item in data.A[SearchResult.ObjectName]^.Objects do
         begin
           if not Assigned(Item) then
             continue;
@@ -812,6 +813,7 @@ var
             Exit;
           end;
         end;
+        AttributeToRemove.Clear;
       end;
     until FrmRSAT.LdapClient.SearchCookie = '';
   end;
@@ -823,6 +825,24 @@ begin
     if not Assigned(RowData) or not RowData^.Exists('rawdata') then
       continue;
     data.A_[RowData^.S['distinguishedName']]^.AddItem(RowData^);
+  end;
+
+  if data.Count <= 0 then
+  begin
+    if Assigned(fLog) then
+      fLog.Log(sllWarning, 'Try to remove items that does not have data', Self);
+    Exit;
+  end;
+
+  if data.Count = 1 then
+    Message := FormatUtf8(rsDeleteObjectConfirmation, [data._[0]^._[0]^.S['name']])
+  else
+    Message := rsDeleteObjectsConfirmation;
+  if MessageDlg(rsTitleDeleteObject, Message, mtConfirmation, mbYesNoCancel, 0) <> mrYes then
+  begin
+    if Assigned(fLog) then
+      fLog.Log(sllInfo, 'Action cancelled by user.', Self);
+    Exit;
   end;
 
   Filter := '';
@@ -845,6 +865,11 @@ begin
     FreeAndNilSafe(AttributeToRemove);
     Action_Refresh.Execute;
   end;
+end;
+
+procedure TFrmModuleDNS.Action_DeleteUpdate(Sender: TObject);
+begin
+  Action_Delete.Enabled := (GridDNS.SelectedCount > 0);
 end;
 
 procedure TFrmModuleDNS.Action_NewZoneExecute(Sender: TObject);

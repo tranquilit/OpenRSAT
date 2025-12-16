@@ -113,6 +113,14 @@ msgstr ""
 msgid "Are you sure that you want to delete % from the selected group(s)?"
 msgstr ""
 
+#: ucommon.rsdeleteobjectconfirmation
+msgid "Do you want to delete the record % from the server?"
+msgstr ""
+
+#: ucommon.rsdeleteobjectsconfirmation
+msgid "Do you want to delete the selected records from the server?"
+msgstr ""
+
 #: ucommon.rsdeleteprimarygroup
 msgid "The primary group cannot be deleted. You need to define another if you wish to delete this one."
 msgstr ""
@@ -663,6 +671,10 @@ msgstr ""
 
 #: ucommon.rstitledeletemember
 msgid "Delete a group user"
+msgstr ""
+
+#: ucommon.rstitledeleteobject
+msgid "Delete object"
 msgstr ""
 
 #: ucommon.rstitleinvalidformat

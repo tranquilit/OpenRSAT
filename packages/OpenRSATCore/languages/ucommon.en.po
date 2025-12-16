@@ -129,6 +129,14 @@ msgstr "Are you sure you want to delete the following object: %"
 msgid "Are you sure that you want to delete % from the selected group(s)?"
 msgstr "Are you sure that you want to delete % from the selected group(s)?"
 
+#: ucommon.rsdeleteobjectconfirmation
+msgid "Do you want to delete the record % from the server?"
+msgstr "Do you want to delete the record % from the server?"
+
+#: ucommon.rsdeleteobjectsconfirmation
+msgid "Do you want to delete the selected records from the server?"
+msgstr "Do you want to delete the selected records from the server?"
+
 #: ucommon.rsdeleteprimarygroup
 msgid "The primary group cannot be deleted. You need to define another if you wish to delete this one."
 msgstr "The primary group cannot be deleted. You need to define another if you wish to delete this one."
@@ -682,6 +690,10 @@ msgstr "Successful connection"
 #: ucommon.rstitledeletemember
 msgid "Delete a group user"
 msgstr "Delete a group user"
+
+#: ucommon.rstitledeleteobject
+msgid "Delete object"
+msgstr "Delete object"
 
 #: ucommon.rstitleinvalidformat
 msgid "Invalid format"

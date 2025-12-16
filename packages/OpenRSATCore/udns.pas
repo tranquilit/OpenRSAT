@@ -497,6 +497,7 @@ procedure DNSRRNSBuild(var NS: TRRNS; const AValue: RawUtf8);
 
 implementation
 uses
+  mormot.core.text,
   mormot.net.sock,
   DateUtils,
   ucommon;
@@ -1278,9 +1279,9 @@ begin
   for i := 0 to Pred(DNSCOUNTNAME.LabelCount) do
   begin
     if (i = 0) then
-      result := DNSCOUNTNAME.RawName[i].Name
+      result := FormatUtf8('%', [DNSCOUNTNAME.RawName[i].Name])
     else
-      result := Format('%s.%s', [result, DNSCOUNTNAME.RawName[i].Name]);
+      result := FormatUtf8('%.%', [result, DNSCOUNTNAME.RawName[i].Name]);
   end;
 end;
 

@@ -473,6 +473,7 @@ object FrmModuleDNS: TFrmModuleDNS
       Caption = 'Delete'
       ImageIndex = 13
       OnExecute = Action_DeleteExecute
+      OnUpdate = Action_DeleteUpdate
     end
     object Action_Refresh: TAction
       Caption = 'Refresh'
