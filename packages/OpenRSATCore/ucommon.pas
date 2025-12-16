@@ -27,6 +27,8 @@ type
     procedure FuncExpandIPv6;
     procedure FuncIsValidIP6;
     procedure FuncIsValidIP4;
+    procedure FuncIsServerPath;
+    procedure FuncIsLocalPath;
   end;
 
   {$ENDIF OPENRSATTESTS}
@@ -868,6 +870,30 @@ begin
   Check(not IsValidIP4('192.168.1.1.1'), 'Too many octets');
   Check(not IsValidIP4('192.168.1.'), 'Trailing dot');
   Check(not IsValidIP4('256.100.100.100'), '256 is outside valid range');
+end;
+
+procedure TCommonTests.FuncIsServerPath;
+begin
+  Check(IsServerPath('\\server\path'), 'Valid test');
+  Check(IsServerPath('\\server\this\is\a\long\path'), 'Valid test');
+  Check(not IsServerPath('\\server'), 'Missing path');
+  Check(not IsServerPath('\\server\'), 'Missing path');
+  Check(not IsServerPath('path'), 'Missing server');
+  Check(not IsServerPath(''), 'Empty path');
+  Check(not IsServerPath('\\server\path\'), 'Trailing backslash');
+  Check(not IsServerPath('C:\'), 'Local path');
+end;
+
+procedure TCommonTests.FuncIsLocalPath;
+begin
+  Check(IsLocalPath('C:\'), 'Valid test');
+  Check(IsLocalPath('C:\path'), 'Valid test');
+  Check(IsLocalPath('C:\this\is\a\long\path'), 'Valid test');
+  Check(not IsLocalPath('C:\path\'), 'Trailing backslash');
+  Check(not IsLocalPath('C:'), 'Missing path');
+  Check(not IsLocalPath('C'), 'Missing path');
+  Check(not IsLocalPath(''), 'Empty path');
+  Check(not IsLocalPath('\\path'), 'Server path');
 end;
 
 
