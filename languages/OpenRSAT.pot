@@ -54,11 +54,6 @@ msgstr ""
 msgid "Retrieve old configuration"
 msgstr ""
 
-#: tvisopenrsat.menuitem_showgpo.caption
-msgctxt "tvisopenrsat.menuitem_showgpo.caption"
-msgid "Show GPO"
-msgstr ""
-
 #: tvisopenrsat.menuitem_view.caption
 msgctxt "tvisopenrsat.menuitem_view.caption"
 msgid "View"

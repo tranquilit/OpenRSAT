@@ -49,7 +49,6 @@ type
     MenuItem_LdapConnect: TMenuItem;
     MenuItem_LdapConnectOption: TMenuItem;
     MenuItem_LdapDisconnect: TMenuItem;
-    MenuItem_ShowGPO: TMenuItem;
     MenuItem_View: TMenuItem;
     MenuItem_ViewTheme: TMenuItem;
     MenuItem_ViewThemeDark: TMenuItem;

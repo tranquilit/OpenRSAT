@@ -51,41 +51,6 @@ msgctxt "tformconnectconfigs.label_username.caption"
 msgid "Username: "
 msgstr ""
 
-#: ufrmmoduleaducoption.lrj:$.strings.[3].value
-msgctxt "tfrmaducoption.label1.caption"
-msgid "Grid options"
-msgstr ""
-
-#: ufrmmoduleaducoption.lrj:$.strings.[6].value
-msgctxt "tfrmaducoption.label2.caption"
-msgid "Tree options"
-msgstr ""
-
-#: ufrmmoduleaducoption.lrj:$.strings.[4].value
-msgctxt "tfrmaducoption.label3.caption"
-msgid "Filter"
-msgstr ""
-
-#: ufrmmoduleaducoption.lrj:$.strings.[5].value
-msgctxt "tfrmaducoption.label4.caption"
-msgid "Ldap attributes"
-msgstr ""
-
-#: ufrmmoduleaducoption.lrj:$.strings.[2].value
-msgctxt "tfrmaducoption.label_filter.caption"
-msgid "Filter"
-msgstr ""
-
-#: ufrmmoduleaducoption.lrj:$.strings.[1].value
-msgctxt "tfrmaducoption.label_searchpagenumber.caption"
-msgid "Search Page Number"
-msgstr ""
-
-#: ufrmmoduleaducoption.lrj:$.strings.[0].value
-msgctxt "tfrmaducoption.label_searchpagesize.caption"
-msgid "Search Page Size"
-msgstr ""
-
 #: ufrmmoduleserviceinterfaces.lrj:$.strings.[15].value
 msgctxt "tfrmmoduleadsi.action_deleteobject.caption"
 msgid "Delete"
@@ -439,6 +404,46 @@ msgstr ""
 #: ufrmmoduleaduc.lrj:$.strings.[11].value
 msgctxt "tfrmmoduleaduc.toolbutton_user.hint"
 msgid "New User"
+msgstr ""
+
+#: ufrmmoduleaducoption.lrj:$.strings.[3].value
+msgctxt "tfrmmoduleaducoption.label1.caption"
+msgid "Grid options"
+msgstr ""
+
+#: ufrmmoduleaducoption.lrj:$.strings.[6].value
+msgctxt "tfrmmoduleaducoption.label2.caption"
+msgid "Tree options"
+msgstr ""
+
+#: ufrmmoduleaducoption.lrj:$.strings.[4].value
+msgctxt "tfrmmoduleaducoption.label3.caption"
+msgid "Filter"
+msgstr ""
+
+#: ufrmmoduleaducoption.lrj:$.strings.[5].value
+msgctxt "tfrmmoduleaducoption.label4.caption"
+msgid "Ldap attributes"
+msgstr ""
+
+#: ufrmmoduleaducoption.lrj:$.strings.[2].value
+msgctxt "tfrmmoduleaducoption.label_filter.caption"
+msgid "Filter"
+msgstr ""
+
+#: ufrmmoduleaducoption.lrj:$.strings.[1].value
+msgctxt "tfrmmoduleaducoption.label_searchpagenumber.caption"
+msgid "Search Page Number"
+msgstr ""
+
+#: ufrmmoduleaducoption.lrj:$.strings.[0].value
+msgctxt "tfrmmoduleaducoption.label_searchpagesize.caption"
+msgid "Search Page Size"
+msgstr ""
+
+#: ufrmmoduleaducoption.lrj:$.strings.[7].value
+msgctxt "tfrmmoduleaducoption.label_showgpo.caption"
+msgid "Show GPO"
 msgstr ""
 
 #: ufrmmoduledns.lrj:$.strings.[13].value
@@ -2091,22 +2096,22 @@ msgid "Properties"
 msgstr ""
 
 #: ufrmrsatoptions.lrj:$.strings.[3].value
-msgctxt "tfrmrsatoptions.combobox3.text"
+msgctxt "tfrmrsatoption.combobox3.text"
 msgid "False"
 msgstr ""
 
 #: ufrmrsatoptions.lrj:$.strings.[0].value
-msgctxt "tfrmrsatoptions.label1.caption"
+msgctxt "tfrmrsatoption.label1.caption"
 msgid "Theme"
 msgstr ""
 
 #: ufrmrsatoptions.lrj:$.strings.[1].value
-msgctxt "tfrmrsatoptions.label2.caption"
+msgctxt "tfrmrsatoption.label2.caption"
 msgid "Lang"
 msgstr ""
 
 #: ufrmrsatoptions.lrj:$.strings.[2].value
-msgctxt "tfrmrsatoptions.label3.caption"
+msgctxt "tfrmrsatoption.label3.caption"
 msgid "AdvancedView"
 msgstr ""
 

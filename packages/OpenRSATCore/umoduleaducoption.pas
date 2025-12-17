@@ -143,6 +143,7 @@ begin
   fGridFilter := IniFile.ReadString(Section, 'GridFilter', '');
   fTreeFilter := IniFile.ReadString(Section, 'TreeFilter', '');
   fTreeObjectClasses := TRawUtf8DynArray(IniFile.ReadString(Section, 'TreeObjectClasses', DEFAULT_TREE_OBJECT_CLASSES).Split(';'));
+  fShowGPO := IniFile.ReadBool(Section, 'ShowGPO', False);
 
   fChanged := False;
 end;
@@ -159,6 +160,7 @@ begin
   IniFile.WriteString(SECTION, 'GridFilter', fGridFilter);
   IniFile.WriteString(SECTION, 'TreeFilter', fTreeFilter);
   IniFile.WriteString(SECTION, 'TreeObjectClasses', String.Join(';', TStringArray(fTreeObjectClasses)));
+  IniFile.WriteBool(SECTION, 'ShowGPO', fShowGPO);
 
   fChanged := False;
 end;

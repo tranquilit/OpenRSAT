@@ -24,6 +24,7 @@ type
   { TFrmModuleADUCOption }
 
   TFrmModuleADUCOption = class(TFrameOption)
+    CheckBox_ShowGPO: TCheckBox;
     CheckListBox2: TCheckListBox;
     Edit_SearchPageNumber: TEdit;
     Edit_SearchPageSize: TEdit;
@@ -31,6 +32,7 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
+    Label_ShowGPO: TLabel;
     Label_Filter: TLabel;
     Label_SearchPageNumber: TLabel;
     Label_SearchPageSize: TLabel;
@@ -39,6 +41,7 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     TisSearchEdit3: TTisSearchEdit;
+    procedure CheckBox_ShowGPOChange(Sender: TObject);
     procedure CheckListBox2ClickCheck(Sender: TObject);
     procedure Edit_SearchPageNumberChange(Sender: TObject);
     procedure Edit_SearchPageSizeChange(Sender: TObject);
@@ -54,11 +57,13 @@ type
     function GetGridFilter: RawUtf8;
     function GetSearchPageNumber: Integer;
     function GetSearchPageSize: Integer;
+    function GetShowGPO: Boolean;
     function GetTreeFilter: RawUtf8;
     function GetTreeObjectClasses: TRawUtf8DynArray;
     procedure SetGridFilter(AValue: RawUtf8);
     procedure SetSearchPageNumber(AValue: Integer);
     procedure SetSearchPageSize(AValue: Integer);
+    procedure SetShowGPO(AValue: Boolean);
     procedure SetTreeFilter(AValue: RawUtf8);
     procedure SetTreeObjectClasses(AValue: TRawUtf8DynArray);
   public
@@ -76,6 +81,7 @@ type
     property GridFilter: RawUtf8 read GetGridFilter write SetGridFilter;
     property TreeFilter: RawUtf8 read GetTreeFilter write SetTreeFilter;
     property TreeObjectClasses: TRawUtf8DynArray read GetTreeObjectClasses write SetTreeObjectClasses;
+    property ShowGPO: Boolean read GetShowGPO write SetShowGPO;
   end;
 
 implementation
@@ -113,6 +119,11 @@ begin
   fChanged := True;
 end;
 
+procedure TFrmModuleADUCOption.CheckBox_ShowGPOChange(Sender: TObject);
+begin
+  fChanged := True;
+end;
+
 procedure TFrmModuleADUCOption.SetGridFilter(AValue: RawUtf8);
 begin
   if Memo_Filter.Text = AValue then
@@ -133,6 +144,11 @@ end;
 function TFrmModuleADUCOption.GetSearchPageSize: Integer;
 begin
   TryStrToInt(Edit_SearchPageSize.Text, result);
+end;
+
+function TFrmModuleADUCOption.GetShowGPO: Boolean;
+begin
+  result := CheckBox_ShowGPO.Checked;
 end;
 
 function TFrmModuleADUCOption.GetTreeFilter: RawUtf8;
@@ -158,6 +174,14 @@ end;
 procedure TFrmModuleADUCOption.SetSearchPageSize(AValue: Integer);
 begin
   Edit_SearchPageSize.Text := IntToStr(AValue);
+end;
+
+procedure TFrmModuleADUCOption.SetShowGPO(AValue: Boolean);
+begin
+  if AValue = CheckBox_ShowGPO.Checked then
+    Exit;
+
+  CheckBox_ShowGPO.Checked := AValue;
 end;
 
 procedure TFrmModuleADUCOption.SetTreeFilter(AValue: RawUtf8);
@@ -232,6 +256,7 @@ begin
   GridFilter := ADUCOption.GridFilter;
   TreeFilter := ADUCOption.TreeFilter;
   TreeObjectClasses := ADUCOption.TreeObjectClasses;
+  ShowGPO := ADUCOption.ShowGPO;
 
   fChanged := False;
 end;
@@ -255,6 +280,7 @@ begin
   ADUCOption.GridFilter := GridFilter;
   ADUCOption.TreeFilter := TreeFilter;
   ADUCOption.TreeObjectClasses := TreeObjectClasses;
+  ADUCOption.ShowGPO := ShowGPO;
 
   IniFile := TIniFile.Create(OptionFilePath);
   try

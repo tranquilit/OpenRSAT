@@ -14,28 +14,19 @@ uses
 
 type
 
-  { TGPLinks }
-
-  TGPLinks = class
-  private
-    fDistinguishedName: Array of String;
-    fFlag: Array of Integer;
-    fCount: Integer;
-    procedure AddLink(ADistinguishedName: String; AFlag: Integer);
-    function GetDistinguishedName(aValue: Integer): String;
-    function GetFlag(aValue: Integer): Integer;
-    procedure SetLinks(GPLink: String);
-  public
-    constructor Create(GPLink: String);
-    property Count: Integer read fCount;
-    property DistinguishedName[aValue: Integer]: String read GetDistinguishedName;
-    property Flag[aValue: Integer]: Integer read GetFlag;
+  TGPLink = record
+    Link: RawUtf8;
+    DistinguishedName: RawUtf8;
+    Flag: Integer;
   end;
+
+  TGPLinkDynArr = Array of TGPLink;
 
   TADUCTreeNodeType = (
     atntNone,
     atntQuery,
-    atntObject
+    atntObject,
+    atntGPO
   );
 
   // Node data for query type
@@ -63,7 +54,6 @@ type
   TADUCTreeNodeObject = class
   private
     fAttributes: TLdapAttributeList;
-    //fGPLinks: TGPLinks;
 
     function GetFirstAttribute(AttributeName: RawUtf8): RawUtf8;
     function GetLastAttribute(AttributeName: RawUtf8): RawUtf8;
@@ -73,7 +63,6 @@ type
 
     function GetDistinguishedName: String;
     function GetGPLink: String;
-    //function GetGPLinks: TGPLinks;
     function GetLastObjectClass: String;
     function GetObjectClass: TRawUtf8DynArray;
     procedure SetDistinguishedName(AValue: String);
@@ -90,7 +79,23 @@ type
     property ObjectClass: TRawUtf8DynArray read GetObjectClass write SetObjectClass;
     property LastObjectClass: String read GetLastObjectClass;
     property GPLink: String read GetGPLink write SetGPLink;
-    //property GPLinks: TGPLinks read GetGPLinks;
+  end;
+
+  { TADUCTreeNodeGPO }
+
+  TADUCTreeNodeGPO = class
+  private
+    fLink: TGPLink;
+
+    function GetDistinguishedName: RawUtf8;
+    function GetFlag: Integer;
+    function GetGPLink: TGPLink;
+    procedure SetGPLink(AValue: TGPLink);
+  public
+
+    property DistinguishedName: RawUtf8 read GetDistinguishedName;
+    property Flag: Integer read GetFlag;
+    property GPLink: TGPLink read GetGPLink write SetGPLink;
   end;
 
 
@@ -109,69 +114,26 @@ type
     function IsNoneType: Boolean;
     function IsObjectType: Boolean;
     function IsQueryType: Boolean;
+    function IsGPOType: Boolean;
     function GetNodeDataObject: TADUCTreeNodeObject;
     function GetNodeDataQuery: TADUCTreeNodeQuery;
+    function GetNodeDataGPO: TADUCTreeNodeGPO;
+
+    function GetFirstChildGPO(): TADUCTreeNode;
+    function GetNextChildGPO(ANode: TADUCTreeNode): TADUCTreeNode;
+
+    function ADUCNodeCompare(Node1, Node2: TTreeNode): integer;
   end;
 
+operator=(Destination, Source: TGPLink): Boolean;
 
 implementation
 uses
   mormot.core.text;
 
-{ TGPLinks }
-
-procedure TGPLinks.AddLink(ADistinguishedName: String; AFlag: Integer);
+operator=(Destination, Source: TGPLink): Boolean;
 begin
-  Insert(ADistinguishedName, fDistinguishedName, fCount);
-  Insert(AFlag, fFlag, fCount);
-  Inc(fCount);
-end;
-
-function TGPLinks.GetDistinguishedName(aValue: Integer): String;
-begin
-  result := '';
-  if (aValue < Low(fDistinguishedName)) or (aValue > High(fDistinguishedName)) then
-    Exit;
-  result := fDistinguishedName[aValue];
-end;
-
-function TGPLinks.GetFlag(aValue: Integer): Integer;
-begin
-  result := -1;
-  if (aValue < Low(fFlag)) or (aValue > High(fFlag)) then
-    Exit;
-  result := fFlag[aValue];
-end;
-
-procedure TGPLinks.SetLinks(GPLink: String);
-var
-  Link: String;
-  LinkStart, LinkEnd: SizeInt;
-  LinkArr: TStringArray;
-begin
-  LinkStart := 0;
-  LinkEnd := 0;
-
-  while GPLink <> '' do
-  begin
-    LinkStart := GPLink.IndexOf('[LDAP://', LinkEnd);
-    if LinkStart < 0 then
-      break;
-    LinkEnd := GPLink.IndexOf(']', LinkStart);
-
-    Link := GPLink.Substring(LinkStart + 8, LinkEnd - 8 - LinkStart);
-    LinkArr := Link.Split(';');
-    AddLink(LinkArr[0], StrToInt(LinkArr[1]));
-  end;
-end;
-
-constructor TGPLinks.Create(GPLink: String);
-begin
-  fCount := 0;
-  fDistinguishedName := [];
-  fFlag := [];
-
-  SetLinks(GPLink);
+  result := (Destination.Link = Source.Link);
 end;
 
 { TADUCTreeNodeQuery }
@@ -331,6 +293,31 @@ begin
   result := fAttributes.Find(AttributeName);
 end;
 
+{ TADUCTreeNodeGPO }
+
+function TADUCTreeNodeGPO.GetGPLink: TGPLink;
+begin
+  result := fLink;
+end;
+
+function TADUCTreeNodeGPO.GetDistinguishedName: RawUtf8;
+begin
+  result := fLink.DistinguishedName;
+end;
+
+function TADUCTreeNodeGPO.GetFlag: Integer;
+begin
+  result := fLink.Flag;
+end;
+
+procedure TADUCTreeNodeGPO.SetGPLink(AValue: TGPLink);
+begin
+  if AValue = fLink then
+    Exit;
+
+  fLink := AValue;
+end;
+
 { TADUCTreeNode }
 
 procedure TADUCTreeNode.SetNodeType(AValue: TADUCTreeNodeType);
@@ -342,6 +329,7 @@ begin
   case AValue of
     atntObject: data := TADUCTreeNodeObject.Create;
     atntQuery: data := TADUCTreeNodeQuery.Create;
+    atntGPO: data := TADUCTreeNodeGPO.Create;
   end;
   fNodeType := AValue;
 end;
@@ -375,6 +363,11 @@ begin
   result := IsType(atntQuery);
 end;
 
+function TADUCTreeNode.IsGPOType: Boolean;
+begin
+  result := IsType(atntGPO);
+end;
+
 function TADUCTreeNode.GetNodeDataObject: TADUCTreeNodeObject;
 begin
   result := nil;
@@ -387,6 +380,56 @@ begin
   result := nil;
   if IsType(atntQuery) then
     result := TADUCTreeNodeQuery(data);
+end;
+
+function TADUCTreeNode.GetNodeDataGPO: TADUCTreeNodeGPO;
+begin
+  result := nil;
+  if IsType(atntGPO) then
+    result := TADUCTreeNodeGPO(data);
+end;
+
+function TADUCTreeNode.GetFirstChildGPO(): TADUCTreeNode;
+begin
+  result := GetNextChildGPO(nil);
+end;
+
+function TADUCTreeNode.GetNextChildGPO(ANode: TADUCTreeNode): TADUCTreeNode;
+var
+  i: Integer;
+  Node: TADUCTreeNode;
+begin
+  result := nil;
+
+  if not Assigned(ANode) then
+    Node := (GetFirstChild as TADUCTreeNode)
+  else
+    Node := (ANode.GetNextSibling as TADUCTreeNode);
+
+  if not Assigned(Node) then
+    Exit;
+
+  repeat
+    if Node.IsGPOType then
+    begin
+      result := Node;
+      Exit;
+    end;
+    Node := (Node.GetNextSibling as TADUCTreeNode);
+  until Node = nil;
+end;
+
+function TADUCTreeNode.ADUCNodeCompare(Node1, Node2: TTreeNode): integer;
+begin
+  result := Ord((Node1 as TADUCTreeNode).fNodeType) - Ord((Node2 as TADUCTreeNode).fNodeType);
+  if (result = 0) then
+  begin
+    {$IFDEF UNIX}
+    Result := CompareStr(Node1.Text, Node2.Text);
+    {$ELSE}
+    Result := AnsiCompareStr(Node1.Text,Node2.Text);
+    {$ENDIF}
+  end;
 end;
 
 destructor TADUCTreeNode.Destroy;

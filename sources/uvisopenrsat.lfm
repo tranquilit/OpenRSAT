@@ -9,7 +9,7 @@ object VisOpenRSAT: TVisOpenRSAT
   Menu = MainMenu
   Position = poWorkAreaCenter
   SessionProperties = 'Width;WindowState;Height;Left;Top'
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   OnPaint = FormPaint
   OnShow = FormShow
   object MainMenu: TMainMenu
@@ -72,9 +72,6 @@ object VisOpenRSAT: TVisOpenRSAT
       end
       object MenuItem_AdvancedFeatures: TMenuItem
         Caption = 'MenuItem_AdvancedFeatures'
-      end
-      object MenuItem_ShowGPO: TMenuItem
-        Caption = 'Show GPO'
       end
     end
     object MenuItem_DEBUG: TMenuItem

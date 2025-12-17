@@ -275,7 +275,8 @@ type
 
     procedure UpdateTreeImages(ANode: TADUCTreeNode);
 
-    //procedure InsertGPLink(ANode: TADUCTreeNode);
+    procedure RefreshGPLinks(ANode: TADUCTreeNode; Recursive: Boolean = True);
+    procedure RemoveGPLinks(ANode: TADUCTreeNode);
     procedure RefreshADUCTreeNode(Node: TADUCTreeNode);
     procedure UpdateGridADUC(ANode: TADUCTreeNode);
 
@@ -1425,17 +1426,23 @@ end;
 procedure TFrmModuleADUC.TreeADUCGetImageIndex(Sender: TObject;
   Node: TTreeNode);
 var
-  NodeData: TADUCTreeNodeObject;
+  ObjectClass: RawUtf8;
 begin
   // Fast Exit
   if not Assigned(Node) or (Node.ImageIndex <> -1) then
     Exit;
 
-  NodeData := (Node as TADUCTreeNode).GetNodeDataObject;
-  if not Assigned(NodeData) then
+  case (Node as TADUCTreeNode).NodeType of
+    atntObject: ObjectClass := (Node as TADUCTreeNode).GetNodeDataObject.LastObjectClass;
+    atntGPO: ObjectClass := 'groupPolicyContainer';
+    else
+      Exit;
+  end;
+
+  if ObjectClass = '' then
     Exit;
 
-  Node.ImageIndex := ObjectClassToImageIndex(NodeData.LastObjectClass);
+  Node.ImageIndex := ObjectClassToImageIndex(ObjectClass);
   Node.SelectedIndex := Node.ImageIndex;
 end;
 
@@ -1759,11 +1766,187 @@ begin
     fLog.Log(sllInfo, '% - Node "%" and subnodes (%) have been updated.', [Self.Name, ANode.Text, IntToStr(ANode.Count)]);
 end;
 
-//procedure TFrmModuleADUC.InsertGPLink(ANode: TADUCTreeNode);
-//begin
-//  if not Assigned(ANode) or not Assigned(ANode.GetNodeDataObject) or not Assigned(ANode.GetNodeDataObject.GPLinks) then
-//    Exit;
-//end;
+function GPLinkToGPLinkArr(GPLink: RawUtf8): TGPLinkDynArr;
+var
+  LinkStart, LinkEnd, Count: Integer;
+  Link: TGPLink;
+  LinkArr: TStringArray;
+begin
+  result := nil;
+  LinkStart := 0;
+  LinkEnd := 0;
+  Count := 0;
+
+  while GPLink <> '' do
+  begin
+    LinkStart := String(GPLink).IndexOf('[LDAP://', LinkEnd);
+    if LinkStart < 0 then
+      break;
+    LinkEnd := String(GPLink).IndexOf(']', LinkStart);
+
+    Link.Link := String(GPLink).Substring(LinkStart + 8, LinkEnd - 8 - LinkStart);
+    LinkArr := String(Link.Link).Split(';');
+    if Length(LinkArr) <> 2 then
+      raise Exception.Create('Wrong GPLink format');
+    Link.DistinguishedName := LinkArr[0];
+    if not TryStrToInt(LinkArr[1], Link.Flag) then
+      raise Exception.Create('GPLink flag is not a number');
+
+    Insert(Link, result, Count);
+    Inc(Count);
+  end;
+end;
+
+procedure TFrmModuleADUC.RefreshGPLinks(ANode: TADUCTreeNode; Recursive: Boolean
+  );
+var
+  GPLinkArr: TGPLinkDynArr;
+  GPLink: TGPLink;
+  GPOItems: TLdapResultObjArray;
+  NodeGPO, NodeToDelete: TADUCTreeNode;
+  Filter: RawUtf8;
+  pairs: TNameValueDNs;
+  GPOItem: TLdapResult;
+  Found: Boolean;
+  i: Integer;
+begin
+  if not Assigned(ANode) then
+    ANode := fADUCDomainNode;
+
+  if not Assigned(ANode) or not Assigned(ANode.GetNodeDataObject) then
+    Exit;
+  GPLinkArr := GPLinkToGPLinkArr(ANode.GetNodeDataObject.GPLink);
+
+  if Length(GPLinkArr) <= 0 then
+    Exit;
+
+  GPOItems := nil;
+
+  // Retrieve existing GPO Nodes
+  // Compare GPLinkArr with existing nodes
+  Filter := '';
+  for GPLink in GPLinkArr do
+    Filter := FormatUtf8('%(distinguishedName=%)', [Filter, LdapEscape(GPLink.DistinguishedName)]);
+  if Filter <> '' then
+    Filter := FormatUtf8('(|%)', [Filter]);
+
+  FrmRSAT.LdapClient.SearchBegin();
+  try
+    FrmRSAT.LdapClient.SearchScope := lssWholeSubtree;
+    repeat
+      if not FrmRSAT.LdapClient.Search(FrmRSAT.LdapClient.DefaultDN, False, Filter, ['displayName']) then
+      begin
+        if Assigned(fLog) then
+          fLog.Log(sllError, 'Ldap Search Error: "%"', [FrmRSAT.LdapClient.ResultString]);
+        ShowLdapSearchError(FrmRSAT.LdapClient);
+        Exit;
+      end;
+      GPOItems := Concat(GPOItems, FrmRSAT.LdapClient.SearchResult.Items);
+    until FrmRSAT.LdapClient.SearchCookie = '';
+  finally
+    FrmRSAT.LdapClient.SearchEnd;
+  end;
+
+  TreeADUC.BeginUpdate;
+  try
+    for GPLink in GPLinkArr do
+    begin
+      NodeGPO := ANode.GetFirstChildGPO();
+      while Assigned(NodeGPO) do
+      begin
+        if NodeGPO.GetNodeDataGPO.DistinguishedName = GPLink.DistinguishedName then
+          break;
+        NodeGPO := ANode.GetNextChildGPO(NodeGPO);
+      end;
+      if Assigned(NodeGPO) then
+      begin
+        NodeGPO.GetNodeDataGPO.GPLink := GPLink;
+        for GPOItem in GPOItems do
+          if String(GPOItem.ObjectName).ToLower = String(GPLink.DistinguishedName).ToLower then
+          begin
+            NodeGPO.Text := GPOItem.Find('displayName').GetReadable();
+            break;
+          end;
+      end
+      else
+      begin
+        ParseDN(GPLink.DistinguishedName, pairs);
+        NodeGPO := (TreeADUC.Items.AddChild(ANode, pairs[0].Value) as TADUCTreeNode);
+        NodeGPO.NodeType := atntGPO;
+        NodeGPO.GetNodeDataGPO.GPLink := GPLink;
+        for GPOItem in GPOItems do
+          if String(GPOItem.ObjectName).ToLower = String(GPLink.DistinguishedName).ToLower then
+          begin
+            NodeGPO.Text := GPOItem.Find('displayName').GetReadable();
+            break;
+          end;
+      end;
+    end;
+  finally
+    TreeADUC.EndUpdate;
+  end;
+
+  NodeToDelete := nil;
+  TreeADUC.BeginUpdate;
+  try
+    NodeGPO := ANode.GetFirstChildGPO();
+    while Assigned(NodeGPO) do
+    begin
+      Found := False;
+      for GPLink in GPLinkArr do
+      begin
+        if String(GPLink.DistinguishedName).ToLower = String(NodeGPO.GetNodeDataGPO.DistinguishedName).ToLower then
+        begin
+          Found := True;
+          break;
+        end;
+      end;
+      if not Found then
+        NodeToDelete := NodeGPO;
+      NodeGPO := ANode.GetNextChildGPO(NodeGPO);
+      if Assigned(NodeToDelete) then
+      begin
+        TreeADUC.Items.Delete(NodeToDelete);
+        NodeToDelete := nil;
+      end;
+    end;
+  finally
+    TreeADUC.EndUpdate;
+  end;
+
+  if Recursive then
+    for i := 0 to Pred(ANode.Count) do
+      RefreshGPLinks((ANode.Items[i] as TADUCTreeNode), Recursive);
+
+end;
+
+procedure TFrmModuleADUC.RemoveGPLinks(ANode: TADUCTreeNode);
+var
+  Node, PrevNode: TTreeNode;
+begin
+  if not Assigned(ANode) then
+    ANode := fADUCDomainNode;
+
+  if not Assigned(ANode) then
+    Exit;
+
+  TreeADUC.Items.BeginUpdate;
+  try
+    Node := ANode.GetFirstChild;
+    while Assigned(Node) do
+    begin
+      PrevNode := Node;
+      Node := ANode.GetNextChild(Node);
+
+      case (PrevNode as TADUCTreeNode).NodeType of
+      atntGPO: TreeADUC.Items.Delete(PrevNode);
+      atntObject: if PrevNode.HasChildren then RemoveGPLinks((PrevNode as TADUCTreeNode))
+      end;
+    end;
+  finally
+    TreeADUC.Items.EndUpdate;
+  end;
+end;
 
 procedure TFrmModuleADUC.RefreshADUCTreeNode(Node: TADUCTreeNode);
 var
@@ -1936,10 +2119,12 @@ begin
     end;
   end;
 
+  // Refresh GPO
+  if fModuleAduc.ADUCOption.ShowGPO then
+    RefreshGPLinks(Node, False);
+
   // Sort nodes
-  Node.AlphaSort;
-  //if fModuleOptions.ShowGPO then
-  //  InsertGPLink(Node);
+  Node.CustomSort(@Node.ADUCNodeCompare);
 end;
 
 procedure TFrmModuleADUC.UpdateGridADUC(ANode: TADUCTreeNode);
@@ -2435,7 +2620,12 @@ end;
 
 procedure TFrmModuleADUC.Refresh;
 begin
+  if fModuleAduc.ADUCOption.ShowGPO then
+    RefreshGPLinks(nil)
+  else
+    RemoveGPLinks(nil);
 
+  RefreshADUCTreeNode((TreeADUC.Selected as TADUCTreeNode));
 end;
 
 end.

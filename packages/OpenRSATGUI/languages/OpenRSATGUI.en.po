@@ -48,41 +48,6 @@ msgctxt "tformconnectconfigs.label_username.caption"
 msgid "Username: "
 msgstr "Username: "
 
-#: ufrmmoduleaducoption.lrj:$.strings.[3].value
-msgctxt "tfrmaducoption.label1.caption"
-msgid "Grid options"
-msgstr "Grid options"
-
-#: ufrmmoduleaducoption.lrj:$.strings.[6].value
-msgctxt "tfrmaducoption.label2.caption"
-msgid "Tree options"
-msgstr "Tree options"
-
-#: ufrmmoduleaducoption.lrj:$.strings.[4].value
-msgctxt "tfrmaducoption.label3.caption"
-msgid "Filter"
-msgstr "Filter"
-
-#: ufrmmoduleaducoption.lrj:$.strings.[5].value
-msgctxt "tfrmaducoption.label4.caption"
-msgid "Ldap attributes"
-msgstr "Ldap attributes"
-
-#: ufrmmoduleaducoption.lrj:$.strings.[2].value
-msgctxt "tfrmaducoption.label_filter.caption"
-msgid "Filter"
-msgstr "Filter"
-
-#: ufrmmoduleaducoption.lrj:$.strings.[1].value
-msgctxt "tfrmaducoption.label_searchpagenumber.caption"
-msgid "Search Page Number"
-msgstr "Search Page Number"
-
-#: ufrmmoduleaducoption.lrj:$.strings.[0].value
-msgctxt "tfrmaducoption.label_searchpagesize.caption"
-msgid "Search Page Size"
-msgstr "Search Page Size"
-
 #: ufrmmoduleserviceinterfaces.lrj:$.strings.[15].value
 msgctxt "tfrmmoduleadsi.action_deleteobject.caption"
 msgid "Delete"
@@ -438,6 +403,46 @@ msgctxt "tfrmmoduleaduc.toolbutton_user.hint"
 msgid "New User"
 msgstr "New User"
 
+#: ufrmmoduleaducoption.lrj:$.strings.[3].value
+msgctxt "tfrmmoduleaducoption.label1.caption"
+msgid "Grid options"
+msgstr "Grid options"
+
+#: ufrmmoduleaducoption.lrj:$.strings.[6].value
+msgctxt "tfrmmoduleaducoption.label2.caption"
+msgid "Tree options"
+msgstr "Tree options"
+
+#: ufrmmoduleaducoption.lrj:$.strings.[4].value
+msgctxt "tfrmmoduleaducoption.label3.caption"
+msgid "Filter"
+msgstr "Filter"
+
+#: ufrmmoduleaducoption.lrj:$.strings.[5].value
+msgctxt "tfrmmoduleaducoption.label4.caption"
+msgid "Ldap attributes"
+msgstr "Ldap attributes"
+
+#: ufrmmoduleaducoption.lrj:$.strings.[2].value
+msgctxt "tfrmmoduleaducoption.label_filter.caption"
+msgid "Filter"
+msgstr "Filter"
+
+#: ufrmmoduleaducoption.lrj:$.strings.[1].value
+msgctxt "tfrmmoduleaducoption.label_searchpagenumber.caption"
+msgid "Search Page Number"
+msgstr "Search Page Number"
+
+#: ufrmmoduleaducoption.lrj:$.strings.[0].value
+msgctxt "tfrmmoduleaducoption.label_searchpagesize.caption"
+msgid "Search Page Size"
+msgstr "Search Page Size"
+
+#: ufrmmoduleaducoption.lrj:$.strings.[7].value
+msgctxt "tfrmmoduleaducoption.label_showgpo.caption"
+msgid "Show GPO"
+msgstr "Show GPO"
+
 #: ufrmmoduledns.lrj:$.strings.[13].value
 msgctxt "tfrmmoduledns.action_delete.caption"
 msgid "Delete"
@@ -770,9 +775,12 @@ msgstr "OK"
 
 #: ufrmnewsite.lrj:$.strings.[1].value
 msgctxt "tfrmnewsite.label_info.caption"
-msgid "Select a site link object for this site. Site link objects are located in th"
-"e Sites/Inter-Site Transports container."
+msgid ""
+"Select a site link object for this site. Site link objects are located in "
+"the Sites/Inter-Site Transports container."
 msgstr ""
+"Select a site link object for this site. Site link objects are located in "
+"the Sites/Inter-Site Transports container."
 
 #: ufrmnewsite.lrj:$.strings.[0].value
 msgctxt "tfrmnewsite.label_name.caption"
@@ -796,10 +804,14 @@ msgstr "OK"
 
 #: ufrmnewsubnet.lrj:$.strings.[0].value
 msgctxt "tfrmnewsubnet.label1.caption"
-msgid "Enter the address prefix using network prefix notation (address/prefix lengt"
-"h), where the prefix length indicates the number of fixed bits. You can ente"
-"r either an IPv4 or an IPv6 subnet prefix."
+msgid ""
+"Enter the address prefix using network prefix notation (address/prefix "
+"length), where the prefix length indicates the number of fixed bits. You can "
+"enter either an IPv4 or an IPv6 subnet prefix."
 msgstr ""
+"Enter the address prefix using network prefix notation (address/prefix "
+"length), where the prefix length indicates the number of fixed bits. You can "
+"enter either an IPv4 or an IPv6 subnet prefix."
 
 #: ufrmnewsubnet.lrj:$.strings.[1].value
 msgctxt "tfrmnewsubnet.label2.caption"
@@ -983,16 +995,25 @@ msgstr "NULL"
 
 #: ufrmpropertyaccount.lrj:$.strings.[1].value
 msgctxt "tfrmpropertyaccount.edit_name.hint"
-msgid "This attribute contains the UPN for a user based on the Internet standard RF"
-"C 822\r\n(name@domain.lan)"
+msgid ""
+"This attribute contains the UPN for a user based on the Internet standard "
+"RFC 822\r\n"
+"(name@domain.lan)"
 msgstr ""
+"This attribute contains the UPN for a user based on the Internet standard "
+"RFC 822\r\n"
+"(name@domain.lan)"
 
 #: ufrmpropertyaccount.lrj:$.strings.[3].value
 msgctxt "tfrmpropertyaccount.edit_samaccountname.hint"
-msgid "The logon name used to support clients and servers running earlier versions "
-"of the operating system\r\nSuch as Windows NT 4.0, Windows 95, Windows 98, a"
-"nd LAN Manager"
+msgid ""
+"The logon name used to support clients and servers running earlier versions "
+"of the operating system\r\n"
+"Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager"
 msgstr ""
+"The logon name used to support clients and servers running earlier versions "
+"of the operating system\r\n"
+"Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager"
 
 #: ufrmpropertyaccount.lrj:$.strings.[17].value
 msgctxt "tfrmpropertyaccount.goupbox_expires.caption"
@@ -1186,10 +1207,14 @@ msgstr "Name of computer as registered in DNS."
 
 #: ufrmpropertygeneralcomputer.lrj:$.strings.[5].value
 msgctxt "tfrmpropertygeneralcomputer.edit_samaccountname.hint"
-msgid "The logon name used to support clients and servers running earlier versions "
-"of the operating system\r\nSuch as Windows NT 4.0, Windows 95, Windows 98, a"
-"nd LAN Manager"
+msgid ""
+"The logon name used to support clients and servers running earlier versions "
+"of the operating system\r\n"
+"Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager"
 msgstr ""
+"The logon name used to support clients and servers running earlier versions "
+"of the operating system\r\n"
+"Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager"
 
 #: ufrmpropertygeneralcomputer.lrj:$.strings.[2].value
 msgctxt "tfrmpropertygeneralcomputer.label_dctype.caption"
@@ -1228,10 +1253,14 @@ msgstr "The group's E-mail address"
 
 #: ufrmpropertygeneralgroup.lrj:$.strings.[1].value
 msgctxt "tfrmpropertygeneralgroup.edit_samaccountname.hint"
-msgid "The logon name used to support clients and servers running earlier versions "
-"of the operating system\r\nSuch as Windows NT 4.0, Windows 95, Windows 98, a"
-"nd LAN Manager"
+msgid ""
+"The logon name used to support clients and servers running earlier versions "
+"of the operating system\r\n"
+"Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager"
 msgstr ""
+"The logon name used to support clients and servers running earlier versions "
+"of the operating system\r\n"
+"Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager"
 
 #: ufrmpropertygeneralgroup.lrj:$.strings.[2].value
 msgctxt "tfrmpropertygeneralgroup.label_description.caption"
@@ -1660,15 +1689,21 @@ msgstr "Active Directory's Services Folder"
 
 #: ufrmpropertymemberof.lrj:$.strings.[5].value
 msgctxt "tfrmpropertymemberof.label_defineprimarygroup.caption"
-msgid "It is useless to modify the primary goup, unless you're using Macintosh or o"
-"ther POSIX compliant apps."
+msgid ""
+"It is useless to modify the primary goup, unless you're using Macintosh or "
+"other POSIX compliant apps."
 msgstr ""
+"It is useless to modify the primary goup, unless you're using Macintosh or "
+"other POSIX compliant apps."
 
 #: ufrmpropertymemberof.lrj:$.strings.[3].value
 msgctxt "tfrmpropertymemberof.label_mof_noprimarygroup.caption"
-msgid "This list  shows only the current domain's groups and the groups handled in "
+msgid ""
+"This list  shows only the current domain's groups and the groups handled in "
 "the Global catalog, such as unviversals groups."
 msgstr ""
+"This list  shows only the current domain's groups and the groups handled in "
+"the Global catalog, such as unviversals groups."
 
 #: ufrmpropertymemberof.lrj:$.strings.[0].value
 msgctxt "tfrmpropertymemberof.label_mof_title.caption"
@@ -1777,10 +1812,14 @@ msgstr "Contains the name for the department in which the user works"
 
 #: ufrmpropertyorganization.lrj:$.strings.[5].value
 msgctxt "tfrmpropertyorganization.edit_title.hint"
-msgid "Contains the user's job title\r\nThis property is commonly used to indicate "
-"the formal job title\r\nSuch as Senior Programmer, rather than occupational "
-"class, such as programmer"
+msgid ""
+"Contains the user's job title\r\n"
+"This property is commonly used to indicate the formal job title\r\n"
+"Such as Senior Programmer, rather than occupational class, such as programmer"
 msgstr ""
+"Contains the user's job title\r\n"
+"This property is commonly used to indicate the formal job title\r\n"
+"Such as Senior Programmer, rather than occupational class, such as programmer"
 
 #: ufrmpropertyorganization.lrj:$.strings.[0].value
 msgctxt "tfrmpropertyorganization.groupbox_manager.caption"
@@ -1819,22 +1858,30 @@ msgstr "name"
 
 #: ufrmpropertyprofile.lrj:$.strings.[9].value
 msgctxt "tfrmpropertyprofile.combobox_connectto.hint"
-msgid "Specifies the drive letter to which to map the UNC path specified by homeDir"
-"ectory"
+msgid ""
+"Specifies the drive letter to which to map the UNC path specified by "
+"homeDirectory"
 msgstr ""
+"Specifies the drive letter to which to map the UNC path specified by "
+"homeDirectory"
 
 #: ufrmpropertyprofile.lrj:$.strings.[11].value
 msgctxt "tfrmpropertyprofile.edit_connectto.hint"
-msgid "The home directory for the account\r\nHomeDirectory must be a UNC path\r\n(f"
-"or example, \\\\**servername\\**path)"
+msgid ""
+"The home directory for the account\r\n"
+"HomeDirectory must be a UNC path\r\n"
+"(for example, \\\\**servername\\**path)"
 msgstr ""
 
 #: ufrmpropertyprofile.lrj:$.strings.[7].value
 msgctxt "tfrmpropertyprofile.edit_homedirectory.hint"
-msgid "The home directory for the account\r\nIf homeDrive is set and specifies a dr"
-"ive letter, homeDirectory must be a UNC path\r\nOtherwise, homeDirectory is "
-"a fully qualified local path including the drive letter\r\n(for example, Dri"
-"veLetter**:\\Directory\\**Folder)"
+msgid ""
+"The home directory for the account\r\n"
+"If homeDrive is set and specifies a drive letter, homeDirectory must be a "
+"UNC path\r\n"
+"Otherwise, homeDirectory is a fully qualified local path including the drive "
+"letter\r\n"
+"(for example, DriveLetter**:\\Directory\\**Folder)"
 msgstr ""
 
 #: ufrmpropertyprofile.lrj:$.strings.[2].value
@@ -1908,22 +1955,26 @@ msgid "List of X509 certificates published for the user account"
 msgstr "List of X509 certificates published for the user account"
 
 #: ufrmpropertypublishedcertificates.lrj:$.strings.[1].value
-msgctxt "tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[0].text"
+msgctxt ""
+"tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[0].text"
 msgid "Issued To"
 msgstr "Issued To"
 
 #: ufrmpropertypublishedcertificates.lrj:$.strings.[2].value
-msgctxt "tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[1].text"
+msgctxt ""
+"tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[1].text"
 msgid "Issued By"
 msgstr "Issued By"
 
 #: ufrmpropertypublishedcertificates.lrj:$.strings.[3].value
-msgctxt "tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[2].text"
+msgctxt ""
+"tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[2].text"
 msgid "Intended Purposes"
 msgstr "Intended Purposes"
 
 #: ufrmpropertypublishedcertificates.lrj:$.strings.[4].value
-msgctxt "tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[3].text"
+msgctxt ""
+"tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[3].text"
 msgid "Expiration Date"
 msgstr "Expiration Date"
 
@@ -2088,22 +2139,34 @@ msgid "Properties"
 msgstr "Properties"
 
 #: ufrmrsatoptions.lrj:$.strings.[3].value
-msgctxt "tfrmrsatoptions.combobox3.text"
+#, fuzzy
+#| msgctxt "tfrmrsatoptions.combobox3.text"
+#| msgid "False"
+msgctxt "tfrmrsatoption.combobox3.text"
 msgid "False"
 msgstr "False"
 
 #: ufrmrsatoptions.lrj:$.strings.[0].value
-msgctxt "tfrmrsatoptions.label1.caption"
+#, fuzzy
+#| msgctxt "tfrmrsatoptions.label1.caption"
+#| msgid "Theme"
+msgctxt "tfrmrsatoption.label1.caption"
 msgid "Theme"
 msgstr "Theme"
 
 #: ufrmrsatoptions.lrj:$.strings.[1].value
-msgctxt "tfrmrsatoptions.label2.caption"
+#, fuzzy
+#| msgctxt "tfrmrsatoptions.label2.caption"
+#| msgid "Lang"
+msgctxt "tfrmrsatoption.label2.caption"
 msgid "Lang"
 msgstr "Lang"
 
 #: ufrmrsatoptions.lrj:$.strings.[2].value
-msgctxt "tfrmrsatoptions.label3.caption"
+#, fuzzy
+#| msgctxt "tfrmrsatoptions.label3.caption"
+#| msgid "AdvancedView"
+msgctxt "tfrmrsatoption.label3.caption"
 msgid "AdvancedView"
 msgstr "AdvancedView"
 
@@ -2994,9 +3057,10 @@ msgstr "Permissions:"
 
 #: uvisdelegatecontrol.lrj:$.strings.[2].value
 msgctxt "tvisdelegatecontrol.label2.caption"
-msgid "This wizard helps you delegate control of Active Directory objects. You can "
-"grant users permission to manage users, groups, computers, organizational un"
-"its, and other objects stored in Active Directory Domain Services."
+msgid ""
+"This wizard helps you delegate control of Active Directory objects. You can "
+"grant users permission to manage users, groups, computers, organizational "
+"units, and other objects stored in Active Directory Domain Services."
 msgstr ""
 
 #: uvisdelegatecontrol.lrj:$.strings.[3].value
@@ -3016,8 +3080,10 @@ msgstr "Users and Groups"
 
 #: uvisdelegatecontrol.lrj:$.strings.[5].value
 msgctxt "tvisdelegatecontrol.label6.caption"
-msgid "Select one or more users or groups to whom you want to delegate control."
-msgstr "Select one or more users or groups to whom you want to delegate control."
+msgid ""
+"Select one or more users or groups to whom you want to delegate control."
+msgstr ""
+"Select one or more users or groups to whom you want to delegate control."
 
 #: uvisdelegatecontrol.lrj:$.strings.[7].value
 msgctxt "tvisdelegatecontrol.label7.caption"
@@ -3046,8 +3112,9 @@ msgstr "Create a custom task to delegate"
 
 #: uvisdelegatecontrol.lrj:$.strings.[17].value
 msgctxt "tvisdelegatecontrol.radiobutton3.caption"
-msgid "This folder, existing objects in this folder, and creation of new objects in"
-" this folder"
+msgid ""
+"This folder, existing objects in this folder, and creation of new objects in "
+"this folder"
 msgstr ""
 
 #: uvisdelegatecontrol.lrj:$.strings.[18].value
@@ -3157,8 +3224,9 @@ msgstr "Logon Workstations"
 
 #: uvislogonworkstation.lrj:$.strings.[1].value
 msgctxt "tvislogonworkstation.label_info.caption"
-msgid "In Computer name, type the computer''s NetBIOS or Domain Name system (DNS) n"
-"ame."
+msgid ""
+"In Computer name, type the computer''s NetBIOS or Domain Name system (DNS) "
+"name."
 msgstr ""
 
 #: uvislogonworkstation.lrj:$.strings.[5].value
@@ -3293,14 +3361,16 @@ msgstr "Host offering this service:"
 
 #: uvisnewresourcerecord.lrj:$.strings.[39].value
 msgctxt "tvisnewresourcerecord.label8.caption"
-msgid "Allow any authenticated user to update all DNS records with the same nam. Th"
-"is setting applies only to DNS records for a new name."
+msgid ""
+"Allow any authenticated user to update all DNS records with the same nam. "
+"This setting applies only to DNS records for a new name."
 msgstr ""
 
 #: uvisnewresourcerecord.lrj:$.strings.[16].value
 msgctxt "tvisnewresourcerecord.label_aallow.caption"
-msgid "Allow any authenticated user to update all DNS records with the same name. T"
-"his setting applies only to DNS records for a new name."
+msgid ""
+"Allow any authenticated user to update all DNS records with the same name. "
+"This setting applies only to DNS records for a new name."
 msgstr ""
 
 #: uvisnewresourcerecord.lrj:$.strings.[14].value
@@ -3340,8 +3410,9 @@ msgstr "Alias name (uses parent domain if left blank):"
 
 #: uvisnewresourcerecord.lrj:$.strings.[8].value
 msgctxt "tvisnewresourcerecord.label_cnameallow.caption"
-msgid "Allow any authenticated user to update all DNS records with the same name. T"
-"his setting applies only to DNS records for a new name."
+msgid ""
+"Allow any authenticated user to update all DNS records with the same name. "
+"This setting applies only to DNS records for a new name."
 msgstr ""
 
 #: uvisnewresourcerecord.lrj:$.strings.[7].value
@@ -3366,9 +3437,10 @@ msgstr "Record time stamp:"
 
 #: uvisnewresourcerecord.lrj:$.strings.[25].value
 msgctxt "tvisnewresourcerecord.label_mxdefault.caption"
-msgid "By default. DNS uses the parent domain name when creating a Mail Exchange re"
-"cord. You can specify a host or child name, but in most deployements, the ab"
-"ove field is left blank."
+msgid ""
+"By default. DNS uses the parent domain name when creating a Mail Exchange "
+"record. You can specify a host or child name, but in most deployements, the "
+"above field is left blank."
 msgstr ""
 
 #: uvisnewresourcerecord.lrj:$.strings.[26].value
@@ -3393,8 +3465,9 @@ msgstr "Mail server priority:"
 
 #: uvisnewresourcerecord.lrj:$.strings.[22].value
 msgctxt "tvisnewresourcerecord.label_ptrallowany.caption"
-msgid "Allow any authenticated user to update all DNS records with the same name. T"
-"his setting applies only to DNS records for a new name."
+msgid ""
+"Allow any authenticated user to update all DNS records with the same name. "
+"This setting applies only to DNS records for a new name."
 msgstr ""
 
 #: uvisnewresourcerecord.lrj:$.strings.[19].value
@@ -3534,15 +3607,17 @@ msgstr "Welcome to the New Zone Wizard"
 
 #: uvisnewzonewizard.lrj:$.strings.[15].value
 msgctxt "tvisnewzonewizard.label10.caption"
-msgid "Create a copy of a zone containing inly Name Server (NS), Start of Authority"
-" (SOA), and possibly glue Host (A) records. A server containing a stub zone "
+msgid ""
+"Create a copy of a zone containing inly Name Server (NS), Start of Authority "
+"(SOA), and possibly glue Host (A) records. A server containing a stub zone "
 "is not authoritative for that zone."
 msgstr ""
 
 #: uvisnewzonewizard.lrj:$.strings.[16].value
 msgctxt "tvisnewzonewizard.label11.caption"
-msgid "Store the zone in Active Directory (available only if DNS server is a writea"
-"ble domain controller)"
+msgid ""
+"Store the zone in Active Directory (available only if DNS server is a "
+"writeable domain controller)"
 msgstr ""
 
 #: uvisnewzonewizard.lrj:$.strings.[17].value
@@ -3552,8 +3627,10 @@ msgstr "Active Directory Zone Replication Scope"
 
 #: uvisnewzonewizard.lrj:$.strings.[18].value
 msgctxt "tvisnewzonewizard.label13.caption"
-msgid "You can select how you want DNS data replicated throughout your network."
-msgstr "You can select how you want DNS data replicated throughout your network."
+msgid ""
+"You can select how you want DNS data replicated throughout your network."
+msgstr ""
+"You can select how you want DNS data replicated throughout your network."
 
 #: uvisnewzonewizard.lrj:$.strings.[19].value
 msgctxt "tvisnewzonewizard.label14.caption"
@@ -3572,13 +3649,16 @@ msgstr "To all DNS servers running on domain controllers in this domain:"
 
 #: uvisnewzonewizard.lrj:$.strings.[22].value
 msgctxt "tvisnewzonewizard.label17.caption"
-msgid "To all domain controllers in this domain (for Windows 2000 compatibility):"
-msgstr "To all domain controllers in this domain (for Windows 2000 compatibility):"
+msgid ""
+"To all domain controllers in this domain (for Windows 2000 compatibility):"
+msgstr ""
+"To all domain controllers in this domain (for Windows 2000 compatibility):"
 
 #: uvisnewzonewizard.lrj:$.strings.[23].value
 msgctxt "tvisnewzonewizard.label18.caption"
-msgid "To all domain controllers specified in the scoper of this directory partitio"
-"n:"
+msgid ""
+"To all domain controllers specified in the scoper of this directory "
+"partition:"
 msgstr ""
 
 #: uvisnewzonewizard.lrj:$.strings.[24].value
@@ -3598,10 +3678,11 @@ msgstr "What is the name of the new zone?"
 
 #: uvisnewzonewizard.lrj:$.strings.[26].value
 msgctxt "tvisnewzonewizard.label21.caption"
-msgid "The zone name specifies the portion of the DNS namespace for which this serv"
-"er is autoritative. It might be your organization's domain name (for example"
-", example.com) or a portion of the domain name (for example, newzone.example"
-".com). The zone name is not the name of the DNS server."
+msgid ""
+"The zone name specifies the portion of the DNS namespace for which this "
+"server is autoritative. It might be your organization's domain name (for "
+"example, example.com) or a portion of the domain name (for example, newzone."
+"example.com). The zone name is not the name of the DNS server."
 msgstr ""
 
 #: uvisnewzonewizard.lrj:$.strings.[27].value
@@ -3616,19 +3697,23 @@ msgstr "Zone File"
 
 #: uvisnewzonewizard.lrj:$.strings.[29].value
 msgctxt "tvisnewzonewizard.label24.caption"
-msgid "You can create a new zone file or use a file copied from another DNS server."
-msgstr "You can create a new zone file or use a file copied from another DNS server."
+msgid ""
+"You can create a new zone file or use a file copied from another DNS server."
+msgstr ""
+"You can create a new zone file or use a file copied from another DNS server."
 
 #: uvisnewzonewizard.lrj:$.strings.[30].value
 msgctxt "tvisnewzonewizard.label25.caption"
-msgid "Do you want to create a new zone file or use an existing file that you have "
+msgid ""
+"Do you want to create a new zone file or use an existing file that you have "
 "copied from another DNS server?"
 msgstr ""
 
 #: uvisnewzonewizard.lrj:$.strings.[31].value
 msgctxt "tvisnewzonewizard.label26.caption"
-msgid "To use this existing file, ensure that it has been copied to the folder %Sys"
-"temRoot%\\system32\\dns on this server, and then click Next."
+msgid ""
+"To use this existing file, ensure that it has been copied to the folder "
+"%SystemRoot%\\system32\\dns on this server, and then click Next."
 msgstr ""
 
 #: uvisnewzonewizard.lrj:$.strings.[32].value
@@ -3643,14 +3728,16 @@ msgstr "Use this existing file:"
 
 #: uvisnewzonewizard.lrj:$.strings.[34].value
 msgctxt "tvisnewzonewizard.label29.caption"
-msgid "You can specify that this DNS zone accepts secure, nonsecure, or no dynamic "
+msgid ""
+"You can specify that this DNS zone accepts secure, nonsecure, or no dynamic "
 "updates."
 msgstr ""
 
 #: uvisnewzonewizard.lrj:$.strings.[5].value
 msgctxt "tvisnewzonewizard.label3.caption"
-msgid "A zone translates DNS names to related data, such as IP addresses or network"
-" services."
+msgid ""
+"A zone translates DNS names to related data, such as IP addresses or network "
+"services."
 msgstr ""
 
 #: uvisnewzonewizard.lrj:$.strings.[35].value
@@ -3660,8 +3747,9 @@ msgstr "Dynamic Update"
 
 #: uvisnewzonewizard.lrj:$.strings.[36].value
 msgctxt "tvisnewzonewizard.label31.caption"
-msgid "Dynamic updates enable DNS client computers to register and dynamically upda"
-"te their resource records with a DNS server whenever changes occur."
+msgid ""
+"Dynamic updates enable DNS client computers to register and dynamically "
+"update their resource records with a DNS server whenever changes occur."
 msgstr ""
 
 #: uvisnewzonewizard.lrj:$.strings.[37].value
@@ -3691,8 +3779,9 @@ msgstr "Dynamic updates of resource records are accepted from any client."
 
 #: uvisnewzonewizard.lrj:$.strings.[42].value
 msgctxt "tvisnewzonewizard.label37.caption"
-msgid "This option is a significant security vulnerability because updates can be a"
-"ccepted from untrusted sources."
+msgid ""
+"This option is a significant security vulnerability because updates can be "
+"accepted from untrusted sources."
 msgstr ""
 
 #: uvisnewzonewizard.lrj:$.strings.[43].value
@@ -3702,7 +3791,8 @@ msgstr "Do not allow dynamic updates"
 
 #: uvisnewzonewizard.lrj:$.strings.[44].value
 msgctxt "tvisnewzonewizard.label39.caption"
-msgid "Dynamic updates of resource records are not accepted by this zone. You must "
+msgid ""
+"Dynamic updates of resource records are not accepted by this zone. You must "
 "update these records manually."
 msgstr ""
 
@@ -3718,14 +3808,16 @@ msgstr "Completing the New Zone Wizard"
 
 #: uvisnewzonewizard.lrj:$.strings.[46].value
 msgctxt "tvisnewzonewizard.label41.caption"
-msgid "You have successfully completed the New Zone Wizard. You specified the follo"
-"wing settings:"
+msgid ""
+"You have successfully completed the New Zone Wizard. You specified the "
+"following settings:"
 msgstr ""
 
 #: uvisnewzonewizard.lrj:$.strings.[47].value
 msgctxt "tvisnewzonewizard.label42.caption"
-msgid "Note: You should now add records to the zone or ensure that records are upda"
-"ted dynamically. You can then verify name resolution using nslookup."
+msgid ""
+"Note: You should now add records to the zone or ensure that records are "
+"updated dynamically. You can then verify name resolution using nslookup."
 msgstr ""
 
 #: uvisnewzonewizard.lrj:$.strings.[48].value
@@ -3755,8 +3847,9 @@ msgstr "Creates a copy of a zone that can be updated directly on this server."
 
 #: uvisnewzonewizard.lrj:$.strings.[14].value
 msgctxt "tvisnewzonewizard.label9.caption"
-msgid "Create a copy of a zone that exists on another server. This option helps bal"
-"ance the processing load of primary servers and provides fault tolerance."
+msgid ""
+"Create a copy of a zone that exists on another server. This option helps "
+"balance the processing load of primary servers and provides fault tolerance."
 msgstr ""
 
 #: uvisnewzonewizard.lrj:$.strings.[10].value
@@ -4271,8 +4364,10 @@ msgstr "Confirm Password :"
 
 #: uvistaskresetpassword.lrj:$.strings.[4].value
 msgctxt "tvistaskresetpassword.label_effect.caption"
-msgid "The user must logoff and then logon again for the change to take effect."
-msgstr "The user must logoff and then logon again for the change to take effect."
+msgid ""
+"The user must logoff and then logon again for the change to take effect."
+msgstr ""
+"The user must logoff and then logon again for the change to take effect."
 
 #: uvistaskresetpassword.lrj:$.strings.[1].value
 msgctxt "tvistaskresetpassword.label_newpassword.caption"

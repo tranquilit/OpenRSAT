@@ -6,6 +6,7 @@ object FrmModuleADUC: TFrmModuleADUC
   Align = alClient
   ClientHeight = 400
   ClientWidth = 800
+  LCLVersion = '4.5.0.0'
   TabOrder = 0
   DesignLeft = 709
   DesignTop = 152

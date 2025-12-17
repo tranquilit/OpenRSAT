@@ -9,6 +9,7 @@ object FrmModuleADUCOption: TFrmModuleADUCOption
   AutoScroll = True
   ClientHeight = 596
   ClientWidth = 524
+  LCLVersion = '4.5.0.0'
   TabOrder = 0
   DesignLeft = 2978
   DesignTop = 189
@@ -129,14 +130,14 @@ object FrmModuleADUCOption: TFrmModuleADUCOption
   end
   object Panel2: TPanel
     Left = 4
-    Height = 396
+    Height = 421
     Top = 228
     Width = 516
     Align = alTop
     AutoSize = True
     BorderSpacing.Around = 4
     BevelOuter = bvNone
-    ClientHeight = 396
+    ClientHeight = 421
     ClientWidth = 516
     TabOrder = 1
     object CheckListBox2: TCheckListBox
@@ -147,7 +148,7 @@ object FrmModuleADUCOption: TFrmModuleADUCOption
       AnchorSideRight.Side = asrBottom
       Left = 8
       Height = 176
-      Top = 212
+      Top = 237
       Width = 500
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 8
@@ -179,11 +180,11 @@ object FrmModuleADUCOption: TFrmModuleADUCOption
     end
     object Label4: TLabel
       AnchorSideLeft.Control = Panel2
-      AnchorSideTop.Control = Memo2
+      AnchorSideTop.Control = CheckBox_ShowGPO
       AnchorSideTop.Side = asrBottom
       Left = 8
       Height = 15
-      Top = 158
+      Top = 183
       Width = 79
       BorderSpacing.Around = 8
       Caption = 'Ldap attributes'
@@ -209,7 +210,7 @@ object FrmModuleADUCOption: TFrmModuleADUCOption
       AnchorSideTop.Side = asrBottom
       Left = 8
       Height = 23
-      Top = 181
+      Top = 206
       Width = 130
       BorderSpacing.Around = 8
       Enabled = False
@@ -229,6 +230,35 @@ object FrmModuleADUCOption: TFrmModuleADUCOption
       Caption = 'Tree options'
       Font.Height = -16
       ParentFont = False
+    end
+    object CheckBox_ShowGPO: TCheckBox
+      AnchorSideLeft.Control = Label_ShowGPO
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Memo2
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 166
+      Height = 17
+      Top = 158
+      Width = 342
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      TabOrder = 3
+      OnChange = CheckBox_ShowGPOChange
+    end
+    object Label_ShowGPO: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = CheckBox_ShowGPO
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 159
+      Width = 150
+      BorderSpacing.Around = 8
+      Caption = 'Show GPO'
+      Constraints.MinWidth = 150
+      WordWrap = True
     end
   end
 end

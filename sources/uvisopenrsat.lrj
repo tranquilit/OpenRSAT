@@ -9,7 +9,6 @@
 {"hash":16159529,"name":"tvisopenrsat.menuitem_viewthemedark.caption","sourcebytes":[85,115,101,32,100,97,114,107,32,116,104,101,109,101,32,40,97,116,32,110,101,120,116,32,108,97,117,110,99,104,41],"value":"Use dark theme (at next launch)"},
 {"hash":138063625,"name":"tvisopenrsat.menuitem_viewthemesystem.caption","sourcebytes":[85,115,101,32,115,121,115,116,101,109,32,116,104,101,109,101,32,40,97,116,32,110,101,120,116,32,108,97,117,110,99,104,41],"value":"Use system theme (at next launch)"},
 {"hash":70560563,"name":"tvisopenrsat.menuitem_advancedfeatures.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,65,100,118,97,110,99,101,100,70,101,97,116,117,114,101,115],"value":"MenuItem_AdvancedFeatures"},
-{"hash":258558431,"name":"tvisopenrsat.menuitem_showgpo.caption","sourcebytes":[83,104,111,119,32,71,80,79],"value":"Show GPO"},
 {"hash":214130019,"name":"tvisopenrsat.menuitem_debug.caption","sourcebytes":[68,101,98,117,103,32,111,112,116,105,111,110,115],"value":"Debug options"},
 {"hash":63,"name":"tvisopenrsat.menuitem_help.caption","sourcebytes":[63],"value":"?"},
 {"hash":256032926,"name":"tvisopenrsat.menuitem_retrieveoldconfiguration.caption","sourcebytes":[82,101,116,114,105,101,118,101,32,111,108,100,32,99,111,110,102,105,103,117,114,97,116,105,111,110],"value":"Retrieve old configuration"},
