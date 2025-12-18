@@ -1,0 +1,310 @@
+object VisModifyGPLink: TVisModifyGPLink
+  Left = 667
+  Height = 398
+  Top = 206
+  Width = 674
+  Caption = 'VisModifyGPLink'
+  ClientHeight = 398
+  ClientWidth = 674
+  LCLVersion = '4.5.0.0'
+  object Panel_Top: TPanel
+    Left = 0
+    Height = 39
+    Top = 0
+    Width = 674
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 39
+    ClientWidth = 674
+    TabOrder = 0
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel_Top
+      AnchorSideTop.Control = Edit1
+      AnchorSideTop.Side = asrCenter
+      Left = 8
+      Height = 15
+      Top = 12
+      Width = 38
+      BorderSpacing.Around = 8
+      Caption = 'Object:'
+    end
+    object Edit1: TEdit
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_Top
+      AnchorSideRight.Control = Panel_Top
+      AnchorSideRight.Side = asrBottom
+      Left = 54
+      Height = 23
+      Top = 8
+      Width = 612
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Around = 8
+      TabOrder = 0
+    end
+  end
+  object Panel_Client: TPanel
+    Left = 0
+    Height = 318
+    Top = 39
+    Width = 674
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 318
+    ClientWidth = 674
+    TabOrder = 1
+    object Splitter1: TSplitter
+      Left = 344
+      Height = 318
+      Top = 0
+      Width = 5
+    end
+    object Panel_Left: TPanel
+      AnchorSideRight.Control = Splitter1
+      Left = 0
+      Height = 318
+      Top = 0
+      Width = 344
+      Align = alLeft
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BevelOuter = bvNone
+      ClientHeight = 318
+      ClientWidth = 344
+      TabOrder = 1
+      object Label_LinkedGPO: TLabel
+        AnchorSideLeft.Control = Panel_Left
+        AnchorSideLeft.Side = asrCenter
+        AnchorSideTop.Control = Panel_Left
+        Left = 141
+        Height = 15
+        Top = 8
+        Width = 62
+        BorderSpacing.Around = 8
+        Caption = 'Linked GPO'
+      end
+      object TisGrid_LinkedGPO: TTisGrid
+        AnchorSideLeft.Control = Panel_Left
+        AnchorSideTop.Control = TisSearchEdit1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Panel_Left
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = Panel_Left
+        AnchorSideBottom.Side = asrBottom
+        Left = 8
+        Height = 248
+        Top = 62
+        Width = 328
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderSpacing.Around = 8
+        DragMode = dmAutomatic
+        Header.AutoSizeIndex = -1
+        Header.Columns = <        
+          item
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+            Position = 0
+            Text = 'Name'
+            Width = 284
+            PropertyName = 'name'
+          end>
+        Header.Height = 28
+        Header.MaxHeight = 101
+        Header.MinHeight = 19
+        Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+        Header.SortColumn = 0
+        Header.Style = hsFlatButtons
+        Images = CoreDataModule.ImageList1
+        PopupMenu = PopupMenu1
+        TabOrder = 0
+        TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toSimpleDrawSelection]
+        ZebraColor = 15593713
+        OnDragOver = TisGrid_LinkedGPODragOver
+        OnDragDrop = TisGrid_LinkedGPODragDrop
+        OnGetImageIndex = TisGrid_LinkedGPOGetImageIndex
+        OnBeforeDeleteRows = TisGrid_LinkedGPOBeforeDeleteRows
+      end
+      object TisSearchEdit1: TTisSearchEdit
+        AnchorSideLeft.Control = TisGrid_LinkedGPO
+        AnchorSideTop.Control = Label_LinkedGPO
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TisGrid_LinkedGPO
+        AnchorSideRight.Side = asrBottom
+        Left = 16
+        Height = 23
+        Top = 31
+        Width = 312
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 8
+        ItemHeight = 15
+        TabOrder = 1
+        Buttons = <>
+        OnSearch = TisSearchEdit1Search
+      end
+    end
+    object Panel_Right: TPanel
+      AnchorSideLeft.Control = Splitter1
+      AnchorSideLeft.Side = asrBottom
+      Left = 349
+      Height = 318
+      Top = 0
+      Width = 325
+      Align = alRight
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BevelOuter = bvNone
+      ClientHeight = 318
+      ClientWidth = 325
+      TabOrder = 2
+      object Label_AvailableGPO: TLabel
+        AnchorSideLeft.Control = Panel_Right
+        AnchorSideLeft.Side = asrCenter
+        AnchorSideTop.Control = Panel_Right
+        Left = 125
+        Height = 15
+        Top = 8
+        Width = 75
+        BorderSpacing.Around = 8
+        Caption = 'Available GPO'
+      end
+      object TisGrid_AvailableGPO: TTisGrid
+        AnchorSideLeft.Control = Panel_Right
+        AnchorSideTop.Control = TisSearchEdit2
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Panel_Right
+        AnchorSideRight.Side = asrBottom
+        AnchorSideBottom.Control = Panel_Right
+        AnchorSideBottom.Side = asrBottom
+        Left = 8
+        Height = 248
+        Top = 62
+        Width = 309
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderSpacing.Around = 8
+        DragMode = dmAutomatic
+        Header.AutoSizeIndex = -1
+        Header.Columns = <        
+          item
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+            Position = 0
+            Text = 'Name'
+            Width = 227
+            PropertyName = 'name'
+          end>
+        Header.Height = 28
+        Header.MaxHeight = 101
+        Header.MinHeight = 19
+        Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+        Header.SortColumn = 0
+        Header.Style = hsFlatButtons
+        TabOrder = 0
+        TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+        ZebraColor = 15593713
+        OnDragOver = TisGrid_AvailableGPODragOver
+        OnDragDrop = TisGrid_AvailableGPODragDrop
+        OnBeforeDeleteRows = TisGrid_AvailableGPOBeforeDeleteRows
+      end
+      object TisSearchEdit2: TTisSearchEdit
+        AnchorSideLeft.Control = TisGrid_AvailableGPO
+        AnchorSideTop.Control = Label_AvailableGPO
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = TisGrid_AvailableGPO
+        AnchorSideRight.Side = asrBottom
+        Left = 16
+        Height = 23
+        Top = 31
+        Width = 293
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Around = 8
+        ItemHeight = 15
+        TabOrder = 1
+        Buttons = <>
+        OnSearch = TisSearchEdit2Search
+      end
+    end
+  end
+  object Panel_Bottom: TPanel
+    Left = 0
+    Height = 41
+    Top = 357
+    Width = 674
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 674
+    TabOrder = 2
+    object BitBtn_OK: TBitBtn
+      Left = 489
+      Height = 25
+      Top = 8
+      Width = 42
+      Action = Action_OK
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object BitBtn_Apply: TBitBtn
+      Left = 609
+      Height = 25
+      Top = 8
+      Width = 57
+      Action = Action_Apply
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 1
+    end
+    object BitBtn_Cancel: TBitBtn
+      Left = 539
+      Height = 25
+      Top = 8
+      Width = 62
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 2
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 136
+    Top = 160
+    object MenuItem_EnableGPO: TMenuItem
+      Action = Action_EnableGPO
+    end
+    object MenuItem_DisableGPO: TMenuItem
+      Action = Action_DisableGPO
+    end
+    object MenuItem_EnforceGPO: TMenuItem
+      Action = Action_EnforceGPO
+    end
+  end
+  object ActionList1: TActionList
+    Left = 48
+    Top = 120
+    object Action_EnableGPO: TAction
+      Caption = 'Enable GPO'
+      OnExecute = Action_EnableGPOExecute
+    end
+    object Action_DisableGPO: TAction
+      Caption = 'Disable GPO'
+      OnExecute = Action_DisableGPOExecute
+    end
+    object Action_EnforceGPO: TAction
+      Caption = 'Enforce GPO'
+      OnExecute = Action_EnforceGPOExecute
+    end
+    object Action_Apply: TAction
+      Caption = 'Apply'
+      OnExecute = Action_ApplyExecute
+    end
+    object Action_OK: TAction
+      Caption = 'OK'
+      OnExecute = Action_OKExecute
+    end
+  end
+end

@@ -84,6 +84,10 @@
         <Filename Value="udns.pas"/>
         <UnitName Value="udns"/>
       </Item>
+      <Item>
+        <Filename Value="ugplink.pas"/>
+        <UnitName Value="ugplink"/>
+      </Item>
     </Files>
     <i18n>
       <EnableI18N Value="True"/>

@@ -1,0 +1,14 @@
+{"version":1,"strings":[
+{"hash":92462747,"name":"tvismodifygplink.caption","sourcebytes":[86,105,115,77,111,100,105,102,121,71,80,76,105,110,107],"value":"VisModifyGPLink"},
+{"hash":93370922,"name":"tvismodifygplink.label1.caption","sourcebytes":[79,98,106,101,99,116,58],"value":"Object:"},
+{"hash":28539935,"name":"tvismodifygplink.label_linkedgpo.caption","sourcebytes":[76,105,110,107,101,100,32,71,80,79],"value":"Linked GPO"},
+{"hash":346165,"name":"tvismodifygplink.tisgrid_linkedgpo.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
+{"hash":32460415,"name":"tvismodifygplink.label_availablegpo.caption","sourcebytes":[65,118,97,105,108,97,98,108,101,32,71,80,79],"value":"Available GPO"},
+{"hash":346165,"name":"tvismodifygplink.tisgrid_availablegpo.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
+{"hash":77089212,"name":"tvismodifygplink.bitbtn_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
+{"hash":153323583,"name":"tvismodifygplink.action_enablegpo.caption","sourcebytes":[69,110,97,98,108,101,32,71,80,79],"value":"Enable GPO"},
+{"hash":158090559,"name":"tvismodifygplink.action_disablegpo.caption","sourcebytes":[68,105,115,97,98,108,101,32,71,80,79],"value":"Disable GPO"},
+{"hash":148570415,"name":"tvismodifygplink.action_enforcegpo.caption","sourcebytes":[69,110,102,111,114,99,101,32,71,80,79],"value":"Enforce GPO"},
+{"hash":4749113,"name":"tvismodifygplink.action_apply.caption","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":1339,"name":"tvismodifygplink.action_ok.caption","sourcebytes":[79,75],"value":"OK"}
+]}

@@ -10,17 +10,10 @@ uses
   ComCtrls,
   mormot.core.base,
   mormot.core.variants,
-  mormot.net.ldap;
+  mormot.net.ldap,
+  ugplink;
 
 type
-
-  TGPLink = record
-    Link: RawUtf8;
-    DistinguishedName: RawUtf8;
-    Flag: Integer;
-  end;
-
-  TGPLinkDynArr = Array of TGPLink;
 
   TADUCTreeNodeType = (
     atntNone,
@@ -90,11 +83,12 @@ type
     function GetDistinguishedName: RawUtf8;
     function GetFlag: Integer;
     function GetGPLink: TGPLink;
+    procedure SetFlag(AValue: Integer);
     procedure SetGPLink(AValue: TGPLink);
   public
 
     property DistinguishedName: RawUtf8 read GetDistinguishedName;
-    property Flag: Integer read GetFlag;
+    property Flag: Integer read GetFlag write SetFlag;
     property GPLink: TGPLink read GetGPLink write SetGPLink;
   end;
 
@@ -125,16 +119,9 @@ type
     function ADUCNodeCompare(Node1, Node2: TTreeNode): integer;
   end;
 
-operator=(Destination, Source: TGPLink): Boolean;
-
 implementation
 uses
   mormot.core.text;
-
-operator=(Destination, Source: TGPLink): Boolean;
-begin
-  result := (Destination.Link = Source.Link);
-end;
 
 { TADUCTreeNodeQuery }
 
@@ -298,6 +285,13 @@ end;
 function TADUCTreeNodeGPO.GetGPLink: TGPLink;
 begin
   result := fLink;
+end;
+
+procedure TADUCTreeNodeGPO.SetFlag(AValue: Integer);
+begin
+  if AValue = fLink.Flag then
+    Exit;
+  fLink.Flag := AValue;
 end;
 
 function TADUCTreeNodeGPO.GetDistinguishedName: RawUtf8;

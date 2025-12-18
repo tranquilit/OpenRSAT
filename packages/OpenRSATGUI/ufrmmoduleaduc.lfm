@@ -706,6 +706,23 @@ object FrmModuleADUC: TFrmModuleADUC
       Caption = 'Operations masters'
       OnExecute = Action_OperationsMastersExecute
     end
+    object Action_ModifyGPLink: TAction
+      Caption = 'Modify GPLink'
+      ShortCut = 24653
+      OnExecute = Action_ModifyGPLinkExecute
+    end
+    object Action_EnableGPO: TAction
+      Caption = 'Enable GPO'
+      OnExecute = Action_EnableGPOExecute
+    end
+    object Action_DisableGPO: TAction
+      Caption = 'Disable GPO'
+      OnExecute = Action_DisableGPOExecute
+    end
+    object Action_EnforceGPO: TAction
+      Caption = 'Enforce GPO'
+      OnExecute = Action_EnforceGPOExecute
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
@@ -746,6 +763,15 @@ object FrmModuleADUC: TFrmModuleADUC
     end
     object MenuItem_Find: TMenuItem
       Action = Action_Search
+    end
+    object MenuItem_EnableGPO: TMenuItem
+      Action = Action_EnableGPO
+    end
+    object MenuItem_DisableGPO: TMenuItem
+      Action = Action_DisableGPO
+    end
+    object MenuItem_EnforceGPO: TMenuItem
+      Action = Action_EnforceGPO
     end
     object Separator2: TMenuItem
       Caption = '-'

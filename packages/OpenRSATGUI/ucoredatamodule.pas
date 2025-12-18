@@ -54,7 +54,10 @@ type
     ileADSiteTool,
     ileADSiteSettings,
     ileADServeur,
-    ileADSubnet
+    ileADSubnet,
+    ileADGPODisabled,
+    ileADGPOEnabled,
+    ileADGPOEnforced
   );
 
   { TCoreDataModule }

@@ -30,7 +30,7 @@ uses
   ufrmpropertypublishedcertificates, ufrmpropertymember, ufrmpropertysecurity, 
   ufrmpropertyattributes, uhelpersui, ucommonui, ursatldapclientui, 
   ufrmoption, ufrmmodule, ufrmmoduleaducoption, ufrmrsat, ufrmmodules, 
-  LazarusPackageIntf;
+  uvismodifygplink, LazarusPackageIntf;
 
 implementation
 
