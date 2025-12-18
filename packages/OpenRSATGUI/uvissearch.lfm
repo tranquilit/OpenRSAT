@@ -9,7 +9,7 @@ object VisSearch: TVisSearch
   ClientWidth = 779
   KeyPreview = True
   Position = poOwnerFormCenter
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   OnClose = FormClose
   OnKeyDown = FormKeyDown
   OnShow = FormShow

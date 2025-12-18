@@ -149,7 +149,7 @@ begin
     FrmRSAT.RSAT.LdapClient.SearchScope := lssWholeSubtree;
 
     repeat
-      if not FrmRSAT.RSAT.LdapClient.Search(FrmRSAT.RSAT.LdapClient.DefaultDN(), False, '', ['lDAPDisplayName']) then
+      if not FrmRSAT.RSAT.LdapClient.Search(FrmRSAT.RSAT.LdapClient.SchemaDN, False, '', ['lDAPDisplayName']) then
       begin
         ShowLdapSearchError(FrmRSAT.RSAT.LdapClient);
         Exit;
