@@ -45,6 +45,7 @@ type
   { TFrmModuleADUC }
 
   TFrmModuleADUC = class(TFrameModule)
+    Action_BlockGPOInheritance: TAction;
     Action_EnableGPO: TAction;
     Action_DisableGPO: TAction;
     Action_EnforceGPO: TAction;
@@ -91,6 +92,7 @@ type
     Action_UsersAndComputers: TAction;
     Image1: TImage;
     Image2: TImage;
+    MenuItem_BlockGPOInheritance: TMenuItem;
     MenuItem_EnableGPO: TMenuItem;
     MenuItem_DisableGPO: TMenuItem;
     MenuItem_EnforceGPO: TMenuItem;
@@ -179,6 +181,8 @@ type
     ToolButton_Search: TToolButton;
     ToolButton_User: TToolButton;
     TreeADUC: TTreeView;
+    procedure Action_BlockGPOInheritanceExecute(Sender: TObject);
+    procedure Action_BlockGPOInheritanceUpdate(Sender: TObject);
     procedure Action_ChangeDomainControllerExecute(Sender: TObject);
     procedure Action_ChangeDomainControllerUpdate(Sender: TObject);
     procedure Action_CopyExecute(Sender: TObject);
@@ -436,6 +440,39 @@ begin
   finally
     FreeAndNil(Vis);
   end;
+end;
+
+procedure TFrmModuleADUC.Action_BlockGPOInheritanceExecute(Sender: TObject);
+var
+  NodeData: TADUCTreeNodeObject;
+  BakGPOptions: RawUtf8;
+begin
+  NodeData := (TreeADUC.Selected as TADUCTreeNode).GetNodeDataObject;
+  if not Assigned(NodeData) then
+    Exit;
+  BakGPOptions := NodeData.GPOptions;
+  if NodeData.GPOptions = '1' then
+    NodeData.GPOptions := '0'
+  else
+    NodeData.GPOptions := '1';
+  if not FrmRSAT.LdapClient.Modify(NodeData.DistinguishedName, lmoReplace, 'gPOptions', NodeData.GPOptions) then
+  begin
+    NodeData.GPOptions := BakGPOptions;
+    ShowLdapModifyError(FrmRSAT.LdapClient);
+    Exit;
+  end;
+  TreeADUC.OnGetImageIndex(Self, TreeADUC.Selected);
+end;
+
+procedure TFrmModuleADUC.Action_BlockGPOInheritanceUpdate(Sender: TObject);
+var
+  NodeData: TADUCTreeNodeObject;
+begin
+  NodeData := (TreeADUC.Selected as TADUCTreeNode).GetNodeDataObject;
+  if not Assigned(NodeData) then
+    Exit;
+
+  Action_BlockGPOInheritance.Checked := NodeData.GPOptions = '1';
 end;
 
 procedure TFrmModuleADUC.Action_CopyUpdate(Sender: TObject);
@@ -1349,9 +1386,14 @@ begin
   VisibleItems := [];
 
   case (TreeADUC.Selected as TADUCTreeNode).NodeType of
-    atntObject: VisibleItems := Concat(VisibleItems, [MenuItem_DelegateControl,
-      MenuItem_ChangeDomainController,MenuItem_OperationsMasters,MenuItem_New,
-      MenuItem_Search,MenuItem_Refresh,MenuItem_Delete,MenuItem_Properties]);
+    atntObject:
+    begin
+      VisibleItems := Concat(VisibleItems, [MenuItem_DelegateControl,
+        MenuItem_ChangeDomainController,MenuItem_OperationsMasters,MenuItem_New,
+        MenuItem_Search,MenuItem_Refresh,MenuItem_Delete,MenuItem_Properties]);
+      if fModuleAduc.ADUCOption.ShowGPO then
+        VisibleItems := Concat(VisibleItems, [MenuItem_BlockGPOInheritance]);
+    end;
     atntGPO: VisibleItems := Concat(VisibleItems, [MenuItem_EnableGPO,
       MenuItem_DisableGPO, MenuItem_EnforceGPO]);
   end;
@@ -1476,6 +1518,11 @@ begin
     begin
       ObjectClass := (Node as TADUCTreeNode).GetNodeDataObject.LastObjectClass;
       Node.ImageIndex := ObjectClassToImageIndex(ObjectClass);
+      if fModuleAduc.ADUCOption.ShowGPO and ((Node as TADUCTreeNode).GetNodeDataObject.GPOptions = '1') then
+      case TImageListEnum(Node.ImageIndex) of
+        ileADOU: Node.ImageIndex := Ord(ileADOUGPOInheritanceDisable);
+        ileADContainer: Node.ImageIndex := Ord(ileADContainerGPOInheritanceDisabled);
+      end;
     end;
     atntGPO:
     begin
@@ -1793,8 +1840,7 @@ begin
 
   TreeADUC.BeginUpdate;
   try
-    ANode.ImageIndex := ObjectClassToImageIndex(NodeData.LastObjectClass);
-    ANode.SelectedIndex := ANode.ImageIndex;
+    TreeADUC.OnGetImageIndex(Self, ANode);
     for i := 0 to ANode.Count - 1 do
     begin
       if not Assigned(ANode.Items[i]) then
@@ -1804,8 +1850,7 @@ begin
       if not Assigned(NodeData) then
         continue;
 
-      ANode.Items[i].ImageIndex := ObjectClassToImageIndex(NodeData.LastObjectClass);
-      ANode.Items[i].SelectedIndex := ANode.Items[i].ImageIndex;
+      TreeADUC.OnGetImageIndex(Self, ANode.Items[i]);
     end;
   finally
     TreeADUC.EndUpdate;
@@ -2092,7 +2137,7 @@ begin
   try
     Ldap.SearchScope := lssSingleLevel;
     repeat
-      if not Ldap.Search(NodeData.DistinguishedName, False, BuildFilter, ['distinguishedName', 'objectClass', 'gPLink', 'name']) then
+      if not Ldap.Search(NodeData.DistinguishedName, False, BuildFilter, ['distinguishedName', 'objectClass', 'gPLink', 'name', 'gPOptions']) then
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, 'Fail to refresh ADUCTreeNode(%): %', [Node.Text, Ldap.ResultString], Self);
@@ -2123,6 +2168,7 @@ begin
           RefreshNode.HasChildren := True;
         end;
 
+        TreeADUC.OnGetImageIndex(Self, RefreshNode);
         ItemNodeData := (RefreshNode as TADUCTreeNode).GetNodeDataObject;
         if not Assigned(ItemNodeData) then
           continue;
@@ -2131,6 +2177,7 @@ begin
         RefreshNode.Text := ItemNodeData.Name;
         ItemNodeData.ObjectClass := SearchResult.Find('objectClass').GetAllReadable;
         ItemNodeData.GPLink := SearchResult.Find('gPLink').GetReadable();
+        ItemNodeData.GPOptions := SearchResult.Find('gPOptions').GetReadable();
       end;
     until Ldap.SearchCookie = '';
   finally
@@ -2168,6 +2215,7 @@ begin
       EndUpdate;
     end;
   end;
+  TreeADUC.OnGetImageIndex(Self, Node);
 
   // Refresh GPO
   if fModuleAduc.ADUCOption.ShowGPO then

@@ -8,8 +8,8 @@ object FrmModuleADUC: TFrmModuleADUC
   ClientWidth = 800
   LCLVersion = '4.5.0.0'
   TabOrder = 0
-  DesignLeft = 709
-  DesignTop = 152
+  DesignLeft = 941
+  DesignTop = 207
   object Splitter1: TSplitter
     Left = 168
     Height = 349
@@ -481,6 +481,7 @@ object FrmModuleADUC: TFrmModuleADUC
     PopupMenu = PopupMenu1
     ReadOnly = True
     RightClickSelect = True
+    StateImages = CoreDataModule.ImageList1
     TabOrder = 3
     Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
     OnChange = TreeADUCChange
@@ -723,6 +724,11 @@ object FrmModuleADUC: TFrmModuleADUC
       Caption = 'Enforce GPO'
       OnExecute = Action_EnforceGPOExecute
     end
+    object Action_BlockGPOInheritance: TAction
+      Caption = 'Block GPO Inheritance'
+      OnExecute = Action_BlockGPOInheritanceExecute
+      OnUpdate = Action_BlockGPOInheritanceUpdate
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
@@ -772,6 +778,9 @@ object FrmModuleADUC: TFrmModuleADUC
     end
     object MenuItem_EnforceGPO: TMenuItem
       Action = Action_EnforceGPO
+    end
+    object MenuItem_BlockGPOInheritance: TMenuItem
+      Action = Action_BlockGPOInheritance
     end
     object Separator2: TMenuItem
       Caption = '-'

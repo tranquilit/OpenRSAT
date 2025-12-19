@@ -49,6 +49,7 @@ type
     fAttributes: TLdapAttributeList;
 
     function GetFirstAttribute(AttributeName: RawUtf8): RawUtf8;
+    function GetGPOptions: RawUtf8;
     function GetLastAttribute(AttributeName: RawUtf8): RawUtf8;
     function GetAllAttribute(AttributeName: RawUtf8): TRawUtf8DynArray;
     function GetName: String;
@@ -60,6 +61,7 @@ type
     function GetObjectClass: TRawUtf8DynArray;
     procedure SetDistinguishedName(AValue: String);
     procedure SetGPLink(AValue: String);
+    procedure SetGPOptions(AValue: RawUtf8);
     procedure SetName(AValue: String);
     procedure SetObjectClass(AValue: TRawUtf8DynArray);
   public
@@ -72,6 +74,7 @@ type
     property ObjectClass: TRawUtf8DynArray read GetObjectClass write SetObjectClass;
     property LastObjectClass: String read GetLastObjectClass;
     property GPLink: String read GetGPLink write SetGPLink;
+    property GPOptions: RawUtf8 read GetGPOptions write SetGPOptions;
   end;
 
   { TADUCTreeNodeGPO }
@@ -160,6 +163,14 @@ begin
   Attribute := fAttributes.Find(AttributeName);
   if Assigned(Attribute) then
     result := Attribute.GetReadable();
+end;
+
+function TADUCTreeNodeObject.GetGPOptions: RawUtf8;
+begin
+  if not Assigned(Self) then
+    Exit;
+
+  result := fAttributes.Find('gPOptions').GetReadable();
 end;
 
 function TADUCTreeNodeObject.GetLastAttribute(AttributeName: RawUtf8): RawUtf8;
@@ -251,6 +262,11 @@ end;
 procedure TADUCTreeNodeObject.SetGPLink(AValue: String);
 begin
   SetAttribute('gPLink', [AValue]);
+end;
+
+procedure TADUCTreeNodeObject.SetGPOptions(AValue: RawUtf8);
+begin
+  SetAttribute('gPOptions', [AValue]);
 end;
 
 procedure TADUCTreeNodeObject.SetName(AValue: String);

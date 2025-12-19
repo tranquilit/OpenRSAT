@@ -57,7 +57,9 @@ type
     ileADSubnet,
     ileADGPODisabled,
     ileADGPOEnabled,
-    ileADGPOEnforced
+    ileADGPOEnforced,
+    ileADOUGPOInheritanceDisable,
+    ileADContainerGPOInheritanceDisabled
   );
 
   { TCoreDataModule }
