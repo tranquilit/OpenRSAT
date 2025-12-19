@@ -1597,9 +1597,9 @@ function DNSRRSRVBytesToRecord(out SRV: TRRSRV; const Buffer: TByteArray
 begin
   result := False;
   try
-    SRV.wPriority := (Buffer[0] shl 8) and Buffer[1];
-    SRV.wWeight := (Buffer[2] shl 8) and Buffer[3];
-    SRV.wPort := (Buffer[4] shl 8) and Buffer[5];
+    SRV.wPriority := (Buffer[0] shl 8) or Buffer[1];
+    SRV.wWeight := (Buffer[2] shl 8) or Buffer[3];
+    SRV.wPort := (Buffer[4] shl 8) or Buffer[5];
     result := DNSCOUNTNAMEBytesToRecord(SRV.nameTarget, PByteArray(@Buffer[6])^);
   finally
   end;

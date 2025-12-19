@@ -38,14 +38,9 @@ type
   TDNSTreeNode = class(TTreeNode)
   private
     fType: TDNSTreeNodeType;
-
-    // dtntZone, dtntDNSNode
     fAttributes: TLdapAttributeList;
     fDistinguishedName: String;
     fRetrieved: Boolean;
-
-    //fChildren: TDocVariantData;
-    //fOwnerZone: TDNSTreeNode;
   public
     constructor Create(AnOwner: TTreeNodes); override;
     destructor Destroy; override;
@@ -193,8 +188,8 @@ constructor TDNSTreeNode.Create(AnOwner: TTreeNodes);
 begin
   inherited Create(AnOwner);
 
-  ImageIndex := Ord(ileADOU);
-  SelectedIndex := Ord(ileADOU);
+  ImageIndex := Ord(ileADContainer);
+  SelectedIndex := Ord(ileADContainer);
 
   fRetrieved := False;
   fDistinguishedName := '';
@@ -384,7 +379,7 @@ begin
       newRaw.Clear;
       continue;
     end;
-    for j := 0 to DNSRecordAttribute.Count - 1 do
+    for j := 0 to Pred(DNSRecordAttribute.Count) do
     begin
       if not DNSRecordBytesToRecord(DNSRecord, PByteArray(DNSRecordAttribute.GetRaw(j))^) then
         continue;
@@ -429,56 +424,67 @@ end;
 
 procedure TFrmModuleDNS.RetrieveNodeZone(Node: TDNSTreeNode);
 var
-  SearchResult: TLdapResult;
-  NewNode: TDNSTreeNode;
+  DNSNode: TLdapResult;
+  TreeNode: TDNSTreeNode;
+  TreeNodeList: Array of TDNSTreeNode;
 
-  function AddDNSNode(Node: TDNSTreeNode; SplittedName: TStringArray): TDNSTreeNode;
+  function GetOrAddDNSNode(Node: TDNSTreeNode; SplittedName: TStringArray): TDNSTreeNode;
   var
-    NewNode: TDNSTreeNode;
     idx: Integer;
   begin
     idx := high(SplittedName);
-    NewNode := (node.FindNode(SplittedName[idx]) as TDNSTreeNode);
-    if not Assigned(NewNode) then
-      NewNode := (TreeDNS.Items.AddChild(Node, SplittedName[idx]) as TDNSTreeNode);
-    NewNode.Visible := (idx > 0) or (NewNode.Count > 0);
-    NewNode.fType := dtntDNSNode;
-    NewNode.fRetrieved := True;
+    result := (Node.FindNode(SplittedName[idx]) as TDNSTreeNode);
+    if not Assigned(result) then
+      result := (TreeDNS.Items.AddChild(Node, SplittedName[idx]) as TDNSTreeNode);
+    result.Visible := (idx > 0) or (result.Count > 0);
+    result.fType := dtntDNSNode;
+    result.fRetrieved := True;
     Delete(SplittedName, idx, 1);
     if idx > 0 then
-      newNode := AddDNSNode((NewNode as TDNSTreeNode), SplittedName);
-    result := newNode;
+      result := GetOrAddDNSNode(result, SplittedName);
+  end;
+
+  function RemoveOldDNSNode(Node: TDNSTreeNode; TreeNodeList: Array of TDNSTreeNode): Boolean;
+  var
+    i, j: Integer;
+    Found: Boolean;
+  begin
+    result := False;
+    i := 0;
+    while i < Node.Count do
+    begin
+      Found := False;
+      for j := 0 to Length(TreeNodeList) do
+      begin
+        if (Node.Items[i] = TreeNodeList[j]) or RemoveOldDNSNode((Node.Items[i] as TDNSTreeNode), TreeNodeList) then
+        begin
+          Found := True;
+          result := True;
+          break;
+        end;
+      end;
+      if not Found then
+        TreeDNS.Items.Delete(Node.Items[i])
+      else
+        Inc(i);
+    end;
   end;
 
 begin
-  Node.DeleteChildren;
-  FrmRSAT.LdapClient.SearchBegin();
-  try
-    FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
+  TreeNodeList := nil;
+  for DNSNode in fModule.GetZoneNodes(Node.DistinguishedName).Items do
+  begin
+    if not Assigned(DNSNode) then
+      continue;
 
-    repeat
-      if not FrmRSAT.LdapClient.Search(Node.DistinguishedName, False, '', ['*']) then
-      begin
-        if Assigned(fLog) then
-          fLog.Log(sllError, '% - Ldap Search Error: %', [Self.Name, FrmRSAT.LdapClient.ResultString]);
-        ShowLdapSearchError(FrmRSAT.LdapClient);
-        Exit;
-      end;
-
-      for SearchResult in FrmRSAT.LdapClient.SearchResult.Items do
-      begin
-        if not Assigned(SearchResult) then
-          continue;
-
-        NewNode := AddDNSNode(Node, String(SearchResult.Find('dc').GetReadable()).Split('.'));
-        NewNode.fDistinguishedName := SearchResult.ObjectName;
-        NewNode.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone);
-      end;
-    until FrmRSAT.LdapClient.SearchCookie = '';
-  finally
-    FrmRSAT.LdapClient.SearchEnd;
+    TreeNode := GetOrAddDNSNode(Node, String(DNSNode.Find('dc').GetReadable()).Split('.'));
+    TreeNode.fDistinguishedName := DNSNode.ObjectName;
+    TreeNode.fAttributes := TLdapAttributeList(DNSNode.Attributes.Clone);
+    Insert(TreeNode, TreeNodeList, 0);
   end;
+
   Node.fRetrieved := True;
+  RemoveOldDNSNode(Node, TreeNodeList);
 end;
 
 procedure TFrmModuleDNS.RetrieveNode(Node: TDNSTreeNode);
@@ -968,7 +974,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Create', [Self.Name]);
 
-  fModule := TModuleADDNS.Create;
+  fModule := TModuleADDNS.Create(FrmRSAT.LdapClient);
 
   FrmRSAT.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
   FrmRSAT.LdapClient.RegisterObserverClose(@OnLdapClientClose);
