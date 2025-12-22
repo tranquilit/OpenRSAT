@@ -1,0 +1,152 @@
+object VisProfileManager: TVisProfileManager
+  Left = 2423
+  Height = 288
+  Top = 202
+  Width = 551
+  Caption = 'Profile manager'
+  ClientHeight = 288
+  ClientWidth = 551
+  Position = poOwnerFormCenter
+  SessionProperties = 'ListView1.ViewStyle'
+  LCLVersion = '4.5.0.0'
+  OnShow = FormShow
+  object ToolBar1: TToolBar
+    Left = 0
+    Height = 26
+    Top = 0
+    Width = 551
+    Caption = 'ToolBar1'
+    Images = CoreDataModule.ImageList1
+    TabOrder = 0
+    object ToolButton_Add: TToolButton
+      Left = 1
+      Top = 2
+      Action = Action_Add
+    end
+    object ToolButton_Delete: TToolButton
+      Left = 24
+      Top = 2
+      Action = Action_Delete
+    end
+    object ToolButton_Edit: TToolButton
+      Left = 47
+      Top = 2
+      Action = Action_Edit
+    end
+    object ToolButton_SwitchListView: TToolButton
+      Left = 70
+      Top = 2
+      Caption = 'ToolButton_SwitchListView'
+      DropdownMenu = PopupMenu1
+      Style = tbsButtonDrop
+    end
+  end
+  object ListView1: TListView
+    Left = 8
+    Height = 205
+    Top = 34
+    Width = 535
+    Align = alClient
+    BorderSpacing.Around = 8
+    Columns = <    
+      item
+        AutoSize = True
+        Caption = 'Name'
+        Width = 10
+      end    
+      item
+        AutoSize = True
+        Caption = 'Domain'
+        Width = 10
+      end    
+      item
+        AutoSize = True
+        Caption = 'Domain Controller'
+        Width = 10
+      end    
+      item
+        AutoSize = True
+        Caption = 'Username'
+        Width = 10
+      end>
+    LargeImages = CoreDataModule.ImageList1
+    RowSelect = True
+    SmallImages = CoreDataModule.ImageList1
+    TabOrder = 1
+    ViewStyle = vsIcon
+    OnEdited = ListView1Edited
+    OnResize = ListView1Resize
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 41
+    Top = 247
+    Width = 551
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 551
+    TabOrder = 2
+    object BitBtn_OK: TBitBtn
+      Left = 501
+      Height = 25
+      Top = 8
+      Width = 42
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 200
+    Top = 48
+    object MenuItem_SmallIcons: TMenuItem
+      Caption = 'Small icons'
+      OnClick = MenuItem_SmallIconsClick
+    end
+    object MenuItem_LargeIcons: TMenuItem
+      Caption = 'Large icons'
+      OnClick = MenuItem_LargeIconsClick
+    end
+    object MenuItem_List: TMenuItem
+      Caption = 'List'
+      OnClick = MenuItem_ListClick
+    end
+    object MenuItem_Table: TMenuItem
+      Caption = 'Table'
+      OnClick = MenuItem_TableClick
+    end
+  end
+  object ActionList1: TActionList
+    Images = CoreDataModule.ImageList1
+    Left = 280
+    Top = 48
+    object Action_Add: TAction
+      Caption = 'Action_Add'
+      ImageIndex = 29
+      OnExecute = Action_AddExecute
+    end
+    object Action_Delete: TAction
+      Caption = 'Action_Delete'
+      ImageIndex = 13
+      OnExecute = Action_DeleteExecute
+      OnUpdate = Action_DeleteUpdate
+    end
+    object Action_Edit: TAction
+      Caption = 'Action_Edit'
+      ImageIndex = 30
+      OnExecute = Action_EditExecute
+      OnUpdate = Action_EditUpdate
+    end
+  end
+  object IniPropStorage1: TIniPropStorage
+    StoredValues = <>
+    Left = 120
+    Top = 120
+  end
+end

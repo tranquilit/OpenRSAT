@@ -141,6 +141,10 @@ msgstr "Do you want to delete the selected records from the server?"
 msgid "The primary group cannot be deleted. You need to define another if you wish to delete this one."
 msgstr "The primary group cannot be deleted. You need to define another if you wish to delete this one."
 
+#: ucommon.rsdeleteprofile
+msgid "Do you want to delete the profile %?"
+msgstr "Do you want to delete the profile %?"
+
 #: ucommon.rsdeny
 msgid "Deny"
 msgstr "Deny"

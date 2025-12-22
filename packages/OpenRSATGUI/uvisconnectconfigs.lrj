@@ -2,12 +2,9 @@
 {"hash":68576078,"name":"tformconnectconfigs.caption","sourcebytes":[79,112,101,110,82,83,65,84,32,65,117,116,104,101,110,116,105,99,97,116,105,111,110],"value":"OpenRSAT Authentication"},
 {"hash":179191546,"name":"tformconnectconfigs.label_password.caption","sourcebytes":[80,97,115,115,119,111,114,100,58],"value":"Password:"},
 {"hash":155447552,"name":"tformconnectconfigs.label_username.caption","sourcebytes":[85,115,101,114,110,97,109,101,58,32],"value":"Username: "},
-{"hash":116154878,"name":"tformconnectconfigs.label_config.caption","sourcebytes":[67,111,110,102,105,103,117,114,97,116,105,111,110],"value":"Configuration"},
+{"hash":127258741,"name":"tformconnectconfigs.label_profile.caption","sourcebytes":[80,114,111,102,105,108,101],"value":"Profile"},
 {"hash":94149826,"name":"tformconnectconfigs.label_server.caption","sourcebytes":[83,101,114,118,101,114],"value":"Server"},
-{"hash":250215108,"name":"tformconnectconfigs.label1.caption","sourcebytes":[65,117,116,111,32,99,111,110,110,101,99,116],"value":"Auto connect"},
-{"hash":310020,"name":"tformconnectconfigs.action_editconfig.caption","sourcebytes":[69,100,105,116],"value":"Edit"},
+{"hash":250215108,"name":"tformconnectconfigs.label_autoconnect.caption","sourcebytes":[65,117,116,111,32,99,111,110,110,101,99,116],"value":"Auto connect"},
 {"hash":1339,"name":"tformconnectconfigs.action_ok.caption","sourcebytes":[79,75],"value":"OK"},
-{"hash":77089212,"name":"tformconnectconfigs.action_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
-{"hash":18340,"name":"tformconnectconfigs.action_addconfig.caption","sourcebytes":[65,100,100],"value":"Add"},
-{"hash":78392485,"name":"tformconnectconfigs.action_deleteconfig.caption","sourcebytes":[68,101,108,101,116,101],"value":"Delete"}
+{"hash":77089212,"name":"tformconnectconfigs.action_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"}
 ]}

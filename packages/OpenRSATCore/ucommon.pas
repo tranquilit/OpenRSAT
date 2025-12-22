@@ -388,6 +388,8 @@ resourcestring
   rsDeleteObjectConfirmation = 'Do you want to delete the record % from the server?';
   rsDeleteObjectsConfirmation = 'Do you want to delete the selected records from the server?';
 
+  rsDeleteProfile = 'Do you want to delete the profile %?';
+
 const
   DAYS_BETWEEN_1601_AND_1900 = 109205;
   HUNDRED_OF_MS_IN_A_DAY = 864000000000;

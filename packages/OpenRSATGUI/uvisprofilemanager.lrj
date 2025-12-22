@@ -1,0 +1,17 @@
+{"version":1,"strings":[
+{"hash":112463042,"name":"tvisprofilemanager.caption","sourcebytes":[80,114,111,102,105,108,101,32,109,97,110,97,103,101,114],"value":"Profile manager"},
+{"hash":106991073,"name":"tvisprofilemanager.toolbar1.caption","sourcebytes":[84,111,111,108,66,97,114,49],"value":"ToolBar1"},
+{"hash":242687463,"name":"tvisprofilemanager.toolbutton_switchlistview.caption","sourcebytes":[84,111,111,108,66,117,116,116,111,110,95,83,119,105,116,99,104,76,105,115,116,86,105,101,119],"value":"ToolButton_SwitchListView"},
+{"hash":346165,"name":"tvisprofilemanager.listview1.columns[0].caption","sourcebytes":[78,97,109,101],"value":"Name"},
+{"hash":79050750,"name":"tvisprofilemanager.listview1.columns[1].caption","sourcebytes":[68,111,109,97,105,110],"value":"Domain"},
+{"hash":199636242,"name":"tvisprofilemanager.listview1.columns[2].caption","sourcebytes":[68,111,109,97,105,110,32,67,111,110,116,114,111,108,108,101,114],"value":"Domain Controller"},
+{"hash":164185077,"name":"tvisprofilemanager.listview1.columns[3].caption","sourcebytes":[85,115,101,114,110,97,109,101],"value":"Username"},
+{"hash":1339,"name":"tvisprofilemanager.bitbtn_ok.caption","sourcebytes":[79,75],"value":"OK"},
+{"hash":238403187,"name":"tvisprofilemanager.menuitem_smallicons.caption","sourcebytes":[83,109,97,108,108,32,105,99,111,110,115],"value":"Small icons"},
+{"hash":121450115,"name":"tvisprofilemanager.menuitem_largeicons.caption","sourcebytes":[76,97,114,103,101,32,105,99,111,110,115],"value":"Large icons"},
+{"hash":340132,"name":"tvisprofilemanager.menuitem_list.caption","sourcebytes":[76,105,115,116],"value":"List"},
+{"hash":5929253,"name":"tvisprofilemanager.menuitem_table.caption","sourcebytes":[84,97,98,108,101],"value":"Table"},
+{"hash":6835476,"name":"tvisprofilemanager.action_add.caption","sourcebytes":[65,99,116,105,111,110,95,65,100,100],"value":"Action_Add"},
+{"hash":67185189,"name":"tvisprofilemanager.action_delete.caption","sourcebytes":[65,99,116,105,111,110,95,68,101,108,101,116,101],"value":"Action_Delete"},
+{"hash":109318660,"name":"tvisprofilemanager.action_edit.caption","sourcebytes":[65,99,116,105,111,110,95,69,100,105,116],"value":"Action_Edit"}
+]}

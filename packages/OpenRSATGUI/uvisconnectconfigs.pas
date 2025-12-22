@@ -18,6 +18,8 @@ uses
   ActnList,
   ExtCtrls,
   tis.ui.searchedit,
+  mormot.core.base,
+  mormot.core.text,
   mormot.core.log,
   uldapconfigs;
 
@@ -26,45 +28,42 @@ type
   { TFormConnectConfigs }
 
   TFormConnectConfigs = class(TForm)
-    Action_AddConfig: TAction;
-    Action_DeleteConfig: TAction;
     Action_OK: TAction;
     Action_Cancel: TAction;
-    Action_EditConfig: TAction;
+    Action_ProfileManager: TAction;
     ActionList1: TActionList;
-    BitBtn_DeleteConfig: TBitBtn;
     BitBtn_OK: TBitBtn;
     BitBtn_Cancel: TBitBtn;
-    BitBtn_EditConfig: TBitBtn;
+    BitBtn_ProfileManager: TBitBtn;
     CheckBox_AutoConnect: TCheckBox;
     Edit_Server: TEdit;
     Edit_Username: TEdit;
     Edit_Password: TEdit;
     Image1: TImage;
     Image2: TImage;
-    Label1: TLabel;
-    Label_Config: TLabel;
+    Label_AutoConnect: TLabel;
+    Label_Profile: TLabel;
     Label_Server: TLabel;
     Label_Username: TLabel;
     Label_Password: TLabel;
-    Panel1: TPanel;
-    Panel_Config: TPanel;
+    Panel_Profile: TPanel;
     Panel_Image: TPanel;
     Panel_Client: TPanel;
     Panel_Bottom: TPanel;
-    TisSearchEdit_Configs: TTisSearchEdit;
-    procedure Action_EditConfigExecute(Sender: TObject);
+    TisSearchEdit_Profile: TTisSearchEdit;
+    procedure Action_ProfileManagerExecute(Sender: TObject);
     procedure Action_OKExecute(Sender: TObject);
     procedure Action_OKUpdate(Sender: TObject);
     procedure CheckBox_AutoConnectChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure TisSearchEdit_ConfigsSelect(Sender: TObject);
+    procedure TisSearchEdit_ProfileSearch(Sender: TObject; const aText: string);
+    procedure TisSearchEdit_ProfileSelect(Sender: TObject);
   private
     fLog: ISynLog;
     fLdapConfigs: TLdapConfigs;
 
     procedure CreateDefaultConfig;
-    function RetrieveConfigs(out LastConfig: String): Integer;
+    function RetrieveConfigs(out LastConfig: RawUtf8): Integer;
 
   public
     constructor Create(TheOwner: TComponent; ALdapConfigs: TLdapConfigs; aLog: ISynLog = nil); reintroduce;
@@ -73,11 +72,10 @@ type
 implementation
 
 uses
-  mormot.core.base,
-  mormot.core.text,
   mormot.core.rtti,
   tisinifiles,
   uDarkStyleParams,
+  uvisprofilemanager,
   uvisconnectoptions,
   ucoredatamodule,
   utranslation,
@@ -88,38 +86,24 @@ uses
 
 { TFormConnectConfigs }
 
-procedure TFormConnectConfigs.Action_EditConfigExecute(Sender: TObject);
+procedure TFormConnectConfigs.Action_ProfileManagerExecute(Sender: TObject);
 var
-  connectOptions: TVisConnectOptions;
+  ProfileManager: TVisProfileManager;
+  LastConfig: RawUtf8;
 begin
-  connectOptions := TVisConnectOptions.Create(Self);
+  ProfileManager := TVisProfileManager.Create(Self, fLdapConfigs);
   try
-    connectOptions.Settings := fLdapConfigs.LdapConnectionSettings;
-    if (connectOptions.ShowModal <> mrOK) then
+    if ProfileManager.ShowModal <> mrOK then
       Exit;
 
-    TisSearchEdit_Configs.Items.Add(TisSearchEdit_Configs.Text);
-    fLdapConfigs.SaveConfig(TisSearchEdit_Configs.Text, fLdapConfigs.LdapConnectionSettings);
-
-    Edit_UserName.Enabled := fLdapConfigs.LdapConnectionSettings.UseCredentials;
-    Edit_Password.Enabled := fLdapConfigs.LdapConnectionSettings.UseCredentials;
-
-    if fLdapConfigs.LdapConnectionSettings.UseCredentials then
+    RetrieveConfigs(LastConfig);
+    if Assigned(ProfileManager.ListView1.Selected) then
     begin
-      Edit_Username.text := connectOptions.Edit_User.Text;
-      if Edit_Password.Text = '' then
-        Edit_Password.SetFocus;
-
-      Edit_Password.text := connectOptions.Edit_Password.Text;
-      if Edit_Username.Text = '' then
-        Edit_Username.SetFocus;
+      TisSearchEdit_Profile.Text := ProfileManager.ListView1.Selected.Caption;
+      TisSearchEdit_Profile.OnSelect(TisSearchEdit_Profile);
     end;
-
-    Edit_Server.Text := connectOptions.Edit_DomainController.Text;
-    if Edit_Server.Text = '' then
-      BitBtn_EditConfig.SetFocus;
   finally
-    FreeAndNil(connectOptions);
+    FreeAndNil(ProfileManager);
   end;
 end;
 
@@ -128,14 +112,14 @@ begin
   fLdapConfigs.LdapConnectionSettings.TargetHost := Edit_Server.Text;
   fLdapConfigs.LdapConnectionSettings.password := Edit_Password.Text;
   fLdapConfigs.LdapConnectionSettings.userName := Edit_Username.Text;
-  fLdapConfigs.SaveConfig(TisSearchEdit_Configs.Text);
+  fLdapConfigs.SaveConfig(TisSearchEdit_Profile.Text);
 end;
 
 procedure TFormConnectConfigs.Action_OKUpdate(Sender: TObject);
 begin
   Edit_Username.Enabled := fLdapConfigs.LdapConnectionSettings.UseCredentials;
   Edit_Password.Enabled := Edit_Username.Enabled;
-  Action_OK.Enabled := (TisSearchEdit_Configs.Items.IndexOf(TisSearchEdit_Configs.Text) >= 0);
+  Action_OK.Enabled := (TisSearchEdit_Profile.Items.IndexOf(TisSearchEdit_Profile.Text) >= 0);
 end;
 
 procedure TFormConnectConfigs.CheckBox_AutoConnectChange(Sender: TObject);
@@ -146,29 +130,36 @@ end;
 procedure TFormConnectConfigs.FormShow(Sender: TObject);
 var
   index, ConfigCount: Integer;
-  LastConfig: String;
+  LastConfig: RawUtf8;
 begin
-  TisSearchEdit_Configs.Items.Clear;
+  TisSearchEdit_Profile.Items.Clear;
 
   ConfigCount := RetrieveConfigs(LastConfig);
 
   if ConfigCount <= 0 then
     CreateDefaultConfig;
 
-  index := TisSearchEdit_Configs.Items.IndexOf(TisSearchEdit_Configs.Text);
+  index := TisSearchEdit_Profile.Items.IndexOf(TisSearchEdit_Profile.Text);
   if index < 0 then
     index := 0;
-  TisSearchEdit_Configs.ItemIndex := index;
-  TisSearchEdit_ConfigsSelect(Sender);
+  TisSearchEdit_Profile.ItemIndex := index;
+  TisSearchEdit_ProfileSelect(Sender);
   CheckBox_AutoConnect.Checked := fLdapConfigs.AutoConnect;
 
   UnifyButtonsWidth([BitBtn_Cancel, BitBtn_OK]);
 end;
 
-procedure TFormConnectConfigs.TisSearchEdit_ConfigsSelect(Sender: TObject);
+procedure TFormConnectConfigs.TisSearchEdit_ProfileSearch(Sender: TObject;
+  const aText: string);
+begin
+  if TisSearchEdit_Profile.Items.IndexOf(aText) > 0 then
+    TisSearchEdit_Profile.OnSelect(Sender);
+end;
+
+procedure TFormConnectConfigs.TisSearchEdit_ProfileSelect(Sender: TObject);
 begin
   fLdapConfigs.LdapConnectionSettings.Password := '';
-  fLdapConfigs.LoadConfig(TisSearchEdit_Configs.Text);
+  fLdapConfigs.LoadConfig(TisSearchEdit_Profile.Text);
 
   if Assigned(fLog) then
     fLog.Log(sllDebug, 'Config selected: %', [ConfigFilePath]);
@@ -193,7 +184,7 @@ begin
     Edit_Password.Enabled := False;
   end;
   if  Edit_Server.Text = '' then
-    BitBtn_EditConfig.SetFocus;
+    BitBtn_ProfileManager.SetFocus;
 end;
 
 procedure TFormConnectConfigs.CreateDefaultConfig;
@@ -202,8 +193,8 @@ const
 var
   connectOptions: TVisConnectOptions;
 begin
-  TisSearchEdit_Configs.Items.Add(DEFAULT_NAME);
-  TisSearchEdit_Configs.ItemIndex := TisSearchEdit_Configs.Items.IndexOf(DEFAULT_NAME);
+  TisSearchEdit_Profile.Items.Add(DEFAULT_NAME);
+  TisSearchEdit_Profile.ItemIndex := TisSearchEdit_Profile.Items.IndexOf(DEFAULT_NAME);
 
   connectOptions := TVisConnectOptions.Create(Self);
   try
@@ -216,19 +207,20 @@ begin
   end;
 end;
 
-function TFormConnectConfigs.RetrieveConfigs(out LastConfig: String): Integer;
+function TFormConnectConfigs.RetrieveConfigs(out LastConfig: RawUtf8): Integer;
 var
   ini: TTisInifiles;
-  sections: TStringArray;
-  section: String;
+  sections: TRawUtf8DynArray;
+  section: RawUtf8;
 begin
   if Assigned(fLog) then
     fLog.Log(sllDebug, 'Retrieve config files from "%".', [ConfigFilePath]);
   result := 0;
-  TisSearchEdit_Configs.Items.BeginUpdate;
+  TisSearchEdit_Profile.Clear;
+  TisSearchEdit_Profile.Items.BeginUpdate;
   ini := TTisIniFiles.Create(ConfigFilePath);
   try
-    sections := ini.GetSections;
+    sections := TRawUtf8DynArray(ini.GetSections);
     result := Length(sections);
     LastConfig := fLdapConfigs.LastConfig;
     if LastConfig = '' then
@@ -237,12 +229,12 @@ begin
     begin
       if (section = 'global') then
         continue;
-      TisSearchEdit_Configs.Items.add(section);
+      TisSearchEdit_Profile.Items.add(section);
     end;
-    TisSearchEdit_Configs.Text := LastConfig;
+    TisSearchEdit_Profile.Text := LastConfig;
   finally
     FreeAndNil(ini);
-    TisSearchEdit_Configs.Items.EndUpdate;
+    TisSearchEdit_Profile.Items.EndUpdate;
   end;
 end;
 
