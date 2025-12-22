@@ -88,6 +88,7 @@ uses
   process,
   mormot.core.base,
   mormot.core.text,
+  uconfig,
   ufrmrsatoptions,
   ufrmrsat,
   ursatoption;
@@ -268,7 +269,7 @@ begin
   if not DirectoryExists(GetAppConfigDir(False)) then
     RestoreOldConfig;
 
-  IniPropStorage1.IniFileName := MakePath([GetAppConfigDir(False), 'OpenRSAT.ini']);
+  IniPropStorage1.IniFileName := VisBakFilePath;
 end;
 
 destructor TVisOpenRSAT.Destroy;

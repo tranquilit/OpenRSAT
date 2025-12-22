@@ -296,6 +296,7 @@ uses
   ufrmpropertytelephone,
   ursatldapclient,
   ursatldapclientui,
+  uconfig,
   ucommonui,
   udns;
 
@@ -482,7 +483,7 @@ begin
      (fDistinguishedName = '') then
     Exit;
 
-  IniPropStorage1.IniFileName := MakePath([GetAppConfigDir(false), 'RsatConsole.ini']);
+  IniPropStorage1.IniFileName := VisBakFilePath;
   UnifyButtonsWidth([Btn_BottomApply, Btn_BottomCancel, Btn_BottomOK]);
 
   fProperty := TProperty.Create(FrmRSAT.RSAT);

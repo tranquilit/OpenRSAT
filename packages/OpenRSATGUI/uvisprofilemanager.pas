@@ -209,7 +209,7 @@ begin
 
   fLdapConfigs := ALdapConfigs;
   LoadProfiles;
-  IniPropStorage1.IniFileName := MakePath([ConfigFolderPath, 'OpenRSAT.ini']);
+  IniPropStorage1.IniFileName := VisBakFilePath;
 end;
 
 destructor TVisProfileManager.Destroy;
