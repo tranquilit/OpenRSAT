@@ -233,7 +233,7 @@ begin
     begin
       Screen.Cursor := crDefault;
       if Assigned(fLog) then
-        fLog.Log(sllError, 'Ldap connection failed: %', [LdapClient]);
+        fLog.Log(sllError, 'Ldap connection failed: %', [LdapClient.ResultString]);
       ShowLdapConnectError(LdapClient);
       Action_LdapOptions.Execute();
       Exit;

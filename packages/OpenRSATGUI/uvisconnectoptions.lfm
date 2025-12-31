@@ -13,7 +13,7 @@ object VisConnectOptions: TVisConnectOptions
   Constraints.MinWidth = 530
   KeyPreview = True
   Position = poMainFormCenter
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   OnKeyDown = FormKeyDown
   object PageControl: TPanel
     AnchorSideLeft.Control = Owner
