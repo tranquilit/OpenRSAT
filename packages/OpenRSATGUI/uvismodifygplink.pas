@@ -12,12 +12,23 @@ uses
   Graphics,
   Dialogs,
   StdCtrls,
-  ExtCtrls, Menus, ActnList, Buttons,
-  tis.ui.grid.core, tis.ui.searchedit,
+  VirtualTrees,
+  {$IFDEF WINDOWS}
+  ActiveX,
+  {$ELSE}
+  FakeActiveX,
+  {$ENDIF WINDOWS}
+  ExtCtrls,
+  Menus,
+  ActnList,
+  Buttons,
+  tis.ui.grid.core,
+  tis.ui.searchedit,
   mormot.core.base,
+  mormot.core.variants,
   mormot.net.ldap,
   ugplink,
-  ufrmrsat, VirtualTrees, ActiveX, mormot.core.variants;
+  ufrmrsat;
 
 type
 
