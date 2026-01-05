@@ -2074,7 +2074,10 @@ var
 
 begin
   // Fast Exit
-  if not Assigned(FrmRSAT) or not Assigned(FrmRSAT.LdapClient) or (fUpdating > 0) then
+  if not Assigned(FrmRSAT) or
+     not Assigned(FrmRSAT.LdapClient) or
+     not FrmRSAT.LdapClient.Connected or
+     (fUpdating > 0) then
     Exit;
 
   // Fallback to domainNode
@@ -2084,17 +2087,17 @@ begin
   // Get Ldap instance
   Ldap := FrmRSAT.LdapClient;
 
-  Obj := Ldap.SearchObject(Ldap.DefaultDN(), '', ['distinguishedName', 'objectClass', 'gPLink', 'name']);
-  if not Assigned(Obj) then
-  begin
-    if Assigned(fLog) then
-      fLog.Log(sllError, 'Ldap search object failed: "%"', [Ldap.ResultString], Self);
-    ShowLdapSearchError(Ldap);
-    Exit;
-  end;
   // Retrieve domainNode
   if not Assigned(Node) then
   begin
+    Obj := Ldap.SearchObject(Ldap.DefaultDN(), '', ['distinguishedName', 'objectClass', 'gPLink', 'name']);
+    if not Assigned(Obj) then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllError, 'Ldap search object failed: "%"', [Ldap.ResultString], Self);
+      ShowLdapSearchError(Ldap);
+      Exit;
+    end;
     TreeADUC.BeginUpdate;
     try
       Node := (TreeADUC.Items.Add(nil, DNToCN(Obj.Find('distinguishedName').GetReadable())) as TADUCTreeNode);
@@ -2109,6 +2112,17 @@ begin
       end;
     finally
       TreeADUC.EndUpdate;
+    end;
+  end
+  else
+  begin
+    Obj := Ldap.SearchObject(Node.GetNodeDataObject.DistinguishedName, '', ['distinguishedName', 'objectClass', 'gPLink', 'name']);
+    if not Assigned(Obj) then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllError, 'Ldap search object failed: "%"', [Ldap.ResultString], Self);
+      ShowLdapSearchError(Ldap);
+      Exit;
     end;
   end;
   Node.GetNodeDataObject.GPLink := Obj.Find('gPLink').GetReadable();
