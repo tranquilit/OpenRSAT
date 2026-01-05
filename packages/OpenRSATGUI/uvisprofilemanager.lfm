@@ -6,8 +6,10 @@ object VisProfileManager: TVisProfileManager
   Caption = 'Profile manager'
   ClientHeight = 288
   ClientWidth = 551
+  Constraints.MinHeight = 180
+  Constraints.MinWidth = 320
   Position = poOwnerFormCenter
-  SessionProperties = 'ListView1.ViewStyle'
+  SessionProperties = 'ListView1.ViewStyle;Width;Height;Top;Left'
   LCLVersion = '4.5.0.0'
   OnShow = FormShow
   object ToolBar1: TToolBar
@@ -16,28 +18,31 @@ object VisProfileManager: TVisProfileManager
     Top = 0
     Width = 551
     Caption = 'ToolBar1'
+    EdgeBorders = [ebLeft, ebTop, ebRight, ebBottom]
     Images = CoreDataModule.ImageList1
     TabOrder = 0
     object ToolButton_Add: TToolButton
-      Left = 1
+      Left = 3
       Top = 2
       Action = Action_Add
     end
     object ToolButton_Delete: TToolButton
-      Left = 24
+      Left = 26
       Top = 2
       Action = Action_Delete
     end
     object ToolButton_Edit: TToolButton
-      Left = 47
+      Left = 49
       Top = 2
       Action = Action_Edit
+      ImageIndex = 4
     end
     object ToolButton_SwitchListView: TToolButton
-      Left = 70
+      Left = 72
       Top = 2
       Caption = 'ToolButton_SwitchListView'
       DropdownMenu = PopupMenu1
+      ImageIndex = 30
       Style = tbsButtonDrop
     end
   end
@@ -123,7 +128,6 @@ object VisProfileManager: TVisProfileManager
     end
   end
   object ActionList1: TActionList
-    Images = CoreDataModule.ImageList1
     Left = 280
     Top = 48
     object Action_Add: TAction
