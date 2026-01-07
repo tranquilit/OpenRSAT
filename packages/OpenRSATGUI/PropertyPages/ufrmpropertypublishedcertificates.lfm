@@ -5,6 +5,7 @@ object FrmPropertyPublishedCertificates: TFrmPropertyPublishedCertificates
   Width = 446
   ClientHeight = 349
   ClientWidth = 446
+  LCLVersion = '4.5.0.0'
   TabOrder = 0
   DesignLeft = 2132
   DesignTop = 129

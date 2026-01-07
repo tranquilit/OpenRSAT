@@ -208,8 +208,18 @@ begin
   Certx509 := TX509.Create();
   try
     // support PEM or DER input
-    if not Certx509.LoadFromDer(der) or (Certx509.SignatureAlgorithm = xsaNone) then
+    if not Certx509.LoadFromDer(der) then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllWarning, 'Cannot load from DER certificate.');
       Exit;
+    end;
+    if (Certx509.SignatureAlgorithm = xsaNone) then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllWarning, 'Cannot find certificate signature algorithm.');
+      Exit;
+    end;
 
     // Get purpose
     PublishedCertificate.intendedPurpose := [];
@@ -245,6 +255,8 @@ var
   UserCert: RawUtf8;
   PublishedCertificate: TPublishedCertificate;
   Row: TDocVariantData;
+  UserCertificate: TLdapAttribute;
+  i: Integer;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Update', Self);
@@ -255,12 +267,22 @@ begin
   TisGrid_ListX509.BeginUpdate;
   try
     Row.Init();
-    for UserCert in fProperty.GetAllReadable('userCertificate') do
+    UserCertificate := fProperty.Get('userCertificate');
+    for i := 0 to Pred(UserCertificate.Count) do
     begin
+      UserCert := UserCertificate.GetRaw(i);
       if UserCert = '' then
+      begin
+        if Assigned(fLog) then
+          fLog.Log(sllInfo, 'Empty cert in list. Continue.');
         continue;
+      end;
       if not CertToDoc(UserCert, PublishedCertificate) then
+      begin
+        if Assigned(fLog) then
+          fLog.Log(sllWarning, 'Cannot convert certificate to TPublishedCertificate.');
         continue;
+      end;
       Row.AddValue('certificate', PublishedCertificate.Certificate);
       Row.AddValue('issuedTo', PublishedCertificate.issuedTo);
       Row.AddValue('issuedBy', PublishedCertificate.issuedBy);
