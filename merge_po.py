@@ -1,4 +1,5 @@
 import sys
+import io
 
 def main():
     output = sys.argv[1]
@@ -6,11 +7,11 @@ def main():
 
     full_content = ''
     for input in inputs:
-        with open(input, 'r') as f:
+        with io.open(input, 'r', encoding="utf-8") as f:
             content = f.read()
             full_content = full_content + '\n' + content
 
-    with open(output, 'w') as f:
+    with open(output, 'w', encoding="utf-8") as f:
         f.write(full_content)
 
 if __name__ == "__main__":
