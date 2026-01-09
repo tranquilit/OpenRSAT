@@ -456,7 +456,7 @@ msgstr "Suivant"
 #: ufrmmoduledns.lrj:$.strings.[12].value
 msgctxt "tfrmmoduledns.action_othernewrecords.caption"
 msgid "Other New Records"
-msgstr "Autre nouveux enregistrements"
+msgstr "Autre nouveaux enregistrements"
 
 #: ufrmmoduledns.lrj:$.strings.[10].value
 msgctxt "tfrmmoduledns.action_parent.caption"
