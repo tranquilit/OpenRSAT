@@ -143,8 +143,8 @@ type
     function GetFocusedObject(OnlyContainer: Boolean = False): RawUtf8;
     function GetFocusedObjectClass: RawUtf8;
 
-    procedure OnLdapClientConnect(LdapClient: TLdapClient);
-    procedure OnLdapClientClose(LdapClient: TLdapClient);
+    procedure LdapConnectEvent(Sender: TObject);
+    procedure LdapCloseEvent(Sender: TObject);
 
     procedure OnADSSOptionsChanged(Option: TOption);
 
@@ -157,6 +157,8 @@ type
   protected
     function GetModule: TModule; override;
     function GetFrmOptionClass: TFrameOptionClass; override;
+    function GetOnLdapConnect: TNotifyEvent; override;
+    function GetOnLdapClose: TNotifyEvent; override;
   published
     ////////////////
     /// TFrameModule
@@ -174,6 +176,7 @@ uses
   ucommonui,
   uDarkStyleParams,
   ursatldapclientui,
+  ursatldapclient,
   uvisnewobject,
   ufrmrsat;
 
@@ -1016,13 +1019,14 @@ begin
   end;
 end;
 
-procedure TFrmModuleSitesAndServices.OnLdapClientConnect(LdapClient: TLdapClient
-  );
+procedure TFrmModuleSitesAndServices.LdapConnectEvent(Sender: TObject);
 var
   SearchResult: TLdapResult;
   Filter, cn: RawUtf8;
   BackupCursor: TCursor;
+  LdapClient: TRsatLdapClient;
 begin
+  LdapClient := (Sender as TRSATLdapClient);
   fADSSSiteNode := (TreeView1.Items.Add(nil, 'Sites') as TADSSTreeNode);
   fADSSSiteNode.HasChildren := True;
   fADSSServiceNode := (TreeView1.Items.Add(nil, 'Services') as TADSSTreeNode);
@@ -1066,7 +1070,7 @@ begin
   fADSSSiteNode.Expand(False);
 end;
 
-procedure TFrmModuleSitesAndServices.OnLdapClientClose(LdapClient: TLdapClient);
+procedure TFrmModuleSitesAndServices.LdapCloseEvent(Sender: TObject);
 begin
   TreeView1.Items.Clear;
   TisGrid1.Clear;
@@ -1138,9 +1142,6 @@ begin
 
   fModule := TModuleADSS.Create;
 
-  FrmRSAT.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
-  FrmRSAT.LdapClient.RegisterObserverClose(@OnLdapClientClose);
-
   fModule.Option.RegisterObserver(@OnADSSOptionsChanged);
 
   {$IFDEF WINDOWS}
@@ -1177,6 +1178,16 @@ end;
 function TFrmModuleSitesAndServices.GetFrmOptionClass: TFrameOptionClass;
 begin
   result := TFrmModuleADSSOptions;
+end;
+
+function TFrmModuleSitesAndServices.GetOnLdapConnect: TNotifyEvent;
+begin
+  result := @LdapConnectEvent;
+end;
+
+function TFrmModuleSitesAndServices.GetOnLdapClose: TNotifyEvent;
+begin
+  result := @LdapCloseEvent;
 end;
 
 end.

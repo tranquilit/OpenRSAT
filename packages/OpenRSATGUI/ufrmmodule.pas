@@ -22,12 +22,18 @@ type
     function GetFrmOptionClass: TFrameOptionClass; virtual; abstract;
     function GetModule: TModule; virtual; abstract;
 
+    function GetOnLdapConnect: TNotifyEvent; virtual; abstract;
+    function GetOnLdapClose: TNotifyEvent; virtual; abstract;
+
   published
     procedure Load; virtual; abstract;
     procedure Refresh; virtual; abstract;
 
     property Module: TModule read GetModule;
     property FrmOptionClass: TFrameOptionClass read GetFrmOptionClass;
+
+    property OnLdapConnect: TNotifyEvent read GetOnLdapConnect;
+    property OnLdapClose: TNotifyEvent read GetOnLdapClose;
 
   // Expose TModule
   private

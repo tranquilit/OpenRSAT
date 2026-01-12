@@ -62,6 +62,7 @@ resourcestring
 
   rsLdapSuccess = 'Ldap Success';
   rsLdapError = 'Ldap Error';
+  rsLdapFailed = 'Ldap failed: "%"';
   rsLdapAddFailed = 'Ldap add failed: "%"';
   rsLdapDeleteFailed = 'Ldap delete failed: "%"';
   rsLdapConnectFailed = 'Ldap connect failed: "%"';

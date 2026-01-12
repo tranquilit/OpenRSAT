@@ -358,6 +358,10 @@ msgstr "Echec de la suppression LDAP : \"%\""
 msgid "Ldap Error"
 msgstr "Erreur LDAP"
 
+#: ucommon.rsldapfailed
+msgid "Ldap failed: \"%\""
+msgstr "Echec de la requête LDAP : \"%\""
+
 #: ucommon.rsldapmodifyfailed
 msgid "Ldap modify failed: \"%\""
 msgstr "Echec de modification LDAP : \"%\""

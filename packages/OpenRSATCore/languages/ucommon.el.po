@@ -339,6 +339,10 @@ msgstr "Αποτυχία διαγραφής LDAP: \"%\""
 msgid "Ldap Error"
 msgstr "Σφάλμα Ldap"
 
+#: ucommon.rsldapfailed
+msgid "Ldap failed: \"%\""
+msgstr "Αποτυχία Ldap: \"%\""
+
 #: ucommon.rsldapmodifyfailed
 msgid "Ldap modify failed: \"%\""
 msgstr "Αποτυχία τροποποίησης LDAP: \"%\""
@@ -347,7 +351,8 @@ msgstr "Αποτυχία τροποποίησης LDAP: \"%\""
 msgid ""
 "Moving objects in Active Directory Domain Services can prevent your existing system from working the way it was designed. For exemple, moving an organizational unit (OU) can affect the way that group policies are applied to the accounts within the OU.\n"
 "Are you sure you want to move this object?"
-msgstr "Η μετακίνηση αντικειμένων στο Active Directory Domain Services μπορεί να εμποδίσει το υπάρχον σύστημα σας να λειτουργήσει όπως σχεδιάστηκε. Για παράδειγμα, η μετακίνηση μιας οργανωτικής μονάδος (OU) μπορεί να επηρεάσει τον τρόπο εφαρμογής των πολιτικών ομάδων στους λογαριασμούς μέσα στην OU.\n"
+msgstr ""
+"Η μετακίνηση αντικειμένων στο Active Directory Domain Services μπορεί να εμποδίσει το υπάρχον σύστημα σας να λειτουργήσει όπως σχεδιάστηκε. Για παράδειγμα, η μετακίνηση μιας οργανωτικής μονάδος (OU) μπορεί να επηρεάσει τον τρόπο εφαρμογής των πολιτικών ομάδων στους λογαριασμούς μέσα στην OU.\n"
 "Είσαι σίγουροι ότι θέλετε να μετακινήσετε αυτό το αντικείμενο;"
 
 #: ucommon.rsldapsearchfailed
@@ -727,7 +732,8 @@ msgstr "Το στοχευμένο χαρακτηριστικό δεν υπάρχ
 msgid ""
 "There are unsaved changes.\n"
 "Are you sure you want to quit?"
-msgstr "Υπάρχουν μη αποθηκευμένες αλλαγές.\n"
+msgstr ""
+"Υπάρχουν μη αποθηκευμένες αλλαγές.\n"
 "Είστε σίγουροι ότι θέλετε να τερματίσετε;"
 
 #: ucommon.rsusecurrentcreds

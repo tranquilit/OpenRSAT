@@ -116,14 +116,16 @@ type
     procedure UpdateGridAttribute(Node: TADSITreeNode); overload;
     procedure UpdateGridAttribute(DistinguishedName: String); overload;
 
-    procedure OnLdapClientConnect(LdapClient: TLdapClient);
-    procedure OnLdapClientClose(LdapClient: TLdapClient);
+    procedure LdapConnectEvent(Sender: TObject);
+    procedure LdapCloseEvent(Sender: TObject);
   public
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
   protected
     function GetModule: TModule; override;
     function GetFrmOptionClass: TFrameOptionClass; override;
+    function GetOnLdapConnect: TNotifyEvent; override;
+    function GetOnLdapClose: TNotifyEvent; override;
   published
     procedure Refresh; override;
     procedure Load; override;
@@ -599,12 +601,12 @@ begin
   end;
 end;
 
-procedure TFrmModuleADSI.OnLdapClientConnect(LdapClient: TLdapClient);
+procedure TFrmModuleADSI.LdapConnectEvent(Sender: TObject);
 begin
   Action_Refresh.Execute;
 end;
 
-procedure TFrmModuleADSI.OnLdapClientClose(LdapClient: TLdapClient);
+procedure TFrmModuleADSI.LdapCloseEvent(Sender: TObject);
 begin
   TreeView1.Items.Clear;
   TisGrid1.Clear;
@@ -619,9 +621,6 @@ begin
     fLog.Log(sllTrace, '% - Create', [Self.Name]);
 
   fModule := TModuleADSI.Create;
-
-  FrmRSAT.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
-  FrmRSAT.LdapClient.RegisterObserverClose(@OnLdapClientClose);
 
   {$IFDEF WINDOWS}
   Image1.Visible := not IsDarkModeEnabled;
@@ -657,6 +656,16 @@ end;
 function TFrmModuleADSI.GetFrmOptionClass: TFrameOptionClass;
 begin
   result := nil;
+end;
+
+function TFrmModuleADSI.GetOnLdapConnect: TNotifyEvent;
+begin
+  result := @LdapConnectEvent;
+end;
+
+function TFrmModuleADSI.GetOnLdapClose: TNotifyEvent;
+begin
+  result := @LdapCloseEvent;
 end;
 
 end.

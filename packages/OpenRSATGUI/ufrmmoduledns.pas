@@ -144,8 +144,8 @@ type
 
     function GetCurrentZone: TDNSTreeNode;
 
-    procedure OnLdapClientConnect(LdapClient: TLdapClient);
-    procedure OnLdapClientClose(LdapClient: TLdapClient);
+    procedure LdapConnectEvent(Sender: TObject);
+    procedure LdapCloseEvent(Sender: TObject);
   public
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
@@ -153,6 +153,8 @@ type
   protected
     function GetModule: TModule; override;
     function GetFrmOptionClass: TFrameOptionClass; override;
+    function GetOnLdapConnect: TNotifyEvent; override;
+    function GetOnLdapClose: TNotifyEvent; override;
   published
     ////////////////
     /// TFrameModule
@@ -516,11 +518,14 @@ begin
   end;
 end;
 
-procedure TFrmModuleDNS.OnLdapClientConnect(LdapClient: TLdapClient);
+procedure TFrmModuleDNS.LdapConnectEvent(Sender: TObject);
+var
+  LdapClient: TLdapClient;
 begin
+  LdapClient := (Sender as TLdapClient);
   if Assigned(fRootNode) then
     FreeAndNil(fRootNode);
-  fRootNode := (TreeDNS.Items.Add(nil, '') as TDNSTreeNode);
+  fRootNode := (TreeDNS.Items.Add(nil, LdapClient.Settings.TargetHost) as TDNSTreeNode);
 
   if Assigned(fForwardLookupZonesNode) then
     FreeAndNil(fForwardLookupZonesNode);
@@ -537,8 +542,10 @@ begin
   Refresh;
 end;
 
-procedure TFrmModuleDNS.OnLdapClientClose(LdapClient: TLdapClient);
+procedure TFrmModuleDNS.LdapCloseEvent(Sender: TObject);
 begin
+  FreeAndNil(fForwardLookupZonesNode);
+  FreeAndNil(fReverseLookupZonesNode);
   FreeAndNil(fRootNode);
   GridDNS.Clear;
 end;
@@ -999,9 +1006,6 @@ begin
 
   fModule := TModuleADDNS.Create(FrmRSAT.LdapClient);
 
-  FrmRSAT.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
-  FrmRSAT.LdapClient.RegisterObserverClose(@OnLdapClientClose);
-
   {$IFDEF WINDOWS}
   Image1.Visible := not IsDarkModeEnabled;
   Image2.Visible := IsDarkModeEnabled;
@@ -1038,6 +1042,16 @@ end;
 function TFrmModuleDNS.GetFrmOptionClass: TFrameOptionClass;
 begin
   result := nil;
+end;
+
+function TFrmModuleDNS.GetOnLdapConnect: TNotifyEvent;
+begin
+  result := @LdapConnectEvent;
+end;
+
+function TFrmModuleDNS.GetOnLdapClose: TNotifyEvent;
+begin
+  result := @LdapCloseEvent;
 end;
 
 end.

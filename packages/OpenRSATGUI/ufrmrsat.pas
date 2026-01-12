@@ -77,6 +77,10 @@ type
     procedure LoadModules;
 
     procedure OnOptionChange(Option: TOption);
+
+    procedure OnLdapConnect(Sender: TObject);
+    procedure OnLdapClose(Sender: TObject);
+    procedure OnLdapError(Sender: TObject);
   public
     FrmRSATOptionClass: TFrameOptionClass;
 
@@ -424,6 +428,27 @@ begin
   UpdateLang;
 end;
 
+procedure TFrmRSAT.OnLdapConnect(Sender: TObject);
+var
+  Module: TFrameModule;
+begin
+  for Module in fFrmModules.Items do
+    Module.OnLdapConnect(Sender);
+end;
+
+procedure TFrmRSAT.OnLdapClose(Sender: TObject);
+var
+  Module: TFrameModule;
+begin
+  for Module in fFrmModules.Items do
+    Module.OnLdapClose(Sender);
+end;
+
+procedure TFrmRSAT.OnLdapError(Sender: TObject);
+begin
+  ShowLdapError((Sender as TLdapClient));
+end;
+
 constructor TFrmRSAT.Create(TheOwner: TComponent);
 var
   aLog: ISynLog;
@@ -448,6 +473,10 @@ begin
   fVisPropertiesList := TVisPropertiesList.Create;
 
   StatusBar1.Canvas.Font.Assign(StatusBar1.Font);
+
+  fRSAT.LdapClient.OnConnect := @OnLdapConnect;
+  fRSAT.LdapClient.OnClose := @OnLdapClose;
+  fRSAT.LdapClient.OnError := @OnLdapError;
 end;
 
 destructor TFrmRSAT.Destroy;

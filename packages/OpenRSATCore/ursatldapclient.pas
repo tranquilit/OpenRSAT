@@ -27,12 +27,6 @@ type
   protected
     fPageNumber: Integer;
     fSearchAllResult: TLdapResultObjArray;
-
-    fObserversConnect: Array of TProcLdapClientObject;
-    fObserversClose: Array of TProcLdapClientObject;
-
-    procedure NotifyConnect;
-    procedure NotifyClose;
   public
     procedure SearchPagingBegin(PageNumber: Integer);
     function SearchAllDocPaged(DocResult: PDocVariantData; const BaseDN: RawUtf8;
@@ -45,15 +39,35 @@ type
     property DomainName: RawUtf8 read fDomainName write SetDomainName;
     property DomainControllerName: RawUtf8 read fDomainControllerName write SetDomainControllerName;
 
-    function RegisterObserverConnect(Func: TProcLdapClientObject): Boolean;
-    function RemoveObserverConnect(Func: TProcLdapClientObject): Boolean;
-    function RegisterObserverClose(Func: TProcLdapClientObject): Boolean;
-    function RemoveObserverClose(Func: TProcLdapClientObject): Boolean;
     procedure ChangeSettings(ASettings: TLdapClientSettings);
   public
     function Connect(DiscoverMode: TLdapClientConnect=[lccCldap, lccTlsFirst];
       DelayMS: integer=500): boolean;
     function Close: boolean;
+  private
+    fOnConnect: TNotifyEvent;
+    fOnClose: TNotifyEvent;
+    fOnSearch: TNotifyEvent;
+    fOnDelete: TNotifyEvent;
+    fOnAdd: TNotifyEvent;
+    fOnModify: TNotifyEvent;
+    fOnError: TNotifyEvent;
+
+    procedure SetOnAdd(AValue: TNotifyEvent);
+    procedure SetOnClose(AValue: TNotifyEvent);
+    procedure SetOnConnect(AValue: TNotifyEvent);
+    procedure SetOnDelete(AValue: TNotifyEvent);
+    procedure SetOnError(AValue: TNotifyEvent);
+    procedure SetOnModify(AValue: TNotifyEvent);
+    procedure SetOnSearch(AValue: TNotifyEvent);
+  published
+    property OnConnect: TNotifyEvent read fOnConnect write SetOnConnect;
+    property OnClose: TNotifyEvent read fOnClose write SetOnClose;
+    property OnSearch: TNotifyEvent read fOnSearch write SetOnSearch;
+    property OnDelete: TNotifyEvent read fOnDelete write SetOnDelete;
+    property OnAdd: TNotifyEvent read fOnAdd write SetOnAdd;
+    property OnModify: TNotifyEvent read fOnModify write SetOnModify;
+    property OnError: TNotifyEvent read fOnError write SetOnError;
   end;
 
 implementation
@@ -69,37 +83,21 @@ procedure TRsatLdapClient.SetDomainControllerName(AValue: RawUtf8);
 begin
   if fDomainControllerName = AValue then
     Exit;
+  Close;
   fDomainControllerName := AValue;
   Settings.TargetHost := fDomainControllerName;
   Settings.KerberosSpn := '';
-  Reconnect('Change Domain Controller');
-  NotifyConnect;
+  Connect();
 end;
 
 procedure TRsatLdapClient.SetDomainName(AValue: RawUtf8);
 begin
   if fDomainName = AValue then
     Exit;
+  Close;
   fDomainName := AValue;
   Settings.KerberosDN := fDomainName;
-  Reconnect('Change Domain');
-  NotifyConnect;
-end;
-
-procedure TRsatLdapClient.NotifyConnect;
-var
-  Func: TProcLdapClientObject;
-begin
-  for Func in fObserversConnect do
-    Func(Self);
-end;
-
-procedure TRsatLdapClient.NotifyClose;
-var
-  Func: TProcLdapClientObject;
-begin
-  for Func in fObserversClose do
-    Func(Self);
+  Connect;
 end;
 
 procedure TRsatLdapClient.SearchPagingBegin(PageNumber: Integer);
@@ -193,40 +191,15 @@ begin
   result := ModifyDN(DN, newName, '', True);
 end;
 
-function TRsatLdapClient.RegisterObserverConnect(Func: TProcLdapClientObject
-  ): Boolean;
-begin
-  result := MultiEventAdd(fObserversConnect, TMethod(Func));
-end;
-
-function TRsatLdapClient.RemoveObserverConnect(Func: TProcLdapClientObject
-  ): Boolean;
-begin
-  result := True;
-  MultiEventRemove(fObserversConnect, TMethod(Func));
-end;
-
-function TRsatLdapClient.RegisterObserverClose(Func: TProcLdapClientObject
-  ): Boolean;
-begin
-  result := MultiEventAdd(fObserversClose, TMethod(Func));
-end;
-
-function TRsatLdapClient.RemoveObserverClose(Func: TProcLdapClientObject
-  ): Boolean;
-begin
-  result := True;
-  MultiEventRemove(fObserversClose, TMethod(Func));
-end;
-
 procedure TRsatLdapClient.ChangeSettings(ASettings: TLdapClientSettings);
 begin
   if Assigned(fSettings) then
     FreeAndNil(fSettings);
+  Close;
   fSettings := TLdapClientSettings.Create;
 
   CopyObject(ASettings, fSettings);
-  Reconnect('Change settings');
+  Connect;
 end;
 
 function TRsatLdapClient.Connect(DiscoverMode: TLdapClientConnect;
@@ -234,15 +207,62 @@ function TRsatLdapClient.Connect(DiscoverMode: TLdapClientConnect;
 begin
   Result := inherited Connect(DiscoverMode, DelayMS);
 
-  if Result then
-    NotifyConnect;
+  if Result and Assigned(fOnConnect) then
+    fOnConnect(Self)
+  else if Assigned(fOnError) then
+    fOnError(Self);
 end;
 
 function TRsatLdapClient.Close: boolean;
 begin
   Result := inherited Close;
 
-  NotifyClose;
+  if Assigned(fOnClose) then
+    fOnClose(Self)
+  else if Assigned(fOnError) then
+    fOnError(Self);
+end;
+
+procedure TRsatLdapClient.SetOnAdd(AValue: TNotifyEvent);
+begin
+  if fOnAdd=AValue then Exit;
+  fOnAdd:=AValue;
+end;
+
+procedure TRsatLdapClient.SetOnClose(AValue: TNotifyEvent);
+begin
+  if fOnClose=AValue then Exit;
+  fOnClose:=AValue;
+end;
+
+procedure TRsatLdapClient.SetOnConnect(AValue: TNotifyEvent);
+begin
+  if fOnConnect=AValue then Exit;
+  fOnConnect:=AValue;
+end;
+
+procedure TRsatLdapClient.SetOnDelete(AValue: TNotifyEvent);
+begin
+  if fOnDelete=AValue then Exit;
+  fOnDelete:=AValue;
+end;
+
+procedure TRsatLdapClient.SetOnError(AValue: TNotifyEvent);
+begin
+  if fOnError=AValue then Exit;
+  fOnError:=AValue;
+end;
+
+procedure TRsatLdapClient.SetOnModify(AValue: TNotifyEvent);
+begin
+  if fOnModify=AValue then Exit;
+  fOnModify:=AValue;
+end;
+
+procedure TRsatLdapClient.SetOnSearch(AValue: TNotifyEvent);
+begin
+  if fOnSearch=AValue then Exit;
+  fOnSearch:=AValue;
 end;
 
 end.

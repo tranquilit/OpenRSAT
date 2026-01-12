@@ -26,6 +26,7 @@ type
       out NewSecDesc: TSecurityDescriptor; Enabled: Boolean): Boolean;
   end;
 
+function ShowLdapError(LdapClient: TLdapClient): TModalResult;
 function ShowLdapSearchError(LdapClient: TLdapClient): TModalResult;
 function ShowLdapModifyError(LdapClient: TLdapClient): TModalResult;
 function ShowLdapDeleteError(LdapClient: TLdapClient): TModalResult;
@@ -140,6 +141,15 @@ end;
 function ShowLdapError(Message: RawUtf8): TModalResult;
 begin
   result := MessageDlg(rsLdapError, Message, mtError, mbOKCancel, 0);
+end;
+
+function ShowLdapError(LdapClient: TLdapClient): TModalResult;
+var
+  Message: RawUtf8;
+begin
+  Message := GetLdapErrorCustomMessage(LdapClient);
+
+  result := ShowLdapError(FormatUtf8(rsLdapFailed, [Message]));
 end;
 
 function ShowLdapSearchError(LdapClient: TLdapClient): TModalResult;

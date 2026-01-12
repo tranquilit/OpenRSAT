@@ -358,6 +358,10 @@ msgstr "Ldap delete failed: \"%\""
 msgid "Ldap Error"
 msgstr "Ldap Error"
 
+#: ucommon.rsldapfailed
+msgid "Ldap failed: \"%\""
+msgstr "Ldap failed: \"%\""
+
 #: ucommon.rsldapmodifyfailed
 msgid "Ldap modify failed: \"%\""
 msgstr "Ldap modify failed: \"%\""

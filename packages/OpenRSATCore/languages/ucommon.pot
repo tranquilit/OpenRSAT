@@ -342,6 +342,10 @@ msgstr ""
 msgid "Ldap Error"
 msgstr ""
 
+#: ucommon.rsldapfailed
+msgid "Ldap failed: \"%\""
+msgstr ""
+
 #: ucommon.rsldapmodifyfailed
 msgid "Ldap modify failed: \"%\""
 msgstr ""

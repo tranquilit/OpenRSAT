@@ -304,6 +304,8 @@ type
 
     procedure OnLdapClientConnect(LdapClient: TLdapClient);
     procedure OnLdapClientClose(LdapClient: TLdapClient);
+    procedure LdapConnectEvent(Sender: TObject);
+    procedure LdapCloseEvent(Sender: TObject);
 
   public
     constructor Create(TheOwner: TComponent); override;
@@ -317,6 +319,8 @@ type
   protected
     function GetModule: TModule; override;
     function GetFrmOptionClass: TFrameOptionClass; override;
+    function GetOnLdapConnect: TNotifyEvent; override;
+    function GetOnLdapClose: TNotifyEvent; override;
   published
     procedure Load; override;
     procedure Refresh; override;
@@ -2573,6 +2577,24 @@ begin
   end;
 end;
 
+procedure TFrmModuleADUC.LdapConnectEvent(Sender: TObject);
+begin
+  RefreshADUCTreeNode(fADUCDomainNode);
+end;
+
+procedure TFrmModuleADUC.LdapCloseEvent(Sender: TObject);
+begin
+  TreeADUC.BeginUpdate;
+  try
+    if Assigned(fADUCDomainNode) and fADUCDomainNode.HasChildren then
+      fADUCDomainNode.DeleteChildren;
+    GridADUC.Clear;
+    FreeAndNil(fADUCDomainNode);
+  finally
+    TreeADUC.EndUpdate;
+  end;
+end;
+
 constructor TFrmModuleADUC.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
@@ -2595,9 +2617,6 @@ begin
   fADUCQueryNode.SelectedIndex := fADUCQueryNode.ImageIndex;
 
   fADUCDomainNode := nil;
-
-  FrmRSAT.LdapClient.RegisterObserverConnect(@OnLdapClientConnect);
-  FrmRSAT.LdapClient.RegisterObserverClose(@OnLdapClientClose);
 
   {$IFDEF WINDOWS}
   Image1.Visible := not IsDarkModeEnabled;
@@ -2723,6 +2742,16 @@ end;
 function TFrmModuleADUC.GetFrmOptionClass: TFrameOptionClass;
 begin
   result := TFrmModuleADUCOption;
+end;
+
+function TFrmModuleADUC.GetOnLdapConnect: TNotifyEvent;
+begin
+  result := @LdapConnectEvent;
+end;
+
+function TFrmModuleADUC.GetOnLdapClose: TNotifyEvent;
+begin
+  result := @LdapCloseEvent;
 end;
 
 procedure TFrmModuleADUC.Load;
