@@ -523,17 +523,17 @@ var
   LdapClient: TLdapClient;
 begin
   LdapClient := (Sender as TLdapClient);
+  if Assigned(fForwardLookupZonesNode) then
+    FreeAndNil(fForwardLookupZonesNode);
+  if Assigned(fReverseLookupZonesNode) then
+    FreeAndNil(fReverseLookupZonesNode);
   if Assigned(fRootNode) then
     FreeAndNil(fRootNode);
   fRootNode := (TreeDNS.Items.Add(nil, LdapClient.Settings.TargetHost) as TDNSTreeNode);
 
-  if Assigned(fForwardLookupZonesNode) then
-    FreeAndNil(fForwardLookupZonesNode);
   fForwardLookupZonesNode := (TreeDNS.Items.AddChild(fRootNode, 'Forward Lookup Zones') as TDNSTreeNode);
   fForwardLookupZonesNode.NodeType := dtntCustom;
 
-  if Assigned(fReverseLookupZonesNode) then
-    FreeAndNil(fReverseLookupZonesNode);
   fReverseLookupZonesNode := (TreeDNS.Items.AddChild(fRootNode, 'Reverse Lookup Zones') as TDNSTreeNode);
   fReverseLookupZonesNode.NodeType := dtntCustom;
 
@@ -1005,6 +1005,10 @@ begin
     fLog.Log(sllTrace, '% - Create', [Self.Name]);
 
   fModule := TModuleADDNS.Create(FrmRSAT.LdapClient);
+
+  fRootNode := nil;
+  fForwardLookupZonesNode := nil;
+  fReverseLookupZonesNode := nil;
 
   {$IFDEF WINDOWS}
   Image1.Visible := not IsDarkModeEnabled;
