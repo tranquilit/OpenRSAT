@@ -195,8 +195,8 @@ begin
       end;
       NodeName := DNToCN(SearchResult.ObjectName);
       RootNode := (TreeView1.Items.Add(nil, NodeName) as TADSITreeNode);
+      RootNode.HasChildren := True;
       RootNode.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone);
-      RefreshNode(RootNode);
     end;
   finally
     TreeView1.AlphaSort;
