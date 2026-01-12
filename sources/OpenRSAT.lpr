@@ -14,6 +14,7 @@ uses
   Forms,
   Interfaces, // this includes the LCL widgetset
   lazcontrols,
+  controls,
   SysUtils,
   LazUTF8,
   //Submodules
@@ -103,6 +104,8 @@ begin
   InitLoggingFromCommandLine;
   TSynLog.Add.Log(sllDebug, 'Logger Initialization');
   RequireDerivedFormResource := True;
+  Application.Scaled:=True;
+  Application.LayoutAdjustmentPolicy := lapAutoAdjustForDPI;
   Application.Initialize;
 
   {$IFDEF DEBUG}
