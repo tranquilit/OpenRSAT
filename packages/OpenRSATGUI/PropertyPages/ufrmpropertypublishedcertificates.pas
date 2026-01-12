@@ -266,8 +266,10 @@ begin
   TisGrid_ListX509.Clear;
   TisGrid_ListX509.BeginUpdate;
   try
-    Row.Init();
     UserCertificate := fProperty.Get('userCertificate');
+    if not Assigned(UserCertificate) then
+      Exit;
+    Row.Init();
     for i := 0 to Pred(UserCertificate.Count) do
     begin
       UserCert := UserCertificate.GetRaw(i);
