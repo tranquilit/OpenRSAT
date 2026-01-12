@@ -464,6 +464,7 @@ object FrmModuleDNS: TFrmModuleDNS
       Caption = 'Property'
       ImageIndex = 4
       OnExecute = Action_PropertyExecute
+      OnUpdate = Action_PropertyUpdate
     end
     object Action_OtherNewRecords: TAction
       Caption = 'Other New Records'

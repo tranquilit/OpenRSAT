@@ -99,6 +99,7 @@ type
     procedure Action_ParentExecute(Sender: TObject);
     procedure Action_PreviousExecute(Sender: TObject);
     procedure Action_PropertyExecute(Sender: TObject);
+    procedure Action_PropertyUpdate(Sender: TObject);
     procedure Action_RefreshExecute(Sender: TObject);
     procedure GridDNSDblClick(Sender: TObject);
     procedure GridDNSGetImageIndex(Sender: TBaseVirtualTree;
@@ -517,11 +518,28 @@ end;
 
 procedure TFrmModuleDNS.OnLdapClientConnect(LdapClient: TLdapClient);
 begin
+  if Assigned(fRootNode) then
+    FreeAndNil(fRootNode);
+  fRootNode := (TreeDNS.Items.Add(nil, '') as TDNSTreeNode);
+
+  if Assigned(fForwardLookupZonesNode) then
+    FreeAndNil(fForwardLookupZonesNode);
+  fForwardLookupZonesNode := (TreeDNS.Items.AddChild(fRootNode, 'Forward Lookup Zones') as TDNSTreeNode);
+  fForwardLookupZonesNode.NodeType := dtntCustom;
+
+  if Assigned(fReverseLookupZonesNode) then
+    FreeAndNil(fReverseLookupZonesNode);
+  fReverseLookupZonesNode := (TreeDNS.Items.AddChild(fRootNode, 'Reverse Lookup Zones') as TDNSTreeNode);
+  fReverseLookupZonesNode.NodeType := dtntCustom;
+
+  fRootNode.Expand(False);
+  fRootNode.Selected := True;
   Refresh;
 end;
 
 procedure TFrmModuleDNS.OnLdapClientClose(LdapClient: TLdapClient);
 begin
+  FreeAndNil(fRootNode);
   GridDNS.Clear;
 end;
 
@@ -754,6 +772,11 @@ begin
 
   if Assigned(DNSNode) and Assigned(DNSNode.fAttributes) then
     FrmRSAT.OpenProperty(DNSNode.fAttributes.Find('distinguishedName').GetReadable(), DNSNode.fAttributes.Find('name').GetReadable());
+end;
+
+procedure TFrmModuleDNS.Action_PropertyUpdate(Sender: TObject);
+begin
+  Action_Property.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected and (GridDNS.SelectedCount > 0)
 end;
 
 procedure TFrmModuleDNS.Action_NextExecute(Sender: TObject);
@@ -999,21 +1022,12 @@ end;
 
 procedure TFrmModuleDNS.Refresh;
 begin
-  fRootNode.Text := FrmRSAT.LdapClient.Settings.TargetHost;
   Action_Refresh.Execute;
 end;
 
 procedure TFrmModuleDNS.Load;
 begin
   fTreeSelectionHistory := TTreeSelectionHistory.Create;
-
-  fRootNode := (TreeDNS.Items.Add(nil, '') as TDNSTreeNode);
-  fForwardLookupZonesNode := (TreeDNS.Items.AddChild(fRootNode, 'Forward Lookup Zones') as TDNSTreeNode);
-  fForwardLookupZonesNode.NodeType := dtntCustom;
-  fReverseLookupZonesNode := (TreeDNS.Items.AddChild(fRootNode, 'Reverse Lookup Zones') as TDNSTreeNode);
-  fReverseLookupZonesNode.NodeType := dtntCustom;
-  fRootNode.Expand(False);
-  fRootNode.Selected := True;
 end;
 
 function TFrmModuleDNS.GetModule: TModule;
