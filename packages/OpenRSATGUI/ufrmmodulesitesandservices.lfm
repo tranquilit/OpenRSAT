@@ -5,6 +5,7 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
   Width = 800
   ClientHeight = 400
   ClientWidth = 800
+  LCLVersion = '4.5.0.0'
   TabOrder = 0
   DesignLeft = 670
   DesignTop = 346

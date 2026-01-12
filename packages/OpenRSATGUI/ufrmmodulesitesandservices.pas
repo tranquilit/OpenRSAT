@@ -414,6 +414,8 @@ end;
 procedure TFrmModuleSitesAndServices.Action_DeleteUpdate(Sender: TObject);
 var
   Allowed: Boolean;
+  NodeData: PDocVariantData;
+  Node: PVirtualNode;
 
   function TypeIsAllowed(ObjectType: String): Boolean;
   begin
@@ -426,24 +428,24 @@ var
   end;
 
 begin
-  Allowed := True;
-  //if TisGrid1.Focused then
-  //begin
-  //  Allowed := True;
-  //  Node := TisGrid1.GetFirstSelected();
-  //  while Assigned(Node) do
-  //  begin
-  //    NodeData := TisGrid1.GetNodeAsPDocVariantData(Node);
-  //    Node := TisGrid1.GetNextSelected(Node);
-  //    if not Assigned(NodeData) then
-  //      continue;
-  //    Allowed := Allowed and TypeIsAllowed(NodeData^.S['type']);
-  //  end;
-  //end
-  //else if TreeView1.Focused then
-  //begin
-  //  Allowed := TypeIsAllowed((TreeView1.Selected as TSSNode).ObjectType);
-  //end;
+  Allowed := False;
+  if TisGrid1.Focused then
+  begin
+    Allowed := True;
+    Node := TisGrid1.GetFirstSelected();
+    while Assigned(Node) do
+    begin
+      NodeData := TisGrid1.GetNodeAsPDocVariantData(Node);
+      Node := TisGrid1.GetNextSelected(Node);
+      if not Assigned(NodeData) then
+        continue;
+      Allowed := Allowed and TypeIsAllowed(NodeData^.S['type']);
+    end;
+  end
+  else if TreeView1.Focused then
+  begin
+    Allowed := Assigned(TreeView1.selected) and TypeIsAllowed((TreeView1.Selected as TADSSTreeNode).ObjectType);
+  end;
   Action_Delete.Enabled := Allowed;
 end;
 
