@@ -16,6 +16,16 @@ uses
   ursat;
 
 type
+
+  TFVERecoveryInformation = record
+    cn: RawUtf8;
+    msFVERecoveryPassword: RawUtf8;
+  end;
+
+  PFVERecoveryInformation = ^TFVERecoveryInformation;
+
+  TFVERecoveryInformationDynArray = Array of TFVERecoveryInformation;
+
   { TProperty }
 
   TProperty = class
@@ -64,7 +74,7 @@ type
     property ManagerName: RawUtf8 read GetManagerName;
     property DirectReportsNames: TRawUtf8DynArray read GetDirectReportsNames;
     function CannotChangePassword: Boolean;
-    function msFVERecoveryInformation: TLdapResultList;
+    function msFVERecoveryInformation: TFVERecoveryInformationDynArray;
     function AttributesFromSchema: TRawUtf8DynArray;
 
     procedure UserAccountControlExclude(UserAccountControl: TUserAccountControl);
@@ -850,13 +860,13 @@ begin
   result := (AceSelf <> -1) and (AceWorld <> -1);
 end;
 
-function TProperty.msFVERecoveryInformation: TLdapResultList;
+function TProperty.msFVERecoveryInformation: TFVERecoveryInformationDynArray;
 var
-  SearchResult, ResultItem: TLdapResult;
-  Attribute, ResultAttribute: TLdapAttribute;
-  i: Integer;
+  SearchResult: TLdapResult;
+  Count: Integer;
 begin
-  result := TLdapResultList.Create;
+  result := nil;
+  Count := 0;
 
   LdapClient.SearchBegin();
   try
@@ -867,20 +877,15 @@ begin
         ShowLdapSearchError(LdapClient);
         Exit;
       end;
-      ResultItem := result.Add;
 
+      SetLength(result, Count + LdapClient.SearchResult.Count);
       for SearchResult in LdapClient.SearchResult.Items do
       begin
         if not Assigned(SearchResult) then
           continue;
-        for Attribute in SearchResult.Attributes.Items do
-        begin
-          if not Assigned(Attribute) then
-            continue;
-          ResultAttribute := ResultItem.Attributes.Add(Attribute.AttributeName, Attribute.GetReadable());
-          for i := 1 to Attribute.Count - 1 do
-            ResultAttribute.Add(Attribute.GetReadable(i));
-        end;
+        result[Count].cn := SearchResult.Find('cn').GetReadable();
+        result[Count].msFVERecoveryPassword := SearchResult.Find('msFVE-RecoveryPassword').GetReadable();
+        Inc(Count);
       end;
     until (LdapClient.SearchCookie = '');
   finally
