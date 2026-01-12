@@ -83,6 +83,7 @@ type
     procedure Action_NewObjectExecute(Sender: TObject);
     procedure Action_NewObjectUpdate(Sender: TObject);
     procedure Action_PropertyExecute(Sender: TObject);
+    procedure Action_PropertyUpdate(Sender: TObject);
     procedure Action_RefreshExecute(Sender: TObject);
     procedure Timer_TreeChangeNodeTimer(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
@@ -232,6 +233,11 @@ begin
   begin
     FrmRSAT.OpenProperty((TreeView1.Selected as TADSITreeNode).DistinguishedName, TreeView1.Selected.Text);
   end;
+end;
+
+procedure TFrmModuleADSI.Action_PropertyUpdate(Sender: TObject);
+begin
+  Action_Property.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected and (TisGrid1.SelectedCount > 0);
 end;
 
 procedure TFrmModuleADSI.Action_NewObjectExecute(Sender: TObject);
