@@ -580,7 +580,6 @@ var
           begin
             if Assigned(fLog) then
               fLog.Log(sllError, '% - Ldap Search Error: %', [Self.Name, FrmRSAT.LdapClient.ResultString]);
-            ShowLdapSearchError(FrmRSAT.LdapClient);
             Exit;
           end;
         finally
@@ -811,7 +810,6 @@ var
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, '% - Ldap Search Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
-        ShowLdapSearchError(FrmRSAT.LdapClient);
         Exit;
       end;
 
@@ -833,7 +831,6 @@ var
           begin
             if Assigned(fLog) then
               fLog.Log(sllError, '% - Ldap Delete Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
-            ShowLdapDeleteError(FrmRSAT.LdapClient);
             Exit;
           end;
         end
@@ -845,7 +842,6 @@ var
           begin
             if Assigned(fLog) then
               fLog.Log(sllError, '% - Ldap Modify Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
-            ShowLdapModifyError(FrmRSAT.LdapClient);
             Exit;
           end;
         end;

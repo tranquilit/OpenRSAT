@@ -149,10 +149,7 @@ begin
   Obj := Ldap.SearchObject(Ldap.DefaultDN(), '', ['name', 'distinguishedName', 'objectClass']);
 
   if not Assigned(Obj) then
-  begin
-    ShowLdapSearchError(Ldap);
     Exit;
-  end;
 
   fDomainNode := (TreeView.Items.Add(nil, Obj.Find('name').GetReadable()) as TMoveTreeNode);
   fDomainNode.DistinguishedName := Obj.Find('distinguishedName').GetReadable();
@@ -185,10 +182,7 @@ begin
     Ldap.SearchScope := lssSingleLevel;
     repeat
       if not Ldap.Search(MoveNode.distinguishedName, False, '', ['name', 'distinguishedName', 'objectClass']) then
-      begin
-        ShowLdapSearchError(Ldap);
         Exit;
-      end;
 
       for SearchResult in Ldap.SearchResult.Items do
       begin
@@ -265,10 +259,7 @@ begin
   newDN := DNs[0].Name + '=' + newRDN;
   newDn += ',' + PDocVariantData(TreeView.Selected.Data)^.S['distinguishedName'];
   if not Ldap.MoveLdapEntry(DN, newDn) then
-  begin
-    ShowLdapModifyError(Ldap);
     Exit;
-  end;
 end;
 
 procedure TVisTaskMove.Action_OKUpdate(Sender: TObject);

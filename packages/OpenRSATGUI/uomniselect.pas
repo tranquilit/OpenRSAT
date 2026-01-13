@@ -23,7 +23,8 @@ uses
   tis.ui.searchedit,
   Virtualtrees,
   // Rsat
-  Controls;
+  Controls,
+  ursatldapclient;
 
 type
 
@@ -53,7 +54,7 @@ type
       var Ghosted: Boolean; var ImageIndex: Integer);
     procedure ToolButton_AttributesListClick(Sender: TObject);
   private
-    fLdap: TLdapClient;
+    fLdap: TRsatLdapClient;
     fBaseDN: RawUtf8;
 
     fAllowedObjectClass: TStringArray;
@@ -63,7 +64,7 @@ type
     function GetSelectedObjects: TRawUtf8DynArray;
     procedure ListRefresh();
   public
-    constructor Create(TheOwner: TComponent; Ldap: TLdapClient; AllowedObjectClass: TStringArray; baseDN: RawUtf8 = ''; AllowMultiselect: Boolean = True; Filter: RawUtf8 = ''); reintroduce;
+    constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient; AllowedObjectClass: TStringArray; baseDN: RawUtf8 = ''; AllowMultiselect: Boolean = True; Filter: RawUtf8 = ''); reintroduce;
     property SelectedObjects: TRawUtf8DynArray read GetSelectedObjects;
   end;
 
@@ -82,7 +83,7 @@ uses
 { TVisOmniselect }
 
 // Form
-constructor TVisOmniselect.Create(TheOwner: TComponent; Ldap: TLdapClient;
+constructor TVisOmniselect.Create(TheOwner: TComponent; ALdap: TRsatLdapClient;
   AllowedObjectClass: TStringArray; baseDN: RawUtf8; AllowMultiselect: Boolean;
   Filter: RawUtf8);
 var
@@ -91,7 +92,7 @@ var
 begin
   Inherited Create(TheOwner);
 
-  fLdap := Ldap;
+  fLdap := ALdap;
   fBaseDN := baseDN;
   fAllowedObjectClass := AllowedObjectClass;
   fAllowMultiselect := AllowMultiselect;
@@ -195,10 +196,7 @@ begin
     fLdap.SearchScope := lssWholeSubtree;
     repeat
       if not fLdap.Search(fLdap.DefaultDN(fBaseDN), False, SearchFilter, ['name', 'objectClass', 'description', 'distinguishedName']) then
-      begin
-        ShowLdapSearchError(fLdap);
         Exit;
-      end;
       for item in fLdap.SearchResult.Items do
       begin
         if not Assigned(item) then

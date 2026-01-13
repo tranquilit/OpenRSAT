@@ -462,7 +462,6 @@ begin
   if not FrmRSAT.LdapClient.Modify(NodeData.DistinguishedName, lmoReplace, 'gPOptions', NodeData.GPOptions) then
   begin
     NodeData.GPOptions := BakGPOptions;
-    ShowLdapModifyError(FrmRSAT.LdapClient);
     Exit;
   end;
   TreeADUC.OnGetImageIndex(Self, TreeADUC.Selected);
@@ -584,7 +583,6 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, 'Ldap deletion failed: "%"', [FrmRSAT.LdapClient.ResultString], Action_Delete);
-        ShowLdapDeleteError(FrmRSAT.LdapClient);
         Exit;
       end;
     end;
@@ -1104,7 +1102,6 @@ var
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, 'Ldap modify error: "%"', [FrmRSAT.LdapClient.ResultString]);
-        ShowLdapModifyError(FrmRSAT.LdapClient);
       end;
     finally
       FreeAndNil(AttributeMember);
@@ -1129,7 +1126,6 @@ var
         begin
           if Assigned(fLog) then
             fLog.Log(sllError, 'Ldap Search Error: "%"', [FrmRSAT.LdapClient.ResultString]);
-          ShowLdapSearchError(FrmRSAT.LdapClient);
           Exit;
         end;
 
@@ -1201,7 +1197,6 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, '% - Failed to move ldap entry "%" to "%": %', [DistinguishedName, SelectedDN, FrmRSAT.LdapClient.ResultString]);
-      ShowLdapDeleteError(FrmRSAT.LdapClient);
       Exit;
     end;
   finally
@@ -1235,7 +1230,6 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, '% - Cannot retrieve information about "%". (%)', [Action_TaskResetPassword.Caption, userDN, FrmRSAT.LdapClient.ResultString]);
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
     end;
     res := userData.Attributes.Find('objectClass');
@@ -1283,7 +1277,6 @@ begin
         begin
           if Assigned(fLog) then
             fLog.Log(sllError, '% - Ldap Modify Error: %', [Action_TaskResetPassword.Caption, FrmRSAT.LdapClient.ResultString]);
-          ShowLdapModifyError(FrmRSAT.LdapClient);
           Exit;
         end;
       finally
@@ -1297,7 +1290,6 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, '% - Ldap Modify Error: %', [Action_TaskResetPassword.Caption, FrmRSAT.LdapClient.ResultString]);
-        ShowLdapModifyError(FrmRSAT.LdapClient);
         Exit;
       end;
     finally
@@ -1314,7 +1306,6 @@ begin
         begin
           if Assigned(fLog) then
             fLog.Log(sllError, '% - Ldap Modify Error: %', [Action_TaskResetPassword.Caption, FrmRSAT.LdapClient.ResultString]);
-          ShowLdapModifyError(FrmRSAT.LdapClient);
           Exit;
         end;
       finally
@@ -1748,7 +1739,6 @@ begin
   begin
     if Assigned(fLog) then
       fLog.Log(sllError, 'Rename Ldap Entry: "%"', [FrmRSAT.LdapClient.ResultString], Self);
-    ShowLdapModifyError(FrmRSAT.LdapClient);
     Exit;
   end;
 
@@ -1889,7 +1879,6 @@ begin
   GPLink := GPLinkArrToGPLink(GPLinkArr);
   if not FrmRSAT.LdapClient.Modify(ParentNode.GetNodeDataObject.DistinguishedName, lmoReplace, 'gPLink', GPLink) then
   begin
-    ShowLdapModifyError(FrmRSAT.LdapClient);
     NodeDataGPO.Flag := BackupFlag;
     Exit;
   end;
@@ -1937,7 +1926,6 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, 'Ldap Search Error: "%"', [FrmRSAT.LdapClient.ResultString]);
-        ShowLdapSearchError(FrmRSAT.LdapClient);
         Exit;
       end;
       GPOItems := Concat(GPOItems, FrmRSAT.LdapClient.SearchResult.Items);
@@ -2099,7 +2087,6 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, 'Ldap search object failed: "%"', [Ldap.ResultString], Self);
-      ShowLdapSearchError(Ldap);
       Exit;
     end;
     TreeADUC.BeginUpdate;
@@ -2125,7 +2112,6 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, 'Ldap search object failed: "%"', [Ldap.ResultString], Self);
-      ShowLdapSearchError(Ldap);
       Exit;
     end;
   end;
@@ -2159,7 +2145,6 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, 'Fail to refresh ADUCTreeNode(%): %', [Node.Text, Ldap.ResultString], Self);
-        ShowLdapSearchError(Ldap);
         Exit;
       end;
 
@@ -2294,7 +2279,6 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, '% - Ldap search error: "%"', [GridADUC.Name, FrmRSAT.LdapClient.ResultString]);
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
     end;
 

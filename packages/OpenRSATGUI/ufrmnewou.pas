@@ -67,10 +67,7 @@ begin
   try
     Att.Add('objectClass', 'top').Add('organizationalUnit');
     if not NewObject.Ldap.Add(DN, Att) then
-    begin
-      ShowLdapAddError(NewObject.Ldap);
       Exit;
-    end;
   finally
     FreeAndNil(Att);
   end;
@@ -85,10 +82,7 @@ begin
   // Get SecDesc
   data := NewObject.Ldap.SearchObject(atNTSecurityDescriptor, DN, '');
   if not Assigned(data) then
-  begin
-    ShowLdapSearchError(NewObject.Ldap);
     Exit;
-  end;
   if not SecDesc.FromBinary(data.GetRaw()) then
   begin
     Dialogs.MessageDlg(rsTitleParsing, rsACEParsing, mtError, [mbOK], 0);
@@ -99,10 +93,7 @@ begin
     Exit;
 
   if not NewObject.Ldap.Modify(DN, lmoReplace, atNTSecurityDescriptor, SecDesc.ToBinary()) then // Modify
-  begin
-    ShowLdapModifyError(NewObject.Ldap);
     Exit;
-  end;
 
   NewObject.ModalResult := mrOK;
 end;

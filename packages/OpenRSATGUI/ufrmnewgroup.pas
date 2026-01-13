@@ -119,10 +119,7 @@ begin
     Att.Add('groupType', BinMask.ToString);
 
     if not NewObject.Ldap.Add('CN=' + Edit_Name.Text + ',' + NewObject.ObjectOU, Att) then
-    begin
-      ShowLdapAddError(NewObject.Ldap);
       Exit;
-    end;
     NewObject.ModalResult := mrOK;
   finally
     FreeAndNil(Att);

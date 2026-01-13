@@ -14,7 +14,8 @@ uses
   ExtCtrls,
   tis.ui.grid.core,
   mormot.net.ldap,
-  mormot.core.base;
+  mormot.core.base,
+  ursatldapclient;
 
 type
 
@@ -33,14 +34,14 @@ type
     procedure Timer_SearchInGridTimer(Sender: TObject);
     procedure TisGrid1KeyPress(Sender: TObject; var Key: char);
   private
-    fLdap: TLdapClient;
+    fLdap: TRsatLdapClient;
 
     fSearchWord: RawUtf8;
 
     procedure Load;
     procedure LoadSiteLinks;
   public
-    constructor Create(TheOwner: TComponent; ALdap: TLdapClient); reintroduce;
+    constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient); reintroduce;
   end;
 
 implementation
@@ -70,10 +71,7 @@ begin
     Attribute.Add('site');
     DistinguishedName := Format('CN=%s,CN=Sites,%s', [LdapEscape(Edit1.Text), fLdap.ConfigDN]);
     if not fLdap.Add(DistinguishedName, AttributeList) then
-    begin
-      ShowLdapAddError(fLdap);
       Exit;
-    end;
   finally
     FreeAndNil(AttributeList);
   end;
@@ -84,10 +82,7 @@ begin
     Attribute := AttributeList.Add('objectClass', 'top');
     Attribute.Add('serversContainer');
     if not fLdap.Add(Format('CN=Servers,%s', [DistinguishedName]), AttributeList) then
-    begin
-      ShowLdapAddError(fLdap);
       Exit;
-    end;
   finally
     FreeAndNil(AttributeList);
   end;
@@ -99,10 +94,7 @@ begin
     Attribute.Add('applicationSiteSettings');
     Attribute.Add('nTDSSiteSettings');
     if not fLdap.Add(Format('CN=NTDS Site Settings,%s', [DistinguishedName]), AttributeList) then
-    begin
-      ShowLdapAddError(fLdap);
       Exit;
-    end;
   finally
     FreeAndNil(AttributeList);
   end;
@@ -113,10 +105,7 @@ begin
     NodeData := TisGrid1.GetNodeAsPDocVariantData(TisGrid1.GetFirstSelected);
     Attribute.Add(DistinguishedName);
     if not fLdap.Modify(NodeData^.S['distinguishedName'], lmoAdd, Attribute) then
-    begin
-      ShowLdapModifyError(fLdap);
       Exit;
-    end;
   finally
     FreeAndNil(Attribute);
   end;
@@ -156,10 +145,7 @@ begin
 
     repeat
       if not fLdap.Search(fLdap.ConfigDN, False, '(objectClass=siteLink)', ['name', 'distinguishedName']) then
-      begin
-        ShowLdapSearchError(fLdap);
         Exit;
-      end;
 
       for SearchResult in fLdap.SearchResult.Items do
       begin
@@ -182,7 +168,7 @@ begin
   end;
 end;
 
-constructor TFrmNewSite.Create(TheOwner: TComponent; ALdap: TLdapClient);
+constructor TFrmNewSite.Create(TheOwner: TComponent; ALdap: TRsatLdapClient);
 var
   OwnerNewObject: TVisNewObject absolute TheOwner;
 begin

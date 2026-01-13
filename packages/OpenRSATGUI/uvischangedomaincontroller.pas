@@ -287,7 +287,6 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, Ldap.ResultString);
-        ShowLdapSearchError(Ldap);
         Exit;
       end;
 
@@ -333,7 +332,6 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, 'Ldap Search Error: "%"', [Ldap.ResultString]);
-        ShowLdapSearchError(Ldap);
         Exit;
       end;
 
@@ -360,18 +358,16 @@ end;
 function TChangeDomainController.ChangeConnection(DomainController: RawUtf8
   ): Boolean;
 var
-  test: TLdapClient;
+  test: TRsatLdapClient;
 begin
   result := False;
-  test := TLdapClient.Create(FrmRSAT.LdapClient.Settings);
+  test := TRsatLdapClient.Create(FrmRSAT.LdapClient.Settings);
+  test.OnError := FrmRSAT.LdapClient.OnError;
   try
     test.Settings.TargetHost := DomainController;
     test.Settings.KerberosSpn := '';
     if not test.Connect() then
-    begin
-      ShowLdapConnectError(test);
       Exit;
-    end;
     FrmRSAT.ChangeDomainController(DomainController);
     result := True;
   finally
@@ -381,18 +377,16 @@ end;
 
 function TChangeDomainController.TestConnection(DomainController: RawUtf8): Boolean;
 var
-  test: TLdapClient;
+  test: TRsatLdapClient;
 begin
   result := False;
-  test := TLdapClient.Create(FrmRSAT.LdapClient.Settings);
+  test := TRsatLdapClient.Create(FrmRSAT.LdapClient.Settings);
+  test.OnError := FrmRSAT.LdapClient.OnError;
   try
     test.Settings.TargetHost := DomainController;
     test.Settings.KerberosSpn := '';
     if not test.Connect() then
-    begin
-      ShowLdapConnectError(test);
       Exit;
-    end;
     result := True;
   finally
     FreeAndNil(test);

@@ -174,10 +174,7 @@ begin
   Filter := FormatUtf8('(objectSid=%)', [LdapEscape(SidToText(@SID))]);
   PrimaryGroupAttribute := Props.LdapClient.SearchObject(Props.LdapClient.DefaultDN(), Filter, 'distinguishedName', lssWholeSubtree);
   if not Assigned(PrimaryGroupAttribute) then
-  begin
-    ShowLdapSearchError(Props.LdapClient);
     Exit;
-  end;
   result := PrimaryGroupAttribute.GetReadable();
 end;
 

@@ -23,7 +23,8 @@ uses
   mormot.core.base,
   mormot.net.ldap,
   mormot.core.log,
-  mormot.core.variants;
+  mormot.core.variants,
+  ursatldapclient;
 
 type
 
@@ -95,7 +96,7 @@ type
       procedure TisSearchEdit_TrusteeBeforeSearch(Sender: TObject;
         const aText: string; var aAbort: Boolean);
   private
-    Ldap: TLdapClient;
+    Ldap: TRsatLdapClient;
     fBaseDN: RawUtf8;
     Trustees, appliesTo, Properties: TDocVariantData;
     facl: TSecAcl;
@@ -104,7 +105,7 @@ type
     procedure FillProperties();
     procedure FillInheritance();
   public
-    constructor Create(TheOwner: TComponent; _Ldap: TLdapClient; aBaseDN: RawUtf8); reintroduce;
+    constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient; ABaseDN: RawUtf8); reintroduce;
     property Acl: TSecAcl read facl;
   end;
 
@@ -199,10 +200,7 @@ begin
     Ldap.SearchScope := lssSingleLevel;
     repeat
       if not Ldap.Search(FormatUtf8('%,%', [CN_EXTENDED_RIGHTS, Ldap.ConfigDN]), False, '', ['displayName', 'objectGUID']) then
-      begin
-        ShowLdapSearchError(Ldap);
         Exit;
-      end;
       for item in Ldap.SearchResult.Items do
       begin
         ComboBox_Property.Items.Add(item.Find('displayName').GetReadable());
@@ -264,10 +262,7 @@ begin
   try
     Ldap.SearchScope := lssWholeSubtree;
     if not Ldap.Search(Ldap.DefaultDN(fBaseDN), False, Filter, ['distinguishedName', 'objectSid']) then
-    begin
-      ShowLdapSearchError(Ldap);
       Exit;
-    end;
   finally
     Ldap.SearchEnd;
   end;
@@ -293,10 +288,7 @@ begin
   try
     Ldap.SearchScope := lssWholeSubtree;
     if not Ldap.Search(FormatUtf8('CN=WellKnown Security Principals,%', [Ldap.ConfigDN()]), False, Filter, ['name', 'objectSid']) then
-    begin
-      ShowLdapSearchError(Ldap);
       Exit;
-    end;
   finally
     Ldap.SearchEnd;
   end;
@@ -617,12 +609,12 @@ begin
   end;
 end;
 
-constructor TVisAddACEs.Create(TheOwner: TComponent; _Ldap: TLdapClient;
-  aBaseDN: RawUtf8);
+constructor TVisAddACEs.Create(TheOwner: TComponent; ALdap: TRsatLdapClient;
+  ABaseDN: RawUtf8);
 begin
   Inherited Create(TheOwner);
-  Ldap := _Ldap;
-  fBaseDN := aBaseDN;
+  Ldap := ALdap;
+  fBaseDN := ABaseDN;
   Trustees.Init([dvoCheckForDuplicatedNames, dvoReturnNullForUnknownProperty, dvoValueCopiedByReference]);
   appliesTo.Init([dvoCheckForDuplicatedNames, dvoReturnNullForUnknownProperty, dvoValueCopiedByReference]);
   Properties.Init([dvoCheckForDuplicatedNames, dvoReturnNullForUnknownProperty, dvoValueCopiedByReference]);

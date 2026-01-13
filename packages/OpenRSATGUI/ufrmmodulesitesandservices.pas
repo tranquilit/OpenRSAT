@@ -363,6 +363,8 @@ var
   mResult, mResultNonLeaf: TModalResult;
 
   procedure InnerDelete(distinguishedName: String);
+  var
+    BakOnError: TNotifyEvent;
   begin
     if (mResult <> mrYesToAll) then
       mResult := MessageDlg('Delete object', FormatUtf8('Do you want to delete "%"?', [distinguishedName]), mtConfirmation, [mbYesToAll, mbYes, mbNo, mbNoToAll, mbCancel], 0);
@@ -370,24 +372,26 @@ var
     if (mResult <> mrYes) and (mResult <> mrYesToAll) then
       Exit;
 
-    if not FrmRSAT.LdapClient.Delete(distinguishedName) then
-    begin
-      case FrmRSAT.LdapClient.ResultError of
-        leNotAllowedOnNonLeaf:
-        begin
-          if (mResultNonLeaf = mrNoToAll) or (mResultNonLeaf = mrCancel) then
-            Exit;
-          if (mResultNonLeaf <> mrYesToAll) then
-            mResultNonLeaf := MessageDlg('Non leaf object', 'Object has children. Do you want to delete them ?', mtConfirmation, [mbYesToAll, mbYes, mbNo, mbNoToAll, mbCancel], 0);
+    try
+      BakOnError := FrmRSAT.LdapClient.OnError;
+      FrmRSAT.LdapClient.OnError := nil;
+      FrmRSAT.LdapClient.Delete(distinguishedName);
+    finally
+      FrmRSAT.LdapClient.OnError := BakOnError;
+    end;
 
-          if (mResultNonLeaf <> mrYes) and (mResultNonLeaf <> mrYesToAll) then
-            Exit;
-          if not FrmRSAT.LdapClient.Delete((TreeView1.Selected as TADSSTreeNode).DistinguishedName, True) then
-          begin
-            ShowLdapDeleteError(FrmRSAT.LdapClient);
-            Exit;
-          end;
-        end;
+    case FrmRSAT.LdapClient.ResultError of
+      leNotAllowedOnNonLeaf:
+      begin
+        if (mResultNonLeaf = mrNoToAll) or (mResultNonLeaf = mrCancel) then
+          Exit;
+        if (mResultNonLeaf <> mrYesToAll) then
+          mResultNonLeaf := MessageDlg('Non leaf object', 'Object has children. Do you want to delete them ?', mtConfirmation, [mbYesToAll, mbYes, mbNo, mbNoToAll, mbCancel], 0);
+
+        if (mResultNonLeaf <> mrYes) and (mResultNonLeaf <> mrYesToAll) then
+          Exit;
+        if not FrmRSAT.LdapClient.Delete((TreeView1.Selected as TADSSTreeNode).DistinguishedName, True) then
+          Exit;
       end;
     end;
   end;
@@ -599,10 +603,7 @@ begin
     Filter := '(&(!(objectClass=nTDSSiteSettings))(!(objectClass=nTDSConnection)))';
     repeat
       if not FrmRSAT.LdapClient.Search(Node.DistinguishedName, False, Filter, ['*']) then
-      begin
-        ShowLdapSearchError(FrmRSAT.LdapClient);
         Exit;
-      end;
 
       for SearchResult in FrmRSAT.LdapClient.SearchResult.Items do
       begin
@@ -712,10 +713,7 @@ begin
     Filter := '';
     repeat
       if not FrmRSAT.LdapClient.Search(Node.DistinguishedName, False, Filter, ['*']) then
-      begin
-        ShowLdapSearchError(FrmRSAT.LdapClient);
         Exit;
-      end;
 
       for SearchResult in FrmRSAT.LdapClient.SearchResult.Items do
       begin
@@ -1044,10 +1042,7 @@ begin
     Filter := '(|(cn=Sites)(cn=Services))';
     repeat
       if not LdapClient.Search(LdapClient.ConfigDN, False, Filter, ['*']) then
-      begin
-        ShowLdapSearchError(LdapClient);
         Exit;
-      end;
       for SearchResult in LdapClient.SearchResult.Items do
       begin
         if not Assigned(SearchResult) then

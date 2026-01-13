@@ -13,7 +13,10 @@ uses
   Buttons,
   ActnList,
   tis.ui.grid.core,
-  mormot.net.ldap, mormot.core.variants, mormot.core.base;
+  mormot.net.ldap,
+  mormot.core.variants,
+  mormot.core.base,
+  ursatldapclient;
 
 type
 
@@ -31,13 +34,13 @@ type
     TisGrid1: TTisGrid;
     procedure ComboBox1Change(Sender: TObject);
   private
-    fLdap: TLdapClient;
+    fLdap: TRsatLdapClient;
     LdapSchema: TDocVariantData;
 
     procedure Load;
     procedure ReloadGrid;
   public
-    constructor Create(TheOwner: TComponent; ALdap: TLdapClient); reintroduce;
+    constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient); reintroduce;
   end;
 
 implementation
@@ -106,7 +109,7 @@ begin
   end;
 end;
 
-constructor TFrmNewObject.Create(TheOwner: TComponent; ALdap: TLdapClient);
+constructor TFrmNewObject.Create(TheOwner: TComponent; ALdap: TRsatLdapClient);
 var
   ObjectClassAttribute: TDocVariantData;
   Item: TLdapResult;
@@ -137,10 +140,7 @@ begin
 
     repeat
       if not fLdap.Search(Format('CN=Schema,%s', [fLdap.ConfigDN]), False, '', ['*']) then
-      begin
-        ShowLdapSearchError(fLdap);
         Exit;
-      end;
 
       for Item in fLdap.SearchResult.Items do
       begin

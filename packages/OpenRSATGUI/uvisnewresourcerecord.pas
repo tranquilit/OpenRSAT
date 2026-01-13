@@ -290,7 +290,6 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, 'Ldap Modify Error: %', [fLdapClient.ResultString]);
-        ShowLdapModifyError(fLdapClient);
         Exit;
       end;
     finally
@@ -310,7 +309,6 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, 'Ldap Add Error: %', [fLdapClient.ResultString], Self);
-        ShowLdapAddError(fLdapClient);
         Exit;
       end;
     finally

@@ -190,10 +190,7 @@ begin
       fProperty.LdapClient.SearchScope := lssWholeSubtree;
       repeat
         if not fProperty.LdapClient.Search(fProperty.LdapClient.DefaultDN(), False, Filter, ['name', 'objectSid']) then
-        begin
-          ShowLdapSearchError(fProperty.LdapClient);
           Exit;
-        end;
 
         for SearchResult in fProperty.LdapClient.SearchResult.Items do
         begin

@@ -13,7 +13,8 @@ uses
   ActnList, ExtCtrls,
   tis.ui.grid.core,
   mormot.core.base,
-  mormot.net.ldap;
+  mormot.net.ldap,
+  ursatldapclient;
 
 type
 
@@ -44,7 +45,7 @@ type
     procedure TisGrid1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
   private
-    fLdap: TLdapClient;
+    fLdap: TRsatLdapClient;
 
     ValidPrefix: Boolean;
 
@@ -52,7 +53,7 @@ type
 
     procedure Load;
   public
-    constructor Create(TheOwner: TComponent; ALdap: TLdapClient); reintroduce;
+    constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient); reintroduce;
   end;
 
 implementation
@@ -245,10 +246,7 @@ begin
 
     repeat
       if not fLdap.Search(Format('CN=Sites,%s', [fLdap.ConfigDN]), False, '(objectClass=site)', ['name', 'distinguishedName']) then
-      begin
-        ShowLdapSearchError(fLdap);
         Exit;
-      end;
 
       for SearchResult in fLdap.SearchResult.Items do
       begin
@@ -290,16 +288,13 @@ begin
       AttributeList.Add('siteObject', SelectedData^.S['distinguishedName']);
     end;
     if not fLdap.Add(DistinguishedName, AttributeList) then
-    begin
-      ShowLdapAddError(fLdap);
       Exit;
-    end;
   finally
     FreeAndNil(AttributeList);
   end;
 end;
 
-constructor TFrmNewSubnet.Create(TheOwner: TComponent; ALdap: TLdapClient);
+constructor TFrmNewSubnet.Create(TheOwner: TComponent; ALdap: TRsatLdapClient);
 var
   OwnerNewObject: TVisNewObject absolute TheOwner;
 begin

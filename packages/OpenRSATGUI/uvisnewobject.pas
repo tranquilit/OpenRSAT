@@ -13,7 +13,8 @@ uses
   mormot.net.ldap,
   mormot.core.base,
   Controls,
-  ucoredatamodule;
+  ucoredatamodule,
+  ursatldapclient;
 
 type
 
@@ -54,7 +55,7 @@ type
     procedure ConstructFrame;
   public
     PageIdx, PageCount: Integer;
-    Ldap: TLdapClient;
+    Ldap: TRsatLdapClient;
 
     CallBack: procedure of Object;
     constructor Create(TheOwner: TComponent; NewObjectType: TVisNewObjectType; OU, BaseDN: RawUtf8); reintroduce;

@@ -215,10 +215,7 @@ begin
     fProperty.LdapClient.SearchScope := lssWholeSubtree;
     repeat
       if not fProperty.LdapClient.Search(fProperty.LdapClient.DefaultDN, False, Filter, ['distinguishedName', 'objectClass', 'name']) then
-      begin
-        ShowLdapSearchError(fProperty.LdapClient);
         Exit;
-      end;
 
       TisGrid_Members.BeginUpdate;
       try

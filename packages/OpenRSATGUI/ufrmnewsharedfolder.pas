@@ -74,10 +74,7 @@ begin
 
     DN := FormatUtf8('CN=%,%', [Edit_Name.Text, VisNewObject.ObjectOU]);
     if not VisNewObject.Ldap.Add(DN, Attr) then
-    begin
-      ShowLdapAddError(VisNewObject.Ldap);
       Exit;
-    end;
   finally
     FreeAndNil(Attr);
   end;

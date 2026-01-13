@@ -188,10 +188,7 @@ begin
       FrmRSAT.LdapClient.SearchScope := lssWholeSubtree;
       repeat
         if not FrmRSAT.LdapClient.Search(FrmRSAT.LdapClient.DefaultDN, False, Filter, ['distinguishedName', 'objectSID', 'sAMAccountName']) then
-        begin
-          ShowLdapSearchError(FrmRSAT.LdapClient);
           Exit;
-        end;
 
         Index := Length(fUsersAndGroups);
         SetLength(fUsersAndGroups, Index + FrmRSAT.LdapClient.SearchResult.Count);
@@ -354,10 +351,7 @@ begin
 
     repeat
       if not FrmRSAT.LdapClient.Search(Join(['CN=Schema,', FrmRSAT.LdapClient.ConfigDN]), False, '(|(objectClass=classSchema))', ['lDAPDisplayName', 'objectClass', 'schemaIDGUID']) then
-      begin
-        ShowLdapSearchError(FrmRSAT.LdapClient);
         Exit;
-      end;
 
       for SearchResult in FrmRSAT.LdapClient.SearchResult.Items do
       begin
@@ -388,10 +382,7 @@ begin
 
       repeat
         if not FrmRSAT.LdapClient.Search(Join(['CN=Schema,', FrmRSAT.LdapClient.ConfigDN]), False, '', ['lDAPDisplayName', 'schemaIDGUID']) then
-        begin
-          ShowLdapSearchError(FrmRSAT.LdapClient);
           Exit;
-        end;
 
         for SearchResult in FrmRSAT.LdapClient.SearchResult.Items do
         begin
@@ -409,10 +400,7 @@ begin
       FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
       repeat
         if not FrmRSAT.LdapClient.Search(FormatUtf8('%,%', [CN_EXTENDED_RIGHTS, FrmRSAT.LdapClient.ConfigDN]), False, '', ['displayName', 'objectGUID']) then
-        begin
-          ShowLdapSearchError(FrmRSAT.LdapClient);
           Exit;
-        end;
         for item in FrmRSAT.LdapClient.SearchResult.Items do
         begin
           DisplayName := item.Find('displayName').GetReadable();
@@ -495,18 +483,12 @@ var
 
     LdapObject := FrmRSAT.LdapClient.SearchObject(Join(['CN=Schema,', FrmRSAT.LdapClient.ConfigDN]), FormatUtf8('(lDAPDisplayName=%)', [LdapEscape(ObjectType)]), 'distinguishedName', lssWholeSubtree);
     if not Assigned(LdapObject) then
-    begin
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
-    end;
     ObjectDN := LdapObject.GetReadable();
 
     LdapObject := FrmRSAT.LdapClient.SearchObject(ObjectDN, '', 'schemaIDGUID');
     if not Assigned(LdapObject) then
-    begin
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
-    end;
     guid := PGuid(LdapObject.GetRaw())^;
 
     Index := Length(NewAcl^);
@@ -554,18 +536,12 @@ var
 
     LdapObject := FrmRSAT.LdapClient.SearchObject(Join(['CN=Schema,', FrmRSAT.LdapClient.ConfigDN]), FormatUtf8('(lDAPDisplayName=%)', [LdapEscape('computer')]), 'distinguishedName', lssWholeSubtree);
     if not Assigned(LdapObject) then
-    begin
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
-    end;
     ObjectDN := LdapObject.GetReadable();
 
     LdapObject := FrmRSAT.LdapClient.SearchObject(ObjectDN, '', 'schemaIDGUID');
     if not Assigned(LdapObject) then
-    begin
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
-    end;
     guid := PGuid(LdapObject.GetRaw())^;
 
     Index := Length(NewAcl^);
@@ -593,18 +569,12 @@ var
 
     LdapObject := FrmRSAT.LdapClient.SearchObject(Join(['CN=Schema,', FrmRSAT.LdapClient.ConfigDN]), FormatUtf8('(lDAPDisplayName=%)', [LdapEscape('member')]), 'distinguishedName', lssWholeSubtree);
     if not Assigned(LdapObject) then
-    begin
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
-    end;
     ObjectDN := LdapObject.GetReadable();
 
     LdapObject := FrmRSAT.LdapClient.SearchObject(ObjectDN, '', 'schemaIDGUID');
     if not Assigned(LdapObject) then
-    begin
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
-    end;
     guid := PGuid(LdapObject.GetRaw())^;
 
     Index := Length(NewAcl^);
@@ -618,18 +588,12 @@ var
 
     LdapObject := FrmRSAT.LdapClient.SearchObject(Join(['CN=Schema,', FrmRSAT.LdapClient.ConfigDN]), FormatUtf8('(lDAPDisplayName=%)', [LdapEscape('group')]), 'distinguishedName', lssWholeSubtree);
     if not Assigned(LdapObject) then
-    begin
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
-    end;
     ObjectDN := LdapObject.GetReadable();
 
     LdapObject := FrmRSAT.LdapClient.SearchObject(ObjectDN, '', 'schemaIDGUID');
     if not Assigned(LdapObject) then
-    begin
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
-    end;
     guid := PGuid(LdapObject.GetRaw())^;
 
     NewAcl^[Index].InheritedObjectType := guid;
@@ -646,18 +610,12 @@ var
 
     LdapObject := FrmRSAT.LdapClient.SearchObject(Join(['CN=Schema,', FrmRSAT.LdapClient.ConfigDN]), FormatUtf8('(lDAPDisplayName=%)', [LdapEscape(ObjectType)]), 'distinguishedName', lssWholeSubtree);
     if not Assigned(LdapObject) then
-    begin
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
-    end;
     ObjectDN := LdapObject.GetReadable();
 
     LdapObject := FrmRSAT.LdapClient.SearchObject(ObjectDN, '', 'schemaIDGUID');
     if not Assigned(LdapObject) then
-    begin
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
-    end;
     guid := PGuid(LdapObject.GetRaw())^;
 
     Index := Length(NewAcl^);
@@ -680,19 +638,13 @@ var
 
     LdapObject := FrmRSAT.LdapClient.SearchObject(Join(['CN=Schema,', FrmRSAT.LdapClient.ConfigDN]), FormatUtf8('(lDAPDisplayName=%)', [LdapEscape('pwdLastSet')]), 'distinguishedName', lssWholeSubtree);
     if not Assigned(LdapObject) then
-    begin
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
-    end;
 
     ObjectDN := LdapObject.GetReadable();
 
     LdapObject := FrmRSAT.LdapClient.SearchObject(ObjectDN, '', 'schemaIDGUID');
     if not Assigned(LdapObject) then
-    begin
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
-    end;
     guid := PGuid(LdapObject.GetRaw())^;
 
     Index := Length(NewAcl^);
@@ -723,10 +675,7 @@ begin
   // Get selected object acl
   res := FrmRSAT.LdapClient.SearchObject(SelectedObject, '', 'nTSecurityDescriptor');
   if not Assigned(res) then
-  begin
-    ShowLdapSearchError(FrmRSAT.LdapClient);
     Exit;
-  end;
 
   if not SecurityDescriptor.FromBinary(res.GetRaw()) then
     Exit;
@@ -774,10 +723,7 @@ begin
     FrmRSAT.LdapClient.SearchScope := lssWholeSubtree;
     repeat
       if not FrmRSAT.LdapClient.Search(FrmRSAT.LdapClient.DefaultDN, False, Filter, ['sAMAccountName', 'objectSID']) then
-      begin
-        ShowLdapSearchError(FrmRSAT.LdapClient);
         Exit;
-      end;
 
       for Item in FrmRSAT.LdapClient.SearchResult.Items do
       begin
@@ -796,10 +742,7 @@ begin
     NewAttr.Add(SecurityDescriptor.ToBinary);
 
     if not FrmRSAT.LdapClient.Modify(SelectedObject, lmoReplace, NewAttr) then
-    begin
-      ShowLdapModifyError(FrmRSAT.LdapClient);
       Exit;
-    end;
   finally
     FreeAndNil(NewAttr);
   end;

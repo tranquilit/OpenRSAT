@@ -135,10 +135,7 @@ begin
 
     DN := FormatUtf8('CN=%,%', [Edit_FullName.Text, NewObject.ObjectOU]);
     if not NewObject.Ldap.Add(DN, AttList) then
-    begin
-      ShowLdapAddError(NewObject.Ldap);
       Exit;
-    end;
   finally
     FreeAndNil(AttList);
   end;
@@ -148,10 +145,7 @@ begin
     // https://learn.microsoft.com/en-us/windows/win32/adsi/modifying-user-cannot-change-password-ldap-provider
     Att := NewObject.Ldap.SearchObject(atNTSecurityDescriptor, DN, '');
     if not Assigned(Att) then
-    begin
-      ShowLdapSearchError(NewObject.Ldap);
       Exit;
-    end;
 
     SecDesc.FromBinary(Att.GetRaw());
     AceSelf  := SecDescAddOrUpdateACE(@SecDesc, ATTR_UUID[kaUserChangePassword],
@@ -165,10 +159,7 @@ begin
     (NewObject.Ldap as TRsatLdapClient).OrderAcl(DN, (Owner as TVisNewObject).BaseDN, @SecDesc.Dacl);
 
     if not NewObject.Ldap.Modify(DN, lmoReplace, atNTSecurityDescriptor, SecDesc.ToBinary()) then
-    begin
-      ShowLdapModifyError(NewObject.Ldap);
       Exit;
-    end;
   end;
 
   NewObject.ModalResult := mrOK;

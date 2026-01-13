@@ -457,10 +457,7 @@ begin
     LdapClient.SearchScope := lssWholeSubtree;
     repeat
       if not LdapClient.Search(LdapClient.ConfigDN, False, FormatUtf8('(siteObject=%)', [LdapEscape(distinguishedName)]), ['cn']) then
-      begin
-        ShowLdapSearchError(LdapClient);
         Exit;
-      end;
       SetLength(result, Count + LdapClient.SearchResult.Count);
       for SearchResult in LdapClient.SearchResult.Items do
       begin
@@ -510,10 +507,7 @@ begin
     LdapClient.SearchScope := lssWholeSubtree;
     repeat
       if not LdapClient.Search(LdapClient.DefaultDN, False, Filter, ['name']) then
-      begin
-        ShowLdapSearchError(LdapClient);
         Exit;
-      end;
       SetLength(result, Count + LdapClient.SearchResult.Count);
       for SearchResult in LdapClient.SearchResult.Items do
       begin
@@ -553,10 +547,7 @@ begin
       continue;
     result := result and ApplyAttributeDifference(fModifiedAttributes.Items[i].AttributeName);
     if not result and (LdapClient.ResultString <> '') then
-    begin
-      ShowLdapModifyError(LdapClient);
       break;
-    end;
   end;
   FreeAndNil(fModifiedAttributes);
 end;
@@ -675,10 +666,7 @@ var
           Attribute.Add(Value);
         result := LdapClient.Modify(DistinguishedName, Modifier, Attribute);
         if not result then
-        begin
-          ShowLdapModifyError(LdapClient);
           Exit;
-        end;
       finally
         FreeAndNil(Attribute);
       end;
@@ -797,10 +785,7 @@ begin
     LdapClient.SearchScope := lssWholeSubtree;
     repeat
       if not LdapClient.Search(LdapClient.ConfigDN, False, '(objectClass=site)', ['name', 'distinguishedName']) then
-      begin
-        ShowLdapSearchError(LdapClient);
         Exit;
-      end;
 
       for SearchResult in LdapClient.SearchResult.Items do
       begin
@@ -825,10 +810,7 @@ begin
   try
     Attribute := LdapClient.SearchObject(FormatUtf8('CN=Partitions,%', [LdapClient.ConfigDN]), '', 'uPNSuffixes');
     if not Assigned(Attribute) and (LdapClient.ResultCode > 0) then
-    begin
-      ShowLdapSearchError(LdapClient);
       Exit;
-    end;
   finally
     LdapClient.SearchRangeEnd;
   end;
@@ -873,10 +855,7 @@ begin
     LdapClient.SearchScope := lssSingleLevel;
     repeat
       if not LdapClient.Search(DistinguishedName, False, '(objectClass=msFVE-RecoveryInformation)', ['cn', 'msFVE-RecoveryPassword']) then
-      begin
-        ShowLdapSearchError(LdapClient);
         Exit;
-      end;
 
       SetLength(result, Count + LdapClient.SearchResult.Count);
       for SearchResult in LdapClient.SearchResult.Items do
@@ -922,10 +901,7 @@ begin
       RSAT.LdapClient.SearchScope := lssWholeSubtree;
       repeat
         if not RSAT.LdapClient.Search(RSAT.LdapClient.SchemaDN, False, Filter, ['mustContain', 'systemMustContain', 'mayContain', 'systemMayContain', 'auxiliaryClass', 'systemAuxiliaryClass']) then
-        begin
-          ShowLdapSearchError(RSAT.LdapClient);
           Exit;
-        end;
 
         for SearchResult in RSAT.LdapClient.SearchResult.Items do
         begin

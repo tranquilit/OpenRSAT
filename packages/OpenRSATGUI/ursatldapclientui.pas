@@ -242,10 +242,7 @@ begin
     DN := GetParentDN(DN); // Get Parent SecDesc
     data := Self.SearchObject(atNTSecurityDescriptor, DN, '');
     if not Assigned(data) then
-    begin
-      ShowLdapSearchError(Self);
       Exit; // Failure
-    end;
     if not SecDescParent.FromBinary(data.GetRaw()) then
     begin
       //Dialogs.MessageDlg(rsTitleParsing, rsACEParsing, mtError, [mbOK], 0);
@@ -266,10 +263,7 @@ begin
       OrderAcl(DN, BaseDN, @SecDescParent.Dacl); // Order
 
       if not Self.Modify(DN, lmoReplace, atNTSecurityDescriptor, SecDescParent.ToBinary()) then // Modify
-      begin
-        ShowLdapModifyError(Self);
         Exit; // Failure
-      end;
     end;
   end;
 
@@ -308,10 +302,7 @@ begin
   pDN := GetParentDN(DN);
   LdapObject := Self.SearchObject(atNTSecurityDescriptor, pDN, '');
   if not Assigned(LdapObject) then
-  begin
-    ShowLdapSearchError(Self);
     Exit;
-  end;
   sd.FromBinary(LdapObject.GetRaw());
   for pace in sd.Dacl do
   begin
@@ -351,10 +342,7 @@ begin
     repeat
       Self.SearchScope := lssWholeSubtree;
       if not Self.Search([atNTSecurityDescriptor], filter) then
-      begin
-        ShowLdapSearchError(Self);
         Exit;
-      end;
       for res in Self.SearchResult.Items do
       begin
         if not sd.FromBinary(res.Attributes.Find(atNTSecurityDescriptor).GetRaw()) then

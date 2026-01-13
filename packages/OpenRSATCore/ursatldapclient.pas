@@ -9,6 +9,7 @@ uses
   SysUtils,
   System.UITypes,
   mormot.core.base,
+  mormot.core.os.security,
   mormot.core.variants,
   mormot.net.ldap;
 
@@ -41,6 +42,39 @@ type
 
     procedure ChangeSettings(ASettings: TLdapClientSettings; AutoConnect: Boolean = True);
   public
+    function Search(const Attributes: TLdapAttributeTypes; const Filter: RawUtf8='';
+      const BaseDN: RawUtf8=''; TypesOnly: boolean=false): boolean; overload;
+    function Search(const BaseDN: RawUtf8; TypesOnly: boolean; const Filter: RawUtf8;
+      const Attributes: array of RawUtf8): boolean; overload;
+    function SearchObject(const ObjectDN, Filter, Attribute: RawUtf8;
+  Scope: TLdapSearchScope=lssBaseObject): TLdapAttribute; overload;
+    function SearchObject(const ObjectDN, Filter: RawUtf8;
+      const Attributes: array of RawUtf8; Scope: TLdapSearchScope=lssBaseObject
+      ): TLdapResult; overload;
+    function SearchObject(Attribute: TLdapAttributeType; const ObjectDN,
+      Filter: RawUtf8; Scope: TLdapSearchScope=lssBaseObject): TLdapAttribute;
+      overload;
+    function SearchObject(const Attributes: TLdapAttributeTypes;
+      const ObjectDN, Filter: RawUtf8; Scope: TLdapSearchScope=lssBaseObject
+      ): TLdapResult; overload;
+    function Modify(const Obj: RawUtf8; const Modifications: array of TAsnObject
+      ): boolean; overload;
+    function Modify(const Obj: RawUtf8; Op: TLdapModifyOp;
+      const Types: array of TLdapAttributeType;
+      const Values: array of const): boolean; overload;
+    function Modify(const Obj: RawUtf8; Op: TLdapModifyOp; const AttrName: RawUtf8;
+  const AttrValue: RawByteString): boolean; overload;
+    function Modify(const Obj: RawUtf8; Op: TLdapModifyOp; Attribute: TLdapAttribute
+  ): boolean; overload;
+    function Modify(const Obj: RawUtf8; Op: TLdapModifyOp;
+      AttrType: TLdapAttributeType; const AttrValue: RawByteString): boolean;
+      overload;
+    function ModifyDN(const Obj, NewRdn, NewSuperior: RawUtf8;
+      DeleteOldRdn: boolean): boolean;
+    function ModifyUserPassword(const UserDN: RawUtf8; const OldPassword,
+      NewPassword: SpiUtf8): boolean;
+    function Add(const Obj: RawUtf8; Value: TLdapAttributeList): boolean;
+    function Delete(const Obj: RawUtf8; DeleteChildren: boolean=false): boolean;
     function Connect(DiscoverMode: TLdapClientConnect=[lccCldap, lccTlsFirst];
       DelayMS: integer=500): boolean;
     function Close: boolean;
@@ -201,7 +235,233 @@ begin
 
   CopyObject(ASettings, fSettings);
   if AutoConnect then
-  Connect;
+    Connect;
+end;
+
+function TRsatLdapClient.Search(const Attributes: TLdapAttributeTypes;
+  const Filter: RawUtf8; const BaseDN: RawUtf8; TypesOnly: boolean): boolean;
+begin
+  Result := inherited Search(Attributes, Filter, BaseDN, TypesOnly);
+
+  if Result then
+  begin
+    if Assigned(fOnSearch) then
+      fOnSearch(Self);
+  end
+  else
+    if Assigned(fOnError) then
+      fOnError(Self);
+end;
+
+function TRsatLdapClient.Search(const BaseDN: RawUtf8; TypesOnly: boolean;
+  const Filter: RawUtf8; const Attributes: array of RawUtf8): boolean;
+begin
+  Result := inherited Search(BaseDN, TypesOnly, Filter, Attributes);
+
+  if Result then
+  begin
+    if Assigned(fOnSearch) then
+      fOnSearch(Self);
+  end
+  else
+    if Assigned(fOnError) then
+      fOnError(Self);
+end;
+
+function TRsatLdapClient.SearchObject(const ObjectDN, Filter,
+  Attribute: RawUtf8; Scope: TLdapSearchScope): TLdapAttribute;
+begin
+  result := inherited SearchObject(ObjectDN, Filter, Attribute, Scope);
+
+  if not Assigned(result) and (ResultCode > 0) then
+  begin
+    if Assigned(fOnError) then
+      fOnError(Self);
+  end
+  else
+    if Assigned(fOnSearch) then
+      fOnSearch(Self);
+end;
+
+function TRsatLdapClient.SearchObject(const ObjectDN, Filter: RawUtf8;
+  const Attributes: array of RawUtf8; Scope: TLdapSearchScope): TLdapResult;
+begin
+  result := inherited SearchObject(ObjectDN, Filter, Attributes, Scope);
+
+  if not Assigned(result) and (ResultCode > 0) then
+  begin
+    if Assigned(fOnError) then
+      fOnError(Self);
+  end
+  else
+    if Assigned(fOnSearch) then
+      fOnSearch(Self);
+end;
+
+function TRsatLdapClient.SearchObject(Attribute: TLdapAttributeType;
+  const ObjectDN, Filter: RawUtf8; Scope: TLdapSearchScope): TLdapAttribute;
+begin
+  result := inherited SearchObject(Attribute, ObjectDN, Filter, Scope);
+
+  if not Assigned(result) and (ResultCode > 0) then
+  begin
+    if Assigned(fOnError) then
+      fOnError(Self);
+  end
+  else
+    if Assigned(fOnSearch) then
+      fOnSearch(Self);
+end;
+
+function TRsatLdapClient.SearchObject(const Attributes: TLdapAttributeTypes;
+  const ObjectDN, Filter: RawUtf8; Scope: TLdapSearchScope): TLdapResult;
+begin
+  result := inherited SearchObject(Attributes, ObjectDN, Filter, Scope);
+
+  if not Assigned(result) and (ResultCode > 0) then
+  begin
+    if Assigned(fOnError) then
+      fOnError(Self);
+  end
+  else
+    if Assigned(fOnSearch) then
+      fOnSearch(Self);
+end;
+
+function TRsatLdapClient.Modify(const Obj: RawUtf8;
+  const Modifications: array of TAsnObject): boolean;
+begin
+  result := inherited Modify(Obj, Modifications);
+
+  if result then
+  begin
+    if Assigned(fOnModify) then
+      fOnModify(Self);
+  end
+  else
+    if Assigned(fOnError) then
+      fOnError(Self);
+end;
+
+function TRsatLdapClient.Modify(const Obj: RawUtf8; Op: TLdapModifyOp;
+  const Types: array of TLdapAttributeType;
+  const Values: array of const): boolean;
+begin
+  result := inherited Modify(Obj, Op, Types, Values);
+
+  if result then
+  begin
+    if Assigned(fOnModify) then
+      fOnModify(Self);
+  end
+  else
+    if Assigned(fOnError) then
+      fOnError(Self);
+end;
+
+function TRsatLdapClient.Modify(const Obj: RawUtf8; Op: TLdapModifyOp;
+  const AttrName: RawUtf8; const AttrValue: RawByteString): boolean;
+begin
+  result := inherited Modify(Obj, Op, AttrName, AttrValue);
+
+  if result then
+  begin
+    if Assigned(fOnModify) then
+      fOnModify(Self);
+  end
+  else
+    if Assigned(fOnError) then
+      fOnError(Self);
+end;
+
+function TRsatLdapClient.Modify(const Obj: RawUtf8; Op: TLdapModifyOp;
+  Attribute: TLdapAttribute): boolean;
+begin
+  result := inherited Modify(Obj, Op, Attribute);
+
+  if result then
+  begin
+    if Assigned(fOnModify) then
+      fOnModify(Self);
+  end
+  else
+    if Assigned(fOnError) then
+      fOnError(Self);
+end;
+
+function TRsatLdapClient.Modify(const Obj: RawUtf8; Op: TLdapModifyOp;
+  AttrType: TLdapAttributeType; const AttrValue: RawByteString): boolean;
+begin
+  result := inherited Modify(Obj, Op, AttrType, AttrValue);
+
+  if result then
+  begin
+    if Assigned(fOnModify) then
+      fOnModify(Self);
+  end
+  else
+    if Assigned(fOnError) then
+      fOnError(Self);
+end;
+
+function TRsatLdapClient.ModifyDN(const Obj, NewRdn, NewSuperior: RawUtf8;
+  DeleteOldRdn: boolean): boolean;
+begin
+  result := inherited ModifyDN(Obj, NewRdn, NewSuperior, DeleteOldRdn);
+
+  if result then
+  begin
+    if Assigned(fOnModify) then
+      fOnModify(Self);
+  end
+  else
+    if Assigned(fOnError) then
+      fOnError(Self);
+end;
+
+function TRsatLdapClient.ModifyUserPassword(const UserDN: RawUtf8;
+  const OldPassword, NewPassword: SpiUtf8): boolean;
+begin
+  result := inherited ModifyUserPassword(UserDN, OldPassword, NewPassword);
+
+  if result then
+  begin
+    if Assigned(fOnModify) then
+      fOnModify(Self);
+  end
+  else
+    if Assigned(fOnError) then
+      fOnError(Self);
+end;
+
+function TRsatLdapClient.Add(const Obj: RawUtf8; Value: TLdapAttributeList
+  ): boolean;
+begin
+  result := inherited Add(Obj, Value);
+
+  if result then
+  begin
+    if Assigned(fOnAdd) then
+      fOnAdd(Self);
+  end
+  else
+    if Assigned(fOnError) then
+      fOnError(Self);
+end;
+
+function TRsatLdapClient.Delete(const Obj: RawUtf8; DeleteChildren: boolean
+  ): boolean;
+begin
+  result := inherited Delete(Obj, DeleteChildren);
+
+  if result then
+  begin
+    if Assigned(fOnDelete) then
+      fOnDelete(Self);
+  end
+  else
+    if Assigned(fOnError) then
+      fOnError(Self);
 end;
 
 function TRsatLdapClient.Connect(DiscoverMode: TLdapClientConnect;
@@ -209,20 +469,31 @@ function TRsatLdapClient.Connect(DiscoverMode: TLdapClientConnect;
 begin
   Result := inherited Connect(DiscoverMode, DelayMS);
 
-  if Result and Assigned(fOnConnect) then
-    fOnConnect(Self)
-  else if Assigned(fOnError) then
-    fOnError(Self);
+  if Result and Connected then
+  begin
+    if Assigned(fOnConnect) then
+      fOnConnect(Self);
+  end
+  else
+  begin
+    if Assigned(fOnError) then
+      fOnError(Self);
+    Close;
+  end;
 end;
 
 function TRsatLdapClient.Close: boolean;
 begin
   Result := inherited Close;
 
-  if Assigned(fOnClose) then
-    fOnClose(Self)
-  else if Assigned(fOnError) then
-    fOnError(Self);
+  if result then
+  begin
+    if Assigned(fOnClose) then
+      fOnClose(Self);
+  end
+  else
+    if Assigned(fOnError) then
+      fOnError(Self);
 end;
 
 procedure TRsatLdapClient.SetOnAdd(AValue: TNotifyEvent);

@@ -16,7 +16,8 @@ uses
   Buttons,
   mormot.core.base,
   mormot.core.variants,
-  mormot.net.ldap;
+  mormot.net.ldap,
+  ursatldapclient;
 
 type
 
@@ -38,13 +39,13 @@ type
       var NodeClass: TTreeNodeClass);
   private
     fSelectedDN: RawUtf8;
-    fLdap: TLdapClient;
+    fLdap: TRsatLdapClient;
     fBaseDN: RawUtf8;
 
     procedure ChangeNode(node: TTreeNode);
   public
-    constructor Create(TheOwner: TComponent; _Ldap: TLdapClient; _CurrentDN,
-      abaseDN: RawUtf8); reintroduce;
+    constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient; ACurrentDN,
+      AbaseDN: RawUtf8); reintroduce;
 
     property SelectedDN: RawUtf8 read fSelectedDN;
   end;
@@ -122,10 +123,7 @@ begin
       fLdap.SearchScope := lssSingleLevel;
       repeat
         if not fLdap.Search(NodeData.DistinguishedName, False, TreeViewLdapFilter, ['distinguishedName', 'objectClass']) then
-        begin
-          ShowLdapSearchError(fLdap);
           Exit;
-        end;
 
         for item in fLdap.SearchResult.Items do
         begin
@@ -172,8 +170,8 @@ begin
   end;
 end;
 
-constructor TVisChangeDN.Create(TheOwner: TComponent; _Ldap: TLdapClient;
-  _CurrentDN, abaseDN: RawUtf8);
+constructor TVisChangeDN.Create(TheOwner: TComponent; ALdap: TRsatLdapClient;
+  ACurrentDN, AbaseDN: RawUtf8);
 var
   res: TLdapResult;
   distinguishedName, objectClass: RawUtf8;
@@ -184,16 +182,13 @@ var
 begin
   inherited Create(TheOwner);
 
-  fBaseDN := abaseDN;
-  fLdap := _Ldap;
-  fSelectedDN := _CurrentDN;
+  fBaseDN := AbaseDN;
+  fLdap := ALdap;
+  fSelectedDN := ACurrentDN;
 
   res := fLdap.SearchObject(fLdap.DefaultDN(fBaseDN), '', ['distinguishedName', 'objectClass']);
   if not Assigned(res) then
-  begin
-    ShowLdapSearchError(fLdap);
     Exit;
-  end;
 
   distinguishedName := res.Find('distinguishedName').GetReadable();
   ObjectClassArray := res.Find('objectClass').GetAllReadable;

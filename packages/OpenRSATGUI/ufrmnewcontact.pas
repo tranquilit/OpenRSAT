@@ -85,10 +85,7 @@ begin
       Attr.Add(atInitials, Edit_Initial.Text);
 
     if not VisNewObject.Ldap.Add('CN=' + Edit_FullName.Text + ',' + VisNewObject.ObjectOU, Attr) then
-    begin
-      ShowLdapAddError(VisNewObject.Ldap);
       Exit;
-    end;
     VisNewObject.ModalResult := mrOK;
   finally
     FreeAndNil(Attr);

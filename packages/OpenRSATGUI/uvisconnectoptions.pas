@@ -84,7 +84,9 @@ uses
   mormot.net.dns,
   mormot.net.sock,
   ucommon,
-  uvisconnectiondetails;
+  ursatldapclient,
+  uvisconnectiondetails,
+  ufrmrsat;
 
 {$R *.lfm}
 
@@ -186,14 +188,15 @@ end;
 
 procedure TVisConnectOptions.Action_CheckExecute(Sender: TObject);
 var
-  ALdap: TLdapClient;
+  ALdap: TRsatLdapClient;
   ASettings: TMLdapClientSettings;
   vis: TVisConnectionDetails;
 begin
   ASettings := TMLdapClientSettings.Create();
   try
     GetSettings(ASettings);
-    ALdap := TLdapClient.Create(ASettings);
+    ALdap := TRsatLdapClient.Create(ASettings);
+    ALdap.OnError := FrmRSAT.LdapClient.OnError;
     try
       ALdap.TlsContext^.IgnoreCertificateErrors := ALdap.Settings.AllowUnsafePasswordBind;
       vis := TVisConnectionDetails.Create(Self, ALdap);

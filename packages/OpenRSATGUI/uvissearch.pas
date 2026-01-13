@@ -150,10 +150,7 @@ begin
 
     repeat
       if not FrmRSAT.RSAT.LdapClient.Search(FrmRSAT.RSAT.LdapClient.SchemaDN, False, '', ['lDAPDisplayName']) then
-      begin
-        ShowLdapSearchError(FrmRSAT.RSAT.LdapClient);
         Exit;
-      end;
 
       for SearchResult in FrmRSAT.RSAT.LdapClient.SearchResult.Items do
       begin
@@ -409,10 +406,7 @@ begin
   try
     repeat
       if not FrmRSAT.RSAT.LdapClient.Search(Trim(Edit_Path.Text), False, Filter, Attributes) then
-      begin
-        ShowLdapSearchError(FrmRSAT.RSAT.LdapClient);
         Exit;
-      end;
       for item in FrmRSAT.RSAT.LdapClient.SearchResult.Items do
       begin
         if not Assigned(item) or (item.Attributes.Count <= 0) then

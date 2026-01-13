@@ -189,10 +189,7 @@ begin
     begin
       SearchResult := FrmRSAT.LdapClient.SearchObject(Context, '', ['description', 'distinguishedName', 'name', 'objectClass']);
       if not Assigned(SearchResult) then
-      begin
-        ShowLdapSearchError(FrmRSAT.LdapClient);
         continue;
-      end;
       NodeName := DNToCN(SearchResult.ObjectName);
       RootNode := (TreeView1.Items.Add(nil, NodeName) as TADSITreeNode);
       RootNode.HasChildren := True;
@@ -286,7 +283,6 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, FrmRSAT.LdapClient.ResultString);
-      ShowLdapDeleteError(FrmRSAT.LdapClient);
       continue;
     end;
   end;
@@ -436,7 +432,6 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, FrmRSAT.LdapClient.ResultString]);
-        ShowLdapSearchError(FrmRSAT.LdapClient);
         Exit;
       end;
 
@@ -509,7 +504,6 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, FrmRSAT.LdapClient.ResultString]);
-        ShowLdapSearchError(FrmRSAT.LdapClient);
         Exit;
       end;
 
@@ -578,7 +572,6 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, '% - Ldap Search Object Error: "%"', [Self.Name, FrmRSAT.LdapClient.ResultString]);
-      ShowLdapSearchError(FrmRSAT.LdapClient);
       Exit;
     end;
 

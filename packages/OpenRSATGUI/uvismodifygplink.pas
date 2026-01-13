@@ -196,10 +196,7 @@ begin
   end;
   GPLink := GPLinkArrToGPLink(NewGPLinkArr);
   if not FrmRSAT.LdapClient.Modify(Edit1.Text, lmoReplace, 'gPLink', GPLink) then
-  begin
-    ShowLdapModifyError(FrmRSAT.LdapClient);
     Exit;
-  end;
 end;
 
 procedure TVisModifyGPLink.TisGrid_LinkedGPODragDrop(Sender: TBaseVirtualTree;
@@ -290,10 +287,7 @@ begin
     FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
     repeat
       if not FrmRSAT.LdapClient.Search(FormatUtf8('CN=Policies,CN=System,%', [FrmRSAT.LdapClient.DefaultDN]), False, 'objectClass=groupPolicyContainer', ['displayName']) then
-      begin
-        ShowLdapSearchError(FrmRSAT.LdapClient);
         Exit;
-      end;
 
       SetLength(fGroupPolicyContainerArr, Count + FrmRSAT.LdapClient.SearchResult.Count);
       for SearchResult in FrmRSAT.LdapClient.SearchResult.Items do

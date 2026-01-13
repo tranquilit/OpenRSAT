@@ -114,10 +114,7 @@ begin
 
   Attribute := Props.RSAT.LdapClient.SearchObject(GetParentDN(Props.distinguishedName), '', 'nTSecurityDescriptor');
   if not Assigned(Attribute) then
-  begin
-    ShowLdapSearchError(Props.RSAT.LdapClient);
     Exit;
-  end;
 
   if not SecDesc.FromBinary(Attribute.GetRaw()) then
   begin
@@ -272,10 +269,7 @@ begin
   begin
     Attribute := Props.RSAT.LdapClient.SearchObject(GetParentDN(Props.distinguishedName), '', 'nTSecurityDescriptor');
     if not Assigned(Attribute) then
-    begin
-      ShowLdapSearchError(Props.RSAT.LdapClient);
       Exit;
-    end;
 
     if not SecDesc.FromBinary(Attribute.GetRaw()) then
     begin

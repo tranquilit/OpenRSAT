@@ -561,7 +561,6 @@ begin
   end;
   if not Assigned(LdapObject) then
   begin
-    ShowLdapSearchError(fProperty.RSAT.LdapClient);
     Close();
     Exit;
   end;

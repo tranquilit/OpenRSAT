@@ -109,10 +109,7 @@ begin
 
   Attr := (owner as TVisNewObject).Ldap.SearchObject(atObjectSid, DNarr[0], '');
   if not Assigned(Attr) then
-  begin
-    ShowLdapSearchError((owner as TVisNewObject).Ldap);
     Exit;
-  end;
   Edit_UserOrGroup.Text := DNarr[0];
   Sid := Attr.GetRaw();
 end;
@@ -157,10 +154,7 @@ begin
 
     DN := FormatUtf8('CN=%,%', [Edit_ComputerName.Text, VisNewObject.ObjectOU]);
     if not VisNewObject.Ldap.Add(DN, Attr) then
-    begin
-      ShowLdapAddError(VisNewObject.Ldap);
       Exit;
-    end;
   finally
     FreeAndNil(Attr);
   end;
@@ -174,10 +168,7 @@ begin
 
   Att := VisNewObject.Ldap.SearchObject(atNTSecurityDescriptor, DN, '');
   if not Assigned(Att) then
-  begin
-    ShowLdapSearchError(VisNewObject.Ldap);
     Exit;
-  end;
 
   SecDesc.FromBinary(Att.GetRaw());
 
@@ -198,10 +189,7 @@ begin
   (VisNewObject.Ldap as TRsatLdapClient).OrderAcl(DN, (owner as TVisNewObject).BaseDN, @SecDesc.Dacl);
 
   if not VisNewObject.Ldap.Modify(DN, lmoReplace, atNTSecurityDescriptor, SecDesc.ToBinary()) then
-  begin
-    ShowLdapModifyError(VisNewObject.Ldap);
     Exit;
-  end;
 
   VisNewObject.ModalResult := mrOK;
 end;

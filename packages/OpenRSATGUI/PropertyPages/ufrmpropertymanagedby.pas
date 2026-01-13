@@ -233,7 +233,6 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, 'Ldap Search Error: "%"', [Props.RSAT.LdapClient.ResultString], Self);
-      ShowLdapSearchError(Props.RSAT.LdapClient);
       Exit;
     end;
     fManagerAttributes := TLdapAttributeList(LdapResult.Attributes.Clone);

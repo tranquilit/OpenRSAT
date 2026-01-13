@@ -194,10 +194,7 @@ begin
     if NewDCSettings = '' then
       Exit;
     if not FrmRSAT.LdapClient.Modify(Master, lmoReplace, 'fSMORoleOwner', NewDCSettings) then
-    begin
-      ShowLdapModifyError(FrmRSAT.LdapClient);
       Exit;
-    end;
     result := Vis.DomainController;
   finally
     FreeAndNil(Vis);

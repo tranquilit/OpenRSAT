@@ -376,10 +376,7 @@ begin
     Attribute.Add(RawDNSProperty);
 
     if not LdapClient.Add(DistinguishedName, AttributeList) then
-    begin
-      ShowLdapAddError(LdapClient);
       Exit;
-    end;
   finally
     FreeAndNil(AttributeList);
   end;
@@ -414,10 +411,7 @@ begin
     Attribute.Add(RawDNSProperty);
 
     if not LdapClient.Add(Format('DC=@,%s', [DistinguishedName]), AttributeList) then
-    begin
-      ShowLdapAddError(LdapClient);
       Exit;
-    end;
   finally
     FreeAndNil(AttributeList);
   end;

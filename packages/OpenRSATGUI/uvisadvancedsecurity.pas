@@ -21,7 +21,8 @@ uses
   mormot.core.os.security,
   mormot.core.variants,
   mormot.net.ldap,
-  ucommon;
+  ucommon,
+  ursatldapclient;
 
 type
 
@@ -100,7 +101,7 @@ type
   private
     SecurityDescriptor: PSecurityDescriptor;
     SampleSD: TSecurityDescriptor;
-    Ldap: TLdapClient;
+    Ldap: TRsatLdapClient;
     DN: RawUtf8;
     fBaseDN: RawUtf8;
     fSearchWord: RawUtf8;
@@ -137,8 +138,8 @@ type
 
     procedure ResolveOwnerAndGroup;
   public
-    constructor Create(TheOwner: TComponent; _Ldap: TLdapClient;
-      _SD: PSecurityDescriptor; _dn, abaseDN: RawUtf8); reintroduce;
+    constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient;
+      ASD: PSecurityDescriptor; Adn, AbaseDN: RawUtf8); reintroduce;
   end;
 
 const
@@ -279,7 +280,6 @@ uses
   mormot.core.text,
   ucoredatamodule,
   ucommonui,
-  ursatldapclient,
   ursatldapclientui,
   uvisaddaces;
 
@@ -287,7 +287,7 @@ uses
 
 
 // Can be optimised, but it's fine
-function GUIDsToNames(Ldap: TLdapClient; const GuidArr: array of TGuid): TRawUtf8DynArray;
+function GUIDsToNames(Ldap: TRsatLdapClient; const GuidArr: array of TGuid): TRawUtf8DynArray;
 var
   i: Integer;
   Filter, G: RawUtf8;
@@ -320,10 +320,7 @@ begin
     Exit; // Nothing to do
   Ldap.SearchScope := lssWholeSubtree;
   if not Ldap.Search(FormatUtf8('%,%', [CN_SCHEMA, Ldap.ConfigDN]), False, Filter, ['name', 'schemaIDGUID']) then
-  begin
-    ShowLdapSearchError(Ldap);
     Exit;
-  end;
   for res in Ldap.SearchResult.Items do
   begin
     G := ToUtf8(PGuid(res.Attributes.Find('schemaIDGUID').GetRaw())^);
@@ -337,10 +334,7 @@ begin
     Filter += FormatUtf8('(rightsGuid=%)', [toSearch[i]]);
   Ldap.SearchScope := lssWholeSubtree;
   if not Ldap.Search(FormatUtf8('%,%', [CN_EXTENDED_RIGHTS, Ldap.ConfigDN]), False, Filter, ['name', 'rightsGuid']) then
-  begin
-    ShowLdapSearchError(Ldap);
     Exit;
-  end;
   for res in Ldap.SearchResult.Items do
   begin
     G := ToUtf8(PGuid(res.Attributes.Find('rightsGuid').GetRaw())^);
@@ -350,7 +344,7 @@ begin
   end;
 end;
 
-function ACEsToInheritanceRoot(Ldap: TLdapClient; arr: PSecAcl; DN, fBaseDN: RawUtf8): TRawUtf8DynArray;
+function ACEsToInheritanceRoot(Ldap: TRsatLdapClient; arr: PSecAcl; DN, fBaseDN: RawUtf8): TRawUtf8DynArray;
 var
   Filter: RawUtf8;
   SecDescArr: array of TSecurityDescriptor;
@@ -375,10 +369,7 @@ begin
     Exit; // Nothing to do
   Ldap.SearchScope := lssWholeSubtree;
   if not Ldap.Search([atNTSecurityDescriptor], Filter) then
-  begin
-    ShowLdapSearchError(Ldap);
     Exit;
-  end;
 
   SecDescArr  := []; // Sort & fill SecDescArr by level of inheritance (closest-first)
   DNParentArr := [];
@@ -416,7 +407,7 @@ end;
 { TVisAdvancedSecurity }
 
 constructor TVisAdvancedSecurity.Create(TheOwner: TComponent;
-  _Ldap: TLdapClient; _SD: PSecurityDescriptor; _dn, abaseDN: RawUtf8);
+  ALdap: TRsatLdapClient; ASD: PSecurityDescriptor; Adn, AbaseDN: RawUtf8);
 begin
   inherited Create(TheOwner);
 
@@ -425,11 +416,11 @@ begin
     fLog.Log(sllTrace, '% - Create', [Self.Name]);
 
   // Init
-  Ldap := _Ldap;
-  SecurityDescriptor := _SD;
-  SampleSD := _SD^;
-  DN := _dn;
-  fBaseDN := aBaseDN;
+  Ldap := ALdap;
+  SecurityDescriptor := ASD;
+  SampleSD := ASD^;
+  DN := Adn;
+  fBaseDN := ABaseDN;
 
   // Unify button width
   UnifyButtonsWidth([BitBtn_AddAce, BitBtn_DeleteAce, BitBtn_EditAce]);
@@ -511,7 +502,6 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, '% - Ldap Modify Error: "%"', [Action_Apply.Caption, Ldap.ResultString]);
-      ShowLdapModifyError(Ldap);
       Exit;
     end;
   finally
@@ -522,7 +512,6 @@ begin
   begin
     if Assigned(fLog) then
       fLog.Log(sllError, '% - Ldap Search Object Error: "%"', [Action_Apply.Caption, Ldap.ResultString]);
-    ShowLdapSearchError(Ldap);
     Exit;
   end;
   SecurityDescriptor^.FromBinary(attr.GetRaw());
@@ -622,7 +611,6 @@ begin
         begin
           if Assigned(fLog) then
             fLog.Log(sllError, '% - Ldap Search Error: "%"', [Action_EditAce.Caption, Ldap.ResultString]);
-          ShowLdapSearchError(Ldap);
           Exit;
         end;
 
@@ -645,7 +633,6 @@ begin
         begin
           if Assigned(fLog) then
             fLog.Log(sllTrace, '% - Ldap Search Error: "%"', [Action_EditAce.Caption, Ldap.ResultString]);
-          ShowLdapSearchError(Ldap);
           Exit;
         end;
 
@@ -736,7 +723,6 @@ begin
   begin
     if Assigned(fLog) then
       fLog.Log(sllError, '% - Ldap Search Object Error: "%"', [Action_Restore.Caption, Ldap.ResultString]);
-    ShowLdapSearchError(Ldap);
     Exit;
   end;
 
@@ -762,7 +748,6 @@ begin
       begin
         if Assigned(fLog) then
           fLog.Log(sllError, '% - Ldap Search Error: "%"', [Action_Restore.Caption, Ldap.ResultString]);
-        ShowLdapSearchError(Ldap);
         Exit;
       end;
 
@@ -945,7 +930,7 @@ var
   SidArr: array of RawUtf8;
   GuidArr: array of TGuid;
 
-  procedure ResolveSid(PSidCache: PDocVariantData; SecDesc: PSecurityDescriptor; LdapClient: TLdapClient);
+  procedure ResolveSid(PSidCache: PDocVariantData; SecDesc: PSecurityDescriptor; LdapClient: TRsatLdapClient);
   var
     Filter: String;
     idx: Integer;
@@ -990,7 +975,6 @@ var
         begin
           if Assigned(fLog) then
             fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, Ldap.ResultString]);
-          ShowLdapSearchError(LdapClient);
           Exit;
         end;
 
@@ -1014,7 +998,6 @@ var
         begin
           if Assigned(fLog) then
             fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, Ldap.ResultString]);
-          ShowLdapSearchError(LdapClient);
           Exit;
         end;
 
@@ -1148,7 +1131,6 @@ begin
     begin
       if Assigned(fLog) then
         fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, Ldap.ResultString]);
-      ShowLdapSearchError(Ldap);
       Exit;
     end;
 

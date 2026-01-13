@@ -11,7 +11,7 @@ uses
   Controls,
   Graphics,
   Dialogs, StdCtrls, ExtCtrls, Grids, ComCtrls, Buttons,
-  mormot.net.ldap, tis.ui.grid.core;
+  mormot.net.ldap, tis.ui.grid.core, ursatldapclient;
 
 type
 
@@ -56,17 +56,18 @@ type
     TisGrid1: TTisGrid;
     procedure BitBtn1Click(Sender: TObject);
   private
-    fLdapClient: TLdapClient;
-    procedure SetLdapClient(AValue: TLdapClient);
+    fLdapClient: TRsatLdapClient;
+    procedure SetLdapClient(AValue: TRsatLdapClient);
 
     procedure ClearLdapInformation;
     procedure UpdateLdapInformation;
+    procedure ConnectSuccess(Sender: TObject);
   public
     ShouldClose: Boolean;
 
-    constructor Create(TheOwner: TComponent; ALdapClient: TLdapClient = nil); reintroduce;
+    constructor Create(TheOwner: TComponent; ALdapClient: TRsatLdapClient = nil); reintroduce;
 
-    property LdapClient: TLdapClient read fLdapClient write SetLdapClient;
+    property LdapClient: TRsatLdapClient read fLdapClient write SetLdapClient;
   end;
 
 implementation
@@ -89,7 +90,7 @@ begin
     Edit_Password.EchoMode := emPassword;
 end;
 
-procedure TVisConnectionDetails.SetLdapClient(AValue: TLdapClient);
+procedure TVisConnectionDetails.SetLdapClient(AValue: TRsatLdapClient);
 begin
   if fLdapClient = AValue then
     Exit;
@@ -158,7 +159,6 @@ begin
 
   if not Assigned(RootDSEObject) then
   begin
-    ShowLdapConnectError(LdapClient);
     Panel5.Visible := True;
     Memo1.Text := LdapClient.ResultString;
     Exit;
@@ -184,26 +184,26 @@ begin
   TisGrid1.LoadData();
 
   LdapClient.Close;
+  LdapClient.OnConnect := @ConnectSuccess;
   if (not LdapClient.Connect()) then
   begin
-    ShowLdapConnectError(LdapClient);
     Panel5.Visible := True;
     Memo1.Text := LdapClient.ResultString;
-  end
-  else
-  begin
-    if mrOk <> MessageDlg(rsLdapSuccess, FormatUtf8(rsConnectSuccess, [LdapClient.Settings.TargetUri]), mtInformation, [mbClose, mbOK], 0) then
-    begin
-      ShouldClose := True;
-      Exit;
-    end;
-
   end;
   Edit_KerberosSPN.Text := LdapClient.Settings.KerberosSpn;
 end;
 
+procedure TVisConnectionDetails.ConnectSuccess(Sender: TObject);
+begin
+  if mrOk <> MessageDlg(rsLdapSuccess, FormatUtf8(rsConnectSuccess, [LdapClient.Settings.TargetUri]), mtInformation, [mbClose, mbOK], 0) then
+  begin
+    ShouldClose := True;
+    Exit;
+  end;
+end;
+
 constructor TVisConnectionDetails.Create(TheOwner: TComponent;
-  ALdapClient: TLdapClient);
+  ALdapClient: TRsatLdapClient);
 begin
   inherited Create(TheOwner);
 
