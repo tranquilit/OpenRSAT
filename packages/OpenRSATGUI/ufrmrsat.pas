@@ -215,13 +215,7 @@ begin
   try
     // TLdapClientSettings
     conf := LdapConfigs.LdapConnectionSettings;
-    if conf.UseCredentials and not conf.Tls then
-      {$IfDef darwin}
-      conf.UserName := conf.UserName;
-      {$Else}
-      conf.UserName := String(conf.UserName).Split('@')[0];
-      {$EndIf}
-    LdapClient.ChangeSettings(Conf);
+    LdapClient.ChangeSettings(Conf, False);
 
     {$IFDEF DEBUG}
       LdapClient.Log := TSynLog;

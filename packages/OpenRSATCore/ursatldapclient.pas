@@ -39,7 +39,7 @@ type
     property DomainName: RawUtf8 read fDomainName write SetDomainName;
     property DomainControllerName: RawUtf8 read fDomainControllerName write SetDomainControllerName;
 
-    procedure ChangeSettings(ASettings: TLdapClientSettings);
+    procedure ChangeSettings(ASettings: TLdapClientSettings; AutoConnect: Boolean = True);
   public
     function Connect(DiscoverMode: TLdapClientConnect=[lccCldap, lccTlsFirst];
       DelayMS: integer=500): boolean;
@@ -191,7 +191,8 @@ begin
   result := ModifyDN(DN, newName, '', True);
 end;
 
-procedure TRsatLdapClient.ChangeSettings(ASettings: TLdapClientSettings);
+procedure TRsatLdapClient.ChangeSettings(ASettings: TLdapClientSettings;
+  AutoConnect: Boolean);
 begin
   if Assigned(fSettings) then
     FreeAndNil(fSettings);
@@ -199,6 +200,7 @@ begin
   fSettings := TLdapClientSettings.Create;
 
   CopyObject(ASettings, fSettings);
+  if AutoConnect then
   Connect;
 end;
 
