@@ -391,6 +391,9 @@ resourcestring
 
   rsDeleteProfile = 'Do you want to delete the profile %?';
 
+  rsStatusBarUsername = 'User: %';
+  rsStatusBarDC = 'DC: %';
+
 const
   DAYS_BETWEEN_1601_AND_1900 = 109205;
   HUNDRED_OF_MS_IN_A_DAY = 864000000000;

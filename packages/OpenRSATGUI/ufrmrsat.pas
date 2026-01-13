@@ -239,9 +239,6 @@ begin
   finally
     Screen.Cursor := crDefault;
   end;
-
-  SetStatusBarText(0, FormatUtf8('User: %', [LdapClient.BoundUser]));
-  SetStatusBarText(1, FormatUtf8('DC: %', [LdapClient.Settings.TargetHost]));
 end;
 
 procedure TFrmRSAT.Action_AdvancedFeaturesExecute(Sender: TObject);
@@ -266,8 +263,6 @@ begin
     fLog.Log(sllTrace, '% - Execute', [Action_LdapDisconnect.Name]);
 
   LdapClient.Close;
-
-  SetStatusBarText(0, 'User: NA');
 end;
 
 procedure TFrmRSAT.Action_LdapDisconnectUpdate(Sender: TObject);
@@ -426,6 +421,9 @@ procedure TFrmRSAT.OnLdapConnect(Sender: TObject);
 var
   Module: TFrameModule;
 begin
+  SetStatusBarText(0, FormatUtf8(rsStatusBarUsername, [LdapClient.BoundUser]));
+  SetStatusBarText(1, FormatUtf8(rsStatusBarDC, [LdapClient.Settings.TargetHost]));
+
   for Module in fFrmModules.Items do
     Module.OnLdapConnect(Sender);
 end;
@@ -434,6 +432,9 @@ procedure TFrmRSAT.OnLdapClose(Sender: TObject);
 var
   Module: TFrameModule;
 begin
+  SetStatusBarText(0, '');
+  SetStatusBarText(1, '');
+
   for Module in fFrmModules.Items do
     Module.OnLdapClose(Sender);
 end;
@@ -530,7 +531,6 @@ end;
 procedure TFrmRSAT.ChangeDomainController(DomainController: RawUtf8);
 begin
   LdapClient.DomainControllerName := DomainController;
-  SetStatusBarText(1, FormatUtf8('DC: %', [DomainController]));
 end;
 
 {$IFDEF OPENRSATTESTS}
