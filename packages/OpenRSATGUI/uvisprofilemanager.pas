@@ -63,8 +63,9 @@ type
   private
     fIniFile: TIniFile;
     fLdapConfigs: TLdapConfigs;
+    fSelected: RawUtf8;
   public
-    constructor Create(TheOwner: TComponent; ALdapConfigs: TLdapConfigs);
+    constructor Create(TheOwner: TComponent; ALdapConfigs: TLdapConfigs; Selected: RawUtf8 = '');
       reintroduce;
     destructor Destroy; override;
 
@@ -206,9 +207,10 @@ begin
 end;
 
 constructor TVisProfileManager.Create(TheOwner: TComponent;
-  ALdapConfigs: TLdapConfigs);
+  ALdapConfigs: TLdapConfigs; Selected: RawUtf8);
 begin
   inherited Create(TheOwner);
+  fSelected := Selected;
 
   fLdapConfigs := ALdapConfigs;
   LoadProfiles;
@@ -268,6 +270,7 @@ begin
   NewViewItem.SubItems.Add(fIniFile.ReadString(Section, 'KerberosDN', ''));
   NewViewItem.SubItems.Add(fIniFile.ReadString(Section, 'TargetHost', ''));
   NewViewItem.SubItems.Add(fIniFile.ReadString(Section, 'Username', ''));
+  NewViewItem.Selected := (Section = fSelected);
 end;
 
 end.

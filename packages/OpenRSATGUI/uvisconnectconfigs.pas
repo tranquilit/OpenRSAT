@@ -91,7 +91,7 @@ var
   ProfileManager: TVisProfileManager;
   LastConfig: RawUtf8;
 begin
-  ProfileManager := TVisProfileManager.Create(Self, fLdapConfigs);
+  ProfileManager := TVisProfileManager.Create(Self, fLdapConfigs, TisSearchEdit_Profile.Text);
   try
     if ProfileManager.ShowModal <> mrOK then
       Exit;
