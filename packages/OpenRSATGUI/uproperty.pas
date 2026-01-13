@@ -712,6 +712,8 @@ begin
   result := (fTempModify.Count > 0);
   if result then
     Exit;
+  if not Assigned(fModifiedAttributes) then
+    Exit;
   for Attribute in fModifiedAttributes.Items do
   begin
     if not Assigned(Attribute) then

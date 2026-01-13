@@ -113,7 +113,8 @@ type
     fPropertyFrameList: Array of TPropertyFrame;
     fDistinguishedName: RawUtf8;
 
-    procedure LoadAttributes;
+    function LoadAttributes: Boolean;
+    procedure OnSearchEventFillAttributes(Sender: TObject);
     procedure LoadView;
     procedure UpdateTabs;
     procedure NewTab(NewFrameClass: TPropertyFrameClass);
@@ -529,8 +530,8 @@ end;
 
 procedure TVisProperties.FormShow(Sender: TObject);
 begin
-  LoadAttributes;
-  LoadView;
+  if LoadAttributes then
+    LoadView;
   MakeFullyVisible;
 end;
 
@@ -548,13 +549,15 @@ begin
   {$endif}
 end;
 
-procedure TVisProperties.LoadAttributes;
+function TVisProperties.LoadAttributes: Boolean;
 var
   LdapObject: TLdapResult;
 begin
+  result := False;
   // Fetch data
   fProperty.RSAT.LdapClient.SearchRangeBegin;
   try
+    fProperty.RSAT.LdapClient.OnSearch := @OnSearchEventFillAttributes;
     LdapObject := fProperty.RSAT.LdapClient.SearchObject(DistinguishedName, '', ['*']);
   finally
     fProperty.RSAT.LdapClient.SearchRangeEnd;
@@ -564,8 +567,18 @@ begin
     Close();
     Exit;
   end;
+  result := True;
+end;
+
+procedure TVisProperties.OnSearchEventFillAttributes(Sender: TObject);
+var
+  LdapClient: TRsatLdapClient;
+begin
+  LdapClient := (Sender as TRsatLdapClient);
+
   // Fill Attributes
-  fProperty.Attributes := LdapObject.Attributes;
+  fProperty.Attributes := LdapClient.SearchResult.Items[0].Attributes;
+  fProperty.RSAT.LdapClient.OnSearch := nil;
 end;
 
 procedure TVisProperties.LoadView;

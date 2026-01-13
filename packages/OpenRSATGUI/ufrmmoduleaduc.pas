@@ -1745,6 +1745,7 @@ begin
   DistinguishedName := newRDN;
   for i := 1 to High(DistinguishedNameParsed) do
     DistinguishedName := Format('%s,%s=%s', [DistinguishedName, DistinguishedNameParsed[i].Name, DistinguishedNameParsed[i].Value]);
+  GridADUC.GetNodeAsPDocVariantData(Node)^.U['distinguishedName'] := DistinguishedName;
 end;
 
 procedure TFrmModuleADUC.GridADUCEndDrag(Sender, Target: TObject; X, Y: Integer
