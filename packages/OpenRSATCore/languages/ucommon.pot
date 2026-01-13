@@ -649,6 +649,14 @@ msgstr ""
 msgid "The result retrieved more objects than the server allowed."
 msgstr ""
 
+#: ucommon.rsstatusbardc
+msgid "DC: %"
+msgstr ""
+
+#: ucommon.rsstatusbarusername
+msgid "User: %"
+msgstr ""
+
 #: ucommon.rsstrongerauthrequired
 msgid "The server requires the client to authenticate with a stronger authentication."
 msgstr ""

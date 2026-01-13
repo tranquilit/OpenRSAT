@@ -667,6 +667,14 @@ msgstr "Single Time Editor"
 msgid "The result retrieved more objects than the server allowed."
 msgstr "The result retrieved more objects than the server allowed."
 
+#: ucommon.rsstatusbardc
+msgid "DC: %"
+msgstr "DC: %"
+
+#: ucommon.rsstatusbarusername
+msgid "User: %"
+msgstr "User: %"
+
 #: ucommon.rsstrongerauthrequired
 msgid "The server requires the client to authenticate with a stronger authentication."
 msgstr "The server requires the client to authenticate with a stronger authentication."

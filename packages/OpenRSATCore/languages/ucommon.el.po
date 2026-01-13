@@ -648,6 +648,14 @@ msgstr ""
 msgid "The result retrieved more objects than the server allowed."
 msgstr "Το αποτέλεσμα ανέκτησε περισσότερα αντικείμενα από όσα επέτρεψε ο διακομιστής."
 
+#: ucommon.rsstatusbardc
+msgid "DC: %"
+msgstr "DC: %"
+
+#: ucommon.rsstatusbarusername
+msgid "User: %"
+msgstr "Χρήστης: %"
+
 #: ucommon.rsstrongerauthrequired
 msgid "The server requires the client to authenticate with a stronger authentication."
 msgstr "Ο διακομιστής απαιτεί από τον πελάτη να αυθεντικοποιηθεί με ισχυρότερη αυθεντικοποίηση."

@@ -1,3 +1,41 @@
+#: tvisabout.caption
+msgctxt "tvisabout.caption"
+msgid "About"
+msgstr "A propos"
+
+#: tvisabout.label_description.caption
+msgid "OpenRSAT is an open-source, cross-platform tool for Active Directory administration via an interface, inspired by Microsoft’s RSAT tools. It enables system administrators to manage users, groups, and organizational units on Windows, Linux, and macOS. "
+msgstr "OpenRSAT est un outil open source multiplateforme destiné à l'administration d'Active Directory via une interface, inspiré des outils RSAT de Microsoft. Il permet aux administrateurs système de gérer les utilisateurs, les groupes et les unités organisationnelles sous Windows, Linux et macOS."
+
+#: tvisabout.label_discord.caption
+msgid "Click to join Tranquil IT discord."
+msgstr "Cliquer pour rejoindre le discord de Tranquil IT."
+
+#: tvisabout.label_documentation.caption
+msgid "Click to open Documentation page. (Not yet implemented)"
+msgstr "Cliquer pour ouvrir la page de documentation. (Pas encore implémenté)"
+
+#: tvisabout.label_github.caption
+msgid "Click to open OpenRSAT github page."
+msgstr "Cliquer pour ouvrir la page github d'OpenRSAT."
+
+#: tvisabout.label_githubissue.caption
+msgid "You found a bug or want to give feedback? Click to open an issue on github!"
+msgstr "Vous avez trouvé un bug ou voulez faire un retour ? Cliquer pour ouvrir un ticket sur github !"
+
+#: tvisabout.label_tranquilit.caption
+msgid "Click to open Tranquil IT home page."
+msgstr "Cliquer pour ouvrir la page d'accueil de Tranquil IT."
+
+#: tvisabout.label_waptpackage.caption
+msgid "Click to open OpenRSAT WAPT package."
+msgstr "Cliquer pour ouvrir la page du paquet WAPT OpenRSAT."
+
+#: tvisopenrsat.action_about.caption
+msgctxt "tvisopenrsat.action_about.caption"
+msgid "About"
+msgstr "A propos"
+
 #: tvisopenrsat.action_newwindow.caption
 msgid "Action_NewWindow"
 msgstr ""

@@ -30,12 +30,14 @@ type
   { TVisOpenRSAT }
 
   TVisOpenRSAT = class(TForm)
+    Action_About: TAction;
     Action_NewWindow: TAction;
     Action_OpenedProperties: TAction;
     ActionList: TActionList;
     Action_Quit: TAction;
     IniPropStorage1: TIniPropStorage;
     MainMenu: TMainMenu;
+    MenuItem1: TMenuItem;
     MenuItem_RetrieveOldConfiguration: TMenuItem;
     MenuItem_AdvancedFeatures: TMenuItem;
     MenuItem3: TMenuItem;
@@ -57,6 +59,7 @@ type
     MenuItem_ViewWindows: TMenuItem;
     Separator4: TMenuItem;
     Separator_File: TMenuItem;
+    procedure Action_AboutExecute(Sender: TObject);
     procedure Action_NewWindowExecute(Sender: TObject);
     procedure Action_OpenedPropertiesUpdate(Sender: TObject);
     procedure Action_QuitExecute(Sender: TObject);
@@ -91,7 +94,8 @@ uses
   uconfig,
   ufrmrsatoptions,
   ufrmrsat,
-  ursatoption;
+  ursatoption,
+  uvisabout;
 
 {$R *.lfm}
 
@@ -169,6 +173,19 @@ begin
     Execute;
   finally
     Free;
+  end;
+end;
+
+procedure TVisOpenRSAT.Action_AboutExecute(Sender: TObject);
+var
+  Vis: TVisAbout;
+begin
+  Vis := TVisAbout.Create(Self);
+  try
+    Vis.Version := VERSION;
+    Vis.ShowModal;
+  finally
+    FreeAndNil(Vis);
   end;
 end;
 

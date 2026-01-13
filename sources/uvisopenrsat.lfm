@@ -117,6 +117,9 @@ object VisOpenRSAT: TVisOpenRSAT
     end
     object MenuItem_Help: TMenuItem
       Caption = '?'
+      object MenuItem1: TMenuItem
+        Action = Action_About
+      end
       object MenuItem_RetrieveOldConfiguration: TMenuItem
         Caption = 'Retrieve old configuration'
       end
@@ -139,6 +142,10 @@ object VisOpenRSAT: TVisOpenRSAT
       Caption = 'Action_NewWindow'
       ShortCut = 24654
       OnExecute = Action_NewWindowExecute
+    end
+    object Action_About: TAction
+      Caption = 'About'
+      OnExecute = Action_AboutExecute
     end
   end
   object IniPropStorage1: TIniPropStorage

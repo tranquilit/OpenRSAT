@@ -469,6 +469,12 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
+      <Unit>
+        <Filename Value="uvisabout.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="VisAbout"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
     </Units>
     <Debugger>
       <BackendConv>

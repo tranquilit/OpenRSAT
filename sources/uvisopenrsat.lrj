@@ -14,5 +14,6 @@
 {"hash":256032926,"name":"tvisopenrsat.menuitem_retrieveoldconfiguration.caption","sourcebytes":[82,101,116,114,105,101,118,101,32,111,108,100,32,99,111,110,102,105,103,117,114,97,116,105,111,110],"value":"Retrieve old configuration"},
 {"hash":363524,"name":"tvisopenrsat.action_quit.caption","sourcebytes":[81,117,105,116],"value":"Quit"},
 {"hash":114087587,"name":"tvisopenrsat.action_openedproperties.caption","sourcebytes":[80,114,111,112,101,114,116,105,101,115],"value":"Properties"},
-{"hash":213390615,"name":"tvisopenrsat.action_newwindow.caption","sourcebytes":[65,99,116,105,111,110,95,78,101,119,87,105,110,100,111,119],"value":"Action_NewWindow"}
+{"hash":213390615,"name":"tvisopenrsat.action_newwindow.caption","sourcebytes":[65,99,116,105,111,110,95,78,101,119,87,105,110,100,111,119],"value":"Action_NewWindow"},
+{"hash":4691652,"name":"tvisopenrsat.action_about.caption","sourcebytes":[65,98,111,117,116],"value":"About"}
 ]}
