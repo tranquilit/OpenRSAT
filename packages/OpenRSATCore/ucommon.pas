@@ -394,6 +394,12 @@ resourcestring
   rsStatusBarUsername = 'User: %';
   rsStatusBarDC = 'DC: %';
 
+  rsAccountUnlocked = 'Account Unlock';
+  rsAccountUnlockedMessage = 'Account has been unlocked successfully.';
+
+  rsResetPassword = 'Reset Password';
+  rsResetPasswordMessage = 'Password has been reset successfully.';
+
 const
   DAYS_BETWEEN_1601_AND_1900 = 109205;
   HUNDRED_OF_MS_IN_A_DAY = 864000000000;

@@ -307,6 +307,9 @@ type
     procedure LdapConnectEvent(Sender: TObject);
     procedure LdapCloseEvent(Sender: TObject);
 
+    procedure OnModifyEventAccountUnlock(Sender: TObject);
+    procedure OnModifyEventPasswordChanged(Sender: TObject);
+
   public
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
@@ -1273,6 +1276,7 @@ begin
       attr := TLdapAttribute.Create('userAccountControl', atUserAccountControl);
       try
         attr.Add(IntToString(userAccountControl or 16 {uacLockedOut}));
+        FrmRSAT.LdapClient.OnModify := @OnModifyEventAccountUnlock;
         if not FrmRSAT.LdapClient.Modify(userDN, lmoReplace, attr) then
         begin
           if Assigned(fLog) then
@@ -1286,6 +1290,7 @@ begin
     attr := TLdapAttribute.Create('unicodePwd', atUndefined);
     try
       attr.add(LdapUnicodePwd(Edit_NewPassword.Text));
+      FrmRSAT.LdapClient.OnModify := @OnModifyEventPasswordChanged;
       if not FrmRSAT.LdapClient.Modify(userDN, lmoReplace, attr) then
       begin
         if Assigned(fLog) then
@@ -2578,6 +2583,18 @@ begin
   finally
     TreeADUC.EndUpdate;
   end;
+end;
+
+procedure TFrmModuleADUC.OnModifyEventAccountUnlock(Sender: TObject);
+begin
+  MessageDlg(rsAccountUnlocked, rsAccountUnlockedMessage, mtInformation, [mbOK], 0);
+  (Sender as TRsatLdapClient).OnModify := nil;
+end;
+
+procedure TFrmModuleADUC.OnModifyEventPasswordChanged(Sender: TObject);
+begin
+  MessageDlg(rsResetPassword, rsResetPasswordMessage, mtInformation, [mbOK], 0);
+  (Sender as TRsatLdapClient).OnModify := nil;
 end;
 
 constructor TFrmModuleADUC.Create(TheOwner: TComponent);

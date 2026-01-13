@@ -1,3 +1,11 @@
+#: ucommon.rsaccountunlocked
+msgid "Account Unlock"
+msgstr "Déverrouillage du compte"
+
+#: ucommon.rsaccountunlockedmessage
+msgid "Account has been unlocked successfully."
+msgstr "Le compte a été déverrouillé avec succès."
+
 #: ucommon.rsacecreatefailure
 msgid "Failed to create ACE for object % in ACL."
 msgstr "Echec de la création de l'ACE dans l'ACL pour l'objet %."
@@ -517,6 +525,14 @@ msgstr "Ceci ne devrait pas être une erreur. Le client doit suivre la redirecti
 #: ucommon.rsrename
 msgid "Rename"
 msgstr "Renommer"
+
+#: ucommon.rsresetpassword
+msgid "Reset Password"
+msgstr "Réinitialiser le mot de passe"
+
+#: ucommon.rsresetpasswordmessage
+msgid "Password has been reset successfully."
+msgstr "Le mot de passe a été réinitialisé avec succès."
 
 #: ucommon.rsrestarttitle
 msgid "Restart confirmation"

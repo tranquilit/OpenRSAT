@@ -1,6 +1,14 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: ucommon.rsaccountunlocked
+msgid "Account Unlock"
+msgstr ""
+
+#: ucommon.rsaccountunlockedmessage
+msgid "Account has been unlocked successfully."
+msgstr ""
+
 #: ucommon.rsacecreatefailure
 msgid "Failed to create ACE for object % in ACL."
 msgstr ""
@@ -498,6 +506,14 @@ msgstr ""
 
 #: ucommon.rsrename
 msgid "Rename"
+msgstr ""
+
+#: ucommon.rsresetpassword
+msgid "Reset Password"
+msgstr ""
+
+#: ucommon.rsresetpasswordmessage
+msgid "Password has been reset successfully."
 msgstr ""
 
 #: ucommon.rsrestarttitle

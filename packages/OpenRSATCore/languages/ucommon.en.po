@@ -1,3 +1,11 @@
+#: ucommon.rsaccountunlocked
+msgid "Account Unlock"
+msgstr "Account Unlock"
+
+#: ucommon.rsaccountunlockedmessage
+msgid "Account has been unlocked successfully."
+msgstr "Account has been unlocked successfully."
+
 #: ucommon.rsacecreatefailure
 msgid "Failed to create ACE for object % in ACL."
 msgstr "Failed to create ACE for object % in ACL."
@@ -517,6 +525,14 @@ msgstr "This should not be an error. Client should follow referral. Please try t
 #: ucommon.rsrename
 msgid "Rename"
 msgstr "Rename"
+
+#: ucommon.rsresetpassword
+msgid "Reset Password"
+msgstr "Reset Password"
+
+#: ucommon.rsresetpasswordmessage
+msgid "Password has been reset successfully."
+msgstr "Password has been reset successfully."
 
 #: ucommon.rsrestarttitle
 msgid "Restart confirmation"
