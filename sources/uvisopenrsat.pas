@@ -202,13 +202,13 @@ begin
   MenuItem_LdapDisconnect.Action := FrmRSAT.Action_LdapDisconnect;
   MenuItem_FileOptions.Action := FrmRSAT.Action_Options;
   MenuItem_AdvancedFeatures.Action := FrmRSAT.Action_AdvancedFeatures;
-  MakeFullyVisible();
   Activate;
 
   FrmRSAT.Timer_AutoConnect.Enabled := FrmRSAT.LdapConfigs.AutoConnect;
   UpdateViewThemeButtons;
   IniPropStorage1.Restore;
   FrmRSAT.SetStatusBarText(2, FormatUtf8('Version: %', [VERSION]));
+  MakeFullyVisible();
 end;
 
 procedure TVisOpenRSAT.MenuItem_ViewThemeDarkClick(Sender: TObject);
