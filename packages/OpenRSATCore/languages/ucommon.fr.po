@@ -70,7 +70,7 @@ msgstr ""
 
 #: ucommon.rsallow
 msgid "Allow"
-msgstr "Authoriser"
+msgstr "Autoriser"
 
 #: ucommon.rsand
 msgid "% and %"
@@ -82,7 +82,7 @@ msgstr "Connexion anonyme"
 
 #: ucommon.rsauthmethodnotsupported
 msgid "The server does not allow this kind of auth method."
-msgstr "Le serveur n'authoriser pas ce type de méthode d'authentification."
+msgstr "Le serveur n'autoriser pas ce type de méthode d'authentification."
 
 #: ucommon.rschangeoptionrequiredrestart
 msgid "The changes you have made require a console restart. Restart now?"
@@ -90,7 +90,7 @@ msgstr "Les modifications que vous avez apportées nécessitent un redémarrage 
 
 #: ucommon.rsconfidentialityrequired
 msgid "The server do not allow your operation, cause your connection is not secured enought."
-msgstr "Le serveur n'authorise pas votre operation, car votre connexion n'est pas assez sécurisé."
+msgstr "Le serveur n'autorise pas votre operation, car votre connexion n'est pas assez sécurisé."
 
 #: ucommon.rsconfirmation
 msgid "Confirmation"
@@ -167,7 +167,7 @@ msgstr ""
 
 #: ucommon.rsdnspropertyzoneallowupdate
 msgid "Allow Update"
-msgstr "Authoriser les mises à jour"
+msgstr "Autoriser les mises à jour"
 
 #: ucommon.rsdnspropertyzoneautonsservers
 msgid "Auto NS servers"
@@ -709,7 +709,7 @@ msgstr "La limite de temps de la requête a été atteint."
 
 #: ucommon.rstitleadvancedsecurity
 msgid "Advanced Security Settings for %"
-msgstr "Paramètres de sécurité avancé pour %"
+msgstr "Paramètres de sécurité avancés pour %"
 
 #: ucommon.rstitleconnectorbind
 msgid "Connect or bind error."
@@ -849,7 +849,7 @@ msgstr "Tout paquet restreint intégré"
 
 #: ucommon.rswellknownsidbuiltinauthorizationaccess
 msgid "Builtin Authorization Access"
-msgstr "Authorization d'accès intégré"
+msgstr "Autorization d'accès intégré"
 
 #: ucommon.rswellknownsidbuiltinbackupoperators
 msgid "Builtin Backup Operators"

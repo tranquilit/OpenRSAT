@@ -1955,7 +1955,7 @@ msgstr "Permissions pour"
 #: ufrmpropertysecurity.lrj:$.strings.[2].value
 msgctxt "tfrmpropertysecurity.tisgrid_securitylistright.header.columns[1].text"
 msgid "Allow"
-msgstr "Authoriser"
+msgstr "Autoriser"
 
 #: ufrmpropertysecurity.lrj:$.strings.[3].value
 msgctxt "tfrmpropertysecurity.tisgrid_securitylistright.header.columns[2].text"
@@ -2260,7 +2260,7 @@ msgstr "Administrateur :"
 #: uvisaddaces.lrj:$.strings.[23].value
 msgctxt "tvisaddaces.radiobutton_allow.caption"
 msgid "Allow"
-msgstr "Authoriser"
+msgstr "Autoriser"
 
 #: uvisaddaces.lrj:$.strings.[24].value
 msgctxt "tvisaddaces.radiobutton_deny.caption"
@@ -3133,7 +3133,7 @@ msgstr ""
 #: uvislogonhours.lrj:$.strings.[28].value
 msgctxt "tvislogonhours.radiobutton_allowed.caption"
 msgid "Logon Allowed"
-msgstr "Heures de connexion authorisé"
+msgstr "Heures de connexion autorisé"
 
 #: uvislogonhours.lrj:$.strings.[29].value
 msgctxt "tvislogonhours.radiobutton_denied.caption"
