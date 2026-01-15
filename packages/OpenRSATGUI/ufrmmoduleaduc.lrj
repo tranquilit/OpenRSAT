@@ -88,5 +88,6 @@
 {"hash":265874779,"name":"tfrmmoduleaduc.menuitem_newsitelink.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,83,105,116,101,76,105,110,107],"value":"MenuItem_NewSiteLink"},
 {"hash":4200325,"name":"tfrmmoduleaduc.menuitem_newsitelinkbridge.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,83,105,116,101,76,105,110,107,66,114,105,100,103,101],"value":"MenuItem_NewSiteLinkBridge"},
 {"hash":73044658,"name":"tfrmmoduleaduc.menuitem_newsitecontainer.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,83,105,116,101,67,111,110,116,97,105,110,101,114],"value":"MenuItem_NewSiteContainer"},
-{"hash":53807620,"name":"tfrmmoduleaduc.menuitem_newsubnet.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,83,117,98,110,101,116],"value":"MenuItem_NewSubnet"}
+{"hash":53807620,"name":"tfrmmoduleaduc.menuitem_newsubnet.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,83,117,98,110,101,116],"value":"MenuItem_NewSubnet"},
+{"hash":251184691,"name":"tfrmmoduleaduc.menuitem_editcolumns.caption","sourcebytes":[69,100,105,116,32,99,111,108,117,109,110,115],"value":"Edit columns"}
 ]}

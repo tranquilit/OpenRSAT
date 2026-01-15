@@ -72,6 +72,7 @@ type
   end;
 
 function ObjectClassToImageIndex(ObjectClass: RawUtf8): Integer;
+function ObjectClassToImageIndex(ObjectClass: TRawUtf8DynArray): Integer;
 
 var
   CoreDataModule: TCoreDataModule;
@@ -101,6 +102,16 @@ begin
    end;
    if (result = Ord(ileADUnknown)) and String(objectClass).Contains('Container') then
      result := Ord(ileADContainer);
+end;
+
+function ObjectClassToImageIndex(ObjectClass: TRawUtf8DynArray): Integer;
+var
+  idx: Integer;
+begin
+  result := Ord(ileADUnknown);
+  idx := High(ObjectClass);
+  if (idx >= 0) then
+    result := ObjectClassToImageIndex(ObjectClass[idx]);
 end;
 
 {$R *.lfm}

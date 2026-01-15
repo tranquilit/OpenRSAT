@@ -19,6 +19,7 @@ type
     function Contains(AValue: RawUtf8): Boolean;
     procedure Append(AValue: RawUtf8);
     procedure Remove(Index: Integer);
+    function IndexOf(AValue: RawUtf8): Integer;
   end;
 
 implementation
@@ -31,16 +32,8 @@ begin
 end;
 
 function TRawUtf8DynArrayHelper.Contains(AValue: RawUtf8): Boolean;
-var
-  v: RawUtf8;
 begin
-  result := False;
-  for v in Self do
-  begin
-    result := v = AValue;
-    if result then
-      Exit;
-  end;
+  result := (IndexOf(AValue) >= 0);
 end;
 
 procedure TRawUtf8DynArrayHelper.Append(AValue: RawUtf8);
@@ -51,6 +44,14 @@ end;
 procedure TRawUtf8DynArrayHelper.Remove(Index: Integer);
 begin
   Delete(Self, Index, 1);
+end;
+
+function TRawUtf8DynArrayHelper.IndexOf(AValue: RawUtf8): Integer;
+begin
+  for result := 0 to Pred(Count) do
+    if Self[result] = AValue then
+      Exit;
+  result := -1;
 end;
 
 end.

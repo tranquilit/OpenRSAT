@@ -20,6 +20,7 @@ uses
   ActnList,
   Menus,
   tis.ui.grid.core,
+  tis.ui.grid.controls,
   VirtualTrees,
   mormot.core.log,
   umoduleADUC,
@@ -92,6 +93,7 @@ type
     Action_UsersAndComputers: TAction;
     Image1: TImage;
     Image2: TImage;
+    MenuItem_EditColumns: TMenuItem;
     MenuItem_BlockGPOInheritance: TMenuItem;
     MenuItem_EnableGPO: TMenuItem;
     MenuItem_DisableGPO: TMenuItem;
@@ -161,6 +163,7 @@ type
     MenuItem_Search: TMenuItem;
     Splitter1: TSplitter;
     GridADUC: TTisGrid;
+    TisGridHeaderPopupMenu1: TTisGridHeaderPopupMenu;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
     ToolButton_AddToGroup: TToolButton;
@@ -232,6 +235,7 @@ type
     procedure Action_TaskResetPasswordUpdate(Sender: TObject);
     procedure GridADUCKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
       );
+    procedure MenuItem_EditColumnsClick(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
     procedure Timer_TreeChangeNodeTimer(Sender: TObject);
     procedure TreeADUCChange(Sender: TObject; Node: TTreeNode);
@@ -294,6 +298,7 @@ type
     procedure RefreshGPLinks(ANode: TADUCTreeNode; Recursive: Boolean = True);
     procedure RemoveGPLinks(ANode: TADUCTreeNode);
     procedure RefreshADUCTreeNode(Node: TADUCTreeNode);
+    procedure UpdateGridColumns;
     procedure UpdateGridADUC(ANode: TADUCTreeNode);
 
     function GetSelectedObjects: TRawUtf8DynArray;
@@ -302,13 +307,12 @@ type
 
     procedure ObserverRsatOptions(Option: TOption);
 
-    procedure OnLdapClientConnect(LdapClient: TLdapClient);
-    procedure OnLdapClientClose(LdapClient: TLdapClient);
     procedure LdapConnectEvent(Sender: TObject);
     procedure LdapCloseEvent(Sender: TObject);
 
     procedure OnModifyEventAccountUnlock(Sender: TObject);
     procedure OnModifyEventPasswordChanged(Sender: TObject);
+    procedure OnSearchEventFillGrid(Sender: TObject);
 
   public
     constructor Create(TheOwner: TComponent); override;
@@ -348,6 +352,9 @@ uses
   ufrmrsatoptions,
   ursatoption,
   ufrmrsat,
+  uviseditaduccolumns,
+  uconfig,
+  uhelpers,
   ugplink;
 
 {$R *.lfm}
@@ -992,12 +999,12 @@ begin
     else
     begin // Missing name or distinguishedName
       if not GridADUC.SelectedObjects[0]^.Exists('name') or
-         not GridADUC.SelectedObjects[0]^.Exists('distinguishedName') then
+         not GridADUC.SelectedObjects[0]^.Exists('objectName') then
       begin
         Exit;
       end;
       SelectedText := GridADUC.SelectedObjects[0]^.U['name'];
-      DistinguishedName := GridADUC.SelectedObjects[0]^.U['distinguishedName'];
+      DistinguishedName := GridADUC.SelectedObjects[0]^.U['objectName'];
     end;
   end
   else if TreeADUC.Focused then
@@ -1153,7 +1160,7 @@ begin
     fLog.Log(sllTrace, '% - Execute', [Action_TaskAddToAGroup.Caption]);
 
   // Retrieve Focused object distinguishedName
-  DistinguishedName := GridADUC.FocusedRow^.S['distinguishedName'];
+  DistinguishedName := GridADUC.FocusedRow^.S['objectName'];
 
   // Open the vis to let the user select groups
   With TVisOmniselect.Create(Self, FrmRSAT.LdapClient, ['group'], FrmRSAT.LdapClient.DefaultDN, True, ExclusionFilter(DistinguishedName)) do
@@ -1177,7 +1184,7 @@ end;
 
 procedure TFrmModuleADUC.Action_TaskAddToAGroupUpdate(Sender: TObject);
 begin
-  Action_TaskAddToAGroup.Enabled := Assigned(GridADUC.FocusedRow) and GridADUC.FocusedRow^.Exists('distinguishedName');
+  Action_TaskAddToAGroup.Enabled := Assigned(GridADUC.FocusedRow) and GridADUC.FocusedRow^.Exists('objectName');
 end;
 
 procedure TFrmModuleADUC.Action_TaskMoveExecute(Sender: TObject);
@@ -1187,7 +1194,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Execute', [Action_TaskMove.Caption]);
 
-  DistinguishedName := GridADUC.FocusedRow^.U['distinguishedName'];
+  DistinguishedName := GridADUC.FocusedRow^.U['objectName'];
   With TVisChangeDN.Create(Self, FrmRSAT.LdapClient, DistinguishedName, FrmRSAT.LdapClient.DefaultDN) do
   try
     if (mrOK <> ShowModal) then
@@ -1209,7 +1216,7 @@ end;
 
 procedure TFrmModuleADUC.Action_TaskMoveUpdate(Sender: TObject);
 begin
-  Action_TaskMove.Enabled := Assigned(GridADUC.FocusedRow) and GridADUC.FocusedRow^.Exists('distinguishedName');
+  Action_TaskMove.Enabled := Assigned(GridADUC.FocusedRow) and GridADUC.FocusedRow^.Exists('objectName');
 end;
 
 procedure TFrmModuleADUC.Action_TaskResetPasswordExecute(Sender: TObject);
@@ -1227,7 +1234,7 @@ begin
   With TVisTaskResetPassword.Create(self) do
   try
     // Query object to modify
-    userDN := GridADUC.FocusedRow^.U['distinguishedName'];
+    userDN := GridADUC.FocusedRow^.U['objectName'];
     userData := FrmRSAT.LdapClient.SearchObject(userDN, '', ['userAccountControl', 'objectClass']);
     if not Assigned(userData) then
     begin
@@ -1324,7 +1331,7 @@ end;
 
 procedure TFrmModuleADUC.Action_TaskResetPasswordUpdate(Sender: TObject);
 begin
-  Action_TaskResetPassword.Enabled := Assigned(GridADUC.FocusedRow) and (GridADUC.FocusedRow^.Exists('distinguishedName'));
+  Action_TaskResetPassword.Enabled := Assigned(GridADUC.FocusedRow) and (GridADUC.FocusedRow^.Exists('objectName'));
 end;
 
 procedure TFrmModuleADUC.GridADUCKeyDown(Sender: TObject; var Key: Word;
@@ -1336,6 +1343,17 @@ begin
     GridADUC.EditNode(GridADUC.FocusedNode, GridADUC.FocusedColumn);
     GridADUC.TreeOptions.MiscOptions := GridADUC.TreeOptions.MiscOptions + [toReadOnly] - [toEditable];
   end;
+end;
+
+procedure TFrmModuleADUC.MenuItem_EditColumnsClick(Sender: TObject);
+begin
+  With TVisEditADUCColumns.Create(Self, fModuleAduc) do
+    if ShowModal = mrOK then
+    begin
+      fModuleAduc.ADUCOption.GridAttributesFilter := DisplayedColumns;
+      fModuleAduc.ADUCOption.Save(OptionFilePath);
+      UpdateGridADUC(nil);
+    end;
 end;
 
 procedure TFrmModuleADUC.Timer_SearchInGridTimer(Sender: TObject);
@@ -1445,7 +1463,7 @@ begin
     Exit;
   end;
   repeat
-    oldDN := GridADUC.GetNodeAsPDocVariantData(Node)^.U['distinguishedName'];
+    oldDN := GridADUC.GetNodeAsPDocVariantData(Node)^.U['objectName'];
     newDN := String.Join(',', [oldDN.Split(',')[0], BaseDN]);
     Insert(oldDN, oldDNS, Length(oldDNS));
     Insert(newDN, newDNS, Length(newDNS));
@@ -1626,7 +1644,7 @@ begin
     if not Assigned(TreeADUC.Selected.Items[i]) then
       continue;
 
-    if NodeData.DistinguishedName = Data^.U['distinguishedName'] then
+    if NodeData.DistinguishedName = Data^.U['objectName'] then
     begin
       if Assigned(fLog) then
         fLog.Log(sllInfo, '% - Found object in % (%)', [Self.Name, TreeADUC.Name, TreeADUC.Selected.Items[i].Text]);
@@ -1657,7 +1675,7 @@ begin
   GridADUC.GetHitTestInfoAt(Pt.x, Pt.y, True, HitInfo);
 
   Data := GridADUC.GetNodeAsPDocVariantData(HitInfo.HitNode);
-  BaseDN := Data^.U['distinguishedName'];
+  BaseDN := Data^.U['objectName'];
 
   Node := GridADUC.GetFirstSelected();
   if not Assigned(Node) then
@@ -1669,7 +1687,7 @@ begin
 
   repeat
     Data := GridADUC.GetNodeAsPDocVariantData(Node);
-    oldDN := data^.U['distinguishedName'];
+    oldDN := data^.U['objectName'];
     newDN := String.Join(',', [oldDN.split(',')[0], BaseDN]);
     Insert(newDN, newDNS, Length(newDNS));
     Insert(oldDN, oldDNS, Length(oldDNS));
@@ -1723,7 +1741,7 @@ begin
     Exit;
   end;
 
-  DistinguishedName := GridADUC.GetNodeAsPDocVariantData(Node)^.U['distinguishedName'];
+  DistinguishedName := GridADUC.GetNodeAsPDocVariantData(Node)^.U['objectName'];
   ParseDN(DistinguishedName, DistinguishedNameParsed);
   newRDN := GridADUC.GetNodeAsPDocVariantData(Node)^.U['name'];
   if newRDN = DistinguishedNameParsed[0].Value then
@@ -1750,7 +1768,7 @@ begin
   DistinguishedName := newRDN;
   for i := 1 to High(DistinguishedNameParsed) do
     DistinguishedName := Format('%s,%s=%s', [DistinguishedName, DistinguishedNameParsed[i].Name, DistinguishedNameParsed[i].Value]);
-  GridADUC.GetNodeAsPDocVariantData(Node)^.U['distinguishedName'] := DistinguishedName;
+  GridADUC.GetNodeAsPDocVariantData(Node)^.U['objectName'] := DistinguishedName;
 end;
 
 procedure TFrmModuleADUC.GridADUCEndDrag(Sender, Target: TObject; X, Y: Integer
@@ -1769,7 +1787,7 @@ begin
   if GridADUC.FindColumnByIndex(Column).PropertyName <> 'name' then
     Exit;
   try
-    ImageIndex := ObjectClassToImageIndex(GridADUC.GetNodeAsPDocVariantData(Node)^.S['objectClass']);
+    ImageIndex := ObjectClassToImageIndex(GridADUC.GetNodeAsPDocVariantData(Node)^.A['objectClass']^.ToRawUtf8DynArray);
   except
     ImageIndex := Ord(ileADUnknown);
   end;
@@ -1784,7 +1802,7 @@ var
   PropertyValues: TRawUtf8DynArray;
 begin
   row := GridADUC.GetNodeAsPDocVariantData(aNode);
-  if not Assigned(Row) then
+  if not Assigned(Row) or (aColumn < 0) then
     Exit;
   PropertyName := GridADUC.FindColumnByIndex(aColumn).PropertyName;
   if (PropertyName = '') then
@@ -1792,7 +1810,11 @@ begin
   PropertyValues := Row^.A[PropertyName]^.ToRawUtf8DynArray;
   if not Assigned(PropertyValues) or (Length(PropertyValues) <= 0) then
     Exit;
-  aText := PropertyValues[High(PropertyValues)];
+  case PropertyName of
+    'objectClass': aText := PropertyValues[High(PropertyValues)];
+    else
+      aText := FormatUtf8('(%)[%]', [Length(PropertyValues), String.Join(';', TStringDynArray(PropertyValues))]);
+  end;
 end;
 
 procedure TFrmModuleADUC.GridADUCKeyPress(Sender: TObject; var Key: char);
@@ -2234,15 +2256,36 @@ begin
   Node.CustomSort(@Node.ADUCNodeCompare);
 end;
 
+procedure TFrmModuleADUC.UpdateGridColumns;
+var
+  Columns: TRawUtf8DynArray;
+  i: Integer;
+  NewColumn: TTisGridColumn;
+begin
+  Columns := fModuleAduc.ADUCOption.GridAttributesFilter;
+
+  for i := Pred(GridADUC.Header.Columns.Count) downto 0 do
+    if not Columns.Contains(TTisGridColumn(GridADUC.Header.Columns[i]).PropertyName) then
+      GridADUC.Header.Columns.Delete(i)
+    else
+      Columns.Remove(Columns.IndexOf(TTisGridColumn(GridADUC.Header.Columns[i]).PropertyName));
+
+  for i := 0 to Pred(Length(Columns)) do
+  begin
+    NewColumn := TTisGridColumn(GridADUC.Header.Columns.Add);
+    NewColumn.PropertyName := Columns[i];
+    NewColumn.DisplayName := Columns[i];
+  end;
+end;
+
 procedure TFrmModuleADUC.UpdateGridADUC(ANode: TADUCTreeNode);
 var
   DocResult, Data, SelectedRows: TDocVariantData;
-  RowData, Row, GridRow: PDocVariantData;
-  RowName: RawUtf8;
+  Row, GridRow: PDocVariantData;
   GridNode: PVirtualNode;
   DistinguishedName, FocusedRowDN, Filter: String;
-  PropertyValues: TRawUtf8DynArray;
   NodeData: TADUCTreeNodeObject;
+  PageCount: Integer;
 begin
   if not Assigned(ANode) then
     ANode := (TreeADUC.Selected as TADUCTreeNode);
@@ -2266,50 +2309,36 @@ begin
   SelectedRows := GridADUC.SelectedRows;
   FocusedRowDN := '';
   if Assigned(GridADUC.FocusedRow) then
-    FocusedRowDN := GridADUC.FocusedRow^.U['distinguishedName'];
+    FocusedRowDN := GridADUC.FocusedRow^.U['objectName'];
 
   GridADUC.Clear;
   Data.init();
   DocResult.init();
+  PageCount := 0;
+
+  Filter := '';
+  if not FrmRSAT.RSATOption.AdvancedView then
+    Filter := FormatUtf8('%(|(!(showInAdvancedViewOnly=*))(showInAdvancedViewOnly=FALSE))', [Filter]);
+
+  if (Filter <> '') and (fModuleAduc.ADUCOption.GridFilter <> '') then
+    Filter := FormatUtf8('(&%(%))', [Filter, fModuleAduc.ADUCOption.GridFilter]);
 
   FrmRSAT.LdapClient.SearchBegin(fModuleAduc.ADUCOption.SearchPageSize);
-  GridADUC.BeginUpdate;
   try
-    FrmRSAT.LdapClient.SearchPagingBegin(fModuleAduc.ADUCOption.SearchPageNumber);
     FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
-    Filter := '(&';
-    if not FrmRSAT.RSATOption.AdvancedView then
-      Filter := FormatUtf8('%(|(!(showInAdvancedViewOnly=*))(showInAdvancedViewOnly=FALSE))', [Filter]);
-    Filter := FormatUtf8('%%)', [Filter, fModuleAduc.ADUCOption.GridFilter]);
-    if not FrmRSAT.LdapClient.SearchAllDocPaged(@DocResult, DistinguishedName, False, Filter, ['distinguishedName', 'objectClass', 'name', 'description']) then
-    begin
-      if Assigned(fLog) then
-        fLog.Log(sllError, '% - Ldap search error: "%"', [GridADUC.Name, FrmRSAT.LdapClient.ResultString]);
-      Exit;
-    end;
-
-    for RowData in DocResult.Objects do
-    begin
-      for RowName in RowData^.Names do
-      begin
-        if RowName = '' then
-          continue;
-        PropertyValues := RowData^.A[RowName]^.ToRawUtf8DynArray;
-        if Assigned(PropertyValues) then
-          Data.AddOrUpdateValue(RowName, PropertyValues[High(PropertyValues)])
-        else
-          Data.AddOrUpdateValue(RowName, RowData^.S[RowName]);
-      end;
-      GridADUC.Data.AddItem(Data);
-      Data.Clear;
-    end;
-    GridADUC.LoadData();
-    GridADUC.CreateColumnsFromData(True, True);
+    FrmRSAT.LdapClient.OnSearch := @OnSearchEventFillGrid;
+    repeat
+      if not FrmRSAT.LdapClient.Search(DistinguishedName, False, Filter, fModuleAduc.ADUCOption.GridAttributesFilter) then
+        Exit;
+      Inc(PageCount);
+    until (FrmRSAT.LdapClient.SearchCookie = '') or (PageCount = fModuleAduc.ADUCOption.SearchPageNumber);
   finally
-    FrmRSAT.LdapClient.SearchPagingEnd;
+    FrmRSAT.LdapClient.OnSearch := nil;
     FrmRSAT.LdapClient.SearchEnd;
-    GridADUC.EndUpdate;
   end;
+
+  UpdateGridColumns;
+
   GridADUC.ClearSelection;
   GridADUC.FocusedNode := nil;
   GridNode := GridADUC.GetFirst();
@@ -2319,10 +2348,10 @@ begin
 
     for Row in SelectedRows.Objects do
     begin
-      if (Row^.S['distinguishedName'] = GridRow^.S['distinguishedName']) then
+      if (Row^.S['objectName'] = GridRow^.S['objectName']) then
         GridADUC.AddToSelection(GridNode);
     end;
-    if (FocusedRowDN <> '') and (GridRow^.S['distinguishedName'] = FocusedRowDN) then
+    if (FocusedRowDN <> '') and (GridRow^.S['objectName'] = FocusedRowDN) then
       GridADUC.FocusedNode := GridNode;
 
     GridNode := GridADUC.GetNext(GridNode);
@@ -2361,9 +2390,9 @@ var
       if not Assigned(Row) then
         continue;
 
-      if Row^.Exists('distinguishedName') then
+      if Row^.Exists('objectName') then
       begin
-        Insert(Row^.U['distinguishedName'], result, Count);
+        Insert(Row^.U['objectName'], result, Count);
         Inc(Count);
       end;
     end;
@@ -2419,17 +2448,22 @@ var
   function GetFocusedObjectInGrid(var ObjectClass: RawUtf8): RawUtf8;
   var
     Row: PDocVariantData;
+    ObjectClassArray: TRawUtf8DynArray;
+    idx: Integer;
   begin
     Row := GridADUC.FocusedRow;
-    if not Assigned(Row) or not Row^.Exists('distinguishedName') then
+    if not Assigned(Row) or not Row^.Exists('objectName') then
     begin
       if Assigned(fLog) then
         fLog.Log(sllTrace, 'No focused Row on Grid', Self);
       Exit;
     end;
 
-    result := Row^.U['distinguishedName'];
-    ObjectClass := Row^.U['objectClass'];
+    result := Row^.U['objectName'];
+    ObjectClassArray := Row^.A_['objectClass']^.ToRawUtf8DynArray;
+    idx := High(ObjectClassArray);
+    if (idx >= 0) then
+      ObjectClass := ObjectClassArray[idx];
   end;
 
   function GetFocusedObjectInTree(var ObjectClass: RawUtf8): RawUtf8;
@@ -2505,6 +2539,25 @@ var
     result := NodeData.LastObjectClass;
   end;
 
+  function GetObjectClassFromRow(Row: PDocVariantData): RawUtf8;
+  var
+    ObjectClassArray: TRawUtf8DynArray;
+    idx: Integer;
+  begin
+    result := '';
+    if not Assigned(Row) or not Row^.Exists('objectClass') then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllTrace, 'No objectClass in row', Self);
+      Exit;
+    end;
+
+    ObjectClassArray := Row^.A['objectClass']^.ToRawUtf8DynArray;
+    idx := High(ObjectClassArray);
+    if (idx >= 0) then
+      result := ObjectClassArray[idx];
+  end;
+
 begin
   result := '';
 
@@ -2518,7 +2571,7 @@ begin
       result := GetFocusedObjectClassInTree;
     end
     else
-      Result := Row^.U['objectClass'];
+      Result := GetObjectClassFromRow(Row);
   end
   else if TreeADUC.Focused then
   begin
@@ -2546,24 +2599,6 @@ begin
     finally
       EndUpdate;
     end;
-  end;
-end;
-
-procedure TFrmModuleADUC.OnLdapClientConnect(LdapClient: TLdapClient);
-begin
-  RefreshADUCTreeNode(fADUCDomainNode);
-end;
-
-procedure TFrmModuleADUC.OnLdapClientClose(LdapClient: TLdapClient);
-begin
-  TreeADUC.BeginUpdate;
-  try
-    if Assigned(fADUCDomainNode) and fADUCDomainNode.HasChildren then
-      fADUCDomainNode.DeleteChildren;
-    GridADUC.Clear;
-    FreeAndNil(fADUCDomainNode);
-  finally
-    TreeADUC.EndUpdate;
   end;
 end;
 
@@ -2595,6 +2630,45 @@ procedure TFrmModuleADUC.OnModifyEventPasswordChanged(Sender: TObject);
 begin
   MessageDlg(rsResetPassword, rsResetPasswordMessage, mtInformation, [mbOK], 0);
   (Sender as TRsatLdapClient).OnModify := nil;
+end;
+
+procedure TFrmModuleADUC.OnSearchEventFillGrid(Sender: TObject);
+var
+  NewRow: TDocVariantData;
+  SearchResultItem: TLdapResult;
+  AttributeItem: TLdapAttribute;
+  i: Integer;
+begin
+  NewRow.Init();
+  GridADUC.BeginUpdate;
+  try
+    With (Sender as TRsatLdapClient) do
+    begin
+      for SearchResultItem in SearchResult.Items do
+      begin
+        if not Assigned(SearchResultItem) then
+          Continue;
+        NewRow.AddValue('objectName', SearchResultItem.ObjectName);
+        for AttributeItem in SearchResultItem.Attributes.Items do
+        begin
+          if not Assigned(AttributeItem) then
+            Continue;
+          if (AttributeItem.Count = 1) then
+            NewRow.AddValue(AttributeItem.AttributeName, AttributeItem.GetReadable())
+          else if (AttributeItem.Count > 1) then
+          begin
+            for i := 0 to Pred(AttributeItem.Count) do
+              NewRow.A_[AttributeItem.AttributeName]^.AddItem(AttributeItem.GetReadable(i));
+          end;
+        end;
+        GridADUC.Data.AddItem(NewRow);
+        NewRow.Clear;
+      end;
+    end;
+  finally
+    GridADUC.LoadData;
+    GridADUC.EndUpdate;
+  end;
 end;
 
 constructor TFrmModuleADUC.Create(TheOwner: TComponent);
@@ -2720,7 +2794,7 @@ begin
   while Assigned(node) do
   begin
     row := GridADUC.GetNodeAsPDocVariantData(node);
-    if (row^.U['distinguishedName'] = DistinguishedName) then
+    if (row^.U['objectName'] = DistinguishedName) then
       GridADUC.AddToSelection(node);
     node := GridADUC.GetNext(node);
   end;

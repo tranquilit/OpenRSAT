@@ -1,0 +1,265 @@
+object VisEditADUCColumns: TVisEditADUCColumns
+  Left = 2448
+  Height = 353
+  Top = 346
+  Width = 487
+  Caption = 'Edit Columns'
+  ClientHeight = 353
+  ClientWidth = 487
+  Constraints.MinHeight = 300
+  Constraints.MinWidth = 400
+  Position = poOwnerFormCenter
+  LCLVersion = '4.5.0.0'
+  OnCreate = FormCreate
+  object Panel1: TPanel
+    Left = 0
+    Height = 303
+    Top = 0
+    Width = 487
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 303
+    ClientWidth = 487
+    TabOrder = 0
+    object Panel2: TPanel
+      Left = 0
+      Height = 303
+      Top = 0
+      Width = 487
+      Align = alClient
+      BevelOuter = bvNone
+      ClientHeight = 303
+      ClientWidth = 487
+      TabOrder = 0
+      object Panel4: TPanel
+        Left = 0
+        Height = 303
+        Top = 0
+        Width = 170
+        Align = alLeft
+        BevelOuter = bvNone
+        ClientHeight = 303
+        ClientWidth = 170
+        TabOrder = 0
+        object ListBox1: TListBox
+          AnchorSideLeft.Control = Panel4
+          AnchorSideTop.Control = TisSearchEdit1
+          AnchorSideTop.Side = asrBottom
+          AnchorSideBottom.Side = asrBottom
+          Left = 8
+          Height = 237
+          Top = 62
+          Width = 150
+          Anchors = [akTop, akLeft, akBottom]
+          BorderSpacing.Around = 8
+          ItemHeight = 0
+          MultiSelect = True
+          TabOrder = 0
+          OnDblClick = ListBox1DblClick
+        end
+        object Label1: TLabel
+          AnchorSideLeft.Control = ListBox1
+          AnchorSideTop.Control = Panel4
+          AnchorSideRight.Control = ListBox1
+          AnchorSideRight.Side = asrBottom
+          Left = 16
+          Height = 15
+          Top = 8
+          Width = 134
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 8
+          Caption = 'Available columns:'
+          WordWrap = True
+        end
+        object TisSearchEdit1: TTisSearchEdit
+          AnchorSideLeft.Control = ListBox1
+          AnchorSideTop.Control = Label1
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ListBox1
+          AnchorSideRight.Side = asrBottom
+          Left = 16
+          Height = 23
+          Top = 31
+          Width = 134
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 8
+          ItemHeight = 15
+          TabOrder = 1
+          Buttons = <>
+          OnSearch = TisSearchEdit1Search
+        end
+      end
+      object Panel6: TPanel
+        Left = 170
+        Height = 303
+        Top = 0
+        Width = 147
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 303
+        ClientWidth = 147
+        Constraints.MaxWidth = 150
+        Constraints.MinWidth = 50
+        TabOrder = 1
+        object BitBtn1: TBitBtn
+          AnchorSideLeft.Control = Panel6
+          AnchorSideTop.Control = Panel6
+          AnchorSideTop.Side = asrCenter
+          AnchorSideRight.Control = Panel6
+          AnchorSideRight.Side = asrBottom
+          Left = 8
+          Height = 25
+          Top = 139
+          Width = 131
+          Action = Action1
+          Anchors = [akTop, akLeft, akRight]
+          AutoSize = True
+          BorderSpacing.Around = 8
+          TabOrder = 0
+        end
+        object BitBtn2: TBitBtn
+          AnchorSideLeft.Control = Panel6
+          AnchorSideTop.Control = BitBtn1
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel6
+          AnchorSideRight.Side = asrBottom
+          Left = 8
+          Height = 25
+          Top = 172
+          Width = 131
+          Action = Action2
+          Anchors = [akTop, akLeft, akRight]
+          AutoSize = True
+          BorderSpacing.Around = 8
+          TabOrder = 1
+        end
+        object BitBtn3: TBitBtn
+          AnchorSideLeft.Control = Panel6
+          AnchorSideRight.Control = Panel6
+          AnchorSideRight.Side = asrBottom
+          AnchorSideBottom.Control = Panel6
+          AnchorSideBottom.Side = asrBottom
+          Left = 8
+          Height = 25
+          Top = 270
+          Width = 131
+          Action = Action5
+          Anchors = [akLeft, akRight, akBottom]
+          AutoSize = True
+          BorderSpacing.Around = 8
+          TabOrder = 2
+        end
+      end
+      object Panel5: TPanel
+        Left = 317
+        Height = 303
+        Top = 0
+        Width = 170
+        Align = alRight
+        BevelOuter = bvNone
+        ClientHeight = 303
+        ClientWidth = 170
+        TabOrder = 2
+        object ListBox2: TListBox
+          AnchorSideLeft.Control = Panel5
+          AnchorSideTop.Control = TisSearchEdit2
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel5
+          AnchorSideRight.Side = asrBottom
+          AnchorSideBottom.Control = Panel5
+          AnchorSideBottom.Side = asrBottom
+          Left = 8
+          Height = 233
+          Top = 62
+          Width = 154
+          Anchors = [akTop, akLeft, akRight, akBottom]
+          BorderSpacing.Around = 8
+          ItemHeight = 0
+          MultiSelect = True
+          TabOrder = 0
+          OnDblClick = ListBox2DblClick
+        end
+        object Label2: TLabel
+          AnchorSideLeft.Control = ListBox2
+          AnchorSideTop.Control = Panel5
+          AnchorSideRight.Control = ListBox2
+          AnchorSideRight.Side = asrBottom
+          Left = 16
+          Height = 15
+          Top = 8
+          Width = 138
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 8
+          Caption = 'Displayed columns:'
+          WordWrap = True
+        end
+        object TisSearchEdit2: TTisSearchEdit
+          AnchorSideLeft.Control = ListBox2
+          AnchorSideTop.Control = Label2
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = ListBox2
+          AnchorSideRight.Side = asrBottom
+          Left = 16
+          Height = 23
+          Top = 31
+          Width = 138
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 8
+          ItemHeight = 15
+          TabOrder = 1
+          Buttons = <>
+          OnSearch = TisSearchEdit2Search
+        end
+      end
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Height = 50
+    Top = 303
+    Width = 487
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 487
+    TabOrder = 1
+    object ButtonPanel1: TButtonPanel
+      Left = 6
+      Height = 34
+      Top = 10
+      Width = 475
+      OKButton.Name = 'OKButton'
+      OKButton.DefaultCaption = True
+      HelpButton.Name = 'HelpButton'
+      HelpButton.DefaultCaption = True
+      CloseButton.Name = 'CloseButton'
+      CloseButton.DefaultCaption = True
+      CancelButton.Name = 'CancelButton'
+      CancelButton.DefaultCaption = True
+      TabOrder = 0
+      ShowButtons = [pbOK, pbCancel]
+    end
+  end
+  object ActionList1: TActionList
+    Left = 208
+    Top = 32
+    object Action1: TAction
+      Caption = 'Add ->'
+      OnExecute = Action1Execute
+    end
+    object Action2: TAction
+      Caption = '<- Remove'
+      OnExecute = Action2Execute
+    end
+    object Action3: TAction
+      Caption = 'Move UP'
+    end
+    object Action4: TAction
+      Caption = 'Move DOWN'
+    end
+    object Action5: TAction
+      Caption = 'Restore Default'
+      OnExecute = Action5Execute
+    end
+  end
+end

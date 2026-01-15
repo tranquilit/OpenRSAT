@@ -1,0 +1,10 @@
+{"version":1,"strings":[
+{"hash":251184659,"name":"tviseditaduccolumns.caption","sourcebytes":[69,100,105,116,32,67,111,108,117,109,110,115],"value":"Edit Columns"},
+{"hash":119985066,"name":"tviseditaduccolumns.label1.caption","sourcebytes":[65,118,97,105,108,97,98,108,101,32,99,111,108,117,109,110,115,58],"value":"Available columns:"},
+{"hash":175244458,"name":"tviseditaduccolumns.label2.caption","sourcebytes":[68,105,115,112,108,97,121,101,100,32,99,111,108,117,109,110,115,58],"value":"Displayed columns:"},
+{"hash":75129614,"name":"tviseditaduccolumns.action1.caption","sourcebytes":[65,100,100,32,45,62],"value":"Add ->"},
+{"hash":93067317,"name":"tviseditaduccolumns.action2.caption","sourcebytes":[60,45,32,82,101,109,111,118,101],"value":"<- Remove"},
+{"hash":74216944,"name":"tviseditaduccolumns.action3.caption","sourcebytes":[77,111,118,101,32,85,80],"value":"Move UP"},
+{"hash":208986334,"name":"tviseditaduccolumns.action4.caption","sourcebytes":[77,111,118,101,32,68,79,87,78],"value":"Move DOWN"},
+{"hash":677300,"name":"tviseditaduccolumns.action5.caption","sourcebytes":[82,101,115,116,111,114,101,32,68,101,102,97,117,108,116],"value":"Restore Default"}
+]}

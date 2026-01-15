@@ -29,7 +29,9 @@ type
     fTreeFilter: RawUtf8;
     fTreeObjectClasses: TRawUtf8DynArray;
     fShowGPO: Boolean;
+    fGridAttributesFilter: TRawUtf8DynArray;
 
+    procedure SetGridAttributesFilter(AValue: TRawUtf8DynArray);
     procedure SetGridFilter(AValue: RawUtf8);
     procedure SetSearchPageNumber(AValue: Integer);
     procedure SetSearchPageSize(AValue: Integer);
@@ -47,15 +49,19 @@ type
     property TreeFilter: RawUtf8 read fTreeFilter write SetTreeFilter;
     property TreeObjectClasses: TRawUtf8DynArray read fTreeObjectClasses write SetTreeObjectClasses;
     property ShowGPO: Boolean read fShowGPO write SetShowGPO;
+    property GridAttributesFilter: TRawUtf8DynArray read FGridAttributesFilter write SetGridAttributesFilter;
 
   /// TOption
   public
-    procedure Load(IniFile: TIniFile); override;
-    procedure Save(IniFile: TIniFile); override;
+    procedure Load(IniFile: TIniFile); override; overload;
+    procedure Save(IniFile: TIniFile); override; overload;
     function Changed: Boolean; override;
     procedure RegisterObserver(Observer: TProcRsatOptionOfObject); override;
     procedure RemoveObserver(Observer: TProcRsatOptionOfObject); override;
   end;
+
+const
+  DEFAULT_GRID_ATTRIBUTES_FILTER: RawUtf8 = 'name;objectClass;description';
 
 implementation
 
@@ -66,6 +72,15 @@ begin
   if fGridFilter = AValue then
     Exit;
   fGridFilter := AValue;
+
+  fChanged := True;
+end;
+
+procedure TModuleADUCOption.SetGridAttributesFilter(AValue: TRawUtf8DynArray);
+begin
+  if FGridAttributesFilter = AValue then
+    Exit;
+  fGridAttributesFilter := AValue;
 
   fChanged := True;
 end;
@@ -144,6 +159,7 @@ begin
   fTreeFilter := IniFile.ReadString(Section, 'TreeFilter', '');
   fTreeObjectClasses := TRawUtf8DynArray(IniFile.ReadString(Section, 'TreeObjectClasses', DEFAULT_TREE_OBJECT_CLASSES).Split(';'));
   fShowGPO := IniFile.ReadBool(Section, 'ShowGPO', False);
+  fGridAttributesFilter := TRawUtf8DynArray(IniFile.ReadString(Section, 'GridAttributesFilter', DEFAULT_GRID_ATTRIBUTES_FILTER).Split(';'));
 
   fChanged := False;
 end;
@@ -161,6 +177,7 @@ begin
   IniFile.WriteString(SECTION, 'TreeFilter', fTreeFilter);
   IniFile.WriteString(SECTION, 'TreeObjectClasses', String.Join(';', TStringArray(fTreeObjectClasses)));
   IniFile.WriteBool(SECTION, 'ShowGPO', fShowGPO);
+  IniFile.WriteString(SECTION, 'GridAttributesFilter', String.Join(';', TStringArray(fGridAttributesFilter)));
 
   fChanged := False;
 end;

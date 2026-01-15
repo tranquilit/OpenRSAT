@@ -53,6 +53,7 @@ object FrmModuleADUC: TFrmModuleADUC
     Header.MaxHeight = 101
     Header.MinHeight = 19
     Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.PopupMenu = TisGridHeaderPopupMenu1
     Header.SortColumn = 0
     Header.Style = hsFlatButtons
     Images = CoreDataModule.ImageList1
@@ -933,5 +934,13 @@ object FrmModuleADUC: TFrmModuleADUC
     OnTimer = Timer_TreeChangeNodeTimer
     Left = 72
     Top = 48
+  end
+  object TisGridHeaderPopupMenu1: TTisGridHeaderPopupMenu
+    Left = 40
+    Top = 264
+    object MenuItem_EditColumns: TMenuItem
+      Caption = 'Edit columns'
+      OnClick = MenuItem_EditColumnsClick
+    end
   end
 end
