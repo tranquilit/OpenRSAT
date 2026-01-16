@@ -2060,7 +2060,7 @@ msgstr "Les commentaires du groupe/utilisateur"
 #: ufrmrsat.lrj:$.strings.[6].value
 msgctxt "tfrmrsat.action_advancedfeatures.caption"
 msgid "Advanced Features"
-msgstr "Fonctionnélitées avancées"
+msgstr "Fonctionnalitées avancées"
 
 #: ufrmrsat.lrj:$.strings.[1].value
 msgctxt "tfrmrsat.action_ldapconnect.caption"
