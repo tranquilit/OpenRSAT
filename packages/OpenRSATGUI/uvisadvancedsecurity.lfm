@@ -11,7 +11,7 @@ object VisAdvancedSecurity: TVisAdvancedSecurity
   Constraints.MinWidth = 256
   KeyPreview = True
   Position = poOwnerFormCenter
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   OnClose = FormClose
   OnKeyDown = FormKeyDown
   object PanelTop: TPanel
@@ -419,12 +419,13 @@ object VisAdvancedSecurity: TVisAdvancedSecurity
       AnchorSideTop.Control = PanelBottom
       AnchorSideTop.Side = asrCenter
       Left = 0
-      Height = 25
-      Top = 1
-      Width = 48
+      Height = 26
+      Top = 0
+      Width = 68
       Action = Action_AddAce
       AutoSize = True
-      ImageIndex = 10
+      Images = CoreDataModule.ImageList1
+      ImageIndex = 47
       TabOrder = 0
     end
     object BitBtn_DeleteAce: TBitBtn
@@ -432,14 +433,15 @@ object VisAdvancedSecurity: TVisAdvancedSecurity
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = PanelBottom
       AnchorSideTop.Side = asrCenter
-      Left = 56
-      Height = 25
-      Top = 1
-      Width = 59
+      Left = 76
+      Height = 26
+      Top = 0
+      Width = 79
       Action = Action_DeleteAce
       AutoSize = True
       BorderSpacing.Left = 8
-      ImageIndex = 9
+      Images = CoreDataModule.ImageList1
+      ImageIndex = 49
       TabOrder = 1
     end
     object BitBtn_EditAce: TBitBtn
@@ -447,14 +449,15 @@ object VisAdvancedSecurity: TVisAdvancedSecurity
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = PanelBottom
       AnchorSideTop.Side = asrCenter
-      Left = 123
-      Height = 25
-      Top = 1
-      Width = 46
+      Left = 163
+      Height = 26
+      Top = 0
+      Width = 66
       Action = Action_EditAce
       AutoSize = True
       BorderSpacing.Left = 8
-      ImageIndex = 5
+      Images = CoreDataModule.ImageList1
+      ImageIndex = 52
       TabOrder = 2
     end
     object BitBtn4: TBitBtn
@@ -463,13 +466,15 @@ object VisAdvancedSecurity: TVisAdvancedSecurity
       AnchorSideTop.Control = PanelBottom
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Side = asrBottom
-      Left = 201
-      Height = 25
-      Top = 1
-      Width = 105
+      Left = 261
+      Height = 26
+      Top = 0
+      Width = 125
       Action = Action_Restore
       AutoSize = True
       BorderSpacing.Left = 32
+      Images = CoreDataModule.ImageList1
+      ImageIndex = 58
       TabOrder = 3
     end
   end

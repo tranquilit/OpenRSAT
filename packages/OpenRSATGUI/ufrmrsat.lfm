@@ -40,11 +40,12 @@ object FrmRSAT: TFrmRSAT
     SimplePanel = False
   end
   object ActionList_Core: TActionList
+    Images = CoreDataModule.ImageList1
     Left = 32
     Top = 24
     object Action_Options: TAction
       Caption = 'Options'
-      ImageIndex = 30
+      ImageIndex = 54
       OnExecute = Action_OptionsExecute
       OnUpdate = Action_OptionsUpdate
     end
@@ -63,7 +64,7 @@ object FrmRSAT: TFrmRSAT
     end
     object Action_LdapOptions: TAction
       Caption = 'Connection Options'
-      ImageIndex = 30
+      ImageIndex = 54
       OnExecute = Action_LdapOptionsExecute
       OnUpdate = Action_LdapOptionsUpdate
     end

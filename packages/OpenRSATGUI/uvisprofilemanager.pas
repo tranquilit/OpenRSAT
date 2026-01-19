@@ -266,7 +266,7 @@ begin
 
   NewViewItem := ListView1.Items.Add;
   NewViewItem.Caption := Section;
-  NewViewItem.ImageIndex := 27;
+  NewViewItem.ImageIndex := 55;
   NewViewItem.SubItems.Add(fIniFile.ReadString(Section, 'KerberosDN', ''));
   NewViewItem.SubItems.Add(fIniFile.ReadString(Section, 'TargetHost', ''));
   NewViewItem.SubItems.Add(fIniFile.ReadString(Section, 'Username', ''));

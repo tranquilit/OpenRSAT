@@ -25,24 +25,26 @@ object VisProfileManager: TVisProfileManager
       Left = 3
       Top = 2
       Action = Action_Add
+      ImageIndex = 48
     end
     object ToolButton_Delete: TToolButton
       Left = 26
       Top = 2
       Action = Action_Delete
+      ImageIndex = 50
     end
     object ToolButton_Edit: TToolButton
       Left = 49
       Top = 2
       Action = Action_Edit
-      ImageIndex = 4
+      ImageIndex = 53
     end
     object ToolButton_SwitchListView: TToolButton
       Left = 72
       Top = 2
       Caption = 'ToolButton_SwitchListView'
       DropdownMenu = PopupMenu1
-      ImageIndex = 30
+      ImageIndex = 46
       Style = tbsButtonDrop
     end
   end

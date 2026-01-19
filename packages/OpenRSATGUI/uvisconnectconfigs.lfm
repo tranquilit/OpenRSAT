@@ -242,7 +242,7 @@ object FormConnectConfigs: TFormConnectConfigs
         AutoSize = True
         BorderSpacing.Around = 8
         Images = CoreDataModule.ImageList1
-        ImageIndex = 30
+        ImageIndex = 54
         TabOrder = 5
       end
     end
@@ -1144,7 +1144,7 @@ object FormConnectConfigs: TFormConnectConfigs
     Left = 48
     Top = 40
     object Action_ProfileManager: TAction
-      ImageIndex = 30
+      ImageIndex = 54
       OnExecute = Action_ProfileManagerExecute
     end
     object Action_OK: TAction

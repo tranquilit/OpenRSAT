@@ -41,12 +41,13 @@ type
     fAttributes: TLdapAttributeList;
     fDistinguishedName: String;
     fRetrieved: Boolean;
+    procedure SetNodeType(AValue: TDNSTreeNodeType);
   public
     constructor Create(AnOwner: TTreeNodes); override;
     destructor Destroy; override;
 
     function HasVisibleChildren: Boolean;
-    property NodeType: TDNSTreeNodeType read fType write fType default dtntRoot;
+    property NodeType: TDNSTreeNodeType read fType write SetNodeType default dtntRoot;
     property Retrieved: Boolean read fRetrieved default False;
     property DistinguishedName: String read fDistinguishedName;
   end;
@@ -187,6 +188,19 @@ const
 
 { TDNSTreeNode }
 
+procedure TDNSTreeNode.SetNodeType(AValue: TDNSTreeNodeType);
+begin
+  if fType = AValue then
+    Exit;
+  fType := AValue;
+  case fType of
+    dtntRoot, dtntCustom: ImageIndex := Ord(ileADContainer);
+    dtntDNSNode: ImageIndex := 57;
+    dtntZone: ImageIndex := 59;
+  end;
+  SelectedIndex := ImageIndex;
+end;
+
 constructor TDNSTreeNode.Create(AnOwner: TTreeNodes);
 begin
   inherited Create(AnOwner);
@@ -322,6 +336,7 @@ begin
       if not DNSRecordBytesToRecord(DNSRecord, PByteArray(DNSRecordAttribute.GetRaw(j))^) then
         continue;
       newRaw.AddValue('name', RecordName);
+      newRaw.AddValue('_type', DNSRecord.RecType);
       newRaw.AddValue('type', DnsResourceRecordToStr(TDnsResourceRecord(DNSRecord.RecType)));
       newRaw.AddValue('data', DNSRecordDataToString(DNSRecord));
       newRaw.AddValue('timestamp', '');
@@ -347,6 +362,7 @@ begin
       if not DNSRecordBytesToRecord(DNSRecord, PByteArray(DNSRecordAttribute.getRaw(j))^) then
         continue;
       newRaw.AddValue('name', RecordName);
+      newRaw.AddValue('_type', DNSRecord.RecType);
       newRaw.AddValue('type', DnsResourceRecordToStr(TDnsResourceRecord(DNSRecord.RecType)));
       newRaw.AddValue('data', DNSRecordDataToString(DNSRecord));
       newRaw.AddValue('timestamp', '');
@@ -387,6 +403,7 @@ begin
       if not DNSRecordBytesToRecord(DNSRecord, PByteArray(DNSRecordAttribute.GetRaw(j))^) then
         continue;
       newRaw.AddValue('name', RecordName);
+      newRaw.AddValue('_type', DNSRecord.RecType);
       newRaw.AddValue('type', DnsResourceRecordToStr(TDnsResourceRecord(dnsRecord.RecType)));
       newRaw.AddValue('data', DNSRecordDataToString(dnsRecord));
       newRaw.AddValue('timestamp', '');
@@ -706,7 +723,18 @@ begin
     if Assigned(TreeDNS.Selected) and Assigned(NodeFound) and NodeFound.HasChildren then
       ImageIndex := Ord(ileADOU)
     else
-      ImageIndex := Ord(ileADUnknown);
+    begin
+      if NodeData^.Exists('_type') then
+      begin
+        case NodeData^.I['_type'] of
+          0: ImageIndex := -1;
+          else
+            ImageIndex := 57;
+        end;
+      end
+      else
+        ImageIndex := Ord(ileADUnknown);
+    end;
   end;
 end;
 

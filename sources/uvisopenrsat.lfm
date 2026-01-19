@@ -37,7 +37,7 @@ object VisOpenRSAT: TVisOpenRSAT
       end
       object MenuItem_FileOptions: TMenuItem
         Caption = 'Options'
-        ImageIndex = 5
+        ImageIndex = 54
       end
       object Separator_File: TMenuItem
         Caption = '-'
@@ -80,6 +80,7 @@ object VisOpenRSAT: TVisOpenRSAT
           00000711520002051A0000000000000000000000000000000000000000000000
           0000000000000000000002051A00071152000000000000000000
         }
+        ImageIndex = 49
       end
     end
     object MenuItem_View: TMenuItem
