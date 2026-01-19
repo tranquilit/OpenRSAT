@@ -11,7 +11,8 @@ uses
   mormot.core.base,
   mormot.core.os.security,
   mormot.core.variants,
-  mormot.net.ldap;
+  mormot.net.ldap,
+  ucommon;
 
 type
 
@@ -25,6 +26,9 @@ type
     fDomainName: RawUtf8;
     procedure SetDomainControllerName(AValue: RawUtf8);
     procedure SetDomainName(AValue: RawUtf8);
+
+    function AddProtection(PSecDesc: PSecurityDescriptor; Sid: RawSid): Boolean;
+    function DelProtection(PSecDesc: PSecurityDescriptor; Sid: RawSid): Boolean;
   protected
     fPageNumber: Integer;
     fSearchAllResult: TLdapResultObjArray;
@@ -41,6 +45,14 @@ type
     property DomainControllerName: RawUtf8 read fDomainControllerName write SetDomainControllerName;
 
     procedure ChangeSettings(ASettings: TLdapClientSettings; AutoConnect: Boolean = True);
+
+    function CreateOrganizationalUnit(OUName, ParentDN: RawUtf8; Protected: Boolean
+      ): RawUtf8;
+    function CreateGroup(GroupName, ParentDN: RawUtf8; JoinGroups: TRawUtf8DynArray = nil; AddMembers: TRawUtf8DynArray = nil): RawUtf8;
+    function CreateUser(UserName, ParentDN: RawUtf8; JoinGroups: TRawUtf8DynArray = nil): RawUtf8;
+    function SetOUProtection(DistinguishedName: RawUtf8; Protected: Boolean): Boolean;
+
+    procedure OrderAcl(DN, BaseDN: RawUtf8; Acl: PSecAcl);
   public
     function Search(const Attributes: TLdapAttributeTypes; const Filter: RawUtf8='';
       const BaseDN: RawUtf8=''; TypesOnly: boolean=false): boolean; overload;
@@ -111,6 +123,78 @@ uses
   mormot.core.text,
   mormot.core.rtti;
 
+
+function AceIsUseless(Ace: PSecAce): Boolean;
+begin
+  result := Ace^.Mask = [];
+end;
+
+function CompareAce(p1, p2: PSecAce; sdArr: array of TSecurityDescriptor
+  ): Integer;
+const
+  DENY: set of TSecAceType = [satAccessDenied, satObjectAccessDenied, satCallbackAccessDenied, satCallbackObjectAccessDenied];
+begin
+  result := 0;
+
+  if not Assigned(p1) or not Assigned(p2) then
+    Exit;
+
+  // Compare inheritance
+  result := GetAceParentCount(p1^, sdArr) - GetAceParentCount(p2^, sdArr);
+  if result <> 0 then
+    Exit;
+
+  // Compare deny / allow
+  if (p1^.AceType in DENY) = (p2^.AceType in DENY) then
+    result := Ord(p1^.AceType) - Ord(p2^.AceType)
+  else if p1^.AceType in DENY then
+    result := -1
+  else
+    result := 1;
+  if result <> 0 then
+    Exit;
+
+  // Compare global or object access
+  if IsNullGuid(p1^.ObjectType) then
+    result := -1;
+  if IsNullGuid(p2^.ObjectType) then
+    result := result + 1;
+  if result <> 0 then
+    Exit;
+
+  // Compare sid
+  result := CompareStr(RawSidToText(p1^.sid), RawSidToText(p2^.Sid));
+end;
+
+procedure InnerOrderAcl(Acl: PSecAcl; sdArr: Array of TSecurityDescriptor);
+var
+  ace: TSecAce;
+  idx, j, lowest: Integer;
+begin
+  idx := 0;
+  while idx < Length(acl^) do // select sort
+  begin
+    if AceIsUseless(@acl^[idx]) then
+    begin
+      Delete(acl^, idx, 1);
+      continue;
+    end;
+
+    lowest := idx;
+    for j := idx to High(acl^) do
+      if CompareAce(@acl^[j], @acl^[lowest], sdArr) < 0 then
+        lowest := j;
+
+    if lowest > idx then
+    begin
+      ace := acl^[lowest];
+      Delete(acl^, lowest, 1);
+      Insert(ace, acl^, idx);
+    end;
+    Inc(idx);
+  end;
+end;
+
 { TRsatLdapClient }
 
 procedure TRsatLdapClient.SetDomainControllerName(AValue: RawUtf8);
@@ -132,6 +216,45 @@ begin
   fDomainName := AValue;
   Settings.KerberosDN := fDomainName;
   Connect;
+end;
+
+function TRsatLdapClient.AddProtection(PSecDesc: PSecurityDescriptor;
+  Sid: RawSid): Boolean;
+begin
+  result := False;
+
+  if not Assigned(PSecDesc) then
+    Exit;
+
+  if not Assigned(SecDescAddOrUpdateACE(PSecDesc, ATTR_UUID[kaNull], Sid, satAccessDenied, [samDelete, samDeleteTree])) then
+  begin
+    if Assigned(fLog) then
+      fLog.add.Log(sllWarning, 'Cannot add ACE', Self);
+    Exit;
+  end;
+  result := True;
+end;
+
+function TRsatLdapClient.DelProtection(PSecDesc: PSecurityDescriptor;
+  Sid: RawSid): Boolean;
+var
+  i: Integer;
+begin
+  result := False;
+
+  if not Assigned(PSecDesc) then
+    Exit;
+
+  i := SecDescFindACE(PSecDesc, satAccessDenied, Sid, [samDelete, samDeleteTree], @ATTR_UUID[kaNull]);
+  if i < 0 then
+  begin
+    if Assigned(fLog) then
+      fLog.add.Log(sllWarning, 'Cannot find ACE', Self);
+    //Dialogs.MessageDlg(rsTitleNotFound, 'Cannot find ACE', mtError, [mbOK], 0);
+    Exit;
+  end;
+  PSecDesc^.Dacl[i].Mask -= [samDelete, samDeleteTree];
+  result := True;
 end;
 
 procedure TRsatLdapClient.SearchPagingBegin(PageNumber: Integer);
@@ -236,6 +359,159 @@ begin
   CopyObject(ASettings, fSettings);
   if AutoConnect then
     Connect;
+end;
+
+function TRsatLdapClient.CreateOrganizationalUnit(OUName, ParentDN: RawUtf8;
+  Protected: Boolean): RawUtf8;
+var
+  Attrs: TLdapAttributeList;
+  Attr: TLdapAttribute;
+begin
+  result := FormatUtf8('ou=%,%', [OUName, ParentDN]);
+  Attrs := TLdapAttributeList.Create;
+  try
+    Attr := Attrs.Add('objectClass', 'top');
+    Attr.Add('organizationalUnit');
+    if not Add(result, Attrs) then
+    begin
+      result := '';
+      Exit;
+    end;
+
+  finally
+    Attrs.Free;
+  end;
+end;
+
+function TRsatLdapClient.CreateGroup(GroupName, ParentDN: RawUtf8;
+  JoinGroups: TRawUtf8DynArray; AddMembers: TRawUtf8DynArray): RawUtf8;
+var
+  Attrs: TLdapAttributeList;
+  Attr: TLdapAttribute;
+  member, group: RawUtf8;
+begin
+  result := FormatUtf8('cn=%,%', [GroupName, ParentDN]);
+  Attrs := TLdapAttributeList.Create;
+  try
+    Attr := Attrs.Add('objectClass', 'top');
+    Attr.Add('group');
+    if Length(AddMembers) > 0 then
+    begin
+      Attr := Attrs.Add('member');
+      for member in AddMembers do
+        Attr.Add(member, aoNoDuplicateValue);
+    end;
+    attrs.Add('sAMAccountName', GroupName);
+    if not Add(result, Attrs) then
+    begin
+      result := '';
+      Exit;
+    end;
+  finally
+    Attrs.Free;
+  end;
+  for group in JoinGroups do
+    Modify(group, lmoAdd, 'member', result);
+end;
+
+function TRsatLdapClient.CreateUser(UserName, ParentDN: RawUtf8;
+  JoinGroups: TRawUtf8DynArray): RawUtf8;
+var
+  Attrs: TLdapAttributeList;
+  Attr: TLdapAttribute;
+  group: RawUtf8;
+begin
+  result := FormatUtf8('cn=%,%', [UserName, ParentDN]);
+  Attrs := TLdapAttributeList.Create;
+  try
+    Attr := Attrs.Add('objectClass', 'top');
+    Attr.Add('person');
+    Attr.Add('organizationalPerson');
+    Attr.Add('user');
+    if not Add(result, Attrs) then
+    begin
+      result := '';
+      Exit;
+    end;
+  finally
+    Attrs.Free;
+  end;
+  for group in JoinGroups do
+    Modify(group, lmoAdd, 'member', result);
+end;
+
+function TRsatLdapClient.SetOUProtection(DistinguishedName: RawUtf8;
+  Protected: Boolean): Boolean;
+var
+  Attribute: TLdapAttribute;
+  SecDesc: TSecurityDescriptor;
+  Sid: RawSid;
+begin
+  result := False;
+
+  Attribute := SearchObject(DistinguishedName, '(objectClass=organizationalUnit)', 'nTSecurityDescriptor');
+  if not Assigned(Attribute) then
+    Exit;
+  if not SecDesc.FromBinary(Attribute.GetRaw()) then
+    Exit;
+  Sid := KnownRawSid(wksWorld);
+
+  if Protected then
+    result := AddProtection(@SecDesc, Sid)
+  else
+    result := DelProtection(@SecDesc, Sid);
+
+  if not result then
+    Exit;
+
+  OrderAcl(Attribute.AttributeName, DefaultDN, @SecDesc);
+
+  if not Modify(Attribute.AttributeName, lmoReplace, 'nTSecurityDescriptor', SecDesc.ToBinary) then
+    Exit;
+end;
+
+// https://learn.microsoft.com/en-us/windows/win32/secauthz/order-of-aces-in-a-dacl
+procedure TRsatLdapClient.OrderAcl(DN, BaseDN: RawUtf8; Acl: PSecAcl);
+var
+  sdArr: Array of TSecurityDescriptor;
+  sd: TSecurityDescriptor;
+  parent, filter: RawUtf8;
+  res: TLdapResult;
+begin
+  TSynLog.Add.Log(sllDebug, FormatUtf8('Start ordering ACL for %...', [DN]));
+  sdArr := [];
+
+  parent := DN;
+  filter := '';
+  while not (parent = Self.DefaultDN(baseDN)) and not (parent = '') do
+  begin
+    if (filter = '') then
+      filter := '|';
+    parent := GetParentDN(parent);
+    filter := FormatUtf8('%(distinguishedName=%)', [filter, LdapEscape(parent)]);
+  end;
+
+  // Get SDs
+  Self.SearchBegin();
+  try
+    repeat
+      Self.SearchScope := lssWholeSubtree;
+      if not Self.Search([atNTSecurityDescriptor], filter) then
+        Exit;
+      for res in Self.SearchResult.Items do
+      begin
+        if not sd.FromBinary(res.Attributes.Find(atNTSecurityDescriptor).GetRaw()) then
+          continue;
+        Insert(sd, sdArr, Length(sdArr));
+      end;
+    until (Self.SearchCookie = '');
+  finally
+    Self.SearchEnd();
+  end;
+
+  // Order acl
+  InnerOrderAcl(acl, sdArr);
+  TSynLog.Add.Log(sllDebug, 'End ordering ACL for.');
 end;
 
 function TRsatLdapClient.Search(const Attributes: TLdapAttributeTypes;
