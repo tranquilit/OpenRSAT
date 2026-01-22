@@ -11,7 +11,7 @@ object VisProperties: TVisProperties
   KeyPreview = True
   Position = poOwnerFormCenter
   SessionProperties = 'Width;Top;Left;Height;WindowState'
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnHelp = FormHelp

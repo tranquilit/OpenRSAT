@@ -74,6 +74,7 @@ uses
   ucommon,
   ucommonui,
   uhelpersui,
+  uvisproperties,
   uvisattributeeditor;
 
 {$R *.lfm}
@@ -93,6 +94,7 @@ end;
 
 procedure TFrmPropertyAttributes.MenuItem1Click(Sender: TObject);
 begin
+  (Owner as TVisProperties).IniPropStorage1.WriteBoolean('PropertyAttributesFilterHaveValue', MenuItem1.Checked);
   Update(fProperty);
 end;
 
@@ -213,6 +215,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create', Self);
 
+  MenuItem1.Checked := (Owner as TVisProperties).IniPropStorage1.ReadBoolean('PropertyAttributesFilterHaveValue', True);
   Caption := 'Attributes';
 end;
 

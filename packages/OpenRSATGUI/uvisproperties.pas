@@ -635,7 +635,7 @@ var
   Frame: TPropertyFrame;
 begin
   Tab := PageControl.AddTabSheet;
-  Frame := NewFrameClass.Create(Tab);
+  Frame := NewFrameClass.Create(Self);
   Frame.Parent := Tab;
   Frame.Align := alClient;
   Tab.Caption := Frame.Caption;
