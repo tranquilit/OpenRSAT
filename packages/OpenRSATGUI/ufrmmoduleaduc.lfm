@@ -8,76 +8,13 @@ object FrmModuleADUC: TFrmModuleADUC
   ClientWidth = 800
   LCLVersion = '4.5.0.0'
   TabOrder = 0
-  DesignLeft = 941
-  DesignTop = 207
+  DesignLeft = 424
+  DesignTop = 192
   object Splitter1: TSplitter
-    Left = 168
+    Left = 170
     Height = 349
     Top = 28
     Width = 5
-  end
-  object GridADUC: TTisGrid
-    Left = 173
-    Height = 345
-    Top = 32
-    Width = 627
-    Align = alClient
-    BorderSpacing.Top = 4
-    BorderSpacing.Bottom = 4
-    Constraints.MinWidth = 195
-    Header.AutoSizeIndex = -1
-    Header.Columns = <    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-        Position = 0
-        Text = 'Name'
-        Width = 200
-        PropertyName = 'name'
-      end    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-        Position = 1
-        Text = 'Type'
-        Width = 150
-        PropertyName = 'objectClass'
-      end    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-        Position = 2
-        Text = 'Description'
-        Width = 300
-        PropertyName = 'description'
-      end>
-    Header.DefaultHeight = 18
-    Header.Height = 28
-    Header.MaxHeight = 101
-    Header.MinHeight = 19
-    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
-    Header.PopupMenu = TisGridHeaderPopupMenu1
-    Header.SortColumn = 0
-    Header.Style = hsFlatButtons
-    Images = CoreDataModule.ImageList1
-    PopupMenu = PopupMenu1
-    TabOrder = 0
-    SelectedAndTotalLabel = Label1
-    TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
-    TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
-    ZebraColor = 15593713
-    ZebraPaint = True
-    PopupMenuOptions = [pmoShowFind, pmoShowFindNext]
-    FilterOptions.CaseInsensitive = True
-    OnContextPopup = GridADUCContextPopup
-    OnDblClick = GridADUCDblClick
-    OnDragOver = GridADUCDragOver
-    OnDragDrop = GridADUCDragDrop
-    OnEdited = GridADUCEdited
-    OnEndDrag = GridADUCEndDrag
-    OnGetImageIndex = GridADUCGetImageIndex
-    OnKeyDown = GridADUCKeyDown
-    OnKeyPress = GridADUCKeyPress
-    OnMouseDown = GridADUCMouseDown
-    OnGetText = GridADUCGetText
-    OnAfterDataChange = GridADUCAfterDataChange
   end
   object Label1: TLabel
     Left = 4
@@ -98,7 +35,7 @@ object FrmModuleADUC: TFrmModuleADUC
     AutoSize = True
     ClientHeight = 28
     ClientWidth = 800
-    TabOrder = 2
+    TabOrder = 0
     object ToolBar1: TToolBar
       Left = 1
       Height = 26
@@ -469,30 +406,150 @@ object FrmModuleADUC: TFrmModuleADUC
       }
     end
   end
-  object TreeADUC: TTreeView
+  object Panel1: TPanel
     Left = 0
-    Height = 345
-    Top = 32
-    Width = 168
+    Height = 349
+    Top = 28
+    Width = 170
     Align = alLeft
-    BorderSpacing.Top = 4
-    BorderSpacing.Bottom = 4
-    Constraints.MinWidth = 100
-    Images = CoreDataModule.ImageList1
-    PopupMenu = PopupMenu1
-    ReadOnly = True
-    RightClickSelect = True
-    StateImages = CoreDataModule.ImageList1
+    BevelOuter = bvNone
+    ClientHeight = 349
+    ClientWidth = 170
+    TabOrder = 1
+    object TreeADUC: TTreeView
+      Left = 0
+      Height = 306
+      Top = 39
+      Width = 170
+      Align = alClient
+      BorderSpacing.Top = 4
+      BorderSpacing.Bottom = 4
+      Constraints.MinWidth = 100
+      Images = CoreDataModule.ImageList1
+      PopupMenu = PopupMenu1
+      ReadOnly = True
+      RightClickSelect = True
+      StateImages = CoreDataModule.ImageList1
+      TabOrder = 1
+      Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+      OnChange = TreeADUCChange
+      OnContextPopup = TreeADUCContextPopup
+      OnCreateNodeClass = TreeADUCCreateNodeClass
+      OnDragDrop = TreeADUCDragDrop
+      OnDragOver = TreeADUCDragOver
+      OnEndDrag = TreeADUCEndDrag
+      OnExpanded = TreeADUCExpanded
+      OnGetImageIndex = TreeADUCGetImageIndex
+    end
+    object TisSearchEdit_Tree: TTisSearchEdit
+      Left = 8
+      Height = 23
+      Top = 8
+      Width = 154
+      Align = alTop
+      BorderSpacing.Around = 8
+      ItemHeight = 15
+      TabOrder = 0
+      Buttons = <>
+      OnSearch = TisSearchEdit_TreeSearch
+    end
+  end
+  object Panel2: TPanel
+    Left = 175
+    Height = 349
+    Top = 28
+    Width = 625
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 349
+    ClientWidth = 625
     TabOrder = 3
-    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
-    OnChange = TreeADUCChange
-    OnContextPopup = TreeADUCContextPopup
-    OnCreateNodeClass = TreeADUCCreateNodeClass
-    OnDragDrop = TreeADUCDragDrop
-    OnDragOver = TreeADUCDragOver
-    OnEndDrag = TreeADUCEndDrag
-    OnExpanded = TreeADUCExpanded
-    OnGetImageIndex = TreeADUCGetImageIndex
+    object GridADUC: TTisGrid
+      Left = 0
+      Height = 306
+      Top = 39
+      Width = 625
+      Align = alClient
+      BorderSpacing.Bottom = 4
+      Constraints.MinWidth = 195
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Text = 'Name'
+          Width = 200
+          PropertyName = 'name'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 1
+          Text = 'Type'
+          Width = 150
+          PropertyName = 'objectClass'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 2
+          Text = 'Description'
+          Width = 300
+          PropertyName = 'description'
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MaxHeight = 101
+      Header.MinHeight = 19
+      Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.PopupMenu = TisGridHeaderPopupMenu1
+      Header.SortColumn = 0
+      Header.Style = hsFlatButtons
+      Images = CoreDataModule.ImageList1
+      PopupMenu = PopupMenu1
+      TabOrder = 1
+      SelectedAndTotalLabel = Label1
+      TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
+      TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+      ZebraColor = 15593713
+      ZebraPaint = True
+      PopupMenuOptions = [pmoShowFind, pmoShowFindNext]
+      FilterOptions.CaseInsensitive = True
+      OnContextPopup = GridADUCContextPopup
+      OnDblClick = GridADUCDblClick
+      OnDragOver = GridADUCDragOver
+      OnDragDrop = GridADUCDragDrop
+      OnEdited = GridADUCEdited
+      OnEndDrag = GridADUCEndDrag
+      OnGetImageIndex = GridADUCGetImageIndex
+      OnKeyDown = GridADUCKeyDown
+      OnKeyPress = GridADUCKeyPress
+      OnMouseDown = GridADUCMouseDown
+      OnGetText = GridADUCGetText
+      OnAfterDataChange = GridADUCAfterDataChange
+    end
+    object Panel4: TPanel
+      Left = 0
+      Height = 39
+      Top = 0
+      Width = 625
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 39
+      ClientWidth = 625
+      TabOrder = 0
+      object TisSearchEdit_Grid: TTisSearchEdit
+        Left = 8
+        Height = 23
+        Top = 8
+        Width = 200
+        Align = alLeft
+        BorderSpacing.Around = 8
+        ItemHeight = 15
+        TabOrder = 0
+        Buttons = <>
+        OnSearch = TisSearchEdit_GridSearch
+      end
+    end
   end
   object ActionList_ADUC: TActionList
     Images = CoreDataModule.ImageList1

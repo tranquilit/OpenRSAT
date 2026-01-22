@@ -445,7 +445,7 @@ object FrmModuleDNS: TFrmModuleDNS
         Left = 8
         Height = 23
         Top = 8
-        Width = 178
+        Width = 200
         Align = alLeft
         BorderSpacing.Around = 8
         ItemHeight = 15

@@ -21,6 +21,7 @@ uses
   Menus,
   tis.ui.grid.core,
   tis.ui.grid.controls,
+  tis.ui.searchedit,
   VirtualTrees,
   mormot.core.log,
   umoduleADUC,
@@ -151,7 +152,10 @@ type
     MenuItem_Refresh: TMenuItem;
     MenuItem_Properties: TMenuItem;
     MenuItem_New: TMenuItem;
+    Panel1: TPanel;
+    Panel2: TPanel;
     Panel3: TPanel;
+    Panel4: TPanel;
     PopupMenu1: TPopupMenu;
     Separator1: TMenuItem;
     Separator2: TMenuItem;
@@ -164,6 +168,8 @@ type
     Splitter1: TSplitter;
     GridADUC: TTisGrid;
     TisGridHeaderPopupMenu1: TTisGridHeaderPopupMenu;
+    TisSearchEdit_Tree: TTisSearchEdit;
+    TisSearchEdit_Grid: TTisSearchEdit;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
     ToolButton_AddToGroup: TToolButton;
@@ -238,6 +244,8 @@ type
     procedure MenuItem_EditColumnsClick(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
     procedure Timer_TreeChangeNodeTimer(Sender: TObject);
+    procedure TisSearchEdit_TreeSearch(Sender: TObject; const aText: string);
+    procedure TisSearchEdit_GridSearch(Sender: TObject; const aText: string);
     procedure TreeADUCChange(Sender: TObject; Node: TTreeNode);
     procedure TreeADUCContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
     procedure TreeADUCCreateNodeClass(Sender: TCustomTreeView;
@@ -1373,6 +1381,55 @@ begin
   UpdateGridADUC((TreeADUC.Selected as TADUCTreeNode));
 end;
 
+procedure TFrmModuleADUC.TisSearchEdit_TreeSearch(Sender: TObject;
+  const aText: string);
+var
+  Node: TTreeNode;
+  LowerText: String;
+
+  function HasVisibleChild(Node: TTreeNode; LowerText: String): Boolean;
+  var
+    ChildNode: TTreeNode;
+  begin
+    result := False;
+    ChildNode := Node.GetFirstChild;
+    if Assigned(ChildNode) then
+    begin
+      repeat
+        RefreshADUCTreeNode((ChildNode as TADUCTreeNode));
+        ChildNode.Visible := HasVisibleChild(ChildNode, LowerText) or (LowerText = '') or (ChildNode.Text.ToLower.Contains(LowerText));
+        if ChildNode.Visible and (LowerText <> '') then
+          ChildNode.Expand(False);
+        result := ChildNode.Visible or result;
+        ChildNode := Node.GetNextChild(ChildNode);
+      until not Assigned(ChildNode);
+    end;
+  end;
+
+begin
+  TreeADUC.BeginUpdate;
+  try
+    Node := TreeADUC.Items.GetFirstNode;
+    if not Assigned(Node) then
+      Exit;
+
+    LowerText := aText.ToLower;
+
+    repeat
+      Node.Visible := (HasVisibleChild(Node, LowerText)) or (LowerText = '') or (Node.Text.ToLower.Contains(LowerText));
+      Node := Node.GetNextSibling;
+    until not Assigned(Node);
+  finally
+    TreeADUC.EndUpdate;
+  end;
+end;
+
+procedure TFrmModuleADUC.TisSearchEdit_GridSearch(Sender: TObject;
+  const aText: string);
+begin
+  UpdateGridADUC(nil);
+end;
+
 procedure TFrmModuleADUC.TreeADUCChange(Sender: TObject; Node: TTreeNode);
 begin
   if Assigned(fLog) then
@@ -2286,6 +2343,7 @@ var
   DistinguishedName, FocusedRowDN, Filter: String;
   NodeData: TADUCTreeNodeObject;
   PageCount: Integer;
+  SearchText: RawUtf8;
 begin
   if not Assigned(ANode) then
     ANode := (TreeADUC.Selected as TADUCTreeNode);
@@ -2319,9 +2377,17 @@ begin
   Filter := '';
   if not FrmRSAT.RSATOption.AdvancedView then
     Filter := FormatUtf8('%(|(!(showInAdvancedViewOnly=*))(showInAdvancedViewOnly=FALSE))', [Filter]);
+  if TisSearchEdit_Grid.Text <> '' then
+  begin
+    SearchText := LdapEscape(TisSearchEdit_Grid.Text);
+    Filter := FormatUtf8('%(|(name=%)(name=*%)(name=%*)(name=*%*))', [Filter, SearchText, SearchText, SearchText, SearchText]);
+  end;
 
-  if (Filter <> '') and (fModuleAduc.ADUCOption.GridFilter <> '') then
-    Filter := FormatUtf8('(&%(%))', [Filter, fModuleAduc.ADUCOption.GridFilter]);
+  if (fModuleAduc.ADUCOption.GridFilter <> '') then
+    Filter := FormatUtf8('%(%)', [Filter, fModuleAduc.ADUCOption.GridFilter]);
+
+  if (Filter <> '') then
+    Filter := FormatUtf8('(&%)', [Filter]);
 
   FrmRSAT.LdapClient.SearchBegin(fModuleAduc.ADUCOption.SearchPageSize);
   try
