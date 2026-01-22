@@ -1,5 +1,4 @@
 {"version":1,"strings":[
-{"hash":42608554,"name":"tvisaddaces.label_title.caption","sourcebytes":[67,114,101,97,116,101,32,97,110,100,32,97,100,100,32,110,101,119,32,82,105,103,104,116,115,32,40,65,67,69,115,41,32,58],"value":"Create and add new Rights (ACEs) :"},
 {"hash":212528298,"name":"tvisaddaces.label_trustee.caption","sourcebytes":[84,114,117,115,116,101,101,32,58],"value":"Trustee :"},
 {"hash":75078819,"name":"tvisaddaces.checkgroup_access.caption","sourcebytes":[65,99,99,101,115,115],"value":"Access"},
 {"hash":65099908,"name":"tvisaddaces.checkbox_cc.caption","sourcebytes":[67,114,101,97,116,101,32,67,104,105,108,100],"value":"Create Child"},
@@ -30,6 +29,7 @@
 {"hash":29029961,"name":"tvisaddaces.tisgrid1.header.columns[3].text","sourcebytes":[84,97,114,103,101,116,32,80,114,111,112,101,114,116,121],"value":"Target Property"},
 {"hash":49860831,"name":"tvisaddaces.tisgrid1.header.columns[4].text","sourcebytes":[65,112,112,108,105,101,115,32,116,111],"value":"Applies to"},
 {"hash":211116879,"name":"tvisaddaces.tisgrid1.header.columns[5].text","sourcebytes":[73,110,104,101,114,105,116,32,116,111],"value":"Inherit to"},
+{"hash":42608554,"name":"tvisaddaces.label_title.caption","sourcebytes":[67,114,101,97,116,101,32,97,110,100,32,97,100,100,32,110,101,119,32,82,105,103,104,116,115,32,40,65,67,69,115,41,32,58],"value":"Create and add new Rights (ACEs) :"},
 {"hash":77089212,"name":"tvisaddaces.bitbtn_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
 {"hash":18340,"name":"tvisaddaces.action_add.caption","sourcebytes":[65,100,100],"value":"Add"},
 {"hash":78392485,"name":"tvisaddaces.action_delete.caption","sourcebytes":[68,101,108,101,116,101],"value":"Delete"},

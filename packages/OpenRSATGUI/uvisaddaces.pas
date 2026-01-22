@@ -62,7 +62,7 @@ type
     Label_Trustee: TLabel;
     Panel1: TPanel;
     Panel_type: TPanel;
-    Panel_BackGround: TPanel;
+    Panel_Center: TPanel;
       Panel_Grid: TPanel;
         BitBtn_Add: TBitBtn;
         BitBtn_Delete: TBitBtn;
@@ -77,6 +77,7 @@ type
       Action_OK: TAction;
       RadioButton_Allow: TRadioButton;
       RadioButton_Deny: TRadioButton;
+      Shape1: TShape;
       TisGrid1: TTisGrid;
       TisSearchEdit_Trustee: TTisSearchEdit;
       procedure Action_AddExecute(Sender: TObject);

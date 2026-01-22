@@ -1,7 +1,7 @@
 object VisAdvancedSecurity: TVisAdvancedSecurity
-  Left = 1983
+  Left = 588
   Height = 628
-  Top = 185
+  Top = 176
   Width = 799
   BorderIcons = [biSystemMenu, biMinimize, biMaximize, biHelp]
   Caption = 'Advanced Security Settings'
@@ -460,7 +460,7 @@ object VisAdvancedSecurity: TVisAdvancedSecurity
       ImageIndex = 52
       TabOrder = 2
     end
-    object BitBtn4: TBitBtn
+    object BitBtn_Restore: TBitBtn
       AnchorSideLeft.Control = BitBtn_EditAce
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = PanelBottom
@@ -549,20 +549,20 @@ object VisAdvancedSecurity: TVisAdvancedSecurity
     Top = 160
     object Action_AddAce: TAction
       Caption = 'Add'
-      ImageIndex = 10
+      ImageIndex = 47
       ShortCut = 45
       OnExecute = Action_AddAceExecute
     end
     object Action_DeleteAce: TAction
       Caption = 'Delete'
-      ImageIndex = 9
+      ImageIndex = 49
       ShortCut = 46
       OnExecute = Action_DeleteAceExecute
       OnUpdate = Action_DeleteAceUpdate
     end
     object Action_EditAce: TAction
       Caption = 'Edit'
-      ImageIndex = 5
+      ImageIndex = 52
       SecondaryShortCuts.Strings = (
         'Space'
       )
@@ -585,6 +585,7 @@ object VisAdvancedSecurity: TVisAdvancedSecurity
     end
     object Action_Restore: TAction
       Caption = 'Restore default'
+      ImageIndex = 58
       OnExecute = Action_RestoreExecute
     end
   end

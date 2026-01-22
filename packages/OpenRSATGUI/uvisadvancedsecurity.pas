@@ -36,7 +36,7 @@ type
     BitBtn_Cancel: TBitBtn;
     BitBtn_Apply: TBitBtn;
     BitBtn_OK: TBitBtn;
-    BitBtn4: TBitBtn;
+    BitBtn_Restore: TBitBtn;
     CheckBox_SR: TCheckBox;
     CheckBox_DT: TCheckBox;
     CheckBox_SD: TCheckBox;
