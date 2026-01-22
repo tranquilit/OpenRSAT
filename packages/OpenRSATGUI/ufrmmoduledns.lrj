@@ -1,4 +1,5 @@
 {"version":1,"strings":[
+{"hash":81151187,"name":"tfrmmoduledns.label1.caption","sourcebytes":[84,111,116,97,108,32,58,32,48,32,101,108,101,109,101,110,116,115],"value":"Total : 0 elements"},
 {"hash":346165,"name":"tfrmmoduledns.griddns.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
 {"hash":376933,"name":"tfrmmoduledns.griddns.header.columns[1].text","sourcebytes":[84,121,112,101],"value":"Type"},
 {"hash":305313,"name":"tfrmmoduledns.griddns.header.columns[2].text","sourcebytes":[68,97,116,97],"value":"Data"},
@@ -6,7 +7,6 @@
 {"hash":95062979,"name":"tfrmmoduledns.griddns.header.columns[4].text","sourcebytes":[83,116,97,116,117,115],"value":"Status"},
 {"hash":210957011,"name":"tfrmmoduledns.griddns.header.columns[5].text","sourcebytes":[68,78,83,83,69,67,32,83,116,97,116,117,115],"value":"DNSSEC Status"},
 {"hash":87930482,"name":"tfrmmoduledns.griddns.header.columns[6].text","sourcebytes":[75,101,121,32,77,97,115,116,101,114],"value":"Key Master"},
-{"hash":81151187,"name":"tfrmmoduledns.label1.caption","sourcebytes":[84,111,116,97,108,32,58,32,48,32,101,108,101,109,101,110,116,115],"value":"Total : 0 elements"},
 {"hash":147653555,"name":"tfrmmoduledns.action_previous.caption","sourcebytes":[80,114,101,118,105,111,117,115],"value":"Previous"},
 {"hash":347380,"name":"tfrmmoduledns.action_next.caption","sourcebytes":[78,101,120,116],"value":"Next"},
 {"hash":90737748,"name":"tfrmmoduledns.action_parent.caption","sourcebytes":[80,97,114,101,110,116],"value":"Parent"},

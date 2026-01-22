@@ -19,6 +19,7 @@ uses
   mormot.net.ldap,
   mormot.core.base,
   tis.ui.grid.core,
+  tis.ui.searchedit,
   ucoredatamodule,
   mormot.core.variants,
   mormot.core.log,
@@ -73,12 +74,17 @@ type
     MenuItem8: TMenuItem;
     MenuItem9: TMenuItem;
     Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
     PopupMenu_DNS: TPopupMenu;
     Separator1: TMenuItem;
     Splitter1: TSplitter;
     GridDNS: TTisGrid;
     Timer_TreeChangeNode: TTimer;
     Timer_SearchInGrid: TTimer;
+    TisSearchEdit1: TTisSearchEdit;
+    TisSearchEdit2: TTisSearchEdit;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
     ToolButton_Previous: TToolButton;
@@ -111,6 +117,8 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure Timer_SearchInGridTimer(Sender: TObject);
     procedure Timer_TreeChangeNodeTimer(Sender: TObject);
+    procedure TisSearchEdit1Search(Sender: TObject; const aText: string);
+    procedure TisSearchEdit2Search(Sender: TObject; const aText: string);
     procedure TreeDNSChange(Sender: TObject; Node: TTreeNode);
     procedure TreeDNSCreateNodeClass(Sender: TCustomTreeView;
       var NodeClass: TTreeNodeClass);
@@ -718,11 +726,11 @@ begin
   begin
     NodeFound := nil;
     NodeData := GridDNS.GetNodeAsPDocVariantData(Node);
-    if Assigned(NodeData) then
+    if Assigned(NodeData) and Assigned(TreeDNS.Selected) then
       NodeFound := (TreeDNS.Selected.FindNode(NodeData^.S['name']) as TDNSTreeNode);
     if Assigned(TreeDNS.Selected) and Assigned(NodeFound) and NodeFound.HasChildren then
       ImageIndex := Ord(ileADOU)
-    else
+    else if Assigned(nodeData) then
     begin
       if NodeData^.Exists('_type') then
       begin
@@ -773,6 +781,88 @@ begin
   end;
 
   UpdateNode((TreeDNS.Selected as TDNSTreeNode));
+end;
+
+procedure TFrmModuleDNS.TisSearchEdit1Search(Sender: TObject;
+  const aText: string);
+var
+  NodeData: PDocVariantData;
+  Node: PVirtualNode;
+  lowerText: String;
+  FieldName: RawUtf8;
+  Filtered: Boolean;
+begin
+  lowerText := aText.ToLower;
+  Node := GridDNS.GetFirst();
+  while Assigned(Node) do
+  begin
+    if (aText = '') then
+    begin
+      GridDNS.IsFiltered[Node] := False;
+      Node := GridDNS.GetNext(Node);
+      Continue;
+    end;
+
+    NodeData := GridDNS.GetNodeAsPDocVariantData(Node);
+    if not Assigned(NodeData) then
+    begin
+      GridDNS.IsFiltered[Node] := True;
+      Node := GridDNS.GetNext(Node);
+      Continue;
+    end;
+
+    with NodeData^ do
+    begin
+      Filtered := True;
+      for FieldName in Names do
+      begin
+        if not GridDNS.IsVisibleColumnByPropertyName(FieldName) or not Exists(FieldName) then
+          Continue;
+        Filtered := not S[FieldName].ToLower.Contains(lowerText);
+        if not Filtered then
+          Break;
+      end;
+      GridDNS.IsFiltered[Node] := Filtered;
+    end;
+    Node := GridDNS.GetNext(Node);
+  end;
+end;
+
+procedure TFrmModuleDNS.TisSearchEdit2Search(Sender: TObject;
+  const aText: string);
+var
+  Node: TTreeNode;
+  LowerText: String;
+
+  function HasVisibleChild(Node: TTreeNode; LowerText: String): Boolean;
+  var
+    ChildNode: TTreeNode;
+  begin
+    result := False;
+    ChildNode := Node.GetFirstChild;
+    if Assigned(ChildNode) then
+    begin
+      repeat
+        ChildNode.Visible := HasVisibleChild(ChildNode, LowerText) or (LowerText = '') or (ChildNode.Text.ToLower.Contains(LowerText));
+        if ChildNode.Visible and (LowerText <> '') then
+          ChildNode.Expand(False);
+        result := ChildNode.Visible or result;
+        ChildNode := Node.GetNextChild(ChildNode);
+      until not Assigned(ChildNode);
+    end;
+  end;
+
+begin
+  Node := TreeDNS.Items.GetFirstNode;
+  if not Assigned(Node) then
+    Exit;
+
+  LowerText := aText.ToLower;
+
+  repeat
+    Node.Visible := (HasVisibleChild(Node, LowerText)) or (LowerText = '') or (Node.Text.ToLower.Contains(LowerText));
+    Node := Node.GetNextSibling;
+  until not Assigned(Node);
 end;
 
 procedure TFrmModuleDNS.Action_PreviousExecute(Sender: TObject);
