@@ -557,10 +557,10 @@ begin
   // Fetch data
   fProperty.RSAT.LdapClient.SearchRangeBegin;
   try
-    fProperty.RSAT.LdapClient.OnSearch := @OnSearchEventFillAttributes;
     LdapObject := fProperty.RSAT.LdapClient.SearchObject(DistinguishedName, '', ['*']);
   finally
     fProperty.RSAT.LdapClient.SearchRangeEnd;
+    OnSearchEventFillAttributes(fProperty.RSAT.LdapClient);
   end;
   if not Assigned(LdapObject) then
   begin

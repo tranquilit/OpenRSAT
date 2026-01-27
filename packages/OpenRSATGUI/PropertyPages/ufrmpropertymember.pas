@@ -209,7 +209,7 @@ begin
 
   TisGrid_Members.Clear;
 
-  fProperty.LdapClient.SearchBegin(2);
+  fProperty.LdapClient.SearchBegin();
   try
     Row.Init();
     fProperty.LdapClient.SearchScope := lssWholeSubtree;
