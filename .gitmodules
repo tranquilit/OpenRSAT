@@ -1,9 +1,6 @@
 [submodule "submodules/mORMot2"]
 	path = submodules/mORMot2
 	url = https://github.com/synopse/mORMot2.git
-[submodule "submodules/pltis_uicomponents"]
-	path = submodules/pltis_uicomponents
-	url = https://github.com/tranquilit/pltis_uicomponents.git
 [submodule "submodules/pltis_utils"]
 	path = submodules/pltis_utils
 	url = https://github.com/tranquilit/pltis_utils.git
@@ -16,3 +13,6 @@
 [submodule "submodules/metadarkstyle"]
 	path = submodules/metadarkstyle
 	url = https://github.com/zamtmn/metadarkstyle.git
+[submodule "submodules/pltis_uicomponents"]
+	path = submodules/pltis_uicomponents
+	url = https://github.com/tranquilit/pltis_uicomponents
