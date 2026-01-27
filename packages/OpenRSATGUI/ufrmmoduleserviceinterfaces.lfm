@@ -367,8 +367,8 @@ object FrmModuleADSI: TFrmModuleADSI
     TabOrder = 3
     object TreeView1: TTreeView
       Left = 0
-      Height = 310
-      Top = 39
+      Height = 318
+      Top = 31
       Width = 170
       Align = alClient
       Images = CoreDataModule.ImageList1
@@ -385,12 +385,12 @@ object FrmModuleADSI: TFrmModuleADSI
       OnGetImageIndex = TreeView1GetImageIndex
     end
     object TisSearchEdit2: TTisSearchEdit
-      Left = 8
+      Left = 4
       Height = 23
-      Top = 8
-      Width = 154
+      Top = 4
+      Width = 162
       Align = alTop
-      BorderSpacing.Around = 8
+      BorderSpacing.Around = 4
       ItemHeight = 15
       TabOrder = 1
       Buttons = <>
@@ -409,22 +409,22 @@ object FrmModuleADSI: TFrmModuleADSI
     TabOrder = 4
     object Panel5: TPanel
       Left = 0
-      Height = 39
+      Height = 31
       Top = 0
       Width = 625
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
-      ClientHeight = 39
+      ClientHeight = 31
       ClientWidth = 625
       TabOrder = 0
       object TisSearchEdit1: TTisSearchEdit
-        Left = 8
+        Left = 4
         Height = 23
-        Top = 8
+        Top = 4
         Width = 200
         Align = alLeft
-        BorderSpacing.Around = 8
+        BorderSpacing.Around = 4
         ItemHeight = 15
         TabOrder = 0
         Buttons = <>
@@ -433,8 +433,8 @@ object FrmModuleADSI: TFrmModuleADSI
     end
     object TisGrid2: TTisGrid
       Left = 330
-      Height = 310
-      Top = 39
+      Height = 318
+      Top = 31
       Width = 295
       Align = alRight
       Header.AutoSizeIndex = -1
@@ -477,8 +477,8 @@ object FrmModuleADSI: TFrmModuleADSI
     end
     object TisGrid1: TTisGrid
       Left = 0
-      Height = 310
-      Top = 39
+      Height = 318
+      Top = 31
       Width = 325
       Align = alClient
       Header.AutoSizeIndex = -1
@@ -536,8 +536,8 @@ object FrmModuleADSI: TFrmModuleADSI
     end
     object Splitter2: TSplitter
       Left = 325
-      Height = 310
-      Top = 39
+      Height = 318
+      Top = 31
       Width = 5
       Align = alRight
       ResizeAnchor = akRight

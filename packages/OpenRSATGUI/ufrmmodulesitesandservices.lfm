@@ -360,8 +360,8 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
     TabOrder = 3
     object TreeView1: TTreeView
       Left = 0
-      Height = 308
-      Top = 39
+      Height = 316
+      Top = 31
       Width = 170
       Align = alClient
       Images = CoreDataModule.ImageList1
@@ -376,12 +376,12 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       OnGetImageIndex = TreeView1GetImageIndex
     end
     object TisSearchEdit1: TTisSearchEdit
-      Left = 8
+      Left = 4
       Height = 23
-      Top = 8
-      Width = 154
+      Top = 4
+      Width = 162
       Align = alTop
-      BorderSpacing.Around = 8
+      BorderSpacing.Around = 4
       ItemHeight = 15
       TabOrder = 1
       Buttons = <>
@@ -400,8 +400,8 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
     TabOrder = 4
     object TisGrid1: TTisGrid
       Left = 0
-      Height = 308
-      Top = 39
+      Height = 316
+      Top = 31
       Width = 625
       Align = alClient
       Header.AutoSizeIndex = -1
@@ -509,22 +509,22 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
     end
     object Panel5: TPanel
       Left = 0
-      Height = 39
+      Height = 31
       Top = 0
       Width = 625
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
-      ClientHeight = 39
+      ClientHeight = 31
       ClientWidth = 625
       TabOrder = 1
       object TisSearchEdit2: TTisSearchEdit
-        Left = 8
+        Left = 4
         Height = 23
-        Top = 8
+        Top = 4
         Width = 200
         Align = alLeft
-        BorderSpacing.Around = 8
+        BorderSpacing.Around = 4
         ItemHeight = 15
         TabOrder = 0
         Buttons = <>

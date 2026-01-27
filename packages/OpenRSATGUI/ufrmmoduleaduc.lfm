@@ -418,8 +418,8 @@ object FrmModuleADUC: TFrmModuleADUC
     TabOrder = 1
     object TreeADUC: TTreeView
       Left = 0
-      Height = 306
-      Top = 39
+      Height = 314
+      Top = 31
       Width = 170
       Align = alClient
       BorderSpacing.Top = 4
@@ -442,12 +442,12 @@ object FrmModuleADUC: TFrmModuleADUC
       OnGetImageIndex = TreeADUCGetImageIndex
     end
     object TisSearchEdit_Tree: TTisSearchEdit
-      Left = 8
+      Left = 4
       Height = 23
-      Top = 8
-      Width = 154
+      Top = 4
+      Width = 162
       Align = alTop
-      BorderSpacing.Around = 8
+      BorderSpacing.Around = 4
       ItemHeight = 15
       TabOrder = 0
       Buttons = <>
@@ -466,8 +466,8 @@ object FrmModuleADUC: TFrmModuleADUC
     TabOrder = 3
     object GridADUC: TTisGrid
       Left = 0
-      Height = 306
-      Top = 39
+      Height = 314
+      Top = 31
       Width = 625
       Align = alClient
       BorderSpacing.Bottom = 4
@@ -528,22 +528,22 @@ object FrmModuleADUC: TFrmModuleADUC
     end
     object Panel4: TPanel
       Left = 0
-      Height = 39
+      Height = 31
       Top = 0
       Width = 625
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
-      ClientHeight = 39
+      ClientHeight = 31
       ClientWidth = 625
       TabOrder = 0
       object TisSearchEdit_Grid: TTisSearchEdit
-        Left = 8
+        Left = 4
         Height = 23
-        Top = 8
+        Top = 4
         Width = 200
         Align = alLeft
-        BorderSpacing.Around = 8
+        BorderSpacing.Around = 4
         ItemHeight = 15
         TabOrder = 0
         Buttons = <>
