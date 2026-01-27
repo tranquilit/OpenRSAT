@@ -1,4 +1,5 @@
 {"version":1,"strings":[
+{"hash":81151187,"name":"tfrmmodulesitesandservices.label1.caption","sourcebytes":[84,111,116,97,108,32,58,32,48,32,101,108,101,109,101,110,116,115],"value":"Total : 0 elements"},
 {"hash":346165,"name":"tfrmmodulesitesandservices.tisgrid1.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
 {"hash":376933,"name":"tfrmmodulesitesandservices.tisgrid1.header.columns[1].text","sourcebytes":[84,121,112,101],"value":"Type"},
 {"hash":156067838,"name":"tfrmmodulesitesandservices.tisgrid1.header.columns[2].text","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110],"value":"Description"},
@@ -11,7 +12,6 @@
 {"hash":139837477,"name":"tfrmmodulesitesandservices.tisgrid1.header.columns[9].text","sourcebytes":[68,67,32,84,121,112,101],"value":"DC Type"},
 {"hash":97585458,"name":"tfrmmodulesitesandservices.tisgrid1.header.columns[10].text","sourcebytes":[70,114,111,109,32,83,101,114,118,101,114],"value":"From Server"},
 {"hash":100003125,"name":"tfrmmodulesitesandservices.tisgrid1.header.columns[11].text","sourcebytes":[70,114,111,109,32,83,105,116,101],"value":"From Site"},
-{"hash":81151187,"name":"tfrmmodulesitesandservices.label1.caption","sourcebytes":[84,111,116,97,108,32,58,32,48,32,101,108,101,109,101,110,116,115],"value":"Total : 0 elements"},
 {"hash":146640072,"name":"tfrmmodulesitesandservices.action_refresh.caption","sourcebytes":[82,101,102,114,101,115,104],"value":"Refresh"},
 {"hash":63603987,"name":"tfrmmodulesitesandservices.action_previous.caption","sourcebytes":[65,99,116,105,111,110,95,80,114,101,118,105,111,117,115],"value":"Action_Previous"},
 {"hash":109438964,"name":"tfrmmodulesitesandservices.action_next.caption","sourcebytes":[65,99,116,105,111,110,95,78,101,120,116],"value":"Action_Next"},

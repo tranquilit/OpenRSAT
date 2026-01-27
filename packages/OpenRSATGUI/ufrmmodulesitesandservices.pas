@@ -17,7 +17,7 @@ uses
   Menus,
   Types,
   VirtualTrees,
-  tis.ui.grid.core,
+  tis.ui.grid.core, tis.ui.searchedit,
   mormot.core.base,
   mormot.core.log,
   mormot.core.variants,
@@ -73,12 +73,17 @@ type
     MenuItem_Property: TMenuItem;
     Panel1: TPanel;
     Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
     PopupMenu1: TPopupMenu;
     Splitter1: TSplitter;
     StatusBar1: TStatusBar;
     Timer_TreeChangeNode: TTimer;
     Timer_SearchInGrid: TTimer;
     TisGrid1: TTisGrid;
+    TisSearchEdit1: TTisSearchEdit;
+    TisSearchEdit2: TTisSearchEdit;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
     ToolButton2: TToolButton;
@@ -110,6 +115,8 @@ type
       Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
       var Ghosted: Boolean; var ImageIndex: Integer);
     procedure TisGrid1KeyPress(Sender: TObject; var Key: char);
+    procedure TisSearchEdit1Search(Sender: TObject; const aText: string);
+    procedure TisSearchEdit2Search(Sender: TObject; const aText: string);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure TreeView1CreateNodeClass(Sender: TCustomTreeView;
       var NodeClass: TTreeNodeClass);
@@ -545,6 +552,88 @@ procedure TFrmModuleSitesAndServices.TisGrid1KeyPress(Sender: TObject;
   var Key: char);
 begin
   SearchInGrid(Timer_SearchInGrid, TisGrid1, fSearchWord, Key);
+end;
+
+procedure TFrmModuleSitesAndServices.TisSearchEdit1Search(Sender: TObject;
+  const aText: string);
+
+  function HasVisibleChild(Node: TTreeNode; LowerText: String): Boolean;
+  var
+    ChildNode: TTreeNode;
+  begin
+    result := False;
+    ChildNode := Node.GetFirstChild;
+    if Assigned(ChildNode) then
+    begin
+      repeat
+        ChildNode.Visible := HasVisibleChild(ChildNode, LowerText) or (LowerText = '') or (ChildNode.Text.ToLower.Contains(LowerText));
+        if ChildNode.Visible and (LowerText <> '') then
+          ChildNode.Expand(False);
+        result := ChildNode.Visible or result;
+        ChildNode := Node.GetNextChild(ChildNode);
+      until not Assigned(ChildNode);
+    end;
+  end;
+
+var
+  Node: TTreeNode;
+  LowerText: String;
+begin
+  Node := TreeView1.Items.GetFirstNode;
+  if not Assigned(Node) then
+    Exit;
+
+  LowerText := aText.ToLower;
+
+  repeat
+    Node.Visible := (HasVisibleChild(Node, LowerText)) or (LowerText = '') or (Node.Text.ToLower.Contains(LowerText));
+    Node := Node.GetNextSibling;
+  until not Assigned(Node);
+end;
+
+procedure TFrmModuleSitesAndServices.TisSearchEdit2Search(Sender: TObject;
+  const aText: string);
+var
+  lowerText: String;
+  Node: PVirtualNode;
+  NodeData: PDocVariantData;
+  Filtered: Boolean;
+  FieldName: RawUtf8;
+begin
+  lowerText := aText.ToLower;
+  Node := TisGrid1.GetFirst();
+  while Assigned(Node) do
+  begin
+    if (aText = '') then
+    begin
+      TisGrid1.IsFiltered[Node] := False;
+      Node := TisGrid1.GetNext(Node);
+      Continue;
+    end;
+
+    NodeData := TisGrid1.GetNodeAsPDocVariantData(Node);
+    if not Assigned(NodeData) then
+    begin
+      TisGrid1.IsFiltered[Node] := True;
+      Node := TisGrid1.GetNext(Node);
+      Continue;
+    end;
+
+    with NodeData^ do
+    begin
+      Filtered := True;
+      for FieldName in Names do
+      begin
+        if not TisGrid1.IsVisibleColumnByPropertyName(FieldName) or not Exists(FieldName) then
+          Continue;
+        Filtered := not S[FieldName].ToLower.Contains(lowerText);
+        if not Filtered then
+          Break;
+      end;
+      TisGrid1.IsFiltered[Node] := Filtered;
+    end;
+    Node := TisGrid1.GetNext(Node);
+  end;
 end;
 
 procedure TFrmModuleSitesAndServices.TreeView1Change(Sender: TObject;

@@ -7,86 +7,8 @@ object FrmModuleADSI: TFrmModuleADSI
   ClientWidth = 800
   LCLVersion = '4.5.0.0'
   TabOrder = 0
-  DesignLeft = 534
-  DesignTop = 270
-  object TreeView1: TTreeView
-    Left = 0
-    Height = 349
-    Top = 28
-    Width = 195
-    Align = alLeft
-    Images = CoreDataModule.ImageList1
-    PopupMenu = PopupMenu1
-    ReadOnly = True
-    RightClickSelect = True
-    SortType = stText
-    TabOrder = 0
-    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
-    OnChange = TreeView1Change
-    OnClick = TreeView1Click
-    OnCreateNodeClass = TreeView1CreateNodeClass
-    OnExpanding = TreeView1Expanding
-    OnGetImageIndex = TreeView1GetImageIndex
-  end
-  object TisGrid1: TTisGrid
-    Left = 200
-    Height = 349
-    Top = 28
-    Width = 300
-    Align = alClient
-    Header.AutoSizeIndex = -1
-    Header.Columns = <    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus, coWrapCaption, coEditable]
-        Position = 0
-        Text = 'DistinguishedName'
-        Width = 200
-        PropertyName = 'distinguishedName'
-      end    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-        Position = 1
-        Tag = 1
-        Text = 'Name'
-        Width = 200
-        PropertyName = 'name'
-      end    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-        Position = 2
-        Tag = 2
-        Text = 'Type'
-        Width = 150
-        PropertyName = 'type'
-      end    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus, coWrapCaption, coEditable]
-        Position = 3
-        Tag = 3
-        Text = 'Description'
-        Width = 300
-        PropertyName = 'description'
-      end>
-    Header.DefaultHeight = 18
-    Header.Height = 28
-    Header.MaxHeight = 101
-    Header.MinHeight = 19
-    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
-    Header.Style = hsFlatButtons
-    Images = CoreDataModule.ImageList1
-    PopupMenu = PopupMenu1
-    TabOrder = 1
-    SelectedAndTotalLabel = Label1
-    TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toFullRowDrag]
-    TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
-    ZebraColor = 15593713
-    OnChange = TisGrid1Change
-    OnClick = TisGrid1Click
-    OnDblClick = TisGrid1DblClick
-    OnGetImageIndex = TisGrid1GetImageIndex
-    OnKeyPress = TisGrid1KeyPress
-    OnMouseDown = TisGrid1MouseDown
-  end
+  DesignLeft = 512
+  DesignTop = 244
   object Panel1: TPanel
     Left = 0
     Height = 23
@@ -97,7 +19,7 @@ object FrmModuleADSI: TFrmModuleADSI
     BevelOuter = bvNone
     ClientHeight = 23
     ClientWidth = 800
-    TabOrder = 2
+    TabOrder = 0
     object StatusBar1: TStatusBar
       Left = 0
       Height = 23
@@ -117,62 +39,10 @@ object FrmModuleADSI: TFrmModuleADSI
     end
   end
   object Splitter1: TSplitter
-    Left = 195
+    Left = 170
     Height = 349
     Top = 28
     Width = 5
-  end
-  object TisGrid2: TTisGrid
-    Left = 505
-    Height = 349
-    Top = 28
-    Width = 295
-    Align = alRight
-    Header.AutoSizeIndex = -1
-    Header.Columns = <    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-        Position = 0
-        Text = 'Attribute'
-        Width = 92
-        PropertyName = 'attribute'
-      end    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-        Position = 1
-        Text = 'Value'
-        Width = 149
-        PropertyName = 'value'
-      end    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-        Position = 2
-        Text = 'Type'
-        PropertyName = 'type'
-      end    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-        Position = 3
-        Text = 'Size'
-        PropertyName = 'size'
-      end>
-    Header.DefaultHeight = 18
-    Header.Height = 28
-    Header.MaxHeight = 101
-    Header.MinHeight = 19
-    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
-    Header.Style = hsFlatButtons
-    TabOrder = 4
-    ZebraColor = 15593713
-    OnKeyPress = TisGrid2KeyPress
-  end
-  object Splitter2: TSplitter
-    Left = 500
-    Height = 349
-    Top = 28
-    Width = 5
-    Align = alRight
-    ResizeAnchor = akRight
   end
   object Panel2: TPanel
     Left = 0
@@ -183,7 +53,7 @@ object FrmModuleADSI: TFrmModuleADSI
     AutoSize = True
     ClientHeight = 28
     ClientWidth = 800
-    TabOrder = 6
+    TabOrder = 2
     object ToolBar1: TToolBar
       Left = 1
       Height = 26
@@ -483,6 +353,194 @@ object FrmModuleADSI: TFrmModuleADSI
         FC354C0667CA94A9BF23F3BF054C993A81320DCE94A913A8FF01FBD9D709E188
         D2DA0000000049454E44AE426082
       }
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Height = 349
+    Top = 28
+    Width = 170
+    Align = alLeft
+    BevelOuter = bvNone
+    ClientHeight = 349
+    ClientWidth = 170
+    TabOrder = 3
+    object TreeView1: TTreeView
+      Left = 0
+      Height = 310
+      Top = 39
+      Width = 170
+      Align = alClient
+      Images = CoreDataModule.ImageList1
+      PopupMenu = PopupMenu1
+      ReadOnly = True
+      RightClickSelect = True
+      SortType = stText
+      TabOrder = 0
+      Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+      OnChange = TreeView1Change
+      OnClick = TreeView1Click
+      OnCreateNodeClass = TreeView1CreateNodeClass
+      OnExpanding = TreeView1Expanding
+      OnGetImageIndex = TreeView1GetImageIndex
+    end
+    object TisSearchEdit2: TTisSearchEdit
+      Left = 8
+      Height = 23
+      Top = 8
+      Width = 154
+      Align = alTop
+      BorderSpacing.Around = 8
+      ItemHeight = 15
+      TabOrder = 1
+      Buttons = <>
+      OnSearch = TisSearchEdit2Search
+    end
+  end
+  object Panel4: TPanel
+    Left = 175
+    Height = 349
+    Top = 28
+    Width = 625
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 349
+    ClientWidth = 625
+    TabOrder = 4
+    object Panel5: TPanel
+      Left = 0
+      Height = 39
+      Top = 0
+      Width = 625
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 39
+      ClientWidth = 625
+      TabOrder = 0
+      object TisSearchEdit1: TTisSearchEdit
+        Left = 8
+        Height = 23
+        Top = 8
+        Width = 200
+        Align = alLeft
+        BorderSpacing.Around = 8
+        ItemHeight = 15
+        TabOrder = 0
+        Buttons = <>
+        OnSearch = TisSearchEdit1Search
+      end
+    end
+    object TisGrid2: TTisGrid
+      Left = 330
+      Height = 310
+      Top = 39
+      Width = 295
+      Align = alRight
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Text = 'Attribute'
+          Width = 92
+          PropertyName = 'attribute'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 1
+          Text = 'Value'
+          Width = 149
+          PropertyName = 'value'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 2
+          Text = 'Type'
+          PropertyName = 'type'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 3
+          Text = 'Size'
+          PropertyName = 'size'
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MaxHeight = 101
+      Header.MinHeight = 19
+      Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.Style = hsFlatButtons
+      TabOrder = 1
+      ZebraColor = 15593713
+      OnKeyPress = TisGrid2KeyPress
+    end
+    object TisGrid1: TTisGrid
+      Left = 0
+      Height = 310
+      Top = 39
+      Width = 325
+      Align = alClient
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Text = 'DistinguishedName'
+          Width = 200
+          PropertyName = 'distinguishedName'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 1
+          Tag = 1
+          Text = 'Name'
+          Width = 200
+          PropertyName = 'name'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 2
+          Tag = 2
+          Text = 'Type'
+          Width = 150
+          PropertyName = 'type'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus, coWrapCaption, coEditable]
+          Position = 3
+          Tag = 3
+          Text = 'Description'
+          Width = 300
+          PropertyName = 'description'
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MaxHeight = 101
+      Header.MinHeight = 19
+      Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.Style = hsFlatButtons
+      Images = CoreDataModule.ImageList1
+      PopupMenu = PopupMenu1
+      TabOrder = 2
+      SelectedAndTotalLabel = Label1
+      TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toFullRowDrag]
+      TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+      ZebraColor = 15593713
+      OnChange = TisGrid1Change
+      OnClick = TisGrid1Click
+      OnDblClick = TisGrid1DblClick
+      OnGetImageIndex = TisGrid1GetImageIndex
+      OnKeyPress = TisGrid1KeyPress
+      OnMouseDown = TisGrid1MouseDown
+    end
+    object Splitter2: TSplitter
+      Left = 325
+      Height = 310
+      Top = 39
+      Width = 5
+      Align = alRight
+      ResizeAnchor = akRight
     end
   end
   object ActionList1: TActionList
