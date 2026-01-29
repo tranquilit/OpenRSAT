@@ -77,6 +77,7 @@ type
 implementation
 uses
   uvisconnectoptions,
+  uvisprofileconfiguration,
   ucommon,
   uconfig;
 
@@ -91,27 +92,36 @@ end;
 
 procedure TVisProfileManager.Action_AddExecute(Sender: TObject);
 var
-  ProfileEditor: TVisConnectOptions;
-  SectionName: RawUtf8;
-  Count: Integer;
+  VisProfileConfiguration: TVisProfileConfiguration;
+  //ProfileEditor: TVisConnectOptions;
+  //SectionName: RawUtf8;
+  //Count: Integer;
 begin
-  ProfileEditor := TVisConnectOptions.Create(Self);
+
+  VisProfileConfiguration := TVisProfileConfiguration.Create(Self, fLdapConfigs.LdapConnectionSettings);
   try
-    ProfileEditor.Settings := fLdapConfigs.LdapConnectionSettings;
-    if ProfileEditor.ShowModal <> mrOK then
-      Exit;
-    Count := 0;
-    SectionName := ProfileEditor.Edit_DomainController.Caption;
-    while fIniFile.SectionExists(SectionName) do
-    begin
-      Inc(Count);
-      SectionName := FormatUtf8('%_%', [ProfileEditor.Edit_DomainController.Caption, Count]);
-    end;
-    fLdapConfigs.SaveConfig(SectionName, fLdapConfigs.LdapConnectionSettings);
-    LoadProfiles();
+    VisProfileConfiguration.ShowModal;
   finally
-    FreeAndNil(ProfileEditor);
+    FreeAndNil(VisProfileConfiguration);
   end;
+
+  //ProfileEditor := TVisConnectOptions.Create(Self);
+  //try
+  //  ProfileEditor.Settings := fLdapConfigs.LdapConnectionSettings;
+  //  if ProfileEditor.ShowModal <> mrOK then
+  //    Exit;
+  //  Count := 0;
+  //  SectionName := ProfileEditor.Edit_DomainController.Caption;
+  //  while fIniFile.SectionExists(SectionName) do
+  //  begin
+  //    Inc(Count);
+  //    SectionName := FormatUtf8('%_%', [ProfileEditor.Edit_DomainController.Caption, Count]);
+  //  end;
+  //  fLdapConfigs.SaveConfig(SectionName, fLdapConfigs.LdapConnectionSettings);
+  //  LoadProfiles();
+  //finally
+  //  FreeAndNil(ProfileEditor);
+  //end;
 end;
 
 procedure TVisProfileManager.Action_DeleteExecute(Sender: TObject);

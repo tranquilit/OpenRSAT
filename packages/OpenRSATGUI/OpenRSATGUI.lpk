@@ -12,7 +12,7 @@
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Files Count="82">
+    <Files Count="83">
       <Item1>
         <Filename Value="ufrmmoduleaduc.pas"/>
         <UnitName Value="ufrmmoduleaduc"/>
@@ -341,6 +341,10 @@
         <Filename Value="uviseditaduccolumns.pas"/>
         <UnitName Value="uviseditaduccolumns"/>
       </Item82>
+      <Item83>
+        <Filename Value="uvisprofileconfiguration.pas"/>
+        <UnitName Value="uvisprofileconfiguration"/>
+      </Item83>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>
