@@ -116,6 +116,54 @@ type
     property OnError: TNotifyEvent read fOnError write SetOnError;
   end;
 
+function GetLdapErrorCustomMessage(LdapClient: TLdapClient): RawUtf8;
+
+const
+  LDAP_ERROR_CUSTOM_MESSAGE: Array[leOperationsError..leOther] of RawUtf8 = (
+    rsOperationsError,
+    rsProtocolError,
+    rsTimeLimitExceeded,
+    rsSizeLimitExceeded,
+    '',
+    '',
+    rsAuthMethodNotSupported,
+    rsStrongerAuthRequired,
+    rsReferral,
+    rsAdminLimitExceeded,
+    rsUnavailableCriticalExtension,
+    rsConfidentialityRequired,
+    rsSaslBindInProgress,
+    rsNoSuchAttribute,
+    rsUndefinedAttributeType,
+    rsInappropriateMatching,
+    rsConstraintViolation,
+    rsAttributeOrValueExists,
+    rsInvalidAttributeSyntax,
+    rsNoSuchObject,
+    rsAliasProblem,
+    rsInvalidDNSyntax,
+    '',
+    rsAliasDereferencingProblem,
+    rsInappropriateAuthentication,
+    rsInvalidCredentials,
+    rsInsufficientAccessRights,
+    rsBusy,
+    rsUnavailable,
+    rsUnwillingToPerform,
+    rsLoopDetect,
+    '',
+    '',
+    rsNamingViolation,
+    rsObjectClassViolation,
+    rsNotAllowedOnNonLeaf,
+    rsNotAllowedOnRDN,
+    rsEntryAlreadyExists,
+    rsObjectModsProhibited,
+    '',
+    rsAffectMultipleDSAs,
+    '',
+    rsOther);
+
 implementation
 
 uses
@@ -123,6 +171,16 @@ uses
   mormot.core.text,
   mormot.core.rtti;
 
+function GetLdapErrorCustomMessage(LdapClient: TLdapClient): RawUtf8;
+begin
+  result := '';
+
+  if (LdapClient.ResultError >= Low(LDAP_ERROR_CUSTOM_MESSAGE)) and (LdapClient.ResultError <= High(LDAP_ERROR_CUSTOM_MESSAGE)) then
+    result := LDAP_ERROR_CUSTOM_MESSAGE[LdapClient.ResultError];
+
+  if (result = '') then
+    result := LdapClient.ResultString;
+end;
 
 function AceIsUseless(Ace: PSecAce): Boolean;
 begin

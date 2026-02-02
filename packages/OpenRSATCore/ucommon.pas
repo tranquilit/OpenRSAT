@@ -62,12 +62,18 @@ resourcestring
 
   rsLdapSuccess = 'Ldap Success';
   rsLdapError = 'Ldap Error';
+  rsLdapWarning = 'Ldap Warning';
+
   rsLdapFailed = 'Ldap failed: "%"';
   rsLdapAddFailed = 'Ldap add failed: "%"';
   rsLdapDeleteFailed = 'Ldap delete failed: "%"';
   rsLdapConnectFailed = 'Ldap connect failed: "%"';
   rsLdapSearchFailed = 'Ldap search failed: "%"';
   rsLdapModifyFailed = 'Ldap modify failed: "%"';
+  rsLdapMissingTLS = 'You try to connect to a Domain Controller without TLS connection. It is highly recommanded to enable TLS with a simple connection.';
+  rsLdapTLSInvalidCert = 'TLS connection is enabled, but the certificate is not recognized. Be carefull.';
+  rsLdapSuccessConnMessage = 'Connection to domain "%" with domain controller "%" on port "%" can be established.';
+  rsLdapSuccessAuthMessage = 'Authentication with user "%" has succeeded.';
 
   rsSecurityDescriptorInvalid = 'Fail to read security descriptor';
 
@@ -78,7 +84,7 @@ resourcestring
   rsSizeLimitExceeded = 'The result retrieved more objects than the server allowed.'; // leSizeLimitExceeded (4)
   rsAuthMethodNotSupported = 'The server does not allow this kind of auth method.'; // leAuthMethodNotSupported (7)
   rsStrongerAuthRequired = 'The server requires the client to authenticate with a stronger authentication.'; // leStrongerAuthRequired (8)
-  rsReferral = 'This should not be an error. Client should follow referral. Please try the action on a different server.'; // leReferral (9)
+  rsReferral = 'This should not be an error. Client should follow referral. Please try the action on a different server.'; // leReferral (10)
   rsAdminLimitExceeded = '';
   rsUnavailableCriticalExtension = '';
   rsConfidentialityRequired = 'The server do not allow your operation, cause your connection is not secured enought.'; // leConfidentialityRequired (13)
@@ -87,7 +93,28 @@ resourcestring
   rsUndefinedAttributeType = 'The targeted attribute does not exist in the server schema.'; // leUndefinedAttributeType (17)
   rsInappropriateMatching = 'The matching condition is not supported for this attributeType.'; // leInappropriateMatching (18)
   rsConstraintViolation = 'The requests violates some constraint defined within the server.'; // leConstraintViolation (19)
-  rsInsufficientAccessRights = 'Insufficient rights access.';
+  rsAttributeOrValueExists = 'Attribute or Value already exists.'; // leAttributeOrValueExists (20)
+  rsInvalidAttributeSyntax = 'Attribute already has a value with a different syntax.'; // leInvalidAttributeSyntax (21)
+  rsNoSuchObject = 'The targeted entry does not exists.'; // leNoSuchObject (32)
+  rsAliasProblem = 'A problem occured while attempting to dereference an alias during search processing.'; // leAliasProblem (33)
+  rsInvalidDNSyntax = 'The request included a malformed entry DN.'; //leInvalidDNSyntax (34)
+  rsAliasDereferencingProblem = 'The server encountered an alias while processing the request and that there was some problem related to that alias.'; // leAliasDereferencingProblem (36)
+  rsInappropriateAuthentication = 'The client attempted to bind in an inappropriate manner that is inappropriate for the target account.'; // leInappropriateAuthentication (48)
+  rsInvalidCredentials = 'The client attempted to bind with a set of credentials that cannot be used to authenticate. Verify your username and password.'; // leInvalidCredentials (49)
+  rsInsufficientAccessRights = 'The client requested an operation for which it does not have the necessary access control permissions.'; // leInsufficientAccessRights (50)
+  rsBusy = ''; // leBusy (51)
+  rsUnavailable = ''; // leUnavailable (52)
+  rsUnwillingToPerform = 'The server is not willing to process the requested operation for some reason. This is a fairly generic result code that may be used if the server refuses to process an operation for a reason that is not covered by a more specific result code.'; // leUnwillingToPerform (53)
+  rsLoopDetect = 'The server detected some kind of circular reference in the course of processing an operation.'; // leLoopDetect (54)
+  rsNamingViolation = 'The requested add or modify DN operation would have resulted in an entry that violates some naming constraint within the server.'; // leNamingViolation (64)
+  rsObjectClassViolation = 'The requested operation would have resulted in an entry that has an inappropriate set of object classes, or whose attributes violate the constraints associated with its set of object classes.'; // leObjectClassViolation (65)
+  rsNotAllowedOnNonLeaf = 'The requested operation is only supported for leaf entries, but the targeted entry has one or more subordinates.'; // leNotAllowedOnNonLeaf (66)
+  rsNotAllowedOnRDN = 'The requested modify operation would have resulted in an entry that does not include all of the attributes used in its RDN.'; // leNotAllowedOnRDN (67)
+  rsEntryAlreadyExists = 'The requested operation would have resulted in an entry with the same DN as an entry that already exists in the server.'; // leEntryAlreadyExists (68)
+  rsObjectModsProhibited = ''; // leObjectClassModsProhibited (69)
+  rsAffectMultipleDSAs = ''; // leAffectsMultipleDSAs (71)
+  rsOther = ''; // leOther (80)
+
 
   rsACEpaadParent = 'A Deny Delete-Tree right will be added to the ACL of the parent of this object. Do you wish to continue?';
 
