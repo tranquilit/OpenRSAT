@@ -108,10 +108,10 @@ begin
   SetLength(fItems, c + 1);
 
   fItems[c] := TVisProperties.Create(FrmRSAT, ADistinguishedName);
+  result := fItems[c];
   fItems[c].Caption := AName;
   if Assigned(fItems[c].Owner) then
     fItems[c].Show();
-  result := fItems[c];
 end;
 
 function TVisPropertiesList.Close(aForm: TVisProperties): boolean;
