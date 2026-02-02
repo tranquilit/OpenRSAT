@@ -18,7 +18,7 @@ uses
   ufrmrsatoptions, uvisselectnewrecordtype, uvisnewresourcerecord, 
   uvisnewzonewizard, ufrmmodulesitesandservices, ufrmmoduleserviceinterfaces, 
   ufrmnewobject, ufrmnewsite, ufrmnewsubnet, uaductreeview, 
-  ufrmmoduleadssoptions, uvisconnectiondetails, uvispropertieslist, uproperty, 
+  ufrmmoduleadssoptions, uvispropertieslist, uproperty, 
   uvischangedomaincontroller, uvisoperationmasters, upropertyframe, 
   ufrmpropertyobject, ufrmpropertymanagedby, ufrmpropertyaddress, 
   ufrmpropertymemberof, ufrmpropertygeneraldefault, ufrmpropertygeneraluser, 
@@ -31,7 +31,7 @@ uses
   ufrmpropertyattributes, uhelpersui, ucommonui, ursatldapclientui, 
   ufrmoption, ufrmmodule, ufrmmoduleaducoption, ufrmrsat, ufrmmodules, 
   uvismodifygplink, uvisprofilemanager, uviseditaduccolumns, 
-  uvisprofileconfiguration, LazarusPackageIntf;
+  uvisprofileconfiguration, uvisrootdseinfos, LazarusPackageIntf;
 
 implementation
 

@@ -24,11 +24,13 @@ type
   { TVisProfileConfiguration }
 
   TVisProfileConfiguration = class(TForm)
+    Action_ShowDCInfos: TAction;
     Action_TestConnection: TAction;
     Action_TestAuthentication: TAction;
     Action_SearchDomains: TAction;
     Action_SearchDomainControllers: TAction;
     ActionList1: TActionList;
+    BitBtn_DCInfos: TBitBtn;
     BitBtn_SearchDomains: TBitBtn;
     BitBtn_SearchDomainController: TBitBtn;
     BitBtn_TestConnection: TBitBtn;
@@ -76,6 +78,7 @@ type
     RadioButton_Kerberos: TRadioButton;
     procedure Action_SearchDomainControllersExecute(Sender: TObject);
     procedure Action_SearchDomainsExecute(Sender: TObject);
+    procedure Action_ShowDCInfosExecute(Sender: TObject);
     procedure Action_TestAuthenticationExecute(Sender: TObject);
     procedure Action_TestConnectionExecute(Sender: TObject);
     procedure CheckBox_CurrentUsernameChange(Sender: TObject);
@@ -109,6 +112,7 @@ uses
   mormot.net.sock,
   mormot.crypt.secure,
   ucommon,
+  uvisrootdseinfos,
   ursatldapclient,
   ursatldapclientui;
 
@@ -187,6 +191,18 @@ begin
   finally
     ComboBox_Domains.Items.EndUpdate;
     Screen.Cursor := crDefault;
+  end;
+end;
+
+procedure TVisProfileConfiguration.Action_ShowDCInfosExecute(Sender: TObject);
+var
+  VisRootDSEInfos: TVisRootDSEInfos;
+begin
+  VisRootDSEInfos := TVisRootDSEInfos.Create(Self, fSettings);
+  try
+    VisRootDSEInfos.ShowModal;
+  finally
+    FreeAndNil(VisRootDSEInfos);
   end;
 end;
 

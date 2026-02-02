@@ -22,5 +22,6 @@
 {"hash":49013155,"name":"tvisprofileconfiguration.action_searchdomains.hint","sourcebytes":[83,101,97,114,99,104,32,100,111,109,97,105,110,115],"value":"Search domains"},
 {"hash":137090867,"name":"tvisprofileconfiguration.action_searchdomaincontrollers.hint","sourcebytes":[83,101,97,114,99,104,32,100,111,109,97,105,110,32,99,111,110,116,114,111,108,108,101,114,115],"value":"Search domain controllers"},
 {"hash":249450702,"name":"tvisprofileconfiguration.action_testconnection.caption","sourcebytes":[84,101,115,116,32,67,111,110,110,101,99,116,105,111,110],"value":"Test Connection"},
-{"hash":167530286,"name":"tvisprofileconfiguration.action_testauthentication.caption","sourcebytes":[84,101,115,116,32,65,117,116,104,101,110,116,105,99,97,116,105,111,110],"value":"Test Authentication"}
+{"hash":167530286,"name":"tvisprofileconfiguration.action_testauthentication.caption","sourcebytes":[84,101,115,116,32,65,117,116,104,101,110,116,105,99,97,116,105,111,110],"value":"Test Authentication"},
+{"hash":211474867,"name":"tvisprofileconfiguration.action_showdcinfos.caption","sourcebytes":[83,104,111,119,32,68,67,32,105,110,102,111,115],"value":"Show DC infos"}
 ]}

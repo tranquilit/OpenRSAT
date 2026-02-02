@@ -84,11 +84,10 @@ object VisProfileConfiguration: TVisProfileConfiguration
     object BitBtn_TestConnection: TBitBtn
       AnchorSideRight.Control = GroupBox_Domain
       AnchorSideRight.Side = asrBottom
-      AnchorSideBottom.Control = GroupBox_Domain
-      AnchorSideBottom.Side = asrBottom
+      AnchorSideBottom.Control = BitBtn_DCInfos
       Left = 260
       Height = 25
-      Top = 118
+      Top = 85
       Width = 112
       Action = Action_TestConnection
       Anchors = [akRight, akBottom]
@@ -206,6 +205,21 @@ object VisProfileConfiguration: TVisProfileConfiguration
       Width = 18
       BorderSpacing.Around = 8
       TabOrder = 7
+    end
+    object BitBtn_DCInfos: TBitBtn
+      AnchorSideRight.Control = GroupBox_Domain
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = GroupBox_Domain
+      AnchorSideBottom.Side = asrBottom
+      Left = 269
+      Height = 25
+      Top = 118
+      Width = 103
+      Action = Action_ShowDCInfos
+      Anchors = [akRight, akBottom]
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 8
     end
   end
   object GroupBox_AuthMethods: TGroupBox
@@ -630,7 +644,6 @@ object VisProfileConfiguration: TVisProfileConfiguration
     ShowButtons = [pbOK, pbCancel]
   end
   object ActionList1: TActionList
-    Images = CoreDataModule.ImageList1
     Left = 216
     Top = 104
     object Action_SearchDomains: TAction
@@ -650,6 +663,10 @@ object VisProfileConfiguration: TVisProfileConfiguration
     object Action_TestAuthentication: TAction
       Caption = 'Test Authentication'
       OnExecute = Action_TestAuthenticationExecute
+    end
+    object Action_ShowDCInfos: TAction
+      Caption = 'Show DC infos'
+      OnExecute = Action_ShowDCInfosExecute
     end
   end
 end

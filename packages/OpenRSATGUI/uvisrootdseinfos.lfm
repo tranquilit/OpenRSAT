@@ -1,0 +1,148 @@
+object VisRootDSEInfos: TVisRootDSEInfos
+  Left = 545
+  Height = 399
+  Top = 175
+  Width = 629
+  Caption = 'DC infos'
+  ClientHeight = 399
+  ClientWidth = 629
+  Position = poOwnerFormCenter
+  LCLVersion = '4.5.0.0'
+  OnShow = FormShow
+  object Panel1: TPanel
+    Left = 8
+    Height = 54
+    Top = 8
+    Width = 613
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 54
+    ClientWidth = 613
+    TabOrder = 0
+    object Label_Domain: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Edit_Domain
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 4
+      Width = 150
+      BorderSpacing.Right = 8
+      Caption = 'Domain'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
+    end
+    object Label_DomainController: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Edit_DomainController
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 35
+      Width = 150
+      BorderSpacing.Right = 8
+      Caption = 'Domain Controller'
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
+    end
+    object Edit_Domain: TEdit
+      AnchorSideLeft.Control = Label_Domain
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 158
+      Height = 23
+      Top = 0
+      Width = 455
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Bottom = 8
+      TabOrder = 0
+    end
+    object Edit_DomainController: TEdit
+      AnchorSideLeft.Control = Label_DomainController
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Edit_Domain
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 158
+      Height = 23
+      Top = 31
+      Width = 455
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 1
+    end
+  end
+  object Panel3: TPanel
+    Left = 8
+    Height = 321
+    Top = 70
+    Width = 613
+    Align = alClient
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 321
+    ClientWidth = 613
+    TabOrder = 1
+    object Panel4: TPanel
+      Left = 0
+      Height = 15
+      Top = 8
+      Width = 613
+      Align = alTop
+      AutoSize = True
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      BevelOuter = bvNone
+      ClientHeight = 15
+      ClientWidth = 613
+      TabOrder = 0
+      object Label1: TLabel
+        AnchorSideLeft.Control = Panel4
+        AnchorSideLeft.Side = asrCenter
+        AnchorSideTop.Control = Panel4
+        Left = 169
+        Height = 15
+        Top = 0
+        Width = 275
+        Caption = 'Server informations (available from RootDSE Object)'
+      end
+    end
+    object TisGrid1: TTisGrid
+      Left = 0
+      Height = 290
+      Top = 31
+      Width = 613
+      Align = alClient
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Text = 'Name'
+          Width = 140
+          PropertyName = 'name'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 1
+          Text = 'Value'
+          Width = 214
+          PropertyName = 'value'
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MaxHeight = 101
+      Header.MinHeight = 19
+      Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.Style = hsFlatButtons
+      TabOrder = 1
+      ZebraColor = 15593713
+    end
+  end
+end

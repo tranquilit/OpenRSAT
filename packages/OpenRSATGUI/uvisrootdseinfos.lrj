@@ -1,0 +1,8 @@
+{"version":1,"strings":[
+{"hash":91245027,"name":"tvisrootdseinfos.caption","sourcebytes":[68,67,32,105,110,102,111,115],"value":"DC infos"},
+{"hash":79050750,"name":"tvisrootdseinfos.label_domain.caption","sourcebytes":[68,111,109,97,105,110],"value":"Domain"},
+{"hash":199636242,"name":"tvisrootdseinfos.label_domaincontroller.caption","sourcebytes":[68,111,109,97,105,110,32,67,111,110,116,114,111,108,108,101,114],"value":"Domain Controller"},
+{"hash":156788553,"name":"tvisrootdseinfos.label1.caption","sourcebytes":[83,101,114,118,101,114,32,105,110,102,111,114,109,97,116,105,111,110,115,32,40,97,118,97,105,108,97,98,108,101,32,102,114,111,109,32,82,111,111,116,68,83,69,32,79,98,106,101,99,116,41],"value":"Server informations (available from RootDSE Object)"},
+{"hash":346165,"name":"tvisrootdseinfos.tisgrid1.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
+{"hash":6063029,"name":"tvisrootdseinfos.tisgrid1.header.columns[1].text","sourcebytes":[86,97,108,117,101],"value":"Value"}
+]}
