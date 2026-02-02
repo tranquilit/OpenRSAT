@@ -76,7 +76,7 @@ uses
   tisinifiles,
   uDarkStyleParams,
   uvisprofilemanager,
-  uvisconnectoptions,
+  uvisprofileconfiguration,
   ucoredatamodule,
   utranslation,
   ucommonui,
@@ -191,19 +191,24 @@ procedure TFormConnectConfigs.CreateDefaultConfig;
 const
   DEFAULT_NAME = 'default';
 var
-  connectOptions: TVisConnectOptions;
+  ASettings: TMLdapClientSettings;
+  ProfileConfiguration: TVisProfileConfiguration;
 begin
   TisSearchEdit_Profile.Items.Add(DEFAULT_NAME);
   TisSearchEdit_Profile.ItemIndex := TisSearchEdit_Profile.Items.IndexOf(DEFAULT_NAME);
 
-  connectOptions := TVisConnectOptions.Create(Self);
+  ASettings := TMLdapClientSettings.Create();
   try
-    connectOptions.Settings := fLdapConfigs.LdapConnectionSettings;
-    if (connectOptions.ShowModal <> mrOK) then
-      Exit;
-    fLdapConfigs.SaveConfig(DEFAULT_NAME);
+    ProfileConfiguration := TVisProfileConfiguration.Create(Self, ASettings);
+    try
+      if (ProfileConfiguration.ShowModal <> mrOK) then
+        Exit;
+    finally
+      FreeAndNil(ProfileConfiguration);
+    end;
+    fLdapConfigs.SaveConfig(DEFAULT_NAME, ASettings);
   finally
-    FreeAndNil(connectOptions);
+    FreeAndNil(ASettings);
   end;
 end;
 

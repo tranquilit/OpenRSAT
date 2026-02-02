@@ -81,7 +81,6 @@ type
 
 implementation
 uses
-  uvisconnectoptions,
   uvisprofileconfiguration,
   ucommon,
   uconfig;

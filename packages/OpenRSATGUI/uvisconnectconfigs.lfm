@@ -111,7 +111,7 @@ object FormConnectConfigs: TFormConnectConfigs
         Left = 116
         Height = 23
         Top = 8
-        Width = 130
+        Width = 150
         Anchors = [akTop, akLeft, akRight]
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
@@ -233,15 +233,14 @@ object FormConnectConfigs: TFormConnectConfigs
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = Panel_Profile
         AnchorSideRight.Side = asrBottom
-        Left = 254
-        Height = 26
-        Top = 6
-        Width = 46
+        Left = 274
+        Height = 10
+        Top = 14
+        Width = 26
         Action = Action_ProfileManager
         Anchors = [akTop, akRight]
         AutoSize = True
         BorderSpacing.Around = 8
-        Images = CoreDataModule.ImageList1
         ImageIndex = 54
         TabOrder = 5
       end
@@ -1140,7 +1139,6 @@ object FormConnectConfigs: TFormConnectConfigs
     end
   end
   object ActionList1: TActionList
-    Images = CoreDataModule.ImageList1
     Left = 48
     Top = 40
     object Action_ProfileManager: TAction
