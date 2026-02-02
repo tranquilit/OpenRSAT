@@ -1,0 +1,18 @@
+{"version":1,"strings":[
+{"hash":5073153,"name":"tform1.caption","sourcebytes":[70,111,114,109,49],"value":"Form1"},
+{"hash":22713,"name":"tform1.groupbox1.caption","sourcebytes":[81,117,105],"value":"Qui"},
+{"hash":77930234,"name":"tform1.label1.caption","sourcebytes":[80,114,105,110,99,105,112,97,108,58],"value":"Principal:"},
+{"hash":139283182,"name":"tform1.bitbtn1.caption","sourcebytes":[67,104,97,110,103,101,46,46,46],"value":"Change..."},
+{"hash":363609,"name":"tform1.groupbox2.caption","sourcebytes":[81,117,111,105],"value":"Quoi"},
+{"hash":4731751,"name":"tform1.radiobutton1.caption","sourcebytes":[65,108,108,111,119],"value":"Allow"},
+{"hash":306265,"name":"tform1.radiobutton2.caption","sourcebytes":[68,101,110,121],"value":"Deny"},
+{"hash":16731411,"name":"tform1.checkgroup1.caption","sourcebytes":[80,101,114,109,105,115,115,105,111,110,115],"value":"Permissions"},
+{"hash":107793498,"name":"tform1.label2.caption","sourcebytes":[80,114,111,112,101,114,116,121,58],"value":"Property:"},
+{"hash":139283182,"name":"tform1.bitbtn2.caption","sourcebytes":[67,104,97,110,103,101,46,46,46],"value":"Change..."},
+{"hash":9499445,"name":"tform1.groupbox3.caption","sourcebytes":[72,195,169,114,105,116,97,103,101],"value":"H\u00E9ritage"},
+{"hash":253197449,"name":"tform1.radiobutton3.caption","sourcebytes":[84,104,105,115,32,111,98,106,101,99,116,32,111,110,108,121],"value":"This object only"},
+{"hash":219796404,"name":"tform1.radiobutton4.caption","sourcebytes":[84,104,105,115,32,111,98,106,101,99,116,32,97,110,100,32,97,108,108,32,100,101,115,99,101,110,100,97,110,116],"value":"This object and all descendant"},
+{"hash":190976068,"name":"tform1.radiobutton5.caption","sourcebytes":[65,108,108,32,100,101,115,99,101,110,100,97,110,116],"value":"All descendant"},
+{"hash":201379050,"name":"tform1.radiobutton6.caption","sourcebytes":[68,101,115,99,101,110,100,97,110,116,58],"value":"Descendant:"},
+{"hash":139283182,"name":"tform1.bitbtn3.caption","sourcebytes":[67,104,97,110,103,101,46,46,46],"value":"Change..."}
+]}
