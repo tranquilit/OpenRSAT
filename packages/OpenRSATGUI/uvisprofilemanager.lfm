@@ -81,6 +81,7 @@ object VisProfileManager: TVisProfileManager
     SmallImages = CoreDataModule.ImageList1
     TabOrder = 1
     ViewStyle = vsIcon
+    OnChange = ListView1Change
     OnEdited = ListView1Edited
     OnResize = ListView1Resize
   end

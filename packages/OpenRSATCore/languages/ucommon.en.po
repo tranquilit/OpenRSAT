@@ -68,6 +68,14 @@ msgstr ""
 "Validated Write (SW)\n"
 "Control Access (CR)"
 
+#: ucommon.rsaliasdereferencingproblem
+msgid "The server encountered an alias while processing the request and that there was some problem related to that alias."
+msgstr "The server encountered an alias while processing the request and that there was some problem related to that alias."
+
+#: ucommon.rsaliasproblem
+msgid "A problem occured while attempting to dereference an alias during search processing."
+msgstr "A problem occured while attempting to dereference an alias during search processing."
+
 #: ucommon.rsallow
 msgid "Allow"
 msgstr "Allow"
@@ -79,6 +87,10 @@ msgstr "% and %"
 #: ucommon.rsanonymousconnection
 msgid "Anonymous Connection"
 msgstr "Anonymous Connection"
+
+#: ucommon.rsattributeorvalueexists
+msgid "Attribute or Value already exists."
+msgstr "Attribute or Value already exists."
 
 #: ucommon.rsauthmethodnotsupported
 msgid "The server does not allow this kind of auth method."
@@ -309,6 +321,10 @@ msgstr "Secure"
 msgid "Unsecure"
 msgstr "Unsecure"
 
+#: ucommon.rsentryalreadyexists
+msgid "The requested operation would have resulted in an entry with the same DN as an entry that already exists in the server."
+msgstr "The requested operation would have resulted in an entry with the same DN as an entry that already exists in the server."
+
 #: ucommon.rserror
 msgid "Error"
 msgstr "Error"
@@ -338,13 +354,30 @@ msgstr "Confirm the deletion of the %d selected rows?"
 msgid "Delete selected rows"
 msgstr "Delete selected rows"
 
+#: ucommon.rsinappropriateauthentication
+msgid "The client attempted to bind in an inappropriate manner that is inappropriate for the target account."
+msgstr "The client attempted to bind in an inappropriate manner that is inappropriate for the target account."
+
 #: ucommon.rsinappropriatematching
 msgid "The matching condition is not supported for this attributeType."
 msgstr "The matching condition is not supported for this attributeType."
 
 #: ucommon.rsinsufficientaccessrights
-msgid "Insufficient rights access."
+#| msgid "Insufficient rights access."
+msgid "The client requested an operation for which it does not have the necessary access control permissions."
 msgstr "Insufficient rights access."
+
+#: ucommon.rsinvalidattributesyntax
+msgid "Attribute already has a value with a different syntax."
+msgstr "Attribute already has a value with a different syntax."
+
+#: ucommon.rsinvalidcredentials
+msgid "The client attempted to bind with a set of credentials that cannot be used to authenticate. Verify your username and password."
+msgstr "The client attempted to bind with a set of credentials that cannot be used to authenticate. Verify your username and password."
+
+#: ucommon.rsinvaliddnsyntax
+msgid "The request included a malformed entry DN."
+msgstr "The request included a malformed entry DN."
 
 #: ucommon.rsinvalidipformat
 msgid "Invalid IP format"
@@ -370,6 +403,10 @@ msgstr "Ldap Error"
 msgid "Ldap failed: \"%\""
 msgstr "Ldap failed: \"%\""
 
+#: ucommon.rsldapmissingtls
+msgid "You try to connect to a Domain Controller without TLS connection. It is highly recommanded to enable TLS with a simple connection."
+msgstr "You try to connect to a Domain Controller without TLS connection. It is highly recommanded to enable TLS with a simple connection."
+
 #: ucommon.rsldapmodifyfailed
 msgid "Ldap modify failed: \"%\""
 msgstr "Ldap modify failed: \"%\""
@@ -389,6 +426,26 @@ msgstr "Ldap search failed: \"%\""
 #: ucommon.rsldapsuccess
 msgid "Ldap Success"
 msgstr "Ldap Success"
+
+#: ucommon.rsldapsuccessauthmessage
+msgid "Authentication with user \"%\" has succeeded."
+msgstr "Authentication with user \"%\" has succeeded."
+
+#: ucommon.rsldapsuccessconnmessage
+msgid "Connection to domain \"%\" with domain controller \"%\" on port \"%\" can be established."
+msgstr "Connection to domain \"%\" with domain controller \"%\" on port \"%\" can be established."
+
+#: ucommon.rsldaptlsinvalidcert
+msgid "TLS connection is enabled, but the certificate is not recognized. Be carefull."
+msgstr "TLS connection is enabled, but the certificate is not recognized. Be carefull."
+
+#: ucommon.rsldapwarning
+msgid "Ldap Warning"
+msgstr "Ldap Warning"
+
+#: ucommon.rsloopdetect
+msgid "The server detected some kind of circular reference in the course of processing an operation."
+msgstr "The server detected some kind of circular reference in the course of processing an operation."
 
 #: ucommon.rsmoduleadsidisplayname
 msgid "Services and Interfaces"
@@ -433,6 +490,10 @@ msgstr "Multi-valued String Editor"
 #: ucommon.rsmultitimeeditor
 msgid "Multi-valued Time Editor"
 msgstr "Multi-valued Time Editor"
+
+#: ucommon.rsnamingviolation
+msgid "The requested add or modify DN operation would have resulted in an entry that violates some naming constraint within the server."
+msgstr "The requested add or modify DN operation would have resulted in an entry that violates some naming constraint within the server."
 
 #: ucommon.rsnewconfirmpassdifferent
 msgid "The New and Confirm passwords must match. Please re-type them."
@@ -509,6 +570,22 @@ msgstr "The Password never expires."
 #: ucommon.rsnosuchattribute
 msgid "The targeted attribute does not exist in the specified entry."
 msgstr "The targeted attribute does not exist in the specified entry."
+
+#: ucommon.rsnosuchobject
+msgid "The targeted entry does not exists."
+msgstr "The targeted entry does not exists."
+
+#: ucommon.rsnotallowedonnonleaf
+msgid "The requested operation is only supported for leaf entries, but the targeted entry has one or more subordinates."
+msgstr "The requested operation is only supported for leaf entries, but the targeted entry has one or more subordinates."
+
+#: ucommon.rsnotallowedonrdn
+msgid "The requested modify operation would have resulted in an entry that does not include all of the attributes used in its RDN."
+msgstr "The requested modify operation would have resulted in an entry that does not include all of the attributes used in its RDN."
+
+#: ucommon.rsobjectclassviolation
+msgid "The requested operation would have resulted in an entry that has an inappropriate set of object classes, or whose attributes violate the constraints associated with its set of object classes."
+msgstr "The requested operation would have resulted in an entry that has an inappropriate set of object classes, or whose attributes violate the constraints associated with its set of object classes."
 
 #: ucommon.rsoperationserror
 msgid "Operation occurs in a wrong order."
@@ -778,6 +855,10 @@ msgid ""
 msgstr ""
 "There are unsaved changes.\n"
 "Are you sure you want to quit?"
+
+#: ucommon.rsunwillingtoperform
+msgid "The server is not willing to process the requested operation for some reason. This is a fairly generic result code that may be used if the server refuses to process an operation for a reason that is not covered by a more specific result code."
+msgstr "The server is not willing to process the requested operation for some reason. This is a fairly generic result code that may be used if the server refuses to process an operation for a reason that is not covered by a more specific result code."
 
 #: ucommon.rsusecurrentcreds
 msgid "Current user credentials"

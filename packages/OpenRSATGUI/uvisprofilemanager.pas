@@ -53,6 +53,8 @@ type
     procedure Action_EditExecute(Sender: TObject);
     procedure Action_EditUpdate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure ListView1Change(Sender: TObject; Item: TListItem;
+      Change: TItemChange);
     procedure ListView1Edited(Sender: TObject; Item: TListItem;
       var AValue: string);
     procedure ListView1Resize(Sender: TObject);
@@ -64,6 +66,8 @@ type
     fIniFile: TIniFile;
     fLdapConfigs: TLdapConfigs;
     fSelected: RawUtf8;
+
+    function NewDefaultConfig: TMLdapClientSettings;
   public
     constructor Create(TheOwner: TComponent; ALdapConfigs: TLdapConfigs; Selected: RawUtf8 = '');
       reintroduce;
@@ -77,6 +81,7 @@ type
 implementation
 uses
   uvisconnectoptions,
+  uvisprofileconfiguration,
   ucommon,
   uconfig;
 
@@ -89,28 +94,41 @@ begin
   SwitchListView(vsReport);
 end;
 
+function TVisProfileManager.NewDefaultConfig: TMLdapClientSettings;
+begin
+  result := TMLdapClientSettings.Create();
+end;
+
 procedure TVisProfileManager.Action_AddExecute(Sender: TObject);
 var
-  ProfileEditor: TVisConnectOptions;
-  SectionName: RawUtf8;
+  VisProfileConfiguration: TVisProfileConfiguration;
+  DefaultConfig: TMLdapClientSettings;
+  SectionName, DomainController: RawUtf8;
   Count: Integer;
 begin
-  ProfileEditor := TVisConnectOptions.Create(Self);
+  DefaultConfig := NewDefaultConfig;
   try
-    ProfileEditor.Settings := fLdapConfigs.LdapConnectionSettings;
-    if ProfileEditor.ShowModal <> mrOK then
-      Exit;
+    VisProfileConfiguration := TVisProfileConfiguration.Create(Self, DefaultConfig);
+    try
+      if VisProfileConfiguration.ShowModal <> mrOK then
+        Exit;
+      DomainController := VisProfileConfiguration.ComboBox_DomainControllers.Caption;
+    finally
+      FreeAndNil(VisProfileConfiguration);
+    end;
+
+    SectionName := DomainController;
     Count := 0;
-    SectionName := ProfileEditor.Edit_DomainController.Caption;
     while fIniFile.SectionExists(SectionName) do
     begin
       Inc(Count);
-      SectionName := FormatUtf8('%_%', [ProfileEditor.Edit_DomainController.Caption, Count]);
+      SectionName := FormatUtf8('%_%', [DomainController, Count]);
     end;
-    fLdapConfigs.SaveConfig(SectionName, fLdapConfigs.LdapConnectionSettings);
+    fSelected := SectionName;
+    fLdapConfigs.SaveConfig(SectionName, DefaultConfig);
     LoadProfiles();
   finally
-    FreeAndNil(ProfileEditor);
+    FreeAndNil(DefaultConfig);
   end;
 end;
 
@@ -133,18 +151,17 @@ end;
 
 procedure TVisProfileManager.Action_EditExecute(Sender: TObject);
 var
-  ProfileEditor: TVisConnectOptions;
+  VisProfileConfiguration: TVisProfileConfiguration;
 begin
-  ProfileEditor := TVisConnectOptions.Create(Self);
+  fLdapConfigs.LoadConfig(ListView1.Selected.Caption);
+  VisProfileConfiguration := TVisProfileConfiguration.Create(Self, fLdapConfigs.LdapConnectionSettings);
   try
-    fLdapConfigs.LoadConfig(ListView1.Selected.Caption);
-    ProfileEditor.Settings := fLdapConfigs.LdapConnectionSettings;
-    if ProfileEditor.ShowModal <> mrOK then
+    if VisProfileConfiguration.ShowModal <> mrOK then
       Exit;
     fLdapConfigs.SaveConfig(ListView1.Selected.Caption, fLdapConfigs.LdapConnectionSettings);
     LoadProfiles;
   finally
-    FreeAndNil(ProfileEditor);
+    FreeAndNil(VisProfileConfiguration);
   end;
 end;
 
@@ -156,6 +173,12 @@ end;
 procedure TVisProfileManager.FormShow(Sender: TObject);
 begin
   SwitchListView(ListView1.ViewStyle);
+end;
+
+procedure TVisProfileManager.ListView1Change(Sender: TObject; Item: TListItem;
+  Change: TItemChange);
+begin
+  fSelected := Item.Caption;
 end;
 
 procedure TVisProfileManager.ListView1Edited(Sender: TObject; Item: TListItem;
