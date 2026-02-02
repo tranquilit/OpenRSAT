@@ -82,6 +82,7 @@ object VisProfileManager: TVisProfileManager
     TabOrder = 1
     ViewStyle = vsIcon
     OnChange = ListView1Change
+    OnDblClick = ListView1DblClick
     OnEdited = ListView1Edited
     OnResize = ListView1Resize
   end

@@ -55,6 +55,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure ListView1Change(Sender: TObject; Item: TListItem;
       Change: TItemChange);
+    procedure ListView1DblClick(Sender: TObject);
     procedure ListView1Edited(Sender: TObject; Item: TListItem;
       var AValue: string);
     procedure ListView1Resize(Sender: TObject);
@@ -179,6 +180,11 @@ procedure TVisProfileManager.ListView1Change(Sender: TObject; Item: TListItem;
   Change: TItemChange);
 begin
   fSelected := Item.Caption;
+end;
+
+procedure TVisProfileManager.ListView1DblClick(Sender: TObject);
+begin
+  Action_Edit.Execute;
 end;
 
 procedure TVisProfileManager.ListView1Edited(Sender: TObject; Item: TListItem;
