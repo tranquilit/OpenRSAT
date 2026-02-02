@@ -577,7 +577,8 @@ begin
   LdapClient := (Sender as TRsatLdapClient);
 
   // Fill Attributes
-  fProperty.Attributes := LdapClient.SearchResult.Items[0].Attributes;
+  if LdapClient.SearchResult.Count > 0 then
+    fProperty.Attributes := LdapClient.SearchResult.Items[0].Attributes;
   fProperty.RSAT.LdapClient.OnSearch := nil;
 end;
 
