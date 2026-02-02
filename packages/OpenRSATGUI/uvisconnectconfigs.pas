@@ -258,6 +258,8 @@ begin
   Image1.Visible := not IsDarkModeEnabled;
   Image2.Visible := IsDarkModeEnabled;
   {$ENDIF}
+
+  ActionList1.Images := CoreDataModule.ImageList1;
 end;
 
 end.

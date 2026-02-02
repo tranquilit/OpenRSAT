@@ -112,6 +112,7 @@ uses
   mormot.net.sock,
   mormot.crypt.secure,
   ucommon,
+  ucoredatamodule,
   uvisrootdseinfos,
   ursatldapclient,
   ursatldapclientui;
@@ -435,6 +436,8 @@ begin
   inherited Create(TheOwner);
 
   fSettings := ASettings;
+
+  ActionList1.Images := CoreDataModule.ImageList1;
 end;
 
 end.

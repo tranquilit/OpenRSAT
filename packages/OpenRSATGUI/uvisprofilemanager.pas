@@ -21,7 +21,6 @@ uses
   IniFiles,
   mormot.core.base,
   mormot.core.text,
-  ucoredatamodule,
   uldapconfigs;
 
 type
@@ -82,6 +81,7 @@ type
 implementation
 uses
   uvisprofileconfiguration,
+  ucoredatamodule,
   ucommon,
   uconfig;
 
@@ -243,6 +243,8 @@ begin
   fLdapConfigs := ALdapConfigs;
   LoadProfiles;
   IniPropStorage1.IniFileName := VisBakFilePath;
+
+  ActionList1.Images := CoreDataModule.ImageList1;
 end;
 
 destructor TVisProfileManager.Destroy;
