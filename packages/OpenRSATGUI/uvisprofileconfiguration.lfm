@@ -644,6 +644,7 @@ object VisProfileConfiguration: TVisProfileConfiguration
     ShowButtons = [pbOK, pbCancel]
   end
   object ActionList1: TActionList
+    Images = CoreDataModule.ImageList1
     Left = 216
     Top = 104
     object Action_SearchDomains: TAction

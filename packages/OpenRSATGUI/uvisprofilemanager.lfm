@@ -112,6 +112,7 @@ object VisProfileManager: TVisProfileManager
     end
   end
   object PopupMenu1: TPopupMenu
+    Images = CoreDataModule.ImageList1
     Left = 200
     Top = 48
     object MenuItem_SmallIcons: TMenuItem
@@ -132,6 +133,7 @@ object VisProfileManager: TVisProfileManager
     end
   end
   object ActionList1: TActionList
+    Images = CoreDataModule.ImageList1
     Left = 280
     Top = 48
     object Action_Add: TAction

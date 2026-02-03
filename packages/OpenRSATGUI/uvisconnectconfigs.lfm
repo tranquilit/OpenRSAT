@@ -1139,6 +1139,7 @@ object FormConnectConfigs: TFormConnectConfigs
     end
   end
   object ActionList1: TActionList
+    Images = CoreDataModule.ImageList1
     Left = 48
     Top = 40
     object Action_ProfileManager: TAction
