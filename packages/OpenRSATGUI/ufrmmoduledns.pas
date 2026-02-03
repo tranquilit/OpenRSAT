@@ -580,6 +580,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Change Node', Self);
 
+  GridDNS.Clear;
   if Timer_TreeChangeNode.Enabled then
     Timer_TreeChangeNode.Enabled := False;
   Timer_TreeChangeNode.Enabled := True;
@@ -735,7 +736,7 @@ begin
       if NodeData^.Exists('_type') then
       begin
         case NodeData^.I['_type'] of
-          0: ImageIndex := -1;
+          0: ImageIndex := Ord(ileADUnknown);
           else
             ImageIndex := 57;
         end;
