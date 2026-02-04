@@ -311,13 +311,19 @@ procedure TFrmModuleDNS.UpdateNodeCustom(Node: TDNSTreeNode);
 var
   newRaw: TDocVariantData;
   i: Integer;
+  DNSNode: TDNSTreeNode;
+  Attribute: TLdapAttribute;
 begin
   newRaw.Init();
   UpdateGridColumns(['name', 'type', 'status', 'dnssec', 'keymaster']);
 
   for i := 0 to Node.Count - 1 do
   begin
-    newRaw.AddValue('name', Node.Items[i].Text);
+    DNSNode := (Node.Items[i] as TDNSTreeNode);
+    newRaw.AddValue('name', DNSNode.Text);
+    newRaw.AddValue('distinguishedName', DNSNode.DistinguishedName);
+    Attribute := DNSNode.fAttributes.Find('objectClass');
+    newRaw.AddValue('type', Attribute.GetReadable(Pred(Attribute.Count)));
     GridDNS.Data.AddItem(newRaw);
     newRaw.Clear;
   end;
@@ -482,7 +488,7 @@ var
     while i < Node.Count do
     begin
       Found := False;
-      for j := 0 to Length(TreeNodeList) do
+      for j := High(TreeNodeList) downto 0 do
       begin
         if (Node.Items[i] = TreeNodeList[j]) or RemoveOldDNSNode((Node.Items[i] as TDNSTreeNode), TreeNodeList) then
         begin
