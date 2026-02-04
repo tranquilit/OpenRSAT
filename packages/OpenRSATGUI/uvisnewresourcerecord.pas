@@ -272,6 +272,7 @@ var
   NewAttributeList: TLdapAttributeList;
   BytesArray: Array[0..$ffff] of Byte;
   Len: Integer;
+  BakOnError: TNotifyEvent;
 begin
   // Check if object exists
   result := False;
@@ -280,7 +281,13 @@ begin
 
   ARawByteString := Copy(String(@BytesArray[0]), 0, Len + 1);
 
-  LdapObj := fLdapClient.SearchObject(DistinguishedName, '', ['dnsRecord']);
+  BakOnError := fLdapClient.OnError;
+  fLdapClient.OnError := nil;
+  try
+    LdapObj := fLdapClient.SearchObject(DistinguishedName, '', ['dnsRecord']);
+  finally
+    fLdapClient.OnError := BakOnError;
+  end;
   if Assigned(LdapObj) then
   begin
     NewAttribute := TLdapAttribute.Create('dnsRecord', atUndefined);
