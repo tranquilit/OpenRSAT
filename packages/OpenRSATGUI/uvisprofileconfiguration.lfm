@@ -30,11 +30,12 @@ object VisProfileConfiguration: TVisProfileConfiguration
       Left = 8
       Height = 15
       Top = 12
-      Width = 100
+      Width = 150
       BorderSpacing.Around = 8
       Caption = 'Domain'
-      Constraints.MaxWidth = 100
-      Constraints.MinWidth = 100
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
     end
     object Label_DomainController: TLabel
       AnchorSideLeft.Control = GroupBox_Domain
@@ -43,11 +44,12 @@ object VisProfileConfiguration: TVisProfileConfiguration
       Left = 8
       Height = 15
       Top = 43
-      Width = 100
+      Width = 150
       BorderSpacing.Around = 8
       Caption = 'Domain Controller'
-      Constraints.MaxWidth = 100
-      Constraints.MinWidth = 100
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
     end
     object BitBtn_SearchDomains: TBitBtn
       AnchorSideLeft.Side = asrBottom
@@ -100,7 +102,7 @@ object VisProfileConfiguration: TVisProfileConfiguration
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = ComboBox_DomainControllers
       AnchorSideTop.Side = asrBottom
-      Left = 116
+      Left = 166
       Height = 17
       Top = 70
       Width = 18
@@ -114,11 +116,12 @@ object VisProfileConfiguration: TVisProfileConfiguration
       Left = 8
       Height = 15
       Top = 71
-      Width = 100
+      Width = 150
       BorderSpacing.Around = 8
       Caption = 'TLS'
-      Constraints.MaxWidth = 100
-      Constraints.MinWidth = 100
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
     end
     object Label_Timeout: TLabel
       AnchorSideLeft.Control = GroupBox_Domain
@@ -127,18 +130,19 @@ object VisProfileConfiguration: TVisProfileConfiguration
       Left = 8
       Height = 15
       Top = 124
-      Width = 100
+      Width = 150
       BorderSpacing.Around = 8
       Caption = 'Timeout'
-      Constraints.MaxWidth = 100
-      Constraints.MinWidth = 100
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
     end
     object Edit_Timeout: TEdit
       AnchorSideLeft.Control = Label_Timeout
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = CheckBox_Unsafe
       AnchorSideTop.Side = asrBottom
-      Left = 116
+      Left = 166
       Height = 23
       Top = 120
       Width = 50
@@ -154,10 +158,10 @@ object VisProfileConfiguration: TVisProfileConfiguration
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = GroupBox_Domain
       AnchorSideRight.Control = BitBtn_SearchDomains
-      Left = 116
+      Left = 166
       Height = 23
       Top = 8
-      Width = 222
+      Width = 172
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Around = 8
       Constraints.MinWidth = 150
@@ -172,10 +176,10 @@ object VisProfileConfiguration: TVisProfileConfiguration
       AnchorSideTop.Control = ComboBox_Domains
       AnchorSideTop.Side = asrBottom
       AnchorSideRight.Control = BitBtn_SearchDomainController
-      Left = 116
+      Left = 166
       Height = 23
       Top = 39
-      Width = 222
+      Width = 172
       Anchors = [akTop, akLeft, akRight]
       Constraints.MinWidth = 150
       ItemHeight = 15
@@ -188,18 +192,19 @@ object VisProfileConfiguration: TVisProfileConfiguration
       Left = 8
       Height = 15
       Top = 96
-      Width = 100
+      Width = 150
       BorderSpacing.Around = 8
       Caption = 'Unsafe connection'
-      Constraints.MaxWidth = 100
-      Constraints.MinWidth = 100
+      Constraints.MaxWidth = 150
+      Constraints.MinWidth = 150
+      WordWrap = True
     end
     object CheckBox_Unsafe: TCheckBox
       AnchorSideLeft.Control = Label_Unsafe
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = CheckBox_TLS
       AnchorSideTop.Side = asrBottom
-      Left = 116
+      Left = 166
       Height = 17
       Top = 95
       Width = 18
@@ -322,6 +327,7 @@ object VisProfileConfiguration: TVisProfileConfiguration
           BorderSpacing.Around = 4
           Caption = 'Anonymous'
           Visible = False
+          WordWrap = True
         end
         object Label_Simple: TLabel
           AnchorSideLeft.Control = Label_Anonymous
@@ -335,6 +341,7 @@ object VisProfileConfiguration: TVisProfileConfiguration
           BorderSpacing.Right = 12
           BorderSpacing.Around = 4
           Caption = 'Simple'
+          WordWrap = True
         end
         object Label_Digest: TLabel
           AnchorSideLeft.Control = Label_Simple
@@ -349,6 +356,7 @@ object VisProfileConfiguration: TVisProfileConfiguration
           BorderSpacing.Around = 4
           Caption = 'Digest'
           Visible = False
+          WordWrap = True
         end
         object Label_Kerberos: TLabel
           AnchorSideLeft.Control = Label_Digest
@@ -362,6 +370,7 @@ object VisProfileConfiguration: TVisProfileConfiguration
           BorderSpacing.Right = 12
           BorderSpacing.Around = 4
           Caption = 'Kerberos'
+          WordWrap = True
         end
       end
     end
@@ -419,7 +428,7 @@ object VisProfileConfiguration: TVisProfileConfiguration
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = Label_ChannelBinding
           AnchorSideTop.Side = asrCenter
-          Left = 116
+          Left = 166
           Height = 17
           Top = 7
           Width = 18
@@ -432,11 +441,12 @@ object VisProfileConfiguration: TVisProfileConfiguration
           Left = 8
           Height = 15
           Top = 8
-          Width = 100
+          Width = 150
           BorderSpacing.Around = 8
           Caption = 'Channel binding'
-          Constraints.MaxWidth = 100
-          Constraints.MinWidth = 100
+          Constraints.MaxWidth = 150
+          Constraints.MinWidth = 150
+          WordWrap = True
         end
         object Label_CurrentUsername: TLabel
           AnchorSideLeft.Control = Panel_Kerberos
@@ -445,18 +455,19 @@ object VisProfileConfiguration: TVisProfileConfiguration
           Left = 8
           Height = 15
           Top = 31
-          Width = 100
+          Width = 150
           BorderSpacing.Around = 8
           Caption = 'Current username'
-          Constraints.MaxWidth = 100
-          Constraints.MinWidth = 100
+          Constraints.MaxWidth = 150
+          Constraints.MinWidth = 150
+          WordWrap = True
         end
         object CheckBox_CurrentUsername: TCheckBox
           AnchorSideLeft.Control = Label_CurrentUsername
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = Label_CurrentUsername
           AnchorSideTop.Side = asrCenter
-          Left = 116
+          Left = 166
           Height = 17
           Top = 30
           Width = 18
@@ -482,7 +493,7 @@ object VisProfileConfiguration: TVisProfileConfiguration
           AnchorSideLeft.Control = Label_Algorithm
           AnchorSideLeft.Side = asrBottom
           AnchorSideTop.Control = Panel_Digest
-          Left = 116
+          Left = 166
           Height = 23
           Top = 8
           Width = 150
@@ -499,11 +510,12 @@ object VisProfileConfiguration: TVisProfileConfiguration
           Left = 8
           Height = 15
           Top = 12
-          Width = 100
+          Width = 150
           BorderSpacing.Around = 8
           Caption = 'Algorithm'
-          Constraints.MaxWidth = 100
-          Constraints.MinWidth = 100
+          Constraints.MaxWidth = 150
+          Constraints.MinWidth = 150
+          WordWrap = True
         end
       end
       object GroupBox_Account: TGroupBox
@@ -525,11 +537,12 @@ object VisProfileConfiguration: TVisProfileConfiguration
           Left = 8
           Height = 15
           Top = 13
-          Width = 100
+          Width = 150
           BorderSpacing.Around = 8
           Caption = 'Username'
-          Constraints.MaxWidth = 100
-          Constraints.MinWidth = 100
+          Constraints.MaxWidth = 150
+          Constraints.MinWidth = 150
+          WordWrap = True
         end
         object Label_Password: TLabel
           AnchorSideLeft.Control = GroupBox_Account
@@ -538,11 +551,12 @@ object VisProfileConfiguration: TVisProfileConfiguration
           Left = 8
           Height = 15
           Top = 44
-          Width = 100
+          Width = 150
           BorderSpacing.Around = 8
           Caption = 'Password'
-          Constraints.MaxWidth = 100
-          Constraints.MinWidth = 100
+          Constraints.MaxWidth = 150
+          Constraints.MinWidth = 150
+          WordWrap = True
         end
         object Edit_Password: TEdit
           AnchorSideLeft.Control = Label_Password
@@ -551,10 +565,10 @@ object VisProfileConfiguration: TVisProfileConfiguration
           AnchorSideTop.Side = asrBottom
           AnchorSideRight.Control = GroupBox_Account
           AnchorSideRight.Side = asrBottom
-          Left = 116
+          Left = 166
           Height = 23
           Top = 40
-          Width = 236
+          Width = 186
           Anchors = [akTop, akLeft, akRight]
           BorderSpacing.Around = 8
           Constraints.MinWidth = 150
@@ -568,16 +582,16 @@ object VisProfileConfiguration: TVisProfileConfiguration
           AnchorSideTop.Control = GroupBox_Account
           AnchorSideRight.Control = GroupBox_Account
           AnchorSideRight.Side = asrBottom
-          Left = 116
+          Left = 166
           Height = 24
           Top = 8
-          Width = 236
+          Width = 230
           Anchors = [akTop, akLeft, akRight]
           AutoSize = True
           BorderSpacing.Around = 8
           BevelOuter = bvNone
           ClientHeight = 24
-          ClientWidth = 236
+          ClientWidth = 230
           Constraints.MinWidth = 230
           TabOrder = 0
           object Edit_UsernameDomain: TEdit
@@ -587,10 +601,10 @@ object VisProfileConfiguration: TVisProfileConfiguration
             AnchorSideTop.Side = asrCenter
             AnchorSideRight.Control = Panel3
             AnchorSideRight.Side = asrBottom
-            Left = 132
+            Left = 129
             Height = 23
             Top = 1
-            Width = 104
+            Width = 101
             Anchors = [akTop, akLeft, akRight]
             Constraints.MinWidth = 100
             TabOrder = 1
@@ -603,7 +617,7 @@ object VisProfileConfiguration: TVisProfileConfiguration
             Left = 0
             Height = 23
             Top = 1
-            Width = 105
+            Width = 102
             Anchors = [akTop, akLeft, akRight]
             Constraints.MinWidth = 100
             TabOrder = 0
@@ -614,13 +628,14 @@ object VisProfileConfiguration: TVisProfileConfiguration
             AnchorSideLeft.Side = asrCenter
             AnchorSideTop.Control = Panel3
             AnchorSideTop.Side = asrCenter
-            Left = 113
+            Left = 110
             Height = 15
             Top = 5
             Width = 11
             BorderSpacing.Left = 8
             BorderSpacing.Right = 8
             Caption = '@'
+            WordWrap = True
           end
         end
       end
