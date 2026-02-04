@@ -17,7 +17,7 @@ uses
   ButtonPanel,
   ActnList,
   uldapconfigs,
-  mormot.core.base;
+  mormot.core.base, Types;
 
 type
 
@@ -259,7 +259,7 @@ end;
 procedure TVisProfileConfiguration.Action_SearchDomainControllersExecute(
   Sender: TObject);
 var
-  BakDomainController, Hostname: RawUtf8;
+  BakDomainController, Hostname, MyDC: RawUtf8;
   Hostnames: TRawUtf8DynArray;
 begin
   try
@@ -270,16 +270,30 @@ begin
     ComboBox_DomainControllers.Items.BeginUpdate;
 
     Hostnames := DnsLdapServices(ComboBox_Domains.Text);
+    MyDC := CldapMyLdapController();
 
     if Length(Hostnames) > 0 then
     begin
       CldapSortHosts(Hostnames, 3000, MaxInt);
 
       for Hostname in Hostnames do
-        ComboBox_DomainControllers.Items.Add(String(Hostname).Split(':')[0]);
-      ComboBox_DomainControllers.ItemIndex := 0;
-      if ComboBox_DomainControllers.Items.Count > 1 then
-        ComboBox_DomainControllers.DroppedDown := True;
+      begin
+        if Hostname = MyDC then
+          ComboBox_DomainControllers.Items.Add(FormatUtf8('% (%)', [String(Hostname).Split(':')[0], 'Current domain']))
+        else
+          ComboBox_DomainControllers.Items.Add(String(Hostname).Split(':')[0]);
+      end;
+
+      if (ComboBox_DomainControllers.Items.Count > 0) then
+      begin
+        ComboBox_DomainControllers.ItemIndex := ComboBox_DomainControllers.Items.IndexOf(FormatUtf8('% (%)', [String(MyDC).Split(':')[0], 'Current domain']));
+        if (ComboBox_DomainControllers.ItemIndex < 0) then
+        begin
+          ComboBox_DomainControllers.ItemIndex := 0;
+          if (ComboBox_DomainControllers.Items.Count > 1) then
+            ComboBox_DomainControllers.DroppedDown := True;
+        end;
+      end;
     end
     else
       ComboBox_DomainControllers.Text := BakDomainController;
@@ -379,6 +393,7 @@ procedure TVisProfileConfiguration.GUIToSettings(ASettings: TMLdapClientSettings
   );
 var
   Timeout: Longint;
+  DomainController: RawUtf8;
 begin
   if not Assigned(ASettings) then
     ASettings := Settings;
@@ -387,14 +402,17 @@ begin
 
   ASettings.Tls := CheckBox_TLS.Checked;
   ASettings.KerberosDN := ComboBox_Domains.Text;
-  if (Pos(':', ComboBox_DomainControllers.Text) > 0) then
+  DomainController := ComboBox_DomainControllers.Text;
+  if Pos('(', DomainController) > 0 then
+    DomainController := String(DomainController).Substring(0, Pos('(', DomainController) - 2);
+  if (Pos(':', DomainController) > 0) then
   begin
-    ASettings.TargetHost := String(ComboBox_DomainControllers.Text).Substring(0, Pos(':', ComboBox_DomainControllers.Text) - 1);
-    ASettings.TargetPort := String(ComboBox_DomainControllers.Text).Substring(Pos(':', ComboBox_DomainControllers.Text));
+    ASettings.TargetHost := String(DomainController).Substring(0, Pos(':', DomainController) - 1);
+    ASettings.TargetPort := String(DomainController).Substring(Pos(':', DomainController));
   end
   else
   begin
-    ASettings.TargetHost := ComboBox_DomainControllers.Text;
+    ASettings.TargetHost := DomainController;
     if ASettings.Tls then
       ASettings.TargetPort := LDAP_TLS_PORT
     else
