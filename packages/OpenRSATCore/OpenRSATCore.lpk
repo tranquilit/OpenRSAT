@@ -88,6 +88,10 @@
         <Filename Value="ugplink.pas"/>
         <UnitName Value="ugplink"/>
       </Item>
+      <Item>
+        <Filename Value="uproperty.pas"/>
+        <UnitName Value="uproperty"/>
+      </Item>
     </Files>
     <i18n>
       <EnableI18N Value="True"/>

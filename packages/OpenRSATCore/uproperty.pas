@@ -10,12 +10,42 @@ uses
   mormot.core.base,
   mormot.core.os.security,
   mormot.core.variants,
+  {$IFDEF OPENRSATTESTS}
+  mormot.core.test,
+  {$ENDIF OPENRSATTESTS}
   mormot.net.ldap,
   ucommon,
   ursatldapclient,
   ursat;
 
 type
+
+  {$IFDEF OPENRSATTESTS}
+
+  { TPropertyTests }
+
+  TPropertyTests = class(TSynTestCase)
+  private
+    function GetFilledAttributes: TLdapAttributeList;
+  published
+    procedure TestCreate;
+    procedure TestAttributes;
+    procedure TestCanonicalName;
+    procedure TestDistinguishedName;
+    procedure TestAdd;
+    procedure TestRestore;
+    procedure TestGet;
+    procedure TestGetRaw;
+    procedure TestGetReadable;
+    procedure TestGetAllReadable;
+    procedure TestDCTypeFromUAC;
+    procedure TestDirectReportsNames;
+    procedure TestManagerName;
+    procedure TestSubnetsFromSiteObject;
+    procedure TestSiteFromServerReference;
+  end;
+  {$ENDIF OPENRSATTESTS}
+
 
   TFVERecoveryInformation = record
     cn: RawUtf8;
@@ -137,8 +167,362 @@ implementation
 
 uses
   mormot.core.datetime,
-  mormot.core.text,
-  ursatldapclientui;
+  mormot.core.text;
+
+{ TPropertyTests }
+
+function TPropertyTests.GetFilledAttributes: TLdapAttributeList;
+var
+  a: TLdapAttribute;
+begin
+  result := TLdapAttributeList.Create;
+
+  result.Add('cn', 'cn');
+  result.Add('description', 'description');
+  result.Add('distinguishedName', 'CN=distinguishedName,DC=test,DC=lan');
+  result.Add('managedBy', 'CN=managedBy,DC=test,DC=lan');
+  result.Add('name', 'name');
+  result.Add('objectClass', 'objectClass').Add('objectClassBis');
+  result.Add('objectGuid', 'objectGUID');
+  result.Add('objectSid', 'objectSID');
+  result.Add('objectType', 'objectType');
+  result.Add('sAMAccountName', 'sAMAccountName');
+end;
+
+procedure TPropertyTests.TestCreate;
+var
+  P: TProperty;
+  RSAT, R: TRSAT;
+begin
+
+  P := TProperty.Create();
+  try
+    Check(Assigned(P));
+    Check(not Assigned(P.fAttributes));
+    Check(not Assigned(P.fModifiedAttributes));
+    Check(not Assigned(P.fRSAT));
+    Check(P.fTempModify.Count = 0);
+  finally
+    FreeAndNil(P);
+  end;
+
+  R := TRSAT.Create(nil);
+  try
+    P := TProperty.Create(R);
+    try
+      Check(Assigned(P));
+      Check(not Assigned(P.fAttributes));
+      Check(not Assigned(P.fModifiedAttributes));
+      Check(Assigned(P.fRSAT));
+      Check(P.fRSAT = R);
+      Check(P.fTempModify.Count = 0);
+    finally
+      FreeAndNil(P);
+    end;
+  finally
+    FreeAndNil(R);
+  end;
+end;
+
+procedure TPropertyTests.TestAttributes;
+var
+  P: TProperty;
+  A, B: TLdapAttributeList;
+begin
+  P := TProperty.Create();
+  A := TLdapAttributeList.Create;
+  B := GetFilledAttributes;
+  try
+    Check(not Assigned(P.Attributes));
+    P.Attributes := A;
+    Check(Assigned(P.Attributes));
+    Check(P.Attributes.Count = A.Count);
+    P.Attributes := nil;
+    Check(not Assigned(P.Attributes));
+    P.Attributes := B;
+    Check(P.Attributes.Count = B.Count);
+  finally
+    FreeAndNil(B);
+    FreeAndNil(A);
+    FreeAndNil(P);
+  end;
+end;
+
+procedure TPropertyTests.TestCanonicalName;
+var
+  P: TProperty;
+begin
+  P := TProperty.Create();
+  try
+    Check(P.canonicalName = '');
+    P.distinguishedName := 'CN=distinguishedName,DC=test,DC=lan';
+    Check(P.canonicalName = 'test.lan/distinguishedName');
+  finally
+    FreeAndNil(P);
+  end;
+end;
+
+procedure TPropertyTests.TestDistinguishedName;
+var
+  P: TProperty;
+  A: TLdapAttributeList;
+begin
+  P := TProperty.Create();
+  A := GetFilledAttributes;
+  try
+    Check(P.distinguishedName = '');
+    Check(P.Attributes.Find('distinguishedName').GetReadable() = '');
+    Check(P.fModifiedAttributes.Find('distinguishedName').GetReadable() = '');
+
+    P.distinguishedName := 'CN=distinguishedName,DC=test,DC=lan';
+    Check(P.distinguishedName = 'CN=distinguishedName,DC=test,DC=lan');
+    Check(P.Attributes.Find('distinguishedName').GetReadable() = '');
+    Check(P.fModifiedAttributes.Find('distinguishedName').GetReadable() = 'CN=distinguishedName,DC=test,DC=lan');
+
+    P.Attributes := A;
+    Check(P.distinguishedName = 'CN=distinguishedName,DC=test,DC=lan');
+    Check(P.Attributes.Find('distinguishedName').GetReadable() = 'CN=distinguishedName,DC=test,DC=lan');
+    Check(P.fModifiedAttributes.Find('distinguishedName').GetReadable() = '');
+
+    P.distinguishedName := 'CN=distinguishedNameModified,DC=test,DC=lan';
+    Check(P.distinguishedName = 'CN=distinguishedNameModified,DC=test,DC=lan');
+    Check(P.Attributes.Find('distinguishedName').GetReadable() = 'CN=distinguishedName,DC=test,DC=lan');
+    Check(P.fModifiedAttributes.Find('distinguishedName').GetReadable() = 'CN=distinguishedNameModified,DC=test,DC=lan');
+  finally
+    FreeAndNil(A);
+    FreeAndNil(P);
+  end;
+end;
+
+procedure TPropertyTests.TestAdd;
+const
+  Key: RawUtf8 = 'distinguishedName';
+var
+  P: TProperty;
+begin
+  P := TProperty.Create();
+  try
+    P.Add(key, 'value');
+    Check(not Assigned(P.Attributes));
+    Check(P.fModifiedAttributes.Find(Key).Count = 1);
+
+    P.Add(key, 'valuebis');
+    Check(not Assigned(P.Attributes));
+    Check(P.fModifiedAttributes.Find(Key).Count = 1);
+
+    P.Add(key, 'valuebisbis', aoAlways);
+    Check(not Assigned(P.Attributes));
+    Check(P.fModifiedAttributes.Find(Key).Count = 2);
+
+    P.Add(key, 'newvalue', aoKeepExisting);
+    Check(not Assigned(P.Attributes));
+    Check(P.fModifiedAttributes.Find(Key).Count = 2);
+
+    P.Add(key, 'newvalue', aoNoDuplicateValue);
+    Check(not Assigned(P.Attributes));
+    Check(P.fModifiedAttributes.Find(Key).Count = 3);
+
+    P.Add(key, 'newvalue', aoNoDuplicateValue);
+    Check(not Assigned(P.Attributes));
+    Check(P.fModifiedAttributes.Find(Key).Count = 3);
+
+    P.Add(key, 'newvalue', aoReplaceValue);
+    Check(not Assigned(P.Attributes));
+    Check(P.fModifiedAttributes.Find(Key).Count = 1);
+  finally
+    FreeAndNil(P);
+  end;
+end;
+
+procedure TPropertyTests.TestRestore;
+const
+  Key: RawUtf8 = 'objectClass';
+var
+  P: TProperty;
+begin
+  P := TProperty.Create;
+  try
+    P.Add(Key, 'top');
+    P.Add(Key, 'user', aoAlways);
+    Check(Assigned(P.Get(Key)));
+    P.Restore(Key);
+    Check(not Assigned(P.Get(Key)))
+  finally
+    FreeAndNil(P);
+  end;
+end;
+
+procedure TPropertyTests.TestGet;
+const
+  Key: RawUtf8 = 'objectClass';
+var
+  P: TProperty;
+begin
+  P := TProperty.Create();
+  try
+    Check(not Assigned(P.Get(Key)));
+
+    P.Add(Key, 'top');
+    P.Add(Key, 'user', aoAlways);
+    P.Add(Key, 'person', aoAlways);
+
+    Check(Assigned(P.Get(Key)));
+    P.Restore(Key);
+    Check(not Assigned(P.Get(Key)));
+  finally
+    FreeAndNil(P);
+  end;
+end;
+
+procedure TPropertyTests.TestGetRaw;
+const
+  Key: RawUtf8 = 'objectClass';
+var
+  P: TProperty;
+begin
+  P := TProperty.Create();
+  try
+    Check(P.GetRaw(Key) = '');
+    Check(P.GetRaw(Key, -1) = '');
+    Check(P.GetRaw(Key, 152) = '');
+
+    P.Add(Key, 'top');
+    P.Add(Key, 'user', aoAlways);
+    P.Add(Key, 'person', aoAlways);
+
+    Check(P.GetRaw(Key) = 'top');
+    Check(P.GetRaw(Key, 1) = 'user');
+    Check(P.GetRaw(Key, 2) = 'person');
+    Check(P.GetRaw(Key, 3) = '');
+
+    P.Restore(Key);
+
+    Check(P.GetRaw(Key) = '');
+  finally
+    FreeAndNil(P);
+  end;
+end;
+
+procedure TPropertyTests.TestGetReadable;
+const
+  Key: RawUtf8 = 'objectClass';
+var
+  P: TProperty;
+begin
+  P := TProperty.Create();
+  try
+    Check(P.GetReadable(Key) = '');
+    Check(P.GetReadable(Key, -1) = '');
+    Check(P.GetReadable(Key, 152) = '');
+
+    P.Add(Key, 'top');
+    P.Add(Key, 'user', aoAlways);
+    P.Add(Key, 'person', aoAlways);
+
+    Check(P.GetReadable(Key) = 'top');
+    Check(P.GetReadable(Key, 1) = 'user');
+    Check(P.GetReadable(Key, 2) = 'person');
+    Check(P.GetReadable(Key, 3) = '');
+
+    P.Restore(Key);
+
+    Check(P.GetReadable(Key) = '');
+  finally
+    FreeAndNil(P);
+  end;
+end;
+
+procedure TPropertyTests.TestGetAllReadable;
+const
+  Key: RawUtf8 = 'objectClass';
+var
+  P: TProperty;
+begin
+  P := TProperty.Create();
+  try
+    Check(Length(P.GetAllReadable(Key)) = 0);
+
+    P.Add(Key, 'top');
+    P.Add(Key, 'user', aoAlways);
+    P.Add(Key, 'person', aoAlways);
+
+    Check(Length(P.GetAllReadable(Key)) = 3);
+
+    P.Restore(Key);
+
+    Check(Length(P.GetAllReadable(Key)) = 0);
+  finally
+    FreeAndNil(P);
+  end;
+end;
+
+procedure TPropertyTests.TestDCTypeFromUAC;
+var
+  P: TProperty;
+begin
+  P := TProperty.Create();
+  try
+    Check(P.DCTypeFromUAC = '');
+
+    P.UserAccountControlInclude(uacServerTrusted);
+    Check(P.DCTypeFromUAC = rsUACServer);
+    P.UserAccountControlExclude(uacServerTrusted);
+
+    P.UserAccountControlInclude(uacWorkstationTrusted);
+    Check(P.DCTypeFromUAC = rsUACWorkstation);
+    P.UserAccountControlExclude(uacWorkstationTrusted);
+  finally
+    FreeAndNil(P);
+  end;
+end;
+
+procedure TPropertyTests.TestDirectReportsNames;
+var
+  P: TProperty;
+begin
+  P := TProperty.Create();
+  try
+    Check(Length(P.DirectReportsNames) = 0);
+  finally
+    FreeAndNil(P);
+  end;
+end;
+
+procedure TPropertyTests.TestManagerName;
+var
+  P: TProperty;
+begin
+  P := TProperty.Create();
+  try
+    Check(P.ManagerName = '');
+  finally
+    FreeAndNil(P);
+  end;
+end;
+
+procedure TPropertyTests.TestSubnetsFromSiteObject;
+var
+  P: TProperty;
+begin
+  P := TProperty.Create();
+  try
+    Check(Length(P.SubnetsFromSiteObject) = 0);
+  finally
+    FreeAndNil(P);
+  end;
+end;
+
+procedure TPropertyTests.TestSiteFromServerReference;
+var
+  P: TProperty;
+begin
+  P := TProperty.Create();
+  try
+    Check(P.SiteFromServerReference = '');
+  finally
+    FreeAndNil(P);
+  end;
+end;
 
 { TProperty }
 
@@ -236,6 +620,9 @@ begin
     FreeAndNil(fModifiedAttributes);
   if Assigned(fAttributes) then
     FreeAndNil(fAttributes);
+
+  if not Assigned(AValue) then
+    Exit;
 
   fModifiedAttributes := TLdapAttributeList.Create;
   fAttributes := TLdapAttributeList(AValue.Clone);
@@ -434,6 +821,8 @@ var
   Pairs: TNameValueDNs;
 begin
   result := '';
+  if not Assigned(LdapClient) then
+    Exit;
   Attribute := LdapClient.SearchObject(LdapClient.ConfigDN, FormatUtf8('(serverReference=%)', [distinguishedName]), 'distinguishedName', lssWholeSubtree);
   if not Assigned(Attribute) then
     Exit;
@@ -451,6 +840,9 @@ var
 begin
   result := nil;
   Count := 0;
+
+  if not Assigned(LdapClient) then
+    Exit;
 
   LdapClient.SearchBegin();
   try
@@ -983,6 +1375,10 @@ begin
   Exclude(msDSSupportedEncrytionTypes, msDSSupportedEncrytionType);
   Add('msDS-SupportedEncryptionTypes', IntToStr(MsdsSupportedEncryptionTypesValue(msDSSupportedEncrytionTypes)));
 end;
+
+{$IFDEF OPENRSATTESTS}
+
+{$ENDIF OPENRSATTESTS}
 
 end.
 
