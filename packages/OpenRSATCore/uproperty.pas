@@ -190,6 +190,7 @@ uses
   mormot.core.datetime,
   mormot.core.text;
 
+{$IFDEF OPENRSATTESTS}
 { TPropertyTests }
 
 function TPropertyTests.GetFilledAttributes: TLdapAttributeList;
@@ -547,6 +548,8 @@ begin
     FreeAndNil(P);
   end;
 end;
+
+{$ENDIF OPENRSATTESTS}
 
 { TProperty }
 
