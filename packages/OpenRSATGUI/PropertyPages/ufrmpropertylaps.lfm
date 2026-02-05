@@ -5,9 +5,10 @@ object FrmPropertyLAPS: TFrmPropertyLAPS
   Width = 416
   ClientHeight = 317
   ClientWidth = 416
+  LCLVersion = '4.5.0.0'
   TabOrder = 0
-  DesignLeft = 2095
-  DesignTop = 201
+  DesignLeft = 859
+  DesignTop = 237
   object GroupBox1: TGroupBox
     Left = 8
     Height = 301
@@ -15,7 +16,7 @@ object FrmPropertyLAPS: TFrmPropertyLAPS
     Width = 400
     Align = alTop
     BorderSpacing.Around = 8
-    Caption = 'Solution du mot de passe de l''administrateur local'
+    Caption = 'Local Administrator Password Solution'
     ClientHeight = 281
     ClientWidth = 396
     TabOrder = 0
@@ -25,9 +26,9 @@ object FrmPropertyLAPS: TFrmPropertyLAPS
       Left = 8
       Height = 15
       Top = 8
-      Width = 222
+      Width = 181
       BorderSpacing.Around = 8
-      Caption = 'Expiration actuelle du mot de passe LAPS :'
+      Caption = 'Current LAPS password expiration:'
     end
     object Edit_CurrentExpiration: TEdit
       AnchorSideLeft.Control = GroupBox1
@@ -51,9 +52,9 @@ object FrmPropertyLAPS: TFrmPropertyLAPS
       Left = 8
       Height = 15
       Top = 62
-      Width = 271
+      Width = 182
       BorderSpacing.Around = 8
-      Caption = 'Définir l''expiration du nouveau mot de passe LAPS :'
+      Caption = 'Set new LAPS password expiration:'
     end
     object DateTimePicker_NewExpiration: TDateTimePicker
       AnchorSideLeft.Control = GroupBox1
@@ -107,9 +108,9 @@ object FrmPropertyLAPS: TFrmPropertyLAPS
       Left = 8
       Height = 15
       Top = 116
-      Width = 242
+      Width = 174
       BorderSpacing.Around = 8
-      Caption = 'Nom du compte d''administrateur local LAPS :'
+      Caption = 'LAPS local admin account name:'
     end
     object Edit_LocalAdminAccountName: TEdit
       AnchorSideLeft.Control = GroupBox1
@@ -133,9 +134,9 @@ object FrmPropertyLAPS: TFrmPropertyLAPS
       Left = 8
       Height = 15
       Top = 170
-      Width = 285
+      Width = 194
       BorderSpacing.Around = 8
-      Caption = 'Mot de passe du compte d''administrateur local LAPS :'
+      Caption = 'LAPS local admin account password:'
     end
     object Edit_LocalAdminAccountPassword: TEdit
       AnchorSideLeft.Control = GroupBox1
