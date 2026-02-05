@@ -1354,14 +1354,20 @@ begin
 end;
 
 procedure TFrmModuleADUC.MenuItem_EditColumnsClick(Sender: TObject);
+var
+  VisEditColumns: TVisEditADUCColumns;
 begin
-  With TVisEditADUCColumns.Create(Self, fModuleAduc) do
-    if ShowModal = mrOK then
+  VisEditColumns := TVisEditADUCColumns.Create(Self, fModuleAduc);
+  try
+    if VisEditColumns.ShowModal = mrOK then
     begin
-      fModuleAduc.ADUCOption.GridAttributesFilter := DisplayedColumns;
+      fModuleAduc.ADUCOption.GridAttributesFilter := VisEditColumns.DisplayedColumns;
       fModuleAduc.ADUCOption.Save(OptionFilePath);
       UpdateGridADUC(nil);
     end;
+  finally
+    FreeAndNil(VisEditColumns);
+  end;
 end;
 
 procedure TFrmModuleADUC.Timer_SearchInGridTimer(Sender: TObject);

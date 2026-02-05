@@ -109,6 +109,7 @@ begin
           Exit;
       until SearchCookie = '';
     finally
+      OnSearch := nil;
       SearchEnd;
     end;
   end;
