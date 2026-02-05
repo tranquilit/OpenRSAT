@@ -11,13 +11,14 @@ object FrmPropertyLAPS: TFrmPropertyLAPS
   DesignTop = 255
   object GroupBox1: TGroupBox
     Left = 8
-    Height = 301
+    Height = 277
     Top = 8
     Width = 400
     Align = alTop
+    AutoSize = True
     BorderSpacing.Around = 8
     Caption = 'Local Administrator Password Solution'
-    ClientHeight = 281
+    ClientHeight = 257
     ClientWidth = 396
     TabOrder = 0
     object Label_CurrentExpiration: TLabel
