@@ -7,8 +7,8 @@ object FrmPropertyLAPS: TFrmPropertyLAPS
   ClientWidth = 416
   LCLVersion = '4.5.0.0'
   TabOrder = 0
-  DesignLeft = 859
-  DesignTop = 237
+  DesignLeft = 1214
+  DesignTop = 255
   object GroupBox1: TGroupBox
     Left = 8
     Height = 301

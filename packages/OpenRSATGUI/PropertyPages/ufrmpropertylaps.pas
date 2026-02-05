@@ -121,7 +121,7 @@ begin
 
   fProperty := Props;
 
-  fProperty.SearchObject(['msLAPS-Password', 'ms-Mcs-AdmPwd', 'msLAPS-PasswordExpirationTime', 'ms-Mcs-AdmPwdExpirationTime']);
+  fProperty.SearchObject(['msLAPS-Password', 'ms-Mcs-AdmPwd', 'msLAPS-PasswordExpirationTime', 'ms-Mcs-AdmPwdExpirationTime', 'msLAPS-EncryptedPassword']);
 
   Edit_CurrentExpiration.CaptionNoChange := fProperty.GetReadable('msLAPS-PasswordExpirationTime');
   if Edit_CurrentExpiration.Caption = '' then
