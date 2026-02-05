@@ -8,7 +8,8 @@ uses
   Classes,
   SysUtils,
   mormot.core.base,
-  uoption;
+  uoption,
+  ursat;
 
 type
   /// TModule provide an Abstract interface to a RSAT module.
@@ -19,6 +20,7 @@ type
     function GetName: RawUtf8; virtual; abstract;
     function GetDisplayName: RawUtf8; virtual; abstract;
     function GetOption: TOption; virtual; abstract;
+    function GetRSAT: TRSAT; virtual; abstract;
 
   public
     // Module status
@@ -29,6 +31,8 @@ type
     property DisplayName: RawUtf8 read GetDisplayName;
     // Retrieve module option
     property Option: TOption read GetOption;
+
+    property RSAT: TRSAT read GetRSAT;
   end;
 
 implementation

@@ -37,9 +37,6 @@ type
 
   end;
 
-var
-  VisTaskResetPassword: TVisTaskResetPassword;
-
 implementation
 uses
   ucommonui;

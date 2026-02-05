@@ -318,10 +318,14 @@ type
     procedure LdapConnectEvent(Sender: TObject);
     procedure LdapCloseEvent(Sender: TObject);
 
+    procedure ResetPasswordComputerWarning(Sender: TObject);
     procedure OnModifyEventAccountUnlock(Sender: TObject);
     procedure OnModifyEventPasswordChanged(Sender: TObject);
     procedure OnSearchEventFillGrid(Sender: TObject);
 
+    function ResetPasswordCallback(const LockedAccount: Boolean; out
+      ANewPassword: RawUtf8; out AUserMustChangePassword: Boolean; out
+  AUnlockAccount: Boolean): Boolean;
   public
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
@@ -1228,113 +1232,11 @@ begin
 end;
 
 procedure TFrmModuleADUC.Action_TaskResetPasswordExecute(Sender: TObject);
-var
-  userDN: String;
-  userData: TLdapResult;
-  res, attr: TLdapAttribute;
-  userAccountControl: LongInt;
-  accountIsLocked: Boolean;
-  ObjectClassArr: TRawUtf8DynArray;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute', [Action_TaskResetPassword.Caption]);
+    fLog.Log(sllTrace, 'Reset password', [Action_TaskResetPassword.Caption], Self);
 
-  With TVisTaskResetPassword.Create(self) do
-  try
-    // Query object to modify
-    userDN := GridADUC.FocusedRow^.U['objectName'];
-    userData := FrmRSAT.LdapClient.SearchObject(userDN, '', ['userAccountControl', 'objectClass']);
-    if not Assigned(userData) then
-    begin
-      if Assigned(fLog) then
-        fLog.Log(sllError, '% - Cannot retrieve information about "%". (%)', [Action_TaskResetPassword.Caption, userDN, FrmRSAT.LdapClient.ResultString]);
-      Exit;
-    end;
-    res := userData.Attributes.Find('objectClass');
-    if not Assigned(res) then
-    begin
-      if Assigned(fLog) then
-        fLog.Log(sllError, '% - Cannot retrieve objectClass about "%".', [Action_TaskResetPassword.Caption, userDN]);
-      Exit;
-    end;
-    ObjectClassArr := res.GetAllReadable;
-    if (ObjectClassArr[High(ObjectClassArr)] = 'computer') then
-      if MessageDlg('Dangererous action', 'Be carefull, this action is dangerous. Do you want to perform a reset password on a computer ?', mtWarning, mbYesNoCancel, 0) <> mrYes then
-      begin
-        if Assigned(fLog) then
-          fLog.Log(sllInfo, '% - User cancel', [Action_TaskResetPassword.Caption]);
-        Exit;
-      end;
-    res := userData.Attributes.Find('userAccountControl');
-    userAccountControl := StrToInt(res.GetRaw());
-    if (userAccountControl < 0) then
-    begin
-      if Assigned(fLog) then
-        fLog.Log(sllError, '% - Invalid userAccountControl(%)', [Action_TaskResetPassword.Caption, IntToStr(userAccountControl)]);
-      Exit;
-    end;
-    accountIsLocked := ((userAccountControl and 16 {uacLockedOut}) > 0);
-    if accountIsLocked then
-      Label_Status.Caption := Label_Status.Caption + 'Locked'
-    else
-      Label_Status.Caption := Label_Status.Caption + 'Unlocked';
-    // Check password conformity
-    repeat
-      if (ShowModal <> mrOk) then
-        Exit;
-      if (Edit_NewPassword.Text <> Edit_ConfirmPassword.Text) then
-        ShowMessage(rsNewConfirmPassDifferent);
-    until (Edit_NewPassword.Text = Edit_ConfirmPassword.Text);
-    // modify userAccountControl
-    if accountIsLocked and CheckBox_Unlock.Checked then
-    begin
-      attr := TLdapAttribute.Create('userAccountControl', atUserAccountControl);
-      try
-        attr.Add(IntToString(userAccountControl or 16 {uacLockedOut}));
-        FrmRSAT.LdapClient.OnModify := @OnModifyEventAccountUnlock;
-        if not FrmRSAT.LdapClient.Modify(userDN, lmoReplace, attr) then
-        begin
-          if Assigned(fLog) then
-            fLog.Log(sllError, '% - Ldap Modify Error: %', [Action_TaskResetPassword.Caption, FrmRSAT.LdapClient.ResultString]);
-          Exit;
-        end;
-      finally
-        FreeAndNil(attr);
-      end;
-    end;
-    attr := TLdapAttribute.Create('unicodePwd', atUndefined);
-    try
-      attr.add(LdapUnicodePwd(Edit_NewPassword.Text));
-      FrmRSAT.LdapClient.OnModify := @OnModifyEventPasswordChanged;
-      if not FrmRSAT.LdapClient.Modify(userDN, lmoReplace, attr) then
-      begin
-        if Assigned(fLog) then
-          fLog.Log(sllError, '% - Ldap Modify Error: %', [Action_TaskResetPassword.Caption, FrmRSAT.LdapClient.ResultString]);
-        Exit;
-      end;
-    finally
-      FreeAndNil(attr);
-    end;
-
-    // Set reset password
-    if CheckBox_Change.Checked then
-    begin
-      attr := TLdapAttribute.Create('pwdLastSet', atPwdLastSet);
-      try
-        attr.Add(IntToString(0));
-        if not FrmRSAT.LdapClient.Modify(userDN, lmoReplace, attr) then
-        begin
-          if Assigned(fLog) then
-            fLog.Log(sllError, '% - Ldap Modify Error: %', [Action_TaskResetPassword.Caption, FrmRSAT.LdapClient.ResultString]);
-          Exit;
-        end;
-      finally
-        FreeAndNil(attr);
-      end;
-    end;
-  finally
-    Free;
-  end;
+  fModuleAduc.ResetPassword(@ResetPasswordCallback, GridADUC.FocusedRow^.U['objectName'], @ResetPasswordComputerWarning, @OnModifyEventAccountUnlock, @OnModifyEventPasswordChanged);
 end;
 
 procedure TFrmModuleADUC.Action_TaskResetPasswordUpdate(Sender: TObject);
@@ -2692,6 +2594,22 @@ begin
   end;
 end;
 
+procedure TFrmModuleADUC.ResetPasswordComputerWarning(Sender: TObject);
+var
+  ObjectClassAttr: TLdapAttribute;
+begin
+  ObjectClassAttr := (Sender as TLdapAttribute);
+  if (ObjectClassAttr.GetReadable(Pred(ObjectClassAttr.Count)) = 'computer') then
+  begin
+    if MessageDlg('Dangererous action', 'Be carefull, this action is dangerous. Do you want to perform a reset password on a computer ?', mtWarning, mbYesNoCancel, 0) <> mrYes then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllInfo, 'User cancel', Self);
+      Exit;
+    end;
+  end;
+end;
+
 procedure TFrmModuleADUC.OnModifyEventAccountUnlock(Sender: TObject);
 begin
   MessageDlg(rsAccountUnlocked, rsAccountUnlockedMessage, mtInformation, [mbOK], 0);
@@ -2743,6 +2661,37 @@ begin
   end;
 end;
 
+function TFrmModuleADUC.ResetPasswordCallback(const LockedAccount: Boolean; out ANewPassword: RawUtf8; out
+  AUserMustChangePassword: Boolean; out AUnlockAccount: Boolean): Boolean;
+var
+  VisTaskResetPassword: TVisTaskResetPassword;
+begin
+  result := False;
+
+  VisTaskResetPassword := TVisTaskResetPassword.Create(Self);
+  try
+    if LockedAccount then
+      VisTaskResetPassword.Label_Status.Caption := VisTaskResetPassword.Label_Status.Caption + 'Locked'
+    else
+      VisTaskResetPassword.Label_Status.Caption := VisTaskResetPassword.Label_Status.Caption + 'Unlocked';
+
+    repeat
+      if VisTaskResetPassword.ShowModal <> mrOK then
+        Exit;
+      if (VisTaskResetPassword.Edit_NewPassword.Text = VisTaskResetPassword.Edit_ConfirmPassword.Text) then
+        Break;
+      ShowMessage(rsNewConfirmPassDifferent);
+    until False;
+
+    result := True;
+    ANewPassword := VisTaskResetPassword.Edit_NewPassword.Text;
+    AUserMustChangePassword := VisTaskResetPassword.CheckBox_Change.Checked;
+    AUnlockAccount := LockedAccount and VisTaskResetPassword.CheckBox_Unlock.Checked;
+  finally
+    FreeAndNil(VisTaskResetPassword);
+  end;
+end;
+
 constructor TFrmModuleADUC.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
@@ -2753,7 +2702,7 @@ begin
 
   fEnabled := True;
 
-  fModuleAduc := TModuleADUC.Create;
+  fModuleAduc := TModuleADUC.Create(FrmRSAT.RSAT);
   fTreeSelectionHistory := TTreeSelectionHistory.Create;
 
   fADUCRootNode := (TreeADUC.Items.Add(nil, 'Active Directory Users and Computers') as TADUCTreeNode);
