@@ -16,8 +16,26 @@
     </General>
     <BuildModes>
       <Item Name="Default" Default="True"/>
+      <Item Name="test">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="openrsattests"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir)"/>
+            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <Linking>
+            <Debugging>
+              <DebugInfoType Value="dsDwarf3"/>
+            </Debugging>
+          </Linking>
+        </CompilerOptions>
+      </Item>
       <SharedMatrixOptions Count="1">
-        <Item1 ID="385609100261" Modes="Default" Value="-dOPENRSATTESTS"/>
+        <Item1 ID="385609100261" Modes="test" Value="-dOPENRSATTESTS"/>
       </SharedMatrixOptions>
     </BuildModes>
     <PublishOptions>
