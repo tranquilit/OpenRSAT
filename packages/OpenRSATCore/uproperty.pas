@@ -76,20 +76,32 @@ type
     function ApplyAttributeDifference(AttributeName: RawUtf8): Boolean;
     function ApplyTempModification: Boolean;
   public
+    /// TProperty default constructor.
+    /// ARSAT: Provide an access to TRSAT instance.
     constructor Create(ARSAT: TRSAT = nil);
     destructor Destroy; override;
 
+    /// Check for local changes.
     function IsModified: Boolean;
+    /// Check for local changes on the attributeName.
     function IsModified(AttributeName: RawUtf8): Boolean;
+    /// Apply changes on the active directory.
     function ApplyModification: Boolean;
 
+    /// Retrieve all readable values of an attribute.
     function GetAllReadable(Name: RawUtf8): TRawUtf8DynArray;
+    /// Retrieve a readable value at a given index of an attribute.
     function GetReadable(Name: RawUtf8; index: Integer = 0): RawUtf8;
+    /// Retrieve a raw value at a given index of an attribute.
     function GetRaw(Name: RawUtf8; index: Integer = 0): RawByteString;
+    /// Retrieve an attribute by name.
     function Get(Name: RawUtf8): TLdapAttribute;
 
+    /// Add a value to an attribute by name.
     procedure Add(Name: RawUtf8; Value: RawUtf8; Option: TLdapAddOption = aoReplaceValue);
+    /// Restore the default value of an attribute by name.
     procedure Restore(Name: RawUtf8);
+    /// Retrieve defined attributes from an active directory.
     procedure SearchObject(Attributes: TRawUtf8DynArray);
 
     procedure AddMemberOf(MemberOfList: TRawUtf8DynArray);
@@ -98,13 +110,22 @@ type
     procedure Subnets(Data: PDocVariantData);
     function UPNSuffixes: TRawUtf8DynArray;
 
+    /// Retrieve site name from `serverReference`.
     property SiteFromServerReference: RawUtf8 read GetSiteFromServerReference;
+    /// Retrieve subnets cn from `siteObject`.
     property SubnetsFromSiteObject: TRawUtf8DynArray read GetSubnetsFromSiteObject;
+    /// Retrieve DC type name from User Account Control (UAC).
     property DCTypeFromUAC: RawUtf8 read GetDCTypeFromUAC;
+    /// Retrieve manager name.
     property ManagerName: RawUtf8 read GetManagerName;
+    /// Retrieve direct reports names.
     property DirectReportsNames: TRawUtf8DynArray read GetDirectReportsNames;
+    /// Modify ACL so entry cannot change password.
     function CannotChangePassword: Boolean;
+    /// Retrieve recovery informations of an object.
+    /// It is object's single level subentry has an objectClass of msFVE-RecoveryInformation
     function msFVERecoveryInformation: TFVERecoveryInformationDynArray;
+    /// Retrieve available attributes for an objectClass.
     function AttributesFromSchema: TRawUtf8DynArray;
 
     procedure UserAccountControlExclude(UserAccountControl: TUserAccountControl);
@@ -483,6 +504,9 @@ begin
   P := TProperty.Create();
   try
     Check(Length(P.DirectReportsNames) = 0);
+
+    P.Add('directReports', 'CN=Demo User,OU=Users,OU=openrsat,DC=openrsat,DC=lan');
+    Check(Length(P.DirectReportsNames) = 1);
   finally
     FreeAndNil(P);
   end;
@@ -823,7 +847,7 @@ begin
   result := '';
   if not Assigned(LdapClient) then
     Exit;
-  Attribute := LdapClient.SearchObject(LdapClient.ConfigDN, FormatUtf8('(serverReference=%)', [distinguishedName]), 'distinguishedName', lssWholeSubtree);
+  Attribute := LdapClient.SearchObject(LdapClient.ConfigDN, FormatUtf8('(serverReference=%)', [LdapEscape(distinguishedName)]), 'distinguishedName', lssWholeSubtree);
   if not Assigned(Attribute) then
     Exit;
   if not ParseDN(Attribute.GetReadable(), Pairs, True) then
@@ -885,6 +909,9 @@ var
   SearchResult: TLdapResult;
 begin
   result := nil;
+  if not Assigned(LdapClient) then
+    Exit;
+
   DirectReports := GetAllReadable('directReports');
   Filter := '';
   for DirectReport in DirectReports do
@@ -1174,6 +1201,8 @@ var
   SearchResult: TLdapResult;
   SiteName, SiteDistinguishedName: RawUtf8;
 begin
+  if not Assigned(LdapClient) then
+    Exit;
   LdapClient.SearchBegin();
   try
     LdapClient.SearchScope := lssWholeSubtree;
@@ -1200,6 +1229,8 @@ function TProperty.UPNSuffixes: TRawUtf8DynArray;
 var
   Attribute: TLdapAttribute;
 begin
+  if not Assigned(LdapClient) then
+    Exit;
   LdapClient.SearchRangeBegin;
   try
     Attribute := LdapClient.SearchObject(FormatUtf8('CN=Partitions,%', [LdapClient.ConfigDN]), '', 'uPNSuffixes');
