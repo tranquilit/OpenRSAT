@@ -441,7 +441,7 @@ object FrmModuleDNS: TFrmModuleDNS
       ClientHeight = 31
       ClientWidth = 625
       TabOrder = 0
-      object TisSearchEdit1: TTisSearchEdit
+      object TisSearchEdit_GridDNS: TTisSearchEdit
         Left = 4
         Height = 23
         Top = 4
@@ -452,7 +452,7 @@ object FrmModuleDNS: TFrmModuleDNS
         TabOrder = 0
         Buttons = <>
         SearchInterval = 500
-        OnSearch = TisSearchEdit1Search
+        OnSearch = TisSearchEdit_GridDNSSearch
       end
     end
   end
@@ -486,7 +486,7 @@ object FrmModuleDNS: TFrmModuleDNS
       OnExpanding = TreeDNSExpanding
       OnMouseDown = TreeDNSMouseDown
     end
-    object TisSearchEdit2: TTisSearchEdit
+    object TisSearchEdit_TreeDNS: TTisSearchEdit
       Left = 4
       Height = 23
       Top = 4
@@ -497,7 +497,7 @@ object FrmModuleDNS: TFrmModuleDNS
       TabOrder = 0
       Buttons = <>
       SearchInterval = 500
-      OnSearch = TisSearchEdit2Search
+      OnSearch = TisSearchEdit_TreeDNSSearch
     end
   end
   object ActionList_DNS: TActionList

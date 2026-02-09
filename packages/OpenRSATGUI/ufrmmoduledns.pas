@@ -83,8 +83,8 @@ type
     GridDNS: TTisGrid;
     Timer_TreeChangeNode: TTimer;
     Timer_SearchInGrid: TTimer;
-    TisSearchEdit1: TTisSearchEdit;
-    TisSearchEdit2: TTisSearchEdit;
+    TisSearchEdit_GridDNS: TTisSearchEdit;
+    TisSearchEdit_TreeDNS: TTisSearchEdit;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
     ToolButton_Previous: TToolButton;
@@ -117,8 +117,8 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure Timer_SearchInGridTimer(Sender: TObject);
     procedure Timer_TreeChangeNodeTimer(Sender: TObject);
-    procedure TisSearchEdit1Search(Sender: TObject; const aText: string);
-    procedure TisSearchEdit2Search(Sender: TObject; const aText: string);
+    procedure TisSearchEdit_GridDNSSearch(Sender: TObject; const aText: string);
+    procedure TisSearchEdit_TreeDNSSearch(Sender: TObject; const aText: string);
     procedure TreeDNSChange(Sender: TObject; Node: TTreeNode);
     procedure TreeDNSCreateNodeClass(Sender: TCustomTreeView;
       var NodeClass: TTreeNodeClass);
@@ -790,7 +790,7 @@ begin
   UpdateNode((TreeDNS.Selected as TDNSTreeNode));
 end;
 
-procedure TFrmModuleDNS.TisSearchEdit1Search(Sender: TObject;
+procedure TFrmModuleDNS.TisSearchEdit_GridDNSSearch(Sender: TObject;
   const aText: string);
 var
   NodeData: PDocVariantData;
@@ -835,7 +835,7 @@ begin
   end;
 end;
 
-procedure TFrmModuleDNS.TisSearchEdit2Search(Sender: TObject;
+procedure TFrmModuleDNS.TisSearchEdit_TreeDNSSearch(Sender: TObject;
   const aText: string);
 var
   Node: TTreeNode;

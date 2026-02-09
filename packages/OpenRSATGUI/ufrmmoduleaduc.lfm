@@ -441,7 +441,7 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExpanded = TreeADUCExpanded
       OnGetImageIndex = TreeADUCGetImageIndex
     end
-    object TisSearchEdit_Tree: TTisSearchEdit
+    object TisSearchEdit_TreeADUC: TTisSearchEdit
       Left = 4
       Height = 23
       Top = 4
@@ -452,7 +452,7 @@ object FrmModuleADUC: TFrmModuleADUC
       TabOrder = 0
       Buttons = <>
       SearchInterval = 500
-      OnSearch = TisSearchEdit_TreeSearch
+      OnSearch = TisSearchEdit_TreeADUCSearch
     end
   end
   object Panel2: TPanel
@@ -539,7 +539,7 @@ object FrmModuleADUC: TFrmModuleADUC
       ClientHeight = 31
       ClientWidth = 625
       TabOrder = 1
-      object TisSearchEdit_Grid: TTisSearchEdit
+      object TisSearchEdit_GridADUC: TTisSearchEdit
         Left = 4
         Height = 23
         Top = 4
@@ -550,9 +550,9 @@ object FrmModuleADUC: TFrmModuleADUC
         TabOrder = 0
         Buttons = <>
         SearchInterval = 500
-        OnSearch = TisSearchEdit_GridSearch
+        OnSearch = TisSearchEdit_GridADUCSearch
       end
-      object CheckBox1: TCheckBox
+      object CheckBox_IncludeSubContainer: TCheckBox
         Left = 208
         Height = 23
         Top = 4
@@ -561,7 +561,7 @@ object FrmModuleADUC: TFrmModuleADUC
         BorderSpacing.Around = 4
         Caption = 'Include subcontainer'
         TabOrder = 1
-        OnChange = CheckBox1Change
+        OnChange = CheckBox_IncludeSubContainerChange
       end
     end
   end

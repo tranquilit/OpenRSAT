@@ -384,7 +384,7 @@ object FrmModuleADSI: TFrmModuleADSI
       OnExpanding = TreeView1Expanding
       OnGetImageIndex = TreeView1GetImageIndex
     end
-    object TisSearchEdit2: TTisSearchEdit
+    object TisSearchEdit_TreeADSI: TTisSearchEdit
       Left = 4
       Height = 23
       Top = 4
@@ -395,7 +395,7 @@ object FrmModuleADSI: TFrmModuleADSI
       TabOrder = 1
       Buttons = <>
       SearchInterval = 500
-      OnSearch = TisSearchEdit2Search
+      OnSearch = TisSearchEdit_TreeADSISearch
     end
   end
   object Panel4: TPanel
@@ -419,7 +419,7 @@ object FrmModuleADSI: TFrmModuleADSI
       ClientHeight = 31
       ClientWidth = 625
       TabOrder = 0
-      object TisSearchEdit1: TTisSearchEdit
+      object TisSearchEdit_ADSI: TTisSearchEdit
         Left = 4
         Height = 23
         Top = 4
@@ -430,7 +430,7 @@ object FrmModuleADSI: TFrmModuleADSI
         TabOrder = 0
         Buttons = <>
         SearchInterval = 500
-        OnSearch = TisSearchEdit1Search
+        OnSearch = TisSearchEdit_ADSISearch
       end
     end
     object TisGrid2: TTisGrid

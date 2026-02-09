@@ -71,8 +71,8 @@ type
     Timer_SearchInGrid: TTimer;
     TisGrid1: TTisGrid;
     TisGrid2: TTisGrid;
-    TisSearchEdit1: TTisSearchEdit;
-    TisSearchEdit2: TTisSearchEdit;
+    TisSearchEdit_ADSI: TTisSearchEdit;
+    TisSearchEdit_TreeADSI: TTisSearchEdit;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
     ToolSeparator1: TToolButton;
@@ -102,8 +102,8 @@ type
     procedure TisGrid1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure TisGrid2KeyPress(Sender: TObject; var Key: char);
-    procedure TisSearchEdit1Search(Sender: TObject; const aText: string);
-    procedure TisSearchEdit2Search(Sender: TObject; const aText: string);
+    procedure TisSearchEdit_ADSISearch(Sender: TObject; const aText: string);
+    procedure TisSearchEdit_TreeADSISearch(Sender: TObject; const aText: string);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure TreeView1Click(Sender: TObject);
     procedure TreeView1CreateNodeClass(Sender: TCustomTreeView;
@@ -376,7 +376,7 @@ begin
   SearchInGrid(Timer_SearchInGrid, TisGrid2, fSearchWord, Key);
 end;
 
-procedure TFrmModuleADSI.TisSearchEdit1Search(Sender: TObject;
+procedure TFrmModuleADSI.TisSearchEdit_ADSISearch(Sender: TObject;
   const aText: string);
 var
   lowerText: String;
@@ -421,7 +421,7 @@ begin
   end;
 end;
 
-procedure TFrmModuleADSI.TisSearchEdit2Search(Sender: TObject;
+procedure TFrmModuleADSI.TisSearchEdit_TreeADSISearch(Sender: TObject;
   const aText: string);
   function HasVisibleChild(Node: TTreeNode; LowerText: String): Boolean;
   var

@@ -92,7 +92,7 @@ type
     Action_TaskSendMail: TAction;
     Action_TreeNewAll: TAction;
     Action_UsersAndComputers: TAction;
-    CheckBox1: TCheckBox;
+    CheckBox_IncludeSubContainer: TCheckBox;
     Image1: TImage;
     Image2: TImage;
     MenuItem_EditColumns: TMenuItem;
@@ -169,8 +169,8 @@ type
     Splitter1: TSplitter;
     GridADUC: TTisGrid;
     TisGridHeaderPopupMenu1: TTisGridHeaderPopupMenu;
-    TisSearchEdit_Tree: TTisSearchEdit;
-    TisSearchEdit_Grid: TTisSearchEdit;
+    TisSearchEdit_TreeADUC: TTisSearchEdit;
+    TisSearchEdit_GridADUC: TTisSearchEdit;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
     ToolButton_AddToGroup: TToolButton;
@@ -240,14 +240,14 @@ type
     procedure Action_TaskMoveUpdate(Sender: TObject);
     procedure Action_TaskResetPasswordExecute(Sender: TObject);
     procedure Action_TaskResetPasswordUpdate(Sender: TObject);
-    procedure CheckBox1Change(Sender: TObject);
+    procedure CheckBox_IncludeSubContainerChange(Sender: TObject);
     procedure GridADUCKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
       );
     procedure MenuItem_EditColumnsClick(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
     procedure Timer_TreeChangeNodeTimer(Sender: TObject);
-    procedure TisSearchEdit_TreeSearch(Sender: TObject; const aText: string);
-    procedure TisSearchEdit_GridSearch(Sender: TObject; const aText: string);
+    procedure TisSearchEdit_TreeADUCSearch(Sender: TObject; const aText: string);
+    procedure TisSearchEdit_GridADUCSearch(Sender: TObject; const aText: string);
     procedure TreeADUCChange(Sender: TObject; Node: TTreeNode);
     procedure TreeADUCContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
     procedure TreeADUCCreateNodeClass(Sender: TCustomTreeView;
@@ -1247,7 +1247,7 @@ begin
   Action_TaskResetPassword.Enabled := Assigned(GridADUC.FocusedRow) and (GridADUC.FocusedRow^.Exists('objectName'));
 end;
 
-procedure TFrmModuleADUC.CheckBox1Change(Sender: TObject);
+procedure TFrmModuleADUC.CheckBox_IncludeSubContainerChange(Sender: TObject);
 begin
   UpdateGridADUC(nil);
 end;
@@ -1297,7 +1297,7 @@ begin
   UpdateGridADUC((TreeADUC.Selected as TADUCTreeNode));
 end;
 
-procedure TFrmModuleADUC.TisSearchEdit_TreeSearch(Sender: TObject;
+procedure TFrmModuleADUC.TisSearchEdit_TreeADUCSearch(Sender: TObject;
   const aText: string);
 var
   Node: TTreeNode;
@@ -1340,7 +1340,7 @@ begin
   end;
 end;
 
-procedure TFrmModuleADUC.TisSearchEdit_GridSearch(Sender: TObject;
+procedure TFrmModuleADUC.TisSearchEdit_GridADUCSearch(Sender: TObject;
   const aText: string);
 begin
   UpdateGridADUC(nil);
@@ -2293,9 +2293,9 @@ begin
   Filter := '';
   if not FrmRSAT.RSATOption.AdvancedView then
     Filter := FormatUtf8('%(|(!(showInAdvancedViewOnly=*))(showInAdvancedViewOnly=FALSE))', [Filter]);
-  if TisSearchEdit_Grid.Text <> '' then
+  if TisSearchEdit_GridADUC.Text <> '' then
   begin
-    SearchText := LdapEscape(TisSearchEdit_Grid.Text);
+    SearchText := LdapEscape(TisSearchEdit_GridADUC.Text);
     Filter := FormatUtf8('%(|(name=%)(name=*%)(name=%*)(name=*%*))', [Filter, SearchText, SearchText, SearchText, SearchText]);
   end;
 
@@ -2307,7 +2307,7 @@ begin
 
   FrmRSAT.LdapClient.SearchBegin(fModuleAduc.ADUCOption.SearchPageSize);
   try
-    if CheckBox1.Checked then
+    if CheckBox_IncludeSubContainer.Checked then
       FrmRSAT.LdapClient.SearchScope := lssWholeSubtree
     else
       FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
