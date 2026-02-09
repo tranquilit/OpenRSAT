@@ -10,7 +10,6 @@ object VisOpenRSAT: TVisOpenRSAT
   Position = poWorkAreaCenter
   SessionProperties = 'Width;WindowState;Height;Left;Top'
   LCLVersion = '4.5.0.0'
-  OnPaint = FormPaint
   OnShow = FormShow
   object MainMenu: TMainMenu
     Images = CoreDataModule.ImageList1
