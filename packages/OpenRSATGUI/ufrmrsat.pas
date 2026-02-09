@@ -13,6 +13,7 @@ uses
   ActnList,
   ExtCtrls,
   StdCtrls,
+  IniPropStorage,
   mormot.core.base,
   mormot.core.log,
   mormot.core.test,
@@ -43,6 +44,7 @@ type
     Action_LdapOptions: TAction;
     Action_Options: TAction;
     Action_Properties: TAction;
+    IniPropStorage1: TIniPropStorage;
     PageControl1: TPageControl;
     StatusBar1: TStatusBar;
     Timer_AutoConnect: TTimer;
@@ -172,7 +174,8 @@ uses
   ucommon,
   umoduleaduc,
   ursatldapclientui,
-  utranslation;
+  utranslation,
+  uconfig;
 
 {$R *.lfm}
 
@@ -482,6 +485,8 @@ begin
     aLog := fLog.Enter('% - Create', [Self.Name]);
 
   Application.CreateForm(TCoreDataModule, CoreDataModule);
+
+  IniPropStorage1.IniFileName := VisBakFilePath;
 
   FrmRSATOptionClass := TFrmRSATOption;
 

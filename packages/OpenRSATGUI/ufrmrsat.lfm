@@ -91,4 +91,9 @@ object FrmRSAT: TFrmRSAT
     Left = 128
     Top = 40
   end
+  object IniPropStorage1: TIniPropStorage
+    StoredValues = <>
+    Left = 240
+    Top = 40
+  end
 end
