@@ -731,10 +731,6 @@ object FrmModuleADUC: TFrmModuleADUC
       Caption = 'Search'
       ShortCut = 24646
     end
-    object Action_SwitchToolbarCaption: TAction
-      Caption = 'Switch toolbar size'
-      OnExecute = Action_SwitchToolbarCaptionExecute
-    end
     object Action_Previous: TAction
       Caption = 'Previous'
       DisableIfNoHandler = False
@@ -970,12 +966,6 @@ object FrmModuleADUC: TFrmModuleADUC
     end
     object MenuItem_Paste: TMenuItem
       Action = Action_Paste
-    end
-    object Separator3: TMenuItem
-      Caption = '-'
-    end
-    object MenuItem_SwitchToolbarSize: TMenuItem
-      Action = Action_SwitchToolbarCaption
     end
     object Separator4: TMenuItem
       Caption = '-'

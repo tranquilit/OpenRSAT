@@ -79,7 +79,6 @@ type
     Action_SearchRoot: TAction;
     Action_ShowGPO: TAction;
     Action_SitesAndServices: TAction;
-    Action_SwitchToolbarCaption: TAction;
     Action_TaskAddToAGroup: TAction;
     Action_TaskCopy: TAction;
     Action_TaskDelegateControl: TAction;
@@ -134,7 +133,6 @@ type
     MenuItem_NewMsAuthzCentralAccessPolicy: TMenuItem;
     MenuItem_NewMsAuthzCentralAccessRule: TMenuItem;
     MenuItem_NewMsDNSServerSettings: TMenuItem;
-    MenuItem_SwitchToolbarSize: TMenuItem;
     MenuItem_Copy: TMenuItem;
     MenuItem_Cut: TMenuItem;
     MenuItem_Paste: TMenuItem;
@@ -160,7 +158,6 @@ type
     PopupMenu1: TPopupMenu;
     Separator1: TMenuItem;
     Separator2: TMenuItem;
-    Separator3: TMenuItem;
     Separator4: TMenuItem;
     Timer_TreeChangeNode: TTimer;
     Timer_SearchInGrid: TTimer;
@@ -233,7 +230,6 @@ type
     procedure Action_RefreshUpdate(Sender: TObject);
     procedure Action_SearchExecute(Sender: TObject);
     procedure Action_SearchUpdate(Sender: TObject);
-    procedure Action_SwitchToolbarCaptionExecute(Sender: TObject);
     procedure Action_TaskAddToAGroupExecute(Sender: TObject);
     procedure Action_TaskAddToAGroupUpdate(Sender: TObject);
     procedure Action_TaskMoveExecute(Sender: TObject);
@@ -1071,42 +1067,6 @@ begin
   Action_Search.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
-procedure TFrmModuleADUC.Action_SwitchToolbarCaptionExecute(Sender: TObject);
-begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute', [Action_SwitchToolbarCaption.Caption]);
-
-  ToolBar1.ShowCaptions := not ToolBar1.ShowCaptions;
-  if ToolBar1.ShowCaptions then
-  begin
-    ToolBar1.ButtonHeight := 40;
-    UnifyButtonsWidth([ToolButton_Previous, ToolButton_Next, ToolButton_Parent]);
-    UnifyButtonsWidth([ToolButton_Property, ToolButton_Search, ToolButton_Filter]);
-    UnifyButtonsWidth([ToolButton_User, ToolButton_Group, ToolButton_OU]);
-    UnifyButtonsWidth([ToolButton_Copy, ToolButton_Cut, ToolButton_Paste, ToolButton_Delete, ToolButton_AddToGroup]);
-  end else
-  begin
-    ToolBar1.ButtonHeight := 24;
-    UnifyButtonsWidth([
-      ToolButton_Previous,
-      ToolButton_Next,
-      ToolButton_Parent,
-      ToolButton_Property,
-      ToolButton_Search,
-      ToolButton_Filter,
-      ToolButton_User,
-      ToolButton_Group,
-      ToolButton_OU,
-      ToolButton_Copy,
-      ToolButton_Cut,
-      ToolButton_Paste,
-      ToolButton_Delete,
-      ToolButton_AddToGroup
-    ], 24);
-  end;
-  ToolBar1.Refresh;
-end;
-
 procedure TFrmModuleADUC.Action_TaskAddToAGroupExecute(Sender: TObject);
 var
   DistinguishedName, SelectedDistinguishedName: String;
@@ -1570,7 +1530,6 @@ begin
     MenuItem_Copy,
     MenuItem_Cut,
     MenuItem_Paste,
-    MenuItem_SwitchToolbarSize,
     MenuItem_Search,
     MenuItem_Delete,
     MenuItem_Refresh,
@@ -2647,7 +2606,7 @@ begin
     begin
       for SearchResultItem in SearchResult.Items do
       begin
-        if not Assigned(SearchResultItem) then
+        if not Assigned(SearchResultItem) or (SearchResultItem.Attributes.Count <= 0) then
           Continue;
         NewRow.AddValue('objectName', SearchResultItem.ObjectName);
         for AttributeItem in SearchResultItem.Attributes.Items do

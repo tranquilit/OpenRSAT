@@ -49,7 +49,6 @@
 {"hash":5671589,"name":"tfrmmoduleaduc.action_paste.caption","sourcebytes":[80,97,115,116,101],"value":"Paste"},
 {"hash":21703,"name":"tfrmmoduleaduc.action_treenewall.caption","sourcebytes":[78,101,119],"value":"New"},
 {"hash":94079128,"name":"tfrmmoduleaduc.action_searchroot.caption","sourcebytes":[83,101,97,114,99,104],"value":"Search"},
-{"hash":84978805,"name":"tfrmmoduleaduc.action_switchtoolbarcaption.caption","sourcebytes":[83,119,105,116,99,104,32,116,111,111,108,98,97,114,32,115,105,122,101],"value":"Switch toolbar size"},
 {"hash":147653555,"name":"tfrmmoduleaduc.action_previous.caption","sourcebytes":[80,114,101,118,105,111,117,115],"value":"Previous"},
 {"hash":347380,"name":"tfrmmoduleaduc.action_next.caption","sourcebytes":[78,101,120,116],"value":"Next"},
 {"hash":63147732,"name":"tfrmmoduleaduc.action_parent.caption","sourcebytes":[65,99,116,105,111,110,95,80,97,114,101,110,116],"value":"Action_Parent"},
