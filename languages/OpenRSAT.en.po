@@ -89,6 +89,10 @@ msgstr "?"
 msgid "Retrieve old configuration"
 msgstr "Retrieve old configuration"
 
+#: tvisopenrsat.menuitem_showgpo.caption
+msgid "MenuItem_ShowGPO"
+msgstr ""
+
 #: tvisopenrsat.menuitem_view.caption
 msgctxt "tvisopenrsat.menuitem_view.caption"
 msgid "View"

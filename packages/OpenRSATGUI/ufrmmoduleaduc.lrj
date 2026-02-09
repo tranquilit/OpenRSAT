@@ -19,6 +19,7 @@
 {"hash":346165,"name":"tfrmmoduleaduc.gridaduc.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
 {"hash":376933,"name":"tfrmmoduleaduc.gridaduc.header.columns[1].text","sourcebytes":[84,121,112,101],"value":"Type"},
 {"hash":156067838,"name":"tfrmmoduleaduc.gridaduc.header.columns[2].text","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110],"value":"Description"},
+{"hash":112186354,"name":"tfrmmoduleaduc.checkbox1.caption","sourcebytes":[73,110,99,108,117,100,101,32,115,117,98,99,111,110,116,97,105,110,101,114],"value":"Include subcontainer"},
 {"hash":146640072,"name":"tfrmmoduleaduc.action_refresh.caption","sourcebytes":[82,101,102,114,101,115,104],"value":"Refresh"},
 {"hash":114087587,"name":"tfrmmoduleaduc.action_properties.caption","sourcebytes":[80,114,111,112,101,114,116,105,101,115],"value":"Properties"},
 {"hash":211143810,"name":"tfrmmoduleaduc.action_newuser.caption","sourcebytes":[78,101,119,32,85,115,101,114],"value":"New User"},

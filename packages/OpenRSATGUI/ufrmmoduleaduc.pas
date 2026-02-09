@@ -92,6 +92,7 @@ type
     Action_TaskSendMail: TAction;
     Action_TreeNewAll: TAction;
     Action_UsersAndComputers: TAction;
+    CheckBox1: TCheckBox;
     Image1: TImage;
     Image2: TImage;
     MenuItem_EditColumns: TMenuItem;
@@ -239,6 +240,7 @@ type
     procedure Action_TaskMoveUpdate(Sender: TObject);
     procedure Action_TaskResetPasswordExecute(Sender: TObject);
     procedure Action_TaskResetPasswordUpdate(Sender: TObject);
+    procedure CheckBox1Change(Sender: TObject);
     procedure GridADUCKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
       );
     procedure MenuItem_EditColumnsClick(Sender: TObject);
@@ -1028,7 +1030,8 @@ begin
     Exit;
   end;
 
-  FrmRSAT.OpenProperty(DistinguishedName, SelectedText);
+  if DistinguishedName <> '' then
+    FrmRSAT.OpenProperty(DistinguishedName, SelectedText);
 end;
 
 procedure TFrmModuleADUC.Action_PropertiesUpdate(Sender: TObject);
@@ -1242,6 +1245,11 @@ end;
 procedure TFrmModuleADUC.Action_TaskResetPasswordUpdate(Sender: TObject);
 begin
   Action_TaskResetPassword.Enabled := Assigned(GridADUC.FocusedRow) and (GridADUC.FocusedRow^.Exists('objectName'));
+end;
+
+procedure TFrmModuleADUC.CheckBox1Change(Sender: TObject);
+begin
+  UpdateGridADUC(nil);
 end;
 
 procedure TFrmModuleADUC.GridADUCKeyDown(Sender: TObject; var Key: Word;
@@ -2299,7 +2307,10 @@ begin
 
   FrmRSAT.LdapClient.SearchBegin(fModuleAduc.ADUCOption.SearchPageSize);
   try
-    FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
+    if CheckBox1.Checked then
+      FrmRSAT.LdapClient.SearchScope := lssWholeSubtree
+    else
+      FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
     FrmRSAT.LdapClient.OnSearch := @OnSearchEventFillGrid;
     repeat
       if not FrmRSAT.LdapClient.Search(DistinguishedName, False, Filter, fModuleAduc.ADUCOption.GridAttributesFilter) then

@@ -506,12 +506,13 @@ begin
     PropertyName := TisGrid1.SelectedRows._[0]^.S['name'];
     DistinguishedName := TisGrid1.SelectedRows._[0]^.S['distinguishedName'];
   end;
-  FrmRSAT.OpenProperty(DistinguishedName, PropertyName);
+  if (DistinguishedName <> '') then
+    FrmRSAT.OpenProperty(DistinguishedName, PropertyName);
 end;
 
 procedure TFrmModuleSitesAndServices.Action_PropertyUpdate(Sender: TObject);
 begin
-  Action_Property.Enabled := Assigned(FrmRSAT) and Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+  Action_Property.Enabled := Assigned(FrmRSAT) and Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected and (Assigned(TreeView1.Selected) or (TisGrid1.SelectedCount > 0));
 end;
 
 procedure TFrmModuleSitesAndServices.TisGrid1DblClick(Sender: TObject);

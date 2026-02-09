@@ -78,6 +78,11 @@ object FrmRSAT: TFrmRSAT
       OnExecute = Action_AdvancedFeaturesExecute
       OnUpdate = Action_AdvancedFeaturesUpdate
     end
+    object Action_ShowGPO: TAction
+      Caption = 'Show GPO'
+      OnExecute = Action_ShowGPOExecute
+      OnUpdate = Action_ShowGPOUpdate
+    end
   end
   object Timer_AutoConnect: TTimer
     Enabled = False

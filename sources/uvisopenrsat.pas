@@ -38,6 +38,7 @@ type
     IniPropStorage1: TIniPropStorage;
     MainMenu: TMainMenu;
     MenuItem1: TMenuItem;
+    MenuItem_ShowGPO: TMenuItem;
     MenuItem_RetrieveOldConfiguration: TMenuItem;
     MenuItem_AdvancedFeatures: TMenuItem;
     MenuItem3: TMenuItem;
@@ -202,6 +203,7 @@ begin
   MenuItem_LdapDisconnect.Action := FrmRSAT.Action_LdapDisconnect;
   MenuItem_FileOptions.Action := FrmRSAT.Action_Options;
   MenuItem_AdvancedFeatures.Action := FrmRSAT.Action_AdvancedFeatures;
+  MenuItem_ShowGPO.Action := FrmRSAT.Action_ShowGPO;
   Activate;
 
   FrmRSAT.Timer_AutoConnect.Enabled := FrmRSAT.LdapConfigs.AutoConnect;

@@ -385,6 +385,7 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       ItemHeight = 15
       TabOrder = 1
       Buttons = <>
+      SearchInterval = 500
       OnSearch = TisSearchEdit1Search
     end
   end
@@ -528,6 +529,7 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
         ItemHeight = 15
         TabOrder = 0
         Buttons = <>
+        SearchInterval = 500
         OnSearch = TisSearchEdit2Search
       end
     end

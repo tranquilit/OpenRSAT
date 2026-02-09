@@ -451,6 +451,7 @@ object FrmModuleADUC: TFrmModuleADUC
       ItemHeight = 15
       TabOrder = 0
       Buttons = <>
+      SearchInterval = 500
       OnSearch = TisSearchEdit_TreeSearch
     end
   end
@@ -460,6 +461,7 @@ object FrmModuleADUC: TFrmModuleADUC
     Top = 28
     Width = 625
     Align = alClient
+    AutoSize = True
     BevelOuter = bvNone
     ClientHeight = 349
     ClientWidth = 625
@@ -505,7 +507,7 @@ object FrmModuleADUC: TFrmModuleADUC
       Header.Style = hsFlatButtons
       Images = CoreDataModule.ImageList1
       PopupMenu = PopupMenu1
-      TabOrder = 1
+      TabOrder = 0
       SelectedAndTotalLabel = Label1
       TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
       TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
@@ -536,7 +538,7 @@ object FrmModuleADUC: TFrmModuleADUC
       BevelOuter = bvNone
       ClientHeight = 31
       ClientWidth = 625
-      TabOrder = 0
+      TabOrder = 1
       object TisSearchEdit_Grid: TTisSearchEdit
         Left = 4
         Height = 23
@@ -547,7 +549,19 @@ object FrmModuleADUC: TFrmModuleADUC
         ItemHeight = 15
         TabOrder = 0
         Buttons = <>
+        SearchInterval = 500
         OnSearch = TisSearchEdit_GridSearch
+      end
+      object CheckBox1: TCheckBox
+        Left = 208
+        Height = 23
+        Top = 4
+        Width = 129
+        Align = alLeft
+        BorderSpacing.Around = 4
+        Caption = 'Include subcontainer'
+        TabOrder = 1
+        OnChange = CheckBox1Change
       end
     end
   end

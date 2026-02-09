@@ -35,6 +35,7 @@ type
   { TFrmRSAT }
 
   TFrmRSAT = class(TFrame)
+    Action_ShowGPO: TAction;
     Action_AdvancedFeatures: TAction;
     ActionList_Core: TActionList;
     Action_LdapConnect: TAction;
@@ -56,6 +57,8 @@ type
     procedure Action_LdapOptionsUpdate(Sender: TObject);
     procedure Action_OptionsExecute(Sender: TObject);
     procedure Action_OptionsUpdate(Sender: TObject);
+    procedure Action_ShowGPOExecute(Sender: TObject);
+    procedure Action_ShowGPOUpdate(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure Timer_AutoConnectTimer(Sender: TObject);
     {$pop}
@@ -167,6 +170,7 @@ uses
   uvisconnectconfigs,
   mormot.net.dns,
   ucommon,
+  umoduleaduc,
   ursatldapclientui,
   utranslation;
 
@@ -311,6 +315,29 @@ end;
 procedure TFrmRSAT.Action_OptionsUpdate(Sender: TObject);
 begin
   Action_Options.Enabled := True;
+end;
+
+procedure TFrmRSAT.Action_ShowGPOExecute(Sender: TObject);
+var
+  FrmModule: TFrameModule;
+begin
+  FrmModule := FrmModules.Get(rsModuleADUCName);
+  if not Assigned(FrmModule) then
+    Exit;
+
+  ((FrmModule as TFrmModuleADUC).Module as TModuleADUC).ADUCOption.ShowGPO := not ((FrmModule as TFrmModuleADUC).Module as TModuleADUC).ADUCOption.ShowGPO;
+  FrmModule.Refresh;
+end;
+
+procedure TFrmRSAT.Action_ShowGPOUpdate(Sender: TObject);
+var
+  FrmModule: TFrameModule;
+begin
+  FrmModule := FrmModules.Get(rsModuleADUCName);
+  if not Assigned(FrmModule) then
+    Exit;
+
+  Action_ShowGPO.Checked := ((FrmModule as TFrmModuleADUC).Module as TModuleADUC).ADUCOption.ShowGPO;
 end;
 
 procedure TFrmRSAT.PageControl1Change(Sender: TObject);

@@ -451,6 +451,7 @@ object FrmModuleDNS: TFrmModuleDNS
         ItemHeight = 15
         TabOrder = 0
         Buttons = <>
+        SearchInterval = 500
         OnSearch = TisSearchEdit1Search
       end
     end
@@ -495,6 +496,7 @@ object FrmModuleDNS: TFrmModuleDNS
       ItemHeight = 15
       TabOrder = 0
       Buttons = <>
+      SearchInterval = 500
       OnSearch = TisSearchEdit2Search
     end
   end

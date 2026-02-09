@@ -30,6 +30,7 @@ type
 
     function RegisterModule(AFrmModule: TFrameModule): Boolean;
     function Change(AName: RawUtf8): Boolean;
+    function Get(AName: RawUtf8): TFrameModule;
     function Refresh: Boolean;
     function RefreshAll: Boolean;
     property Items: TFrameModuleDynArray read fFrmModules;
@@ -114,6 +115,19 @@ begin
     fLog.Log(sllWarning, '% - Module not found "%".', [Self.ClassName, AName]);
   result := False;
   fActiveModule := nil;
+end;
+
+function TFrmModules.Get(AName: RawUtf8): TFrameModule;
+var
+  fm: TFrameModule;
+begin
+  result := nil;
+  for fm in fFrmModules do
+    if (fm.ModuleName = AName) then
+    begin
+      result := fm;
+      Exit;
+    end;
 end;
 
 function TFrmModules.Refresh: Boolean;

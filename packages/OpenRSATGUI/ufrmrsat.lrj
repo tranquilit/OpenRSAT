@@ -5,5 +5,6 @@
 {"hash":174193460,"name":"tfrmrsat.action_ldapdisconnect.caption","sourcebytes":[68,105,115,99,111,110,110,101,99,116],"value":"Disconnect"},
 {"hash":141619539,"name":"tfrmrsat.action_ldapoptions.caption","sourcebytes":[67,111,110,110,101,99,116,105,111,110,32,79,112,116,105,111,110,115],"value":"Connection Options"},
 {"hash":114087587,"name":"tfrmrsat.action_properties.caption","sourcebytes":[80,114,111,112,101,114,116,105,101,115],"value":"Properties"},
-{"hash":257364099,"name":"tfrmrsat.action_advancedfeatures.caption","sourcebytes":[65,100,118,97,110,99,101,100,32,70,101,97,116,117,114,101,115],"value":"Advanced Features"}
+{"hash":257364099,"name":"tfrmrsat.action_advancedfeatures.caption","sourcebytes":[65,100,118,97,110,99,101,100,32,70,101,97,116,117,114,101,115],"value":"Advanced Features"},
+{"hash":258558431,"name":"tfrmrsat.action_showgpo.caption","sourcebytes":[83,104,111,119,32,71,80,79],"value":"Show GPO"}
 ]}
