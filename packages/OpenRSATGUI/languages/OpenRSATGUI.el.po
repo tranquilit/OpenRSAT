@@ -1,24 +1,9 @@
-#: uvisconnectconfigs.lrj:$.strings.[9].value
-msgctxt "tformconnectconfigs.action_addconfig.caption"
-msgid "Add"
-msgstr "Προσθήκη"
-
-#: uvisconnectconfigs.lrj:$.strings.[8].value
+#: uvisconnectconfigs.lrj:$.strings.[7].value
 msgctxt "tformconnectconfigs.action_cancel.caption"
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: uvisconnectconfigs.lrj:$.strings.[10].value
-msgctxt "tformconnectconfigs.action_deleteconfig.caption"
-msgid "Delete"
-msgstr "Διαγραφή"
-
 #: uvisconnectconfigs.lrj:$.strings.[6].value
-msgctxt "tformconnectconfigs.action_editconfig.caption"
-msgid "Edit"
-msgstr "Επεξεργασία"
-
-#: uvisconnectconfigs.lrj:$.strings.[7].value
 msgctxt "tformconnectconfigs.action_ok.caption"
 msgid "OK"
 msgstr "OK"
@@ -29,7 +14,10 @@ msgid "OpenRSAT Authentication"
 msgstr "Αυθεντικοποίηση OpenRSAT"
 
 #: uvisconnectconfigs.lrj:$.strings.[5].value
-msgctxt "tformconnectconfigs.label1.caption"
+#, fuzzy
+#| msgctxt "tformconnectconfigs.label1.caption"
+#| msgid "Auto connect"
+msgctxt "tformconnectconfigs.label_autoconnect.caption"
 msgid "Auto connect"
 msgstr "Αυτόματη σύνδεση"
 
@@ -37,6 +25,14 @@ msgstr "Αυτόματη σύνδεση"
 msgctxt "tformconnectconfigs.label_password.caption"
 msgid "Password:"
 msgstr "Κωδικός:"
+
+#: uvisconnectconfigs.lrj:$.strings.[3].value
+#, fuzzy
+#| msgctxt "tfrmpropertyprofile.label_profilepath.caption"
+#| msgid "Profile path :"
+msgctxt "tformconnectconfigs.label_profile.caption"
+msgid "Profile"
+msgstr "Διαδρομή προφίλ :"
 
 #: uvisconnectconfigs.lrj:$.strings.[4].value
 msgctxt "tformconnectconfigs.label_server.caption"
@@ -83,42 +79,42 @@ msgctxt "tfrmmoduleadsi.action_refresh.caption"
 msgid "Refresh"
 msgstr "Ανανέωση"
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[4].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[0].value
 msgctxt "tfrmmoduleadsi.label1.caption"
 msgid "Total : 0 elements"
 msgstr "Συνολικά: 0 στοιχεία"
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[1].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[6].value
 msgctxt "tfrmmoduleadsi.tisgrid1.header.columns[1].text"
 msgid "Name"
 msgstr "Όνομα"
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[2].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[7].value
 msgctxt "tfrmmoduleadsi.tisgrid1.header.columns[2].text"
 msgid "Type"
 msgstr "Τύπος"
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[3].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[8].value
 msgctxt "tfrmmoduleadsi.tisgrid1.header.columns[3].text"
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[5].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[1].value
 msgctxt "tfrmmoduleadsi.tisgrid2.header.columns[0].text"
 msgid "Attribute"
 msgstr "Χαρακτηριστικό"
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[6].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[2].value
 msgctxt "tfrmmoduleadsi.tisgrid2.header.columns[1].text"
 msgid "Value"
 msgstr "Τιμή"
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[7].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[3].value
 msgctxt "tfrmmoduleadsi.tisgrid2.header.columns[2].text"
 msgid "Type"
 msgstr "Τύπος"
 
-#: ufrmmoduleserviceinterfaces.lrj:$.strings.[8].value
+#: ufrmmoduleserviceinterfaces.lrj:$.strings.[4].value
 msgctxt "tfrmmoduleadsi.tisgrid2.header.columns[3].text"
 msgid "Size"
 msgstr "Μέγεθος"
@@ -128,277 +124,324 @@ msgctxt "tfrmmoduleadssoptions.label1.caption"
 msgid "Show Service"
 msgstr "Εμφάνιση Υπηρεσίας"
 
-#: ufrmmoduleaduc.lrj:$.strings.[54].value
+#: ufrmmoduleaduc.lrj:$.strings.[64].value
+#, fuzzy
+#| msgctxt "tvisaddaces.checkgroup_inheritance.caption"
+#| msgid "Inheritance"
+msgctxt "tfrmmoduleaduc.action_blockgpoinheritance.caption"
+msgid "Block GPO Inheritance"
+msgstr "Κληρονόμηση"
+
+#: ufrmmoduleaduc.lrj:$.strings.[55].value
 msgctxt "tfrmmoduleaduc.action_changedomaincontroller.caption"
 msgid "Change Domain Controller"
 msgstr "Αλλαγή Ελεγκτή Τομέα"
 
-#: ufrmmoduleaduc.lrj:$.strings.[44].value
+#: ufrmmoduleaduc.lrj:$.strings.[45].value
 msgctxt "tfrmmoduleaduc.action_copy.caption"
 msgid "Copy"
 msgstr "Αντιγραφή"
 
-#: ufrmmoduleaduc.lrj:$.strings.[45].value
+#: ufrmmoduleaduc.lrj:$.strings.[46].value
 msgctxt "tfrmmoduleaduc.action_cut.caption"
 msgid "Cut"
 msgstr "Αποκοπή"
 
-#: ufrmmoduleaduc.lrj:$.strings.[57].value
+#: ufrmmoduleaduc.lrj:$.strings.[58].value
 msgctxt "tfrmmoduleaduc.action_delegatecontrol.caption"
 msgid "Delegate control"
 msgstr "Ανάθεση ελέγχου"
 
-#: ufrmmoduleaduc.lrj:$.strings.[24].value
+#: ufrmmoduleaduc.lrj:$.strings.[25].value
 msgctxt "tfrmmoduleaduc.action_delete.caption"
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: ufrmmoduleaduc.lrj:$.strings.[43].value
+#: ufrmmoduleaduc.lrj:$.strings.[62].value
+#, fuzzy
+#| msgctxt "tfrmmoduleaduc.action_taskdisableaccount.caption"
+#| msgid "Disable Account"
+msgctxt "tfrmmoduleaduc.action_disablegpo.caption"
+msgid "Disable GPO"
+msgstr "Απενεργοποίηση Λογαριασμού"
+
+#: ufrmmoduleaduc.lrj:$.strings.[61].value
+msgctxt "tfrmmoduleaduc.action_enablegpo.caption"
+msgid "Enable GPO"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[63].value
+msgctxt "tfrmmoduleaduc.action_enforcegpo.caption"
+msgid "Enforce GPO"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[44].value
 msgctxt "tfrmmoduleaduc.action_filter.caption"
 msgid "Filter"
 msgstr "Φίλτρο"
 
-#: ufrmmoduleaduc.lrj:$.strings.[37].value
+#: ufrmmoduleaduc.lrj:$.strings.[60].value
+#, fuzzy
+#| msgctxt "tfrmpropertyattributes.action_modify.caption"
+#| msgid "Modify"
+msgctxt "tfrmmoduleaduc.action_modifygplink.caption"
+msgid "Modify GPLink"
+msgstr "Τροποποίηση"
+
+#: ufrmmoduleaduc.lrj:$.strings.[38].value
 msgctxt "tfrmmoduleaduc.action_newall.caption"
 msgid "New"
 msgstr "Νέο"
 
-#: ufrmmoduleaduc.lrj:$.strings.[35].value
+#: ufrmmoduleaduc.lrj:$.strings.[36].value
 msgctxt "tfrmmoduleaduc.action_newcomputer.caption"
 msgid "Computer"
 msgstr "Υπολογιστής"
 
-#: ufrmmoduleaduc.lrj:$.strings.[39].value
+#: ufrmmoduleaduc.lrj:$.strings.[40].value
 msgctxt "tfrmmoduleaduc.action_newcontact.caption"
 msgid "Contact"
 msgstr "Επαφή"
 
-#: ufrmmoduleaduc.lrj:$.strings.[38].value
+#: ufrmmoduleaduc.lrj:$.strings.[39].value
 msgctxt "tfrmmoduleaduc.action_newdefault.caption"
 msgid "Default"
 msgstr "Προκαθορισμένο"
 
-#: ufrmmoduleaduc.lrj:$.strings.[23].value
+#: ufrmmoduleaduc.lrj:$.strings.[24].value
 msgctxt "tfrmmoduleaduc.action_newgroup.caption"
 msgid "New Group"
 msgstr "Νέα Ομάδα"
 
-#: ufrmmoduleaduc.lrj:$.strings.[36].value
+#: ufrmmoduleaduc.lrj:$.strings.[37].value
 msgctxt "tfrmmoduleaduc.action_newou.caption"
 msgid "New OU"
 msgstr "Νέο OU"
 
-#: ufrmmoduleaduc.lrj:$.strings.[41].value
+#: ufrmmoduleaduc.lrj:$.strings.[42].value
 msgctxt "tfrmmoduleaduc.action_newsharedfolder.caption"
 msgid "Shared Folder"
 msgstr "Κοινόχρηστος Φάκελος"
 
-#: ufrmmoduleaduc.lrj:$.strings.[22].value
+#: ufrmmoduleaduc.lrj:$.strings.[23].value
 msgctxt "tfrmmoduleaduc.action_newuser.caption"
 msgid "New User"
 msgstr "Νέος Χρήστης"
 
-#: ufrmmoduleaduc.lrj:$.strings.[51].value
+#: ufrmmoduleaduc.lrj:$.strings.[52].value
 msgctxt "tfrmmoduleaduc.action_next.caption"
 msgid "Next"
 msgstr "Επόμενο"
 
-#: ufrmmoduleaduc.lrj:$.strings.[58].value
+#: ufrmmoduleaduc.lrj:$.strings.[59].value
 msgctxt "tfrmmoduleaduc.action_operationsmasters.caption"
 msgid "Operations masters"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[46].value
+#: ufrmmoduleaduc.lrj:$.strings.[47].value
 msgctxt "tfrmmoduleaduc.action_paste.caption"
 msgid "Paste"
 msgstr "Επικόλληση"
 
-#: ufrmmoduleaduc.lrj:$.strings.[50].value
+#: ufrmmoduleaduc.lrj:$.strings.[51].value
 msgctxt "tfrmmoduleaduc.action_previous.caption"
 msgid "Previous"
 msgstr "Προηγούμενο"
 
-#: ufrmmoduleaduc.lrj:$.strings.[21].value
+#: ufrmmoduleaduc.lrj:$.strings.[22].value
 msgctxt "tfrmmoduleaduc.action_properties.caption"
 msgid "Properties"
 msgstr "Ιδιότητες"
 
-#: ufrmmoduleaduc.lrj:$.strings.[20].value
+#: ufrmmoduleaduc.lrj:$.strings.[21].value
 msgctxt "tfrmmoduleaduc.action_refresh.caption"
 msgid "Refresh"
 msgstr "Ανανέωση"
 
-#: ufrmmoduleaduc.lrj:$.strings.[42].value
+#: ufrmmoduleaduc.lrj:$.strings.[43].value
 msgctxt "tfrmmoduleaduc.action_search.caption"
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: ufrmmoduleaduc.lrj:$.strings.[48].value
+#: ufrmmoduleaduc.lrj:$.strings.[49].value
 msgctxt "tfrmmoduleaduc.action_searchroot.caption"
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: ufrmmoduleaduc.lrj:$.strings.[53].value
+#: ufrmmoduleaduc.lrj:$.strings.[54].value
 msgctxt "tfrmmoduleaduc.action_showgpo.caption"
 msgid "Show GPO"
 msgstr "Εμφάνιση GPO"
 
-#: ufrmmoduleaduc.lrj:$.strings.[55].value
+#: ufrmmoduleaduc.lrj:$.strings.[56].value
 msgctxt "tfrmmoduleaduc.action_sitesandservices.caption"
 msgid "Sites and services"
 msgstr "Τοποθεσίες και υπηρεσίες"
 
-#: ufrmmoduleaduc.lrj:$.strings.[49].value
+#: ufrmmoduleaduc.lrj:$.strings.[50].value
 msgctxt "tfrmmoduleaduc.action_switchtoolbarcaption.caption"
 msgid "Switch toolbar size"
 msgstr "Αλλαγή μεγέθους εργαλειοθήκης"
 
-#: ufrmmoduleaduc.lrj:$.strings.[27].value
+#: ufrmmoduleaduc.lrj:$.strings.[28].value
 msgctxt "tfrmmoduleaduc.action_taskaddtoagroup.caption"
 msgid "Add to a group"
 msgstr "Προσθήκη σε ομάδα"
 
-#: ufrmmoduleaduc.lrj:$.strings.[26].value
+#: ufrmmoduleaduc.lrj:$.strings.[27].value
 msgctxt "tfrmmoduleaduc.action_taskcopy.caption"
 msgid "Copy"
 msgstr "Αντιγραφή"
 
-#: ufrmmoduleaduc.lrj:$.strings.[25].value
+#: ufrmmoduleaduc.lrj:$.strings.[26].value
 msgctxt "tfrmmoduleaduc.action_taskdelegatecontrol.caption"
 msgid "Delagate Control"
 msgstr "Ανάθεση Ελέγχου"
 
-#: ufrmmoduleaduc.lrj:$.strings.[29].value
+#: ufrmmoduleaduc.lrj:$.strings.[30].value
 msgctxt "tfrmmoduleaduc.action_taskdisableaccount.caption"
 msgid "Disable Account"
 msgstr "Απενεργοποίηση Λογαριασμού"
 
-#: ufrmmoduleaduc.lrj:$.strings.[34].value
+#: ufrmmoduleaduc.lrj:$.strings.[35].value
 msgctxt "tfrmmoduleaduc.action_taskmanage.caption"
 msgid "Manage"
 msgstr "Διαχείριση"
 
-#: ufrmmoduleaduc.lrj:$.strings.[31].value
+#: ufrmmoduleaduc.lrj:$.strings.[32].value
 msgctxt "tfrmmoduleaduc.action_taskmove.caption"
 msgid "Move"
 msgstr "Μετακίνηση"
 
-#: ufrmmoduleaduc.lrj:$.strings.[28].value
+#: ufrmmoduleaduc.lrj:$.strings.[29].value
 msgctxt "tfrmmoduleaduc.action_tasknamemappings.caption"
 msgid "Name mappings"
 msgstr "Αντιστοιχίσεις ονομάτων"
 
-#: ufrmmoduleaduc.lrj:$.strings.[32].value
+#: ufrmmoduleaduc.lrj:$.strings.[33].value
 msgctxt "tfrmmoduleaduc.action_taskopenhomepage.caption"
 msgid "Open Home Page"
 msgstr "Άνοιγμα Αρχικής Σελίδας"
 
-#: ufrmmoduleaduc.lrj:$.strings.[30].value
+#: ufrmmoduleaduc.lrj:$.strings.[31].value
 msgctxt "tfrmmoduleaduc.action_taskresetpassword.caption"
 msgid "Reset Password"
 msgstr "Επαναφορά Κωδικού"
 
-#: ufrmmoduleaduc.lrj:$.strings.[33].value
+#: ufrmmoduleaduc.lrj:$.strings.[34].value
 msgctxt "tfrmmoduleaduc.action_tasksendmail.caption"
 msgid "Send Mail"
 msgstr "Αποστολή Mail"
 
-#: ufrmmoduleaduc.lrj:$.strings.[47].value
+#: ufrmmoduleaduc.lrj:$.strings.[48].value
 msgctxt "tfrmmoduleaduc.action_treenewall.caption"
 msgid "New"
 msgstr "Νέο"
 
-#: ufrmmoduleaduc.lrj:$.strings.[56].value
+#: ufrmmoduleaduc.lrj:$.strings.[57].value
 msgctxt "tfrmmoduleaduc.action_usersandcomputers.caption"
 msgid "Users and computers"
 msgstr "Χρήστες και υπολογιστές"
 
-#: ufrmmoduleaduc.lrj:$.strings.[0].value
+#: ufrmmoduleaduc.lrj:$.strings.[20].value
+#, fuzzy
+#| msgctxt "tvisnewquery.checkbox_includesubcontainers.caption"
+#| msgid "Include subcontainers"
+msgctxt "tfrmmoduleaduc.checkbox1.caption"
+msgid "Include subcontainer"
+msgstr "Συμπερίληψη subcontainers"
+
+#: ufrmmoduleaduc.lrj:$.strings.[17].value
 msgctxt "tfrmmoduleaduc.gridaduc.header.columns[0].text"
 msgid "Name"
 msgstr "Όνομα"
 
-#: ufrmmoduleaduc.lrj:$.strings.[1].value
+#: ufrmmoduleaduc.lrj:$.strings.[18].value
 msgctxt "tfrmmoduleaduc.gridaduc.header.columns[1].text"
 msgid "Type"
 msgstr "Τύπος"
 
-#: ufrmmoduleaduc.lrj:$.strings.[2].value
+#: ufrmmoduleaduc.lrj:$.strings.[19].value
 msgctxt "tfrmmoduleaduc.gridaduc.header.columns[2].text"
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: ufrmmoduleaduc.lrj:$.strings.[3].value
+#: ufrmmoduleaduc.lrj:$.strings.[0].value
 msgctxt "tfrmmoduleaduc.label1.caption"
 msgid "Total : 0 elements"
 msgstr "Συνολικά: 0 στοιχεία"
 
-#: ufrmmoduleaduc.lrj:$.strings.[19].value
+#: ufrmmoduleaduc.lrj:$.strings.[91].value
+msgctxt "tfrmmoduleaduc.menuitem_editcolumns.caption"
+msgid "Edit columns"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[16].value
 msgctxt "tfrmmoduleaduc.toolbutton_addtogroup.hint"
 msgid "Add to a Group"
 msgstr "Προσθήκη σε ομάδα"
 
-#: ufrmmoduleaduc.lrj:$.strings.[15].value
+#: ufrmmoduleaduc.lrj:$.strings.[12].value
 msgctxt "tfrmmoduleaduc.toolbutton_copy.hint"
 msgid "Copy"
 msgstr "Αντιγραφή"
 
-#: ufrmmoduleaduc.lrj:$.strings.[16].value
+#: ufrmmoduleaduc.lrj:$.strings.[13].value
 msgctxt "tfrmmoduleaduc.toolbutton_cut.hint"
 msgid "Cut"
 msgstr "Αποκοπή"
 
-#: ufrmmoduleaduc.lrj:$.strings.[18].value
+#: ufrmmoduleaduc.lrj:$.strings.[15].value
 msgctxt "tfrmmoduleaduc.toolbutton_delete.hint"
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: ufrmmoduleaduc.lrj:$.strings.[9].value
+#: ufrmmoduleaduc.lrj:$.strings.[6].value
 msgctxt "tfrmmoduleaduc.toolbutton_filter.hint"
 msgid "Filter"
 msgstr "Φίλτρο"
 
-#: ufrmmoduleaduc.lrj:$.strings.[12].value
+#: ufrmmoduleaduc.lrj:$.strings.[9].value
 msgctxt "tfrmmoduleaduc.toolbutton_group.hint"
 msgid "New Group"
 msgstr "Νέα Ομάδα"
 
-#: ufrmmoduleaduc.lrj:$.strings.[5].value
+#: ufrmmoduleaduc.lrj:$.strings.[2].value
 msgctxt "tfrmmoduleaduc.toolbutton_next.hint"
 msgid "Next"
 msgstr "Επόμενο"
 
-#: ufrmmoduleaduc.lrj:$.strings.[13].value
+#: ufrmmoduleaduc.lrj:$.strings.[10].value
 msgctxt "tfrmmoduleaduc.toolbutton_ou.hint"
 msgid "New OU"
 msgstr "Νέο OU"
 
-#: ufrmmoduleaduc.lrj:$.strings.[6].value
+#: ufrmmoduleaduc.lrj:$.strings.[3].value
 msgctxt "tfrmmoduleaduc.toolbutton_parent.hint"
 msgid "Parent"
 msgstr "Γονέας"
 
-#: ufrmmoduleaduc.lrj:$.strings.[17].value
+#: ufrmmoduleaduc.lrj:$.strings.[14].value
 msgctxt "tfrmmoduleaduc.toolbutton_paste.hint"
 msgid "Paste"
 msgstr "Επικόλληση"
 
-#: ufrmmoduleaduc.lrj:$.strings.[4].value
+#: ufrmmoduleaduc.lrj:$.strings.[1].value
 msgctxt "tfrmmoduleaduc.toolbutton_previous.hint"
 msgid "Previous"
 msgstr "Προηγούμενο"
 
-#: ufrmmoduleaduc.lrj:$.strings.[7].value
+#: ufrmmoduleaduc.lrj:$.strings.[4].value
 msgctxt "tfrmmoduleaduc.toolbutton_property.hint"
 msgid "Property"
 msgstr "Ιδιότητα"
 
-#: ufrmmoduleaduc.lrj:$.strings.[8].value
+#: ufrmmoduleaduc.lrj:$.strings.[5].value
 msgctxt "tfrmmoduleaduc.toolbutton_search.hint"
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: ufrmmoduleaduc.lrj:$.strings.[11].value
+#: ufrmmoduleaduc.lrj:$.strings.[8].value
 msgctxt "tfrmmoduleaduc.toolbutton_user.hint"
 msgid "New User"
 msgstr "Νέος Χρήστης"
@@ -483,42 +526,42 @@ msgctxt "tfrmmoduledns.action_refresh.caption"
 msgid "Refresh"
 msgstr "Ανανέωση"
 
-#: ufrmmoduledns.lrj:$.strings.[0].value
+#: ufrmmoduledns.lrj:$.strings.[1].value
 msgctxt "tfrmmoduledns.griddns.header.columns[0].text"
 msgid "Name"
 msgstr "Όνομα"
 
-#: ufrmmoduledns.lrj:$.strings.[1].value
+#: ufrmmoduledns.lrj:$.strings.[2].value
 msgctxt "tfrmmoduledns.griddns.header.columns[1].text"
 msgid "Type"
 msgstr "Τύπος"
 
-#: ufrmmoduledns.lrj:$.strings.[2].value
+#: ufrmmoduledns.lrj:$.strings.[3].value
 msgctxt "tfrmmoduledns.griddns.header.columns[2].text"
 msgid "Data"
 msgstr "Δεδομένα"
 
-#: ufrmmoduledns.lrj:$.strings.[3].value
+#: ufrmmoduledns.lrj:$.strings.[4].value
 msgctxt "tfrmmoduledns.griddns.header.columns[3].text"
 msgid "Timestamp"
 msgstr "Χρονοσφραγίδα"
 
-#: ufrmmoduledns.lrj:$.strings.[4].value
+#: ufrmmoduledns.lrj:$.strings.[5].value
 msgctxt "tfrmmoduledns.griddns.header.columns[4].text"
 msgid "Status"
 msgstr "Κατάσταση"
 
-#: ufrmmoduledns.lrj:$.strings.[5].value
+#: ufrmmoduledns.lrj:$.strings.[6].value
 msgctxt "tfrmmoduledns.griddns.header.columns[5].text"
 msgid "DNSSEC Status"
 msgstr "Κατάσταση DNSSEC"
 
-#: ufrmmoduledns.lrj:$.strings.[6].value
+#: ufrmmoduledns.lrj:$.strings.[7].value
 msgctxt "tfrmmoduledns.griddns.header.columns[6].text"
 msgid "Key Master"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[7].value
+#: ufrmmoduledns.lrj:$.strings.[0].value
 msgctxt "tfrmmoduledns.label1.caption"
 msgid "Total : 0 elements"
 msgstr "Συνολικά: 0 στοιχεία"
@@ -548,67 +591,67 @@ msgctxt "tfrmmodulesitesandservices.action_refresh.caption"
 msgid "Refresh"
 msgstr "Ανανέωση"
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[12].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[0].value
 msgctxt "tfrmmodulesitesandservices.label1.caption"
 msgid "Total : 0 elements"
 msgstr "Συνολικά: 0 στοιχεία"
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[0].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[1].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[0].text"
 msgid "Name"
 msgstr "Όνομα"
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[10].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[11].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[10].text"
 msgid "From Server"
 msgstr "Από Εξυπηρετητή"
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[11].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[12].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[11].text"
 msgid "From Site"
 msgstr "Από Τόπο"
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[1].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[2].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[1].text"
 msgid "Type"
 msgstr "Τύπος"
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[2].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[3].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[2].text"
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[3].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[4].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[3].text"
 msgid "Location"
 msgstr "Τοποθεσία"
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[4].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[5].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[4].text"
 msgid "Site"
 msgstr "Τόπος"
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[5].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[6].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[5].text"
 msgid "Cost"
 msgstr "Κόστος"
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[6].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[7].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[6].text"
 msgid "Replication Interval"
 msgstr "Διάστημα Αναπαραγωγής"
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[7].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[8].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[7].text"
 msgid "Domain"
 msgstr "Τομέας"
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[8].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[9].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[8].text"
 msgid "Bridgehead"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[9].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[10].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[9].text"
 msgid "DC Type"
 msgstr "Τύπος DC"
@@ -621,12 +664,15 @@ msgstr "Αλλαγή..."
 #: ufrmnewcomputer.lrj:$.strings.[5].value
 msgctxt "tfrmnewcomputer.checkbox_assigncomputer.caption"
 msgid "Assign this computer account as a pre-Windows 2000 computer"
-msgstr "Προδιορισμός αυτού του λογαριασμού υπολογιστή ως υπολογιστή προ-Windows 2000"
+msgstr ""
+"Προδιορισμός αυτού του λογαριασμού υπολογιστή ως υπολογιστή προ-Windows 2000"
 
 #: ufrmnewcomputer.lrj:$.strings.[2].value
 msgctxt "tfrmnewcomputer.label1.caption"
 msgid "The following user or group can join this computer to a domain."
-msgstr "Ο παρακάτω χρήστης ή ομάδα μπορεί να συνδέσει αυτόν τον υπολογιστή σε έναν τομέα."
+msgstr ""
+"Ο παρακάτω χρήστης ή ομάδα μπορεί να συνδέσει αυτόν τον υπολογιστή σε έναν "
+"τομέα."
 
 #: ufrmnewcomputer.lrj:$.strings.[0].value
 msgctxt "tfrmnewcomputer.label_computername.caption"
@@ -775,8 +821,9 @@ msgstr "ΟΚ"
 
 #: ufrmnewsite.lrj:$.strings.[1].value
 msgctxt "tfrmnewsite.label_info.caption"
-msgid "Select a site link object for this site. Site link objects are located in th"
-"e Sites/Inter-Site Transports container."
+msgid ""
+"Select a site link object for this site. Site link objects are located in "
+"the Sites/Inter-Site Transports container."
 msgstr ""
 
 #: ufrmnewsite.lrj:$.strings.[0].value
@@ -801,13 +848,15 @@ msgstr "ΟΚ"
 
 #: ufrmnewsubnet.lrj:$.strings.[0].value
 msgctxt "tfrmnewsubnet.label1.caption"
-msgid "Enter the address prefix using network prefix notation (address/prefix lengt"
-"h), where the prefix length indicates the number of fixed bits. You can ente"
-"r either an IPv4 or an IPv6 subnet prefix."
-msgstr "Εισάγετε το πρόθεμα διεύθυνσης χρησιμοποιώντας τη σημειογραφία προθέματος δι"
-"κτύου (διεύθυνση/μήκος προθέματος), όπου το μήκος προθέματος υποδεικνύει τον"
-" αριθμό των σταθερών bits. Μπορείτε να εισαγάγετε είτε ένα πρόθεμα υποδικτύο"
-"υ IPv4 είτε ένα πρόθεμα υποδικτύου IPv6."
+msgid ""
+"Enter the address prefix using network prefix notation (address/prefix "
+"length), where the prefix length indicates the number of fixed bits. You can "
+"enter either an IPv4 or an IPv6 subnet prefix."
+msgstr ""
+"Εισάγετε το πρόθεμα διεύθυνσης χρησιμοποιώντας τη σημειογραφία προθέματος "
+"δικτύου (διεύθυνση/μήκος προθέματος), όπου το μήκος προθέματος υποδεικνύει "
+"τον αριθμό των σταθερών bits. Μπορείτε να εισαγάγετε είτε ένα πρόθεμα "
+"υποδικτύου IPv4 είτε ένα πρόθεμα υποδικτύου IPv6."
 
 #: ufrmnewsubnet.lrj:$.strings.[1].value
 msgctxt "tfrmnewsubnet.label2.caption"
@@ -857,7 +906,8 @@ msgstr "Ο χρήστης δεν μπορεί να αλλάξει τον κωδ�
 #: ufrmnewuser.lrj:$.strings.[9].value
 msgctxt "tfrmnewuser.checkbox_mustchangepassword.caption"
 msgid "User must change password at next logon"
-msgstr "Ο χρήστης πρέπει να αλλάξει τον κωδικό πρόσβασης κατά την επόμενη σύνδεση"
+msgstr ""
+"Ο χρήστης πρέπει να αλλάξει τον κωδικό πρόσβασης κατά την επόμενη σύνδεση"
 
 #: ufrmnewuser.lrj:$.strings.[11].value
 msgctxt "tfrmnewuser.checkbox_passwordneverexpires.caption"
@@ -867,7 +917,8 @@ msgstr "Ο κωδικός πρόσβασης δεν λήγει ποτέ"
 #: ufrmnewuser.lrj:$.strings.[4].value
 msgctxt "tfrmnewuser.edit_fullname.hint"
 msgid "The person's preferred name to be used when beeing displayed"
-msgstr "Το προτιμώμενο όνομα του ατόμου που θα χρησιμοποιείται κατά την εμφάνιση"
+msgstr ""
+"Το προτιμώμενο όνομα του ατόμου που θα χρησιμοποιείται κατά την εμφάνιση"
 
 #: ufrmnewuser.lrj:$.strings.[8].value
 msgctxt "tfrmnewuser.label_confirm.caption"
@@ -902,7 +953,8 @@ msgstr "Κωδικός :"
 #: ufrmnewuser.lrj:$.strings.[13].value
 msgctxt "tfrmnewuser.label_resume.caption"
 msgid "When you click Finish, the following object will be created :"
-msgstr "Όταν κάνετε κλικ στο Ολοκλήρωση, θα δημιουργηθεί το ακόλουθο αντικείμενο :"
+msgstr ""
+"Όταν κάνετε κλικ στο Ολοκλήρωση, θα δημιουργηθεί το ακόλουθο αντικείμενο :"
 
 #: ufrmnewuser.lrj:$.strings.[5].value
 msgctxt "tfrmnewuser.label_userlogon.caption"
@@ -952,7 +1004,8 @@ msgstr "Χρήση μόνο τύπων κρυπτογράφησης Kerberos DES
 #: ufrmpropertyaccount.lrj:$.strings.[6].value
 msgctxt "tfrmpropertyaccount.checkbox_mustchange.caption"
 msgid "User must change password at next logon"
-msgstr "Ο χρήστης πρέπει να αλλάξει τον κωδικό πρόσβασης κατά την επόμενη σύνδεση"
+msgstr ""
+"Ο χρήστης πρέπει να αλλάξει τον κωδικό πρόσβασης κατά την επόμενη σύνδεση"
 
 #: ufrmpropertyaccount.lrj:$.strings.[8].value
 msgctxt "tfrmpropertyaccount.checkbox_neverexpires.caption"
@@ -967,12 +1020,14 @@ msgstr "Να μην απαιτείται προεπαλήθευση Kerberos"
 #: ufrmpropertyaccount.lrj:$.strings.[9].value
 msgctxt "tfrmpropertyaccount.checkbox_reversibleencryption.caption"
 msgid "Store password using reversible encryption"
-msgstr "Αποθήκευση κωδικού πρόσβασης χρησιμοποιώντας αντιστρέψιμη κρυπτογράφηση"
+msgstr ""
+"Αποθήκευση κωδικού πρόσβασης χρησιμοποιώντας αντιστρέψιμη κρυπτογράφηση"
 
 #: ufrmpropertyaccount.lrj:$.strings.[12].value
 msgctxt "tfrmpropertyaccount.checkbox_sensitive.caption"
 msgid "Account is sensitive and cannot be delegated"
-msgstr "Ο λογαριασμός είναι ευαίσθητος και δεν μπορούν να του ανατεθούν εργασίες"
+msgstr ""
+"Ο λογαριασμός είναι ευαίσθητος και δεν μπορούν να του ανατεθούν εργασίες"
 
 #: ufrmpropertyaccount.lrj:$.strings.[11].value
 msgctxt "tfrmpropertyaccount.checkbox_smartcard.caption"
@@ -991,19 +1046,25 @@ msgstr "ΚΕΝΟ"
 
 #: ufrmpropertyaccount.lrj:$.strings.[1].value
 msgctxt "tfrmpropertyaccount.edit_name.hint"
-msgid "This attribute contains the UPN for a user based on the Internet standard RF"
-"C 822\r\n(name@domain.lan)"
-msgstr "Αυτό το χαρακτηριστικό περιέχει το UPN για έναν χρήστη βάσει του προτύπου In"
-"ternet RFC 822\r\n(name@domain.lan)"
+msgid ""
+"This attribute contains the UPN for a user based on the Internet standard "
+"RFC 822\r\n"
+"(name@domain.lan)"
+msgstr ""
+"Αυτό το χαρακτηριστικό περιέχει το UPN για έναν χρήστη βάσει του προτύπου "
+"Internet RFC 822\r\n"
+"(name@domain.lan)"
 
 #: ufrmpropertyaccount.lrj:$.strings.[3].value
 msgctxt "tfrmpropertyaccount.edit_samaccountname.hint"
-msgid "The logon name used to support clients and servers running earlier versions "
-"of the operating system\r\nSuch as Windows NT 4.0, Windows 95, Windows 98, a"
-"nd LAN Manager"
-msgstr "Το όνομα σύνδεσης που χρησιμοποιείται για την υποστήριξη πελατών και διακομι"
-"στών παλαιών εκδόσεων του λειτουργικού συστήματος\r\nΌπως Windows NT 4.0, Wi"
-"ndows 95, Windows 98 και LAN Manager"
+msgid ""
+"The logon name used to support clients and servers running earlier versions "
+"of the operating system\r\n"
+"Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager"
+msgstr ""
+"Το όνομα σύνδεσης που χρησιμοποιείται για την υποστήριξη πελατών και "
+"διακομιστών παλαιών εκδόσεων του λειτουργικού συστήματος\r\n"
+"Όπως Windows NT 4.0, Windows 95, Windows 98 και LAN Manager"
 
 #: ufrmpropertyaccount.lrj:$.strings.[17].value
 msgctxt "tfrmpropertyaccount.goupbox_expires.caption"
@@ -1197,12 +1258,14 @@ msgstr "Όνομα υπολογιστή όπως καταχωρήθηκε στο
 
 #: ufrmpropertygeneralcomputer.lrj:$.strings.[5].value
 msgctxt "tfrmpropertygeneralcomputer.edit_samaccountname.hint"
-msgid "The logon name used to support clients and servers running earlier versions "
-"of the operating system\r\nSuch as Windows NT 4.0, Windows 95, Windows 98, a"
-"nd LAN Manager"
-msgstr "Το όνομα σύνδεσης που χρησιμοποιείται για την υποστήριξη πελατών και διακομι"
-"στών παλαιών εκδόσεων του λειτουργικού συστήματος\r\nΌπως Windows NT 4.0, Wi"
-"ndows 95, Windows 98 και LAN Manager"
+msgid ""
+"The logon name used to support clients and servers running earlier versions "
+"of the operating system\r\n"
+"Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager"
+msgstr ""
+"Το όνομα σύνδεσης που χρησιμοποιείται για την υποστήριξη πελατών και "
+"διακομιστών παλαιών εκδόσεων του λειτουργικού συστήματος\r\n"
+"Όπως Windows NT 4.0, Windows 95, Windows 98 και LAN Manager"
 
 #: ufrmpropertygeneralcomputer.lrj:$.strings.[2].value
 msgctxt "tfrmpropertygeneralcomputer.label_dctype.caption"
@@ -1241,12 +1304,14 @@ msgstr "Η διεύθυνση E-mail της ομάδας"
 
 #: ufrmpropertygeneralgroup.lrj:$.strings.[1].value
 msgctxt "tfrmpropertygeneralgroup.edit_samaccountname.hint"
-msgid "The logon name used to support clients and servers running earlier versions "
-"of the operating system\r\nSuch as Windows NT 4.0, Windows 95, Windows 98, a"
-"nd LAN Manager"
-msgstr "Το όνομα σύνδεσης που χρησιμοποιείται για την υποστήριξη πελατών και διακομι"
-"στών παλαιών εκδόσεων του λειτουργικού συστήματος\r\nΌπως Windows NT 4.0, Wi"
-"ndows 95, Windows 98 και LAN Manager"
+msgid ""
+"The logon name used to support clients and servers running earlier versions "
+"of the operating system\r\n"
+"Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager"
+msgstr ""
+"Το όνομα σύνδεσης που χρησιμοποιείται για την υποστήριξη πελατών και "
+"διακομιστών παλαιών εκδόσεων του λειτουργικού συστήματος\r\n"
+"Όπως Windows NT 4.0, Windows 95, Windows 98 και LAN Manager"
 
 #: ufrmpropertygeneralgroup.lrj:$.strings.[2].value
 msgctxt "tfrmpropertygeneralgroup.label_description.caption"
@@ -1401,7 +1466,8 @@ msgstr "Άλλο..."
 #: ufrmpropertygeneraluser.lrj:$.strings.[9].value
 msgctxt "tfrmpropertygeneraluser.edit_displayname.hint"
 msgid "The person's preferred name to be used when beeing displayed"
-msgstr "Το προτιμώμενο όνομα του ατόμου που θα χρησιμοποιείται κατά την εμφάνιση"
+msgstr ""
+"Το προτιμώμενο όνομα του ατόμου που θα χρησιμοποιείται κατά την εμφάνιση"
 
 #: ufrmpropertygeneraluser.lrj:$.strings.[6].value
 msgctxt "tfrmpropertygeneraluser.edit_givenname.hint"
@@ -1491,12 +1557,16 @@ msgstr "Λέξεις κλειδιά..."
 #: ufrmpropertygeneralvolume.lrj:$.strings.[3].value
 msgctxt "tfrmpropertygeneralvolume.bitbtn_keywords.hint"
 msgid "A list of keywords that can be used to locate a given connection point"
-msgstr "Μια λίστα λέξεων κλειδιών που μπορούν να χρησιμοποιηθούν για την εύρεση ενός δεδομένου σημείου σύνδεσης"
+msgstr ""
+"Μια λίστα λέξεων κλειδιών που μπορούν να χρησιμοποιηθούν για την εύρεση ενός "
+"δεδομένου σημείου σύνδεσης"
 
 #: ufrmpropertygeneralvolume.lrj:$.strings.[2].value
 msgctxt "tfrmpropertygeneralvolume.edit_uncname.hint"
 msgid "The universal naming convention name for shared volumes and printers"
-msgstr "Το όνομα της καθολικής συμβάσεως ονοματοδοσίας για κοινόχρηστους τόμους και εκτυπωτές"
+msgstr ""
+"Το όνομα της καθολικής συμβάσεως ονοματοδοσίας για κοινόχρηστους τόμους και "
+"εκτυπωτές"
 
 #: ufrmpropertygeneralvolume.lrj:$.strings.[0].value
 msgctxt "tfrmpropertygeneralvolume.label_description.caption"
@@ -1530,28 +1600,28 @@ msgstr "ΚΕΝΟ"
 
 #: ufrmpropertylaps.lrj:$.strings.[0].value
 msgctxt "tfrmpropertylaps.groupbox1.caption"
-msgid "Solution du mot de passe de l'administrateur local"
-msgstr "Λύση κωδικού πρόσβασης τοπικού διαχειριστή"
+msgid "Local Administrator Password Solution"
+msgstr ""
 
 #: ufrmpropertylaps.lrj:$.strings.[1].value
 msgctxt "tfrmpropertylaps.label_currentexpiration.caption"
-msgid "Expiration actuelle du mot de passe LAPS :"
-msgstr "Τρέχουσα λήξη κωδικού πρόσβασης LAPS :"
+msgid "Current LAPS password expiration:"
+msgstr ""
 
 #: ufrmpropertylaps.lrj:$.strings.[4].value
 msgctxt "tfrmpropertylaps.label_localadminaccountname.caption"
-msgid "Nom du compte d'administrateur local LAPS :"
-msgstr "Όνομα λογαριασμού τοπικού διαχειριστή LAPS :"
+msgid "LAPS local admin account name:"
+msgstr ""
 
 #: ufrmpropertylaps.lrj:$.strings.[5].value
 msgctxt "tfrmpropertylaps.label_localadminaccountpassword.caption"
-msgid "Mot de passe du compte d'administrateur local LAPS :"
-msgstr "Κωδικός πρόσβασης λογαριασμού τοπικού διαχειριστή LAPS :"
+msgid "LAPS local admin account password:"
+msgstr ""
 
 #: ufrmpropertylaps.lrj:$.strings.[2].value
 msgctxt "tfrmpropertylaps.label_newexpiration.caption"
-msgid "Définir l'expiration du nouveau mot de passe LAPS :"
-msgstr "Ορισμός λήξης νέου κωδικού πρόσβασης LAPS :"
+msgid "Set new LAPS password expiration:"
+msgstr ""
 
 #: ufrmpropertylocation.lrj:$.strings.[1].value
 msgctxt "tfrmpropertylocation.edit_location.hint"
@@ -1675,17 +1745,21 @@ msgstr "Φάκελος Υπηρεσιών Active Directory"
 
 #: ufrmpropertymemberof.lrj:$.strings.[5].value
 msgctxt "tfrmpropertymemberof.label_defineprimarygroup.caption"
-msgid "It is useless to modify the primary goup, unless you're using Macintosh or o"
-"ther POSIX compliant apps."
-msgstr "Είναι ανώφελο να τροποποιήσετε την κύρια ομάδα, εκτός εάν χρησιμοποιείτε εφα"
-"ρμογές Macintosh ή άλλες συμβατές με POSIX."
+msgid ""
+"It is useless to modify the primary goup, unless you're using Macintosh or "
+"other POSIX compliant apps."
+msgstr ""
+"Είναι ανώφελο να τροποποιήσετε την κύρια ομάδα, εκτός εάν χρησιμοποιείτε "
+"εφαρμογές Macintosh ή άλλες συμβατές με POSIX."
 
 #: ufrmpropertymemberof.lrj:$.strings.[3].value
 msgctxt "tfrmpropertymemberof.label_mof_noprimarygroup.caption"
-msgid "This list  shows only the current domain's groups and the groups handled in "
+msgid ""
+"This list  shows only the current domain's groups and the groups handled in "
 "the Global catalog, such as unviversals groups."
-msgstr "Αυτή η λίστα εμφανίζει μόνο τις ομάδες του τρέχοντος τομέα και τις ομάδες πο"
-"υ διαχειρίζεται ο Καθολικός κατάλογος, όπως οι οικουμενικές ομάδες."
+msgstr ""
+"Αυτή η λίστα εμφανίζει μόνο τις ομάδες του τρέχοντος τομέα και τις ομάδες "
+"που διαχειρίζεται ο Καθολικός κατάλογος, όπως οι οικουμενικές ομάδες."
 
 #: ufrmpropertymemberof.lrj:$.strings.[0].value
 msgctxt "tfrmpropertymemberof.label_mof_title.caption"
@@ -1740,12 +1814,16 @@ msgstr "Δημιουργήθηκε :"
 #: ufrmpropertyoperatingsystem.lrj:$.strings.[3].value
 msgctxt "tfrmpropertyoperatingsystem.edit_operatingsystem.hint"
 msgid "The Operating System name, for example, Windows Vista Enterprise"
-msgstr "Το όνομα του Λειτουργικού Συστήματος, για παράδειγμα, Windows Vista Enterprise"
+msgstr ""
+"Το όνομα του Λειτουργικού Συστήματος, για παράδειγμα, Windows Vista "
+"Enterprise"
 
 #: ufrmpropertyoperatingsystem.lrj:$.strings.[5].value
 msgctxt "tfrmpropertyoperatingsystem.edit_operatingsystemservicepack.hint"
 msgid "The operating system service pack ID (for example, SP3)"
-msgstr "Το αναγνωριστικό πακέτου υπηρεσιών λειτουργικού συστήματος (για παράδειγμα, SP3)"
+msgstr ""
+"Το αναγνωριστικό πακέτου υπηρεσιών λειτουργικού συστήματος (για παράδειγμα, "
+"SP3)"
 
 #: ufrmpropertyoperatingsystem.lrj:$.strings.[4].value
 msgctxt "tfrmpropertyoperatingsystem.edit_operatingsystemversion.hint"
@@ -1794,12 +1872,16 @@ msgstr "Περιέχει το όνομα του τμήματος στο οποί
 
 #: ufrmpropertyorganization.lrj:$.strings.[5].value
 msgctxt "tfrmpropertyorganization.edit_title.hint"
-msgid "Contains the user's job title\r\nThis property is commonly used to indicate "
-"the formal job title\r\nSuch as Senior Programmer, rather than occupational "
-"class, such as programmer"
-msgstr "Περιέχει τον τίτλο εργασίας του χρήστη\r\nΑυτή η ιδιότητα χρησιμοποιείται συ"
-"νήθως για να δείχνει τον επίσημο τίτλο εργασίας\r\nΌπως Ανώτερος Προγραμματι"
-"στής, αντί για την επαγγελματική κατηγορία, όπως προγραμματιστής"
+msgid ""
+"Contains the user's job title\r\n"
+"This property is commonly used to indicate the formal job title\r\n"
+"Such as Senior Programmer, rather than occupational class, such as programmer"
+msgstr ""
+"Περιέχει τον τίτλο εργασίας του χρήστη\r\n"
+"Αυτή η ιδιότητα χρησιμοποιείται συνήθως για να δείχνει τον επίσημο τίτλο "
+"εργασίας\r\n"
+"Όπως Ανώτερος Προγραμματιστής, αντί για την επαγγελματική κατηγορία, όπως "
+"προγραμματιστής"
 
 #: ufrmpropertyorganization.lrj:$.strings.[0].value
 msgctxt "tfrmpropertyorganization.groupbox_manager.caption"
@@ -1838,29 +1920,40 @@ msgstr "όνομα"
 
 #: ufrmpropertyprofile.lrj:$.strings.[9].value
 msgctxt "tfrmpropertyprofile.combobox_connectto.hint"
-msgid "Specifies the drive letter to which to map the UNC path specified by homeDir"
-"ectory"
-msgstr "Καθορίζει το γράμμα μονάδας δίσκου στο οποίο θα αντιστοιχιστεί η διαδρομή UN"
-"C που καθορίζεται από το homeDirectory"
+msgid ""
+"Specifies the drive letter to which to map the UNC path specified by "
+"homeDirectory"
+msgstr ""
+"Καθορίζει το γράμμα μονάδας δίσκου στο οποίο θα αντιστοιχιστεί η διαδρομή "
+"UNC που καθορίζεται από το homeDirectory"
 
 #: ufrmpropertyprofile.lrj:$.strings.[11].value
 msgctxt "tfrmpropertyprofile.edit_connectto.hint"
-msgid "The home directory for the account\r\nHomeDirectory must be a UNC path\r\n(f"
-"or example, \\\\**servername\\**path)"
-msgstr "Ο κατάλογος του λογαριασμού\r\nΤο HomeDirectory πρέπει να είναι μια διαδρομή"
-" UNC\r\n(για παράδειγμα, \\\\**διακομιστής\\**διαδρομή)"
+msgid ""
+"The home directory for the account\r\n"
+"HomeDirectory must be a UNC path\r\n"
+"(for example, \\\\**servername\\**path)"
+msgstr ""
+"Ο κατάλογος του λογαριασμού\r\n"
+"Το HomeDirectory πρέπει να είναι μια διαδρομή UNC\r\n"
+"(για παράδειγμα, \\\\**διακομιστής\\**διαδρομή)"
 
 #: ufrmpropertyprofile.lrj:$.strings.[7].value
 msgctxt "tfrmpropertyprofile.edit_homedirectory.hint"
-msgid "The home directory for the account\r\nIf homeDrive is set and specifies a dr"
-"ive letter, homeDirectory must be a UNC path\r\nOtherwise, homeDirectory is "
-"a fully qualified local path including the drive letter\r\n(for example, Dri"
-"veLetter**:\\Directory\\**Folder)"
-msgstr "Ο κατάλογος του λογαριασμού\r\nΕάν το homeDrive έχει οριστεί και κα"
-"θορίζει ένα γράμμα μονάδας δίσκου, το homeDirectory πρέπει να είναι μια διαδ"
-"ρομή UNC\r\nΔιαφορετικά, το homeDirectory είναι μια πλήρης τοπική διαδρομή σ"
-"υμπεριλαμβανομένου του γράμματος μονάδας δίσκου\r\n(για παράδειγμα, ΓράμμαΔί"
-"σκου**:\\Κατάλογος\\**Φάκελος)"
+msgid ""
+"The home directory for the account\r\n"
+"If homeDrive is set and specifies a drive letter, homeDirectory must be a "
+"UNC path\r\n"
+"Otherwise, homeDirectory is a fully qualified local path including the drive "
+"letter\r\n"
+"(for example, DriveLetter**:\\Directory\\**Folder)"
+msgstr ""
+"Ο κατάλογος του λογαριασμού\r\n"
+"Εάν το homeDrive έχει οριστεί και καθορίζει ένα γράμμα μονάδας δίσκου, το "
+"homeDirectory πρέπει να είναι μια διαδρομή UNC\r\n"
+"Διαφορετικά, το homeDirectory είναι μια πλήρης τοπική διαδρομή "
+"συμπεριλαμβανομένου του γράμματος μονάδας δίσκου\r\n"
+"(για παράδειγμα, ΓράμμαΔίσκου**:\\Κατάλογος\\**Φάκελος)"
 
 #: ufrmpropertyprofile.lrj:$.strings.[2].value
 msgctxt "tfrmpropertyprofile.edit_profilepath.hint"
@@ -1930,25 +2023,30 @@ msgstr "Προβολή Πιστοποιητικού"
 #: ufrmpropertypublishedcertificates.lrj:$.strings.[0].value
 msgctxt "tfrmpropertypublishedcertificates.label_listx509.caption"
 msgid "List of X509 certificates published for the user account"
-msgstr "Λίστα πιστοποιητικών X509 που έχουν δημοσιευτεί για τον λογαριασμό χρήστη"
+msgstr ""
+"Λίστα πιστοποιητικών X509 που έχουν δημοσιευτεί για τον λογαριασμό χρήστη"
 
 #: ufrmpropertypublishedcertificates.lrj:$.strings.[1].value
-msgctxt "tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[0].text"
+msgctxt ""
+"tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[0].text"
 msgid "Issued To"
 msgstr "Έχει εκδοθεί σε"
 
 #: ufrmpropertypublishedcertificates.lrj:$.strings.[2].value
-msgctxt "tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[1].text"
+msgctxt ""
+"tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[1].text"
 msgid "Issued By"
 msgstr "Έχει εκδοθεί από"
 
 #: ufrmpropertypublishedcertificates.lrj:$.strings.[3].value
-msgctxt "tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[2].text"
+msgctxt ""
+"tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[2].text"
 msgid "Intended Purposes"
 msgstr "Προβλεπόμενες Χρήσεις"
 
 #: ufrmpropertypublishedcertificates.lrj:$.strings.[4].value
-msgctxt "tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[3].text"
+msgctxt ""
+"tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[3].text"
 msgid "Expiration Date"
 msgstr "Ημερομηνία Λήξης"
 
@@ -2112,6 +2210,14 @@ msgctxt "tfrmrsat.action_properties.caption"
 msgid "Properties"
 msgstr "Ιδιότητες"
 
+#: ufrmrsat.lrj:$.strings.[7].value
+#, fuzzy
+#| msgctxt "tfrmmoduleaduc.action_showgpo.caption"
+#| msgid "Show GPO"
+msgctxt "tfrmrsat.action_showgpo.caption"
+msgid "Show GPO"
+msgstr "Εμφάνιση GPO"
+
 #: ufrmrsatoptions.lrj:$.strings.[3].value
 msgctxt "tfrmrsatoption.combobox3.text"
 msgid "False"
@@ -2162,157 +2268,157 @@ msgctxt "tvisaddaces.bitbtn_cancel.caption"
 msgid "Cancel"
 msgstr "Άκυρο"
 
-#: uvisaddaces.lrj:$.strings.[3].value
+#: uvisaddaces.lrj:$.strings.[2].value
 msgctxt "tvisaddaces.checkbox_cc.caption"
 msgid "Create Child"
 msgstr "Δημιουργία Παιδιού"
 
-#: uvisaddaces.lrj:$.strings.[18].value
+#: uvisaddaces.lrj:$.strings.[17].value
 msgctxt "tvisaddaces.checkbox_ci.caption"
 msgid "Container Inherited"
 msgstr "Κληρονομημένα από Container"
 
-#: uvisaddaces.lrj:$.strings.[11].value
+#: uvisaddaces.lrj:$.strings.[10].value
 msgctxt "tvisaddaces.checkbox_cr.caption"
 msgid "Control Access"
 msgstr "Έλεγχος Πρόσβασης"
 
-#: uvisaddaces.lrj:$.strings.[4].value
+#: uvisaddaces.lrj:$.strings.[3].value
 msgctxt "tvisaddaces.checkbox_dc.caption"
 msgid "Delete Child"
 msgstr "Διαγραφή Παιδιού"
 
-#: uvisaddaces.lrj:$.strings.[9].value
+#: uvisaddaces.lrj:$.strings.[8].value
 msgctxt "tvisaddaces.checkbox_dt.caption"
 msgid "Delete Tree"
 msgstr "Διαγραφή Δέντρου"
 
-#: uvisaddaces.lrj:$.strings.[19].value
+#: uvisaddaces.lrj:$.strings.[18].value
 msgctxt "tvisaddaces.checkbox_io.caption"
 msgid "Inherit Only"
 msgstr "Μόνο Κληρονόμηση"
 
-#: uvisaddaces.lrj:$.strings.[5].value
+#: uvisaddaces.lrj:$.strings.[4].value
 msgctxt "tvisaddaces.checkbox_lc.caption"
 msgid "List Children"
 msgstr "Λίστα Παιδιών"
 
-#: uvisaddaces.lrj:$.strings.[10].value
+#: uvisaddaces.lrj:$.strings.[9].value
 msgctxt "tvisaddaces.checkbox_lo.caption"
 msgid "List Object"
 msgstr "Λίστα Αντικειμένου"
 
-#: uvisaddaces.lrj:$.strings.[20].value
+#: uvisaddaces.lrj:$.strings.[19].value
 msgctxt "tvisaddaces.checkbox_np.caption"
 msgid "No Propagate"
 msgstr "Χωρίς Διάδοση"
 
-#: uvisaddaces.lrj:$.strings.[17].value
+#: uvisaddaces.lrj:$.strings.[16].value
 msgctxt "tvisaddaces.checkbox_oi.caption"
 msgid "Object Inherited"
 msgstr "Κληρονομημένα από Αντικειμένο"
 
-#: uvisaddaces.lrj:$.strings.[13].value
+#: uvisaddaces.lrj:$.strings.[12].value
 msgctxt "tvisaddaces.checkbox_rc.caption"
 msgid "Read Control"
 msgstr "Ανάγνωση Ελέγχου"
 
-#: uvisaddaces.lrj:$.strings.[7].value
+#: uvisaddaces.lrj:$.strings.[6].value
 msgctxt "tvisaddaces.checkbox_rp.caption"
 msgid "Read Property"
 msgstr "Ανάγνωση Ιδιότητας"
 
-#: uvisaddaces.lrj:$.strings.[12].value
+#: uvisaddaces.lrj:$.strings.[11].value
 msgctxt "tvisaddaces.checkbox_sd.caption"
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: uvisaddaces.lrj:$.strings.[6].value
+#: uvisaddaces.lrj:$.strings.[5].value
 msgctxt "tvisaddaces.checkbox_sw.caption"
 msgid "Self Write"
 msgstr "Εγγραφή Εαυτού"
 
-#: uvisaddaces.lrj:$.strings.[14].value
+#: uvisaddaces.lrj:$.strings.[13].value
 msgctxt "tvisaddaces.checkbox_wd.caption"
 msgid "Write Dac"
 msgstr "Εγγραφή Dac"
 
-#: uvisaddaces.lrj:$.strings.[15].value
+#: uvisaddaces.lrj:$.strings.[14].value
 msgctxt "tvisaddaces.checkbox_wo.caption"
 msgid "Write Owner"
 msgstr "Εγγραφή Ιδιοκτήτη"
 
-#: uvisaddaces.lrj:$.strings.[8].value
+#: uvisaddaces.lrj:$.strings.[7].value
 msgctxt "tvisaddaces.checkbox_wp.caption"
 msgid "Write Property"
 msgstr "Εγγραφή Ιδιότητας"
 
-#: uvisaddaces.lrj:$.strings.[2].value
+#: uvisaddaces.lrj:$.strings.[1].value
 msgctxt "tvisaddaces.checkgroup_access.caption"
 msgid "Access"
 msgstr "Πρόσβαση"
 
-#: uvisaddaces.lrj:$.strings.[16].value
+#: uvisaddaces.lrj:$.strings.[15].value
 msgctxt "tvisaddaces.checkgroup_inheritance.caption"
 msgid "Inheritance"
 msgstr "Κληρονόμηση"
 
-#: uvisaddaces.lrj:$.strings.[22].value
+#: uvisaddaces.lrj:$.strings.[21].value
 msgctxt "tvisaddaces.label_inheritance.caption"
 msgid "Inheritance:"
 msgstr "Κληρονόμηση:"
 
-#: uvisaddaces.lrj:$.strings.[21].value
+#: uvisaddaces.lrj:$.strings.[20].value
 msgctxt "tvisaddaces.label_property.caption"
 msgid "Target Property :"
 msgstr "Στόχευση Ιδιότητας :"
 
-#: uvisaddaces.lrj:$.strings.[0].value
+#: uvisaddaces.lrj:$.strings.[30].value
 msgctxt "tvisaddaces.label_title.caption"
 msgid "Create and add new Rights (ACEs) :"
 msgstr "Δημιουργία και προσθήκη νέων Δικαιωμάτων (ACEs) :"
 
-#: uvisaddaces.lrj:$.strings.[1].value
+#: uvisaddaces.lrj:$.strings.[0].value
 msgctxt "tvisaddaces.label_trustee.caption"
 msgid "Trustee :"
 msgstr "Εμπιστευόμενος :"
 
-#: uvisaddaces.lrj:$.strings.[23].value
+#: uvisaddaces.lrj:$.strings.[22].value
 msgctxt "tvisaddaces.radiobutton_allow.caption"
 msgid "Allow"
 msgstr "Επίτρεψε"
 
-#: uvisaddaces.lrj:$.strings.[24].value
+#: uvisaddaces.lrj:$.strings.[23].value
 msgctxt "tvisaddaces.radiobutton_deny.caption"
 msgid "Deny"
 msgstr "Απόρριψε"
 
-#: uvisaddaces.lrj:$.strings.[25].value
+#: uvisaddaces.lrj:$.strings.[24].value
 msgctxt "tvisaddaces.tisgrid1.header.columns[0].text"
 msgid "Type"
 msgstr "Τύπος"
 
-#: uvisaddaces.lrj:$.strings.[26].value
+#: uvisaddaces.lrj:$.strings.[25].value
 msgctxt "tvisaddaces.tisgrid1.header.columns[1].text"
 msgid "Trustee"
 msgstr "Εμπιστευόμενος"
 
-#: uvisaddaces.lrj:$.strings.[27].value
+#: uvisaddaces.lrj:$.strings.[26].value
 msgctxt "tvisaddaces.tisgrid1.header.columns[2].text"
 msgid "Access"
 msgstr "Πρόσβαση"
 
-#: uvisaddaces.lrj:$.strings.[28].value
+#: uvisaddaces.lrj:$.strings.[27].value
 msgctxt "tvisaddaces.tisgrid1.header.columns[3].text"
 msgid "Target Property"
 msgstr "Στόχευση Ιδιότητας"
 
-#: uvisaddaces.lrj:$.strings.[29].value
+#: uvisaddaces.lrj:$.strings.[28].value
 msgctxt "tvisaddaces.tisgrid1.header.columns[4].text"
 msgid "Applies to"
 msgstr "Εφαρμόζεται σε"
 
-#: uvisaddaces.lrj:$.strings.[30].value
+#: uvisaddaces.lrj:$.strings.[29].value
 msgctxt "tvisaddaces.tisgrid1.header.columns[5].text"
 msgid "Inherit to"
 msgstr "Κληρονομείται σε"
@@ -2727,186 +2833,6 @@ msgctxt "tvischangepartition.caption"
 msgid "Change partition"
 msgstr "Αλλαγή κατάτμησης"
 
-#: uvisconnectiondetails.lrj:$.strings.[11].value
-msgctxt "tvisconnectiondetails.bitbtn1.caption"
-msgid "Hide/Show"
-msgstr "Απόκρυψη/Εμφάνιση"
-
-#: uvisconnectiondetails.lrj:$.strings.[0].value
-msgctxt "tvisconnectiondetails.caption"
-msgid "Connection details"
-msgstr "Λεπτομέρειες σύνδεσης"
-
-#: uvisconnectiondetails.lrj:$.strings.[18].value
-msgctxt "tvisconnectiondetails.label1.caption"
-msgid "Server informations (available from RootDSE Object)"
-msgstr "Πληροφορίες διακομιστή (διαθέσιμες από το RootDSE Object)"
-
-#: uvisconnectiondetails.lrj:$.strings.[10].value
-msgctxt "tvisconnectiondetails.label2.caption"
-msgid "Ldap error:"
-msgstr "Σφάλμα Ldap:"
-
-#: uvisconnectiondetails.lrj:$.strings.[6].value
-msgctxt "tvisconnectiondetails.label_allowunsafepasswordbind.caption"
-msgid "Allow unsafe password bind"
-msgstr "Επίτρεψε μη ασφαλή σύνδεση με κωδικό πρόσβασης"
-
-#: uvisconnectiondetails.lrj:$.strings.[9].value
-msgctxt "tvisconnectiondetails.label_autobind.caption"
-msgid "Auto bind"
-msgstr "Αυτόματη σύνδεση"
-
-#: uvisconnectiondetails.lrj:$.strings.[8].value
-msgctxt "tvisconnectiondetails.label_autoreconnect.caption"
-msgid "Auto reconnect"
-msgstr "Αυτόματη επανασύνδεση"
-
-#: uvisconnectiondetails.lrj:$.strings.[12].value
-msgctxt "tvisconnectiondetails.label_domain.caption"
-msgid "Domain"
-msgstr "Τομέας"
-
-#: uvisconnectiondetails.lrj:$.strings.[13].value
-msgctxt "tvisconnectiondetails.label_domaincontroller.caption"
-msgid "Domain Controller"
-msgstr "Ελεγκτής Τομέα"
-
-#: uvisconnectiondetails.lrj:$.strings.[7].value
-msgctxt "tvisconnectiondetails.label_kerberosdisablechannelbinding.caption"
-msgid "Kerberos disable channel binding"
-msgstr "Ο Kerberos απενεργοποιεί τη δέσμευση καναλιού"
-
-#: uvisconnectiondetails.lrj:$.strings.[4].value
-msgctxt "tvisconnectiondetails.label_kerberosspn.caption"
-msgid "KerberosSPN"
-msgstr ""
-
-#: uvisconnectiondetails.lrj:$.strings.[2].value
-msgctxt "tvisconnectiondetails.label_password.caption"
-msgid "Password"
-msgstr "Κωδικός Πρόσβασης"
-
-#: uvisconnectiondetails.lrj:$.strings.[3].value
-msgctxt "tvisconnectiondetails.label_timeout.caption"
-msgid "Timeout"
-msgstr "Χρονικό όριο"
-
-#: uvisconnectiondetails.lrj:$.strings.[5].value
-msgctxt "tvisconnectiondetails.label_tls.caption"
-msgid "TLS"
-msgstr ""
-
-#: uvisconnectiondetails.lrj:$.strings.[1].value
-msgctxt "tvisconnectiondetails.label_username.caption"
-msgid "Username"
-msgstr "Όνομα Χρήστη"
-
-#: uvisconnectiondetails.lrj:$.strings.[15].value
-msgctxt "tvisconnectiondetails.tabsheet_advanced.caption"
-msgid "Advanced"
-msgstr "Για προχωρημένους"
-
-#: uvisconnectiondetails.lrj:$.strings.[14].value
-msgctxt "tvisconnectiondetails.tabsheet_formatted.caption"
-msgid "Formatted"
-msgstr "Μορφοποιημένο"
-
-#: uvisconnectiondetails.lrj:$.strings.[16].value
-msgctxt "tvisconnectiondetails.tisgrid1.header.columns[0].text"
-msgid "Name"
-msgstr "Όνομα"
-
-#: uvisconnectiondetails.lrj:$.strings.[17].value
-msgctxt "tvisconnectiondetails.tisgrid1.header.columns[1].text"
-msgid "Value"
-msgstr "Τιμή"
-
-#: uvisconnectoptions.lrj:$.strings.[17].value
-msgctxt "tvisconnectoptions.action_cancel.caption"
-msgid "Cancel"
-msgstr "Ακύρωση"
-
-#: uvisconnectoptions.lrj:$.strings.[15].value
-msgctxt "tvisconnectoptions.action_check.caption"
-msgid "Check"
-msgstr "Έλεγχος"
-
-#: uvisconnectoptions.lrj:$.strings.[16].value
-msgctxt "tvisconnectoptions.action_ok.caption"
-msgid "OK"
-msgstr "ΟΚ"
-
-#: uvisconnectoptions.lrj:$.strings.[0].value
-msgctxt "tvisconnectoptions.caption"
-msgid "Connection Options"
-msgstr "Επιλογές Σύνδεσης"
-
-#: uvisconnectoptions.lrj:$.strings.[10].value
-msgctxt "tvisconnectoptions.cbignorecerterrors.caption"
-msgid "Ignore certificate errors"
-msgstr "Αγνόησε τα σφάλματα πιστοποιητικού"
-
-#: uvisconnectoptions.lrj:$.strings.[14].value
-msgctxt "tvisconnectoptions.checkbox_anonyme.caption"
-msgid "Anonymous Connection"
-msgstr "Ανώνυμη Σύνδεση"
-
-#: uvisconnectoptions.lrj:$.strings.[9].value
-msgctxt "tvisconnectoptions.checkbox_sasl.caption"
-msgid "SASL"
-msgstr ""
-
-#: uvisconnectoptions.lrj:$.strings.[6].value
-msgctxt "tvisconnectoptions.checkbox_tls.caption"
-msgid "TLS"
-msgstr ""
-
-#: uvisconnectoptions.lrj:$.strings.[11].value
-msgctxt "tvisconnectoptions.group_account.caption"
-msgid "Account :"
-msgstr "Λογαριασμός :"
-
-#: uvisconnectoptions.lrj:$.strings.[1].value
-msgctxt "tvisconnectoptions.group_connection.caption"
-msgid "Connection :"
-msgstr "Σύνδεση :"
-
-#: uvisconnectoptions.lrj:$.strings.[5].value
-msgctxt "tvisconnectoptions.label_dc.caption"
-msgid "Domain Controller"
-msgstr "Ελεγκτής Τομέα"
-
-#: uvisconnectoptions.lrj:$.strings.[13].value
-msgctxt "tvisconnectoptions.label_password.caption"
-msgid "Password :"
-msgstr "Κωδικός Πρόσβασης :"
-
-#: uvisconnectoptions.lrj:$.strings.[3].value
-msgctxt "tvisconnectoptions.label_port.caption"
-msgid "Port :"
-msgstr "Θύρα :"
-
-#: uvisconnectoptions.lrj:$.strings.[2].value
-msgctxt "tvisconnectoptions.label_targethost.caption"
-msgid "Domain :"
-msgstr "Τομέας :"
-
-#: uvisconnectoptions.lrj:$.strings.[12].value
-msgctxt "tvisconnectoptions.label_user.caption"
-msgid "User :"
-msgstr "Χρήστης :"
-
-#: uvisconnectoptions.lrj:$.strings.[8].value
-msgctxt "tvisconnectoptions.radiobutton_gssapi.caption"
-msgid "GSS-API"
-msgstr ""
-
-#: uvisconnectoptions.lrj:$.strings.[7].value
-msgctxt "tvisconnectoptions.radiobutton_simpleauth.caption"
-msgid "Simple Authentication"
-msgstr "Απλή Πιστοποίηση"
-
 #: uvisdelegatecontrol.lrj:$.strings.[32].value
 msgctxt "tvisdelegatecontrol.action_add.caption"
 msgid "Add..."
@@ -3019,13 +2945,15 @@ msgstr "Άδειες:"
 
 #: uvisdelegatecontrol.lrj:$.strings.[2].value
 msgctxt "tvisdelegatecontrol.label2.caption"
-msgid "This wizard helps you delegate control of Active Directory objects. You can "
-"grant users permission to manage users, groups, computers, organizational un"
-"its, and other objects stored in Active Directory Domain Services."
-msgstr "Αυτός ο οδηγός σάς βοηθά να αναθέσετε τον έλεγχο αντικειμένων του Active Dir"
-"ectory. Μπορείτε να χορηγήσετε στους χρήστες άδειες για τη διαχείριση χρηστώ"
-"ν, ομάδων, υπολογιστών, οργανωτικών μονάδων και άλλων αντικειμένων που αποθη"
-"κεύονται στις Υπηρεσίες Τομέα Active Directory."
+msgid ""
+"This wizard helps you delegate control of Active Directory objects. You can "
+"grant users permission to manage users, groups, computers, organizational "
+"units, and other objects stored in Active Directory Domain Services."
+msgstr ""
+"Αυτός ο οδηγός σάς βοηθά να αναθέσετε τον έλεγχο αντικειμένων του Active "
+"Directory. Μπορείτε να χορηγήσετε στους χρήστες άδειες για τη διαχείριση "
+"χρηστών, ομάδων, υπολογιστών, οργανωτικών μονάδων και άλλων αντικειμένων που "
+"αποθηκεύονται στις Υπηρεσίες Τομέα Active Directory."
 
 #: uvisdelegatecontrol.lrj:$.strings.[3].value
 msgctxt "tvisdelegatecontrol.label3.caption"
@@ -3044,8 +2972,11 @@ msgstr "Χρήστες και Ομάδες"
 
 #: uvisdelegatecontrol.lrj:$.strings.[5].value
 msgctxt "tvisdelegatecontrol.label6.caption"
-msgid "Select one or more users or groups to whom you want to delegate control."
-msgstr "Επιλέξτε έναν ή περισσότερους χρήστες ή ομάδες στους οποίους θέλετε να αναθέσετε τον έλεγχο."
+msgid ""
+"Select one or more users or groups to whom you want to delegate control."
+msgstr ""
+"Επιλέξτε έναν ή περισσότερους χρήστες ή ομάδες στους οποίους θέλετε να "
+"αναθέσετε τον έλεγχο."
 
 #: uvisdelegatecontrol.lrj:$.strings.[7].value
 msgctxt "tvisdelegatecontrol.label7.caption"
@@ -3074,15 +3005,75 @@ msgstr "Δημιουργία προσαρμοσμένης εργασίας γι�
 
 #: uvisdelegatecontrol.lrj:$.strings.[17].value
 msgctxt "tvisdelegatecontrol.radiobutton3.caption"
-msgid "This folder, existing objects in this folder, and creation of new objects in"
-" this folder"
-msgstr "Αυτός ο φάκελος, υπάρχοντα αντικείμενα σε αυτόν το φάκελο και δημιουργία νέω"
-"ν αντικειμένων σε αυτόν το φάκελο"
+msgid ""
+"This folder, existing objects in this folder, and creation of new objects in "
+"this folder"
+msgstr ""
+"Αυτός ο φάκελος, υπάρχοντα αντικείμενα σε αυτόν το φάκελο και δημιουργία "
+"νέων αντικειμένων σε αυτόν το φάκελο"
 
 #: uvisdelegatecontrol.lrj:$.strings.[18].value
 msgctxt "tvisdelegatecontrol.radiobutton4.caption"
 msgid "Only the following objects in the folder:"
 msgstr "Μόνο τα παρακάτω αντικείμενα στο φάκελο:"
+
+#: uviseditaduccolumns.lrj:$.strings.[3].value
+msgctxt "tviseditaduccolumns.action1.caption"
+msgid "Add ->"
+msgstr ""
+
+#: uviseditaduccolumns.lrj:$.strings.[4].value
+#, fuzzy
+#| msgctxt "tfrmpropertypublishedcertificates.action_remove.caption"
+#| msgid "Remove"
+msgctxt "tviseditaduccolumns.action2.caption"
+msgid "<- Remove"
+msgstr "Αφαίρεση"
+
+#: uviseditaduccolumns.lrj:$.strings.[5].value
+#, fuzzy
+#| msgctxt "tfrmmoduleaduc.action_taskmove.caption"
+#| msgid "Move"
+msgctxt "tviseditaduccolumns.action3.caption"
+msgid "Move UP"
+msgstr "Μετακίνηση"
+
+#: uviseditaduccolumns.lrj:$.strings.[6].value
+#, fuzzy
+#| msgctxt "tvisattributeeditor.action_up.caption"
+#| msgid "Move up"
+msgctxt "tviseditaduccolumns.action4.caption"
+msgid "Move DOWN"
+msgstr "Μετακίνηση πάνω"
+
+#: uviseditaduccolumns.lrj:$.strings.[7].value
+#, fuzzy
+#| msgctxt "tvisadvancedsecurity.action_restore.caption"
+#| msgid "Restore default"
+msgctxt "tviseditaduccolumns.action5.caption"
+msgid "Restore Default"
+msgstr "Επαναφορά προεπιλογής"
+
+#: uviseditaduccolumns.lrj:$.strings.[0].value
+msgctxt "tviseditaduccolumns.caption"
+msgid "Edit Columns"
+msgstr ""
+
+#: uviseditaduccolumns.lrj:$.strings.[1].value
+#, fuzzy
+#| msgctxt "tfrmmoduleaduc.action_taskdisableaccount.caption"
+#| msgid "Disable Account"
+msgctxt "tviseditaduccolumns.label1.caption"
+msgid "Available columns:"
+msgstr "Απενεργοποίηση Λογαριασμού"
+
+#: uviseditaduccolumns.lrj:$.strings.[2].value
+#, fuzzy
+#| msgctxt "tfrmnewcontact.label_displayname.caption"
+#| msgid "Display name:"
+msgctxt "tviseditaduccolumns.label2.caption"
+msgid "Displayed columns:"
+msgstr "Εμφανιζόμενο όνομα:"
 
 #: uvislistother.lrj:$.strings.[4].value
 msgctxt "tvislistother.action_add.caption"
@@ -3186,10 +3177,12 @@ msgstr "Σταθμοί Εργασίας Σύνδεσης"
 
 #: uvislogonworkstation.lrj:$.strings.[1].value
 msgctxt "tvislogonworkstation.label_info.caption"
-msgid "In Computer name, type the computer''s NetBIOS or Domain Name system (DNS) n"
-"ame."
-msgstr "Στο όνομα του υπολογιστή, πληκτρολογήστε το NetBIOS ή το DNS όνομα του υπολο"
-"γιστή."
+msgid ""
+"In Computer name, type the computer''s NetBIOS or Domain Name system (DNS) "
+"name."
+msgstr ""
+"Στο όνομα του υπολογιστή, πληκτρολογήστε το NetBIOS ή το DNS όνομα του "
+"υπολογιστή."
 
 #: uvislogonworkstation.lrj:$.strings.[5].value
 msgctxt "tvislogonworkstation.label_name.caption"
@@ -3210,6 +3203,82 @@ msgstr "Όλους τους υπολογιστές"
 msgctxt "tvislogonworkstation.radiobutton_following.caption"
 msgid "The following computers"
 msgstr "Στους ακόλουθους υπολογιστές"
+
+#: uvismodifygplink.lrj:$.strings.[10].value
+#, fuzzy
+#| msgctxt "tvisadvancedsecurity.action_apply.caption"
+#| msgid "Apply"
+msgctxt "tvismodifygplink.action_apply.caption"
+msgid "Apply"
+msgstr "Εφαρμογή"
+
+#: uvismodifygplink.lrj:$.strings.[8].value
+#, fuzzy
+#| msgctxt "tfrmmoduleaduc.action_taskdisableaccount.caption"
+#| msgid "Disable Account"
+msgctxt "tvismodifygplink.action_disablegpo.caption"
+msgid "Disable GPO"
+msgstr "Απενεργοποίηση Λογαριασμού"
+
+#: uvismodifygplink.lrj:$.strings.[7].value
+msgctxt "tvismodifygplink.action_enablegpo.caption"
+msgid "Enable GPO"
+msgstr ""
+
+#: uvismodifygplink.lrj:$.strings.[9].value
+msgctxt "tvismodifygplink.action_enforcegpo.caption"
+msgid "Enforce GPO"
+msgstr ""
+
+#: uvismodifygplink.lrj:$.strings.[11].value
+#, fuzzy
+#| msgctxt "tformconnectconfigs.action_ok.caption"
+#| msgid "OK"
+msgctxt "tvismodifygplink.action_ok.caption"
+msgid "OK"
+msgstr "OK"
+
+#: uvismodifygplink.lrj:$.strings.[6].value
+#, fuzzy
+#| msgctxt "tformconnectconfigs.action_cancel.caption"
+#| msgid "Cancel"
+msgctxt "tvismodifygplink.bitbtn_cancel.caption"
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: uvismodifygplink.lrj:$.strings.[1].value
+#, fuzzy
+#| msgctxt "tfrmnewobject.label2.caption"
+#| msgid "Object name"
+msgctxt "tvismodifygplink.label1.caption"
+msgid "Object:"
+msgstr "Όνομα αντικειμένου"
+
+#: uvismodifygplink.lrj:$.strings.[4].value
+msgctxt "tvismodifygplink.label_availablegpo.caption"
+msgid "Available GPO"
+msgstr ""
+
+#: uvismodifygplink.lrj:$.strings.[2].value
+msgctxt "tvismodifygplink.label_linkedgpo.caption"
+msgid "Linked GPO"
+msgstr ""
+
+#: uvismodifygplink.lrj:$.strings.[5].value
+#, fuzzy
+#| msgctxt "tfrmmoduleadsi.tisgrid1.header.columns[1].text"
+#| msgid "Name"
+msgctxt "tvismodifygplink.tisgrid_availablegpo.header.columns[0].text"
+msgid "Name"
+msgstr "Όνομα"
+
+#: uvismodifygplink.lrj:$.strings.[3].value
+#, fuzzy
+#| msgctxt "tfrmmoduleadsi.tisgrid1.header.columns[1].text"
+#| msgid "Name"
+msgctxt "tvismodifygplink.tisgrid_linkedgpo.header.columns[0].text"
+msgid "Name"
+msgstr "Όνομα"
 
 #: uvisnewobject.lrj:$.strings.[1].value
 msgctxt "tvisnewobject.btn_cancel.caption"
@@ -3323,19 +3392,23 @@ msgstr "Υπολογιστής που προσφέρει αυτή την υπη�
 
 #: uvisnewresourcerecord.lrj:$.strings.[39].value
 msgctxt "tvisnewresourcerecord.label8.caption"
-msgid "Allow any authenticated user to update all DNS records with the same nam. Th"
-"is setting applies only to DNS records for a new name."
-msgstr "Επίτρεψε σε οποιονδήποτε πιστοποιημένο χρήστη να ενημερώσει όλες τις εγγραφέ"
-"ς DNS με το ίδιο όνομα. Αυτή η ρύθμιση ισχύει μόνο για εγγραφές DNS για ένα "
-"νέο όνομα."
+msgid ""
+"Allow any authenticated user to update all DNS records with the same nam. "
+"This setting applies only to DNS records for a new name."
+msgstr ""
+"Επίτρεψε σε οποιονδήποτε πιστοποιημένο χρήστη να ενημερώσει όλες τις "
+"εγγραφές DNS με το ίδιο όνομα. Αυτή η ρύθμιση ισχύει μόνο για εγγραφές DNS "
+"για ένα νέο όνομα."
 
 #: uvisnewresourcerecord.lrj:$.strings.[16].value
 msgctxt "tvisnewresourcerecord.label_aallow.caption"
-msgid "Allow any authenticated user to update all DNS records with the same name. T"
-"his setting applies only to DNS records for a new name."
-msgstr "Επίτρεψε σε οποιονδήποτε πιστοποιημένο χρήστη να ενημερώσει όλες τις εγγραφέ"
-"ς DNS με το ίδιο όνομα. Αυτή η ρύθμιση ισχύει μόνο για εγγραφές DNS για ένα "
-"νέο όνομα."
+msgid ""
+"Allow any authenticated user to update all DNS records with the same name. "
+"This setting applies only to DNS records for a new name."
+msgstr ""
+"Επίτρεψε σε οποιονδήποτε πιστοποιημένο χρήστη να ενημερώσει όλες τις "
+"εγγραφές DNS με το ίδιο όνομα. Αυτή η ρύθμιση ισχύει μόνο για εγγραφές DNS "
+"για ένα νέο όνομα."
 
 #: uvisnewresourcerecord.lrj:$.strings.[14].value
 msgctxt "tvisnewresourcerecord.label_adelete.caption"
@@ -3374,11 +3447,13 @@ msgstr "Ψευδόνυμο όνομα (χρησιμοποιεί τον γονι�
 
 #: uvisnewresourcerecord.lrj:$.strings.[8].value
 msgctxt "tvisnewresourcerecord.label_cnameallow.caption"
-msgid "Allow any authenticated user to update all DNS records with the same name. T"
-"his setting applies only to DNS records for a new name."
-msgstr "Επίτρεψε σε οποιονδήποτε πιστοποιημένο χρήστη να ενημερώσει όλες τις εγγραφέ"
-"ς DNS με το ίδιο όνομα. Αυτή η ρύθμιση ισχύει μόνο για εγγραφές DNS για ένα "
-"νέο όνομα."
+msgid ""
+"Allow any authenticated user to update all DNS records with the same name. "
+"This setting applies only to DNS records for a new name."
+msgstr ""
+"Επίτρεψε σε οποιονδήποτε πιστοποιημένο χρήστη να ενημερώσει όλες τις "
+"εγγραφές DNS με το ίδιο όνομα. Αυτή η ρύθμιση ισχύει μόνο για εγγραφές DNS "
+"για ένα νέο όνομα."
 
 #: uvisnewresourcerecord.lrj:$.strings.[7].value
 msgctxt "tvisnewresourcerecord.label_cnamedelete.caption"
@@ -3402,13 +3477,15 @@ msgstr "Χρονοσήμανση εγγραφής:"
 
 #: uvisnewresourcerecord.lrj:$.strings.[25].value
 msgctxt "tvisnewresourcerecord.label_mxdefault.caption"
-msgid "By default. DNS uses the parent domain name when creating a Mail Exchange re"
-"cord. You can specify a host or child name, but in most deployements, the ab"
-"ove field is left blank."
-msgstr "Εξ ορισμού. Το DNS χρησιμοποιεί το όνομα του γονικού τομέα κατά τη δημιουργί"
-"α εγγραφής Ανταλλαγής Αλληλογραφίας. Μπορείτε να καθορίσετε ένα όνομα υπολογ"
-"ιστή ή θυγατρικού τομέα, αλλά στις περισσότερες εγκαταστάσεις, το παραπάνω π"
-"εδίο αφήνεται κενό."
+msgid ""
+"By default. DNS uses the parent domain name when creating a Mail Exchange "
+"record. You can specify a host or child name, but in most deployements, the "
+"above field is left blank."
+msgstr ""
+"Εξ ορισμού. Το DNS χρησιμοποιεί το όνομα του γονικού τομέα κατά τη "
+"δημιουργία εγγραφής Ανταλλαγής Αλληλογραφίας. Μπορείτε να καθορίσετε ένα "
+"όνομα υπολογιστή ή θυγατρικού τομέα, αλλά στις περισσότερες εγκαταστάσεις, "
+"το παραπάνω πεδίο αφήνεται κενό."
 
 #: uvisnewresourcerecord.lrj:$.strings.[26].value
 msgctxt "tvisnewresourcerecord.label_mxfqdn.caption"
@@ -3432,11 +3509,13 @@ msgstr "Προτεραιότητα διακομιστή αλληλογραφία
 
 #: uvisnewresourcerecord.lrj:$.strings.[22].value
 msgctxt "tvisnewresourcerecord.label_ptrallowany.caption"
-msgid "Allow any authenticated user to update all DNS records with the same name. T"
-"his setting applies only to DNS records for a new name."
-msgstr "Επίτρεψε σε οποιονδήποτε πιστοποιημένο χρήστη να ενημερώσει όλες τις εγγραφέ"
-"ς DNS με το ίδιο όνομα. Αυτή η ρύθμιση ισχύει μόνο για εγγραφές DNS για ένα "
-"νέο όνομα."
+msgid ""
+"Allow any authenticated user to update all DNS records with the same name. "
+"This setting applies only to DNS records for a new name."
+msgstr ""
+"Επίτρεψε σε οποιονδήποτε πιστοποιημένο χρήστη να ενημερώσει όλες τις "
+"εγγραφές DNS με το ίδιο όνομα. Αυτή η ρύθμιση ισχύει μόνο για εγγραφές DNS "
+"για ένα νέο όνομα."
 
 #: uvisnewresourcerecord.lrj:$.strings.[19].value
 msgctxt "tvisnewresourcerecord.label_ptrfqdn.caption"
@@ -3575,19 +3654,23 @@ msgstr "Καλώς ήρθατε στον Οδηγό Νέας Ζώνης"
 
 #: uvisnewzonewizard.lrj:$.strings.[15].value
 msgctxt "tvisnewzonewizard.label10.caption"
-msgid "Create a copy of a zone containing inly Name Server (NS), Start of Authority"
-" (SOA), and possibly glue Host (A) records. A server containing a stub zone "
+msgid ""
+"Create a copy of a zone containing inly Name Server (NS), Start of Authority "
+"(SOA), and possibly glue Host (A) records. A server containing a stub zone "
 "is not authoritative for that zone."
-msgstr "Δημιουργία αντιγράφου μιας ζώνης που περιέχει μόνο εγγραφές Διακομιστή Ονομά"
-"των (NS), Έναρξης Αρχής (SOA) και ενδεχομένως glue εγγραφές Υπολογιστή (A). "
-"Ένας  διακομιστής που περιέχει μια stub ζώνη δεν είναι εξουσιοδοτημένος για "
-"αυτή τη ζώνη."
+msgstr ""
+"Δημιουργία αντιγράφου μιας ζώνης που περιέχει μόνο εγγραφές Διακομιστή "
+"Ονομάτων (NS), Έναρξης Αρχής (SOA) και ενδεχομένως glue εγγραφές Υπολογιστή "
+"(A). Ένας  διακομιστής που περιέχει μια stub ζώνη δεν είναι εξουσιοδοτημένος "
+"για αυτή τη ζώνη."
 
 #: uvisnewzonewizard.lrj:$.strings.[16].value
 msgctxt "tvisnewzonewizard.label11.caption"
-msgid "Store the zone in Active Directory (available only if DNS server is a writea"
-"ble domain controller)"
-msgstr "Αποθήκευση της ζώνης στο Active Directory (διαθέσιμο μόνο εάν ο διακομιστής "
+msgid ""
+"Store the zone in Active Directory (available only if DNS server is a "
+"writeable domain controller)"
+msgstr ""
+"Αποθήκευση της ζώνης στο Active Directory (διαθέσιμο μόνο εάν ο διακομιστής "
 "DNS είναι εγγράψιμος ελεγκτής τομέα)"
 
 #: uvisnewzonewizard.lrj:$.strings.[17].value
@@ -3597,8 +3680,11 @@ msgstr "Πεδίο Εφαρμογής Αναπαραγωγής Ζώνης Active
 
 #: uvisnewzonewizard.lrj:$.strings.[18].value
 msgctxt "tvisnewzonewizard.label13.caption"
-msgid "You can select how you want DNS data replicated throughout your network."
-msgstr "Μπορείτε να επιλέξετε πώς θέλετε να αναπαραχθούν τα δεδομένα DNS στο δίκτυό σας."
+msgid ""
+"You can select how you want DNS data replicated throughout your network."
+msgstr ""
+"Μπορείτε να επιλέξετε πώς θέλετε να αναπαραχθούν τα δεδομένα DNS στο δίκτυό "
+"σας."
 
 #: uvisnewzonewizard.lrj:$.strings.[19].value
 msgctxt "tvisnewzonewizard.label14.caption"
@@ -3608,23 +3694,33 @@ msgstr "Επιλέξτε πώς θέλετε να αναπαραχθούν τα 
 #: uvisnewzonewizard.lrj:$.strings.[20].value
 msgctxt "tvisnewzonewizard.label15.caption"
 msgid "To all DNS servers running on domain controllers in this forest:"
-msgstr "Σε όλους τους διακομιστές DNS που εκτελούνται σε ελεγκτές τομέα σε αυτό το δάσος:"
+msgstr ""
+"Σε όλους τους διακομιστές DNS που εκτελούνται σε ελεγκτές τομέα σε αυτό το "
+"δάσος:"
 
 #: uvisnewzonewizard.lrj:$.strings.[21].value
 msgctxt "tvisnewzonewizard.label16.caption"
 msgid "To all DNS servers running on domain controllers in this domain:"
-msgstr "Σε όλους τους διακομιστές DNS που εκτελούνται σε ελεγκτές τομέα σε αυτόν τον τομέα:"
+msgstr ""
+"Σε όλους τους διακομιστές DNS που εκτελούνται σε ελεγκτές τομέα σε αυτόν τον "
+"τομέα:"
 
 #: uvisnewzonewizard.lrj:$.strings.[22].value
 msgctxt "tvisnewzonewizard.label17.caption"
-msgid "To all domain controllers in this domain (for Windows 2000 compatibility):"
-msgstr "Σε όλους τους ελεγκτές τομέα σε αυτόν τον τομέα (για συμβατότητα με Windows 2000):"
+msgid ""
+"To all domain controllers in this domain (for Windows 2000 compatibility):"
+msgstr ""
+"Σε όλους τους ελεγκτές τομέα σε αυτόν τον τομέα (για συμβατότητα με Windows "
+"2000):"
 
 #: uvisnewzonewizard.lrj:$.strings.[23].value
 msgctxt "tvisnewzonewizard.label18.caption"
-msgid "To all domain controllers specified in the scoper of this directory partitio"
-"n:"
-msgstr "Σε όλους τους ελεγκτές τομέα που ορίζονται στο πεδίο αυτής της κατατμησης καταλόγου:"
+msgid ""
+"To all domain controllers specified in the scoper of this directory "
+"partition:"
+msgstr ""
+"Σε όλους τους ελεγκτές τομέα που ορίζονται στο πεδίο αυτής της κατατμησης "
+"καταλόγου:"
 
 #: uvisnewzonewizard.lrj:$.strings.[24].value
 msgctxt "tvisnewzonewizard.label19.caption"
@@ -3634,7 +3730,9 @@ msgstr "Όνομα Ζώνης"
 #: uvisnewzonewizard.lrj:$.strings.[4].value
 msgctxt "tvisnewzonewizard.label2.caption"
 msgid "This wizard helps you create a new zone for your DNS server."
-msgstr "Αυτός ο οδηγός σάς βοηθά να δημιουργήσετε μια νέα ζώνη για τον διακομιστή DNS σας."
+msgstr ""
+"Αυτός ο οδηγός σάς βοηθά να δημιουργήσετε μια νέα ζώνη για τον διακομιστή "
+"DNS σας."
 
 #: uvisnewzonewizard.lrj:$.strings.[25].value
 msgctxt "tvisnewzonewizard.label20.caption"
@@ -3643,15 +3741,17 @@ msgstr "Ποιο είναι το όνομα της νέας ζώνης;"
 
 #: uvisnewzonewizard.lrj:$.strings.[26].value
 msgctxt "tvisnewzonewizard.label21.caption"
-msgid "The zone name specifies the portion of the DNS namespace for which this serv"
-"er is autoritative. It might be your organization's domain name (for example"
-", example.com) or a portion of the domain name (for example, newzone.example"
-".com). The zone name is not the name of the DNS server."
-msgstr "Το όνομα ζώνης καθορίζει το τμήμα του χώρου ονομάτων DNS για το οποίο αυτός "
-"ο διακομιστής είναι εξουσιοδοτημένος. Μπορεί να είναι το όνομα τομέα της ο"
-"ργάνωσής σας (για παράδειγμα, example.com) ή ένα τμήμα του ονόματος τομέα (γ"
-"ια παράδειγμα, newzone.example.com). Το όνομα ζώνης δεν είναι το όνομα του δ"
-"ιακομιστή DNS."
+msgid ""
+"The zone name specifies the portion of the DNS namespace for which this "
+"server is autoritative. It might be your organization's domain name (for "
+"example, example.com) or a portion of the domain name (for example, newzone."
+"example.com). The zone name is not the name of the DNS server."
+msgstr ""
+"Το όνομα ζώνης καθορίζει το τμήμα του χώρου ονομάτων DNS για το οποίο αυτός "
+"ο διακομιστής είναι εξουσιοδοτημένος. Μπορεί να είναι το όνομα τομέα της "
+"οργάνωσής σας (για παράδειγμα, example.com) ή ένα τμήμα του ονόματος τομέα "
+"(για παράδειγμα, newzone.example.com). Το όνομα ζώνης δεν είναι το όνομα του "
+"διακομιστή DNS."
 
 #: uvisnewzonewizard.lrj:$.strings.[27].value
 msgctxt "tvisnewzonewizard.label22.caption"
@@ -3665,24 +3765,30 @@ msgstr "Αρχείο Ζώνης"
 
 #: uvisnewzonewizard.lrj:$.strings.[29].value
 msgctxt "tvisnewzonewizard.label24.caption"
-msgid "You can create a new zone file or use a file copied from another DNS server."
-msgstr "Μπορείτε να δημιουργήσετε ένα νέο αρχείο ζώνης ή να χρησιμοποιήσετε ένα αρχε"
-"ίο που έχετε αντιγράψει από άλλο διακομιστή DNS."
+msgid ""
+"You can create a new zone file or use a file copied from another DNS server."
+msgstr ""
+"Μπορείτε να δημιουργήσετε ένα νέο αρχείο ζώνης ή να χρησιμοποιήσετε ένα "
+"αρχείο που έχετε αντιγράψει από άλλο διακομιστή DNS."
 
 #: uvisnewzonewizard.lrj:$.strings.[30].value
 msgctxt "tvisnewzonewizard.label25.caption"
-msgid "Do you want to create a new zone file or use an existing file that you have "
+msgid ""
+"Do you want to create a new zone file or use an existing file that you have "
 "copied from another DNS server?"
-msgstr "Θέλετε να δημιουργήσετε ένα νέο αρχείο ζώνης ή να χρησιμοποιήσετε ένα υπάρχο"
-"ν αρχείο που έχετε αντιγράψει από άλλο διακομιστή DNS;"
+msgstr ""
+"Θέλετε να δημιουργήσετε ένα νέο αρχείο ζώνης ή να χρησιμοποιήσετε ένα "
+"υπάρχον αρχείο που έχετε αντιγράψει από άλλο διακομιστή DNS;"
 
 #: uvisnewzonewizard.lrj:$.strings.[31].value
 msgctxt "tvisnewzonewizard.label26.caption"
-msgid "To use this existing file, ensure that it has been copied to the folder %Sys"
-"temRoot%\\system32\\dns on this server, and then click Next."
-msgstr "Για να χρησιμοποιήσετε αυτό το υπάρχον αρχείο, βεβαιωθείτε ότι έχει αντιγραφ"
-"εί στο φάκελο %SystemRoot%\\system32\\dns σε αυτόν το διακομιστή και μετά κά"
-"ντε κλικ στο Επόμενο."
+msgid ""
+"To use this existing file, ensure that it has been copied to the folder "
+"%SystemRoot%\\system32\\dns on this server, and then click Next."
+msgstr ""
+"Για να χρησιμοποιήσετε αυτό το υπάρχον αρχείο, βεβαιωθείτε ότι έχει "
+"αντιγραφεί στο φάκελο %SystemRoot%\\system32\\dns σε αυτόν το διακομιστή και "
+"μετά κάντε κλικ στο Επόμενο."
 
 #: uvisnewzonewizard.lrj:$.strings.[32].value
 msgctxt "tvisnewzonewizard.label27.caption"
@@ -3696,15 +3802,20 @@ msgstr "Χρησιμοποιήστε αυτό το υπάρχον αρχείο:"
 
 #: uvisnewzonewizard.lrj:$.strings.[34].value
 msgctxt "tvisnewzonewizard.label29.caption"
-msgid "You can specify that this DNS zone accepts secure, nonsecure, or no dynamic "
+msgid ""
+"You can specify that this DNS zone accepts secure, nonsecure, or no dynamic "
 "updates."
-msgstr "Μπορείτε να καθορίσετε ότι αυτή η ζώνη DNS δέχεται ασφαλή, μη ασφαλή ή καμία δυναμική ενημέρωση."
+msgstr ""
+"Μπορείτε να καθορίσετε ότι αυτή η ζώνη DNS δέχεται ασφαλή, μη ασφαλή ή καμία "
+"δυναμική ενημέρωση."
 
 #: uvisnewzonewizard.lrj:$.strings.[5].value
 msgctxt "tvisnewzonewizard.label3.caption"
-msgid "A zone translates DNS names to related data, such as IP addresses or network"
-" services."
-msgstr "Μια ζώνη μεταφράζει τα ονόματα DNS σε σχετικά δεδομένα, όπως διευθύνσεις IP "
+msgid ""
+"A zone translates DNS names to related data, such as IP addresses or network "
+"services."
+msgstr ""
+"Μια ζώνη μεταφράζει τα ονόματα DNS σε σχετικά δεδομένα, όπως διευθύνσεις IP "
 "ή δικτυακές υπηρεσίες."
 
 #: uvisnewzonewizard.lrj:$.strings.[35].value
@@ -3714,11 +3825,13 @@ msgstr "Δυναμική Ενημέρωση"
 
 #: uvisnewzonewizard.lrj:$.strings.[36].value
 msgctxt "tvisnewzonewizard.label31.caption"
-msgid "Dynamic updates enable DNS client computers to register and dynamically upda"
-"te their resource records with a DNS server whenever changes occur."
-msgstr "Οι δυναμικές ενημερώσεις επιτρέπουν στους υπολογιστές πελάτες DNS να εγγράφο"
-"νται και να ενημερώνουν δυναμικά τις εγγραφές πόρων τους με ένα διακομιστή D"
-"NS όποτε προκύψουν αλλαγές."
+msgid ""
+"Dynamic updates enable DNS client computers to register and dynamically "
+"update their resource records with a DNS server whenever changes occur."
+msgstr ""
+"Οι δυναμικές ενημερώσεις επιτρέπουν στους υπολογιστές πελάτες DNS να "
+"εγγράφονται και να ενημερώνουν δυναμικά τις εγγραφές πόρων τους με ένα "
+"διακομιστή DNS όποτε προκύψουν αλλαγές."
 
 #: uvisnewzonewizard.lrj:$.strings.[37].value
 msgctxt "tvisnewzonewizard.label32.caption"
@@ -3728,29 +3841,38 @@ msgstr "Επιλέξτε τον τύπο δυναμικών ενημερώσεω
 #: uvisnewzonewizard.lrj:$.strings.[38].value
 msgctxt "tvisnewzonewizard.label33.caption"
 msgid "Allow only secure dynamic updates (recommanded for Active Directory)"
-msgstr "Να επιτρέπονται μόνο ασφαλείς δυναμικές ενημερώσεις (συνιστάται για το Active Directory)"
+msgstr ""
+"Να επιτρέπονται μόνο ασφαλείς δυναμικές ενημερώσεις (συνιστάται για το "
+"Active Directory)"
 
 #: uvisnewzonewizard.lrj:$.strings.[39].value
 msgctxt "tvisnewzonewizard.label34.caption"
 msgid "This option is available only for Active Directory-integrated zones."
-msgstr "Αυτή η επιλογή είναι διαθέσιμη μόνο για ζώνες που είναι ενσωματωμένες στο Active Directory."
+msgstr ""
+"Αυτή η επιλογή είναι διαθέσιμη μόνο για ζώνες που είναι ενσωματωμένες στο "
+"Active Directory."
 
 #: uvisnewzonewizard.lrj:$.strings.[40].value
 msgctxt "tvisnewzonewizard.label35.caption"
 msgid "Allow both nonsecure and secure dynamic updates"
-msgstr "Να επιτρέπονται και οι μη ασφαλείς και οι ασφαλείς δυναμικές ενημερώσεις"
+msgstr ""
+"Να επιτρέπονται και οι μη ασφαλείς και οι ασφαλείς δυναμικές ενημερώσεις"
 
 #: uvisnewzonewizard.lrj:$.strings.[41].value
 msgctxt "tvisnewzonewizard.label36.caption"
 msgid "Dynamic updates of resource records are accepted from any client."
-msgstr "Οι δυναμικές ενημερώσεις των εγγραφών πόρων γίνονται αποδεκτές από οποιοδήποτε πελάτη."
+msgstr ""
+"Οι δυναμικές ενημερώσεις των εγγραφών πόρων γίνονται αποδεκτές από "
+"οποιοδήποτε πελάτη."
 
 #: uvisnewzonewizard.lrj:$.strings.[42].value
 msgctxt "tvisnewzonewizard.label37.caption"
-msgid "This option is a significant security vulnerability because updates can be a"
-"ccepted from untrusted sources."
-msgstr "Αυτή η επιλογή αποτελεί σημαντικό κενό ασφαλείας επειδή οι ενημερώσεις μπορο"
-"ύν να γίνονται αποδεκτές από μη αξιόπιστες πηγές."
+msgid ""
+"This option is a significant security vulnerability because updates can be "
+"accepted from untrusted sources."
+msgstr ""
+"Αυτή η επιλογή αποτελεί σημαντικό κενό ασφαλείας επειδή οι ενημερώσεις "
+"μπορούν να γίνονται αποδεκτές από μη αξιόπιστες πηγές."
 
 #: uvisnewzonewizard.lrj:$.strings.[43].value
 msgctxt "tvisnewzonewizard.label38.caption"
@@ -3759,9 +3881,11 @@ msgstr "Να μην επιτρέπονται δυναμικές ενημερώσ
 
 #: uvisnewzonewizard.lrj:$.strings.[44].value
 msgctxt "tvisnewzonewizard.label39.caption"
-msgid "Dynamic updates of resource records are not accepted by this zone. You must "
+msgid ""
+"Dynamic updates of resource records are not accepted by this zone. You must "
 "update these records manually."
-msgstr "Οι δυναμικές ενημερώσεις των εγγραφών πόρων δεν γίνονται αποδεκτές από αυτή "
+msgstr ""
+"Οι δυναμικές ενημερώσεις των εγγραφών πόρων δεν γίνονται αποδεκτές από αυτή "
 "τη ζώνη. Πρέπει να ενημερώσετε αυτές τις εγγραφές χειροκίνητα."
 
 #: uvisnewzonewizard.lrj:$.strings.[6].value
@@ -3776,24 +3900,29 @@ msgstr "Ολοκλήρωση του Οδηγού Δημιουργίας Ζώνη
 
 #: uvisnewzonewizard.lrj:$.strings.[46].value
 msgctxt "tvisnewzonewizard.label41.caption"
-msgid "You have successfully completed the New Zone Wizard. You specified the follo"
-"wing settings:"
-msgstr "Έχετε ολοκληρώσει με επιτυχία τον Οδηγό Δημιουργίας Ζώνης. Έχετε καθορίσει τ"
-"ις ακόλουθες ρυθμίσεις:"
+msgid ""
+"You have successfully completed the New Zone Wizard. You specified the "
+"following settings:"
+msgstr ""
+"Έχετε ολοκληρώσει με επιτυχία τον Οδηγό Δημιουργίας Ζώνης. Έχετε καθορίσει "
+"τις ακόλουθες ρυθμίσεις:"
 
 #: uvisnewzonewizard.lrj:$.strings.[47].value
 msgctxt "tvisnewzonewizard.label42.caption"
-msgid "Note: You should now add records to the zone or ensure that records are upda"
-"ted dynamically. You can then verify name resolution using nslookup."
-msgstr "Σημείωση: Πρέπει τώρα να προσθέσετε εγγραφές στη ζώνη ή να εξασφαλίσετε ότι "
-"οι εγγραφές ενημερώνονται δυναμικά. Μπορείτε στη συνέχεια να επιβεβαιώσετε τ"
-"ην ανάλυση ονόματος χρησιμοποιώντας το nslookup."
+msgid ""
+"Note: You should now add records to the zone or ensure that records are "
+"updated dynamically. You can then verify name resolution using nslookup."
+msgstr ""
+"Σημείωση: Πρέπει τώρα να προσθέσετε εγγραφές στη ζώνη ή να εξασφαλίσετε ότι "
+"οι εγγραφές ενημερώνονται δυναμικά. Μπορείτε στη συνέχεια να επιβεβαιώσετε "
+"την ανάλυση ονόματος χρησιμοποιώντας το nslookup."
 
 #: uvisnewzonewizard.lrj:$.strings.[48].value
 msgctxt "tvisnewzonewizard.label43.caption"
 msgid "To close this wizard and create the new zone, click Finish."
-msgstr "Για να κλείσετε αυτόν τον οδηγό και να δημιουργήσετε τη νέα ζώνη, κάντε κλικ"
-" στο Ολοκλήρωση."
+msgstr ""
+"Για να κλείσετε αυτόν τον οδηγό και να δημιουργήσετε τη νέα ζώνη, κάντε κλικ "
+"στο Ολοκλήρωση."
 
 #: uvisnewzonewizard.lrj:$.strings.[7].value
 msgctxt "tvisnewzonewizard.label5.caption"
@@ -3813,15 +3942,19 @@ msgstr "Επιλέξτε τον τύπο ζώνης που θέλετε να δ�
 #: uvisnewzonewizard.lrj:$.strings.[13].value
 msgctxt "tvisnewzonewizard.label8.caption"
 msgid "Creates a copy of a zone that can be updated directly on this server."
-msgstr "Δημιουργεί ένα αντίγραφο μιας ζώνης που μπορεί να ενημερωθεί απευθείας σε αυτόν το διακομιστή."
+msgstr ""
+"Δημιουργεί ένα αντίγραφο μιας ζώνης που μπορεί να ενημερωθεί απευθείας σε "
+"αυτόν το διακομιστή."
 
 #: uvisnewzonewizard.lrj:$.strings.[14].value
 msgctxt "tvisnewzonewizard.label9.caption"
-msgid "Create a copy of a zone that exists on another server. This option helps bal"
-"ance the processing load of primary servers and provides fault tolerance."
-msgstr "Δημιουργεί ένα αντίγραφο μιας ζώνης που υπάρχει σε άλλο διακομιστή. Αυτή η ε"
-"πιλογή βοηθά να εξισορροπήσει το φορτίο επεξεργασίας των πρωτευόντων διακομι"
-"στών και παρέχει ανοχή σε σφάλματα."
+msgid ""
+"Create a copy of a zone that exists on another server. This option helps "
+"balance the processing load of primary servers and provides fault tolerance."
+msgstr ""
+"Δημιουργεί ένα αντίγραφο μιας ζώνης που υπάρχει σε άλλο διακομιστή. Αυτή η "
+"επιλογή βοηθά να εξισορροπήσει το φορτίο επεξεργασίας των πρωτευόντων "
+"διακομιστών και παρέχει ανοχή σε σφάλματα."
 
 #: uvisnewzonewizard.lrj:$.strings.[10].value
 msgctxt "tvisnewzonewizard.radiobutton1.caption"
@@ -3952,6 +4085,252 @@ msgstr "Ακύρωση"
 msgctxt "tvisoptions.caption"
 msgid "Options"
 msgstr "Επιλογές"
+
+#: uvisprofileconfiguration.lrj:$.strings.[21].value
+#, fuzzy
+#| msgctxt "tvisconnectiondetails.label_domaincontroller.caption"
+#| msgid "Domain Controller"
+msgctxt "tvisprofileconfiguration.action_searchdomaincontrollers.hint"
+msgid "Search domain controllers"
+msgstr "Ελεγκτής Τομέα"
+
+#: uvisprofileconfiguration.lrj:$.strings.[20].value
+#, fuzzy
+#| msgctxt "tvissearch.action_searchfrom.caption"
+#| msgid "Search from"
+msgctxt "tvisprofileconfiguration.action_searchdomains.hint"
+msgid "Search domains"
+msgstr "Αναζήτηση από"
+
+#: uvisprofileconfiguration.lrj:$.strings.[24].value
+msgctxt "tvisprofileconfiguration.action_showdcinfos.caption"
+msgid "Show DC infos"
+msgstr ""
+
+#: uvisprofileconfiguration.lrj:$.strings.[23].value
+#, fuzzy
+#| msgctxt "tvisconnectoptions.radiobutton_simpleauth.caption"
+#| msgid "Simple Authentication"
+msgctxt "tvisprofileconfiguration.action_testauthentication.caption"
+msgid "Test Authentication"
+msgstr "Απλή Πιστοποίηση"
+
+#: uvisprofileconfiguration.lrj:$.strings.[22].value
+#, fuzzy
+#| msgctxt "tvisconnectoptions.group_connection.caption"
+#| msgid "Connection :"
+msgctxt "tvisprofileconfiguration.action_testconnection.caption"
+msgid "Test Connection"
+msgstr "Σύνδεση :"
+
+#: uvisprofileconfiguration.lrj:$.strings.[0].value
+msgctxt "tvisprofileconfiguration.caption"
+msgid "Profil configuration"
+msgstr ""
+
+#: uvisprofileconfiguration.lrj:$.strings.[16].value
+#, fuzzy
+#| msgctxt "tvisconnectoptions.group_account.caption"
+#| msgid "Account :"
+msgctxt "tvisprofileconfiguration.groupbox_account.caption"
+msgid "Account"
+msgstr "Λογαριασμός :"
+
+#: uvisprofileconfiguration.lrj:$.strings.[8].value
+msgctxt "tvisprofileconfiguration.groupbox_authmethods.caption"
+msgid "Auth method"
+msgstr ""
+
+#: uvisprofileconfiguration.lrj:$.strings.[1].value
+#, fuzzy
+#| msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[7].text"
+#| msgid "Domain"
+msgctxt "tvisprofileconfiguration.groupbox_domain.caption"
+msgid "Domain"
+msgstr "Τομέας"
+
+#: uvisprofileconfiguration.lrj:$.strings.[15].value
+msgctxt "tvisprofileconfiguration.label_algorithm.caption"
+msgid "Algorithm"
+msgstr ""
+
+#: uvisprofileconfiguration.lrj:$.strings.[9].value
+#, fuzzy
+#| msgctxt "tvisconnectoptions.checkbox_anonyme.caption"
+#| msgid "Anonymous Connection"
+msgctxt "tvisprofileconfiguration.label_anonymous.caption"
+msgid "Anonymous"
+msgstr "Ανώνυμη Σύνδεση"
+
+#: uvisprofileconfiguration.lrj:$.strings.[19].value
+msgctxt "tvisprofileconfiguration.label_at.caption"
+msgid "@"
+msgstr ""
+
+#: uvisprofileconfiguration.lrj:$.strings.[13].value
+msgctxt "tvisprofileconfiguration.label_channelbinding.caption"
+msgid "Channel binding"
+msgstr ""
+
+#: uvisprofileconfiguration.lrj:$.strings.[14].value
+#, fuzzy
+#| msgctxt ""
+#| "tfrmpropertysecurity.tisgrid_securitylistuser.header.columns[0].text"
+#| msgid "Group or user names"
+msgctxt "tvisprofileconfiguration.label_currentusername.caption"
+msgid "Current username"
+msgstr "Ομάδα ή ονόματα χρηστών"
+
+#: uvisprofileconfiguration.lrj:$.strings.[11].value
+msgctxt "tvisprofileconfiguration.label_digest.caption"
+msgid "Digest"
+msgstr ""
+
+#: uvisprofileconfiguration.lrj:$.strings.[2].value
+#, fuzzy
+#| msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[7].text"
+#| msgid "Domain"
+msgctxt "tvisprofileconfiguration.label_domain.caption"
+msgid "Domain"
+msgstr "Τομέας"
+
+#: uvisprofileconfiguration.lrj:$.strings.[3].value
+#, fuzzy
+#| msgctxt "tvisconnectiondetails.label_domaincontroller.caption"
+#| msgid "Domain Controller"
+msgctxt "tvisprofileconfiguration.label_domaincontroller.caption"
+msgid "Domain Controller"
+msgstr "Ελεγκτής Τομέα"
+
+#: uvisprofileconfiguration.lrj:$.strings.[12].value
+msgctxt "tvisprofileconfiguration.label_kerberos.caption"
+msgid "Kerberos"
+msgstr ""
+
+#: uvisprofileconfiguration.lrj:$.strings.[18].value
+#, fuzzy
+#| msgctxt "tvisconnectiondetails.label_password.caption"
+#| msgid "Password"
+msgctxt "tvisprofileconfiguration.label_password.caption"
+msgid "Password"
+msgstr "Κωδικός Πρόσβασης"
+
+#: uvisprofileconfiguration.lrj:$.strings.[10].value
+msgctxt "tvisprofileconfiguration.label_simple.caption"
+msgid "Simple"
+msgstr ""
+
+#: uvisprofileconfiguration.lrj:$.strings.[5].value
+#, fuzzy
+#| msgctxt "tvisconnectiondetails.label_timeout.caption"
+#| msgid "Timeout"
+msgctxt "tvisprofileconfiguration.label_timeout.caption"
+msgid "Timeout"
+msgstr "Χρονικό όριο"
+
+#: uvisprofileconfiguration.lrj:$.strings.[4].value
+msgctxt "tvisprofileconfiguration.label_tls.caption"
+msgid "TLS"
+msgstr ""
+
+#: uvisprofileconfiguration.lrj:$.strings.[7].value
+#, fuzzy
+#| msgctxt "tvisconnectoptions.checkbox_anonyme.caption"
+#| msgid "Anonymous Connection"
+msgctxt "tvisprofileconfiguration.label_unsafe.caption"
+msgid "Unsafe connection"
+msgstr "Ανώνυμη Σύνδεση"
+
+#: uvisprofileconfiguration.lrj:$.strings.[17].value
+#, fuzzy
+#| msgctxt "tvisconnectiondetails.label_username.caption"
+#| msgid "Username"
+msgctxt "tvisprofileconfiguration.label_username.caption"
+msgid "Username"
+msgstr "Όνομα Χρήστη"
+
+#: uvisprofilemanager.lrj:$.strings.[12].value
+msgctxt "tvisprofilemanager.action_add.caption"
+msgid "Action_Add"
+msgstr ""
+
+#: uvisprofilemanager.lrj:$.strings.[14].value
+msgctxt "tvisprofilemanager.action_edit.caption"
+msgid "Action_Edit"
+msgstr ""
+
+#: uvisprofilemanager.lrj:$.strings.[7].value
+#, fuzzy
+#| msgctxt "tformconnectconfigs.action_ok.caption"
+#| msgid "OK"
+msgctxt "tvisprofilemanager.bitbtn_ok.caption"
+msgid "OK"
+msgstr "OK"
+
+#: uvisprofilemanager.lrj:$.strings.[0].value
+#, fuzzy
+#| msgctxt "tfrmpropertyprofile.label_profilepath.caption"
+#| msgid "Profile path :"
+msgctxt "tvisprofilemanager.caption"
+msgid "Profile manager"
+msgstr "Διαδρομή προφίλ :"
+
+#: uvisprofilemanager.lrj:$.strings.[3].value
+#, fuzzy
+#| msgctxt "tfrmmoduleadsi.tisgrid1.header.columns[1].text"
+#| msgid "Name"
+msgctxt "tvisprofilemanager.listview1.columns[0].caption"
+msgid "Name"
+msgstr "Όνομα"
+
+#: uvisprofilemanager.lrj:$.strings.[4].value
+#, fuzzy
+#| msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[7].text"
+#| msgid "Domain"
+msgctxt "tvisprofilemanager.listview1.columns[1].caption"
+msgid "Domain"
+msgstr "Τομέας"
+
+#: uvisprofilemanager.lrj:$.strings.[5].value
+#, fuzzy
+#| msgctxt "tvisconnectiondetails.label_domaincontroller.caption"
+#| msgid "Domain Controller"
+msgctxt "tvisprofilemanager.listview1.columns[2].caption"
+msgid "Domain Controller"
+msgstr "Ελεγκτής Τομέα"
+
+#: uvisprofilemanager.lrj:$.strings.[6].value
+#, fuzzy
+#| msgctxt "tvisconnectiondetails.label_username.caption"
+#| msgid "Username"
+msgctxt "tvisprofilemanager.listview1.columns[3].caption"
+msgid "Username"
+msgstr "Όνομα Χρήστη"
+
+#: uvisprofilemanager.lrj:$.strings.[9].value
+msgctxt "tvisprofilemanager.menuitem_largeicons.caption"
+msgid "Large icons"
+msgstr ""
+
+#: uvisprofilemanager.lrj:$.strings.[10].value
+msgctxt "tvisprofilemanager.menuitem_list.caption"
+msgid "List"
+msgstr ""
+
+#: uvisprofilemanager.lrj:$.strings.[8].value
+msgctxt "tvisprofilemanager.menuitem_smallicons.caption"
+msgid "Small icons"
+msgstr ""
+
+#: uvisprofilemanager.lrj:$.strings.[11].value
+msgctxt "tvisprofilemanager.menuitem_table.caption"
+msgid "Table"
+msgstr ""
+
+#: uvisprofilemanager.lrj:$.strings.[1].value
+msgctxt "tvisprofilemanager.toolbar1.caption"
+msgid "ToolBar1"
+msgstr ""
 
 #: uvisproperties.lrj:$.strings.[0].value
 msgctxt "tvisproperties.action_apply.caption"
@@ -4107,6 +4486,51 @@ msgstr "Για προχωρημένους"
 msgctxt "tvisproperties.action_securitydeleteuser.caption"
 msgid "Delete"
 msgstr "Διαγραφή"
+
+#: uvisrootdseinfos.lrj:$.strings.[0].value
+msgctxt "tvisrootdseinfos.caption"
+msgid "DC infos"
+msgstr ""
+
+#: uvisrootdseinfos.lrj:$.strings.[3].value
+#, fuzzy
+#| msgctxt "tvisconnectiondetails.label1.caption"
+#| msgid "Server informations (available from RootDSE Object)"
+msgctxt "tvisrootdseinfos.label1.caption"
+msgid "Server informations (available from RootDSE Object)"
+msgstr "Πληροφορίες διακομιστή (διαθέσιμες από το RootDSE Object)"
+
+#: uvisrootdseinfos.lrj:$.strings.[1].value
+#, fuzzy
+#| msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[7].text"
+#| msgid "Domain"
+msgctxt "tvisrootdseinfos.label_domain.caption"
+msgid "Domain"
+msgstr "Τομέας"
+
+#: uvisrootdseinfos.lrj:$.strings.[2].value
+#, fuzzy
+#| msgctxt "tvisconnectiondetails.label_domaincontroller.caption"
+#| msgid "Domain Controller"
+msgctxt "tvisrootdseinfos.label_domaincontroller.caption"
+msgid "Domain Controller"
+msgstr "Ελεγκτής Τομέα"
+
+#: uvisrootdseinfos.lrj:$.strings.[4].value
+#, fuzzy
+#| msgctxt "tfrmmoduleadsi.tisgrid1.header.columns[1].text"
+#| msgid "Name"
+msgctxt "tvisrootdseinfos.tisgrid1.header.columns[0].text"
+msgid "Name"
+msgstr "Όνομα"
+
+#: uvisrootdseinfos.lrj:$.strings.[5].value
+#, fuzzy
+#| msgctxt "tfrmmoduleadsi.tisgrid2.header.columns[1].text"
+#| msgid "Value"
+msgctxt "tvisrootdseinfos.tisgrid1.header.columns[1].text"
+msgid "Value"
+msgstr "Τιμή"
 
 #: uvissearch.lrj:$.strings.[29].value
 msgctxt "tvissearch.action_advadd.caption"
@@ -4321,7 +4745,8 @@ msgstr "Επαναφορά Κωδικού Πρόσβασης"
 #: uvistaskresetpassword.lrj:$.strings.[3].value
 msgctxt "tvistaskresetpassword.checkbox_change.caption"
 msgid "User must change password at next logon"
-msgstr "Ο χρήστης πρέπει να αλλάξει τον κωδικό πρόσβασης κατά την επόμενη σύνδεση"
+msgstr ""
+"Ο χρήστης πρέπει να αλλάξει τον κωδικό πρόσβασης κατά την επόμενη σύνδεση"
 
 #: uvistaskresetpassword.lrj:$.strings.[5].value
 msgctxt "tvistaskresetpassword.checkbox_unlock.caption"
@@ -4335,8 +4760,11 @@ msgstr "Επιβεβαίωση Κωδικού Πρόσβασης :"
 
 #: uvistaskresetpassword.lrj:$.strings.[4].value
 msgctxt "tvistaskresetpassword.label_effect.caption"
-msgid "The user must logoff and then logon again for the change to take effect."
-msgstr "Ο χρήστης πρέπει να αποσυνδεθεί και στη συνέχεια να συνδεθεί ξανά για να εφαρμοστεί η αλλαγή."
+msgid ""
+"The user must logoff and then logon again for the change to take effect."
+msgstr ""
+"Ο χρήστης πρέπει να αποσυνδεθεί και στη συνέχεια να συνδεθεί ξανά για να "
+"εφαρμοστεί η αλλαγή."
 
 #: uvistaskresetpassword.lrj:$.strings.[1].value
 msgctxt "tvistaskresetpassword.label_newpassword.caption"
@@ -4348,3 +4776,122 @@ msgctxt "tvistaskresetpassword.label_status.caption"
 msgid "Account Lockout Status on this Domain Controller : "
 msgstr "Κατάσταση Κλειδώματος Λογαριασμού σε αυτόν τον Ελεγκτή Τομέα : "
 
+#~ msgctxt "tformconnectconfigs.action_addconfig.caption"
+#~ msgid "Add"
+#~ msgstr "Προσθήκη"
+
+#~ msgctxt "tformconnectconfigs.action_deleteconfig.caption"
+#~ msgid "Delete"
+#~ msgstr "Διαγραφή"
+
+#~ msgctxt "tformconnectconfigs.action_editconfig.caption"
+#~ msgid "Edit"
+#~ msgstr "Επεξεργασία"
+
+#~ msgctxt "tfrmpropertylaps.groupbox1.caption"
+#~ msgid "Solution du mot de passe de l'administrateur local"
+#~ msgstr "Λύση κωδικού πρόσβασης τοπικού διαχειριστή"
+
+#~ msgctxt "tfrmpropertylaps.label_currentexpiration.caption"
+#~ msgid "Expiration actuelle du mot de passe LAPS :"
+#~ msgstr "Τρέχουσα λήξη κωδικού πρόσβασης LAPS :"
+
+#~ msgctxt "tfrmpropertylaps.label_localadminaccountname.caption"
+#~ msgid "Nom du compte d'administrateur local LAPS :"
+#~ msgstr "Όνομα λογαριασμού τοπικού διαχειριστή LAPS :"
+
+#~ msgctxt "tfrmpropertylaps.label_localadminaccountpassword.caption"
+#~ msgid "Mot de passe du compte d'administrateur local LAPS :"
+#~ msgstr "Κωδικός πρόσβασης λογαριασμού τοπικού διαχειριστή LAPS :"
+
+#~ msgctxt "tfrmpropertylaps.label_newexpiration.caption"
+#~ msgid "Définir l'expiration du nouveau mot de passe LAPS :"
+#~ msgstr "Ορισμός λήξης νέου κωδικού πρόσβασης LAPS :"
+
+#~ msgctxt "tvisconnectiondetails.bitbtn1.caption"
+#~ msgid "Hide/Show"
+#~ msgstr "Απόκρυψη/Εμφάνιση"
+
+#~ msgctxt "tvisconnectiondetails.caption"
+#~ msgid "Connection details"
+#~ msgstr "Λεπτομέρειες σύνδεσης"
+
+#~ msgctxt "tvisconnectiondetails.label2.caption"
+#~ msgid "Ldap error:"
+#~ msgstr "Σφάλμα Ldap:"
+
+#~ msgctxt "tvisconnectiondetails.label_allowunsafepasswordbind.caption"
+#~ msgid "Allow unsafe password bind"
+#~ msgstr "Επίτρεψε μη ασφαλή σύνδεση με κωδικό πρόσβασης"
+
+#~ msgctxt "tvisconnectiondetails.label_autobind.caption"
+#~ msgid "Auto bind"
+#~ msgstr "Αυτόματη σύνδεση"
+
+#~ msgctxt "tvisconnectiondetails.label_autoreconnect.caption"
+#~ msgid "Auto reconnect"
+#~ msgstr "Αυτόματη επανασύνδεση"
+
+#~ msgctxt "tvisconnectiondetails.label_domain.caption"
+#~ msgid "Domain"
+#~ msgstr "Τομέας"
+
+#~ msgctxt "tvisconnectiondetails.label_kerberosdisablechannelbinding.caption"
+#~ msgid "Kerberos disable channel binding"
+#~ msgstr "Ο Kerberos απενεργοποιεί τη δέσμευση καναλιού"
+
+#~ msgctxt "tvisconnectiondetails.tabsheet_advanced.caption"
+#~ msgid "Advanced"
+#~ msgstr "Για προχωρημένους"
+
+#~ msgctxt "tvisconnectiondetails.tabsheet_formatted.caption"
+#~ msgid "Formatted"
+#~ msgstr "Μορφοποιημένο"
+
+#~ msgctxt "tvisconnectiondetails.tisgrid1.header.columns[0].text"
+#~ msgid "Name"
+#~ msgstr "Όνομα"
+
+#~ msgctxt "tvisconnectiondetails.tisgrid1.header.columns[1].text"
+#~ msgid "Value"
+#~ msgstr "Τιμή"
+
+#~ msgctxt "tvisconnectoptions.action_cancel.caption"
+#~ msgid "Cancel"
+#~ msgstr "Ακύρωση"
+
+#~ msgctxt "tvisconnectoptions.action_check.caption"
+#~ msgid "Check"
+#~ msgstr "Έλεγχος"
+
+#~ msgctxt "tvisconnectoptions.action_ok.caption"
+#~ msgid "OK"
+#~ msgstr "ΟΚ"
+
+#~ msgctxt "tvisconnectoptions.caption"
+#~ msgid "Connection Options"
+#~ msgstr "Επιλογές Σύνδεσης"
+
+#~ msgctxt "tvisconnectoptions.cbignorecerterrors.caption"
+#~ msgid "Ignore certificate errors"
+#~ msgstr "Αγνόησε τα σφάλματα πιστοποιητικού"
+
+#~ msgctxt "tvisconnectoptions.label_dc.caption"
+#~ msgid "Domain Controller"
+#~ msgstr "Ελεγκτής Τομέα"
+
+#~ msgctxt "tvisconnectoptions.label_password.caption"
+#~ msgid "Password :"
+#~ msgstr "Κωδικός Πρόσβασης :"
+
+#~ msgctxt "tvisconnectoptions.label_port.caption"
+#~ msgid "Port :"
+#~ msgstr "Θύρα :"
+
+#~ msgctxt "tvisconnectoptions.label_targethost.caption"
+#~ msgid "Domain :"
+#~ msgstr "Τομέας :"
+
+#~ msgctxt "tvisconnectoptions.label_user.caption"
+#~ msgid "User :"
+#~ msgstr "Χρήστης :"
