@@ -5,6 +5,7 @@ object FrmPropertyMember: TFrmPropertyMember
   Width = 447
   ClientHeight = 360
   ClientWidth = 447
+  LCLVersion = '4.5.0.0'
   TabOrder = 0
   DesignLeft = 2085
   DesignTop = 175
@@ -50,6 +51,7 @@ object FrmPropertyMember: TFrmPropertyMember
     Header.MaxHeight = 101
     Header.MinHeight = 19
     Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.SortColumn = 0
     Header.Style = hsFlatButtons
     TabOrder = 0
     TreeOptions.AutoOptions = [toAutoDropExpand, toAutoScrollOnExpand, toAutoSort, toAutoTristateTracking, toAutoDeleteMovedNodes, toDisableAutoscrollOnFocus, toAutoChangeScale]
