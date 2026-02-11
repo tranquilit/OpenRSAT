@@ -198,12 +198,19 @@ end;
 procedure TVisProfileConfiguration.Action_ShowDCInfosExecute(Sender: TObject);
 var
   VisRootDSEInfos: TVisRootDSEInfos;
+  ASettings: TMLdapClientSettings;
 begin
-  VisRootDSEInfos := TVisRootDSEInfos.Create(Self, fSettings);
+  ASettings := TMLdapClientSettings.Create;
   try
-    VisRootDSEInfos.ShowModal;
+    GUIToSettings(ASettings);
+    VisRootDSEInfos := TVisRootDSEInfos.Create(Self, ASettings);
+    try
+      VisRootDSEInfos.ShowModal;
+    finally
+      FreeAndNil(VisRootDSEInfos);
+    end;
   finally
-    FreeAndNil(VisRootDSEInfos);
+    FreeAndNil(ASettings);
   end;
 end;
 

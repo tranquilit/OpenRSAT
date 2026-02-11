@@ -104,6 +104,7 @@ begin
       // Server info
       Edit_Domain.Text := Settings.KerberosDN;
       Edit_DomainController.Text := Settings.TargetHost;
+      Settings.AutoBind := lcbPlain;
       Settings.UserName := '';
       Settings.Password := '';
       Connect();
