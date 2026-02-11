@@ -63,6 +63,7 @@
 {"hash":158090559,"name":"tfrmmoduleaduc.action_disablegpo.caption","sourcebytes":[68,105,115,97,98,108,101,32,71,80,79],"value":"Disable GPO"},
 {"hash":148570415,"name":"tfrmmoduleaduc.action_enforcegpo.caption","sourcebytes":[69,110,102,111,114,99,101,32,71,80,79],"value":"Enforce GPO"},
 {"hash":232345557,"name":"tfrmmoduleaduc.action_blockgpoinheritance.caption","sourcebytes":[66,108,111,99,107,32,71,80,79,32,73,110,104,101,114,105,116,97,110,99,101],"value":"Block GPO Inheritance"},
+{"hash":172734798,"name":"tfrmmoduleaduc.action_showobjectlocation.caption","sourcebytes":[83,104,111,119,32,111,98,106,101,99,116,32,108,111,99,97,116,105,111,110],"value":"Show object location"},
 {"hash":92596005,"name":"tfrmmoduleaduc.menuitem_newmsmqqueue.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,77,83,77,81,81,117,101,117,101],"value":"MenuItem_NewMSMQQueue"},
 {"hash":198121851,"name":"tfrmmoduleaduc.menuitem_newmsmqroutinglink.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,77,83,77,81,82,111,117,116,105,110,103,76,105,110,107],"value":"MenuItem_NewMSMQRoutingLink"},
 {"hash":157049177,"name":"tfrmmoduleaduc.menuitem_newmsauthzcentralaccesspolicy.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,77,115,65,117,116,104,122,67,101,110,116,114,97,108,65,99,99,101,115,115,80,111,108,105,99,121],"value":"MenuItem_NewMsAuthzCentralAccessPolicy"},

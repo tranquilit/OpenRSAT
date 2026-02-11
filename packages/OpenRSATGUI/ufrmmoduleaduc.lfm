@@ -797,6 +797,11 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExecute = Action_BlockGPOInheritanceExecute
       OnUpdate = Action_BlockGPOInheritanceUpdate
     end
+    object Action_ShowObjectLocation: TAction
+      Caption = 'Show object location'
+      OnExecute = Action_ShowObjectLocationExecute
+      OnUpdate = Action_ShowObjectLocationUpdate
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
@@ -969,6 +974,9 @@ object FrmModuleADUC: TFrmModuleADUC
     end
     object Separator4: TMenuItem
       Caption = '-'
+    end
+    object MenuItem_ShowObjectLocation: TMenuItem
+      Action = Action_ShowObjectLocation
     end
     object MenuItem_Search: TMenuItem
       Action = Action_Search

@@ -47,6 +47,7 @@ type
   { TFrmModuleADUC }
 
   TFrmModuleADUC = class(TFrameModule)
+    Action_ShowObjectLocation: TAction;
     Action_BlockGPOInheritance: TAction;
     Action_EnableGPO: TAction;
     Action_DisableGPO: TAction;
@@ -94,6 +95,7 @@ type
     CheckBox_IncludeSubContainer: TCheckBox;
     Image1: TImage;
     Image2: TImage;
+    MenuItem_ShowObjectLocation: TMenuItem;
     MenuItem_EditColumns: TMenuItem;
     MenuItem_BlockGPOInheritance: TMenuItem;
     MenuItem_EnableGPO: TMenuItem;
@@ -230,6 +232,8 @@ type
     procedure Action_RefreshUpdate(Sender: TObject);
     procedure Action_SearchExecute(Sender: TObject);
     procedure Action_SearchUpdate(Sender: TObject);
+    procedure Action_ShowObjectLocationExecute(Sender: TObject);
+    procedure Action_ShowObjectLocationUpdate(Sender: TObject);
     procedure Action_TaskAddToAGroupExecute(Sender: TObject);
     procedure Action_TaskAddToAGroupUpdate(Sender: TObject);
     procedure Action_TaskMoveExecute(Sender: TObject);
@@ -1067,6 +1071,41 @@ begin
   Action_Search.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
+procedure TFrmModuleADUC.Action_ShowObjectLocationExecute(Sender: TObject);
+var
+  ObjectName, ObjectOU: RawUtf8;
+  Node: TADUCTreeNode;
+  i, Level: Integer;
+  SplittedCN: TStringArray;
+begin
+  ObjectName := GridADUC.SelectedObjects[0]^.S['objectName'];
+  ObjectOU := GetParentDN(ObjectName);
+
+  SplittedCN := String(DNToCN(ObjectOU)).Split('/');
+
+  Node := fADUCDomainNode;
+  Level := 1;
+  repeat
+    if not Assigned(Node) then
+      Exit;
+    for i := 0 to Pred(Node.Count) do
+      if Node.Items[i].Text = SplittedCN[Level] then
+      begin
+        Node := (Node.Items[i] as TADUCTreeNode);
+        Break;
+      end;
+    Inc(Level);
+    RefreshADUCTreeNode(Node);
+  until Level >= Length(SplittedCN);
+  TreeADUC.Selected := Node;
+end;
+
+procedure TFrmModuleADUC.Action_ShowObjectLocationUpdate(Sender: TObject);
+begin
+  Action_ShowObjectLocation.Enabled := Assigned(GridADUC) and (GridADUC.SelectedCount = 1);
+end;
+
+
 procedure TFrmModuleADUC.Action_TaskAddToAGroupExecute(Sender: TObject);
 var
   DistinguishedName, SelectedDistinguishedName: String;
@@ -1530,6 +1569,7 @@ begin
     MenuItem_Copy,
     MenuItem_Cut,
     MenuItem_Paste,
+    MenuItem_ShowObjectLocation,
     MenuItem_Search,
     MenuItem_Delete,
     MenuItem_Refresh,
@@ -1737,7 +1777,7 @@ begin
   if not Assigned(Row) or (aColumn < 0) then
     Exit;
   PropertyName := GridADUC.FindColumnByIndex(aColumn).PropertyName;
-  if (PropertyName = '') then
+  if (PropertyName = '') or not Row^.Exists(PropertyName) or not Row^.A[PropertyName]^.IsArray then
     Exit;
   PropertyValues := Row^.A[PropertyName]^.ToRawUtf8DynArray;
   if not Assigned(PropertyValues) or (Length(PropertyValues) <= 0) then
@@ -2692,12 +2732,18 @@ begin
   Image1.Visible := True;
   Image2.Visible := False;
   {$ENDIF}
+
+  FrmRSAT.IniPropStorage1.IniSection := Name;
+  CheckBox_IncludeSubContainer.Checked := FrmRSAT.IniPropStorage1.ReadBoolean(CheckBox_IncludeSubContainer.Name, False);
 end;
 
 destructor TFrmModuleADUC.Destroy;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Destroy', [Self.Name]);
+
+  FrmRSAT.IniPropStorage1.IniSection := Name;
+  FrmRSAT.IniPropStorage1.WriteBoolean(CheckBox_IncludeSubContainer.Name, CheckBox_IncludeSubContainer.Checked);
 
   FreeAndNil(fTreeSelectionHistory);
   FreeAndNil(fModuleAduc);
