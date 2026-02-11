@@ -536,6 +536,7 @@ object VisSearch: TVisSearch
       TabOrder = 0
       SelectedAndTotalLabel = Label_ResultCount
       ZebraColor = 15593713
+      OnDblClick = TisGrid_ResultDblClick
       OnGetImageIndex = TisGrid_ResultGetImageIndex
       OnKeyPress = TisGrid_ResultKeyPress
     end

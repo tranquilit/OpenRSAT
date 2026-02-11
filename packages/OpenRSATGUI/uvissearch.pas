@@ -96,6 +96,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
+    procedure TisGrid_ResultDblClick(Sender: TObject);
     procedure TisGrid_ResultGetImageIndex(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
       var Ghosted: Boolean; var ImageIndex: Integer);
@@ -171,6 +172,11 @@ end;
 procedure TVisSearch.Timer_SearchInGridTimer(Sender: TObject);
 begin
   Timer_SearchInGrid.Enabled := False;
+end;
+
+procedure TVisSearch.TisGrid_ResultDblClick(Sender: TObject);
+begin
+  Action_Properties.Execute;
 end;
 
 procedure TVisSearch.TisGrid_ResultGetImageIndex(Sender: TBaseVirtualTree;
