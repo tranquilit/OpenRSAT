@@ -90,6 +90,7 @@ implementation
 uses
   process,
   mormot.core.base,
+  mormot.core.os,
   mormot.core.text,
   uconfig,
   ufrmrsatoptions,
@@ -203,8 +204,15 @@ begin
   FrmRSAT.Timer_AutoConnect.Enabled := FrmRSAT.LdapConfigs.AutoConnect;
   UpdateViewThemeButtons;
   IniPropStorage1.Restore;
-  FrmRSAT.SetStatusBarText(2, FormatUtf8('Version: %', [VERSION]));
   MakeFullyVisible();
+  {$IFDEF WINDOWS}
+  if (WindowState = wsMaximized) and (OSVersion >= wTen) then
+  begin
+    WindowState := wsNormal;
+    WindowState := wsMaximized;
+  end;
+  {$ENDIF WINDOWS}
+  FrmRSAT.SetStatusBarText(2, FormatUtf8('Version: %', [VERSION]));
 end;
 
 procedure TVisOpenRSAT.MenuItem_ViewThemeDarkClick(Sender: TObject);
