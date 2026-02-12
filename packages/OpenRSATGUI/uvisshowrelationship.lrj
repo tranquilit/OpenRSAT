@@ -1,0 +1,20 @@
+{"version":1,"strings":[
+{"hash":266414736,"name":"tvisshowrelationship.caption","sourcebytes":[86,105,115,83,104,111,119,82,101,108,97,116,105,111,110,115,104,105,112],"value":"VisShowRelationship"},
+{"hash":94079128,"name":"tvisshowrelationship.label2.caption","sourcebytes":[83,101,97,114,99,104],"value":"Search"},
+{"hash":347380,"name":"tvisshowrelationship.bitbtn3.caption","sourcebytes":[78,101,120,116],"value":"Next"},
+{"hash":147653555,"name":"tvisshowrelationship.bitbtn4.caption","sourcebytes":[80,114,101,118,105,111,117,115],"value":"Previous"},
+{"hash":110596146,"name":"tvisshowrelationship.checkbox1.caption","sourcebytes":[83,104,111,119,32,117,115,101,114],"value":"Show user"},
+{"hash":195026770,"name":"tvisshowrelationship.checkbox2.caption","sourcebytes":[67,104,101,99,107,66,111,120,50],"value":"CheckBox2"},
+{"hash":5262024,"name":"tvisshowrelationship.tisgrid1.header.columns[0].text","sourcebytes":[73,110,100,101,120],"value":"Index"},
+{"hash":1166,"name":"tvisshowrelationship.tisgrid1.header.columns[1].text","sourcebytes":[68,78],"value":"DN"},
+{"hash":346165,"name":"tvisshowrelationship.tisgrid1.header.columns[2].text","sourcebytes":[78,97,109,101],"value":"Name"},
+{"hash":87832770,"name":"tvisshowrelationship.tisgrid1.header.columns[3].text","sourcebytes":[77,101,109,98,101,114],"value":"Member"},
+{"hash":59512470,"name":"tvisshowrelationship.tisgrid1.header.columns[4].text","sourcebytes":[77,101,109,98,101,114,32,111,102],"value":"Member of"},
+{"hash":157732041,"name":"tvisshowrelationship.action_property.caption","sourcebytes":[80,114,111,112,101,114,116,121],"value":"Property"},
+{"hash":249212480,"name":"tvisshowrelationship.action_focusedselectedgroup.caption","sourcebytes":[70,111,99,117,115,101,100,32,115,101,108,101,99,116,101,100,32,103,114,111,117,112],"value":"Focused selected group"},
+{"hash":146640072,"name":"tvisshowrelationship.action_refresh.caption","sourcebytes":[82,101,102,114,101,115,104],"value":"Refresh"},
+{"hash":267343253,"name":"tvisshowrelationship.action_synchronize.caption","sourcebytes":[83,121,110,99,104,114,111,110,105,122,101],"value":"Synchronize"},
+{"hash":134797655,"name":"tvisshowrelationship.action_savetopng.caption","sourcebytes":[83,97,118,101,32,116,111,32,80,78,71],"value":"Save to PNG"},
+{"hash":153349200,"name":"tvisshowrelationship.action_unfocusgroup.caption","sourcebytes":[85,110,102,111,99,117,115,32,103,114,111,117,112],"value":"Unfocus group"},
+{"hash":134792500,"name":"tvisshowrelationship.action_savetodot.caption","sourcebytes":[83,97,118,101,32,116,111,32,68,79,84],"value":"Save to DOT"}
+]}

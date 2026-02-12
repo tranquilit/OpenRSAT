@@ -31,7 +31,8 @@ uses
   ufrmpropertyattributes, uhelpersui, ucommonui, ursatldapclientui, 
   ufrmoption, ufrmmodule, ufrmmoduleaducoption, ufrmrsat, ufrmmodules, 
   uvismodifygplink, uvisprofilemanager, uviseditaduccolumns, 
-  uvisprofileconfiguration, uvisrootdseinfos, LazarusPackageIntf;
+  uvisprofileconfiguration, uvisrootdseinfos, uvisshowrelationship, 
+  LazarusPackageIntf;
 
 implementation
 
