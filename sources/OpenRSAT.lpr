@@ -132,6 +132,7 @@ begin
   GssLib_Custom := cmd.ParamS('lib&krb5', 'the Kerberos libgssapi #filename');
   {$ENDIF OSPOSIX}
   RegisterOpenSsl;
+  TSynLog.Add.Log(sllDebug, 'OpenSSL version: %', [OpenSslVersionText]);
 
   OnGetApplicationName := @GetApplicationName;
   Application.CreateForm(TVisOpenRSAT, VisOpenRSAT);

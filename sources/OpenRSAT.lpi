@@ -409,9 +409,49 @@
           </Other>
         </CompilerOptions>
       </Item>
+      <Item Name="windows-QT">
+        <MacroValues Count="1">
+          <Macro1 Name="LCLWidgetType" Value="qt6"/>
+        </MacroValues>
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="../bin/$(BuildMode)/$NameOnly($(ProjFile))"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir)"/>
+            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <Parsing>
+            <SyntaxOptions>
+              <TypedAddress Value="True"/>
+            </SyntaxOptions>
+          </Parsing>
+          <CodeGeneration>
+            <TargetCPU Value="x86_64"/>
+            <TargetOS Value="win64"/>
+            <Optimizations>
+              <OptimizationLevel Value="2"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+              <DebugInfoType Value="dsDwarf3"/>
+              <StripSymbols Value="True"/>
+            </Debugging>
+          </Linking>
+          <Other>
+            <Verbosity>
+              <ShowHints Value="False"/>
+            </Verbosity>
+          </Other>
+        </CompilerOptions>
+      </Item>
       <SharedMatrixOptions Count="5">
-        <Item1 ID="341349997921" Modes="Default,win32,win64,MemCheck,linux-x64,linux-i386,macosx-intel,macosx-arm64,linux-arm32,linux-arm64" Value="-dPUREMORMOT2"/>
-        <Item2 ID="191197069007" Modes="MemCheck,Default,win32,win64,linux-x64,linux-i386,macosx-intel,macosx-arm64,linux-arm32,linux-arm64" Value="-dFORCE_OPENSSL"/>
+        <Item1 ID="341349997921" Modes="Default,win32,win64,MemCheck,linux-x64,linux-i386,macosx-intel,macosx-arm64,linux-arm32,linux-arm64,windows-QT" Value="-dPUREMORMOT2"/>
+        <Item2 ID="191197069007" Modes="MemCheck,Default,win32,win64,linux-x64,linux-i386,macosx-intel,macosx-arm64,linux-arm32,linux-arm64,windows-QT" Value="-dFORCE_OPENSSL"/>
         <Item3 ID="905935975356" Modes="macosx-intel,macosx-arm64" Type="IDEMacro" MacroName="LCLWidgetType" Value="cocoa"/>
         <Item4 ID="546235392333" Modes="MemCheck" Value="-dDEBUG"/>
         <Item5 ID="884816521549" Modes="MemCheck,Default" Value="-dDEVMODE"/>

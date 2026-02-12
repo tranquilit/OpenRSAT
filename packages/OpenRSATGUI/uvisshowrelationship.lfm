@@ -1,0 +1,245 @@
+object VisShowRelationship: TVisShowRelationship
+  Left = 206
+  Height = 567
+  Top = 160
+  Width = 1092
+  Caption = 'VisShowRelationship'
+  ClientHeight = 567
+  ClientWidth = 1092
+  LCLVersion = '4.5.0.0'
+  object LvlGraphControl1: TLvlGraphControl
+    Left = 332
+    Height = 526
+    Top = 41
+    Width = 760
+    Align = alClient
+    Color = clWhite
+    Font.Height = -15
+    NodeStyle.Shape = lgnsNone
+    NodeStyle.DefaultImageIndex = -1
+    NodeStyle.Coloring = lgncRGB
+    OnDblClick = LvlGraphControl1DblClick
+    OnMouseDown = LvlGraphControl1MouseDown
+    OnMouseMove = LvlGraphControl1MouseMove
+    OnMouseUp = LvlGraphControl1MouseUp
+    Options = [lgoAutoLayout, lgoStraightenGraph, lgoHighlightNodeUnderMouse, lgoHighlightEdgeNearMouse]
+    ParentFont = False
+    ParentShowHint = False
+    PopupMenu = PopupMenu1
+    TabOrder = 0
+    TabStop = False
+  end
+  object Panel1: TPanel
+    Left = 8
+    Height = 25
+    Top = 8
+    Width = 1076
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 25
+    ClientWidth = 1076
+    ParentBackground = False
+    TabOrder = 1
+    object TisSearchEdit1: TTisSearchEdit
+      Left = 110
+      Height = 23
+      Top = 0
+      Width = 195
+      Align = alLeft
+      ItemHeight = 15
+      TabOrder = 0
+      Buttons = <>
+      SearchInterval = 1000
+      OnSearch = TisSearchEdit1Search
+    end
+    object Label2: TLabel
+      Left = 75
+      Height = 25
+      Top = 0
+      Width = 35
+      Align = alLeft
+      Caption = 'Search'
+      Layout = tlCenter
+    end
+    object BitBtn3: TBitBtn
+      Left = 306
+      Height = 25
+      Top = 0
+      Width = 50
+      Align = alLeft
+      AutoSize = True
+      Caption = 'Next'
+      TabOrder = 1
+      OnClick = BitBtn3Click
+    end
+    object BitBtn4: TBitBtn
+      Left = 356
+      Height = 25
+      Top = 0
+      Width = 71
+      Align = alLeft
+      AutoSize = True
+      Caption = 'Previous'
+      TabOrder = 2
+      OnClick = BitBtn4Click
+    end
+    object BitBtn_Refresh: TBitBtn
+      Left = 0
+      Height = 25
+      Top = 0
+      Width = 75
+      Action = Action_Refresh
+      Align = alLeft
+      TabOrder = 3
+    end
+    object CheckBox1: TCheckBox
+      Left = 427
+      Height = 25
+      Top = 0
+      Width = 72
+      Align = alLeft
+      Caption = 'Show user'
+      TabOrder = 4
+      OnChange = CheckBox1Change
+    end
+    object Label1: TLabel
+      Left = 305
+      Height = 25
+      Top = 0
+      Width = 1
+      Align = alLeft
+      Layout = tlCenter
+    end
+    object CheckBox2: TCheckBox
+      Left = 499
+      Height = 25
+      Top = 0
+      Width = 76
+      Align = alLeft
+      Caption = 'CheckBox2'
+      TabOrder = 5
+      OnChange = CheckBox2Change
+    end
+  end
+  object TisGrid1: TTisGrid
+    Left = 0
+    Height = 526
+    Top = 41
+    Width = 327
+    Align = alLeft
+    DefaultNodeHeight = 20
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'Index'
+        Width = 66
+        PropertyName = 'index'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Tag = 1
+        Text = 'DN'
+        Width = 205
+        PropertyName = 'distinguishedName'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 2
+        Tag = 2
+        Text = 'Name'
+        Width = 129
+        PropertyName = 'name'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 3
+        Tag = 3
+        Text = 'Member'
+        Width = 82
+        PropertyName = 'member'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 4
+        Tag = 4
+        Text = 'Member of'
+        Width = 120
+        PropertyName = 'memberOf'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 100
+    Header.MinHeight = 18
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.SortColumn = 0
+    Header.Style = hsFlatButtons
+    TabOrder = 2
+    ZebraColor = 15593713
+  end
+  object Splitter1: TSplitter
+    Left = 327
+    Height = 526
+    Top = 41
+    Width = 5
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 432
+    Top = 192
+    object MenuItem1: TMenuItem
+      Action = Action_Property
+    end
+    object MenuItem2: TMenuItem
+      Action = Action_FocusedSelectedGroup
+    end
+    object MenuItem4: TMenuItem
+      Action = Action_UnfocusGroup
+    end
+    object MenuItem3: TMenuItem
+      Action = Action_SaveToPNG
+    end
+    object MenuItem5: TMenuItem
+      Action = Action_SaveToDOT
+    end
+  end
+  object ActionList1: TActionList
+    Left = 96
+    Top = 96
+    object Action_Property: TAction
+      Caption = 'Property'
+    end
+    object Action_FocusedSelectedGroup: TAction
+      Caption = 'Focused selected group'
+      OnExecute = Action_FocusedSelectedGroupExecute
+      OnUpdate = Action_FocusedSelectedGroupUpdate
+    end
+    object Action_Refresh: TAction
+      Caption = 'Refresh'
+      OnExecute = Action_RefreshExecute
+    end
+    object Action_Synchronize: TAction
+      Caption = 'Synchronize'
+      OnExecute = Action_SynchronizeExecute
+    end
+    object Action_SaveToPNG: TAction
+      Caption = 'Save to PNG'
+      OnExecute = Action_SaveToPNGExecute
+    end
+    object Action_UnfocusGroup: TAction
+      Caption = 'Unfocus group'
+      OnExecute = Action_UnfocusGroupExecute
+    end
+    object Action_SaveToDOT: TAction
+      Caption = 'Save to DOT'
+      OnExecute = Action_SaveToDOTExecute
+    end
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 8
+    Top = 8
+  end
+end

@@ -802,6 +802,11 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExecute = Action_ShowObjectLocationExecute
       OnUpdate = Action_ShowObjectLocationUpdate
     end
+    object Action_ShowRelationShip: TAction
+      Caption = 'Action_ShowRelationShip'
+      ShortCut = 24652
+      OnExecute = Action_ShowRelationShipExecute
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
