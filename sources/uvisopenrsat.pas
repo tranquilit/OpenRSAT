@@ -277,6 +277,7 @@ begin
 
   // Setup theme for windows
   {$IFDEF WINDOWS}
+  {$IFDEF LCLWIN32}
   if FrmRSAT.RsatOption.Theme = tmDark then
     PreferredAppMode := pamForceDark
   else if FrmRSAT.RsatOption.Theme = tmLight then
@@ -284,6 +285,7 @@ begin
   else
     PreferredAppMode := pamAllowDark;
   uMetaDarkStyle.ApplyMetaDarkStyle(DefaultDark);
+  {$ENDIF}
   {$ENDIF}
 
   // Check for old config

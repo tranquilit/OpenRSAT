@@ -47,6 +47,7 @@ type
   { TFrmModuleADUC }
 
   TFrmModuleADUC = class(TFrameModule)
+    Action_ShowRelationShip: TAction;
     Action_ShowObjectLocation: TAction;
     Action_BlockGPOInheritance: TAction;
     Action_EnableGPO: TAction;
@@ -234,6 +235,7 @@ type
     procedure Action_SearchUpdate(Sender: TObject);
     procedure Action_ShowObjectLocationExecute(Sender: TObject);
     procedure Action_ShowObjectLocationUpdate(Sender: TObject);
+    procedure Action_ShowRelationShipExecute(Sender: TObject);
     procedure Action_TaskAddToAGroupExecute(Sender: TObject);
     procedure Action_TaskAddToAGroupUpdate(Sender: TObject);
     procedure Action_TaskMoveExecute(Sender: TObject);
@@ -367,6 +369,7 @@ uses
   ursatoption,
   ufrmrsat,
   uviseditaduccolumns,
+  uvisshowrelationship,
   uconfig,
   uhelpers,
   ugplink;
@@ -1105,6 +1108,19 @@ begin
   Action_ShowObjectLocation.Enabled := Assigned(GridADUC) and (GridADUC.SelectedCount = 1);
 end;
 
+procedure TFrmModuleADUC.Action_ShowRelationShipExecute(Sender: TObject);
+var
+  Vis: TVisShowRelationship;
+  ObjectName: RawUtf8;
+begin
+  ObjectName := '';
+  if GridADUC.SelectedCount = 1 then
+    ObjectName := GridADUC.SelectedObjects[0]^.S['objectName'];
+  Vis := TVisShowRelationship.Create(Self, FrmRSAT.LdapClient, ObjectName);
+
+  Vis.ShowModal;
+  Vis.Free;
+end;
 
 procedure TFrmModuleADUC.Action_TaskAddToAGroupExecute(Sender: TObject);
 var

@@ -1,0 +1,119 @@
+object VisShowRelationship: TVisShowRelationship
+  Left = 499
+  Height = 489
+  Top = 149
+  Width = 878
+  Caption = 'VisShowRelationship'
+  ClientHeight = 489
+  ClientWidth = 878
+  LCLVersion = '4.5.0.0'
+  object LvlGraphControl1: TLvlGraphControl
+    Left = 0
+    Height = 464
+    Top = 25
+    Width = 878
+    Align = alClient
+    Color = clWhite
+    Font.Height = -15
+    NodeStyle.Shape = lgnsNone
+    NodeStyle.DefaultImageIndex = -1
+    NodeStyle.Coloring = lgncRGB
+    OnDblClick = LvlGraphControl1DblClick
+    ParentFont = False
+    ParentShowHint = False
+    TabOrder = 0
+    TabStop = False
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 25
+    Top = 0
+    Width = 878
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 25
+    ClientWidth = 878
+    ParentBackground = False
+    TabOrder = 1
+    object Edit1: TEdit
+      Left = 83
+      Height = 25
+      Top = 0
+      Width = 240
+      Align = alLeft
+      TabOrder = 0
+    end
+    object BitBtn1: TBitBtn
+      Left = 323
+      Height = 25
+      Top = 0
+      Width = 64
+      Align = alLeft
+      AutoSize = True
+      Caption = 'BitBtn1'
+      TabOrder = 1
+    end
+    object BitBtn2: TBitBtn
+      Left = 387
+      Height = 25
+      Top = 0
+      Width = 64
+      Align = alLeft
+      AutoSize = True
+      Caption = 'BitBtn2'
+      TabOrder = 2
+    end
+    object Label1: TLabel
+      Left = 0
+      Height = 25
+      Top = 0
+      Width = 83
+      Align = alLeft
+      Caption = 'Focused object:'
+      Layout = tlCenter
+    end
+    object TisSearchEdit1: TTisSearchEdit
+      Left = 485
+      Height = 23
+      Top = 0
+      Width = 189
+      Align = alLeft
+      ItemHeight = 15
+      TabOrder = 3
+      Buttons = <>
+      OnSearch = TisSearchEdit1Search
+    end
+    object Label2: TLabel
+      Left = 451
+      Height = 25
+      Top = 0
+      Width = 34
+      Align = alLeft
+      Caption = 'Label2'
+      Layout = tlCenter
+    end
+    object BitBtn3: TBitBtn
+      Left = 674
+      Height = 25
+      Top = 0
+      Width = 50
+      Align = alLeft
+      AutoSize = True
+      Caption = 'Next'
+      TabOrder = 4
+      OnClick = BitBtn3Click
+    end
+    object BitBtn4: TBitBtn
+      Left = 724
+      Height = 25
+      Top = 0
+      Width = 71
+      Align = alLeft
+      AutoSize = True
+      Caption = 'Previous'
+      TabOrder = 5
+      OnClick = BitBtn4Click
+    end
+  end
+end
