@@ -7,8 +7,8 @@ object FrmModuleDNS: TFrmModuleDNS
   ClientWidth = 800
   LCLVersion = '4.5.0.0'
   TabOrder = 0
-  DesignLeft = 503
-  DesignTop = 263
+  DesignLeft = 377
+  DesignTop = 211
   object Splitter1: TSplitter
     Left = 170
     Height = 349
@@ -455,6 +455,76 @@ object FrmModuleDNS: TFrmModuleDNS
         OnSearch = TisSearchEdit_GridDNSSearch
       end
     end
+    object Panel5: TPanel
+      Left = 0
+      Height = 318
+      Top = 31
+      Width = 625
+      Align = alClient
+      BevelOuter = bvNone
+      ClientHeight = 318
+      ClientWidth = 625
+      TabOrder = 2
+      Visible = False
+      object Panel6: TPanel
+        AnchorSideLeft.Control = Panel5
+        AnchorSideLeft.Side = asrCenter
+        AnchorSideTop.Control = Panel5
+        AnchorSideTop.Side = asrCenter
+        Left = 229
+        Height = 59
+        Top = 130
+        Width = 166
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 59
+        ClientWidth = 166
+        TabOrder = 0
+        object ProgressBar1: TProgressBar
+          AnchorSideLeft.Control = Panel6
+          AnchorSideTop.Control = Label2
+          AnchorSideTop.Side = asrBottom
+          AnchorSideRight.Control = Panel6
+          AnchorSideRight.Side = asrBottom
+          AnchorSideBottom.Control = Panel6
+          AnchorSideBottom.Side = asrBottom
+          Left = 8
+          Height = 20
+          Top = 31
+          Width = 150
+          Anchors = [akTop, akLeft, akRight, akBottom]
+          BorderSpacing.Around = 8
+          Constraints.MaxWidth = 150
+          Constraints.MinWidth = 150
+          Style = pbstMarquee
+          TabOrder = 0
+        end
+        object Label2: TLabel
+          AnchorSideLeft.Control = Panel6
+          AnchorSideTop.Control = Panel6
+          Left = 8
+          Height = 15
+          Top = 8
+          Width = 90
+          BorderSpacing.Around = 8
+          Caption = 'Retrieve records: '
+        end
+        object Label3: TLabel
+          AnchorSideLeft.Control = Label2
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Panel6
+          AnchorSideRight.Control = Panel6
+          AnchorSideRight.Side = asrBottom
+          Left = 106
+          Height = 15
+          Top = 8
+          Width = 52
+          Anchors = [akTop, akLeft, akRight]
+          BorderSpacing.Around = 8
+          Caption = '0'
+        end
+      end
+    end
   end
   object Panel3: TPanel
     Left = 0
@@ -522,6 +592,7 @@ object FrmModuleDNS: TFrmModuleDNS
     object Action_Property: TAction
       Caption = 'Property'
       ImageIndex = 4
+      ShortCut = 13
       OnExecute = Action_PropertyExecute
       OnUpdate = Action_PropertyUpdate
     end
@@ -533,6 +604,7 @@ object FrmModuleDNS: TFrmModuleDNS
     object Action_Delete: TAction
       Caption = 'Delete'
       ImageIndex = 13
+      ShortCut = 46
       OnExecute = Action_DeleteExecute
       OnUpdate = Action_DeleteUpdate
     end

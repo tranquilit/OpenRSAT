@@ -28,11 +28,12 @@ uses
   ufrmmodule,
   ufrmoption,
   umodule,
-  umoduleaddns;
+  umoduleaddns,
+  ursatldapclient;
 
 type
 
-  TDNSTreeNodeType = (dtntRoot, dtntCustom, dtntZone, dtntDNSNode);
+  TDNSTreeNodeType = (dtntRoot, dtntCustom, dtntZone, dtntZoneFolder);
 
   { TDNSTreeNode }
 
@@ -46,6 +47,8 @@ type
   public
     constructor Create(AnOwner: TTreeNodes); override;
     destructor Destroy; override;
+
+    function ZoneFolderPath: RawUtf8;
 
     function HasVisibleChildren: Boolean;
     property NodeType: TDNSTreeNodeType read fType write SetNodeType default dtntRoot;
@@ -68,6 +71,8 @@ type
     Image1: TImage;
     Image2: TImage;
     Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
     MenuItem10: TMenuItem;
     MenuItem6: TMenuItem;
     MenuItem7: TMenuItem;
@@ -77,7 +82,10 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
+    Panel5: TPanel;
+    Panel6: TPanel;
     PopupMenu_DNS: TPopupMenu;
+    ProgressBar1: TProgressBar;
     Separator1: TMenuItem;
     Splitter1: TSplitter;
     GridDNS: TTisGrid;
@@ -141,17 +149,18 @@ type
     procedure UpdateGridColumns(Names: TStringArray);
     procedure UpdateNodeRoot(Node: TDNSTreeNode);
     procedure UpdateNodeCustom(Node: TDNSTreeNode);
-    procedure UpdateNodeDNSNode(Node: TDNSTreeNode);
+    procedure UpdateNodeZoneFolder(Node: TDNSTreeNode);
     procedure UpdateNodeZone(Node: TDNSTreeNode);
+    procedure UpdateZoneOnStatus(const status: String);
+    procedure UpdateZoneOnFinished();
 
-    procedure UpdateNode(Node: TDNSTreeNode);
+    /// Update data about a TreeNode.
+    procedure UpdateNode(Node: TDNSTreeNode = nil);
+    /// Update grid from data on a TreeNode.
+    procedure UpdateGrid(Node: TDNSTreeNode = nil);
 
-    procedure RetrieveNodeDNSNode(Node: TDNSTreeNode);
-    procedure RetrieveNodeZone(Node: TDNSTreeNode);
-
-    procedure RetrieveNode(Node: TDNSTreeNode);
-
-    function GetCurrentZone: TDNSTreeNode;
+    procedure ReloadZones;
+    procedure TreeUpdateZones;
 
     procedure LdapConnectEvent(Sender: TObject);
     procedure LdapCloseEvent(Sender: TObject);
@@ -186,13 +195,10 @@ uses
   uvisnewresourcerecord,
   ursatldapclientui,
   udns,
+  uhelpers,
   ufrmrsat;
 
 {$R *.lfm}
-
-const
-  DOMAIN_DNS_ZONES: String = 'CN=MicrosoftDNS,DC=DomainDnsZones';
-  FOREST_DNS_ZONES: String = 'CN=MicrosoftDNS,DC=ForestDnsZones';
 
 { TDNSTreeNode }
 
@@ -203,7 +209,7 @@ begin
   fType := AValue;
   case fType of
     dtntRoot, dtntCustom: ImageIndex := Ord(ileADContainer);
-    dtntDNSNode: ImageIndex := 57;
+    dtntZoneFolder: ImageIndex := 57;
     dtntZone: ImageIndex := 59;
   end;
   SelectedIndex := ImageIndex;
@@ -226,6 +232,22 @@ begin
   FreeAndNil(fAttributes);
 
   inherited Destroy;
+end;
+
+function TDNSTreeNode.ZoneFolderPath: RawUtf8;
+var
+  ParentNode: TDNSTreeNode;
+  ResultPath: TRawUtf8DynArray;
+begin
+  ResultPath := nil;
+  result := '';
+  ParentNode := Self;
+  repeat
+    Insert(ParentNode.Text, ResultPath, Length(ResultPath));
+    ParentNode := (ParentNode.Parent as TDNSTreeNode);
+  until ParentNode.fType <> dtntZoneFolder;
+  if ParentNode.fType = dtntZone then
+    result := FormatUtf8('.%', [String.Join('.', TStringArray(ResultPath))]);
 end;
 
 function TDNSTreeNode.HasVisibleChildren: Boolean;
@@ -305,31 +327,17 @@ begin
     GridDNS.Data.AddItem(newRaw);
     newRaw.Clear;
   end;
+  GridDNS.LoadData;
 end;
 
 procedure TFrmModuleDNS.UpdateNodeCustom(Node: TDNSTreeNode);
-var
-  newRaw: TDocVariantData;
-  i: Integer;
-  DNSNode: TDNSTreeNode;
-  Attribute: TLdapAttribute;
 begin
-  newRaw.Init();
   UpdateGridColumns(['name', 'type', 'status', 'dnssec', 'keymaster']);
-
-  for i := 0 to Node.Count - 1 do
-  begin
-    DNSNode := (Node.Items[i] as TDNSTreeNode);
-    newRaw.AddValue('name', DNSNode.Text);
-    newRaw.AddValue('distinguishedName', DNSNode.DistinguishedName);
-    Attribute := DNSNode.fAttributes.Find('objectClass');
-    newRaw.AddValue('type', Attribute.GetReadable(Pred(Attribute.Count)));
-    GridDNS.Data.AddItem(newRaw);
-    newRaw.Clear;
-  end;
+  ReloadZones;
+  UpdateGrid();
 end;
 
-procedure TFrmModuleDNS.UpdateNodeDNSNode(Node: TDNSTreeNode);
+procedure TFrmModuleDNS.UpdateNodeZoneFolder(Node: TDNSTreeNode);
 var
   newRaw: TDocVariantData;
   i, j: Integer;
@@ -340,212 +348,114 @@ begin
   newRaw.Init();
   UpdateGridColumns(['name', 'type', 'data', 'timestamp']);
 
-  // Self information
-  DNSRecordAttribute := Node.fAttributes.Find('dnsRecord');
-  if Assigned(DNSRecordAttribute) then
-  begin
-    RecordName := '(Same as parent folder)';
-    for j := 0 to DNSRecordAttribute.Count - 1 do
-    begin
-      if not DNSRecordBytesToRecord(DNSRecord, PByteArray(DNSRecordAttribute.GetRaw(j))^) then
-        continue;
-      newRaw.AddValue('name', RecordName);
-      newRaw.AddValue('_type', DNSRecord.RecType);
-      newRaw.AddValue('type', DnsResourceRecordToStr(TDnsResourceRecord(DNSRecord.RecType)));
-      newRaw.AddValue('data', DNSRecordDataToString(DNSRecord));
-      newRaw.AddValue('timestamp', '');
-      newRaw.AddValue('rawdata', DNSRecordAttribute.GetRaw(j));
-      newRaw.AddValue('distinguishedName', Node.fAttributes.Find('distinguishedName').GetReadable());
-      GridDNS.Data.AddItem(newRaw);
-      NewRaw.Clear;
-    end;
-  end;
-  for i := 0 to Node.Count - 1 do
-  begin
-    RecordName := Node.Items[i].Text;
-    DNSRecordAttribute := (Node.Items[i] as TDNSTreeNode).fAttributes.Find('dnsRecord');
-    if not Assigned(DNSRecordAttribute) or (Node.Items[i] as TDNSTreeNode).HasVisibleChildren then
-    begin
-      newRaw.AddValue('name', RecordName);
-      GridDNS.Data.AddItem(newRaw);
-      newRaw.Clear;
-      continue;
-    end;
-    for j := 0 to DNSRecordAttribute.Count - 1 do
-    begin
-      if not DNSRecordBytesToRecord(DNSRecord, PByteArray(DNSRecordAttribute.getRaw(j))^) then
-        continue;
-      newRaw.AddValue('name', RecordName);
-      newRaw.AddValue('_type', DNSRecord.RecType);
-      newRaw.AddValue('type', DnsResourceRecordToStr(TDnsResourceRecord(DNSRecord.RecType)));
-      newRaw.AddValue('data', DNSRecordDataToString(DNSRecord));
-      newRaw.AddValue('timestamp', '');
-      newRaw.AddValue('rawdata', DNSRecordAttribute.GetRaw(j));
-      newRaw.AddValue('distinguishedName', (Node.Items[i] as TDNSTreeNode).fAttributes.Find('distinguishedName').GetReadable());
-      GridDNS.Data.AddItem(newRaw);
-      NewRaw.Clear;
-    end;
-  end;
+  UpdateGrid();
 end;
 
 procedure TFrmModuleDNS.UpdateNodeZone(Node: TDNSTreeNode);
-var
-  newRaw: TDocVariantData;
-  i, j: Integer;
-  DNSRecordAttribute: TLdapAttribute;
-  DNSRecord: TDNSRecord;
-  RecordName: String;
 begin
-  newRaw.Init();
   UpdateGridColumns(['name', 'type', 'data', 'timestamp']);
 
-  for i := 0 to Node.Count - 1 do
-  begin
-    RecordName := Node.Items[i].Text;
-    if RecordName = '@' then
-      RecordName := '(Same as parent folder)';
-    DNSRecordAttribute := (Node.Items[i] as TDNSTreeNode).fAttributes.Find('dnsRecord');
-    if not Assigned(DNSRecordAttribute) or (Node.Items[i] as TDNSTreeNode).HasVisibleChildren then
-    begin
-      newRaw.AddValue('name', RecordName);
-      GridDNS.Data.AddItem(newRaw);
-      newRaw.Clear;
-      continue;
-    end;
-    for j := 0 to Pred(DNSRecordAttribute.Count) do
-    begin
-      if not DNSRecordBytesToRecord(DNSRecord, PByteArray(DNSRecordAttribute.GetRaw(j))^) then
-        continue;
-      newRaw.AddValue('name', RecordName);
-      newRaw.AddValue('_type', DNSRecord.RecType);
-      newRaw.AddValue('type', DnsResourceRecordToStr(TDnsResourceRecord(dnsRecord.RecType)));
-      newRaw.AddValue('data', DNSRecordDataToString(dnsRecord));
-      newRaw.AddValue('timestamp', '');
-      newRaw.AddValue('rawdata', DNSRecordAttribute.GetRaw(j));
-      newRaw.AddValue('distinguishedName', (Node.Items[i] as TDNSTreeNode).fAttributes.Find('distinguishedName').GetReadable());
-      GridDNS.Data.AddItem(newRaw);
-      newRaw.Clear;
-    end;
-  end;
+  Panel5.Visible := True;
+  GridDNS.Visible := False;
+  Label3.Caption := 'Starting...';
+  fModule.UpdateZoneOnStatus := @UpdateZoneOnStatus;
+  fModule.UpdateZoneOnFinished := @UpdateZoneOnFinished;
+  fModule.UpdateZone(Node.DistinguishedName);
+end;
+
+procedure TFrmModuleDNS.UpdateZoneOnStatus(const status: String);
+begin
+  Label3.Caption := status;
+end;
+
+procedure TFrmModuleDNS.UpdateZoneOnFinished;
+begin
+  Label3.Caption := 'Terminated';
+
+  UpdateGrid();
+
+  GridDNS.Visible := True;
+  Panel5.Visible := False;
 end;
 
 procedure TFrmModuleDNS.UpdateNode(Node: TDNSTreeNode);
 begin
+  if not Assigned(Node) then
+    Node := (TreeDNS.Selected as TDNSTreeNode);
+  if not Assigned(Node) then
+    Exit;
+  fModule.StopPreviousUpdate;
+
+  case Node.fType of
+    dtntRoot: UpdateNodeRoot(Node);
+    dtntCustom: UpdateNodeCustom(Node);
+    dtntZoneFolder: UpdateNodeZoneFolder(Node);
+    dtntZone: UpdateNodeZone(Node);
+  end;
+end;
+
+procedure TFrmModuleDNS.UpdateGrid(Node: TDNSTreeNode);
+begin
+  if not Assigned(Node) then
+    Node := (TreeDNS.Selected as TDNSTreeNode);
+  if not Assigned(Node) then
+    Exit;
+
   GridDNS.Clear;
-  if not Node.Retrieved then
-    RetrieveNode(Node);
-  GridDNS.BeginUpdate;
+  case Node.fType of
+    dtntRoot: ;
+    dtntCustom: GridDNS.LoadData(fModule.ZoneStoragesToDocVariantData((Node = fReverseLookupZonesNode)));
+    dtntZone: GridDNS.LoadData(fModule.GetZoneDnsStorage(Node.DistinguishedName).ToDocVariantData);
+  end;
+end;
+
+
+procedure TFrmModuleDNS.ReloadZones;
+begin
+  fModule.ReloadZones;
+  TreeUpdateZones();
+end;
+
+procedure TFrmModuleDNS.TreeUpdateZones;
+var
+  ZoneNames: TRawUtf8DynArray;
+  i: Integer;
+  ZoneName, ZoneDC: RawUtf8;
+  Node: TDNSTreeNode;
+  ZoneStorage: TZoneDnsStorage;
+begin
+  ZoneNames := fModule.GetZoneNames;
+
+  for i := Pred(fForwardLookupZonesNode.Count) downto 0 do
+    if not ZoneNames.Contains(fForwardLookupZonesNode.Items[i].Text) then
+      TreeDNS.Items.Delete(fForwardLookupZonesNode.Items[i]);
+
+  for i := Pred(fReverseLookupZonesNode.Count) downto 0 do
+    if not ZoneNames.Contains(fReverseLookupZonesNode.Items[i].Text) then
+      TreeDNS.Items.Delete(fReverseLookupZonesNode.Items[i]);
+
+  TreeDNS.BeginUpdate;
   try
-    case Node.fType of
-      dtntRoot: UpdateNodeRoot(Node);
-      dtntCustom: UpdateNodeCustom(Node);
-      dtntDNSNode: UpdateNodeDNSNode(Node);
-      dtntZone: UpdateNodeZone(Node);
+    for ZoneName in ZoneNames do
+    begin
+      ZoneStorage := fModule.GetZoneDnsStorageByName(ZoneName);
+      if not Assigned(ZoneStorage) then
+        Continue;
+      ZoneDC := ZoneStorage.DC;
+      if Assigned(fReverseLookupZonesNode.FindNode(ZoneDC)) or Assigned(fForwardLookupZonesNode.FindNode(ZoneDC)) then
+        Continue;
+      if (ZoneDC = 'RootDNSServers') then
+        continue;
+      if String(ZoneDC).EndsWith('in-addr.arpa') then
+        Node := (TreeDNS.Items.AddChild(fReverseLookupZonesNode, ZoneDC) as TDNSTreeNode)
+      else
+        Node := (TreeDNS.Items.AddChild(fForwardLookupZonesNode, ZoneDC) as TDNSTreeNode);
+      Node.NodeType := dtntZone;
+      Node.HasChildren := True;
+      Node.fDistinguishedName := ZoneStorage.ZoneObjectName;
     end;
   finally
-    GridDNS.EndUpdate;
-    GridDNS.LoadData;
-  end;
-end;
-
-procedure TFrmModuleDNS.RetrieveNodeDNSNode(Node: TDNSTreeNode);
-begin
-  while Assigned(Node) and (Node.fType = dtntDNSNode) do
-    Node := (Node.Parent as TDNSTreeNode);
-  Node.fRetrieved := False;
-  Node.Selected := True;
-end;
-
-procedure TFrmModuleDNS.RetrieveNodeZone(Node: TDNSTreeNode);
-var
-  DNSNode: TLdapResult;
-  TreeNode: TDNSTreeNode;
-  TreeNodeList: Array of TDNSTreeNode;
-
-  function GetOrAddDNSNode(Node: TDNSTreeNode; SplittedName: TStringArray): TDNSTreeNode;
-  var
-    idx: Integer;
-  begin
-    idx := high(SplittedName);
-    result := (Node.FindNode(SplittedName[idx]) as TDNSTreeNode);
-    if not Assigned(result) then
-      result := (TreeDNS.Items.AddChild(Node, SplittedName[idx]) as TDNSTreeNode);
-    result.Visible := (idx > 0) or (result.Count > 0);
-    result.fType := dtntDNSNode;
-    result.fRetrieved := True;
-    Delete(SplittedName, idx, 1);
-    if idx > 0 then
-      result := GetOrAddDNSNode(result, SplittedName);
-  end;
-
-  function RemoveOldDNSNode(Node: TDNSTreeNode; TreeNodeList: Array of TDNSTreeNode): Boolean;
-  var
-    i, j: Integer;
-    Found: Boolean;
-  begin
-    result := False;
-    i := 0;
-    while i < Node.Count do
-    begin
-      Found := False;
-      for j := High(TreeNodeList) downto 0 do
-      begin
-        if (Node.Items[i] = TreeNodeList[j]) or RemoveOldDNSNode((Node.Items[i] as TDNSTreeNode), TreeNodeList) then
-        begin
-          Found := True;
-          result := True;
-          break;
-        end;
-      end;
-      if not Found then
-        TreeDNS.Items.Delete(Node.Items[i])
-      else
-        Inc(i);
-    end;
-  end;
-
-begin
-  TreeNodeList := nil;
-  for DNSNode in fModule.GetZoneNodes(Node.DistinguishedName).Items do
-  begin
-    if not Assigned(DNSNode) then
-      continue;
-
-    TreeNode := GetOrAddDNSNode(Node, String(DNSNode.Find('dc').GetReadable()).Split('.'));
-    TreeNode.fDistinguishedName := DNSNode.ObjectName;
-    TreeNode.fAttributes := TLdapAttributeList(DNSNode.Attributes.Clone);
-    Insert(TreeNode, TreeNodeList, 0);
-  end;
-
-  Node.fRetrieved := True;
-  RemoveOldDNSNode(Node, TreeNodeList);
-end;
-
-procedure TFrmModuleDNS.RetrieveNode(Node: TDNSTreeNode);
-begin
-  case Node.fType of
-    dtntZone: RetrieveNodeZone(Node);
-    dtntDNSNode: RetrieveNodeDNSNode(Node);
-  end;
-end;
-
-function TFrmModuleDNS.GetCurrentZone: TDNSTreeNode;
-var
-  dcPrefix: String;
-begin
-  result := nil;
-  dcPrefix := '';
-  case (TreeDNS.Selected as TDNSTreeNode).fType of
-    dtntZone: result := (TreeDNS.Selected as TDNSTreeNode);
-    dtntDNSNode:
-    begin
-      result := (TreeDNS.Selected as TDNSTreeNode);
-      while Assigned(result) and (result.fType <> dtntZone) do
-      begin
-        dcPrefix := Format('.%s%s', [result.Text, dcPrefix]);
-        result := (result.Parent as TDNSTreeNode);
-      end;
-    end;
+    TreeDNS.EndUpdate;
   end;
 end;
 
@@ -593,100 +503,9 @@ begin
 end;
 
 procedure TFrmModuleDNS.Action_RefreshExecute(Sender: TObject);
-var
-  dcCache: TDocVariantData;
-
-  procedure UpdateZones(distinguishedName: String; dcCache: PDocVariantData);
-  var
-    SearchResult: TLdapResult;
-    Node: TDNSTreeNode;
-    dc: String;
-  begin
-    FrmRSAT.LdapClient.SearchBegin();
-    try
-      FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
-      repeat
-        FrmRSAT.LdapClient.SearchRangeBegin;
-        try
-          if not FrmRSAT.LdapClient.Search(distinguishedName, False, '', ['*']) then
-          begin
-            if Assigned(fLog) then
-              fLog.Log(sllError, '% - Ldap Search Error: %', [Self.Name, FrmRSAT.LdapClient.ResultString]);
-            Exit;
-          end;
-        finally
-          FrmRSAT.LdapClient.SearchRangeEnd;
-        end;
-
-        for SearchResult in FrmRSAT.LdapClient.SearchResult.Items do
-        begin
-          if not Assigned(SearchResult) then
-            continue;
-          dc := SearchResult.find('dc').GetReadable();
-          if dc = 'RootDNSServers' then
-            continue;
-          if dc.EndsWith('in-addr.arpa') then
-          begin
-            Node := (fReverseLookupZonesNode.FindNode(dc) as TDNSTreeNode);
-            if not Assigned(Node) then
-            begin
-              Node := (TreeDNS.Items.AddChild(fReverseLookupZonesNode, dc) as TDNSTreeNode);
-              Node.NodeType := dtntZone;
-              Node.HasChildren := True;
-              Node.fDistinguishedName := SearchResult.ObjectName;
-            end;
-          end
-          else
-          begin
-            Node := (fForwardLookupZonesNode.FindNode(dc) as TDNSTreeNode);
-            if not Assigned(Node) then
-            begin
-              Node := (TreeDNS.Items.AddChild(fForwardLookupZonesNode, dc) as TDNSTreeNode);
-              Node.NodeType := dtntZone;
-              Node.HasChildren := True;
-              Node.fDistinguishedName := SearchResult.ObjectName;
-            end;
-          end;
-          if Assigned(Node.fAttributes) then
-            FreeAndNil(Node.fAttributes);
-          Node.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone);
-          dcCache^.B[dc] := True;
-        end;
-      until FrmRSAT.LdapClient.SearchCookie = '';
-    finally
-      FrmRSAT.LdapClient.SearchEnd;
-    end;
-  end;
-
-  procedure RemoveOldNodes(ZonesNode: TDNSTreeNode; dcCache: PDocVariantData);
-  var
-    i: Integer;
-  begin
-    i := ZonesNode.Count - 1;
-    while i >= 0 do
-    begin
-      if not dcCache^.Exists(ZonesNode.Items[i].Text) then
-        ZonesNode.Items[i].Delete;
-      Dec(i);
-    end;
-  end;
-
 begin
-  dcCache.Init();
-  TreeDNS.BeginUpdate;
-  try
-    UpdateZones(Format('%s,%s', [DOMAIN_DNS_ZONES, FrmRSAT.LdapClient.DefaultDN()]), @dcCache);
-    UpdateZones(Format('%s,%s', [FOREST_DNS_ZONES, FrmRSAT.LdapClient.RootDN]), @dcCache);
-
-    RemoveOldNodes(fReverseLookupZonesNode, @dcCache);
-    RemoveOldNodes(fForwardLookupZonesNode, @dcCache);
-    if not Assigned(TreeDNS.Selected) then
-      TreeDNS.Selected := fRootNode;
-    (TreeDNS.Selected as TDNSTreeNode).fRetrieved := False;
-    UpdateNode((TreeDNS.Selected as TDNSTreeNode));
-  finally
-    TreeDNS.EndUpdate;
-  end;
+  ReloadZones;
+  UpdateNode();
 end;
 
 procedure TFrmModuleDNS.GridDNSDblClick(Sender: TObject);
@@ -780,6 +599,8 @@ begin
 
   Timer_TreeChangeNode.Enabled := False;
 
+  GridDNS.Clear;
+
   if not Assigned(TreeDNS.Selected) then
   begin
     if Assigned(fLog) then
@@ -787,7 +608,10 @@ begin
     Exit;
   end;
 
-  UpdateNode((TreeDNS.Selected as TDNSTreeNode));
+  if not (TreeDNS.Selected as TDNSTreeNode).Retrieved then
+    UpdateNode((TreeDNS.Selected as TDNSTreeNode))
+  else
+    UpdateGrid((TreeDNS.Selected as TDNSTreeNode));
 end;
 
 procedure TFrmModuleDNS.TisSearchEdit_GridDNSSearch(Sender: TObject;
@@ -800,6 +624,7 @@ var
   Filtered: Boolean;
 begin
   lowerText := aText.ToLower;
+  GridDNS.BeginUpdate;
   Node := GridDNS.GetFirst();
   while Assigned(Node) do
   begin
@@ -833,6 +658,7 @@ begin
     end;
     Node := GridDNS.GetNext(Node);
   end;
+  GridDNS.EndUpdate;
 end;
 
 procedure TFrmModuleDNS.TisSearchEdit_TreeDNSSearch(Sender: TObject;
@@ -883,26 +709,21 @@ end;
 
 procedure TFrmModuleDNS.Action_PropertyExecute(Sender: TObject);
 var
-  DNSNode: TDNSTreeNode;
   NodeData: PDocVariantData;
+  DistinguishedName: RawUtf8;
 begin
-  DNSNode := nil;
+  DistinguishedName := '';
   if Assigned(GridDNS.FocusedNode) then
   begin
     NodeData := GridDNS.GetNodeAsPDocVariantData(GridDNS.FocusedNode);
-    if Assigned(NodeData) and Assigned(TreeDNS.Selected) then
-    begin
-      if NodeData^.S['name'] = '(Same as parent folder)' then
-        DNSNode := (TreeDNS.Selected.FindNode('@') as TDNSTreeNode)
-      else
-        DNSNode := (TreeDNS.Selected.FindNode(NodeData^.S['name']) as TDNSTreeNode);
-    end;
+    if Assigned(NodeData) then
+      DistinguishedName := NodeData^.S['objectName'];
   end;
-  if not Assigned(DNSNode) and Assigned(TreeDNS.Selected) then
-    DNSNode := (TreeDNS.Selected as TDNSTreeNode);
+  if (DistinguishedName = '') and Assigned(TreeDNS.Selected) then
+    DistinguishedName := (TreeDNS.Selected as TDNSTreeNode).DistinguishedName;
 
-  if Assigned(DNSNode) and Assigned(DNSNode.fAttributes) then
-    FrmRSAT.OpenProperty(DNSNode.fAttributes.Find('distinguishedName').GetReadable(), DNSNode.fAttributes.Find('name').GetReadable());
+  if DistinguishedName <> '' then
+    FrmRSAT.OpenProperty(DistinguishedName);
 end;
 
 procedure TFrmModuleDNS.Action_PropertyUpdate(Sender: TObject);
@@ -976,57 +797,31 @@ var
   end;
 
 begin
-  data.Init();
-  for RowData in GridDNS.SelectedRows.Objects do
-  begin
-    if not Assigned(RowData) or not RowData^.Exists('rawdata') then
-      continue;
-    data.A_[RowData^.S['distinguishedName']]^.AddItem(RowData^);
-  end;
 
-  if data.Count <= 0 then
-  begin
-    if Assigned(fLog) then
-      fLog.Log(sllWarning, 'Try to remove items that does not have data', Self);
-    Exit;
-  end;
-
-  if data.Count = 1 then
-    Message := FormatUtf8(rsDeleteObjectConfirmation, [data._[0]^._[0]^.S['name']])
-  else
-    Message := rsDeleteObjectsConfirmation;
-  if MessageDlg(rsTitleDeleteObject, Message, mtConfirmation, mbYesNoCancel, 0) <> mrYes then
+  if MessageDlg(rsTitleDeleteObject, rsDeleteObjectsConfirmation, mtConfirmation, mbYesNoCancel, 0) <> mrYes then
   begin
     if Assigned(fLog) then
       fLog.Log(sllInfo, 'Action cancelled by user.', Self);
     Exit;
   end;
 
-  Filter := '';
-  if data.Count > 0 then
+
+  for RowData in GridDNS.SelectedRows.Objects do
   begin
-    for DistinguishedName in data.GetNames do
-      Filter := FormatUtf8('%(distinguishedName=%)', [Filter, distinguishedName]);
-    Filter := FormatUtf8('(|%)', [Filter]);
-  end;
+    if not Assigned(RowData) then
+      continue;
 
-  FrmRSAT.LdapClient.SearchBegin();
-  AttributeToRemove := TLdapAttribute.Create('dnsRecord', atUndefined);
-  try
-    FrmRSAT.LdapClient.SearchScope := lssWholeSubtree;
-
-    InnerDelete(FormatUtf8('%,%', [DOMAIN_DNS_ZONES, FrmRSAT.LdapClient.DefaultDN]));
-    InnerDelete(FormatUtf8('%,%', [FOREST_DNS_ZONES, FrmRSAT.LdapClient.RootDN]));
-  finally
-    FrmRSAT.LdapClient.SearchEnd;
-    FreeAndNilSafe(AttributeToRemove);
-    Action_Refresh.Execute;
+    if RowData^.Exists('rawdata') then
+      fModule.RSAT.LdapClient.Modify(RowData^.S['objectName'], lmoDelete, 'dnsRecord', RowData^.S['rawdata'])
+    else
+      fModule.RSAT.LdapClient.Delete(RowData^.S['objectName'], True);
   end;
+  Refresh;
 end;
 
 procedure TFrmModuleDNS.Action_DeleteUpdate(Sender: TObject);
 begin
-  Action_Delete.Enabled := (GridDNS.SelectedCount > 0);
+  Action_Delete.Enabled := (GridDNS.Focused) and (GridDNS.SelectedCount > 0);
 end;
 
 procedure TFrmModuleDNS.Action_NewZoneExecute(Sender: TObject);
@@ -1047,39 +842,32 @@ end;
 
 procedure TFrmModuleDNS.Action_NewZoneUpdate(Sender: TObject);
 begin
-  {$ifdef DEVMODE}
-  Action_NewZone.Enabled := True;
-  {$else}
-  Action_NewZone.Enabled := False;
-  {$endif}
+  Action_NewZone.Enabled := Assigned(TreeDNS.Selected) and ((TreeDNS.Selected as TDNSTreeNode).fType = dtntCustom);
 end;
 
 procedure TFrmModuleDNS.Action_OtherNewRecordsExecute(Sender: TObject);
 var
-  DNSNodeZone, DNSNode: TDNSTreeNode;
-  AttributeDNSRecord: TLdapAttribute;
+  DNSNodeZone: TDNSTreeNode;
   dcPrefix: String;
   DNSRecord: TDNSRecord;
-  i: Integer;
+  idx: Integer;
   Serial: Cardinal;
   Found: Boolean;
+  ZoneStorage: TZoneDnsStorage;
+  RawDNSRecord: RawByteString;
 begin
   dcPrefix := '';
-  DNSNodeZone := GetCurrentZone;
+  DNSNodeZone := (TreeDNS.Selected as TDNSTreeNode);
 
   if not Assigned(DNSNodeZone) then
     Exit;
 
-  DNSNode := (DNSNodeZone.FindNode('@') as TDNSTreeNode);
-  if Assigned(DNSNode) and Assigned(DNSNode.fAttributes) then
-    AttributeDNSRecord := DNSNode.fAttributes.Find('dnsRecord');
-  if not Assigned(AttributeDNSRecord) then
-    Exit;
-
   Found := False;
-  for i := 0 to AttributeDNSRecord.Count - 1 do
+  ZoneStorage := fModule.GetZoneDnsStorage(DNSNodeZone.DistinguishedName);
+  idx := ZoneStorage.GetByName('@');
+  for RawDNSRecord in ZoneStorage.GetDnsRecord(idx) do
   begin
-    if not DNSRecordBytesToRecord(DNSRecord, PByteArray(AttributeDNSRecord.GetRaw(i))^) then
+    if not DNSRecordBytesToRecord(DNSRecord, PByteArray(RawDNSRecord)^) then
       continue;
     if not (DNSRecord.RecType = Ord(drrSOA)) then
       continue;
@@ -1091,7 +879,6 @@ begin
   if not Found then
     Exit;
 
-
   With TVisSelectNewRecordType.Create(Self, Serial, FrmRSAT.LdapClient, DNSNodeZone.DistinguishedName, dcPrefix) do
   begin
     ShowModal;
@@ -1100,7 +887,7 @@ end;
 
 procedure TFrmModuleDNS.Action_OtherNewRecordsUpdate(Sender: TObject);
 begin
-  Action_OtherNewRecords.Enabled := Assigned(GetCurrentZone);
+  Action_OtherNewRecords.Enabled := Assigned(TreeDNS.Selected) and ((TreeDNS.Selected as TDNSTreeNode).fType = dtntZone);
 end;
 
 procedure TFrmModuleDNS.Action_ParentExecute(Sender: TObject);
@@ -1125,7 +912,8 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Create', [Self.Name]);
 
-  fModule := TModuleADDNS.Create(FrmRSAT.LdapClient);
+  fModule := TModuleADDNS.Create(FrmRSAT.RSAT);
+
 
   fRootNode := nil;
   fForwardLookupZonesNode := nil;

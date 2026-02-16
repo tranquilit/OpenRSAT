@@ -7,6 +7,8 @@
 {"hash":95062979,"name":"tfrmmoduledns.griddns.header.columns[4].text","sourcebytes":[83,116,97,116,117,115],"value":"Status"},
 {"hash":210957011,"name":"tfrmmoduledns.griddns.header.columns[5].text","sourcebytes":[68,78,83,83,69,67,32,83,116,97,116,117,115],"value":"DNSSEC Status"},
 {"hash":87930482,"name":"tfrmmoduledns.griddns.header.columns[6].text","sourcebytes":[75,101,121,32,77,97,115,116,101,114],"value":"Key Master"},
+{"hash":19101312,"name":"tfrmmoduledns.label2.caption","sourcebytes":[82,101,116,114,105,101,118,101,32,114,101,99,111,114,100,115,58,32],"value":"Retrieve records: "},
+{"hash":48,"name":"tfrmmoduledns.label3.caption","sourcebytes":[48],"value":"0"},
 {"hash":147653555,"name":"tfrmmoduledns.action_previous.caption","sourcebytes":[80,114,101,118,105,111,117,115],"value":"Previous"},
 {"hash":347380,"name":"tfrmmoduledns.action_next.caption","sourcebytes":[78,101,120,116],"value":"Next"},
 {"hash":90737748,"name":"tfrmmoduledns.action_parent.caption","sourcebytes":[80,97,114,101,110,116],"value":"Parent"},
