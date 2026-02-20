@@ -43,6 +43,7 @@ type
     function GetName: RawUtf8; override;
     function GetDisplayName: RawUtf8; override;
     function GetOption: TOption; override;
+    function GetRSAT: TRSAT; override;
   end;
 
 implementation
@@ -189,6 +190,11 @@ end;
 function TModuleADUC.GetOption: TOption;
 begin
   result := fModuleADUCOption;
+end;
+
+function TModuleADUC.GetRSAT: TRSAT;
+begin
+  result := fRSAT;
 end;
 
 end.
