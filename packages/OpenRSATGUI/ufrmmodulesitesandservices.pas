@@ -1225,7 +1225,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create', Self);
 
-  fModule := TModuleADSS.Create;
+  fModule := TModuleADSS.Create(FrmRSAT.RSAT);
 
   fModule.Option.RegisterObserver(@OnADSSOptionsChanged);
 

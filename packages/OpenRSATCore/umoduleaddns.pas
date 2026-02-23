@@ -149,10 +149,6 @@ type
 
   TModuleADDNS = class(TModule)
   private
-    fEnabled: Boolean;
-    fOption: TModuleADDNSOption;
-    fRSAT: TRSAT;
-
     fZoneStorages: TZoneDnsStorageDynArray;
 
     fUpdateZoneOnStatus: TThreadUpdateZoneStatus;
@@ -162,6 +158,7 @@ type
     fCurrentZoneStorage: TZoneDnsStorage;
 
     fDocVariantData: TDocVariantData;
+    function GetADDNSOption: TModuleADDNSOption;
   public
     constructor Create(ARSAT: TRSAT); reintroduce;
     destructor Destroy; override;
@@ -184,14 +181,10 @@ type
     property UpdateZoneOnStatus: TThreadUpdateZoneStatus read fUpdateZoneOnStatus write fUpdateZoneOnStatus;
     property UpdateZoneOnFinished: TThreadUpdateZoneFinished read fUpdateZoneOnFinished write fUpdateZoneOnFinished;
 
+    property ADDNSOption: TModuleADDNSOption read GetADDNSOption;
     /// TModule
   protected
-    function GetEnabled: Boolean; override;
     procedure SetEnabled(AValue: Boolean); override;
-    function GetName: RawUtf8; override;
-    function GetDisplayName: RawUtf8; override;
-    function GetOption: TOption; override;
-    function GetRSAT: TRSAT; override;
   end;
 
 implementation
@@ -470,8 +463,15 @@ end;
 
 { TModuleADDNS }
 
+function TModuleADDNS.GetADDNSOption: TModuleADDNSOption;
+begin
+  result := (fOption as TModuleADDNSOption);
+end;
+
 constructor TModuleADDNS.Create(ARSAT: TRSAT);
 begin
+  inherited Create(rsModuleDNSName, rsModuleDNSDisplayName);
+
   fEnabled := True;
   fOption := TModuleADDNSOption.Create;
   fRSAT := ARSAT;
@@ -689,35 +689,10 @@ begin
     result[i] := fZoneStorages[i].Name;
 end;
 
-function TModuleADDNS.GetEnabled: Boolean;
-begin
-  result := fEnabled;
-end;
-
 procedure TModuleADDNS.SetEnabled(AValue: Boolean);
 begin
   if AValue = fEnabled then
     Exit;
-end;
-
-function TModuleADDNS.GetName: RawUtf8;
-begin
-  result := rsModuleDNSName;
-end;
-
-function TModuleADDNS.GetDisplayName: RawUtf8;
-begin
-  result := rsModuleDNSDisplayName;
-end;
-
-function TModuleADDNS.GetOption: TOption;
-begin
-  result := fOption;
-end;
-
-function TModuleADDNS.GetRSAT: TRSAT;
-begin
-  result := fRSAT;
 end;
 
 end.

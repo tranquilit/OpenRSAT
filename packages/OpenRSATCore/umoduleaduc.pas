@@ -22,28 +22,19 @@ type
 
   TModuleADUC = class(TModule)
   private
-    fModuleADUCOption: TModuleADUCOption;
-
-    fEnabled: Boolean;
     fLog: TSynLog;
-
-    fRSAT: TRSAT;
+    function GetADUCOption: TModuleADUCOption;
   public
     constructor Create(ARSAT: TRSAT);
     destructor Destroy; override;
 
-    property ADUCOption: TModuleADUCOption read fModuleADUCOption;
+    property ADUCOption: TModuleADUCOption read GetADUCOption;
 
     function ResetPassword(AResetPasswordCallback: TResetPasswordCallback; AObjectDN: RawUtf8; AComputerWarning, AOnUnlockedAccount, AOnPasswordChanged: TNotifyEvent): Boolean;
 
     /// TModule
   protected
-    function GetEnabled: Boolean; override;
     procedure SetEnabled(AValue: Boolean); override;
-    function GetName: RawUtf8; override;
-    function GetDisplayName: RawUtf8; override;
-    function GetOption: TOption; override;
-    function GetRSAT: TRSAT; override;
   end;
 
 implementation
@@ -53,18 +44,25 @@ uses
 
 { TModuleADUC }
 
+function TModuleADUC.GetADUCOption: TModuleADUCOption;
+begin
+  result := (fOption as TModuleADUCOption);
+end;
+
 constructor TModuleADUC.Create(ARSAT: TRSAT);
 begin
+  inherited Create(rsModuleADUCName, rsModuleADUCDisplayName);
+
   fRSAT := ARSAT;
   fEnabled := True;
   fLog := TSynLog.Add;
-  fModuleADUCOption := TModuleADUCOption.Create;
-  fModuleADUCOption.Load;
+  fOption := TModuleADUCOption.Create;
+  fOption.Load;
 end;
 
 destructor TModuleADUC.Destroy;
 begin
-  FreeAndNil(fModuleADUCOption);
+  FreeAndNil(fOption);
 
   inherited Destroy;
 end;
@@ -165,36 +163,11 @@ begin
   end;
 end;
 
-function TModuleADUC.GetEnabled: Boolean;
-begin
-  result := fEnabled;
-end;
-
 procedure TModuleADUC.SetEnabled(AValue: Boolean);
 begin
   if AValue = fEnabled then
     Exit;
   fEnabled := AValue;
-end;
-
-function TModuleADUC.GetName: RawUtf8;
-begin
-  result := rsModuleADUCName;
-end;
-
-function TModuleADUC.GetDisplayName: RawUtf8;
-begin
-  result := rsModuleADUCDisplayName;
-end;
-
-function TModuleADUC.GetOption: TOption;
-begin
-  result := fModuleADUCOption;
-end;
-
-function TModuleADUC.GetRSAT: TRSAT;
-begin
-  result := fRSAT;
 end;
 
 end.

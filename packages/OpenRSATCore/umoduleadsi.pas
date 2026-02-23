@@ -10,7 +10,8 @@ uses
   mormot.core.base,
   umodule,
   umoduleadsioption,
-  uoption;
+  uoption,
+  ursat;
 
 type
 
@@ -18,19 +19,15 @@ type
 
   TModuleADSI = class(TModule)
   private
-    fEnabled: Boolean;
-    fOption: TModuleADSIOption;
+    function GetADSIOption: TModuleADSIOption;
   public
-    constructor Create;
+    constructor Create(ARSAT: TRSAT);
     destructor Destroy; override;
 
+    property ADSIOption: TModuleADSIOption read GetADSIOption;
     /// TModule
   protected
-    function GetEnabled: Boolean; override;
     procedure SetEnabled(AValue: Boolean); override;
-    function GetName: RawUtf8; override;
-    function GetDisplayName: RawUtf8; override;
-    function GetOption: TOption; override;
   end;
 
 implementation
@@ -39,8 +36,16 @@ uses
 
 { TModuleADSI }
 
-constructor TModuleADSI.Create;
+function TModuleADSI.GetADSIOption: TModuleADSIOption;
 begin
+  result := (fOption as TModuleADSIOption);
+end;
+
+constructor TModuleADSI.Create(ARSAT: TRSAT);
+begin
+  inherited Create(rsModuleADSIName, rsModuleADSIDisplayName);
+
+  fRSAT := ARSAT;
   fEnabled := True;
   fOption := TModuleADSIOption.Create;
 end;
@@ -52,31 +57,11 @@ begin
   inherited Destroy;
 end;
 
-function TModuleADSI.GetEnabled: Boolean;
-begin
-  result := fEnabled;
-end;
-
 procedure TModuleADSI.SetEnabled(AValue: Boolean);
 begin
   if AValue = fEnabled then
     Exit;
   fEnabled := AValue;
-end;
-
-function TModuleADSI.GetName: RawUtf8;
-begin
-  result := rsModuleADSIName;
-end;
-
-function TModuleADSI.GetDisplayName: RawUtf8;
-begin
-  result := rsModuleADSIDisplayName;
-end;
-
-function TModuleADSI.GetOption: TOption;
-begin
-  result := fOption;
 end;
 
 end.
