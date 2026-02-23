@@ -154,7 +154,8 @@ begin
     if Omniselect.ShowModal() <> mrOK then
       Exit;
     for NewMember in Omniselect.SelectedObjects do
-      fProperty.Add('member', NewMember, aoAlways);
+      if NewMember <> '' then
+        fProperty.Add('member', NewMember, aoAlways);
   finally
     FreeAndNil(Omniselect);
   end;
