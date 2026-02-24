@@ -329,24 +329,34 @@ begin
 end;
 
 function TRelationStorage.Get(ADistinguishedName: RawUtf8): StorageID;
+var
+  i: Integer;
 begin
   if EmptyRawUtf8(ADistinguishedName) then
     Exit;
 
-  for result := 0 to Pred(fCount) do
+  for i := 0 to Pred(fCount) do
     if fDistinguishedNames[result] = ADistinguishedName then
+    begin
+      result := i;
       Exit;
+    end;
   result := -1;
 end;
 
 function TRelationStorage.GetByName(AName: RawUtf8): StorageID;
+var
+  i: Integer;
 begin
   if EmptyRawUtf8(AName) then
     Exit;
 
-  for result := 0 to Pred(fCount) do
+  for i := 0 to Pred(fCount) do
     if fNames[result] = AName then
+    begin
+      result := i;
       Exit;
+    end;
   result := -1;
 end;
 
