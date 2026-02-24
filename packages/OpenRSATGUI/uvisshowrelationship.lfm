@@ -1,15 +1,15 @@
 object VisShowRelationship: TVisShowRelationship
-  Left = 206
-  Height = 567
-  Top = 160
+  Left = 156
+  Height = 566
+  Top = 119
   Width = 1092
-  Caption = 'VisShowRelationship'
-  ClientHeight = 567
+  Caption = 'Group relations'
+  ClientHeight = 566
   ClientWidth = 1092
   LCLVersion = '4.5.0.0'
-  object LvlGraphControl1: TLvlGraphControl
+  object LvlGraphControl: TLvlGraphControl
     Left = 332
-    Height = 526
+    Height = 525
     Top = 41
     Width = 760
     Align = alClient
@@ -18,114 +18,132 @@ object VisShowRelationship: TVisShowRelationship
     NodeStyle.Shape = lgnsNone
     NodeStyle.DefaultImageIndex = -1
     NodeStyle.Coloring = lgncRGB
-    OnDblClick = LvlGraphControl1DblClick
-    OnMouseDown = LvlGraphControl1MouseDown
-    OnMouseMove = LvlGraphControl1MouseMove
-    OnMouseUp = LvlGraphControl1MouseUp
+    OnDblClick = LvlGraphControlDblClick
+    OnMouseDown = LvlGraphControlMouseDown
+    OnMouseMove = LvlGraphControlMouseMove
+    OnMouseUp = LvlGraphControlMouseUp
     Options = [lgoAutoLayout, lgoStraightenGraph, lgoHighlightNodeUnderMouse, lgoHighlightEdgeNearMouse]
     ParentFont = False
     ParentShowHint = False
-    PopupMenu = PopupMenu1
+    PopupMenu = PopupMenu_Graph
     TabOrder = 0
     TabStop = False
   end
-  object Panel1: TPanel
-    Left = 8
-    Height = 25
-    Top = 8
-    Width = 1076
+  object Panel_Top: TPanel
+    Left = 0
+    Height = 41
+    Top = 0
+    Width = 1092
     Align = alTop
     AutoSize = True
-    BorderSpacing.Around = 8
     BevelOuter = bvNone
-    ClientHeight = 25
-    ClientWidth = 1076
+    ClientHeight = 41
+    ClientWidth = 1092
     ParentBackground = False
     TabOrder = 1
     object TisSearchEdit1: TTisSearchEdit
-      Left = 110
+      Left = 235
       Height = 23
-      Top = 0
+      Top = 8
       Width = 195
       Align = alLeft
+      BorderSpacing.Around = 8
       ItemHeight = 15
       TabOrder = 0
       Buttons = <>
       SearchInterval = 1000
       OnSearch = TisSearchEdit1Search
     end
-    object Label2: TLabel
-      Left = 75
+    object Label_Search: TLabel
+      Left = 189
       Height = 25
-      Top = 0
-      Width = 35
+      Top = 8
+      Width = 38
       Align = alLeft
-      Caption = 'Search'
+      BorderSpacing.Around = 8
+      Caption = 'Search:'
       Layout = tlCenter
     end
-    object BitBtn3: TBitBtn
-      Left = 306
+    object BitBtn_Next: TBitBtn
+      Left = 447
       Height = 25
-      Top = 0
+      Top = 8
       Width = 50
       Align = alLeft
       AutoSize = True
+      BorderSpacing.Around = 8
       Caption = 'Next'
       TabOrder = 1
-      OnClick = BitBtn3Click
+      OnClick = BitBtn_NextClick
     end
-    object BitBtn4: TBitBtn
-      Left = 356
+    object BitBtn_Previous: TBitBtn
+      Left = 505
       Height = 25
-      Top = 0
+      Top = 8
       Width = 71
       Align = alLeft
       AutoSize = True
+      BorderSpacing.Around = 8
       Caption = 'Previous'
       TabOrder = 2
-      OnClick = BitBtn4Click
+      OnClick = BitBtn_PreviousClick
     end
     object BitBtn_Refresh: TBitBtn
-      Left = 0
+      Left = 106
       Height = 25
-      Top = 0
+      Top = 8
       Width = 75
       Action = Action_Refresh
       Align = alLeft
+      BorderSpacing.Around = 8
       TabOrder = 3
     end
-    object CheckBox1: TCheckBox
-      Left = 427
+    object CheckBox_ShowUser: TCheckBox
+      Left = 584
       Height = 25
-      Top = 0
+      Top = 8
       Width = 72
       Align = alLeft
+      BorderSpacing.Around = 8
       Caption = 'Show user'
       TabOrder = 4
-      OnChange = CheckBox1Change
+      OnChange = CheckBox_ShowUserChange
     end
-    object Label1: TLabel
-      Left = 305
+    object Label_SearchCount: TLabel
+      Left = 438
       Height = 25
-      Top = 0
+      Top = 8
       Width = 1
       Align = alLeft
+      BorderSpacing.Around = 8
       Layout = tlCenter
     end
-    object CheckBox2: TCheckBox
-      Left = 499
+    object CheckBox_HideSingleNode: TCheckBox
+      Left = 664
       Height = 25
-      Top = 0
-      Width = 76
+      Top = 8
+      Width = 107
       Align = alLeft
-      Caption = 'CheckBox2'
+      BorderSpacing.Around = 8
+      Caption = 'Hide single node'
       TabOrder = 5
-      OnChange = CheckBox2Change
+      OnChange = CheckBox_HideSingleNodeChange
+    end
+    object BitBtn_Sync: TBitBtn
+      Left = 8
+      Height = 25
+      Top = 8
+      Width = 90
+      Action = Action_Synchronize
+      Align = alLeft
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 6
     end
   end
-  object TisGrid1: TTisGrid
+  object TisGrid_GroupData: TTisGrid
     Left = 0
-    Height = 526
+    Height = 525
     Top = 41
     Width = 327
     Align = alLeft
@@ -183,26 +201,26 @@ object VisShowRelationship: TVisShowRelationship
   end
   object Splitter1: TSplitter
     Left = 327
-    Height = 526
+    Height = 525
     Top = 41
     Width = 5
   end
-  object PopupMenu1: TPopupMenu
+  object PopupMenu_Graph: TPopupMenu
     Left = 432
     Top = 192
-    object MenuItem1: TMenuItem
+    object MenuItem_Property: TMenuItem
       Action = Action_Property
     end
-    object MenuItem2: TMenuItem
+    object MenuItem_FocusSelectedNode: TMenuItem
       Action = Action_FocusedSelectedGroup
     end
-    object MenuItem4: TMenuItem
+    object MenuItem_UnfocusGroup: TMenuItem
       Action = Action_UnfocusGroup
     end
-    object MenuItem3: TMenuItem
+    object MenuItem_SaveToPNG: TMenuItem
       Action = Action_SaveToPNG
     end
-    object MenuItem5: TMenuItem
+    object MenuItem_SaveToDOT: TMenuItem
       Action = Action_SaveToDOT
     end
   end
@@ -211,6 +229,9 @@ object VisShowRelationship: TVisShowRelationship
     Top = 96
     object Action_Property: TAction
       Caption = 'Property'
+      ShortCut = 16397
+      OnExecute = Action_PropertyExecute
+      OnUpdate = Action_PropertyUpdate
     end
     object Action_FocusedSelectedGroup: TAction
       Caption = 'Focused selected group'
@@ -219,14 +240,23 @@ object VisShowRelationship: TVisShowRelationship
     end
     object Action_Refresh: TAction
       Caption = 'Refresh'
+      SecondaryShortCuts.Strings = (
+        'CTRL+R'
+      )
+      ShortCut = 116
       OnExecute = Action_RefreshExecute
     end
     object Action_Synchronize: TAction
       Caption = 'Synchronize'
+      SecondaryShortCuts.Strings = (
+        'CTRL+SHIFT+R'
+      )
+      ShortCut = 8308
       OnExecute = Action_SynchronizeExecute
     end
     object Action_SaveToPNG: TAction
       Caption = 'Save to PNG'
+      ShortCut = 16467
       OnExecute = Action_SaveToPNGExecute
     end
     object Action_UnfocusGroup: TAction
@@ -239,7 +269,7 @@ object VisShowRelationship: TVisShowRelationship
     end
   end
   object SaveDialog1: TSaveDialog
-    Left = 8
-    Top = 8
+    Left = 504
+    Top = 120
   end
 end

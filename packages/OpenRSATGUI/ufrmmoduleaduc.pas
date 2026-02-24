@@ -173,6 +173,7 @@ type
     TisSearchEdit_GridADUC: TTisSearchEdit;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
+    ToolButton_ShowRelation: TToolButton;
     ToolButton_AddToGroup: TToolButton;
     ToolButton_Copy: TToolButton;
     ToolButton_Cut: TToolButton;

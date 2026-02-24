@@ -163,6 +163,12 @@ object FrmModuleADUC: TFrmModuleADUC
         Top = 2
         Style = tbsSeparator
       end
+      object ToolButton_ShowRelation: TToolButton
+        Left = 361
+        Top = 2
+        Action = Action_ShowRelationShip
+        Caption = 'Show group relation'
+      end
     end
     object Image1: TImage
       Left = 689
@@ -804,7 +810,7 @@ object FrmModuleADUC: TFrmModuleADUC
     end
     object Action_ShowRelationShip: TAction
       Caption = 'Action_ShowRelationShip'
-      ShortCut = 24652
+      ImageIndex = 26
       OnExecute = Action_ShowRelationShipExecute
     end
   end
