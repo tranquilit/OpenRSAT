@@ -701,7 +701,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Create', [Self.Name]);
 
-  fModule := TModuleADSI.Create;
+  fModule := TModuleADSI.Create(FrmRSAT.RSAT);
 
   {$IFDEF WINDOWS}
   Image1.Visible := not IsDarkModeEnabled;
