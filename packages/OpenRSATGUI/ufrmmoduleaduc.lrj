@@ -16,6 +16,7 @@
 {"hash":5671589,"name":"tfrmmoduleaduc.toolbutton_paste.hint","sourcebytes":[80,97,115,116,101],"value":"Paste"},
 {"hash":78392485,"name":"tfrmmoduleaduc.toolbutton_delete.hint","sourcebytes":[68,101,108,101,116,101],"value":"Delete"},
 {"hash":153699280,"name":"tfrmmoduleaduc.toolbutton_addtogroup.hint","sourcebytes":[65,100,100,32,116,111,32,97,32,71,114,111,117,112],"value":"Add to a Group"},
+{"hash":179445614,"name":"tfrmmoduleaduc.toolbutton_showrelation.caption","sourcebytes":[83,104,111,119,32,103,114,111,117,112,32,114,101,108,97,116,105,111,110],"value":"Show group relation"},
 {"hash":346165,"name":"tfrmmoduleaduc.gridaduc.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
 {"hash":376933,"name":"tfrmmoduleaduc.gridaduc.header.columns[1].text","sourcebytes":[84,121,112,101],"value":"Type"},
 {"hash":156067838,"name":"tfrmmoduleaduc.gridaduc.header.columns[2].text","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110],"value":"Description"},
