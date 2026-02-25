@@ -352,7 +352,7 @@ begin
     Exit;
 
   for i := 0 to Pred(fCount) do
-    if fNames[result] = AName then
+    if fNames[i] = AName then
     begin
       result := i;
       Exit;
