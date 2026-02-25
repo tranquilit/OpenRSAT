@@ -336,7 +336,7 @@ begin
     Exit;
 
   for i := 0 to Pred(fCount) do
-    if fDistinguishedNames[result] = ADistinguishedName then
+    if fDistinguishedNames[i] = ADistinguishedName then
     begin
       result := i;
       Exit;
