@@ -190,7 +190,7 @@ uses
   uvisselectnewrecordtype,
   ucommon,
   ucommonui,
-  uDarkStyleParams,
+  utheme,
   uvisnewzonewizard,
   uvisnewresourcerecord,
   ursatldapclientui,
@@ -919,13 +919,8 @@ begin
   fForwardLookupZonesNode := nil;
   fReverseLookupZonesNode := nil;
 
-  {$IFDEF WINDOWS}
-  Image1.Visible := not IsDarkModeEnabled;
-  Image2.Visible := IsDarkModeEnabled;
-  {$ELSE}
-  Image1.Visible := True;
-  Image2.Visible := False;
-  {$ENDIF}
+  Image1.Visible := not IsDarkMode;
+  Image2.Visible := not Image1.Visible;
 
 end;
 

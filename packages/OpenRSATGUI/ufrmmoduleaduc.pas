@@ -354,7 +354,7 @@ implementation
 uses
   dialogs,
   uvissearch,
-  uDarkStyleParams,
+  utheme,
   uvisnewobject,
   uOmniselect,
   uvisdelegatecontrol,
@@ -2742,13 +2742,8 @@ begin
 
   fADUCDomainNode := nil;
 
-  {$IFDEF WINDOWS}
-  Image1.Visible := not IsDarkModeEnabled;
-  Image2.Visible := IsDarkModeEnabled;
-  {$ELSE}
-  Image1.Visible := True;
-  Image2.Visible := False;
-  {$ENDIF}
+  Image1.Visible := not IsDarkMode;
+  Image2.Visible := not Image1.Visible;
 
   FrmRSAT.IniPropStorage1.IniSection := Name;
   CheckBox_IncludeSubContainer.Checked := FrmRSAT.IniPropStorage1.ReadBoolean(CheckBox_IncludeSubContainer.Name, False);

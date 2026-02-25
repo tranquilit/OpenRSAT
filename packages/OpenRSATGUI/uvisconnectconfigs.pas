@@ -74,7 +74,7 @@ implementation
 uses
   mormot.core.rtti,
   tisinifiles,
-  uDarkStyleParams,
+  utheme,
   uvisprofilemanager,
   uvisprofileconfiguration,
   ucoredatamodule,
@@ -254,10 +254,8 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllInfo, 'Vis Connect Config');
 
-  {$IFDEF WINDOWS}
-  Image1.Visible := not IsDarkModeEnabled;
-  Image2.Visible := IsDarkModeEnabled;
-  {$ENDIF}
+  Image1.Visible := not IsDarkMode;
+  Image2.Visible := not Image1.Visible;
 
   ActionList1.Images := CoreDataModule.ImageList1;
 end;

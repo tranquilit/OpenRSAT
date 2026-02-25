@@ -181,7 +181,7 @@ uses
   mormot.core.text,
   ucommon,
   ucommonui,
-  uDarkStyleParams,
+  utheme,
   ursatldapclientui,
   ursatldapclient,
   uvisnewobject,
@@ -1229,13 +1229,8 @@ begin
 
   fModule.Option.RegisterObserver(@OnADSSOptionsChanged);
 
-  {$IFDEF WINDOWS}
-  Image1.Visible := not IsDarkModeEnabled;
-  Image2.Visible := IsDarkModeEnabled;
-  {$ELSE}
-  Image1.Visible := True;
-  Image2.Visible := False;
-  {$ENDIF}
+  Image1.Visible := not IsDarkMode;
+  Image2.Visible := not Image1.Visible;
 end;
 
 destructor TFrmModuleSitesAndServices.Destroy;

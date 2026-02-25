@@ -143,7 +143,7 @@ uses
   mormot.core.variants,
   ucommon,
   ucommonui,
-  uDarkStyleParams,
+  utheme,
   ursatldapclientui,
   uvisnewobject,
   ufrmrsat;
@@ -703,13 +703,11 @@ begin
 
   fModule := TModuleADSI.Create(FrmRSAT.RSAT);
 
-  {$IFDEF WINDOWS}
-  Image1.Visible := not IsDarkModeEnabled;
-  Image2.Visible := IsDarkModeEnabled;
-  {$ELSE}
-  Image1.Visible := True;
-  Image2.Visible := False;
-  {$ENDIF}
+  fLog.Log(sllTrace, 'Created');
+  Image1.Visible := not IsDarkMode;
+  fLog.Log(sllTrace, 'visible1');
+  Image2.Visible := not Image1.Visible;
+  fLog.Log(sllTrace, 'visible2');
 end;
 
 destructor TFrmModuleADSI.Destroy;
