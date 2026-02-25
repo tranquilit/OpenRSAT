@@ -5,6 +5,7 @@ object FrmPropertyGeneralUser: TFrmPropertyGeneralUser
   Width = 421
   ClientHeight = 406
   ClientWidth = 421
+  LCLVersion = '4.5.0.0'
   TabOrder = 0
   DesignLeft = 1336
   DesignTop = 235
@@ -312,9 +313,9 @@ object FrmPropertyGeneralUser: TFrmPropertyGeneralUser
       Left = 0
       Height = 15
       Top = 43
-      Width = 71
+      Width = 78
       BorderSpacing.Top = 8
-      Caption = 'Email adress :'
+      Caption = 'Email address :'
       Layout = tlCenter
     end
     object Label_HomePage: TLabel
