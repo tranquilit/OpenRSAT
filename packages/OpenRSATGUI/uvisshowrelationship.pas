@@ -156,6 +156,7 @@ implementation
 uses
   uhelpers,
   ufrmrsat,
+  utheme,
   variants,
   FPWritePNG,
   ucoredatamodule,
@@ -873,7 +874,7 @@ begin
       LvlGraphControl.ScrollTop := y * h;
       for x := 0 to Bitmap.Width div w do
       begin
-        LvlGraphControl.ScrollLeft := x * w;
+        LvlGraphControl.ScrollLeft := x * w
         LvlGraphControl.PaintTo(Bitmap.Canvas, LvlGraphControl.ScrollLeft, LvlGraphControl.ScrollTop);
       end;
     end;
@@ -984,6 +985,13 @@ begin
   fMoving := False;
 
   LvlGraphControl.Images := CoreDataModule.ImageList1;
+
+  if IsDarkMode then
+  begin
+    LvlGraphControl.Color := clBlack;
+    LvlGraphControl.EdgeStyle.Color := clGray;
+    LvlGraphControl.EdgeStyle.HighlightColor := clWhite;
+  end;
 end;
 
 destructor TVisShowRelationship.Destroy;
