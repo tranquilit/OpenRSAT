@@ -874,7 +874,8 @@ begin
       LvlGraphControl.ScrollTop := y * h;
       for x := 0 to Bitmap.Width div w do
       begin
-        LvlGraphControl.ScrollLeft := x * w
+        LvlGraphControl.ScrollLeft := x * w;
+        Application.ProcessMessages;
         LvlGraphControl.PaintTo(Bitmap.Canvas, LvlGraphControl.ScrollLeft, LvlGraphControl.ScrollTop);
       end;
     end;
