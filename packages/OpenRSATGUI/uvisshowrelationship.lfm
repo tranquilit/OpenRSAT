@@ -270,6 +270,7 @@ object VisShowRelationship: TVisShowRelationship
       Caption = 'Save to PNG'
       ShortCut = 16467
       OnExecute = Action_SaveToPNGExecute
+      OnUpdate = Action_SaveToPNGUpdate
     end
     object Action_UnfocusGroup: TAction
       Caption = 'Unfocus group'

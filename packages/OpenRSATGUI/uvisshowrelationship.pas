@@ -123,6 +123,7 @@ type
     procedure Action_RefreshExecute(Sender: TObject);
     procedure Action_SaveToDOTExecute(Sender: TObject);
     procedure Action_SaveToPNGExecute(Sender: TObject);
+    procedure Action_SaveToPNGUpdate(Sender: TObject);
     procedure Action_SynchronizeExecute(Sender: TObject);
     procedure Action_UnfocusGroupExecute(Sender: TObject);
     procedure BitBtn_NextClick(Sender: TObject);
@@ -569,6 +570,15 @@ begin
   SaveDialog1.FileName := '';
   if SaveDialog1.Execute then
     SaveToPNG(SaveDialog1.FileName);
+end;
+
+procedure TVisShowRelationship.Action_SaveToPNGUpdate(Sender: TObject);
+begin
+  {$IFDEF DARWIN}
+  Action_SaveToPNG.Enabled := False;
+  {$ELSE}
+  Action_SaveToPNG.Enabled := True;
+  {$ENDIF DARWIN}
 end;
 
 procedure TVisShowRelationship.Action_FocusedSelectedGroupExecute(
