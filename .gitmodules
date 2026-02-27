@@ -6,7 +6,7 @@
 	url = https://github.com/tranquilit/pltis_utils.git
 [submodule "submodules/pltis_virtualtrees"]
 	path = submodules/pltis_virtualtrees
-	url = https://github.com/tranquilit/pltis_virtualtrees.git
+	url = https://github.com/osvegn/pltis_virtualtrees.git
 [submodule "submodules/pltis_tsmbios"]
 	path = submodules/pltis_tsmbios
 	url = https://github.com/tranquilit/pltis_tsmbios.git
