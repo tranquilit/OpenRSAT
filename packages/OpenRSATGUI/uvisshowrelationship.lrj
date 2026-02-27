@@ -5,6 +5,7 @@
 {"hash":147653555,"name":"tvisshowrelationship.bitbtn_previous.caption","sourcebytes":[80,114,101,118,105,111,117,115],"value":"Previous"},
 {"hash":110596146,"name":"tvisshowrelationship.checkbox_showuser.caption","sourcebytes":[83,104,111,119,32,117,115,101,114],"value":"Show user"},
 {"hash":84704805,"name":"tvisshowrelationship.checkbox_hidesinglenode.caption","sourcebytes":[72,105,100,101,32,115,105,110,103,108,101,32,110,111,100,101],"value":"Hide single node"},
+{"hash":79992259,"name":"tvisshowrelationship.checkbox1.caption","sourcebytes":[67,105,114,99,117,108,97,114,32,100,101,112,101,110,100,101,110,99,105,101,115],"value":"Circular dependencies"},
 {"hash":5262024,"name":"tvisshowrelationship.tisgrid_groupdata.header.columns[0].text","sourcebytes":[73,110,100,101,120],"value":"Index"},
 {"hash":1166,"name":"tvisshowrelationship.tisgrid_groupdata.header.columns[1].text","sourcebytes":[68,78],"value":"DN"},
 {"hash":346165,"name":"tvisshowrelationship.tisgrid_groupdata.header.columns[2].text","sourcebytes":[78,97,109,101],"value":"Name"},

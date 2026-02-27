@@ -1,17 +1,17 @@
 object VisShowRelationship: TVisShowRelationship
-  Left = 156
-  Height = 566
-  Top = 119
-  Width = 1092
+  Left = 406
+  Height = 567
+  Top = 248
+  Width = 1093
   Caption = 'Group relations'
-  ClientHeight = 566
-  ClientWidth = 1092
+  ClientHeight = 567
+  ClientWidth = 1093
   LCLVersion = '4.5.0.0'
   object LvlGraphControl: TLvlGraphControl
-    Left = 332
-    Height = 525
+    Left = 229
+    Height = 526
     Top = 41
-    Width = 760
+    Width = 864
     Align = alClient
     Color = clWhite
     Font.Height = -15
@@ -33,12 +33,12 @@ object VisShowRelationship: TVisShowRelationship
     Left = 0
     Height = 41
     Top = 0
-    Width = 1092
+    Width = 1093
     Align = alTop
     AutoSize = True
     BevelOuter = bvNone
     ClientHeight = 41
-    ClientWidth = 1092
+    ClientWidth = 1093
     ParentBackground = False
     TabOrder = 1
     object TisSearchEdit1: TTisSearchEdit
@@ -140,12 +140,22 @@ object VisShowRelationship: TVisShowRelationship
       BorderSpacing.Around = 8
       TabOrder = 6
     end
+    object CheckBox1: TCheckBox
+      Left = 779
+      Height = 25
+      Top = 8
+      Width = 135
+      Align = alLeft
+      BorderSpacing.Around = 8
+      Caption = 'Circular dependencies'
+      TabOrder = 7
+    end
   end
   object TisGrid_GroupData: TTisGrid
     Left = 0
-    Height = 525
+    Height = 526
     Top = 41
-    Width = 327
+    Width = 224
     Align = alLeft
     DefaultNodeHeight = 20
     Header.AutoSizeIndex = -1
@@ -196,12 +206,14 @@ object VisShowRelationship: TVisShowRelationship
     Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
     Header.SortColumn = 0
     Header.Style = hsFlatButtons
+    ParentFont = False
     TabOrder = 2
     ZebraColor = 15593713
+    ZebraPaint = True
   end
   object Splitter1: TSplitter
-    Left = 327
-    Height = 525
+    Left = 224
+    Height = 526
     Top = 41
     Width = 5
   end

@@ -6,12 +6,26 @@ unit uvisshowrelationship;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Spin,
-  StdCtrls, Buttons, Menus, ActnList, IntfGraphics, EditBtn, LvlGraphCtrl,
-  ursatldapclient, mormot.core.base, mormot.net.ldap, mormot.core.variants,
-  Math,
+  Classes,
+  SysUtils,
+  Forms,
+  Controls,
+  Graphics,
+  Dialogs,
+  ExtCtrls,
+  StdCtrls,
+  Buttons,
+  Menus,
+  ActnList,
+  IntfGraphics,
+  LvlGraphCtrl,
+  tis.ui.searchedit,
+  tis.ui.grid.core,
+  mormot.core.base,
   mormot.core.log,
-  tis.ui.searchedit, tis.ui.grid.core;
+  mormot.core.variants,
+  mormot.net.ldap,
+  ursatldapclient;
 
 type
 
@@ -47,6 +61,7 @@ type
     function AddMember(AID: StorageID; AMember: RawUtf8): StorageID;
   public
     constructor Create;
+    procedure Clear;
     function GetOrAdd(ADistinguishedName: RawUtf8): StorageID;
     function GetOrAddByName(AName: RawUtf8): StorageID;
     function Get(ADistinguishedName: RawUtf8): StorageID;
@@ -84,6 +99,7 @@ type
     BitBtn_Refresh: TBitBtn;
     BitBtn_Next: TBitBtn;
     BitBtn_Previous: TBitBtn;
+    CheckBox1: TCheckBox;
     CheckBox_ShowUser: TCheckBox;
     CheckBox_HideSingleNode: TCheckBox;
     Label_SearchCount: TLabel;
@@ -142,6 +158,7 @@ type
     procedure RefreshFullAD;
     procedure RefreshGroup(ADistinguishedName: RawUtf8);
 
+    function HasCircularNestedGroup(AID: StorageID): Boolean;
     procedure ScrollNodeIntoView(ANode: TLvlGraphNode);
     procedure SaveToPNG(FileName: RawUtf8);
     procedure SaveToDOT(FileName: RawUtf8);
@@ -154,15 +171,12 @@ type
 
 implementation
 uses
+  FPWritePNG,
+  mormot.core.text,
   uhelpers,
   ufrmrsat,
   utheme,
-  variants,
-  FPWritePNG,
-  ucoredatamodule,
-  mormot.core.data,
-  mormot.core.rtti,
-  mormot.core.text;
+  ucoredatamodule;
 
 {$R *.lfm}
 
@@ -176,6 +190,7 @@ begin
   if not ValidIndex(AID) or EmptyArray(AMembers) then
     Exit;
 
+  fMembers[AID] := nil;
   for i := 0 to High(AMembers) do
     if AMembers[i] <> '' then
       AddMember(AID, AMembers[i]);
@@ -199,7 +214,7 @@ function TRelationStorage.AddMember(AID: StorageID; AMember: RawUtf8
   ): StorageID;
 var
   i: Integer;
-  Members, MembersOf: TInt64DynArray;
+  Members: TInt64DynArray;
 begin
   result := -1;
   if not ValidIndex(AID) or EmptyRawUtf8(AMember) then
@@ -299,14 +314,19 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create', Self);
 
+  Clear;
+  fDocVariantData.Init();
+end;
+
+procedure TRelationStorage.Clear;
+begin
   fCount := 0;
   fCapacity := 0;
   fDistinguishedNames := nil;
   fNames := nil;
   fMembers := nil;
   fMembersOf := nil;
-
-  fDocVariantData.Init();
+  fDocVariantData.Clear;
 end;
 
 function TRelationStorage.GetOrAdd(ADistinguishedName: RawUtf8): StorageID;
@@ -640,6 +660,8 @@ begin
 end;
 
 procedure TVisShowRelationship.SynchronizeFullAD;
+var
+  Data: PDocVariantData;
 begin
   fLdapClient.SearchBegin();
   try
@@ -651,7 +673,8 @@ begin
     until fLdapClient.SearchCookie = '';
   finally
     fLdapClient.SearchEnd;
-    TisGrid_GroupData.LoadData(fStorage.AsDocVariantData);
+    Data := fStorage.AsDocVariantData;
+    TisGrid_GroupData.LoadData(Data);
   end;
 end;
 
@@ -722,6 +745,8 @@ begin
         continue;
       if CheckBox_HideSingleNode.Checked and not Assigned(fStorage.fMembers[i]) and not Assigned(fStorage.fMembersOf[i]) then
         continue;
+      if CheckBox1.Checked and not HasCircularNestedGroup(i) then
+        continue;
       SourceName := fStorage.GetName(i);
       if SourceName = '' then
         SourceName := DNToCN(fStorage.GetDistinguishedName(i));
@@ -734,6 +759,8 @@ begin
         if not Assigned(fStorage.GetObjectClass(ID)) then
           Continue;
         if not CheckBox_ShowUser.Checked and fStorage.GetObjectClass(ID).Contains('user') then
+          continue;
+        if CheckBox1.Checked and not HasCircularNestedGroup(ID) then
           continue;
         TargetName := fStorage.GetName(ID);
         if TargetName = '' then
@@ -829,6 +856,29 @@ begin
     LvlGraphControl.EndUpdate;
   end;
   ScrollNodeIntoView(BaseNode);
+end;
+
+function TVisShowRelationship.HasCircularNestedGroup(AID: StorageID): Boolean;
+  function MatchMember(AID: StorageID; AMembers: StorageIDDynArray): Boolean;
+  var
+    i: Integer;
+  begin
+    result := False;
+    for i := 0 to High(AMembers) do
+    begin
+      if AMembers[i] = AID then
+      begin
+        result := True;
+        Exit;
+      end;
+      result := MatchMember(AID, fStorage.GetMembers(AMembers[i]));
+      if result then
+        break;
+    end;
+  end;
+
+begin
+  result := MatchMember(AID, fStorage.GetMembers(AID));
 end;
 
 procedure TVisShowRelationship.ScrollNodeIntoView(ANode: TLvlGraphNode);
