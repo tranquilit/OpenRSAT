@@ -1,0 +1,11 @@
+{"version":1,"strings":[
+{"hash":346165,"name":"tfrmpropertyntauthcertificates.tisgrid1.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
+{"hash":95062979,"name":"tfrmpropertyntauthcertificates.tisgrid1.header.columns[1].text","sourcebytes":[83,116,97,116,117,115],"value":"Status"},
+{"hash":180040761,"name":"tfrmpropertyntauthcertificates.tisgrid1.header.columns[2].text","sourcebytes":[73,115,115,117,101,100,32,66,121],"value":"Issued By"},
+{"hash":141448819,"name":"tfrmpropertyntauthcertificates.tisgrid1.header.columns[3].text","sourcebytes":[73,110,116,101,110,100,101,100,32,80,117,114,112,111,115,101,115],"value":"Intended Purposes"},
+{"hash":51146421,"name":"tfrmpropertyntauthcertificates.tisgrid1.header.columns[4].text","sourcebytes":[69,120,112,105,114,97,116,105,111,110,32,68,97,116,101],"value":"Expiration Date"},
+{"hash":18340,"name":"tfrmpropertyntauthcertificates.action_add.caption","sourcebytes":[65,100,100],"value":"Add"},
+{"hash":78392485,"name":"tfrmpropertyntauthcertificates.action_delete.caption","sourcebytes":[68,101,108,101,116,101],"value":"Delete"},
+{"hash":380871,"name":"tfrmpropertyntauthcertificates.action_view.caption","sourcebytes":[86,105,101,119],"value":"View"},
+{"hash":80705172,"name":"tfrmpropertyntauthcertificates.action_export.caption","sourcebytes":[69,120,112,111,114,116],"value":"Export"}
+]}

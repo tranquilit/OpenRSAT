@@ -3,6 +3,7 @@ object VisProperties: TVisProperties
   Height = 504
   Top = 236
   Width = 480
+  AllowDropFiles = True
   BorderIcons = [biSystemMenu, biHelp]
   ClientHeight = 504
   ClientWidth = 480
@@ -14,6 +15,7 @@ object VisProperties: TVisProperties
   LCLVersion = '4.5.0.0'
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
+  OnDropFiles = FormDropFiles
   OnHelp = FormHelp
   OnKeyDown = FormKeyDown
   OnShow = FormShow

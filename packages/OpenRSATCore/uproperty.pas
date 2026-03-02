@@ -128,6 +128,14 @@ type
     /// Retrieve available attributes for an objectClass.
     function AttributesFromSchema: TRawUtf8DynArray;
 
+    function NTAuthCertificatesDN: RawUtf8;
+    function NTAuthCertificates: TRawByteStringDynArray;
+    procedure AddNTAuthCertificate(Cert: RawByteString);
+    procedure DelNTAuthCertificate(Cert: RawByteString);
+
+    procedure UpdateTempModify(DN, AttributeName: RawUtf8; AttributeValue: RawByteString; ModifyOption: TLdapModifyOp);
+    function GetTempModify(DN, AttributeName: RawUtf8; ModifyOption: TLdapModifyOp): TRawByteStringDynArray;
+
     procedure UserAccountControlExclude(UserAccountControl: TUserAccountControl);
     procedure UserAccountControlInclude(UserAccountControl: TUserAccountControl);
     procedure msDSSupportedEncryptionTypeInclude(msDSSupportedEncrytionType: TMsdsSupportedEncryptionType);
@@ -187,6 +195,7 @@ type
 implementation
 
 uses
+  uhelpers,
   mormot.core.datetime,
   mormot.core.text;
 
@@ -1086,9 +1095,12 @@ var
       try
         for Value in AttributeObject^.A[ModifierString]^.ToRawUtf8DynArray do
           Attribute.Add(Value);
-        result := LdapClient.Modify(DistinguishedName, Modifier, Attribute);
-        if not result then
-          Exit;
+        if Attribute.Count > 0 then
+        begin
+          result := LdapClient.Modify(DistinguishedName, Modifier, Attribute);
+          if not result then
+            Exit;
+        end;
       finally
         FreeAndNil(Attribute);
       end;
@@ -1368,6 +1380,89 @@ begin
       RSAT.LdapClient.SearchEnd;
     end;
   until not Assigned(AObjectClass) or (Length(AObjectClass) <= 0);
+end;
+
+function TProperty.NTAuthCertificatesDN: RawUtf8;
+begin
+  result := FormatUtf8('CN=NTAuthCertificates,CN=Public Key Services,CN=Services,%', [RSAT.LdapClient.ConfigDN]);
+end;
+
+function TProperty.NTAuthCertificates: TRawByteStringDynArray;
+var
+  Attribute: TLdapAttribute;
+  i, j: Integer;
+  TempArr: TRawByteStringDynArray;
+begin
+  result := nil;
+  Attribute := RSAT.LdapClient.SearchObject(NTAuthCertificatesDN, '', 'cACertificate');
+  if not Assigned(Attribute) then
+    Exit;
+
+  SetLength(result, Attribute.Count);
+  for i := 0 to Pred(Attribute.Count) do
+    result[i] := Attribute.GetRaw(i);
+  TempArr := GetTempModify(NTAuthCertificatesDN, 'cACertificate', lmoDelete);
+  for i := 0 to High(TempArr) do
+  begin
+    for j := High(result) downto 0 do
+    begin
+      if result[j] = TempArr[i] then
+        Delete(result, j, 1);
+    end;
+  end;
+  TempArr := GetTempModify(NTAuthCertificatesDN, 'cACertificate', lmoAdd);
+  for i := 0 to High(TempArr) do
+    Insert(TempArr[i], result, Length(result));
+end;
+
+procedure TProperty.AddNTAuthCertificate(Cert: RawByteString);
+begin
+  UpdateTempModify(NTAuthCertificatesDN, 'cACertificate', Cert, lmoAdd);
+end;
+
+procedure TProperty.DelNTAuthCertificate(Cert: RawByteString);
+begin
+  UpdateTempModify(NTAuthCertificatesDN, 'cACertificate', Cert, lmoDelete);
+end;
+
+procedure TProperty.UpdateTempModify(DN, AttributeName: RawUtf8;
+  AttributeValue: RawByteString; ModifyOption: TLdapModifyOp);
+const
+  MODIFY_VALUE: Array[TLdapModifyOp] of RawUtf8 = ('add', 'delete', 'replace');
+var
+  Attribute: PDocVariantData;
+begin
+  if ModifyOption = lmoReplace then
+    Exit;
+
+  Attribute := fTempModify.O_[DN]^.O_[AttributeName];
+  if not Assigned(Attribute) then
+    Exit;
+
+  case ModifyOption of
+    lmoAdd:
+    begin
+      if Attribute^.Exists(MODIFY_VALUE[lmoDelete]) and (Attribute^.A_[MODIFY_VALUE[lmoDelete]]^.DeleteByValue(AttributeValue) > 0) then
+        Exit;
+    end;
+    lmoDelete:
+    begin
+      if Attribute^.Exists(MODIFY_VALUE[lmoAdd]) and (Attribute^.A_[MODIFY_VALUE[lmoAdd]]^.DeleteByValue(AttributeValue) > 0) then
+        Exit;
+    end;
+  end;
+  if not Attribute^.A_[MODIFY_VALUE[ModifyOption]]^.ToRawUtf8DynArray.Contains(AttributeValue) then
+    Attribute^.A_[MODIFY_VALUE[ModifyOption]]^.AddItem(AttributeValue);
+end;
+
+function TProperty.GetTempModify(DN, AttributeName: RawUtf8;
+  ModifyOption: TLdapModifyOp): TRawByteStringDynArray;
+const
+  MODIFY_VALUE: Array[TLdapModifyOp] of RawUtf8 = ('add', 'delete', 'replace');
+begin
+  result := nil;
+  if fTempModify.Exists(DN) and fTempModify.O[DN]^.Exists(AttributeName) and fTempModify.O[DN]^.O[AttributeName]^.Exists(MODIFY_VALUE[ModifyOption]) then
+    result := TRawByteStringDynArray(fTempModify.O[DN]^.O[AttributeName]^.A[MODIFY_VALUE[ModifyOption]]^.ToRawUtf8DynArray);
 end;
 
 procedure TProperty.UserAccountControlExclude(

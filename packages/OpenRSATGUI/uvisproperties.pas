@@ -99,6 +99,7 @@ type
 
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
     function FormHelp(Command: Word; Data: PtrInt; var CallHelp: Boolean
       ): Boolean;
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -293,6 +294,7 @@ uses
   ufrmpropertyorganization,
   ufrmpropertypublishedcertificates,
   ufrmpropertyprofile,
+  ufrmpropertyntauthcertificates,
   ufrmpropertysecurity,
   ufrmpropertytelephone,
   ursatldapclient,
@@ -380,6 +382,14 @@ const
     TFrmPropertyGeneralSubnet,
     TFrmPropertyLocation,
     TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  );
+
+  PROPERTY_DOMAIN_DNS: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralDefault,
+    TFrmPropertyObject,
+    TFrmPropertyNTAuthCertificates,
     TFrmPropertySecurity,
     TFrmPropertyAttributes
   );
@@ -513,6 +523,12 @@ begin
   CanClose := True;
 end;
 
+procedure TVisProperties.FormDropFiles(Sender: TObject;
+  const FileNames: array of string);
+begin
+  (PageControl.ActivePage.controls[0] as TPropertyFrame).DropFiles(FileNames);
+end;
+
 function TVisProperties.FormHelp(Command: Word; Data: PtrInt;
   var CallHelp: Boolean): Boolean;
 begin
@@ -595,6 +611,7 @@ begin
   'organizationalUnit': property_tabs := PROPERTY_ORGANIZATIONAL_UNIT;
   'contact': property_tabs := PROPERTY_CONTACT;
   'volume': property_tabs := PROPERTY_VOLUME;
+  'domainDNS': property_tabs := PROPERTY_DOMAIN_DNS;
   {$ifdef DEVMODE}
   'dnsZone':
   begin

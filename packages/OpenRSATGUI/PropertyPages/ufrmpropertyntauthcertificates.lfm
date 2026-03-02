@@ -1,0 +1,152 @@
+object FrmPropertyNTAuthCertificates: TFrmPropertyNTAuthCertificates
+  Left = 0
+  Height = 401
+  Top = 0
+  Width = 476
+  ClientHeight = 401
+  ClientWidth = 476
+  LCLVersion = '4.5.0.0'
+  TabOrder = 0
+  DesignLeft = 892
+  DesignTop = 212
+  object TisGrid1: TTisGrid
+    Left = 8
+    Height = 344
+    Top = 8
+    Width = 460
+    Align = alClient
+    BorderSpacing.Around = 8
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'Name'
+        Width = 200
+        PropertyName = 'name'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Text = 'Status'
+        PropertyName = 'status'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 2
+        Text = 'Issued By'
+        Width = 100
+        PropertyName = 'issuedBy'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 3
+        Text = 'Intended Purposes'
+        Width = 100
+        PropertyName = 'intendedPurposes'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 4
+        Text = 'Expiration Date'
+        Width = 100
+        PropertyName = 'expirationDate'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 100
+    Header.MinHeight = 18
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.Style = hsFlatButtons
+    TabOrder = 0
+    ZebraColor = 15593713
+    OnDblClick = TisGrid1DblClick
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 41
+    Top = 360
+    Width = 476
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 476
+    TabOrder = 1
+    object BitBtn_Add: TBitBtn
+      Left = 8
+      Height = 25
+      Top = 8
+      Width = 48
+      Action = Action_Add
+      Align = alLeft
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 0
+    end
+    object BitBtn_Del: TBitBtn
+      Left = 64
+      Height = 25
+      Top = 8
+      Width = 59
+      Action = Action_Delete
+      Align = alLeft
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 1
+    end
+    object BitBtn_View: TBitBtn
+      Left = 131
+      Height = 25
+      Top = 8
+      Width = 51
+      Action = Action_View
+      Align = alLeft
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 2
+    end
+    object BitBtn_Export: TBitBtn
+      Left = 190
+      Height = 25
+      Top = 8
+      Width = 59
+      Action = Action_Export
+      Align = alLeft
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 3
+    end
+  end
+  object ActionList1: TActionList
+    Left = 56
+    Top = 56
+    object Action_Add: TAction
+      Caption = 'Add'
+      OnExecute = Action_AddExecute
+    end
+    object Action_Delete: TAction
+      Caption = 'Delete'
+      OnExecute = Action_DeleteExecute
+      OnUpdate = Action_DeleteUpdate
+    end
+    object Action_View: TAction
+      Caption = 'View'
+      OnExecute = Action_ViewExecute
+      OnUpdate = Action_ViewUpdate
+    end
+    object Action_Export: TAction
+      Caption = 'Export'
+      OnExecute = Action_ExportExecute
+      OnUpdate = Action_ExportUpdate
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 160
+    Top = 72
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 224
+    Top = 128
+  end
+end
