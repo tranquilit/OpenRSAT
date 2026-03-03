@@ -7,28 +7,6 @@ object VisShowRelationship: TVisShowRelationship
   ClientHeight = 567
   ClientWidth = 1093
   LCLVersion = '4.5.0.0'
-  object LvlGraphControl: TLvlGraphControl
-    Left = 229
-    Height = 526
-    Top = 41
-    Width = 864
-    Align = alClient
-    Color = clWhite
-    Font.Height = -15
-    NodeStyle.Shape = lgnsNone
-    NodeStyle.DefaultImageIndex = -1
-    NodeStyle.Coloring = lgncRGB
-    OnDblClick = LvlGraphControlDblClick
-    OnMouseDown = LvlGraphControlMouseDown
-    OnMouseMove = LvlGraphControlMouseMove
-    OnMouseUp = LvlGraphControlMouseUp
-    Options = [lgoAutoLayout, lgoStraightenGraph, lgoHighlightNodeUnderMouse, lgoHighlightEdgeNearMouse]
-    ParentFont = False
-    ParentShowHint = False
-    PopupMenu = PopupMenu_Graph
-    TabOrder = 0
-    TabStop = False
-  end
   object Panel_Top: TPanel
     Left = 0
     Height = 41
@@ -40,94 +18,17 @@ object VisShowRelationship: TVisShowRelationship
     ClientHeight = 41
     ClientWidth = 1093
     ParentBackground = False
-    TabOrder = 1
-    object TisSearchEdit1: TTisSearchEdit
-      Left = 235
-      Height = 23
-      Top = 8
-      Width = 195
-      Align = alLeft
-      BorderSpacing.Around = 8
-      ItemHeight = 15
-      TabOrder = 0
-      Buttons = <>
-      SearchInterval = 1000
-      OnSearch = TisSearchEdit1Search
-    end
-    object Label_Search: TLabel
-      Left = 189
-      Height = 25
-      Top = 8
-      Width = 38
-      Align = alLeft
-      BorderSpacing.Around = 8
-      Caption = 'Search:'
-      Layout = tlCenter
-    end
-    object BitBtn_Next: TBitBtn
-      Left = 447
-      Height = 25
-      Top = 8
-      Width = 50
-      Align = alLeft
-      AutoSize = True
-      BorderSpacing.Around = 8
-      Caption = 'Next'
-      TabOrder = 1
-      OnClick = BitBtn_NextClick
-    end
-    object BitBtn_Previous: TBitBtn
-      Left = 505
-      Height = 25
-      Top = 8
-      Width = 71
-      Align = alLeft
-      AutoSize = True
-      BorderSpacing.Around = 8
-      Caption = 'Previous'
-      TabOrder = 2
-      OnClick = BitBtn_PreviousClick
-    end
+    TabOrder = 0
     object BitBtn_Refresh: TBitBtn
       Left = 106
       Height = 25
       Top = 8
-      Width = 75
+      Width = 65
       Action = Action_Refresh
       Align = alLeft
+      AutoSize = True
       BorderSpacing.Around = 8
-      TabOrder = 3
-    end
-    object CheckBox_ShowUser: TCheckBox
-      Left = 584
-      Height = 25
-      Top = 8
-      Width = 72
-      Align = alLeft
-      BorderSpacing.Around = 8
-      Caption = 'Show user'
-      TabOrder = 4
-      OnChange = CheckBox_ShowUserChange
-    end
-    object Label_SearchCount: TLabel
-      Left = 438
-      Height = 25
-      Top = 8
-      Width = 1
-      Align = alLeft
-      BorderSpacing.Around = 8
-      Layout = tlCenter
-    end
-    object CheckBox_HideSingleNode: TCheckBox
-      Left = 664
-      Height = 25
-      Top = 8
-      Width = 107
-      Align = alLeft
-      BorderSpacing.Around = 8
-      Caption = 'Hide single node'
-      TabOrder = 5
-      OnChange = CheckBox_HideSingleNodeChange
+      TabOrder = 0
     end
     object BitBtn_Sync: TBitBtn
       Left = 8
@@ -138,102 +39,310 @@ object VisShowRelationship: TVisShowRelationship
       Align = alLeft
       AutoSize = True
       BorderSpacing.Around = 8
-      TabOrder = 6
+      TabOrder = 1
     end
-    object CheckBox1: TCheckBox
-      Left = 779
+    object Label2: TLabel
+      Left = 179
       Height = 25
       Top = 8
-      Width = 135
+      Width = 50
       Align = alLeft
       BorderSpacing.Around = 8
-      Caption = 'Circular dependencies'
-      TabOrder = 7
+      Caption = 'Selected: '
+      Layout = tlCenter
+    end
+    object Edit1: TEdit
+      Left = 237
+      Height = 25
+      Top = 8
+      Width = 265
+      Align = alLeft
+      BorderSpacing.Around = 8
+      ReadOnly = True
+      TabOrder = 2
+    end
+    object BitBtn1: TBitBtn
+      Left = 510
+      Height = 25
+      Top = 8
+      Width = 133
+      Action = Action_UnfocusGroup
+      Align = alLeft
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 3
     end
   end
-  object TisGrid_GroupData: TTisGrid
-    Left = 0
-    Height = 526
-    Top = 41
-    Width = 224
-    Align = alLeft
-    DefaultNodeHeight = 20
-    Header.AutoSizeIndex = -1
-    Header.Columns = <    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-        Position = 0
-        Text = 'Index'
-        Width = 66
-        PropertyName = 'index'
-      end    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-        Position = 1
-        Tag = 1
-        Text = 'DN'
-        Width = 205
-        PropertyName = 'distinguishedName'
-      end    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-        Position = 2
-        Tag = 2
-        Text = 'Name'
-        Width = 129
-        PropertyName = 'name'
-      end    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-        Position = 3
-        Tag = 3
-        Text = 'Member'
-        Width = 82
-        PropertyName = 'member'
-      end    
-      item
-        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-        Position = 4
-        Tag = 4
-        Text = 'Member of'
-        Width = 120
-        PropertyName = 'memberOf'
-      end>
-    Header.DefaultHeight = 18
-    Header.Height = 28
-    Header.MaxHeight = 100
-    Header.MinHeight = 18
-    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
-    Header.SortColumn = 0
-    Header.Style = hsFlatButtons
-    ParentFont = False
-    TabOrder = 2
-    ZebraColor = 15593713
-    ZebraPaint = True
-  end
   object Splitter1: TSplitter
-    Left = 224
+    Left = 275
     Height = 526
     Top = 41
     Width = 5
   end
-  object PopupMenu_Graph: TPopupMenu
-    Left = 432
-    Top = 192
-    object MenuItem_Property: TMenuItem
-      Action = Action_Property
+  object Panel_Client: TPanel
+    Left = 280
+    Height = 526
+    Top = 41
+    Width = 813
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 526
+    ClientWidth = 813
+    TabOrder = 2
+    object LvlGraphControl: TLvlGraphControl
+      Left = 0
+      Height = 485
+      Top = 41
+      Width = 813
+      Align = alClient
+      Color = clWhite
+      Font.Height = -15
+      NodeStyle.Shape = lgnsNone
+      NodeStyle.DefaultImageIndex = -1
+      NodeStyle.Coloring = lgncRGB
+      OnDblClick = LvlGraphControlDblClick
+      OnMouseDown = LvlGraphControlMouseDown
+      OnMouseMove = LvlGraphControlMouseMove
+      OnMouseUp = LvlGraphControlMouseUp
+      Options = [lgoAutoLayout, lgoStraightenGraph, lgoHighlightNodeUnderMouse, lgoHighlightEdgeNearMouse]
+      ParentFont = False
+      ParentShowHint = False
+      PopupMenu = PopupMenu_Graph
+      TabOrder = 0
+      TabStop = False
     end
+    object Panel2: TPanel
+      Left = 0
+      Height = 41
+      Top = 0
+      Width = 813
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 41
+      ClientWidth = 813
+      ParentBackground = False
+      TabOrder = 1
+      object Label_Search: TLabel
+        Left = 8
+        Height = 25
+        Top = 8
+        Width = 38
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'Search:'
+        Layout = tlCenter
+      end
+      object BitBtn_Next: TBitBtn
+        Left = 266
+        Height = 25
+        Top = 8
+        Width = 50
+        Align = alLeft
+        AutoSize = True
+        BorderSpacing.Around = 8
+        Caption = 'Next'
+        TabOrder = 0
+        OnClick = BitBtn_NextClick
+      end
+      object BitBtn_Previous: TBitBtn
+        Left = 324
+        Height = 25
+        Top = 8
+        Width = 71
+        Align = alLeft
+        AutoSize = True
+        BorderSpacing.Around = 8
+        Caption = 'Previous'
+        TabOrder = 1
+        OnClick = BitBtn_PreviousClick
+      end
+      object CheckBox_ShowUser: TCheckBox
+        Left = 403
+        Height = 25
+        Top = 8
+        Width = 72
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'Show user'
+        TabOrder = 2
+        OnChange = CheckBox_ShowUserChange
+      end
+      object Label_SearchCount: TLabel
+        Left = 257
+        Height = 25
+        Top = 8
+        Width = 1
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Layout = tlCenter
+      end
+      object CheckBox_HideSingleNode: TCheckBox
+        Left = 483
+        Height = 25
+        Top = 8
+        Width = 107
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'Hide single node'
+        TabOrder = 3
+        OnChange = CheckBox_HideSingleNodeChange
+      end
+      object CheckBox1: TCheckBox
+        Left = 598
+        Height = 25
+        Top = 8
+        Width = 135
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'Circular dependencies'
+        TabOrder = 4
+        OnChange = CheckBox1Change
+      end
+      object TisSearchEdit1: TTisSearchEdit
+        Left = 54
+        Height = 23
+        Top = 8
+        Width = 195
+        Align = alLeft
+        BorderSpacing.Around = 8
+        ItemHeight = 15
+        TabOrder = 5
+        Buttons = <>
+        SearchInterval = 1000
+        OnSearch = TisSearchEdit1Search
+      end
+    end
+  end
+  object Panel_Left: TPanel
+    Left = 0
+    Height = 526
+    Top = 41
+    Width = 275
+    Align = alLeft
+    BevelOuter = bvNone
+    ClientHeight = 526
+    ClientWidth = 275
+    TabOrder = 3
+    object TisGrid_GroupData: TTisGrid
+      Left = 0
+      Height = 487
+      Top = 39
+      Width = 275
+      Align = alClient
+      DefaultNodeHeight = 20
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Text = 'Index'
+          Width = 66
+          PropertyName = 'index'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 1
+          Tag = 1
+          Text = 'DN'
+          Width = 205
+          PropertyName = 'distinguishedName'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 2
+          Tag = 2
+          Text = 'Name'
+          Width = 129
+          PropertyName = 'name'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 3
+          Tag = 3
+          Text = 'Member'
+          Width = 82
+          PropertyName = 'member'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 4
+          Tag = 4
+          Text = 'Member of'
+          Width = 120
+          PropertyName = 'memberOf'
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MaxHeight = 100
+      Header.MinHeight = 18
+      Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.SortColumn = 0
+      Header.Style = hsFlatButtons
+      ParentFont = False
+      PopupMenu = PopupMenu_Grid
+      TabOrder = 0
+      ZebraColor = 15593713
+      ZebraPaint = True
+    end
+    object Panel1: TPanel
+      Left = 0
+      Height = 39
+      Top = 0
+      Width = 275
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 39
+      ClientWidth = 275
+      TabOrder = 1
+      object Label1: TLabel
+        Left = 8
+        Height = 23
+        Top = 8
+        Width = 41
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'Search: '
+        Layout = tlCenter
+      end
+      object TisSearchEdit2: TTisSearchEdit
+        Left = 57
+        Height = 23
+        Top = 8
+        Width = 198
+        Align = alLeft
+        BorderSpacing.Around = 8
+        ItemHeight = 15
+        TabOrder = 0
+        Buttons = <>
+        OnSearch = TisSearchEdit2Search
+      end
+    end
+  end
+  object PopupMenu_Graph: TPopupMenu
+    Left = 528
+    Top = 224
     object MenuItem_FocusSelectedNode: TMenuItem
-      Action = Action_FocusedSelectedGroup
+      Action = Action_FocusSelectedGroup
     end
     object MenuItem_UnfocusGroup: TMenuItem
       Action = Action_UnfocusGroup
+    end
+    object Separator2: TMenuItem
+      Caption = '-'
     end
     object MenuItem_SaveToPNG: TMenuItem
       Action = Action_SaveToPNG
     end
     object MenuItem_SaveToDOT: TMenuItem
       Action = Action_SaveToDOT
+    end
+    object Separator1: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem_Property: TMenuItem
+      Action = Action_Property
     end
   end
   object ActionList1: TActionList
@@ -245,10 +354,10 @@ object VisShowRelationship: TVisShowRelationship
       OnExecute = Action_PropertyExecute
       OnUpdate = Action_PropertyUpdate
     end
-    object Action_FocusedSelectedGroup: TAction
-      Caption = 'Focused selected group'
-      OnExecute = Action_FocusedSelectedGroupExecute
-      OnUpdate = Action_FocusedSelectedGroupUpdate
+    object Action_FocusSelectedGroup: TAction
+      Caption = 'Focus selected group'
+      OnExecute = Action_FocusSelectedGroupExecute
+      OnUpdate = Action_FocusSelectedGroupUpdate
     end
     object Action_Refresh: TAction
       Caption = 'Refresh'
@@ -273,16 +382,28 @@ object VisShowRelationship: TVisShowRelationship
       OnUpdate = Action_SaveToPNGUpdate
     end
     object Action_UnfocusGroup: TAction
-      Caption = 'Unfocus group'
+      Caption = 'Clear focused group'
       OnExecute = Action_UnfocusGroupExecute
     end
     object Action_SaveToDOT: TAction
       Caption = 'Save to DOT'
       OnExecute = Action_SaveToDOTExecute
     end
+    object Action_FocusSelectedInGrid: TAction
+      Caption = 'Focus Selected'
+      OnExecute = Action_FocusSelectedInGridExecute
+      OnUpdate = Action_FocusSelectedInGridUpdate
+    end
   end
   object SaveDialog1: TSaveDialog
     Left = 504
     Top = 120
+  end
+  object PopupMenu_Grid: TPopupMenu
+    Left = 96
+    Top = 200
+    object MenuItem_FocusSelected: TMenuItem
+      Action = Action_FocusSelectedInGrid
+    end
   end
 end

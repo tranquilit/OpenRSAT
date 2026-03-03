@@ -25,7 +25,7 @@ uses
   mormot.core.log,
   mormot.core.variants,
   mormot.net.ldap,
-  ursatldapclient;
+  ursatldapclient, VirtualTrees;
 
 type
 
@@ -87,14 +87,16 @@ type
   { TVisShowRelationship }
 
   TVisShowRelationship = class(TForm)
+    Action_FocusSelectedInGrid: TAction;
     Action_SaveToDOT: TAction;
     Action_UnfocusGroup: TAction;
     Action_SaveToPNG: TAction;
     Action_Synchronize: TAction;
     Action_Refresh: TAction;
     Action_Property: TAction;
-    Action_FocusedSelectedGroup: TAction;
+    Action_FocusSelectedGroup: TAction;
     ActionList1: TActionList;
+    BitBtn1: TBitBtn;
     BitBtn_Sync: TBitBtn;
     BitBtn_Refresh: TBitBtn;
     BitBtn_Next: TBitBtn;
@@ -102,22 +104,36 @@ type
     CheckBox1: TCheckBox;
     CheckBox_ShowUser: TCheckBox;
     CheckBox_HideSingleNode: TCheckBox;
+    Edit1: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
     Label_SearchCount: TLabel;
     Label_Search: TLabel;
     LvlGraphControl: TLvlGraphControl;
+    MenuItem_FocusSelected: TMenuItem;
     MenuItem_Property: TMenuItem;
     MenuItem_FocusSelectedNode: TMenuItem;
     MenuItem_SaveToPNG: TMenuItem;
     MenuItem_UnfocusGroup: TMenuItem;
     MenuItem_SaveToDOT: TMenuItem;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel_Client: TPanel;
+    Panel_Left: TPanel;
     Panel_Top: TPanel;
+    PopupMenu_Grid: TPopupMenu;
     PopupMenu_Graph: TPopupMenu;
     SaveDialog1: TSaveDialog;
+    Separator1: TMenuItem;
+    Separator2: TMenuItem;
     Splitter1: TSplitter;
     TisGrid_GroupData: TTisGrid;
     TisSearchEdit1: TTisSearchEdit;
-    procedure Action_FocusedSelectedGroupExecute(Sender: TObject);
-    procedure Action_FocusedSelectedGroupUpdate(Sender: TObject);
+    TisSearchEdit2: TTisSearchEdit;
+    procedure Action_FocusSelectedGroupExecute(Sender: TObject);
+    procedure Action_FocusSelectedGroupUpdate(Sender: TObject);
+    procedure Action_FocusSelectedInGridExecute(Sender: TObject);
+    procedure Action_FocusSelectedInGridUpdate(Sender: TObject);
     procedure Action_PropertyExecute(Sender: TObject);
     procedure Action_PropertyUpdate(Sender: TObject);
     procedure Action_RefreshExecute(Sender: TObject);
@@ -128,6 +144,7 @@ type
     procedure Action_UnfocusGroupExecute(Sender: TObject);
     procedure BitBtn_NextClick(Sender: TObject);
     procedure BitBtn_PreviousClick(Sender: TObject);
+    procedure CheckBox1Change(Sender: TObject);
     procedure CheckBox_ShowUserChange(Sender: TObject);
     procedure CheckBox_HideSingleNodeChange(Sender: TObject);
     procedure LvlGraphControlDblClick(Sender: TObject);
@@ -138,13 +155,13 @@ type
     procedure LvlGraphControlMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure TisSearchEdit1Search(Sender: TObject; const aText: string);
+    procedure TisSearchEdit2Search(Sender: TObject; const aText: string);
   private
     fLog: TSynLog;
     fMoving: Boolean;
     fOriginX, fOriginY: Integer;
 
     fLdapClient: TRsatLdapClient;
-    fDistinguishedName: RawUtf8;
 
     fNodesFound: Array of TLvlGraphNode;
     fNodesFoundIdx: Integer;
@@ -534,26 +551,26 @@ end;
 
 procedure TVisShowRelationship.Action_SynchronizeExecute(Sender: TObject);
 begin
-  if fDistinguishedName = '' then
+  if Edit1.Text = '' then
     SynchronizeFullAD
   else
-    SynchronizeGroup(fDistinguishedName);
+    SynchronizeGroup(Edit1.Text);
 
   Action_Refresh.Execute;
 end;
 
 procedure TVisShowRelationship.Action_UnfocusGroupExecute(Sender: TObject);
 begin
-  fDistinguishedName := '';
+  Edit1.Text := '';
   Action_Refresh.Execute;
 end;
 
 procedure TVisShowRelationship.Action_RefreshExecute(Sender: TObject);
 begin
-  if fDistinguishedName = '' then
+  if Edit1.Text = '' then
     RefreshFullAD
   else
-    RefreshGroup(fDistinguishedName);
+    RefreshGroup(Edit1.Text);
 end;
 
 procedure TVisShowRelationship.Action_SaveToDOTExecute(Sender: TObject);
@@ -581,7 +598,7 @@ begin
   {$ENDIF DARWIN}
 end;
 
-procedure TVisShowRelationship.Action_FocusedSelectedGroupExecute(
+procedure TVisShowRelationship.Action_FocusSelectedGroupExecute(
   Sender: TObject);
 var
   idx: Int64;
@@ -590,14 +607,32 @@ begin
   if idx < 0 then
     Exit;
 
-  fDistinguishedName := fStorage.fDistinguishedNames[idx];
+  Edit1.Text := fStorage.fDistinguishedNames[idx];
   Action_Refresh.Execute;
 end;
 
-procedure TVisShowRelationship.Action_FocusedSelectedGroupUpdate(Sender: TObject
+procedure TVisShowRelationship.Action_FocusSelectedGroupUpdate(Sender: TObject
   );
 begin
-  Action_FocusedSelectedGroup.Enabled := Assigned(LvlGraphControl.SelectedNode);
+  Action_FocusSelectedGroup.Enabled := Assigned(LvlGraphControl.SelectedNode);
+end;
+
+procedure TVisShowRelationship.Action_FocusSelectedInGridExecute(Sender: TObject
+  );
+var
+  Row: PDocVariantData;
+begin
+  Row := TisGrid_GroupData.SelectedRows._[0];
+  if not Assigned(Row) then
+    Exit;
+  Edit1.Text := Row^.S['distinguishedName'];
+  Action_Refresh.Execute;
+end;
+
+procedure TVisShowRelationship.Action_FocusSelectedInGridUpdate(Sender: TObject
+  );
+begin
+  Action_FocusSelectedInGrid.Enabled := (TisGrid_GroupData.SelectedCount = 1);
 end;
 
 procedure TVisShowRelationship.Action_PropertyExecute(Sender: TObject);
@@ -629,6 +664,11 @@ begin
   fNodesFound[fNodesFoundIdx].Selected := True;
   ScrollNodeIntoView(fNodesFound[fNodesFoundIdx]);
   Label_SearchCount.Caption := FormatUtf8('% / %', [fNodesFoundIdx + 1, fNodesFoundCount]);
+end;
+
+procedure TVisShowRelationship.CheckBox1Change(Sender: TObject);
+begin
+  Action_Refresh.Execute;
 end;
 
 procedure TVisShowRelationship.CheckBox_ShowUserChange(Sender: TObject);
@@ -667,6 +707,24 @@ begin
   end;
   Label_SearchCount.Caption := FormatUtf8('% / %', [fNodesFoundIdx + 1, fNodesFoundCount]);
   BitBtn_Next.SetFocus;
+end;
+
+procedure TVisShowRelationship.TisSearchEdit2Search(Sender: TObject;
+  const aText: string);
+var
+  Node: PVirtualNode;
+begin
+  TisGrid_GroupData.BeginUpdate;
+  try
+    Node := TisGrid_GroupData.GetFirst();
+    while Assigned(Node) do
+    begin
+      TisGrid_GroupData.IsVisible[Node] := (aText = '') or (TisGrid_GroupData.GetNodeAsPDocVariantData(Node, False)^.S['distinguishedName'].ToLower.Contains(aText.ToLower));
+      Node := TisGrid_GroupData.GetNext(Node);
+    end;
+  finally
+    TisGrid_GroupData.EndUpdate;
+  end;
 end;
 
 procedure TVisShowRelationship.SynchronizeFullAD;
@@ -1041,7 +1099,7 @@ begin
     fLog.Log(sllTrace, 'Create', Self);
 
   fLdapClient := ALdapClient;
-  fDistinguishedName := ADistinguishedName;
+  Edit1.Text := ADistinguishedName;
   fStorage := TRelationStorage.Create;
   fMoving := False;
 

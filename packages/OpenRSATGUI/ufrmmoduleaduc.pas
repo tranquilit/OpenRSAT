@@ -1113,10 +1113,15 @@ procedure TFrmModuleADUC.Action_ShowRelationShipExecute(Sender: TObject);
 var
   Vis: TVisShowRelationship;
   ObjectName: RawUtf8;
+  ObjectClass: TRawUtf8DynArray;
 begin
   ObjectName := '';
-  if GridADUC.SelectedCount = 1 then
-    ObjectName := GridADUC.SelectedObjects[0]^.S['objectName'];
+  if (GridADUC.SelectedCount = 1) then
+  begin
+    ObjectClass := GridADUC.SelectedObjects[0]^.A['objectClass']^.ToRawUtf8DynArray;
+    if ObjectClass[Length(ObjectClass) - 1] = 'group' then
+      ObjectName := GridADUC.SelectedObjects[0]^.S['objectName'];
+  end;
   Vis := TVisShowRelationship.Create(Self, FrmRSAT.LdapClient, ObjectName);
 
   Vis.ShowModal;

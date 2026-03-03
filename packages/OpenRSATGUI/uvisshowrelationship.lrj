@@ -1,5 +1,6 @@
 {"version":1,"strings":[
 {"hash":71881827,"name":"tvisshowrelationship.caption","sourcebytes":[71,114,111,117,112,32,114,101,108,97,116,105,111,110,115],"value":"Group relations"},
+{"hash":196029408,"name":"tvisshowrelationship.label2.caption","sourcebytes":[83,101,108,101,99,116,101,100,58,32],"value":"Selected: "},
 {"hash":163088874,"name":"tvisshowrelationship.label_search.caption","sourcebytes":[83,101,97,114,99,104,58],"value":"Search:"},
 {"hash":347380,"name":"tvisshowrelationship.bitbtn_next.caption","sourcebytes":[78,101,120,116],"value":"Next"},
 {"hash":147653555,"name":"tvisshowrelationship.bitbtn_previous.caption","sourcebytes":[80,114,101,118,105,111,117,115],"value":"Previous"},
@@ -11,11 +12,13 @@
 {"hash":346165,"name":"tvisshowrelationship.tisgrid_groupdata.header.columns[2].text","sourcebytes":[78,97,109,101],"value":"Name"},
 {"hash":87832770,"name":"tvisshowrelationship.tisgrid_groupdata.header.columns[3].text","sourcebytes":[77,101,109,98,101,114],"value":"Member"},
 {"hash":59512470,"name":"tvisshowrelationship.tisgrid_groupdata.header.columns[4].text","sourcebytes":[77,101,109,98,101,114,32,111,102],"value":"Member of"},
+{"hash":193502800,"name":"tvisshowrelationship.label1.caption","sourcebytes":[83,101,97,114,99,104,58,32],"value":"Search: "},
 {"hash":157732041,"name":"tvisshowrelationship.action_property.caption","sourcebytes":[80,114,111,112,101,114,116,121],"value":"Property"},
-{"hash":249212480,"name":"tvisshowrelationship.action_focusedselectedgroup.caption","sourcebytes":[70,111,99,117,115,101,100,32,115,101,108,101,99,116,101,100,32,103,114,111,117,112],"value":"Focused selected group"},
+{"hash":166301488,"name":"tvisshowrelationship.action_focusselectedgroup.caption","sourcebytes":[70,111,99,117,115,32,115,101,108,101,99,116,101,100,32,103,114,111,117,112],"value":"Focus selected group"},
 {"hash":146640072,"name":"tvisshowrelationship.action_refresh.caption","sourcebytes":[82,101,102,114,101,115,104],"value":"Refresh"},
 {"hash":267343253,"name":"tvisshowrelationship.action_synchronize.caption","sourcebytes":[83,121,110,99,104,114,111,110,105,122,101],"value":"Synchronize"},
 {"hash":134797655,"name":"tvisshowrelationship.action_savetopng.caption","sourcebytes":[83,97,118,101,32,116,111,32,80,78,71],"value":"Save to PNG"},
-{"hash":153349200,"name":"tvisshowrelationship.action_unfocusgroup.caption","sourcebytes":[85,110,102,111,99,117,115,32,103,114,111,117,112],"value":"Unfocus group"},
-{"hash":134792500,"name":"tvisshowrelationship.action_savetodot.caption","sourcebytes":[83,97,118,101,32,116,111,32,68,79,84],"value":"Save to DOT"}
+{"hash":18864976,"name":"tvisshowrelationship.action_unfocusgroup.caption","sourcebytes":[67,108,101,97,114,32,102,111,99,117,115,101,100,32,103,114,111,117,112],"value":"Clear focused group"},
+{"hash":134792500,"name":"tvisshowrelationship.action_savetodot.caption","sourcebytes":[83,97,118,101,32,116,111,32,68,79,84],"value":"Save to DOT"},
+{"hash":260570100,"name":"tvisshowrelationship.action_focusselectedingrid.caption","sourcebytes":[70,111,99,117,115,32,83,101,108,101,99,116,101,100],"value":"Focus Selected"}
 ]}
