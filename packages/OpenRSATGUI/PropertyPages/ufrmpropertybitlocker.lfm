@@ -5,9 +5,10 @@ object FrmPropertyBitLocker: TFrmPropertyBitLocker
   Width = 466
   ClientHeight = 324
   ClientWidth = 466
+  LCLVersion = '4.5.0.0'
   TabOrder = 0
-  DesignLeft = 2104
-  DesignTop = 212
+  DesignLeft = 1226
+  DesignTop = 262
   object Label_BitlockerPassword: TLabel
     Left = 10
     Height = 15
@@ -86,6 +87,20 @@ object FrmPropertyBitLocker: TFrmPropertyBitLocker
           Text = 'ID de mdp'
           Width = 185
           PropertyName = 'passwordID'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 2
+          Text = 'Recovery Password'
+          Width = 162
+          PropertyName = 'recoveryPassword'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 3
+          Text = 'Computer'
+          Width = 154
+          PropertyName = 'computer'
         end>
       Header.DefaultHeight = 18
       Header.Height = 28
@@ -93,8 +108,26 @@ object FrmPropertyBitLocker: TFrmPropertyBitLocker
       Header.MinHeight = 19
       Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
       Header.Style = hsFlatButtons
+      PopupMenu = PopupMenu1
       TabOrder = 0
       ZebraColor = 15593713
+      OnChange = TisGrid1Change
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 96
+    Top = 72
+    object MenuItem_CopyPassword: TMenuItem
+      Action = Action_CopyPassword
+    end
+  end
+  object ActionList1: TActionList
+    Left = 256
+    Top = 80
+    object Action_CopyPassword: TAction
+      Caption = 'Copy password'
+      OnExecute = Action_CopyPasswordExecute
+      OnUpdate = Action_CopyPasswordUpdate
     end
   end
 end

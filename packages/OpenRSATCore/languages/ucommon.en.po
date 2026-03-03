@@ -96,6 +96,22 @@ msgstr "Attribute or Value already exists."
 msgid "The server does not allow this kind of auth method."
 msgstr "The server does not allow this kind of auth method."
 
+#: ucommon.rsbitlockercomputer
+msgid "Computer: "
+msgstr "Computer: "
+
+#: ucommon.rsbitlockerdate
+msgid "Date: "
+msgstr "Date: "
+
+#: ucommon.rsbitlockerpasswordid
+msgid "Password ID: "
+msgstr "Password ID: "
+
+#: ucommon.rsbitlockerrecoverypassword
+msgid "Recovery Password: "
+msgstr "Recovery Password: "
+
 #: ucommon.rschangeoptionrequiredrestart
 msgid "The changes you have made require a console restart. Restart now?"
 msgstr ""
@@ -363,7 +379,6 @@ msgid "The matching condition is not supported for this attributeType."
 msgstr "The matching condition is not supported for this attributeType."
 
 #: ucommon.rsinsufficientaccessrights
-#| msgid "Insufficient rights access."
 msgid "The client requested an operation for which it does not have the necessary access control permissions."
 msgstr "Insufficient rights access."
 

@@ -96,6 +96,22 @@ msgstr "L'attribut ou la valeur existe déjà."
 msgid "The server does not allow this kind of auth method."
 msgstr "Le serveur n'autoriser pas ce type de méthode d'authentification."
 
+#: ucommon.rsbitlockercomputer
+msgid "Computer: "
+msgstr "Ordinateur : "
+
+#: ucommon.rsbitlockerdate
+msgid "Date: "
+msgstr "Date : "
+
+#: ucommon.rsbitlockerpasswordid
+msgid "Password ID: "
+msgstr "ID de mot de passe : "
+
+#: ucommon.rsbitlockerrecoverypassword
+msgid "Recovery Password: "
+msgstr "Mot de passe de récupération : "
+
 #: ucommon.rschangeoptionrequiredrestart
 msgid "The changes you have made require a console restart. Restart now?"
 msgstr "Les modifications que vous avez apportées nécessitent un redémarrage de la console. Voulez-vous redémarrer maintenant ?"
@@ -363,7 +379,6 @@ msgid "The matching condition is not supported for this attributeType."
 msgstr "La condition de correspondance n'est pas prise en charge pour ce type d'attribut."
 
 #: ucommon.rsinsufficientaccessrights
-#| msgid "Insufficient rights access."
 msgid "The client requested an operation for which it does not have the necessary access control permissions."
 msgstr "Droits d'accès insuffisant."
 
@@ -429,11 +444,11 @@ msgstr "Succès LDAP"
 
 #: ucommon.rsldapsuccessauthmessage
 msgid "Authentication with user \"%\" has succeeded."
-msgstr "L'authentification avec l'utilisateur "%" a réussi."
+msgstr "L'authentification avec l'utilisateur \"%\" a réussi."
 
 #: ucommon.rsldapsuccessconnmessage
 msgid "Connection to domain \"%\" with domain controller \"%\" on port \"%\" can be established."
-msgstr "La connexion au domaine "%" avec le contrôleur de domaine "%" sur le port "%" peut être établie."
+msgstr "La connexion au domaine \"%\" avec le contrôleur de domaine \"%\" sur le port \"%\" peut être établie."
 
 #: ucommon.rsldaptlsinvalidcert
 msgid "TLS connection is enabled, but the certificate is not recognized. Be carefull."

@@ -80,6 +80,22 @@ msgstr ""
 msgid "The server does not allow this kind of auth method."
 msgstr ""
 
+#: ucommon.rsbitlockercomputer
+msgid "Computer: "
+msgstr ""
+
+#: ucommon.rsbitlockerdate
+msgid "Date: "
+msgstr ""
+
+#: ucommon.rsbitlockerpasswordid
+msgid "Password ID: "
+msgstr ""
+
+#: ucommon.rsbitlockerrecoverypassword
+msgid "Recovery Password: "
+msgstr ""
+
 #: ucommon.rschangeoptionrequiredrestart
 msgid "The changes you have made require a console restart. Restart now?"
 msgstr ""
