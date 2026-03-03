@@ -1,7 +1,7 @@
 object VisLogonHours: TVisLogonHours
-  Left = 2905
+  Left = 663
   Height = 233
-  Top = 703
+  Top = 334
   Width = 521
   AutoSize = True
   BorderIcons = [biSystemMenu]
@@ -11,7 +11,7 @@ object VisLogonHours: TVisLogonHours
   ClientWidth = 521
   KeyPreview = True
   Position = poOwnerFormCenter
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   OnKeyDown = FormKeyDown
   object RadioButton_Secret: TRadioButton
     AnchorSideLeft.Control = Btn_Cancel
@@ -20,9 +20,9 @@ object VisLogonHours: TVisLogonHours
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Side = asrBottom
-    Left = 416
+    Left = 406
     Height = 17
-    Top = 78
+    Top = 76
     Width = 18
     Checked = True
     TabOrder = 8
@@ -250,14 +250,13 @@ object VisLogonHours: TVisLogonHours
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = DrawGrid
     Left = 384
-    Height = 26
+    Height = 25
     Top = 39
-    Width = 62
+    Width = 42
     Action = Action_OK
     AutoSize = True
     BorderSpacing.Left = 16
     ModalResult = 1
-    Images = VisMain.ImageList_RSAT
     ImageIndex = 8
     TabOrder = 2
   end
@@ -267,15 +266,14 @@ object VisLogonHours: TVisLogonHours
     AnchorSideTop.Control = Btn_OK
     AnchorSideTop.Side = asrBottom
     Left = 384
-    Height = 26
-    Top = 73
-    Width = 82
+    Height = 25
+    Top = 72
+    Width = 62
     AutoSize = True
     BorderSpacing.Left = 16
     BorderSpacing.Top = 8
     Caption = 'Cancel'
     ModalResult = 2
-    Images = VisMain.ImageList_RSAT
     ImageIndex = 6
     TabOrder = 3
   end
@@ -286,7 +284,7 @@ object VisLogonHours: TVisLogonHours
     AnchorSideTop.Side = asrBottom
     Left = 384
     Height = 30
-    Top = 131
+    Top = 129
     Width = 13
     BorderSpacing.Left = 16
     BorderSpacing.Top = 32
@@ -302,7 +300,7 @@ object VisLogonHours: TVisLogonHours
     AnchorSideTop.Side = asrCenter
     Left = 405
     Height = 19
-    Top = 137
+    Top = 135
     Width = 98
     BorderSpacing.Left = 8
     BorderSpacing.Right = 8
@@ -318,7 +316,7 @@ object VisLogonHours: TVisLogonHours
     AnchorSideTop.Side = asrBottom
     Left = 384
     Height = 29
-    Top = 161
+    Top = 159
     Width = 13
     BorderSpacing.Left = 16
     Color = clBtnShadow
@@ -333,7 +331,7 @@ object VisLogonHours: TVisLogonHours
     AnchorSideTop.Side = asrCenter
     Left = 405
     Height = 19
-    Top = 166
+    Top = 164
     Width = 92
     BorderSpacing.Left = 8
     Caption = 'Logon Denied'
@@ -361,7 +359,6 @@ object VisLogonHours: TVisLogonHours
     Top = 48
   end
   object ActionList: TActionList
-    Images = VisMain.ImageList_RSAT
     Left = 80
     Top = 48
     object Action_OK: TAction

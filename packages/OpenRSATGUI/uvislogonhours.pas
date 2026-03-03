@@ -57,7 +57,7 @@ type
   end;
 
 const
-  days: array[0..6] of String = (rsMonday, rsThursday, rsWednesday, rsTuesday, rsFriday, rsSaturday, rsSunday);
+  days: array[0..6] of String = (rsMonday, rsTuesday, rsWednesday, rsThursday, rsFriday, rsSaturday, rsSunday);
 
 implementation
 uses
@@ -166,7 +166,7 @@ begin
   // Cells
   if (aRow > 0) and (aCol > 0) then
   begin
-    if GetBit((aRow-1) * HoursPerDay + aCol-1 - Integer(SpinEdit_UTC.Value)) then
+    if GetBit((aRow) * HoursPerDay + aCol-1 - Integer(SpinEdit_UTC.Value)) then
       DrawGrid.Canvas.Brush.Color := clBlue
     else
       DrawGrid.Canvas.Brush.Color := clBtnShadow;
