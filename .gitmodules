@@ -16,3 +16,6 @@
 [submodule "submodules/pltis_uicomponents"]
 	path = submodules/pltis_uicomponents
 	url = https://github.com/tranquilit/pltis_uicomponents
+[submodule "submodules/pltis_djoin"]
+	path = submodules/pltis_djoin
+	url = https://github.com/tranquilit/pltis_djoin.git

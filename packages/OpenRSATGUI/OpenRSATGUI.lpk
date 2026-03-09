@@ -356,31 +356,34 @@
       <OutDir Value="languages"/>
       <EnableI18NForLFM Value="True"/>
     </i18n>
-    <RequiredPkgs Count="8">
+    <RequiredPkgs Count="9">
       <Item1>
-        <PackageName Value="LazControlDsgn"/>
+        <PackageName Value="pltis_djoin"/>
       </Item1>
       <Item2>
-        <PackageName Value="OpenRSATCore"/>
+        <PackageName Value="LazControlDsgn"/>
       </Item2>
       <Item3>
-        <PackageName Value="MetaDarkStyle"/>
+        <PackageName Value="OpenRSATCore"/>
       </Item3>
       <Item4>
-        <PackageName Value="DateTimeCtrlsDsgn"/>
+        <PackageName Value="MetaDarkStyle"/>
       </Item4>
       <Item5>
-        <PackageName Value="pltis_uicomponents"/>
+        <PackageName Value="DateTimeCtrlsDsgn"/>
       </Item5>
       <Item6>
-        <PackageName Value="LCL"/>
+        <PackageName Value="pltis_uicomponents"/>
       </Item6>
       <Item7>
-        <PackageName Value="mormot2"/>
+        <PackageName Value="LCL"/>
       </Item7>
       <Item8>
-        <PackageName Value="FCL"/>
+        <PackageName Value="mormot2"/>
       </Item8>
+      <Item9>
+        <PackageName Value="FCL"/>
+      </Item9>
     </RequiredPkgs>
     <UsageOptions>
       <UnitPath Value="$(PkgOutDir)"/>

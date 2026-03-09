@@ -813,6 +813,11 @@ object FrmModuleADUC: TFrmModuleADUC
       ImageIndex = 26
       OnExecute = Action_ShowRelationShipExecute
     end
+    object Action_PrepareDJOIN: TAction
+      Caption = 'Prepare DJOIN'
+      OnExecute = Action_PrepareDJOINExecute
+      OnUpdate = Action_PrepareDJOINUpdate
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
@@ -865,6 +870,9 @@ object FrmModuleADUC: TFrmModuleADUC
     end
     object MenuItem_BlockGPOInheritance: TMenuItem
       Action = Action_BlockGPOInheritance
+    end
+    object MenuItem_PrepareDJOIN: TMenuItem
+      Action = Action_PrepareDJOIN
     end
     object Separator2: TMenuItem
       Caption = '-'
@@ -1022,5 +1030,9 @@ object FrmModuleADUC: TFrmModuleADUC
       Caption = 'Edit columns'
       OnClick = MenuItem_EditColumnsClick
     end
+  end
+  object SelectDirectoryDialog1: TSelectDirectoryDialog
+    Left = 304
+    Top = 152
   end
 end

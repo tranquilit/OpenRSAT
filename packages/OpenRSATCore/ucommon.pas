@@ -432,6 +432,11 @@ resourcestring
   rsBitlockerDate = 'Date: ';
   rsBitlockerPasswordID = 'Password ID: ';
 
+  rsPrepareDJOIN = 'Prepare DJOIN';
+  rsPrepareDJOINFinished = 'Prepare DJOIN finished. Open folder?';
+  rsPrepareDJOINConfirmation = 'You are about to change the password for the selected machines. This will remove the trust relationships with the domain. Continue?';
+  rsPrepareDJOINSelectFolder = 'Select folder to store djoin files';
+
 const
   DAYS_BETWEEN_1601_AND_1900 = 109205;
   HUNDRED_OF_MS_IN_A_DAY = 864000000000;

@@ -606,6 +606,22 @@ msgstr "The requested operation would have resulted in an entry that has an inap
 msgid "Operation occurs in a wrong order."
 msgstr "Operation occurs in a wrong order."
 
+#: ucommon.rspreparedjoin
+msgid "Prepare DJOIN"
+msgstr "Prepare DJOIN"
+
+#: ucommon.rspreparedjoinconfirmation
+msgid "You are about to change the password for the selected machines. This will remove the trust relationships with the domain. Continue?"
+msgstr "You are about to change the password for the selected machines. This will remove the trust relationships with the domain. Continue?"
+
+#: ucommon.rspreparedjoinfinished
+msgid "Prepare DJOIN finished. Open folder?"
+msgstr "Prepare DJOIN finished. Open folder?"
+
+#: ucommon.rspreparedjoinselectfolder
+msgid "Select folder to store djoin files"
+msgstr "Select folder to store djoin files"
+
 #: ucommon.rsprotocolerror
 msgid "Malformed LDAP message. Unrecognized operation."
 msgstr "Malformed LDAP message. Unrecognized operation."
