@@ -589,6 +589,22 @@ msgstr ""
 msgid "Operation occurs in a wrong order."
 msgstr "Ενέργεια συμβαίνει με λάθος σειρά."
 
+#: ucommon.rspreparedjoin
+msgid "Prepare DJOIN"
+msgstr ""
+
+#: ucommon.rspreparedjoinconfirmation
+msgid "You are about to change the password for the selected machines. This will remove the trust relationships with the domain. Continue?"
+msgstr ""
+
+#: ucommon.rspreparedjoinfinished
+msgid "Prepare DJOIN finished. Open folder?"
+msgstr ""
+
+#: ucommon.rspreparedjoinselectfolder
+msgid "Select folder to store djoin files"
+msgstr ""
+
 #: ucommon.rsprotocolerror
 msgid "Malformed LDAP message. Unrecognized operation."
 msgstr "Λανθασμένη μορφή μηνύματος LDAP. Μη αναγνωρίσιμη ενέργεια."

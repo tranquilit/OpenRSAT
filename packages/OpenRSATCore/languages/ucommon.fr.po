@@ -606,6 +606,22 @@ msgstr "L'opération demandée aurait donné lieu à une entrée comportant un e
 msgid "Operation occurs in a wrong order."
 msgstr "L'opération est apparu dans le mauvais ordre."
 
+#: ucommon.rspreparedjoin
+msgid "Prepare DJOIN"
+msgstr "Préparation DJOIN"
+
+#: ucommon.rspreparedjoinconfirmation
+msgid "You are about to change the password for the selected machines. This will remove the trust relationships with the domain. Continue?"
+msgstr "Vous êtes sur le point de modifier le mot de passe des machines sélectionnés. Ceci supprime les relations d'approbation avec le domaine. Continuer ?"
+
+#: ucommon.rspreparedjoinfinished
+msgid "Prepare DJOIN finished. Open folder?"
+msgstr "Préparation de DJOIN terminée. Ouvrir le dossier ?"
+
+#: ucommon.rspreparedjoinselectfolder
+msgid "Select folder to store djoin files"
+msgstr "Sélectionner le dossier dans lequel stocker les fichiers djoin."
+
 #: ucommon.rsprotocolerror
 msgid "Malformed LDAP message. Unrecognized operation."
 msgstr "Message LDAP malformé. Opération non reconnu."

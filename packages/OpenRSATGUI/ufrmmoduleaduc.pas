@@ -18,7 +18,9 @@ uses
   ExtCtrls,
   StdCtrls,
   ActnList,
+  LCLIntf,
   Menus,
+  Dialogs,
   tis.ui.grid.core,
   tis.ui.grid.controls,
   tis.ui.searchedit,
@@ -40,6 +42,8 @@ uses
   ufrmoption,
   umodule,
   uoption,
+  uDJoin,
+  uLdapUtils,
   ursatldapclient;
 
 type
@@ -47,6 +51,7 @@ type
   { TFrmModuleADUC }
 
   TFrmModuleADUC = class(TFrameModule)
+    Action_PrepareDJOIN: TAction;
     Action_ShowRelationShip: TAction;
     Action_ShowObjectLocation: TAction;
     Action_BlockGPOInheritance: TAction;
@@ -96,6 +101,7 @@ type
     CheckBox_IncludeSubContainer: TCheckBox;
     Image1: TImage;
     Image2: TImage;
+    MenuItem_PrepareDJOIN: TMenuItem;
     MenuItem_ShowObjectLocation: TMenuItem;
     MenuItem_EditColumns: TMenuItem;
     MenuItem_BlockGPOInheritance: TMenuItem;
@@ -159,6 +165,7 @@ type
     Panel3: TPanel;
     Panel4: TPanel;
     PopupMenu1: TPopupMenu;
+    SelectDirectoryDialog1: TSelectDirectoryDialog;
     Separator1: TMenuItem;
     Separator2: TMenuItem;
     Separator4: TMenuItem;
@@ -226,6 +233,8 @@ type
     procedure Action_ParentUpdate(Sender: TObject);
     procedure Action_PasteExecute(Sender: TObject);
     procedure Action_PasteUpdate(Sender: TObject);
+    procedure Action_PrepareDJOINExecute(Sender: TObject);
+    procedure Action_PrepareDJOINUpdate(Sender: TObject);
     procedure Action_PreviousExecute(Sender: TObject);
     procedure Action_PreviousUpdate(Sender: TObject);
     procedure Action_PropertiesExecute(Sender: TObject);
@@ -352,7 +361,6 @@ type
 
 implementation
 uses
-  dialogs,
   uvissearch,
   utheme,
   uvisnewobject,
@@ -967,6 +975,82 @@ end;
 
 procedure TFrmModuleADUC.Action_PasteUpdate(Sender: TObject);
 begin
+end;
+
+procedure TFrmModuleADUC.Action_PrepareDJOINExecute(Sender: TObject);
+var
+  DJoin: TDJoin;
+  NodeData: PDocVariantData;
+  DN, Folder: RawUtf8;
+  Node: PVirtualNode;
+begin
+  if GridADUC.SelectedCount <= 0 then
+    Exit;
+
+  if (mrYes <> MessageDlg(rsPrepareDJOIN, rsPrepareDJOINConfirmation, mtWarning, mbYesNoCancel, 0)) then
+    Exit;
+
+  SelectDirectoryDialog1.Title := rsPrepareDJOINSelectFolder;
+  if not SelectDirectoryDialog1.Execute then
+    Exit;
+  Folder := SelectDirectoryDialog1.FileName;
+  if not String(Folder).EndsWith(DirectorySeparator) then
+    Append(Folder, DirectorySeparator);
+
+  DJoin := TDJoin.Create;
+  try
+    Node := GridADUC.GetFirstSelected();
+    while Assigned(Node) do
+    begin
+      NodeData := GridADUC.GetNodeAsPDocVariantData(Node, False);
+      if not Assigned(NodeData) then
+        Continue;
+      Node := GridADUC.GetNextSelected(Node);
+
+      DN := NodeData^.S['objectName'];
+
+      DJoin.LoadFromLDAP(FrmRSAT.LdapClient, GetDNName(DN), GetParentDN(DN), '', '', '', aieMove);
+      DJoin.SaveToFile(FormatUtf8('%/%.%.djoin', [Folder, GetDNName(DN), DNToCN(FrmRSAT.LdapClient.DefaultDN())]));
+    end;
+  finally
+    FreeAndNil(DJoin);
+  end;
+  if (mrYes <> MessageDlg(rsPrepareDJOIN, rsPrepareDJOINFinished, mtConfirmation, mbYesNoCancel, 0)) then
+    Exit;
+  OpenDocument(Folder);
+end;
+
+procedure TFrmModuleADUC.Action_PrepareDJOINUpdate(Sender: TObject);
+var
+  Node: PVirtualNode;
+  NodeData: PDocVariantData;
+  objectClass: TRawUtf8DynArray;
+  LastIdx: Integer;
+  Allow: Boolean;
+begin
+  Allow := False;
+
+  try
+    Node := GridADUC.GetFirstSelected();
+    while Assigned(Node) do
+    begin
+      NodeData := GridADUC.GetNodeAsPDocVariantData(Node);
+      Node := GridADUC.GetNextSelected(Node);
+      if not Assigned(NodeData) or not NodeData^.Exists('objectClass') then
+        Exit;
+      objectClass := NodeData^.A['objectClass']^.ToRawUtf8DynArray;
+      if not Assigned(ObjectClass) then
+        Exit;
+      LastIdx := High(objectClass);
+      if (LastIdx < 0) then
+        Exit;
+      if (objectClass[LastIdx] <> 'computer') then
+        Exit;
+    end;
+    Allow := True;
+  finally
+    Action_PrepareDJOIN.Enabled := Allow;
+  end;
 end;
 
 procedure TFrmModuleADUC.Action_PreviousExecute(Sender: TObject);
@@ -1587,6 +1671,7 @@ begin
     MenuItem_SendMail,
     MenuItem_Manage,
     MenuItem_Find,
+    MenuItem_PrepareDJOIN,
     MenuItem_New,
     MenuItem_Copy,
     MenuItem_Cut,
