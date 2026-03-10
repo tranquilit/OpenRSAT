@@ -35,13 +35,11 @@ type
     BitBtn_OK: TBitBtn;
     BitBtn_Cancel: TBitBtn;
     BitBtn_ProfileManager: TBitBtn;
-    CheckBox_AutoConnect: TCheckBox;
     Edit_Server: TEdit;
     Edit_Username: TEdit;
     Edit_Password: TEdit;
     Image1: TImage;
     Image2: TImage;
-    Label_AutoConnect: TLabel;
     Label_Profile: TLabel;
     Label_Server: TLabel;
     Label_Username: TLabel;
@@ -54,7 +52,6 @@ type
     procedure Action_ProfileManagerExecute(Sender: TObject);
     procedure Action_OKExecute(Sender: TObject);
     procedure Action_OKUpdate(Sender: TObject);
-    procedure CheckBox_AutoConnectChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure TisSearchEdit_ProfileSearch(Sender: TObject; const aText: string);
     procedure TisSearchEdit_ProfileSelect(Sender: TObject);
@@ -122,11 +119,6 @@ begin
   Action_OK.Enabled := (TisSearchEdit_Profile.Items.IndexOf(TisSearchEdit_Profile.Text) >= 0);
 end;
 
-procedure TFormConnectConfigs.CheckBox_AutoConnectChange(Sender: TObject);
-begin
-  fLdapConfigs.AutoConnect := CheckBox_AutoConnect.Checked;
-end;
-
 procedure TFormConnectConfigs.FormShow(Sender: TObject);
 var
   index, ConfigCount: Integer;
@@ -144,7 +136,6 @@ begin
     index := 0;
   TisSearchEdit_Profile.ItemIndex := index;
   TisSearchEdit_ProfileSelect(Sender);
-  CheckBox_AutoConnect.Checked := fLdapConfigs.AutoConnect;
 
   UnifyButtonsWidth([BitBtn_Cancel, BitBtn_OK]);
 end;
@@ -250,6 +241,7 @@ begin
 
   fLog := aLog;
   fLdapConfigs := ALdapConfigs;
+  fLdapConfigs.AutoConnect := True;
 
   if Assigned(fLog) then
     fLog.Log(sllInfo, 'Vis Connect Config');

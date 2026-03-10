@@ -5,6 +5,7 @@ object FrmPropertySecurity: TFrmPropertySecurity
   Width = 465
   ClientHeight = 421
   ClientWidth = 465
+  LCLVersion = '4.5.0.0'
   TabOrder = 0
   DesignLeft = 2137
   DesignTop = 347
@@ -42,6 +43,7 @@ object FrmPropertySecurity: TFrmPropertySecurity
       Header.Options = [hoAutoResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
       Header.SortColumn = 0
       Header.Style = hsFlatButtons
+      Images = CoreDataModule.ImageList1
       TabOrder = 0
       ZebraColor = 15593713
       FilterOptions.CaseInsensitive = True
@@ -179,14 +181,15 @@ object FrmPropertySecurity: TFrmPropertySecurity
   end
   object Splitter1: TSplitter
     Cursor = crVSplit
-    Left = 8
+    Left = 0
     Height = 5
     Top = 166
-    Width = 449
+    Width = 465
     Align = alTop
     ResizeAnchor = akTop
   end
   object ActionList1: TActionList
+    Images = CoreDataModule.ImageList1
     Left = 88
     Top = 72
     object Action_Add: TAction

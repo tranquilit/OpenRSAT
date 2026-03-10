@@ -4,7 +4,6 @@
 {"hash":155447552,"name":"tformconnectconfigs.label_username.caption","sourcebytes":[85,115,101,114,110,97,109,101,58,32],"value":"Username: "},
 {"hash":127258741,"name":"tformconnectconfigs.label_profile.caption","sourcebytes":[80,114,111,102,105,108,101],"value":"Profile"},
 {"hash":94149826,"name":"tformconnectconfigs.label_server.caption","sourcebytes":[83,101,114,118,101,114],"value":"Server"},
-{"hash":250215108,"name":"tformconnectconfigs.label_autoconnect.caption","sourcebytes":[65,117,116,111,32,99,111,110,110,101,99,116],"value":"Auto connect"},
 {"hash":1339,"name":"tformconnectconfigs.action_ok.caption","sourcebytes":[79,75],"value":"OK"},
 {"hash":77089212,"name":"tformconnectconfigs.action_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"}
 ]}

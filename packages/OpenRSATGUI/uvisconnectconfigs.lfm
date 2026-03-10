@@ -179,23 +179,6 @@ object FormConnectConfigs: TFormConnectConfigs
         Caption = 'Server'
         Constraints.MinWidth = 100
       end
-      object CheckBox_AutoConnect: TCheckBox
-        AnchorSideLeft.Control = Label_AutoConnect
-        AnchorSideLeft.Side = asrBottom
-        AnchorSideTop.Control = Edit_Password
-        AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Control = Panel_Profile
-        AnchorSideRight.Side = asrBottom
-        AnchorSideBottom.Side = asrBottom
-        Left = 116
-        Height = 17
-        Top = 132
-        Width = 184
-        Anchors = [akTop, akLeft, akRight]
-        BorderSpacing.Around = 8
-        TabOrder = 4
-        OnChange = CheckBox_AutoConnectChange
-      end
       object Edit_Server: TEdit
         AnchorSideLeft.Control = Label_Server
         AnchorSideLeft.Side = asrBottom
@@ -214,19 +197,6 @@ object FormConnectConfigs: TFormConnectConfigs
         ReadOnly = True
         TabOrder = 1
       end
-      object Label_AutoConnect: TLabel
-        AnchorSideLeft.Control = Panel_Profile
-        AnchorSideTop.Control = CheckBox_AutoConnect
-        AnchorSideTop.Side = asrCenter
-        Left = 8
-        Height = 15
-        Top = 133
-        Width = 100
-        Alignment = taRightJustify
-        BorderSpacing.Around = 8
-        Caption = 'Auto connect'
-        Constraints.MinWidth = 100
-      end
       object BitBtn_ProfileManager: TBitBtn
         AnchorSideLeft.Side = asrBottom
         AnchorSideTop.Control = TisSearchEdit_Profile
@@ -242,7 +212,7 @@ object FormConnectConfigs: TFormConnectConfigs
         AutoSize = True
         BorderSpacing.Around = 8
         ImageIndex = 54
-        TabOrder = 5
+        TabOrder = 4
       end
     end
     object Panel_Image: TPanel
