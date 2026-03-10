@@ -1456,6 +1456,8 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Tree Change', Self);
 
+  if not Assigned(Node) then
+    Exit;
   if Timer_TreeChangeNode.Enabled then
     Timer_TreeChangeNode.Enabled := False;
   Timer_TreeChangeNode.Enabled := True;
@@ -2198,7 +2200,7 @@ begin
     end;
     TreeADUC.BeginUpdate;
     try
-      Node := (TreeADUC.Items.Add(nil, DNToCN(Obj.Find('distinguishedName').GetReadable())) as TADUCTreeNode);
+      Node := (TreeADUC.Items.AddChild(fADUCRootNode, DNToCN(Obj.Find('distinguishedName').GetReadable())) as TADUCTreeNode);
       Node.NodeType := atntObject;
       Node.GetNodeDataObject.DistinguishedName := Obj.Find('distinguishedName').GetReadable();
       Node.GetNodeDataObject.ObjectClass := Obj.Find('objectClass').GetAllReadable;
@@ -2826,7 +2828,7 @@ begin
   fADUCRootNode.ImageIndex := Ord(ileAppIcon);
   fADUCRootNode.SelectedIndex := fADUCRootNode.ImageIndex;
 
-  fADUCQueryNode := (TreeADUC.Items.Add(nil, 'Saved Query') as TADUCTreeNode);
+  fADUCQueryNode := (TreeADUC.Items.AddChild(fADUCRootNode, 'Saved Query') as TADUCTreeNode);
   fADUCQueryNode.ImageIndex := Ord(ileADContainer);
   fADUCQueryNode.SelectedIndex := fADUCQueryNode.ImageIndex;
 

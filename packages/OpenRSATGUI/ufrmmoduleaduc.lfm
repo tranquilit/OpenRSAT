@@ -435,9 +435,11 @@ object FrmModuleADUC: TFrmModuleADUC
       PopupMenu = PopupMenu1
       ReadOnly = True
       RightClickSelect = True
+      ShowLines = False
+      ShowRoot = False
       StateImages = CoreDataModule.ImageList1
       TabOrder = 1
-      Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
+      Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoToolTips, tvoThemedDraw]
       OnChange = TreeADUCChange
       OnContextPopup = TreeADUCContextPopup
       OnCreateNodeClass = TreeADUCCreateNodeClass
