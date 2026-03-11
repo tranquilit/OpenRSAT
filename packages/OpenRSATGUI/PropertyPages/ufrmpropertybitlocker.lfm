@@ -9,82 +9,36 @@ object FrmPropertyBitLocker: TFrmPropertyBitLocker
   TabOrder = 0
   DesignLeft = 1226
   DesignTop = 262
-  object Label_BitlockerPassword: TLabel
-    Left = 10
-    Height = 15
-    Top = 8
-    Width = 456
-    Align = alTop
-    BorderSpacing.Left = 10
-    BorderSpacing.Top = 8
-    Caption = 'Mot de passe de récupération BitLocker :'
-  end
-  object Label_BitclockerDetails: TLabel
-    Left = 10
-    Height = 15
-    Top = 177
-    Width = 456
-    Align = alTop
-    BorderSpacing.Left = 10
-    Caption = 'Détails :'
-  end
-  object Memo1: TMemo
-    AnchorSideBottom.Side = asrBottom
-    Left = 8
-    Height = 138
-    Top = 192
-    Width = 450
-    Align = alTop
-    Anchors = [akTop, akLeft, akRight, akBottom]
-    BorderSpacing.Left = 8
-    BorderSpacing.Right = 8
-    BorderSpacing.Bottom = 8
-    Lines.Strings = (
-      'Aucun élément dans cette vue.'
-      ''
-      'Pour rechercher un mot de passe de récupération, cliquez avec le bouton droit sur l''object domaine dans l''arborescence, puis sélectionnez " Rechercher le mot de passe de récupération BitLocker... ".'
-    )
-    ReadOnly = True
-    TabOrder = 0
-  end
   object Panel1: TPanel
     Left = 8
-    Height = 146
-    Top = 23
+    Height = 152
+    Top = 8
     Width = 450
-    Align = alTop
-    BorderSpacing.Left = 8
-    BorderSpacing.Right = 8
-    BorderSpacing.Bottom = 8
+    Align = alClient
+    BorderSpacing.Around = 8
     BevelOuter = bvNone
-    ClientHeight = 146
+    ClientHeight = 152
     ClientWidth = 450
-    TabOrder = 1
+    TabOrder = 0
     object TisGrid1: TTisGrid
-      AnchorSideLeft.Control = Panel1
-      AnchorSideTop.Control = Panel1
-      AnchorSideRight.Control = Panel1
-      AnchorSideRight.Side = asrBottom
-      AnchorSideBottom.Control = Panel1
-      AnchorSideBottom.Side = asrBottom
       Left = 0
-      Height = 146
-      Top = 0
+      Height = 137
+      Top = 15
       Width = 450
-      Anchors = [akTop, akLeft, akRight, akBottom]
+      Align = alClient
       Header.AutoSizeIndex = -1
       Header.Columns = <      
         item
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
           Position = 0
-          Text = 'Date d''ajout'
+          Text = 'Date'
           Width = 190
           PropertyName = 'date'
         end      
         item
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
           Position = 1
-          Text = 'ID de mdp'
+          Text = 'Password ID'
           Width = 185
           PropertyName = 'passwordID'
         end      
@@ -112,6 +66,44 @@ object FrmPropertyBitLocker: TFrmPropertyBitLocker
       TabOrder = 0
       ZebraColor = 15593713
       OnChange = TisGrid1Change
+    end
+    object Label_BitlockerPassword: TLabel
+      Left = 0
+      Height = 15
+      Top = 0
+      Width = 450
+      Align = alTop
+      Caption = 'Mot de passe de récupération BitLocker :'
+    end
+  end
+  object Panel2: TPanel
+    Left = 8
+    Height = 148
+    Top = 168
+    Width = 450
+    Align = alBottom
+    BorderSpacing.Around = 8
+    BevelOuter = bvNone
+    ClientHeight = 148
+    ClientWidth = 450
+    TabOrder = 1
+    object Label_BitclockerDetails: TLabel
+      Left = 0
+      Height = 15
+      Top = 0
+      Width = 450
+      Align = alTop
+      Caption = 'Détails :'
+    end
+    object Memo1: TMemo
+      Left = 0
+      Height = 133
+      Top = 15
+      Width = 442
+      Align = alClient
+      BorderSpacing.Right = 8
+      ReadOnly = True
+      TabOrder = 0
     end
   end
   object PopupMenu1: TPopupMenu

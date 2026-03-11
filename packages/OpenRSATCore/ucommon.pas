@@ -431,6 +431,7 @@ resourcestring
   rsBitlockerComputer = 'Computer: ';
   rsBitlockerDate = 'Date: ';
   rsBitlockerPasswordID = 'Password ID: ';
+  rsBitlockerRecovery = 'BitLocker recovery';
 
   rsPrepareDJOIN = 'Prepare DJOIN';
   rsPrepareDJOINFinished = 'Prepare DJOIN finished. Open folder?';

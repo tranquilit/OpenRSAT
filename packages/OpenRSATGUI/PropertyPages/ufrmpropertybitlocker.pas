@@ -33,6 +33,7 @@ type
     Memo1: TMemo;
     MenuItem_CopyPassword: TMenuItem;
     Panel1: TPanel;
+    Panel2: TPanel;
     PopupMenu1: TPopupMenu;
     TisGrid1: TTisGrid;
     procedure Action_CopyPasswordExecute(Sender: TObject);
@@ -95,7 +96,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create', Self);
 
-  Caption := 'BitLocker recovery';
+  Caption := rsBitlockerRecovery;
 end;
 
 procedure TFrmPropertyBitLocker.Update(Props: TProperty);

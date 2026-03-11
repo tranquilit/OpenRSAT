@@ -335,12 +335,12 @@ const
     TFrmPropertyOperatingSystem,
     TFrmPropertyMemberOf,
     TFrmPropertyLAPS,
+    TFrmPropertyBitLocker,
     TFrmPropertyLocation,
     TFrmPropertyManagedBy,
     TFrmPropertyObject,
     TFrmPropertySecurity,
-    TFrmPropertyAttributes,
-    TFrmPropertyBitLocker
+    TFrmPropertyAttributes
   );
 
   PROPERTY_ORGANIZATIONAL_UNIT: Array of TPropertyFrameClass = (

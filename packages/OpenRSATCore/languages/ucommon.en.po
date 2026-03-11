@@ -108,6 +108,10 @@ msgstr "Date: "
 msgid "Password ID: "
 msgstr "Password ID: "
 
+#: ucommon.rsbitlockerrecovery
+msgid "BitLocker recovery"
+msgstr "BitLocker recovery"
+
 #: ucommon.rsbitlockerrecoverypassword
 msgid "Recovery Password: "
 msgstr "Recovery Password: "
