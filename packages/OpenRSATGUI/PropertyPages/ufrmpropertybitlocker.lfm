@@ -73,7 +73,7 @@ object FrmPropertyBitLocker: TFrmPropertyBitLocker
       Top = 0
       Width = 450
       Align = alTop
-      Caption = 'Mot de passe de récupération BitLocker :'
+      Caption = 'Bitlocker recovery password:'
     end
   end
   object Panel2: TPanel
@@ -93,7 +93,7 @@ object FrmPropertyBitLocker: TFrmPropertyBitLocker
       Top = 0
       Width = 450
       Align = alTop
-      Caption = 'Détails :'
+      Caption = 'Details:'
     end
     object Memo1: TMemo
       Left = 0
