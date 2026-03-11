@@ -711,7 +711,6 @@ object FrmModuleADUC: TFrmModuleADUC
       Caption = 'Copy'
       DisableIfNoHandler = False
       ImageIndex = 10
-      ShortCut = 16451
       OnExecute = Action_CopyExecute
       OnUpdate = Action_CopyUpdate
     end
@@ -719,7 +718,6 @@ object FrmModuleADUC: TFrmModuleADUC
       Caption = 'Cut'
       DisableIfNoHandler = False
       ImageIndex = 11
-      ShortCut = 16472
       OnExecute = Action_CutExecute
       OnUpdate = Action_CutUpdate
     end
@@ -727,7 +725,6 @@ object FrmModuleADUC: TFrmModuleADUC
       Caption = 'Paste'
       DisableIfNoHandler = False
       ImageIndex = 12
-      ShortCut = 16470
       OnExecute = Action_PasteExecute
       OnUpdate = Action_PasteUpdate
     end
