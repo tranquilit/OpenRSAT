@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=OpenRSAT
+Exec=/opt/openrsat/OpenRSAT
+Terminal=false
+Type=Application
+Icon=/opt/openrsat/OpenRSAT.png
+Categories=Utility;
