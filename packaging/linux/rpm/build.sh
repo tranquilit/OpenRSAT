@@ -1,29 +1,45 @@
 #/bin/sh
 
+# Usage:
+# ./build.sh <VERSION:0.4.226> <ARCH:x64,arm64,arm32,x86> <ICON_PATH:./icon.png>
+
 set -ex
+VERSION=$1
+ARCH=$2
+ICON_PATH=$3
 BUILDDIR=$PWD/builddir
+URL="https://github.com/tranquilit/openrsat/releases/download/v"$VERSION
+
+echo "Verify architecture..."
+
+if [ "$ARCH" = "x64" ]; then
+  DEBARCH=amd64
+elif [ "$ARCH" = "arm64" ]; then
+  DEBARCH=arm64
+elif [ "$ARCH" = "arm32" ]; then
+  DEBARCH=armhf
+elif [ "$ARCH" = "x86" ]; then
+  DEBARCH=i386
+else
+  echo "Invalid architecture. Exit."
+  exit
+fi
 
 echo "Setting up environment"
-rm -rf $BUILDDIR BUILD RPMS SRPMS BUILDROOT
-mkdir -p ./{BUILD,RPMS}
-
-VERSION="0.4.30"
-URL="https://wapt.tranquil.it/store/fr/wapt/tis-openrsat_$VERSION.2_linux_PROD.wapt"
+mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES}
 
 echo "Download from $URL"
-
-wget -O ./BUILD/tis-openrsat.zip $URL
-unzip -d ./BUILD/ ./BUILD/tis-openrsat.zip
-cp BUILD/bin/linux-x64/OpenRSAT ./BUILD/
-cp BUILD/WAPT/icon.png ./BUILD/OpenRSAT.png
+wget -O ~/rpmbuild/SOURCES/OpenRSAT $URL/OpenRSAT-linux-$ARCH
+cp $ICON_PATH ~/rpmbuild/SOURCES/OpenRSAT.png
+cp ./OpenRSAT.desktop ~/rpmbuild/SOURCES/OpenRSAT.desktop
 
 echo "Build rpm"
 rpmbuild -bb --buildroot $BUILDDIR --define "_version $VERSION" --clean ./OpenRSAT.spec
 
 echo "Retrieve rpm"
-mv RPMS/*/*.rpm .
+mv ~/rpmbuild/RPMS/*/*.rpm .
 
 echo "Remove builddir"
-rm -rf $BUILDDIR BUILD RPMS SRPMS BUILDROOT SOURCES SPECS
+rm -rf ~/rpmbuild
 
 echo "Success"
