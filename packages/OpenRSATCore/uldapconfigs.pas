@@ -57,6 +57,7 @@ implementation
 uses
   IniFiles,
   mormot.core.data,
+  mormot.core.fmt,
   mormot.core.os,
   mormot.core.variants,
   uconfig;
