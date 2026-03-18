@@ -374,6 +374,10 @@ msgstr "Confirm the deletion of the %d selected rows?"
 msgid "Delete selected rows"
 msgstr "Delete selected rows"
 
+#: ucommon.rshidepassword
+msgid "Hide password"
+msgstr "Hide password"
+
 #: ucommon.rsinappropriateauthentication
 msgid "The client attempted to bind in an inappropriate manner that is inappropriate for the target account."
 msgstr "The client attempted to bind in an inappropriate manner that is inappropriate for the target account."
@@ -782,6 +786,10 @@ msgstr "Write"
 #: ucommon.rssecuritydescriptorinvalid
 msgid "Fail to read security descriptor"
 msgstr "Fail to read security descriptor"
+
+#: ucommon.rsshowpassword
+msgid "Show password"
+msgstr "Show password"
 
 #: ucommon.rssinglestringeditor
 msgid "Single String Editor"

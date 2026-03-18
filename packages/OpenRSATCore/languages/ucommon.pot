@@ -358,6 +358,10 @@ msgstr ""
 msgid "Delete selected rows"
 msgstr ""
 
+#: ucommon.rshidepassword
+msgid "Hide password"
+msgstr ""
+
 #: ucommon.rsinappropriateauthentication
 msgid "The client attempted to bind in an inappropriate manner that is inappropriate for the target account."
 msgstr ""
@@ -763,6 +767,10 @@ msgstr ""
 
 #: ucommon.rssecuritydescriptorinvalid
 msgid "Fail to read security descriptor"
+msgstr ""
+
+#: ucommon.rsshowpassword
+msgid "Show password"
 msgstr ""
 
 #: ucommon.rssinglestringeditor

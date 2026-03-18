@@ -1,3 +1,6 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
 #: ucommon.rsaccountunlocked
 msgid "Account Unlock"
 msgstr "Ξεκλείδωμα λογαριασμού"
@@ -354,6 +357,10 @@ msgstr "Επιβεβαίωση διαγραφής των %d επιλεγμένω
 #: ucommon.rsgriddeleterows
 msgid "Delete selected rows"
 msgstr "Διαγραφή επιλεγμένων γραμμών"
+
+#: ucommon.rshidepassword
+msgid "Hide password"
+msgstr ""
 
 #: ucommon.rsinappropriateauthentication
 msgid "The client attempted to bind in an inappropriate manner that is inappropriate for the target account."
@@ -765,6 +772,10 @@ msgstr "Εγγραφή"
 #: ucommon.rssecuritydescriptorinvalid
 msgid "Fail to read security descriptor"
 msgstr "Αποτυχία ανάγνωσης περιγραφής ασφαλείας"
+
+#: ucommon.rsshowpassword
+msgid "Show password"
+msgstr ""
 
 #: ucommon.rssinglestringeditor
 msgid "Single String Editor"

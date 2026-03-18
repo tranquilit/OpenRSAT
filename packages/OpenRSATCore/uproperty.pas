@@ -46,6 +46,25 @@ type
   end;
   {$ENDIF OPENRSATTESTS}
 
+  TLAPSV1Information = record
+    Expiration: TDateTime;
+    Password: SpiUtf8;
+  end;
+
+  TLAPSV2Inforamtion = record
+    Expiration: TDateTime;
+    EncryptedPassword: RawUtf8;
+    WhenChanged: TDateTime;
+    Account: RawUtf8;
+    Password: SpiUtf8;
+  end;
+
+  TLAPSInformation = record
+    LAPSV1: TLAPSV1Information;
+    LAPSV2: TLAPSV2Inforamtion;
+  end;
+
+  PLAPSInformation = ^TLAPSInformation;
 
   TFVERecoveryInformation = record
     cn: RawUtf8;
@@ -65,8 +84,11 @@ type
 
     fRSAT: TRSAT;
 
+    fLAPSInformation: TLAPSInformation;
+
     function GetDCTypeFromUAC: RawUtf8;
     function GetDirectReportsNames: TRawUtf8DynArray;
+    function GetLAPSInformation: PLAPSInformation;
     function GetManagerName: RawUtf8;
     function GetSiteFromServerReference: RawUtf8;
     function GetSubnetsFromSiteObject: TRawUtf8DynArray;
@@ -128,6 +150,7 @@ type
     /// Retrieve available attributes for an objectClass.
     function AttributesFromSchema: TRawUtf8DynArray;
 
+    property LAPSInformation: PLAPSInformation read GetLAPSInformation;
     function NTAuthCertificatesDN: RawUtf8;
     function NTAuthCertificates: TRawByteStringDynArray;
     procedure AddNTAuthCertificate(Cert: RawByteString);
@@ -192,12 +215,53 @@ type
     property whenChanged: TDateTime read GetwhenChanged write SetwhenChanged;
   end;
 
+
+function ConvertLAPSPassword(const LAPSPassword: RawUtf8; out Account: RawUtf8; out Password: RawUtf8; out WhenChanged: TDateTime): Boolean;
+/// Invalid function (missing time)
+function BuildLAPSPassword(const Account: RawUtf8; const Password: RawUtf8; const WhenChanged: TDateTime): RawUtf8;
+
 implementation
 
 uses
   uhelpers,
+  DateUtils,
   mormot.core.datetime,
   mormot.core.text;
+
+function FileTimeToDateTime(FileTime: RawUtf8): TDateTime;
+begin
+  AttributeValueMakeReadable(FileTime, atsFileTime);
+  result := Iso8601ToDateTime(FileTime);
+end;
+
+function ConvertLAPSPassword(const LAPSPassword: RawUtf8; out Account: RawUtf8;
+  out Password: RawUtf8; out WhenChanged: TDateTime): Boolean;
+var
+  PasswordData: TDocVariantData;
+begin
+  result := False;
+  if LAPSPassword = '' then
+    Exit;
+
+  PasswordData.InitJson(LAPSPassword);
+  if PasswordData.Exists('n') then
+    Account := PasswordData.U['n'];
+  if PasswordData.Exists('t') then
+    WhenChanged := FileTimeToDateTime(PasswordData.U['t']);
+  if PasswordData.Exists('p') then
+    Password := PasswordData.U['p'];
+  result := True;
+end;
+
+function BuildLAPSPassword(const Account: RawUtf8; const Password: RawUtf8;
+  const WhenChanged: TDateTime): RawUtf8;
+var
+  PasswordData: TDocVariantData;
+begin
+  PasswordData.Init(JSON_FAST);
+  PasswordData.U['n'] := Account;
+  PasswordData.U['p'] := Password;
+end;
 
 {$IFDEF OPENRSATTESTS}
 { TPropertyTests }
@@ -951,6 +1015,33 @@ begin
   finally
     LdapClient.SearchEnd;
   end;
+end;
+
+function ExpirationTimeToDateTime(ExpirationTime: RawUtf8): TDateTime;
+begin
+  AttributeValueMakeReadable(ExpirationTime, atsFileTime);
+  if not TryISOStrToDateTime(ExpirationTime, result) then
+    Exit;
+end;
+
+function TProperty.GetLAPSInformation: PLAPSInformation;
+var
+  AAccount, APassword: RawUtf8;
+  AWhenChanged: TDateTime;
+begin
+  fLAPSInformation.LAPSV1.Expiration := ExpirationTimeToDateTime(GetReadable('ms-Mcs-AdmPwdExpirationTime'));
+  fLAPSInformation.LAPSV1.Password := GetReadable('ms-Mcs-AdmPwd');
+
+  fLAPSInformation.LAPSV2.Expiration := ExpirationTimeToDateTime(GetReadable('msLAPS-PasswordExpirationTime'));
+  fLAPSInformation.LAPSV2.EncryptedPassword := GetReadable('msLAPS-EncryptedPassword');
+
+  ConvertLAPSPassword(GetReadable('msLAPS-Password'), AAccount, APassword, AWhenChanged);
+
+  fLAPSInformation.LAPSV2.Account := AAccount;
+  fLAPSInformation.LAPSV2.Password := APassword;
+  fLAPSInformation.LAPSV2.WhenChanged := AWhenChanged;
+
+  result := @fLAPSInformation;
 end;
 
 function TProperty.GetManagerName: RawUtf8;

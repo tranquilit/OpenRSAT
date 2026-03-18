@@ -13,6 +13,7 @@ uses
   Controls,
   StdCtrls,
   ActnList,
+  ExtCtrls,
   mormot.core.base,
   mormot.core.log,
   uproperty,
@@ -23,26 +24,59 @@ type
   { TFrmPropertyLAPS }
 
   TFrmPropertyLAPS = class(TPropertyFrame)
-    Action_ExpireNow: TAction;
-    Action_CopyPassword: TAction;
-    Action_ShowPassword: TAction;
+    Action_v2_EncryptedCopyPassword: TAction;
+    Action_v2_EncryptedShowPassword: TAction;
+    Action_v1_ExpireNow: TAction;
+    Action_v1_CopyPassword: TAction;
+    Action_v1_ShowPassword: TAction;
+    Action_v2_ExpireNow: TAction;
+    Action_v2_CopyPassword: TAction;
+    Action_v2_ShowPassword: TAction;
     ActionList1: TActionList;
-    BitBtn_ExpireNow: TBitBtn;
-    BitBtn_CopyPassword: TBitBtn;
-    BitBtn_ShowPassword: TBitBtn;
-    DateTimePicker_NewExpiration: TDateTimePicker;
-    Edit_CurrentExpiration: TEdit;
-    Edit_LocalAdminAccountName: TEdit;
-    Edit_LocalAdminAccountPassword: TEdit;
-    GroupBox1: TGroupBox;
-    Label_CurrentExpiration: TLabel;
-    Label_NewExpiration: TLabel;
-    Label_LocalAdminAccountName: TLabel;
-    Label_LocalAdminAccountPassword: TLabel;
-    procedure Action_CopyPasswordExecute(Sender: TObject);
-    procedure Action_ExpireNowExecute(Sender: TObject);
-    procedure Action_ShowPasswordExecute(Sender: TObject);
-    procedure DateTimePicker_NewExpirationChange(Sender: TObject);
+    BitBtn_v2_EncryptedCopyPassword: TBitBtn;
+    BitBtn_v2_EncryptedShowPassword: TBitBtn;
+    BitBtn_v1_ExpireNow: TBitBtn;
+    BitBtn_v1_ShowPassword: TBitBtn;
+    BitBtn_v1_CopyPassword: TBitBtn;
+    BitBtn_v2_ExpireNow: TBitBtn;
+    BitBtn_v2_CopyPassword: TBitBtn;
+    BitBtn_v2_ShowPassword: TBitBtn;
+    DateTimePicker_v1_NewExpiration: TDateTimePicker;
+    DateTimePicker_v2_NewExpiration: TDateTimePicker;
+    Edit_v2_EncryptedPasswordData: TEdit;
+    Edit_v2_EncryptedLocalAdminAccountName: TEdit;
+    Edit_v2_EncryptedLocalAdminAccountPassword: TEdit;
+    Edit_v1_CurrentExpiration: TEdit;
+    Edit_v1_Password: TEdit;
+    Edit_v2_CurrentExpiration: TEdit;
+    Edit_v2_LocalAdminAccountName: TEdit;
+    Edit_v2_LocalAdminAccountPassword: TEdit;
+    GroupBox_LAPSEncrypted: TGroupBox;
+    GroupBox_LAPSv2: TGroupBox;
+    GroupBox_LAPSv1: TGroupBox;
+    Label_v2_EncryptedPasswordData: TLabel;
+    Label_v2_EncryptedLocalAdminAccountName: TLabel;
+    Label_v2_EncryptedLocalAdminPassword: TLabel;
+    Label_v1_CurrentExpiration: TLabel;
+    Label_v1_NewExpiration: TLabel;
+    Label_v1_Password: TLabel;
+    Label_v2_CurrentExpiration: TLabel;
+    Label_v2_NewExpiration: TLabel;
+    Label_v2_LocalAdminAccountName: TLabel;
+    Label_v2_LocalAdminAccountPassword: TLabel;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    procedure Action_v1_CopyPasswordExecute(Sender: TObject);
+    procedure Action_v1_ExpireNowExecute(Sender: TObject);
+    procedure Action_v1_ShowPasswordExecute(Sender: TObject);
+    procedure Action_v2_CopyPasswordExecute(Sender: TObject);
+    procedure Action_v2_EncryptedCopyPasswordExecute(Sender: TObject);
+    procedure Action_v2_EncryptedShowPasswordExecute(Sender: TObject);
+    procedure Action_v2_ExpireNowExecute(Sender: TObject);
+    procedure Action_v2_ShowPasswordExecute(Sender: TObject);
   private
     fLog: TSynLog;
     fProperty: TProperty;
@@ -53,51 +87,78 @@ type
 
 implementation
 uses
+  mormot.core.datetime,
+  mormot.core.os,
   mormot.core.variants,
   mormot.net.ldap,
   ucommon,
+  DateUtils,
   uhelpersui;
 
 {$R *.lfm}
 
 { TFrmPropertyLAPS }
-
-procedure TFrmPropertyLAPS.Action_ExpireNowExecute(Sender: TObject);
+function DateTimeToFileTime(ADateTime: TDateTime): QWord;
 begin
-  DateTimePicker_NewExpiration.DateTime := Now;
+  result := UnixMSTimeToWindowsFileTime64(DateTimeToUnixMSTime(ADateTime));
 end;
 
-procedure TFrmPropertyLAPS.Action_ShowPasswordExecute(Sender: TObject);
+procedure TFrmPropertyLAPS.Action_v2_ExpireNowExecute(Sender: TObject);
 begin
-  if (Edit_LocalAdminAccountPassword.EchoMode = emPassword) then
+  DateTimePicker_v2_NewExpiration.DateTime := Now;
+  fProperty.Add('msLAPS-PasswordExpirationTime', IntToStr(DateTimeToFileTime(LocalTimeToUniversal(DateTimePicker_v2_NewExpiration.DateTime))));
+end;
+
+procedure ShowPassword(AEdit: TEdit; AAction: TAction);
+begin
+  if (AEdit.EchoMode = emPassword) then
   begin
-    Edit_LocalAdminAccountPassword.EchoMode := emNormal;
-    Action_ShowPassword.Caption := 'Hide password';
+    AEdit.EchoMode := emNormal;
+    AAction.Caption := rsHidePassword;
   end
   else
   begin
-    Edit_LocalAdminAccountPassword.EchoMode := emPassword;
-    Action_ShowPassword.Caption := 'Show password';
+    AEdit.EchoMode := emPassword;
+    AAction.Caption := rsShowPassword;
   end;
 end;
 
-procedure TFrmPropertyLAPS.Action_CopyPasswordExecute(Sender: TObject);
+procedure TFrmPropertyLAPS.Action_v2_ShowPasswordExecute(Sender: TObject);
 begin
-  Edit_LocalAdminAccountPassword.CopyToClipboard
+  ShowPassword(Edit_v2_LocalAdminAccountPassword, Action_v2_ShowPassword);
 end;
 
-procedure TFrmPropertyLAPS.DateTimePicker_NewExpirationChange(Sender: TObject);
-var
-  AttributeName: RawUtf8;
+procedure TFrmPropertyLAPS.Action_v2_CopyPasswordExecute(Sender: TObject);
 begin
-  AttributeName := 'ms-Mcs-AdmPwdExpirationTime';
-  if fProperty.GetReadable(AttributeName) = '' then
-  begin
-    AttributeName := 'msLAPS-PasswordExpirationTime';
-    if fProperty.GetReadable(AttributeName) = '' then
-      Exit;
-  end;
-  fProperty.Add(AttributeName, DateTimeToStr(DateTimePicker_NewExpiration.DateTime));
+  Edit_v2_LocalAdminAccountPassword.CopyToClipboard;
+end;
+
+procedure TFrmPropertyLAPS.Action_v2_EncryptedCopyPasswordExecute(
+  Sender: TObject);
+begin
+  Edit_v2_EncryptedLocalAdminAccountPassword.CopyToClipboard;
+end;
+
+procedure TFrmPropertyLAPS.Action_v2_EncryptedShowPasswordExecute(
+  Sender: TObject);
+begin
+  ShowPassword(Edit_v2_EncryptedLocalAdminAccountPassword, Action_v2_EncryptedShowPassword);
+end;
+
+procedure TFrmPropertyLAPS.Action_v1_ExpireNowExecute(Sender: TObject);
+begin
+  DateTimePicker_v1_NewExpiration.DateTime := Now;
+  fProperty.Add('ms-Mcs-AdmPwdExpirationTime', IntToStr(DateTimeToFileTime(LocalTimeToUniversal(DateTimePicker_v1_NewExpiration.DateTime))));
+end;
+
+procedure TFrmPropertyLAPS.Action_v1_ShowPasswordExecute(Sender: TObject);
+begin
+  ShowPassword(Edit_v1_Password, Action_v1_ShowPassword);
+end;
+
+procedure TFrmPropertyLAPS.Action_v1_CopyPasswordExecute(Sender: TObject);
+begin
+  Edit_v1_Password.CopyToClipboard;
 end;
 
 constructor TFrmPropertyLAPS.Create(TheOwner: TComponent);
@@ -113,8 +174,7 @@ end;
 
 procedure TFrmPropertyLAPS.Update(Props: TProperty);
 var
-  PasswordData: TDocVariantData;
-  Password: RawUtf8;
+  LAPSInformation: PLAPSInformation;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Update', Self);
@@ -123,27 +183,34 @@ begin
 
   fProperty.SearchObject(['msLAPS-Password', 'ms-Mcs-AdmPwd', 'msLAPS-PasswordExpirationTime', 'ms-Mcs-AdmPwdExpirationTime', 'msLAPS-EncryptedPassword']);
 
-  Edit_CurrentExpiration.CaptionNoChange := fProperty.GetReadable('msLAPS-PasswordExpirationTime');
-  if Edit_CurrentExpiration.Caption = '' then
-    Edit_CurrentExpiration.CaptionNoChange := fProperty.GetReadable('ms-Mcs-AdmPwdExpirationTime');
-  if Edit_CurrentExpiration.Caption <> '' then
-    Edit_CurrentExpiration.Caption := DateTimeToIsoString(LdapToDate(Edit_CurrentExpiration.Caption));
+  LAPSInformation := fProperty.LAPSInformation;
+  if not Assigned(LAPSInformation) then
+  begin
+    if Assigned(fLog) then
+      fLog.Log(sllTrace, 'No laps information.', Self);
+    Exit;
+  end;
 
-  Password := fProperty.GetReadable('msLAPS-Password');
-  if Password <> '' then
+  GroupBox_LAPSv1.Visible := (LAPSInformation^.LAPSV1.Password <> '');
+  if GroupBox_LAPSv1.Visible then
   begin
-    PasswordData.InitJson(Password);
-    if PasswordData.Exists('n') then
-      Edit_LocalAdminAccountName.CaptionNoChange := PasswordData.U['n'];
-    if PasswordData.Exists('p') then
-      Edit_LocalAdminAccountPassword.CaptionNoChange := PasswordData.U['p'];
-  end
-  else
+    Edit_v1_CurrentExpiration.CaptionNoChange := DateTimeToStr(UniversalTimeToLocal(LAPSInformation^.LAPSV1.Expiration));
+    DateTimePicker_v1_NewExpiration.DateTimeNoChange := UniversalTimeToLocal(LAPSInformation^.LAPSV1.Expiration);
+    Edit_v1_Password.CaptionNoChange := LAPSInformation^.LAPSV1.Password;
+  end;
+
+  GroupBox_LAPSEncrypted.Visible := (LAPSInformation^.LAPSV2.EncryptedPassword <> '');
+  GroupBox_LAPSv2.Visible := (LAPSInformation^.LAPSV2.Password <> '') or GroupBox_LAPSEncrypted.Visible;
+  if GroupBox_LAPSv2.Visible then
   begin
-    Password := fProperty.GetReadable('ms-Mcs-AdmPwd');
-    if Password = '' then
-      Password := fProperty.GetReadable('msLAPS-EncryptedPassword');
-    Edit_LocalAdminAccountPassword.CaptionNoChange := Password;
+    Edit_v2_CurrentExpiration.CaptionNoChange := DateTimeToStr(UniversalTimeToLocal(LAPSInformation^.LAPSV2.Expiration));
+    DateTimePicker_v2_NewExpiration.DateTimeNoChange := UniversalTimeToLocal(LAPSInformation^.LAPSV2.Expiration);
+    Edit_v2_LocalAdminAccountName.CaptionNoChange := LAPSInformation^.LAPSV2.Account;
+    Edit_v2_LocalAdminAccountPassword.CaptionNoChange := LAPSInformation^.LAPSV2.Password;
+    if GroupBox_LAPSEncrypted.Visible then
+    begin
+      Edit_v2_EncryptedPasswordData.CaptionNoChange := LAPSInformation^.LAPSV2.EncryptedPassword;
+    end;
   end;
 end;
 

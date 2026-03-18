@@ -374,6 +374,10 @@ msgstr "Confirmer la suppression des %d lignes sélectionnées ?"
 msgid "Delete selected rows"
 msgstr "Supprimer les lignes sélectionnées"
 
+#: ucommon.rshidepassword
+msgid "Hide password"
+msgstr "Cacher le mot de passe"
+
 #: ucommon.rsinappropriateauthentication
 msgid "The client attempted to bind in an inappropriate manner that is inappropriate for the target account."
 msgstr "Le client a tenté d'effectuer une liaison de manière inappropriée pour le compte cible."
@@ -782,6 +786,10 @@ msgstr "Ecrire"
 #: ucommon.rssecuritydescriptorinvalid
 msgid "Fail to read security descriptor"
 msgstr "Echec de la lecture du descripteur de sécurité"
+
+#: ucommon.rsshowpassword
+msgid "Show password"
+msgstr "Afficher le mot de passe"
 
 #: ucommon.rssinglestringeditor
 msgid "Single String Editor"
