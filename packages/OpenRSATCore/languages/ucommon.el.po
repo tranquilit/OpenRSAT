@@ -465,6 +465,10 @@ msgstr ""
 msgid "Ldap Warning"
 msgstr ""
 
+#: ucommon.rslockedaccount
+msgid "This account is currently locked out on this Active Directory Domain Controller."
+msgstr ""
+
 #: ucommon.rsloopdetect
 msgid "The server detected some kind of circular reference in the course of processing an operation."
 msgstr ""

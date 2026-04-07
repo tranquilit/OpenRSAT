@@ -482,6 +482,10 @@ msgstr "TLS connection is enabled, but the certificate is not recognized. Be car
 msgid "Ldap Warning"
 msgstr "Ldap Warning"
 
+#: ucommon.rslockedaccount
+msgid "This account is currently locked out on this Active Directory Domain Controller."
+msgstr "This account is currently locked out on this Active Directory Domain Controller."
+
 #: ucommon.rsloopdetect
 msgid "The server detected some kind of circular reference in the course of processing an operation."
 msgstr "The server detected some kind of circular reference in the course of processing an operation."

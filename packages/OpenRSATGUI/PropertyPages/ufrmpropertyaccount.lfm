@@ -5,6 +5,7 @@ object FrmPropertyAccount: TFrmPropertyAccount
   Width = 467
   ClientHeight = 379
   ClientWidth = 467
+  LCLVersion = '4.6.0.0'
   TabOrder = 0
   DesignLeft = 2148
   DesignTop = 237
@@ -148,18 +149,6 @@ object FrmPropertyAccount: TFrmPropertyAccount
       BorderSpacing.Left = 8
       TabOrder = 1
     end
-  end
-  object CheckBox_Unlock: TCheckBox
-    Left = 16
-    Height = 19
-    Top = 141
-    Width = 451
-    Align = alTop
-    BorderSpacing.Left = 16
-    BorderSpacing.Top = 16
-    Caption = 'Unlock account'
-    TabOrder = 3
-    OnChange = CheckBox_UnlockChange
   end
   object Label_Options: TLabel
     Left = 16
@@ -427,6 +416,50 @@ object FrmPropertyAccount: TFrmPropertyAccount
       )
       ShowMonthNames = True
       OnChange = DateTimePicker_ExpiresChange
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 27
+    Top = 125
+    Width = 438
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 27
+    ClientWidth = 438
+    TabOrder = 5
+    object CheckBox_Unlock: TCheckBox
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Label_Unlock
+      AnchorSideTop.Side = asrCenter
+      Left = 16
+      Height = 17
+      Top = 9
+      Width = 18
+      BorderSpacing.Left = 16
+      TabOrder = 0
+      OnChange = CheckBox_UnlockChange
+      OnClick = CheckBox_UnlockClick
+    end
+    object Label_Unlock: TLabel
+      AnchorSideLeft.Control = CheckBox_Unlock
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Side = asrCenter
+      Left = 34
+      Height = 19
+      Top = 8
+      Width = 404
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 8
+      Caption = 'Unlock account.'
+      Constraints.MinHeight = 19
+      Constraints.MinWidth = 390
+      ParentColor = False
+      WordWrap = True
     end
   end
   object ActionList1: TActionList

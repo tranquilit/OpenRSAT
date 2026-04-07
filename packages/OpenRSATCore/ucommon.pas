@@ -445,6 +445,7 @@ resourcestring
 
   rsShowPassword = 'Show password';
   rsHidePassword = 'Hide password';
+  rsLockedAccount = 'This account is currently locked out on this Active Directory Domain Controller.';
 
 const
   DAYS_BETWEEN_1601_AND_1900 = 109205;
