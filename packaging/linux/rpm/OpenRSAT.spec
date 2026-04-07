@@ -10,8 +10,8 @@ BuildArch:	x86_64
 License:        GPL
 URL:            https://www.tranquil.it
 Source0:        OpenRSAT
-Source1:        OpenRSAT.desktop
-Source2:        OpenRSAT.png
+Source1:        OpenRSAT.png
+Source2:        OpenRSAT.desktop
 
 Requires:	bash, gtk2
 
