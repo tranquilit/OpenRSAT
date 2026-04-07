@@ -47,9 +47,11 @@ type
     Edit_SAMAccountName: TEdit;
     Edit_SAMDomain: TEdit;
     GoupBox_Expires: TGroupBox;
+    Label_Unlock: TLabel;
     Label_Options: TLabel;
     Label_UserLogonName: TLabel;
     Label_UserSAMAccountName: TLabel;
+    Panel1: TPanel;
     Panel_LogonTime: TPanel;
     Panel_LogonName: TPanel;
     Panel_SAMAccountName: TPanel;
@@ -70,6 +72,7 @@ type
     procedure CheckBox_SensitiveChange(Sender: TObject);
     procedure CheckBox_SmartCardChange(Sender: TObject);
     procedure CheckBox_UnlockChange(Sender: TObject);
+    procedure CheckBox_UnlockClick(Sender: TObject);
     procedure ComboBox_DomainChange(Sender: TObject);
     procedure DateTimePicker_ExpiresChange(Sender: TObject);
     procedure Edit_NameChange(Sender: TObject);
@@ -290,6 +293,11 @@ begin
     fProperty.Restore('lockoutTime');
 end;
 
+procedure TFrmPropertyAccount.CheckBox_UnlockClick(Sender: TObject);
+begin
+  fProperty.Add('lockoutTime', '0');
+end;
+
 procedure TFrmPropertyAccount.UpdateLogonName;
 var
   UserPrincipalName: RawUtf8;
@@ -425,6 +433,8 @@ begin
 end;
 
 procedure TFrmPropertyAccount.Update(Props: TProperty);
+var
+  Lockout_Value: RawUtf8;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Update', Self);
@@ -433,7 +443,9 @@ begin
 
   UpdateLogonName;
   UpdateSamaccountName;
-
+  Lockout_Value := Props.GetReadable('lockoutTime', 0);
+  if (Lockout_Value <> '') and (Lockout_Value <> '0') then
+     Label_Unlock.Caption := FormatUtf8('% %', [Label_Unlock.Caption, rsLockedAccount]);
   CheckBox_Unlock.CheckedNoChange  := False;
 
   UpdateOptions;
