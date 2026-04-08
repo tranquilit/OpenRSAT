@@ -51,6 +51,7 @@ type
   { TFrmModuleADUC }
 
   TFrmModuleADUC = class(TFrameModule)
+    Action_CreateKeyTab: TAction;
     Action_PrepareDJOIN: TAction;
     Action_ShowRelationShip: TAction;
     Action_ShowObjectLocation: TAction;
@@ -101,6 +102,7 @@ type
     CheckBox_IncludeSubContainer: TCheckBox;
     Image1: TImage;
     Image2: TImage;
+    MenuItem_CreateKeyTab: TMenuItem;
     MenuItem_PrepareDJOIN: TMenuItem;
     MenuItem_ShowObjectLocation: TMenuItem;
     MenuItem_EditColumns: TMenuItem;
@@ -199,6 +201,7 @@ type
     ToolButton_Search: TToolButton;
     ToolButton_User: TToolButton;
     TreeADUC: TTreeView;
+    procedure Action_CreateKeyTabExecute(Sender: TObject);
     procedure Action_BlockGPOInheritanceExecute(Sender: TObject);
     procedure Action_BlockGPOInheritanceUpdate(Sender: TObject);
     procedure Action_ChangeDomainControllerExecute(Sender: TObject);
@@ -381,6 +384,10 @@ uses
   uvisshowrelationship,
   uconfig,
   uhelpers,
+  mormot.crypt.secure,
+  mormot.core.os.security,
+  mormot.crypt.core,
+  mormot.core.os,
   ugplink;
 
 {$R *.lfm}
@@ -501,6 +508,93 @@ begin
     Exit;
   end;
   TreeADUC.OnGetImageIndex(Self, TreeADUC.Selected);
+end;
+
+procedure TFrmModuleADUC.Action_CreateKeyTabExecute(Sender: TObject);
+const
+  ENC_TYPES: Array of Integer = (ENCTYPE_AES128_CTS_HMAC_SHA1_96, ENCTYPE_AES256_CTS_HMAC_SHA1_96);
+var
+  r: TLdapResult;
+  gen: TKerberosKeyTabGenerator;
+  spn, salt, Principal, Password: RawUtf8;
+  EncType, KVNO, i: Integer;
+  ServicePrincipalNames: TRawUtf8DynArray;
+  Folder, p, sAMAccountName, realm, DistinguishedName: RawUtf8;
+  LdapAttribute: TLdapAttribute;
+  IsComputer: Boolean;
+begin
+  if (mrYes <> MessageDlg(rsGenerateKeyTab, rsGenerateKeyTabConfirmation, mtWarning, mbYesNoCancel, 0)) then
+    Exit;
+
+  DistinguishedName := GetFocusedObject();
+  r := FrmRSAT.LdapClient.SearchObject(DistinguishedName, '', ['userPrincipalName', 'dNSHostName', 'servicePrincipalName', 'sAMAccountName', 'objectClass']);
+  gen := TKerberosKeyTabGenerator.Create;
+  try
+    IsComputer := r.Find('objectClass').GetReadable(r.Find('objectClass').Count - 1) = 'computer';
+    sAMAccountName := r.Find('sAMAccountName').GetReadable();
+    realm := DNToCN(FrmRSAT.LdapClient.DefaultDN());
+    ServicePrincipalNames := Copy(r.Find('servicePrincipalName').GetAllReadable);
+
+    Principal := '';
+    if IsComputer then
+      Principal := FormatUtf8('%@%', [sAMAccountName, realm])
+    else
+      Principal := r.Find('userPrincipalName').GetReadable();
+
+    Password := PasswordBox('Enter password', 'Leave empty to generate password.');
+    if Password = '' then
+      Password := TAesPrng.Main.RandomPassword(64);
+
+    if not FrmRSAT.LdapClient.ModifyUserPassword(DistinguishedName, '', Password) then
+      Exit;
+
+    /// Retrive the KVNO after password has been changed
+    LdapAttribute := FrmRSAT.LdapClient.SearchObject(DistinguishedName, '', 'msDS-KeyVersionNumber');
+    if not Assigned(LdapAttribute) then
+      Exit;
+    KVNO := StrToInt(LdapAttribute.GetReadable());
+
+    if String(sAMAccountName).EndsWith('$') then
+      sAMAccountName := Copy(sAMAccountName, 0, Length(sAMAccountName) - 1);
+
+    salt := '';
+    /// Build salt for computer
+    if IsComputer then
+      salt := Join([UpperCase(realm), 'host', sAMAccountName, '.', LowerCase(realm)]);
+
+    for EncType in ENC_TYPES do
+      if not gen.AddNew(Principal, Password, IsComputer, salt, EncType) then
+        Exit;
+
+    /// Add service principal names to keytab
+    for spn in ServicePrincipalNames do
+    begin
+      if (spn = '') then
+        Continue;
+      p := spn;
+      if Pos('@', p) <= 0 then
+        p := FormatUtf8('%@%', [p, realm]);
+      for EncType in ENC_TYPES do
+        if not gen.AddNew(p, Password, IsComputer, salt, EncType) then
+          Exit;
+    end;
+
+    /// Update KVNO for each entry
+    for i := 0 to High(gen.Entry) do
+      gen.Entry[i].KeyVersion := KVNO;
+
+    SelectDirectoryDialog1.Title := rsGenerateKeyTabSelectFolder;
+    if not SelectDirectoryDialog1.Execute then
+      Exit;
+    Folder := SelectDirectoryDialog1.FileName;
+    if not String(Folder).EndsWith(DirectorySeparator) then
+      Append(Folder, DirectorySeparator);
+    gen.SaveToFile(FormatUtf8('%%.keytab', [Folder, samaccountName]));
+  finally
+    gen.Clear;
+    FreeAndNil(gen);
+    FillZero(Password, Length(Password));
+  end;
 end;
 
 procedure TFrmModuleADUC.Action_BlockGPOInheritanceUpdate(Sender: TObject);
@@ -1674,6 +1768,7 @@ begin
     MenuItem_Manage,
     MenuItem_Find,
     MenuItem_PrepareDJOIN,
+    MenuItem_CreateKeyTab,
     MenuItem_New,
     MenuItem_Copy,
     MenuItem_Cut,

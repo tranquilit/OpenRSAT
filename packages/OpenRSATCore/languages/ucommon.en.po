@@ -365,6 +365,22 @@ msgstr "this object"
 msgid "Friday"
 msgstr "Friday"
 
+#: ucommon.rsgeneratekeytab
+msgid "Generate KEYTAB"
+msgstr "Generate KEYTAB"
+
+#: ucommon.rsgeneratekeytabconfirmation
+msgid "You are about to change the password for the selected object. This will remove the trust relationships with the domain. Continue?"
+msgstr "You are about to change the password for the selected object. This will remove the trust relationships with the domain. Continue?"
+
+#: ucommon.rsgeneratekeytabfinished
+msgid "Generate KEYTAB finished. Open folder?"
+msgstr "Generate KEYTAB finished. Open folder?"
+
+#: ucommon.rsgeneratekeytabselectfolder
+msgid "Select folder to store keytab file"
+msgstr "Select folder to store keytab file"
+
 #: ucommon.rsgridconfdeleterow
 #, object-pascal-format
 msgid "Confirm the deletion of the %d selected rows?"

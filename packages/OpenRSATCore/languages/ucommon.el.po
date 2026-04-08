@@ -349,6 +349,22 @@ msgstr "αυτό το αντικείμενο"
 msgid "Friday"
 msgstr "Παρασκευή"
 
+#: ucommon.rsgeneratekeytab
+msgid "Generate KEYTAB"
+msgstr ""
+
+#: ucommon.rsgeneratekeytabconfirmation
+msgid "You are about to change the password for the selected object. This will remove the trust relationships with the domain. Continue?"
+msgstr ""
+
+#: ucommon.rsgeneratekeytabfinished
+msgid "Generate KEYTAB finished. Open folder?"
+msgstr ""
+
+#: ucommon.rsgeneratekeytabselectfolder
+msgid "Select folder to store keytab file"
+msgstr ""
+
 #: ucommon.rsgridconfdeleterow
 #, object-pascal-format
 msgid "Confirm the deletion of the %d selected rows?"

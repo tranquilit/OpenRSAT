@@ -819,6 +819,10 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExecute = Action_PrepareDJOINExecute
       OnUpdate = Action_PrepareDJOINUpdate
     end
+    object Action_CreateKeyTab: TAction
+      Caption = 'Create KeyTab'
+      OnExecute = Action_CreateKeyTabExecute
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
@@ -874,6 +878,9 @@ object FrmModuleADUC: TFrmModuleADUC
     end
     object MenuItem_PrepareDJOIN: TMenuItem
       Action = Action_PrepareDJOIN
+    end
+    object MenuItem_CreateKeyTab: TMenuItem
+      Action = Action_CreateKeyTab
     end
     object Separator2: TMenuItem
       Caption = '-'

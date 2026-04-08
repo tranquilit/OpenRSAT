@@ -438,6 +438,11 @@ resourcestring
   rsPrepareDJOINConfirmation = 'You are about to change the password for the selected machines. This will remove the trust relationships with the domain. Continue?';
   rsPrepareDJOINSelectFolder = 'Select folder to store djoin files';
 
+  rsGenerateKeyTab = 'Generate KEYTAB';
+  rsGenerateKeyTabFinished = 'Generate KEYTAB finished. Open folder?';
+  rsGenerateKeyTabConfirmation = 'You are about to change the password for the selected object. This will remove the trust relationships with the domain. Continue?';
+  rsGenerateKeyTabSelectFolder = 'Select folder to store keytab file';
+
   rsShowPassword = 'Show password';
   rsHidePassword = 'Hide password';
 
