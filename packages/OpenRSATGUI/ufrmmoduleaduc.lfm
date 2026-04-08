@@ -822,6 +822,7 @@ object FrmModuleADUC: TFrmModuleADUC
     object Action_CreateKeyTab: TAction
       Caption = 'Create KeyTab'
       OnExecute = Action_CreateKeyTabExecute
+      OnUpdate = Action_CreateKeyTabUpdate
     end
   end
   object PopupMenu1: TPopupMenu

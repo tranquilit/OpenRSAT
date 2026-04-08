@@ -208,6 +208,7 @@ type
     procedure Action_ChangeDomainControllerUpdate(Sender: TObject);
     procedure Action_CopyExecute(Sender: TObject);
     procedure Action_CopyUpdate(Sender: TObject);
+    procedure Action_CreateKeyTabUpdate(Sender: TObject);
     procedure Action_CutExecute(Sender: TObject);
     procedure Action_CutUpdate(Sender: TObject);
     procedure Action_DelegateControlExecute(Sender: TObject);
@@ -523,8 +524,15 @@ var
   LdapAttribute: TLdapAttribute;
   IsComputer: Boolean;
 begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, 'Create KeyTab.', Self);
+
   if (mrYes <> MessageDlg(rsGenerateKeyTab, rsGenerateKeyTabConfirmation, mtWarning, mbYesNoCancel, 0)) then
+  begin
+    if Assigned(fLog) then
+      fLog.Log(sllInfo, 'Action cancelled by user. (confirmation)', Self);
     Exit;
+  end;
 
   DistinguishedName := GetFocusedObject();
   r := FrmRSAT.LdapClient.SearchObject(DistinguishedName, '', ['userPrincipalName', 'dNSHostName', 'servicePrincipalName', 'sAMAccountName', 'objectClass']);
@@ -546,12 +554,20 @@ begin
       Password := TAesPrng.Main.RandomPassword(64);
 
     if not FrmRSAT.LdapClient.ModifyUserPassword(DistinguishedName, '', Password) then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllError, 'Failed to modify user password (%).', [FrmRSAT.LdapClient.ResultString], Self);
       Exit;
+    end;
 
     /// Retrive the KVNO after password has been changed
     LdapAttribute := FrmRSAT.LdapClient.SearchObject(DistinguishedName, '', 'msDS-KeyVersionNumber');
     if not Assigned(LdapAttribute) then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllError, 'Cannot find attribute.', Self);
       Exit;
+    end;
     KVNO := StrToInt(LdapAttribute.GetReadable());
 
     if String(sAMAccountName).EndsWith('$') then
@@ -560,11 +576,21 @@ begin
     salt := '';
     /// Build salt for computer
     if IsComputer then
-      salt := Join([UpperCase(realm), 'host', sAMAccountName, '.', LowerCase(realm)]);
+      salt := Join([UpperCase(realm), 'host', LowerCase(sAMAccountName), '.', LowerCase(realm)]);
 
     for EncType in ENC_TYPES do
       if not gen.AddNew(Principal, Password, IsComputer, salt, EncType) then
+      begin
+        if Assigned(fLog) then
+        begin
+          fLog.Log(sllError, 'Failed to add new entry on keytab for principal %', [Principal], Self);
+          fLog.Log(sllDebug, 'Principal: %', [Principal], Self);
+          fLog.Log(sllDebug, 'IsComputer: %', [IsComputer], Self);
+          fLog.Log(sllDebug, 'Salt: %', [Salt], Self);
+          fLog.Log(sllDebug, 'EncType: %', [EncType], Self);
+        end;
         Exit;
+      end;
 
     /// Add service principal names to keytab
     for spn in ServicePrincipalNames do
@@ -576,7 +602,17 @@ begin
         p := FormatUtf8('%@%', [p, realm]);
       for EncType in ENC_TYPES do
         if not gen.AddNew(p, Password, IsComputer, salt, EncType) then
+        begin
+          if Assigned(fLog) then
+          begin
+            fLog.Log(sllError, 'Failed to add new entry on keytab for principal %', [p], Self);
+            fLog.Log(sllDebug, 'Principal: %', [p], Self);
+            fLog.Log(sllDebug, 'IsComputer: %', [IsComputer], Self);
+            fLog.Log(sllDebug, 'Salt: %', [Salt], Self);
+            fLog.Log(sllDebug, 'EncType: %', [EncType], Self);
+          end;
           Exit;
+        end;
     end;
 
     /// Update KVNO for each entry
@@ -585,7 +621,11 @@ begin
 
     SelectDirectoryDialog1.Title := rsGenerateKeyTabSelectFolder;
     if not SelectDirectoryDialog1.Execute then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllInfo, 'Action cancelled by user (Select folder).', Self);
       Exit;
+    end;
     Folder := SelectDirectoryDialog1.FileName;
     if not String(Folder).EndsWith(DirectorySeparator) then
       Append(Folder, DirectorySeparator);
@@ -611,6 +651,41 @@ end;
 procedure TFrmModuleADUC.Action_CopyUpdate(Sender: TObject);
 begin
 
+end;
+
+procedure TFrmModuleADUC.Action_CreateKeyTabUpdate(Sender: TObject);
+var
+  Allow: Boolean;
+  Node: PVirtualNode;
+  NodeData: PDocVariantData;
+  objectClass: TRawUtf8DynArray;
+  LastIdx: Integer;
+begin
+  Allow := False;
+
+  try
+    Node := GridADUC.GetFirstSelected();
+    if not Assigned(Node) then
+      Exit;
+    while Assigned(Node) do
+    begin
+      NodeData := GridADUC.GetNodeAsPDocVariantData(Node);
+      Node := GridADUC.GetNextSelected(Node);
+      if not Assigned(NodeData) or not NodeData^.Exists('objectClass') then
+        Exit;
+      objectClass := NodeData^.A['objectClass']^.ToRawUtf8DynArray;
+      if not Assigned(ObjectClass) then
+        Exit;
+      LastIdx := High(objectClass);
+      if (LastIdx < 0) then
+        Exit;
+      if (objectClass[LastIdx] <> 'computer') and (objectClass[LastIdx] <> 'user') then
+        Exit;
+    end;
+    Allow := True;
+  finally
+    Action_CreateKeyTab.Enabled := Allow;
+  end;
 end;
 
 procedure TFrmModuleADUC.Action_CutExecute(Sender: TObject);
