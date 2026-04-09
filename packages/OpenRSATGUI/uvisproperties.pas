@@ -273,6 +273,7 @@ uses
   uvisattributeeditor,
   ufrmrsat,
   ufrmpropertyattributes,
+  ufrmpropertyunixattributes,
   ufrmpropertyaccount,
   ufrmpropertyaddress,
   ufrmpropertybitlocker,
@@ -317,7 +318,8 @@ const
     TFrmPropertyMemberOf,
     TFrmPropertyObject,
     TFrmPropertySecurity,
-    TFrmPropertyAttributes
+    TFrmPropertyAttributes,
+    TFrmPropertyUnixAttributes
   );
 
   PROPERTY_GROUP: Array of TPropertyFrameClass = (
@@ -327,7 +329,8 @@ const
     TFrmPropertyManagedBy,
     TFrmPropertyObject,
     TFrmPropertySecurity,
-    TFrmPropertyAttributes
+    TFrmPropertyAttributes,
+    TFrmPropertyUnixAttributes
   );
 
   PROPERTY_COMPUTER: Array of TPropertyFrameClass = (
