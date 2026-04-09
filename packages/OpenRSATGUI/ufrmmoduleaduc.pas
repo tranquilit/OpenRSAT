@@ -574,9 +574,6 @@ begin
       sAMAccountName := Copy(sAMAccountName, 0, Length(sAMAccountName) - 1);
 
     salt := '';
-    /// Build salt for computer
-    if IsComputer then
-      salt := Join([UpperCase(realm), 'host', LowerCase(sAMAccountName), '.', LowerCase(realm)]);
 
     for EncType in ENC_TYPES do
       if not gen.AddNew(Principal, Password, IsComputer, salt, EncType) then
@@ -1178,6 +1175,7 @@ begin
 
       DN := NodeData^.S['objectName'];
 
+      FrmRSAT.LdapClient.SearchScope := lssWholeSubtree;
       DJoin.LoadFromLDAP(FrmRSAT.LdapClient, GetDNName(DN), GetParentDN(DN), '', '', '', aieMove);
       DJoin.SaveToFile(FormatUtf8('%/%.%.djoin', [Folder, GetDNName(DN), DNToCN(FrmRSAT.LdapClient.DefaultDN())]));
     end;
