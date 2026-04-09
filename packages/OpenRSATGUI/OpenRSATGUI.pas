@@ -31,7 +31,8 @@ uses
   ufrmoption, ufrmmodule, ufrmmoduleaducoption, ufrmrsat, ufrmmodules, 
   uvismodifygplink, uvisprofilemanager, uviseditaduccolumns, 
   uvisprofileconfiguration, uvisrootdseinfos, uvisshowrelationship, utheme, 
-  ufrmpropertyntauthcertificates, LazarusPackageIntf;
+  ufrmpropertyntauthcertificates, ufrmpropertyunixattributes, 
+  LazarusPackageIntf;
 
 implementation
 

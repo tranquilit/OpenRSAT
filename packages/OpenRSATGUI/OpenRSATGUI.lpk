@@ -12,7 +12,7 @@
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Files Count="83">
+    <Files Count="84">
       <Item1>
         <Filename Value="ufrmmoduleaduc.pas"/>
         <UnitName Value="ufrmmoduleaduc"/>
@@ -345,6 +345,10 @@
         <Filename Value="PropertyPages\ufrmpropertyntauthcertificates.pas"/>
         <UnitName Value="ufrmpropertyntauthcertificates"/>
       </Item83>
+      <Item84>
+        <Filename Value="PropertyPages\ufrmpropertyunixattributes.pas"/>
+        <UnitName Value="ufrmpropertyunixattributes"/>
+      </Item84>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>
