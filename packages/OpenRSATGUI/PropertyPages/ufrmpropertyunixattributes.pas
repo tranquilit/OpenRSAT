@@ -141,7 +141,7 @@ var
 begin
   AttributeValue := fProperty.GetReadable(Attribute, 0);
   if AttributeValue <> '' then
-    Field.Text := AttributeValue;
+    Field.CaptionNoChange := AttributeValue;
 end;
 
 procedure TFrmPropertyUnixAttributes.UpdateComboBoxField(Attribute: RawUtf8; Field: TComboBox);
@@ -150,7 +150,7 @@ var
 begin
   AttributeValue := fProperty.GetReadable(Attribute, 0);
   if AttributeValue <> '' then
-    Field.Text := AttributeValue;
+    Field.CaptionNoChange := AttributeValue;
 end;
 
 constructor TFrmPropertyUnixAttributes.Create(TheOwner: TComponent);
