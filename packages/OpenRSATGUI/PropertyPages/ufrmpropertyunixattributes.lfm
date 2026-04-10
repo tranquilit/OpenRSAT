@@ -1,0 +1,401 @@
+object FrmPropertyUnixAttributes: TFrmPropertyUnixAttributes
+  Left = 0
+  Height = 240
+  Top = 0
+  Width = 403
+  ClientHeight = 240
+  ClientWidth = 403
+  LCLVersion = '4.6.0.0'
+  TabOrder = 0
+  DesignLeft = 132
+  DesignTop = 461
+  object Panel_NisDomain: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Panel_Info
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 46
+    Width = 387
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 23
+    ClientWidth = 387
+    TabOrder = 0
+    object Label1: TLabel
+      AnchorSideLeft.Control = Panel_NisDomain
+      AnchorSideTop.Control = ComboBox_NisDomain
+      AnchorSideTop.Side = asrCenter
+      Left = 0
+      Height = 15
+      Top = 4
+      Width = 85
+      Caption = 'NIS Domain:'
+      Constraints.MinWidth = 85
+      WordWrap = True
+    end
+    object ComboBox_NisDomain: TComboBox
+      AnchorSideLeft.Control = Label1
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Panel_NisDomain
+      AnchorSideRight.Control = Panel_NisDomain
+      AnchorSideRight.Side = asrBottom
+      Left = 85
+      Height = 23
+      Top = 0
+      Width = 302
+      Anchors = [akTop, akLeft, akRight]
+      ItemHeight = 15
+      TabOrder = 0
+      OnChange = ComboBox_NisDomainChange
+    end
+  end
+  object Panel_OptionsUser: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Panel_NisDomain
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 154
+    Top = 85
+    Width = 387
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 16
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 154
+    ClientWidth = 387
+    TabOrder = 1
+    object Panel_Uid: TPanel
+      AnchorSideLeft.Control = Panel_OptionsUser
+      AnchorSideTop.Control = Panel_OptionsUser
+      AnchorSideRight.Control = Panel_OptionsUser
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 23
+      Top = 0
+      Width = 387
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 23
+      ClientWidth = 387
+      TabOrder = 0
+      object Label_Uid: TLabel
+        AnchorSideLeft.Control = Panel_Uid
+        AnchorSideTop.Control = Edit_Uid
+        AnchorSideTop.Side = asrCenter
+        Left = 0
+        Height = 15
+        Top = 4
+        Width = 85
+        AutoSize = False
+        Caption = 'UID:'
+        Constraints.MaxWidth = 85
+        Constraints.MinWidth = 85
+        WordWrap = True
+      end
+      object Edit_Uid: TEdit
+        AnchorSideLeft.Control = Label_Uid
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Panel_Uid
+        AnchorSideRight.Control = Panel_Uid
+        AnchorSideRight.Side = asrBottom
+        Left = 85
+        Height = 23
+        Top = 0
+        Width = 302
+        Anchors = [akTop, akLeft, akRight]
+        NumbersOnly = True
+        TabOrder = 0
+        OnChange = Edit_UidChange
+      end
+    end
+    object Panel_LoginShell: TPanel
+      AnchorSideLeft.Control = Panel_OptionsUser
+      AnchorSideTop.Control = Panel_Uid
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_OptionsUser
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 23
+      Top = 39
+      Width = 387
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = True
+      BorderSpacing.Top = 16
+      BevelOuter = bvNone
+      ClientHeight = 23
+      ClientWidth = 387
+      TabOrder = 1
+      object Label_LoginShell: TLabel
+        AnchorSideLeft.Control = Panel_LoginShell
+        AnchorSideTop.Control = Edit_LoginShell
+        AnchorSideTop.Side = asrCenter
+        Left = 0
+        Height = 15
+        Top = 4
+        Width = 85
+        AutoSize = False
+        Caption = 'Login Shell:'
+        Constraints.MinWidth = 85
+        WordWrap = True
+      end
+      object Edit_LoginShell: TEdit
+        AnchorSideLeft.Control = Label_LoginShell
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Panel_LoginShell
+        AnchorSideRight.Control = Panel_LoginShell
+        AnchorSideRight.Side = asrBottom
+        Left = 85
+        Height = 23
+        Top = 0
+        Width = 302
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+        OnChange = Edit_LoginShellChange
+      end
+    end
+    object Panel_HomeDirectory: TPanel
+      AnchorSideLeft.Control = Panel_OptionsUser
+      AnchorSideTop.Control = Panel_LoginShell
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_OptionsUser
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 30
+      Top = 78
+      Width = 387
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = True
+      BorderSpacing.Top = 16
+      BevelOuter = bvNone
+      ClientHeight = 30
+      ClientWidth = 387
+      TabOrder = 2
+      object Label_HomeDirectory: TLabel
+        AnchorSideLeft.Control = Panel_HomeDirectory
+        AnchorSideTop.Control = Panel_HomeDirectory
+        Left = 0
+        Height = 30
+        Top = 0
+        Width = 85
+        Caption = 'Home Directory:'
+        Constraints.MaxWidth = 85
+        Constraints.MinWidth = 85
+        WordWrap = True
+      end
+      object Edit_HomeDirectory: TEdit
+        AnchorSideLeft.Control = Label_HomeDirectory
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Label_HomeDirectory
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = Panel_HomeDirectory
+        AnchorSideRight.Side = asrBottom
+        Left = 85
+        Height = 23
+        Top = 4
+        Width = 302
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+        OnChange = Edit_HomeDirectoryChange
+      end
+    end
+    object Panel_PrimaryGroup: TPanel
+      AnchorSideLeft.Control = Panel_OptionsUser
+      AnchorSideTop.Control = Panel_HomeDirectory
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_OptionsUser
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 30
+      Top = 124
+      Width = 387
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = True
+      BorderSpacing.Top = 16
+      BevelOuter = bvNone
+      ClientHeight = 30
+      ClientWidth = 387
+      TabOrder = 3
+      object Label_PrimaryGroup: TLabel
+        AnchorSideLeft.Control = Panel_PrimaryGroup
+        AnchorSideTop.Control = Panel_PrimaryGroup
+        Left = 0
+        Height = 30
+        Top = 0
+        Width = 85
+        Caption = 'Primary group name/GID:'
+        Constraints.MaxWidth = 85
+        Constraints.MinWidth = 85
+        WordWrap = True
+      end
+      object ComboBox_PrimaryGroup: TComboBox
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Label_PrimaryGroup
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Control = Panel_PrimaryGroup
+        AnchorSideRight.Side = asrBottom
+        Left = 85
+        Height = 23
+        Top = 4
+        Width = 302
+        Anchors = [akTop, akLeft, akRight]
+        Enabled = False
+        ItemHeight = 15
+        ReadOnly = True
+        TabOrder = 0
+        OnChange = ComboBox_PrimaryGroupChange
+      end
+    end
+  end
+  object Panel_OptionsGroup: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Panel_NisDomain
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 23
+    Top = 85
+    Width = 387
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 16
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 23
+    ClientWidth = 387
+    TabOrder = 2
+    object Panel_Gid: TPanel
+      AnchorSideLeft.Control = Panel_OptionsGroup
+      AnchorSideTop.Control = Panel_OptionsGroup
+      AnchorSideRight.Control = Panel_OptionsGroup
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 23
+      Top = 0
+      Width = 387
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = True
+      BevelOuter = bvNone
+      Caption = 'Panel_Gid'
+      ClientHeight = 23
+      ClientWidth = 387
+      TabOrder = 0
+      object Label_Gid: TLabel
+        AnchorSideLeft.Control = Panel_Gid
+        AnchorSideTop.Control = Edit_Gid
+        AnchorSideTop.Side = asrCenter
+        Left = 0
+        Height = 15
+        Top = 4
+        Width = 85
+        Caption = 'GID (Group ID):'
+        Constraints.MinWidth = 85
+      end
+      object Edit_Gid: TEdit
+        AnchorSideLeft.Control = Label_Gid
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = Panel_Gid
+        AnchorSideRight.Control = Panel_Gid
+        AnchorSideRight.Side = asrBottom
+        Left = 85
+        Height = 23
+        Top = 0
+        Width = 302
+        Anchors = [akTop, akLeft, akRight]
+        TabOrder = 0
+        OnChange = Edit_GidChange
+      end
+    end
+  end
+  object Panel_Info: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 30
+    Top = 8
+    Width = 387
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    Caption = 'Panel_Info'
+    ClientHeight = 30
+    ClientWidth = 387
+    TabOrder = 3
+    object Panel_InfoUser: TPanel
+      AnchorSideLeft.Control = Panel_Info
+      AnchorSideTop.Control = Panel_Info
+      AnchorSideRight.Control = Panel_Info
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 30
+      Top = 0
+      Width = 387
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 30
+      ClientWidth = 387
+      TabOrder = 0
+      object Label_InfoUser: TLabel
+        AnchorSideLeft.Control = Panel_InfoUser
+        AnchorSideTop.Control = Panel_InfoUser
+        AnchorSideRight.Control = Panel_InfoUser
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 30
+        Top = 0
+        Width = 387
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'To enable access to this user for UNIX clients, you will have to specify the NIS domain this user belongs to.'
+        WordWrap = True
+      end
+    end
+    object Panel_InfoGroup: TPanel
+      AnchorSideLeft.Control = Panel_Info
+      AnchorSideTop.Control = Panel_Info
+      AnchorSideRight.Control = Panel_Info
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 30
+      Top = 0
+      Width = 387
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 30
+      ClientWidth = 387
+      TabOrder = 1
+      object Label_InfoGroup: TLabel
+        AnchorSideLeft.Control = Panel_InfoGroup
+        AnchorSideTop.Control = Panel_InfoGroup
+        AnchorSideRight.Control = Panel_InfoGroup
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 30
+        Top = 0
+        Width = 387
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'To enable access to this group for UNIX clients, you will have to specify the NIS domain this group belongs to.'
+        WordWrap = True
+      end
+    end
+  end
+end
