@@ -1,0 +1,12 @@
+{"version":1,"strings":[
+{"hash":185703258,"name":"tfrmpropertyunixattributes.label1.caption","sourcebytes":[78,73,83,32,68,111,109,97,105,110,58],"value":"NIS Domain:"},
+{"hash":367994,"name":"tfrmpropertyunixattributes.label_uid.caption","sourcebytes":[85,73,68,58],"value":"UID:"},
+{"hash":11231994,"name":"tfrmpropertyunixattributes.label_loginshell.caption","sourcebytes":[76,111,103,105,110,32,83,104,101,108,108,58],"value":"Login Shell:"},
+{"hash":148870698,"name":"tfrmpropertyunixattributes.label_homedirectory.caption","sourcebytes":[72,111,109,101,32,68,105,114,101,99,116,111,114,121,58],"value":"Home Directory:"},
+{"hash":227350458,"name":"tfrmpropertyunixattributes.label_primarygroup.caption","sourcebytes":[80,114,105,109,97,114,121,32,103,114,111,117,112,32,110,97,109,101,47,71,73,68,58],"value":"Primary group name/GID:"},
+{"hash":79850356,"name":"tfrmpropertyunixattributes.panel_gid.caption","sourcebytes":[80,97,110,101,108,95,71,105,100],"value":"Panel_Gid"},
+{"hash":168325754,"name":"tfrmpropertyunixattributes.label_gid.caption","sourcebytes":[71,73,68,32,40,71,114,111,117,112,32,73,68,41,58],"value":"GID (Group ID):"},
+{"hash":203861135,"name":"tfrmpropertyunixattributes.panel_info.caption","sourcebytes":[80,97,110,101,108,95,73,110,102,111],"value":"Panel_Info"},
+{"hash":259036478,"name":"tfrmpropertyunixattributes.label_infouser.caption","sourcebytes":[84,111,32,101,110,97,98,108,101,32,97,99,99,101,115,115,32,116,111,32,116,104,105,115,32,117,115,101,114,32,102,111,114,32,85,78,73,88,32,99,108,105,101,110,116,115,44,32,121,111,117,32,119,105,108,108,32,104,97,118,101,32,116,111,32,115,112,101,99,105,102,121,32,116,104,101,32,78,73,83,32,100,111,109,97,105,110,32,116,104,105,115,32,117,115,101,114,32,98,101,108,111,110,103,115,32,116,111,46],"value":"To enable access to this user for UNIX clients, you will have to specify the NIS domain this user belongs to."},
+{"hash":193926526,"name":"tfrmpropertyunixattributes.label_infogroup.caption","sourcebytes":[84,111,32,101,110,97,98,108,101,32,97,99,99,101,115,115,32,116,111,32,116,104,105,115,32,103,114,111,117,112,32,102,111,114,32,85,78,73,88,32,99,108,105,101,110,116,115,44,32,121,111,117,32,119,105,108,108,32,104,97,118,101,32,116,111,32,115,112,101,99,105,102,121,32,116,104,101,32,78,73,83,32,100,111,109,97,105,110,32,116,104,105,115,32,103,114,111,117,112,32,98,101,108,111,110,103,115,32,116,111,46],"value":"To enable access to this group for UNIX clients, you will have to specify the NIS domain this group belongs to."}
+]}
