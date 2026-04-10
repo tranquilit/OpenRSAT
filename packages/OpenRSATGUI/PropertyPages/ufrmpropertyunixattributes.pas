@@ -115,28 +115,24 @@ end;
 procedure TFrmPropertyUnixAttributes.SetupFields();
 var
   ObjectClass: TRawUtf8DynArray;
-  obj: RawUtf8;
 begin
   UpdateComboBoxField('msSFU30NisDomain', ComboBox_NisDomain);
   ObjectClass := fProperty.GetAllReadable('objectClass');
-  for obj in ObjectClass do;
+  if ObjectClass[High(ObjectClass)] = 'user' then
   begin
-    if obj = 'user' then
-    begin
-      Panel_InfoGroup.Visible := false;
-      Panel_OptionsGroup.Visible := false;
-      UpdateEditField('uid', Edit_Uid);
-      UpdateEditField('loginShell', Edit_LoginShell);
-      UpdateEditField('unixHomeDirectory', Edit_HomeDirectory);
-      UpdateComboBoxField('primaryGroupID', ComboBox_PrimaryGroup);
-    end
-    else if obj = 'group' then
-    begin
-      Panel_InfoUser.Visible := false;
+    Panel_InfoGroup.Visible := false;
+    Panel_OptionsGroup.Visible := false;
+    UpdateEditField('uid', Edit_Uid);
+    UpdateEditField('loginShell', Edit_LoginShell);
+    UpdateEditField('unixHomeDirectory', Edit_HomeDirectory);
+    UpdateComboBoxField('primaryGroupID', ComboBox_PrimaryGroup);
+  end
+  else if ObjectClass[High(ObjectClass)] = 'group' then
+  begin
+    Panel_InfoUser.Visible := false;
       Panel_OptionsUser.Visible := false;
       UpdateEditField('gidNumber', Edit_Gid);
     end;
-  end;
 end;
 
 procedure TFrmPropertyUnixAttributes.UpdateEditField(Attribute: RawUtf8; Field: TEdit);
