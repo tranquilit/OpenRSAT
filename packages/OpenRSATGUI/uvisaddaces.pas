@@ -520,6 +520,7 @@ procedure TVisAddACEs.TisGrid1FocusChanged(Sender: TBaseVirtualTree;
   Node: PVirtualNode; Column: TColumnIndex);
 var
   Data: PDocVariantData;
+  ObjectSID: TLdapAttribute;
 begin
   Data := TisGrid1.GetNodeAsPDocVariantData(Node);
   if not Assigned(Data) then
@@ -530,6 +531,8 @@ begin
 
   // Trustee
   TisSearchEdit_Trustee.Text := Data^.S['sid'];
+  ObjectSID := Ldap.SearchObject(Data^.S['sid'], '', 'objectSid');
+  Trustees.AddOrUpdateValue(Data^.S['sid'], ObjectSID.GetReadable());
 
   // Access
   CheckBox_CC.Checked := (Data^.I['mask'] and (1 << Ord(samCreateChild)) <> 0);
