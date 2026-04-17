@@ -169,6 +169,12 @@ object FrmModuleADUC: TFrmModuleADUC
         Action = Action_ShowRelationShip
         Caption = 'Show group relation'
       end
+      object ToolButton_AttributesGrid: TToolButton
+        Left = 385
+        Top = 2
+        ImageIndex = 57
+        OnClick = ToolButton_AttributesGridClick
+      end
     end
     object Image1: TImage
       Left = 689
@@ -423,6 +429,7 @@ object FrmModuleADUC: TFrmModuleADUC
     ClientWidth = 170
     TabOrder = 1
     object TreeADUC: TTreeView
+      AnchorSideTop.Control = TisSearchEdit_TreeADUC
       Left = 0
       Height = 314
       Top = 31
@@ -465,6 +472,9 @@ object FrmModuleADUC: TFrmModuleADUC
     end
   end
   object Panel2: TPanel
+    AnchorSideLeft.Control = Splitter1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideRight.Control = Splitter2
     Left = 175
     Height = 349
     Top = 28
@@ -530,6 +540,7 @@ object FrmModuleADUC: TFrmModuleADUC
       OnDragDrop = GridADUCDragDrop
       OnEdited = GridADUCEdited
       OnEndDrag = GridADUCEndDrag
+      OnFocusChanged = GridADUCFocusChanged
       OnGetImageIndex = GridADUCGetImageIndex
       OnKeyDown = GridADUCKeyDown
       OnKeyPress = GridADUCKeyPress
@@ -574,6 +585,78 @@ object FrmModuleADUC: TFrmModuleADUC
         OnChange = CheckBox_IncludeSubContainerChange
       end
     end
+  end
+  object Panel5: TPanel
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 629
+    Height = 291
+    Top = 61
+    Width = 410
+    Align = alRight
+    BorderSpacing.Top = 33
+    BorderSpacing.Right = 4
+    BorderSpacing.Bottom = 4
+    BevelOuter = bvNone
+    ClientHeight = 291
+    ClientWidth = 410
+    TabOrder = 4
+    Visible = False
+    object GridAttributes: TTisGrid
+      AnchorSideRight.Side = asrBottom
+      Left = 0
+      Height = 287
+      Top = 0
+      Width = 410
+      Align = alClient
+      BorderSpacing.Bottom = 4
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Text = 'Attributes'
+          Width = 102
+          PropertyName = 'attributes'
+          ReadOnly = True
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 1
+          Tag = 1
+          Text = 'Values'
+          Width = 282
+          PropertyName = 'values'
+          ReadOnly = True
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MainColumn = 1
+      Header.MaxHeight = 100
+      Header.MinHeight = 18
+      Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.SortColumn = 0
+      Header.Style = hsFlatButtons
+      PopupMenu = PopupMenu1
+      TabOrder = 0
+      SelectedAndTotalLabel = Label1
+      TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
+      TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+      ZebraColor = 15593713
+      PopupMenuOptions = [pmoShowFind, pmoShowFindNext]
+      FilterOptions.CaseInsensitive = True
+      OnMouseDown = GridAttributesMouseDown
+    end
+  end
+  object Splitter2: TSplitter
+    AnchorSideLeft.Side = asrBottom
+    Left = 377
+    Height = 324
+    Top = 28
+    Width = 5
+    Align = alRight
+    ResizeAnchor = akRight
+    Visible = False
   end
   object ActionList_ADUC: TActionList
     Images = CoreDataModule.ImageList1

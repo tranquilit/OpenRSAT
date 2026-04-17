@@ -166,22 +166,26 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
+    Panel5: TPanel;
     PopupMenu1: TPopupMenu;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
     Separator1: TMenuItem;
     Separator2: TMenuItem;
     Separator4: TMenuItem;
+    Splitter2: TSplitter;
     Timer_TreeChangeNode: TTimer;
     Timer_SearchInGrid: TTimer;
     Label1: TLabel;
     MenuItem_Search: TMenuItem;
     Splitter1: TSplitter;
     GridADUC: TTisGrid;
+    GridAttributes: TTisGrid;
     TisGridHeaderPopupMenu1: TTisGridHeaderPopupMenu;
     TisSearchEdit_TreeADUC: TTisSearchEdit;
     TisSearchEdit_GridADUC: TTisSearchEdit;
     ToolBar1: TToolBar;
     ToolButton1: TToolButton;
+    ToolButton_AttributesGrid: TToolButton;
     ToolButton_ShowRelation: TToolButton;
     ToolButton_AddToGroup: TToolButton;
     ToolButton_Copy: TToolButton;
@@ -257,20 +261,22 @@ type
     procedure Action_TaskResetPasswordExecute(Sender: TObject);
     procedure Action_TaskResetPasswordUpdate(Sender: TObject);
     procedure CheckBox_IncludeSubContainerChange(Sender: TObject);
-    procedure GridADUCKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState
-      );
+    procedure GridADUCFocusChanged(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex);
+    procedure GridADUCKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure GridAttributesMouseDown(Sender: TObject; Button: TMouseButton; 
+      Shift: TShiftState; X, Y: Integer);
     procedure MenuItem_EditColumnsClick(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
     procedure Timer_TreeChangeNodeTimer(Sender: TObject);
     procedure TisSearchEdit_TreeADUCSearch(Sender: TObject; const aText: string);
     procedure TisSearchEdit_GridADUCSearch(Sender: TObject; const aText: string);
+    procedure ToolButton_AttributesGridClick(Sender: TObject);
     procedure TreeADUCChange(Sender: TObject; Node: TTreeNode);
     procedure TreeADUCContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
     procedure TreeADUCCreateNodeClass(Sender: TCustomTreeView;
       var NodeClass: TTreeNodeClass);
     procedure TreeADUCDragDrop(Sender, Source: TObject; X, Y: Integer);
-    procedure TreeADUCDragOver(Sender, Source: TObject; X, Y: Integer;
-      State: TDragState; var Accept: Boolean);
+    procedure TreeADUCDragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
     procedure TreeADUCEndDrag(Sender, Target: TObject; X, Y: Integer);
     procedure TreeADUCExpanded(Sender: TObject; Node: TTreeNode);
     procedure TreeADUCGetImageIndex(Sender: TObject; Node: TTreeNode);
@@ -1524,6 +1530,50 @@ begin
   UpdateGridADUC(nil);
 end;
 
+procedure TFrmModuleADUC.GridADUCFocusChanged(Sender: TBaseVirtualTree;
+  Node: PVirtualNode; Column: TColumnIndex);
+var
+  OnSearch: TNotifyEvent;
+  NewRow: TDocVariantData;
+  VariantData: PDocVariantData;
+  LdapResult: TLdapResult;
+  a: TLdapAttribute;
+  value: RawUtf8;
+begin
+  NewRow.Init();
+  VariantData := GridADUC.GetNodeAsPDocVariantData(Node, True);
+  GridAttributes.Clear;
+  GridAttributes.BeginUpdate;
+  OnSearch := FrmRSAT.LdapClient.OnSearch;
+  try
+    FrmRSAT.LdapClient.OnSearch := nil;
+    if Assigned(VariantData) then
+    begin
+      LdapResult := FrmRSAT.LdapClient.SearchObject(VariantData^.S['objectName'], '', ['*']);
+      if not Assigned(LdapResult) then
+         exit;
+
+      for a in LdapResult.Attributes.Items do
+      begin
+        if not Assigned(a) then
+          continue;
+        
+        NewRow.AddValue('attributes', a.AttributeName); 
+        for value in a.GetAllReadable() do
+        begin
+          NewRow.AddOrUpdateValue('values', value);
+          GridAttributes.Data.AddItem(NewRow);
+        end;
+        NewRow.Clear
+      end;
+    end;
+    finally
+      GridAttributes.EndUpdate;
+      FrmRSAT.LdapClient.OnSearch := OnSearch;
+      GridAttributes.LoadData();
+  end;
+end;
+
 procedure TFrmModuleADUC.GridADUCKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
@@ -1533,6 +1583,13 @@ begin
     GridADUC.EditNode(GridADUC.FocusedNode, GridADUC.FocusedColumn);
     GridADUC.TreeOptions.MiscOptions := GridADUC.TreeOptions.MiscOptions + [toReadOnly] - [toEditable];
   end;
+end;
+
+procedure TFrmModuleADUC.GridAttributesMouseDown(Sender: TObject; 
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if Button = mbLeft then
+    GridAttributes.BeginDrag(False);
 end;
 
 procedure TFrmModuleADUC.MenuItem_EditColumnsClick(Sender: TObject);
@@ -1616,6 +1673,20 @@ procedure TFrmModuleADUC.TisSearchEdit_GridADUCSearch(Sender: TObject;
   const aText: string);
 begin
   UpdateGridADUC(nil);
+end;
+
+procedure TFrmModuleADUC.ToolButton_AttributesGridClick(Sender: TObject);
+begin
+  if Panel5.Visible then
+  begin
+    Splitter2.Visible := False;
+    Panel5.Visible := False;
+  end
+  else
+  begin
+    Panel5.Visible := True;
+    Splitter2.Visible := True;
+  end;
 end;
 
 procedure TFrmModuleADUC.TreeADUCChange(Sender: TObject; Node: TTreeNode);
@@ -1914,39 +1985,64 @@ var
   BaseDN, oldDN, newDN: String;
   Node: PVirtualNode;
   newDNS, oldDNS: Array of String;
+  NewColName: RawUtf8;
 begin
   oldDNS := [];
   newDNS := [];
 
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - DragDrop', [Self.Name]);
-
-  GridADUC.GetHitTestInfoAt(Pt.x, Pt.y, True, HitInfo);
-
-  Data := GridADUC.GetNodeAsPDocVariantData(HitInfo.HitNode);
-  BaseDN := Data^.U['objectName'];
-
-  Node := GridADUC.GetFirstSelected();
-  if not Assigned(Node) then
+  
+  if Source = GridADUC then
   begin
+    GridADUC.GetHitTestInfoAt(Pt.x, Pt.y, True, HitInfo);
+  
+    Data := GridADUC.GetNodeAsPDocVariantData(HitInfo.HitNode);
+    BaseDN := Data^.U['objectName'];
+  
+    Node := GridADUC.GetFirstSelected();
+    if not Assigned(Node) then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllWarning, '% - No selected node.', [Self.Name]);
+      Exit;
+    end;
+  
+    repeat
+      Data := GridADUC.GetNodeAsPDocVariantData(Node);
+      oldDN := data^.U['objectName'];
+      newDN := String.Join(',', [oldDN.split(',')[0], BaseDN]);
+      Insert(newDN, newDNS, Length(newDNS));
+      Insert(oldDN, oldDNS, Length(oldDNS));
+      Node := GridADUC.GetNextSelected(Node);
+    until Node = nil;
+  
+    FrmRSAT.LdapClient.MoveLdapEntries(oldDNS, newDNS);
     if Assigned(fLog) then
-      fLog.Log(sllWarning, '% - No selected node.', [Self.Name]);
-    Exit;
+      fLog.Log(sllInfo, '% - % entries moved.', [Self.Name, IntToStr(Length(oldDNS))]);
+    Action_Refresh.Execute;
+  end
+  else if Source = GridAttributes then
+  begin
+    Node := GridAttributes.GetFirstSelected();
+    if not Assigned(Node) then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllWarning, '% - No selected node.', [Self.Name]);
+      Exit;
+    end;
+
+    Data := GridAttributes.GetNodeAsPDocVariantData(Node);
+    NewColName := Data^.S['attributes'];
+    if NewColName = '' then
+       exit;
+
+    if not fModuleAduc.ADUCOption.GridAttributesFilter.Contains(NewColName) then
+    begin
+       fModuleAduc.ADUCOption.GridAttributesFilter.Append(NewColName);
+       UpdateGridADUC(nil);
+    end;
   end;
-
-  repeat
-    Data := GridADUC.GetNodeAsPDocVariantData(Node);
-    oldDN := data^.U['objectName'];
-    newDN := String.Join(',', [oldDN.split(',')[0], BaseDN]);
-    Insert(newDN, newDNS, Length(newDNS));
-    Insert(oldDN, oldDNS, Length(oldDNS));
-    Node := GridADUC.GetNextSelected(Node);
-  until Node = nil;
-
-  FrmRSAT.LdapClient.MoveLdapEntries(oldDNS, newDNS);
-  if Assigned(fLog) then
-    fLog.Log(sllInfo, '% - % entries moved.', [Self.Name, IntToStr(Length(oldDNS))]);
-  Action_Refresh.Execute;
 end;
 
 procedure TFrmModuleADUC.GridADUCDragOver(Sender: TBaseVirtualTree;
@@ -1957,19 +2053,26 @@ var
   Data: PDocVariantData;
 begin
   Accept := False;
-  if (Source <> GridADUC) then
-    Exit;
 
-  GridADUC.TreeOptions.PaintOptions := GridADUC.TreeOptions.PaintOptions + [toHotTrack];
-  HitInfo.HitNode := nil;
-  GridADUC.GetHitTestInfoAt(Pt.x, Pt.y, True, HitInfo);
-  if not Assigned(HitInfo.HitNode) or (hiNowhere in HitInfo.HitPositions) then
-    Exit;
-  Data := GridADUC.GetNodeAsPDocVariantData(HitInfo.HitNode);
-  if not Assigned(data) then
-    Exit;
-  if TRawUtf8DynArrayContains(Data^.A['objectClass']^.ToRawUtf8DynArray, 'organizationalUnit') then
-    Accept := HitInfo.HitNode <> GridADUC.FocusedNode;
+  if Source = GridADUC then
+  begin
+    // Drag n'Drop from GridADUC
+    GridADUC.TreeOptions.PaintOptions := GridADUC.TreeOptions.PaintOptions + [toHotTrack];
+    HitInfo.HitNode := nil;
+    GridADUC.GetHitTestInfoAt(Pt.x, Pt.y, True, HitInfo);
+    if not Assigned(HitInfo.HitNode) or (hiNowhere in HitInfo.HitPositions) then
+      Exit;
+    Data := GridADUC.GetNodeAsPDocVariantData(HitInfo.HitNode);
+    if not Assigned(data) then
+      Exit;
+    if TRawUtf8DynArrayContains(Data^.A['objectClass']^.ToRawUtf8DynArray, 'organizationalUnit') then
+      Accept := HitInfo.HitNode <> GridADUC.FocusedNode;
+  end
+  else if Source = GridAttributes then
+  begin
+    // Drag n'Drop from GridAttributes
+    Accept := True;
+  end;
 end;
 
 procedure TFrmModuleADUC.GridADUCEdited(Sender: TBaseVirtualTree;
@@ -2510,6 +2613,10 @@ var
   Columns: TRawUtf8DynArray;
   i: Integer;
   NewColumn: TTisGridColumn;
+  item: TLdapResult;
+  a: TLdapAttribute;
+  OnSearch: TNotifyEvent;
+  Filter: RawUtf8;
 begin
   Columns := fModuleAduc.ADUCOption.GridAttributesFilter;
 
@@ -2519,11 +2626,40 @@ begin
     else
       Columns.Remove(Columns.IndexOf(TTisGridColumn(GridADUC.Header.Columns[i]).PropertyName));
 
+  Filter := '';
   for i := 0 to Pred(Length(Columns)) do
   begin
     NewColumn := TTisGridColumn(GridADUC.Header.Columns.Add);
+    NewColumn.Width := 150;
     NewColumn.PropertyName := Columns[i];
-    NewColumn.DisplayName := Columns[i];
+    Filter := FormatUtf8('%(lDAPDisplayName=%)', [Filter, Columns[i]]);  
+  end;
+  if Filter = '' then
+    Exit;
+  Filter := FormatUtf8('(|%)', [Filter]);
+  
+  try  
+    OnSearch := FrmRSAT.LdapClient.OnSearch;
+    FrmRSAT.LdapClient.OnSearch := nil;
+    if not FrmRSAT.LdapClient.Search(FrmRSAT.LdapClient.SchemaDN, False, Filter, ['lDAPDisplayName', 'name']) then
+       exit;
+
+    for item in FrmRSAT.LdapClient.SearchResult.Items do
+    begin
+      if not Assigned(item) then
+        continue;
+
+      for a in item.Attributes.Items do
+      begin
+        if not Assigned(a) then
+           continue;
+
+        if a.AttributeName = 'name' then
+           NewColumn.Text := a.GetReadable();
+      end;
+    end;
+  finally
+    FrmRSAT.LdapClient.OnSearch := OnSearch;
   end;
 end;
 
