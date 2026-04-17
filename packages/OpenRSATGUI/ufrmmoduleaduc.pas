@@ -51,6 +51,7 @@ type
   { TFrmModuleADUC }
 
   TFrmModuleADUC = class(TFrameModule)
+    Action_TaskEnableAccount: TAction;
     Action_CreateKeyTab: TAction;
     Action_PrepareDJOIN: TAction;
     Action_ShowRelationShip: TAction;
@@ -155,6 +156,7 @@ type
     MenuItem_AddToAGroup: TMenuItem;
     MenuItem_NameMapping: TMenuItem;
     MenuItem_DisableAccount: TMenuItem;
+    MenuItem_EnableAccount: TMenuItem;
     MenuItem_ResetPassword: TMenuItem;
     MenuItem_Move: TMenuItem;
     MenuItem_OpenHomePage: TMenuItem;
@@ -205,6 +207,7 @@ type
     ToolButton_Search: TToolButton;
     ToolButton_User: TToolButton;
     TreeADUC: TTreeView;
+    procedure Action_TaskEnableAccountExecute(Sender: TObject);
     procedure Action_CreateKeyTabExecute(Sender: TObject);
     procedure Action_BlockGPOInheritanceExecute(Sender: TObject);
     procedure Action_BlockGPOInheritanceUpdate(Sender: TObject);
@@ -267,6 +270,7 @@ type
     procedure GridAttributesMouseDown(Sender: TObject; Button: TMouseButton; 
       Shift: TShiftState; X, Y: Integer);
     procedure MenuItem_EditColumnsClick(Sender: TObject);
+    procedure PopupMenu1Popup(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
     procedure Timer_TreeChangeNodeTimer(Sender: TObject);
     procedure TisSearchEdit_TreeADUCSearch(Sender: TObject; const aText: string);
@@ -638,6 +642,43 @@ begin
     gen.Clear;
     FreeAndNil(gen);
     FillZero(Password, Length(Password));
+  end;
+end;
+
+procedure TFrmModuleADUC.Action_TaskEnableAccountExecute(Sender: TObject);
+var
+  Data: PDocVariantData;
+  LdapResult: TLdapResult;
+  ObjectName, CurrentUAC: RawUtf8;
+  NewUAC: TLdapAttribute;
+  ConvertValue: integer;
+  a: TLdapAttribute;
+begin
+  Data := GridADUC.GetNodeAsPDocVariantData(nil, True);
+  if not Assigned(Data) then
+    Exit;
+
+  LdapResult := FrmRSAT.LdapClient.SearchObject(Data^.S['objectName'],
+    '', ['name', 'userAccountControl']);
+  for a in LdapResult.Attributes.Items do
+  begin
+    if not Assigned(a) then
+      continue;
+
+    if a.AttributeName = 'name' then
+      ObjectName := a.GetReadable()
+    else if a.AttributeName = 'userAccountControl' then
+    begin
+      CurrentUAC := a.GetReadable();
+      NewUAC := TLdapAttribute.Create(a.AttributeName, atUserAccountControl);
+      try
+        NewUAC.AddFmt('%', [StrToInt(CurrentUAC) - 2]);
+        FrmRSAT.LdapClient.Modify(Data^.S['objectName'], lmoReplace, NewUAC);
+        ShowMessage(FormatUtf8('Object % has been enabled.', [ObjectName]));
+      finally
+        FreeAndNil(NewUAC);
+      end;
+    end;
   end;
 end;
 
@@ -1487,14 +1528,15 @@ var
   LdapResult: TLdapResult;
   ObjectName, CurrentUAC: RawUtf8;
   NewUAC: TLdapAttribute;
-  ConvertValue: Integer;
+  ConvertValue: integer;
   a: TLdapAttribute;
 begin
   Data := GridADUC.GetNodeAsPDocVariantData(nil, True);
   if not Assigned(Data) then
     Exit;
-   
-  LdapResult := FrmRSAT.LdapClient.SearchObject(Data^.S['objectName'], '', ['name', 'userAccountControl']);
+
+  LdapResult := FrmRSAT.LdapClient.SearchObject(Data^.S['objectName'],
+    '', ['name', 'userAccountControl']);
   for a in LdapResult.Attributes.Items do
   begin
     if not Assigned(a) then
@@ -1577,6 +1619,8 @@ var
   a: TLdapAttribute;
   value: RawUtf8;
 begin
+  if not GridAttributes.Visible then
+     exit;
   NewRow.Init();
   VariantData := GridADUC.GetNodeAsPDocVariantData(Node, True);
   GridAttributes.Clear;
@@ -1643,6 +1687,47 @@ begin
     end;
   finally
     FreeAndNil(VisEditColumns);
+  end;
+end;
+
+procedure TFrmModuleADUC.PopupMenu1Popup(Sender: TObject);
+var
+  Data: PDocVariantData;
+  Result: TLdapResult;
+  CurrentUAC: LongInt;
+  OnSearch: TNotifyEvent;
+  i: TLdapAttribute;
+begin
+  Data := GridADUC.GetNodeAsPDocVariantData(nil, True);
+  if not Assigned(Data) then
+    exit;
+  
+  OnSearch := FrmRSAT.LdapClient.OnSearch;
+  FrmRSAT.LdapClient.OnSearch := nil;
+  try
+    Result := FrmRSAT.LdapClient.SearchObject(Data^.S['objectName'], '', ['userAccountControl']);
+    for i in Result.Attributes.Items do
+    begin
+      if not Assigned(i) then
+         continue;
+      
+      if i.AttributeName = 'userAccountControl' then
+      begin
+        CurrentUAC := StrToInt(i.GetReadable());
+        if (CurrentUAC and 2) = 2 then
+        begin
+          MenuItem_DisableAccount.Visible := False;
+          MenuItem_EnableAccount.Visible := True;
+        end
+        else
+        begin
+          MenuItem_DisableAccount.Visible := True;
+          MenuItem_EnableAccount.Visible := False;
+        end;
+      end;
+    end;
+  finally
+    FrmRSAT.LdapClient.OnSearch := OnSearch;
   end;
 end;
 
