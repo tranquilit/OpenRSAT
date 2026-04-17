@@ -715,6 +715,7 @@ object FrmModuleADUC: TFrmModuleADUC
     object Action_TaskDisableAccount: TAction
       Category = 'Tasks'
       Caption = 'Disable Account'
+      OnExecute = Action_TaskDisableAccountExecute
     end
     object Action_TaskResetPassword: TAction
       Category = 'Tasks'

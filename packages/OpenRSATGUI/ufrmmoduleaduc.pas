@@ -256,6 +256,7 @@ type
     procedure Action_ShowRelationShipExecute(Sender: TObject);
     procedure Action_TaskAddToAGroupExecute(Sender: TObject);
     procedure Action_TaskAddToAGroupUpdate(Sender: TObject);
+    procedure Action_TaskDisableAccountExecute(Sender: TObject);
     procedure Action_TaskMoveExecute(Sender: TObject);
     procedure Action_TaskMoveUpdate(Sender: TObject);
     procedure Action_TaskResetPasswordExecute(Sender: TObject);
@@ -1478,6 +1479,44 @@ end;
 procedure TFrmModuleADUC.Action_TaskAddToAGroupUpdate(Sender: TObject);
 begin
   Action_TaskAddToAGroup.Enabled := Assigned(GridADUC.FocusedRow) and GridADUC.FocusedRow^.Exists('objectName');
+end;
+
+procedure TFrmModuleADUC.Action_TaskDisableAccountExecute(Sender: TObject);
+var
+  Data: PDocVariantData;
+  LdapResult: TLdapResult;
+  ObjectName, CurrentUAC: RawUtf8;
+  NewUAC: TLdapAttribute;
+  ConvertValue: Integer;
+  a: TLdapAttribute;
+begin
+  Data := GridADUC.GetNodeAsPDocVariantData(nil, True);
+  if not Assigned(Data) then
+    Exit;
+   
+  LdapResult := FrmRSAT.LdapClient.SearchObject(Data^.S['objectName'], '', ['name', 'userAccountControl']);
+  for a in LdapResult.Attributes.Items do
+  begin
+    if not Assigned(a) then
+      continue;
+
+    if a.AttributeName = 'name' then
+      ObjectName := a.GetReadable()
+    else if a.AttributeName = 'userAccountControl' then
+    begin
+      CurrentUAC := a.GetReadable();
+      NewUAC := TLdapAttribute.Create(a.AttributeName, atUserAccountControl);
+      try
+        ConvertValue := StrToInt(CurrentUAC) + 2;
+        ShowMessage(FormatUtf8('%', [ConvertValue]));
+        NewUAC.AddFmt('%', [ConvertValue]);
+        FrmRSAT.LdapClient.Modify(Data^.S['objectName'], lmoReplace, NewUAC);
+        ShowMessage(FormatUtf8('Object % has been disabled.', [ObjectName]));
+      finally
+        FreeAndNil(NewUAC);
+      end;
+    end;
+  end;
 end;
 
 procedure TFrmModuleADUC.Action_TaskMoveExecute(Sender: TObject);
