@@ -585,74 +585,78 @@ object FrmModuleADUC: TFrmModuleADUC
         OnChange = CheckBox_IncludeSubContainerChange
       end
     end
-    object Panel5: TPanel
+  end
+  object Panel5: TPanel
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 382
+    Height = 291
+    Top = 61
+    Width = 410
+    Align = alRight
+    BorderSpacing.Top = 33
+    BorderSpacing.Right = 4
+    BorderSpacing.Bottom = 4
+    BevelOuter = bvNone
+    ClientHeight = 291
+    ClientWidth = 410
+    TabOrder = 4
+    Visible = False
+    object GridAttributes: TTisGrid
       AnchorSideRight.Side = asrBottom
-      Left = 215
-      Height = 316
-      Top = 33
+      Left = 0
+      Height = 287
+      Top = 0
       Width = 410
-      Align = alRight
-      BevelOuter = bvNone
-      ClientHeight = 316
-      ClientWidth = 410
-      TabOrder = 2
-      Visible = False
-      object GridAttributes: TTisGrid
-        AnchorSideRight.Side = asrBottom
-        Left = 0
-        Height = 312
-        Top = 0
-        Width = 410
-        Align = alClient
-        BorderSpacing.Bottom = 4
-        Header.AutoSizeIndex = -1
-        Header.Columns = <        
-          item
-            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-            Position = 0
-            Text = 'Attributes'
-            Width = 102
-            PropertyName = 'attributes'
-            ReadOnly = True
-          end        
-          item
-            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-            Position = 1
-            Tag = 1
-            Text = 'Values'
-            Width = 282
-            PropertyName = 'values'
-            ReadOnly = True
-          end>
-        Header.DefaultHeight = 18
-        Header.Height = 28
-        Header.MainColumn = 1
-        Header.MaxHeight = 100
-        Header.MinHeight = 18
-        Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
-        Header.SortColumn = 0
-        Header.Style = hsFlatButtons
-        PopupMenu = PopupMenu1
-        TabOrder = 0
-        SelectedAndTotalLabel = Label1
-        TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
-        TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
-        ZebraColor = 15593713
-        PopupMenuOptions = [pmoShowFind, pmoShowFindNext]
-        FilterOptions.CaseInsensitive = True
-        OnMouseDown = GridAttributesMouseDown
-      end
+      Align = alClient
+      BorderSpacing.Bottom = 4
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Text = 'Attributes'
+          Width = 102
+          PropertyName = 'attributes'
+          ReadOnly = True
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 1
+          Tag = 1
+          Text = 'Values'
+          Width = 282
+          PropertyName = 'values'
+          ReadOnly = True
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MainColumn = 1
+      Header.MaxHeight = 100
+      Header.MinHeight = 18
+      Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.SortColumn = 0
+      Header.Style = hsFlatButtons
+      PopupMenu = PopupMenu1
+      TabOrder = 0
+      SelectedAndTotalLabel = Label1
+      TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
+      TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+      ZebraColor = 15593713
+      PopupMenuOptions = [pmoShowFind, pmoShowFindNext]
+      FilterOptions.CaseInsensitive = True
+      OnMouseDown = GridAttributesMouseDown
     end
-    object Splitter2: TSplitter
-      AnchorSideLeft.Side = asrBottom
-      Left = 210
-      Height = 316
-      Top = 33
-      Width = 5
-      Align = alRight
-      ResizeAnchor = akRight
-      Visible = False
-    end
+  end
+  object Splitter2: TSplitter
+    AnchorSideLeft.Side = asrBottom
+    Left = 377
+    Height = 324
+    Top = 28
+    Width = 5
+    Align = alRight
+    ResizeAnchor = akRight
+    Visible = False
   end
   object ActionList_ADUC: TActionList
     Images = CoreDataModule.ImageList1
@@ -904,9 +908,14 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExecute = Action_CreateKeyTabExecute
       OnUpdate = Action_CreateKeyTabUpdate
     end
+    object Action_TaskEnableAccount: TAction
+      Category = 'Tasks'
+      OnExecute = Action_TaskEnableAccountExecute
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
+    OnPopup = PopupMenu1Popup
     Left = 128
     Top = 112
     object MenuItem_DelegateControl: TMenuItem
@@ -923,6 +932,10 @@ object FrmModuleADUC: TFrmModuleADUC
     end
     object MenuItem_NameMapping: TMenuItem
       Action = Action_TaskNameMappings
+    end
+    object MenuItem_EnableAccount: TMenuItem
+      Action = Action_TaskEnableAccount
+      Caption = 'Enable Account'
     end
     object MenuItem_DisableAccount: TMenuItem
       Action = Action_TaskDisableAccount
