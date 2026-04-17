@@ -716,10 +716,10 @@ object FrmModuleADUC: TFrmModuleADUC
       Category = 'Tasks'
       Caption = 'Name mappings'
     end
-    object Action_TaskDisableAccount: TAction
+    object Action_TaskDisableEnableAccount: TAction
       Category = 'Tasks'
-      Caption = 'Disable Account'
-      OnExecute = Action_TaskDisableAccountExecute
+      Caption = 'Disable Enable Account'
+      OnExecute = Action_TaskDisableEnableAccountExecute
     end
     object Action_TaskResetPassword: TAction
       Category = 'Tasks'
@@ -908,10 +908,6 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExecute = Action_CreateKeyTabExecute
       OnUpdate = Action_CreateKeyTabUpdate
     end
-    object Action_TaskEnableAccount: TAction
-      Category = 'Tasks'
-      OnExecute = Action_TaskEnableAccountExecute
-    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
@@ -933,12 +929,8 @@ object FrmModuleADUC: TFrmModuleADUC
     object MenuItem_NameMapping: TMenuItem
       Action = Action_TaskNameMappings
     end
-    object MenuItem_EnableAccount: TMenuItem
-      Action = Action_TaskEnableAccount
-      Caption = 'Enable Account'
-    end
     object MenuItem_DisableAccount: TMenuItem
-      Action = Action_TaskDisableAccount
+      Action = Action_TaskDisableEnableAccount
     end
     object MenuItem_ResetPassword: TMenuItem
       Action = Action_TaskResetPassword
