@@ -1507,9 +1507,7 @@ begin
       CurrentUAC := a.GetReadable();
       NewUAC := TLdapAttribute.Create(a.AttributeName, atUserAccountControl);
       try
-        ConvertValue := StrToInt(CurrentUAC) + 2;
-        ShowMessage(FormatUtf8('%', [ConvertValue]));
-        NewUAC.AddFmt('%', [ConvertValue]);
+        NewUAC.AddFmt('%', [StrToInt(CurrentUAC) + 2]);
         FrmRSAT.LdapClient.Modify(Data^.S['objectName'], lmoReplace, NewUAC);
         ShowMessage(FormatUtf8('Object % has been disabled.', [ObjectName]));
       finally
