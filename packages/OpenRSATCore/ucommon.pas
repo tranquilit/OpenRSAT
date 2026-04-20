@@ -129,6 +129,7 @@ resourcestring
   rsNewObjectContact = 'New object - Contact';
   rsNewObjectGroup = 'New object - Group';
   rsNewObjectOU = 'New object - OU';
+  rsNewObjectInetOrgPerson = 'New object - Inet Org. Person';
   rsNewObjectSite = 'New object - Site';
   rsNewObjectSharedFolder = 'New object - Shared Folder';
   rsNewObjectSubnet = 'New object - Subnet';

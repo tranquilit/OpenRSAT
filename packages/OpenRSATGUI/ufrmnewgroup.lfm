@@ -7,6 +7,7 @@ object FrmNewGroup: TFrmNewGroup
   ClientWidth = 424
   Constraints.MaxHeight = 232
   Constraints.MinHeight = 232
+  LCLVersion = '4.6.0.0'
   TabOrder = 0
   DesignLeft = 825
   DesignTop = 205

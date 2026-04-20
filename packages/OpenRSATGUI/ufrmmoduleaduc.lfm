@@ -774,6 +774,7 @@ object FrmModuleADUC: TFrmModuleADUC
     object Action_NewInetOrgPerson: TAction
       Category = 'New'
       Caption = 'InetOrgPerson'
+      OnExecute = Action_NewInetOrgPersonExecute
     end
     object Action_NewSharedFolder: TAction
       Category = 'New'
