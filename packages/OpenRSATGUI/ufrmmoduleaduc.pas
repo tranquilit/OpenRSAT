@@ -1589,9 +1589,26 @@ var
   LdapResult: TLdapResult;
   a: TLdapAttribute;
   value: RawUtf8;
+  
+  procedure checkIfUAC(Attribute: TLdapAttribute);
+  var
+    CurrentUAC: LongInt;
+  begin
+    if Attribute.AttributeName = 'userAccountControl' then
+    begin
+      MenuItem_DisableAccount.Enabled := True;
+      CurrentUAC := StrToInt(Attribute.GetReadable());
+      if (CurrentUAC and 2) = 2 then
+        MenuItem_DisableAccount.Caption := 'Enable Account'
+      else
+        MenuItem_DisableAccount.Caption := 'Disable Account';
+      end; 
+  end;
+
 begin
   if not GridAttributes.Visible then
      exit;
+
   NewRow.Init();
   VariantData := GridADUC.GetNodeAsPDocVariantData(Node, True);
   GridAttributes.Clear;
@@ -1610,6 +1627,8 @@ begin
         if not Assigned(a) then
           continue;
         
+        checkIfUAC(a);
+
         NewRow.AddValue('attributes', a.AttributeName); 
         for value in a.GetAllReadable() do
         begin
@@ -1664,35 +1683,12 @@ end;
 procedure TFrmModuleADUC.PopupMenu1Popup(Sender: TObject);
 var
   Data: PDocVariantData;
-  Result: TLdapResult;
-  CurrentUAC: LongInt;
-  OnSearch: TNotifyEvent;
-  i: TLdapAttribute;
 begin
   Data := GridADUC.GetNodeAsPDocVariantData(nil, True);
   if not Assigned(Data) then
-    exit;
-  
-  OnSearch := FrmRSAT.LdapClient.OnSearch;
-  FrmRSAT.LdapClient.OnSearch := nil;
-  try
-    Result := FrmRSAT.LdapClient.SearchObject(Data^.S['objectName'], '', ['userAccountControl']);
-    for i in Result.Attributes.Items do
-    begin
-      if not Assigned(i) then
-         continue;
-      
-      if i.AttributeName = 'userAccountControl' then
-      begin
-        CurrentUAC := StrToInt(i.GetReadable());
-        if (CurrentUAC and 2) = 2 then
-          MenuItem_DisableAccount.Caption := 'Enable Account'
-        else
-          MenuItem_DisableAccount.Caption := 'Disable Account';
-      end;
-    end;
-  finally
-    FrmRSAT.LdapClient.OnSearch := OnSearch;
+  begin
+    MenuItem_DisableAccount.Caption := 'Disable Account';
+    MenuItem_DisableAccount.Enabled := False;
   end;
 end;
 
