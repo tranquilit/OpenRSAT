@@ -565,6 +565,10 @@ msgstr "Νέο αντικείμενο - Επαφή"
 msgid "New object - Group"
 msgstr "Νέο αντικείμενο - Ομάδα"
 
+#: ucommon.rsnewobjectinetorgperson
+msgid "New object - Inet Org. Person"
+msgstr ""
+
 #: ucommon.rsnewobjectou
 msgid "New object - OU"
 msgstr "Νέο αντικείμενο - OU"

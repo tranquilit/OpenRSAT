@@ -582,6 +582,10 @@ msgstr "New object - Contact"
 msgid "New object - Group"
 msgstr "New object - Group"
 
+#: ucommon.rsnewobjectinetorgperson
+msgid "New object - Inet Org. Person"
+msgstr ""
+
 #: ucommon.rsnewobjectou
 msgid "New object - OU"
 msgstr "New object - OU"
