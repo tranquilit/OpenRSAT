@@ -22,6 +22,7 @@ type
     vnotNone,
     vnotUser,
     vnotGroup,
+    vnotInetOrgPerson,
     vnotOrganizationalUnit,
     vnotComputer,
     vnotContact,
@@ -77,6 +78,7 @@ uses
   ufrmnewsite,
   ufrmnewsubnet,
   ufrmnewuser,
+  ufrmnewinetorgperson,
   ucommonui;
 
 {$R *.lfm}
@@ -105,6 +107,7 @@ begin
     vnotComputer: Frame := TFrmNewComputer.Create(Self);
     vnotContact: Frame := TFrmNewContact.Create(Self);
     vnotGroup: Frame := TFrmNewGroup.Create(Self);
+    vnotInetOrgPerson: Frame := TFrmNewInetOrgPerson.Create(Self);
     vnotOrganizationalUnit: Frame := TFrmNewOU.Create(Self);
     vnotUser: Frame := TFrmNewUser.Create(Self);
     vnotVolume: Frame := TFrmNewSharedFolder.Create(Self);

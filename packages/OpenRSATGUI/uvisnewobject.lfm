@@ -10,7 +10,7 @@ object VisNewObject: TVisNewObject
   Constraints.MinWidth = 424
   KeyPreview = True
   Position = poOwnerFormCenter
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.6.0.0'
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   object Panel_Header: TPanel
