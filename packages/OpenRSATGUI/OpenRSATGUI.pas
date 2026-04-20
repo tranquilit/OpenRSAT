@@ -32,7 +32,7 @@ uses
   uvismodifygplink, uvisprofilemanager, uviseditaduccolumns, 
   uvisprofileconfiguration, uvisrootdseinfos, uvisshowrelationship, utheme, 
   ufrmpropertyntauthcertificates, ufrmpropertyunixattributes, 
-  LazarusPackageIntf;
+  ufrmnewinetorgperson, LazarusPackageIntf;
 
 implementation
 
