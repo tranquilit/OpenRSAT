@@ -143,7 +143,7 @@ begin
     try
       Att.Add('objectClass', 'top').Add('person');
       //'organizationalPerson', 'user', 'inetOrgPerson']
-      NewObject.Ldap.Add('CN=' + Edit_FullName.Text + ',' + NewObject.ObjectOU, Att)
+      //NewObject.Ldap.Add('CN=' + Edit_FullName.Text + ',' + NewObject.ObjectOU, Att)
     finally
       FreeAndNil(Att);
     end;
