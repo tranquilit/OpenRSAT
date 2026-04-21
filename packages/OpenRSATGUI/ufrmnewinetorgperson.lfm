@@ -394,7 +394,7 @@ object FrmNewInetOrgPerson: TFrmNewInetOrgPerson
       Checked = True
       State = cbChecked
       TabOrder = 0
-      OnClick = CheckBox_NextLogonClick
+      OnChange = CheckBox_NextLogonChange
     end
     object CheckBox_CannotChange: TCheckBox
       AnchorSideLeft.Control = Panel5
@@ -436,6 +436,56 @@ object FrmNewInetOrgPerson: TFrmNewInetOrgPerson
       BorderSpacing.Top = 8
       Caption = 'Account is disabled'
       TabOrder = 3
+    end
+  end
+  object Panel6: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 192
+    Top = 8
+    Width = 419
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 192
+    ClientWidth = 419
+    TabOrder = 5
+    Visible = False
+    object Label_Validation: TLabel
+      AnchorSideLeft.Control = Panel6
+      AnchorSideTop.Control = Panel6
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 309
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'When you click Finish, the following object will be created:'
+    end
+    object Memo_Properties: TMemo
+      AnchorSideLeft.Control = Panel6
+      AnchorSideTop.Control = Label_Validation
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel6
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Panel6
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 153
+      Top = 31
+      Width = 403
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      ReadOnly = True
+      TabOrder = 0
     end
   end
   object ActionList: TActionList

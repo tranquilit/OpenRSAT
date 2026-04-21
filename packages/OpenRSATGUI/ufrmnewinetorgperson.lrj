@@ -11,5 +11,6 @@
 {"hash":130487524,"name":"tfrmnewinetorgperson.checkbox_cannotchange.caption","sourcebytes":[85,115,101,114,32,99,97,110,110,111,116,32,99,104,97,110,103,101,32,112,97,115,115,119,111,114,100],"value":"User cannot change password"},
 {"hash":47850099,"name":"tfrmnewinetorgperson.checkbox_neverexpires.caption","sourcebytes":[80,97,115,115,119,111,114,100,32,110,101,118,101,114,32,101,120,112,105,114,101,115],"value":"Password never expires"},
 {"hash":43894900,"name":"tfrmnewinetorgperson.checkbox_accountdisabled.caption","sourcebytes":[65,99,99,111,117,110,116,32,105,115,32,100,105,115,97,98,108,101,100],"value":"Account is disabled"},
+{"hash":253659306,"name":"tfrmnewinetorgperson.label_validation.caption","sourcebytes":[87,104,101,110,32,121,111,117,32,99,108,105,99,107,32,70,105,110,105,115,104,44,32,116,104,101,32,102,111,108,108,111,119,105,110,103,32,111,98,106,101,99,116,32,119,105,108,108,32,98,101,32,99,114,101,97,116,101,100,58],"value":"When you click Finish, the following object will be created:"},
 {"hash":347380,"name":"tfrmnewinetorgperson.action_next.caption","sourcebytes":[78,101,120,116],"value":"Next"}
 ]}
