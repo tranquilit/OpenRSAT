@@ -474,13 +474,16 @@ object FrmModuleADUC: TFrmModuleADUC
   object Panel2: TPanel
     AnchorSideLeft.Control = Splitter1
     AnchorSideLeft.Side = asrBottom
-    AnchorSideRight.Control = Splitter2
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
     Left = 175
     Height = 349
     Top = 28
     Width = 625
     Align = alClient
+    Anchors = [akTop, akLeft, akRight]
     AutoSize = True
+    BorderSpacing.Right = 4
     BevelOuter = bvNone
     ClientHeight = 349
     ClientWidth = 625
@@ -549,11 +552,13 @@ object FrmModuleADUC: TFrmModuleADUC
       OnAfterDataChange = GridADUCAfterDataChange
     end
     object Panel4: TPanel
+      AnchorSideRight.Control = GridADUC
+      AnchorSideRight.Side = asrBottom
       Left = 0
       Height = 33
       Top = 0
       Width = 625
-      Align = alTop
+      Anchors = [akTop, akLeft, akRight]
       AutoSize = True
       BevelOuter = bvNone
       ClientHeight = 33
@@ -598,12 +603,14 @@ object FrmModuleADUC: TFrmModuleADUC
       TabOrder = 2
       Visible = False
       object GridAttributes: TTisGrid
+        AnchorSideTop.Side = asrBottom
         AnchorSideRight.Side = asrBottom
         Left = 0
         Height = 312
         Top = 0
         Width = 410
         Align = alClient
+        BorderSpacing.Top = 4
         BorderSpacing.Bottom = 4
         Header.AutoSizeIndex = -1
         Header.Columns = <        
@@ -641,6 +648,22 @@ object FrmModuleADUC: TFrmModuleADUC
         PopupMenuOptions = [pmoShowFind, pmoShowFindNext]
         FilterOptions.CaseInsensitive = True
         OnMouseDown = GridAttributesMouseDown
+      end
+      object TisSearchEdit_GrisAttributes: TTisSearchEdit
+        AnchorSideRight.Side = asrBottom
+        Left = 4
+        Height = 23
+        Top = 4
+        Width = 402
+        Align = alTop
+        BorderSpacing.Left = 4
+        BorderSpacing.Top = 4
+        BorderSpacing.Right = 4
+        ItemHeight = 15
+        Style = csSimple
+        TabOrder = 1
+        Buttons = <>
+        OnSearch = TisSearchEdit_GrisAttributesSearch
       end
     end
     object Splitter2: TSplitter

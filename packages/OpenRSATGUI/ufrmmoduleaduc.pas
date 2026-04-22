@@ -181,6 +181,7 @@ type
     GridADUC: TTisGrid;
     GridAttributes: TTisGrid;
     TisGridHeaderPopupMenu1: TTisGridHeaderPopupMenu;
+    TisSearchEdit_GrisAttributes: TTisSearchEdit;
     TisSearchEdit_TreeADUC: TTisSearchEdit;
     TisSearchEdit_GridADUC: TTisSearchEdit;
     ToolBar1: TToolBar;
@@ -268,6 +269,8 @@ type
     procedure MenuItem_EditColumnsClick(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
     procedure Timer_TreeChangeNodeTimer(Sender: TObject);
+    procedure TisSearchEdit_GrisAttributesSearch(Sender: TObject; 
+      const aText: string);
     procedure TisSearchEdit_TreeADUCSearch(Sender: TObject; const aText: string);
     procedure TisSearchEdit_GridADUCSearch(Sender: TObject; const aText: string);
     procedure ToolButton_AttributesGridClick(Sender: TObject);
@@ -1537,6 +1540,7 @@ var
   NewRow: TDocVariantData;
   VariantData: PDocVariantData;
   LdapResult: TLdapResult;
+  SearchText: RawUtf8;
   a: TLdapAttribute;
   value: RawUtf8;
 begin
@@ -1545,19 +1549,23 @@ begin
   GridAttributes.Clear;
   GridAttributes.BeginUpdate;
   OnSearch := FrmRSAT.LdapClient.OnSearch;
+  SearchText := TisSearchEdit_GrisAttributes.Text;
   try
     FrmRSAT.LdapClient.OnSearch := nil;
-    if Assigned(VariantData) then
-    begin
-      LdapResult := FrmRSAT.LdapClient.SearchObject(VariantData^.S['objectName'], '', ['*']);
-      if not Assigned(LdapResult) then
-         exit;
+    if not Assigned(VariantData) then
+      exit;
+    
+    LdapResult := FrmRSAT.LdapClient.SearchObject(VariantData^.S['objectName'], '', ['*']);
+    if not Assigned(LdapResult) then
+      exit;
 
-      for a in LdapResult.Attributes.Items do
+    for a in LdapResult.Attributes.Items do
+    begin
+      if not Assigned(a) then
+        continue;
+      
+      if SearchText = '' then
       begin
-        if not Assigned(a) then
-          continue;
-        
         NewRow.AddValue('attributes', a.AttributeName); 
         for value in a.GetAllReadable() do
         begin
@@ -1565,12 +1573,25 @@ begin
           GridAttributes.Data.AddItem(NewRow);
         end;
         NewRow.Clear
+      end
+      else
+      begin
+        if Pos(LowerCase(SearchText), LowerCase(a.AttributeName)) > 0 then
+        begin
+          NewRow.AddValue('attributes', a.AttributeName);
+          for value in a.GetAllReadable() do
+          begin
+            NewRow.AddOrUpdateValue('values', value);
+            GridAttributes.Data.AddItem(NewRow);
+          end;
+          NewRow.Clear
+        end; 
       end;
     end;
-    finally
-      GridAttributes.EndUpdate;
-      FrmRSAT.LdapClient.OnSearch := OnSearch;
-      GridAttributes.LoadData();
+  finally
+    GridAttributes.EndUpdate;
+    FrmRSAT.LdapClient.OnSearch := OnSearch;
+    GridAttributes.LoadData();
   end;
 end;
 
@@ -1624,6 +1645,49 @@ begin
   RefreshADUCTreeNode((TreeADUC.Selected as TADUCTreeNode));
   UpdateTreeImages((TreeADUC.Selected as TADUCTreeNode));
   UpdateGridADUC((TreeADUC.Selected as TADUCTreeNode));
+end;
+
+procedure TFrmModuleADUC.TisSearchEdit_GrisAttributesSearch(Sender: TObject; 
+  const aText: string);
+var
+  NewRow: TDocVariantData;
+  OnSearch: TNotifyEvent;
+  Data: PDocVariantData;
+  Result: TLdapResult;
+  item: TLdapAttribute;
+  value: RawUtf8;
+begin
+  NewRow.Init();
+  GridAttributes.BeginUpdate;
+  GridAttributes.Clear;
+  OnSearch := FrmRSAT.LdapClient.OnSearch;
+  try
+    Data := GridADUC.GetNodeAsPDocVariantData(nil, True);
+    Result := FrmRSAT.LdapClient.SearchObject(Data^.S['objectName'], '', ['*']);
+    if not Assigned(Result) then
+      exit;
+
+    for item in Result.Attributes.Items do
+    begin
+      if not Assigned(item) then
+        continue;
+
+      if Pos(LowerCase(aText), LowerCase(item.AttributeName)) > 0 then
+      begin
+        NewRow.AddValue('attributes', item.AttributeName);
+        for value in item.GetAllReadable() do
+        begin
+          NewRow.AddOrUpdateValue('values', value);
+          GridAttributes.Data.AddItem(NewRow);
+        end;
+        NewRow.Clear
+      end;
+    end
+  finally
+    FrmRSAT.LdapClient.OnSearch := OnSearch;
+    GridAttributes.LoadData;
+    GridAttributes.EndUpdate;
+  end;
 end;
 
 procedure TFrmModuleADUC.TisSearchEdit_TreeADUCSearch(Sender: TObject;
