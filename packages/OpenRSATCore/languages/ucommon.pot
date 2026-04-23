@@ -568,6 +568,10 @@ msgstr ""
 msgid "New object - Inet Org. Person"
 msgstr ""
 
+#: ucommon.rsnewobjectmsdsshadowprincipalcontainer
+msgid "New object - msDS-ShadowPrincipalContainer"
+msgstr ""
+
 #: ucommon.rsnewobjectou
 msgid "New object - OU"
 msgstr ""
