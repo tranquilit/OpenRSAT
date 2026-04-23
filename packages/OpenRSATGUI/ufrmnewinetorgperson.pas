@@ -63,6 +63,7 @@ type
   private
     PageID: Integer;
     procedure BuildRecapProperties;
+    procedure BtnOK;
   public
     constructor Create(TheOwner: TComponent); override;
   end;
@@ -97,6 +98,52 @@ begin
     Memo_Properties.Lines.Add(CheckBox_AccountDisabled.Caption);
 end;
 
+procedure TFrmNewInetOrgPerson.BtnOK();
+var
+  NewObject: TVisNewObject;
+  AttList: TLdapAttributeList;
+  Att: TLdapAttribute;
+  DN: String;
+  UAC: TUserAccountControls = [uacNormalAccount]; 
+begin
+  NewObject := (owner as TVisNewObject);
+  AttList := TLdapAttributeList.Create();
+  try
+    Att := AttList.Add(atObjectClass, 'top');
+    Att.Add('person');
+    Att.Add('organizationalPerson');
+    Att.Add('user');
+    Att.Add('inetOrgPerson');
+    
+    AttList.Add(atDisplayName, Edit_FullName.Text);
+    if Edit_FirstName.Text <> '' then
+       AttList.Add(atGivenName, Edit_FirstName.Text);
+    if Edit_Initials.Text <> '' then
+       AttList.Add(atInitials, Edit_Initials.Text);
+    if Edit_LastName.Text <> '' then
+       AttList.Add(atSurname, Edit_LastName.Text);
+    AttList.Add(atUserPrincipalName, FormatUtf8('%%', [Edit_UserLogonName.Text, ComboBox_UserLogonName.Text]));
+    AttList.Add(atSamAccountName, Edit_UserLogonName.Text);
+    
+    AttList.AddUnicodePwd(Edit_Password.Text);
+    if CheckBox_NextLogon.Checked then
+      AttList.Add(atPwdLastSet, '0');
+    if CheckBox_NeverExpires.Checked then
+      Include(UAC, uacPasswordDoNotExpire);
+    if CheckBox_AccountDisabled.Checked then
+      Include(UAC, uacAccountDisable);
+    if UAC <> [] then
+      AttList.Add(atUserAccountControl, UserAccountControlsValue(UAC).ToString());
+    
+    DN := FormatUtf8('CN=%,%', [Edit_FullName.Text, NewObject.ObjectOU]);
+    if not NewObject.Ldap.Add(DN, AttList) then
+      Exit;
+  finally
+    FreeAndNil(Att);
+  end;
+  NewObject.ModalResult := mrOK;    
+end;
+
 procedure TFrmNewInetOrgPerson.Edit_FirstNameChange(Sender: TObject);
 var
   FullName: String;
@@ -110,62 +157,52 @@ begin
 end;
 
 procedure TFrmNewInetOrgPerson.Action_NextExecute(Sender: TObject);
-var
-  NewObject: TVisNewObject;
-  Att: TLdapAttributeList;
 begin
-  if PageID = 0 then
-  begin
-    PageID += 1;
-    Panel1.Visible := False;
-    Panel2.Visible := False;
-    Panel3.Visible := False;
-    Panel4.Visible := True;
-    Panel5.Visible := True;
-  end
-  else if PageID = 1 then
-  begin
-    if Edit_Password.Text <> Edit_Confirm.Text then
+  case (PageID) of
+    0:
     begin
-      ShowMessage('The passwords do not match.');
-      Exit
+      PageID += 1;
+      Panel1.Visible := False;
+      Panel2.Visible := False;
+      Panel3.Visible := False;
+      Panel4.Visible := True;
+      Panel5.Visible := True;
     end;
-    PageID += 1;
-    BuildRecapProperties;
-    Panel4.Visible := False;
-    Panel5.Visible := False;
-    Panel6.Visible := True; 
-  end
-  else if PageID = 2 then
-  begin
-    NewObject := (owner as TVisNewObject);
-    Att := TLdapAttributeList.Create();
-    try
-      Att.Add('objectClass', 'top').Add('person');
-      //'organizationalPerson', 'user', 'inetOrgPerson']
-      //NewObject.Ldap.Add('CN=' + Edit_FullName.Text + ',' + NewObject.ObjectOU, Att)
-    finally
-      FreeAndNil(Att);
+    1:
+    begin
+      if Edit_Password.Text <> Edit_Confirm.Text then
+      begin
+        ShowMessage('The passwords do not match.');
+        Exit
+      end;
+      PageID += 1;
+      BuildRecapProperties;
+      Panel4.Visible := False;
+      Panel5.Visible := False;
+      Panel6.Visible := True; 
     end;
+    2: BtnOK();
   end;
 end;
 
 procedure TFrmNewInetOrgPerson.Action_BackExecute(Sender: TObject);
 begin
   PageID -= 1;
-  if PageID = 0 then
-  begin
-    Panel1.Visible := True;
-    Panel2.Visible := True;
-    Panel3.Visible := True;
-    Panel4.Visible := False;
-    Panel5.Visible := False;
-  end
-  else if PageID = 1 then
-  begin
-    Panel4.Visible := True;
-    Panel5.Visible := True;
-    Panel6.Visible := False;
+  case (PageId) of
+    0:
+    begin
+      Panel1.Visible := True;
+      Panel2.Visible := True;
+      Panel3.Visible := True;
+      Panel4.Visible := False;
+      Panel5.Visible := False;
+    end;
+    1:
+    begin
+      Panel4.Visible := True;
+      Panel5.Visible := True;
+      Panel6.Visible := False;
+    end;
   end;
 end;
 
