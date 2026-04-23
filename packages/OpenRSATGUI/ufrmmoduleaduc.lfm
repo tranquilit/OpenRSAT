@@ -911,6 +911,10 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExecute = Action_NewMsDSShadowPrincipalContainerExecute
       OnUpdate = Action_NewMsDSShadowPrincipalContainerUpdate
     end
+    object Action_NewMsImagingPSPs: TAction
+      OnExecute = Action_NewMsImagingPSPsExecute
+      OnUpdate = Action_NewMsImagingPSPsUpdate
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
@@ -1029,7 +1033,8 @@ object FrmModuleADUC: TFrmModuleADUC
         Caption = 'msDS-ShadowPrincipalContainer'
       end
       object MenuItem_NewMsImagingPSPs: TMenuItem
-        Caption = 'MenuItem_NewMsImagingPSPs'
+        Action = Action_NewMsImagingPSPs
+        Caption = 'msImaging-PSPs'
       end
       object MenuItem_NewMsImagingPostScanProcess: TMenuItem
         Caption = 'MenuItem_NewMsImagingPostScanProcess'

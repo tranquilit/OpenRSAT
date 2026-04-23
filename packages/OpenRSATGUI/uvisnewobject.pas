@@ -24,6 +24,7 @@ type
     vnotGroup,
     vnotInetOrgPerson,
     vnotMsDSShadowPrincipalContainer,
+    vnotMsImagingPSPs,
     vnotOrganizationalUnit,
     vnotComputer,
     vnotContact,
@@ -81,6 +82,7 @@ uses
   ufrmnewuser,
   ufrmnewinetorgperson,
   ufrmnewmsdsshadowprincipalcontainer,
+  ufrmnewmsimagingpsps,
   ucommonui;
 
 {$R *.lfm}
@@ -111,6 +113,7 @@ begin
     vnotGroup: Frame := TFrmNewGroup.Create(Self);
     vnotInetOrgPerson: Frame := TFrmNewInetOrgPerson.Create(Self);
     vnotMsDSShadowPrincipalContainer: Frame := TFrmNewMsDSShadowPrincipalContainer.Create(Self);
+    vnotMsImagingPSPs: Frame := TFrmNewMsImagingPSPs.Create(Self); 
     vnotOrganizationalUnit: Frame := TFrmNewOU.Create(Self);
     vnotUser: Frame := TFrmNewUser.Create(Self);
     vnotVolume: Frame := TFrmNewSharedFolder.Create(Self);

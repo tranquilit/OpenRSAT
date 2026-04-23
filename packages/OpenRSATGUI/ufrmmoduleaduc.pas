@@ -51,6 +51,7 @@ type
   { TFrmModuleADUC }
 
   TFrmModuleADUC = class(TFrameModule)
+    Action_NewMsImagingPSPs: TAction;
     Action_NewMsDSShadowPrincipalContainer: TAction;
     Action_CreateKeyTab: TAction;
     Action_PrepareDJOIN: TAction;
@@ -91,6 +92,7 @@ type
     Action_TaskAddToAGroup: TAction;
     Action_TaskCopy: TAction;
     Action_TaskDelegateControl: TAction;
+    Action_TaskDisableEnableAccount: TAction;
     Action_TaskDisableEnableAccount: TAction;
     Action_TaskManage: TAction;
     Action_TaskMove: TAction;
@@ -235,6 +237,8 @@ type
     procedure Action_NewInetOrgPersonUpdate(Sender: TObject);
     procedure Action_NewMsDSShadowPrincipalContainerExecute(Sender: TObject);
     procedure Action_NewMsDSShadowPrincipalContainerUpdate(Sender: TObject);
+    procedure Action_NewMsImagingPSPsExecute(Sender: TObject);
+    procedure Action_NewMsImagingPSPsUpdate(Sender: TObject);
     procedure Action_NewOUExecute(Sender: TObject);
     procedure Action_NewOUUpdate(Sender: TObject);
     procedure Action_NewUserExecute(Sender: TObject);
@@ -1103,6 +1107,25 @@ procedure TFrmModuleADUC.Action_NewMsDSShadowPrincipalContainerUpdate(
   Sender: TObject);
 begin
   Action_NewMsDSShadowPrincipalContainer.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end; 
+
+procedure TFrmModuleADUC.Action_NewMsImagingPSPsExecute(Sender: TObject);
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewMsImagingPSPs.Caption]);
+
+  With TVisNewObject.Create(Self, vnotMsImagingPSPs, GetFocusedObject(True), FrmRSAT.LdapClient.DefaultDN) do
+  begin
+    PageCount := 1;
+    Ldap := FrmRSAT.LdapClient;
+    if ShowModal = mrOK then
+      Action_Refresh.Execute;
+  end;
+end; 
+
+procedure TFrmModuleADUC.Action_NewMsImagingPSPsUpdate(Sender: TObject);
+begin
+  Action_NewMsImagingPSPs.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end; 
 
 procedure TFrmModuleADUC.Action_NewOUExecute(Sender: TObject);
