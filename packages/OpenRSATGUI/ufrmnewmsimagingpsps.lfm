@@ -1,0 +1,65 @@
+object FrmNewMsImagingPSPs: TFrmNewMsImagingPSPs
+  Left = 0
+  Height = 240
+  Top = 0
+  Width = 320
+  ClientHeight = 240
+  ClientWidth = 320
+  LCLVersion = '4.6.0.0'
+  TabOrder = 0
+  DesignTop = 133
+  object Panel1: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 70
+    Top = 8
+    Width = 304
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 70
+    ClientWidth = 304
+    TabOrder = 0
+    object Label_cn: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 13
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'cn'
+    end
+    object Edit_cn: TEdit
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Label_cn
+      AnchorSideTop.Side = asrBottom
+      AnchorSideBottom.Control = Panel1
+      AnchorSideBottom.Side = asrBottom
+      Left = 8
+      Height = 23
+      Top = 31
+      Width = 176
+      Anchors = [akTop, akLeft, akBottom]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 16
+      TabOrder = 0
+    end
+  end
+  object ActionList: TActionList
+    Left = 264
+    Top = 184
+    object Action_Next: TAction
+      OnExecute = Action_NextExecute
+      OnUpdate = Action_NextUpdate
+    end
+  end
+end

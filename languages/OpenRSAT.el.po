@@ -2,6 +2,9 @@
 msgid "Next"
 msgstr ""
 
+#: tfrmnewmsimagingpsps.label_cn.caption
+msgid "cn"
+
 #: tfrmnewinetorgperson.label_firstname.caption
 msgid "First name:"
 msgstr ""

@@ -4,6 +4,9 @@ msgstr ""
 
 #: tfrmnewinetorgperson.label_firstname.caption
 msgid "First name:"
+
+#: tfrmnewmsimagingpsps.label_cn.caption
+msgid "cn"
 msgstr ""
 
 #: tfrmnewinetorgperson.label_fullname.caption
