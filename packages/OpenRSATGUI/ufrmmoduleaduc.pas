@@ -51,6 +51,7 @@ type
   { TFrmModuleADUC }
 
   TFrmModuleADUC = class(TFrameModule)
+    Action_NewMsDSShadowPrincipalContainer: TAction;
     Action_CreateKeyTab: TAction;
     Action_PrepareDJOIN: TAction;
     Action_ShowRelationShip: TAction;
@@ -232,6 +233,8 @@ type
     procedure Action_NewGroupUpdate(Sender: TObject);
     procedure Action_NewInetOrgPersonExecute(Sender: TObject);
     procedure Action_NewInetOrgPersonUpdate(Sender: TObject);
+    procedure Action_NewMsDSShadowPrincipalContainerExecute(Sender: TObject);
+    procedure Action_NewMsDSShadowPrincipalContainerUpdate(Sender: TObject);
     procedure Action_NewOUExecute(Sender: TObject);
     procedure Action_NewOUUpdate(Sender: TObject);
     procedure Action_NewUserExecute(Sender: TObject);
@@ -1079,6 +1082,27 @@ end;
 procedure TFrmModuleADUC.Action_NewInetOrgPersonUpdate(Sender: TObject);
 begin
   Action_NewInetOrgPerson.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end; 
+
+procedure TFrmModuleADUC.Action_NewMsDSShadowPrincipalContainerExecute(
+  Sender: TObject);
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewMsDSShadowPrincipalContainer.Caption]);
+
+  With TVisNewObject.Create(Self, vnotMsDSShadowPrincipalContainer, GetFocusedObject(True), FrmRSAT.LdapClient.DefaultDN) do
+  begin
+    PageCount := 1;
+    Ldap := FrmRSAT.LdapClient;
+    if ShowModal = mrOK then
+      Action_Refresh.Execute;
+  end;
+end; 
+
+procedure TFrmModuleADUC.Action_NewMsDSShadowPrincipalContainerUpdate(
+  Sender: TObject);
+begin
+  Action_NewMsDSShadowPrincipalContainer.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end; 
 
 procedure TFrmModuleADUC.Action_NewOUExecute(Sender: TObject);
