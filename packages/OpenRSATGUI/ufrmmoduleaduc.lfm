@@ -906,6 +906,11 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExecute = Action_CreateKeyTabExecute
       OnUpdate = Action_CreateKeyTabUpdate
     end
+    object Action_NewMsDSShadowPrincipalContainer: TAction
+      Caption = 'Action_NewMsDSShadowPrincipalContainer'
+      OnExecute = Action_NewMsDSShadowPrincipalContainerExecute
+      OnUpdate = Action_NewMsDSShadowPrincipalContainerUpdate
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
@@ -1017,10 +1022,11 @@ object FrmModuleADUC: TFrmModuleADUC
         Caption = 'MenuItem_NewMsDSResourcePropertyList'
       end
       object MenuItem_NewMsDSShadowPrincipal: TMenuItem
-        Caption = 'MenuItem_NewMsDSShadowPrincipal'
+        Caption = 'Action_NewMsDSShadowPrincipalContainer'
       end
       object MenuItem_NewMsDSShadowPrincipalContainer: TMenuItem
-        Caption = 'MenuItem_NewMsDSShadowPrincipalContainer'
+        Action = Action_NewMsDSShadowPrincipalContainer
+        Caption = 'msDS-ShadowPrincipalContainer'
       end
       object MenuItem_NewMsImagingPSPs: TMenuItem
         Caption = 'MenuItem_NewMsImagingPSPs'
