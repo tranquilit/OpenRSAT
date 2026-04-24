@@ -1,9 +1,15 @@
 program openrsattests;
 
 uses
+  {$IFDEF UNIX}
+  cthreads,
+  {$ENDIF}
+  interfaces,
+  Forms,
   mormot.core.test,
   ucommon,
-  uproperty;
+  uproperty,
+  uvisadvancedsecuritytest;
 
 type
 
@@ -20,11 +26,17 @@ procedure TOpenRSATTests.Units;
 begin
   AddCase([
     TCommonTests,
-    TPropertyTests
+    TPropertyTests,
+    TVisAdvancedSecurityTest,
+    TSidCacheTest,
+    TGuidCacheTest
   ]);
 end;
 
 begin
+  RequireDerivedFormResource := True;
+  Application.Initialize;
+  Application.ShowMainForm := False;
   TOpenRSATTests.RunAsConsole('OpenRSAT Regression Tests');
 end.
 

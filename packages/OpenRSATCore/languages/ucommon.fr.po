@@ -1,3 +1,6 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
 #: ucommon.rsaccountunlocked
 msgid "Account Unlock"
 msgstr "Déverrouillage du compte"
@@ -506,6 +509,14 @@ msgstr "Ce compte est actuellement bloqué sur ce contrôleur de domaine Active 
 msgid "The server detected some kind of circular reference in the course of processing an operation."
 msgstr "Le serveur a détecté une sorte de référence circulaire au cours du traitement d'une opération."
 
+#: ucommon.rsmissingldapclient
+msgid "Missing LdapClient."
+msgstr ""
+
+#: ucommon.rsmissingnodedata
+msgid "Missing NodeData."
+msgstr ""
+
 #: ucommon.rsmoduleadsidisplayname
 msgid "Services and Interfaces"
 msgstr "Services et Interfaces"
@@ -864,6 +875,7 @@ msgid "The request time limit has been reached."
 msgstr "La limite de temps de la requête a été atteint."
 
 #: ucommon.rstitleadvancedsecurity
+msgctxt "ucommon.rstitleadvancedsecurity"
 msgid "Advanced Security Settings for %"
 msgstr "Paramètres de sécurité avancés pour %"
 
@@ -942,6 +954,12 @@ msgstr "Le serveur n'est pas disposé à traiter l'opération demandée pour une
 #: ucommon.rsusecurrentcreds
 msgid "Current user credentials"
 msgstr "Identifiants actuels de l'utilisateur"
+
+#: ucommon.rsvisadvancedsecuritytitle
+#, fuzzy
+msgctxt "ucommon.rsvisadvancedsecuritytitle"
+msgid "Advanced Security Settings for %"
+msgstr "Paramètres de sécurité avancés pour %"
 
 #: ucommon.rswarning
 msgid "Warning"

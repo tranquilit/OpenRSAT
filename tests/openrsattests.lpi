@@ -27,6 +27,64 @@
             <IncludeFiles Value="$(ProjOutDir)"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
+          <CodeGeneration>
+            <Optimizations>
+              <OptimizationLevel Value="3"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <DebugInfoType Value="dsDwarf3"/>
+            </Debugging>
+          </Linking>
+        </CompilerOptions>
+      </Item>
+      <Item Name="test_linux_x64">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="openrsattests"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir)"/>
+            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <CodeGeneration>
+            <TargetCPU Value="x86_64"/>
+            <TargetOS Value="linux"/>
+            <Optimizations>
+              <OptimizationLevel Value="3"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <DebugInfoType Value="dsDwarf3"/>
+            </Debugging>
+          </Linking>
+        </CompilerOptions>
+      </Item>
+      <Item Name="test_macos_intel">
+        <MacroValues Count="1">
+          <Macro1 Name="LCLWidgetType" Value="cocoa"/>
+        </MacroValues>
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value="openrsattests"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir)"/>
+            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <CodeGeneration>
+            <TargetCPU Value="x86_64"/>
+            <TargetOS Value="darwin"/>
+            <Optimizations>
+              <OptimizationLevel Value="3"/>
+            </Optimizations>
+          </CodeGeneration>
           <Linking>
             <Debugging>
               <DebugInfoType Value="dsDwarf3"/>
@@ -35,7 +93,7 @@
         </CompilerOptions>
       </Item>
       <SharedMatrixOptions Count="1">
-        <Item1 ID="385609100261" Modes="test" Value="-dOPENRSATTESTS"/>
+        <Item1 ID="385609100261" Modes="test,test_linux_x64,test_macos_intel" Value="-dOPENRSATTESTS"/>
       </SharedMatrixOptions>
     </BuildModes>
     <PublishOptions>
@@ -46,6 +104,9 @@
       <FormatVersion Value="2"/>
     </RunParams>
     <RequiredPackages>
+      <Item>
+        <PackageName Value="OpenRSATGUI"/>
+      </Item>
       <Item>
         <PackageName Value="OpenRSATCore"/>
       </Item>
@@ -60,6 +121,10 @@
       </Unit>
       <Unit>
         <Filename Value="utestvispropertylist.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="uvisadvancedsecuritytest.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>
@@ -90,6 +155,18 @@
       </Item>
       <Item>
         <Name Value="EFOpenError"/>
+      </Item>
+      <Item>
+        <Name Value="TVisAdvancedSecurityTestException"/>
+      </Item>
+      <Item>
+        <Name Value="TVisAdvancedSecurityException"/>
+      </Item>
+      <Item>
+        <Name Value="TVisAdvancedSecurityMissingNodeDataException"/>
+      </Item>
+      <Item>
+        <Name Value="TVisAdvancedSecurityMissingLdapClientException"/>
       </Item>
     </Exceptions>
   </Debugging>

@@ -488,6 +488,14 @@ msgstr ""
 msgid "The server detected some kind of circular reference in the course of processing an operation."
 msgstr ""
 
+#: ucommon.rsmissingldapclient
+msgid "Missing LdapClient."
+msgstr ""
+
+#: ucommon.rsmissingnodedata
+msgid "Missing NodeData."
+msgstr ""
+
 #: ucommon.rsmoduleadsidisplayname
 msgid "Services and Interfaces"
 msgstr ""
@@ -846,6 +854,7 @@ msgid "The request time limit has been reached."
 msgstr ""
 
 #: ucommon.rstitleadvancedsecurity
+msgctxt "ucommon.rstitleadvancedsecurity"
 msgid "Advanced Security Settings for %"
 msgstr ""
 
@@ -921,6 +930,11 @@ msgstr ""
 
 #: ucommon.rsusecurrentcreds
 msgid "Current user credentials"
+msgstr ""
+
+#: ucommon.rsvisadvancedsecuritytitle
+msgctxt "ucommon.rsvisadvancedsecuritytitle"
+msgid "Advanced Security Settings for %"
 msgstr ""
 
 #: ucommon.rswarning

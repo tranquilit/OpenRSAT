@@ -8,7 +8,7 @@ uses
   Classes,
   SysUtils,
   mormot.core.log,
-  {$IFDEF OPENRSATTESTS}
+  {$IFDEF OPENRSATTESTSOLD}
   mormot.core.test,
   {$ENDIF}
   uvisproperties,
@@ -38,7 +38,7 @@ type
     function GetNames: TStringArray;
   end;
 
-  {$IFDEF OPENRSATTESTS}
+  {$IFDEF OPENRSATTESTSOLD}
 
   { TTestVisPropertiesList }
 
@@ -221,7 +221,7 @@ begin
     Insert(fItems[i].Caption, result, i);
 end;
 
-{$IFDEF OPENRSATTESTS}
+{$IFDEF OPENRSATTESTSOLD}
 
 { TTestVisPropertiesList }
 

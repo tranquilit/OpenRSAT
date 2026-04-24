@@ -1,3 +1,6 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
 #: ucommon.rsaccountunlocked
 msgid "Account Unlock"
 msgstr "Ξεκλείδωμα λογαριασμού"
@@ -489,6 +492,14 @@ msgstr ""
 msgid "The server detected some kind of circular reference in the course of processing an operation."
 msgstr ""
 
+#: ucommon.rsmissingldapclient
+msgid "Missing LdapClient."
+msgstr ""
+
+#: ucommon.rsmissingnodedata
+msgid "Missing NodeData."
+msgstr ""
+
 #: ucommon.rsmoduleadsidisplayname
 msgid "Services and Interfaces"
 msgstr "Υπηρεσίες και Διεπαφές"
@@ -847,6 +858,7 @@ msgid "The request time limit has been reached."
 msgstr "Το όριο χρόνου αιτήματος έχει επιτευχθεί."
 
 #: ucommon.rstitleadvancedsecurity
+msgctxt "ucommon.rstitleadvancedsecurity"
 msgid "Advanced Security Settings for %"
 msgstr "Προηγμένες Ρυθμίσεις Ασφαλείας για %"
 
@@ -925,6 +937,12 @@ msgstr ""
 #: ucommon.rsusecurrentcreds
 msgid "Current user credentials"
 msgstr "Στοιχεία τρέχοντος χρήστη"
+
+#: ucommon.rsvisadvancedsecuritytitle
+#, fuzzy
+msgctxt "ucommon.rsvisadvancedsecuritytitle"
+msgid "Advanced Security Settings for %"
+msgstr "Προηγμένες Ρυθμίσεις Ασφαλείας για %"
 
 #: ucommon.rswarning
 msgid "Warning"

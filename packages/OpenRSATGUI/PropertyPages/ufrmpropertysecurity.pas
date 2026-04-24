@@ -87,18 +87,16 @@ procedure TFrmPropertySecurity.Action_AdvancedExecute(Sender: TObject);
 var
   Vis: TVisAdvancedSecurity;
 begin
-  Vis := TVisAdvancedSecurity.Create(self, fProperty.LdapClient, fProperty.SecurityDescriptor, fProperty.DistinguishedName, fProperty.LdapClient.DefaultDN());
+  Vis := TVisAdvancedSecurity.Create(Self);
   try
-    Vis.Caption := FormatUtf8(rsTitleAdvancedSecurity, [fProperty.GetReadable('name')]);
-    if Vis.ShowModal() <> mrOK then
-      Exit;
+    Vis.ObjectDN := fProperty.distinguishedName;
+    vis.ObjectName := fProperty.name;
+    Vis.SecurityDescriptor := fProperty.SecurityDescriptor^;
+    Vis.ShowModal;
+    fProperty.SecurityDescriptor := @Vis.SecurityDescriptor;
   finally
     FreeAndNil(Vis);
   end;
-
-  // Update security descriptor binary value
-  fProperty.SecurityDescriptor := fProperty.SecurityDescriptor;
-  SecurityFillListUser();
 end;
 
 procedure TFrmPropertySecurity.Timer_TisGridSearchTimer(Sender: TObject);

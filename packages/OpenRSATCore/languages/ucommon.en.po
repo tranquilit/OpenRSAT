@@ -1,3 +1,6 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
 #: ucommon.rsaccountunlocked
 msgid "Account Unlock"
 msgstr "Account Unlock"
@@ -506,6 +509,14 @@ msgstr "This account is currently locked out on this Active Directory Domain Con
 msgid "The server detected some kind of circular reference in the course of processing an operation."
 msgstr "The server detected some kind of circular reference in the course of processing an operation."
 
+#: ucommon.rsmissingldapclient
+msgid "Missing LdapClient."
+msgstr ""
+
+#: ucommon.rsmissingnodedata
+msgid "Missing NodeData."
+msgstr ""
+
 #: ucommon.rsmoduleadsidisplayname
 msgid "Services and Interfaces"
 msgstr "Services and Interfaces"
@@ -864,6 +875,7 @@ msgid "The request time limit has been reached."
 msgstr "The request time limit has been reached."
 
 #: ucommon.rstitleadvancedsecurity
+msgctxt "ucommon.rstitleadvancedsecurity"
 msgid "Advanced Security Settings for %"
 msgstr "Advanced Security Settings for %"
 
@@ -942,6 +954,12 @@ msgstr "The server is not willing to process the requested operation for some re
 #: ucommon.rsusecurrentcreds
 msgid "Current user credentials"
 msgstr "Current user credentials"
+
+#: ucommon.rsvisadvancedsecuritytitle
+#, fuzzy
+msgctxt "ucommon.rsvisadvancedsecuritytitle"
+msgid "Advanced Security Settings for %"
+msgstr "Advanced Security Settings for %"
 
 #: ucommon.rswarning
 msgid "Warning"
