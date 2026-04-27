@@ -132,6 +132,7 @@ resourcestring
   rsNewObjectInetOrgPerson = 'New object - Inet Org. Person';
   rsNewObjectMsDSKeyCredential = 'New object - msDS-KeyCredential';
   rsNewObjectMsDSShadowPrincipalContainer = 'New object - msDS-ShadowPrincipalContainer';
+  rsNewObjectMsDSResourcePropertyList = 'New object - msDS-ResourcePropertyList';
   rsNewObjectSite = 'New object - Site';
   rsNewObjectSharedFolder = 'New object - Shared Folder';
   rsNewObjectSubnet = 'New object - Subnet';

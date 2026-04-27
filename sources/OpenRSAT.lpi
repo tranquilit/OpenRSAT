@@ -484,6 +484,12 @@
         <ComponentName Value="VisAbout"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
+      <Unit>
+        <Filename Value="..\packages\OpenRSATGUI\ufrmnewmsdsresourcepropertylist.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrmNewMsDSResourcePropertyList"/>
+        <ResourceBaseClass Value="Frame"/>
+      </Unit>
     </Units>
     <Debugger>
       <BackendConv>

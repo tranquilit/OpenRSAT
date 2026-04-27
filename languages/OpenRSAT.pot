@@ -1,6 +1,10 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: tfrmnewmsdsresourcepropertylist.label_cn.caption
+msgid "cn"
+msgstr ""
+
 #: tvisabout.caption
 msgctxt "tvisabout.caption"
 msgid "About"
