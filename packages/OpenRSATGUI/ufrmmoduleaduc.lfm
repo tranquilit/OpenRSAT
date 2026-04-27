@@ -915,6 +915,10 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExecute = Action_NewMsImagingPSPsExecute
       OnUpdate = Action_NewMsImagingPSPsUpdate
     end
+    object Action_NewMsDSKeyCredential: TAction
+      OnExecute = Action_NewMsDSKeyCredentialExecute
+      OnUpdate = Action_NewMsDSKeyCredentialUpdate
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
@@ -1017,7 +1021,8 @@ object FrmModuleADUC: TFrmModuleADUC
         Caption = 'MenuItem_NewMsDSClaimType'
       end
       object MenuItem_NewMsDSKeyCredential: TMenuItem
-        Caption = 'MenuItem_NewMsDSKeyCredential'
+        Action = Action_NewMsDSKeyCredential
+        Caption = 'msDS-KeyCredential'
       end
       object MenuItem_NewMsDSResourceProperty: TMenuItem
         Caption = 'MenuItem_NewMsDSResourceProperty'

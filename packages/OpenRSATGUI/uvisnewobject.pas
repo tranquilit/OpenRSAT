@@ -23,6 +23,7 @@ type
     vnotUser,
     vnotGroup,
     vnotInetOrgPerson,
+    vnotMsDSKeyCredential,
     vnotMsDSShadowPrincipalContainer,
     vnotMsImagingPSPs,
     vnotOrganizationalUnit,
@@ -81,6 +82,7 @@ uses
   ufrmnewsubnet,
   ufrmnewuser,
   ufrmnewinetorgperson,
+  ufrmnewmsdskeycredential,
   ufrmnewmsdsshadowprincipalcontainer,
   ufrmnewmsimagingpsps,
   ucommonui;
@@ -112,6 +114,7 @@ begin
     vnotContact: Frame := TFrmNewContact.Create(Self);
     vnotGroup: Frame := TFrmNewGroup.Create(Self);
     vnotInetOrgPerson: Frame := TFrmNewInetOrgPerson.Create(Self);
+    vnotMsDSKeyCredential: Frame := TFrmNewMsDSKeyCredential.Create(Self);
     vnotMsDSShadowPrincipalContainer: Frame := TFrmNewMsDSShadowPrincipalContainer.Create(Self);
     vnotMsImagingPSPs: Frame := TFrmNewMsImagingPSPs.Create(Self); 
     vnotOrganizationalUnit: Frame := TFrmNewOU.Create(Self);
