@@ -30,8 +30,7 @@ uses
   mormot.crypt.openssl,
   // Rsat
   uvisopenrsat,
-  ufrmnewinetorgperson,
-  ufrmnewmsimagingpsps;
+  ufrmnewinetorgperson;
 
 const
   LOG_TRC = LOG_NFO + [sllTrace];

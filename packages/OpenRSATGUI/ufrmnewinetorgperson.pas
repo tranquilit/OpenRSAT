@@ -130,6 +130,8 @@ begin
       AttList.Add(atPwdLastSet, '0');
     if CheckBox_NeverExpires.Checked then
       Include(UAC, uacPasswordDoNotExpire);
+    if CheckBox_CannotChange.Checked then
+      Include(UAC, uacPasswordCannotChange);
     if CheckBox_AccountDisabled.Checked then
       Include(UAC, uacAccountDisable);
     if UAC <> [] then

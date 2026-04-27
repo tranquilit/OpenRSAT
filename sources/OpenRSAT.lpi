@@ -484,13 +484,6 @@
         <ComponentName Value="VisAbout"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
-      <Unit>
-        <Filename Value="..\packages\OpenRSATGUI\ufrmnewmsimagingpsps.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="FrmNewMsImagingPSPs"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Frame"/>
-      </Unit>
     </Units>
     <Debugger>
       <BackendConv>

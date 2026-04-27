@@ -130,6 +130,7 @@ resourcestring
   rsNewObjectGroup = 'New object - Group';
   rsNewObjectOU = 'New object - OU';
   rsNewObjectInetOrgPerson = 'New object - Inet Org. Person';
+  rsNewObjectMsDSKeyCredential = 'New object - msDS-KeyCredential';
   rsNewObjectMsDSShadowPrincipalContainer = 'New object - msDS-ShadowPrincipalContainer';
   rsNewObjectSite = 'New object - Site';
   rsNewObjectSharedFolder = 'New object - Shared Folder';
