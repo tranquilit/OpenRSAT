@@ -257,6 +257,7 @@ type
     procedure Action_TaskAddToAGroupExecute(Sender: TObject);
     procedure Action_TaskAddToAGroupUpdate(Sender: TObject);
     procedure Action_TaskDisableEnableAccountExecute(Sender: TObject);
+    procedure Action_TaskDisableEnableAccountUpdate(Sender: TObject);
     procedure Action_TaskMoveExecute(Sender: TObject);
     procedure Action_TaskMoveUpdate(Sender: TObject);
     procedure Action_TaskResetPasswordExecute(Sender: TObject);
@@ -267,7 +268,6 @@ type
     procedure GridAttributesMouseDown(Sender: TObject; Button: TMouseButton; 
       Shift: TShiftState; X, Y: Integer);
     procedure MenuItem_EditColumnsClick(Sender: TObject);
-    procedure PopupMenu1Popup(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
     procedure Timer_TreeChangeNodeTimer(Sender: TObject);
     procedure TisSearchEdit_TreeADUCSearch(Sender: TObject; const aText: string);
@@ -1486,48 +1486,69 @@ procedure TFrmModuleADUC.Action_TaskDisableEnableAccountExecute(Sender: TObject)
 var
   Data: PDocVariantData;
   LdapResult: TLdapResult;
-  ObjectName, CurrentUAC, NewState: RawUtf8;
-  NewUAC: TLdapAttribute;
-  ConvertValue: integer;
-  a: TLdapAttribute;
+  UAC: TUserAccountControls;
+  UACAttr, AttrName: TLdapAttribute;
+  Obj, Value: RawUtf8;
 begin
   Data := GridADUC.GetNodeAsPDocVariantData(nil, True);
   if not Assigned(Data) then
     Exit;
-
+  
   LdapResult := FrmRSAT.LdapClient.SearchObject(Data^.S['objectName'],
     '', ['name', 'userAccountControl']);
-  for a in LdapResult.Attributes.Items do
+  if not Assigned(LdapResult) then
+    exit;
+
+  AttrName := LdapResult.Find('name');
+  UACAttr := LdapResult.Find('userAccountControl');
+  if not Assigned(UACAttr) or not Assigned(AttrName) then
+    exit;
+
+  Obj := AttrName.GetReadable();
+  UAC := UserAccountControlsFromText(UACAttr.GetReadable());
+  if uacAccountDisable in UAC then
   begin
-    if not Assigned(a) then
-      continue;
-
-    if a.AttributeName = 'name' then
-      ObjectName := a.GetReadable()
-    else if a.AttributeName = 'userAccountControl' then
-    begin
-      CurrentUAC := a.GetReadable();
-      NewUAC := TLdapAttribute.Create(a.AttributeName, atUserAccountControl);
-      try
-        if (StrToInt(CurrentUAC) and 2) = 2 then
-        begin
-           NewUAC.AddFmt('%', [StrToInt(CurrentUAC) - 2]);
-           NewState := 'enabled';
-        end
-        else
-        begin
-           NewUAC.AddFmt('%', [StrToInt(CurrentUAC) + 2]);
-           NewState := 'disabled';
-        end;
-
-        FrmRSAT.LdapClient.Modify(Data^.S['objectName'], lmoReplace, NewUAC);
-        ShowMessage(FormatUtf8('Object % has been %.', [ObjectName, NewState]));
-      finally
-        FreeAndNil(NewUAC);
-        UpdateGridADUC(nil);
-      end;
-    end;
+    Exclude(UAC, uacAccountDisable);
+    Value := 'enabled';
+  end
+  else
+  begin
+    Include(UAC, uacAccountDisable);
+    Value := 'disabled';
   end;
+
+  UACAttr.Clear;
+  UACAttr.Add(IntToStr(UserAccountControlsValue(UAC)));
+  if not FrmRSAT.LdapClient.Modify(Data^.S['objectName'], lmoReplace, UACAttr) then
+    exit;
+  
+  ShowMessage(FormatUtf8('Object % has been %', [Obj, Value]));
+  UpdateGridADUC(nil);
+end;
+
+procedure TFrmModuleADUC.Action_TaskDisableEnableAccountUpdate(Sender: TObject);
+var
+  Data: Integer;
+  UAC: TUserAccountControls;
+begin
+  if not Assigned(GridADUC.FocusedRow) or not GridADUC.FocusedRow^.Exists('userAccountControl') then
+  begin
+    Action_TaskDisableEnableAccount.Enabled := False; 
+    exit;
+  end;
+
+  Data := GridADUC.FocusedRow^.I['userAccountControl'];
+  if Data = 0 then
+  begin
+    Action_TaskDisableEnableAccount.Enabled := False;
+    exit;
+  end;
+  
+  Action_TaskDisableEnableAccount.Enabled := True;
+  if uacAccountDisable in TUserAccountControls(Data) then
+    Action_TaskDisableEnableAccount.Caption := 'Enable Account'
+  else
+    Action_TaskDisableEnableAccount.Caption := 'Disable Account';
 end;
 
 procedure TFrmModuleADUC.Action_TaskMoveExecute(Sender: TObject);
@@ -1589,24 +1610,8 @@ var
   LdapResult: TLdapResult;
   a: TLdapAttribute;
   value: RawUtf8;
-  
-  procedure checkIfUAC(Attribute: TLdapAttribute);
-  var
-    CurrentUAC: LongInt;
-  begin
-    if Attribute.AttributeName = 'userAccountControl' then
-    begin
-      MenuItem_DisableAccount.Enabled := True;
-      CurrentUAC := StrToInt(Attribute.GetReadable());
-      if (CurrentUAC and 2) = 2 then
-        MenuItem_DisableAccount.Caption := 'Enable Account'
-      else
-        MenuItem_DisableAccount.Caption := 'Disable Account';
-      end; 
-  end;
-
 begin
-  if not GridAttributes.Visible then
+  if not Panel5.Visible then
      exit;
 
   NewRow.Init();
@@ -1627,8 +1632,6 @@ begin
         if not Assigned(a) then
           continue;
         
-        checkIfUAC(a);
-
         NewRow.AddValue('attributes', a.AttributeName); 
         for value in a.GetAllReadable() do
         begin
@@ -1677,18 +1680,6 @@ begin
     end;
   finally
     FreeAndNil(VisEditColumns);
-  end;
-end;
-
-procedure TFrmModuleADUC.PopupMenu1Popup(Sender: TObject);
-var
-  Data: PDocVariantData;
-begin
-  Data := GridADUC.GetNodeAsPDocVariantData(nil, True);
-  if not Assigned(Data) then
-  begin
-    MenuItem_DisableAccount.Caption := 'Disable Account';
-    MenuItem_DisableAccount.Enabled := False;
   end;
 end;
 
@@ -1769,6 +1760,7 @@ begin
   begin
     Panel5.Visible := True;
     Splitter2.Visible := True;
+    UpdateGridADUC(nil);
   end;
 end;
 
@@ -2808,7 +2800,7 @@ begin
       FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
     FrmRSAT.LdapClient.OnSearch := @OnSearchEventFillGrid;
     repeat
-      if not FrmRSAT.LdapClient.Search(DistinguishedName, False, Filter, fModuleAduc.ADUCOption.GridAttributesFilter) then
+      if not FrmRSAT.LdapClient.Search(DistinguishedName, False, Filter, Concat(fModuleAduc.ADUCOption.GridAttributesFilter, ['userAccountControl'])) then
         Exit;
       Inc(PageCount);
     until (FrmRSAT.LdapClient.SearchCookie = '') or (PageCount = fModuleAduc.ADUCOption.SearchPageNumber);
@@ -3145,6 +3137,7 @@ begin
         if not Assigned(SearchResultItem) or (SearchResultItem.Attributes.Count <= 0) then
           Continue;
         NewRow.AddValue('objectName', SearchResultItem.ObjectName);
+        NewRow.AddValue('userAccountControl', SearchResultItem.Attributes.Find('userAccountControl').GetReadable());
         for AttributeItem in SearchResultItem.Attributes.Items do
         begin
           if not Assigned(AttributeItem) then
