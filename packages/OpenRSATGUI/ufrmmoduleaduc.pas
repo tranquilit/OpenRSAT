@@ -247,6 +247,8 @@ type
     procedure Action_NewOUUpdate(Sender: TObject);
     procedure Action_NewResourcePropertyListExecute(Sender: TObject);
     procedure Action_NewResourcePropertyListUpdate(Sender: TObject);
+    procedure Action_NewSharedFolderExecute(Sender: TObject);
+    procedure Action_NewSharedFolderUpdate(Sender: TObject);
     procedure Action_NewUserExecute(Sender: TObject);
     procedure Action_NewUserUpdate(Sender: TObject);
     procedure Action_NextExecute(Sender: TObject);
@@ -1189,6 +1191,25 @@ end;
 procedure TFrmModuleADUC.Action_NewResourcePropertyListUpdate(Sender: TObject);
 begin
   Action_NewResourcePropertyList.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end;
+
+procedure TFrmModuleADUC.Action_NewSharedFolderExecute(Sender: TObject);
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
+
+  With TVisNewObject.Create(Self, vnotSharedFolder, GetFocusedObject(True), FrmRSAT.LdapClient.DefaultDN) do
+  begin
+    PageCount := 3;
+    Ldap := FrmRSAT.LdapClient;
+    if ShowModal = mrOK then
+      Action_Refresh.Execute;
+  end;
+end;
+
+procedure TFrmModuleADUC.Action_NewSharedFolderUpdate(Sender: TObject);
+begin
+  Action_NewSharedFolder.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
 procedure TFrmModuleADUC.Action_NewUserExecute(Sender: TObject);

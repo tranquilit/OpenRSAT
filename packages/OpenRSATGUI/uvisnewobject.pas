@@ -32,7 +32,8 @@ type
     vnotContact,
     vnotVolume,
     vnotSite,
-    vnotSubnet
+    vnotSubnet,
+    vnotSharedFolder
   );
   { TVisNewObject }
 
@@ -125,6 +126,7 @@ begin
     vnotVolume: Frame := TFrmNewSharedFolder.Create(Self);
     vnotSite: Frame := TFrmNewSite.Create(Self, Ldap);
     vnotSubnet: Frame := TFrmNewSubnet.Create(Self, Ldap);
+    vnotSharedFolder: Frame := TFrmNewSharedFolder.Create(Self);
     else
     begin
       Close;

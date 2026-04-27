@@ -779,6 +779,8 @@ object FrmModuleADUC: TFrmModuleADUC
     object Action_NewSharedFolder: TAction
       Category = 'New'
       Caption = 'Shared Folder'
+      OnExecute = Action_NewSharedFolderExecute
+      OnUpdate = Action_NewSharedFolderUpdate
     end
     object Action_Search: TAction
       Caption = 'Search'
