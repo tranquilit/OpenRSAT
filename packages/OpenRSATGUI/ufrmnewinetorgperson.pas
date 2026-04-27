@@ -75,9 +75,11 @@ uses
   Dialogs,
   SysUtils,
   mormot.core.text,
+  mormot.core.os.security,
   mormot.net.ldap,
   ucommon,
   ucoredatamodule,
+  ursatldapclient,
   ursatldapclientui,
   uvisnewobject;
 
@@ -104,7 +106,9 @@ var
   AttList: TLdapAttributeList;
   Att: TLdapAttribute;
   DN: String;
-  UAC: TUserAccountControls = [uacNormalAccount]; 
+  UAC: TUserAccountControls = [uacNormalAccount];
+  SecDesc: TSecurityDescriptor;
+  AceSelf, AceWorld: PSecAce;
 begin
   NewObject := (owner as TVisNewObject);
   AttList := TLdapAttributeList.Create();
@@ -130,8 +134,6 @@ begin
       AttList.Add(atPwdLastSet, '0');
     if CheckBox_NeverExpires.Checked then
       Include(UAC, uacPasswordDoNotExpire);
-    if CheckBox_CannotChange.Checked then
-      Include(UAC, uacPasswordCannotChange);
     if CheckBox_AccountDisabled.Checked then
       Include(UAC, uacAccountDisable);
     if UAC <> [] then
@@ -143,6 +145,29 @@ begin
   finally
     FreeAndNil(Att);
   end;
+  
+  if CheckBox_CannotChange.Checked then
+  begin
+    // https://learn.microsoft.com/en-us/windows/win32/adsi/modifying-user-cannot-change-password-ldap-provider
+    Att := NewObject.Ldap.SearchObject(atNTSecurityDescriptor, DN, '');
+    if not Assigned(Att) then
+      Exit;
+
+    SecDesc.FromBinary(Att.GetRaw());
+    AceSelf  := SecDescAddOrUpdateACE(@SecDesc, ATTR_UUID[kaUserChangePassword],
+      KnownRawSid(wksSelf),  satObjectAccessAllowed, [samControlAccess]);
+    AceWorld := SecDescAddOrUpdateACE(@SecDesc, ATTR_UUID[kaUserChangePassword],
+      KnownRawSid(wksWorld), satObjectAccessAllowed, [samControlAccess]);
+
+    AceSelf^.AceType  := satObjectAccessDenied;
+    AceWorld^.AceType := satObjectAccessDenied;
+
+    (NewObject.Ldap as TRsatLdapClient).OrderAcl(DN, (Owner as TVisNewObject).BaseDN, @SecDesc.Dacl);
+
+    if not NewObject.Ldap.Modify(DN, lmoReplace, atNTSecurityDescriptor, SecDesc.ToBinary()) then
+      Exit;
+  end;
+
   NewObject.ModalResult := mrOK;    
 end;
 
