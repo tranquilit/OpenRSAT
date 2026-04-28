@@ -573,6 +573,10 @@ msgstr ""
 msgid "New object - msDS-KeyCredential"
 msgstr ""
 
+#: ucommon.rsnewobjectmsdsresourcepropertylist
+msgid "New object - msDS-ResourcePropertyList"
+msgstr ""
+
 #: ucommon.rsnewobjectmsdsshadowprincipalcontainer
 msgid "New object - msDS-ShadowPrincipalContainer"
 msgstr ""
@@ -580,6 +584,10 @@ msgstr ""
 #: ucommon.rsnewobjectou
 msgid "New object - OU"
 msgstr "Νέο αντικείμενο - OU"
+
+#: ucommon.rsnewobjectprinter
+msgid "New object - Printer"
+msgstr ""
 
 #: ucommon.rsnewobjectsharedfolder
 msgid "New object - Shared Folder"

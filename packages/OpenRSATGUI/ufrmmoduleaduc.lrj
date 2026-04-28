@@ -90,7 +90,7 @@
 {"hash":47210995,"name":"tfrmmoduleaduc.menuitem_newmsmqqueuealias.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,77,83,77,81,81,117,101,117,101,65,108,105,97,115],"value":"MenuItem_NewMSMQQueueAlias"},
 {"hash":176076062,"name":"tfrmmoduleaduc.menuitem_newconnection.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,67,111,110,110,101,99,116,105,111,110],"value":"MenuItem_NewConnection"},
 {"hash":262484147,"name":"tfrmmoduleaduc.menuitem_newsitesettings.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,83,105,116,101,83,101,116,116,105,110,103,115],"value":"MenuItem_NewSiteSettings"},
-{"hash":242857714,"name":"tfrmmoduleaduc.menuitem_newprinter.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,80,114,105,110,116,101,114],"value":"MenuItem_NewPrinter"},
+{"hash":126900882,"name":"tfrmmoduleaduc.menuitem_newprinter.caption","sourcebytes":[80,114,105,110,116,101,114],"value":"Printer"},
 {"hash":50586114,"name":"tfrmmoduleaduc.menuitem_newserver.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,83,101,114,118,101,114],"value":"MenuItem_NewServer"},
 {"hash":128818946,"name":"tfrmmoduleaduc.menuitem_newserverscontainer.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,83,101,114,118,101,114,115,67,111,110,116,97,105,110,101,114],"value":"MenuItem_NewServersContainer"},
 {"hash":247668693,"name":"tfrmmoduleaduc.menuitem_newsite.caption","sourcebytes":[77,101,110,117,73,116,101,109,95,78,101,119,83,105,116,101],"value":"MenuItem_NewSite"},

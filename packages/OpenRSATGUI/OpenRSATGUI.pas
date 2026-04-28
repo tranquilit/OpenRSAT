@@ -33,7 +33,8 @@ uses
   uvisprofileconfiguration, uvisrootdseinfos, uvisshowrelationship, utheme, 
   ufrmpropertyntauthcertificates, ufrmpropertyunixattributes, 
   ufrmnewinetorgperson, ufrmnewmsdsshadowprincipalcontainer, 
-  ufrmnewmsimagingpsps, ufrmnewmsdskeycredential, LazarusPackageIntf;
+  ufrmnewmsimagingpsps, ufrmnewmsdskeycredential, 
+  ufrmnewmsdsresourcepropertylist, ufrmnewprinter, LazarusPackageIntf;
 
 implementation
 
