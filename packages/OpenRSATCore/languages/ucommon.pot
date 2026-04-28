@@ -584,6 +584,10 @@ msgstr ""
 msgid "New object - OU"
 msgstr ""
 
+#: ucommon.rsnewobjectprinter
+msgid "New object - Printer"
+msgstr ""
+
 #: ucommon.rsnewobjectsharedfolder
 msgid "New object - Shared Folder"
 msgstr ""

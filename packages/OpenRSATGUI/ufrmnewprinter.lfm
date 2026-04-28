@@ -1,0 +1,75 @@
+object FrmNewPrinter: TFrmNewPrinter
+  Left = 0
+  Height = 240
+  Top = 0
+  Width = 320
+  ClientHeight = 240
+  ClientWidth = 320
+  LCLVersion = '4.6.0.0'
+  TabOrder = 0
+  DesignLeft = 104
+  DesignTop = 170
+  object Panel1: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 224
+    Top = 8
+    Width = 304
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    BevelOuter = bvNone
+    ClientHeight = 224
+    ClientWidth = 304
+    TabOrder = 0
+    object Label_NetworkPath: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 30
+      Top = 8
+      Width = 288
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      Caption = 'Network path of the pre-Windows 2000 print share (\\server\share):'
+      WordWrap = True
+    end
+    object Edit_NetworkPath: TEdit
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Label_NetworkPath
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Panel1
+      Left = 8
+      Height = 23
+      Top = 46
+      Width = 288
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      TabOrder = 0
+    end
+  end
+  object ActionList: TActionList
+    Left = 264
+    Top = 192
+    object Action_Next: TAction
+      OnExecute = Action_NextExecute
+      OnUpdate = Action_NextUpdate
+    end
+  end
+end

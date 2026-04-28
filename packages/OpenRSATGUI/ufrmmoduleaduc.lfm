@@ -925,6 +925,10 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExecute = Action_NewResourcePropertyListExecute
       OnUpdate = Action_NewResourcePropertyListUpdate
     end
+    object Action_NewPrinter: TAction
+      OnExecute = Action_NewPrinterExecute
+      OnUpdate = Action_NewPrinterUpdate
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
@@ -1064,7 +1068,9 @@ object FrmModuleADUC: TFrmModuleADUC
         Action = Action_NewOU
       end
       object MenuItem_NewPrinter: TMenuItem
-        Caption = 'MenuItem_NewPrinter'
+        Action = Action_NewPrinter
+        Caption = 'Printer'
+        ImageIndex = 24
       end
       object MenuItem_NewServer: TMenuItem
         Caption = 'MenuItem_NewServer'
