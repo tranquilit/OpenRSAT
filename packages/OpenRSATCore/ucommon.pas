@@ -443,6 +443,11 @@ resourcestring
   rsGenerateKeyTabConfirmation = 'You are about to change the password for the selected object. This will remove the trust relationships with the domain. Continue?';
   rsGenerateKeyTabSelectFolder = 'Select folder to store keytab file';
 
+  rsActionEnableObject = 'Object % has been enabled.';
+  rsActionDisableObject = 'Object % has been disabled.';
+  rsEnableAccount = 'Enable Account';
+  rsDisableAccount = 'Disable Account';
+
   rsShowPassword = 'Show password';
   rsHidePassword = 'Hide password';
   rsLockedAccount = 'This account is currently locked out on this Active Directory Domain Controller.';

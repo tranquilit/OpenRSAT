@@ -68,6 +68,14 @@ msgstr ""
 "Écriture validée (SW)\n"
 "Contrôle d'accès (CR)"
 
+#: ucommon.rsactiondisableobject
+msgid "Object % has been disabled."
+msgstr "L'object % a été désactivé."
+
+#: ucommon.rsactionenableobject
+msgid "Object % has been enabled."
+msgstr "L'object % a été activé."
+
 #: ucommon.rsaliasdereferencingproblem
 msgid "The server encountered an alias while processing the request and that there was some problem related to that alias."
 msgstr "Le serveur a rencontré un alias lors du traitement de la requête et un problème lié à cet alias s'est produit."
@@ -188,6 +196,10 @@ msgstr "Êtes-vous certain de supprimer ce profil % ?"
 #: ucommon.rsdeny
 msgid "Deny"
 msgstr "Refuser"
+
+#: ucommon.rsdisableaccount
+msgid "Disable Account"
+msgstr "Désactiver le compte"
 
 #: ucommon.rsdnspropertyzoneagingenabledtime
 msgid "Aging enabled time"
@@ -340,6 +352,10 @@ msgstr "Sécuriser"
 #: ucommon.rsdnszoneupdateunsecure
 msgid "Unsecure"
 msgstr "Non sécuriser"
+
+#: ucommon.rsenableaccount
+msgid "Enable Account"
+msgstr "Activer le compte"
 
 #: ucommon.rsentryalreadyexists
 msgid "The requested operation would have resulted in an entry with the same DN as an entry that already exists in the server."

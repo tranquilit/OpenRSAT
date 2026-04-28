@@ -1488,7 +1488,7 @@ var
   LdapResult: TLdapResult;
   UAC: TUserAccountControls;
   UACAttr, AttrName: TLdapAttribute;
-  Obj, Value: RawUtf8;
+  Obj: RawUtf8;
 begin
   Data := GridADUC.GetNodeAsPDocVariantData(nil, True);
   if not Assigned(Data) then
@@ -1507,29 +1507,25 @@ begin
   Obj := AttrName.GetReadable();
   UAC := UserAccountControlsFromText(UACAttr.GetReadable());
   if uacAccountDisable in UAC then
-  begin
-    Exclude(UAC, uacAccountDisable);
-    Value := 'enabled';
-  end
+    Exclude(UAC, uacAccountDisable)
   else
-  begin
     Include(UAC, uacAccountDisable);
-    Value := 'disabled';
-  end;
 
   UACAttr.Clear;
   UACAttr.Add(IntToStr(UserAccountControlsValue(UAC)));
   if not FrmRSAT.LdapClient.Modify(Data^.S['objectName'], lmoReplace, UACAttr) then
     exit;
-  
-  ShowMessage(FormatUtf8('Object % has been %', [Obj, Value]));
+
+  if uacAccountDisable in UAC then
+    ShowMessage(FormatUtf8(rsActionDisableObject, [Obj]))
+  else
+    ShowMessage(FormatUtf8(rsActionEnableObject, [Obj]));
   UpdateGridADUC(nil);
 end;
 
 procedure TFrmModuleADUC.Action_TaskDisableEnableAccountUpdate(Sender: TObject);
 var
   Data: Integer;
-  UAC: TUserAccountControls;
 begin
   if not Assigned(GridADUC.FocusedRow) or not GridADUC.FocusedRow^.Exists('userAccountControl') then
   begin
@@ -1537,7 +1533,9 @@ begin
     exit;
   end;
 
-  Data := GridADUC.FocusedRow^.I['userAccountControl'];
+  if not TryStrToInt(GridADUC.FocusedRow^.S['userAccountControl'], Data) then
+    Exit;
+
   if Data = 0 then
   begin
     Action_TaskDisableEnableAccount.Enabled := False;
@@ -1546,9 +1544,9 @@ begin
   
   Action_TaskDisableEnableAccount.Enabled := True;
   if uacAccountDisable in TUserAccountControls(Data) then
-    Action_TaskDisableEnableAccount.Caption := 'Enable Account'
+    Action_TaskDisableEnableAccount.Caption := rsEnableAccount
   else
-    Action_TaskDisableEnableAccount.Caption := 'Disable Account';
+    Action_TaskDisableEnableAccount.Caption := rsDisableAccount;
 end;
 
 procedure TFrmModuleADUC.Action_TaskMoveExecute(Sender: TObject);
@@ -3136,14 +3134,13 @@ begin
       begin
         if not Assigned(SearchResultItem) or (SearchResultItem.Attributes.Count <= 0) then
           Continue;
-        NewRow.AddValue('objectName', SearchResultItem.ObjectName);
-        NewRow.AddValue('userAccountControl', SearchResultItem.Attributes.Find('userAccountControl').GetReadable());
+        NewRow.AddOrUpdateValue('objectName', SearchResultItem.ObjectName);
         for AttributeItem in SearchResultItem.Attributes.Items do
         begin
           if not Assigned(AttributeItem) then
             Continue;
           if (AttributeItem.Count = 1) then
-            NewRow.AddValue(AttributeItem.AttributeName, AttributeItem.GetReadable())
+            NewRow.AddOrUpdateValue(AttributeItem.AttributeName, AttributeItem.GetReadable())
           else if (AttributeItem.Count > 1) then
           begin
             for i := 0 to Pred(AttributeItem.Count) do

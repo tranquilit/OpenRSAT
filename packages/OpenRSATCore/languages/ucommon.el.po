@@ -49,6 +49,14 @@ msgid ""
 "Control Access (CR)"
 msgstr ""
 
+#: ucommon.rsactiondisableobject
+msgid "Object % has been disabled."
+msgstr ""
+
+#: ucommon.rsactionenableobject
+msgid "Object % has been enabled."
+msgstr ""
+
 #: ucommon.rsaliasdereferencingproblem
 msgid "The server encountered an alias while processing the request and that there was some problem related to that alias."
 msgstr ""
@@ -169,6 +177,10 @@ msgstr "Θέλετε να διαγράψετε το προφίλ %?"
 #: ucommon.rsdeny
 msgid "Deny"
 msgstr "Άρνηση"
+
+#: ucommon.rsdisableaccount
+msgid "Disable Account"
+msgstr ""
 
 #: ucommon.rsdnspropertyzoneagingenabledtime
 msgid "Aging enabled time"
@@ -321,6 +333,10 @@ msgstr "Ασφαλής"
 #: ucommon.rsdnszoneupdateunsecure
 msgid "Unsecure"
 msgstr "Μη ασφαλής"
+
+#: ucommon.rsenableaccount
+msgid "Enable Account"
+msgstr ""
 
 #: ucommon.rsentryalreadyexists
 msgid "The requested operation would have resulted in an entry with the same DN as an entry that already exists in the server."

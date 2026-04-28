@@ -52,6 +52,14 @@ msgid ""
 "Control Access (CR)"
 msgstr ""
 
+#: ucommon.rsactiondisableobject
+msgid "Object % has been disabled."
+msgstr ""
+
+#: ucommon.rsactionenableobject
+msgid "Object % has been enabled."
+msgstr ""
+
 #: ucommon.rsaliasdereferencingproblem
 msgid "The server encountered an alias while processing the request and that there was some problem related to that alias."
 msgstr ""
@@ -171,6 +179,10 @@ msgstr ""
 
 #: ucommon.rsdeny
 msgid "Deny"
+msgstr ""
+
+#: ucommon.rsdisableaccount
+msgid "Disable Account"
 msgstr ""
 
 #: ucommon.rsdnspropertyzoneagingenabledtime
@@ -323,6 +335,10 @@ msgstr ""
 
 #: ucommon.rsdnszoneupdateunsecure
 msgid "Unsecure"
+msgstr ""
+
+#: ucommon.rsenableaccount
+msgid "Enable Account"
 msgstr ""
 
 #: ucommon.rsentryalreadyexists
