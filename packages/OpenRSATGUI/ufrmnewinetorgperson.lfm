@@ -69,23 +69,25 @@ object FrmNewInetOrgPerson: TFrmNewInetOrgPerson
       AnchorSideLeft.Control = Panel1
       AnchorSideTop.Control = Label_LastName
       AnchorSideTop.Side = asrBottom
-      AnchorSideRight.Control = Label_LastName
+      AnchorSideRight.Control = Edit_FullName
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Control = Panel1
       AnchorSideBottom.Side = asrBottom
       Left = 8
       Height = 15
       Top = 70
-      Width = 58
+      Width = 399
       Anchors = [akTop, akLeft, akRight, akBottom]
+      AutoSize = False
       BorderSpacing.Left = 8
       BorderSpacing.Top = 16
+      BorderSpacing.Right = 4
       BorderSpacing.Bottom = 8
       Caption = 'Full name:'
+      WordWrap = True
     end
     object Edit_FirstName: TEdit
-      AnchorSideLeft.Control = Label_FirstName
-      AnchorSideLeft.Side = asrBottom
+      AnchorSideLeft.Control = Edit_FullName
       AnchorSideTop.Control = Label_FirstName
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Side = asrCenter
@@ -94,7 +96,6 @@ object FrmNewInetOrgPerson: TFrmNewInetOrgPerson
       Top = 4
       Width = 179
       AutoSize = False
-      BorderSpacing.Left = 32
       MaxLength = 28
       TabOrder = 0
       OnChange = Edit_FirstNameChange
@@ -118,8 +119,7 @@ object FrmNewInetOrgPerson: TFrmNewInetOrgPerson
       OnChange = Edit_InitialsChange
     end
     object Edit_LastName: TEdit
-      AnchorSideLeft.Control = Label_LastName
-      AnchorSideLeft.Side = asrBottom
+      AnchorSideLeft.Control = Edit_FullName
       AnchorSideTop.Control = Label_LastName
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = Panel1
@@ -129,7 +129,6 @@ object FrmNewInetOrgPerson: TFrmNewInetOrgPerson
       Top = 35
       Width = 313
       Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Left = 32
       BorderSpacing.Right = 8
       MaxLength = 28
       TabOrder = 2

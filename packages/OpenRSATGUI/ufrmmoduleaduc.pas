@@ -96,7 +96,6 @@ type
     Action_TaskCopy: TAction;
     Action_TaskDelegateControl: TAction;
     Action_TaskDisableEnableAccount: TAction;
-    Action_TaskDisableEnableAccount: TAction;
     Action_TaskManage: TAction;
     Action_TaskMove: TAction;
     Action_TaskNameMappings: TAction;
