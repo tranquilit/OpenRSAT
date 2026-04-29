@@ -76,12 +76,15 @@ type
     Panel3: TPanel;
     Panel4: TPanel;
     Panel5: TPanel;
+    Panel6: TPanel;
     PopupMenu1: TPopupMenu;
     Splitter1: TSplitter;
+    Splitter2: TSplitter;
     StatusBar1: TStatusBar;
     Timer_TreeChangeNode: TTimer;
     Timer_SearchInGrid: TTimer;
     TisGrid1: TTisGrid;
+    TisGrid_GridAttributes: TTisGrid;
     TisSearchEdit_TreeADSS: TTisSearchEdit;
     TisSearchEdit_GridADSS: TTisSearchEdit;
     ToolBar1: TToolBar;
@@ -92,6 +95,7 @@ type
     ToolButton5: TToolButton;
     ToolButton6: TToolButton;
     ToolButton7: TToolButton;
+    ToolButton8: TToolButton;
     TreeView1: TTreeView;
     {$push}{$warn 5024 off}
     procedure Action_DeleteExecute(Sender: TObject);
@@ -111,12 +115,15 @@ type
       const aPropertyName: RawUtf8; const aRow1, aRow2: PDocVariantData;
       var aHandled: Boolean): PtrInt;
     procedure TisGrid1DblClick(Sender: TObject);
+    procedure TisGrid1FocusChanged(Sender: TBaseVirtualTree; 
+      Node: PVirtualNode; Column: TColumnIndex);
     procedure TisGrid1GetImageIndex(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
       var Ghosted: Boolean; var ImageIndex: Integer);
     procedure TisGrid1KeyPress(Sender: TObject; var Key: char);
     procedure TisSearchEdit_TreeADSSSearch(Sender: TObject; const aText: string);
     procedure TisSearchEdit_GridADSSSearch(Sender: TObject; const aText: string);
+    procedure ToolButton8Click(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure TreeView1CreateNodeClass(Sender: TCustomTreeView;
       var NodeClass: TTreeNodeClass);
@@ -530,6 +537,11 @@ begin
     FrmRSAT.OpenProperty(TisGrid1.FocusedRow^.S['distinguishedName'], TisGrid1.FocusedRow^.S['name']);
 end;
 
+procedure TFrmModuleSitesAndServices.TisGrid1FocusChanged(
+  Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex);
+begin
+end;
+
 procedure TFrmModuleSitesAndServices.TisGrid1GetImageIndex(
   Sender: TBaseVirtualTree; Node: PVirtualNode; Kind: TVTImageKind;
   Column: TColumnIndex; var Ghosted: Boolean; var ImageIndex: Integer);
@@ -634,6 +646,21 @@ begin
       TisGrid1.IsFiltered[Node] := Filtered;
     end;
     Node := TisGrid1.GetNext(Node);
+  end;
+end;
+
+procedure TFrmModuleSitesAndServices.ToolButton8Click(Sender: TObject);
+begin
+  if Panel5.Visible then
+  begin
+    Splitter2.Visible := False;
+    Panel6.Visible := False;
+  end
+  else
+  begin
+    Panel6.Visible := True;
+    Splitter2.Visible := True;
+    UpdateGrid(nil);
   end;
 end;
 

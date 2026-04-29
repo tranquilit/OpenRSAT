@@ -106,6 +106,14 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
         Top = 2
         Style = tbsSeparator
       end
+      object ToolButton8: TToolButton
+        Left = 139
+        Top = 2
+        Caption = 'ToolButton8'
+        Enabled = False
+        ImageIndex = 57
+        OnClick = ToolButton8Click
+      end
     end
     object Image1: TImage
       Left = 689
@@ -505,6 +513,7 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toFullRowDrag]
       ZebraColor = 15593713
       OnDblClick = TisGrid1DblClick
+      OnFocusChanged = TisGrid1FocusChanged
       OnGetImageIndex = TisGrid1GetImageIndex
       OnKeyPress = TisGrid1KeyPress
       OnCompareByRow = TisGrid1CompareByRow
@@ -533,6 +542,44 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
         Buttons = <>
         SearchInterval = 500
         OnSearch = TisSearchEdit_GridADSSSearch
+      end
+    end
+    object Splitter2: TSplitter
+      Left = 210
+      Height = 314
+      Top = 33
+      Width = 5
+      Align = alRight
+      ResizeAnchor = akRight
+    end
+    object Panel6: TPanel
+      Left = 215
+      Height = 314
+      Top = 33
+      Width = 410
+      Align = alRight
+      BevelOuter = bvNone
+      ClientHeight = 314
+      ClientWidth = 410
+      TabOrder = 3
+      Visible = False
+      object TisGrid_GridAttributes: TTisGrid
+        Left = 0
+        Height = 314
+        Top = 0
+        Width = 410
+        Align = alClient
+        Header.AutoSizeIndex = 0
+        Header.Columns = <>
+        Header.DefaultHeight = 18
+        Header.Height = 18
+        Header.MainColumn = -1
+        Header.MaxHeight = 100
+        Header.MinHeight = 18
+        Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+        Header.Style = hsFlatButtons
+        TabOrder = 0
+        ZebraColor = 15593713
       end
     end
   end
