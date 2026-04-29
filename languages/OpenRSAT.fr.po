@@ -1,30 +1,5 @@
-#: tfrmnewinetorgperson.action_next.caption
-msgid "Next"
-msgstr "Suivant"
-
-#: tfrmnewinetorgperson.label_firstname.caption
-msgid "First name:"
-msgstr "Prénom:"
-
-#: tfrmnewinetorgperson.label_fullname.caption
-msgid "Full name:"
-msgstr "Nom complet:"
-
-#: tfrmnewinetorgperson.label_initials.caption
-msgid "Initials:"
-msgstr "Initials:"
-
-#: tfrmnewinetorgperson.label_lastname.caption
-msgid "Last name:"
-msgstr "Nom"
-
-#: tfrmnewinetorgperson.label_prewindows.caption
-msgid "User logon name (pre-Windows 2000):"
-msgstr ""
-
-#: tfrmnewinetorgperson.label_userlogonname.caption
-msgid "User logon name:"
-msgstr ""
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
 
 #: tvisabout.caption
 msgctxt "tvisabout.caption"
