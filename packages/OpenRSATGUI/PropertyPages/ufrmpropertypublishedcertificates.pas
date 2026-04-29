@@ -25,7 +25,7 @@ uses
 type
 
   TPublishedCertificate = record
-    Certificate: RawUtf8;
+    Certificate: RawByteString;
     issuedTo: RawUtf8;
     issuedBy: RawUtf8;
     intendedPurpose: TRawUtf8DynArray;
