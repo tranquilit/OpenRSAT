@@ -5,6 +5,7 @@ object FrmPropertyObject: TFrmPropertyObject
   Width = 412
   ClientHeight = 370
   ClientWidth = 412
+  LCLVersion = '4.5.0.0'
   TabOrder = 0
   DesignLeft = 2113
   DesignTop = 357

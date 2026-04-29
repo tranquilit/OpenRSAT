@@ -13,6 +13,7 @@ uses
   ExtCtrls,
   StdCtrls,
   ActnList,
+  DateUtils,
   mormot.core.log,
   mormot.core.os.security,
   uproperty,
@@ -243,8 +244,8 @@ begin
   Edit_CanonicalName.Text := fProperty.canonicalName;
   ObjectClassAttribute := fProperty.Attributes.Find('objectClass');
   Edit_ObjectClass.Text := ObjectClassAttribute.GetReadable(ObjectClassAttribute.Count - 1);
-  Edit_WhenCreated.Text := DateTimetoStr(fProperty.whenCreated);
-  Edit_WhenChanged.Text := DateTimetoStr(fProperty.whenChanged);
+  Edit_WhenCreated.Text := DateTimetoStr(UniversalTimeToLocal(fProperty.whenCreated));
+  Edit_WhenChanged.Text := DateTimetoStr(UniversalTimeToLocal(fProperty.whenChanged));
   Edit_USNActual.Text := fProperty.Attributes.Find('uSNChanged').GetReadable();
   Edit_USNOriginal.Text := fProperty.Attributes.Find('uSNCreated').GetReadable();
 
