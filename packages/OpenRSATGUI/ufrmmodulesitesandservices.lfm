@@ -629,19 +629,81 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       OnExecute = Action_DeleteExecute
       OnUpdate = Action_DeleteUpdate
     end
+    object Action_NewAll: TAction
+      Category = 'New'
+      Caption = 'New'
+      DisableIfNoHandler = False
+      OnUpdate = Action_NewAllUpdate
+    end
   end
   object PopupMenu1: TPopupMenu
     OnPopup = PopupMenu1Popup
     Left = 256
     Top = 96
+    object MenuItem_DelegateControl: TMenuItem
+      Caption = 'Delegate Control'
+    end
+    object Separator1: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem_AllTasks: TMenuItem
+      Caption = 'All Tasks'
+      object MenuItem_DelegateControl2: TMenuItem
+        Caption = 'Delegate Control'
+      end
+    end
+    object Separator2: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem_New: TMenuItem
+      Action = Action_NewAll
+      object MenuItem_NewSite: TMenuItem
+        Action = Action_NewSite
+        Caption = 'Site'
+      end
+      object MenuItem_NewServer: TMenuItem
+        Caption = 'Server'
+      end
+      object MenuItem_NewSubnet: TMenuItem
+        Action = Action_NewSubnet
+        Caption = 'Subnet'
+      end
+      object MenuItem_NewConnection: TMenuItem
+        Caption = 'Connection'
+      end
+      object MenuItem_NewSiteLink: TMenuItem
+        Caption = 'Site Link'
+      end
+      object MenuItem_NewSiteLinkBridge: TMenuItem
+        Caption = 'Site Link Bridge'
+      end
+      object MenuItem_NewSiteSettings: TMenuItem
+        Caption = 'Site Settings'
+      end
+      object MenuItem_NewSitesContainer: TMenuItem
+        Caption = 'Sites Container'
+      end
+      object MenuItem_NewServersContainer: TMenuItem
+        Caption = 'Servers Container'
+      end
+      object MenuItem_NewMsDNSServerSettings: TMenuItem
+        Caption = 'msDNS-ServerSettings'
+      end
+      object MenuItem_NewMsDSShadowPrincipal: TMenuItem
+        Caption = 'msDS-ShadowPrincipal'
+      end
+      object MenuItem_NewMsDSShadowPrincipalContainer: TMenuItem
+        Caption = 'msDS-ShadowPrincipalContainer'
+      end
+      object MenuItem_NewMsImagingPSPs: TMenuItem
+        Caption = 'msImaging-PSPs'
+      end
+    end
+    object Separator4: TMenuItem
+      Caption = '-'
+    end
     object MenuItem_Refresh: TMenuItem
       Action = Action_Refresh
-    end
-    object MenuItem_NewSite: TMenuItem
-      Action = Action_NewSite
-    end
-    object MenuItem_NewSubnet: TMenuItem
-      Action = Action_NewSubnet
     end
     object MenuItem_Property: TMenuItem
       Action = Action_Property
