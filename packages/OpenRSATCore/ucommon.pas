@@ -138,6 +138,7 @@ resourcestring
   rsNewObjectSubnet = 'New object - Subnet';
   rsNewObjectUser = 'New object - User';
   rsNewObjectPrinter = 'New object - Printer';
+  rsNewObjectServer = 'New object - Server';
 
   rsNewObjectBtnBack = '< Back';
   rsNewObjectBtnNext = 'Next >';
