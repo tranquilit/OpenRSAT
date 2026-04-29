@@ -355,7 +355,7 @@ begin
     begin
       Filter := Trim(Edit_BasicValue.Text);
       if not (Filter = '') then
-        Filter := FormatUtf8('|(cn=*%*)(dn=*%*)(name=*%*)', [Filter, Filter, Filter, Filter])
+        Filter := FormatUtf8('|(cn=*%*)(dn=*%*)(name=*%*)(userPrincipalName=*%*)', [Filter, Filter, Filter, Filter])
       else
         Filter := 'name=*';
     end;
