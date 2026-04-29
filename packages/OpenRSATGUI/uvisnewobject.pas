@@ -27,7 +27,8 @@ type
     vnotContact,
     vnotVolume,
     vnotSite,
-    vnotSubnet
+    vnotSubnet,
+    vnotServer
   );
   { TVisNewObject }
 
@@ -77,6 +78,7 @@ uses
   ufrmnewsite,
   ufrmnewsubnet,
   ufrmnewuser,
+  ufrmnewserver,
   ucommonui;
 
 {$R *.lfm}
@@ -110,6 +112,7 @@ begin
     vnotVolume: Frame := TFrmNewSharedFolder.Create(Self);
     vnotSite: Frame := TFrmNewSite.Create(Self, Ldap);
     vnotSubnet: Frame := TFrmNewSubnet.Create(Self, Ldap);
+    vnotServer: Frame := TFrmNewServer.Create(Self, Ldap);
     else
     begin
       Close;

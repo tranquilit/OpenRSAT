@@ -635,6 +635,11 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       DisableIfNoHandler = False
       OnUpdate = Action_NewAllUpdate
     end
+    object Action_NewServer: TAction
+      Caption = 'New Server'
+      OnExecute = Action_NewServerExecute
+      OnUpdate = Action_NewServerUpdate
+    end
   end
   object PopupMenu1: TPopupMenu
     OnPopup = PopupMenu1Popup
@@ -646,15 +651,6 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
     object Separator1: TMenuItem
       Caption = '-'
     end
-    object MenuItem_AllTasks: TMenuItem
-      Caption = 'All Tasks'
-      object MenuItem_DelegateControl2: TMenuItem
-        Caption = 'Delegate Control'
-      end
-    end
-    object Separator2: TMenuItem
-      Caption = '-'
-    end
     object MenuItem_New: TMenuItem
       Action = Action_NewAll
       object MenuItem_NewSite: TMenuItem
@@ -662,6 +658,7 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
         Caption = 'Site'
       end
       object MenuItem_NewServer: TMenuItem
+        Action = Action_NewServer
         Caption = 'Server'
       end
       object MenuItem_NewSubnet: TMenuItem
@@ -701,6 +698,11 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
     end
     object Separator4: TMenuItem
       Caption = '-'
+    end
+    object MenuItem_Delete: TMenuItem
+      Action = Action_Delete
+      Caption = 'Delete'
+      ShortCut = 46
     end
     object MenuItem_Refresh: TMenuItem
       Action = Action_Refresh

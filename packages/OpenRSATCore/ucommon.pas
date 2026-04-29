@@ -133,6 +133,7 @@ resourcestring
   rsNewObjectSharedFolder = 'New object - Shared Folder';
   rsNewObjectSubnet = 'New object - Subnet';
   rsNewObjectUser = 'New object - User';
+  rsNewObjectServer = 'New object - Server';
 
   rsNewObjectBtnBack = '< Back';
   rsNewObjectBtnNext = 'Next >';
