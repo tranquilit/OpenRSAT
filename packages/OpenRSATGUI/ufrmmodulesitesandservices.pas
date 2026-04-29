@@ -55,6 +55,7 @@ type
   { TFrmModuleSitesAndServices }
 
   TFrmModuleSitesAndServices = class(TFrameModule)
+    Action_NewAll: TAction;
     Action_Delete: TAction;
     Action_Property: TAction;
     Action_NewSubnet: TAction;
@@ -67,9 +68,24 @@ type
     Image1: TImage;
     Image2: TImage;
     Label1: TLabel;
-    MenuItem_Refresh: TMenuItem;
+    MenuItem_NewServer: TMenuItem;
+    MenuItem_NewConnection: TMenuItem;
+    MenuItem_NewSiteSettings: TMenuItem;
+    MenuItem_NewSitesContainer: TMenuItem;
+    MenuItem_NewServersContainer: TMenuItem;
+    MenuItem_NewMsDSShadowPrincipal: TMenuItem;
+    MenuItem_NewMsDNSServerSettings: TMenuItem;
+    MenuItem_NewMsDSShadowPrincipalContainer: TMenuItem;
+    MenuItem_NewMsImagingPSPs: TMenuItem;
+    MenuItem_NewSiteLinkBridge: TMenuItem;
+    MenuItem_NewSiteLink: TMenuItem;
     MenuItem_NewSite: TMenuItem;
     MenuItem_NewSubnet: TMenuItem;
+    MenuItem_DelegateControl2: TMenuItem;
+    MenuItem_DelegateControl: TMenuItem;
+    MenuItem_AllTasks: TMenuItem;
+    MenuItem_New: TMenuItem;
+    MenuItem_Refresh: TMenuItem;
     MenuItem_Property: TMenuItem;
     Panel1: TPanel;
     Panel2: TPanel;
@@ -78,6 +94,9 @@ type
     Panel5: TPanel;
     Panel6: TPanel;
     PopupMenu1: TPopupMenu;
+    Separator1: TMenuItem;
+    Separator2: TMenuItem;
+    Separator4: TMenuItem;
     Splitter1: TSplitter;
     Splitter2: TSplitter;
     StatusBar1: TStatusBar;
@@ -98,6 +117,7 @@ type
     ToolButton8: TToolButton;
     TreeView1: TTreeView;
     {$push}{$warn 5024 off}
+    procedure Action_NewAllUpdate(Sender: TObject);
     procedure Action_DeleteExecute(Sender: TObject);
     procedure Action_DeleteUpdate(Sender: TObject);
     procedure Action_NewSiteExecute(Sender: TObject);
@@ -195,6 +215,23 @@ uses
   ufrmrsat;
 
 {$R *.lfm}
+
+type
+  TNewAction = (
+    naMsDNSServerSettings,           // New Ms-DS ServerSettings
+    naMsDSShadowPrincipal,           // New Ms-DS ShadowPrincipal
+    naMsDSShadowPrincipalContainer,  // New Ms-DS ShadowPrincipalContainer
+    naMsImagingPSPs,                 // New Ms-DS ImagingPSPs
+    naConnection,                    // New Connection
+    naSiteSettings,                  // New Site Settings
+    naServersContainer,              // New Server Container
+    naSite,                          // New Site
+    naSiteLink,                      // New Site Link
+    naSiteLinkBridge,                // New Site Link Bridge
+    naSitesContainer,                // New Sites Container
+    naSubnet,                        // New Subnet
+    naServer                         // New Server
+  );
 
 type
   TIPAddress = record
@@ -430,6 +467,97 @@ begin
     InnerDelete((TreeView1.Selected as TADSSTreeNode).DistinguishedName);
   end;
   RefreshLdapNode();
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewAllUpdate(Sender: TObject);
+var
+  menuItems: Array of TMenuItem;
+  newList: Set of TNewAction;
+  item, i: Integer;
+  filter: UInt64;
+  listItem: TNewAction;
+  ObjectClass: String;
+const
+  SitesContainerNew = [
+    naSite
+  ];
+  
+  SubnetContainerNew = [
+    naSubnet
+  ];
+
+  ServersContainerNew = [
+    naServer
+  ];
+
+  ServerNew = [
+    naMsDNSServerSettings,
+    naMsDSShadowPrincipalContainer,
+    naMsImagingPSPs
+  ];
+
+  NTDSDSANew = [
+    naConnection
+  ];
+  
+  InterSiteTransportNew = [
+    naSiteLink,
+    naSiteLinkBridge
+  ];
+  
+begin
+  menuItems := [
+    MenuItem_NewMsDNSServerSettings,
+    MenuItem_NewMsDSShadowPrincipal,
+    MenuItem_NewMsDSShadowPrincipalContainer,
+    MenuItem_NewMsImagingPSPs,
+    MenuItem_NewConnection,
+    MenuItem_NewSiteSettings,
+    MenuItem_NewServersContainer,
+    MenuItem_NewSite,
+    MenuItem_NewSiteLink,
+    MenuItem_NewSiteLinkBridge,
+    MenuItem_NewSitesContainer,
+    MenuItem_NewSubnet,
+    MenuItem_NewServer
+  ];
+  filter := 0;
+  newList := [];
+  
+  ObjectClass := GetFocusedObjectClass;
+
+  case ObjectClass of
+    'sitesContainer': newList := SitesContainerNew;
+    'subnetContainer': newList := SubnetContainerNew;
+    'serversContainer': newList := ServersContainerNew;
+    'server': newList := ServerNew;
+    'nTDSDSA': newList := NTDSDSANew;
+    'interSiteTransport': newList := InterSiteTransportNew;
+    else
+      TSynLog.Add.Log(sllWarning, FormatUtf8('"objectClass" not yet implemented: %', [ObjectClass]));
+  end;
+  
+  // Create filter to allow MenuItem_TreeNew visibility
+  for listItem in newList do
+    filter := filter or (UInt64(1) shl Ord(listItem));
+
+  // Set MenuItem_TreeNew visibility
+  for item := 0 to High(menuItems) do
+  begin
+    menuItems[item].Visible := ((filter and (UInt64(1) shl item)) > 0);
+    menuItems[item].Enabled := Assigned(menuItems[item].Action){ and Assigned(menuItems[item].Action.OnExecute)};
+  end;
+
+  // Hide new MenuItem_TreeNew if no new action allowed
+  for i := 0 to MenuItem_New.Count - 1 do
+  begin
+    if MenuItem_New.Items[i].Visible then
+    begin
+      Action_NewAll.Visible := True;
+      Exit;
+    end;
+  end;
+  Action_NewAll.Visible := False;   
 end;
 
 procedure TFrmModuleSitesAndServices.Action_DeleteUpdate(Sender: TObject);
