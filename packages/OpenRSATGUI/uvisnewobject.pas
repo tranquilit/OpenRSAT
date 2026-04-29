@@ -32,9 +32,10 @@ type
     vnotContact,
     vnotVolume,
     vnotSite,
-    vnotSubnet,
+    vnotSubnet
     vnotSharedFolder,
     vnotPrinter
+    vnotServer
   );
   { TVisNewObject }
 
@@ -90,6 +91,7 @@ uses
   ufrmnewmsdsshadowprincipalcontainer,
   ufrmnewmsimagingpsps,
   ufrmnewprinter,
+  ufrmnewserver,
   ucommonui;
 
 {$R *.lfm}
@@ -130,6 +132,7 @@ begin
     vnotSubnet: Frame := TFrmNewSubnet.Create(Self, Ldap);
     vnotSharedFolder: Frame := TFrmNewSharedFolder.Create(Self);
     vnotPrinter: Frame := TFrmNewPrinter.Create(Self);
+    vnotServer: Frame := TFrmNewServer.Create(Self, Ldap);
     else
     begin
       Close;

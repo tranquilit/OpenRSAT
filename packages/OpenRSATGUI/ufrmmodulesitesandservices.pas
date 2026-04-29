@@ -55,6 +55,7 @@ type
   { TFrmModuleSitesAndServices }
 
   TFrmModuleSitesAndServices = class(TFrameModule)
+    Action_NewServer: TAction;
     Action_NewAll: TAction;
     Action_Delete: TAction;
     Action_Property: TAction;
@@ -68,6 +69,7 @@ type
     Image1: TImage;
     Image2: TImage;
     Label1: TLabel;
+    MenuItem_Delete: TMenuItem;
     MenuItem_NewServer: TMenuItem;
     MenuItem_NewConnection: TMenuItem;
     MenuItem_NewSiteSettings: TMenuItem;
@@ -81,9 +83,7 @@ type
     MenuItem_NewSiteLink: TMenuItem;
     MenuItem_NewSite: TMenuItem;
     MenuItem_NewSubnet: TMenuItem;
-    MenuItem_DelegateControl2: TMenuItem;
     MenuItem_DelegateControl: TMenuItem;
-    MenuItem_AllTasks: TMenuItem;
     MenuItem_New: TMenuItem;
     MenuItem_Refresh: TMenuItem;
     MenuItem_Property: TMenuItem;
@@ -95,7 +95,6 @@ type
     Panel6: TPanel;
     PopupMenu1: TPopupMenu;
     Separator1: TMenuItem;
-    Separator2: TMenuItem;
     Separator4: TMenuItem;
     Splitter1: TSplitter;
     Splitter2: TSplitter;
@@ -120,6 +119,8 @@ type
     procedure Action_NewAllUpdate(Sender: TObject);
     procedure Action_DeleteExecute(Sender: TObject);
     procedure Action_DeleteUpdate(Sender: TObject);
+    procedure Action_NewServerExecute(Sender: TObject);
+    procedure Action_NewServerUpdate(Sender: TObject);
     procedure Action_NewSiteExecute(Sender: TObject);
     procedure Action_NewSiteUpdate(Sender: TObject);
     procedure Action_NewSubnetExecute(Sender: TObject);
@@ -596,6 +597,25 @@ begin
     Allowed := Assigned(TreeView1.selected) and TypeIsAllowed((TreeView1.Selected as TADSSTreeNode).ObjectType);
   end;
   Action_Delete.Enabled := Allowed;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewServerExecute(Sender: TObject);
+var
+  vis: TVisNewObject;
+begin
+  vis := TVisNewObject.Create(Self, vnotServer, Format('CN=Server,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  try
+    vis.Ldap := FrmRSAT.LdapClient;
+    vis.ShowModal;
+    RefreshLdapNode();
+  finally
+    FreeAndNil(vis);
+  end;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewServerUpdate(Sender: TObject);
+begin
+  Action_NewServer.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
 procedure TFrmModuleSitesAndServices.Action_NewSiteUpdate(Sender: TObject);
