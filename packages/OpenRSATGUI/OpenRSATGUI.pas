@@ -32,7 +32,9 @@ uses
   uvismodifygplink, uvisprofilemanager, uviseditaduccolumns, 
   uvisprofileconfiguration, uvisrootdseinfos, uvisshowrelationship, utheme, 
   ufrmpropertyntauthcertificates, ufrmpropertyunixattributes, 
-  LazarusPackageIntf;
+  ufrmnewinetorgperson, ufrmnewmsdsshadowprincipalcontainer, 
+  ufrmnewmsimagingpsps, ufrmnewmsdskeycredential, 
+  ufrmnewmsdsresourcepropertylist, ufrmnewprinter, LazarusPackageIntf;
 
 implementation
 

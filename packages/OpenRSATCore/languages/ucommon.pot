@@ -564,8 +564,28 @@ msgstr ""
 msgid "New object - Group"
 msgstr ""
 
+#: ucommon.rsnewobjectinetorgperson
+msgid "New object - Inet Org. Person"
+msgstr ""
+
+#: ucommon.rsnewobjectmsdskeycredential
+msgid "New object - msDS-KeyCredential"
+msgstr ""
+
+#: ucommon.rsnewobjectmsdsresourcepropertylist
+msgid "New object - msDS-ResourcePropertyList"
+msgstr ""
+
+#: ucommon.rsnewobjectmsdsshadowprincipalcontainer
+msgid "New object - msDS-ShadowPrincipalContainer"
+msgstr ""
+
 #: ucommon.rsnewobjectou
 msgid "New object - OU"
+msgstr ""
+
+#: ucommon.rsnewobjectprinter
+msgid "New object - Printer"
 msgstr ""
 
 #: ucommon.rsnewobjectsharedfolder

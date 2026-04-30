@@ -51,6 +51,11 @@ type
   { TFrmModuleADUC }
 
   TFrmModuleADUC = class(TFrameModule)
+    Action_NewPrinter: TAction;
+    Action_NewResourcePropertyList: TAction;
+    Action_NewMsDSKeyCredential: TAction;
+    Action_NewMsImagingPSPs: TAction;
+    Action_NewMsDSShadowPrincipalContainer: TAction;
     Action_CreateKeyTab: TAction;
     Action_PrepareDJOIN: TAction;
     Action_ShowRelationShip: TAction;
@@ -230,8 +235,22 @@ type
     procedure Action_NewContactUpdate(Sender: TObject);
     procedure Action_NewGroupExecute(Sender: TObject);
     procedure Action_NewGroupUpdate(Sender: TObject);
+    procedure Action_NewInetOrgPersonExecute(Sender: TObject);
+    procedure Action_NewInetOrgPersonUpdate(Sender: TObject);
+    procedure Action_NewMsDSKeyCredentialExecute(Sender: TObject);
+    procedure Action_NewMsDSKeyCredentialUpdate(Sender: TObject);
+    procedure Action_NewMsDSShadowPrincipalContainerExecute(Sender: TObject);
+    procedure Action_NewMsDSShadowPrincipalContainerUpdate(Sender: TObject);
+    procedure Action_NewMsImagingPSPsExecute(Sender: TObject);
+    procedure Action_NewMsImagingPSPsUpdate(Sender: TObject);
     procedure Action_NewOUExecute(Sender: TObject);
     procedure Action_NewOUUpdate(Sender: TObject);
+    procedure Action_NewPrinterExecute(Sender: TObject);
+    procedure Action_NewPrinterUpdate(Sender: TObject);
+    procedure Action_NewResourcePropertyListExecute(Sender: TObject);
+    procedure Action_NewResourcePropertyListUpdate(Sender: TObject);
+    procedure Action_NewSharedFolderExecute(Sender: TObject);
+    procedure Action_NewSharedFolderUpdate(Sender: TObject);
     procedure Action_NewUserExecute(Sender: TObject);
     procedure Action_NewUserUpdate(Sender: TObject);
     procedure Action_NextExecute(Sender: TObject);
@@ -872,6 +891,20 @@ const
   ];
 
   // Allowed new buttons for objectClass 'container'
+  OUNew = [
+    naComputer,
+    naContact,
+    naGroup,
+    naInetOrgPerson,
+    naMsDSShadowPrincipalContainer,
+    naMsImagingPSPs,
+    naOrganizationalUnit,
+    naPrinter,
+    naUser,
+    naSharedFolder
+  ];
+
+  // Allowed new buttons for objectClass 'organizationalUnit'
   ContainerNew = [
     naComputer,
     naContact,
@@ -881,15 +914,11 @@ const
     naMsDSResourcePropertyList,
     naMsDSShadowPrincipalContainer,
     naMsImagingPSPs,
-    naMSMQQueueAlias,
     naOrganizationalUnit,
     naPrinter,
     naUser,
     naSharedFolder
   ];
-
-  // Allowed new buttons for objectClass 'organizationalUnit'
-  OUNew = ContainerNew;
 
   // Allowed new buttons for objectClass 'lostAndFound'
   LostAndFoundNew = [
@@ -1060,6 +1089,84 @@ begin
   Action_NewGroup.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
+procedure TFrmModuleADUC.Action_NewInetOrgPersonExecute(Sender: TObject);
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewInetOrgPerson.Caption]);
+
+  With TVisNewObject.Create(Self, vnotInetOrgPerson, GetFocusedObject(True), FrmRSAT.LdapClient.DefaultDN) do
+  begin
+    PageCount := 1;
+    Ldap := FrmRSAT.LdapClient;
+    if ShowModal = mrOK then
+      Action_Refresh.Execute;
+  end;
+end;
+
+procedure TFrmModuleADUC.Action_NewInetOrgPersonUpdate(Sender: TObject);
+begin
+  Action_NewInetOrgPerson.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end; 
+
+procedure TFrmModuleADUC.Action_NewMsDSKeyCredentialExecute(Sender: TObject);
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewMsDSKeyCredential.Caption]);
+
+  With TVisNewObject.Create(Self, vnotMsDSKeyCredential, GetFocusedObject(True), FrmRSAT.LdapClient.DefaultDN) do
+  begin
+    PageCount := 1;
+    Ldap := FrmRSAT.LdapClient;
+    if ShowModal = mrOK then
+      Action_Refresh.Execute;
+  end;
+end; 
+
+procedure TFrmModuleADUC.Action_NewMsDSKeyCredentialUpdate(Sender: TObject);
+begin
+  Action_NewMsDSKeyCredential.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end; 
+
+procedure TFrmModuleADUC.Action_NewMsDSShadowPrincipalContainerExecute(
+  Sender: TObject);
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewMsDSShadowPrincipalContainer.Caption]);
+
+  With TVisNewObject.Create(Self, vnotMsDSShadowPrincipalContainer, GetFocusedObject(True), FrmRSAT.LdapClient.DefaultDN) do
+  begin
+    PageCount := 1;
+    Ldap := FrmRSAT.LdapClient;
+    if ShowModal = mrOK then
+      Action_Refresh.Execute;
+  end;
+end; 
+
+procedure TFrmModuleADUC.Action_NewMsDSShadowPrincipalContainerUpdate(
+  Sender: TObject);
+begin
+  Action_NewMsDSShadowPrincipalContainer.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end; 
+
+procedure TFrmModuleADUC.Action_NewMsImagingPSPsExecute(Sender: TObject);
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewMsImagingPSPs.Caption]);
+
+  With TVisNewObject.Create(Self, vnotMsImagingPSPs, GetFocusedObject(True), FrmRSAT.LdapClient.DefaultDN) do
+  begin
+    PageCount := 1;
+    Ldap := FrmRSAT.LdapClient;
+    if ShowModal = mrOK then
+      Action_Refresh.Execute;
+  end;
+end; 
+
+procedure TFrmModuleADUC.Action_NewMsImagingPSPsUpdate(Sender: TObject);
+begin
+  Action_NewMsImagingPSPs.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end; 
+
 procedure TFrmModuleADUC.Action_NewOUExecute(Sender: TObject);
 begin
   if Assigned(fLog) then
@@ -1077,6 +1184,63 @@ end;
 procedure TFrmModuleADUC.Action_NewOUUpdate(Sender: TObject);
 begin
   Action_NewOU.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end;
+
+procedure TFrmModuleADUC.Action_NewPrinterExecute(Sender: TObject);
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
+
+  With TVisNewObject.Create(Self, vnotPrinter, GetFocusedObject(True), FrmRSAT.LdapClient.DefaultDN) do
+  begin
+    PageCount := 1;
+    Ldap := FrmRSAT.LdapClient;
+    if ShowModal = mrOK then
+      Action_Refresh.Execute;
+  end;
+end;
+
+procedure TFrmModuleADUC.Action_NewPrinterUpdate(Sender: TObject);
+begin
+  Action_NewPrinter.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end;
+
+procedure TFrmModuleADUC.Action_NewResourcePropertyListExecute(Sender: TObject);
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
+
+  With TVisNewObject.Create(Self, vnotMsDSResourcePropertyList, GetFocusedObject(True), FrmRSAT.LdapClient.DefaultDN) do
+  begin
+    PageCount := 1;
+    Ldap := FrmRSAT.LdapClient;
+    if ShowModal = mrOK then
+      Action_Refresh.Execute;
+  end;
+end;
+
+procedure TFrmModuleADUC.Action_NewResourcePropertyListUpdate(Sender: TObject);
+begin
+  Action_NewResourcePropertyList.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end;
+
+procedure TFrmModuleADUC.Action_NewSharedFolderExecute(Sender: TObject);
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
+
+  With TVisNewObject.Create(Self, vnotSharedFolder, GetFocusedObject(True), FrmRSAT.LdapClient.DefaultDN) do
+  begin
+    PageCount := 3;
+    Ldap := FrmRSAT.LdapClient;
+    if ShowModal = mrOK then
+      Action_Refresh.Execute;
+  end;
+end;
+
+procedure TFrmModuleADUC.Action_NewSharedFolderUpdate(Sender: TObject);
+begin
+  Action_NewSharedFolder.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
 procedure TFrmModuleADUC.Action_NewUserExecute(Sender: TObject);

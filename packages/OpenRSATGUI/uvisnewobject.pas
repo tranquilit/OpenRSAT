@@ -22,12 +22,19 @@ type
     vnotNone,
     vnotUser,
     vnotGroup,
+    vnotInetOrgPerson,
+    vnotMsDSKeyCredential,
+    vnotMsDSResourcePropertyList,
+    vnotMsDSShadowPrincipalContainer,
+    vnotMsImagingPSPs,
     vnotOrganizationalUnit,
     vnotComputer,
     vnotContact,
     vnotVolume,
     vnotSite,
-    vnotSubnet
+    vnotSubnet,
+    vnotSharedFolder,
+    vnotPrinter
   );
   { TVisNewObject }
 
@@ -77,6 +84,12 @@ uses
   ufrmnewsite,
   ufrmnewsubnet,
   ufrmnewuser,
+  ufrmnewinetorgperson,
+  ufrmnewmsdskeycredential,
+  ufrmnewmsdsresourcepropertylist,
+  ufrmnewmsdsshadowprincipalcontainer,
+  ufrmnewmsimagingpsps,
+  ufrmnewprinter,
   ucommonui;
 
 {$R *.lfm}
@@ -105,11 +118,18 @@ begin
     vnotComputer: Frame := TFrmNewComputer.Create(Self);
     vnotContact: Frame := TFrmNewContact.Create(Self);
     vnotGroup: Frame := TFrmNewGroup.Create(Self);
+    vnotInetOrgPerson: Frame := TFrmNewInetOrgPerson.Create(Self);
+    vnotMsDSKeyCredential: Frame := TFrmNewMsDSKeyCredential.Create(Self);
+    vnotMsDSResourcePropertyList: Frame := TFrmNewMsDSResourcePropertyList.Create(Self);
+    vnotMsDSShadowPrincipalContainer: Frame := TFrmNewMsDSShadowPrincipalContainer.Create(Self);
+    vnotMsImagingPSPs: Frame := TFrmNewMsImagingPSPs.Create(Self); 
     vnotOrganizationalUnit: Frame := TFrmNewOU.Create(Self);
     vnotUser: Frame := TFrmNewUser.Create(Self);
     vnotVolume: Frame := TFrmNewSharedFolder.Create(Self);
     vnotSite: Frame := TFrmNewSite.Create(Self, Ldap);
     vnotSubnet: Frame := TFrmNewSubnet.Create(Self, Ldap);
+    vnotSharedFolder: Frame := TFrmNewSharedFolder.Create(Self);
+    vnotPrinter: Frame := TFrmNewPrinter.Create(Self);
     else
     begin
       Close;

@@ -1,3 +1,6 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
 #: tvisabout.caption
 msgctxt "tvisabout.caption"
 msgid "About"

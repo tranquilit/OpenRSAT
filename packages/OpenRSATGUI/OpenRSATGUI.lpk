@@ -12,7 +12,7 @@
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Files Count="84">
+    <Files Count="90">
       <Item1>
         <Filename Value="ufrmmoduleaduc.pas"/>
         <UnitName Value="ufrmmoduleaduc"/>
@@ -349,6 +349,30 @@
         <Filename Value="PropertyPages\ufrmpropertyunixattributes.pas"/>
         <UnitName Value="ufrmpropertyunixattributes"/>
       </Item84>
+      <Item85>
+        <Filename Value="ufrmnewinetorgperson.pas"/>
+        <UnitName Value="ufrmnewinetorgperson"/>
+      </Item85>
+      <Item86>
+        <Filename Value="ufrmnewmsdsshadowprincipalcontainer.pas"/>
+        <UnitName Value="ufrmnewmsdsshadowprincipalcontainer"/>
+      </Item86>
+      <Item87>
+        <Filename Value="ufrmnewmsimagingpsps.pas"/>
+        <UnitName Value="ufrmnewmsimagingpsps"/>
+      </Item87>
+      <Item88>
+        <Filename Value="ufrmnewmsdskeycredential.pas"/>
+        <UnitName Value="ufrmnewmsdskeycredential"/>
+      </Item88>
+      <Item89>
+        <Filename Value="ufrmnewmsdsresourcepropertylist.pas"/>
+        <UnitName Value="ufrmnewmsdsresourcepropertylist"/>
+      </Item89>
+      <Item90>
+        <Filename Value="ufrmnewprinter.pas"/>
+        <UnitName Value="ufrmnewprinter"/>
+      </Item90>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>

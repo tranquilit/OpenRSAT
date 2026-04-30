@@ -129,10 +129,15 @@ resourcestring
   rsNewObjectContact = 'New object - Contact';
   rsNewObjectGroup = 'New object - Group';
   rsNewObjectOU = 'New object - OU';
+  rsNewObjectInetOrgPerson = 'New object - Inet Org. Person';
+  rsNewObjectMsDSKeyCredential = 'New object - msDS-KeyCredential';
+  rsNewObjectMsDSShadowPrincipalContainer = 'New object - msDS-ShadowPrincipalContainer';
+  rsNewObjectMsDSResourcePropertyList = 'New object - msDS-ResourcePropertyList';
   rsNewObjectSite = 'New object - Site';
   rsNewObjectSharedFolder = 'New object - Shared Folder';
   rsNewObjectSubnet = 'New object - Subnet';
   rsNewObjectUser = 'New object - User';
+  rsNewObjectPrinter = 'New object - Printer';
 
   rsNewObjectBtnBack = '< Back';
   rsNewObjectBtnNext = 'Next >';
