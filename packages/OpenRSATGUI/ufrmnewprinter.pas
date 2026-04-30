@@ -11,7 +11,8 @@ uses
   Forms,
   StdCtrls,
   ExtCtrls,
-  SysUtils;
+  SysUtils,
+  mormot.core.base;
 
 type 
   { TFrmNewPrinter }
@@ -24,7 +25,7 @@ type
     procedure Action_NextExecute(Sender: TObject);
     procedure Action_NextUpdate(Sender: TObject);
   private
-    function UNCToDashName(const UNC: string): string;
+    function UNCToDashName(const UNC: RawUtf8): RawUtf8;
     function GetServerName(const UNC: string): string;
     function GetShareName(const UNC: string): string;
   public
@@ -36,7 +37,6 @@ implementation
 uses
   Dialogs,
   Graphics,
-  mormot.core.base,
   mormot.core.text,
   mormot.net.ldap,
   ucommon,
@@ -45,9 +45,9 @@ uses
 
 {$R *.lfm}
 
-function TFrmNewPrinter.UNCToDashName(const UNC: string): string;
+function TFrmNewPrinter.UNCToDashName(const UNC: RawUtf8): RawUtf8;
 var
-  s: string;
+  s: RawUtf8;
   p: Integer;
 begin
   Result := '';

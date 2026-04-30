@@ -9,7 +9,9 @@ uses
   Classes,
   ExtCtrls,
   Forms,
-  StdCtrls;
+  Graphics,
+  StdCtrls,
+  tis.ui.searchedit;
 
 type
   
@@ -49,6 +51,9 @@ type
     Panel4: TPanel;
     Panel5: TPanel;
     Panel6: TPanel;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    Panel9: TPanel;
     procedure Action_BackExecute(Sender: TObject);
     procedure Action_BackUpdate(Sender: TObject);
     procedure Action_NextExecute(Sender: TObject);
@@ -56,14 +61,18 @@ type
     procedure CheckBox_CannotChangeClick(Sender: TObject);
     procedure CheckBox_NeverExpiresClick(Sender: TObject);
     procedure CheckBox_NextLogonChange(Sender: TObject);
+    procedure Edit_ConfirmChange(Sender: TObject);
     procedure Edit_FirstNameChange(Sender: TObject);
+    procedure Edit_FullNameKeyPress(Sender: TObject; var Key: char);
     procedure Edit_InitialsChange(Sender: TObject);
     procedure Edit_LastNameChange(Sender: TObject);
+    procedure Edit_PasswordKeyPress(Sender: TObject; var Key: char);
     procedure Edit_UserLogonNameChange(Sender: TObject); 
   private
     PageID: Integer;
     procedure BuildRecapProperties;
     procedure BtnOK;
+    procedure Load;
   public
     constructor Create(TheOwner: TComponent); override;
   end;
@@ -183,30 +192,34 @@ begin
   Edit_FullName.Text := FullName;
 end;
 
+procedure TFrmNewInetOrgPerson.Edit_FullNameKeyPress(Sender: TObject; 
+  var Key: char);
+begin
+  if Key = #13 then
+  begin
+    Edit_UserLogonName.SetFocus;
+    Key := #0;
+  end;
+end;
+
 procedure TFrmNewInetOrgPerson.Action_NextExecute(Sender: TObject);
 begin
   case (PageID) of
     0:
     begin
       PageID += 1;
-      Panel1.Visible := False;
-      Panel2.Visible := False;
-      Panel3.Visible := False;
-      Panel4.Visible := True;
-      Panel5.Visible := True;
+      Panel7.Visible := False;
+      Panel8.Visible := True;
+      Edit_Password.SetFocus;
+      (owner as TVisNewObject).Btn_Next.Caption := rsNewObjectBtnNext;
     end;
     1:
     begin
-      if Edit_Password.Text <> Edit_Confirm.Text then
-      begin
-        ShowMessage('The passwords do not match.');
-        Exit
-      end;
       PageID += 1;
       BuildRecapProperties;
-      Panel4.Visible := False;
-      Panel5.Visible := False;
-      Panel6.Visible := True; 
+      Panel8.Visible := False;
+      Panel9.Visible := True;
+      (owner as TVisNewObject).Btn_Next.Caption := rsNewObjectBtnOK;
     end;
     2: BtnOK();
   end;
@@ -218,17 +231,17 @@ begin
   case (PageId) of
     0:
     begin
-      Panel1.Visible := True;
-      Panel2.Visible := True;
-      Panel3.Visible := True;
-      Panel4.Visible := False;
-      Panel5.Visible := False;
+      Panel7.Visible := True;
+      Panel8.Visible := False;
+      Edit_FullName.SetFocus;
+      (owner as TVisNewObject).Btn_Next.Caption := rsNewObjectBtnNext;
     end;
     1:
     begin
-      Panel4.Visible := True;
-      Panel5.Visible := True;
-      Panel6.Visible := False;
+      Panel8.Visible := True;
+      Panel9.Visible := False;
+      Edit_Password.SetFocus;
+      (owner as TVisNewObject).Btn_Next.Caption := rsNewObjectBtnNext;
     end;
   end;
 end;
@@ -246,7 +259,7 @@ begin
   if PageID = 0 then
     Action_Next.Enabled := (Edit_FullName.Text <> '') and (Edit_UserLogonName.Text <> '')
   else if PageID = 1 then
-    Action_Next.Enabled := True
+    Action_Next.Enabled := (Edit_Password.Text = Edit_Confirm.Text) and (Edit_Password.Text <> '');
 end;
 
 procedure TFrmNewInetOrgPerson.CheckBox_CannotChangeClick(Sender: TObject);
@@ -257,7 +270,12 @@ begin
   if CheckBox_NextLogon.Checked then
   begin
     CheckBox_CannotChange.Checked := False;
-    ShowMessage('You specified that the password should never expire.' + LineEnding + 'The user will not be required to change the password at next logon.');
+    MessageDlg(
+      'You specified that the password should never expire.' + LineEnding + 'The user will not be required to change the password at next logon.',
+      mtError,
+      [mbOK],
+      0
+    );
   end;
 end;
 
@@ -266,7 +284,12 @@ begin
   if CheckBox_NextLogon.Checked then
   begin
     CheckBox_NextLogon.Checked := False;
-    ShowMessage('You cannot check both User must change password at next logon and User cannot change password for the same user.');
+    MessageDlg(
+      'You cannot check both User must change password at next logon and User cannot change password for the same user.',
+      MtError,
+      [mbOK],
+      0
+    );
   end;
 end;
 
@@ -278,13 +301,31 @@ begin
   if CheckBox_NeverExpires.Checked then
   begin
     CheckBox_NextLogon.Checked := False;
-    ShowMessage('You specified that the password should never expire.' + LineEnding + 'The user will not be required to change the password at next logon.');
+    MessageDlg(
+      'You specified that the password should never expire.' + LineEnding + 'The user will not be required to change the password at next logon.',
+      mtError,
+      [mbOK],
+      0
+    );
   end
   else if CheckBox_CannotChange.Checked then
   begin
     CheckBox_CannotChange.Checked := False;
-    ShowMessage('You cannot check both User must change password at next logon and User cannot change password for the same user.');
+    MessageDlg(
+      'You cannot check both User must change password at next logon and User cannot change password for the same user.',
+      mtError,
+      [mbOK],
+      0
+    );
   end;
+end;
+
+procedure TFrmNewInetOrgPerson.Edit_ConfirmChange(Sender: TObject);
+begin
+  if Edit_Confirm.Text <> Edit_Password.Text then
+    Edit_Confirm.Font.Color := clRed
+  else
+    Edit_Confirm.Font.Color := clDefault;
 end;
 
 procedure TFrmNewInetOrgPerson.Edit_InitialsChange(Sender: TObject);
@@ -311,9 +352,24 @@ begin
   Edit_FullName.Text := FullName;
 end;
 
+procedure TFrmNewInetOrgPerson.Edit_PasswordKeyPress(Sender: TObject; 
+  var Key: char);
+begin
+  if Key = #13 then
+  begin
+    Edit_Confirm.SetFocus;
+    Key := #0
+  end;
+end;
+
 procedure TFrmNewInetOrgPerson.Edit_UserLogonNameChange(Sender: TObject);
 begin
   Edit_PreWindowsSuffix.Text := Edit_UserLogonName.Text
+end;
+
+procedure TFrmNewInetOrgPerson.Load;
+begin
+  Edit_FullName.SetFocus;
 end;
 
 constructor TFrmNewInetOrgPerson.Create(TheOwner: TComponent);
@@ -335,13 +391,14 @@ begin
   
   OwnerNewObject.Caption := rsNewObjectInetOrgPerson;
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next'); 
-  OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnNext;
+  OwnerNewObject.Btn_Next.Default := True;
   OwnerNewObject.Btn_Back.Action := ActionList.ActionByName('Action_Back');
   OwnerNewObject.Btn_Back.Caption := rsNewObjectBtnBack;
   PageID := 0;
   ComboBox_UserLogonName.Items.Add(FormatUtf8('@%', [UserLogonFormatDN(OwnerNewObject.Edit_DN.Text, '/')]));
   ComboBox_UserLogonName.ItemIndex := 0;
   Edit_PreWindowsPrefix.Text := FormatUtf8('%/', [UpperCase(UserLogonFormatDN(OwnerNewObject.Edit_DN.Text, '.lan'))]);
+  OwnerNewObject.CallBack := @Load; 
 end;
 
 end.

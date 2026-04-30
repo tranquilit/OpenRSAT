@@ -31,6 +31,7 @@ type
     procedure Action_NextUpdate(Sender: TObject);
   private
     PageID: Integer;
+    procedure Load;
   public
     constructor Create(TheOwner: TComponent); override;
   end;
@@ -60,9 +61,11 @@ begin
   case (PageID) of
     0:
     begin
+      (owner as TVisNewObject).Btn_Next.Caption := rsNewObjectBtnOK;
       PageID += 1;
       Panel1.Visible := False;
       Panel2.Visible := True;
+      Edit_KeyID.SetFocus;
     end;
     1:
     begin
@@ -98,6 +101,8 @@ begin
   PageID -= 1;
   Panel1.Visible := True;
   Panel2.Visible := False;
+  Edit_cn.SetFocus;
+  (owner as TVisNewObject).Btn_Next.Caption := rsNewObjectBtnNext;
 end;
 
 procedure TFrmNewMsDSKeyCredential.Action_BackUpdate(Sender: TObject);
@@ -108,6 +113,11 @@ begin
     Action_Back.Enabled := True;
 end;
 
+procedure TFrmNewMsDSKeyCredential.Load;
+begin
+  Edit_cn.SetFocus;
+end; 
+
 constructor TFrmNewMsDSKeyCredential.Create(TheOwner: TComponent);
 var
   OwnerNewObject: TVisNewObject absolute TheOwner;
@@ -117,9 +127,11 @@ begin
   OwnerNewObject.Caption := rsNewObjectMsDSKeyCredential;
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next'); 
   OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnNext;
+  OwnerNewObject.Btn_Next.Default := True;
   OwnerNewObject.Btn_Back.Action := ActionList.ActionByName('Action_Back');
   OwnerNewObject.Btn_Back.Caption := rsNewObjectBtnBack;
-  PageID := 0; 
+  PageID := 0;
+  OwnerNewObject.CallBack := @Load;
 end;
 
 end.
