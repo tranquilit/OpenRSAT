@@ -5,12 +5,12 @@
 {"hash":242270122,"name":"tfrmnewinetorgperson.label_fullname.caption","sourcebytes":[70,117,108,108,32,110,97,109,101,58],"value":"Full name:"},
 {"hash":70055466,"name":"tfrmnewinetorgperson.label_userlogonname.caption","sourcebytes":[85,115,101,114,32,108,111,103,111,110,32,110,97,109,101,58],"value":"User logon name:"},
 {"hash":11367210,"name":"tfrmnewinetorgperson.label_prewindows.caption","sourcebytes":[85,115,101,114,32,108,111,103,111,110,32,110,97,109,101,32,40,112,114,101,45,87,105,110,100,111,119,115,32,50,48,48,48,41,58],"value":"User logon name (pre-Windows 2000):"},
+{"hash":143313434,"name":"tfrmnewinetorgperson.label_validation.caption","sourcebytes":[87,104,101,110,32,121,111,117,32,99,108,105,99,107,32,79,75,44,32,116,104,101,32,102,111,108,108,111,119,105,110,103,32,111,98,106,101,99,116,32,119,105,108,108,32,98,101,32,99,114,101,97,116,101,100,58],"value":"When you click OK, the following object will be created:"},
 {"hash":179191546,"name":"tfrmnewinetorgperson.label_password.caption","sourcebytes":[80,97,115,115,119,111,114,100,58],"value":"Password:"},
 {"hash":105713066,"name":"tfrmnewinetorgperson.label_confirm.caption","sourcebytes":[67,111,110,102,105,114,109,58],"value":"Confirm:"},
 {"hash":61409310,"name":"tfrmnewinetorgperson.checkbox_nextlogon.caption","sourcebytes":[85,115,101,114,32,109,117,115,116,32,99,104,97,110,103,101,32,112,97,115,115,119,111,114,100,32,97,116,32,110,101,120,116,32,108,111,103,111,110],"value":"User must change password at next logon"},
 {"hash":130487524,"name":"tfrmnewinetorgperson.checkbox_cannotchange.caption","sourcebytes":[85,115,101,114,32,99,97,110,110,111,116,32,99,104,97,110,103,101,32,112,97,115,115,119,111,114,100],"value":"User cannot change password"},
 {"hash":47850099,"name":"tfrmnewinetorgperson.checkbox_neverexpires.caption","sourcebytes":[80,97,115,115,119,111,114,100,32,110,101,118,101,114,32,101,120,112,105,114,101,115],"value":"Password never expires"},
 {"hash":43894900,"name":"tfrmnewinetorgperson.checkbox_accountdisabled.caption","sourcebytes":[65,99,99,111,117,110,116,32,105,115,32,100,105,115,97,98,108,101,100],"value":"Account is disabled"},
-{"hash":253659306,"name":"tfrmnewinetorgperson.label_validation.caption","sourcebytes":[87,104,101,110,32,121,111,117,32,99,108,105,99,107,32,70,105,110,105,115,104,44,32,116,104,101,32,102,111,108,108,111,119,105,110,103,32,111,98,106,101,99,116,32,119,105,108,108,32,98,101,32,99,114,101,97,116,101,100,58],"value":"When you click Finish, the following object will be created:"},
 {"hash":347380,"name":"tfrmnewinetorgperson.action_next.caption","sourcebytes":[78,101,120,116],"value":"Next"}
 ]}

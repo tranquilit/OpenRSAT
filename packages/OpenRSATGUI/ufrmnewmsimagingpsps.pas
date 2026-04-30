@@ -24,7 +24,7 @@ type
     procedure Action_NextExecute(Sender: TObject);
     procedure Action_NextUpdate(Sender: TObject);
   private
-
+    procedure Load;
   public
     constructor Create(TheOwner: TComponent); override; 
   end;
@@ -75,6 +75,11 @@ begin
   Action_Next.Enabled := (Edit_cn.Text <> '');
 end;
 
+procedure TFrmNewMsImagingPSPs.Load;
+begin
+  Edit_cn.SetFocus;
+end;
+
 constructor TFrmNewMsImagingPSPs.Create(TheOwner: TComponent);
 var
   OwnerNewObject: TVisNewObject absolute TheOwner;
@@ -85,7 +90,8 @@ begin
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
   OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnOK;
   OwnerNewObject.Btn_Next.Default := True;
-  OwnerNewObject.Btn_Back.Visible := False; 
+  OwnerNewObject.Btn_Back.Visible := False;
+  OwnerNewObject.CallBack := @Load;
 end;  
 
 end.

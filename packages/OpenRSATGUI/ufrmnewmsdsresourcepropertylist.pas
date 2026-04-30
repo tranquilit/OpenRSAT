@@ -24,7 +24,7 @@ type
     procedure Action_NextExecute(Sender: TObject);
     procedure Action_NextUpdate(Sender: TObject);
   private
-
+    procedure Load;
   public
     constructor Create(TheOwner: TComponent); override;
   end;
@@ -68,6 +68,11 @@ begin
 
 end;
 
+procedure TFrmNewMsDSResourcePropertyList.Load;
+begin
+  Edit_cn.SetFocus;
+end; 
+
 procedure TFrmNewMsDSResourcePropertyList.Action_NextUpdate(Sender: TObject);
 begin
   Action_Next.Enabled := (Edit_cn.Text <> ''); 
@@ -83,7 +88,8 @@ begin
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
   OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnOK;
   OwnerNewObject.Btn_Next.Default := True;
-  OwnerNewObject.Btn_Back.Visible := False; 
+  OwnerNewObject.Btn_Back.Visible := False;
+  OwnerNewObject.CallBack := @Load
 end;
 
 end.
