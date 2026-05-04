@@ -44,6 +44,7 @@ uses
   SysUtils,
   mormot.core.text,
   mormot.net.ldap,
+  mormot.core.base,
   ucommon,
   ucoredatamodule,
   ursatldapclientui,
@@ -56,7 +57,7 @@ var
   NewObject: TVisNewObject;
   AttList: TLdapAttributeList;
   Att: TLdapAttribute;
-  DN: String;
+  DN: RawUtf8;
 begin
   case (PageID) of
     0:

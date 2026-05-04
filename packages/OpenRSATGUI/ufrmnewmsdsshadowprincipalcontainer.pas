@@ -36,6 +36,7 @@ uses
   Dialogs,
   SysUtils,
   mormot.core.text,
+  mormot.core.base,
   mormot.net.ldap,
   ucommon,
   ucoredatamodule,
@@ -50,7 +51,7 @@ var
   NewObject: TVisNewObject;
   AttList: TLdapAttributeList;
   Att: TLdapAttribute;
-  DN: String;
+  DN: RawUtf8;
 begin
   NewObject := (owner as TVisNewObject);
   AttList := TLdapAttributeList.Create();

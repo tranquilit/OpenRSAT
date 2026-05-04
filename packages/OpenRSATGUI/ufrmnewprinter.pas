@@ -26,8 +26,8 @@ type
     procedure Action_NextUpdate(Sender: TObject);
   private
     function UNCToDashName(const UNC: RawUtf8): RawUtf8;
-    function GetServerName(const UNC: string): string;
-    function GetShareName(const UNC: string): string;
+    function GetServerName(const UNC: RawUtf8): RawUtf8;
+    function GetShareName(const UNC: RawUtf8): RawUtf8;
   public
     constructor Create(TheOwner: TComponent); override;
   end;
@@ -62,7 +62,7 @@ begin
   Result := Copy(s, 1, p - 1) + '-' + Copy(s, p + 1, MaxInt);
 end;
 
-function TFrmNewPrinter.GetServerName(const UNC: string): string;
+function TFrmNewPrinter.GetServerName(const UNC: RawUtf8): RawUtf8;
 var
   p: Integer;
 begin
@@ -76,7 +76,7 @@ begin
     Result := Copy(UNC, 3, p - 3);
 end;
 
-function TFrmNewPrinter.GetShareName(const UNC: string): string;
+function TFrmNewPrinter.GetShareName(const UNC: RawUtf8): RawUtf8;
 var
   p: Integer;
 begin

@@ -456,6 +456,10 @@ resourcestring
   rsShowPassword = 'Show password';
   rsHidePassword = 'Hide password';
   rsLockedAccount = 'This account is currently locked out on this Active Directory Domain Controller.';
+  
+  rsUserMustChangePasswordAndCannotChange = 'You cannot check both User must change password at next logon and User cannot change password for the same user.';
+  rsPasswordShouldNeverExpire = 'You specified that the password should never expire.';
+  rsNotRequiredToChangePassword = 'The user will not be required to change the password at next logon.';
 
 const
   DAYS_BETWEEN_1601_AND_1900 = 109205;

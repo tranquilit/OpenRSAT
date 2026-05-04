@@ -63,7 +63,6 @@ type
     procedure CheckBox_NextLogonChange(Sender: TObject);
     procedure Edit_ConfirmChange(Sender: TObject);
     procedure Edit_FirstNameChange(Sender: TObject);
-    procedure Edit_FullNameKeyPress(Sender: TObject; var Key: char);
     procedure Edit_InitialsChange(Sender: TObject);
     procedure Edit_LastNameChange(Sender: TObject);
     procedure Edit_PasswordKeyPress(Sender: TObject; var Key: char);
@@ -85,6 +84,7 @@ uses
   SysUtils,
   mormot.core.text,
   mormot.core.os.security,
+  mormot.core.base,
   mormot.net.ldap,
   ucommon,
   ucoredatamodule,
@@ -114,7 +114,7 @@ var
   NewObject: TVisNewObject;
   AttList: TLdapAttributeList;
   Att: TLdapAttribute;
-  DN: String;
+  DN: RawUtf8;
   UAC: TUserAccountControls = [uacNormalAccount];
   SecDesc: TSecurityDescriptor;
   AceSelf, AceWorld: PSecAce;
@@ -153,6 +153,7 @@ begin
       Exit;
   finally
     FreeAndNil(Att);
+    FreeAndNil(AttList);
   end;
   
   if CheckBox_CannotChange.Checked then
@@ -182,7 +183,7 @@ end;
 
 procedure TFrmNewInetOrgPerson.Edit_FirstNameChange(Sender: TObject);
 var
-  FullName: String;
+  FullName: RawUtf8;
 begin
   FullName := Edit_FirstName.Text;
   if Edit_Initials.Text <> '' then
@@ -190,16 +191,6 @@ begin
   if Edit_LastName.Text <> '' then
     FullName := FormatUtf8('% %', [FullName, Edit_LastName.Text]);
   Edit_FullName.Text := FullName;
-end;
-
-procedure TFrmNewInetOrgPerson.Edit_FullNameKeyPress(Sender: TObject; 
-  var Key: char);
-begin
-  if Key = #13 then
-  begin
-    Edit_UserLogonName.SetFocus;
-    Key := #0;
-  end;
 end;
 
 procedure TFrmNewInetOrgPerson.Action_NextExecute(Sender: TObject);
@@ -271,7 +262,7 @@ begin
   begin
     CheckBox_CannotChange.Checked := False;
     MessageDlg(
-      'You specified that the password should never expire.' + LineEnding + 'The user will not be required to change the password at next logon.',
+      rsPasswordShouldNeverExpire + LineEnding + rsNotRequiredToChangePassword,
       mtError,
       [mbOK],
       0
@@ -285,7 +276,7 @@ begin
   begin
     CheckBox_NextLogon.Checked := False;
     MessageDlg(
-      'You cannot check both User must change password at next logon and User cannot change password for the same user.',
+      rsUserMustChangePasswordAndCannotChange,
       MtError,
       [mbOK],
       0
@@ -302,7 +293,7 @@ begin
   begin
     CheckBox_NextLogon.Checked := False;
     MessageDlg(
-      'You specified that the password should never expire.' + LineEnding + 'The user will not be required to change the password at next logon.',
+      rsPasswordShouldNeverExpire + LineEnding + rsNotRequiredToChangePassword,
       mtError,
       [mbOK],
       0
@@ -312,7 +303,7 @@ begin
   begin
     CheckBox_CannotChange.Checked := False;
     MessageDlg(
-      'You cannot check both User must change password at next logon and User cannot change password for the same user.',
+      rsUserMustChangePasswordAndCannotChange,
       mtError,
       [mbOK],
       0
@@ -330,7 +321,7 @@ end;
 
 procedure TFrmNewInetOrgPerson.Edit_InitialsChange(Sender: TObject);
 var
-  FullName: String;
+  FullName: RawUtf8;
 begin
   if Edit_FirstName.Text <> '' then
     FullName := Edit_FirstName.Text;
@@ -342,7 +333,7 @@ end;
 
 procedure TFrmNewInetOrgPerson.Edit_LastNameChange(Sender: TObject);
 var
-  FullName: String;
+  FullName: RawUtf8;
 begin
   if Edit_FirstName.Text <> '' then
     FullName := Edit_FirstName.Text;
@@ -369,13 +360,13 @@ end;
 
 procedure TFrmNewInetOrgPerson.Load;
 begin
-  Edit_FullName.SetFocus;
+  Edit_FirstName.SetFocus;
 end;
 
 constructor TFrmNewInetOrgPerson.Create(TheOwner: TComponent);
 var
   OwnerNewObject: TVisNewObject absolute TheOwner;
-  function UserLogonFormatDN(Text, Separator: String): string;
+  function UserLogonFormatDN(Text, Separator: RawUtf8): RawUtf8;
   var
     Position: Integer;
   begin
