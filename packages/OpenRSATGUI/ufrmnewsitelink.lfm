@@ -1,0 +1,154 @@
+object FrmNewSiteLink: TFrmNewSiteLink
+  Left = 0
+  Height = 240
+  Top = 0
+  Width = 320
+  ClientHeight = 240
+  ClientWidth = 320
+  LCLVersion = '4.6.0.0'
+  TabOrder = 0
+  DesignTop = 133
+  object Panel1: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 27
+    Top = 8
+    Width = 304
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 27
+    ClientWidth = 304
+    TabOrder = 0
+    object Label_Name: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 0
+      Height = 15
+      Top = 8
+      Width = 35
+      BorderSpacing.Top = 8
+      Caption = 'Name:'
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = Label_Name
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Label_Name
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 51
+      Height = 23
+      Top = 4
+      Width = 245
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 16
+      BorderSpacing.Right = 8
+      TabOrder = 0
+    end
+  end
+  object Panel2: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Panel1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 111
+    Top = 43
+    Width = 304
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 111
+    ClientWidth = 304
+    TabOrder = 1
+    object Label2: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Panel2
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 34
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Label2'
+    end
+    object ListBox1: TListBox
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Label2
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 80
+      Top = 31
+      Width = 100
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      ItemHeight = 0
+      TabOrder = 0
+    end
+    object Label3: TLabel
+      AnchorSideTop.Control = Panel2
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 262
+      Height = 15
+      Top = 8
+      Width = 34
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      Caption = 'Label3'
+    end
+    object ListBox2: TListBox
+      AnchorSideTop.Control = Label3
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 200
+      Height = 80
+      Top = 31
+      Width = 96
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      ItemHeight = 0
+      TabOrder = 1
+    end
+    object Button1: TButton
+      AnchorSideLeft.Control = ListBox2
+      AnchorSideLeft.Side = asrCenter
+      Left = 154
+      Height = 25
+      Top = 18
+      Width = 188
+      Caption = 'Button1'
+      TabOrder = 2
+    end
+    object Button2: TButton
+      Left = 0
+      Height = 25
+      Top = 18
+      Width = 75
+      Caption = 'Button2'
+      TabOrder = 3
+    end
+    object Label4: TLabel
+      Left = 0
+      Height = 15
+      Top = 18
+      Width = 34
+      Caption = 'Label4'
+    end
+  end
+end

@@ -28,7 +28,6 @@
 {"hash":94149826,"name":"tfrmmodulesitesandservices.menuitem_newserver.caption","sourcebytes":[83,101,114,118,101,114],"value":"Server"},
 {"hash":95130820,"name":"tfrmmodulesitesandservices.menuitem_newsubnet.caption","sourcebytes":[83,117,98,110,101,116],"value":"Subnet"},
 {"hash":79563278,"name":"tfrmmodulesitesandservices.menuitem_newconnection.caption","sourcebytes":[67,111,110,110,101,99,116,105,111,110],"value":"Connection"},
-{"hash":175470155,"name":"tfrmmodulesitesandservices.menuitem_newsitelink.caption","sourcebytes":[83,105,116,101,32,76,105,110,107],"value":"Site Link"},
 {"hash":63938213,"name":"tfrmmodulesitesandservices.menuitem_newsitelinkbridge.caption","sourcebytes":[83,105,116,101,32,76,105,110,107,32,66,114,105,100,103,101],"value":"Site Link Bridge"},
 {"hash":112234787,"name":"tfrmmodulesitesandservices.menuitem_newsitesettings.caption","sourcebytes":[83,105,116,101,32,83,101,116,116,105,110,103,115],"value":"Site Settings"},
 {"hash":258142370,"name":"tfrmmodulesitesandservices.menuitem_newsitescontainer.caption","sourcebytes":[83,105,116,101,115,32,67,111,110,116,97,105,110,101,114],"value":"Sites Container"},

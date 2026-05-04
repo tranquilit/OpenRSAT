@@ -35,7 +35,8 @@ type
     vnotSubnet
     vnotSharedFolder,
     vnotPrinter
-    vnotServer
+    vnotServer,
+    vnotSiteLink
   );
   { TVisNewObject }
 
@@ -92,6 +93,7 @@ uses
   ufrmnewmsimagingpsps,
   ufrmnewprinter,
   ufrmnewserver,
+  ufrmnewsitelink,
   ucommonui;
 
 {$R *.lfm}
@@ -133,6 +135,7 @@ begin
     vnotSharedFolder: Frame := TFrmNewSharedFolder.Create(Self);
     vnotPrinter: Frame := TFrmNewPrinter.Create(Self);
     vnotServer: Frame := TFrmNewServer.Create(Self, Ldap);
+    vnotSiteLink: Frame := TFrmNewSiteLink.Create(Self, Ldap);
     else
     begin
       Close;
