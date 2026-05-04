@@ -645,6 +645,10 @@ msgstr ""
 msgid "The requested modify operation would have resulted in an entry that does not include all of the attributes used in its RDN."
 msgstr ""
 
+#: ucommon.rsnotrequiredtochangepassword
+msgid "The user will not be required to change the password at next logon."
+msgstr ""
+
 #: ucommon.rsobjectclassviolation
 msgid "The requested operation would have resulted in an entry that has an inappropriate set of object classes, or whose attributes violate the constraints associated with its set of object classes."
 msgstr ""
@@ -652,6 +656,10 @@ msgstr ""
 #: ucommon.rsoperationserror
 msgid "Operation occurs in a wrong order."
 msgstr "Ενέργεια συμβαίνει με λάθος σειρά."
+
+#: ucommon.rspasswordshouldneverexpire
+msgid "You specified that the password should never expire."
+msgstr ""
 
 #: ucommon.rspreparedjoin
 msgid "Prepare DJOIN"
@@ -945,6 +953,10 @@ msgstr ""
 #: ucommon.rsusecurrentcreds
 msgid "Current user credentials"
 msgstr "Στοιχεία τρέχοντος χρήστη"
+
+#: ucommon.rsusermustchangepasswordandcannotchange
+msgid "You cannot check both User must change password at next logon and User cannot change password for the same user."
+msgstr ""
 
 #: ucommon.rswarning
 msgid "Warning"

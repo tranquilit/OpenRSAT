@@ -662,6 +662,10 @@ msgstr "L'opération demandée n'est prise en charge que pour les entrées feuil
 msgid "The requested modify operation would have resulted in an entry that does not include all of the attributes used in its RDN."
 msgstr "L'opération de modification demandée aurait donné lieu à une entrée qui n'inclut pas tous les attributs utilisés dans son RDN."
 
+#: ucommon.rsnotrequiredtochangepassword
+msgid "The user will not be required to change the password at next logon."
+msgstr ""
+
 #: ucommon.rsobjectclassviolation
 msgid "The requested operation would have resulted in an entry that has an inappropriate set of object classes, or whose attributes violate the constraints associated with its set of object classes."
 msgstr "L'opération demandée aurait donné lieu à une entrée comportant un ensemble inapproprié de classes d'objets ou dont les attributs enfreignent les contraintes associées à son ensemble de classes d'objets."
@@ -669,6 +673,10 @@ msgstr "L'opération demandée aurait donné lieu à une entrée comportant un e
 #: ucommon.rsoperationserror
 msgid "Operation occurs in a wrong order."
 msgstr "L'opération est apparu dans le mauvais ordre."
+
+#: ucommon.rspasswordshouldneverexpire
+msgid "You specified that the password should never expire."
+msgstr ""
 
 #: ucommon.rspreparedjoin
 msgid "Prepare DJOIN"
@@ -962,6 +970,10 @@ msgstr "Le serveur n'est pas disposé à traiter l'opération demandée pour une
 #: ucommon.rsusecurrentcreds
 msgid "Current user credentials"
 msgstr "Identifiants actuels de l'utilisateur"
+
+#: ucommon.rsusermustchangepasswordandcannotchange
+msgid "You cannot check both User must change password at next logon and User cannot change password for the same user."
+msgstr ""
 
 #: ucommon.rswarning
 msgid "Warning"

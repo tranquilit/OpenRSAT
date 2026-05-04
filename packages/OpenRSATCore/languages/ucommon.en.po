@@ -662,6 +662,10 @@ msgstr "The requested operation is only supported for leaf entries, but the targ
 msgid "The requested modify operation would have resulted in an entry that does not include all of the attributes used in its RDN."
 msgstr "The requested modify operation would have resulted in an entry that does not include all of the attributes used in its RDN."
 
+#: ucommon.rsnotrequiredtochangepassword
+msgid "The user will not be required to change the password at next logon."
+msgstr ""
+
 #: ucommon.rsobjectclassviolation
 msgid "The requested operation would have resulted in an entry that has an inappropriate set of object classes, or whose attributes violate the constraints associated with its set of object classes."
 msgstr "The requested operation would have resulted in an entry that has an inappropriate set of object classes, or whose attributes violate the constraints associated with its set of object classes."
@@ -669,6 +673,10 @@ msgstr "The requested operation would have resulted in an entry that has an inap
 #: ucommon.rsoperationserror
 msgid "Operation occurs in a wrong order."
 msgstr "Operation occurs in a wrong order."
+
+#: ucommon.rspasswordshouldneverexpire
+msgid "You specified that the password should never expire."
+msgstr ""
 
 #: ucommon.rspreparedjoin
 msgid "Prepare DJOIN"
@@ -962,6 +970,10 @@ msgstr "The server is not willing to process the requested operation for some re
 #: ucommon.rsusecurrentcreds
 msgid "Current user credentials"
 msgstr "Current user credentials"
+
+#: ucommon.rsusermustchangepasswordandcannotchange
+msgid "You cannot check both User must change password at next logon and User cannot change password for the same user."
+msgstr ""
 
 #: ucommon.rswarning
 msgid "Warning"
