@@ -139,6 +139,7 @@ resourcestring
   rsNewObjectUser = 'New object - User';
   rsNewObjectPrinter = 'New object - Printer';
   rsNewObjectServer = 'New object - Server';
+  rsNewObjectSiteLink = 'New Object - Site Link';
 
   rsNewObjectBtnBack = '< Back';
   rsNewObjectBtnNext = 'Next >';

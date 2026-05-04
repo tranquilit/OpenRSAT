@@ -55,6 +55,14 @@ type
   { TFrmModuleSitesAndServices }
 
   TFrmModuleSitesAndServices = class(TFrameModule)
+    Action_NewSharedFolder: TAction;
+    Action_NewMsDSKeyCredential: TAction;
+    Action_NewUser: TAction;
+    Action_NewInetOrgPerson: TAction;
+    Action_NewPrinter: TAction;
+    Action_NewComputer: TAction;
+    Action_NewContact: TAction;
+    Action_NewGroup: TAction;
     Action_NewSiteLink: TAction;
     Action_NewServer: TAction;
     Action_NewAll: TAction;
@@ -70,6 +78,14 @@ type
     Image1: TImage;
     Image2: TImage;
     Label1: TLabel;
+    MenuItem_NewPrinter: TMenuItem;
+    MenuItem_NewUser: TMenuItem;
+    MenuItem_NewSharedFolder: TMenuItem;
+    MenuItem_NewMsDSKeyCredential: TMenuItem;
+    MenuItem_NewInetOrgPerson: TMenuItem;
+    MenuItem_NewComputer: TMenuItem;
+    MenuItem_NewContact: TMenuItem;
+    MenuItem_NewGroup: TMenuItem;
     MenuItem_Delete: TMenuItem;
     MenuItem_NewServer: TMenuItem;
     MenuItem_NewConnection: TMenuItem;
@@ -117,9 +133,16 @@ type
     ToolButton8: TToolButton;
     TreeView1: TTreeView;
     {$push}{$warn 5024 off}
+    
     procedure Action_NewAllUpdate(Sender: TObject);
     procedure Action_DeleteExecute(Sender: TObject);
     procedure Action_DeleteUpdate(Sender: TObject);
+    procedure Action_NewComputerExecute(Sender: TObject);
+    procedure Action_NewComputerUpdate(Sender: TObject);
+    procedure Action_NewContactExecute(Sender: TObject);
+    procedure Action_NewContactUpdate(Sender: TObject);
+    procedure Action_NewGroupExecute(Sender: TObject);
+    procedure Action_NewGroupUpdate(Sender: TObject);
     procedure Action_NewServerExecute(Sender: TObject);
     procedure Action_NewServerUpdate(Sender: TObject);
     procedure Action_NewSiteExecute(Sender: TObject);
@@ -128,6 +151,8 @@ type
     procedure Action_NewSiteUpdate(Sender: TObject);
     procedure Action_NewSubnetExecute(Sender: TObject);
     procedure Action_NewSubnetUpdate(Sender: TObject);
+    procedure Action_NewUserExecute(Sender: TObject);
+    procedure Action_NewUserUpdate(Sender: TObject);
     procedure Action_PropertyExecute(Sender: TObject);
     procedure Action_PropertyUpdate(Sender: TObject);
     procedure Action_RefreshExecute(Sender: TObject);
@@ -222,7 +247,13 @@ uses
 
 type
   TNewAction = (
+    naComputer,                      // New Computer
+    naContact,                       // New Contact
+    naGroup,                         // New Group
+    naInetOrgPerson,                 // New InetOrgPerson
+    naPrinter,                       // New Printer 
     naMsDNSServerSettings,           // New Ms-DS ServerSettings
+    naMsDSKeyCredential,             // New Ms-DS KeyCredential
     naMsDSShadowPrincipal,           // New Ms-DS ShadowPrincipal
     naMsDSShadowPrincipalContainer,  // New Ms-DS ShadowPrincipalContainer
     naMsImagingPSPs,                 // New Ms-DS ImagingPSPs
@@ -234,7 +265,9 @@ type
     naSiteLinkBridge,                // New Site Link Bridge
     naSitesContainer,                // New Sites Container
     naSubnet,                        // New Subnet
-    naServer                         // New Server
+    naServer,                        // New Server
+    naUser,                          // New User
+    naSharedFolder                   // New Shared Folder
   );
 
 type
@@ -528,9 +561,28 @@ const
     naSiteLinkBridge
   ];
   
+  ServicesNew = [
+    naComputer,
+    naContact,
+    naGroup,
+    naInetOrgPerson,
+    naMsDSKeyCredential,
+    naMsDSShadowPrincipalContainer,
+    naMsImagingPSPs,
+    naPrinter,
+    naUser,
+    naSharedFolder
+  ];
+  
 begin
   menuItems := [
+    MenuItem_NewComputer,
+    MenuItem_NewContact,
+    MenuItem_NewGroup,
+    MenuItem_NewInetOrgPerson,
+    MenuItem_NewPrinter,
     MenuItem_NewMsDNSServerSettings,
+    MenuItem_NewMsDSKeyCredential,
     MenuItem_NewMsDSShadowPrincipal,
     MenuItem_NewMsDSShadowPrincipalContainer,
     MenuItem_NewMsImagingPSPs,
@@ -542,7 +594,9 @@ begin
     MenuItem_NewSiteLinkBridge,
     MenuItem_NewSitesContainer,
     MenuItem_NewSubnet,
-    MenuItem_NewServer
+    MenuItem_NewServer,
+    MenuItem_NewUser,
+    MenuItem_NewSharedFolder
   ];
   filter := 0;
   newList := [];
@@ -556,6 +610,7 @@ begin
     'server': newList := ServerNew;
     'nTDSDSA': newList := NTDSDSANew;
     'interSiteTransport': newList := InterSiteTransportNew;
+    'container': newList := ServicesNew;
     else
       TSynLog.Add.Log(sllWarning, FormatUtf8('"objectClass" not yet implemented: %', [ObjectClass]));
   end;
@@ -621,6 +676,72 @@ begin
   Action_Delete.Enabled := Allowed;
 end;
 
+procedure TFrmModuleSitesAndServices.Action_NewComputerExecute(Sender: TObject);
+var
+  vis: TVisNewObject;
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewComputer.Caption]);
+
+  vis := TVisNewObject.Create(Self, vnotComputer, Format('CN=Computer,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  try
+    vis.Ldap := FrmRSAT.LdapClient;
+    vis.ShowModal;
+    RefreshLdapNode();
+  finally
+    FreeAndNil(vis);
+  end;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewComputerUpdate(Sender: TObject);
+begin
+  Action_NewComputer.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected; 
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewContactExecute(Sender: TObject);
+var
+  vis: TVisNewObject;
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewContact.Caption]);
+
+  vis := TVisNewObject.Create(Self, vnotContact, Format('CN=Person,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  try
+    vis.Ldap := FrmRSAT.LdapClient;
+    vis.ShowModal;
+    RefreshLdapNode();
+  finally
+    FreeAndNil(vis);
+  end;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewContactUpdate(Sender: TObject);
+begin
+  Action_NewContact.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewGroupExecute(Sender: TObject);
+var
+  vis: TVisNewObject;
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewGroup.Caption]);
+
+  vis := TVisNewObject.Create(Self, vnotGroup, Format('CN=Group,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  try
+    vis.Ldap := FrmRSAT.LdapClient;
+    vis.ShowModal;
+    RefreshLdapNode();
+  finally
+    FreeAndNil(vis);
+  end;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewGroupUpdate(Sender: TObject);
+begin
+  Action_NewGroup.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end;
+
 procedure TFrmModuleSitesAndServices.Action_NewServerExecute(Sender: TObject);
 var
   vis: TVisNewObject;
@@ -662,6 +783,28 @@ end;
 procedure TFrmModuleSitesAndServices.Action_NewSubnetUpdate(Sender: TObject);
 begin
   Action_NewSubnet.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewUserExecute(Sender: TObject);
+var
+  vis: TVisNewObject;
+begin
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
+
+  vis := TVisNewObject.Create(Self, vnotUser, Format('CN=Person,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  try
+    vis.Ldap := FrmRSAT.LdapClient;
+    vis.ShowModal;
+    RefreshLdapNode();
+  finally
+    FreeAndNil(vis);
+  end;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewUserUpdate(Sender: TObject);
+begin
+  Action_NewUser.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected; 
 end;
 
 procedure TFrmModuleSitesAndServices.Action_PropertyExecute(Sender: TObject);

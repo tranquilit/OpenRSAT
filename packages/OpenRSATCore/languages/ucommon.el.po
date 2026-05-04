@@ -589,6 +589,10 @@ msgstr "Νέο αντικείμενο - OU"
 msgid "New object - Printer"
 msgstr ""
 
+#: ucommon.rsnewobjectserver
+msgid "New object - Server"
+msgstr ""
+
 #: ucommon.rsnewobjectsharedfolder
 msgid "New object - Shared Folder"
 msgstr "Νέο αντικείμενο - Κοινόχρηστος Φάκελος"
@@ -596,6 +600,10 @@ msgstr "Νέο αντικείμενο - Κοινόχρηστος Φάκελος"
 #: ucommon.rsnewobjectsite
 msgid "New object - Site"
 msgstr "Νέο αντικείμενο - Τοποθεσία"
+
+#: ucommon.rsnewobjectsitelink
+msgid "New Object - Site Link"
+msgstr ""
 
 #: ucommon.rsnewobjectsubnet
 msgid "New object - Subnet"

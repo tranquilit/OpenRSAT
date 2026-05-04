@@ -606,6 +606,10 @@ msgstr "New object - OU"
 msgid "New object - Printer"
 msgstr ""
 
+#: ucommon.rsnewobjectserver
+msgid "New object - Server"
+msgstr ""
+
 #: ucommon.rsnewobjectsharedfolder
 msgid "New object - Shared Folder"
 msgstr "New object - Shared Folder"
@@ -613,6 +617,10 @@ msgstr "New object - Shared Folder"
 #: ucommon.rsnewobjectsite
 msgid "New object - Site"
 msgstr "New object - Site"
+
+#: ucommon.rsnewobjectsitelink
+msgid "New Object - Site Link"
+msgstr ""
 
 #: ucommon.rsnewobjectsubnet
 msgid "New object - Subnet"

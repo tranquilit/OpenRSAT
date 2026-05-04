@@ -32,9 +32,9 @@ type
     vnotContact,
     vnotVolume,
     vnotSite,
-    vnotSubnet
+    vnotSubnet,
     vnotSharedFolder,
-    vnotPrinter
+    vnotPrinter,
     vnotServer,
     vnotSiteLink
   );
