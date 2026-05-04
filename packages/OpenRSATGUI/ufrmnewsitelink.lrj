@@ -1,0 +1,8 @@
+{"version":1,"strings":[
+{"hash":5538698,"name":"tfrmnewsitelink.label_name.caption","sourcebytes":[78,97,109,101,58],"value":"Name:"},
+{"hash":86477810,"name":"tfrmnewsitelink.label2.caption","sourcebytes":[76,97,98,101,108,50],"value":"Label2"},
+{"hash":86477811,"name":"tfrmnewsitelink.label3.caption","sourcebytes":[76,97,98,101,108,51],"value":"Label3"},
+{"hash":164345425,"name":"tfrmnewsitelink.button1.caption","sourcebytes":[66,117,116,116,111,110,49],"value":"Button1"},
+{"hash":164345426,"name":"tfrmnewsitelink.button2.caption","sourcebytes":[66,117,116,116,111,110,50],"value":"Button2"},
+{"hash":86477812,"name":"tfrmnewsitelink.label4.caption","sourcebytes":[76,97,98,101,108,52],"value":"Label4"}
+]}

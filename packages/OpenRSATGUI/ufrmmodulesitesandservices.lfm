@@ -640,6 +640,10 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       OnExecute = Action_NewServerExecute
       OnUpdate = Action_NewServerUpdate
     end
+    object Action_NewSiteLink: TAction
+      OnExecute = Action_NewSiteLinkExecute
+      OnUpdate = Action_NewSiteLinkUpdate
+    end
   end
   object PopupMenu1: TPopupMenu
     OnPopup = PopupMenu1Popup
@@ -669,7 +673,7 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
         Caption = 'Connection'
       end
       object MenuItem_NewSiteLink: TMenuItem
-        Caption = 'Site Link'
+        Action = Action_NewSiteLink
       end
       object MenuItem_NewSiteLinkBridge: TMenuItem
         Caption = 'Site Link Bridge'
