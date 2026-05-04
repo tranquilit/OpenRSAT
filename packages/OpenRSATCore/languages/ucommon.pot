@@ -588,12 +588,20 @@ msgstr ""
 msgid "New object - Printer"
 msgstr ""
 
+#: ucommon.rsnewobjectserver
+msgid "New object - Server"
+msgstr ""
+
 #: ucommon.rsnewobjectsharedfolder
 msgid "New object - Shared Folder"
 msgstr ""
 
 #: ucommon.rsnewobjectsite
 msgid "New object - Site"
+msgstr ""
+
+#: ucommon.rsnewobjectsitelink
+msgid "New Object - Site Link"
 msgstr ""
 
 #: ucommon.rsnewobjectsubnet

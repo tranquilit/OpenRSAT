@@ -72,7 +72,7 @@ object FrmNewSiteLink: TFrmNewSiteLink
     ClientHeight = 111
     ClientWidth = 304
     TabOrder = 1
-    object Label2: TLabel
+    object Label_LeftList: TLabel
       AnchorSideLeft.Control = Panel2
       AnchorSideTop.Control = Panel2
       Left = 8
@@ -81,22 +81,31 @@ object FrmNewSiteLink: TFrmNewSiteLink
       Width = 34
       BorderSpacing.Left = 8
       BorderSpacing.Top = 8
-      Caption = 'Label2'
+      Caption = 'Sites not in this site link:'
     end
-    object ListBox1: TListBox
+    object ListBox_NotInSiteLink: TListBox
       AnchorSideLeft.Control = Panel2
-      AnchorSideTop.Control = Label2
+      AnchorSideTop.Control = Label_LeftList
       AnchorSideTop.Side = asrBottom
+      AnchorSideBottom.Control = Label_Warning
       Left = 8
       Height = 80
       Top = 31
       Width = 100
       BorderSpacing.Left = 8
       BorderSpacing.Top = 8
-      ItemHeight = 0
+      BorderSpacing.Bottom = 8
+      Items.Strings = (
+        'Item 1'
+        'Item 2'
+        'Item 3'
+      )
+      ItemHeight = 15
       TabOrder = 0
+      OnSelectionChange = ListBox_NotInSiteLinkSelectionChange
     end
-    object Label3: TLabel
+    object Label_RightList: TLabel
+      AnchorSideLeft.Control = ListBox_InSiteLink
       AnchorSideTop.Control = Panel2
       AnchorSideRight.Control = Panel2
       AnchorSideRight.Side = asrBottom
@@ -107,14 +116,14 @@ object FrmNewSiteLink: TFrmNewSiteLink
       Anchors = [akTop, akRight]
       BorderSpacing.Top = 8
       BorderSpacing.Right = 8
-      Caption = 'Label3'
+      Caption = 'Sites in this site link:'
     end
-    object ListBox2: TListBox
-      AnchorSideTop.Control = Label3
+    object ListBox_InSiteLink: TListBox
+      AnchorSideTop.Control = Label_RightList
       AnchorSideTop.Side = asrBottom
       AnchorSideRight.Control = Panel2
       AnchorSideRight.Side = asrBottom
-      Left = 200
+      AnchorSideBottom.Control = Label_Warning
       Height = 80
       Top = 31
       Width = 96
@@ -122,33 +131,85 @@ object FrmNewSiteLink: TFrmNewSiteLink
       BorderSpacing.Left = 8
       BorderSpacing.Top = 8
       BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
       ItemHeight = 0
       TabOrder = 1
+      OnSelectionChange = ListBox_InSiteLinkSelectionChange
     end
-    object Button1: TButton
-      AnchorSideLeft.Control = ListBox2
+    object Label_Warning: TLabel
+      AnchorSideLeft.Control = Panel2
       AnchorSideLeft.Side = asrCenter
-      Left = 154
-      Height = 25
-      Top = 18
-      Width = 188
-      Caption = 'Button1'
-      TabOrder = 2
-    end
-    object Button2: TButton
-      Left = 0
-      Height = 25
-      Top = 18
-      Width = 75
-      Caption = 'Button2'
-      TabOrder = 3
-    end
-    object Label4: TLabel
-      Left = 0
+      AnchorSideTop.Control = ListBox_NotInSiteLink
+      AnchorSideTop.Side = asrBottom
+      AnchorSideBottom.Control = Panel2
+      AnchorSideBottom.Side = asrBottom
+      Left = 94
       Height = 15
-      Top = 18
-      Width = 34
-      Caption = 'Label4'
+      Top = 200
+      Width = 216
+      Anchors = [akTop, akLeft, akBottom]
+      BorderSpacing.Top = 8
+      Caption = 'A site link must contain at least two sites.'
+    end
+    object Panel3: TPanel
+      AnchorSideLeft.Control = ListBox_NotInSiteLink
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ListBox_NotInSiteLink
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = ListBox_InSiteLink
+      Left = 156
+      Height = 54
+      Top = 84
+      Width = 92
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = True
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 8
+      BevelOuter = bvNone
+      ClientHeight = 54
+      ClientWidth = 92
+      TabOrder = 2
+      object Button_Add: TButton
+        AnchorSideLeft.Control = Panel3
+        AnchorSideTop.Control = Panel3
+        AnchorSideRight.Control = Panel3
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 25
+        Top = 0
+        Width = 92
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Add >>'
+        Enabled = False
+        TabOrder = 0
+        OnClick = Button_AddClick
+      end
+      object Button_Remove: TButton
+        AnchorSideLeft.Control = Panel3
+        AnchorSideTop.Control = Button_Add
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Panel3
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 25
+        Top = 29
+        Width = 92
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 4
+        Caption = '<< Remove'
+        Enabled = False
+        TabOrder = 1
+        OnClick = Button_RemoveClick
+      end
+    end
+  end
+  object ActionList: TActionList
+    Left = 384
+    Top = 240
+    object Action_Next: TAction
+      Caption = 'Next'
+      OnExecute = Action_NextExecute
+      OnUpdate = Action_NextUpdate
     end
   end
 end
