@@ -353,9 +353,12 @@ begin
   case PageControl_Search.ActivePageIndex of
     0:
     begin
-      Filter := Trim(Edit_BasicValue.Text);
+      Filter := LdapEscape(Trim(Edit_BasicValue.Text));
       if not (Filter = '') then
-        Filter := FormatUtf8('|(cn=*%*)(dn=*%*)(name=*%*)(userPrincipalName=*%*)', [Filter, Filter, Filter, Filter])
+        // Keep the legacy contains search for display names, but use indexed
+        // prefix matching for logon attributes to avoid slow full subtree scans
+        // on large directories.
+        Filter := FormatUtf8('|(cn=*%*)(dn=*%*)(name=*%*)(sAMAccountName=%*)(userPrincipalName=%*)', [Filter, Filter, Filter, Filter, Filter])
       else
         Filter := 'name=*';
     end;
