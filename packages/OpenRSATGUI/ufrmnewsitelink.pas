@@ -100,6 +100,8 @@ begin
   if idx <> -1 then
   begin
     ListBox_InSiteLink.Items.Add(ListBox_NotInSiteLink.Items[idx]);
+    ListBox_InSiteLink.ItemIndex := ListBox_InSiteLink.Items.Count - 1;
+    ListBox_InSiteLink.SetFocus;
     ListBox_NotInSiteLink.Items.Delete(idx);
   end;
 end;
@@ -112,6 +114,8 @@ begin
   if idx <> -1 then
   begin
     ListBox_NotInSiteLink.Items.Add(ListBox_InSiteLink.Items[idx]);
+    ListBox_NotInSiteLink.ItemIndex := ListBox_NotInSiteLink.Items.Count - 1;
+    ListBox_NotInSiteLink.SetFocus;
     ListBox_InSiteLink.Items.Delete(idx);
   end;
 end;

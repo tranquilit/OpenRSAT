@@ -31,6 +31,7 @@
 {"hash":214629228,"name":"tfrmmodulesitesandservices.action_newmsdskeycredential.caption","sourcebytes":[65,99,116,105,111,110,95,78,101,119,77,115,68,83,75,101,121,67,114,101,100,101,110,116,105,97,108],"value":"Action_NewMsDSKeyCredential"},
 {"hash":243048850,"name":"tfrmmodulesitesandservices.action_newuser.caption","sourcebytes":[65,99,116,105,111,110,95,78,101,119,85,115,101,114],"value":"Action_NewUser"},
 {"hash":71629826,"name":"tfrmmodulesitesandservices.action_newsharedfolder.caption","sourcebytes":[65,99,116,105,111,110,95,78,101,119,83,104,97,114,101,100,70,111,108,100,101,114],"value":"Action_NewSharedFolder"},
+{"hash":123775381,"name":"tfrmmodulesitesandservices.action_newsitelinkbridge.caption","sourcebytes":[65,99,116,105,111,110,95,78,101,119,83,105,116,101,76,105,110,107,66,114,105,100,103,101],"value":"Action_NewSiteLinkBridge"},
 {"hash":60404796,"name":"tfrmmodulesitesandservices.menuitem_delegatecontrol.caption","sourcebytes":[68,101,108,101,103,97,116,101,32,67,111,110,116,114,111,108],"value":"Delegate Control"},
 {"hash":105369186,"name":"tfrmmodulesitesandservices.menuitem_newcomputer.caption","sourcebytes":[67,111,109,112,117,116,101,114],"value":"Computer"},
 {"hash":174434276,"name":"tfrmmodulesitesandservices.menuitem_newcontact.caption","sourcebytes":[67,111,110,116,97,99,116],"value":"Contact"},

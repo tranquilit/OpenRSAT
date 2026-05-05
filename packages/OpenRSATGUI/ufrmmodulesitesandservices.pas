@@ -55,6 +55,7 @@ type
   { TFrmModuleSitesAndServices }
 
   TFrmModuleSitesAndServices = class(TFrameModule)
+    Action_NewSiteLinkBridge: TAction;
     Action_NewSharedFolder: TAction;
     Action_NewMsDSKeyCredential: TAction;
     Action_NewUser: TAction;
@@ -146,6 +147,8 @@ type
     procedure Action_NewServerExecute(Sender: TObject);
     procedure Action_NewServerUpdate(Sender: TObject);
     procedure Action_NewSiteExecute(Sender: TObject);
+    procedure Action_NewSiteLinkBridgeExecute(Sender: TObject);
+    procedure Action_NewSiteLinkBridgeUpdate(Sender: TObject);
     procedure Action_NewSiteLinkExecute(Sender: TObject);
     procedure Action_NewSiteLinkUpdate(Sender: TObject);
     procedure Action_NewSiteUpdate(Sender: TObject);
@@ -445,6 +448,27 @@ begin
   end;
 end;
 
+procedure TFrmModuleSitesAndServices.Action_NewSiteLinkBridgeExecute(
+  Sender: TObject);
+var
+  vis: TVisNewObject;
+begin
+  vis := TVisNewObject.Create(Self, vnotSiteLinkBridge, Format('CN=Sites,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  try
+    vis.Ldap := FrmRSAT.LdapClient;
+    vis.ShowModal;
+    RefreshLdapNode();
+  finally
+    FreeAndNil(vis);
+  end;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewSiteLinkBridgeUpdate(
+  Sender: TObject);
+begin
+  Action_NewSiteLinkBridge.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end;
+
 procedure TFrmModuleSitesAndServices.Action_NewSiteLinkExecute(Sender: TObject);
 var
   vis: TVisNewObject;
@@ -720,7 +744,7 @@ begin
   Action_NewContact.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
-procedure TFrmModuleSitesAndServices.Action_NewGroupExecute(Sender: TObject);
+procedure TFrmModuleSitesAndServices.Action_NewGroupExecute(Sender: TObject);                                                                   
 var
   vis: TVisNewObject;
 begin
@@ -767,7 +791,7 @@ begin
 end;
 
 procedure TFrmModuleSitesAndServices.Action_NewSubnetExecute(Sender: TObject);
-var
+var                                                                           
   vis: TVisNewObject;
 begin
   vis := TVisNewObject.Create(Self, vnotSubnet, Format('CN=Subnets,CN=Sites,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
@@ -792,7 +816,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
 
-  vis := TVisNewObject.Create(Self, vnotUser, Format('CN=Person,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotUser, Format('CN=User,%s', [FrmRSAT.LdapClient.DefaultDN()]), FrmRSAT.LdapClient.DefaultDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;

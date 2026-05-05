@@ -385,6 +385,10 @@
         <Filename Value="ufrmnewserver.pas"/>
         <UnitName Value="ufrmnewserver"/>
       </Item93>
+      <Item87>
+        <Filename Value="ufrmnewsitelinkbridge.pas"/>
+        <UnitName Value="ufrmnewsitelinkbridge"/>
+      </Item87>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>

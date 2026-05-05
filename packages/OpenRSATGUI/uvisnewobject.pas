@@ -36,7 +36,8 @@ type
     vnotSharedFolder,
     vnotPrinter,
     vnotServer,
-    vnotSiteLink
+    vnotSiteLink,
+    vnotSiteLinkBridge
   );
   { TVisNewObject }
 
@@ -94,6 +95,7 @@ uses
   ufrmnewprinter,
   ufrmnewserver,
   ufrmnewsitelink,
+  ufrmnewsitelinkbridge,
   ucommonui;
 
 {$R *.lfm}
@@ -136,6 +138,7 @@ begin
     vnotPrinter: Frame := TFrmNewPrinter.Create(Self);
     vnotServer: Frame := TFrmNewServer.Create(Self, Ldap);
     vnotSiteLink: Frame := TFrmNewSiteLink.Create(Self, Ldap);
+    vnotSiteLinkBridge: Frame := TFrmNewSiteLinkBridge.Create(Self, Ldap);
     else
     begin
       Close;
