@@ -396,6 +396,12 @@ const
     TFrmPropertySecurity,
     TFrmPropertyAttributes
   );
+  
+  PROPERTY_SERVER: Array of TPropertyFrameClass = (
+    TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  ); 
 
   PROPERTY_SUBNET: Array of TPropertyFrameClass = (
     TFrmPropertyGeneralSubnet,
@@ -652,6 +658,7 @@ begin
   'site': property_tabs := PROPERTY_SITE;
   'siteLink': property_tabs := PROPERTY_SITE_LINK;
   'siteLinkBridge': property_tabs :=  PROPERTY_SITE_LINK_BRIDGE;
+  'server': property_tabs := PROPERTY_SERVER;
   'subnet': property_tabs := PROPERTY_SUBNET;
   end;
 
