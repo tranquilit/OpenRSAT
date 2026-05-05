@@ -5,6 +5,7 @@ object FrmPropertyGeneralSite: TFrmPropertyGeneralSite
   Width = 445
   ClientHeight = 354
   ClientWidth = 445
+  LCLVersion = '4.6.0.0'
   TabOrder = 0
   DesignLeft = 2145
   DesignTop = 174

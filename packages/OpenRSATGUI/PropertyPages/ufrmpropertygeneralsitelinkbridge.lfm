@@ -1,0 +1,227 @@
+object FrmPropertyGeneralSiteLinkBridge: TFrmPropertyGeneralSiteLinkBridge
+  Left = 0
+  Height = 348
+  Top = 0
+  Width = 489
+  ClientHeight = 348
+  ClientWidth = 489
+  LCLVersion = '4.6.0.0'
+  TabOrder = 0
+  DesignLeft = 120
+  DesignTop = 538
+  object Panel1: TPanel
+    Left = 8
+    Height = 27
+    Top = 81
+    Width = 473
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 27
+    ClientWidth = 473
+    TabOrder = 0
+    object Label_Description: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 63
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Description:'
+    end
+    object Edit_Description: TEdit
+      AnchorSideLeft.Control = Label_Description
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Label_Description
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 103
+      Height = 23
+      Top = 4
+      Width = 362
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 32
+      BorderSpacing.Right = 8
+      TabOrder = 0
+    end
+  end
+  object Panel2: TPanel
+    Left = 8
+    Height = 206
+    Top = 124
+    Width = 473
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 16
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 206
+    ClientWidth = 473
+    TabOrder = 1
+    object Label_NotInSiteLinkBridge: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Panel2
+      AnchorSideRight.Control = ListBox_NotInSiteLinkBridge
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 30
+      Top = 8
+      Width = 150
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Site links not in this site link bridge:'
+      WordWrap = True
+    end
+    object ListBox_NotInSiteLinkBridge: TListBox
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Label_NotInSiteLinkBridge
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 160
+      Top = 46
+      Width = 150
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      ItemHeight = 0
+      TabOrder = 0
+    end
+    object Label_InSiteLinkBridge: TLabel
+      AnchorSideLeft.Control = ListBox_InSiteLinkBridge
+      AnchorSideTop.Control = Panel2
+      AnchorSideRight.Control = ListBox_InSiteLinkBridge
+      AnchorSideRight.Side = asrBottom
+      Left = 315
+      Height = 30
+      Top = 8
+      Width = 150
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 8
+      Caption = 'Site links in this site link bridge:'
+      WordWrap = True
+    end
+    object ListBox_InSiteLinkBridge: TListBox
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ListBox_NotInSiteLinkBridge
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 315
+      Height = 160
+      Top = 46
+      Width = 150
+      Anchors = [akTop, akRight]
+      BorderSpacing.Right = 8
+      ItemHeight = 0
+      TabOrder = 1
+    end
+    object Panel3: TPanel
+      AnchorSideLeft.Control = ListBox_NotInSiteLinkBridge
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ListBox_NotInSiteLinkBridge
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = ListBox_InSiteLinkBridge
+      Left = 166
+      Height = 54
+      Top = 99
+      Width = 141
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = True
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 8
+      BevelOuter = bvNone
+      ClientHeight = 54
+      ClientWidth = 141
+      TabOrder = 2
+      object Button_Add: TButton
+        AnchorSideLeft.Control = Panel3
+        AnchorSideRight.Control = Panel3
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 25
+        Top = 0
+        Width = 141
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Add >>'
+        TabOrder = 0
+      end
+      object Button_Remove: TButton
+        AnchorSideLeft.Control = Panel3
+        AnchorSideTop.Control = Button_Add
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Panel3
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 25
+        Top = 29
+        Width = 141
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 4
+        Caption = '<< Remove'
+        TabOrder = 1
+      end
+    end
+  end
+  object Panel4: TPanel
+    Left = 8
+    Height = 48
+    Top = 8
+    Width = 473
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 48
+    ClientWidth = 473
+    TabOrder = 2
+    object Image_Logo: TImage
+      AnchorSideLeft.Control = Panel4
+      AnchorSideTop.Control = Panel4
+      Left = 8
+      Height = 40
+      Top = 8
+      Width = 40
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = Image_Logo
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Image_Logo
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel4
+      AnchorSideRight.Side = asrBottom
+      Left = 80
+      Height = 23
+      Top = 17
+      Width = 385
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 32
+      BorderSpacing.Right = 8
+      Color = clWindow
+      Enabled = False
+      TabStop = False
+      TabOrder = 0
+    end
+  end
+  object Line_Header: TShape
+    AnchorSideTop.Control = Panel4
+    Left = 8
+    Height = 1
+    Top = 72
+    Width = 473
+    Align = alTop
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 16
+    BorderSpacing.Right = 8
+    Pen.Color = clMedGray
+  end
+end

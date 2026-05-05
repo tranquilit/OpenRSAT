@@ -13,6 +13,7 @@ uses
   StdCtrls, Spin,
   mormot.core.base,
   mormot.core.log,
+  uhelpersui,
   uproperty,
   upropertyframe;
 
@@ -24,7 +25,9 @@ type
     Button_Schedule: TButton;
     Button_Add: TButton;
     Button_Remove: TButton;
+    Edit_Name: TEdit;
     Edit_Description: TEdit;
+    Image_Logo: TImage;
     Label_Cost: TLabel;
     Label_Minutes: TLabel;
     Label_Replicate: TLabel;
@@ -37,6 +40,8 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
+    Panel5: TPanel;
+    Line_Header: TShape;
     SpinEdit_Replicate: TSpinEdit;
     SpinEdit_Cost: TSpinEdit;
     procedure Button_AddClick(Sender: TObject);
@@ -106,7 +111,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create', Self);
 
-  Caption := 'Site Link';
+  Caption := 'General';
 end;
 
 procedure TFrmPropertyGeneralSiteLink.Update(Props: TProperty);
@@ -115,6 +120,9 @@ begin
     fLog.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
+  
+  Edit_Name.CaptionNoChange := fProperty.name;
+  Edit_Description.CaptionNoChange := fProperty.description; 
 end; 
 
 end.
