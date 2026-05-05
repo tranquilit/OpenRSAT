@@ -12,7 +12,7 @@
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Files Count="93">
+    <Files Count="94">
       <Item1>
         <Filename Value="ufrmmoduleaduc.pas"/>
         <UnitName Value="ufrmmoduleaduc"/>
@@ -386,6 +386,10 @@
         <Filename Value="ufrmnewsitelinkbridge.pas"/>
         <UnitName Value="ufrmnewsitelinkbridge"/>
       </Item93>
+      <Item94>
+        <Filename Value="PropertyPages\ufrmpropertygeneralsitelink.pas"/>
+        <UnitName Value="ufrmpropertygeneralsitelink"/>
+      </Item94>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>
