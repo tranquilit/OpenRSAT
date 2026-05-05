@@ -73,7 +73,7 @@ var
   AttributeList: TLdapAttributeList;
   Attribute: TLdapAttribute;
 begin
-  DistinguishedName := Format('CN=%s,CN=SMTP,CN=Inter-Site Transports,CN=Sites,%s', [LdapEscape(Edit_Name.Text), fLdap.ConfigDN]);
+  DistinguishedName := Format('CN=%s,CN=SMTP,CN=Inter-Site Transports,CN=Sites,%s', [Edit_Name.Text, fLdap.ConfigDN]);
   AttributeList := TLdapAttributeList.Create;
 
   try

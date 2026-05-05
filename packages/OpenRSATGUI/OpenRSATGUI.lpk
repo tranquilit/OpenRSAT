@@ -376,19 +376,16 @@
       <Item91>
         <Filename Value="uvisselectobjectguid.pas"/>
         <UnitName Value="uvisselectobjectguid"/>
-      </Item91>
-      <Item92>
         <Filename Value="ufrmnewsitelink.pas"/>
         <UnitName Value="ufrmnewsitelink"/>
-      </Item92>
-      <Item93>
+      <Item92>
         <Filename Value="ufrmnewserver.pas"/>
         <UnitName Value="ufrmnewserver"/>
-      </Item93>
-      <Item87>
+      </Item92>
+      <Item93>
         <Filename Value="ufrmnewsitelinkbridge.pas"/>
         <UnitName Value="ufrmnewsitelinkbridge"/>
-      </Item87>
+      </Item93>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>
