@@ -29,7 +29,7 @@ uses
   mormot.lib.openssl11,
   mormot.crypt.openssl,
   // Rsat
-  uvisopenrsat, ufrmnewserver;
+  uvisopenrsat;
 
 const
   LOG_TRC = LOG_NFO + [sllTrace];

@@ -89,18 +89,13 @@ object FrmNewSiteLink: TFrmNewSiteLink
       AnchorSideTop.Side = asrBottom
       AnchorSideBottom.Control = Label_Warning
       Left = 8
-      Height = 80
+      Height = 130
       Top = 31
-      Width = 100
+      Width = 130
       BorderSpacing.Left = 8
       BorderSpacing.Top = 8
       BorderSpacing.Bottom = 8
-      Items.Strings = (
-        'Item 1'
-        'Item 2'
-        'Item 3'
-      )
-      ItemHeight = 15
+      ItemHeight = 0
       TabOrder = 0
       OnSelectionChange = ListBox_NotInSiteLinkSelectionChange
     end
@@ -124,9 +119,10 @@ object FrmNewSiteLink: TFrmNewSiteLink
       AnchorSideRight.Control = Panel2
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Control = Label_Warning
-      Height = 80
+      Left = 173
+      Height = 130
       Top = 31
-      Width = 96
+      Width = 130
       Anchors = [akTop, akRight]
       BorderSpacing.Left = 8
       BorderSpacing.Top = 8

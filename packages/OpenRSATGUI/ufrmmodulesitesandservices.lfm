@@ -676,6 +676,11 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
     object Action_NewSharedFolder: TAction
       Caption = 'Action_NewSharedFolder'
     end
+    object Action_NewSiteLinkBridge: TAction
+      Caption = 'Action_NewSiteLinkBridge'
+      OnExecute = Action_NewSiteLinkBridgeExecute
+      OnUpdate = Action_NewSiteLinkBridgeUpdate
+    end
   end
   object PopupMenu1: TPopupMenu
     OnPopup = PopupMenu1Popup
@@ -724,6 +729,7 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
         Caption = 'Site Link'
       end
       object MenuItem_NewSiteLinkBridge: TMenuItem
+        Action = Action_NewSiteLinkBridge
         Caption = 'Site Link Bridge'
       end
       object MenuItem_NewSiteSettings: TMenuItem
