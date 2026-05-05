@@ -35,7 +35,8 @@ uses
   uvisselectobjectsid, uvisselectobjectguid, ufrmnewinetorgperson, ufrmnewmsdsshadowprincipalcontainer, 
   ufrmnewmsimagingpsps, ufrmnewmsdskeycredential, 
   ufrmnewmsdsresourcepropertylist, ufrmnewprinter, ufrmnewsitelink, 
-  ufrmnewserver, ufrmnewsitelinkbridge, LazarusPackageIntf;
+  ufrmnewserver, ufrmnewsitelinkbridge, ufrmpropertygeneralsitelink, 
+  LazarusPackageIntf;
 
 implementation
 

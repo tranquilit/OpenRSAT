@@ -1,0 +1,11 @@
+{"version":1,"strings":[
+{"hash":81166474,"name":"tfrmpropertygeneralsitelink.label_description.caption","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110,58],"value":"Description:"},
+{"hash":227666042,"name":"tfrmpropertygeneralsitelink.label_notinsitelink.caption","sourcebytes":[83,105,116,101,115,32,110,111,116,32,105,110,32,116,104,105,115,32,115,105,116,101,32,108,105,110,107,58],"value":"Sites not in this site link:"},
+{"hash":73773706,"name":"tfrmpropertygeneralsitelink.label_insitelink.caption","sourcebytes":[83,105,116,101,115,32,105,110,32,116,104,105,115,32,115,105,116,101,32,108,105,110,107,58],"value":"Sites in this site link:"},
+{"hash":75129886,"name":"tfrmpropertygeneralsitelink.button_add.caption","sourcebytes":[65,100,100,32,62,62],"value":"Add >>"},
+{"hash":93067557,"name":"tfrmpropertygeneralsitelink.button_remove.caption","sourcebytes":[60,60,32,82,101,109,111,118,101],"value":"<< Remove"},
+{"hash":4876922,"name":"tfrmpropertygeneralsitelink.label_cost.caption","sourcebytes":[67,111,115,116,58],"value":"Cost:"},
+{"hash":4394233,"name":"tfrmpropertygeneralsitelink.label_replicate.caption","sourcebytes":[82,101,112,108,105,99,97,116,101,32,101,118,101,114,121],"value":"Replicate every"},
+{"hash":67488435,"name":"tfrmpropertygeneralsitelink.label_minutes.caption","sourcebytes":[109,105,110,117,116,101,115],"value":"minutes"},
+{"hash":142965614,"name":"tfrmpropertygeneralsitelink.button_schedule.caption","sourcebytes":[67,104,97,110,103,101,32,83,99,104,101,100,117,108,101,46,46,46],"value":"Change Schedule..."}
+]}
