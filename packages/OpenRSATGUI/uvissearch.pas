@@ -353,12 +353,11 @@ begin
   case PageControl_Search.ActivePageIndex of
     0:
     begin
-      Filter := LdapEscape(Trim(Edit_BasicValue.Text));
-      if not (Filter = '') then
-        // Keep the legacy contains search for display names, but use indexed
-        // prefix matching for logon attributes to avoid slow full subtree scans
-        // on large directories.
-        Filter := FormatUtf8('|(cn=*%*)(dn=*%*)(name=*%*)(sAMAccountName=%*)(userPrincipalName=%*)', [Filter, Filter, Filter, Filter, Filter])
+      Filter := Trim(Edit_BasicValue.Text);
+      if (Filter <> '') then
+        // https://ldapwiki.com/wiki/Wiki.jsp?page=Ambiguous%20Name%20Resolution
+        // Ambiguous Name Resolution (aNR) is a search algorithm in Microsoft Active Directory that permits a client to search multiple Naming Attributes on objects via a single clause in a search filter
+        Filter := FormatUtf8('(anr=%*)', [LdapEscape(Filter)])
       else
         Filter := 'name=*';
     end;
