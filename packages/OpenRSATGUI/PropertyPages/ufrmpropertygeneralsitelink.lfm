@@ -3,6 +3,7 @@ object FrmPropertyGeneralSiteLink: TFrmPropertyGeneralSiteLink
   Height = 362
   Top = 0
   Width = 490
+  AutoSize = True
   ClientHeight = 362
   ClientWidth = 490
   LCLVersion = '4.6.0.0'
@@ -11,7 +12,8 @@ object FrmPropertyGeneralSiteLink: TFrmPropertyGeneralSiteLink
   DesignTop = 195
   object Panel1: TPanel
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = Owner
+    AnchorSideTop.Control = Line_Header
+    AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 8
@@ -56,10 +58,10 @@ object FrmPropertyGeneralSiteLink: TFrmPropertyGeneralSiteLink
     end
   end
   object Panel2: TPanel
-    AnchorSideLeft.Control = Panel1
+    AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Panel1
     AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = Panel1
+    AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 8
     Height = 211
@@ -67,7 +69,9 @@ object FrmPropertyGeneralSiteLink: TFrmPropertyGeneralSiteLink
     Width = 474
     Anchors = [akTop, akLeft, akRight]
     AutoSize = True
-    BorderSpacing.Top = 16
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
     BevelOuter = bvNone
     ClientHeight = 211
     ClientWidth = 474
@@ -91,7 +95,7 @@ object FrmPropertyGeneralSiteLink: TFrmPropertyGeneralSiteLink
       AnchorSideTop.Control = Label_NotInSiteLink
       AnchorSideTop.Side = asrBottom
       Left = 8
-      Height = 180
+      Height = 160
       Top = 31
       Width = 150
       BorderSpacing.Left = 8
@@ -113,7 +117,7 @@ object FrmPropertyGeneralSiteLink: TFrmPropertyGeneralSiteLink
       AnchorSideRight.Control = Panel2
       AnchorSideRight.Side = asrBottom
       Left = 316
-      Height = 180
+      Height = 160
       Top = 31
       Width = 150
       Anchors = [akTop, akRight]
@@ -185,7 +189,7 @@ object FrmPropertyGeneralSiteLink: TFrmPropertyGeneralSiteLink
     Anchors = [akTop, akLeft, akRight]
     AutoSize = True
     BorderSpacing.Left = 8
-    BorderSpacing.Top = 16
+    BorderSpacing.Top = 8
     BorderSpacing.Right = 8
     BevelOuter = bvNone
     ClientHeight = 87
@@ -263,5 +267,57 @@ object FrmPropertyGeneralSiteLink: TFrmPropertyGeneralSiteLink
       Caption = 'Change Schedule...'
       TabOrder = 2
     end
+  end
+  object Panel5: TPanel
+    Left = 8
+    Height = 50
+    Top = 8
+    Width = 474
+    Align = alTop
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 474
+    TabOrder = 3
+    object Image_Logo: TImage
+      AnchorSideLeft.Control = Panel5
+      AnchorSideTop.Control = Panel5
+      Left = 8
+      Height = 40
+      Top = 8
+      Width = 40
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = Image_Logo
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Image_Logo
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel5
+      AnchorSideRight.Side = asrBottom
+      Left = 80
+      Height = 23
+      Top = 17
+      Width = 386
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 32
+      BorderSpacing.Right = 8
+      Enabled = False
+      TabOrder = 0
+    end
+  end
+  object Line_Header: TShape
+    Left = 8
+    Height = 1
+    Top = 74
+    Width = 474
+    Align = alTop
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 16
+    BorderSpacing.Right = 8
+    Pen.Color = clMedGray
   end
 end

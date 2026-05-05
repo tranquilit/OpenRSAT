@@ -286,6 +286,7 @@ uses
   ufrmpropertygeneraluser,
   ufrmpropertygeneralvolume,
   ufrmpropertygeneralsitelink,
+  ufrmpropertygeneralsitelinkbridge,
   ufrmpropertylaps,
   ufrmpropertylocation,
   ufrmpropertymanagedby,
@@ -388,6 +389,13 @@ const
     TFrmPropertySecurity,
     TFrmPropertyAttributes
   ); 
+  
+  PROPERTY_SITE_LINK_BRIDGE: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralSiteLinkBridge,
+    TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  );
 
   PROPERTY_SUBNET: Array of TPropertyFrameClass = (
     TFrmPropertyGeneralSubnet,
@@ -643,6 +651,7 @@ begin
   {$endif}
   'site': property_tabs := PROPERTY_SITE;
   'siteLink': property_tabs := PROPERTY_SITE_LINK;
+  'siteLinkBridge': property_tabs :=  PROPERTY_SITE_LINK_BRIDGE;
   'subnet': property_tabs := PROPERTY_SUBNET;
   end;
 
