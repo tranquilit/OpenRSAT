@@ -32,10 +32,10 @@ uses
   uvismodifygplink, uvisprofilemanager, uviseditaduccolumns, 
   uvisprofileconfiguration, uvisrootdseinfos, uvisshowrelationship, utheme, 
   ufrmpropertyntauthcertificates, ufrmpropertyunixattributes, 
-  uvisselectobjectsid, ufrmnewinetorgperson, 
-  ufrmnewmsdsshadowprincipalcontainer, ufrmnewmsimagingpsps, 
-  ufrmnewmsdskeycredential, ufrmnewmsdsresourcepropertylist, ufrmnewprinter, 
-  uvisselectobjectguid, ufrmnewsitelink, ufrmnewserver, LazarusPackageIntf;
+  uvisselectobjectsid, uvisselectobjectguid, ufrmnewinetorgperson, ufrmnewmsdsshadowprincipalcontainer, 
+  ufrmnewmsimagingpsps, ufrmnewmsdskeycredential, 
+  ufrmnewmsdsresourcepropertylist, ufrmnewprinter, ufrmnewsitelink, 
+  ufrmnewserver, ufrmnewsitelinkbridge, LazarusPackageIntf;
 
 implementation
 

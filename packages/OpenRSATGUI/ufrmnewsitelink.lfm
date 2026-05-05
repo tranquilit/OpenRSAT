@@ -33,6 +33,7 @@ object FrmNewSiteLink: TFrmNewSiteLink
       Height = 15
       Top = 8
       Width = 35
+      BorderSpacing.Left = 8
       BorderSpacing.Top = 8
       Caption = 'Name:'
     end
@@ -108,7 +109,7 @@ object FrmNewSiteLink: TFrmNewSiteLink
       Height = 15
       Top = 8
       Width = 34
-      Anchors = [akTop, akRight]
+      Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Top = 8
       BorderSpacing.Right = 8
       Caption = 'Sites in this site link:'
