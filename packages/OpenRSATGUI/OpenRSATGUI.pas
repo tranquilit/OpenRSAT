@@ -36,7 +36,8 @@ uses
   ufrmnewmsimagingpsps, ufrmnewmsdskeycredential, 
   ufrmnewmsdsresourcepropertylist, ufrmnewprinter, ufrmnewsitelink, 
   ufrmnewserver, ufrmnewsitelinkbridge, ufrmpropertygeneralsitelink, 
-  ufrmpropertygeneralsitelinkbridge, LazarusPackageIntf;
+  ufrmpropertygeneralsitelinkbridge, ufrmpropertygeneralntdssitesettings, 
+  LazarusPackageIntf;
 
 implementation
 
