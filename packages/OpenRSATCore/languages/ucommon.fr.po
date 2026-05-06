@@ -586,6 +586,10 @@ msgstr "Nouvel objet - Groupe"
 msgid "New object - Inet Org. Person"
 msgstr ""
 
+#: ucommon.rsnewobjectmsdnsserversettings
+msgid "New object - msDNS-ServerSettings"
+msgstr ""
+
 #: ucommon.rsnewobjectmsdskeycredential
 msgid "New object - msDS-KeyCredential"
 msgstr ""
@@ -596,6 +600,10 @@ msgstr ""
 
 #: ucommon.rsnewobjectmsdsshadowprincipalcontainer
 msgid "New object - msDS-ShadowPrincipalContainer"
+msgstr ""
+
+#: ucommon.rsnewobjectmsimagingpsps
+msgid "New object - msImaging-PSPs"
 msgstr ""
 
 #: ucommon.rsnewobjectou

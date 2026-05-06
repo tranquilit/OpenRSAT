@@ -23,6 +23,7 @@ type
     vnotUser,
     vnotGroup,
     vnotInetOrgPerson,
+    vnotMsDNSServerSettings,
     vnotMsDSKeyCredential,
     vnotMsDSResourcePropertyList,
     vnotMsDSShadowPrincipalContainer,
@@ -88,6 +89,7 @@ uses
   ufrmnewsubnet,
   ufrmnewuser,
   ufrmnewinetorgperson,
+  ufrmnewmsdnsserversettings,
   ufrmnewmsdskeycredential,
   ufrmnewmsdsresourcepropertylist,
   ufrmnewmsdsshadowprincipalcontainer,
@@ -125,6 +127,7 @@ begin
     vnotContact: Frame := TFrmNewContact.Create(Self);
     vnotGroup: Frame := TFrmNewGroup.Create(Self);
     vnotInetOrgPerson: Frame := TFrmNewInetOrgPerson.Create(Self);
+    vnotMsDNSServerSettings: Frame := TFrmNewMsDNSServerSettings.Create(Self);
     vnotMsDSKeyCredential: Frame := TFrmNewMsDSKeyCredential.Create(Self);
     vnotMsDSResourcePropertyList: Frame := TFrmNewMsDSResourcePropertyList.Create(Self);
     vnotMsDSShadowPrincipalContainer: Frame := TFrmNewMsDSShadowPrincipalContainer.Create(Self);

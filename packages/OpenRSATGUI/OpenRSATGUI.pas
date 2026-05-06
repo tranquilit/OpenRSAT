@@ -38,7 +38,7 @@ uses
   ufrmnewserver, ufrmnewsitelinkbridge, ufrmpropertygeneralsitelink, 
   ufrmpropertygeneralsitelinkbridge, ufrmpropertygeneralntdssitesettings, 
   ufrmpropertygeneralserver, ufrmpropertygeneralntdsdsa, 
-  ufrmpropertyconnections, LazarusPackageIntf;
+  ufrmpropertyconnections, ufrmnewmsdnsserversettings, LazarusPackageIntf;
 
 implementation
 

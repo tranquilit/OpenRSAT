@@ -12,7 +12,7 @@
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Files Count="99">
+    <Files Count="100">
       <Item1>
         <Filename Value="ufrmmoduleaduc.pas"/>
         <UnitName Value="ufrmmoduleaduc"/>
@@ -410,6 +410,10 @@
         <Filename Value="PropertyPages\ufrmpropertyconnections.pas"/>
         <UnitName Value="ufrmpropertyconnections"/>
       </Item99>
+      <Item100>
+        <Filename Value="ufrmnewmsdnsserversettings.pas"/>
+        <UnitName Value="ufrmnewmsdnsserversettings"/>
+      </Item100>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>
