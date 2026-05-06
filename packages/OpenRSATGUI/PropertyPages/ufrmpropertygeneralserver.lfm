@@ -1,0 +1,328 @@
+object FrmPropertyGeneralServer: TFrmPropertyGeneralServer
+  Left = 0
+  Height = 376
+  Top = 0
+  Width = 404
+  ClientHeight = 376
+  ClientWidth = 404
+  LCLVersion = '4.6.0.0'
+  TabOrder = 0
+  DesignLeft = 426
+  DesignTop = 436
+  object Panel1: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 48
+    Top = 8
+    Width = 388
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 48
+    ClientWidth = 388
+    TabOrder = 0
+    object Image_Logo: TImage
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 8
+      Height = 40
+      Top = 8
+      Width = 40
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = Image_Logo
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Image_Logo
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 80
+      Height = 23
+      Top = 17
+      Width = 300
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 32
+      BorderSpacing.Right = 8
+      ReadOnly = True
+      TabOrder = 0
+    end
+  end
+  object Shape1: TShape
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Panel1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 1
+    Top = 72
+    Width = 388
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 16
+    BorderSpacing.Right = 8
+    Pen.Color = clMedGray
+  end
+  object Panel2: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Shape1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 108
+    Top = 81
+    Width = 388
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 108
+    ClientWidth = 388
+    TabOrder = 1
+    object Label_Computer: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Panel2
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 57
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Computer:'
+    end
+    object Edit_Computer: TEdit
+      AnchorSideLeft.Control = Label_Computer
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Label_Computer
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 97
+      Height = 23
+      Top = 4
+      Width = 283
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 32
+      BorderSpacing.Right = 8
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object Label_Domain: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Edit_Computer
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 15
+      Top = 35
+      Width = 45
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Domain:'
+    end
+    object Edit_Domain: TEdit
+      AnchorSideLeft.Control = Edit_Computer
+      AnchorSideTop.Control = Label_Domain
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 97
+      Height = 23
+      Top = 31
+      Width = 283
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Right = 8
+      ReadOnly = True
+      TabOrder = 1
+    end
+    object Label_DCType: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Edit_Domain
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 15
+      Top = 62
+      Width = 47
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'DC Type:'
+    end
+    object Edit_DCType: TEdit
+      AnchorSideLeft.Control = Edit_Domain
+      AnchorSideTop.Control = Label_DCType
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 97
+      Height = 23
+      Top = 58
+      Width = 283
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Right = 8
+      ReadOnly = True
+      TabOrder = 2
+    end
+    object Label_Description: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Edit_DCType
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 15
+      Top = 89
+      Width = 63
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Description:'
+    end
+    object Edit_Description: TEdit
+      AnchorSideLeft.Control = Edit_DCType
+      AnchorSideTop.Control = Label_Description
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 97
+      Height = 23
+      Top = 85
+      Width = 283
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Right = 8
+      ReadOnly = True
+      TabOrder = 3
+    end
+  end
+  object Panel3: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Panel2
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 169
+    Top = 197
+    Width = 388
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 169
+    ClientWidth = 388
+    TabOrder = 2
+    object Label_TransportsAvailable: TLabel
+      AnchorSideLeft.Control = Panel3
+      AnchorSideTop.Control = Panel3
+      AnchorSideRight.Control = ListBox_TransportsAvailable
+      AnchorSideRight.Side = asrBottom
+      Left = 8
+      Height = 30
+      Top = 8
+      Width = 150
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Transports available for inter-site data transfer:'
+      WordWrap = True
+    end
+    object Label_Transports: TLabel
+      AnchorSideLeft.Control = ListBox_Transports
+      AnchorSideTop.Control = Panel3
+      AnchorSideRight.Control = ListBox_Transports
+      AnchorSideRight.Side = asrBottom
+      Left = 230
+      Height = 45
+      Top = 8
+      Width = 150
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 8
+      Caption = 'This server is a preferred bridgehead server for the following transports:'
+      WordWrap = True
+    end
+    object ListBox_TransportsAvailable: TListBox
+      AnchorSideLeft.Control = Panel3
+      AnchorSideTop.Control = ListBox_Transports
+      Left = 8
+      Height = 100
+      Top = 61
+      Width = 150
+      BorderSpacing.Left = 8
+      ItemHeight = 0
+      TabOrder = 0
+    end
+    object ListBox_Transports: TListBox
+      AnchorSideTop.Control = Label_Transports
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel3
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Panel3
+      Left = 230
+      Height = 100
+      Top = 61
+      Width = 150
+      Anchors = [akTop, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      ItemHeight = 0
+      TabOrder = 1
+    end
+    object Panel4: TPanel
+      AnchorSideLeft.Control = ListBox_TransportsAvailable
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ListBox_TransportsAvailable
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = ListBox_Transports
+      Left = 166
+      Height = 50
+      Top = 86
+      Width = 56
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = True
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 8
+      BevelOuter = bvNone
+      ClientHeight = 50
+      ClientWidth = 56
+      TabOrder = 2
+      object Button_Add: TButton
+        AnchorSideLeft.Control = Panel4
+        AnchorSideTop.Control = Panel4
+        AnchorSideRight.Control = Panel4
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 25
+        Top = 0
+        Width = 56
+        Anchors = [akTop, akLeft, akRight]
+        AutoSize = True
+        Caption = 'Add >>'
+        TabOrder = 0
+      end
+      object Button_Remove: TButton
+        AnchorSideLeft.Control = Panel4
+        AnchorSideTop.Control = Button_Add
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Panel4
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 25
+        Top = 25
+        Width = 56
+        Anchors = [akTop, akLeft, akRight]
+        AutoSize = True
+        Caption = '<< Remove'
+        TabOrder = 1
+      end
+    end
+  end
+end
