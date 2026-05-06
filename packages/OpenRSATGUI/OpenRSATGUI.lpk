@@ -12,7 +12,7 @@
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Files Count="96">
+    <Files Count="99">
       <Item1>
         <Filename Value="ufrmmoduleaduc.pas"/>
         <UnitName Value="ufrmmoduleaduc"/>
@@ -398,6 +398,18 @@
         <Filename Value="PropertyPages\ufrmpropertygeneralntdssitesettings.pas"/>
         <UnitName Value="ufrmpropertygeneralntdssitesettings"/>
       </Item96>
+      <Item97>
+        <Filename Value="PropertyPages\ufrmpropertygeneralserver.pas"/>
+        <UnitName Value="ufrmpropertygeneralserver"/>
+      </Item97>
+      <Item98>
+        <Filename Value="PropertyPages\ufrmpropertygeneralntdsdsa.pas"/>
+        <UnitName Value="ufrmpropertygeneralntdsdsa"/>
+      </Item98>
+      <Item99>
+        <Filename Value="PropertyPages\ufrmpropertyconnections.pas"/>
+        <UnitName Value="ufrmpropertyconnections"/>
+      </Item99>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>

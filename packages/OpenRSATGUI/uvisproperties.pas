@@ -277,6 +277,7 @@ uses
   ufrmpropertyaccount,
   ufrmpropertyaddress,
   ufrmpropertybitlocker,
+  ufrmpropertyconnections,
   ufrmpropertygeneraldefault,
   ufrmpropertygeneralsubnet,
   ufrmpropertygeneralcomputer,
@@ -288,6 +289,8 @@ uses
   ufrmpropertygeneralsitelink,
   ufrmpropertygeneralsitelinkbridge,
   ufrmpropertygeneralntdssitesettings,
+  ufrmpropertygeneralntdsdsa,
+  ufrmpropertygeneralserver,
   ufrmpropertylaps,
   ufrmpropertylocation,
   ufrmpropertymanagedby,
@@ -402,7 +405,14 @@ const
     TFrmPropertyObject,
     TFrmPropertySecurity,
     TFrmPropertyAttributes
-  ); 
+  );
+  
+  PROPERTY_SERVER_WITH_DNS_HOSTNAME: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralServer,
+    TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  );
 
   PROPERTY_SUBNET: Array of TPropertyFrameClass = (
     TFrmPropertyGeneralSubnet,
@@ -422,6 +432,14 @@ const
   
   PROPERTY_NTDS_SITE_SETTINGS: Array of TPropertyFrameClass = (
     TFrmPropertyGeneralNTDSSiteSettings,
+    TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  );
+  
+  PROPERTY_NTDSDSA: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralNTDSDSA,
+    TFrmPropertyConnections,
     TFrmPropertyObject,
     TFrmPropertySecurity,
     TFrmPropertyAttributes
@@ -667,7 +685,14 @@ begin
   'siteLink': property_tabs := PROPERTY_SITE_LINK;
   'siteLinkBridge': property_tabs :=  PROPERTY_SITE_LINK_BRIDGE;
   'nTDSSiteSettings': property_tabs := PROPERTY_NTDS_SITE_SETTINGS;
-  'server': property_tabs := PROPERTY_SERVER;
+  'nTDSDSA': property_tabs := PROPERTY_NTDSDSA;
+  'server':
+  begin
+    if not Assigned(fProperty.Attributes.Find('dNSHostName')) then
+      property_tabs := PROPERTY_SERVER
+    else
+      property_tabs := PROPERTY_SERVER_WITH_DNS_HOSTNAME;
+  end;
   'subnet': property_tabs := PROPERTY_SUBNET;
   end;
 

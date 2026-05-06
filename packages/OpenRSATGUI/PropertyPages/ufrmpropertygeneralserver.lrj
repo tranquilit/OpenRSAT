@@ -1,0 +1,10 @@
+{"version":1,"strings":[
+{"hash":75294266,"name":"tfrmpropertygeneralserver.label_computer.caption","sourcebytes":[67,111,109,112,117,116,101,114,58],"value":"Computer:"},
+{"hash":191070298,"name":"tfrmpropertygeneralserver.label_domain.caption","sourcebytes":[68,111,109,97,105,110,58],"value":"Domain:"},
+{"hash":89915914,"name":"tfrmpropertygeneralserver.label_dctype.caption","sourcebytes":[68,67,32,84,121,112,101,58],"value":"DC Type:"},
+{"hash":81166474,"name":"tfrmpropertygeneralserver.label_description.caption","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110,58],"value":"Description:"},
+{"hash":152426346,"name":"tfrmpropertygeneralserver.label_transportsavailable.caption","sourcebytes":[84,114,97,110,115,112,111,114,116,115,32,97,118,97,105,108,97,98,108,101,32,102,111,114,32,105,110,116,101,114,45,115,105,116,101,32,100,97,116,97,32,116,114,97,110,115,102,101,114,58],"value":"Transports available for inter-site data transfer:"},
+{"hash":178174714,"name":"tfrmpropertygeneralserver.label_transports.caption","sourcebytes":[84,104,105,115,32,115,101,114,118,101,114,32,105,115,32,97,32,112,114,101,102,101,114,114,101,100,32,98,114,105,100,103,101,104,101,97,100,32,115,101,114,118,101,114,32,102,111,114,32,116,104,101,32,102,111,108,108,111,119,105,110,103,32,116,114,97,110,115,112,111,114,116,115,58],"value":"This server is a preferred bridgehead server for the following transports:"},
+{"hash":75129886,"name":"tfrmpropertygeneralserver.button_add.caption","sourcebytes":[65,100,100,32,62,62],"value":"Add >>"},
+{"hash":93067557,"name":"tfrmpropertygeneralserver.button_remove.caption","sourcebytes":[60,60,32,82,101,109,111,118,101],"value":"<< Remove"}
+]}

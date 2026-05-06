@@ -1,0 +1,8 @@
+{"version":1,"strings":[
+{"hash":6444650,"name":"tfrmpropertyconnections.label_from.caption","sourcebytes":[82,101,112,108,105,99,97,116,101,32,70,114,111,109,58],"value":"Replicate From:"},
+{"hash":346165,"name":"tfrmpropertyconnections.grid_from.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
+{"hash":368805,"name":"tfrmpropertyconnections.grid_from.header.columns[1].text","sourcebytes":[83,105,116,101],"value":"Site"},
+{"hash":6321898,"name":"tfrmpropertyconnections.label_to.caption","sourcebytes":[82,101,112,108,105,99,97,116,101,32,84,111,58],"value":"Replicate To:"},
+{"hash":346165,"name":"tfrmpropertyconnections.grid_to.header.columns[0].text","sourcebytes":[78,97,109,101],"value":"Name"},
+{"hash":368805,"name":"tfrmpropertyconnections.grid_to.header.columns[1].text","sourcebytes":[83,105,116,101],"value":"Site"}
+]}

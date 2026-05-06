@@ -37,7 +37,8 @@ uses
   ufrmnewmsdsresourcepropertylist, ufrmnewprinter, ufrmnewsitelink, 
   ufrmnewserver, ufrmnewsitelinkbridge, ufrmpropertygeneralsitelink, 
   ufrmpropertygeneralsitelinkbridge, ufrmpropertygeneralntdssitesettings, 
-  LazarusPackageIntf;
+  ufrmpropertygeneralserver, ufrmpropertygeneralntdsdsa, 
+  ufrmpropertyconnections, LazarusPackageIntf;
 
 implementation
 

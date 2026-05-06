@@ -1,0 +1,7 @@
+{"version":1,"strings":[
+{"hash":81166474,"name":"tfrmpropertygeneralntdsdsa.label_description.caption","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110,58],"value":"Description:"},
+{"hash":268329418,"name":"tfrmpropertygeneralntdsdsa.label_querypolicy.caption","sourcebytes":[81,117,101,114,121,32,80,111,108,105,99,121,58],"value":"Query Policy:"},
+{"hash":75918138,"name":"tfrmpropertygeneralntdsdsa.label_dnsalias.caption","sourcebytes":[68,78,83,32,65,108,105,97,115,58],"value":"DNS Alias:"},
+{"hash":181541367,"name":"tfrmpropertygeneralntdsdsa.checkbox_globalcatalog.caption","sourcebytes":[71,108,111,98,97,108,32,67,97,116,97,108,111,103],"value":"Global Catalog"},
+{"hash":76602974,"name":"tfrmpropertygeneralntdsdsa.label_info.caption","sourcebytes":[84,104,101,32,97,109,111,117,110,116,32,111,102,32,116,105,109,101,32,105,116,32,119,105,108,108,32,116,97,107,101,32,116,111,32,112,117,98,108,105,115,104,32,116,104,101,32,71,108,111,98,97,108,32,67,97,116,97,108,111,103,32,118,97,114,105,101,115,32,100,101,112,101,110,100,105,110,103,32,111,110,32,121,111,117,114,32,114,101,112,108,105,99,97,116,105,111,110,32,116,111,112,111,108,111,103,121,46],"value":"The amount of time it will take to publish the Global Catalog varies depending on your replication topology."}
+]}
