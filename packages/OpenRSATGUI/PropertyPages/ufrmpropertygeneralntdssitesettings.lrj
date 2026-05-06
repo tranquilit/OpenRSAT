@@ -1,0 +1,11 @@
+{"version":1,"strings":[
+{"hash":81166474,"name":"tfrmpropertygeneralntdssitesettings.label_description.caption","sourcebytes":[68,101,115,99,114,105,112,116,105,111,110,58],"value":"Description:"},
+{"hash":142965614,"name":"tfrmpropertygeneralntdssitesettings.button_schedule.caption","sourcebytes":[67,104,97,110,103,101,32,83,99,104,101,100,117,108,101,46,46,46],"value":"Change Schedule..."},
+{"hash":30376514,"name":"tfrmpropertygeneralntdssitesettings.groupbox_intersitetopologygenerator.caption","sourcebytes":[73,110,116,101,114,45,83,105,116,101,32,84,111,112,111,108,111,103,121,32,71,101,110,101,114,97,116,111,114],"value":"Inter-Site Topology Generator"},
+{"hash":164219914,"name":"tfrmpropertygeneralntdssitesettings.label_server.caption","sourcebytes":[83,101,114,118,101,114,58],"value":"Server:"},
+{"hash":5900938,"name":"tfrmpropertygeneralntdssitesettings.label_site.caption","sourcebytes":[83,105,116,101,58],"value":"Site:"},
+{"hash":234613767,"name":"tfrmpropertygeneralntdssitesettings.groupbox_universalgroup.caption","sourcebytes":[85,110,105,118,101,114,115,97,108,32,71,114,111,117,112,32,77,101,109,98,101,114,115,104,105,112,32,67,97,99,104,105,110,103],"value":"Universal Group Membership Caching"},
+{"hash":186730423,"name":"tfrmpropertygeneralntdssitesettings.checkbox_enable.caption","sourcebytes":[69,110,97,98,108,101,32,85,110,105,118,101,114,115,97,108,32,77,101,109,98,101,114,115,104,105,112,32,67,97,99,104,105,110,103],"value":"Enable Universal Membership Caching"},
+{"hash":96043306,"name":"tfrmpropertygeneralntdssitesettings.label_refresh.caption","sourcebytes":[82,101,102,114,101,115,104,32,99,97,99,104,101,32,102,114,111,109,58],"value":"Refresh cache from:"},
+{"hash":197723102,"name":"tfrmpropertygeneralntdssitesettings.combobox_refresh.text","sourcebytes":[60,68,101,102,97,117,108,116,62],"value":"<Default>"}
+]}

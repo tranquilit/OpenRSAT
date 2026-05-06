@@ -287,6 +287,7 @@ uses
   ufrmpropertygeneralvolume,
   ufrmpropertygeneralsitelink,
   ufrmpropertygeneralsitelinkbridge,
+  ufrmpropertygeneralntdssitesettings,
   ufrmpropertylaps,
   ufrmpropertylocation,
   ufrmpropertymanagedby,
@@ -415,6 +416,13 @@ const
     TFrmPropertyGeneralDefault,
     TFrmPropertyObject,
     TFrmPropertyNTAuthCertificates,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  );
+  
+  PROPERTY_NTDS_SITE_SETTINGS: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralNTDSSiteSettings,
+    TFrmPropertyObject,
     TFrmPropertySecurity,
     TFrmPropertyAttributes
   );
@@ -658,6 +666,7 @@ begin
   'site': property_tabs := PROPERTY_SITE;
   'siteLink': property_tabs := PROPERTY_SITE_LINK;
   'siteLinkBridge': property_tabs :=  PROPERTY_SITE_LINK_BRIDGE;
+  'nTDSSiteSettings': property_tabs := PROPERTY_NTDS_SITE_SETTINGS;
   'server': property_tabs := PROPERTY_SERVER;
   'subnet': property_tabs := PROPERTY_SUBNET;
   end;
