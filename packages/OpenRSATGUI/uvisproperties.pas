@@ -290,6 +290,7 @@ uses
   ufrmpropertygeneralsitelinkbridge,
   ufrmpropertygeneralntdssitesettings,
   ufrmpropertygeneralntdsdsa,
+  ufrmpropertygeneralintersitetransport,
   ufrmpropertygeneralserver,
   ufrmpropertylaps,
   ufrmpropertylocation,
@@ -386,6 +387,13 @@ const
     TFrmPropertySecurity,
     TFrmPropertyAttributes
   );
+  
+  PROPERTY_INTER_SITE_TRANSPORT: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralInterSiteTransport,
+    TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  ); 
   
   PROPERTY_SITE_LINK: Array of TPropertyFrameClass = (
     TFrmPropertyGeneralSiteLink,
@@ -694,6 +702,7 @@ begin
       property_tabs := PROPERTY_SERVER_WITH_DNS_HOSTNAME;
   end;
   'subnet': property_tabs := PROPERTY_SUBNET;
+  'interSiteTransport': property_tabs := PROPERTY_INTER_SITE_TRANSPORT;
   end;
 
   for property_tab in property_tabs do

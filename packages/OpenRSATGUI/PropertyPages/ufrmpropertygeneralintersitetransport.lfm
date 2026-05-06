@@ -1,0 +1,150 @@
+object FrmPropertyGeneralInterSiteTransport: TFrmPropertyGeneralInterSiteTransport
+  Left = 0
+  Height = 240
+  Top = 0
+  Width = 320
+  ClientHeight = 240
+  ClientWidth = 320
+  LCLVersion = '4.6.0.0'
+  TabOrder = 0
+  DesignLeft = 118
+  DesignTop = 169
+  object Panel1: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 56
+    Top = 8
+    Width = 304
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 56
+    ClientWidth = 304
+    TabOrder = 0
+    object Image_Logo: TImage
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      AnchorSideBottom.Control = Panel1
+      Left = 8
+      Height = 40
+      Top = 8
+      Width = 40
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = Image_Logo
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Image_Logo
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 80
+      Height = 23
+      Top = 17
+      Width = 216
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 32
+      BorderSpacing.Right = 8
+      ReadOnly = True
+      TabOrder = 0
+    end
+  end
+  object Shape1: TShape
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Panel1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 1
+    Top = 72
+    Width = 304
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    Pen.Color = clMedGray
+  end
+  object Panel2: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Shape1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 81
+    Top = 81
+    Width = 304
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 81
+    ClientWidth = 304
+    TabOrder = 1
+    object Label_Description: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Panel2
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 63
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Description:'
+    end
+    object Edit_Description: TEdit
+      AnchorSideLeft.Control = Label_Description
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Label_Description
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 103
+      Height = 23
+      Top = 4
+      Width = 193
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 32
+      BorderSpacing.Right = 8
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object CheckBox_Schedules: TCheckBox
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Edit_Description
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 19
+      Top = 35
+      Width = 107
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Ignore schedules'
+      TabOrder = 1
+    end
+    object CheckBox_Bridge: TCheckBox
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = CheckBox_Schedules
+      AnchorSideTop.Side = asrBottom
+      Left = 8
+      Height = 19
+      Top = 62
+      Width = 115
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Bridge all site links'
+      TabOrder = 2
+    end
+  end
+end
