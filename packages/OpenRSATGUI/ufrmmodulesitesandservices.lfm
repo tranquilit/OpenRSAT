@@ -661,12 +661,18 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
     end
     object Action_NewInetOrgPerson: TAction
       Caption = 'Action_NewInetOrgPerson'
+      OnExecute = Action_NewInetOrgPersonExecute
+      OnUpdate = Action_NewInetOrgPersonUpdate
     end
     object Action_NewPrinter: TAction
       Caption = 'Action_NewPrinter'
+      OnExecute = Action_NewPrinterExecute
+      OnUpdate = Action_NewPrinterUpdate
     end
     object Action_NewMsDSKeyCredential: TAction
       Caption = 'Action_NewMsDSKeyCredential'
+      OnExecute = Action_NewMsDSKeyCredentialExecute
+      OnUpdate = Action_NewMsDSKeyCredentialUpdate
     end
     object Action_NewUser: TAction
       Caption = 'Action_NewUser'
@@ -675,11 +681,28 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
     end
     object Action_NewSharedFolder: TAction
       Caption = 'Action_NewSharedFolder'
+      OnExecute = Action_NewSharedFolderExecute
+      OnUpdate = Action_NewSharedFolderUpdate
     end
     object Action_NewSiteLinkBridge: TAction
       Caption = 'Action_NewSiteLinkBridge'
       OnExecute = Action_NewSiteLinkBridgeExecute
       OnUpdate = Action_NewSiteLinkBridgeUpdate
+    end
+    object Action_NewMsDSShadowPrincipalContainer: TAction
+      Caption = 'NewMsDSShadowPrincipalContainer'
+      OnExecute = Action_NewMsDSShadowPrincipalContainerExecute
+      OnUpdate = Action_NewMsDSShadowPrincipalContainerUpdate
+    end
+    object Action_NewMsImagingPSPs: TAction
+      Caption = 'Action_NewMsImagingPSPs'
+      OnExecute = Action_NewMsImagingPSPsExecute
+      OnUpdate = Action_NewMsImagingPSPsUpdate
+    end
+    object Action_NewMsDNSServerSettings: TAction
+      Caption = 'NewMsDNSServerSettings'
+      OnExecute = Action_NewMsDNSServerSettingsExecute
+      OnUpdate = Action_NewMsDNSServerSettingsUpdate
     end
   end
   object PopupMenu1: TPopupMenu
@@ -707,6 +730,7 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
         Caption = 'Group'
       end
       object MenuItem_NewInetOrgPerson: TMenuItem
+        Action = Action_NewInetOrgPerson
         Caption = 'InetOrgPerson'
       end
       object MenuItem_NewSite: TMenuItem
@@ -742,21 +766,26 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
         Caption = 'Servers Container'
       end
       object MenuItem_NewMsDNSServerSettings: TMenuItem
+        Action = Action_NewMsDNSServerSettings
         Caption = 'msDNS-ServerSettings'
       end
       object MenuItem_NewMsDSKeyCredential: TMenuItem
+        Action = Action_NewMsDSKeyCredential
         Caption = 'msDS-KeyCredential'
       end
       object MenuItem_NewMsDSShadowPrincipal: TMenuItem
         Caption = 'msDS-ShadowPrincipal'
       end
       object MenuItem_NewMsDSShadowPrincipalContainer: TMenuItem
+        Action = Action_NewMsDSShadowPrincipalContainer
         Caption = 'msDS-ShadowPrincipalContainer'
       end
       object MenuItem_NewMsImagingPSPs: TMenuItem
+        Action = Action_NewMsImagingPSPs
         Caption = 'msImaging-PSPs'
       end
       object MenuItem_NewPrinter: TMenuItem
+        Action = Action_NewPrinter
         Caption = 'Printer'
       end
       object MenuItem_NewUser: TMenuItem
@@ -764,6 +793,7 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
         Caption = 'User'
       end
       object MenuItem_NewSharedFolder: TMenuItem
+        Action = Action_NewSharedFolder
         Caption = 'Shared Folder'
       end
     end

@@ -55,6 +55,9 @@ type
   { TFrmModuleSitesAndServices }
 
   TFrmModuleSitesAndServices = class(TFrameModule)
+    Action_NewMsDNSServerSettings: TAction;
+    Action_NewMsImagingPSPs: TAction;
+    Action_NewMsDSShadowPrincipalContainer: TAction;
     Action_NewSiteLinkBridge: TAction;
     Action_NewSharedFolder: TAction;
     Action_NewMsDSKeyCredential: TAction;
@@ -144,8 +147,22 @@ type
     procedure Action_NewContactUpdate(Sender: TObject);
     procedure Action_NewGroupExecute(Sender: TObject);
     procedure Action_NewGroupUpdate(Sender: TObject);
+    procedure Action_NewInetOrgPersonExecute(Sender: TObject);
+    procedure Action_NewInetOrgPersonUpdate(Sender: TObject);
+    procedure Action_NewMsDNSServerSettingsExecute(Sender: TObject);
+    procedure Action_NewMsDNSServerSettingsUpdate(Sender: TObject);
+    procedure Action_NewMsDSKeyCredentialExecute(Sender: TObject);
+    procedure Action_NewMsDSKeyCredentialUpdate(Sender: TObject);
+    procedure Action_NewMsDSShadowPrincipalContainerExecute(Sender: TObject);
+    procedure Action_NewMsDSShadowPrincipalContainerUpdate(Sender: TObject);
+    procedure Action_NewMsImagingPSPsExecute(Sender: TObject);
+    procedure Action_NewMsImagingPSPsUpdate(Sender: TObject);
+    procedure Action_NewPrinterExecute(Sender: TObject);
+    procedure Action_NewPrinterUpdate(Sender: TObject);
     procedure Action_NewServerExecute(Sender: TObject);
     procedure Action_NewServerUpdate(Sender: TObject);
+    procedure Action_NewSharedFolderExecute(Sender: TObject);
+    procedure Action_NewSharedFolderUpdate(Sender: TObject);
     procedure Action_NewSiteExecute(Sender: TObject);
     procedure Action_NewSiteLinkBridgeExecute(Sender: TObject);
     procedure Action_NewSiteLinkBridgeUpdate(Sender: TObject);
@@ -766,6 +783,124 @@ begin
   Action_NewGroup.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
+procedure TFrmModuleSitesAndServices.Action_NewInetOrgPersonExecute(Sender: TObject);
+var
+  vis: TVisNewObject;
+begin
+  vis := TVisNewObject.Create(Self, vnotInetOrgPerson, Format('CN=Person,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  try
+    vis.Ldap := FrmRSAT.LdapClient;
+    vis.ShowModal;
+    RefreshLdapNode();
+  finally
+    FreeAndNil(vis);
+  end;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewInetOrgPersonUpdate(Sender: TObject);
+var
+  vis: TVisNewObject;
+begin
+  Action_NewInetOrgPerson.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewMsDNSServerSettingsExecute(Sender: TObject);
+var
+  vis: TVisNewObject;
+begin
+  vis := TVisNewObject.Create(Self, vnotMsDNSServerSettings, Format('CN=ms-DNS-Server-Settings,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  try
+    vis.Ldap := FrmRSAT.LdapClient;
+    vis.ShowModal;
+    RefreshLdapNode();
+  finally
+    FreeAndNil(vis);
+  end;
+end; 
+
+procedure TFrmModuleSitesAndServices.Action_NewMsDNSServerSettingsUpdate(
+  Sender: TObject);
+begin
+  Action_NewMsDNSServerSettings.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;  
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewMsDSKeyCredentialExecute(Sender: TObject);
+var
+  vis: TVisNewObject;
+begin
+  vis := TVisNewObject.Create(Self, vnotMsDSKeyCredential, Format('CN=ms-DS-Key-Credential,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  try
+    vis.Ldap := FrmRSAT.LdapClient;
+    vis.ShowModal;
+    RefreshLdapNode();
+  finally
+    FreeAndNil(vis);
+  end;
+end; 
+
+procedure TFrmModuleSitesAndServices.Action_NewMsDSKeyCredentialUpdate(
+  Sender: TObject);
+begin
+  Action_NewMsDSKeyCredential.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;  
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewMsDSShadowPrincipalContainerExecute(Sender: TObject);
+var
+  vis: TVisNewObject;
+begin
+  vis := TVisNewObject.Create(Self, vnotMsDSShadowPrincipalContainer, Format('CN=ms-DS-Shadow-Principal-Container,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  try
+    vis.Ldap := FrmRSAT.LdapClient;
+    vis.ShowModal;
+    RefreshLdapNode();
+  finally
+    FreeAndNil(vis);
+  end;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewMsDSShadowPrincipalContainerUpdate(Sender: TObject);
+begin
+  Action_NewMsDSShadowPrincipalContainer.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewMsImagingPSPsExecute(Sender: TObject);
+var
+  vis: TVisNewObject;
+begin
+  vis := TVisNewObject.Create(Self, vnotMsImagingPSPs, Format('CN=ms-Imaging-PSPs,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  try
+    vis.Ldap := FrmRSAT.LdapClient;
+    vis.ShowModal;
+    RefreshLdapNode();
+  finally
+    FreeAndNil(vis);
+  end;
+end; 
+
+procedure TFrmModuleSitesAndServices.Action_NewMsImagingPSPsUpdate(Sender: TObject);
+begin
+  Action_NewMsImagingPSPs.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected; 
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewPrinterExecute(Sender: TObject);
+var
+  vis: TVisNewObject; 
+begin
+  vis := TVisNewObject.Create(Self, vnotPrinter, Format('CN=Print-Queue,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  try
+    vis.Ldap := FrmRSAT.LdapClient;
+    vis.ShowModal;
+    RefreshLdapNode();
+  finally
+    FreeAndNil(vis);
+  end;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewPrinterUpdate(Sender: TObject);
+begin
+  Action_NewPrinter.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end;
+
 procedure TFrmModuleSitesAndServices.Action_NewServerExecute(Sender: TObject);
 var
   vis: TVisNewObject;
@@ -783,6 +918,27 @@ end;
 procedure TFrmModuleSitesAndServices.Action_NewServerUpdate(Sender: TObject);
 begin
   Action_NewServer.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewSharedFolderExecute(
+  Sender: TObject);
+var                                                                           
+  vis: TVisNewObject;
+begin
+  vis := TVisNewObject.Create(Self, vnotSharedFolder, Format('CN=Volume,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  try
+    vis.Ldap := FrmRSAT.LdapClient;
+    vis.ShowModal;
+    RefreshLdapNode();
+  finally
+    FreeAndNil(vis);
+  end;
+end;
+
+procedure TFrmModuleSitesAndServices.Action_NewSharedFolderUpdate(
+  Sender: TObject);
+begin
+  Action_NewSharedFolder.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
 procedure TFrmModuleSitesAndServices.Action_NewSiteUpdate(Sender: TObject);

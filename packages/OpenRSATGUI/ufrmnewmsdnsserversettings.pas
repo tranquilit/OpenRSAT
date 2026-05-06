@@ -1,4 +1,4 @@
-unit ufrmnewmsimagingpsps;
+unit ufrmnewmsdnsserversettings;
 
 {$mode ObjFPC}{$H+}
 
@@ -9,13 +9,13 @@ uses
   Classes,
   ExtCtrls,
   Forms,
-  StdCtrls;
+  StdCtrls; 
 
 type
   
-  { TFrmNewMsImagingPSPs }
+  { TFrmNewMsDNSServerSettings }
 
-  TFrmNewMsImagingPSPs = class(TFrame)
+  TFrmNewMsDNSServerSettings = class(TFrame)
     Action_Next: TAction;
     ActionList: TActionList;
     Edit_cn: TEdit;
@@ -26,7 +26,7 @@ type
   private
     procedure Load;
   public
-    constructor Create(TheOwner: TComponent); override; 
+    constructor Create(TheOwner: TComponent); override;
   end;
 
 implementation
@@ -41,13 +41,16 @@ uses
   ucommon,
   ucoredatamodule,
   ursatldapclientui,
-  uvisnewobject;
+  uvisnewobject; 
 
 {$R *.lfm}
 
-{ TFrmNewMsImagingPSPs }
+procedure TFrmNewMsDNSServerSettings.Load;
+begin
+  Edit_cn.SetFocus;
+end;
 
-procedure TFrmNewMsImagingPSPs.Action_NextExecute(Sender: TObject);
+procedure TFrmNewMsDNSServerSettings.Action_NextExecute(Sender: TObject);
 var
   NewObject: TVisNewObject;
   AttList: TLdapAttributeList;
@@ -58,8 +61,7 @@ begin
   AttList := TLdapAttributeList.Create();
   try
     Att := AttList.Add(atObjectClass, 'top');
-    Att.Add('container');
-    Att.Add('msImaging-PSPs');
+    Att.Add('msDNS-ServerSettings');
     
     DN := FormatUtf8('CN=%,%', [Edit_cn.Text, NewObject.ObjectOU]);
     if not NewObject.Ldap.Add(DN, AttList) then
@@ -71,29 +73,24 @@ begin
   NewObject.ModalResult := mrOK;
 end;
 
-procedure TFrmNewMsImagingPSPs.Action_NextUpdate(Sender: TObject);
+procedure TFrmNewMsDNSServerSettings.Action_NextUpdate(Sender: TObject);
 begin
   Action_Next.Enabled := (Edit_cn.Text <> '');
 end;
 
-procedure TFrmNewMsImagingPSPs.Load;
-begin
-  Edit_cn.SetFocus;
-end;
-
-constructor TFrmNewMsImagingPSPs.Create(TheOwner: TComponent);
+constructor TFrmNewMsDNSServerSettings.Create(TheOwner: TComponent);
 var
   OwnerNewObject: TVisNewObject absolute TheOwner;
 begin
   inherited Create(TheOwner);
   
-  OwnerNewObject.Caption := rsNewObjectMSImagingPSPs;
+  OwnerNewObject.Caption := rsNewObjectMsDNSServerSettings;
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
   OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnOK;
   OwnerNewObject.Btn_Next.Default := True;
   OwnerNewObject.Btn_Back.Visible := False;
   OwnerNewObject.CallBack := @Load;
-end;  
+end; 
 
 end.
 
