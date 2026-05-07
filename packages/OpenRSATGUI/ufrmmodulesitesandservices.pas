@@ -533,11 +533,13 @@ var
       begin
         if (mResultNonLeaf = mrNoToAll) or (mResultNonLeaf = mrCancel) then
           Exit;
+
         if (mResultNonLeaf <> mrYesToAll) then
           mResultNonLeaf := MessageDlg('Non leaf object', 'Object has children. Do you want to delete them ?', mtConfirmation, [mbYesToAll, mbYes, mbNo, mbNoToAll, mbCancel], 0);
 
         if (mResultNonLeaf <> mrYes) and (mResultNonLeaf <> mrYesToAll) then
           Exit;
+        
         if not FrmRSAT.LdapClient.Delete((TreeView1.Selected as TADSSTreeNode).DistinguishedName, True) then
           Exit;
       end;
@@ -724,7 +726,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Execute', [Action_NewComputer.Caption]);
 
-  vis := TVisNewObject.Create(Self, vnotComputer, Format('CN=Computer,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotComputer, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
@@ -746,7 +748,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Execute', [Action_NewContact.Caption]);
 
-  vis := TVisNewObject.Create(Self, vnotContact, Format('CN=Person,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotContact, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
@@ -768,7 +770,8 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Execute', [Action_NewGroup.Caption]);
 
-  vis := TVisNewObject.Create(Self, vnotGroup, Format('CN=Group,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  ShowMessage(GetFocusedObject(True));
+  vis := TVisNewObject.Create(Self, vnotGroup, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
@@ -787,7 +790,7 @@ procedure TFrmModuleSitesAndServices.Action_NewInetOrgPersonExecute(Sender: TObj
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotInetOrgPerson, Format('CN=Person,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotInetOrgPerson, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
@@ -808,7 +811,7 @@ procedure TFrmModuleSitesAndServices.Action_NewMsDNSServerSettingsExecute(Sender
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotMsDNSServerSettings, Format('CN=ms-DNS-Server-Settings,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotMsDNSServerSettings, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
@@ -828,7 +831,7 @@ procedure TFrmModuleSitesAndServices.Action_NewMsDSKeyCredentialExecute(Sender: 
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotMsDSKeyCredential, Format('CN=ms-DS-Key-Credential,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotMsDSKeyCredential, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
@@ -848,7 +851,7 @@ procedure TFrmModuleSitesAndServices.Action_NewMsDSShadowPrincipalContainerExecu
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotMsDSShadowPrincipalContainer, Format('CN=ms-DS-Shadow-Principal-Container,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotMsDSShadowPrincipalContainer, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
@@ -867,7 +870,7 @@ procedure TFrmModuleSitesAndServices.Action_NewMsImagingPSPsExecute(Sender: TObj
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotMsImagingPSPs, Format('CN=ms-Imaging-PSPs,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotMsImagingPSPs, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
@@ -886,7 +889,7 @@ procedure TFrmModuleSitesAndServices.Action_NewPrinterExecute(Sender: TObject);
 var
   vis: TVisNewObject; 
 begin
-  vis := TVisNewObject.Create(Self, vnotPrinter, Format('CN=Print-Queue,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotPrinter, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
@@ -905,7 +908,7 @@ procedure TFrmModuleSitesAndServices.Action_NewServerExecute(Sender: TObject);
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotServer, Format('CN=Server,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotServer, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
@@ -924,7 +927,7 @@ procedure TFrmModuleSitesAndServices.Action_NewSharedFolderExecute(Sender: TObje
 var                                                                           
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotSharedFolder, Format('CN=Volume,CN=Schema,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotSharedFolder, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
@@ -949,7 +952,7 @@ procedure TFrmModuleSitesAndServices.Action_NewSubnetExecute(Sender: TObject);
 var                                                                           
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotSubnet, Format('CN=Subnets,CN=Sites,%s', [FrmRSAT.LdapClient.ConfigDN]), FrmRSAT.LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotSubnet, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
@@ -971,7 +974,7 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
 
-  vis := TVisNewObject.Create(Self, vnotUser, Format('CN=User,%s', [FrmRSAT.LdapClient.DefaultDN()]), FrmRSAT.LdapClient.DefaultDN);
+  vis := TVisNewObject.Create(Self, vnotUser, GetFocusedObject(True), FrmRSAT.LdapClient.DefaultDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
@@ -1203,6 +1206,7 @@ begin
 
   if not Assigned(Node) or (fUpdating > 0) then
     Exit;
+
   ChildCache.Init;
   FrmRSAT.LdapClient.SearchBegin();
   try
@@ -1231,10 +1235,11 @@ begin
         ChildNode.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone);
       end;
     until FrmRSAT.LdapClient.SearchCookie = '';
-    for i := 0 to Node.Count - 1 do
+
+    for i := Node.Count - 1 downto 0 do
     begin
-      if not ChildCache.Exists(Node.Items[Node.Count - 1 - i].Text) then
-        TreeView1.Items.Delete(node.Items[Node.Count - 1 - i]);
+      if not ChildCache.Exists(Node.Items[i].Text) then
+        TreeView1.Items.Delete(node.Items[i]);
     end;
     Node.HasChildren := Node.Count > 0;
   finally
