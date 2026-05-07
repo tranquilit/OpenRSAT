@@ -409,13 +409,13 @@ const
     TFrmPropertyAttributes
   );
   
-  PROPERTY_SERVER: Array of TPropertyFrameClass = (
+  PROPERTY_NO_GENERAL: Array of TPropertyFrameClass = (
     TFrmPropertyObject,
     TFrmPropertySecurity,
     TFrmPropertyAttributes
   );
   
-  PROPERTY_SERVER_WITH_DNS_HOSTNAME: Array of TPropertyFrameClass = (
+  PROPERTY_SERVER: Array of TPropertyFrameClass = (
     TFrmPropertyGeneralServer,
     TFrmPropertyObject,
     TFrmPropertySecurity,
@@ -691,15 +691,16 @@ begin
   {$endif}
   'site': property_tabs := PROPERTY_SITE;
   'siteLink': property_tabs := PROPERTY_SITE_LINK;
-  'siteLinkBridge': property_tabs :=  PROPERTY_SITE_LINK_BRIDGE;
+  'siteLinkBridge': property_tabs := PROPERTY_SITE_LINK_BRIDGE;
+  'mSMQEnterpriseSettings': property_tabs := PROPERTY_NO_GENERAL;
   'nTDSSiteSettings': property_tabs := PROPERTY_NTDS_SITE_SETTINGS;
   'nTDSDSA': property_tabs := PROPERTY_NTDSDSA;
   'server':
   begin
     if not Assigned(fProperty.Attributes.Find('dNSHostName')) then
-      property_tabs := PROPERTY_SERVER
+      property_tabs := PROPERTY_NO_GENERAL
     else
-      property_tabs := PROPERTY_SERVER_WITH_DNS_HOSTNAME;
+      property_tabs := PROPERTY_SERVER;
   end;
   'subnet': property_tabs := PROPERTY_SUBNET;
   'interSiteTransport': property_tabs := PROPERTY_INTER_SITE_TRANSPORT;

@@ -920,8 +920,7 @@ begin
   Action_NewServer.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
-procedure TFrmModuleSitesAndServices.Action_NewSharedFolderExecute(
-  Sender: TObject);
+procedure TFrmModuleSitesAndServices.Action_NewSharedFolderExecute(Sender: TObject);
 var                                                                           
   vis: TVisNewObject;
 begin
