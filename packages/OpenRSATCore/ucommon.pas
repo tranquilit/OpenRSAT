@@ -461,6 +461,8 @@ resourcestring
   rsPasswordShouldNeverExpire = 'You specified that the password should never expire.';
   rsNotRequiredToChangePassword = 'The user will not be required to change the password at next logon.';
 
+  rsVisAdvancedSecurityTitle = 'Advanced Security Settings for %';
+
 const
   DAYS_BETWEEN_1601_AND_1900 = 109205;
   HUNDRED_OF_MS_IN_A_DAY = 864000000000;
@@ -500,6 +502,17 @@ const
     rsSecAccessGenericRead        // samGenericRead
   );
 
+  SEC_FLAGS_NAMES: array[TSecAceFlag] of String = (
+    rsSafObjectInherit,    // 'OI' // safObjectInherit
+    rsSafContainerInherit, // 'CI' // safContainerInherit
+    rsSafNoPropagate,      // 'NP' // safNoPropagateInherit
+    rsSafInheritOnly,      // 'IO' // safInheritOnly
+    rsSafInherited,        // 'ID' // safInherited
+    '',                    // '',  // saf5
+    rsSafAuditSuccess,     // 'SA' // safSuccessfulAccess
+    rsSafAuditFailure      // 'FA' // safFailedAccess
+  );
+
   PREFIX_REGEX = '(\/(12[0-8]|(1[0-1]|[1-9]|)\d))';
   IPV4_REGEX = '((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}';
   IPV6_REGEX = '((?:[0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4}|(?:[0-9A-Fa-f]{1,4}:){1,7}:|:(?::[0-9A-Fa-f]{1,4}){1,7}|(?:[0-9A-Fa-f]{1,4}:){1,6}:[0-9A-Fa-f]{1,4}|(?:[0-9A-Fa-f]{1,4}:){1,5}(?::[0-9A-Fa-f]{1,4}){1,2}|(?:[0-9A-Fa-f]{1,4}:){1,4}(?::[0-9A-Fa-f]{1,4}){1,3}|(?:[0-9A-Fa-f]{1,4}:){1,3}(?::[0-9A-Fa-f]{1,4}){1,4}|(?:[0-9A-Fa-f]{1,4}:){1,2}(?::[0-9A-Fa-f]{1,4}){1,5}|[0-9A-Fa-f]{1,4}:(?:(?::[0-9A-Fa-f]{1,4}){1,6})|:(?:(?::[0-9A-Fa-f]{1,4}){1,6}))';
@@ -536,6 +549,137 @@ function SecDescFindACE(PSecDesc: PSecurityDescriptor;
   Flags: TSecAceFlags  = [];
   iGUID: PGuid         = nil
   ): Integer;
+
+const
+
+  SEC_ACCESS: Array of TSecAccess = (
+    samCreateChild,  // CC
+    samDeleteChild,  // DC
+    samListChildren, // LC
+    samSelfWrite,    // SW
+    samReadProp,     // RP
+    samWriteProp,    // WP
+    samDeleteTree,   // DT
+    samListObject,   // LO
+    samControlAccess,// CR
+    samDelete,       // SD
+    samReadControl,  // RC
+    samWriteDAC,     // WD
+    samWriteOwner    // WO
+  );
+
+  SAF_NAMES: array[TSecAceFlag] of String = (
+    rsSafObjectInherit,    // 'OI' // safObjectInherit
+    rsSafContainerInherit, // 'CI' // safContainerInherit
+    rsSafNoPropagate,      // 'NP' // safNoPropagateInherit
+    rsSafInheritOnly,      // 'IO' // safInheritOnly
+    rsSafInherited,        // 'ID' // safInherited
+    '',                    // '',  // saf5
+    rsSafAuditSuccess,     // 'SA' // safSuccessfulAccess
+    rsSafAuditFailure      // 'FA' // safFailedAccess
+  );
+
+  WELL_KNOWN_SID_NAMES: array[TWellKnownSid] of String = (
+    rsWellKnownSidNull,                                            // wksNull,
+    rsWellKnownSidWorld,                                           // wksWorld,
+    rsWellKnownSidLocal,                                           // wksLocal,
+    rsWellKnownSidConsoleLogon,                                    // wksConsoleLogon,
+    rsWellKnownSidCreatorOwner,                                    // wksCreatorOwner,
+    rsWellKnownSidCreatorGroup,                                    // wksCreatorGroup,
+    rsWellKnownSidCreatorOwnerServer,                              // wksCreatorOwnerServer,
+    rsWellKnownSidCreatorGroupServer,                              // wksCreatorGroupServer,
+    rsWellKnownSidCreatorOwnerRights,                              // wksCreatorOwnerRights,
+    rsWellKnownSidIntegrityUntrusted,                              // wksIntegrityUntrusted,
+    rsWellKnownSidIntegrityLow,                                    // wksIntegrityLow,
+    rsWellKnownSidIntegrityMedium,                                 // wksIntegrityMedium,
+    rsWellKnownSidIntegrityMediumPlus,                             // wksIntegrityMediumPlus,
+    rsWellKnownSidIntegrityHigh,                                   // wksIntegrityHigh,
+    rsWellKnownSidIntegritySystem,                                 // wksIntegritySystem,
+    rsWellKnownSidIntegrityProtectedProcess,                       // wksIntegrityProtectedProcess,
+    rsWellKnownSidIntegritySecureProcess,                          // wksIntegritySecureProcess,
+    rsWellKnownSidAuthenticationAuthorityAsserted,                 // wksAuthenticationAuthorityAsserted,
+    rsWellKnownSidAuthenticationServiceAsserted,                   // wksAuthenticationServiceAsserted,
+    rsWellKnownSidAuthenticationFreshKeyAuth,                      // wksAuthenticationFreshKeyAuth,
+    rsWellKnownSidAuthenticationKeyTrust,                          // wksAuthenticationKeyTrust,
+    rsWellKnownSidAuthenticationKeyPropertyMfa,                    // wksAuthenticationKeyPropertyMfa,
+    rsWellKnownSidAuthenticationKeyPropertyAttestation,            // wksAuthenticationKeyPropertyAttestation,
+    rsWellKnownSidNtAuthority,                                     // wksNtAuthority,
+    rsWellKnownSidDialup,                                          // wksDialup,
+    rsWellKnownSidNetwork,                                         // wksNetwork,
+    rsWellKnownSidBatch,                                           // wksBatch,
+    rsWellKnownSidInteractive,                                     // wksInteractive,
+    rsWellKnownSidService,                                         // wksService,
+    rsWellKnownSidAnonymous,                                       // wksAnonymous,
+    rsWellKnownSidProxy,                                           // wksProxy,
+    rsWellKnownSidEnterpriseControllers,                           // wksEnterpriseControllers,
+    rsWellKnownSidSelf,                                            // wksSelf,
+    rsWellKnownSidAuthenticatedUser,                               // wksAuthenticatedUser,
+    rsWellKnownSidRestrictedCode,                                  // wksRestrictedCode,
+    rsWellKnownSidTerminalServer,                                  // wksTerminalServer,
+    rsWellKnownSidRemoteLogonId,                                   // wksRemoteLogonId,
+    rsWellKnownSidThisOrganisation,                                // wksThisOrganisation,
+    rsWellKnownSidIisUser,                                         // wksIisUser,
+    rsWellKnownSidLocalSystem,                                     // wksLocalSystem,
+    rsWellKnownSidLocalService,                                    // wksLocalService,
+    rsWellKnownSidNetworkService,                                  // wksNetworkService,
+    rsWellKnownSidLocalAccount,                                    // wksLocalAccount,
+    rsWellKnownSidLocalAccountAndAdministrator,                    // wksLocalAccountAndAdministrator,
+    rsWellKnownSidBuiltinDomain,                                   // wksBuiltinDomain,
+    rsWellKnownSidBuiltinAdministrators,                           // wksBuiltinAdministrators,
+    rsWellKnownSidBuiltinUsers,                                    // wksBuiltinUsers,
+    rsWellKnownSidBuiltinGuests,                                   // wksBuiltinGuests,
+    rsWellKnownSidBuiltinPowerUsers,                               // wksBuiltinPowerUsers,
+    rsWellKnownSidBuiltinAccountOperators,                         // wksBuiltinAccountOperators,
+    rsWellKnownSidBuiltinSystemOperators,                          // wksBuiltinSystemOperators,
+    rsWellKnownSidBuiltinPrintOperators,                           // wksBuiltinPrintOperators,
+    rsWellKnownSidBuiltinBackupOperators,                          // wksBuiltinBackupOperators,
+    rsWellKnownSidBuiltinReplicator,                               // wksBuiltinReplicator,
+    rsWellKnownSidBuiltinRasServers,                               // wksBuiltinRasServers,
+    rsWellKnownSidBuiltinPreWindows2000CompatibleAccess,           // wksBuiltinPreWindows2000CompatibleAccess,
+    rsWellKnownSidBuiltinRemoteDesktopUsers,                       // wksBuiltinRemoteDesktopUsers,
+    rsWellKnownSidBuiltinNetworkConfigurationOperators,            // wksBuiltinNetworkConfigurationOperators,
+    rsWellKnownSidBuiltinIncomingForestTrustBuilders,              // wksBuiltinIncomingForestTrustBuilders,
+    rsWellKnownSidBuiltinPerfMonitoringUsers,                      // wksBuiltinPerfMonitoringUsers,
+    rsWellKnownSidBuiltinPerfLoggingUsers,                         // wksBuiltinPerfLoggingUsers,
+    rsWellKnownSidBuiltinAuthorizationAccess,                      // wksBuiltinAuthorizationAccess,
+    rsWellKnownSidBuiltinTerminalServerLicenseServers,             // wksBuiltinTerminalServerLicenseServers,
+    rsWellKnownSidBuiltinDcomUsers,                                // wksBuiltinDcomUsers,
+    rsWellKnownSidBuiltinIUsers,                                   // wksBuiltinIUsers,
+    rsWellKnownSidBuiltinCryptoOperators,                          // wksBuiltinCryptoOperators,
+    rsWellKnownSidBuiltinUnknown,                                  // wksBuiltinUnknown,
+    rsWellKnownSidBuiltinCacheablePrincipalsGroups,                // wksBuiltinCacheablePrincipalsGroups,
+    rsWellKnownSidBuiltinNonCacheablePrincipalsGroups,             // wksBuiltinNonCacheablePrincipalsGroups,
+    rsWellKnownSidBuiltinEventLogReadersGroup,                     // wksBuiltinEventLogReadersGroup,
+    rsWellKnownSidBuiltinCertSvcDComAccessGroup,                   // wksBuiltinCertSvcDComAccessGroup,
+    rsWellKnownSidBuiltinRdsRemoteAccessServers,                   // wksBuiltinRdsRemoteAccessServers,
+    rsWellKnownSidBuiltinRdsEndpointServers,                       // wksBuiltinRdsEndpointServers,
+    rsWellKnownSidBuiltinRdsManagementServers,                     // wksBuiltinRdsManagementServers,
+    rsWellKnownSidBuiltinHyperVAdmins,                             // wksBuiltinHyperVAdmins,
+    rsWellKnownSidBuiltinAccessControlAssistanceOperators,         // wksBuiltinAccessControlAssistanceOperators,
+    rsWellKnownSidBuiltinRemoteManagementUsers,                    // wksBuiltinRemoteManagementUsers,
+    rsWellKnownSidBuiltinDefaultSystemManagedGroup,                // wksBuiltinDefaultSystemManagedGroup,
+    rsWellKnownSidBuiltinStorageReplicaAdmins,                     // wksBuiltinStorageReplicaAdmins,
+    rsWellKnownSidBuiltinDeviceOwners,                             // wksBuiltinDeviceOwners,
+    rsWellKnownSidBuiltinWriteRestrictedCode,                      // wksBuiltinWriteRestrictedCode,
+    rsWellKnownSidBuiltinUserModeDriver,                           // wksBuiltinUserModeDriver,
+    rsWellKnownSidCapabilityInternetClient,                        // wksCapabilityInternetClient,
+    rsWellKnownSidCapabilityInternetClientServer,                  // wksCapabilityInternetClientServer,
+    rsWellKnownSidCapabilityPrivateNetworkClientServer,            // wksCapabilityPrivateNetworkClientServer,
+    rsWellKnownSidCapabilityPicturesLibrary,                       // wksCapabilityPicturesLibrary,
+    rsWellKnownSidCapabilityVideosLibrary,                         // wksCapabilityVideosLibrary,
+    rsWellKnownSidCapabilityMusicLibrary,                          // wksCapabilityMusicLibrary,
+    rsWellKnownSidCapabilityDocumentsLibrary,                      // wksCapabilityDocumentsLibrary,
+    rsWellKnownSidCapabilityEnterpriseAuthentication,              // wksCapabilityEnterpriseAuthentication,
+    rsWellKnownSidCapabilitySharedUserCertificates,                // wksCapabilitySharedUserCertificates,
+    rsWellKnownSidCapabilityRemovableStorage,                      // wksCapabilityRemovableStorage,
+    rsWellKnownSidCapabilityAppointments,                          // wksCapabilityAppointments,
+    rsWellKnownSidCapabilityContacts,                              // wksCapabilityContacts,
+    rsWellKnownSidBuiltinAnyPackage,                               // wksBuiltinAnyPackage,
+    rsWellKnownSidBuiltinAnyRestrictedPackage,                     // wksBuiltinAnyRestrictedPackage,
+    rsWellKnownSidNtlmAuthentication,                              // wksNtlmAuthentication,
+    rsWellKnownSidSChannelAuthentication,                          // wksSChannelAuthentication,
+    rsWellKnownSidDigestAuthentication                             // wksDigestAuthentication,
+  );
 
 implementation
 uses

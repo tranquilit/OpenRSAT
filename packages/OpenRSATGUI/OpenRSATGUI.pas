@@ -34,7 +34,8 @@ uses
   ufrmpropertyntauthcertificates, ufrmpropertyunixattributes, 
   ufrmnewinetorgperson, ufrmnewmsdsshadowprincipalcontainer, 
   ufrmnewmsimagingpsps, ufrmnewmsdskeycredential, 
-  ufrmnewmsdsresourcepropertylist, ufrmnewprinter, LazarusPackageIntf;
+  ufrmnewmsdsresourcepropertylist, ufrmnewprinter, uvisselectobjectsid,
+  uvisselectobjectguid, LazarusPackageIntf;
 
 implementation
 

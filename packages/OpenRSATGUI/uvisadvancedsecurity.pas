@@ -1,1152 +1,733 @@
 unit uvisadvancedsecurity;
 
 {$mode ObjFPC}{$H+}
-{$WARN 6058 off : Call to subroutine "$1" marked as inline is not inlined}
+
 interface
 
 uses
-  ActnList,
-  Buttons,
   Classes,
+  SysUtils,
+  Forms,
   Controls,
+  Graphics,
   Dialogs,
   ExtCtrls,
-  Forms,
-  tis.ui.grid.core,
   StdCtrls,
-  Menus,
-  VirtualTrees,
-  mormot.core.base,
-  mormot.core.log,
+  Buttons,
+  ActnList,
+  tis.ui.grid.core,
   mormot.core.os.security,
   mormot.core.variants,
+  VirtualTrees,
+  mormot.core.base,
+  mormot.core.text,
   mormot.net.ldap,
-  ucommon,
-  ursatldapclient;
+  ucoredatamodule,
+  uadvancedsecuritypresenter,
+  ucommon;
+
+{ TODO:
+  Add column "Inherited from" with the base object of the ACE.
+  Add "Restore default" button to reset the default ACL.
+  View ACL flags.
+  Show warning if owner / group is not "Domain Admins".
+  Add button to easely set "Domain Admins" to owner / group.
+  Update column Inheritance flags text with "This object", "This object and all descendants", ...
+}
 
 type
 
+  TVisAdvancedSecurityException = class(Exception);
+
   { TVisAdvancedSecurity }
 
-  TVisAdvancedSecurity = class(TForm)
-    Action_Restore: TAction;
-    Action_OK: TAction;
-    Action_Cancel: TAction;
+  TVisAdvancedSecurity = class(TForm, IAdvancedSecurityView)
+    Action_SelectPrincipal: TAction;
+    Action_AddACE: TAction;
+    Action_SelectOwner: TAction;
     Action_Apply: TAction;
-    BitBtn_Cancel: TBitBtn;
+    Action_Cancel: TAction;
+    Action_DeleteACE: TAction;
+    Action_DuplicateACE: TAction;
+    Action_OK: TAction;
+    Action_SelectGroup: TAction;
+    Action_SelectInheritedObject: TAction;
+    Action_SelectObject: TAction;
+    ActionList1: TActionList;
     BitBtn_Apply: TBitBtn;
+    BitBtn_Cancel: TBitBtn;
     BitBtn_OK: TBitBtn;
-    BitBtn_Restore: TBitBtn;
-    CheckBox_SR: TCheckBox;
-    CheckBox_DT: TCheckBox;
-    CheckBox_SD: TCheckBox;
-    CheckBox_SP: TCheckBox;
-    CheckBox_DD: TCheckBox;
-    CheckBox_DP: TCheckBox;
-    CheckBox_GD: TCheckBox;
-    CheckBox_OD: TCheckBox;
-    CheckBox_RM: TCheckBox;
-    CheckBox_PS: TCheckBox;
-    CheckBox_PD: TCheckBox;
-    CheckBox_SI: TCheckBox;
-    CheckBox_DI: TCheckBox;
-    CheckBox_SC: TCheckBox;
-    CheckBox_DC: TCheckBox;
-    CheckBox_SS: TCheckBox;
-    CheckGroup_ACLFlags: TCheckGroup;
-    MenuItem1: TMenuItem;
-    MenuItem2: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
+    BitBtn_Group: TBitBtn;
+    BitBtn_Owner: TBitBtn;
+    BitBtn_Principal: TBitBtn;
+    BitBtn_Add: TBitBtn;
+    BitBtn_Duplicate: TBitBtn;
+    BitBtn_Delete: TBitBtn;
+    BitBtn_Object: TBitBtn;
+    BitBtn_ObjectInheritance: TBitBtn;
+    CheckBoxCC: TCheckBox;
+    CheckBoxD: TCheckBox;
+    CheckBoxRC: TCheckBox;
+    CheckBoxWO: TCheckBox;
+    CheckBoxWDAC: TCheckBox;
+    CheckBoxOI: TCheckBox;
+    CheckBoxCI: TCheckBox;
+    CheckBoxIO: TCheckBox;
+    CheckBoxNP: TCheckBox;
+    CheckBoxDC: TCheckBox;
+    CheckBoxLC: TCheckBox;
+    CheckBoxSW: TCheckBox;
+    CheckBoxRP: TCheckBox;
+    CheckBoxWP: TCheckBox;
+    CheckBoxDT: TCheckBox;
+    CheckBoxLO: TCheckBox;
+    CheckBoxCA: TCheckBox;
+    ComboBox_Type: TComboBox;
+    Edit_InheritedObject: TEdit;
+    Edit_Object: TEdit;
+    Edit_Group: TEdit;
+    Edit_Owner: TEdit;
+    Edit_Principal: TEdit;
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    Label_Group: TLabel;
+    Label_Owner: TLabel;
+    Label_Type: TLabel;
+    Label_Principal: TLabel;
+    Label_Object: TLabel;
+    Label_ObjectInheritance: TLabel;
     Panel1: TPanel;
-    PanelTop: TPanel;
-      Edit_Group: TEdit;
-      Label_Group: TLabel;
-      Label_Owner: TLabel;
-      Edit_Owner: TEdit;
-      CheckBox_Raw: TCheckBox;
-      PopupMenu1: TPopupMenu;
-      Timer_SearchInGrid: TTimer;
-    TisGrid_ACL: TTisGrid;
-    PanelBottom: TPanel;
-      BitBtn_AddAce: TBitBtn;
-      BitBtn_DeleteAce: TBitBtn;
-      BitBtn_EditAce: TBitBtn;
-    ActionList: TActionList;
-      Action_AddAce: TAction;
-      Action_DeleteAce: TAction;
-      Action_EditAce: TAction;
-      procedure Action_AddAceExecute(Sender: TObject);
-      procedure Action_ApplyExecute(Sender: TObject);
-      procedure Action_ApplyUpdate(Sender: TObject);
-      procedure Action_CancelExecute(Sender: TObject);
-      procedure Action_DeleteAceExecute(Sender: TObject);
-      procedure Action_DeleteAceUpdate(Sender: TObject);
-      procedure Action_EditAceExecute(Sender: TObject);
-      procedure Action_EditAceUpdate(Sender: TObject);
-      procedure Action_OKExecute(Sender: TObject);
-      procedure Action_RestoreExecute(Sender: TObject);
-      procedure CheckBox_RawChange(Sender: TObject);
-      procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
-      procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-      procedure Timer_SearchInGridTimer(Sender: TObject);
-      procedure TisGrid_ACLDblClick(Sender: TObject);
-      procedure TisGrid_ACLGetImageIndex(Sender: TBaseVirtualTree;
-        Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
-        var Ghosted: Boolean; var ImageIndex: Integer);
-      procedure TisGrid_ACLGetText(aSender: TBaseVirtualTree;
-        aNode: PVirtualNode; const aCell: TDocVariantData;
-        aColumn: TColumnIndex; aTextType: TVSTTextType; var aText: string);
-      procedure TisGrid_ACLKeyPress(Sender: TObject; var Key: char);
+    Panel10: TPanel;
+    Panel11: TPanel;
+    Panel12: TPanel;
+    Panel14: TPanel;
+    Panel15: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    Panel9: TPanel;
+    ScrollBox1: TScrollBox;
+    Splitter1: TSplitter;
+    TisGrid1: TTisGrid;
+    procedure Action_AddACEExecute(Sender: TObject);
+    procedure Action_ApplyExecute(Sender: TObject);
+    procedure Action_CancelExecute(Sender: TObject);
+    procedure Action_DeleteACEExecute(Sender: TObject);
+    procedure Action_DuplicateACEExecute(Sender: TObject);
+    procedure Action_OKExecute(Sender: TObject);
+    procedure Action_SelectInheritedObjectExecute(Sender: TObject);
+    procedure Action_SelectObjectExecute(Sender: TObject);
+    procedure Action_SelectOwnerExecute(Sender: TObject);
+    procedure Action_SelectPrincipalExecute(Sender: TObject);
+    procedure CheckBoxCAChange(Sender: TObject);
+    procedure CheckBoxCCChange(Sender: TObject);
+    procedure CheckBoxCIChange(Sender: TObject);
+    procedure CheckBoxDCChange(Sender: TObject);
+    procedure CheckBoxDChange(Sender: TObject);
+    procedure CheckBoxDTChange(Sender: TObject);
+    procedure CheckBoxIOChange(Sender: TObject);
+    procedure CheckBoxLCChange(Sender: TObject);
+    procedure CheckBoxLOChange(Sender: TObject);
+    procedure CheckBoxNPChange(Sender: TObject);
+    procedure CheckBoxOIChange(Sender: TObject);
+    procedure CheckBoxRCChange(Sender: TObject);
+    procedure CheckBoxRPChange(Sender: TObject);
+    procedure CheckBoxSWChange(Sender: TObject);
+    procedure CheckBoxWDACChange(Sender: TObject);
+    procedure CheckBoxWOChange(Sender: TObject);
+    procedure CheckBoxWPChange(Sender: TObject);
+    procedure ComboBox_ObjectChange(Sender: TObject);
+    procedure ComboBox_ObjectInheritanceChange(Sender: TObject);
+    procedure ComboBox_TypeChange(Sender: TObject);
+    procedure Edit_InheritedObjectChange(Sender: TObject);
+    procedure Edit_ObjectChange(Sender: TObject);
+    procedure Edit_PrincipalChange(Sender: TObject);
+    procedure TisGrid1DrawText(Sender: TBaseVirtualTree; TargetCanvas: TCanvas; Node: PVirtualNode;
+      Column: TColumnIndex; const CellText: String; const CellRect: TRect; var DefaultDraw: Boolean);
+    procedure TisGrid1FocusChanged(Sender: TBaseVirtualTree;
+      Node: PVirtualNode; Column: TColumnIndex);
+    procedure TisGrid1GetImageIndex(Sender: TBaseVirtualTree;
+      Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
+      var Ghosted: Boolean; var ImageIndex: Integer);
+    procedure TisGrid1GetText(aSender: TBaseVirtualTree; aNode: PVirtualNode;
+      const aCell: TDocVariantData; aColumn: TColumnIndex;
+      aTextType: TVSTTextType; var aText: string);
   private
-    SecurityDescriptor: PSecurityDescriptor;
-    SampleSD: TSecurityDescriptor;
-    Ldap: TRsatLdapClient;
-    DN: RawUtf8;
-    fBaseDN: RawUtf8;
-    fSearchWord: RawUtf8;
-    fLog: TSynLog;
+    fPresenter: TAdvancedSecurityPresenter;
 
-    /// Cache of GUID names for fast retrieve.
-    GUIDName: TDocVariantData;
-
-    /// Find name of a GUID.
-    /// It looks into a name cache storage first, and if it not exists in storage,
-    /// it looks into ldap configuration and then into ldap schema.
-    /// It still not found, use the string representation of the guid.
-    /// Argument:
-    /// - guid(TGuid): Guid to convert.
-    /// Return:
-    /// Guid representation as RawUtf8.
-    function FindGuidName(guid: TGuid): RawUtf8;
-
-    /// Find the names of a TSecAccess array.
-    /// Argument:
-    /// - mask(TSecAccessMask): List of access to convert.
-    /// Return:
-    /// A RawUtf8 representation of the access list.
-    function AccessNamesFromMask(mask: TSecAccessMask; Raw: Boolean): RawUtf8;
-
-    /// Find the names of a TSecAceFlags.
-    /// Argument:
-    /// - flags(TSecAceFlags): List of flag to convert.
-    /// Return:
-    /// A RawUtf8 representation of the flag list.
-    function AppliesToFromFlags(flags: TSecAceFlags; Raw: Boolean): RawUtf8;
-
-    procedure UpdateGridACL();
-
-    procedure ResolveOwnerAndGroup;
+    function SelectObjectSid(out aSid, aName: RawUtf8): Boolean;
+    function SelectObjectGUID(out aGUID, aName: RawUtf8; aAllowedType: TRawUtf8DynArray): Boolean;
   public
-    constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient;
-      ASD: PSecurityDescriptor; Adn, AbaseDN: RawUtf8); reintroduce;
+    constructor Create(TheOwner: TComponent); override;
+    destructor Destroy; override;
+
+    procedure SetLdapClient(aClient: TLdapClient);
+    procedure SetDistinguishedName(const aDN: RawUtf8);
+    procedure SetObjectName(const aName: RawUtf8);
+    procedure SetSecurityDescriptor(const aSD: TSecurityDescriptor);
+    function GetSecurityDescriptor: TSecurityDescriptor;
+  public
+    procedure SetTitle(const aName: RawUtf8);
+    procedure SetOwnerText(const aName: RawUtf8);
+    procedure SetGroupText(const aName: RawUtf8);
+    procedure RefreshACEGrid(aACEs: PDocVariantData);
+    procedure RefreshACEGridIndex(aACE: PDocVariantData; aIndex: Integer);
+    procedure SelectACE(aIndex: Integer);
+
+    procedure SetRightPanelType(aIsAllow: Boolean);
+    procedure SetRightPanelAccount(const aName: RawUtf8);
+    procedure SetRightPanelMask(aMask: TSecAccessMask);
+    procedure SetRightPanelFlags(aFlags: TSecAceFlags);
+    procedure SetRightPanelObject(const aGUIDName: RawUtf8);
+    procedure SetRightPanelInheritedObject(const aGUIDName: RawUtf8);
+
+    procedure SetApplyEnabled(aEnabled: Boolean);
+    procedure SetDeleteEnabled(aEnabled: Boolean);
+    procedure SetDuplicateEnabled(aEnabled: Boolean);
+
+    function  GetCurrentMask: TSecAccessMask;
+    function  GetCurrentFlags: TSecAceFlags;
+    function  GetCurrentType: Boolean;
+    function  GetCurrentPrincipalText: RawUtf8;
+    function  GetCurrentObjectText: RawUtf8;
+    function  GetCurrentInheritedObjectText: RawUtf8;
+
+    function  PickPrincipal(out aSid, aName: RawUtf8): Boolean;
+    function  PickOwner(out aSid, aName: RawUtf8): Boolean;
+    function PickObject(out aGUID, aName: RawUtf8; aAllowedtype: TRawUtf8DynArray): Boolean;
+
+    procedure ShowError(const aMsg: RawUtf8);
+    procedure CloseRequest;
   end;
 
-const
-  SEC_ACCESS: Array of TSecAccess = (
-    samCreateChild,  // CC
-    samDeleteChild,  // DC
-    samListChildren, // LC
-    samSelfWrite,    // SW
-    samReadProp,     // RP
-    samWriteProp,    // WP
-    samDeleteTree,   // DT
-    samListObject,   // LO
-    samControlAccess,// CR
-    samDelete,       // SD
-    samReadControl,  // RC
-    samWriteDAC,     // WD
-    samWriteOwner    // WO
-  );
-
-  SAF_NAMES: array[TSecAceFlag] of String = (
-    rsSafObjectInherit,    // 'OI' // safObjectInherit
-    rsSafContainerInherit, // 'CI' // safContainerInherit
-    rsSafNoPropagate,      // 'NP' // safNoPropagateInherit
-    rsSafInheritOnly,      // 'IO' // safInheritOnly
-    rsSafInherited,        // 'ID' // safInherited
-    '',                    // '',  // saf5
-    rsSafAuditSuccess,     // 'SA' // safSuccessfulAccess
-    rsSafAuditFailure      // 'FA' // safFailedAccess
-  );
-
-    WELL_KNOWN_SID_NAMES: array[TWellKnownSid] of String = (
-    rsWellKnownSidNull,                                            // wksNull,
-    rsWellKnownSidWorld,                                           // wksWorld,
-    rsWellKnownSidLocal,                                           // wksLocal,
-    rsWellKnownSidConsoleLogon,                                    // wksConsoleLogon,
-    rsWellKnownSidCreatorOwner,                                    // wksCreatorOwner,
-    rsWellKnownSidCreatorGroup,                                    // wksCreatorGroup,
-    rsWellKnownSidCreatorOwnerServer,                              // wksCreatorOwnerServer,
-    rsWellKnownSidCreatorGroupServer,                              // wksCreatorGroupServer,
-    rsWellKnownSidCreatorOwnerRights,                              // wksCreatorOwnerRights,
-    rsWellKnownSidIntegrityUntrusted,                              // wksIntegrityUntrusted,
-    rsWellKnownSidIntegrityLow,                                    // wksIntegrityLow,
-    rsWellKnownSidIntegrityMedium,                                 // wksIntegrityMedium,
-    rsWellKnownSidIntegrityMediumPlus,                             // wksIntegrityMediumPlus,
-    rsWellKnownSidIntegrityHigh,                                   // wksIntegrityHigh,
-    rsWellKnownSidIntegritySystem,                                 // wksIntegritySystem,
-    rsWellKnownSidIntegrityProtectedProcess,                       // wksIntegrityProtectedProcess,
-    rsWellKnownSidIntegritySecureProcess,                          // wksIntegritySecureProcess,
-    rsWellKnownSidAuthenticationAuthorityAsserted,                 // wksAuthenticationAuthorityAsserted,
-    rsWellKnownSidAuthenticationServiceAsserted,                   // wksAuthenticationServiceAsserted,
-    rsWellKnownSidAuthenticationFreshKeyAuth,                      // wksAuthenticationFreshKeyAuth,
-    rsWellKnownSidAuthenticationKeyTrust,                          // wksAuthenticationKeyTrust,
-    rsWellKnownSidAuthenticationKeyPropertyMfa,                    // wksAuthenticationKeyPropertyMfa,
-    rsWellKnownSidAuthenticationKeyPropertyAttestation,            // wksAuthenticationKeyPropertyAttestation,
-    rsWellKnownSidNtAuthority,                                     // wksNtAuthority,
-    rsWellKnownSidDialup,                                          // wksDialup,
-    rsWellKnownSidNetwork,                                         // wksNetwork,
-    rsWellKnownSidBatch,                                           // wksBatch,
-    rsWellKnownSidInteractive,                                     // wksInteractive,
-    rsWellKnownSidService,                                         // wksService,
-    rsWellKnownSidAnonymous,                                       // wksAnonymous,
-    rsWellKnownSidProxy,                                           // wksProxy,
-    rsWellKnownSidEnterpriseControllers,                           // wksEnterpriseControllers,
-    rsWellKnownSidSelf,                                            // wksSelf,
-    rsWellKnownSidAuthenticatedUser,                               // wksAuthenticatedUser,
-    rsWellKnownSidRestrictedCode,                                  // wksRestrictedCode,
-    rsWellKnownSidTerminalServer,                                  // wksTerminalServer,
-    rsWellKnownSidRemoteLogonId,                                   // wksRemoteLogonId,
-    rsWellKnownSidThisOrganisation,                                // wksThisOrganisation,
-    rsWellKnownSidIisUser,                                         // wksIisUser,
-    rsWellKnownSidLocalSystem,                                     // wksLocalSystem,
-    rsWellKnownSidLocalService,                                    // wksLocalService,
-    rsWellKnownSidNetworkService,                                  // wksNetworkService,
-    rsWellKnownSidLocalAccount,                                    // wksLocalAccount,
-    rsWellKnownSidLocalAccountAndAdministrator,                    // wksLocalAccountAndAdministrator,
-    rsWellKnownSidBuiltinDomain,                                   // wksBuiltinDomain,
-    rsWellKnownSidBuiltinAdministrators,                           // wksBuiltinAdministrators,
-    rsWellKnownSidBuiltinUsers,                                    // wksBuiltinUsers,
-    rsWellKnownSidBuiltinGuests,                                   // wksBuiltinGuests,
-    rsWellKnownSidBuiltinPowerUsers,                               // wksBuiltinPowerUsers,
-    rsWellKnownSidBuiltinAccountOperators,                         // wksBuiltinAccountOperators,
-    rsWellKnownSidBuiltinSystemOperators,                          // wksBuiltinSystemOperators,
-    rsWellKnownSidBuiltinPrintOperators,                           // wksBuiltinPrintOperators,
-    rsWellKnownSidBuiltinBackupOperators,                          // wksBuiltinBackupOperators,
-    rsWellKnownSidBuiltinReplicator,                               // wksBuiltinReplicator,
-    rsWellKnownSidBuiltinRasServers,                               // wksBuiltinRasServers,
-    rsWellKnownSidBuiltinPreWindows2000CompatibleAccess,           // wksBuiltinPreWindows2000CompatibleAccess,
-    rsWellKnownSidBuiltinRemoteDesktopUsers,                       // wksBuiltinRemoteDesktopUsers,
-    rsWellKnownSidBuiltinNetworkConfigurationOperators,            // wksBuiltinNetworkConfigurationOperators,
-    rsWellKnownSidBuiltinIncomingForestTrustBuilders,              // wksBuiltinIncomingForestTrustBuilders,
-    rsWellKnownSidBuiltinPerfMonitoringUsers,                      // wksBuiltinPerfMonitoringUsers,
-    rsWellKnownSidBuiltinPerfLoggingUsers,                         // wksBuiltinPerfLoggingUsers,
-    rsWellKnownSidBuiltinAuthorizationAccess,                      // wksBuiltinAuthorizationAccess,
-    rsWellKnownSidBuiltinTerminalServerLicenseServers,             // wksBuiltinTerminalServerLicenseServers,
-    rsWellKnownSidBuiltinDcomUsers,                                // wksBuiltinDcomUsers,
-    rsWellKnownSidBuiltinIUsers,                                   // wksBuiltinIUsers,
-    rsWellKnownSidBuiltinCryptoOperators,                          // wksBuiltinCryptoOperators,
-    rsWellKnownSidBuiltinUnknown,                                  // wksBuiltinUnknown,
-    rsWellKnownSidBuiltinCacheablePrincipalsGroups,                // wksBuiltinCacheablePrincipalsGroups,
-    rsWellKnownSidBuiltinNonCacheablePrincipalsGroups,             // wksBuiltinNonCacheablePrincipalsGroups,
-    rsWellKnownSidBuiltinEventLogReadersGroup,                     // wksBuiltinEventLogReadersGroup,
-    rsWellKnownSidBuiltinCertSvcDComAccessGroup,                   // wksBuiltinCertSvcDComAccessGroup,
-    rsWellKnownSidBuiltinRdsRemoteAccessServers,                   // wksBuiltinRdsRemoteAccessServers,
-    rsWellKnownSidBuiltinRdsEndpointServers,                       // wksBuiltinRdsEndpointServers,
-    rsWellKnownSidBuiltinRdsManagementServers,                     // wksBuiltinRdsManagementServers,
-    rsWellKnownSidBuiltinHyperVAdmins,                             // wksBuiltinHyperVAdmins,
-    rsWellKnownSidBuiltinAccessControlAssistanceOperators,         // wksBuiltinAccessControlAssistanceOperators,
-    rsWellKnownSidBuiltinRemoteManagementUsers,                    // wksBuiltinRemoteManagementUsers,
-    rsWellKnownSidBuiltinDefaultSystemManagedGroup,                // wksBuiltinDefaultSystemManagedGroup,
-    rsWellKnownSidBuiltinStorageReplicaAdmins,                     // wksBuiltinStorageReplicaAdmins,
-    rsWellKnownSidBuiltinDeviceOwners,                             // wksBuiltinDeviceOwners,
-    rsWellKnownSidBuiltinWriteRestrictedCode,                      // wksBuiltinWriteRestrictedCode,
-    rsWellKnownSidBuiltinUserModeDriver,                           // wksBuiltinUserModeDriver,
-    rsWellKnownSidCapabilityInternetClient,                        // wksCapabilityInternetClient,
-    rsWellKnownSidCapabilityInternetClientServer,                  // wksCapabilityInternetClientServer,
-    rsWellKnownSidCapabilityPrivateNetworkClientServer,            // wksCapabilityPrivateNetworkClientServer,
-    rsWellKnownSidCapabilityPicturesLibrary,                       // wksCapabilityPicturesLibrary,
-    rsWellKnownSidCapabilityVideosLibrary,                         // wksCapabilityVideosLibrary,
-    rsWellKnownSidCapabilityMusicLibrary,                          // wksCapabilityMusicLibrary,
-    rsWellKnownSidCapabilityDocumentsLibrary,                      // wksCapabilityDocumentsLibrary,
-    rsWellKnownSidCapabilityEnterpriseAuthentication,              // wksCapabilityEnterpriseAuthentication,
-    rsWellKnownSidCapabilitySharedUserCertificates,                // wksCapabilitySharedUserCertificates,
-    rsWellKnownSidCapabilityRemovableStorage,                      // wksCapabilityRemovableStorage,
-    rsWellKnownSidCapabilityAppointments,                          // wksCapabilityAppointments,
-    rsWellKnownSidCapabilityContacts,                              // wksCapabilityContacts,
-    rsWellKnownSidBuiltinAnyPackage,                               // wksBuiltinAnyPackage,
-    rsWellKnownSidBuiltinAnyRestrictedPackage,                     // wksBuiltinAnyRestrictedPackage,
-    rsWellKnownSidNtlmAuthentication,                              // wksNtlmAuthentication,
-    rsWellKnownSidSChannelAuthentication,                          // wksSChannelAuthentication,
-    rsWellKnownSidDigestAuthentication                             // wksDigestAuthentication,
-  );
-
 implementation
-
 uses
-  SysUtils,
-  mormot.core.data,
-  mormot.core.text,
-  ucoredatamodule,
-  ucommonui,
-  ursatldapclientui,
-  uvisaddaces;
+  uvisselectobjectguid,
+  uvisselectobjectsid;
 
 {$R *.lfm}
 
-
-// Can be optimised, but it's fine
-function GUIDsToNames(Ldap: TRsatLdapClient; const GuidArr: array of TGuid): TRawUtf8DynArray;
-var
-  i: Integer;
-  Filter, G: RawUtf8;
-  res: TLdapResult;
-  toSearch: array of RawUtf8;
-begin
-  result := [];
-  SetLength(result, Length(GuidArr));
-
-  toSearch := [];
-
-  for i := 0 to High(GuidArr) do
-  begin
-    if IsNullGuid(GuidArr[i]) then
-      result[i] := 'NULL'
-    else
-      result[i] := ATTR_TXT[UuidToKnownAttribute(GuidArr[i])]; // Find WellKnownGUID
-
-    if result[i] <> '' then
-      continue;
-    result[i] := ToUtf8(GuidArr[i]); // Set Default Value
-    Insert(result[i], toSearch, Length(toSearch)); // Add to Search
-  end;
-
-  // LDAP Search
-  Filter := '|';
-  for i := 0 to High(toSearch) do
-    Filter += FormatUtf8('(schemaIDGUID=%)', [toSearch[i]]);
-  if Filter = '|' then
-    Exit; // Nothing to do
-  Ldap.SearchScope := lssWholeSubtree;
-  if not Ldap.Search(FormatUtf8('%,%', [CN_SCHEMA, Ldap.ConfigDN]), False, Filter, ['name', 'schemaIDGUID']) then
-    Exit;
-  for res in Ldap.SearchResult.Items do
-  begin
-    G := ToUtf8(PGuid(res.Attributes.Find('schemaIDGUID').GetRaw())^);
-    for i := 0 to High(GuidArr) do // Find corresponding Guid
-      if result[i] = G then
-        result[i] := res.Attr[atName]; // Set new value
-  end;
-
-  Filter := '|';
-  for i := 0 to High(toSearch) do
-    Filter += FormatUtf8('(rightsGuid=%)', [toSearch[i]]);
-  Ldap.SearchScope := lssWholeSubtree;
-  if not Ldap.Search(FormatUtf8('%,%', [CN_EXTENDED_RIGHTS, Ldap.ConfigDN]), False, Filter, ['name', 'rightsGuid']) then
-    Exit;
-  for res in Ldap.SearchResult.Items do
-  begin
-    G := ToUtf8(PGuid(res.Attributes.Find('rightsGuid').GetRaw())^);
-    for i := 0 to High(GuidArr) do // Find corresponding Guid
-      if result[i] = G then
-        result[i] := res.Attr[atName]; // Set new value
-  end;
-end;
-
-function ACEsToInheritanceRoot(Ldap: TRsatLdapClient; arr: PSecAcl; DN, fBaseDN: RawUtf8): TRawUtf8DynArray;
-var
-  Filter: RawUtf8;
-  SecDescArr: array of TSecurityDescriptor;
-  DNParentArr: Array of RawUtf8;
-  res: TLdapResult;
-  start, i, j, found: Integer;
-  pairs: TNameValueDNs;
-begin
-  result := [];
-  SetLength(result, Length(arr^));
-
-  Filter := '|';
-
-  while DN <> Ldap.DefaultDN(fBaseDN) do
-  begin
-    DN := GetParentDN(DN);
-    Filter += FormatUtf8('(distinguishedName=%)', [DN]);
-  end;
-
-  // LDAP Search
-  if Filter = '|' then
-    Exit; // Nothing to do
-  Ldap.SearchScope := lssWholeSubtree;
-  if not Ldap.Search([atNTSecurityDescriptor], Filter) then
-    Exit;
-
-  SecDescArr  := []; // Sort & fill SecDescArr by level of inheritance (closest-first)
-  DNParentArr := [];
-  SetLength(SecDescArr,  Ldap.SearchResult.Count);
-  SetLength(DNParentArr, Ldap.SearchResult.Count);
-  ParseDN(Ldap.DefaultDN(fBaseDN), pairs); // Furthest Parent
-  start := Length(pairs);
-  for i := 0 to Ldap.SearchResult.Count - 1 do
-  begin
-    res := Ldap.SearchResult.Items[i];
-    ParseDN(res.ObjectName, pairs);
-    SecDescArr[High(SecDescArr) - (Length(pairs) - start)].FromBinary(res.Attributes.Find(atNTSecurityDescriptor).GetRaw());
-    DNParentArr[High(SecDescArr) - (Length(pairs) - start)] := res.ObjectName;
-  end;
-
-  start := 0; // Skip all non-inherited
-  while (start < Length(result)) and not (safInherited in arr^[start].Flags) do
-  begin
-    result[start] := '';
-    Inc(start);
-  end;
-
-  for i := 0 to High(SecDescArr) do // Loop over parents
-    for j := start to High(result) do // Loop over ACES
-    begin
-      found := SecDescFindACE(@SecDescArr[i], arr^[start].AceType, arr^[start].Sid, arr^[start].Mask,   @arr^[start].ObjectType, arr^[start].Flags - [safInherited], @arr^[start].InheritedObjectType); // Find non-inherited self in parent
-      if found <> -1 then // Is oldest parent
-      begin
-        result[j] := DNParentArr[i]; // Set inherited DN
-        start := j + 1; // Optimise loop
-      end;
-    end;
-end;
-
 { TVisAdvancedSecurity }
 
-constructor TVisAdvancedSecurity.Create(TheOwner: TComponent;
-  ALdap: TRsatLdapClient; ASD: PSecurityDescriptor; Adn, AbaseDN: RawUtf8);
+procedure TVisAdvancedSecurity.Action_AddACEExecute(Sender: TObject);
 begin
-  inherited Create(TheOwner);
-
-  fLog := TSynLog.Add;
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Create', [Self.Name]);
-
-  // Init
-  Ldap := ALdap;
-  SecurityDescriptor := ASD;
-  SampleSD := ASD^;
-  DN := Adn;
-  fBaseDN := ABaseDN;
-
-  // Unify button width
-  UnifyButtonsWidth([BitBtn_AddAce, BitBtn_DeleteAce, BitBtn_EditAce]);
-  UnifyButtonsWidth([BitBtn_Cancel, BitBtn_Apply, BitBtn_OK]);
-
-  // Update Grid
-  UpdateGridACL();
-end;
-
-procedure TVisAdvancedSecurity.FormClose(Sender: TObject;
-  var CloseAction: TCloseAction);
-begin
-  CloseAction := caFree;
-end;
-
-procedure TVisAdvancedSecurity.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-  case Key of
-    27: Close;
-  end;
-end;
-
-procedure TVisAdvancedSecurity.Timer_SearchInGridTimer(Sender: TObject);
-begin
-  Timer_SearchInGrid.Enabled := True;
-end;
-
-
-procedure TVisAdvancedSecurity.TisGrid_ACLDblClick(Sender: TObject);
-begin
-  Action_EditAce.Execute;
-end;
-
-// CheckBox
-procedure TVisAdvancedSecurity.CheckBox_RawChange(Sender: TObject);
-begin
-  CheckGroup_ACLFlags.Visible := CheckBox_Raw.Checked;
-  TisGrid_ACL.Refresh();
-end;
-
-procedure TVisAdvancedSecurity.Action_AddAceExecute(Sender: TObject);
-var
-  add: TVisAddACEs;
-begin
-  add := TVisAddACEs.Create(self, Ldap, fBaseDN);
-  try
-    add.Caption := 'Add ACE';
-    if (add.ShowModal() <> mrOK) or (Length(add.Acl) <= 0) then
-    begin
-      FreeAndNil(add);
-      Exit;
-    end;
-    SecurityDescriptor^.Dacl := Concat(SecurityDescriptor^.Dacl, add.Acl);
-    (Ldap as TRsatLdapClient).OrderAcl(DN, fBaseDN, @SecurityDescriptor^.Dacl);
-    UpdateGridACL();
-  finally
-    FreeAndNil(add);
-  end;
+  fPresenter.ActionAddACE;
 end;
 
 procedure TVisAdvancedSecurity.Action_ApplyExecute(Sender: TObject);
-var
-  attr: TLdapAttribute;
 begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute', [Action_Apply.Caption]);
-
-  if (mrYes <> MessageDlg(rsConfirmation, 'Are you sure you want to apply the changes?', mtWarning, [mbYes, mbNo], 0)) then
-  begin
-    if Assigned(fLog) then
-      fLog.Log(sllInfo, '% - User cancel action.', [Action_Apply.Caption]);
-    Exit;
-  end;
-  attr := TLdapAttribute.Create('nTSecurityDescriptor', atNTSecurityDescriptor);
-  try
-    attr.Add(SecurityDescriptor^.ToBinary);
-    if not Ldap.Modify(dn, lmoReplace, attr) then
-    begin
-      if Assigned(fLog) then
-        fLog.Log(sllError, '% - Ldap Modify Error: "%"', [Action_Apply.Caption, Ldap.ResultString]);
-      Exit;
-    end;
-  finally
-    FreeAndNil(attr);
-  end;
-  attr := Ldap.SearchObject(DN, '', 'nTSecurityDescriptor');
-  if not Assigned(attr) then
-  begin
-    if Assigned(fLog) then
-      fLog.Log(sllError, '% - Ldap Search Object Error: "%"', [Action_Apply.Caption, Ldap.ResultString]);
-    Exit;
-  end;
-  SecurityDescriptor^.FromBinary(attr.GetRaw());
-  SampleSD := SecurityDescriptor^;
-  UpdateGridACL();
-end;
-
-procedure TVisAdvancedSecurity.Action_ApplyUpdate(Sender: TObject);
-begin
-  Action_Apply.Enabled := not SecurityDescriptor^.IsEqual(SampleSD);
+  fPresenter.ActionApply;
 end;
 
 procedure TVisAdvancedSecurity.Action_CancelExecute(Sender: TObject);
 begin
-  if (not Action_Apply.Enabled) then
-    Exit;
-  if (mrYes <> MessageDlg(rsConfirmation, 'Are you sure you want to cancel the changes?', mtWarning, [mbYes, mbNo], 0)) then
-  begin
-    ModalResult := mrNone;
-    Exit;
-  end;
-  SecurityDescriptor^ := SampleSD;
+  fPresenter.ActionCancel;
 end;
 
-procedure TVisAdvancedSecurity.Action_DeleteAceExecute(Sender: TObject);
-var
-  Node: PVirtualNode;
-  NodesIndex: Array of Integer;
-  Index: Integer;
+procedure TVisAdvancedSecurity.Action_DeleteACEExecute(Sender: TObject);
 begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute', [Action_DeleteAce.Caption]);
-
-  Node := TisGrid_ACL.GetFirstSelected();
-  NodesIndex := [];
-  while Assigned(Node) do
-  begin
-    Insert(Node^.Index, NodesIndex, 0);
-    Node := TisGrid_ACL.GetNextSelected(Node);
-  end;
-  for Index in NodesIndex do
-    Delete(SecurityDescriptor^.Dacl, Index, 1);
-
-  TisGrid_ACL.DeleteSelectedNodes;
+  fPresenter.ActionDeleteACE;
 end;
 
-procedure TVisAdvancedSecurity.Action_DeleteAceUpdate(Sender: TObject);
+procedure TVisAdvancedSecurity.Action_DuplicateACEExecute(Sender: TObject);
 begin
-  Action_DeleteAce.Enabled := (TisGrid_ACL.SelectedCount > 0);
-end;
-
-procedure TVisAdvancedSecurity.Action_EditAceExecute(Sender: TObject);
-var
-  add: TVisAddACEs;
-  data: TDocVariantData;
-  pdata: PDocVariantData;
-  value: Integer;
-  _name, DistinguishedName: RawUtf8;
-  SearchResult: TLdapResult;
-begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute', [Action_EditAce.Caption]);
-
-  pdata := TisGrid_ACL.GetNodeAsPDocVariantData(TisGrid_ACL.GetFirstSelected());
-  if not Assigned(pdata) then
-  begin
-    if Assigned(fLog) then
-      fLog.Log(sllWarning, '% - Cannot get first selected row', [Action_EditAce.Caption]);
-    Exit;
-  end;
-
-  add := TVisAddACEs.Create(self, Ldap, fBaseDN);
-  try
-    data.Init([]);
-
-    add.Caption := 'Edit ACE';
-    // Get type
-    value := pdata^.I['_type'];
-    if (TSecAceType(value) in [satObjectAccessAllowed, satAccessAllowed]) then
-      data.AddOrUpdateValue('type', 0)
-    else if (TSecAceType(value) in [satObjectAccessDenied, satAccessDenied]) then
-      data.AddOrUpdateValue('type', 1)
-    else
-    begin
-      if Assigned(fLog) then
-        fLog.Log(sllError, '% - Invalid ace value type.', [Action_EditAce.Caption]);
-      Exit;
-    end;
-
-    // Get sid
-    // Retrieve from domain, if not retrieve from known sid
-    Ldap.SearchBegin();
-    try
-      Ldap.SearchScope := lssWholeSubtree;
-      repeat
-        if not Ldap.Search(Ldap.DefaultDN(fBaseDN), False, FormatUtf8('objectSid=%', [LdapEscape(pdata^.S['_sid'])]), ['distinguishedName']) then
-        begin
-          if Assigned(fLog) then
-            fLog.Log(sllError, '% - Ldap Search Error: "%"', [Action_EditAce.Caption, Ldap.ResultString]);
-          Exit;
-        end;
-
-        for SearchResult in Ldap.SearchResult.Items do
-        begin
-          if not Assigned(SearchResult) then
-            Continue;
-          DistinguishedName := SearchResult.Find('distinguishedName').GetReadable();
-        end;
-      until Ldap.SearchCookie = '';
-    finally
-      Ldap.SearchEnd;
-    end;
-
-    Ldap.SearchBegin();
-    try
-      Ldap.SearchScope := lssWholeSubtree;
-      repeat
-        if not Ldap.Search(FormatUtf8('CN=WellKnown Security Principals,%', [Ldap.ConfigDN]), False, FormatUtf8('objectSid=%', [LdapEscape(pdata^.S['_sid'])]), ['distinguishedName']) then
-        begin
-          if Assigned(fLog) then
-            fLog.Log(sllTrace, '% - Ldap Search Error: "%"', [Action_EditAce.Caption, Ldap.ResultString]);
-          Exit;
-        end;
-
-        for SearchResult in Ldap.SearchResult.Items do
-        begin
-          if not Assigned(SearchResult) then
-            Continue;
-          DistinguishedName := SearchResult.Find('distinguishedName').GetReadable();
-        end;
-      until Ldap.SearchCookie = '';
-
-    finally
-      Ldap.SearchEnd;
-    end;
-    data.AddOrUpdateValue('sid', DistinguishedName);
-
-    // Get mask
-    data.AddOrUpdateValue('mask', pdata^.I['_mask']);
-
-    // Get flags
-    data.AddOrUpdateValue('flags', pdata^.I['_flags']);
-
-    // Get objectType
-    if not IsNullGuid(RawUtf8ToGuid(pdata^.S['_objectType'])) then
-    begin
-      _name := Ldap.SearchObject(FormatUtf8('CN=Schema,%', [Ldap.ConfigDN]), FormatUtf8('(schemaIDGUID=%)', [LdapEscape(pdata^.S['_objectType'])]), 'lDAPDisplayName', lssWholeSubtree).GetReadable();
-      if _name = '' then
-        _name := Ldap.SearchObject(FormatUtf8('%,%', [CN_EXTENDED_RIGHTS, Ldap.ConfigDN]), FormatUtf8('rightsGuid=%', [LdapEscape(pdata^.S['_objectType'])]), 'displayName', lssWholeSubtree).GetReadable();
-      data.AddOrUpdateValue('objectType', _name);
-    end;
-
-    // Get iObjectType
-    if not IsNullGuid(RawUtf8ToGuid(pdata^.S['_iObjectType'])) then
-    begin
-      _name := Ldap.SearchObject(FormatUtf8('CN=Schema,%', [Ldap.ConfigDN]), FormatUtf8('(schemaIDGUID=%)', [LdapEscape(pdata^.S['_iObjectType'])]), 'lDAPDisplayName', lssWholeSubtree).GetReadable();
-      data.AddOrUpdateValue('iObjectType', _name);
-    end;
-
-    // Add object to grid
-    add.TisGrid1.BeginUpdate;
-    add.TisGrid1.Data.AddItem(data);
-    add.TisGrid1.EndUpdate;
-    add.TisGrid1.LoadData();
-    add.BitBtn_Add.Action := Nil;
-    add.BitBtn_Add.Enabled := False;
-
-    if add.ShowModal() <> mrOK then
-    begin
-      if Assigned(fLog) then
-        fLog.Log(sllInfo, '% - User cancel action', [Action_EditAce.Caption]);
-      Exit;
-    end;
-    Delete(SecurityDescriptor^.Dacl, TisGrid_ACL.FocusedNode^.Index, 1);
-    SecurityDescriptor^.Dacl := Concat(SecurityDescriptor^.Dacl, add.Acl);
-    (Ldap as TRsatLdapClient).OrderAcl(DN, fBaseDN, @SecurityDescriptor^.Dacl);
-    UpdateGridACL();
-  finally
-    FreeAndNil(add);
-  end;
-end;
-
-procedure TVisAdvancedSecurity.Action_EditAceUpdate(Sender: TObject);
-begin
-  Action_EditAce.Enabled := (TisGrid_ACL.SelectedCount = 1);
+  fPresenter.ActionDuplicateACE;
 end;
 
 procedure TVisAdvancedSecurity.Action_OKExecute(Sender: TObject);
 begin
-  if Action_Apply.Enabled then
-    Action_ApplyExecute(Sender);
+  fPresenter.ActionOK;
 end;
 
-procedure TVisAdvancedSecurity.Action_RestoreExecute(Sender: TObject);
-var
-  sdText: RawUtf8;
-  sd: TSecurityDescriptor;
-  ObjectClass, Attribute: TLdapAttribute;
-  ace: TSecAce;
-  i: Integer;
-  SearchResult: TLdapResult;
-  ObjectClassFilter: String;
+procedure TVisAdvancedSecurity.Action_SelectInheritedObjectExecute(Sender: TObject);
 begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute', [Action_Restore.Caption]);
+  fPresenter.ActionSelectInheritedObject;
+end;
 
-  ObjectClass := Ldap.SearchObject(DN, '', 'objectClass');
-  if not Assigned(ObjectClass) then
-  begin
-    if Assigned(fLog) then
-      fLog.Log(sllError, '% - Ldap Search Object Error: "%"', [Action_Restore.Caption, Ldap.ResultString]);
+procedure TVisAdvancedSecurity.Action_SelectObjectExecute(Sender: TObject);
+begin
+  fPresenter.ActionSelectObject;
+end;
+
+procedure TVisAdvancedSecurity.Action_SelectOwnerExecute(Sender: TObject);
+begin
+  fPresenter.ActionSelectOwner;
+end;
+
+procedure TVisAdvancedSecurity.Action_SelectPrincipalExecute(Sender: TObject);
+begin
+  fPresenter.ActionSelectPrincipal;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxCAChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelMaskChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxCCChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelMaskChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxCIChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelFlagsChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxDCChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelMaskChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxDChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelMaskChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxDTChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelMaskChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxIOChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelFlagsChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxLCChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelMaskChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxLOChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelMaskChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxNPChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelFlagsChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxOIChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelFlagsChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxRCChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelMaskChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxRPChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelMaskChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxSWChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelMaskChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxWDACChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelMaskChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxWOChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelMaskChanged;
+end;
+
+procedure TVisAdvancedSecurity.CheckBoxWPChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelMaskChanged;
+end;
+
+procedure TVisAdvancedSecurity.ComboBox_ObjectChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelObjectChanged;
+end;
+
+procedure TVisAdvancedSecurity.ComboBox_ObjectInheritanceChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelInheritedObjectChanged;
+end;
+
+procedure TVisAdvancedSecurity.ComboBox_TypeChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelTypeChanged;
+end;
+
+procedure TVisAdvancedSecurity.Edit_InheritedObjectChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelInheritedObjectChanged;
+end;
+
+procedure TVisAdvancedSecurity.Edit_ObjectChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelObjectChanged;
+end;
+
+procedure TVisAdvancedSecurity.Edit_PrincipalChange(Sender: TObject);
+begin
+  fPresenter.DoRightPanelPrincipalChanged;
+end;
+
+procedure TVisAdvancedSecurity.TisGrid1DrawText(Sender: TBaseVirtualTree; TargetCanvas: TCanvas; Node: PVirtualNode;
+  Column: TColumnIndex; const CellText: String; const CellRect: TRect; var DefaultDraw: Boolean);
+var
+  NodeData: PDocVariantData;
+begin
+  NodeData := TisGrid1.GetNodeAsPDocVariantData(Node);
+  if not Assigned(NodeData) or not NodeData^.Exists('state') then
     Exit;
+
+  case NodeData^.I['state'] of
+    1: TargetCanvas.Font.Bold := True;
+    2: TargetCanvas.Font.Italic := True;
+    3: TargetCanvas.Font.StrikeThrough := True;
   end;
-
-  SecurityDescriptor^.Flags := [scDaclAutoInheritReq, scOwnerDefaulted, scGroupDefaulted, scDaclAutoInherit, scSelfRelative, scDaclPresent];
-  SecurityDescriptor^.Dacl := [];
-
-
-  ObjectClassFilter := '(|';
-  for i := 0 to objectClass.Count - 1 do
-    ObjectClassFilter := Format('%s(lDAPDisplayName=%s)', [ObjectClassFilter, LdapEscape(ObjectClass.GetReadable(i))]);
-
-  if ObjectClassFilter = '(|' then
-    ObjectClassFilter := ''
-  else
-    ObjectClassFilter := Format('%s)', [ObjectClassFilter]);
-
-  Ldap.SearchBegin();
-  try
-    Ldap.SearchScope := lssSingleLevel;
-
-    repeat
-      if not Ldap.Search(Format('CN=Schema,%s', [Ldap.ConfigDN]), False, ObjectClassFilter, ['defaultSecurityDescriptor']) then
-      begin
-        if Assigned(fLog) then
-          fLog.Log(sllError, '% - Ldap Search Error: "%"', [Action_Restore.Caption, Ldap.ResultString]);
-        Exit;
-      end;
-
-      for SearchResult in Ldap.SearchResult.Items do
-      begin
-        if not Assigned(SearchResult) then
-          continue;
-
-        Attribute := SearchResult.Find('defaultSecurityDescriptor');
-        if not Assigned(Attribute) then
-          continue;
-        sdText := Attribute.GetReadable();
-        sd.FromText(sdText, RawSidToText(Ldap.DomainSid));
-        for ace in sd.Dacl do
-        begin
-          if not AceInDacl(SecurityDescriptor^.Dacl, ace) then
-            Insert(ace, SecurityDescriptor^.Dacl, 0);
-        end;
-      end;
-    until Ldap.SearchCookie = '';
-  finally
-    Ldap.SearchEnd;
-  end;
-  (Ldap as TRsatLdapClient).OrderAcl(DN, fBaseDN, @SecurityDescriptor^.Dacl);
-  UpdateGridACL;
 end;
 
-// TisGrid
-procedure TVisAdvancedSecurity.TisGrid_ACLGetText(aSender: TBaseVirtualTree;
-  aNode: PVirtualNode; const aCell: TDocVariantData; aColumn: TColumnIndex;
-  aTextType: TVSTTextType; var aText: string);
+procedure TVisAdvancedSecurity.TisGrid1FocusChanged(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex);
 var
-  PropName: RawUtf8;
+  NodeData: PDocVariantData;
 begin
-  if CheckBox_Raw.Checked then
-    PropName := 'Raw_' + TisGrid_ACL.FindColumnByIndex(aColumn).PropertyName
-  else
-    PropName := 'Hum_' + TisGrid_ACL.FindColumnByIndex(aColumn).PropertyName;
+  NodeData := TisGrid1.GetNodeAsPDocVariantData(Node);
+  if not Assigned(NodeData) then
+    Exit;
 
-  aText := aCell.S[PropName];
-  case TisGrid_ACL.FindColumnByIndex(aColumn).PropertyName of
-  'iObjectType':
-  begin
-    if CheckBox_Raw.Checked then
-    begin
-      if aText = '00000000-0000-0000-0000-000000000000' then
-        aText := '';
-    end
-    else
-    begin
-      if aText = 'NULL' then
-        aText := '';
-    end;
-  end;
-  'objectType':
-    if not CheckBox_Raw.Checked and (aText = 'NULL') then
-      aText := '';
-  end;
+  fPresenter.DoACESelectionChanged(NodeData^.I['index']);
 end;
 
-procedure TVisAdvancedSecurity.TisGrid_ACLKeyPress(Sender: TObject;
-  var Key: char);
-begin
-  SearchInGrid(Timer_SearchInGrid, TisGrid_ACL, fSearchWord, Key);
-end;
-
-procedure TVisAdvancedSecurity.TisGrid_ACLGetImageIndex(
-  Sender: TBaseVirtualTree; Node: PVirtualNode; Kind: TVTImageKind;
+procedure TVisAdvancedSecurity.TisGrid1GetImageIndex(Sender: TBaseVirtualTree; Node: PVirtualNode; Kind: TVTImageKind;
   Column: TColumnIndex; var Ghosted: Boolean; var ImageIndex: Integer);
-begin
-  if TisGrid_ACL.FindColumnByIndex(Column).PropertyName <> 'type' then
-    Exit;
-  case TisGrid_ACL.GetNodeAsPDocVariantData(Node)^.S['Raw_type'] of
-  'A', 'OA':
-    ImageIndex := Ord(ileValid);
-  'D', 'OD':
-    ImageIndex := Ord(ileToolDelete);
-  end;
-end;
-
-function TVisAdvancedSecurity.FindGuidName(guid: TGuid): RawUtf8;
 var
-  sguid: String;
+  NodeData: PDocVariantData;
 begin
-  result := '';
-
-  if IsNullGuid(guid) then
-    Exit;
-
-  sguid := guid.ToString(true);
-
-  if not GUIDName.Exists(sguid) then
+  if TisGrid1.FindColumnByIndex(Column).PropertyName = 'type' then
   begin
-    /// Search in Domain Configuration
-    GUIDName.S[sguid] := Ldap.SearchObject(Ldap.ConfigDN, Format('(rightsGuid=%s)', [sguid]), 'displayName', lssWholeSubtree).GetReadable();
-    if GUIDName.S[sguid] = '' then
-      /// Search in Domain Schema
-      GUIDName.S[sguid] := Ldap.SearchObject(FormatUtf8('%,%', [CN_SCHEMA, Ldap.ConfigDN]), Format('(schemaIDGUID=%s)', [sguid]), 'lDAPDisplayName', lssWholeSubtree).GetReadable();
-    if GUIDName.S[sguid] = '' then
-      /// guid as string
-      GUIDName.S[sguid] := sguid;
-  end;
-  result := GUIDName.S[sguid];
-end;
-
-function TVisAdvancedSecurity.AccessNamesFromMask(mask: TSecAccessMask; Raw: Boolean): RawUtf8;
-var
-  m: TSecAccess;
-begin
-  result := '';
-
-  if not Raw then
-  begin
-    // Full control
-    if mask >= [samCreateChild, samDeleteChild, samListChildren, samSelfWrite, samReadProp, samWriteProp,
-      samDeleteTree, samListObject,samControlAccess, samDelete, samReadControl, samWriteDac, samWriteOwner] then
-    begin
-      result := rsSecAccessFullControl;
-      mask -= [samCreateChild, samDeleteChild, samListChildren, samSelfWrite, samReadProp, samWriteProp,
-        samDeleteTree, samListObject, samControlAccess, samDelete, samReadControl, samWriteDac, samWriteOwner];
-    end;
-
-    // List content
-    if mask >= [samListChildren, samListObject] then
-    begin
-      result := rsSecAccessListContent;
-      mask -= [samListChildren, samListObject];
-    end;
-  end;
-
-  for m in mask do
-    if result = '' then
-      if Raw then
-        result := SAM_SDDL[m]
-      else
-        result := SEC_ACCESS_NAMES[m]
-    else
-      if Raw then
-        result := FormatUtf8('%, %', [result, SAM_SDDL[m]])
-      else
-        result := FormatUtf8('%, %', [result, SEC_ACCESS_NAMES[m]]);
-end;
-
-function TVisAdvancedSecurity.AppliesToFromFlags(flags: TSecAceFlags; Raw: Boolean): RawUtf8;
-var
-  f: TSecAceFlag;
-begin
-  result := '';
-
-  if Raw then
-    for f in flags do
-      if result = '' then
-        result := SAF_SDDL[f]
-      else
-        result := FormatUtf8('%, %', [result, SAF_SDDL[f]])
-  else
-  begin
-    if safNoPropagateInherit in flags then
-        result := rsFlagDirectDesendants
-    else if (safObjectInherit in flags) or (safContainerInherit in flags) then
-        result := rsFlagAllDescendants;
-
-    if not (safInheritOnly in flags) then
-      if result = '' then
-        result := rsFlagThisObject
-      else
-        result := FormatUtf8(rsAnd, [rsFlagThisObject, result]);
-
-    if result <> '' then
-      result[1] := UpCase(result[1]); // propper upper casing
-  end;
-end;
-
-procedure TVisAdvancedSecurity.UpdateGridACL;
-var
-  i: Integer;
-  ace: PSecAce;
-  rowAce, Data, SidCache: TDocVariantData;
-  HumanReadableData: TRawUtf8DynArray;
-  SidArr: array of RawUtf8;
-  GuidArr: array of TGuid;
-
-  procedure ResolveSid(PSidCache: PDocVariantData; SecDesc: PSecurityDescriptor; LdapClient: TRsatLdapClient);
-  var
-    Filter: String;
-    idx: Integer;
-    SearchResult: TLdapResult;
-
-  begin
-    if Assigned(fLog) then
-      fLog.Log(sllTrace, '% - Resolve SIDs', [Self.Name]);
-    Filter := '(|';
-
-    // Owner filter
-    if SidToKnown(PSid(SecDesc^.Owner)) <> wksNull then
-      PSidCache^.S[RawSidToText(SecDesc^.Owner)] := WELL_KNOWN_SID_NAMES[SidToKnown(PSid(SecDesc^.Owner))]
-    else
-      Filter := FormatUtf8('%(objectSid=%)', [Filter, RawSidToText(SecDesc^.Owner)]);
-
-    // Group filter
-    if SidToKnown(PSid(SecDesc^.Group)) <> wksNull then
-      PSidCache^.S[RawSidToText(SecDesc^.Group)] := WELL_KNOWN_SID_NAMES[SidToKnown(PSid(SecDesc^.Group))]
-    else
-      Filter := FormatUtf8('%(objectSid=%)', [Filter, RawSidToText(SecDesc^.Group)]);
-
-    // ACL filter
-    for idx := 0 to High(SecDesc^.Dacl) do
-    begin
-      if SidToKnown(PSid(SecDesc^.Dacl[idx].Sid)) <> wksNull then
-      begin
-        PSidCache^.S[RawSidToText(SecDesc^.Dacl[idx].Sid)] := WELL_KNOWN_SID_NAMES[SidToKnown(PSid(SecDesc^.Dacl[idx].Sid))];
-        continue;
-      end;
-      Filter := FormatUtf8('%(objectSid=%)', [Filter, RawSidToText(SecDesc^.Dacl[idx].Sid)]);
-    end;
-    Filter := FormatUtf8('%)', [Filter]);
-
-    // Resolve SIDs
-    LdapClient.SearchBegin();
-    try
-      LdapClient.SearchScope := lssWholeSubtree;
-
-      repeat
-        if not LdapClient.Search(LdapClient.DefaultDN(), False, Filter, ['name', 'objectSid']) then
-        begin
-          if Assigned(fLog) then
-            fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, Ldap.ResultString]);
-          Exit;
-        end;
-
-        for SearchResult in LdapClient.SearchResult.Items do
-        begin
-          if not Assigned(SearchResult) then
-            continue;
-          PSidCache^.S[SearchResult.Find('objectSid').GetReadable()] := SearchResult.Find('name').GetReadable();
-        end;
-      until LdapClient.SearchCookie = '';
-    finally
-      LdapClient.SearchEnd;
-    end;
-
-    LdapClient.SearchBegin();
-    try
-      LdapClient.SearchScope := lssWholeSubtree;
-
-      repeat
-        if not LdapClient.Search(LdapClient.ConfigDN, False, Filter, ['name', 'objectSid']) then
-        begin
-          if Assigned(fLog) then
-            fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, Ldap.ResultString]);
-          Exit;
-        end;
-
-        for SearchResult in LdapClient.SearchResult.Items do
-        begin
-          if not Assigned(SearchResult) then
-            continue;
-          PSidCache^.S[SearchResult.Find('objectSid').GetReadable()] := SearchResult.Find('name').GetReadable();
-        end;
-      until LdapClient.SearchCookie = '';
-    finally
-      LdapClient.SearchEnd;
-    end;
-  end;
-
-begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Update Grid ACL', [Self.Name]);
-
-  SidArr := [];
-  SetLength(SidArr, Length(SecurityDescriptor^.Dacl));
-  GuidArr := [];
-  SetLength(GuidArr, 2 * Length(SecurityDescriptor^.Dacl)); // obj type + inherited
-
-  TisGrid_ACL.BeginUpdate();
-  try
-    Data.InitArray([]);
-    SidCache.Init();
-    ResolveSid(@SidCache, SecurityDescriptor, Ldap);
-
-    if SidCache.Exists(RawSidToText(SecurityDescriptor^.Group)) then
-      Edit_Group.Text := SidCache.S[RawSidToText(SecurityDescriptor^.Group)]
-    else
-      Edit_Group.Text := RawSidToText(SecurityDescriptor^.Group);
-
-    if SidCache.Exists(RawSidToText(SecurityDescriptor^.Owner)) then
-      Edit_Owner.Text := SidCache.S[RawSidToText(SecurityDescriptor^.Owner)]
-    else
-      Edit_Owner.Text := RawSidToText(SecurityDescriptor^.Owner);
-
-    for i := 0 to High(SecurityDescriptor^.Dacl) do
-    begin
-      ace := @SecurityDescriptor^.Dacl[i];
-      // Raw
-      rowAce.Init([dvoCheckForDuplicatedNames, dvoReturnNullForUnknownProperty]);
-      rowAce.AddValue('_type', Ord(ace^.AceType));
-      rowAce.AddValue('_sid', RawSidToText(ace^.Sid));
-      rowAce.AddValue('_mask', Integer(ace^.Mask));
-      rowAce.AddValue('_flags', Int8(ace^.Flags));
-      rowAce.AddValue('_objectType', ace^.ObjectType.ToString(True));
-      rowAce.AddValue('_iObjectType', ace^.InheritedObjectType.ToString(True));
-      rowAce.AddValue('Raw_type',        SAT_SDDL[ace^.AceType]);
-      rowAce.AddValue('Raw_sid',         ace^.SidText());
-      rowAce.AddValue('Raw_mask',        AccessNamesFromMask(ace^.Mask, True));
-      rowAce.AddValue('Raw_flags',       AppliesToFromFlags(ace^.flags, True));
-      rowAce.AddValue('Raw_objectType',  ace^.ObjectType.ToString());
-      //rowAce.AddValue('Raw_iFrom',       'None');
-      rowAce.AddValue('Raw_iObjectType', ace^.InheritedObjectType.ToString());
-      // Human-readable
-      case ace^.AceType of
-      satAccessAllowed, satObjectAccessAllowed:
-        rowAce.AddValue('Hum_type', rsAllow);
-      satAccessDenied, satObjectAccessDenied:
-        rowAce.AddValue('Hum_type', rsDeny);
-      else
-        rowAce.AddValue('Hum_type', SAT_SDDL[ace^.AceType]);
-      end;
-      SidArr[i] := RawSidToText(ace^.Sid);
-      rowAce.AddValue('Hum_mask',        AccessNamesFromMask(ace^.Mask, False));
-      rowAce.AddValue('Hum_flags',       AppliesToFromFlags(ace^.flags, False));
-      GuidArr[i] := ace^.ObjectType;
-      GuidArr[Length(SecurityDescriptor^.Dacl) + i] := ace^.InheritedObjectType;
-      // Add
-      Data.AddItem(rowAce);
-      rowAce.clear();
-    end;
-    // Finalise Human-readable data
-    // SID
-    //HumanReadableData := VisMain.Storage.SidCache.SidsNamesFromSids(SidArr);
-    for i := 0 to Data.Count - 1 do
-      if SidCache.Exists(Data._[i]^.S['_sid']) then
-        Data._[i]^.AddValue('Hum_sid', SidCache.S[Data._[i]^.S['_sid']]);
-    // GUID
-    HumanReadableData := GUIDsToNames(Ldap, GuidArr);
-    for i := 0 to high(HumanReadableData) div 2 do
-    begin
-      Data._[i]^.AddValue('Hum_objectType',  HumanReadableData[i]);
-      Data._[i]^.AddValue('Hum_iObjectType', HumanReadableData[Length(HumanReadableData) div 2 + i]);
-    end;
-    // Inherited From
-    HumanReadableData := ACEsToInheritanceRoot(Ldap, @SecurityDescriptor^.Dacl, DN, fBaseDN);
-    for i := 0 to High(HumanReadableData) do
-    begin
-      Data._[i]^.AddValue('Hum_iFrom', HumanReadableData[i]);
-      Data._[i]^.AddValue('Raw_iFrom', HumanReadableData[i]);
-    end;
-
-    TisGrid_ACL.Data := Data;
-  finally
-    TisGrid_ACL.EndUpdate();
-  end;
-
-  CheckBox_SR.Checked := scSelfRelative in SecurityDescriptor^.Flags;
-  CheckBox_RM.Checked := scRmControlValid in SecurityDescriptor^.Flags;
-  CheckBox_PS.Checked := scSaclProtected in SecurityDescriptor^.Flags;
-  CheckBox_PD.Checked := scDaclProtected in SecurityDescriptor^.Flags;
-  CheckBox_SI.Checked := scSaclAutoInherit in SecurityDescriptor^.Flags;
-  CheckBox_DI.Checked := scDaclAutoInherit in SecurityDescriptor^.Flags;
-  CheckBox_SC.Checked := scSaclAutoInheritReq in SecurityDescriptor^.Flags;
-  CheckBox_DC.Checked := scDaclAutoInheritReq in SecurityDescriptor^.Flags;
-  CheckBox_SS.Checked := scServerSecurity in SecurityDescriptor^.Flags;
-  CheckBox_DT.Checked := scDaclTrusted in SecurityDescriptor^.Flags;
-  CheckBox_SD.Checked := scSaclDefaulted in SecurityDescriptor^.Flags;
-  CheckBox_SP.Checked := scSaclPresent in SecurityDescriptor^.Flags;
-  CheckBox_DD.Checked := scDaclDefaulted in SecurityDescriptor^.Flags;
-  CheckBox_DP.Checked := scDaclPresent in SecurityDescriptor^.Flags;
-  CheckBox_GD.Checked := scGroupDefaulted in SecurityDescriptor^.Flags;
-  CheckBox_OD.Checked := scOwnerDefaulted in SecurityDescriptor^.Flags;
-end;
-
-procedure TVisAdvancedSecurity.ResolveOwnerAndGroup;
-var
-  SearchResult: TLdapResult;
-begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Resolve Owner and Group SIDs.', [Self.Name]);
-
-  Ldap.SearchBegin();
-  try
-    if not Ldap.Search(Ldap.DefaultDN(), False, FormatUtf8('(|(objectSid=%)(objectSid=%))', [RawSidToText(SecurityDescriptor^.Owner), RawSidToText(SecurityDescriptor^.Group)]), ['name', 'objectSid']) then
-    begin
-      if Assigned(fLog) then
-        fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, Ldap.ResultString]);
+    NodeData := TisGrid1.GetNodeAsPDocVariantData(Node);
+    if not Assigned(NodeData) or not NodeData^.Exists('type') then
       Exit;
-    end;
-
-    for SearchResult in Ldap.SearchResult.Items do
-    begin
-      if not Assigned(SearchResult) then
-        continue;
-      if (SearchResult.Find('objectSid').GetRaw() = SecurityDescriptor^.Owner) then
-        Edit_Owner.Text := SearchResult.Find('name').GetReadable();
-
-      if (SearchResult.Find('objectSid').GetRaw() = SecurityDescriptor^.Group) then
-        Edit_Group.Text := SearchResult.Find('name').GetReadable();
-    end;
-  finally
-    Ldap.SearchEnd;
+    if NodeData^.B['type'] then
+      ImageIndex := 28
+    else
+      ImageIndex := 49;
   end;
+end;
+
+procedure TVisAdvancedSecurity.TisGrid1GetText(aSender: TBaseVirtualTree; aNode: PVirtualNode;
+  const aCell: TDocVariantData; aColumn: TColumnIndex; aTextType: TVSTTextType; var aText: string);
+begin
+  if TisGrid1.FindColumnByIndex(aColumn).PropertyName = 'type' then
+    aText := '';
+end;
+
+function TVisAdvancedSecurity.SelectObjectSid(out aSid, aName: RawUtf8): Boolean;
+var
+  Vis: TVisSelectObjectSID;
+begin
+  result := False;
+
+  Vis := TVisSelectObjectSID.Create(Self);
+  try
+    Vis.MultiSelect := False;
+    Vis.LdapClient := fPresenter.LdapClient;
+    if Vis.ShowModal <> mrOK then
+      Exit;
+    result := True;
+    aName := Vis.SelectedName;
+    aSid := Vis.SelectedSid;
+  finally
+    FreeAndNil(Vis);
+  end;
+end;
+
+function TVisAdvancedSecurity.SelectObjectGUID(out aGUID, aName: RawUtf8; aAllowedType: TRawUtf8DynArray): Boolean;
+var
+  Vis: TVisSelectObjectGUID;
+begin
+  result := False;
+
+  Vis := TVisSelectObjectGUID.Create(Self);
+  try
+    Vis.SetMultiSelect(False);
+    Vis.SetLdapClient(fPresenter.LdapClient);
+    Vis.SetAllowedType(aAllowedType);
+    if Vis.ShowModal <> mrOK then
+      Exit;
+    result := True;
+    aName := Vis.GetSelectedName;
+    aGUID := Vis.GetSelectedGUID;
+  finally
+    FreeAndNil(Vis);
+  end;
+end;
+
+constructor TVisAdvancedSecurity.Create(TheOwner: TComponent);
+begin
+  inherited Create(TheOwner);
+
+  fPresenter := TAdvancedSecurityPresenter.Create(Self);
+  ComboBox_Type.Items.AddStrings([rsAllow, rsDeny]);
+end;
+
+destructor TVisAdvancedSecurity.Destroy;
+begin
+  FreeAndNil(fPresenter);
+
+  inherited Destroy;
+end;
+
+procedure TVisAdvancedSecurity.SetLdapClient(aClient: TLdapClient);
+begin
+  fPresenter.SetLdapClient(aClient);
+end;
+
+procedure TVisAdvancedSecurity.SetDistinguishedName(const aDN: RawUtf8);
+begin
+  fPresenter.SetDistinguishedName(aDN);
+end;
+
+procedure TVisAdvancedSecurity.SetObjectName(const aName: RawUtf8);
+begin
+  fPresenter.SetName(aName);
+end;
+
+procedure TVisAdvancedSecurity.SetSecurityDescriptor(const aSD: TSecurityDescriptor);
+begin
+  fPresenter.SetSecurityDescriptor(aSD);
+end;
+
+function TVisAdvancedSecurity.GetSecurityDescriptor: TSecurityDescriptor;
+begin
+  result := fPresenter.GetSecurityDescriptor;
+end;
+
+procedure TVisAdvancedSecurity.SetTitle(const aName: RawUtf8);
+begin
+  Caption := FormatUtf8(rsVisAdvancedSecurityTitle, [aName]);
+end;
+
+procedure TVisAdvancedSecurity.SetOwnerText(const aName: RawUtf8);
+begin
+  Edit_Owner.Caption := aName;
+end;
+
+procedure TVisAdvancedSecurity.SetGroupText(const aName: RawUtf8);
+begin
+  Edit_Group.Caption := aName;
+end;
+
+procedure TVisAdvancedSecurity.RefreshACEGrid(aACEs: PDocVariantData);
+begin
+  TisGrid1.Clear;
+  TisGrid1.LoadData(aACEs);
+end;
+
+procedure TVisAdvancedSecurity.RefreshACEGridIndex(aACE: PDocVariantData; aIndex: Integer);
+var
+  Node, CurrNode: PVirtualNode;
+  NodeData: PDocVariantData;
+begin
+  Node := TisGrid1.GetFirst();
+  while Assigned(Node) do
+  begin
+    CurrNode := Node;
+    NodeData := TisGrid1.GetNodeAsPDocVariantData(Node);
+    Node := TisGrid1.GetNext(CurrNode);
+    if not Assigned(NodeData) then
+      continue;
+
+    if NodeData^.I['index'] = aIndex then
+    begin
+      NodeData^ := aACE^;
+      TisGrid1.InvalidateNode(CurrNode);
+      Break;
+    end;
+  end;
+end;
+
+procedure TVisAdvancedSecurity.SelectACE(aIndex: Integer);
+var
+  Node, CurrNode: PVirtualNode;
+  NodeData: PDocVariantData;
+begin
+  Node := TisGrid1.GetFirst();
+  while Assigned(Node) do
+  begin
+    CurrNode := Node;
+    NodeData := TisGrid1.GetNodeAsPDocVariantData(Node);
+    Node := TisGrid1.GetNext(Node);
+    if not Assigned(NodeData) then
+      continue;
+
+    if NodeData^.I['index'] = aIndex then
+    begin
+      TisGrid1.FocusedNode := CurrNode;
+      Break;
+    end;
+  end;
+end;
+
+procedure TVisAdvancedSecurity.SetRightPanelType(aIsAllow: Boolean);
+begin
+  if aIsAllow then
+    ComboBox_Type.Caption := rsAllow
+  else
+    ComboBox_Type.Caption := rsDeny;
+end;
+
+procedure TVisAdvancedSecurity.SetRightPanelAccount(const aName: RawUtf8);
+begin
+  Edit_Principal.Caption := aName;
+end;
+
+procedure TVisAdvancedSecurity.SetRightPanelMask(aMask: TSecAccessMask);
+begin
+  CheckBoxCC.Checked := samCreateChild in aMask;
+  CheckBoxDC.Checked := samDeleteChild in aMask;
+  CheckBoxLC.Checked := samListChildren in aMask;
+  CheckBoxSW.Checked := samSelfWrite in aMask;
+  CheckBoxRP.Checked := samReadProp in aMask;
+  CheckBoxWP.Checked := samWriteProp in aMask;
+  CheckBoxDT.Checked := samDeleteTree in aMask;
+  CheckBoxLO.Checked := samListObject in aMask;
+  CheckBoxCA.Checked := samControlAccess in aMask;
+  CheckBoxD.Checked := samDelete in aMask;
+  CheckBoxRC.Checked := samReadControl in aMask;
+  CheckBoxWDAC.Checked := samWriteDac in aMask;
+  CheckBoxWO.Checked := samWriteOwner in aMask;
+end;
+
+procedure TVisAdvancedSecurity.SetRightPanelFlags(aFlags: TSecAceFlags);
+begin
+  CheckBoxOI.Checked := safObjectInherit in aFlags;
+  CheckBoxCI.Checked := safContainerInherit in aFlags;
+  CheckBoxIO.Checked := safInheritOnly in aFlags;
+  CheckBoxNP.Checked := safNoPropagateInherit in aFlags;
+end;
+
+procedure TVisAdvancedSecurity.SetRightPanelObject(const aGUIDName: RawUtf8);
+begin
+  Edit_Object.Caption := aGUIDName;
+end;
+
+procedure TVisAdvancedSecurity.SetRightPanelInheritedObject(const aGUIDName: RawUtf8);
+begin
+  Edit_InheritedObject.Caption := aGUIDName;
+end;
+
+procedure TVisAdvancedSecurity.SetApplyEnabled(aEnabled: Boolean);
+begin
+  BitBtn_Apply.Enabled := aEnabled;
+end;
+
+procedure TVisAdvancedSecurity.SetDeleteEnabled(aEnabled: Boolean);
+begin
+  BitBtn_Delete.Enabled := aEnabled;
+end;
+
+procedure TVisAdvancedSecurity.SetDuplicateEnabled(aEnabled: Boolean);
+begin
+  BitBtn_Duplicate.Enabled := aEnabled;
+end;
+
+function TVisAdvancedSecurity.GetCurrentMask: TSecAccessMask;
+begin
+  result := [];
+
+  if CheckBoxCC.Checked then
+    Include(result, samCreateChild);
+  if CheckBoxDC.Checked then
+    Include(result, samDeleteChild);
+  if CheckBoxLC.Checked then
+    Include(result, samListChildren);
+  if CheckBoxSW.Checked then
+    Include(result, samSelfWrite);
+  if CheckBoxRP.Checked then
+    Include(result, samReadProp);
+  if CheckBoxWP.Checked then
+    Include(result, samWriteProp);
+  if CheckBoxDT.Checked then
+    Include(result, samDeleteTree);
+  if CheckBoxLO.Checked then
+    Include(result, samListObject);
+  if CheckBoxCA.Checked then
+    Include(result, samControlAccess);
+  if CheckBoxD.Checked then
+    Include(result, samDelete);
+  if CheckBoxRC.Checked then
+    Include(result, samReadControl);
+  if CheckBoxWDAC.Checked then
+    Include(result, samWriteDac);
+  if CheckBoxWO.Checked then
+    Include(result, samWriteOwner);
+end;
+
+function TVisAdvancedSecurity.GetCurrentFlags: TSecAceFlags;
+begin
+  result := [];
+
+  if CheckBoxOI.Checked then
+    Include(Result, safObjectInherit);
+  if CheckBoxCI.Checked then
+    Include(Result, safContainerInherit);
+  if CheckBoxIO.Checked then
+    Include(Result, safInheritOnly);
+  if CheckBoxNP.Checked then
+    Include(Result, safNoPropagateInherit);
+end;
+
+function TVisAdvancedSecurity.GetCurrentType: Boolean;
+begin
+  result := (ComboBox_Type.Caption = rsAllow);
+end;
+
+function TVisAdvancedSecurity.GetCurrentPrincipalText: RawUtf8;
+begin
+  result := Edit_Principal.Caption;
+end;
+
+function TVisAdvancedSecurity.GetCurrentObjectText: RawUtf8;
+begin
+  result := Edit_Object.Caption;
+end;
+
+function TVisAdvancedSecurity.GetCurrentInheritedObjectText: RawUtf8;
+begin
+  result := Edit_InheritedObject.Caption;
+end;
+
+function TVisAdvancedSecurity.PickPrincipal(out aSid, aName: RawUtf8): Boolean;
+begin
+  result := SelectObjectSid(aSid, aName);
+end;
+
+function TVisAdvancedSecurity.PickOwner(out aSid, aName: RawUtf8): Boolean;
+begin
+  result := SelectObjectSid(aSid, aName);
+end;
+
+function TVisAdvancedSecurity.PickObject(out aGUID, aName: RawUtf8; aAllowedtype: TRawUtf8DynArray): Boolean;
+begin
+  result := SelectObjectGUID(aGUID, aName, aAllowedtype);
+end;
+
+procedure TVisAdvancedSecurity.ShowError(const aMsg: RawUtf8);
+begin
+  MessageDlg('Advanced Security Error', aMsg, mtError, [mbOK], 0);
+end;
+
+procedure TVisAdvancedSecurity.CloseRequest;
+begin
+  Close;
 end;
 
 end.

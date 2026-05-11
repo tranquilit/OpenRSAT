@@ -580,7 +580,8 @@ begin
     Check(Length(P.DirectReportsNames) = 0);
 
     P.Add('directReports', 'CN=Demo User,OU=Users,OU=openrsat,DC=openrsat,DC=lan');
-    Check(Length(P.DirectReportsNames) = 1);
+    // Missing LDAP Connection
+    Check(Length(P.DirectReportsNames) = 0);
   finally
     FreeAndNil(P);
   end;

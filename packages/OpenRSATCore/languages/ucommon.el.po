@@ -875,6 +875,7 @@ msgid "The request time limit has been reached."
 msgstr "Το όριο χρόνου αιτήματος έχει επιτευχθεί."
 
 #: ucommon.rstitleadvancedsecurity
+msgctxt "ucommon.rstitleadvancedsecurity"
 msgid "Advanced Security Settings for %"
 msgstr "Προηγμένες Ρυθμίσεις Ασφαλείας για %"
 
@@ -957,6 +958,12 @@ msgstr "Στοιχεία τρέχοντος χρήστη"
 #: ucommon.rsusermustchangepasswordandcannotchange
 msgid "You cannot check both User must change password at next logon and User cannot change password for the same user."
 msgstr ""
+
+#: ucommon.rsvisadvancedsecuritytitle
+#, fuzzy
+msgctxt "ucommon.rsvisadvancedsecuritytitle"
+msgid "Advanced Security Settings for %"
+msgstr "Προηγμένες Ρυθμίσεις Ασφαλείας για %"
 
 #: ucommon.rswarning
 msgid "Warning"
