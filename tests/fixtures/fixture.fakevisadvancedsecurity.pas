@@ -78,6 +78,7 @@ type
 
     function  PickPrincipal(out aSid, aName: RawUtf8): Boolean;
     function  PickOwner(out aSid, aName: RawUtf8): Boolean;
+    function PickObject(out aGUID, aName: RawUtf8; aAllowedtype: TRawUtf8DynArray): Boolean;
 
     procedure ShowError(const aMsg: RawUtf8);
     procedure CloseRequest;
@@ -249,6 +250,11 @@ function TFakeVisAdvancedSecurity.PickOwner(out aSid, aName: RawUtf8): Boolean;
 begin
   aSid := PickOwnerSID;
   aName := PickOwnerName;
+end;
+
+function TFakeVisAdvancedSecurity.PickObject(out aGUID, aName: RawUtf8; aAllowedtype: TRawUtf8DynArray): Boolean;
+begin
+
 end;
 
 procedure TFakeVisAdvancedSecurity.ShowError(const aMsg: RawUtf8);
