@@ -248,7 +248,7 @@ end;
 
 procedure TVisAdvancedSecurity.Action_RestoreDefaultExecute(Sender: TObject);
 begin
-  fPresenter.RestoreDefault;
+  fPresenter.ActionRestoreDefault;
 end;
 
 procedure TVisAdvancedSecurity.Action_SelectInheritedObjectExecute(Sender: TObject);

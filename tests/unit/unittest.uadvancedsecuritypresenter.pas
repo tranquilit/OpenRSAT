@@ -53,6 +53,8 @@ type
     procedure DoRightPanelObjectChanged;
     procedure DoRightPanelFlagsChanged;
     procedure DoRightPanelInheritedObjectChanged;
+    procedure ActionRestoreDefault_WithoutDistinguishedName;
+    procedure ActionRestoreDefault_WithoutLdapClient;
   end;
 
 implementation
@@ -320,6 +322,19 @@ begin
 
   Check(View.RefreshACEGridIndexCount = 1, 'RefreshACEGridIndex has been called once.');
   Check(View.RefreshACEGridIndexIndex = 1, 'RefreshACEGridIndex index is 1.');
+end;
+
+procedure TTestAdvancedSecurityPresenter.ActionRestoreDefault_WithoutDistinguishedName;
+begin
+  Presenter.ActionRestoreDefault;
+  Check(not Presenter.SDChanged, 'Cannot restore default without DistinguishedName.');
+end;
+
+procedure TTestAdvancedSecurityPresenter.ActionRestoreDefault_WithoutLdapClient;
+begin
+  Presenter.SetDistinguishedName('CN=dn,DC=test,DC=lan');
+  Presenter.ActionRestoreDefault;
+  Check(not Presenter.SDChanged, 'Cannot restore default without LdapClient.');
 end;
 
 end.
