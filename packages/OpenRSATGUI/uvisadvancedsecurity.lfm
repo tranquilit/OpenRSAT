@@ -159,6 +159,18 @@ object VisAdvancedSecurity: TVisAdvancedSecurity
         ShowHint = True
         TabOrder = 2
       end
+      object BitBtn1: TBitBtn
+        Left = 281
+        Height = 25
+        Top = 8
+        Width = 105
+        Action = Action_RestoreDefault
+        Align = alLeft
+        AutoSize = True
+        BorderSpacing.Left = 24
+        BorderSpacing.Around = 8
+        TabOrder = 3
+      end
     end
   end
   object Panel2: TPanel
@@ -768,6 +780,10 @@ object VisAdvancedSecurity: TVisAdvancedSecurity
     object Action_SelectPrincipal: TAction
       Caption = 'Select'
       OnExecute = Action_SelectPrincipalExecute
+    end
+    object Action_RestoreDefault: TAction
+      Caption = 'Restore default'
+      OnExecute = Action_RestoreDefaultExecute
     end
   end
 end

@@ -123,6 +123,7 @@ type
     function ActionAddACE: Integer;
     function ActionDuplicateACE: Integer;
     function ActionDeleteACE: Integer;
+    procedure RestoreDefault;
     procedure ActionSelectOwner;
     procedure ActionSelectPrincipal;
     procedure ActionSelectObject;
@@ -623,6 +624,75 @@ begin
   fDACLChanged := True;
   NotifyButtonStates;
   result := FocusedData^.I['index'];
+end;
+
+procedure TAdvancedSecurityPresenter.RestoreDefault;
+var
+  DACL: TSecAcl;
+  ObjectClass: TLdapAttribute;
+  i: Integer;
+  Filter: RawUtf8;
+
+  procedure AddResultToDACl(ALdapResults: TLdapResultList; out ADACL: TSecAcl);
+  var
+    LdapResult: TLdapResult;
+    sd: TSecurityDescriptor;
+    ace: TSecAce;
+    DomainSid: RawUtf8;
+  begin
+    DomainSid := RawSidToText(LdapClient.DomainSid);
+    for LdapResult in ALdapResults.Items do
+    begin
+      if not Assigned(LdapResult) then
+        Continue;
+      sd.Clear;
+      sd.FromText(LdapResult.Find('defaultSecurityDescriptor').GetReadable(), DomainSID);
+      for ace in sd.Dacl do
+      begin
+        if not AceInDacl(ADACL, ace) then
+          Insert(ace, ADACL, Length(ADACL));
+      end;
+    end;
+  end;
+
+begin
+  DACL := nil;
+
+  ObjectClass := LdapClient.SearchObject(fDistinguishedName, '', 'objectClass');
+
+  if not Assigned(ObjectClass) then
+    Exit;
+
+  Filter := '';
+  for i := 0 to Pred(ObjectClass.Count) do
+    Filter := FormatUtf8('%(lDAPDisplayName=%)', [filter, LdapEscape(ObjectClass.GetReadable(i))]);
+
+  if Filter = '' then
+    Exit;
+  Filter := FormatUtf8('(|%)', [Filter]);
+
+  LdapClient.SearchBegin();
+  try
+    LdapClient.SearchScope := lssSingleLevel;
+    repeat
+      if not LdapClient.Search(LdapClient.SchemaDN, False, Filter, ['defaultSecurityDescriptor']) then
+      begin
+        fView.ShowError(FormatUtf8('LDAP_ERROR(%): %', [LdapClient.ResultCode, LdapClient.ResultString]));
+        Exit;
+      end;
+      AddResultToDACl(LdapClient.SearchResult, DACL);
+    until LdapClient.SearchCookie = '';
+  finally
+    LdapClient.SearchEnd;
+  end;
+  OrderACL(LdapClient, fDistinguishedName, @DACL);
+  fSD.Flags := [scDaclAutoInheritReq, scOwnerDefaulted, scGroupDefaulted, scDaclAutoInherit, scSelfRelative, scDaclPresent];
+  fSD.Dacl := DACL;
+  LoadViewFromSD(fSD);
+  for i := 0 to Pred(fACEs.Count) do
+    UpdateACEDocState(fACEs._[i], 2);
+  fDACLChanged := True;
+  NotifyButtonStates;
 end;
 
 procedure TAdvancedSecurityPresenter.ActionSelectOwner;
