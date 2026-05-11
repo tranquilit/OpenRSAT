@@ -139,6 +139,7 @@ type
 
 function AccessMaskToString(AMask: TSecAccessMask): RawUtf8;
 function InheritanceFlagsToString(AFlags: TSecAceFlags): RawUtf8;
+function InheritanceFlagsToSentance(AFlags: TSecAceFlags): RawUtf8;
 
 implementation
 uses
@@ -187,6 +188,24 @@ begin
       result := FormatUtf8('%, %', [result, SEC_FLAGS_NAMES[f]]);
 end;
 
+function InheritanceFlagsToSentance(AFlags: TSecAceFlags): RawUtf8;
+begin
+  result := '';
+  if safNoPropagateInherit in AFlags then
+    result := rsFlagDirectDesendants
+  else if (safObjectInherit in AFlags) or (safContainerInherit in AFlags) then
+    result := rsFlagAllDescendants;
+
+  if not (safInheritOnly in AFlags) then
+    if result = '' then
+      result := rsFlagThisObject
+    else
+      result := FormatUtf8(rsAnd, [rsFlagThisObject, result]);
+
+  if result <> '' then
+    result[1] := UpCase(result[1]);
+end;
+
 { TAdvancedSecurityPresenter }
 
 function TAdvancedSecurityPresenter.GetSDChanged: Boolean;
@@ -214,7 +233,7 @@ var
     aDoc^.AddOrUpdateValue('account', fSidCache.SIDToName(aDoc^.S['account_sid']));
     aDoc^.AddOrUpdateValue('permissions', AccessMaskToString(TSecAccessMask(Integer(aDoc^.I['rights']))));
     aDoc^.AddOrUpdateValue('object', fGuidCache.GUIDToName(aDoc^.S['object_guid'], ''));
-    aDoc^.AddOrUpdateValue('flags', InheritanceFlagsToString(TSecAceFlags(Int8(aDoc^.I['ace_flags']))));
+    aDoc^.AddOrUpdateValue('flags', InheritanceFlagsToSentance(TSecAceFlags(Int8(aDoc^.I['ace_flags']))));
     aDoc^.AddOrUpdateValue('inheritedObject', fGuidCache.GUIDToName(aDoc^.S['inherited_object_guid'], ''));
   end;
 
@@ -521,7 +540,7 @@ begin
 
   CurrentFlags := fView.GetCurrentFlags;
   fACEs._[fFocusedACEIndex]^.AddOrUpdateValue('ace_flags', Int8(CurrentFlags));
-  fACEs._[fFocusedACEIndex]^.AddOrUpdateValue('flags', InheritanceFlagsToString(CurrentFlags));
+  fACEs._[fFocusedACEIndex]^.AddOrUpdateValue('flags', InheritanceFlagsToSentance(CurrentFlags));
   UpdateACEDocState(fACEs._[fFocusedACEIndex], 2);
   fView.RefreshACEGridIndex(fACEs._[fFocusedACEIndex], fFocusedACEIndex);
   fDACLChanged := True;
