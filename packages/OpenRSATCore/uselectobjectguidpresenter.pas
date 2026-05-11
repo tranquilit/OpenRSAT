@@ -268,6 +268,8 @@ begin
   SearchClassSchema;
   SearchAttributeSchema;
   SearchExtendedRights;
+
+  fNeedRefresh := False;
 end;
 
 end.
