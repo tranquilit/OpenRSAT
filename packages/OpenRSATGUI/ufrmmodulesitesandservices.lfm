@@ -510,8 +510,10 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       PopupMenu = PopupMenu1
       TabOrder = 0
       SelectedAndTotalLabel = Label1
-      TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toFullRowDrag]
+      TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
+      TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
       ZebraColor = 15593713
+      PopupMenuOptions = [pmoShowFind, pmoShowFindNext]
       OnDblClick = TisGrid1DblClick
       OnFocusChanged = TisGrid1FocusChanged
       OnGetImageIndex = TisGrid1GetImageIndex

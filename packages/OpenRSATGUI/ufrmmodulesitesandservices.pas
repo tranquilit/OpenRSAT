@@ -1035,6 +1035,8 @@ end;
 procedure TFrmModuleSitesAndServices.TisGrid1FocusChanged(
   Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex);
 begin
+  if TreeView1.Focused then
+    TisGrid1.FocusedNode := nil;  
 end;
 
 procedure TFrmModuleSitesAndServices.TisGrid1GetImageIndex(
