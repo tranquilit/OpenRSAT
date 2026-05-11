@@ -1,0 +1,162 @@
+object VisSelectObjectGUID: TVisSelectObjectGUID
+  Left = 2606
+  Height = 421
+  Top = 306
+  Width = 626
+  Caption = 'Select Object GUID'
+  ClientHeight = 421
+  ClientWidth = 626
+  Position = poOwnerFormCenter
+  LCLVersion = '4.5.0.0'
+  OnShow = FormShow
+  object TisGrid1: TTisGrid
+    Left = 4
+    Height = 304
+    Top = 45
+    Width = 618
+    Align = alClient
+    BorderSpacing.Around = 4
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'Distinguished Name'
+        Width = 300
+        PropertyName = 'distinguishedName'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Text = 'Name'
+        Width = 150
+        PropertyName = 'name'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 2
+        Text = 'GUID'
+        Width = 300
+        PropertyName = 'guid'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 3
+        Text = 'Type'
+        Width = 150
+        PropertyName = 'type'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 100
+    Header.MinHeight = 18
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.Style = hsFlatButtons
+    TabOrder = 0
+    SelectedAndTotalLabel = Label2
+    ZebraColor = 15593713
+    OnDblClick = TisGrid1DblClick
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 41
+    Top = 0
+    Width = 626
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 626
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 8
+      Height = 25
+      Top = 8
+      Width = 29
+      Align = alLeft
+      BorderSpacing.Around = 8
+      Caption = 'Filter:'
+      Layout = tlCenter
+    end
+    object ComboBox1: TComboBox
+      Left = 45
+      Height = 23
+      Top = 8
+      Width = 200
+      Align = alLeft
+      BorderSpacing.Around = 8
+      ItemHeight = 15
+      TabOrder = 0
+    end
+    object BitBtn1: TBitBtn
+      Left = 253
+      Height = 25
+      Top = 8
+      Width = 75
+      Action = Action1
+      Align = alLeft
+      BorderSpacing.Around = 8
+      TabOrder = 1
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 41
+    Top = 380
+    Width = 626
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 626
+    TabOrder = 2
+    object BitBtn2: TBitBtn
+      Left = 460
+      Height = 25
+      Top = 8
+      Width = 75
+      Align = alRight
+      BorderSpacing.Around = 8
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object BitBtn3: TBitBtn
+      Left = 543
+      Height = 25
+      Top = 8
+      Width = 75
+      Align = alRight
+      BorderSpacing.Around = 8
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object Label2: TLabel
+    Left = 8
+    Height = 15
+    Top = 357
+    Width = 610
+    Align = alBottom
+    Alignment = taRightJustify
+    BorderSpacing.Around = 8
+    Caption = 'Total : 0 elements'
+  end
+  object ActionList1: TActionList
+    Left = 168
+    Top = 168
+    object Action1: TAction
+      Caption = 'Search'
+      OnExecute = Action1Execute
+    end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 500
+    OnTimer = Timer1Timer
+    Left = 384
+    Top = 192
+  end
+end
