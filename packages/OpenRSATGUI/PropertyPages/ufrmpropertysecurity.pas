@@ -95,7 +95,8 @@ begin
     Vis.SetDistinguishedName(fProperty.distinguishedName);
     Vis.SetObjectName(fProperty.name);
     Vis.SetSecurityDescriptor(fProperty.SecurityDescriptor^);
-    Vis.ShowModal;
+    if Vis.ShowModal = mrCancel then
+      Exit;
     SD := Vis.GetSecurityDescriptor;
     fProperty.SecurityDescriptor := @SD;
   finally
