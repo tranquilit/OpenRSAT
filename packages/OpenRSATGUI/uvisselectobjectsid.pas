@@ -40,6 +40,7 @@ type
     TisGrid1: TTisGrid;
     procedure Action1Execute(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
   private
@@ -106,8 +107,15 @@ end;
 
 procedure TVisSelectObjectSID.ComboBox1Change(Sender: TObject);
 begin
-  Timer1.Enabled := False;
-  Timer1.Enabled := True;
+  BitBtn1.Default := True;
+end;
+
+procedure TVisSelectObjectSID.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  case Key of
+    27: Close;
+    117: ComboBox1.SetFocus;
+  end;
 end;
 
 procedure TVisSelectObjectSID.Timer1Timer(Sender: TObject);
@@ -219,6 +227,7 @@ begin
     UpdateGridFromLdap(AFilter);
   finally
     Screen.Cursor := c;
+    BitBtn3.Default := True;
   end;
 end;
 
