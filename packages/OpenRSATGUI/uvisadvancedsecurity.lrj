@@ -42,5 +42,6 @@
 {"hash":94120868,"name":"tvisadvancedsecurity.action_selectinheritedobject.caption","sourcebytes":[83,101,108,101,99,116],"value":"Select"},
 {"hash":94120868,"name":"tvisadvancedsecurity.action_selectobject.caption","sourcebytes":[83,101,108,101,99,116],"value":"Select"},
 {"hash":94120868,"name":"tvisadvancedsecurity.action_selectowner.caption","sourcebytes":[83,101,108,101,99,116],"value":"Select"},
-{"hash":94120868,"name":"tvisadvancedsecurity.action_selectprincipal.caption","sourcebytes":[83,101,108,101,99,116],"value":"Select"}
+{"hash":94120868,"name":"tvisadvancedsecurity.action_selectprincipal.caption","sourcebytes":[83,101,108,101,99,116],"value":"Select"},
+{"hash":677268,"name":"tvisadvancedsecurity.action_restoredefault.caption","sourcebytes":[82,101,115,116,111,114,101,32,100,101,102,97,117,108,116],"value":"Restore default"}
 ]}

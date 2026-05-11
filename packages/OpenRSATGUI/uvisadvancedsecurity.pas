@@ -42,6 +42,7 @@ type
   { TVisAdvancedSecurity }
 
   TVisAdvancedSecurity = class(TForm, IAdvancedSecurityView)
+    Action_RestoreDefault: TAction;
     Action_SelectPrincipal: TAction;
     Action_AddACE: TAction;
     Action_SelectOwner: TAction;
@@ -54,6 +55,7 @@ type
     Action_SelectInheritedObject: TAction;
     Action_SelectObject: TAction;
     ActionList1: TActionList;
+    BitBtn1: TBitBtn;
     BitBtn_Apply: TBitBtn;
     BitBtn_Cancel: TBitBtn;
     BitBtn_OK: TBitBtn;
@@ -119,6 +121,7 @@ type
     procedure Action_DeleteACEExecute(Sender: TObject);
     procedure Action_DuplicateACEExecute(Sender: TObject);
     procedure Action_OKExecute(Sender: TObject);
+    procedure Action_RestoreDefaultExecute(Sender: TObject);
     procedure Action_SelectInheritedObjectExecute(Sender: TObject);
     procedure Action_SelectObjectExecute(Sender: TObject);
     procedure Action_SelectOwnerExecute(Sender: TObject);
@@ -241,6 +244,11 @@ end;
 procedure TVisAdvancedSecurity.Action_OKExecute(Sender: TObject);
 begin
   fPresenter.ActionOK;
+end;
+
+procedure TVisAdvancedSecurity.Action_RestoreDefaultExecute(Sender: TObject);
+begin
+  fPresenter.RestoreDefault;
 end;
 
 procedure TVisAdvancedSecurity.Action_SelectInheritedObjectExecute(Sender: TObject);
