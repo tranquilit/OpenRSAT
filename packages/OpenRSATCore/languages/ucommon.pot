@@ -874,6 +874,7 @@ msgid "The request time limit has been reached."
 msgstr ""
 
 #: ucommon.rstitleadvancedsecurity
+msgctxt "ucommon.rstitleadvancedsecurity"
 msgid "Advanced Security Settings for %"
 msgstr ""
 
@@ -953,6 +954,11 @@ msgstr ""
 
 #: ucommon.rsusermustchangepasswordandcannotchange
 msgid "You cannot check both User must change password at next logon and User cannot change password for the same user."
+msgstr ""
+
+#: ucommon.rsvisadvancedsecuritytitle
+msgctxt "ucommon.rsvisadvancedsecuritytitle"
+msgid "Advanced Security Settings for %"
 msgstr ""
 
 #: ucommon.rswarning

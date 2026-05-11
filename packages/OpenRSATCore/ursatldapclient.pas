@@ -118,6 +118,8 @@ type
 
 function GetLdapErrorCustomMessage(LdapClient: TLdapClient): RawUtf8;
 
+procedure OrderACL(aLdapClient: TLdapClient; aDN: RawUtf8; aACL: PSecAcl);
+
 const
   LDAP_ERROR_CUSTOM_MESSAGE: Array[leOperationsError..leOther] of RawUtf8 = (
     rsOperationsError,
@@ -251,6 +253,49 @@ begin
     end;
     Inc(idx);
   end;
+end;
+
+procedure OrderACL(aLdapClient: TLdapClient; aDN: RawUtf8; aACL: PSecAcl);
+var
+  sdArr: Array of TSecurityDescriptor;
+  sd: TSecurityDescriptor;
+  parent, filter: RawUtf8;
+  res: TLdapResult;
+begin
+  TSynLog.Add.Log(sllDebug, FormatUtf8('Start ordering ACL for %...', [aDN]));
+  sdArr := [];
+
+  parent := aDN;
+  filter := '';
+  while not (parent = aLdapClient.DefaultDN()) and not (parent = '') do
+  begin
+    if (filter = '') then
+      filter := '|';
+    parent := GetParentDN(parent);
+    filter := FormatUtf8('%(distinguishedName=%)', [filter, LdapEscape(parent)]);
+  end;
+
+  // Get SDs
+  aLdapClient.SearchBegin();
+  try
+    repeat
+      aLdapClient.SearchScope := lssWholeSubtree;
+      if not aLdapClient.Search([atNTSecurityDescriptor], filter) then
+        Exit;
+      for res in aLdapClient.SearchResult.Items do
+      begin
+        if not sd.FromBinary(res.Attributes.Find(atNTSecurityDescriptor).GetRaw()) then
+          continue;
+        Insert(sd, sdArr, Length(sdArr));
+      end;
+    until (aLdapClient.SearchCookie = '');
+  finally
+    aLdapClient.SearchEnd();
+  end;
+
+  // Order acl
+  InnerOrderAcl(aACL, sdArr);
+  TSynLog.Add.Log(sllDebug, 'End ordering ACL for.');
 end;
 
 { TRsatLdapClient }

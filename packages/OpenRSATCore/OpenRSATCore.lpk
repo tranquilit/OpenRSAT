@@ -92,6 +92,22 @@
         <Filename Value="uproperty.pas"/>
         <UnitName Value="uproperty"/>
       </Item>
+      <Item>
+        <Filename Value="usidcache.pas"/>
+        <UnitName Value="usidcache"/>
+      </Item>
+      <Item>
+        <Filename Value="uadvancedsecuritypresenter.pas"/>
+        <UnitName Value="uadvancedsecuritypresenter"/>
+      </Item>
+      <Item>
+        <Filename Value="uguidcache.pas"/>
+        <UnitName Value="uguidcache"/>
+      </Item>
+      <Item>
+        <Filename Value="uselectobjectguidpresenter.pas"/>
+        <UnitName Value="uselectobjectguidpresenter"/>
+      </Item>
     </Files>
     <i18n>
       <EnableI18N Value="True"/>
