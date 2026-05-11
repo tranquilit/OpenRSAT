@@ -295,7 +295,7 @@ begin
 
   Check(Presenter.SDChanged, 'SD has been changed.');
   Check(View.ACEGrid._[1]^.I['ace_flags'] = 2, 'Focused ACE ace_flags has been updated.');
-  Check(View.ACEGrid._[1]^.S['flags'] = 'Container Inherit', 'Focused ACE flags has been updated.');
+  Check(View.ACEGrid._[1]^.S['flags'] = 'This object and all descendants', 'Focused ACE flags has been updated.');
   Check(View.ACEGrid._[1]^.I['state'] = 2, 'Focused ACE state has been updated to 2 (modified).');
 
   Check(View.RefreshACEGridIndexCount = 1, 'RefreshACEGridIndex has been called once.');
