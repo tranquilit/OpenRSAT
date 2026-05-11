@@ -33,7 +33,7 @@ object FrmPropertySecurity: TFrmPropertySecurity
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
           Position = 0
           Text = 'Group or user names'
-          Width = 433
+          Width = 429
           PropertyName = 'name'
         end>
       Header.DefaultHeight = 18
@@ -93,7 +93,7 @@ object FrmPropertySecurity: TFrmPropertySecurity
           Position = 2
           Tag = 3
           Text = 'Deny'
-          Width = 58
+          Width = 54
           DataType = cdtBoolean
           PropertyName = 'deny'
         end>

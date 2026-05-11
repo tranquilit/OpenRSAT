@@ -707,6 +707,7 @@ object VisAdvancedSecurity: TVisAdvancedSecurity
       Align = alRight
       AutoSize = True
       BorderSpacing.Around = 8
+      ModalResult = 2
       TabOrder = 1
     end
     object BitBtn_OK: TBitBtn
@@ -718,6 +719,7 @@ object VisAdvancedSecurity: TVisAdvancedSecurity
       Align = alRight
       AutoSize = True
       BorderSpacing.Around = 8
+      ModalResult = 1
       TabOrder = 2
     end
   end
