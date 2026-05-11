@@ -2,8 +2,8 @@ program openrsattests;
 
 uses
   mormot.core.test,
-  ucommon,
-  uproperty;
+  integrationtest.uadvancedsecuritypresenter,
+  unittest.uadvancedsecuritypresenter;
 
 type
 
@@ -12,6 +12,9 @@ type
   TOpenRSATTests = class(TSynTestsLogged)
   published
     procedure Units;
+    procedure Integrations;
+    procedure Performances;
+    procedure Security;
   end;
 
 { TOpenRSATTests }
@@ -19,8 +22,26 @@ type
 procedure TOpenRSATTests.Units;
 begin
   AddCase([
-    TCommonTests,
-    TPropertyTests
+    TTestAdvancedSecurityPresenter
+  ]);
+end;
+
+procedure TOpenRSATTests.Integrations;
+begin
+  AddCase([
+    TIntegrationTestAdvancedSecurityPresenter
+  ]);
+end;
+
+procedure TOpenRSATTests.Performances;
+begin
+  AddCase([
+  ]);
+end;
+
+procedure TOpenRSATTests.Security;
+begin
+  AddCase([
   ]);
 end;
 
