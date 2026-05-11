@@ -123,7 +123,7 @@ type
     function ActionAddACE: Integer;
     function ActionDuplicateACE: Integer;
     function ActionDeleteACE: Integer;
-    procedure RestoreDefault;
+    procedure ActionRestoreDefault;
     procedure ActionSelectOwner;
     procedure ActionSelectPrincipal;
     procedure ActionSelectObject;
@@ -626,7 +626,7 @@ begin
   result := FocusedData^.I['index'];
 end;
 
-procedure TAdvancedSecurityPresenter.RestoreDefault;
+procedure TAdvancedSecurityPresenter.ActionRestoreDefault;
 var
   DACL: TSecAcl;
   ObjectClass: TLdapAttribute;
@@ -657,6 +657,12 @@ var
 
 begin
   DACL := nil;
+
+  if (fDistinguishedName = '') then
+    Exit;
+
+  if not Assigned(LdapClient) then
+    Exit;
 
   ObjectClass := LdapClient.SearchObject(fDistinguishedName, '', 'objectClass');
 
