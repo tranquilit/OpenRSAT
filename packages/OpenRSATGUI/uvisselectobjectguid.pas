@@ -40,6 +40,8 @@ type
     Timer1: TTimer;
     TisGrid1: TTisGrid;
     procedure Action1Execute(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure TisGrid1DblClick(Sender: TObject);
@@ -87,6 +89,20 @@ begin
     fPresenter.Search;
   finally
     Screen.Cursor := c;
+    BitBtn2.Default := True;
+  end;
+end;
+
+procedure TVisSelectObjectGUID.ComboBox1Change(Sender: TObject);
+begin
+  BitBtn1.Default := True;
+end;
+
+procedure TVisSelectObjectGUID.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  case Key of
+    27: Close;
+    117: ComboBox1.SetFocus;
   end;
 end;
 
@@ -100,6 +116,7 @@ begin
   inherited Create(TheOwner);
 
   fPresenter := TSelectObjectGUIDPresenter.Create(Self);
+  Timer1.Enabled := False;
 end;
 
 destructor TVisSelectObjectGUID.Destroy;

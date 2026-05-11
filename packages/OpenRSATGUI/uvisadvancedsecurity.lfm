@@ -1,5 +1,5 @@
 object VisAdvancedSecurity: TVisAdvancedSecurity
-  Left = 2009
+  Left = 89
   Height = 726
   Top = 126
   Width = 1302

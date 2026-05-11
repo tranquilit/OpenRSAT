@@ -6,8 +6,10 @@ object VisSelectObjectSID: TVisSelectObjectSID
   Caption = 'Select ObjectSID'
   ClientHeight = 420
   ClientWidth = 508
+  KeyPreview = True
   Position = poOwnerFormCenter
   LCLVersion = '4.5.0.0'
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   object TisGrid1: TTisGrid
     Left = 4
@@ -48,7 +50,7 @@ object VisSelectObjectSID: TVisSelectObjectSID
     Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
     Header.SortDirection = sdDescending
     Header.Style = hsFlatButtons
-    TabOrder = 0
+    TabOrder = 1
     SelectedAndTotalLabel = Label2
     ZebraColor = 15593713
   end
@@ -62,7 +64,7 @@ object VisSelectObjectSID: TVisSelectObjectSID
     BevelOuter = bvNone
     ClientHeight = 41
     ClientWidth = 508
-    TabOrder = 1
+    TabOrder = 0
     object ComboBox1: TComboBox
       Left = 45
       Height = 23
@@ -116,7 +118,7 @@ object VisSelectObjectSID: TVisSelectObjectSID
       BorderSpacing.Around = 8
       Caption = 'Cancel'
       ModalResult = 2
-      TabOrder = 0
+      TabOrder = 1
     end
     object BitBtn3: TBitBtn
       Left = 342
@@ -128,7 +130,7 @@ object VisSelectObjectSID: TVisSelectObjectSID
       Caption = 'OK'
       Default = True
       ModalResult = 1
-      TabOrder = 1
+      TabOrder = 0
     end
   end
   object Label2: TLabel
@@ -142,13 +144,6 @@ object VisSelectObjectSID: TVisSelectObjectSID
     Caption = 'Total : 0 elements'
     Visible = False
   end
-  object Timer1: TTimer
-    Enabled = False
-    Interval = 500
-    OnTimer = Timer1Timer
-    Left = 160
-    Top = 152
-  end
   object ActionList1: TActionList
     Left = 64
     Top = 136
@@ -156,5 +151,12 @@ object VisSelectObjectSID: TVisSelectObjectSID
       Caption = 'Search'
       OnExecute = Action1Execute
     end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 200
+    OnTimer = Timer1Timer
+    Left = 168
+    Top = 96
   end
 end
