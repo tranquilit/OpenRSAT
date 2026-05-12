@@ -23,7 +23,7 @@ implementation
 
 { TFakeForm }
 
-function TFakeForm.QueryInterface(constref IID: TGUID; out Obj): Hresult; stdcall;
+function TFakeForm.QueryInterface({$IFDEF FPC_HAS_CONSTREF}constref{$ELSE}const{$ENDIF} IID: TGUID; out Obj): Hresult; virtual; {$IFNDEF WINDOWS}cdecl{$ELSE}stdcall{$ENDIF};
 begin
   if GetInterface(IID, Obj) then
     Result := S_OK
@@ -31,12 +31,12 @@ begin
     Result := E_NOINTERFACE;
 end;
 
-function TFakeForm._AddRef: Longint; stdcall;
+function TFakeForm._AddRef: Longint; {$IFNDEF WINDOWS}cdecl{$ELSE}stdcall{$ENDIF};
 begin
   Result := -1;
 end;
 
-function TFakeForm._Release: Longint; stdcall;
+function TFakeForm._Release: Longint; {$IFNDEF WINDOWS}cdecl{$ELSE}stdcall{$ENDIF};
 begin
   Result := -1;
 end;
