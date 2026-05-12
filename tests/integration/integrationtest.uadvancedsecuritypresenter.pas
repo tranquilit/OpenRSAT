@@ -15,6 +15,7 @@ uses
   mormot.net.ldap,
   fixture.ldapclient,
   fixture.fakevisadvancedsecurity,
+  ursatldapclient,
   uadvancedsecuritypresenter;
 
 type
@@ -40,6 +41,7 @@ type
     procedure ActionApply_NewACE;
     procedure ActionApply_DeleteACE;
     procedure ActionApply_NewDeleteModifyACL;
+    procedure ActionRestoreDefault_Valid;
   end;
 
 implementation
@@ -216,6 +218,24 @@ end;
 
 procedure TIntegrationTestAdvancedSecurityPresenter.ActionApply_NewDeleteModifyACL;
 begin
+
+end;
+
+procedure TIntegrationTestAdvancedSecurityPresenter.ActionRestoreDefault_Valid;
+var
+  DefaultACL: TSecAcl;
+begin
+  SD.Clear;
+  LdapClient.Modify(DN, lmoReplace, 'nTSecurityDescriptor', SD.ToBinary);
+
+  SD.FromBinary(LdapClient.SearchObject(DN, '', 'nTSecurityDescriptor').GetRaw());
+  DefaultACL := GetDefaultACLFromObjectClass(LdapClient, ['top', 'organizationalPerson', 'person', 'user']);
+
+  Presenter.SetSecurityDescriptor(SD);
+  Presenter.ActionRestoreDefault;
+  Check(Presenter.SDChanged, 'Security Descriptor has changed.');
+  Check(not Presenter.GetSecurityDescriptor.IsEqual(SD), 'Old SD and new SD are different.');
+  Check(Length(Presenter.GetSecurityDescriptor.Dacl) = Length(DefaultACL), 'New SD is the same length of default SD.');
 
 end;
 
