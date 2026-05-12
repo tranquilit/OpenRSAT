@@ -118,6 +118,10 @@ type
 
 function GetLdapErrorCustomMessage(LdapClient: TLdapClient): RawUtf8;
 
+function ConcatACL(ADacls: Array of TSecAcl; AAllowDuplicated: Boolean = False): TSecAcl;
+
+function GetDefaultACLFromObjectClass(ALdapClient: TLdapClient; AObjectClass: TRawUtf8DynArray): TSecAcl;
+
 procedure OrderACL(aLdapClient: TLdapClient; aDN: RawUtf8; aACL: PSecAcl);
 
 const
@@ -252,6 +256,64 @@ begin
       Insert(ace, acl^, idx);
     end;
     Inc(idx);
+  end;
+end;
+
+function ConcatACL(ADacls: array of TSecAcl; AAllowDuplicated: Boolean): TSecAcl;
+var
+  i, c, j: Integer;
+begin
+  result := nil;
+
+  c := 0;
+  for i := 0 to High(ADacls) do
+  begin
+    for j := 0 to High(ADacls[i]) do
+      if AAllowDuplicated or not AceInDacl(result, ADacls[i][j]) then
+      begin
+        Insert(ADacls[i][j], result, c);
+        Inc(c);
+      end;
+  end;
+end;
+
+function GetDefaultACLFromObjectClass(ALdapClient: TLdapClient; AObjectClass: TRawUtf8DynArray): TSecAcl;
+var
+  Filter: RawUtf8;
+  i: Integer;
+  SD: TSecurityDescriptor;
+  LdapResult: TLdapResult;
+  DomainSID: RawUtf8;
+begin
+  result := nil;
+
+  Filter := '';
+  for i := 0 to High(AObjectClass) do
+    Filter := FormatUtf8('%(lDAPDisplayName=%)', [Filter, LdapEscape(AObjectClass[i])]);
+  if Filter = '' then
+    Exit;
+  Filter := FormatUtf8('(|%)', [Filter]);
+
+  DomainSID := RawSidToText(ALdapClient.DomainSid);
+  ALdapClient.SearchBegin();
+  try
+    ALdapClient.SearchScope := lssWholeSubtree;
+    repeat
+      if not ALdapClient.Search(ALdapClient.SchemaDN, False, Filter, ['defaultSecurityDescriptor']) then
+        Exit;
+
+      for LdapResult in ALdapClient.SearchResult.Items do
+      begin
+        if not Assigned(LdapResult) then
+          Continue;
+        SD.Clear;
+        SD.FromText(LdapResult.Find('defaultSecurityDescriptor').GetReadable(), DomainSID);
+
+        result := ConcatACL([result, SD.Dacl]);
+      end;
+    until ALdapClient.SearchCookie = '';
+  finally
+    ALdapClient.SearchEnd;
   end;
 end;
 
