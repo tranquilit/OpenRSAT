@@ -1217,7 +1217,7 @@ begin
   try
     c := Screen.Cursor;
     Screen.Cursor := crHourGlass;
-    FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
+    FrmRSAT.LdapClient.SearchScope := lssSingleLevel; 
     Filter := '(&(!(objectClass=nTDSSiteSettings))(!(objectClass=nTDSConnection)))';
     repeat
       if not FrmRSAT.LdapClient.Search(Node.DistinguishedName, False, Filter, ['*']) then
@@ -1251,6 +1251,7 @@ begin
     FrmRSAT.LdapClient.SearchEnd;
     Screen.Cursor := c;
   end;
+  
   if node = fADSSSiteNode then
     Node.CustomSort(@CustomSortSitesNode);
   if node.Text = 'Subnets' then
@@ -1656,9 +1657,9 @@ begin
   fADSSRootNode.ImageIndex := Ord(ileADSiteTool);
   fADSSRootNode.SelectedIndex := fADSSRootNode.ImageIndex;
   
-  fADSSSiteNode := (TreeView1.Items.AddChild(fADSSRootNode, 'Sites') as TADSSTreeNode);
+  fADSSSiteNode := (TreeView1.Items.Add(fADSSRootNode, 'Sites') as TADSSTreeNode);
   fADSSSiteNode.HasChildren := True;
-  fADSSServiceNode := (TreeView1.Items.AddChild(fADSSRootNode, 'Services') as TADSSTreeNode);
+  fADSSServiceNode := (TreeView1.Items.Add(nil, 'Services') as TADSSTreeNode);
   fADSSServiceNode.HasChildren := True;
   fADSSServiceNode.Visible := fModule.ShowService;
 
