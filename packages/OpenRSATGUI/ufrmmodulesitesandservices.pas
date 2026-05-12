@@ -184,8 +184,6 @@ type
       const aPropertyName: RawUtf8; const aRow1, aRow2: PDocVariantData;
       var aHandled: Boolean): PtrInt;
     procedure TisGrid1DblClick(Sender: TObject);
-    procedure TisGrid1FocusChanged(Sender: TBaseVirtualTree; 
-      Node: PVirtualNode; Column: TColumnIndex);
     procedure TisGrid1GetImageIndex(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
       var Ghosted: Boolean; var ImageIndex: Integer);
@@ -207,6 +205,7 @@ type
 
     fSearchWord: RawUtf8;
 
+    fADSSRootNode: TADSSTreeNode; 
     fADSSSiteNode: TADSSTreeNode;
     fADSSServiceNode: TADSSTreeNode;
 
@@ -404,8 +403,20 @@ end;
 { TFrmModuleSitesAndServices }
 
 procedure TFrmModuleSitesAndServices.Action_RefreshExecute(Sender: TObject);
+var
+  c: TCursor;
 begin
-  RefreshLdapNode();
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, '% - Execute', [Action_Refresh.Name]);
+
+  c := Screen.Cursor;
+  Screen.Cursor := crHourGlass;
+  try
+    RefreshLdapNode();
+    UpdateGrid(nil);
+  finally
+    Screen.Cursor := c;
+  end;
 end;
 
 procedure TFrmModuleSitesAndServices.Action_RefreshUpdate(Sender: TObject);
@@ -459,7 +470,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -474,7 +485,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -494,7 +505,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -565,7 +576,7 @@ begin
   begin
     InnerDelete((TreeView1.Selected as TADSSTreeNode).DistinguishedName);
   end;
-  RefreshLdapNode();
+  Action_RefreshExecute(nil);
 end;
 
 procedure TFrmModuleSitesAndServices.Action_NewAllUpdate(Sender: TObject);
@@ -730,7 +741,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -752,7 +763,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -770,12 +781,11 @@ begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Execute', [Action_NewGroup.Caption]);
 
-  ShowMessage(GetFocusedObject(True));
   vis := TVisNewObject.Create(Self, vnotGroup, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -794,7 +804,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -815,7 +825,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -835,7 +845,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -855,7 +865,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -874,7 +884,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -893,7 +903,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -912,7 +922,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -931,7 +941,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -956,7 +966,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -978,7 +988,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    RefreshLdapNode();
+    Action_RefreshExecute(nil);  
   finally
     FreeAndNil(vis);
   end;
@@ -1030,13 +1040,6 @@ begin
     Node.Selected := True
   else
     FrmRSAT.OpenProperty(TisGrid1.FocusedRow^.S['distinguishedName'], TisGrid1.FocusedRow^.S['name']);
-end;
-
-procedure TFrmModuleSitesAndServices.TisGrid1FocusChanged(
-  Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex);
-begin
-  if TreeView1.Focused then
-    TisGrid1.FocusedNode := nil;  
 end;
 
 procedure TFrmModuleSitesAndServices.TisGrid1GetImageIndex(
@@ -1310,7 +1313,14 @@ begin
   RowData.Init();
 
   if not Assigned(Node) then
+    Node := (TreeView1.Selected as TADSSTreeNode);
+  if not Assigned(Node) then
+  begin
+    if Assigned(fLog) then
+      fLog.Log(sllError, '% - No node assigned.', [TisGrid1.Name]);
     Exit;
+  end;
+
   case Node.ObjectType of
     'siteContainer': UpdateGridColumns(['name', 'type', 'description', 'location']);
     'subnetContainer': UpdateGridColumns(['name', 'site', 'location', 'type', 'description']);
@@ -1320,6 +1330,7 @@ begin
     else
       UpdateGridColumns(['name', 'type', 'description']);
   end;
+
   TisGrid1.BeginUpdate;
   FrmRSAT.LdapClient.SearchBegin();
   try
@@ -1359,7 +1370,7 @@ begin
     FrmRSAT.LdapClient.SearchEnd;
     TisGrid1.EndUpdate;
     TisGrid1.LoadData();
-    Screen.Cursor := c;
+    Screen.Cursor := c; 
   end;
 end;
 
@@ -1641,9 +1652,13 @@ var
   LdapClient: TRsatLdapClient;
 begin
   LdapClient := (Sender as TRSATLdapClient);
-  fADSSSiteNode := (TreeView1.Items.Add(nil, 'Sites') as TADSSTreeNode);
+  fADSSRootNode := (TreeView1.Items.Add(nil, 'Active Directory Sites and Services') as TADSSTreeNode);
+  fADSSRootNode.ImageIndex := Ord(ileADSiteTool);
+  fADSSRootNode.SelectedIndex := fADSSRootNode.ImageIndex;
+  
+  fADSSSiteNode := (TreeView1.Items.AddChild(fADSSRootNode, 'Sites') as TADSSTreeNode);
   fADSSSiteNode.HasChildren := True;
-  fADSSServiceNode := (TreeView1.Items.Add(nil, 'Services') as TADSSTreeNode);
+  fADSSServiceNode := (TreeView1.Items.AddChild(fADSSRootNode, 'Services') as TADSSTreeNode);
   fADSSServiceNode.HasChildren := True;
   fADSSServiceNode.Visible := fModule.ShowService;
 
@@ -1670,7 +1685,6 @@ begin
           fADSSServiceNode.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone)
         else if (cn = fADSSSiteNode.Text) then
           fADSSSiteNode.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone);
-
       end;
     until LdapClient.SearchCookie = '';
   finally
@@ -1752,7 +1766,7 @@ begin
     fLog.Log(sllTrace, 'Create', Self);
 
   fModule := TModuleADSS.Create(FrmRSAT.RSAT);
-
+  
   fModule.Option.RegisterObserver(@OnADSSOptionsChanged);
 
   Image1.Visible := not IsDarkMode;

@@ -515,7 +515,6 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       ZebraColor = 15593713
       PopupMenuOptions = [pmoShowFind, pmoShowFindNext]
       OnDblClick = TisGrid1DblClick
-      OnFocusChanged = TisGrid1FocusChanged
       OnGetImageIndex = TisGrid1GetImageIndex
       OnKeyPress = TisGrid1KeyPress
       OnCompareByRow = TisGrid1CompareByRow
