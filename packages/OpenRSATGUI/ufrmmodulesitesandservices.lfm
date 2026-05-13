@@ -106,6 +106,14 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
         Top = 2
         Style = tbsSeparator
       end
+      object ToolButton8: TToolButton
+        Left = 139
+        Top = 2
+        Caption = 'ToolButton8'
+        Enabled = False
+        ImageIndex = 57
+        OnClick = ToolButton8Click
+      end
     end
     object Image1: TImage
       Left = 689
@@ -502,8 +510,10 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       PopupMenu = PopupMenu1
       TabOrder = 0
       SelectedAndTotalLabel = Label1
-      TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toFullRowDrag]
+      TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
+      TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
       ZebraColor = 15593713
+      PopupMenuOptions = []
       OnDblClick = TisGrid1DblClick
       OnGetImageIndex = TisGrid1GetImageIndex
       OnKeyPress = TisGrid1KeyPress
@@ -533,6 +543,44 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
         Buttons = <>
         SearchInterval = 500
         OnSearch = TisSearchEdit_GridADSSSearch
+      end
+    end
+    object Splitter2: TSplitter
+      Left = 210
+      Height = 314
+      Top = 33
+      Width = 5
+      Align = alRight
+      ResizeAnchor = akRight
+    end
+    object Panel6: TPanel
+      Left = 215
+      Height = 314
+      Top = 33
+      Width = 410
+      Align = alRight
+      BevelOuter = bvNone
+      ClientHeight = 314
+      ClientWidth = 410
+      TabOrder = 3
+      Visible = False
+      object TisGrid_GridAttributes: TTisGrid
+        Left = 0
+        Height = 314
+        Top = 0
+        Width = 410
+        Align = alClient
+        Header.AutoSizeIndex = 0
+        Header.Columns = <>
+        Header.DefaultHeight = 18
+        Header.Height = 18
+        Header.MainColumn = -1
+        Header.MaxHeight = 100
+        Header.MinHeight = 18
+        Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+        Header.Style = hsFlatButtons
+        TabOrder = 0
+        ZebraColor = 15593713
       end
     end
   end
@@ -582,19 +630,184 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       OnExecute = Action_DeleteExecute
       OnUpdate = Action_DeleteUpdate
     end
+    object Action_NewAll: TAction
+      Category = 'New'
+      Caption = 'New'
+      DisableIfNoHandler = False
+      OnUpdate = Action_NewAllUpdate
+    end
+    object Action_NewServer: TAction
+      Caption = 'New Server'
+      OnExecute = Action_NewServerExecute
+      OnUpdate = Action_NewServerUpdate
+    end
+    object Action_NewSiteLink: TAction
+      OnExecute = Action_NewSiteLinkExecute
+      OnUpdate = Action_NewSiteLinkUpdate
+    end
+    object Action_NewComputer: TAction
+      Caption = 'Action_NewComputer'
+      OnExecute = Action_NewComputerExecute
+      OnUpdate = Action_NewComputerUpdate
+    end
+    object Action_NewContact: TAction
+      Caption = 'Action_NewContact'
+      OnExecute = Action_NewContactExecute
+      OnUpdate = Action_NewContactUpdate
+    end
+    object Action_NewGroup: TAction
+      Caption = 'Action_NewGroup'
+      OnExecute = Action_NewGroupExecute
+      OnUpdate = Action_NewGroupUpdate
+    end
+    object Action_NewInetOrgPerson: TAction
+      Caption = 'Action_NewInetOrgPerson'
+      OnExecute = Action_NewInetOrgPersonExecute
+      OnUpdate = Action_NewInetOrgPersonUpdate
+    end
+    object Action_NewPrinter: TAction
+      Caption = 'Action_NewPrinter'
+      OnExecute = Action_NewPrinterExecute
+      OnUpdate = Action_NewPrinterUpdate
+    end
+    object Action_NewMsDSKeyCredential: TAction
+      Caption = 'Action_NewMsDSKeyCredential'
+      OnExecute = Action_NewMsDSKeyCredentialExecute
+      OnUpdate = Action_NewMsDSKeyCredentialUpdate
+    end
+    object Action_NewUser: TAction
+      Caption = 'Action_NewUser'
+      OnExecute = Action_NewUserExecute
+      OnUpdate = Action_NewUserUpdate
+    end
+    object Action_NewSharedFolder: TAction
+      Caption = 'Action_NewSharedFolder'
+      OnExecute = Action_NewSharedFolderExecute
+      OnUpdate = Action_NewSharedFolderUpdate
+    end
+    object Action_NewSiteLinkBridge: TAction
+      Caption = 'Action_NewSiteLinkBridge'
+      OnExecute = Action_NewSiteLinkBridgeExecute
+      OnUpdate = Action_NewSiteLinkBridgeUpdate
+    end
+    object Action_NewMsDSShadowPrincipalContainer: TAction
+      Caption = 'NewMsDSShadowPrincipalContainer'
+      OnExecute = Action_NewMsDSShadowPrincipalContainerExecute
+      OnUpdate = Action_NewMsDSShadowPrincipalContainerUpdate
+    end
+    object Action_NewMsImagingPSPs: TAction
+      Caption = 'Action_NewMsImagingPSPs'
+      OnExecute = Action_NewMsImagingPSPsExecute
+      OnUpdate = Action_NewMsImagingPSPsUpdate
+    end
+    object Action_NewMsDNSServerSettings: TAction
+      Caption = 'NewMsDNSServerSettings'
+      OnExecute = Action_NewMsDNSServerSettingsExecute
+      OnUpdate = Action_NewMsDNSServerSettingsUpdate
+    end
   end
   object PopupMenu1: TPopupMenu
     OnPopup = PopupMenu1Popup
     Left = 256
     Top = 96
+    object MenuItem_DelegateControl: TMenuItem
+      Caption = 'Delegate Control'
+    end
+    object Separator1: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem_New: TMenuItem
+      Action = Action_NewAll
+      object MenuItem_NewComputer: TMenuItem
+        Action = Action_NewComputer
+        Caption = 'Computer'
+      end
+      object MenuItem_NewContact: TMenuItem
+        Action = Action_NewContact
+        Caption = 'Contact'
+      end
+      object MenuItem_NewGroup: TMenuItem
+        Action = Action_NewGroup
+        Caption = 'Group'
+      end
+      object MenuItem_NewInetOrgPerson: TMenuItem
+        Action = Action_NewInetOrgPerson
+        Caption = 'InetOrgPerson'
+      end
+      object MenuItem_NewSite: TMenuItem
+        Action = Action_NewSite
+        Caption = 'Site'
+      end
+      object MenuItem_NewServer: TMenuItem
+        Action = Action_NewServer
+        Caption = 'Server'
+      end
+      object MenuItem_NewSubnet: TMenuItem
+        Action = Action_NewSubnet
+        Caption = 'Subnet'
+      end
+      object MenuItem_NewConnection: TMenuItem
+        Caption = 'Connection'
+      end
+      object MenuItem_NewSiteLink: TMenuItem
+        Action = Action_NewSiteLink
+        Caption = 'Site Link'
+      end
+      object MenuItem_NewSiteLinkBridge: TMenuItem
+        Action = Action_NewSiteLinkBridge
+        Caption = 'Site Link Bridge'
+      end
+      object MenuItem_NewSiteSettings: TMenuItem
+        Caption = 'Site Settings'
+      end
+      object MenuItem_NewSitesContainer: TMenuItem
+        Caption = 'Sites Container'
+      end
+      object MenuItem_NewServersContainer: TMenuItem
+        Caption = 'Servers Container'
+      end
+      object MenuItem_NewMsDNSServerSettings: TMenuItem
+        Action = Action_NewMsDNSServerSettings
+        Caption = 'msDNS-ServerSettings'
+      end
+      object MenuItem_NewMsDSKeyCredential: TMenuItem
+        Action = Action_NewMsDSKeyCredential
+        Caption = 'msDS-KeyCredential'
+      end
+      object MenuItem_NewMsDSShadowPrincipal: TMenuItem
+        Caption = 'msDS-ShadowPrincipal'
+      end
+      object MenuItem_NewMsDSShadowPrincipalContainer: TMenuItem
+        Action = Action_NewMsDSShadowPrincipalContainer
+        Caption = 'msDS-ShadowPrincipalContainer'
+      end
+      object MenuItem_NewMsImagingPSPs: TMenuItem
+        Action = Action_NewMsImagingPSPs
+        Caption = 'msImaging-PSPs'
+      end
+      object MenuItem_NewPrinter: TMenuItem
+        Action = Action_NewPrinter
+        Caption = 'Printer'
+      end
+      object MenuItem_NewUser: TMenuItem
+        Action = Action_NewUser
+        Caption = 'User'
+      end
+      object MenuItem_NewSharedFolder: TMenuItem
+        Action = Action_NewSharedFolder
+        Caption = 'Shared Folder'
+      end
+    end
+    object Separator4: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem_Delete: TMenuItem
+      Action = Action_Delete
+      Caption = 'Delete'
+      ShortCut = 46
+    end
     object MenuItem_Refresh: TMenuItem
       Action = Action_Refresh
-    end
-    object MenuItem_NewSite: TMenuItem
-      Action = Action_NewSite
-    end
-    object MenuItem_NewSubnet: TMenuItem
-      Action = Action_NewSubnet
     end
     object MenuItem_Property: TMenuItem
       Action = Action_Property

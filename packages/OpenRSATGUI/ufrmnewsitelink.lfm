@@ -1,0 +1,212 @@
+object FrmNewSiteLink: TFrmNewSiteLink
+  Left = 0
+  Height = 240
+  Top = 0
+  Width = 320
+  ClientHeight = 240
+  ClientWidth = 320
+  LCLVersion = '4.6.0.0'
+  TabOrder = 0
+  DesignTop = 133
+  object Panel1: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 27
+    Top = 8
+    Width = 304
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 27
+    ClientWidth = 304
+    TabOrder = 0
+    object Label_Name: TLabel
+      AnchorSideLeft.Control = Panel1
+      AnchorSideTop.Control = Panel1
+      Left = 0
+      Height = 15
+      Top = 8
+      Width = 35
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Name:'
+    end
+    object Edit_Name: TEdit
+      AnchorSideLeft.Control = Label_Name
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Label_Name
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = Panel1
+      AnchorSideRight.Side = asrBottom
+      Left = 51
+      Height = 23
+      Top = 4
+      Width = 245
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 16
+      BorderSpacing.Right = 8
+      TabOrder = 0
+    end
+  end
+  object Panel2: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Panel1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 8
+    Height = 111
+    Top = 43
+    Width = 304
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 111
+    ClientWidth = 304
+    TabOrder = 1
+    object Label_LeftList: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Panel2
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 34
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      Caption = 'Sites not in this site link:'
+    end
+    object ListBox_NotInSiteLink: TListBox
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Label_LeftList
+      AnchorSideTop.Side = asrBottom
+      AnchorSideBottom.Control = Label_Warning
+      Left = 8
+      Height = 130
+      Top = 31
+      Width = 130
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Bottom = 8
+      ItemHeight = 0
+      TabOrder = 0
+      OnSelectionChange = ListBox_NotInSiteLinkSelectionChange
+    end
+    object Label_RightList: TLabel
+      AnchorSideLeft.Control = ListBox_InSiteLink
+      AnchorSideTop.Control = Panel2
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      Left = 262
+      Height = 15
+      Top = 8
+      Width = 34
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      Caption = 'Sites in this site link:'
+    end
+    object ListBox_InSiteLink: TListBox
+      AnchorSideTop.Control = Label_RightList
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Label_Warning
+      Left = 173
+      Height = 130
+      Top = 31
+      Width = 130
+      Anchors = [akTop, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Top = 8
+      BorderSpacing.Right = 8
+      BorderSpacing.Bottom = 8
+      ItemHeight = 0
+      TabOrder = 1
+      OnSelectionChange = ListBox_InSiteLinkSelectionChange
+    end
+    object Label_Warning: TLabel
+      AnchorSideLeft.Control = Panel2
+      AnchorSideLeft.Side = asrCenter
+      AnchorSideTop.Control = ListBox_NotInSiteLink
+      AnchorSideTop.Side = asrBottom
+      AnchorSideBottom.Control = Panel2
+      AnchorSideBottom.Side = asrBottom
+      Left = 94
+      Height = 15
+      Top = 200
+      Width = 216
+      Anchors = [akTop, akLeft, akBottom]
+      BorderSpacing.Top = 8
+      Caption = 'A site link must contain at least two sites.'
+    end
+    object Panel3: TPanel
+      AnchorSideLeft.Control = ListBox_NotInSiteLink
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = ListBox_NotInSiteLink
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = ListBox_InSiteLink
+      Left = 156
+      Height = 54
+      Top = 84
+      Width = 92
+      Anchors = [akTop, akLeft, akRight]
+      AutoSize = True
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 8
+      BevelOuter = bvNone
+      ClientHeight = 54
+      ClientWidth = 92
+      TabOrder = 2
+      object Button_Add: TButton
+        AnchorSideLeft.Control = Panel3
+        AnchorSideTop.Control = Panel3
+        AnchorSideRight.Control = Panel3
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 25
+        Top = 0
+        Width = 92
+        Anchors = [akTop, akLeft, akRight]
+        Caption = 'Add >>'
+        Enabled = False
+        TabOrder = 0
+        OnClick = Button_AddClick
+      end
+      object Button_Remove: TButton
+        AnchorSideLeft.Control = Panel3
+        AnchorSideTop.Control = Button_Add
+        AnchorSideTop.Side = asrBottom
+        AnchorSideRight.Control = Panel3
+        AnchorSideRight.Side = asrBottom
+        Left = 0
+        Height = 25
+        Top = 29
+        Width = 92
+        Anchors = [akTop, akLeft, akRight]
+        BorderSpacing.Top = 4
+        Caption = '<< Remove'
+        Enabled = False
+        TabOrder = 1
+        OnClick = Button_RemoveClick
+      end
+    end
+  end
+  object ActionList: TActionList
+    Left = 384
+    Top = 240
+    object Action_Next: TAction
+      Caption = 'Next'
+      OnExecute = Action_NextExecute
+      OnUpdate = Action_NextUpdate
+    end
+  end
+end

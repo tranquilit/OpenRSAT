@@ -568,6 +568,10 @@ msgstr ""
 msgid "New object - Inet Org. Person"
 msgstr ""
 
+#: ucommon.rsnewobjectmsdnsserversettings
+msgid "New object - msDNS-ServerSettings"
+msgstr ""
+
 #: ucommon.rsnewobjectmsdskeycredential
 msgid "New object - msDS-KeyCredential"
 msgstr ""
@@ -580,6 +584,10 @@ msgstr ""
 msgid "New object - msDS-ShadowPrincipalContainer"
 msgstr ""
 
+#: ucommon.rsnewobjectmsimagingpsps
+msgid "New object - msImaging-PSPs"
+msgstr ""
+
 #: ucommon.rsnewobjectou
 msgid "New object - OU"
 msgstr ""
@@ -588,12 +596,20 @@ msgstr ""
 msgid "New object - Printer"
 msgstr ""
 
+#: ucommon.rsnewobjectserver
+msgid "New object - Server"
+msgstr ""
+
 #: ucommon.rsnewobjectsharedfolder
 msgid "New object - Shared Folder"
 msgstr ""
 
 #: ucommon.rsnewobjectsite
 msgid "New object - Site"
+msgstr ""
+
+#: ucommon.rsnewobjectsitelink
+msgid "New Object - Site Link"
 msgstr ""
 
 #: ucommon.rsnewobjectsubnet

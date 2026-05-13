@@ -9,10 +9,10 @@ uses
   Classes,
   ExtCtrls,
   Forms,
-  StdCtrls; 
+  StdCtrls;
 
 type
-  
+
   { TFrmNewMsDSKeyCredential }
 
   TFrmNewMsDSKeyCredential = class(TFrame)
@@ -48,7 +48,7 @@ uses
   ucommon,
   ucoredatamodule,
   ursatldapclientui,
-  uvisnewobject; 
+  uvisnewobject;
 
 {$R *.lfm}
 
@@ -75,9 +75,9 @@ begin
       try
         Att := AttList.Add(atObjectClass, 'top');
         Att.Add('msDS-KeyCredential');
-        
+
         AttList.Add('msDS-KeyId', Edit_KeyId.Text);
-        
+
         DN := FormatUtf8('CN=%,%', [Edit_cn.Text, NewObject.ObjectOU]);
         if not NewObject.Ldap.Add(DN, AttList) then
           exit;
@@ -117,16 +117,16 @@ end;
 procedure TFrmNewMsDSKeyCredential.Load;
 begin
   Edit_cn.SetFocus;
-end; 
+end;
 
 constructor TFrmNewMsDSKeyCredential.Create(TheOwner: TComponent);
 var
   OwnerNewObject: TVisNewObject absolute TheOwner;
 begin
   inherited Create(TheOwner);
-  
+
   OwnerNewObject.Caption := rsNewObjectMsDSKeyCredential;
-  OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next'); 
+  OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
   OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnNext;
   OwnerNewObject.Btn_Next.Default := True;
   OwnerNewObject.Btn_Back.Action := ActionList.ActionByName('Action_Back');

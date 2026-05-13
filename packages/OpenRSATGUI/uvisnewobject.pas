@@ -23,6 +23,7 @@ type
     vnotUser,
     vnotGroup,
     vnotInetOrgPerson,
+    vnotMsDNSServerSettings,
     vnotMsDSKeyCredential,
     vnotMsDSResourcePropertyList,
     vnotMsDSShadowPrincipalContainer,
@@ -34,7 +35,10 @@ type
     vnotSite,
     vnotSubnet,
     vnotSharedFolder,
-    vnotPrinter
+    vnotPrinter,
+    vnotServer,
+    vnotSiteLink,
+    vnotSiteLinkBridge
   );
   { TVisNewObject }
 
@@ -85,11 +89,15 @@ uses
   ufrmnewsubnet,
   ufrmnewuser,
   ufrmnewinetorgperson,
+  ufrmnewmsdnsserversettings,
   ufrmnewmsdskeycredential,
   ufrmnewmsdsresourcepropertylist,
   ufrmnewmsdsshadowprincipalcontainer,
   ufrmnewmsimagingpsps,
   ufrmnewprinter,
+  ufrmnewserver,
+  ufrmnewsitelink,
+  ufrmnewsitelinkbridge,
   ucommonui;
 
 {$R *.lfm}
@@ -119,6 +127,7 @@ begin
     vnotContact: Frame := TFrmNewContact.Create(Self);
     vnotGroup: Frame := TFrmNewGroup.Create(Self);
     vnotInetOrgPerson: Frame := TFrmNewInetOrgPerson.Create(Self);
+    vnotMsDNSServerSettings: Frame := TFrmNewMsDNSServerSettings.Create(Self);
     vnotMsDSKeyCredential: Frame := TFrmNewMsDSKeyCredential.Create(Self);
     vnotMsDSResourcePropertyList: Frame := TFrmNewMsDSResourcePropertyList.Create(Self);
     vnotMsDSShadowPrincipalContainer: Frame := TFrmNewMsDSShadowPrincipalContainer.Create(Self);
@@ -130,6 +139,9 @@ begin
     vnotSubnet: Frame := TFrmNewSubnet.Create(Self, Ldap);
     vnotSharedFolder: Frame := TFrmNewSharedFolder.Create(Self);
     vnotPrinter: Frame := TFrmNewPrinter.Create(Self);
+    vnotServer: Frame := TFrmNewServer.Create(Self, Ldap);
+    vnotSiteLink: Frame := TFrmNewSiteLink.Create(Self, Ldap);
+    vnotSiteLinkBridge: Frame := TFrmNewSiteLinkBridge.Create(Self, Ldap);
     else
     begin
       Close;

@@ -277,6 +277,7 @@ uses
   ufrmpropertyaccount,
   ufrmpropertyaddress,
   ufrmpropertybitlocker,
+  ufrmpropertyconnections,
   ufrmpropertygeneraldefault,
   ufrmpropertygeneralsubnet,
   ufrmpropertygeneralcomputer,
@@ -285,6 +286,12 @@ uses
   ufrmpropertygeneralsite,
   ufrmpropertygeneraluser,
   ufrmpropertygeneralvolume,
+  ufrmpropertygeneralsitelink,
+  ufrmpropertygeneralsitelinkbridge,
+  ufrmpropertygeneralntdssitesettings,
+  ufrmpropertygeneralntdsdsa,
+  ufrmpropertygeneralintersitetransport,
+  ufrmpropertygeneralserver,
   ufrmpropertylaps,
   ufrmpropertylocation,
   ufrmpropertymanagedby,
@@ -380,6 +387,40 @@ const
     TFrmPropertySecurity,
     TFrmPropertyAttributes
   );
+  
+  PROPERTY_INTER_SITE_TRANSPORT: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralInterSiteTransport,
+    TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  ); 
+  
+  PROPERTY_SITE_LINK: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralSiteLink,
+    TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  ); 
+  
+  PROPERTY_SITE_LINK_BRIDGE: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralSiteLinkBridge,
+    TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  );
+  
+  PROPERTY_NO_GENERAL: Array of TPropertyFrameClass = (
+    TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  );
+  
+  PROPERTY_SERVER: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralServer,
+    TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  );
 
   PROPERTY_SUBNET: Array of TPropertyFrameClass = (
     TFrmPropertyGeneralSubnet,
@@ -393,6 +434,21 @@ const
     TFrmPropertyGeneralDefault,
     TFrmPropertyObject,
     TFrmPropertyNTAuthCertificates,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  );
+  
+  PROPERTY_NTDS_SITE_SETTINGS: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralNTDSSiteSettings,
+    TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  );
+  
+  PROPERTY_NTDSDSA: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralNTDSDSA,
+    TFrmPropertyConnections,
+    TFrmPropertyObject,
     TFrmPropertySecurity,
     TFrmPropertyAttributes
   );
@@ -634,7 +690,20 @@ begin
   end;
   {$endif}
   'site': property_tabs := PROPERTY_SITE;
+  'siteLink': property_tabs := PROPERTY_SITE_LINK;
+  'siteLinkBridge': property_tabs := PROPERTY_SITE_LINK_BRIDGE;
+  'mSMQEnterpriseSettings': property_tabs := PROPERTY_NO_GENERAL;
+  'nTDSSiteSettings': property_tabs := PROPERTY_NTDS_SITE_SETTINGS;
+  'nTDSDSA': property_tabs := PROPERTY_NTDSDSA;
+  'server':
+  begin
+    if not Assigned(fProperty.Attributes.Find('dNSHostName')) then
+      property_tabs := PROPERTY_NO_GENERAL
+    else
+      property_tabs := PROPERTY_SERVER;
+  end;
   'subnet': property_tabs := PROPERTY_SUBNET;
+  'interSiteTransport': property_tabs := PROPERTY_INTER_SITE_TRANSPORT;
   end;
 
   for property_tab in property_tabs do

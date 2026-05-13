@@ -14,7 +14,7 @@ uses
   tis.ui.searchedit;
 
 type
-  
+
   { TFrmNewInetOrgPerson }
 
   TFrmNewInetOrgPerson = class(TFrame)
@@ -66,7 +66,7 @@ type
     procedure Edit_InitialsChange(Sender: TObject);
     procedure Edit_LastNameChange(Sender: TObject);
     procedure Edit_PasswordKeyPress(Sender: TObject; var Key: char);
-    procedure Edit_UserLogonNameChange(Sender: TObject); 
+    procedure Edit_UserLogonNameChange(Sender: TObject);
   private
     PageID: Integer;
     procedure BuildRecapProperties;
@@ -127,7 +127,7 @@ begin
     Att.Add('organizationalPerson');
     Att.Add('user');
     Att.Add('inetOrgPerson');
-    
+
     AttList.Add(atDisplayName, Edit_FullName.Text);
     if Edit_FirstName.Text <> '' then
        AttList.Add(atGivenName, Edit_FirstName.Text);
@@ -137,7 +137,7 @@ begin
        AttList.Add(atSurname, Edit_LastName.Text);
     AttList.Add(atUserPrincipalName, FormatUtf8('%%', [Edit_UserLogonName.Text, ComboBox_UserLogonName.Text]));
     AttList.Add(atSamAccountName, Edit_UserLogonName.Text);
-    
+
     AttList.AddUnicodePwd(Edit_Password.Text);
     if CheckBox_NextLogon.Checked then
       AttList.Add(atPwdLastSet, '0');
@@ -147,7 +147,7 @@ begin
       Include(UAC, uacAccountDisable);
     if UAC <> [] then
       AttList.Add(atUserAccountControl, UserAccountControlsValue(UAC).ToString());
-    
+
     DN := FormatUtf8('CN=%,%', [Edit_FullName.Text, NewObject.ObjectOU]);
     if not NewObject.Ldap.Add(DN, AttList) then
       Exit;
@@ -155,7 +155,7 @@ begin
     FreeAndNil(Att);
     FreeAndNil(AttList);
   end;
-  
+
   if CheckBox_CannotChange.Checked then
   begin
     // https://learn.microsoft.com/en-us/windows/win32/adsi/modifying-user-cannot-change-password-ldap-provider
@@ -178,7 +178,7 @@ begin
       Exit;
   end;
 
-  NewObject.ModalResult := mrOK;    
+  NewObject.ModalResult := mrOK;
 end;
 
 procedure TFrmNewInetOrgPerson.Edit_FirstNameChange(Sender: TObject);
@@ -257,7 +257,7 @@ procedure TFrmNewInetOrgPerson.CheckBox_CannotChangeClick(Sender: TObject);
 begin
   if not CheckBox_CannotChange.Checked then
     exit;
-  
+
   if CheckBox_NextLogon.Checked then
   begin
     CheckBox_CannotChange.Checked := False;
@@ -288,7 +288,7 @@ procedure TFrmNewInetOrgPerson.CheckBox_NextLogonChange(Sender: TObject);
 begin
   if not CheckBox_NextLogon.Checked then
      exit;
-  
+
   if CheckBox_NeverExpires.Checked then
   begin
     CheckBox_NextLogon.Checked := False;
@@ -343,7 +343,7 @@ begin
   Edit_FullName.Text := FullName;
 end;
 
-procedure TFrmNewInetOrgPerson.Edit_PasswordKeyPress(Sender: TObject; 
+procedure TFrmNewInetOrgPerson.Edit_PasswordKeyPress(Sender: TObject;
   var Key: char);
 begin
   if Key = #13 then
@@ -379,9 +379,9 @@ var
   end;
 begin
   inherited Create(TheOwner);
-  
+
   OwnerNewObject.Caption := rsNewObjectInetOrgPerson;
-  OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next'); 
+  OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
   OwnerNewObject.Btn_Next.Default := True;
   OwnerNewObject.Btn_Back.Action := ActionList.ActionByName('Action_Back');
   OwnerNewObject.Btn_Back.Caption := rsNewObjectBtnBack;
@@ -389,7 +389,7 @@ begin
   ComboBox_UserLogonName.Items.Add(FormatUtf8('@%', [UserLogonFormatDN(OwnerNewObject.Edit_DN.Text, '/')]));
   ComboBox_UserLogonName.ItemIndex := 0;
   Edit_PreWindowsPrefix.Text := FormatUtf8('%/', [UpperCase(UserLogonFormatDN(OwnerNewObject.Edit_DN.Text, '.lan'))]);
-  OwnerNewObject.CallBack := @Load; 
+  OwnerNewObject.CallBack := @Load;
 end;
 
 end.

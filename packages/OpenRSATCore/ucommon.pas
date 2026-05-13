@@ -130,14 +130,18 @@ resourcestring
   rsNewObjectGroup = 'New object - Group';
   rsNewObjectOU = 'New object - OU';
   rsNewObjectInetOrgPerson = 'New object - Inet Org. Person';
+  rsNewObjectMsDNSServerSettings = 'New object - msDNS-ServerSettings';
   rsNewObjectMsDSKeyCredential = 'New object - msDS-KeyCredential';
   rsNewObjectMsDSShadowPrincipalContainer = 'New object - msDS-ShadowPrincipalContainer';
+  rsNewObjectMSImagingPSPs = 'New object - msImaging-PSPs';
   rsNewObjectMsDSResourcePropertyList = 'New object - msDS-ResourcePropertyList';
   rsNewObjectSite = 'New object - Site';
   rsNewObjectSharedFolder = 'New object - Shared Folder';
   rsNewObjectSubnet = 'New object - Subnet';
   rsNewObjectUser = 'New object - User';
   rsNewObjectPrinter = 'New object - Printer';
+  rsNewObjectServer = 'New object - Server';
+  rsNewObjectSiteLink = 'New Object - Site Link';
 
   rsNewObjectBtnBack = '< Back';
   rsNewObjectBtnNext = 'Next >';
