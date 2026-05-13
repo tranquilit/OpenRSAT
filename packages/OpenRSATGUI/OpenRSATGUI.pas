@@ -32,14 +32,15 @@ uses
   uvismodifygplink, uvisprofilemanager, uviseditaduccolumns, 
   uvisprofileconfiguration, uvisrootdseinfos, uvisshowrelationship, utheme, 
   ufrmpropertyntauthcertificates, ufrmpropertyunixattributes, 
-  uvisselectobjectsid, uvisselectobjectguid, ufrmnewinetorgperson, ufrmnewmsdsshadowprincipalcontainer, 
-  ufrmnewmsimagingpsps, ufrmnewmsdskeycredential, 
-  ufrmnewmsdsresourcepropertylist, ufrmnewprinter, ufrmnewsitelink, 
-  ufrmnewserver, ufrmnewsitelinkbridge, ufrmpropertygeneralsitelink, 
-  ufrmpropertygeneralsitelinkbridge, ufrmpropertygeneralntdssitesettings, 
-  ufrmpropertygeneralserver, ufrmpropertygeneralntdsdsa, 
-  ufrmpropertyconnections, ufrmnewmsdnsserversettings, 
-  ufrmpropertygeneralintersitetransport, LazarusPackageIntf;
+  uvisselectobjectsid, ufrmnewinetorgperson, 
+  ufrmnewmsdsshadowprincipalcontainer, ufrmnewmsimagingpsps, 
+  ufrmnewmsdskeycredential, ufrmnewmsdsresourcepropertylist, ufrmnewprinter, 
+  uvisselectobjectguid, ufrmnewsitelink, ufrmnewserver, ufrmnewsitelinkbridge, 
+  ufrmpropertygeneralsitelink, ufrmpropertygeneralsitelinkbridge, 
+  ufrmpropertygeneralntdssitesettings, ufrmpropertygeneralserver, 
+  ufrmpropertygeneralntdsdsa, ufrmpropertyconnections, 
+  ufrmnewmsdnsserversettings, ufrmpropertygeneralintersitetransport, 
+  LazarusPackageIntf;
 
 implementation
 

@@ -10,7 +10,7 @@ uses
   Forms,
   Controls,
   ExtCtrls,
-  StdCtrls, Spin,
+  StdCtrls,
   mormot.core.base,
   mormot.core.log,
   uhelpersui,
@@ -71,8 +71,6 @@ begin
 end;
 
 procedure TFrmPropertyGeneralServer.Update(Props: TProperty);
-var
-  att: TLdapAttribute;
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Update', Self);
@@ -82,11 +80,7 @@ begin
   Edit_Name.Text := fProperty.name;
   Edit_Computer.Text := fProperty.CN;
   Edit_Description.Text := fProperty.description;
-  att := fProperty.Attributes.Find('dNSHostName');
-  if Assigned(att) then
-  begin
-    Edit_Domain.Text := GetDomain(att.GetReadable());
-  end;
+  Edit_Domain.Text := DNToCN(fProperty.LdapClient.DefaultDN);
 end;
 
 function TFrmPropertyGeneralServer.GetDomain(Value: RawUtf8): RawUtf8;

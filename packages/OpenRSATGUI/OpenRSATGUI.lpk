@@ -12,7 +12,7 @@
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Files Count="101">
+    <Files Count="102">
       <Item1>
         <Filename Value="ufrmmoduleaduc.pas"/>
         <UnitName Value="ufrmmoduleaduc"/>
@@ -376,48 +376,51 @@
       <Item91>
         <Filename Value="uvisselectobjectguid.pas"/>
         <UnitName Value="uvisselectobjectguid"/>
-        <Filename Value="ufrmnewsitelink.pas"/>
-        <UnitName Value="ufrmnewsitelink"/>
+      </Item91>
       <Item92>
-        <Filename Value="ufrmnewserver.pas"/>
-        <UnitName Value="ufrmnewserver"/>
+        <Filename Value="ufrmnewsitelink.pas"/>
+        <UnitName Value="ufrmnewsitelink"/>  
       </Item92>
       <Item93>
-        <Filename Value="ufrmnewsitelinkbridge.pas"/>
-        <UnitName Value="ufrmnewsitelinkbridge"/>
+        <Filename Value="ufrmnewserver.pas"/>
+        <UnitName Value="ufrmnewserver"/> 
       </Item93>
       <Item94>
-        <Filename Value="PropertyPages\ufrmpropertygeneralsitelink.pas"/>
-        <UnitName Value="ufrmpropertygeneralsitelink"/>
+        <Filename Value="ufrmnewsitelinkbridge.pas"/>
+        <UnitName Value="ufrmnewsitelinkbridge"/>
       </Item94>
       <Item95>
-        <Filename Value="PropertyPages\ufrmpropertygeneralsitelinkbridge.pas"/>
-        <UnitName Value="ufrmpropertygeneralsitelinkbridge"/>
+        <Filename Value="PropertyPages\ufrmpropertygeneralsitelink.pas"/>
+        <UnitName Value="ufrmpropertygeneralsitelink"/>
       </Item95>
       <Item96>
-        <Filename Value="PropertyPages\ufrmpropertygeneralntdssitesettings.pas"/>
-        <UnitName Value="ufrmpropertygeneralntdssitesettings"/>
+        <Filename Value="PropertyPages\ufrmpropertygeneralsitelinkbridge.pas"/>
+        <UnitName Value="ufrmpropertygeneralsitelinkbridge"/> 
       </Item96>
       <Item97>
-        <Filename Value="PropertyPages\ufrmpropertygeneralserver.pas"/>
-        <UnitName Value="ufrmpropertygeneralserver"/>
+        <Filename Value="PropertyPages\ufrmpropertygeneralntdssitesettings.pas"/>
+        <UnitName Value="ufrmpropertygeneralntdssitesettings"/>
       </Item97>
       <Item98>
-        <Filename Value="PropertyPages\ufrmpropertygeneralntdsdsa.pas"/>
-        <UnitName Value="ufrmpropertygeneralntdsdsa"/>
+        <Filename Value="PropertyPages\ufrmpropertygeneralserver.pas"/>
+        <UnitName Value="ufrmpropertygeneralserver"/> 
       </Item98>
       <Item99>
-        <Filename Value="PropertyPages\ufrmpropertyconnections.pas"/>
-        <UnitName Value="ufrmpropertyconnections"/>
+        <Filename Value="PropertyPages\ufrmpropertygeneralntdsdsa.pas"/>
+        <UnitName Value="ufrmpropertygeneralntdsdsa"/>
       </Item99>
       <Item100>
-        <Filename Value="ufrmnewmsdnsserversettings.pas"/>
-        <UnitName Value="ufrmnewmsdnsserversettings"/>
+        <Filename Value="PropertyPages\ufrmpropertyconnections.pas"/>
+        <UnitName Value="ufrmpropertyconnections"/> 
       </Item100>
       <Item101>
-        <Filename Value="PropertyPages\ufrmpropertygeneralintersitetransport.pas"/>
-        <UnitName Value="ufrmpropertygeneralintersitetransport"/>
+        <Filename Value="ufrmnewmsdnsserversettings.pas"/>
+        <UnitName Value="ufrmnewmsdnsserversettings"/> 
       </Item101>
+      <Item102>
+        <Filename Value="PropertyPages\ufrmpropertygeneralintersitetransport.pas"/>
+        <UnitName Value="ufrmpropertygeneralintersitetransport"/> 
+      </Item102>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>

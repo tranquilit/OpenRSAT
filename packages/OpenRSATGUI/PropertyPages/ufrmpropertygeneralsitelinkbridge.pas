@@ -10,7 +10,7 @@ uses
   Forms,
   Controls,
   ExtCtrls,
-  StdCtrls, Spin,
+  StdCtrls,
   mormot.core.base,
   mormot.core.log,
   uhelpersui,

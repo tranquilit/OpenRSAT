@@ -10,7 +10,7 @@ uses
   Forms,
   Controls,
   ExtCtrls,
-  StdCtrls, Spin, tis.ui.grid.core,
+  StdCtrls, tis.ui.grid.core,
   mormot.core.base,
   mormot.core.log,
   uhelpersui,
