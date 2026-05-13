@@ -1211,6 +1211,10 @@ begin
 
   if not Assigned(Node) or (fUpdating > 0) then
     Exit;
+  
+  { Should be probably changed }
+  if Node = fADSSRootNode then
+    Exit;
 
   ChildCache.Init;
   FrmRSAT.LdapClient.SearchBegin();
@@ -1321,6 +1325,10 @@ begin
       fLog.Log(sllError, '% - No node assigned.', [TisGrid1.Name]);
     Exit;
   end;
+
+  { Should be probably changed }
+  if Node = fADSSRootNode then
+    Exit;
 
   case Node.ObjectType of
     'siteContainer': UpdateGridColumns(['name', 'type', 'description', 'location']);
