@@ -30,6 +30,7 @@ uses
   IniFiles,
   Types,
   mormot.core.variants,
+  mormot.core.unicode,
   mormot.core.text,
   mormot.core.base,
   mormot.net.ldap,
@@ -539,21 +540,16 @@ begin
 end;
 
 procedure TFrmModuleADUC.Action_CreateKeyTabExecute(Sender: TObject);
-const
-  ENC_TYPES: Array of Integer = (ENCTYPE_AES128_CTS_HMAC_SHA1_96, ENCTYPE_AES256_CTS_HMAC_SHA1_96);
 var
-  r: TLdapResult;
-  gen: TKerberosKeyTabGenerator;
-  spn, salt, Principal, Password: RawUtf8;
-  EncType, KVNO, i: Integer;
-  ServicePrincipalNames: TRawUtf8DynArray;
-  Folder, p, sAMAccountName, realm, DistinguishedName: RawUtf8;
-  LdapAttribute: TLdapAttribute;
-  IsComputer: Boolean;
+  KeyTabGenerator: TKerberosKeyTabGenerator;
+  Password: SpiUtf8;
+  Folder, FileName: RawUtf8;
+
 begin
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create KeyTab.', Self);
 
+  // Warning about trust relationships.
   if (mrYes <> MessageDlg(rsGenerateKeyTab, rsGenerateKeyTabConfirmation, mtWarning, mbYesNoCancel, 0)) then
   begin
     if Assigned(fLog) then
@@ -561,88 +557,28 @@ begin
     Exit;
   end;
 
-  DistinguishedName := GetFocusedObject();
-  r := FrmRSAT.LdapClient.SearchObject(DistinguishedName, '', ['userPrincipalName', 'dNSHostName', 'servicePrincipalName', 'sAMAccountName', 'objectClass']);
-  gen := TKerberosKeyTabGenerator.Create;
+  // Generate password
+  Password := '';
+  case MessageDlg(rsGenerateKeyTab, rsGenerateKeyTabPassword, mtConfirmation, mbYesNoCancel, 0) of
+    mrNo: Password := PasswordBox(rsGenerateKeyTab, rsGenerateKeyTabPasswordMessage);
+    mrCancel: Exit;
+  end;
+
+  // Generate KeyTab
   try
-    IsComputer := r.Find('objectClass').GetReadable(r.Find('objectClass').Count - 1) = 'computer';
-    sAMAccountName := r.Find('sAMAccountName').GetReadable();
-    realm := DNToCN(FrmRSAT.LdapClient.DefaultDN());
-    ServicePrincipalNames := Copy(r.Find('servicePrincipalName').GetAllReadable);
-
-    Principal := '';
-    if IsComputer then
-      Principal := FormatUtf8('%@%', [sAMAccountName, realm])
-    else
-      Principal := r.Find('userPrincipalName').GetReadable();
-
-    Password := PasswordBox('Enter password', 'Leave empty to generate password.');
-    if Password = '' then
-      Password := TAesPrng.Main.RandomPassword(64);
-
-    if not FrmRSAT.LdapClient.ModifyUserPassword(DistinguishedName, '', Password) then
-    begin
-      if Assigned(fLog) then
-        fLog.Log(sllError, 'Failed to modify user password (%).', [FrmRSAT.LdapClient.ResultString], Self);
-      Exit;
+    try
+      KeyTabGenerator := GenerateKeyTab(FrmRSAT.LdapClient, GetFocusedObject(), Password);
+      if not Assigned(KeyTabGenerator) then
+        raise TGenerateKeyTabException.Create('InternalError: GenerateKeyTab return a nil KeyTabGenerator.');
+    except
+      on E: TGenerateKeyTabException do
+        MessageDlg(rsGenerateKeyTab, FormatUtf8(rsGenerateKeyTabFailed, [E.Message]), mtError, mbOKCancel, 0);
     end;
-
-    /// Retrive the KVNO after password has been changed
-    LdapAttribute := FrmRSAT.LdapClient.SearchObject(DistinguishedName, '', 'msDS-KeyVersionNumber');
-    if not Assigned(LdapAttribute) then
-    begin
-      if Assigned(fLog) then
-        fLog.Log(sllError, 'Cannot find attribute.', Self);
-      Exit;
-    end;
-    KVNO := StrToInt(LdapAttribute.GetReadable());
-
-    if String(sAMAccountName).EndsWith('$') then
-      sAMAccountName := Copy(sAMAccountName, 0, Length(sAMAccountName) - 1);
-
-    salt := '';
-
-    for EncType in ENC_TYPES do
-      if not gen.AddNew(Principal, Password, IsComputer, salt, EncType) then
-      begin
-        if Assigned(fLog) then
-        begin
-          fLog.Log(sllError, 'Failed to add new entry on keytab for principal %', [Principal], Self);
-          fLog.Log(sllDebug, 'Principal: %', [Principal], Self);
-          fLog.Log(sllDebug, 'IsComputer: %', [IsComputer], Self);
-          fLog.Log(sllDebug, 'Salt: %', [Salt], Self);
-          fLog.Log(sllDebug, 'EncType: %', [EncType], Self);
-        end;
-        Exit;
-      end;
-
-    /// Add service principal names to keytab
-    for spn in ServicePrincipalNames do
-    begin
-      if (spn = '') then
-        Continue;
-      p := spn;
-      if Pos('@', p) <= 0 then
-        p := FormatUtf8('%@%', [p, realm]);
-      for EncType in ENC_TYPES do
-        if not gen.AddNew(p, Password, IsComputer, salt, EncType) then
-        begin
-          if Assigned(fLog) then
-          begin
-            fLog.Log(sllError, 'Failed to add new entry on keytab for principal %', [p], Self);
-            fLog.Log(sllDebug, 'Principal: %', [p], Self);
-            fLog.Log(sllDebug, 'IsComputer: %', [IsComputer], Self);
-            fLog.Log(sllDebug, 'Salt: %', [Salt], Self);
-            fLog.Log(sllDebug, 'EncType: %', [EncType], Self);
-          end;
-          Exit;
-        end;
-    end;
-
-    /// Update KVNO for each entry
-    for i := 0 to High(gen.Entry) do
-      gen.Entry[i].KeyVersion := KVNO;
-
+  finally
+    FillZero(Password); // Anti-Forensic
+  end;
+  try
+    // Select output folder
     SelectDirectoryDialog1.Title := rsGenerateKeyTabSelectFolder;
     if not SelectDirectoryDialog1.Execute then
     begin
@@ -653,12 +589,16 @@ begin
     Folder := SelectDirectoryDialog1.FileName;
     if not String(Folder).EndsWith(DirectorySeparator) then
       Append(Folder, DirectorySeparator);
-    gen.SaveToFile(FormatUtf8('%%.keytab', [Folder, samaccountName]));
+
+    // Save KeyTab
+    FileName := FormatUtf8('%%.keytab', [Folder, KeyTabGenerator.Entry[0].Principal]);
+    KeyTabGenerator.SaveToFile(FileName);
   finally
-    gen.Clear;
-    FreeAndNil(gen);
-    FillZero(Password, Length(Password));
+    FreeAndNil(KeyTabGenerator);
   end;
+  if (mrYes <> MessageDlg(rsGenerateKeyTab, rsGenerateKeyTabFinished, mtConfirmation, mbYesNoCancel, 0)) then
+    Exit;
+  OpenDocument(Folder);
 end;
 
 procedure TFrmModuleADUC.Action_BlockGPOInheritanceUpdate(Sender: TObject);
