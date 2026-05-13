@@ -3,7 +3,7 @@ program openrsattests;
 uses
   mormot.core.test,
   integrationtest.uadvancedsecuritypresenter,
-  unittest.uadvancedsecuritypresenter;
+  unittest.uadvancedsecuritypresenter, unittest.ugeneratekeytab;
 
 type
 
@@ -22,7 +22,8 @@ type
 procedure TOpenRSATTests.Units;
 begin
   AddCase([
-    TTestAdvancedSecurityPresenter
+    TTestAdvancedSecurityPresenter,
+    TUnitTestGenerateKeyTab
   ]);
 end;
 
