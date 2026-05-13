@@ -442,27 +442,27 @@ object FrmModuleADSI: TFrmModuleADSI
       Width = 295
       Align = alRight
       Header.AutoSizeIndex = -1
-      Header.Columns = <      
+      Header.Columns = <
         item
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
           Position = 0
           Text = 'Attribute'
           Width = 92
           PropertyName = 'attribute'
-        end      
+        end
         item
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
           Position = 1
           Text = 'Value'
           Width = 149
           PropertyName = 'value'
-        end      
+        end
         item
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
           Position = 2
           Text = 'Type'
           PropertyName = 'type'
-        end      
+        end
         item
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
           Position = 3
@@ -486,14 +486,14 @@ object FrmModuleADSI: TFrmModuleADSI
       Width = 325
       Align = alClient
       Header.AutoSizeIndex = -1
-      Header.Columns = <      
+      Header.Columns = <
         item
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus, coWrapCaption, coEditable]
           Position = 0
           Text = 'DistinguishedName'
           Width = 200
           PropertyName = 'distinguishedName'
-        end      
+        end
         item
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
           Position = 1
@@ -501,7 +501,7 @@ object FrmModuleADSI: TFrmModuleADSI
           Text = 'Name'
           Width = 200
           PropertyName = 'name'
-        end      
+        end
         item
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
           Position = 2
@@ -509,7 +509,7 @@ object FrmModuleADSI: TFrmModuleADSI
           Text = 'Type'
           Width = 150
           PropertyName = 'type'
-        end      
+        end
         item
           Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus, coWrapCaption, coEditable]
           Position = 3

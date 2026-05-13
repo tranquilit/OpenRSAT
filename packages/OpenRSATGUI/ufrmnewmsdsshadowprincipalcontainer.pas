@@ -12,7 +12,7 @@ uses
   StdCtrls;
 
 type
-  
+
   { TFrmNewMsDSShadowPrincipalContainer }
 
   TFrmNewMsDSShadowPrincipalContainer = class(TFrame)
@@ -26,7 +26,7 @@ type
   private
     procedure Load;
   public
-    constructor Create(TheOwner: TComponent); override; 
+    constructor Create(TheOwner: TComponent); override;
   end;
 
 implementation
@@ -41,7 +41,7 @@ uses
   ucommon,
   ucoredatamodule,
   ursatldapclientui,
-  uvisnewobject; 
+  uvisnewobject;
 
 {$R *.lfm}
 
@@ -59,15 +59,15 @@ begin
     Att := AttList.Add(atObjectClass, 'top');
     Att.Add('container');
     Att.Add('msDS-ShadowPrincipalContainer');
-    
+
     DN := FormatUtf8('CN=%,%', [Edit_cn.Text, NewObject.ObjectOU]);
     if not NewObject.Ldap.Add(DN, AttList) then
       Exit;
   finally
     FreeAndNil(Att);
   end;
-  
-  NewObject.ModalResult := mrOK; 
+
+  NewObject.ModalResult := mrOK;
 end;
 
 procedure TFrmNewMsDSShadowPrincipalContainer.Load;
@@ -78,14 +78,14 @@ end;
 procedure TFrmNewMsDSShadowPrincipalContainer.Action_NextUpdate(Sender: TObject);
 begin
   Action_Next.Enabled := (Edit_cn.Text <> '');
-end; 
+end;
 
 constructor TFrmNewMsDSShadowPrincipalContainer.Create(TheOwner: TComponent);
 var
   OwnerNewObject: TVisNewObject absolute TheOwner;
 begin
   inherited Create(TheOwner);
-  
+
   OwnerNewObject.Caption := rsNewObjectMsDSShadowPrincipalContainer;
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
   OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnOK;

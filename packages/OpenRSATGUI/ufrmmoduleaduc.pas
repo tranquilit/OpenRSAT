@@ -284,7 +284,7 @@ type
     procedure CheckBox_IncludeSubContainerChange(Sender: TObject);
     procedure GridADUCFocusChanged(Sender: TBaseVirtualTree; Node: PVirtualNode; Column: TColumnIndex);
     procedure GridADUCKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure GridAttributesMouseDown(Sender: TObject; Button: TMouseButton; 
+    procedure GridAttributesMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure MenuItem_EditColumnsClick(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
@@ -1106,7 +1106,7 @@ end;
 procedure TFrmModuleADUC.Action_NewInetOrgPersonUpdate(Sender: TObject);
 begin
   Action_NewInetOrgPerson.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
-end; 
+end;
 
 procedure TFrmModuleADUC.Action_NewMsDSKeyCredentialExecute(Sender: TObject);
 begin
@@ -1120,12 +1120,12 @@ begin
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;
-end; 
+end;
 
 procedure TFrmModuleADUC.Action_NewMsDSKeyCredentialUpdate(Sender: TObject);
 begin
   Action_NewMsDSKeyCredential.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
-end; 
+end;
 
 procedure TFrmModuleADUC.Action_NewMsDSShadowPrincipalContainerExecute(
   Sender: TObject);
@@ -1140,13 +1140,13 @@ begin
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;
-end; 
+end;
 
 procedure TFrmModuleADUC.Action_NewMsDSShadowPrincipalContainerUpdate(
   Sender: TObject);
 begin
   Action_NewMsDSShadowPrincipalContainer.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
-end; 
+end;
 
 procedure TFrmModuleADUC.Action_NewMsImagingPSPsExecute(Sender: TObject);
 begin
@@ -1160,12 +1160,12 @@ begin
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;
-end; 
+end;
 
 procedure TFrmModuleADUC.Action_NewMsImagingPSPsUpdate(Sender: TObject);
 begin
   Action_NewMsImagingPSPs.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
-end; 
+end;
 
 procedure TFrmModuleADUC.Action_NewOUExecute(Sender: TObject);
 begin
@@ -1657,7 +1657,7 @@ begin
   Data := GridADUC.GetNodeAsPDocVariantData(nil, True);
   if not Assigned(Data) then
     Exit;
-  
+
   LdapResult := FrmRSAT.LdapClient.SearchObject(Data^.S['objectName'],
     '', ['name', 'userAccountControl']);
   if not Assigned(LdapResult) then
@@ -1693,7 +1693,7 @@ var
 begin
   if not Assigned(GridADUC.FocusedRow) or not GridADUC.FocusedRow^.Exists('userAccountControl') then
   begin
-    Action_TaskDisableEnableAccount.Enabled := False; 
+    Action_TaskDisableEnableAccount.Enabled := False;
     exit;
   end;
 
@@ -1705,7 +1705,7 @@ begin
     Action_TaskDisableEnableAccount.Enabled := False;
     exit;
   end;
-  
+
   Action_TaskDisableEnableAccount.Enabled := True;
   if uacAccountDisable in TUserAccountControls(Data) then
     Action_TaskDisableEnableAccount.Caption := rsEnableAccount
@@ -1793,8 +1793,8 @@ begin
       begin
         if not Assigned(a) then
           continue;
-        
-        NewRow.AddValue('attributes', a.AttributeName); 
+
+        NewRow.AddValue('attributes', a.AttributeName);
         for value in a.GetAllReadable() do
         begin
           NewRow.AddOrUpdateValue('values', value);
@@ -1821,7 +1821,7 @@ begin
   end;
 end;
 
-procedure TFrmModuleADUC.GridAttributesMouseDown(Sender: TObject; 
+procedure TFrmModuleADUC.GridAttributesMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   if Button = mbLeft then
@@ -2229,14 +2229,14 @@ begin
 
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - DragDrop', [Self.Name]);
-  
+
   if Source = GridADUC then
   begin
     GridADUC.GetHitTestInfoAt(Pt.x, Pt.y, True, HitInfo);
-  
+
     Data := GridADUC.GetNodeAsPDocVariantData(HitInfo.HitNode);
     BaseDN := Data^.U['objectName'];
-  
+
     Node := GridADUC.GetFirstSelected();
     if not Assigned(Node) then
     begin
@@ -2244,7 +2244,7 @@ begin
         fLog.Log(sllWarning, '% - No selected node.', [Self.Name]);
       Exit;
     end;
-  
+
     repeat
       Data := GridADUC.GetNodeAsPDocVariantData(Node);
       oldDN := data^.U['objectName'];
@@ -2253,7 +2253,7 @@ begin
       Insert(oldDN, oldDNS, Length(oldDNS));
       Node := GridADUC.GetNextSelected(Node);
     until Node = nil;
-  
+
     FrmRSAT.LdapClient.MoveLdapEntries(oldDNS, newDNS);
     if Assigned(fLog) then
       fLog.Log(sllInfo, '% - % entries moved.', [Self.Name, IntToStr(Length(oldDNS))]);
@@ -2869,13 +2869,13 @@ begin
     NewColumn := TTisGridColumn(GridADUC.Header.Columns.Add);
     NewColumn.Width := 150;
     NewColumn.PropertyName := Columns[i];
-    Filter := FormatUtf8('%(lDAPDisplayName=%)', [Filter, Columns[i]]);  
+    Filter := FormatUtf8('%(lDAPDisplayName=%)', [Filter, Columns[i]]);
   end;
   if Filter = '' then
     Exit;
   Filter := FormatUtf8('(|%)', [Filter]);
-  
-  try  
+
+  try
     OnSearch := FrmRSAT.LdapClient.OnSearch;
     FrmRSAT.LdapClient.OnSearch := nil;
     if not FrmRSAT.LdapClient.Search(FrmRSAT.LdapClient.SchemaDN, False, Filter, ['lDAPDisplayName', 'name']) then

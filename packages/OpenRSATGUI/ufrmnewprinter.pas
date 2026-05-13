@@ -14,7 +14,7 @@ uses
   SysUtils,
   mormot.core.base;
 
-type 
+type
   { TFrmNewPrinter }
   TFrmNewPrinter = class(TFrame)
     Action_Next: TAction;
@@ -123,7 +123,7 @@ begin
     FreeAndNil(AttrList);
   end;
 
-  VisNewObject.ModalResult := mrOK; 
+  VisNewObject.ModalResult := mrOK;
 end;
 
 procedure TFrmNewPrinter.Action_NextUpdate(Sender: TObject);

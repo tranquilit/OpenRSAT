@@ -9,10 +9,10 @@ uses
   Classes,
   ExtCtrls,
   Forms,
-  StdCtrls; 
+  StdCtrls;
 
 type
-  
+
   { TFrmNewMsDNSServerSettings }
 
   TFrmNewMsDNSServerSettings = class(TFrame)
@@ -41,7 +41,7 @@ uses
   ucommon,
   ucoredatamodule,
   ursatldapclientui,
-  uvisnewobject; 
+  uvisnewobject;
 
 {$R *.lfm}
 
@@ -62,14 +62,14 @@ begin
   try
     Att := AttList.Add(atObjectClass, 'top');
     Att.Add('msDNS-ServerSettings');
-    
+
     DN := FormatUtf8('CN=%,%', [Edit_cn.Text, NewObject.ObjectOU]);
     if not NewObject.Ldap.Add(DN, AttList) then
       Exit;
   finally
     FreeAndNil(Att);
   end;
-  
+
   NewObject.ModalResult := mrOK;
 end;
 
@@ -83,14 +83,14 @@ var
   OwnerNewObject: TVisNewObject absolute TheOwner;
 begin
   inherited Create(TheOwner);
-  
+
   OwnerNewObject.Caption := rsNewObjectMsDNSServerSettings;
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
   OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnOK;
   OwnerNewObject.Btn_Next.Default := True;
   OwnerNewObject.Btn_Back.Visible := False;
   OwnerNewObject.CallBack := @Load;
-end; 
+end;
 
 end.
 

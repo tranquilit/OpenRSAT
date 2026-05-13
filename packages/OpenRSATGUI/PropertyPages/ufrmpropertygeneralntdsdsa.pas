@@ -18,7 +18,7 @@ uses
   upropertyframe;
 
 type
-  
+
   { TFrmPropertyGeneralNTDSDSA }
 
   TFrmPropertyGeneralNTDSDSA = class(TPropertyFrame)
@@ -40,7 +40,7 @@ type
     fProperty: TProperty;
   public
     constructor Create(TheOwner: TComponent); override;
-    procedure Update(Props: TProperty); override; 
+    procedure Update(Props: TProperty); override;
   end;
 
 implementation
@@ -64,7 +64,7 @@ begin
     fLog.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
-  
+
   Edit_Name.Text := fProperty.name;
   Edit_Description.Text := fProperty.description;
 end;

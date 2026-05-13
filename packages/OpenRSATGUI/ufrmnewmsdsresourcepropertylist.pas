@@ -12,7 +12,7 @@ uses
   StdCtrls;
 
 type
-  
+
   { TFrmNewMsDSResourcePropertyList }
 
   TFrmNewMsDSResourcePropertyList = class(TFrame)
@@ -41,7 +41,7 @@ uses
   ucommon,
   ucoredatamodule,
   ursatldapclientui,
-  uvisnewobject; 
+  uvisnewobject;
 
 {$R *.lfm}
 
@@ -57,26 +57,26 @@ begin
   try
     Att := AttList.Add(atObjectClass, 'top');
     Att.Add('msDS-ResourcePropertyList');
-    
+
     DN := FormatUtf8('CN=%,%', [Edit_cn.Text, NewObject.ObjectOU]);
     if not NewObject.Ldap.Add(DN, AttList) then
       Exit;
   finally
     FreeAndNil(Att);
   end;
-  
-  NewObject.ModalResult := mrOK; 
+
+  NewObject.ModalResult := mrOK;
 
 end;
 
 procedure TFrmNewMsDSResourcePropertyList.Load;
 begin
   Edit_cn.SetFocus;
-end; 
+end;
 
 procedure TFrmNewMsDSResourcePropertyList.Action_NextUpdate(Sender: TObject);
 begin
-  Action_Next.Enabled := (Edit_cn.Text <> ''); 
+  Action_Next.Enabled := (Edit_cn.Text <> '');
 end;
 
 constructor TFrmNewMsDSResourcePropertyList.Create(TheOwner: TComponent);
@@ -84,7 +84,7 @@ var
   OwnerNewObject: TVisNewObject absolute TheOwner;
 begin
   inherited Create(TheOwner);
-  
+
   OwnerNewObject.Caption := rsNewObjectMsDSResourcePropertyList;
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
   OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnOK;

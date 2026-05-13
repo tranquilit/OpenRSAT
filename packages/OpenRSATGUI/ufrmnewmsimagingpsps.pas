@@ -12,7 +12,7 @@ uses
   StdCtrls;
 
 type
-  
+
   { TFrmNewMsImagingPSPs }
 
   TFrmNewMsImagingPSPs = class(TFrame)
@@ -26,7 +26,7 @@ type
   private
     procedure Load;
   public
-    constructor Create(TheOwner: TComponent); override; 
+    constructor Create(TheOwner: TComponent); override;
   end;
 
 implementation
@@ -60,14 +60,14 @@ begin
     Att := AttList.Add(atObjectClass, 'top');
     Att.Add('container');
     Att.Add('msImaging-PSPs');
-    
+
     DN := FormatUtf8('CN=%,%', [Edit_cn.Text, NewObject.ObjectOU]);
     if not NewObject.Ldap.Add(DN, AttList) then
       Exit;
   finally
     FreeAndNil(Att);
   end;
-  
+
   NewObject.ModalResult := mrOK;
 end;
 
@@ -86,14 +86,14 @@ var
   OwnerNewObject: TVisNewObject absolute TheOwner;
 begin
   inherited Create(TheOwner);
-  
+
   OwnerNewObject.Caption := rsNewObjectMSImagingPSPs;
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
   OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnOK;
   OwnerNewObject.Btn_Next.Default := True;
   OwnerNewObject.Btn_Back.Visible := False;
   OwnerNewObject.CallBack := @Load;
-end;  
+end;
 
 end.
 

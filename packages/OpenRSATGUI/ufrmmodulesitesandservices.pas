@@ -137,7 +137,7 @@ type
     ToolButton8: TToolButton;
     TreeView1: TTreeView;
     {$push}{$warn 5024 off}
-    
+
     procedure Action_NewAllUpdate(Sender: TObject);
     procedure Action_DeleteExecute(Sender: TObject);
     procedure Action_DeleteUpdate(Sender: TObject);
@@ -205,7 +205,7 @@ type
 
     fSearchWord: RawUtf8;
 
-    fADSSRootNode: TADSSTreeNode; 
+    fADSSRootNode: TADSSTreeNode;
     fADSSSiteNode: TADSSTreeNode;
     fADSSServiceNode: TADSSTreeNode;
 
@@ -270,7 +270,7 @@ type
     naContact,                       // New Contact
     naGroup,                         // New Group
     naInetOrgPerson,                 // New InetOrgPerson
-    naPrinter,                       // New Printer 
+    naPrinter,                       // New Printer
     naMsDNSServerSettings,           // New Ms-DS ServerSettings
     naMsDSKeyCredential,             // New Ms-DS KeyCredential
     naMsDSShadowPrincipal,           // New Ms-DS ShadowPrincipal
@@ -550,7 +550,7 @@ var
 
         if (mResultNonLeaf <> mrYes) and (mResultNonLeaf <> mrYesToAll) then
           Exit;
-        
+
         if not FrmRSAT.LdapClient.Delete((TreeView1.Selected as TADSSTreeNode).DistinguishedName, True) then
           Exit;
       end;
@@ -591,7 +591,7 @@ const
   SitesContainerNew = [
     naSite
   ];
-  
+
   SubnetContainerNew = [
     naSubnet
   ];
@@ -609,12 +609,12 @@ const
   NTDSDSANew = [
     naConnection
   ];
-  
+
   InterSiteTransportNew = [
     naSiteLink,
     naSiteLinkBridge
   ];
-  
+
   ServicesNew = [
     naComputer,
     naContact,
@@ -627,7 +627,7 @@ const
     naUser,
     naSharedFolder
   ];
-  
+
 begin
   menuItems := [
     MenuItem_NewComputer,
@@ -654,7 +654,7 @@ begin
   ];
   filter := 0;
   newList := [];
-  
+
   ObjectClass := GetFocusedObjectClass;
 
   case ObjectClass of
@@ -668,7 +668,7 @@ begin
     else
       TSynLog.Add.Log(sllWarning, FormatUtf8('"objectClass" not yet implemented: %', [ObjectClass]));
   end;
-  
+
   // Create filter to allow MenuItem_TreeNew visibility
   for listItem in newList do
     filter := filter or (UInt64(1) shl Ord(listItem));
@@ -689,7 +689,7 @@ begin
       Exit;
     end;
   end;
-  Action_NewAll.Visible := False;   
+  Action_NewAll.Visible := False;
 end;
 
 procedure TFrmModuleSitesAndServices.Action_DeleteUpdate(Sender: TObject);
@@ -749,7 +749,7 @@ end;
 
 procedure TFrmModuleSitesAndServices.Action_NewComputerUpdate(Sender: TObject);
 begin
-  Action_NewComputer.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected; 
+  Action_NewComputer.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
 procedure TFrmModuleSitesAndServices.Action_NewContactExecute(Sender: TObject);
@@ -774,7 +774,7 @@ begin
   Action_NewContact.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
-procedure TFrmModuleSitesAndServices.Action_NewGroupExecute(Sender: TObject);                                                                   
+procedure TFrmModuleSitesAndServices.Action_NewGroupExecute(Sender: TObject);
 var
   vis: TVisNewObject;
 begin
@@ -829,12 +829,12 @@ begin
   finally
     FreeAndNil(vis);
   end;
-end; 
+end;
 
 procedure TFrmModuleSitesAndServices.Action_NewMsDNSServerSettingsUpdate(
   Sender: TObject);
 begin
-  Action_NewMsDNSServerSettings.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;  
+  Action_NewMsDNSServerSettings.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
 procedure TFrmModuleSitesAndServices.Action_NewMsDSKeyCredentialExecute(Sender: TObject);
@@ -849,12 +849,12 @@ begin
   finally
     FreeAndNil(vis);
   end;
-end; 
+end;
 
 procedure TFrmModuleSitesAndServices.Action_NewMsDSKeyCredentialUpdate(
   Sender: TObject);
 begin
-  Action_NewMsDSKeyCredential.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;  
+  Action_NewMsDSKeyCredential.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
 procedure TFrmModuleSitesAndServices.Action_NewMsDSShadowPrincipalContainerExecute(Sender: TObject);
@@ -888,16 +888,16 @@ begin
   finally
     FreeAndNil(vis);
   end;
-end; 
+end;
 
 procedure TFrmModuleSitesAndServices.Action_NewMsImagingPSPsUpdate(Sender: TObject);
 begin
-  Action_NewMsImagingPSPs.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected; 
+  Action_NewMsImagingPSPs.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
 procedure TFrmModuleSitesAndServices.Action_NewPrinterExecute(Sender: TObject);
 var
-  vis: TVisNewObject; 
+  vis: TVisNewObject;
 begin
   vis := TVisNewObject.Create(Self, vnotPrinter, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
@@ -934,7 +934,7 @@ begin
 end;
 
 procedure TFrmModuleSitesAndServices.Action_NewSharedFolderExecute(Sender: TObject);
-var                                                                           
+var
   vis: TVisNewObject;
 begin
   vis := TVisNewObject.Create(Self, vnotSharedFolder, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
@@ -959,7 +959,7 @@ begin
 end;
 
 procedure TFrmModuleSitesAndServices.Action_NewSubnetExecute(Sender: TObject);
-var                                                                           
+var
   vis: TVisNewObject;
 begin
   vis := TVisNewObject.Create(Self, vnotSubnet, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
@@ -988,7 +988,7 @@ begin
   try
     vis.Ldap := FrmRSAT.LdapClient;
     vis.ShowModal;
-    Action_RefreshExecute(nil);  
+    Action_RefreshExecute(nil);
   finally
     FreeAndNil(vis);
   end;
@@ -996,7 +996,7 @@ end;
 
 procedure TFrmModuleSitesAndServices.Action_NewUserUpdate(Sender: TObject);
 begin
-  Action_NewUser.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected; 
+  Action_NewUser.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected;
 end;
 
 procedure TFrmModuleSitesAndServices.Action_PropertyExecute(Sender: TObject);
@@ -1211,7 +1211,7 @@ begin
 
   if not Assigned(Node) or (fUpdating > 0) then
     Exit;
-  
+
   { Should be probably changed }
   if Node = fADSSRootNode then
     Exit;
@@ -1221,7 +1221,7 @@ begin
   try
     c := Screen.Cursor;
     Screen.Cursor := crHourGlass;
-    FrmRSAT.LdapClient.SearchScope := lssSingleLevel; 
+    FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
     Filter := '(&(!(objectClass=nTDSSiteSettings))(!(objectClass=nTDSConnection)))';
     repeat
       if not FrmRSAT.LdapClient.Search(Node.DistinguishedName, False, Filter, ['*']) then
@@ -1255,7 +1255,7 @@ begin
     FrmRSAT.LdapClient.SearchEnd;
     Screen.Cursor := c;
   end;
-  
+
   if node = fADSSSiteNode then
     Node.CustomSort(@CustomSortSitesNode);
   if node.Text = 'Subnets' then
@@ -1379,7 +1379,7 @@ begin
     FrmRSAT.LdapClient.SearchEnd;
     TisGrid1.EndUpdate;
     TisGrid1.LoadData();
-    Screen.Cursor := c; 
+    Screen.Cursor := c;
   end;
 end;
 
@@ -1664,7 +1664,7 @@ begin
   fADSSRootNode := (TreeView1.Items.Add(nil, 'Active Directory Sites and Services') as TADSSTreeNode);
   fADSSRootNode.ImageIndex := Ord(ileADSiteTool);
   fADSSRootNode.SelectedIndex := fADSSRootNode.ImageIndex;
-  
+
   fADSSSiteNode := (TreeView1.Items.Add(fADSSRootNode, 'Sites') as TADSSTreeNode);
   fADSSSiteNode.HasChildren := True;
   fADSSServiceNode := (TreeView1.Items.Add(nil, 'Services') as TADSSTreeNode);
@@ -1775,7 +1775,7 @@ begin
     fLog.Log(sllTrace, 'Create', Self);
 
   fModule := TModuleADSS.Create(FrmRSAT.RSAT);
-  
+
   fModule.Option.RegisterObserver(@OnADSSOptionsChanged);
 
   Image1.Visible := not IsDarkMode;

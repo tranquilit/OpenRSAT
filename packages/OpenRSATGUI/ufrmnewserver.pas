@@ -14,10 +14,10 @@ uses
   tis.ui.grid.core,
   mormot.core.base,
   mormot.net.ldap,
-  ursatldapclient; 
+  ursatldapclient;
 
 type
-  
+
   { TFrmNewServer }
 
   TFrmNewServer = class(TFrame)
@@ -45,7 +45,7 @@ uses
   ucommonui,
   ucoredatamodule,
   ursatldapclientui,
-  uvisnewobject; 
+  uvisnewobject;
 
 {$R *.lfm}
 
@@ -67,7 +67,7 @@ begin
   finally
     FreeAndNil(AttributeList);
   end;
-end; 
+end;
 
 procedure TFrmNewServer.Action_NextUpdate(Sender: TObject);
 begin
