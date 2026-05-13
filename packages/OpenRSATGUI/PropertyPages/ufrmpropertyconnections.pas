@@ -15,10 +15,10 @@ uses
   mormot.core.log,
   uhelpersui,
   uproperty,
-  upropertyframe;  
+  upropertyframe;
 
 type
-  
+
   { TFrmPropertyConnections }
 
   TFrmPropertyConnections = class(TPropertyFrame)
@@ -33,7 +33,7 @@ type
     fProperty: TProperty;
   public
     constructor Create(TheOwner: TComponent); override;
-    procedure Update(Props: TProperty); override; 
+    procedure Update(Props: TProperty); override;
   end;
 
 implementation
@@ -57,8 +57,8 @@ begin
     fLog.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
-  
-end; 
+
+end;
 
 end.
 

@@ -15,10 +15,10 @@ uses
   mormot.core.log,
   uhelpersui,
   uproperty,
-  upropertyframe; 
+  upropertyframe;
 
 type
-  
+
   { TFrmPropertyGeneralInterSiteTransport }
 
   TFrmPropertyGeneralInterSiteTransport = class(TPropertyFrame)
@@ -36,7 +36,7 @@ type
     fProperty: TProperty;
   public
     constructor Create(TheOwner: TComponent); override;
-    procedure Update(Props: TProperty); override; 
+    procedure Update(Props: TProperty); override;
   end;
 
 implementation
@@ -60,7 +60,7 @@ begin
     fLog.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
-  
+
   Edit_Name.Text := fProperty.name;
   Edit_Description.Text := fProperty.description;
 end;

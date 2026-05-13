@@ -379,11 +379,11 @@
       </Item91>
       <Item92>
         <Filename Value="ufrmnewsitelink.pas"/>
-        <UnitName Value="ufrmnewsitelink"/>  
+        <UnitName Value="ufrmnewsitelink"/>
       </Item92>
       <Item93>
         <Filename Value="ufrmnewserver.pas"/>
-        <UnitName Value="ufrmnewserver"/> 
+        <UnitName Value="ufrmnewserver"/>
       </Item93>
       <Item94>
         <Filename Value="ufrmnewsitelinkbridge.pas"/>
@@ -395,7 +395,7 @@
       </Item95>
       <Item96>
         <Filename Value="PropertyPages\ufrmpropertygeneralsitelinkbridge.pas"/>
-        <UnitName Value="ufrmpropertygeneralsitelinkbridge"/> 
+        <UnitName Value="ufrmpropertygeneralsitelinkbridge"/>
       </Item96>
       <Item97>
         <Filename Value="PropertyPages\ufrmpropertygeneralntdssitesettings.pas"/>
@@ -403,7 +403,7 @@
       </Item97>
       <Item98>
         <Filename Value="PropertyPages\ufrmpropertygeneralserver.pas"/>
-        <UnitName Value="ufrmpropertygeneralserver"/> 
+        <UnitName Value="ufrmpropertygeneralserver"/>
       </Item98>
       <Item99>
         <Filename Value="PropertyPages\ufrmpropertygeneralntdsdsa.pas"/>
@@ -411,15 +411,15 @@
       </Item99>
       <Item100>
         <Filename Value="PropertyPages\ufrmpropertyconnections.pas"/>
-        <UnitName Value="ufrmpropertyconnections"/> 
+        <UnitName Value="ufrmpropertyconnections"/>
       </Item100>
       <Item101>
         <Filename Value="ufrmnewmsdnsserversettings.pas"/>
-        <UnitName Value="ufrmnewmsdnsserversettings"/> 
+        <UnitName Value="ufrmnewmsdnsserversettings"/>
       </Item101>
       <Item102>
         <Filename Value="PropertyPages\ufrmpropertygeneralintersitetransport.pas"/>
-        <UnitName Value="ufrmpropertygeneralintersitetransport"/> 
+        <UnitName Value="ufrmpropertygeneralintersitetransport"/>
       </Item102>
     </Files>
     <CompatibilityMode Value="True"/>

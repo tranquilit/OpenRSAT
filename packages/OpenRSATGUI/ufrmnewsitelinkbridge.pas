@@ -18,7 +18,7 @@ uses
   ursatldapclient;
 
 type
-  
+
   { TFrmNewSiteLinkBridge }
 
   TFrmNewSiteLinkBridge = class(TFrame)
@@ -40,9 +40,9 @@ type
     procedure Action_NextUpdate(Sender: TObject);
     procedure Button_AddClick(Sender: TObject);
     procedure Button_RemoveClick(Sender: TObject);
-    procedure ListBox_InSiteLinkBridgeSelectionChange(Sender: TObject; 
+    procedure ListBox_InSiteLinkBridgeSelectionChange(Sender: TObject;
       User: boolean);
-    procedure ListBox_NotInSiteLinkBridgeSelectionChange(Sender: TObject; 
+    procedure ListBox_NotInSiteLinkBridgeSelectionChange(Sender: TObject;
       User: boolean);
   private
     fLdap: TRsatLdapClient;
@@ -59,7 +59,7 @@ uses
   mormot.core.variants,
   ucommon,
   ucoredatamodule,
-  uvisnewobject; 
+  uvisnewobject;
 
 {$R *.lfm}
 
@@ -119,21 +119,21 @@ end;
 procedure TFrmNewSiteLinkBridge.ListBox_InSiteLinkBridgeSelectionChange(
   Sender: TObject; User: boolean);
 begin
-  Button_Remove.Enabled := True; 
+  Button_Remove.Enabled := True;
   Button_Add.Enabled := False;
 end;
 
 procedure TFrmNewSiteLinkBridge.ListBox_NotInSiteLinkBridgeSelectionChange(
   Sender: TObject; User: boolean);
 begin
-  Button_Add.Enabled := True; 
+  Button_Add.Enabled := True;
   Button_Remove.Enabled := False;
-end; 
+end;
 
 procedure TFrmNewSiteLinkBridge.Load;
 begin
   Edit_Name.SetFocus;
-end; 
+end;
 
 constructor TFrmNewSiteLinkBridge.Create(TheOwner: TComponent; ALdap: TRsatLdapClient);
 var
@@ -151,7 +151,7 @@ begin
   OwnerNewObject.Btn_Back.Visible := False;
   OwnerNewObject.Image_Object.ImageIndex := Ord(ileADUnknown);
   OwnerNewObject.CallBack := @Load;
-end;   
+end;
 
 end.
 

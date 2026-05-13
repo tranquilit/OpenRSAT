@@ -15,10 +15,10 @@ uses
   mormot.core.log,
   uhelpersui,
   uproperty,
-  upropertyframe;   
+  upropertyframe;
 
 type
-  
+
   { TFrmPropertyGeneralNTDSSiteSettings }
 
   TFrmPropertyGeneralNTDSSiteSettings = class(TPropertyFrame)
@@ -47,7 +47,7 @@ type
     function RemoveCN(Value: RawUtf8): RawUtf8;
   public
     constructor Create(TheOwner: TComponent); override;
-    procedure Update(Props: TProperty); override; 
+    procedure Update(Props: TProperty); override;
   end;
 
 implementation
@@ -76,7 +76,7 @@ begin
     fLog.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
-  
+
   Edit_Name.Text := fProperty.name;
   Edit_Description.Text := fProperty.description;
   att := fProperty.Attributes.Find('interSiteTopologyGenerator');
@@ -85,7 +85,7 @@ begin
     Edit_Server.Text := RemoveCN(GetArgByPosition(att.GetReadable, 2));
     Edit_Site.Text := RemoveCN(GetArgByPosition(att.GetReadable, 4));
   end;
-end; 
+end;
 
 function TFrmPropertyGeneralNTDSSiteSettings.GetArgByPosition(Attribute: RawUtf8; n: Integer): RawUtf8;
 var
@@ -98,14 +98,14 @@ begin
     startPos := PosEx(',', Attribute, startPos);
     if startPos = 0 then
       exit;
-    
+
     Inc(startPos);
   end;
-  
+
   endPos := PosEx(',', Attribute, startPos);
   if endPos = 0 then
     endPos := len + 1;
-  
+
   Result := Copy(Attribute, startPos, endPos - startPos);
 end;
 
@@ -116,7 +116,7 @@ begin
   p := Pos('=', Value);
   if p = 0 then
     exit('');
-  
+
   Result := Copy(Value, p + 1, Length(Value) - p);
 end;
 

@@ -19,7 +19,7 @@ uses
   upropertyframe;
 
 type
-  
+
   { TFrmPropertyGeneralSiteLink }
 
   TFrmPropertyGeneralSiteLink = class(TPropertyFrame)
@@ -48,7 +48,7 @@ type
     procedure Button_AddClick(Sender: TObject);
     procedure Button_RemoveClick(Sender: TObject);
     procedure ListBox_InSiteLinkSelectionChange(Sender: TObject; User: boolean);
-    procedure ListBox_NotInSiteLinkSelectionChange(Sender: TObject; 
+    procedure ListBox_NotInSiteLinkSelectionChange(Sender: TObject;
       User: boolean);
   private
     fLog: TSynLog;
@@ -88,21 +88,21 @@ begin
     ListBox_NotInSiteLink.SetFocus;
     ListBox_InSiteLink.Items.Delete(idx);
   end;
-end;  
+end;
 
 procedure TFrmPropertyGeneralSiteLink.ListBox_InSiteLinkSelectionChange(
   Sender: TObject; User: boolean);
 begin
-  Button_Remove.Enabled := True; 
+  Button_Remove.Enabled := True;
   Button_Add.Enabled := False;
-end;  
+end;
 
 procedure TFrmPropertyGeneralSiteLink.ListBox_NotInSiteLinkSelectionChange(
   Sender: TObject; User: boolean);
 begin
-  Button_Add.Enabled := True; 
+  Button_Add.Enabled := True;
   Button_Remove.Enabled := False;
-end;   
+end;
 
 constructor TFrmPropertyGeneralSiteLink.Create(TheOwner: TComponent);
 begin
@@ -121,10 +121,10 @@ begin
     fLog.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
-  
+
   Edit_Name.CaptionNoChange := fProperty.name;
-  Edit_Description.CaptionNoChange := fProperty.description; 
-end; 
+  Edit_Description.CaptionNoChange := fProperty.description;
+end;
 
 end.
 

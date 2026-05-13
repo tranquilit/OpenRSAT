@@ -15,10 +15,10 @@ uses
   tis.ui.grid.core,
   mormot.core.base,
   mormot.net.ldap,
-  ursatldapclient; 
+  ursatldapclient;
 
 type
-  
+
   { TFrmNewSiteLink }
 
   TFrmNewSiteLink = class(TFrame)
@@ -41,7 +41,7 @@ type
     procedure Button_AddClick(Sender: TObject);
     procedure Button_RemoveClick(Sender: TObject);
     procedure ListBox_InSiteLinkSelectionChange(Sender: TObject; User: boolean);
-    procedure ListBox_NotInSiteLinkSelectionChange(Sender: TObject; 
+    procedure ListBox_NotInSiteLinkSelectionChange(Sender: TObject;
       User: boolean);
   private
     fLdap: TRsatLdapClient;
@@ -120,17 +120,17 @@ begin
   end;
 end;
 
-procedure TFrmNewSiteLink.ListBox_InSiteLinkSelectionChange(Sender: TObject; 
+procedure TFrmNewSiteLink.ListBox_InSiteLinkSelectionChange(Sender: TObject;
   User: boolean);
 begin
-  Button_Remove.Enabled := True; 
+  Button_Remove.Enabled := True;
   Button_Add.Enabled := False;
 end;
 
-procedure TFrmNewSiteLink.ListBox_NotInSiteLinkSelectionChange(Sender: TObject; 
+procedure TFrmNewSiteLink.ListBox_NotInSiteLinkSelectionChange(Sender: TObject;
   User: boolean);
 begin
-  Button_Add.Enabled := True; 
+  Button_Add.Enabled := True;
   Button_Remove.Enabled := False;
 end;
 
@@ -150,7 +150,7 @@ begin
   OwnerNewObject.Btn_Back.Visible := False;
   OwnerNewObject.Image_Object.ImageIndex := Ord(ileADUnknown);
   OwnerNewObject.CallBack := @Load;
-end; 
+end;
 
 end.
 

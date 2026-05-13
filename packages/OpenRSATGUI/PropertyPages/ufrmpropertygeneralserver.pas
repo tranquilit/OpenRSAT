@@ -15,10 +15,10 @@ uses
   mormot.core.log,
   uhelpersui,
   uproperty,
-  upropertyframe; 
+  upropertyframe;
 
 type
-  
+
   { TFrmPropertyGeneralServer }
 
   TFrmPropertyGeneralServer = class(TPropertyFrame)
@@ -49,8 +49,8 @@ type
     function GetDomain(Value: RawUtf8): RawUtf8;
   public
     constructor Create(TheOwner: TComponent); override;
-    procedure Update(Props: TProperty); override; 
-  end; 
+    procedure Update(Props: TProperty); override;
+  end;
 
 implementation
 
@@ -76,7 +76,7 @@ begin
     fLog.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
-  
+
   Edit_Name.Text := fProperty.name;
   Edit_Computer.Text := fProperty.CN;
   Edit_Description.Text := fProperty.description;
@@ -90,7 +90,7 @@ begin
   p := Pos('.', Value);
   if p = 0 then
     exit('');
-  
+
   Result := Copy(Value, p + 1, Length(Value) - p);
 end;
 
