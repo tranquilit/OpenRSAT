@@ -8,6 +8,9 @@ uses
   Classes,
   SysUtils,
   mormot.core.base,
+  mormot.core.unicode,
+  mormot.crypt.core,
+  mormot.crypt.secure,
   mormot.net.ldap,
   {$IFDEF OPENRSATTESTS}
   mormot.core.test,
@@ -17,6 +20,13 @@ uses
 
 type
   PSecurityDescriptor = ^TSecurityDescriptor;
+
+  { TGenerateKeyTabException }
+
+  TGenerateKeyTabException = class(Exception)
+  public
+    constructor Create(const fmt: RawUtf8; const args: array of const); overload;
+  end;
 
   {$IFDEF OPENRSATTESTS}
 
@@ -443,10 +453,13 @@ resourcestring
   rsPrepareDJOINConfirmation = 'You are about to change the password for the selected machines. This will remove the trust relationships with the domain. Continue?';
   rsPrepareDJOINSelectFolder = 'Select folder to store djoin files';
 
-  rsGenerateKeyTab = 'Generate KEYTAB';
-  rsGenerateKeyTabFinished = 'Generate KEYTAB finished. Open folder?';
+  rsGenerateKeyTab = 'Generate KeyTab';
+  rsGenerateKeyTabFailed = 'Generate KeyTab failed: %';
+  rsGenerateKeyTabFinished = 'Generate KeyTab finished. Open folder?';
   rsGenerateKeyTabConfirmation = 'You are about to change the password for the selected object. This will remove the trust relationships with the domain. Continue?';
-  rsGenerateKeyTabSelectFolder = 'Select folder to store keytab file';
+  rsGenerateKeyTabSelectFolder = 'Select folder to store KeyTab file';
+  rsGenerateKeyTabPassword = 'Would you like to generate a random password?';
+  rsGenerateKeyTabPasswordMessage = 'Enter password. Leave empty to generate random password.';
 
   rsActionEnableObject = 'Object % has been enabled.';
   rsActionDisableObject = 'Object % has been disabled.';
@@ -549,6 +562,25 @@ function SecDescFindACE(PSecDesc: PSecurityDescriptor;
   Flags: TSecAceFlags  = [];
   iGUID: PGuid         = nil
   ): Integer;
+
+function ObjectClassIs(AObjectClassAttribute: TLdapAttribute; AObjectClassName: RawUtf8): Boolean;
+function ObjectClassIs(AObjectClassArray: TRawUtf8DynArray; AObjectClassName: RawUtf8): Boolean;
+
+// Prepare a TKerberosKeyTabGenerator from account information.
+function PrepareKeyTab(APassword: SpiUtf8; AEncryptionTypes: TIntegerDynArray; AEntryObject: TLdapResult; ARealm: RawUtf8): TKerberosKeyTabGenerator;
+
+// Prepare a TKerberosKeyTabGenerator from account information.
+// It requires those attributes: ['userPrincipalName', 'servicePrincipalName', 'sAMAccountName', 'objectClass']
+// It does not modify objects in AD. It only read informations.
+// Leave 'APassword' empty to generate a new random password.
+function PrepareKeyTab(ALdapClient: TLdapClient; ADistinguishedName: RawUtf8; APassword: SpiUtf8; AEncryptionTypes: TIntegerDynArray): TKerberosKeyTabGenerator;
+
+// Generate a TKerberosKeyTabGenerator from account information.
+// It requires those attributes: ['userPrincipalName', 'servicePrincipalName', 'sAMAccountName', 'objectClass']
+// Modify the account password in AD.
+// Update the KVNO in the KeyTab entries.
+// Leave 'APassword' empty to generate a new random password.
+function GenerateKeyTab(ALdapClient: TLdapClient; ADistinguishedName: RawUtf8; APassword: SpiUtf8 = ''; AEncryptionTypes: TIntegerDynArray = nil): TKerberosKeyTabGenerator;
 
 const
 
@@ -1043,6 +1075,166 @@ begin
 
   if result = Length(PSecDesc^.Dacl) then
     result := -1;
+end;
+
+function ObjectClassIs(AObjectClassAttribute: TLdapAttribute; AObjectClassName: RawUtf8): Boolean;
+begin
+  result := Assigned(AObjectClassAttribute) and ObjectClassIs(AObjectClassAttribute.GetAllReadable, AObjectClassName);
+end;
+
+function ObjectClassIs(AObjectClassArray: TRawUtf8DynArray; AObjectClassName: RawUtf8): Boolean;
+var
+  l: SizeInt;
+begin
+  l := Length(AObjectClassArray);
+  result := (l > 0) and (AObjectClassArray[l - 1] = AObjectClassName);
+end;
+
+function PrepareKeyTab(APassword: SpiUtf8; AEncryptionTypes: TIntegerDynArray; AEntryObject: TLdapResult; ARealm: RawUtf8): TKerberosKeyTabGenerator;
+var
+  IsComputer: Boolean;
+  sAMAccountName, Principal, Salt, ServicePrincipalName, spn: RawUtf8;
+  ServicePrincipalNames: TRawUtf8DynArray;
+  EncType: Integer;
+  KeyTabGenerator: TKerberosKeyTabGenerator;
+  Attr: TLdapAttribute;
+begin
+  result := nil;
+
+  if (APassword = '') or not Assigned(AEncryptionTypes) or not Assigned(AEntryObject) or (ARealm = '') then
+    Exit;
+
+  Attr := AEntryObject.Find('objectClass');
+  if not Assigned(Attr) then
+    Exit;
+  IsComputer := ObjectClassIs(Attr, 'computer');
+
+  Attr := AEntryObject.Find('sAMAccountName');
+  if not Assigned(Attr) then
+    Exit;
+  sAMAccountName := Attr.GetReadable();
+  ServicePrincipalNames := Copy(AEntryObject.Find('servicePrincipalName').GetAllReadable);
+
+  // Build principal name
+  if IsComputer then
+    Principal := FormatUtf8('%@%', [sAMAccountName, ARealm])
+  else
+    Principal := AEntryObject.Find('userPrincipalName').GetReadable();
+
+  // Sanitize sAMAccountName by removing last '$'
+  if String(sAMAccountName).EndsWith('$') then
+    sAMAccountName := Copy(sAMAccountName, 0, Length(sAMAccountName) - 1);
+
+  // Empty salt to let mormot2 prepare the salt
+  salt := '';
+
+  KeyTabGenerator := TKerberosKeyTabGenerator.Create;
+  try
+    // Add encryption type for principal
+    for EncType in AEncryptionTypes do
+      if not KeyTabGenerator.AddNew(Principal, APassword, IsComputer, salt, EncType) then
+        raise TGenerateKeyTabException.Create('Failed to add new KeyTab entry for "%".', [Principal]);
+
+    // Add encryption type for each servicePrincipalNames
+    for ServicePrincipalName in ServicePrincipalNames do
+    begin
+      if (ServicePrincipalName = '') then
+        continue;
+      spn := ServicePrincipalName;
+      if Pos('@', spn) <= 0 then
+        spn := FormatUtf8('%@%', [spn, ARealm]);
+
+      for EncType in AEncryptionTypes do
+        if not KeyTabGenerator.AddNew(spn, APassword, IsComputer, salt, EncType) then
+          raise TGenerateKeyTabException.Create('Failed to add new KeyTab entry for "%".', [spn]);
+    end;
+
+    result := KeyTabGenerator;
+  finally
+    if not Assigned(result) then
+      FreeAndNil(KeyTabGenerator);
+  end;
+end;
+
+function PrepareKeyTab(ALdapClient: TLdapClient; ADistinguishedName: RawUtf8; APassword: SpiUtf8;
+  AEncryptionTypes: TIntegerDynArray): TKerberosKeyTabGenerator;
+var
+  EntryObject: TLdapResult;
+begin
+  result := nil;
+
+  if APassword = '' then
+    APassword := TAesPrng.Main.RandomPassword(64);
+  if AEncryptionTypes = nil then
+    AEncryptionTypes := [ENCTYPE_AES128_CTS_HMAC_SHA1_96, ENCTYPE_AES256_CTS_HMAC_SHA1_96];
+
+  // Get object's info from AD
+  EntryObject := ALdapClient.SearchObject(ADistinguishedName, '', ['userPrincipalName', 'servicePrincipalName', 'sAMAccountName', 'objectClass', 'msDS-SupportedEncryptionTypes']);
+  if (ALdapClient.ResultCode <> LDAP_RES_SUCCESS) then
+    raise TGenerateKeyTabException.Create('LDAP error (%) on search object (%): "%".', [ALdapClient.ResultCode, ADistinguishedName, ALdapClient.ResultString]);
+  if not Assigned(EntryObject) then
+    raise TGenerateKeyTabException.Create('Cannot search attributes on object (%).', [ADistinguishedName]);
+
+  result := PrepareKeyTab(APassword, AEncryptionTypes, EntryObject, DNToCN(ALdapClient.DefaultDN()));
+end;
+
+function GenerateKeyTab(ALdapClient: TLdapClient; ADistinguishedName: RawUtf8; APassword: SpiUtf8;
+  AEncryptionTypes: TIntegerDynArray): TKerberosKeyTabGenerator;
+var
+  KeyTabGenerator: TKerberosKeyTabGenerator;
+  KVNOAttribute: TLdapAttribute;
+  KVNO: Longint;
+  i: Integer;
+begin
+  result := nil;
+
+  if not Assigned(ALdapClient) then
+    raise TGenerateKeyTabException.Create('InternalError: Missing LdapClient.');
+  if not ALdapClient.Connected then
+    raise TGenerateKeyTabException.Create('InternalError: Not connected to Active Directory.');
+  if ADistinguishedName = '' then
+    raise TGenerateKeyTabException.Create('InternalError: Empty DistinguishedName.');
+
+  if APassword = '' then
+    APassword := TAesPrng.Main.RandomPassword(64);
+
+  KeyTabGenerator := PrepareKeyTab(ALdapClient, ADistinguishedName, APassword, AEncryptionTypes);
+  if not Assigned(KeyTabGenerator) then
+    raise TGenerateKeyTabException.Create('InternalError: PrepareKeyTab return a nil KeyTabGenerator.');
+  try
+    // Change password
+    try
+      if not ALdapClient.ModifyUserPassword(ADistinguishedName, '', APassword) then
+        raise TGenerateKeyTabException.Create('LDAP error (%) on modify user password (%): "%".', [ALdapClient.ResultCode, ADistinguishedName, ALdapClient.ResultString]);
+    finally
+      FillZero(APassword); // Anti-Forensic
+    end;
+
+    // Retrieve KVNO
+    KVNOAttribute := ALdapClient.SearchObject(ADistinguishedName, '', 'msDS-KeyVersionNumber');
+    if ALdapClient.ResultCode <> LDAP_RES_SUCCESS then
+      raise TGenerateKeyTabException.Create('LDAP error (%) on search object (%): "%".', [ALdapClient.ResultCode, ADistinguishedName, ALdapClient.ResultString]);
+    if not Assigned(KVNOAttribute) then
+      raise TGenerateKeyTabException.Create('Cannot search attribute "msDS-KeyVersionNumber" on object (%).', [ADistinguishedName]);
+    if not TryStrToInt(KVNOAttribute.GetReadable(), KVNO) then
+      raise TGenerateKeyTabException.Create('Failed to convert "msDS-KeyVersionNumber" (KVNO) to integer.');
+
+    // Update KVNO
+    for i := 0 to High(KeyTabGenerator.Entry) do
+      KeyTabGenerator.Entry[i].KeyVersion := KVNO;
+
+    result := KeyTabGenerator;
+  finally
+    if not Assigned(result) then
+      FreeAndNil(KeyTabGenerator);
+  end;
+end;
+
+{ TGenerateKeyTabException }
+
+constructor TGenerateKeyTabException.Create(const fmt: RawUtf8; const args: Array of Const);
+begin
+  Message := FormatUtf8(fmt, args);
 end;
 
 {$IFDEF OPENRSATTESTS}
