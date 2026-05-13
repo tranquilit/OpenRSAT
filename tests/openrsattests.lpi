@@ -35,6 +35,8 @@
           </CodeGeneration>
           <Linking>
             <Debugging>
+              <GenerateDebugInfo Value="False"/>
+              <RunWithoutDebug Value="True"/>
               <DebugInfoType Value="dsDwarf3"/>
             </Debugging>
           </Linking>
@@ -96,7 +98,7 @@
         </CompilerOptions>
       </Item>
       <SharedMatrixOptions Count="1">
-        <Item1 ID="385609100261" Modes="test,test_linux_x64,test_macos_intel" Value="-dOPENRSATTESTS"/>
+        <Item1 ID="385609100261" Modes="test_linux_x64,test_macos_intel,test" Value="-dOPENRSATTESTS"/>
       </SharedMatrixOptions>
     </BuildModes>
     <PublishOptions>
@@ -148,6 +150,10 @@
         <Filename Value="fixtures\fixture.ldapclient.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="unit\unittest.ugeneratekeytab.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -189,6 +195,9 @@
       </Item>
       <Item>
         <Name Value="TVisAdvancedSecurityMissingLdapClientException"/>
+      </Item>
+      <Item>
+        <Name Value="TGenerateKeyTabException"/>
       </Item>
     </Exceptions>
   </Debugging>

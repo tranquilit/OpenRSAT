@@ -363,19 +363,31 @@ msgid "Friday"
 msgstr "Παρασκευή"
 
 #: ucommon.rsgeneratekeytab
-msgid "Generate KEYTAB"
+msgid "Generate KeyTab"
 msgstr ""
 
 #: ucommon.rsgeneratekeytabconfirmation
 msgid "You are about to change the password for the selected object. This will remove the trust relationships with the domain. Continue?"
 msgstr ""
 
+#: ucommon.rsgeneratekeytabfailed
+msgid "Generate KeyTab failed: %"
+msgstr ""
+
 #: ucommon.rsgeneratekeytabfinished
-msgid "Generate KEYTAB finished. Open folder?"
+msgid "Generate KeyTab finished. Open folder?"
+msgstr ""
+
+#: ucommon.rsgeneratekeytabpassword
+msgid "Would you like to generate a random password?"
+msgstr ""
+
+#: ucommon.rsgeneratekeytabpasswordmessage
+msgid "Enter password. Leave empty to generate random password."
 msgstr ""
 
 #: ucommon.rsgeneratekeytabselectfolder
-msgid "Select folder to store keytab file"
+msgid "Select folder to store KeyTab file"
 msgstr ""
 
 #: ucommon.rsgridconfdeleterow
