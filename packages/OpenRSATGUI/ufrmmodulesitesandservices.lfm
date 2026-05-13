@@ -513,7 +513,7 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
       TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
       ZebraColor = 15593713
-      PopupMenuOptions = [pmoShowFind, pmoShowFindNext]
+      PopupMenuOptions = []
       OnDblClick = TisGrid1DblClick
       OnGetImageIndex = TisGrid1GetImageIndex
       OnKeyPress = TisGrid1KeyPress
