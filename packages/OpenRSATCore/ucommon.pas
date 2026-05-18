@@ -16,7 +16,8 @@ uses
   mormot.core.test,
   {$ENDIF OPENRSATTESTS}
   mormot.core.os.security,
-  mormot.core.variants;
+  mormot.core.variants,
+  uDJoin;
 
 type
   PSecurityDescriptor = ^TSecurityDescriptor;
@@ -27,6 +28,15 @@ type
   public
     constructor Create(const fmt: RawUtf8; const args: array of const); overload;
   end;
+
+  { TPrepareDJoinException }
+
+  TPrepareDJoinException = class(Exception)
+  public
+    constructor Create(const fmt: Rawutf8; const args: array of const); overload;
+  end;
+
+  TDjoinDynArray = Array of TDJoin;
 
   {$IFDEF OPENRSATTESTS}
 
@@ -586,6 +596,9 @@ function PrepareKeyTab(ALdapClient: TLdapClient; ADistinguishedName: RawUtf8; AP
 // Leave 'APassword' empty to generate a new random password.
 function GenerateKeyTab(ALdapClient: TLdapClient; ADistinguishedName: RawUtf8; APassword: SpiUtf8 = ''; AEncryptionTypes: TIntegerDynArray = nil): TKerberosKeyTabGenerator;
 
+function PrepareDJoin(ALdapClient: TLdapClient; ADistinguishedName: Rawutf8): TDJoin;
+function PrepareDJoins(ALdapClient: TLdapClient; ADistinguishedNames: TRawUtf8DynArray): TDjoinDynArray;
+
 const
 
   SEC_ACCESS: Array of TSecAccess = (
@@ -724,7 +737,8 @@ uses
   StrUtils,
   mormot.core.log,
   mormot.core.text,
-  mormot.net.sock;
+  mormot.net.sock,
+  uLdapUtils;
 
 function AceInDacl(Dacl: TSecAcl; Ace: TSecAce): Boolean;
 var
@@ -1234,9 +1248,56 @@ begin
   end;
 end;
 
+function PrepareDJoin(ALdapClient: TLdapClient; ADistinguishedName: Rawutf8): TDJoin;
+var
+  DJoin: TDJoin;
+begin
+  DJoin := TDJoin.Create;
+  try
+    ALdapClient.SearchScope := lssWholeSubtree;
+    if not DJoin.LoadFromLDAP(ALdapClient, GetDNName(ADistinguishedName), GetParentDN(ADistinguishedName), '', '', '', aieMove) then
+    begin
+      if ALdapClient.ResultCode <> LDAP_RES_SUCCESS then
+        raise TPrepareDJoinException.Create('LDAP error (%) on search object (%): "%".', [ALdapClient.ResultCode, ADistinguishedName, ALdapClient.ResultString])
+      else
+        raise TPrepareDJoinException.Create('Internal Error: Failed to load data for object: "%"', [ADistinguishedName]);
+    end;
+    result := DJoin;
+  finally
+    if not Assigned(result) then
+      FreeAndNil(DJoin);
+  end;
+end;
+
+function PrepareDJoins(ALdapClient: TLdapClient; ADistinguishedNames: TRawUtf8DynArray): TDjoinDynArray;
+var
+  i: Integer;
+begin
+  SetLength(result, Length(ADistinguishedNames));
+  try
+    for i := 0 to High(ADistinguishedNames) do
+      result[i] := PrepareDJoin(ALdapClient, ADistinguishedNames[i]);
+  except
+    on E: TPrepareDJoinException do
+    begin
+      for i := 0 to High(ADistinguishedNames) do
+        if Assigned(result[i]) then
+          FreeAndNil(result[i]);
+      raise E;
+    end;
+  end;
+end;
+
 { TGenerateKeyTabException }
 
 constructor TGenerateKeyTabException.Create(const fmt: RawUtf8; const args: Array of Const);
+begin
+  Message := FormatUtf8(fmt, args);
+end;
+
+{ TPrepareDJoinException }
+
+constructor TPrepareDJoinException.Create(const fmt: Rawutf8; const args: array of const);
 begin
   Message := FormatUtf8(fmt, args);
 end;

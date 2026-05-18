@@ -1257,43 +1257,67 @@ end;
 
 procedure TFrmModuleADUC.Action_PrepareDJOINExecute(Sender: TObject);
 var
-  DJoin: TDJoin;
-  NodeData: PDocVariantData;
-  DN, Folder: RawUtf8;
-  Node: PVirtualNode;
+  PData: PDocVariantData;
+  Folder: RawUtf8;
+  DJoins: TDjoinDynArray;
+  i: Integer;
+  DNs: TRawUtf8DynArray;
 begin
-  if GridADUC.SelectedCount <= 0 then
-    Exit;
+  if Assigned(fLog) then
+    fLog.Log(sllTrace, 'Prepare DJoin.', Self);
 
+  // Warning about trust relationships.
   if (mrYes <> MessageDlg(rsPrepareDJOIN, rsPrepareDJOINConfirmation, mtWarning, mbYesNoCancel, 0)) then
+  begin
+    if Assigned(fLog) then
+      fLog.Log(sllInfo, 'Action cancelled by user (Confirmation).', Self);
     Exit;
-
-  SelectDirectoryDialog1.Title := rsPrepareDJOINSelectFolder;
-  if not SelectDirectoryDialog1.Execute then
-    Exit;
-  Folder := SelectDirectoryDialog1.FileName;
-  if not String(Folder).EndsWith(DirectorySeparator) then
-    Append(Folder, DirectorySeparator);
-
-  DJoin := TDJoin.Create;
-  try
-    Node := GridADUC.GetFirstSelected();
-    while Assigned(Node) do
-    begin
-      NodeData := GridADUC.GetNodeAsPDocVariantData(Node, False);
-      if not Assigned(NodeData) then
-        Continue;
-      Node := GridADUC.GetNextSelected(Node);
-
-      DN := NodeData^.S['objectName'];
-
-      FrmRSAT.LdapClient.SearchScope := lssWholeSubtree;
-      DJoin.LoadFromLDAP(FrmRSAT.LdapClient, GetDNName(DN), GetParentDN(DN), '', '', '', aieMove);
-      DJoin.SaveToFile(FormatUtf8('%/%.%.djoin', [Folder, GetDNName(DN), DNToCN(FrmRSAT.LdapClient.DefaultDN())]));
-    end;
-  finally
-    FreeAndNil(DJoin);
   end;
+
+  // Prepare DJoin
+  DNs := nil;
+  try
+    SetLength(DNs, GridADUC.SelectedCount);
+    for i := 0 to Pred(GridADUC.SelectedCount) do
+    begin
+      PData := GridADUC.SelectedRows._[i];
+      if not Assigned(PData) or not PData^.Exists('objectName') then
+        Continue;
+      DNs[i] := PData^.S['objectName'];
+    end;
+    DJoins := PrepareDJoins(FrmRSAT.LdapClient, DNs);
+  except
+    on E: TPrepareDJoinException do
+      MessageDlg(rsPrepareDJOIN, '', mtError, mbOKCancel, 0);
+  end;
+
+  try
+    // Select output folder
+    SelectDirectoryDialog1.Title := rsPrepareDJOINSelectFolder;
+    if not SelectDirectoryDialog1.Execute then
+    begin
+      if Assigned(fLog) then
+        fLog.Log(sllInfo, 'Action cancelled by user (Select forlder).', Self);
+      Exit;
+    end;
+    Folder := SelectDirectoryDialog1.FileName;
+    if not String(Folder).EndsWith(DirectorySeparator) then
+      Append(Folder, DirectorySeparator);
+
+    // Save DJoin file
+    for i := 0 to High(DJoins) do
+      if Assigned(DJoins[i]) then
+      begin
+        DJoins[i].SaveToFile(FormatUtf8('%%%.%.djoin', [Folder, PathDelim, DJoins[i].MachineName, DNToCN(FrmRSAT.LdapClient.DefaultDN())]));
+        FreeAndNil(DJoins[i]);
+      end;
+  finally
+    for i := 0 to High(DJoins) do
+      if Assigned(DJoins[i]) then
+        FreeAndNil(DJoins[i]);
+  end;
+
+  // Open output folder
   if (mrYes <> MessageDlg(rsPrepareDJOIN, rsPrepareDJOINFinished, mtConfirmation, mbYesNoCancel, 0)) then
     Exit;
   OpenDocument(Folder);

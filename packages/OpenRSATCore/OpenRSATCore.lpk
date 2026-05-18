@@ -116,6 +116,9 @@
     </i18n>
     <RequiredPkgs>
       <Item>
+        <PackageName Value="pltis_djoin"/>
+      </Item>
+      <Item>
         <PackageName Value="mormot2"/>
       </Item>
       <Item>
