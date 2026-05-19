@@ -29,7 +29,7 @@ object FrmNewSiteLink: TFrmNewSiteLink
     object Label_Name: TLabel
       AnchorSideLeft.Control = Panel1
       AnchorSideTop.Control = Panel1
-      Left = 0
+      Left = 8
       Height = 15
       Top = 8
       Width = 35
