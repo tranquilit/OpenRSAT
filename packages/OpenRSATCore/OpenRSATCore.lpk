@@ -108,6 +108,10 @@
         <Filename Value="uselectobjectguidpresenter.pas"/>
         <UnitName Value="uselectobjectguidpresenter"/>
       </Item>
+      <Item>
+        <Filename Value="uviewkeytabpresenter.pas"/>
+        <UnitName Value="uviewkeytabpresenter"/>
+      </Item>
     </Files>
     <i18n>
       <EnableI18N Value="True"/>
