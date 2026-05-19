@@ -82,6 +82,7 @@ var
   DistinguishedName: String;
   AttributeList: TLdapAttributeList;
   Attribute: TLdapAttribute;
+  i: Integer;
 begin
   DistinguishedName := Format('CN=%s,CN=SMTP,CN=Inter-Site Transports,CN=Sites,%s', [Edit_Name.Text, fLdap.ConfigDN]);
   AttributeList := TLdapAttributeList.Create;
@@ -90,7 +91,9 @@ begin
     Attribute := AttributeList.Add('objectClass', 'top');
     Attribute.Add('siteLink');
     
-    AttributeList.Add('siteList', '');
+    Attribute := AttributeList.Add('siteList', fInSite[0].Find('distinguishedName').GetReadable());
+    for i := 1 to Length(fInSite) - 1 do
+      Attribute.Add(fInSite[i].Find('distinguishedName').GetReadable());
     
     AttributeList.Add('cost', '100');
     AttributeList.Add('replInterval', '180');
