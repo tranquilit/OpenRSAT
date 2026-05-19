@@ -223,7 +223,7 @@ msgstr "Dalej"
 #: ufrmmoduleaduc.lrj:$.strings.[59].value
 msgctxt "tfrmmoduleaduc.action_operationsmasters.caption"
 msgid "Operations masters"
-msgstr "Master operacji (FSMO)"
+msgstr "Wzorce operacji (FSMO)"
 
 #: ufrmmoduleaduc.lrj:$.strings.[47].value
 msgctxt "tfrmmoduleaduc.action_paste.caption"
@@ -1144,7 +1144,7 @@ msgstr "Atrybut"
 #: ufrmpropertyattributes.lrj:$.strings.[2].value
 msgctxt "tfrmpropertyattributes.list_attributes.header.columns[1].text"
 msgid "value"
-msgstr "Wartość"
+msgstr "wartość"
 
 #: ufrmpropertyattributes.lrj:$.strings.[6].value
 msgctxt "tfrmpropertyattributes.menuitem1.caption"
@@ -1154,7 +1154,7 @@ msgstr "Pokaż tylko atrybuty mające wartości"
 #: ufrmpropertyattributes.lrj:$.strings.[7].value
 msgctxt "tfrmpropertyattributes.menuitem2.caption"
 msgid "Show only writable attributes"
-msgstr "Pokaż tylko atrybuty zapisywalne"
+msgstr "Pokaż tylko zapisywalne atrybuty"
 
 #: ufrmpropertyattributes.lrj:$.strings.[8].value
 msgctxt "tfrmpropertyattributes.menuitem3.caption"
@@ -1164,7 +1164,7 @@ msgstr "Pokaż atrybuty:"
 #: ufrmpropertyattributes.lrj:$.strings.[9].value
 msgctxt "tfrmpropertyattributes.menuitem4.caption"
 msgid "  Mandatory"
-msgstr "  Obowiązkowe"
+msgstr "  Wymagane"
 
 #: ufrmpropertyattributes.lrj:$.strings.[10].value
 msgctxt "tfrmpropertyattributes.menuitem5.caption"
@@ -1313,7 +1313,7 @@ msgstr "Globalny"
 #: ufrmpropertygeneralgroup.lrj:$.strings.[11].value
 msgctxt "tfrmpropertygeneralgroup.rb_local.caption"
 msgid "Domain local"
-msgstr "Lokalny w domenie"
+msgstr "Domena lokalna"
 
 #: ufrmpropertygeneralgroup.lrj:$.strings.[8].value
 msgctxt "tfrmpropertygeneralgroup.rb_security.caption"
@@ -1378,7 +1378,7 @@ msgstr "Kod pocztowy:"
 #: ufrmpropertygeneralou.lrj:$.strings.[6].value
 msgctxt "tfrmpropertygeneralou.memo_street.hint"
 msgid "A street address"
-msgstr "Adres zamieszkania/ulica"
+msgstr "Numer ulicy"
 
 #: ufrmpropertygeneralsite.lrj:$.strings.[0].value
 msgctxt "tfrmpropertygeneralsite.label_description.caption"
@@ -1398,7 +1398,7 @@ msgstr "Opis:"
 #: ufrmpropertygeneralsubnet.lrj:$.strings.[2].value
 msgctxt "tfrmpropertygeneralsubnet.label_prefix.caption"
 msgid "Prefix"
-msgstr "Prefiks"
+msgstr "Prefix"
 
 #: ufrmpropertygeneralsubnet.lrj:$.strings.[1].value
 msgctxt "tfrmpropertygeneralsubnet.label_site.caption"
@@ -1428,7 +1428,7 @@ msgstr "Imię danej osoby"
 #: ufrmpropertygeneraluser.lrj:$.strings.[15].value
 msgctxt "tfrmpropertygeneraluser.edit_homepage.hint"
 msgid "A web page that is the primary landing page of a website"
-msgstr "Strona główna będąca podstawową stroną docelową witryny internetowej"
+msgstr "Strona internetowa będąca główną stroną docelową serwisu"
 
 #: ufrmpropertygeneraluser.lrj:$.strings.[7].value
 msgctxt "tfrmpropertygeneraluser.edit_initials.hint"
@@ -1478,7 +1478,7 @@ msgstr "Imię:"
 #: ufrmpropertygeneraluser.lrj:$.strings.[13].value
 msgctxt "tfrmpropertygeneraluser.label_homepage.caption"
 msgid "Web page :"
-msgstr "Strona sieci Web:"
+msgstr "Strona internetowa:"
 
 #: ufrmpropertygeneraluser.lrj:$.strings.[1].value
 msgctxt "tfrmpropertygeneraluser.label_initials.caption"
@@ -1543,17 +1543,17 @@ msgstr "Pokaż hasło"
 #: ufrmpropertylaps.lrj:$.strings.[3].value
 msgctxt "tfrmpropertylaps.datetimepicker_newexpiration.textfornulldate"
 msgid "NULL"
-msgstr "NIGDY"
+msgstr "NULL"
 
 #: ufrmpropertylaps.lrj:$.strings.[0].value
 msgctxt "tfrmpropertylaps.groupbox1.caption"
 msgid "Local Administrator Password Solution"
-msgstr "Local Administrator Password Solution"
+msgstr "Rozwiązanie do zarządzania hasłami administratorów lokalnych"
 
 #: ufrmpropertylaps.lrj:$.strings.[1].value
 msgctxt "tfrmpropertylaps.label_currentexpiration.caption"
 msgid "Current LAPS password expiration:"
-msgstr "Obecna data wygaśnięcia hasła LAPS:"
+msgstr "Biężace wygaśnięcie hasła LAPS:"
 
 #: ufrmpropertylaps.lrj:$.strings.[4].value
 msgctxt "tfrmpropertylaps.label_localadminaccountname.caption"
@@ -1573,7 +1573,7 @@ msgstr "Ustaw nową datę wygaśnięcia hasła LAPS:"
 #: ufrmpropertylocation.lrj:$.strings.[1].value
 msgctxt "tfrmpropertylocation.edit_location.hint"
 msgid "The user's location, such as office number"
-msgstr "Lokalizacja użytkownika, na przykład numer biura"
+msgstr "Lokalizacja użytkownika, np. numer biura"
 
 #: ufrmpropertylocation.lrj:$.strings.[0].value
 msgctxt "tfrmpropertylocation.label_location.caption"
@@ -1715,7 +1715,7 @@ msgstr "Grupa podstawowa:"
 #: ufrmpropertyobject.lrj:$.strings.[7].value
 msgctxt "tfrmpropertyobject.action_protection.caption"
 msgid "Protect object from accidental deletion"
-msgstr "Chronić obiekt przed przypadkowym usunięciem"
+msgstr "Chroń obiekt przed przypadkowym usunięciem"
 
 #: ufrmpropertyobject.lrj:$.strings.[0].value
 msgctxt "tfrmpropertyobject.label_canonicalname.caption"
@@ -1882,7 +1882,7 @@ msgstr "Ścieżka do skryptu logowania użytkownika"
 #: ufrmpropertyprofile.lrj:$.strings.[5].value
 msgctxt "tfrmpropertyprofile.groupbox_homefolder.caption"
 msgid "Home folder"
-msgstr "Folder macierzysty"
+msgstr "Folder domowy"
 
 #: ufrmpropertyprofile.lrj:$.strings.[0].value
 msgctxt "tfrmpropertyprofile.groupbox_userprofile.caption"
@@ -2812,7 +2812,7 @@ msgstr "Kreator delegowania sterowania zakończył pracę pomyślnie."
 #: uvisdelegatecontrol.lrj:$.strings.[13].value
 msgctxt "tvisdelegatecontrol.label11.caption"
 msgid "To close this wizard, click Finish."
-msgstr "Aby zamknąć ten kreator, kliknij przycisk Zakończ."
+msgstr "Aby zamknąć ten kreator, kliknij Zakończ."
 
 #: uvisdelegatecontrol.lrj:$.strings.[14].value
 msgctxt "tvisdelegatecontrol.label12.caption"
@@ -2859,7 +2859,7 @@ msgstr "Ten kreator pomaga delegować sterowanie obiektami Active Directory. Mo�
 #: uvisdelegatecontrol.lrj:$.strings.[3].value
 msgctxt "tvisdelegatecontrol.label3.caption"
 msgid "To continue, click Next."
-msgstr "Aby kontynuować, kliknij przycisk Dalej."
+msgstr "Aby kontynuować, kliknij Dalej."
 
 #: uvisdelegatecontrol.lrj:$.strings.[6].value
 msgctxt "tvisdelegatecontrol.label4.caption"
