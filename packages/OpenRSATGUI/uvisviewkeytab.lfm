@@ -72,10 +72,10 @@ object VisViewKeyTab: TVisViewKeyTab
     ClientWidth = 667
     TabOrder = 2
     object BitBtn1: TBitBtn
-      Left = 475
+      Left = 428
       Height = 25
       Top = 8
-      Width = 121
+      Width = 168
       Action = Action_CopyToClipboard
       Align = alRight
       AutoSize = True
@@ -83,7 +83,7 @@ object VisViewKeyTab: TVisViewKeyTab
       TabOrder = 1
     end
     object BitBtn2: TBitBtn
-      Left = 384
+      Left = 337
       Height = 25
       Top = 8
       Width = 83
@@ -229,7 +229,7 @@ object VisViewKeyTab: TVisViewKeyTab
       OnUpdate = Action_SaveToFileUpdate
     end
     object Action_CopyToClipboard: TAction
-      Caption = 'Copy to clipboard'
+      Caption = 'Copy to clipboard (base64)'
       OnExecute = Action_CopyToClipboardExecute
     end
   end

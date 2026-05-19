@@ -11,5 +11,5 @@
 {"hash":8431845,"name":"tvisviewkeytab.action_loadfromfile.caption","sourcebytes":[76,111,97,100,32,102,114,111,109,32,102,105,108,101],"value":"Load from file"},
 {"hash":253268210,"name":"tvisviewkeytab.action_selectfolder.caption","sourcebytes":[83,101,108,101,99,116,32,102,111,108,100,101,114],"value":"Select folder"},
 {"hash":9308581,"name":"tvisviewkeytab.action_savetofile.caption","sourcebytes":[83,97,118,101,32,116,111,32,102,105,108,101],"value":"Save to file"},
-{"hash":127162148,"name":"tvisviewkeytab.action_copytoclipboard.caption","sourcebytes":[67,111,112,121,32,116,111,32,99,108,105,112,98,111,97,114,100],"value":"Copy to clipboard"}
+{"hash":234590921,"name":"tvisviewkeytab.action_copytoclipboard.caption","sourcebytes":[67,111,112,121,32,116,111,32,99,108,105,112,98,111,97,114,100,32,40,98,97,115,101,54,52,41],"value":"Copy to clipboard (base64)"}
 ]}
