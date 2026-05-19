@@ -1,0 +1,236 @@
+object VisViewKeyTab: TVisViewKeyTab
+  Left = 719
+  Height = 412
+  Top = 467
+  Width = 667
+  Caption = 'View KeyTab'
+  ClientHeight = 412
+  ClientWidth = 667
+  LCLVersion = '4.5.0.0'
+  object TisGrid1: TTisGrid
+    Left = 4
+    Height = 281
+    Top = 86
+    Width = 659
+    Align = alClient
+    BorderSpacing.Around = 4
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'KVNO'
+        PropertyName = 'kvno'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Text = 'Timestamp'
+        Width = 150
+        PropertyName = 'timestamp'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 2
+        Text = 'Principal'
+        Width = 300
+        PropertyName = 'principal'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 3
+        Text = 'Encryption type'
+        Width = 150
+        PropertyName = 'encryptionType'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus, coWrapCaption, coEditable]
+        Position = 4
+        Text = 'Key'
+        Width = 300
+        PropertyName = 'key'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 100
+    Header.MinHeight = 18
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.Style = hsFlatButtons
+    TabOrder = 1
+    TabStop = False
+    ZebraColor = 15593713
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 41
+    Top = 371
+    Width = 667
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 667
+    TabOrder = 2
+    object BitBtn1: TBitBtn
+      Left = 475
+      Height = 25
+      Top = 8
+      Width = 121
+      Action = Action_CopyToClipboard
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 1
+    end
+    object BitBtn2: TBitBtn
+      Left = 384
+      Height = 25
+      Top = 8
+      Width = 83
+      Action = Action_SaveToFile
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 0
+    end
+    object BitBtn5: TBitBtn
+      Left = 604
+      Height = 25
+      Top = 8
+      Width = 55
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      Cancel = True
+      Caption = 'Close'
+      TabOrder = 2
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 82
+    Top = 0
+    Width = 667
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 82
+    ClientWidth = 667
+    TabOrder = 0
+    object Panel3: TPanel
+      Left = 0
+      Height = 41
+      Top = 0
+      Width = 667
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 41
+      ClientWidth = 667
+      TabOrder = 0
+      object Label1: TLabel
+        Left = 8
+        Height = 25
+        Top = 8
+        Width = 100
+        Align = alLeft
+        AutoSize = False
+        BorderSpacing.Around = 8
+        Caption = 'Filename'
+        Layout = tlCenter
+      end
+      object Edit1: TEdit
+        Left = 116
+        Height = 25
+        Top = 8
+        Width = 300
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Enabled = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+      object BitBtn3: TBitBtn
+        Left = 424
+        Height = 25
+        Top = 8
+        Width = 100
+        Action = Action_LoadFromFile
+        Align = alLeft
+        BorderSpacing.Around = 8
+        TabOrder = 1
+      end
+    end
+    object Panel4: TPanel
+      Left = 0
+      Height = 41
+      Top = 41
+      Width = 667
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 41
+      ClientWidth = 667
+      TabOrder = 1
+      object Label2: TLabel
+        Left = 8
+        Height = 25
+        Top = 8
+        Width = 100
+        Align = alLeft
+        AutoSize = False
+        BorderSpacing.Around = 8
+        Caption = 'Folder'
+        Layout = tlCenter
+      end
+      object Edit2: TEdit
+        Left = 116
+        Height = 25
+        Top = 8
+        Width = 300
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Enabled = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+      object BitBtn4: TBitBtn
+        Left = 424
+        Height = 25
+        Top = 8
+        Width = 100
+        Action = Action_SelectFolder
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Default = True
+        TabOrder = 1
+      end
+    end
+  end
+  object SelectDirectoryDialog1: TSelectDirectoryDialog
+    Left = 216
+    Top = 176
+  end
+  object ActionList1: TActionList
+    Left = 344
+    Top = 152
+    object Action_LoadFromFile: TAction
+      Caption = 'Load from file'
+      Visible = False
+      OnExecute = Action_LoadFromFileExecute
+    end
+    object Action_SelectFolder: TAction
+      Caption = 'Select folder'
+      OnExecute = Action_SelectFolderExecute
+    end
+    object Action_SaveToFile: TAction
+      Caption = 'Save to file'
+      OnExecute = Action_SaveToFileExecute
+      OnUpdate = Action_SaveToFileUpdate
+    end
+    object Action_CopyToClipboard: TAction
+      Caption = 'Copy to clipboard'
+      OnExecute = Action_CopyToClipboardExecute
+    end
+  end
+end

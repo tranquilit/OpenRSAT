@@ -34,6 +34,7 @@ uses
   mormot.core.text,
   mormot.core.base,
   mormot.net.ldap,
+  mormot.core.os.security,
   uaductreeview,
   utreeselectionhistory,
   uvisproperties,
@@ -45,7 +46,8 @@ uses
   uoption,
   uDJoin,
   uLdapUtils,
-  ursatldapclient;
+  ursatldapclient,
+  uvisviewkeytab;
 
 type
 
@@ -372,6 +374,7 @@ type
     function ResetPasswordCallback(const LockedAccount: Boolean; out
       ANewPassword: RawUtf8; out AUserMustChangePassword: Boolean; out
   AUnlockAccount: Boolean): Boolean;
+    procedure ViewKeyTab(AKeyTab: TKerberosKeyTab);
   public
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
@@ -414,7 +417,6 @@ uses
   uconfig,
   uhelpers,
   mormot.crypt.secure,
-  mormot.core.os.security,
   mormot.crypt.core,
   mormot.core.os,
   ugplink;
@@ -570,35 +572,15 @@ begin
       KeyTabGenerator := GenerateKeyTab(FrmRSAT.LdapClient, GetFocusedObject(), Password);
       if not Assigned(KeyTabGenerator) then
         raise TGenerateKeyTabException.Create('InternalError: GenerateKeyTab return a nil KeyTabGenerator.');
+      ViewKeyTab(KeyTabGenerator);
     except
       on E: TGenerateKeyTabException do
         MessageDlg(rsGenerateKeyTab, FormatUtf8(rsGenerateKeyTabFailed, [E.Message]), mtError, mbOKCancel, 0);
     end;
   finally
     FillZero(Password); // Anti-Forensic
-  end;
-  try
-    // Select output folder
-    SelectDirectoryDialog1.Title := rsGenerateKeyTabSelectFolder;
-    if not SelectDirectoryDialog1.Execute then
-    begin
-      if Assigned(fLog) then
-        fLog.Log(sllInfo, 'Action cancelled by user (Select folder).', Self);
-      Exit;
-    end;
-    Folder := SelectDirectoryDialog1.FileName;
-    if not String(Folder).EndsWith(DirectorySeparator) then
-      Append(Folder, DirectorySeparator);
-
-    // Save KeyTab
-    FileName := FormatUtf8('%%.keytab', [Folder, KeyTabGenerator.Entry[0].Principal]);
-    KeyTabGenerator.SaveToFile(FileName);
-  finally
     FreeAndNil(KeyTabGenerator);
   end;
-  if (mrYes <> MessageDlg(rsGenerateKeyTab, rsGenerateKeyTabFinished, mtConfirmation, mbYesNoCancel, 0)) then
-    Exit;
-  OpenDocument(Folder);
 end;
 
 procedure TFrmModuleADUC.Action_BlockGPOInheritanceUpdate(Sender: TObject);
@@ -3313,6 +3295,19 @@ begin
     AUnlockAccount := LockedAccount and VisTaskResetPassword.CheckBox_Unlock.Checked;
   finally
     FreeAndNil(VisTaskResetPassword);
+  end;
+end;
+
+procedure TFrmModuleADUC.ViewKeyTab(AKeyTab: TKerberosKeyTab);
+var
+  Vis: TVisViewKeyTab;
+begin
+  Vis := TVisViewKeyTab.Create(Self);
+  try
+    Vis.SetKeyTab(AKeyTab);
+    Vis.ShowModal;
+  finally
+    FreeAndNil(Vis);
   end;
 end;
 

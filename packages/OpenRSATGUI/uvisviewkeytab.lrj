@@ -1,0 +1,15 @@
+{"version":1,"strings":[
+{"hash":88086242,"name":"tvisviewkeytab.caption","sourcebytes":[86,105,101,119,32,75,101,121,84,97,98],"value":"View KeyTab"},
+{"hash":330543,"name":"tvisviewkeytab.tisgrid1.header.columns[0].text","sourcebytes":[75,86,78,79],"value":"KVNO"},
+{"hash":63634752,"name":"tvisviewkeytab.tisgrid1.header.columns[1].text","sourcebytes":[84,105,109,101,115,116,97,109,112],"value":"Timestamp"},
+{"hash":4870636,"name":"tvisviewkeytab.tisgrid1.header.columns[2].text","sourcebytes":[80,114,105,110,99,105,112,97,108],"value":"Principal"},
+{"hash":10983093,"name":"tvisviewkeytab.tisgrid1.header.columns[3].text","sourcebytes":[69,110,99,114,121,112,116,105,111,110,32,116,121,112,101],"value":"Encryption type"},
+{"hash":20937,"name":"tvisviewkeytab.tisgrid1.header.columns[4].text","sourcebytes":[75,101,121],"value":"Key"},
+{"hash":4863637,"name":"tvisviewkeytab.bitbtn5.caption","sourcebytes":[67,108,111,115,101],"value":"Close"},
+{"hash":2901221,"name":"tvisviewkeytab.label1.caption","sourcebytes":[70,105,108,101,110,97,109,101],"value":"Filename"},
+{"hash":81144514,"name":"tvisviewkeytab.label2.caption","sourcebytes":[70,111,108,100,101,114],"value":"Folder"},
+{"hash":8431845,"name":"tvisviewkeytab.action_loadfromfile.caption","sourcebytes":[76,111,97,100,32,102,114,111,109,32,102,105,108,101],"value":"Load from file"},
+{"hash":253268210,"name":"tvisviewkeytab.action_selectfolder.caption","sourcebytes":[83,101,108,101,99,116,32,102,111,108,100,101,114],"value":"Select folder"},
+{"hash":9308581,"name":"tvisviewkeytab.action_savetofile.caption","sourcebytes":[83,97,118,101,32,116,111,32,102,105,108,101],"value":"Save to file"},
+{"hash":127162148,"name":"tvisviewkeytab.action_copytoclipboard.caption","sourcebytes":[67,111,112,121,32,116,111,32,99,108,105,112,98,111,97,114,100],"value":"Copy to clipboard"}
+]}
