@@ -950,6 +950,10 @@ msgstr ""
 msgid "Select owner"
 msgstr ""
 
+#: ucommon.rstoofewsitesavailableforsitelink
+msgid "Active Directory Sites and Services cannot locate two sites to create a working site link object. You may create a new site link that links only one site, but it will have no effect until it links at least two sites."
+msgstr ""
+
 #: ucommon.rstuesday
 msgid "Tuesday"
 msgstr ""
