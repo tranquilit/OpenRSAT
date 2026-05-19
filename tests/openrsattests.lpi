@@ -110,6 +110,9 @@
     </RunParams>
     <RequiredPackages>
       <Item>
+        <PackageName Value="pltis_djoin"/>
+      </Item>
+      <Item>
         <PackageName Value="mormot2"/>
       </Item>
     </RequiredPackages>
@@ -152,6 +155,14 @@
       </Unit>
       <Unit>
         <Filename Value="unit\unittest.ugeneratekeytab.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="unit\unittest.uviewkeytabpresenter.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="fixtures\fixture.fakevisviewkeytabpresenter.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>
