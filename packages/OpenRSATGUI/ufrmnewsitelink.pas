@@ -106,7 +106,10 @@ end;
 
 procedure TFrmNewSiteLink.Action_NextUpdate(Sender: TObject);
 begin
-  Action_Next.Enabled := (Edit_Name.Text <> '') and (Length(fInSite) >= 2);
+  if Length(fInSite) + Length(fNotInSite) > 2 then
+    Action_Next.Enabled := (Edit_Name.Text <> '') and (Length(fInSite) >= 2)
+  else
+    Action_Next.Enabled := (Edit_Name.Text <> '');
 end;
 
 procedure TFrmNewSiteLink.Button_AddClick(Sender: TObject);
@@ -130,6 +133,9 @@ end;
 procedure TFrmNewSiteLink.ListBox_InSiteLinkSelectionChange(Sender: TObject;
   User: boolean);
 begin
+  if Length(fInSite) + Length(fNotInSite) < 3 then
+    Exit;
+
   Button_Remove.Enabled := True;
   Button_Add.Enabled := False;
 end;
@@ -137,6 +143,9 @@ end;
 procedure TFrmNewSiteLink.ListBox_NotInSiteLinkSelectionChange(Sender: TObject;
   User: boolean);
 begin
+  if Length(fInSite) + Length(fNotInSite) < 3 then
+    Exit;
+
   Button_Add.Enabled := True;
   Button_Remove.Enabled := False;
 end;
@@ -207,8 +216,13 @@ begin
   end;
   
   if n < 1 then
-    MessageDlg('edfer', mtError,[mbOK], 0);
-  
+  begin
+    MessageDlg(rsTooFewSitesAvailableForSiteLink, mtError,[mbOK], 0);
+    SetLength(fInSite, 1);
+    fInSite[0] := fNotInSite[0];
+    SetLength(fNotInSite, 0);
+  end;
+
   if n = 1 then
   begin
     SetLength(fInSite, 2);

@@ -179,6 +179,8 @@ resourcestring
 
   rsLdapMoveWarningMessage = 'Moving objects in Active Directory Domain Services can prevent your existing system from working the way it was designed. For exemple, moving an organizational unit (OU) can affect the way that group policies are applied to the accounts within the OU.' + LineEnding +
   'Are you sure you want to move this object?';
+  
+  rsTooFewSitesAvailableForSiteLink = 'Active Directory Sites and Services cannot locate two sites to create a working site link object. You may create a new site link that links only one site, but it will have no effect until it links at least two sites.';
 
   // Well Known Sid
   rsWellKnownSidNull = '';
