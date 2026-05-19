@@ -14,14 +14,14 @@ uses
   Spin,
   mormot.core.base,
   mormot.core.log,
+  mormot.net.ldap,
   uhelpersui,
   uproperty,
+  ursatldapclient,
   upropertyframe;
 
 type
-
   { TFrmPropertyGeneralSiteLink }
-
   TFrmPropertyGeneralSiteLink = class(TPropertyFrame)
     Button_Schedule: TButton;
     Button_Add: TButton;
@@ -47,12 +47,24 @@ type
     SpinEdit_Cost: TSpinEdit;
     procedure Button_AddClick(Sender: TObject);
     procedure Button_RemoveClick(Sender: TObject);
+    procedure Edit_DescriptionChange(Sender: TObject);
     procedure ListBox_InSiteLinkSelectionChange(Sender: TObject; User: boolean);
     procedure ListBox_NotInSiteLinkSelectionChange(Sender: TObject;
       User: boolean);
+    
+type
+  { LDAP Result }
+  TLdapResultArray = array of TLdapResult;
+  
+procedure SpinEdit_CostChange(Sender: TObject);
+procedure SpinEdit_ReplicateChange(Sender: TObject);
   private
     fLog: TSynLog;
+    fLdap: TRsatLdapClient;
     fProperty: TProperty;
+
+    fNotInSite, fInSite: TLdapResultArray;
+    
   public
     constructor Create(TheOwner: TComponent); override;
     procedure Update(Props: TProperty); override;
@@ -90,6 +102,11 @@ begin
   end;
 end;
 
+procedure TFrmPropertyGeneralSiteLink.Edit_DescriptionChange(Sender: TObject);
+begin
+  fProperty.Add('description', Edit_Description.Text);
+end;
+
 procedure TFrmPropertyGeneralSiteLink.ListBox_InSiteLinkSelectionChange(
   Sender: TObject; User: boolean);
 begin
@@ -102,6 +119,16 @@ procedure TFrmPropertyGeneralSiteLink.ListBox_NotInSiteLinkSelectionChange(
 begin
   Button_Add.Enabled := True;
   Button_Remove.Enabled := False;
+end;
+
+procedure TFrmPropertyGeneralSiteLink.SpinEdit_CostChange(Sender: TObject);
+begin
+  fProperty.Add('cost', FloatToStr(SpinEdit_Cost.Value));
+end;
+
+procedure TFrmPropertyGeneralSiteLink.SpinEdit_ReplicateChange(Sender: TObject);
+begin
+  fProperty.Add('replInterval', FloatToStr(SpinEdit_Replicate.Value));
 end;
 
 constructor TFrmPropertyGeneralSiteLink.Create(TheOwner: TComponent);
@@ -124,6 +151,9 @@ begin
 
   Edit_Name.CaptionNoChange := fProperty.name;
   Edit_Description.CaptionNoChange := fProperty.description;
+  SpinEdit_Cost.Value := StrToFloat(fProperty.Attributes.Find('cost').GetReadable());
+  SpinEdit_Replicate.Value := StrToFloat(fProperty.Attributes.Find('replInterval').GetReadable());
+  
 end;
 
 end.

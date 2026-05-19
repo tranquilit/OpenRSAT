@@ -55,6 +55,7 @@ object FrmPropertyGeneralSiteLink: TFrmPropertyGeneralSiteLink
       BorderSpacing.Left = 32
       BorderSpacing.Right = 8
       TabOrder = 0
+      OnChange = Edit_DescriptionChange
     end
   end
   object Panel2: TPanel
@@ -217,7 +218,7 @@ object FrmPropertyGeneralSiteLink: TFrmPropertyGeneralSiteLink
       Top = 4
       Width = 106
       TabOrder = 0
-      Value = 100
+      OnChange = SpinEdit_CostChange
     end
     object Label_Replicate: TLabel
       AnchorSideLeft.Control = Label_Cost
@@ -241,7 +242,7 @@ object FrmPropertyGeneralSiteLink: TFrmPropertyGeneralSiteLink
       Width = 106
       BorderSpacing.Left = 64
       TabOrder = 1
-      Value = 180
+      OnChange = SpinEdit_ReplicateChange
     end
     object Label_Minutes: TLabel
       AnchorSideLeft.Control = SpinEdit_Replicate
