@@ -201,21 +201,27 @@ begin
   OwnerNewObject.Image_Object.ImageIndex := Ord(ileADUnknown);
   OwnerNewObject.CallBack := @Load;
 
+  n := 0;
+  fLdap.SearchBegin();
   fLdap.SearchScope := lssSingleLevel;
-  if not fLdap.Search(FormatUtf8('CN=Sites,CN=Configuration,%', [fLdap.DefaultDN()]), false, FormatUtf8('(&(objectClass=site))', []), ['*']) then
-    Exit;
-
-  for Result in fLdap.SearchResult.Items do
-  begin
-    if not Assigned(Result) then
-      continue;
-
-    n := Length(fNotInSite);
-    SetLength(fNotInSite, n + 1);
-    fNotInSite[n] := Result;
-  end;
   
-  if n < 1 then
+  repeat
+    if not fLdap.Search(FormatUtf8('CN=Sites,%', [fLdap.ConfigDN]), false, FormatUtf8('(&(objectClass=site))', []), ['name', 'distinguishedName']) then
+      Exit;
+    
+    for Result in fLdap.SearchResult.Items do
+    begin
+      if not Assigned(Result) then
+        continue;
+  
+      SetLength(fNotInSite, n + 1);
+      fNotInSite[n] := Result;
+      n += 1;
+    end;
+  until fLdap.SearchCookie = '';
+  fLdap.SearchEnd;
+  
+  if n < 2 then
   begin
     MessageDlg(rsTooFewSitesAvailableForSiteLink, mtError,[mbOK], 0);
     SetLength(fInSite, 1);
@@ -223,7 +229,7 @@ begin
     SetLength(fNotInSite, 0);
   end;
 
-  if n = 1 then
+  if n = 2 then
   begin
     SetLength(fInSite, 2);
     fInSite[0] := fNotInSite[0];
