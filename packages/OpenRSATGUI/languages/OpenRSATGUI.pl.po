@@ -2772,7 +2772,7 @@ msgstr "Zakończ"
 #: uvisdelegatecontrol.lrj:$.strings.[0].value
 msgctxt "tvisdelegatecontrol.caption"
 msgid "Delegation of Control Wizard"
-msgstr "Kreator delegowania sterowania"
+msgstr "Kreator delegowania uprawnień"
 
 #: uvisdelegatecontrol.lrj:$.strings.[19].value
 msgctxt "tvisdelegatecontrol.checkbox1.caption"
@@ -2792,7 +2792,7 @@ msgstr "Ogólne"
 #: uvisdelegatecontrol.lrj:$.strings.[25].value
 msgctxt "tvisdelegatecontrol.checkbox4.caption"
 msgid "Property-specific"
-msgstr "Właściwe dla właściwości"
+msgstr "Specyficzne dla właściwości"
 
 #: uvisdelegatecontrol.lrj:$.strings.[26].value
 msgctxt "tvisdelegatecontrol.checkbox5.caption"
@@ -2802,12 +2802,12 @@ msgstr "Tworzenie/usuwanie określonych obiektów podrzędnych"
 #: uvisdelegatecontrol.lrj:$.strings.[1].value
 msgctxt "tvisdelegatecontrol.label1.caption"
 msgid "Welcome to the Delegation of Control Wizard"
-msgstr "Kreator delegowania sterowania zaprasza"
+msgstr "Witamy w Kreatorze delegowania uprawnień"
 
 #: uvisdelegatecontrol.lrj:$.strings.[12].value
 msgctxt "tvisdelegatecontrol.label10.caption"
 msgid "You have successfully completed the Delegation of Control wizard."
-msgstr "Kreator delegowania sterowania zakończył pracę pomyślnie."
+msgstr "Kreator delegowania uprawnień zakończył pracę pomyślnie."
 
 #: uvisdelegatecontrol.lrj:$.strings.[13].value
 msgctxt "tvisdelegatecontrol.label11.caption"
@@ -2854,7 +2854,7 @@ msgctxt "tvisdelegatecontrol.label2.caption"
 msgid "This wizard helps you delegate control of Active Directory objects. You can "
 "grant users permission to manage users, groups, computers, organizational un"
 "its, and other objects stored in Active Directory Domain Services."
-msgstr "Ten kreator pomaga delegować sterowanie obiektami Active Directory. Można przyznać użytkownikom uprawnienia do zarządzania użytkownikami, grupami, komputerami, jednostkami organizacyjnymi i innymi obiektami przechowywanymi w Usługach domenowych Active Directory."
+msgstr "Ten kreator pomaga delegować kontrolę nad obiektami Active Directory. Możesz przyznać użytkownikom uprawnienia do zarządzania użytkownikami, grupami, komputerami, jednostkami organizacyjnymi i innymi obiektami przechowywanymi w usługach domenowych Active Directory."
 
 #: uvisdelegatecontrol.lrj:$.strings.[3].value
 msgctxt "tvisdelegatecontrol.label3.caption"
