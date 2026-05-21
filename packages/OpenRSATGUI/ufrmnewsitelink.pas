@@ -49,12 +49,16 @@ type
   private
     fLdap: TRsatLdapClient;
 
-    fInSite: TLdapResultArray;
-    fNotInSite: TLdapResultArray;
+    fInSite, fNotInSite: TLdapResultArray;
+    fSitesRetrieved: Integer;
 
     procedure Load;
     procedure LoadListBox;
     procedure MoveItem(var Src, Dest: TLdapResultArray; Index: Integer);
+    procedure GetAllSites;
+
+    function GetName: RawUtf8;
+    function GetSiteAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
   public
     constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient); reintroduce;
   end;
@@ -79,21 +83,21 @@ end;
 
 procedure TFrmNewSiteLink.Action_NextExecute(Sender: TObject);
 var
-  DistinguishedName: String;
+  DistinguishedName: RawUtf8;
   AttributeList: TLdapAttributeList;
   Attribute: TLdapAttribute;
   i: Integer;
 begin
-  DistinguishedName := Format('CN=%s,CN=SMTP,CN=Inter-Site Transports,CN=Sites,%s', [Edit_Name.Text, fLdap.ConfigDN]);
+  DistinguishedName := Format('CN=%s,CN=SMTP,CN=Inter-Site Transports,CN=Sites,%s', [GetName(), fLdap.ConfigDN]);
   AttributeList := TLdapAttributeList.Create;
 
   try
     Attribute := AttributeList.Add('objectClass', 'top');
     Attribute.Add('siteLink');
     
-    Attribute := AttributeList.Add('siteList', fInSite[0].Find('distinguishedName').GetReadable());
+    Attribute := AttributeList.Add('siteList', GetSiteAttrValue(fInSite, 0, 'distinguishedName'));
     for i := 1 to Length(fInSite) - 1 do
-      Attribute.Add(fInSite[i].Find('distinguishedName').GetReadable());
+      Attribute.Add(GetSiteAttrValue(fInSite, i, 'distinguishedName'));
     
     AttributeList.Add('cost', '100');
     AttributeList.Add('replInterval', '180');
@@ -107,9 +111,9 @@ end;
 procedure TFrmNewSiteLink.Action_NextUpdate(Sender: TObject);
 begin
   if Length(fInSite) + Length(fNotInSite) > 2 then
-    Action_Next.Enabled := (Edit_Name.Text <> '') and (Length(fInSite) >= 2)
+    Action_Next.Enabled := (GetName() <> '') and (Length(fInSite) >= 2)
   else
-    Action_Next.Enabled := (Edit_Name.Text <> '');
+    Action_Next.Enabled := (GetName() <> '');
 end;
 
 procedure TFrmNewSiteLink.Button_AddClick(Sender: TObject);
@@ -182,15 +186,37 @@ begin
   end;
 end;
 
+procedure TFrmNewSiteLink.GetAllSites;
+var
+  LdapResult: TLdapResult;
+begin
+  fLdap.SearchBegin();
+  fLdap.SearchScope := lssSingleLevel;
+  repeat
+    if not fLdap.Search(FormatUtf8('CN=Sites,%', [fLdap.ConfigDN]), false, FormatUtf8('(&(objectClass=site))', []), ['name', 'distinguishedName']) then
+      Exit;
+    
+    for LdapResult in fLdap.SearchResult.Items do
+    begin
+      if not Assigned(LdapResult) then
+        continue;
+  
+      SetLength(fNotInSite, fSitesRetrieved + 1);
+      fNotInSite[fSitesRetrieved] := LdapResult;
+      fSitesRetrieved += 1;
+    end;
+  until fLdap.SearchCookie = '';
+  fLdap.SearchEnd;
+end;
+
 constructor TFrmNewSiteLink.Create(TheOwner: TComponent; ALdap: TRsatLdapClient);
 var
   OwnerNewObject: TVisNewObject absolute TheOwner;
-  Result: TLdapResult;
-  n: Integer;
 begin
   inherited Create(TheOwner);
 
   fLdap := ALdap;
+  fSitesRetrieved := 0;
 
   OwnerNewObject.Caption := rsNewObjectSiteLink;
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
@@ -200,28 +226,10 @@ begin
   OwnerNewObject.Btn_Back.Visible := False;
   OwnerNewObject.Image_Object.ImageIndex := Ord(ileADUnknown);
   OwnerNewObject.CallBack := @Load;
-
-  n := 0;
-  fLdap.SearchBegin();
-  fLdap.SearchScope := lssSingleLevel;
   
-  repeat
-    if not fLdap.Search(FormatUtf8('CN=Sites,%', [fLdap.ConfigDN]), false, FormatUtf8('(&(objectClass=site))', []), ['name', 'distinguishedName']) then
-      Exit;
-    
-    for Result in fLdap.SearchResult.Items do
-    begin
-      if not Assigned(Result) then
-        continue;
+  GetAllSites;
   
-      SetLength(fNotInSite, n + 1);
-      fNotInSite[n] := Result;
-      n += 1;
-    end;
-  until fLdap.SearchCookie = '';
-  fLdap.SearchEnd;
-  
-  if n < 2 then
+  if fSitesRetrieved < 2 then
   begin
     MessageDlg(rsTooFewSitesAvailableForSiteLink, mtError,[mbOK], 0);
     SetLength(fInSite, 1);
@@ -229,7 +237,7 @@ begin
     SetLength(fNotInSite, 0);
   end;
 
-  if n = 2 then
+  if fSitesRetrieved = 2 then
   begin
     SetLength(fInSite, 2);
     fInSite[0] := fNotInSite[0];
@@ -238,6 +246,16 @@ begin
   end;
   
   LoadListBox;
+end;
+
+function TFrmNewSiteLink.GetName: RawUtf8;
+begin
+  Result := Edit_Name.Text;
+end;
+
+function TFrmNewSiteLink.GetSiteAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
+begin
+  Result := List[idx].Find(attr).GetReadable()
 end;
 
 end.
