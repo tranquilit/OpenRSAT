@@ -100,6 +100,7 @@ type
   public
     constructor Create(TheOwner: TComponent; ASettings: TMLdapClientSettings); reintroduce;
 
+    procedure ApplyTranslation;
     property Settings: TMLdapClientSettings read fSettings;
   end;
 
@@ -111,6 +112,7 @@ uses
   mormot.net.ldap,
   mormot.net.sock,
   mormot.crypt.secure,
+  ustrconsts,
   ucommon,
   ucoredatamodule,
   uvisrootdseinfos,
@@ -463,6 +465,40 @@ begin
   fSettings := ASettings;
 
   ActionList1.Images := CoreDataModule.ImageList1;
+  ApplyTranslation;
+end;
+
+procedure TVisProfileConfiguration.ApplyTranslation;
+begin
+  Caption := rsVisProfileConfiguration;
+
+  GroupBox_Domain.Caption := rsDomain;
+  GroupBox_AuthMethods.Caption := rsAuthMethod;
+  GroupBox_Account.Caption := rsAccount;
+
+  Label_Domain.Caption := rsDomain;
+  Label_DomainController.Caption := rsDomainController;
+  Label_TLS.Caption := rsTLS;
+  Label_Timeout.Caption := rsTimeout;
+  Label_Unsafe.Caption := rsUnsafeConnection;
+  Label_Anonymous.Caption := rsAnonymous;
+  Label_Simple.Caption := rsSimple;
+  Label_Digest.Caption := rsDigest;
+  Label_Kerberos.Caption := rsKerberos;
+  Label_ChannelBinding.Caption := rsChannelBinding;
+  Label_CurrentUsername.Caption := rsCurrentUsername;
+  Label_Algorithm.Caption := rsAlgorithm;
+  Label_Username.Caption := rsUsername;
+  Label_Password.Caption := rsPassword;
+  Label_at.Caption := rsAt;
+
+  BitBtn_TestConnection.Caption := rsTestConnection;
+  BitBtn_DCInfos.Caption := rsShowDCInfos;
+  BitBtn_TestAuthentication.Caption := rsTestAuthentication;
+
+  Action_TestConnection.Caption := rsTestConnection;
+  Action_TestAuthentication.Caption := rsTestAuthentication;
+  Action_ShowDCInfos.Caption := rsShowDCInfos;
 end;
 
 end.

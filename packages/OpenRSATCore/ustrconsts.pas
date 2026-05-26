@@ -20,6 +20,7 @@ resourcestring
   rsVisResourceRecordType = 'Resource record type';
   rsVisRootDSEInfos = 'DC infos';
   rsVisSearch = 'Search';
+  rsVisProfileConfiguration = 'Profile configuration';
 
   rsAdd = 'Add';
   rsDelete = 'Delete';
@@ -119,6 +120,24 @@ resourcestring
   rsCopyPassword = 'Copy password';
   rsShowPassword = 'Show password';
   rsModify = 'Modify';
+
+  rsAuthMethod = 'Auth method';
+  rsAccount = 'Accound';
+  rsTLS = 'TLS';
+  rsTimeout = 'Timeout';
+  rsUnsafeConnection = 'Unsafe connection';
+  rsAnonymous = 'Anonymous';
+  rsSimple = 'Simple';
+  rsDigest = 'Digest';
+  rsKerberos = 'Kerberos';
+  rsChannelBinding = 'Channel binding';
+  rsCurrentUsername = 'Current username';
+  rsAlgorithm = 'Algorithm';
+  rsPassword = 'Password';
+  rsAt = '@';
+  rsTestConnection = 'Test connection';
+  rsTestAuthentication = 'Test authentication';
+  rsShowDCInfos = 'Show DC Infos';
 
 implementation
 
