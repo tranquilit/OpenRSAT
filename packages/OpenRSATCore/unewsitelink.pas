@@ -73,7 +73,7 @@ begin
   
   ListLen := Length(List);
   SetLength(List, ListLen + 1);
-  List[ListLen] := Item;
+  List[ListLen] := TLdapResult(Item.Clone);
 end;
 
 function TNewSiteLinkPresenter.SearchSitesInLdap: boolean;
