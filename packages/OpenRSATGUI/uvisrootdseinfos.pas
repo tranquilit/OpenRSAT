@@ -37,6 +37,8 @@ type
   public
     constructor Create(TheOwner: TComponent; ALdapSettings: TMLdapClientSettings);
       reintroduce;
+
+    procedure ApplyTranslation;
   end;
 
 implementation
@@ -44,6 +46,7 @@ uses
   mormot.core.base,
   mormot.core.text,
   mormot.core.variants,
+  ustrconsts,
   ucommon,
   ursatldapclientui;
 
@@ -122,6 +125,20 @@ begin
   inherited Create(TheOwner);
 
   fLdapSettings := ALdapSettings;
+  ApplyTranslation;
+end;
+
+procedure TVisRootDSEInfos.ApplyTranslation;
+begin
+  Caption := rsVisRootDSEInfos;
+
+  Label_Domain.Caption := rsDomain;
+  Label_DomainController.Caption := rsDomainController;
+
+  label1.Caption := rsServerInformationsAvailableFromRootDSE;
+
+  TisGrid1.Header.Columns[0].Text := rsName;
+  TisGrid1.Header.Columns[1].Text := rsValue;
 end;
 
 end.

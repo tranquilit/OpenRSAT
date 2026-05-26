@@ -18,6 +18,7 @@ resourcestring
   rsVisSelectObjectSID = 'Select object SID';
   rsVisSelectObjectGUID = 'Select object GUID';
   rsVisResourceRecordType = 'Resource record type';
+  rsVisRootDSEInfos = 'DC infos';
 
   rsAdd = 'Add';
   rsDelete = 'Delete';
@@ -34,6 +35,7 @@ resourcestring
 
   rsName = 'Name';
   rsName_1 = 'Name: ';
+  rsValue = 'Value';
   rsDomain = 'Domain';
   rsDomainController = 'Domain controller';
   rsUsername = 'Username';
@@ -73,6 +75,8 @@ resourcestring
   rsDescription = 'Description';
   rsDescription_1 = 'Description: ';
   rsCreateRecord = 'Create record';
+
+  rsServerInformationsAvailableFromRootDSE = 'Server informations (available from RootDSE Object)';
 
 implementation
 
