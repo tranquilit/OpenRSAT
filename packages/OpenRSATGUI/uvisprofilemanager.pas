@@ -52,8 +52,6 @@ type
     procedure Action_EditExecute(Sender: TObject);
     procedure Action_EditUpdate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure ListView1Change(Sender: TObject; Item: TListItem;
-      Change: TItemChange);
     procedure ListView1DblClick(Sender: TObject);
     procedure ListView1Edited(Sender: TObject; Item: TListItem;
       var AValue: string);
@@ -154,6 +152,7 @@ var
   VisProfileConfiguration: TVisProfileConfiguration;
 begin
   fLdapConfigs.LoadConfig(ListView1.Selected.Caption);
+  fSelected := ListView1.Selected.Caption;
   VisProfileConfiguration := TVisProfileConfiguration.Create(Self, fLdapConfigs.LdapConnectionSettings);
   try
     if VisProfileConfiguration.ShowModal <> mrOK then
@@ -173,12 +172,6 @@ end;
 procedure TVisProfileManager.FormShow(Sender: TObject);
 begin
   SwitchListView(ListView1.ViewStyle);
-end;
-
-procedure TVisProfileManager.ListView1Change(Sender: TObject; Item: TListItem;
-  Change: TItemChange);
-begin
-  fSelected := Item.Caption;
 end;
 
 procedure TVisProfileManager.ListView1DblClick(Sender: TObject);
@@ -294,7 +287,7 @@ begin
   if not fIniFile.SectionExists(Section) then
     Exit;
 
-  NewViewItem := ListView1.Items.Add;
+  NewViewItem := ListView1.Items.add;
   NewViewItem.Caption := Section;
   NewViewItem.ImageIndex := 55;
   NewViewItem.SubItems.Add(fIniFile.ReadString(Section, 'KerberosDN', ''));
