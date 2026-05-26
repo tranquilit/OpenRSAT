@@ -103,6 +103,23 @@ resourcestring
   rsAdvancedAdd = 'Advanced add';
   rsAdvancedDelete = 'Advanced delete';
 
+  rsApply = 'Apply';
+  rsClear = 'Clear';
+  rsShowOnlyAttributesThatHaveValues = 'Show only attributes that have values';
+  rsShowOnlyWritableAttributes = 'Show only writable attributes';
+  rsMandatory = 'Mandatory';
+  rsOptional = 'Optional';
+  rsConstructed = 'Constructed';
+  rsBacklinks = 'Backlinks';
+  rsSystemOnly = 'System-only';
+  rsRemove = 'Remove';
+  rsCopyToFile = 'Copy to file';
+  rsViewCertificate = 'View certificate';
+  rsExpireNow = 'Expire now';
+  rsCopyPassword = 'Copy password';
+  rsShowPassword = 'Show password';
+  rsModify = 'Modify';
+
 implementation
 
 end.

@@ -30,6 +30,7 @@ uses
   mormot.crypt.x509,
   mormot.net.ldap,
   Controls,
+  ustrconsts,
   ucommon,
   ucoredatamodule,
   upropertyframe,
@@ -123,6 +124,7 @@ type
     constructor Create(TheOwner: TComponent; ADistinguishedName: RawUtf8); reintroduce;
     destructor Destroy(); override;
 
+    procedure ApplyTranslation;
     property DistinguishedName: RawUtf8 read fDistinguishedName;
   end;
 
@@ -557,6 +559,7 @@ begin
   UnifyButtonsWidth([Btn_BottomApply, Btn_BottomCancel, Btn_BottomOK]);
 
   fProperty := TProperty.Create(FrmRSAT.RSAT);
+  ApplyTranslation;
 end;
 
 destructor TVisProperties.Destroy();
@@ -564,6 +567,45 @@ begin
   FreeAndNil(fProperty);
 
   Inherited;
+end;
+
+procedure TVisProperties.ApplyTranslation;
+begin
+  Btn_BottomApply.Caption := rsApply;
+  Btn_BottomCancel.Caption := rsCancel;
+  Btn_BottomOK.Caption := rsOK;
+
+  Action_Apply.Caption := rsApply;
+  Action_OK.Caption := rsOK;
+  Action_MemberOfAdd.Caption := rsAdd;
+  Action_MemberOfDelete.Caption := rsDelete;
+  Action_ManagedByChange.Caption := rsChange;
+  Action_ManagedByProperties.Caption := rsProperties;
+  Action_ManagedByClear.Caption := rsClear;
+  Action_ManagedByCheckBox.Caption := rsManagerCanUpdateMembershipList;
+  Action_MembersAdd.Caption := rsMembersAdd;
+  Action_MembersDelete.Caption := rsMembersDelete;
+  Action_SecurityAdvanced.Caption := rsAdvanced;
+  Action_SecurityAddUser.Caption := rsAdd;
+  Action_SecurityDeleteUser.Caption := rsDelete;
+  Action_OrganizationProperties.Caption := rsProperties;
+  Action_OrganizationClear.Caption := rsClear;
+  Action_AttributesFilter.Caption := rsFilter;
+  Action_AttributesShowValues.Caption := rsShowOnlyAttributesThatHaveValues;
+  Action_AttributesShowWritable.Caption := rsShowOnlyWritableAttributes;
+  Action_AttributesMandatory.Caption := rsMandatory;
+  Action_AttributesOptional.Caption := rsOptional;
+  Action_AttributesConstructed.Caption := rsConstructed;
+  Action_AttributesBacklinks.Caption := rsBacklinks;
+  Action_AttributesSystemOnly.Caption := rsSystemOnly;
+  Action_CertificateRemove.Caption := rsRemove;
+  Action_CertificateCopy.Caption := rsCopyToFile;
+  Action_CertificateView.Caption := rsViewCertificate;
+  Action_LAPSExpireNow.Caption := rsExpireNow;
+  Action_LAPSCopyPassword.Caption := rsCopyPassword;
+  Action_LAPSShowPassword.Caption := rsShowPassword;
+  Action_AttributesModify.Caption := rsModify;
+  Action_Cancel.Caption := rsCancel;
 end;
 
 procedure TVisProperties.FormClose(Sender: TObject; var CloseAction: TCloseAction);
