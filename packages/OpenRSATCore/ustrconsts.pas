@@ -19,6 +19,7 @@ resourcestring
   rsVisSelectObjectGUID = 'Select object GUID';
   rsVisResourceRecordType = 'Resource record type';
   rsVisRootDSEInfos = 'DC infos';
+  rsVisSearch = 'Search';
 
   rsAdd = 'Add';
   rsDelete = 'Delete';
@@ -77,6 +78,30 @@ resourcestring
   rsCreateRecord = 'Create record';
 
   rsServerInformationsAvailableFromRootDSE = 'Server informations (available from RootDSE Object)';
+
+  rsType = 'Type';
+  rsBasic = 'Basic';
+  rsAdvanced = 'Advanced';
+  rsExpert = 'Expert';
+  rsOptions = 'Options';
+  rsPath = 'Path: ';
+  rsChange = 'Change';
+  rsSearchAName = 'Search a name: ';
+  rsAllConditions = 'All conditions';
+  rsAtLeastOneCondition = 'At least one condition';
+  rsCondition = 'Condition';
+  rsAddCondition = 'Add condition';
+  rsDeleteCondition = 'Delete condition';
+  rsSearchUsingLdapFilter = 'Search using ldap filter: ';
+  rsSearchScope = 'Search scope';
+  rsPageSize = 'Page size';
+  rsPageCount = 'Page count';
+  rsSearchFrom = 'Search from';
+  rsSearchNew = 'Search new';
+  rsShowInView = 'Show in view';
+  rsProperties = 'Properties';
+  rsAdvancedAdd = 'Advanced add';
+  rsAdvancedDelete = 'Advanced delete';
 
 implementation
 

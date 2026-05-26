@@ -106,6 +106,8 @@ type
     fModule: TFrmModuleADUC;
   public
     constructor Create(TheOwner: TComponent; AModule: TFrmModuleADUC); reintroduce;
+
+    procedure ApplyTranslation;
   end;
 
 implementation
@@ -116,6 +118,7 @@ uses
   mormot.core.data,
   mormot.core.log,
   mormot.core.text,
+  ustrconsts,
   ucommon,
   ucommonui,
   ucoredatamodule,
@@ -222,6 +225,55 @@ begin
   inherited Create(TheOwner);
 
   fModule := AModule;
+  ApplyTranslation;
+end;
+
+procedure TVisSearch.ApplyTranslation;
+begin
+  Caption := rsVisSearch;
+
+  TisGrid_Result.Header.Columns[0].Text := rsName;
+  TisGrid_Result.Header.Columns[1].Text := rsType;
+  TisGrid_Result.Header.Columns[2].Text := rsDescription;
+
+  TabSheet_Basic.Caption := rsBasic;
+  TabSheet_Advanced.Caption := rsAdvanced;
+  TabSheet_Expert.Caption := rsExpert;
+  TabSheet_Options.Caption := rsOptions;
+
+  Label_Path.Caption := rsPath;
+  BitBtn_PathChange.Caption := rsChange;
+  Label_BasicValue.Caption := rsSearchAName;
+  BitBtn_Search.Caption := rsSearch;
+
+  RadioButton_AllCondition.Caption := rsAllConditions;
+  RadioButton_OneCondition.Caption := rsAtLeastOneCondition;
+
+  TisGrid_AdvDetails.Header.Columns[0].Text := rsKey;
+  TisGrid_AdvDetails.Header.Columns[1].Text := rsCondition;
+  TisGrid_AdvDetails.Header.Columns[2].Text := rsValue;
+
+  BitBtn_Add.Caption := rsAddCondition;
+  BitBtn_Del.Caption := rsDeleteCondition;
+
+  Label_ExpFilter.Caption := rsSearchUsingLdapFilter;
+
+  Label_SearchScope.Caption := rsSearchScope;
+  Label_PageSize.Caption := rsPageSize;
+  Label_PageCount.Caption := rsPageCount;
+
+  Action_Search.Caption := rsSearch;
+  Action_ChangeDN.Caption := rsChange;
+  Action_SearchFrom.Caption := rsSearchFrom;
+  Action_SearchNew.Caption := rsSearchNew;
+  Action_ShowInView.Caption := rsShowInView;
+  Action_Properties.Caption := rsProperties;
+  Action_AdvAdd.Caption := rsAdvancedAdd;
+  Action_AdvDel.Caption := rsAdvancedDelete;
+  MenuItem_SearchFrom.Caption := rsSearchFrom;
+  MenuItem_SearchNew.Caption := rsSearchNew;
+  MenuItem_ShowInView.Caption := rsShowInView;
+  MenuItem_Properties.Caption := rsProperties;
 end;
 
 procedure TVisSearch.Action_SearchFromExecute(Sender: TObject);
