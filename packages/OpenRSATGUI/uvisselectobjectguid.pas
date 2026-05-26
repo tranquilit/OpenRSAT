@@ -50,6 +50,8 @@ type
   public
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
+
+    procedure ApplyTranslation;
   public
     procedure SetMultiSelect(AMultiSelect: Boolean);
     procedure SetAllowedType(AAllowedType: TRawUtf8DynArray);
@@ -62,6 +64,8 @@ type
   end;
 
 implementation
+uses
+  ustrconsts;
 
 {$R *.lfm}
 
@@ -117,6 +121,7 @@ begin
 
   fPresenter := TSelectObjectGUIDPresenter.Create(Self);
   Timer1.Enabled := False;
+  ApplyTranslation;
 end;
 
 destructor TVisSelectObjectGUID.Destroy;
@@ -124,6 +129,17 @@ begin
   FreeAndNil(fPresenter);
 
   inherited Destroy;
+end;
+
+procedure TVisSelectObjectGUID.ApplyTranslation;
+begin
+  Caption := rsVisSelectObjectGUID;
+
+  Label1.Caption := rsFilter_1;
+  BitBtn1.Caption := rsSearch;
+  BitBtn2.Caption := rsOK;
+  BitBtn3.Caption := rsCancel;
+  Action1.Caption := rsSearch;
 end;
 
 procedure TVisSelectObjectGUID.SetMultiSelect(AMultiSelect: Boolean);

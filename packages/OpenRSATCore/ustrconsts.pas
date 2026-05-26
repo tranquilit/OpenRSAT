@@ -16,6 +16,7 @@ resourcestring
   rsVisTaskResetPassword = 'Reset password';
   rsVisTaskMove = 'Move';
   rsVisSelectObjectSID = 'Select object SID';
+  rsVisSelectObjectGUID = 'Select object GUID';
 
   rsAdd = 'Add';
   rsDelete = 'Delete';
