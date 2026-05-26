@@ -46,6 +46,8 @@ type
   public
     constructor Create(TheOwner: TComponent; Serial: Cardinal; LdapClient:
       TRsatLdapClient; distinguishedName, dcPrefix: String); reintroduce;
+
+    procedure ApplyTranslation;
   end;
 
 const
@@ -81,6 +83,7 @@ const
 implementation
 
 uses
+  ustrconsts,
   ucommon,
   uvisnewresourcerecord;
 
@@ -174,6 +177,21 @@ begin
   fLdapClient := LdapClient;
   fDcPrefix := dcPrefix;
   fDistinguishedName := distinguishedName;
+  ApplyTranslation;
+end;
+
+procedure TVisSelectNewRecordType.ApplyTranslation;
+begin
+  Caption := rsVisResourceRecordType;
+
+  BitBtn2.Caption := rsCancel;
+  BitBtn1.Caption := rsCreateRecord;
+
+  Label1.Caption := rsSelectAResourceRecordType;
+  Label2.Caption := rsDescription;
+
+  Action_CreateRecord.Caption := rsCreateRecord;
+  Action_Cancel.Caption := rsCancel;
 end;
 
 end.

@@ -7,7 +7,7 @@ object VisSelectNewRecordType: TVisSelectNewRecordType
   ClientHeight = 339
   ClientWidth = 304
   Position = poOwnerFormCenter
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   OnCreate = FormCreate
   object Panel1: TPanel
     Left = 8

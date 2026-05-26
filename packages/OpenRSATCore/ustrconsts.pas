@@ -17,6 +17,7 @@ resourcestring
   rsVisTaskMove = 'Move';
   rsVisSelectObjectSID = 'Select object SID';
   rsVisSelectObjectGUID = 'Select object GUID';
+  rsVisResourceRecordType = 'Resource record type';
 
   rsAdd = 'Add';
   rsDelete = 'Delete';
@@ -67,6 +68,11 @@ resourcestring
 
   rsDistinguishedName = 'Distinguished name';
   rsSID = 'SID';
+
+  rsSelectAResourceRecordType = 'Select a resource record type: ';
+  rsDescription = 'Description';
+  rsDescription_1 = 'Description: ';
+  rsCreateRecord = 'Create record';
 
 implementation
 
