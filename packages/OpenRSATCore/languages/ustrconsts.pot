@@ -1,0 +1,55 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: ustrconsts.rsadd
+msgid "Add"
+msgstr ""
+
+#: ustrconsts.rsdelete
+msgid "Delete"
+msgstr ""
+
+#: ustrconsts.rsdomain
+msgid "Domain"
+msgstr ""
+
+#: ustrconsts.rsdomaincontroller
+msgid "Domain Controller"
+msgstr ""
+
+#: ustrconsts.rsedit
+msgid "Edit"
+msgstr ""
+
+#: ustrconsts.rslargeicons
+msgid "Large Icons"
+msgstr ""
+
+#: ustrconsts.rslist
+msgid "List"
+msgstr ""
+
+#: ustrconsts.rsname
+msgid "Name"
+msgstr ""
+
+#: ustrconsts.rsok
+msgid "OK"
+msgstr ""
+
+#: ustrconsts.rssmallicons
+msgid "Small Icons"
+msgstr ""
+
+#: ustrconsts.rstable
+msgid "Table"
+msgstr ""
+
+#: ustrconsts.rsusername
+msgid "Username"
+msgstr ""
+
+#: ustrconsts.rsvisprofilemanagercaption
+msgid "Profile Manager"
+msgstr ""
+

@@ -71,6 +71,8 @@ type
       reintroduce;
     destructor Destroy; override;
 
+    procedure ApplyTranslation;
+
     procedure SwitchListView(ViewStyle: TViewStyle);
     procedure LoadProfiles(ForceUpdate: Boolean = True);
     procedure LoadProfile(Section: RawUtf8);
@@ -80,6 +82,7 @@ implementation
 uses
   uvisprofileconfiguration,
   ucoredatamodule,
+  ustrconsts,
   ucommon,
   uconfig;
 
@@ -238,6 +241,8 @@ begin
   IniPropStorage1.IniFileName := VisBakFilePath;
 
   ActionList1.Images := CoreDataModule.ImageList1;
+
+  ApplyTranslation;
 end;
 
 destructor TVisProfileManager.Destroy;
@@ -245,6 +250,26 @@ begin
   FreeAndNil(fIniFile);
 
   inherited Destroy;
+end;
+
+procedure TVisProfileManager.ApplyTranslation;
+begin
+  Caption := rsVisProfileManagerCaption;
+  Action_Add.Caption := rsAdd;
+  Action_Delete.Caption := rsDelete;
+  Action_Edit.Caption := rsEdit;
+
+  MenuItem_LargeIcons.Caption := rsLargeIcons;
+  MenuItem_SmallIcons.Caption := rsSmallIcons;
+  MenuItem_List.Caption := rsList;
+  MenuItem_Table.Caption := rsTable;
+
+  BitBtn_OK.Caption := rsOK;
+
+  ListView1.Column[0].Caption := rsName;
+  ListView1.Column[1].Caption := rsDomain;
+  ListView1.Column[2].Caption := rsDomainController;
+  ListView1.Column[3].Caption := rsUsername;
 end;
 
 procedure TVisProfileManager.SwitchListView(ViewStyle: TViewStyle);
