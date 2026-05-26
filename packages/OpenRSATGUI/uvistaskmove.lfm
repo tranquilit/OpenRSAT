@@ -8,7 +8,7 @@ object VisTaskMove: TVisTaskMove
   ClientWidth = 300
   KeyPreview = True
   Position = poScreenCenter
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   object Label_DN: TLabel

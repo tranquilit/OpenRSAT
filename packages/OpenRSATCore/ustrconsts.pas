@@ -14,6 +14,7 @@ resourcestring
   rsVisProfileManagerCaption = 'Profile manager';
   rsVisViewKeyTabCaption = 'View Keytab';
   rsVisTaskResetPassword = 'Reset password';
+  rsVisTaskMove = 'Move';
 
   rsAdd = 'Add';
   rsDelete = 'Delete';
@@ -29,6 +30,7 @@ resourcestring
   rsCancel = 'Cancel';
 
   rsName = 'Name';
+  rsName_1 = 'Name: ';
   rsDomain = 'Domain';
   rsDomainController = 'Domain controller';
   rsUsername = 'Username';
@@ -55,6 +57,7 @@ resourcestring
   rsUnlockTheUserAccount = 'Account Lockout Status on this Domain Controller: ';
   rsAccountLockoutStatusOnThisDomainController = 'Unlock the user''s account';
 
+  rsObjectLocation = 'Object location: ';
 implementation
 
 end.

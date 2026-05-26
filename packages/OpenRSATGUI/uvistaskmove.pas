@@ -71,6 +71,8 @@ type
     procedure Tree_Images();
   public
     constructor Create(TheOwner: TComponent; _Ldap: TRsatLdapClient; _DN: String); reintroduce;
+
+    procedure ApplyTranslation;
   end;
 
 implementation
@@ -80,6 +82,7 @@ uses
   SysUtils,
   System.UITypes,
   mormot.core.text,
+  ustrconsts,
   ucommon,
   ucommonui,
   ursatldapclientui,
@@ -137,6 +140,21 @@ begin
   DN := _DN;
   ParseDN(_DN, DNs);
   RDN := DNs[0].Value;
+
+  ApplyTranslation;
+end;
+
+procedure TVisTaskMove.ApplyTranslation;
+begin
+  Caption := rsVisTaskMove;
+
+  Label_DN.Caption := rsObjectLocation;
+  Label_RDN.Caption := rsName_1;
+
+  Btn_Ok.Caption := rsOK;
+  Btn_Cancel.Caption := rsCancel;
+
+  Action_OK.Caption := rsOK;
 end;
 
 procedure TVisTaskMove.FormShow(Sender: TObject);
