@@ -8,10 +8,12 @@ unit OpenRSATCore;
 interface
 
 uses
-  uhelpers, ursatldapclient, ucommon, uldapconfigs, uconfig, uoption, umodule, umoduleaducoption, umoduleaduc, ursat, 
-  ursatoption, umoduleadssoption, umoduleadss, umoduleaddns, umoduleaddnsoption, umoduleadsi, umoduleadsioption, udns, 
-  ugplink, uproperty, usidcache, uadvancedsecuritypresenter, uguidcache, uselectobjectguidpresenter, 
-  uviewkeytabpresenter, LazarusPackageIntf;
+  uhelpers, ursatldapclient, ucommon, uldapconfigs, uconfig, uoption, umodule, 
+  umoduleaducoption, umoduleaduc, ursat, ursatoption, umoduleadssoption, 
+  umoduleadss, umoduleaddns, umoduleaddnsoption, umoduleadsi, 
+  umoduleadsioption, udns, ugplink, uproperty, usidcache, 
+  uadvancedsecuritypresenter, uguidcache, uselectobjectguidpresenter, 
+  uviewkeytabpresenter, unewsitelink, LazarusPackageIntf;
 
 implementation
 

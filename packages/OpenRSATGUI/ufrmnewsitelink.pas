@@ -15,7 +15,8 @@ uses
   tis.ui.grid.core,
   mormot.core.base,
   mormot.net.ldap,
-  ursatldapclient;
+  ursatldapclient,
+  unewsitelink;
 
 type
 
@@ -47,18 +48,11 @@ type
   TLdapResultArray = array of TLdapResult;
     
   private
-    fLdap: TRsatLdapClient;
-
-    fInSite, fNotInSite: TLdapResultArray;
-    fSitesRetrieved: Integer;
+    fNewSiteLinkLogic: TNewSiteLinkPresenter;
 
     procedure Load;
     procedure LoadListBox;
-    procedure MoveItem(var Src, Dest: TLdapResultArray; Index: Integer);
-    procedure GetAllSites;
-
     function GetName: RawUtf8;
-    function GetSiteAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
   public
     constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient); reintroduce;
   end;
@@ -82,131 +76,49 @@ begin
 end;
 
 procedure TFrmNewSiteLink.Action_NextExecute(Sender: TObject);
-var
-  DistinguishedName: RawUtf8;
-  AttributeList: TLdapAttributeList;
-  Attribute: TLdapAttribute;
-  i: Integer;
 begin
-  DistinguishedName := Format('CN=%s,CN=SMTP,CN=Inter-Site Transports,CN=Sites,%s', [GetName(), fLdap.ConfigDN]);
-  AttributeList := TLdapAttributeList.Create;
-
-  try
-    Attribute := AttributeList.Add('objectClass', 'top');
-    Attribute.Add('siteLink');
-    
-    Attribute := AttributeList.Add('siteList', GetSiteAttrValue(fInSite, 0, 'distinguishedName'));
-    for i := 1 to Length(fInSite) - 1 do
-      Attribute.Add(GetSiteAttrValue(fInSite, i, 'distinguishedName'));
-    
-    AttributeList.Add('cost', '100');
-    AttributeList.Add('replInterval', '180');
-    if not fLdap.Add(DistinguishedName, AttributeList) then
-      Exit;
-  finally
-    FreeAndNil(AttributeList);
-  end;
+  fNewSiteLinkLogic.CreateSiteLink(GetName);
 end;
 
 procedure TFrmNewSiteLink.Action_NextUpdate(Sender: TObject);
 begin
-  if Length(fInSite) + Length(fNotInSite) > 2 then
-    Action_Next.Enabled := (GetName() <> '') and (Length(fInSite) >= 2)
-  else
-    Action_Next.Enabled := (GetName() <> '');
+  Action_Next.Enabled := fNewSiteLinkLogic.CanCreateSiteLink(GetName);
 end;
 
 procedure TFrmNewSiteLink.Button_AddClick(Sender: TObject);
-var
-  idx: Integer;
 begin
-  idx := ListBox_NotInSiteLink.ItemIndex;
-  if idx <> -1 then
-    MoveItem(fNotInSite, fInSite, idx);
+  if ListBox_NotInSiteLink.ItemIndex <> -1 then
+  begin
+    fNewSiteLinkLogic.MoveItemToInSite(ListBox_NotInSiteLink.ItemIndex);
+    LoadListBox;
+  end;
 end;
 
 procedure TFrmNewSiteLink.Button_RemoveClick(Sender: TObject);
-var
-  idx: Integer;
 begin
-  idx := ListBox_InSiteLink.ItemIndex;
-  if idx <> -1 then
-    MoveItem(fInSite, fNotInSite, idx);
+  if ListBox_InSiteLink.ItemIndex <> -1 then
+  begin
+    fNewSiteLinkLogic.MoveItemToNotInSite(ListBox_InSiteLink.ItemIndex);
+    LoadListBox;
+  end;
 end;
 
-procedure TFrmNewSiteLink.ListBox_InSiteLinkSelectionChange(Sender: TObject;
-  User: boolean);
+procedure TFrmNewSiteLink.ListBox_InSiteLinkSelectionChange(Sender: TObject; User: boolean);
 begin
-  if Length(fInSite) + Length(fNotInSite) < 3 then
+  if fNewSiteLinkLogic.GetNbSites < 3 then
     Exit;
 
   Button_Remove.Enabled := True;
   Button_Add.Enabled := False;
 end;
 
-procedure TFrmNewSiteLink.ListBox_NotInSiteLinkSelectionChange(Sender: TObject;
-  User: boolean);
+procedure TFrmNewSiteLink.ListBox_NotInSiteLinkSelectionChange(Sender: TObject; User: boolean);
 begin
-  if Length(fInSite) + Length(fNotInSite) < 3 then
+  if fNewSiteLinkLogic.GetNbSites < 3 then
     Exit;
 
   Button_Add.Enabled := True;
   Button_Remove.Enabled := False;
-end;
-
-procedure TFrmNewSiteLink.MoveItem(var Src, Dest: TLdapResultArray; Index: Integer);
-var
-  i: Integer;
-begin
-  SetLength(Dest, Length(Dest) + 1);
-  Dest[High(Dest)] := Src[Index];
-
-  for i := Index to High(Src) - 1 do
-    Src[i] := Src[i + 1];
-
-  SetLength(Src, Length(Src) - 1);
-  LoadListBox;
-end;
-
-procedure TFrmNewSiteLink.LoadListBox();
-var
-  ResultNotInSite, ResultInSite: TLdapResult;
-begin
-  ListBox_NotInSiteLink.Clear;
-  ListBox_InSiteLink.Clear;
-  
-  for ResultNotInSite in fNotInSite do
-  begin
-    ListBox_NotInSiteLink.Items.Add(ResultNotInSite.Find('name').GetReadable());
-  end;
-  
-  for ResultInSite in fInSite do
-  begin
-    ListBox_InSiteLink.Items.Add(ResultInSite.Find('name').GetReadable());
-  end;
-end;
-
-procedure TFrmNewSiteLink.GetAllSites;
-var
-  LdapResult: TLdapResult;
-begin
-  fLdap.SearchBegin();
-  fLdap.SearchScope := lssSingleLevel;
-  repeat
-    if not fLdap.Search(FormatUtf8('CN=Sites,%', [fLdap.ConfigDN]), false, FormatUtf8('(&(objectClass=site))', []), ['name', 'distinguishedName']) then
-      Exit;
-    
-    for LdapResult in fLdap.SearchResult.Items do
-    begin
-      if not Assigned(LdapResult) then
-        continue;
-  
-      SetLength(fNotInSite, fSitesRetrieved + 1);
-      fNotInSite[fSitesRetrieved] := LdapResult;
-      fSitesRetrieved += 1;
-    end;
-  until fLdap.SearchCookie = '';
-  fLdap.SearchEnd;
 end;
 
 constructor TFrmNewSiteLink.Create(TheOwner: TComponent; ALdap: TRsatLdapClient);
@@ -215,8 +127,7 @@ var
 begin
   inherited Create(TheOwner);
 
-  fLdap := ALdap;
-  fSitesRetrieved := 0;
+  fNewSiteLinkLogic := TNewSiteLinkPresenter.Create(ALdap);
 
   OwnerNewObject.Caption := rsNewObjectSiteLink;
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
@@ -227,35 +138,39 @@ begin
   OwnerNewObject.Image_Object.ImageIndex := Ord(ileADUnknown);
   OwnerNewObject.CallBack := @Load;
   
-  GetAllSites;
+  fNewSiteLinkLogic.GetAllSites;
   
-  if fSitesRetrieved < 2 then
+  if Length(fNewSiteLinkLogic.GetSitesNotInSiteLink) < 2 then
   begin
     MessageDlg(rsTooFewSitesAvailableForSiteLink, mtError,[mbOK], 0);
-    SetLength(fInSite, 1);
-    fInSite[0] := fNotInSite[0];
-    SetLength(fNotInSite, 0);
-  end;
-
-  if fSitesRetrieved = 2 then
+    if Length(fNewSiteLinkLogic.GetSitesNotInSiteLink) > 0 then
+      fNewSiteLinkLogic.MoveItemToInSite(0);
+  end
+  else if Length(fNewSiteLinkLogic.GetSitesNotInSiteLink) = 2 then
   begin
-    SetLength(fInSite, 2);
-    fInSite[0] := fNotInSite[0];
-    fInSite[1] := fNotInSite[1];
-    SetLength(fNotInSite, 0);
+    fNewSiteLinkLogic.MoveItemToInSite(0);
+    fNewSiteLinkLogic.MoveItemToInSite(0);
   end;
   
   LoadListBox;
 end;
 
+procedure TFrmNewSiteLink.LoadListBox;
+var
+  r: TLdapResult;
+begin
+  ListBox_NotInSiteLink.Clear;
+  for r in fNewSiteLinkLogic.GetSitesNotInSiteLink do
+    ListBox_NotInSiteLink.Items.Add(fNewSiteLinkLogic.GetResultName(r));
+
+  ListBox_InSiteLink.Clear;
+  for r in fNewSiteLinkLogic.GetSitesInSiteLink do
+    ListBox_InSiteLink.Items.Add(fNewSiteLinkLogic.GetResultName(r));
+end;
+
 function TFrmNewSiteLink.GetName: RawUtf8;
 begin
   Result := Edit_Name.Text;
-end;
-
-function TFrmNewSiteLink.GetSiteAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
-begin
-  Result := List[idx].Find(attr).GetReadable()
 end;
 
 end.
