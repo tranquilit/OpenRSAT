@@ -63,6 +63,8 @@ type
   public
     constructor Create(TheOwner: TComponent); override;
 
+    procedure ApplyTranslation;
+
     property MultiSelect: Boolean read fMultiSelect write SetMultiSelect;
     property LdapClient: TLdapClient read fLdapClient write SetLdapClient;
 
@@ -78,6 +80,7 @@ implementation
 uses
   VirtualTrees,
   mormot.core.os.security,
+  ustrconsts,
   ucommon;
 
 {$R *.lfm}
@@ -316,6 +319,24 @@ begin
   fLdapClient := nil;
   fMultiSelect := False;
   Timer1.Enabled := False;
+
+  ApplyTranslation;
+end;
+
+procedure TVisSelectObjectSID.ApplyTranslation;
+begin
+  Caption := rsVisSelectObjectSID;
+
+  BitBtn1.Caption := rsSearch;
+  Label1.Caption := rsFilter_1;
+  BitBtn2.Caption := rsCancel;
+  BitBtn3.Caption := rsOK;
+
+  Action1.Caption := rsSearch;
+
+  TisGrid1.Header.Columns[0].Text := rsDistinguishedName;
+  TisGrid1.Header.Columns[1].Text := rsName;
+  TisGrid1.Header.Columns[2].Text := rsSID;
 end;
 
 end.

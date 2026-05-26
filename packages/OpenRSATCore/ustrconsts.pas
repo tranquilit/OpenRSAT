@@ -15,6 +15,7 @@ resourcestring
   rsVisViewKeyTabCaption = 'View Keytab';
   rsVisTaskResetPassword = 'Reset password';
   rsVisTaskMove = 'Move';
+  rsVisSelectObjectSID = 'Select object SID';
 
   rsAdd = 'Add';
   rsDelete = 'Delete';
@@ -58,6 +59,14 @@ resourcestring
   rsAccountLockoutStatusOnThisDomainController = 'Unlock the user''s account';
 
   rsObjectLocation = 'Object location: ';
+
+  rsSearch = 'Search';
+  rsFilter = 'Filter';
+  rsFilter_1 = 'Filter: ';
+
+  rsDistinguishedName = 'Distinguished name';
+  rsSID = 'SID';
+
 implementation
 
 end.
