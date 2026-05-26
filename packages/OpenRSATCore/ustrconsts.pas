@@ -13,6 +13,7 @@ type
 resourcestring
   rsVisProfileManagerCaption = 'Profile manager';
   rsVisViewKeyTabCaption = 'View Keytab';
+  rsVisTaskResetPassword = 'Reset password';
 
   rsAdd = 'Add';
   rsDelete = 'Delete';
@@ -25,6 +26,7 @@ resourcestring
 
   rsOK = 'OK';
   rsClose = 'Close';
+  rsCancel = 'Cancel';
 
   rsName = 'Name';
   rsDomain = 'Domain';
@@ -44,6 +46,14 @@ resourcestring
   rsPrincipal = 'Principal';
   rsEncryptionType = 'Encryption type';
   rsKey = 'Key';
+
+  rsNewPassword = 'New password: ';
+  rsConfirmPassword = 'Confirm password: ';
+
+  rsUserMustChangePasswordAtNextLogon = 'User must change password at next logon';
+  rsTheUserMustLogOffAndThenLogOnAgain = 'The user must logoff and then logon again for the change to take effect.';
+  rsUnlockTheUserAccount = 'Account Lockout Status on this Domain Controller: ';
+  rsAccountLockoutStatusOnThisDomainController = 'Unlock the user''s account';
 
 implementation
 

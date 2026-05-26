@@ -34,6 +34,8 @@ type
   private
 
   public
+    constructor Create(TheOwner: TComponent); override;
+    procedure ApplyTranslation;
 
   end;
 
@@ -47,6 +49,28 @@ uses
 procedure TVisTaskResetPassword.FormShow(Sender: TObject);
 begin
   UnifyButtonsWidth([Btn_Ok, Btn_Cancel]);
+end;
+
+constructor TVisTaskResetPassword.Create(TheOwner: TComponent);
+begin
+  inherited Create(TheOwner);
+
+  ApplyTranslation;
+end;
+
+procedure TVisTaskResetPassword.ApplyTranslation;
+begin
+  Caption := rsVisTaskResetPassword;
+  Label_NewPassword.Caption := rsNewPassword;
+  Label_ConfirmPassword.Caption := rsConfirmPassword;
+
+  CheckBox_Change.Caption := rsUserMustChangePasswordAtNextLogon;
+  Label_Effect.Caption := rsTheUserMustLogOffAndThenLogOnAgain;
+  CheckBox_Unlock.Caption := rsUnlockTheUserAccount;
+  Label_Status.Caption := rsAccountLockoutStatusOnThisDomainController;
+
+  Btn_Ok.Caption := rsOK;
+  Btn_Cancel.Caption := rsCancel;
 end;
 
 procedure TVisTaskResetPassword.FormKeyDown(Sender: TObject; var Key: Word;
