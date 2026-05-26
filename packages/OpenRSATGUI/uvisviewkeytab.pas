@@ -63,6 +63,8 @@ type
 
     procedure SetKeyTab(AKeyTab: TKerberosKeyTab);
 
+    procedure ApplyTranslation;
+
   public // IViewKeyTabView
     function GetFileName: RawUtf8;
     procedure SetFileName(AFileName: RawUtf8);
@@ -78,6 +80,7 @@ type
 
 implementation
 uses
+  ustrconsts,
   ucommon;
 
 {$R *.lfm}
@@ -122,6 +125,8 @@ begin
   inherited Create(TheOwner);
 
   fPresenter := TViewKeyTabPresenter.Create(Self);
+
+  ApplyTranslation;
 end;
 
 destructor TVisViewKeyTab.Destroy;
@@ -134,6 +139,33 @@ end;
 procedure TVisViewKeyTab.SetKeyTab(AKeyTab: TKerberosKeyTab);
 begin
   fPresenter.LoadFromKeyTab(AKeyTab);
+end;
+
+procedure TVisViewKeyTab.ApplyTranslation;
+begin
+  Caption := rsVisViewKeyTabCaption;
+
+  BitBtn1.Caption := rsCopyToClipboardBase64;
+  BitBtn2.Caption := rsSaveToFile;
+  BitBtn3.Caption := rsLoadFromFile;
+  BitBtn4.Caption := rsSelectFolder;
+  BitBtn5.Caption := rsClose;
+
+  Action_LoadFromFile.Caption := rsLoadFromFile;
+  Action_SelectFolder.Caption := rsSelectFolder;
+  Action_SaveToFile.Caption := rsSaveToFile;
+  Action_CopyToClipboard.Caption := rsCopyToClipboardBase64;
+
+  Label1.Caption := rsFilename;
+  Label2.Caption := rsFolder;
+
+  SelectDirectoryDialog1.Title := rsSelectFolder;
+
+  TisGrid1.Header.Columns[0].Text := rsKVNO;
+  TisGrid1.Header.Columns[1].Text := rsTimestamp;
+  TisGrid1.Header.Columns[2].Text := rsPrincipal;
+  TisGrid1.Header.Columns[3].Text := rsEncryptionType;
+  TisGrid1.Header.Columns[4].Text := rsKey;
 end;
 
 function TVisViewKeyTab.GetFileName: RawUtf8;
