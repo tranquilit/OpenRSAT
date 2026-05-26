@@ -12,8 +12,10 @@ uses
   ExtCtrls,
   StdCtrls,
   Spin,
+  Dialogs,
   mormot.core.base,
   mormot.core.log,
+  mormot.core.text,
   mormot.net.ldap,
   uhelpersui,
   uproperty,
@@ -49,21 +51,31 @@ type
     procedure Button_RemoveClick(Sender: TObject);
     procedure Edit_DescriptionChange(Sender: TObject);
     procedure ListBox_InSiteLinkSelectionChange(Sender: TObject; User: boolean);
-    procedure ListBox_NotInSiteLinkSelectionChange(Sender: TObject;
-      User: boolean);
+    procedure ListBox_NotInSiteLinkSelectionChange(Sender: TObject; User: boolean);
+    procedure SpinEdit_CostChange(Sender: TObject);
+    procedure SpinEdit_ReplicateChange(Sender: TObject);
     
 type
   { LDAP Result }
   TLdapResultArray = array of TLdapResult;
   
-procedure SpinEdit_CostChange(Sender: TObject);
-procedure SpinEdit_ReplicateChange(Sender: TObject);
   private
     fLog: TSynLog;
     fLdap: TRsatLdapClient;
     fProperty: TProperty;
 
     fNotInSite, fInSite: TLdapResultArray;
+    procedure GetAllSites;
+    procedure AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult);
+    procedure LoadListBox;
+    procedure PrepareListBox;
+    procedure MoveItemToInSite(Index: Integer);
+    procedure MoveItemToNotInSite(Index: Integer);
+    procedure RemoveItemFromArray(var List: TLdapResultArray; Index: Integer);
+    function SearchSitesInLdap: boolean;
+    function GetResultName(Obj: TLdapResult): RawUtf8;
+    function GetSitesInSiteLink: TLdapResultArray;
+    function GetSitesNotInSiteLink: TLdapResultArray;
     
   public
     constructor Create(TheOwner: TComponent); override;
@@ -81,24 +93,30 @@ begin
   idx := ListBox_NotInSiteLink.ItemIndex;
   if idx <> -1 then
   begin
-    ListBox_InSiteLink.Items.Add(ListBox_NotInSiteLink.Items[idx]);
-    ListBox_InSiteLink.ItemIndex := ListBox_InSiteLink.Items.Count - 1;
-    ListBox_InSiteLink.SetFocus;
-    ListBox_NotInSiteLink.Items.Delete(idx);
+    MoveItemToInSite(idx);
+    fProperty.Add('siteList', fInSite[Length(fInSite) - 1].Find('distinguishedName').GetReadable(), aoNoDuplicateValue);
+    LoadListBox;
   end;
 end;
 
 procedure TFrmPropertyGeneralSiteLink.Button_RemoveClick(Sender: TObject);
 var
-  idx: Integer;
+  idx, n: Integer;
 begin
   idx := ListBox_InSiteLink.ItemIndex;
   if idx <> -1 then
   begin
-    ListBox_NotInSiteLink.Items.Add(ListBox_InSiteLink.Items[idx]);
-    ListBox_NotInSiteLink.ItemIndex := ListBox_NotInSiteLink.Items.Count - 1;
-    ListBox_NotInSiteLink.SetFocus;
-    ListBox_InSiteLink.Items.Delete(idx);
+    MoveItemToNotInSite(idx);
+    if Length(fInSite) > 0 then
+    begin
+      fProperty.Add('siteList', fInSite[0].Find('distinguishedName').GetReadable());
+      for n := 1 to High(fInSite) do
+        fProperty.Add('siteList', fInSite[n].Find('distinguishedName').GetReadable(), aoNoDuplicateValue);
+    end
+    else
+      fProperty.Add('siteList', '');
+
+    LoadListBox;
   end;
 end;
 
@@ -148,12 +166,130 @@ begin
     fLog.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
+  fLdap := fProperty.LdapClient;
+  
+  GetAllSites;
+  PrepareListBox;
 
   Edit_Name.CaptionNoChange := fProperty.name;
   Edit_Description.CaptionNoChange := fProperty.description;
   SpinEdit_Cost.Value := StrToFloat(fProperty.Attributes.Find('cost').GetReadable());
   SpinEdit_Replicate.Value := StrToFloat(fProperty.Attributes.Find('replInterval').GetReadable());
+  LoadListBox;
+end;
+
+procedure TFrmPropertyGeneralSiteLink.GetAllSites;
+var
+  LdapResult: TLdapResult;
+begin
+  fLdap.SearchBegin();
+  fLdap.SearchScope := lssSingleLevel;
+  repeat
+    if not SearchSitesInLdap then
+      Exit;
+    
+    for LdapResult in fLdap.SearchResult.Items do
+      AddItemInResultArray(fNotInSite, LdapResult);
+  until fLdap.SearchCookie = '';
+  fLdap.SearchEnd;
+end;
+
+function TFrmPropertyGeneralSiteLink.SearchSitesInLdap: boolean;
+begin
+  Result := fLdap.Search(FormatUtf8('CN=Sites,%', [fLdap.ConfigDN]), false, FormatUtf8('(&(objectClass=site))', []), ['name', 'distinguishedName'])
+end;
+
+procedure TFrmPropertyGeneralSiteLink.AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult);
+var
+  ListLen: Integer;
+begin
+  if not Assigned(Item) then
+    exit;
   
+  ListLen := Length(List);
+  SetLength(List, ListLen + 1);
+  List[ListLen] := TLdapResult(Item.Clone);
+end;
+
+function TFrmPropertyGeneralSiteLink.GetResultName(Obj: TLdapResult): RawUtf8;
+begin
+  Result := Obj.Find('name').GetReadable();
+end;
+
+function TFrmPropertyGeneralSiteLink.GetSitesInSiteLink: TLdapResultArray;
+begin
+  Result := fInSite;
+end;
+
+function TFrmPropertyGeneralSiteLink.GetSitesNotInSiteLink: TLdapResultArray;
+begin
+  Result := fNotInSite;
+end;
+
+procedure TFrmPropertyGeneralSiteLink.LoadListBox;
+var
+  r: TLdapResult;
+begin
+  ListBox_NotInSiteLink.Clear;
+  for r in GetSitesNotInSiteLink do
+    ListBox_NotInSiteLink.Items.Add(GetResultName(r));
+
+  ListBox_InSiteLink.Clear;
+  for r in GetSitesInSiteLink do
+    ListBox_InSiteLink.Items.Add(GetResultName(r));
+end;
+
+procedure TFrmPropertyGeneralSiteLink.PrepareListBox;
+var
+  SiteList: TLdapAttribute;
+  Site: RawUtf8;
+  n: Integer;
+begin
+  SiteList := fProperty.Attributes.Find('siteList');
+  if not Assigned(SiteList) then
+    exit;
+
+  n := Length(fNotInSite) - 1;
+  while n >= 0 do
+  begin
+    for Site in SiteList.GetAllReadable do
+    begin
+      if fNotInSite[n].Attributes.Find('distinguishedName').GetReadable() = Site then
+      begin
+        MoveItemToInSite(n);
+        break;
+      end;
+    end;
+
+    Dec(n);
+  end
+end;
+
+
+procedure TFrmPropertyGeneralSiteLink.MoveItemToInSite(Index: Integer);
+begin
+  SetLength(fInSite, Length(fInSite) + 1);
+  fInSite[High(fInSite)] := fNotInSite[Index];
+  RemoveItemFromArray(fNotInSite, Index);
+end;
+
+
+procedure TFrmPropertyGeneralSiteLink.MoveItemToNotInSite(Index: Integer);
+begin
+  SetLength(fNotInSite, Length(fNotInSite) + 1);
+  fNotInSite[High(fNotInSite)] := fInSite[Index];
+  RemoveItemFromArray(fInSite, Index);
+end;
+
+
+procedure TFrmPropertyGeneralSiteLink.RemoveItemFromArray(var List: TLdapResultArray; Index: Integer);
+var
+  i: Integer;
+begin
+  for i := Index to High(List) - 1 do
+    List[i] := List[i + 1];
+
+  SetLength(List, Length(List) - 1);
 end;
 
 end.
