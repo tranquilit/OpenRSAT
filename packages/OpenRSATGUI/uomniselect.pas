@@ -49,6 +49,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure SearchEdit_ListSearch(Sender: TObject; const aText: string);
+    procedure TisGrid_ItemsDblClick(Sender: TObject);
     procedure TisGrid_ItemsGetImageIndex(Sender: TBaseVirtualTree;
       Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
       var Ghosted: Boolean; var ImageIndex: Integer);
@@ -237,12 +238,14 @@ var
   count: Integer;
 begin
   result := [];
-  SetLength(result, TisGrid_Items.SelectedCount - 1);
+  if TisGrid_Items.SelectedCount <= 0 then
+    Exit;
+  SetLength(result, TisGrid_Items.SelectedCount);
 
   count := 0;
   for row in TisGrid_Items.SelectedRows.Objects do
   begin
-    Insert(row^.S['distinguishedName'], result, count);
+    result[count] := row^.S['distinguishedName'];
     Inc(count);
   end;
 end;
@@ -271,6 +274,11 @@ procedure TVisOmniselect.SearchEdit_ListSearch(Sender: TObject;
   const aText: string);
 begin
   ListRefresh();
+end;
+
+procedure TVisOmniselect.TisGrid_ItemsDblClick(Sender: TObject);
+begin
+  Button_OK.Click;
 end;
 
 procedure TVisOmniselect.Action_MenuItemClickExecute(Sender: TObject);
