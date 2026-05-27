@@ -59,10 +59,13 @@ type
   public
     constructor Create(TheOwner: TComponent); reintroduce;
     destructor Destroy; override;
+
+    procedure ApplyTranslation;
   end;
 
 implementation
 uses
+  ustrconsts,
   Dialogs,
   mormot.core.text,
   mormot.core.base,
@@ -141,6 +144,8 @@ begin
   fOptionFrames := [];
 
   CreateOptionFrames;
+
+  ApplyTranslation;
 end;
 
 destructor TVisOptions.Destroy;
@@ -149,6 +154,15 @@ begin
     fLog.Log(sllTrace, 'Destroy', Self);
 
   inherited Destroy;
+end;
+
+procedure TVisOptions.ApplyTranslation;
+begin
+  Caption := rsVisOptions;
+
+  Action_OK.Caption := rsOK;
+  Action_Cancel.Caption := rsCancel;
+  Action_Apply.Caption := rsApply;
 end;
 
 procedure TVisOptions.FormKeyDown(Sender: TObject; var Key: Word;

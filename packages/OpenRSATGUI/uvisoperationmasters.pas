@@ -75,6 +75,8 @@ type
   public
     constructor Create(TheOwner: TComponent); reintroduce;
 
+    procedure ApplyTranslation;
+
   end;
 
 implementation
@@ -84,6 +86,7 @@ uses
   ursatldapclient,
   ursatldapclientui,
   uvischangedomaincontroller,
+  ustrconsts,
   ucommon,
   ufrmrsat;
 
@@ -216,6 +219,25 @@ begin
   Edit_PDC.Caption := DCHostName(PDC(FrmRSAT.LdapClient));
   Edit_RID.Caption := DCHostName(RID(FrmRSAT.LdapClient));
   Edit_InfrastructureMaster.Caption := DCHostName(InfrastructureMaster(FrmRSAT.LdapClient));
+
+  ApplyTranslation;
+end;
+
+procedure TVisOperationMasters.ApplyTranslation;
+begin
+  Caption := rsVisOperationMasters;
+
+  Label_SchemaMaster.Caption := rsSchemaMaster;
+  Label_DomainNamingMaster.Caption := rsDomainNamingMaster;
+  Label_PDC.Caption := rsPDC;
+  Label_RID.Caption := rsRID;
+  Label_InfrastructureMaster.Caption := rsInfrastructureMaster;
+
+  Action_SchemaMaster.Caption := rsChange;
+  Action_DomainNamingMaster.Caption := rsChange;
+  Action_PDC.Caption := rsChange;
+  Action_RID.Caption := rsChange;
+  Action_InfrastructureMaster.Caption := rsChange;
 end;
 
 end.

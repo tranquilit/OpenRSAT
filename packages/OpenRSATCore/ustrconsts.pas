@@ -8,8 +8,6 @@ uses
   Classes,
   SysUtils;
 
-type
-
 resourcestring
   rsVisProfileManagerCaption = 'Profile manager';
   rsVisViewKeyTabCaption = 'View Keytab';
@@ -21,6 +19,8 @@ resourcestring
   rsVisRootDSEInfos = 'DC infos';
   rsVisSearch = 'Search';
   rsVisProfileConfiguration = 'Profile configuration';
+  rsVisOptions = 'Options';
+  rsVisOperationMasters = 'Operations masters';
 
   rsAdd = 'Add';
   rsDelete = 'Delete';
@@ -106,6 +106,7 @@ resourcestring
 
   rsApply = 'Apply';
   rsClear = 'Clear';
+  rsManagerCanUpdateMembershipList = 'Manager can update membership list';
   rsShowOnlyAttributesThatHaveValues = 'Show only attributes that have values';
   rsShowOnlyWritableAttributes = 'Show only writable attributes';
   rsMandatory = 'Mandatory';
@@ -122,7 +123,7 @@ resourcestring
   rsModify = 'Modify';
 
   rsAuthMethod = 'Auth method';
-  rsAccount = 'Accound';
+  rsAccount = 'Account';
   rsTLS = 'TLS';
   rsTimeout = 'Timeout';
   rsUnsafeConnection = 'Unsafe connection';
@@ -138,6 +139,12 @@ resourcestring
   rsTestConnection = 'Test connection';
   rsTestAuthentication = 'Test authentication';
   rsShowDCInfos = 'Show DC Infos';
+
+  rsSchemaMaster = 'Schema master';
+  rsDomainNamingMaster = 'Domain naming master';
+  rsPDC = 'PDC';
+  rsRID = 'RID';
+  rsInfrastructureMaster = 'Infrastructure master';
 
 implementation
 

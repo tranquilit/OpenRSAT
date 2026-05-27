@@ -9,7 +9,7 @@ object VisOperationMasters: TVisOperationMasters
   Constraints.MinHeight = 200
   Constraints.MinWidth = 400
   Position = poOwnerFormCenter
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   object Panel_SchemaMaster: TPanel
     Left = 0
     Height = 40

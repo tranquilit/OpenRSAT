@@ -11,7 +11,7 @@ object VisOptions: TVisOptions
   Constraints.MinWidth = 320
   KeyPreview = True
   Position = poMainFormCenter
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   object Panel_Bottom: TPanel
