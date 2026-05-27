@@ -51,12 +51,15 @@ type
     PUserWorkstations: PString;
   public
     constructor Create(TheOwner: TComponent; _PUserWorkstations: PString); reintroduce;
+
+    procedure ApplyTranslation;
   end;
 
 implementation
 uses
   Dialogs,
   SysUtils,
+  ustrconsts,
   ucommon,
   ucommonui;
 {$R *.lfm}
@@ -84,8 +87,28 @@ begin
     GroupBox_Following.Enabled := False;
   end;
 
+  ApplyTranslation;
   UnifyButtonsWidth([Btn_Add, Btn_Edit, Btn_Remove]);
   UnifyButtonsWidth([Btn_OK, Btn_Cancel]);
+end;
+
+procedure TVisLogonWorkstation.ApplyTranslation;
+begin
+  Caption := rsVisLogonWorkstations;
+
+  Label_Info.Caption := rsLogonWorkstationsInfo;
+  Label_Title.Caption := rsLogonWorkstationsSelect;
+  Label_Name.Caption := rsComputerName;
+
+  RadioButton_All.Caption := rsLogonWorkstationsChoice1;
+  RadioButton_Following.Caption := rsLogonWorkstationsChoice2;
+
+  Btn_Cancel.Caption := rsCancel;
+
+  Action_Add.Caption := rsAdd;
+  Action_Edit.Caption := rsEdit;
+  Action_Remove.Caption := rsDelete;
+  Action_OK.Caption := rsOK;
 end;
 
 // Radio

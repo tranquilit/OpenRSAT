@@ -22,6 +22,7 @@ resourcestring
   rsVisOptions = 'Options';
   rsVisOperationMasters = 'Operations masters';
   rsVisNewZoneWizard = 'New Zone Wizard';
+  rsVisLogonWorkstations = 'Logon workstations';
 
   rsAdd = 'Add';
   rsDelete = 'Delete';
@@ -199,6 +200,12 @@ resourcestring
   rsFinish = 'Finish';
 
   rsCreateIn = 'Create in: ';
+
+  rsLogonWorkstationsInfo = 'In Computer name, type the computer''s NetBIOS or Domain Name system (DNS) name.';
+  rsLogonWorkstationsSelect = 'This user can logon to :';
+  rsComputerName = 'Computer name :';
+  rsLogonWorkstationsChoice1 = 'All computers';
+  rsLogonWorkstationsChoice2 = 'The following computers';
 
 implementation
 

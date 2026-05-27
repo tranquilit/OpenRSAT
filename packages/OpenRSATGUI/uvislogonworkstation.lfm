@@ -13,7 +13,7 @@ object VisLogonWorkstation: TVisLogonWorkstation
   Constraints.MinWidth = 360
   KeyPreview = True
   Position = poOwnerFormCenter
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   OnKeyDown = FormKeyDown
   object Label_Info: TLabel
     AnchorSideLeft.Control = Owner
