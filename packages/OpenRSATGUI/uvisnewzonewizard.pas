@@ -151,6 +151,9 @@ type
   private
 
   public
+    constructor Create(TheOwner: TComponent); override;
+
+    procedure ApplyTranslation;
     procedure Apply(LdapClient: TRsatLdapClient);
   end;
 
@@ -159,6 +162,7 @@ uses
   mormot.net.dns,
   mormot.core.base,
   ursatldapclientui,
+  ustrconsts,
   udns;
 
 {$R *.lfm}
@@ -291,6 +295,95 @@ procedure TVisNewZoneWizard.TS_ZoneTypeShow(Sender: TObject);
 begin
   BitBtn_Back.Action := Action_BackZoneType;
   BitBtn_Next.Action := Action_NextZoneType;
+end;
+
+constructor TVisNewZoneWizard.Create(TheOwner: TComponent);
+begin
+  inherited Create(TheOwner);
+  ApplyTranslation;
+end;
+
+procedure TVisNewZoneWizard.ApplyTranslation;
+begin
+  Caption := rsVisNewZoneWizard;
+
+  Label1.Caption := rsNewZoneWizardWelcome;
+  Label2.Caption := rsNewZoneWizardDescription1;
+  Label3.Caption := rsNewZoneWizardDescription2;
+  Label4.Caption := rsNewZoneWizardDescription3;
+
+  Label5.Caption := rsNewZoneWizardZoneType;
+  Label6.Caption := rsNewZoneWizardZoneTypeDescription;
+
+  Label7.Caption := rsNewZoneWizardZoneTypeSelect;
+  Label8.Caption := rsNewZoneWizardZoneTypePrimaryZoneDescription;
+  Label9.Caption := rsNewZoneWizardZoneTypeSecondaryZoneDescription;
+  Label10.Caption := rsNewZoneWizardZoneTypeStubZoneDescription;
+  Label11.Caption := rsNewZoneWizardZoneTypeStoreTheZone;
+
+  Label12.Caption := rsNewZoneWizardZoneReplication;
+  Label13.Caption := rsNewZoneWizardZoneReplicationDescription;
+  Label14.Caption := rsNewZoneWizardZoneReplicationSelect;
+  Label15.Caption := rsNewZoneWizardZoneReplicationChoice1;
+  Label16.Caption := rsNewZoneWizardZoneReplicationChoice2;
+  Label17.Caption := rsNewZoneWizardZoneReplicationChoice3;
+  Label18.Caption := rsNewZoneWizardZoneReplicationChoice4;
+
+  Label19.Caption := rsNewZoneWizardZoneName;
+  Label20.Caption := rsNewZoneWizardZoneNameDescription;
+
+  Label21.Caption := rsNewZoneWizardZoneNameMessage;
+  Label22.Caption := rsNewZoneWizardZoneNameZoneName;
+
+  Label23.Caption := rsNewZoneWizardZoneFile;
+  Label24.Caption := rsNewZoneWizardZoneFileDescription;
+
+  Label25.Caption := rsNewZoneWizardZoneFileQuestion;
+  Label26.Caption := rsNewZoneWizardZoneFileMessage;
+  Label27.Caption := rsNewZoneWizardZoneFileChoice1;
+  Label28.Caption := rsNewZoneWizardZoneFileChoice2;
+
+  Label29.Caption := rsNewZoneWizardDynamicUpdateDescription;
+  Label30.Caption := rsNewZoneWizardDynamicUpdate;
+
+  Label31.Caption := rsNewZoneWizardDynamicUpdateMessage;
+  Label32.Caption := rsNewZoneWizardDynamicUpdateSelect;
+  Label33.Caption := rsNewZoneWizardDynamicUpdateChoice1;
+  Label34.Caption := rsNewZoneWizardDynamicUpdateChoice11;
+  Label35.Caption := rsNewZoneWizardDynamicUpdateChoice2;
+  Label36.Caption := rsNewZoneWizardDynamicUpdateChoice21;
+  Label37.Caption := rsNewZoneWizardDynamicUpdateChoice22;
+  Label38.Caption := rsNewZoneWizardDynamicUpdateChoice3;
+  Label39.Caption := rsNewZoneWizardDynamicUpdateChoice31;
+
+  Label40.Caption := rsNewZoneWizardComplete;
+  Label41.Caption := rsNewZoneWizardCompleteMessage;
+  Label42.Caption := rsNewZoneWizardCompleteNote;
+  Label43.Caption := rsNewZoneWizardCompleteClose;
+
+  BitBtn_Next.Caption := rsNext;
+  BitBtn_Back.Caption := rsBack;
+  BitBtn_Cancel.Caption := rsCancel;
+
+  RadioButton1.Caption := rsPrimaryZone;
+  RadioButton2.Caption := rsSecondaryZone;
+  RadioButton3.Caption := rsStubZone;
+
+  Action_Cancel.Caption := rsCancel;
+  Action_NextWizard.Caption := rsNext;
+  Action_NextZoneType.Caption := rsNext;
+  Action_NextZoneReplicationScope.Caption := rsNext;
+  Action_NextZoneName.Caption := rsNext;
+  Action_NextZoneFile.Caption := rsNext;
+  Action_NextDynamicZone.Caption := rsNext;
+  Action_NextFinish.Caption := rsFinish;
+  Action_BackZoneType.Caption := rsBack;
+  Action_BackZoneReplicationScope.Caption := rsBack;
+  Action_BackZoneName.Caption := rsBack;
+  Action_BackZoneFile.Caption := rsBack;
+  Action_BackDynamicZone.Caption := rsBack;
+  Action_BackFinish.Caption := rsBack;
+  Action_BackWizard.Caption := rsBack;
 end;
 
 procedure TVisNewZoneWizard.Apply(LdapClient: TRsatLdapClient);

@@ -6,7 +6,7 @@ object VisNewZoneWizard: TVisNewZoneWizard
   Caption = 'New Zone Wizard'
   ClientHeight = 362
   ClientWidth = 498
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   OnCreate = FormCreate
   object Panel2: TPanel
     Left = 0

@@ -21,6 +21,7 @@ resourcestring
   rsVisProfileConfiguration = 'Profile configuration';
   rsVisOptions = 'Options';
   rsVisOperationMasters = 'Operations masters';
+  rsVisNewZoneWizard = 'New Zone Wizard';
 
   rsAdd = 'Add';
   rsDelete = 'Delete';
@@ -145,6 +146,59 @@ resourcestring
   rsPDC = 'PDC';
   rsRID = 'RID';
   rsInfrastructureMaster = 'Infrastructure master';
+
+  rsNewZoneWizardWelcome = 'Welcome to the New Zone Wizard';
+  rsNewZoneWizardDescription1 = 'This wizard helps you create a new zone for your DNS server.';
+  rsNewZoneWizardDescription2 = 'A zone translates DNS names to related data, such as IP addresses or network services.';
+  rsNewZoneWizardDescription3 = 'To continue, click Next.';
+  rsNewZoneWizardZoneType = 'Zone Type';
+  rsNewZoneWizardZoneTypeDescription = 'The DNS server supports various types of zones and storage.';
+  rsNewZoneWizardZoneTypeSelect = 'Select the type of zone you want to create:';
+  rsNewZoneWizardZoneTypePrimaryZoneDescription = 'Creates a copy of a zone that can be updated directly on this server.';
+  rsNewZoneWizardZoneTypeSecondaryZoneDescription = 'Create a copy of a zone that exists on another server. This option helps balance the processing load of primary servers and provides fault tolerance.';
+  rsNewZoneWizardZoneTypeStubZoneDescription = 'Create a copy of a zone containing inly Name Server (NS), Start of Authority (SOA), and possibly glue Host (A) records. A server containing a stub zone is not authoritative for that zone.';
+  rsNewZoneWizardZoneTypeStoreTheZone = 'Store the zone in Active Directory (available only if DNS server is a writeable domain controller)';
+  rsNewZoneWizardZoneReplication = 'Active Directory Zone Replication Scope';
+  rsNewZoneWizardZoneReplicationDescription = 'You can select how you want DNS data replicated throughout your network.';
+  rsNewZoneWizardZoneReplicationSelect = 'Select how you want zone data replicated:';
+  rsNewZoneWizardZoneReplicationChoice1 = 'To all DNS servers running on domain controllers in this forest:';
+  rsNewZoneWizardZoneReplicationChoice2 = 'To all DNS servers running on domain controllers in this domain:';
+  rsNewZoneWizardZoneReplicationChoice3 = 'To all domain controllers in this domain (for Windows 2000 compatibility):';
+  rsNewZoneWizardZoneReplicationChoice4 = 'To all domain controllers specified in the scoper of this directory partition:';
+  rsNewZoneWizardZoneName = 'Zone Name';
+  rsNewZoneWizardZoneNameDescription = 'What is the name of the new zone?';
+  rsNewZoneWizardZoneNameMessage = 'The zone name specifies the portion of the DNS namespace for which this server is autoritative. It might be your organization''s domain name (for example, example.com) or a portion of the domain name (for example, newzone.example.com). The zone name is not the name of the DNS server.';
+  rsNewZoneWizardZoneNameZoneName = 'Zone name:';
+  rsNewZoneWizardZoneFile = 'Zone File';
+  rsNewZoneWizardZoneFileDescription = 'You can create a new zone file or use a file copied from another DNS server.';
+  rsNewZoneWizardZoneFileQuestion = 'Do you want to create a new zone file or use an existing file that you have copied from another DNS server?';
+  rsNewZoneWizardZoneFileMessage = 'To use this existing file, ensure that it has been copied to the folder %SystemRoot%\system32\dns on this server, and then click Next.';
+  rsNewZoneWizardZoneFileChoice1 = 'Create a new file with this file name:';
+  rsNewZoneWizardZoneFileChoice2 = 'Use this existing file:';
+  rsNewZoneWizardDynamicUpdateDescription = 'You can specify that this DNS zone accepts secure, nonsecure, or no dynamic updates.';
+  rsNewZoneWizardDynamicUpdate = 'Dynamic Update';
+  rsNewZoneWizardDynamicUpdateMessage = 'Dynamic updates enable DNS client computers to register and dynamically update their resource records with a DNS server whenever changes occur.';
+  rsNewZoneWizardDynamicUpdateSelect = 'Select the type of dynamic updates you want to allow:';
+  rsNewZoneWizardDynamicUpdateChoice1 = 'Allow only secure dynamic updates (recommanded for Active Directory)';
+  rsNewZoneWizardDynamicUpdateChoice11 = 'This option is available only for Active Directory-integrated zones.';
+  rsNewZoneWizardDynamicUpdateChoice2 = 'Allow both nonsecure and secure dynamic updates';
+  rsNewZoneWizardDynamicUpdateChoice21 = 'Dynamic updates of resource records are accepted from any client.';
+  rsNewZoneWizardDynamicUpdateChoice22 = 'This option is a significant security vulnerability because updates can be accepted from untrusted sources.';
+  rsNewZoneWizardDynamicUpdateChoice3 = 'Do not allow dynamic updates';
+  rsNewZoneWizardDynamicUpdateChoice31 = 'Dynamic updates of resource records are not accepted by this zone. You must update these records manually.';
+  rsNewZoneWizardComplete = 'Completing the New Zone Wizard';
+  rsNewZoneWizardCompleteMessage = 'You have successfully completed the New Zone Wizard. You specified the following settings:';
+  rsNewZoneWizardCompleteNote = 'Note: You should now add records to the zone or ensure that records are updated dynamically. You can then verify name resolution using nslookup.';
+  rsNewZoneWizardCompleteClose = 'To close this wizard and create the new zone, click Finish.';
+
+  rsNext = 'Next';
+  rsBack = 'Back';
+  rsPrimaryZone = 'Primary zone';
+  rsSecondaryZone = 'Secondary zone';
+  rsStubZone = 'Stub zone';
+  rsFinish = 'Finish';
+
+
 
 implementation
 
