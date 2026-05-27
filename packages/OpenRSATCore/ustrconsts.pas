@@ -198,7 +198,7 @@ resourcestring
   rsStubZone = 'Stub zone';
   rsFinish = 'Finish';
 
-
+  rsCreateIn = 'Create in: ';
 
 implementation
 

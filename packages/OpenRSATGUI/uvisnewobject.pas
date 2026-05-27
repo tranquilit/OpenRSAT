@@ -70,6 +70,8 @@ type
 
     CallBack: procedure of Object;
     constructor Create(TheOwner: TComponent; NewObjectType: TVisNewObjectType; OU, BaseDN: RawUtf8); reintroduce;
+
+    procedure ApplyTranslation;
     property ObjectOU: RawUtf8 read fObjectOU write fObjectOU;
     property BaseDN: RawUtf8 read fBaseDN write fBaseDN;
   end;
@@ -98,6 +100,7 @@ uses
   ufrmnewserver,
   ufrmnewsitelink,
   ufrmnewsitelinkbridge,
+  ustrconsts,
   ucommonui;
 
 {$R *.lfm}
@@ -164,6 +167,13 @@ begin
 
   Edit_DN.Text := DNToCN(ObjectOU);
   PageIdx := 0;
+  ApplyTranslation;
+end;
+
+procedure TVisNewObject.ApplyTranslation;
+begin
+  Label_DN.Caption := rsCreateIn;
+  Btn_Cancel.Caption := rsCancel;
 end;
 
 end.
