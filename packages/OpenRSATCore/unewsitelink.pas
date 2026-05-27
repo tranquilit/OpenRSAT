@@ -83,7 +83,7 @@ end;
 
 function TNewSiteLinkPresenter.SearchSitesInLdap: boolean;
 begin
-  Result := fLdap.Search(FormatUtf8('CN=Sites,%', [fLdap.ConfigDN]), false, FormatUtf8('(&(objectClass=site))', []), ['name', 'distinguishedName']);
+  Result := fLdap.Search(FormatUtf8('CN=Sites,%', [fLdap.ConfigDN]), false, '(&(objectClass=site))', ['name', 'distinguishedName']);
 end;
 
 procedure TNewSiteLinkPresenter.MoveItemToInSite(Index: Integer);

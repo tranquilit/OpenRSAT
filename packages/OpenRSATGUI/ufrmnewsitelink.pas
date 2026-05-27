@@ -55,6 +55,7 @@ type
     function GetName: RawUtf8;
   public
     constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient); reintroduce;
+    destructor Destroy; override;
   end;
 
 implementation
@@ -153,6 +154,12 @@ begin
   end;
   
   LoadListBox;
+end;
+
+destructor TFrmNewSiteLink.Destroy;
+begin
+  FreeAndNil(fNewSiteLinkLogic);
+  inherited Destroy;
 end;
 
 procedure TFrmNewSiteLink.LoadListBox;
