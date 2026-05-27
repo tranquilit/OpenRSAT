@@ -205,8 +205,8 @@ resourcestring
   rsCreateIn = 'Create in: ';
 
   rsLogonWorkstationsInfo = 'In Computer name, type the computer''s NetBIOS or Domain Name system (DNS) name.';
-  rsLogonWorkstationsSelect = 'This user can logon to :';
-  rsComputerName = 'Computer name :';
+  rsLogonWorkstationsSelect = 'This user can logon to: ';
+  rsComputerName = 'Computer name: ';
   rsLogonWorkstationsChoice1 = 'All computers';
   rsLogonWorkstationsChoice2 = 'The following computers';
 
@@ -227,6 +227,12 @@ resourcestring
 
   rsProfile = 'Profile';
   rsServer = 'Server';
+
+  rsComputerName2000 = 'Computer name (pre-Windows 2000): ';
+  rsTheFollowingUserOrGroupCanJoinThisComputerToADomain = 'The following user or group can join this computer to a domain.';
+  rsUserOrGroup = 'User or group: ';
+  rsAssignedThisComputerAccountAsPre2000Computer = 'Assign this computer account as a pre-Windows 2000 computer';
+
 
 implementation
 

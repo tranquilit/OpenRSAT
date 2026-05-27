@@ -5,6 +5,7 @@ object FrmNewComputer: TFrmNewComputer
   Width = 395
   ClientHeight = 240
   ClientWidth = 395
+  LCLVersion = '4.5.0.0'
   TabOrder = 0
   DesignLeft = 430
   DesignTop = 245

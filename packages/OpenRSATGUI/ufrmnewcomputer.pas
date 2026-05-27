@@ -41,6 +41,8 @@ type
     procedure Load;
   public
     constructor Create(TheOwner: TComponent); override;
+
+    procedure ApplyTranslation;
   end;
 
 implementation
@@ -56,6 +58,7 @@ uses
   mormot.net.ldap,
   // Rsat
   uOmniselect,
+  ustrconsts,
   ucommon,
   ucoredatamodule,
   ursatldapclient,
@@ -71,13 +74,25 @@ begin
   inherited Create(TheOwner);
 
   Sid := '';
-  OwnerNewObject.Caption := rsNewObjectComputer;
   OwnerNewObject.Btn_Next.Action := ActionList1.ActionByName('Action_Next');
-  OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnOK;
   OwnerNewObject.Btn_Next.Default := True;
   OwnerNewObject.Btn_Back.Visible := False;
   OwnerNewObject.Image_Object.ImageIndex := Ord(ileADComputer);
   OwnerNewObject.CallBack := @Load;
+  ApplyTranslation;
+end;
+
+procedure TFrmNewComputer.ApplyTranslation;
+begin
+  (Owner as TVisNewObject).Caption := rsNewObjectComputer;
+  (Owner as TVisNewObject).Btn_Next.Caption := rsOK;
+
+  Label_ComputerName.Caption := rsComputerName;
+  Label_ComputerName2000.Caption := rsComputerName2000;
+  Label1.Caption := rsTheFollowingUserOrGroupCanJoinThisComputerToADomain;
+  Label_UserOrGroup.Caption := rsUserOrGroup;
+  CheckBox_AssignComputer.Caption := rsAssignedThisComputerAccountAsPre2000Computer;
+  BitBtn_ChangeUserOrGroup.Caption := rsChange;
 end;
 
 procedure TFrmNewComputer.Action_NextUpdate(Sender: TObject);
