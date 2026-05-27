@@ -25,6 +25,7 @@ resourcestring
   rsVisLogonWorkstations = 'Logon workstations';
   rsVisLogonHours = 'Logon hours';
   rsVisChangeDirectoryServer = 'Change directory server';
+  rsVisOpenRSATAuthentication = 'OpenRSAT Authentication';
 
   rsAdd = 'Add';
   rsDelete = 'Delete';
@@ -223,6 +224,9 @@ resourcestring
   rsDCType = 'DC Type';
   rsDCVersion = 'DC Version';
   rsStatus = 'Status';
+
+  rsProfile = 'Profile';
+  rsServer = 'Server';
 
 implementation
 

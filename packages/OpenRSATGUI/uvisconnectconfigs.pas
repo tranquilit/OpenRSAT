@@ -64,6 +64,8 @@ type
 
   public
     constructor Create(TheOwner: TComponent; ALdapConfigs: TLdapConfigs; aLog: ISynLog = nil); reintroduce;
+
+    procedure ApplyTranslation;
   end;
 
 implementation
@@ -76,6 +78,7 @@ uses
   uvisprofileconfiguration,
   ucoredatamodule,
   utranslation,
+  ustrconsts,
   ucommonui,
   uconfig;
 
@@ -250,6 +253,20 @@ begin
   Image2.Visible := not Image1.Visible;
 
   ActionList1.Images := CoreDataModule.ImageList1;
+  ApplyTranslation;
+end;
+
+procedure TFormConnectConfigs.ApplyTranslation;
+begin
+  Caption := rsVisOpenRSATAuthentication;
+
+  Label_Profile.Caption := rsProfile;
+  Label_Server.Caption := rsServer;
+  Label_Username.Caption := rsUsername;
+  Label_Password.Caption := rsPassword;
+
+  Action_OK.Caption := rsOK;
+  Action_Cancel.Caption := rsCancel;
 end;
 
 end.
