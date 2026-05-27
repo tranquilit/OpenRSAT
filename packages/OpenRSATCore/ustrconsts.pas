@@ -24,6 +24,7 @@ resourcestring
   rsVisNewZoneWizard = 'New Zone Wizard';
   rsVisLogonWorkstations = 'Logon workstations';
   rsVisLogonHours = 'Logon hours';
+  rsVisChangeDirectoryServer = 'Change directory server';
 
   rsAdd = 'Add';
   rsDelete = 'Delete';
@@ -211,6 +212,17 @@ resourcestring
   rsLogonHoursSelectUTC = 'Select the allowed logon period in UTC';
   rsLogonAllowed = 'Logon allowed';
   rsLogonDenied = 'Logon denied';
+
+  rsCurrentDirectoryServer = 'Current directory server: ';
+  rsEmpty = '<empty>';
+  rsChangeTo = 'Change to: ';
+  rsAnyWritableDomainController = 'Any writable Domain Controller';
+  rsThisDomainControllerOrADLDSInstance = 'This Domain Controller or AD LDS instance';
+  rsSaveThisSettingForTheCurrentConsole = 'Save this setting for the current console';
+  rsSite = 'Site';
+  rsDCType = 'DC Type';
+  rsDCVersion = 'DC Version';
+  rsStatus = 'Status';
 
 implementation
 

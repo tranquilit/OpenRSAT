@@ -6,7 +6,7 @@ object VisChangeDomainController: TVisChangeDomainController
   Caption = 'Change Directory Server'
   ClientHeight = 425
   ClientWidth = 656
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   OnCloseQuery = FormCloseQuery
   OnShow = FormShow
   object Panel1: TPanel

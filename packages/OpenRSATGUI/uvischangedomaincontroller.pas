@@ -126,6 +126,8 @@ type
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
 
+    procedure ApplyTranslation;
+
     function DomainController: RawUtf8;
   end;
 
@@ -148,6 +150,7 @@ uses
   mormot.core.rtti,
   mormot.core.text,
   mormot.net.dns,
+  ustrconsts,
   ucommon,
   ucommonui,
   ursatldapclient,
@@ -513,6 +516,8 @@ begin
   fLog := TSynLog.Add;
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'ChangeDomainController visual created.', Self);
+
+  ApplyTranslation;
 end;
 
 destructor TVisChangeDomainController.Destroy;
@@ -520,6 +525,29 @@ begin
   FreeAndNil(fChangeDomainController);
 
   inherited Destroy;
+end;
+
+procedure TVisChangeDomainController.ApplyTranslation;
+begin
+  Caption := rsVisChangeDirectoryServer;
+
+  Label1.Caption := rsCurrentDirectoryServer;
+  Label2.Caption := rsEmpty;
+  Label3.Caption := rsChangeTo;
+
+  RadioButton1.Caption := rsAnyWritableDomainController;
+  RadioButton2.Caption := rsThisDomainControllerOrADLDSInstance;
+
+  CheckBox1.Caption := rsSaveThisSettingForTheCurrentConsole;
+
+  BitBtn_Cancel.Caption := rsCancel;
+  Action_OK.Caption := rsOK;
+
+  TisGrid1.Header.Columns[0].Text := rsName;
+  TisGrid1.Header.Columns[1].Text := rsSite;
+  TisGrid1.Header.Columns[2].Text := rsDCType;
+  TisGrid1.Header.Columns[3].Text := rsDCVersion;
+  TisGrid1.Header.Columns[4].Text := rsStatus;
 end;
 
 function TVisChangeDomainController.DomainController: RawUtf8;
