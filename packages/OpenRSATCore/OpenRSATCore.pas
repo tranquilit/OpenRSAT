@@ -13,7 +13,8 @@ uses
   umoduleadss, umoduleaddns, umoduleaddnsoption, umoduleadsi, 
   umoduleadsioption, udns, ugplink, uproperty, usidcache, 
   uadvancedsecuritypresenter, uguidcache, uselectobjectguidpresenter, 
-  uviewkeytabpresenter, unewsitelink, LazarusPackageIntf;
+  uviewkeytabpresenter, unewsitelink, ugeneralpropertysitelink, 
+  LazarusPackageIntf;
 
 implementation
 
