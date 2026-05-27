@@ -54,6 +54,8 @@ type
     procedure SetBit(i: Integer; b: Boolean);
   public
     constructor Create(TheOwner: TComponent; _PHours: PRawByteString); reintroduce;
+
+    procedure ApplyTranslation;
   end;
 
 const
@@ -63,6 +65,7 @@ implementation
 uses
   Graphics,
   SysUtils,
+  ustrconsts,
   ucommonui,
   mormot.core.text;
 {$R *.lfm}
@@ -99,7 +102,21 @@ begin
   // Buttons
   RadioButton_Allowed.Checked := GetBit(-Integer(SpinEdit_UTC.Value));
   RadioButton_Denied.Checked  := not RadioButton_Allowed.Checked;
+  ApplyTranslation;
   UnifyButtonsWidth([Btn_OK, Btn_Cancel]);
+end;
+
+procedure TVisLogonHours.ApplyTranslation;
+begin
+  Caption := rsVisLogonHours;
+
+  Label_Title.Caption := rsLogonHoursSelectUTC;
+
+  Btn_Cancel.Caption := rsCancel;
+  Action_OK.Caption := rsOK;
+
+  RadioButton_Allowed.Caption := rsLogonAllowed;
+  RadioButton_Denied.Caption := rsLogonDenied;
 end;
 
 // Draw

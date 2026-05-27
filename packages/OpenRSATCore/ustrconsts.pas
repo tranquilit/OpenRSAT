@@ -23,6 +23,7 @@ resourcestring
   rsVisOperationMasters = 'Operations masters';
   rsVisNewZoneWizard = 'New Zone Wizard';
   rsVisLogonWorkstations = 'Logon workstations';
+  rsVisLogonHours = 'Logon hours';
 
   rsAdd = 'Add';
   rsDelete = 'Delete';
@@ -206,6 +207,10 @@ resourcestring
   rsComputerName = 'Computer name :';
   rsLogonWorkstationsChoice1 = 'All computers';
   rsLogonWorkstationsChoice2 = 'The following computers';
+
+  rsLogonHoursSelectUTC = 'Select the allowed logon period in UTC';
+  rsLogonAllowed = 'Logon allowed';
+  rsLogonDenied = 'Logon denied';
 
 implementation
 
