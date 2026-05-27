@@ -116,6 +116,10 @@
         <Filename Value="unewsitelink.pas"/>
         <UnitName Value="unewsitelink"/>
       </Item>
+      <Item>
+        <Filename Value="ugeneralpropertysitelink.pas"/>
+        <UnitName Value="ugeneralpropertysitelink"/>
+      </Item>
     </Files>
     <i18n>
       <EnableI18N Value="True"/>

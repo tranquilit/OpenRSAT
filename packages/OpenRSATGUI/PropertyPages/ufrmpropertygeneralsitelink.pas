@@ -20,7 +20,8 @@ uses
   uhelpersui,
   uproperty,
   ursatldapclient,
-  upropertyframe;
+  upropertyframe,
+  ugeneralpropertysitelink;
 
 type
   { TFrmPropertyGeneralSiteLink }
@@ -61,21 +62,10 @@ type
   
   private
     fLog: TSynLog;
-    fLdap: TRsatLdapClient;
-    fProperty: TProperty;
-
-    fNotInSite, fInSite: TLdapResultArray;
-    procedure GetAllSites;
-    procedure AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult);
+    fSiteLinkLogic: TGeneralPropertySiteLink;
+    
     procedure LoadListBox;
     procedure PrepareListBox;
-    procedure MoveItemToInSite(Index: Integer);
-    procedure MoveItemToNotInSite(Index: Integer);
-    procedure RemoveItemFromArray(var List: TLdapResultArray; Index: Integer);
-    function SearchSitesInLdap: boolean;
-    function GetResultName(Obj: TLdapResult): RawUtf8;
-    function GetSitesInSiteLink: TLdapResultArray;
-    function GetSitesNotInSiteLink: TLdapResultArray;
     
   public
     constructor Create(TheOwner: TComponent); override;
@@ -93,36 +83,28 @@ begin
   idx := ListBox_NotInSiteLink.ItemIndex;
   if idx <> -1 then
   begin
-    MoveItemToInSite(idx);
-    fProperty.Add('siteList', fInSite[Length(fInSite) - 1].Find('distinguishedName').GetReadable(), aoNoDuplicateValue);
+    fSiteLinkLogic.MoveItemToInSite(idx);
+    fSiteLinkLogic.SyncSiteListProperty(aoReplaceValue);
     LoadListBox;
   end;
 end;
 
 procedure TFrmPropertyGeneralSiteLink.Button_RemoveClick(Sender: TObject);
 var
-  idx, n: Integer;
+  idx: Integer;
 begin
   idx := ListBox_InSiteLink.ItemIndex;
   if idx <> -1 then
   begin
-    MoveItemToNotInSite(idx);
-    if Length(fInSite) > 0 then
-    begin
-      fProperty.Add('siteList', fInSite[0].Find('distinguishedName').GetReadable());
-      for n := 1 to High(fInSite) do
-        fProperty.Add('siteList', fInSite[n].Find('distinguishedName').GetReadable(), aoNoDuplicateValue);
-    end
-    else
-      fProperty.Add('siteList', '');
-
+    fSiteLinkLogic.MoveItemToNotInSite(idx);
+    fSiteLinkLogic.SyncSiteListProperty(aoReplaceValue);
     LoadListBox;
   end;
 end;
 
 procedure TFrmPropertyGeneralSiteLink.Edit_DescriptionChange(Sender: TObject);
 begin
-  fProperty.Add('description', Edit_Description.Text);
+  fSiteLinkLogic.SetScalarProperty('description', Edit_Description.Text, aoReplaceValue);
 end;
 
 procedure TFrmPropertyGeneralSiteLink.ListBox_InSiteLinkSelectionChange(
@@ -141,12 +123,12 @@ end;
 
 procedure TFrmPropertyGeneralSiteLink.SpinEdit_CostChange(Sender: TObject);
 begin
-  fProperty.Add('cost', FloatToStr(SpinEdit_Cost.Value));
+  fSiteLinkLogic.SetScalarProperty('cost', FloatToStr(SpinEdit_Cost.Value), aoReplaceValue);
 end;
 
 procedure TFrmPropertyGeneralSiteLink.SpinEdit_ReplicateChange(Sender: TObject);
 begin
-  fProperty.Add('replInterval', FloatToStr(SpinEdit_Replicate.Value));
+  fSiteLinkLogic.SetScalarProperty('replInterval', IntToStr(SpinEdit_Replicate.Value), aoReplaceValue);
 end;
 
 constructor TFrmPropertyGeneralSiteLink.Create(TheOwner: TComponent);
@@ -161,69 +143,30 @@ begin
 end;
 
 procedure TFrmPropertyGeneralSiteLink.Update(Props: TProperty);
+var
+  Value: RawUtf8;
 begin
-  if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+  fSiteLinkLogic := TGeneralPropertySiteLink.Create(Props);
 
-  fProperty := Props;
-  fLdap := fProperty.LdapClient;
-  
-  GetAllSites;
+  fSiteLinkLogic.GetAllSites;
   PrepareListBox;
 
-  Edit_Name.CaptionNoChange := fProperty.name;
-  Edit_Description.CaptionNoChange := fProperty.description;
-  SpinEdit_Cost.Value := StrToFloat(fProperty.Attributes.Find('cost').GetReadable());
-  SpinEdit_Replicate.Value := StrToFloat(fProperty.Attributes.Find('replInterval').GetReadable());
+  Edit_Name.CaptionNoChange := fSiteLinkLogic.Props.name;
+  Edit_Description.CaptionNoChange := fSiteLinkLogic.Props.description;
+
+  Value := fSiteLinkLogic.GetValueFromAttribute(fSiteLinkLogic.FindAttribute('cost'));
+  if Value <> '' then
+    SpinEdit_Cost.Value := StrToFloat(Value)
+  else
+    SpinEdit_Cost.Value := 0;
+
+  Value := fSiteLinkLogic.GetValueFromAttribute(fSiteLinkLogic.FindAttribute('replInterval'));
+  if Value <> '' then
+    SpinEdit_Replicate.Value := StrToInt(Value)
+  else
+    SpinEdit_Replicate.Value := 0;
+
   LoadListBox;
-end;
-
-procedure TFrmPropertyGeneralSiteLink.GetAllSites;
-var
-  LdapResult: TLdapResult;
-begin
-  fLdap.SearchBegin();
-  fLdap.SearchScope := lssSingleLevel;
-  repeat
-    if not SearchSitesInLdap then
-      Exit;
-    
-    for LdapResult in fLdap.SearchResult.Items do
-      AddItemInResultArray(fNotInSite, LdapResult);
-  until fLdap.SearchCookie = '';
-  fLdap.SearchEnd;
-end;
-
-function TFrmPropertyGeneralSiteLink.SearchSitesInLdap: boolean;
-begin
-  Result := fLdap.Search(FormatUtf8('CN=Sites,%', [fLdap.ConfigDN]), false, FormatUtf8('(&(objectClass=site))', []), ['name', 'distinguishedName'])
-end;
-
-procedure TFrmPropertyGeneralSiteLink.AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult);
-var
-  ListLen: Integer;
-begin
-  if not Assigned(Item) then
-    exit;
-  
-  ListLen := Length(List);
-  SetLength(List, ListLen + 1);
-  List[ListLen] := TLdapResult(Item.Clone);
-end;
-
-function TFrmPropertyGeneralSiteLink.GetResultName(Obj: TLdapResult): RawUtf8;
-begin
-  Result := Obj.Find('name').GetReadable();
-end;
-
-function TFrmPropertyGeneralSiteLink.GetSitesInSiteLink: TLdapResultArray;
-begin
-  Result := fInSite;
-end;
-
-function TFrmPropertyGeneralSiteLink.GetSitesNotInSiteLink: TLdapResultArray;
-begin
-  Result := fNotInSite;
 end;
 
 procedure TFrmPropertyGeneralSiteLink.LoadListBox;
@@ -231,12 +174,12 @@ var
   r: TLdapResult;
 begin
   ListBox_NotInSiteLink.Clear;
-  for r in GetSitesNotInSiteLink do
-    ListBox_NotInSiteLink.Items.Add(GetResultName(r));
+  for r in fSiteLinkLogic.GetSitesNotInSiteLink do
+    ListBox_NotInSiteLink.Items.Add(fSiteLinkLogic.GetResultName(r));
 
   ListBox_InSiteLink.Clear;
-  for r in GetSitesInSiteLink do
-    ListBox_InSiteLink.Items.Add(GetResultName(r));
+  for r in fSiteLinkLogic.GetSitesInSiteLink do
+    ListBox_InSiteLink.Items.Add(fSiteLinkLogic.GetResultName(r));
 end;
 
 procedure TFrmPropertyGeneralSiteLink.PrepareListBox;
@@ -245,51 +188,24 @@ var
   Site: RawUtf8;
   n: Integer;
 begin
-  SiteList := fProperty.Attributes.Find('siteList');
+  SiteList := fSiteLinkLogic.FindAttribute('siteList');
   if not Assigned(SiteList) then
     exit;
 
-  n := Length(fNotInSite) - 1;
+  n := Length(fSiteLinkLogic.GetSitesNotInSiteLink) - 1;
   while n >= 0 do
   begin
     for Site in SiteList.GetAllReadable do
     begin
-      if fNotInSite[n].Attributes.Find('distinguishedName').GetReadable() = Site then
+      if fSiteLinkLogic.GetValueFromAttribute(fSiteLinkLogic.FindAttribute('distinguishedName', fSiteLinkLogic.GetSitesNotInSiteLink[n])) = Site then
       begin
-        MoveItemToInSite(n);
+        fSiteLinkLogic.MoveItemToInSite(n);
         break;
       end;
     end;
 
     Dec(n);
   end
-end;
-
-
-procedure TFrmPropertyGeneralSiteLink.MoveItemToInSite(Index: Integer);
-begin
-  SetLength(fInSite, Length(fInSite) + 1);
-  fInSite[High(fInSite)] := fNotInSite[Index];
-  RemoveItemFromArray(fNotInSite, Index);
-end;
-
-
-procedure TFrmPropertyGeneralSiteLink.MoveItemToNotInSite(Index: Integer);
-begin
-  SetLength(fNotInSite, Length(fNotInSite) + 1);
-  fNotInSite[High(fNotInSite)] := fInSite[Index];
-  RemoveItemFromArray(fInSite, Index);
-end;
-
-
-procedure TFrmPropertyGeneralSiteLink.RemoveItemFromArray(var List: TLdapResultArray; Index: Integer);
-var
-  i: Integer;
-begin
-  for i := Index to High(List) - 1 do
-    List[i] := List[i + 1];
-
-  SetLength(List, Length(List) - 1);
 end;
 
 end.
