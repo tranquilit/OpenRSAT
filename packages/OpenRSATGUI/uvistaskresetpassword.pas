@@ -41,6 +41,7 @@ type
 
 implementation
 uses
+  ustrconsts,
   ucommonui;
 {$R *.lfm}
 

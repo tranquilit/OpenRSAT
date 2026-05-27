@@ -583,8 +583,8 @@ begin
   Action_ManagedByProperties.Caption := rsProperties;
   Action_ManagedByClear.Caption := rsClear;
   Action_ManagedByCheckBox.Caption := rsManagerCanUpdateMembershipList;
-  Action_MembersAdd.Caption := rsMembersAdd;
-  Action_MembersDelete.Caption := rsMembersDelete;
+  Action_MembersAdd.Caption := rsAdd;
+  Action_MembersDelete.Caption := rsDelete;
   Action_SecurityAdvanced.Caption := rsAdvanced;
   Action_SecurityAddUser.Caption := rsAdd;
   Action_SecurityDeleteUser.Caption := rsDelete;
