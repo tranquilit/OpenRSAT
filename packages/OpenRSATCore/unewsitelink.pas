@@ -30,6 +30,7 @@ type
 
   public
     constructor Create(ALdap: TRsatLdapClient);
+    destructor Destroy; override;
 
     procedure GetAllSites;
     procedure MoveItemToInSite(Index: Integer);
@@ -53,7 +54,11 @@ begin
   fLdap := ALdap;
 end;
 
-{ PRIVATE }
+destructor TNewSiteLinkPresenter.Destroy;
+begin
+  inherited Destroy;
+end;
+
 procedure TNewSiteLinkPresenter.RemoveItemFromArray(var List: TLdapResultArray; Index: Integer);
 var
   i: Integer;
@@ -78,10 +83,9 @@ end;
 
 function TNewSiteLinkPresenter.SearchSitesInLdap: boolean;
 begin
-  Result := fLdap.Search(FormatUtf8('CN=Sites,%', [fLdap.ConfigDN]), false, FormatUtf8('(&(objectClass=site))', []), ['name', 'distinguishedName'])
+  Result := fLdap.Search(FormatUtf8('CN=Sites,%', [fLdap.ConfigDN]), false, FormatUtf8('(&(objectClass=site))', []), ['name', 'distinguishedName']);
 end;
 
-{ PUBLIC }
 procedure TNewSiteLinkPresenter.MoveItemToInSite(Index: Integer);
 begin
   SetLength(fInSite, Length(fInSite) + 1);
@@ -147,7 +151,7 @@ var
   DN: RawUtf8;
   AttrList: TLdapAttributeList;
   Attr: TLdapAttribute;
-  i: Integer;
+  i, n: Integer;
 begin
   Result := False;
   DN := FormatUtf8('CN=%,CN=SMTP,CN=Inter-Site Transports,CN=Sites,%', [Name, fLdap.ConfigDN]);
@@ -166,6 +170,10 @@ begin
     Result := fLdap.Add(DN, AttrList);
   finally
     AttrList.Free;
+    for n := 0 to High(fInSite) do
+      FreeAndNil(fInSite[n]);
+    for n := 0 to High(fNotInSite) do
+      FreeAndNil(fNotInSite[n]);
   end;
 end;
 
