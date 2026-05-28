@@ -52,6 +52,7 @@ type
     
     fInSite, fNotInSite: TLdapResultArray;
     
+    procedure SyncSiteListProperty(Option: TLdapAddOption);
     procedure AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult);
     function ExtractGroup(const S: RawUtf8): RawUtf8;
     function SearchSitesInLdap: boolean;
@@ -60,6 +61,10 @@ type
     procedure RetrieveSiteLinks;
     function GetResultName(Obj: TLdapResult): RawUtf8;
     procedure LoadListBox;
+    procedure MoveItemToInSite(Index: Integer);
+    procedure MoveItemToNotInSite(Index: Integer);
+    procedure RemoveItemFromArray(var List: TLdapResultArray; Index: Integer);
+    procedure PrepareListBox;
   public
     constructor Create(TheOwner: TComponent); override;
     procedure Update(Props: TProperty); override;
@@ -69,6 +74,27 @@ implementation
 
 {$R *.lfm}
 
+procedure TFrmPropertyGeneralSiteLinkBridge.SyncSiteListProperty(Option: TLdapAddOption);
+var
+  i: Integer;
+  DN: RawUtf8;
+begin
+  if Length(fInSite) = 0 then
+  begin
+    fProperty.Add('siteLinkList', '', aoReplaceValue);
+    Exit;
+  end;
+
+  DN := fInSite[0].Find('distinguishedName').GetReadable();
+  fProperty.Add('siteLinkList', DN, aoReplaceValue);
+
+  for i := 1 to High(fInSite) do
+  begin
+    DN := fInSite[i].Find('distinguishedName').GetReadable();
+    fProperty.Add('siteLinkList', DN, aoNoDuplicateValue);
+  end;
+end;
+
 procedure TFrmPropertyGeneralSiteLinkBridge.Button_AddClick(Sender: TObject);
 var
   idx: Integer;
@@ -76,10 +102,9 @@ begin
   idx := ListBox_NotInSiteLinkBridge.ItemIndex;
   if idx <> -1 then
   begin
-    ListBox_InSiteLinkBridge.Items.Add(ListBox_NotInSiteLinkBridge.Items[idx]);
-    ListBox_InSiteLinkBridge.ItemIndex := ListBox_InSiteLinkBridge.Items.Count - 1;
-    ListBox_InSiteLinkBridge.SetFocus;
-    ListBox_NotInSiteLinkBridge.Items.Delete(idx);
+    MoveItemToInSite(idx);
+    SyncSiteListProperty(aoReplaceValue);
+    LoadListBox;
   end;
 end;
 
@@ -90,10 +115,9 @@ begin
   idx := ListBox_InSiteLinkBridge.ItemIndex;
   if idx <> -1 then
   begin
-    ListBox_NotInSiteLinkBridge.Items.Add(ListBox_InSiteLinkBridge.Items[idx]);
-    ListBox_NotInSiteLinkBridge.ItemIndex := ListBox_NotInSiteLinkBridge.Items.Count - 1;
-    ListBox_NotInSiteLinkBridge.SetFocus;
-    ListBox_InSiteLinkBridge.Items.Delete(idx);
+    MoveItemToNotInSite(idx);
+    SyncSiteListProperty(aoReplaceValue);
+    LoadListBox;
   end;
 end;
 
@@ -181,6 +205,30 @@ begin
     ListBox_InSiteLinkBridge.Items.Add(GetResultName(r));
 end;
 
+procedure TFrmPropertyGeneralSiteLinkBridge.MoveItemToInSite(Index: Integer);
+begin
+  SetLength(fInSite, Length(fInSite) + 1);
+  fInSite[High(fInSite)] := fNotInSite[Index];
+  RemoveItemFromArray(fNotInSite, Index);
+end;
+
+procedure TFrmPropertyGeneralSiteLinkBridge.MoveItemToNotInSite(Index: Integer);
+begin
+  SetLength(fNotInSite, Length(fNotInSite) + 1);
+  fNotInSite[High(fNotInSite)] := fInSite[Index];
+  RemoveItemFromArray(fInSite, Index);
+end;
+
+procedure TFrmPropertyGeneralSiteLinkBridge.RemoveItemFromArray(var List: TLdapResultArray; Index: Integer);
+var
+  i: Integer;
+begin
+  for i := Index to High(List) - 1 do
+    List[i] := List[i + 1];
+
+  SetLength(List, Length(List) - 1);
+end;
+
 constructor TFrmPropertyGeneralSiteLinkBridge.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
@@ -204,7 +252,34 @@ begin
   Edit_Description.CaptionNoChange := fProperty.description;
 
   RetrieveSiteLinks;
+  PrepareListBox;
   LoadListBox;
+end;
+
+procedure TFrmPropertyGeneralSiteLinkBridge.PrepareListBox;
+var
+  SiteList: TLdapAttribute;
+  Site: RawUtf8;
+  n: Integer;
+begin
+  SiteList := fProperty.Attributes.Find('siteLinkList');
+  if not Assigned(SiteList) then
+    exit;
+
+  n := Length(fNotInSite) - 1;
+  while n >= 0 do
+  begin
+    for Site in SiteList.GetAllReadable do
+    begin
+      if fNotInSite[n].Attributes.Find('distinguishedName').GetReadable = Site then
+      begin
+        MoveItemToInSite(n);
+        break;
+      end;
+    end;
+
+    Dec(n);
+  end
 end;
 
 end.
