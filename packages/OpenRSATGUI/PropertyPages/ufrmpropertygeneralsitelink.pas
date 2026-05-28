@@ -69,6 +69,7 @@ type
     
   public
     constructor Create(TheOwner: TComponent); override;
+    destructor Destroy; override;
     procedure Update(Props: TProperty); override;
   end;
 
@@ -107,15 +108,13 @@ begin
   fSiteLinkLogic.SetScalarProperty('description', Edit_Description.Text, aoReplaceValue);
 end;
 
-procedure TFrmPropertyGeneralSiteLink.ListBox_InSiteLinkSelectionChange(
-  Sender: TObject; User: boolean);
+procedure TFrmPropertyGeneralSiteLink.ListBox_InSiteLinkSelectionChange(Sender: TObject; User: boolean);
 begin
   Button_Remove.Enabled := True;
   Button_Add.Enabled := False;
 end;
 
-procedure TFrmPropertyGeneralSiteLink.ListBox_NotInSiteLinkSelectionChange(
-  Sender: TObject; User: boolean);
+procedure TFrmPropertyGeneralSiteLink.ListBox_NotInSiteLinkSelectionChange(Sender: TObject; User: boolean);
 begin
   Button_Add.Enabled := True;
   Button_Remove.Enabled := False;
@@ -140,6 +139,12 @@ begin
     fLog.Log(sllTrace, 'Create', Self);
 
   Caption := 'General';
+end;
+
+destructor TFrmPropertyGeneralSiteLink.Destroy;
+begin
+  FreeAndNil(fSiteLinkLogic);
+  inherited Destroy;
 end;
 
 procedure TFrmPropertyGeneralSiteLink.Update(Props: TProperty);
