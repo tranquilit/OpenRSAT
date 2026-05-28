@@ -150,6 +150,7 @@ object FrmPropertyGeneralSiteLinkBridge: TFrmPropertyGeneralSiteLinkBridge
         Anchors = [akTop, akLeft, akRight]
         Caption = 'Add >>'
         TabOrder = 0
+        OnClick = Button_AddClick
       end
       object Button_Remove: TButton
         AnchorSideLeft.Control = Panel3
@@ -165,6 +166,7 @@ object FrmPropertyGeneralSiteLinkBridge: TFrmPropertyGeneralSiteLinkBridge
         BorderSpacing.Top = 4
         Caption = '<< Remove'
         TabOrder = 1
+        OnClick = Button_RemoveClick
       end
     end
   end

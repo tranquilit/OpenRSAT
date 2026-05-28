@@ -43,6 +43,8 @@ type
     Panel3: TPanel;
     Panel4: TPanel;
     Line_Header: TShape;
+    procedure Button_AddClick(Sender: TObject);
+    procedure Button_RemoveClick(Sender: TObject);
   private
     fLog: TSynLogClass;
     fProperty: TProperty;
@@ -51,6 +53,7 @@ type
     fInSite, fNotInSite: TLdapResultArray;
     
     procedure AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult);
+    function ExtractGroup(const S: RawUtf8): RawUtf8;
     function SearchSitesInLdap: boolean;
     function GetSitesInSiteLink: TLdapResultArray;
     function GetSitesNotInSiteLink: TLdapResultArray;
@@ -66,6 +69,33 @@ implementation
 
 {$R *.lfm}
 
+procedure TFrmPropertyGeneralSiteLinkBridge.Button_AddClick(Sender: TObject);
+var
+  idx: Integer;
+begin
+  idx := ListBox_NotInSiteLinkBridge.ItemIndex;
+  if idx <> -1 then
+  begin
+    ListBox_InSiteLinkBridge.Items.Add(ListBox_NotInSiteLinkBridge.Items[idx]);
+    ListBox_InSiteLinkBridge.ItemIndex := ListBox_InSiteLinkBridge.Items.Count - 1;
+    ListBox_InSiteLinkBridge.SetFocus;
+    ListBox_NotInSiteLinkBridge.Items.Delete(idx);
+  end;
+end;
+
+procedure TFrmPropertyGeneralSiteLinkBridge.Button_RemoveClick(Sender: TObject);
+var
+  idx: Integer;
+begin
+  idx := ListBox_InSiteLinkBridge.ItemIndex;
+  if idx <> -1 then
+  begin
+    ListBox_NotInSiteLinkBridge.Items.Add(ListBox_InSiteLinkBridge.Items[idx]);
+    ListBox_NotInSiteLinkBridge.ItemIndex := ListBox_NotInSiteLinkBridge.Items.Count - 1;
+    ListBox_NotInSiteLinkBridge.SetFocus;
+    ListBox_InSiteLinkBridge.Items.Delete(idx);
+  end;
+end;
 
 procedure TFrmPropertyGeneralSiteLinkBridge.AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult);
 var
@@ -79,10 +109,31 @@ begin
   List[ListLen] := TLdapResult(Item.Clone);
 end;
 
+function TFrmPropertyGeneralSiteLinkBridge.ExtractGroup(const S: RawUtf8): RawUtf8;
+var
+  p1, p2: Integer;
+begin
+  Result := '';
+
+  p1 := Pos('CN=', S);
+  if p1 = 0 then Exit;
+
+  p1 := PosEx('CN=', S, p1 + 3);
+  if p1 = 0 then Exit;
+
+  p2 := PosEx(',', S, p1);
+  if p2 = 0 then
+    Result := Copy(S, p1, Length(S) - p1 + 1)
+  else
+    Result := Copy(S, p1, p2 - p1);
+end;
 
 function TFrmPropertyGeneralSiteLinkBridge.SearchSitesInLdap: boolean;
+var
+  Group: RawUtf8;
 begin
-  Result := fLdap.Search(FormatUtf8('CN=Sites,%', [fLdap.ConfigDN]), false, '(&(objectClass=siteLink))', ['name', 'distinguishedName'])
+  Group := ExtractGroup(fProperty.distinguishedName);
+  Result := fLdap.Search(FormatUtf8('%,CN=Inter-Site Transports,CN=Sites,%', [Group, fLdap.ConfigDN]), false, '(&(objectClass=siteLink))', ['name', 'distinguishedName'])
 end;
 
 procedure TFrmPropertyGeneralSiteLinkBridge.RetrieveSiteLinks;
