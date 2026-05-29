@@ -49,7 +49,7 @@ type
     procedure Edit_DescriptionChange(Sender: TObject);
   private
     fLog: TSynLogClass;
-    fSiteLinkBridgeLogic: TGeneralPropertySiteLinkBridge;
+    fLogic: TGeneralPropertySiteLinkBridge;
 
     procedure LoadListBox;
     procedure PrepareListBox;
@@ -70,8 +70,8 @@ begin
   idx := ListBox_NotInSiteLinkBridge.ItemIndex;
   if idx <> -1 then
   begin
-    fSiteLinkBridgeLogic.MoveItemToInSite(idx);
-    fSiteLinkBridgeLogic.SyncSiteListProperty(aoReplaceValue);
+    fLogic.MoveItemToInSite(idx);
+    fLogic.SyncAttributeProperty(aoReplaceValue);
     LoadListBox;
   end;
 end;
@@ -83,15 +83,15 @@ begin
   idx := ListBox_InSiteLinkBridge.ItemIndex;
   if idx <> -1 then
   begin
-    fSiteLinkBridgeLogic.MoveItemToNotInSite(idx);
-    fSiteLinkBridgeLogic.SyncSiteListProperty(aoReplaceValue);
+    fLogic.MoveItemToNotInSite(idx);
+    fLogic.SyncAttributeProperty(aoReplaceValue);
     LoadListBox;
   end;
 end;
 
 procedure TFrmPropertyGeneralSiteLinkBridge.Edit_DescriptionChange(Sender: TObject);
 begin
-  fSiteLinkBridgeLogic.SetScalarProperty('description', Edit_Description.Text, aoReplaceValue);
+  fLogic.SetScalarProperty('description', Edit_Description.Text, aoReplaceValue);
 end;
 
 procedure TFrmPropertyGeneralSiteLinkBridge.LoadListBox;
@@ -99,12 +99,12 @@ var
   r: TLdapResult;
 begin
   ListBox_NotInSiteLinkBridge.Clear;
-  for r in fSiteLinkBridgeLogic.GetSitesNotInSiteLink do
-    ListBox_NotInSiteLinkBridge.Items.Add(fSiteLinkBridgeLogic.GetResultName(r));
+  for r in fLogic.NotInSite do
+    ListBox_NotInSiteLinkBridge.Items.Add(fLogic.GetResultName(r));
 
   ListBox_InSiteLinkBridge.Clear;
-  for r in fSiteLinkBridgeLogic.GetSitesInSiteLink do
-    ListBox_InSiteLinkBridge.Items.Add(fSiteLinkBridgeLogic.GetResultName(r));
+  for r in fLogic.InSite do
+    ListBox_InSiteLinkBridge.Items.Add(fLogic.GetResultName(r));
 end;
 
 procedure TFrmPropertyGeneralSiteLinkBridge.PrepareListBox;
@@ -113,18 +113,18 @@ var
   Site: RawUtf8;
   n: Integer;
 begin
-  SiteList := fSiteLinkBridgeLogic.FindAttribute('siteLinkList');
+  SiteList := fLogic.FindAttribute('siteLinkList');
   if not Assigned(SiteList) then
     exit;
 
-  n := Length(fSiteLinkBridgeLogic.GetSitesNotInSiteLink) - 1;
+  n := Length(fLogic.NotInSite) - 1;
   while n >= 0 do
   begin
     for Site in SiteList.GetAllReadable do
     begin
-      if fSiteLinkBridgeLogic.GetValueFromAttribute(fSiteLinkBridgeLogic.FindAttribute('distinguishedName', fSiteLinkBridgeLogic.GetSitesNotInSiteLink[n])) = Site then
+      if fLogic.GetValueFromAttribute(fLogic.FindAttribute('distinguishedName', fLogic.NotInSite[n])) = Site then
       begin
-        fSiteLinkBridgeLogic.MoveItemToInSite(n);
+        fLogic.MoveItemToInSite(n);
         break;
       end;
     end;
@@ -146,7 +146,7 @@ end;
 
 destructor TFrmPropertyGeneralSiteLinkBridge.Destroy;
 begin
-  FreeAndNil(fSiteLinkBridgeLogic);
+  FreeAndNil(fLogic);
   inherited Destroy;
 end;
 
@@ -155,12 +155,12 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, 'Update', Self);
 
-  fSiteLinkBridgeLogic := TGeneralPropertySiteLinkBridge.Create(Props);
+  fLogic := TGeneralPropertySiteLinkBridge.Create(Props);
 
-  Edit_Name.CaptionNoChange := fSiteLinkBridgeLogic.Props.name;
-  Edit_Description.CaptionNoChange := fSiteLinkBridgeLogic.Props.description;
+  Edit_Name.CaptionNoChange := fLogic.Props.name;
+  Edit_Description.CaptionNoChange := fLogic.Props.description;
 
-  fSiteLinkBridgeLogic.RetrieveSiteLinks;
+  fLogic.GetAllResources;
   PrepareListBox;
   LoadListBox;
 end;
