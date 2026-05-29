@@ -185,12 +185,20 @@ msgstr ""
 msgid "Distinguished name"
 msgstr ""
 
+#: ustrconsts.rsdistribution
+msgid "Distribution"
+msgstr ""
+
 #: ustrconsts.rsdomain
 msgid "Domain"
 msgstr ""
 
 #: ustrconsts.rsdomaincontroller
 msgid "Domain controller"
+msgstr ""
+
+#: ustrconsts.rsdomainlocal
+msgid "Domain local"
 msgstr ""
 
 #: ustrconsts.rsdomainnamingmaster
@@ -243,6 +251,26 @@ msgstr ""
 
 #: ustrconsts.rsfullname
 msgid "Full name: "
+msgstr ""
+
+#: ustrconsts.rsglobal
+msgid "Global"
+msgstr ""
+
+#: ustrconsts.rsgroupname
+msgid "Group name: "
+msgstr ""
+
+#: ustrconsts.rsgroupname2000
+msgid "Group name (pre-Windows 2000): "
+msgstr ""
+
+#: ustrconsts.rsgroupscope
+msgid "Group scope"
+msgstr ""
+
+#: ustrconsts.rsgrouptype
+msgid "Group type"
 msgstr ""
 
 #: ustrconsts.rsinfrastructuremaster
@@ -611,6 +639,10 @@ msgstr ""
 msgid "Secondary zone"
 msgstr ""
 
+#: ustrconsts.rssecurity
+msgid "Security"
+msgstr ""
+
 #: ustrconsts.rsselectaresourcerecordtype
 msgid "Select a resource record type: "
 msgstr ""
@@ -713,6 +745,10 @@ msgstr ""
 
 #: ustrconsts.rstype
 msgid "Type"
+msgstr ""
+
+#: ustrconsts.rsuniversal
+msgid "Universal"
 msgstr ""
 
 #: ustrconsts.rsunlocktheuseraccount

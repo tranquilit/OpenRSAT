@@ -239,6 +239,16 @@ resourcestring
   rsFullName = 'Full name: ';
   rsDisplayName = 'Display name: ';
 
+  rsGroupName = 'Group name: ';
+  rsGroupName2000 = 'Group name (pre-Windows 2000): ';
+  rsGroupScope = 'Group scope';
+  rsGroupType = 'Group type';
+  rsDomainLocal = 'Domain local';
+  rsGlobal = 'Global';
+  rsUniversal = 'Universal';
+  rsSecurity = 'Security';
+  rsDistribution = 'Distribution';
+
 implementation
 
 end.

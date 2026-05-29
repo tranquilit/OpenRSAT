@@ -174,7 +174,6 @@ object FrmNewGroup: TFrmNewGroup
     OnChange = Edit_NameChange
   end
   object ActionList: TActionList
-    Images = VisMain.ImageList_RSAT
     Left = 376
     Top = 168
     object Action_Next: TAction

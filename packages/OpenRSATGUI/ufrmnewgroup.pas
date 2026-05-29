@@ -38,6 +38,8 @@ type
     procedure Load;
   public
     constructor Create(TheOwner: TComponent); override;
+
+    procedure ApplyTranslation;
   end;
 
 const
@@ -60,6 +62,7 @@ uses
   mormot.core.text,
   mormot.net.ldap,
   // Rsat
+  ustrconsts,
   ucommon,
   ucoredatamodule,
   ursatldapclientui,
@@ -92,6 +95,26 @@ begin
   OwnerNewObject.Btn_Back.Visible := False;
   OwnerNewObject.Image_Object.ImageIndex := Ord(ileADGroup);
   OwnerNewObject.CallBack := @Load;
+
+  ApplyTranslation
+end;
+
+procedure TFrmNewGroup.ApplyTranslation;
+begin
+  (Owner as TVisNewObject).Caption := rsNewObjectGroup;
+  (Owner as TVisNewObject).Btn_Next.Caption := rsOK;
+
+  Label_Name.Caption := rsGroupName;
+  Label_nETBIOSName.Caption := rsGroupName2000;
+
+  RadioGroup_Scope.Caption := rsGroupScope;
+  RadioGroup_Type.Caption := rsGroupType;
+
+  RadioBtn_Local.Caption := rsDomainLocal;
+  RadioBtn_Global.Caption := rsGlobal;
+  RadioBtn_Universal.Caption := rsUniversal;
+  RadioBtn_Security.Caption := rsSecurity;
+  RadioBtn_Distribution.Caption := rsDistribution;
 end;
 
 // Actions
