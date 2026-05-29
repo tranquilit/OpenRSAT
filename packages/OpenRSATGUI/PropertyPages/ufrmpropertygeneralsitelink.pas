@@ -63,7 +63,7 @@ type
   
   private
     fLog: TSynLogClass;
-    fSiteLinkLogic: TGeneralPropertySiteLink;
+    fLogic: TGeneralPropertySiteLink;
     
     procedure LoadListBox;
     procedure PrepareListBox;
@@ -85,8 +85,8 @@ begin
   idx := ListBox_NotInSiteLink.ItemIndex;
   if idx <> -1 then
   begin
-    fSiteLinkLogic.MoveItemToInSite(idx);
-    fSiteLinkLogic.SyncSiteListProperty(aoReplaceValue);
+    fLogic.MoveItemToInSite(idx);
+    fLogic.SyncAttributeProperty(aoReplaceValue);
     LoadListBox;
   end;
 end;
@@ -98,15 +98,15 @@ begin
   idx := ListBox_InSiteLink.ItemIndex;
   if idx <> -1 then
   begin
-    fSiteLinkLogic.MoveItemToNotInSite(idx);
-    fSiteLinkLogic.SyncSiteListProperty(aoReplaceValue);
+    fLogic.MoveItemToNotInSite(idx);
+    fLogic.SyncAttributeProperty(aoReplaceValue);
     LoadListBox;
   end;
 end;
 
 procedure TFrmPropertyGeneralSiteLink.Edit_DescriptionChange(Sender: TObject);
 begin
-  fSiteLinkLogic.SetScalarProperty('description', Edit_Description.Text, aoReplaceValue);
+  fLogic.SetScalarProperty('description', Edit_Description.Text, aoReplaceValue);
 end;
 
 procedure TFrmPropertyGeneralSiteLink.ListBox_InSiteLinkSelectionChange(Sender: TObject; User: boolean);
@@ -123,12 +123,12 @@ end;
 
 procedure TFrmPropertyGeneralSiteLink.SpinEdit_CostChange(Sender: TObject);
 begin
-  fSiteLinkLogic.SetScalarProperty('cost', FloatToStr(SpinEdit_Cost.Value), aoReplaceValue);
+  fLogic.SetScalarProperty('cost', FloatToStr(SpinEdit_Cost.Value), aoReplaceValue);
 end;
 
 procedure TFrmPropertyGeneralSiteLink.SpinEdit_ReplicateChange(Sender: TObject);
 begin
-  fSiteLinkLogic.SetScalarProperty('replInterval', IntToStr(SpinEdit_Replicate.Value), aoReplaceValue);
+  fLogic.SetScalarProperty('replInterval', IntToStr(SpinEdit_Replicate.Value), aoReplaceValue);
 end;
 
 constructor TFrmPropertyGeneralSiteLink.Create(TheOwner: TComponent);
@@ -144,7 +144,7 @@ end;
 
 destructor TFrmPropertyGeneralSiteLink.Destroy;
 begin
-  FreeAndNil(fSiteLinkLogic);
+  FreeAndNil(fLogic);
   inherited Destroy;
 end;
 
@@ -152,26 +152,25 @@ procedure TFrmPropertyGeneralSiteLink.Update(Props: TProperty);
 var
   Value: RawUtf8;
 begin
-  fSiteLinkLogic := TGeneralPropertySiteLink.Create(Props);
-
-  fSiteLinkLogic.GetAllSites;
-  PrepareListBox;
+  fLogic := TGeneralPropertySiteLink.Create(Props);
 
   Edit_Name.CaptionNoChange := Props.name;
   Edit_Description.CaptionNoChange := Props.description;
 
-  Value := fSiteLinkLogic.GetValueFromAttribute(fSiteLinkLogic.FindAttribute('cost'));
+  Value := fLogic.GetValueFromAttribute(fLogic.FindAttribute('cost'));
   if Value <> '' then
     SpinEdit_Cost.Value := StrToFloat(Value)
   else
     SpinEdit_Cost.Value := 0;
 
-  Value := fSiteLinkLogic.GetValueFromAttribute(fSiteLinkLogic.FindAttribute('replInterval'));
+  Value := fLogic.GetValueFromAttribute(fLogic.FindAttribute('replInterval'));
   if Value <> '' then
     SpinEdit_Replicate.Value := StrToInt(Value)
   else
     SpinEdit_Replicate.Value := 0;
 
+  fLogic.GetAllResources;
+  PrepareListBox;
   LoadListBox;
 end;
 
@@ -180,12 +179,12 @@ var
   r: TLdapResult;
 begin
   ListBox_NotInSiteLink.Clear;
-  for r in fSiteLinkLogic.GetSitesNotInSiteLink do
-    ListBox_NotInSiteLink.Items.Add(fSiteLinkLogic.GetResultName(r));
+  for r in fLogic.NotInSite do
+    ListBox_NotInSiteLink.Items.Add(fLogic.GetResultName(r));
 
   ListBox_InSiteLink.Clear;
-  for r in fSiteLinkLogic.GetSitesInSiteLink do
-    ListBox_InSiteLink.Items.Add(fSiteLinkLogic.GetResultName(r));
+  for r in fLogic.InSite do
+    ListBox_InSiteLink.Items.Add(fLogic.GetResultName(r));
 end;
 
 procedure TFrmPropertyGeneralSiteLink.PrepareListBox;
@@ -194,18 +193,18 @@ var
   Site: RawUtf8;
   n: Integer;
 begin
-  SiteList := fSiteLinkLogic.FindAttribute('siteList');
+  SiteList := fLogic.FindAttribute('siteList');
   if not Assigned(SiteList) then
     exit;
 
-  n := Length(fSiteLinkLogic.GetSitesNotInSiteLink) - 1;
+  n := Length(fLogic.NotInSite) - 1;
   while n >= 0 do
   begin
     for Site in SiteList.GetAllReadable do
     begin
-      if fSiteLinkLogic.GetValueFromAttribute(fSiteLinkLogic.FindAttribute('distinguishedName', fSiteLinkLogic.GetSitesNotInSiteLink[n])) = Site then
+      if fLogic.GetValueFromAttribute(fLogic.FindAttribute('distinguishedName', fLogic.NotInSite[n])) = Site then
       begin
-        fSiteLinkLogic.MoveItemToInSite(n);
+        fLogic.MoveItemToInSite(n);
         break;
       end;
     end;
