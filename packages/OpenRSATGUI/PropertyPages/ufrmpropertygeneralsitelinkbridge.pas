@@ -19,6 +19,7 @@ uses
   uhelpersui,
   uproperty,
   ursatldapclient,
+  ugeneralpropertysitelinkbridge,
   ulog;
 
 type
@@ -45,55 +46,22 @@ type
     Line_Header: TShape;
     procedure Button_AddClick(Sender: TObject);
     procedure Button_RemoveClick(Sender: TObject);
+    procedure Edit_DescriptionChange(Sender: TObject);
   private
     fLog: TSynLogClass;
-    fProperty: TProperty;
-    fLdap: TRsatLdapClient;
-    
-    fInSite, fNotInSite: TLdapResultArray;
-    
-    procedure SyncSiteListProperty(Option: TLdapAddOption);
-    procedure AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult);
-    function ExtractGroup(const S: RawUtf8): RawUtf8;
-    function SearchSitesInLdap: boolean;
-    function GetSitesInSiteLink: TLdapResultArray;
-    function GetSitesNotInSiteLink: TLdapResultArray;
-    procedure RetrieveSiteLinks;
-    function GetResultName(Obj: TLdapResult): RawUtf8;
+    fSiteLinkBridgeLogic: TGeneralPropertySiteLinkBridge;
+
     procedure LoadListBox;
-    procedure MoveItemToInSite(Index: Integer);
-    procedure MoveItemToNotInSite(Index: Integer);
-    procedure RemoveItemFromArray(var List: TLdapResultArray; Index: Integer);
     procedure PrepareListBox;
   public
     constructor Create(TheOwner: TComponent); override;
+    destructor Destroy; override;
     procedure Update(Props: TProperty); override;
   end;
 
 implementation
 
 {$R *.lfm}
-
-procedure TFrmPropertyGeneralSiteLinkBridge.SyncSiteListProperty(Option: TLdapAddOption);
-var
-  i: Integer;
-  DN: RawUtf8;
-begin
-  if Length(fInSite) = 0 then
-  begin
-    fProperty.Add('siteLinkList', '', aoReplaceValue);
-    Exit;
-  end;
-
-  DN := fInSite[0].Find('distinguishedName').GetReadable();
-  fProperty.Add('siteLinkList', DN, aoReplaceValue);
-
-  for i := 1 to High(fInSite) do
-  begin
-    DN := fInSite[i].Find('distinguishedName').GetReadable();
-    fProperty.Add('siteLinkList', DN, aoNoDuplicateValue);
-  end;
-end;
 
 procedure TFrmPropertyGeneralSiteLinkBridge.Button_AddClick(Sender: TObject);
 var
@@ -102,8 +70,8 @@ begin
   idx := ListBox_NotInSiteLinkBridge.ItemIndex;
   if idx <> -1 then
   begin
-    MoveItemToInSite(idx);
-    SyncSiteListProperty(aoReplaceValue);
+    fSiteLinkBridgeLogic.MoveItemToInSite(idx);
+    fSiteLinkBridgeLogic.SyncSiteListProperty(aoReplaceValue);
     LoadListBox;
   end;
 end;
@@ -115,81 +83,15 @@ begin
   idx := ListBox_InSiteLinkBridge.ItemIndex;
   if idx <> -1 then
   begin
-    MoveItemToNotInSite(idx);
-    SyncSiteListProperty(aoReplaceValue);
+    fSiteLinkBridgeLogic.MoveItemToNotInSite(idx);
+    fSiteLinkBridgeLogic.SyncSiteListProperty(aoReplaceValue);
     LoadListBox;
   end;
 end;
 
-procedure TFrmPropertyGeneralSiteLinkBridge.AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult);
-var
-  ListLen: Integer;
+procedure TFrmPropertyGeneralSiteLinkBridge.Edit_DescriptionChange(Sender: TObject);
 begin
-  if not Assigned(Item) then
-    exit;
-
-  ListLen := Length(List);
-  SetLength(List, ListLen + 1);
-  List[ListLen] := TLdapResult(Item.Clone);
-end;
-
-function TFrmPropertyGeneralSiteLinkBridge.ExtractGroup(const S: RawUtf8): RawUtf8;
-var
-  p1, p2: Integer;
-begin
-  Result := '';
-
-  p1 := Pos('CN=', S);
-  if p1 = 0 then Exit;
-
-  p1 := PosEx('CN=', S, p1 + 3);
-  if p1 = 0 then Exit;
-
-  p2 := PosEx(',', S, p1);
-  if p2 = 0 then
-    Result := Copy(S, p1, Length(S) - p1 + 1)
-  else
-    Result := Copy(S, p1, p2 - p1);
-end;
-
-function TFrmPropertyGeneralSiteLinkBridge.SearchSitesInLdap: boolean;
-var
-  Group: RawUtf8;
-begin
-  Group := ExtractGroup(fProperty.distinguishedName);
-  Result := fLdap.Search(FormatUtf8('%,CN=Inter-Site Transports,CN=Sites,%', [Group, fLdap.ConfigDN]), false, '(&(objectClass=siteLink))', ['name', 'distinguishedName'])
-end;
-
-procedure TFrmPropertyGeneralSiteLinkBridge.RetrieveSiteLinks;
-var
-  LdapResult: TLdapResult;
-begin
-  fLdap.SearchBegin();
-  fLdap.SearchScope := lssWholeSubtree;
-  repeat
-    if not SearchSitesInLdap then
-      Exit;
-
-    for LdapResult in fLdap.SearchResult.Items do
-      AddItemInResultArray(fNotInSite, LdapResult);
-  until fLdap.SearchCookie = '';
-  fLdap.SearchEnd;
-end;
-
-
-function TFrmPropertyGeneralSiteLinkBridge.GetSitesInSiteLink: TLdapResultArray;
-begin
-  Result := fInSite;
-end;
-
-function TFrmPropertyGeneralSiteLinkBridge.GetSitesNotInSiteLink: TLdapResultArray;
-begin
-  Result := fNotInSite;
-end;
-
-function TFrmPropertyGeneralSiteLinkBridge.GetResultName(Obj: TLdapResult): RawUtf8;
-begin
-  Result := Obj.Find('name').GetReadable();
+  fSiteLinkBridgeLogic.SetScalarProperty('description', Edit_Description.Text, aoReplaceValue);
 end;
 
 procedure TFrmPropertyGeneralSiteLinkBridge.LoadListBox;
@@ -197,36 +99,38 @@ var
   r: TLdapResult;
 begin
   ListBox_NotInSiteLinkBridge.Clear;
-  for r in GetSitesNotInSiteLink do
-    ListBox_NotInSiteLinkBridge.Items.Add(GetResultName(r));
+  for r in fSiteLinkBridgeLogic.GetSitesNotInSiteLink do
+    ListBox_NotInSiteLinkBridge.Items.Add(fSiteLinkBridgeLogic.GetResultName(r));
 
   ListBox_InSiteLinkBridge.Clear;
-  for r in GetSitesInSiteLink do
-    ListBox_InSiteLinkBridge.Items.Add(GetResultName(r));
+  for r in fSiteLinkBridgeLogic.GetSitesInSiteLink do
+    ListBox_InSiteLinkBridge.Items.Add(fSiteLinkBridgeLogic.GetResultName(r));
 end;
 
-procedure TFrmPropertyGeneralSiteLinkBridge.MoveItemToInSite(Index: Integer);
-begin
-  SetLength(fInSite, Length(fInSite) + 1);
-  fInSite[High(fInSite)] := fNotInSite[Index];
-  RemoveItemFromArray(fNotInSite, Index);
-end;
-
-procedure TFrmPropertyGeneralSiteLinkBridge.MoveItemToNotInSite(Index: Integer);
-begin
-  SetLength(fNotInSite, Length(fNotInSite) + 1);
-  fNotInSite[High(fNotInSite)] := fInSite[Index];
-  RemoveItemFromArray(fInSite, Index);
-end;
-
-procedure TFrmPropertyGeneralSiteLinkBridge.RemoveItemFromArray(var List: TLdapResultArray; Index: Integer);
+procedure TFrmPropertyGeneralSiteLinkBridge.PrepareListBox;
 var
-  i: Integer;
+  SiteList: TLdapAttribute;
+  Site: RawUtf8;
+  n: Integer;
 begin
-  for i := Index to High(List) - 1 do
-    List[i] := List[i + 1];
+  SiteList := fSiteLinkBridgeLogic.FindAttribute('siteLinkList');
+  if not Assigned(SiteList) then
+    exit;
 
-  SetLength(List, Length(List) - 1);
+  n := Length(fSiteLinkBridgeLogic.GetSitesNotInSiteLink) - 1;
+  while n >= 0 do
+  begin
+    for Site in SiteList.GetAllReadable do
+    begin
+      if fSiteLinkBridgeLogic.GetValueFromAttribute(fSiteLinkBridgeLogic.FindAttribute('distinguishedName', fSiteLinkBridgeLogic.GetSitesNotInSiteLink[n])) = Site then
+      begin
+        fSiteLinkBridgeLogic.MoveItemToInSite(n);
+        break;
+      end;
+    end;
+
+    Dec(n);
+  end
 end;
 
 constructor TFrmPropertyGeneralSiteLinkBridge.Create(TheOwner: TComponent);
@@ -240,46 +144,25 @@ begin
   Caption := 'General';
 end;
 
+destructor TFrmPropertyGeneralSiteLinkBridge.Destroy;
+begin
+  FreeAndNil(fSiteLinkBridgeLogic);
+  inherited Destroy;
+end;
+
 procedure TFrmPropertyGeneralSiteLinkBridge.Update(Props: TProperty);
 begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, 'Update', Self);
 
-  fProperty := Props;
-  fLdap := fProperty.LdapClient;
+  fSiteLinkBridgeLogic := TGeneralPropertySiteLinkBridge.Create(Props);
 
-  Edit_Name.CaptionNoChange := fProperty.name;
-  Edit_Description.CaptionNoChange := fProperty.description;
+  Edit_Name.CaptionNoChange := fSiteLinkBridgeLogic.Props.name;
+  Edit_Description.CaptionNoChange := fSiteLinkBridgeLogic.Props.description;
 
-  RetrieveSiteLinks;
+  fSiteLinkBridgeLogic.RetrieveSiteLinks;
   PrepareListBox;
   LoadListBox;
-end;
-
-procedure TFrmPropertyGeneralSiteLinkBridge.PrepareListBox;
-var
-  SiteList: TLdapAttribute;
-  Site: RawUtf8;
-  n: Integer;
-begin
-  SiteList := fProperty.Attributes.Find('siteLinkList');
-  if not Assigned(SiteList) then
-    exit;
-
-  n := Length(fNotInSite) - 1;
-  while n >= 0 do
-  begin
-    for Site in SiteList.GetAllReadable do
-    begin
-      if fNotInSite[n].Attributes.Find('distinguishedName').GetReadable = Site then
-      begin
-        MoveItemToInSite(n);
-        break;
-      end;
-    end;
-
-    Dec(n);
-  end
 end;
 
 end.

@@ -121,6 +121,10 @@
         <UnitName Value="ugeneralpropertysitelink"/>
       </Item>
       <Item>
+        <Filename Value="ugeneralpropertysitelinkbridge.pas"/>
+        <UnitName Value="ugeneralpropertysitelinkbridge"/>
+      </Item>
+      <Item>
         <Filename Value="ulog.pas"/>
         <UnitName Value="ulog"/>
       </Item>
