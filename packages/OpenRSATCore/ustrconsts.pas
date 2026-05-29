@@ -233,6 +233,11 @@ resourcestring
   rsUserOrGroup = 'User or group: ';
   rsAssignedThisComputerAccountAsPre2000Computer = 'Assign this computer account as a pre-Windows 2000 computer';
 
+  rsFirstName = 'First name: ';
+  rsInitials = 'Initials: ';
+  rsLastName = 'Last name: ';
+  rsFullName = 'Full name: ';
+  rsDisplayName = 'Display name: ';
 
 implementation
 

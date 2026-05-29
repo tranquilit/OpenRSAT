@@ -177,6 +177,10 @@ msgstr ""
 msgid "Digest"
 msgstr ""
 
+#: ustrconsts.rsdisplayname
+msgid "Display name: "
+msgstr ""
+
 #: ustrconsts.rsdistinguishedname
 msgid "Distinguished name"
 msgstr ""
@@ -229,12 +233,24 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
+#: ustrconsts.rsfirstname
+msgid "First name: "
+msgstr ""
+
 #: ustrconsts.rsfolder
 msgid "Folder"
 msgstr ""
 
+#: ustrconsts.rsfullname
+msgid "Full name: "
+msgstr ""
+
 #: ustrconsts.rsinfrastructuremaster
 msgid "Infrastructure master"
+msgstr ""
+
+#: ustrconsts.rsinitials
+msgid "Initials: "
 msgstr ""
 
 #: ustrconsts.rskerberos
@@ -251,6 +267,10 @@ msgstr ""
 
 #: ustrconsts.rslargeicons
 msgid "Large Icons"
+msgstr ""
+
+#: ustrconsts.rslastname
+msgid "Last name: "
 msgstr ""
 
 #: ustrconsts.rslist

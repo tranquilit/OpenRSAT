@@ -38,6 +38,8 @@ type
   public
     constructor Create(TheOwner: TComponent); override;
 
+    procedure ApplyTranslation;
+
   end;
 
 implementation
@@ -50,6 +52,7 @@ uses
   mormot.core.base,
   mormot.net.ldap,
   // Rsat
+  ustrconsts,
   ucommon,
   ursatldapclientui,
   uvisnewobject;
@@ -141,13 +144,25 @@ var
 begin
   inherited Create(TheOwner);
 
-  OwnerNewObject.Caption := rsNewObjectContact;
   OwnerNewObject.Btn_Next.Action := ActionList1.ActionByName('Action_Next');
-  OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnOK;
   OwnerNewObject.Btn_Next.Default := True;
   OwnerNewObject.Btn_Back.Visible := False;
   OwnerNewObject.Image_Object.ImageIndex := -1{Im_Contact};
   OwnerNewObject.CallBack := @Load;
+
+  ApplyTranslation;
+end;
+
+procedure TFrmNewContact.ApplyTranslation;
+begin
+  (Owner as TVisNewObject).Caption := rsNewObjectContact;
+  (Owner as TVisNewObject).Btn_Next.Caption := rsOK;
+
+  Label_FirstName.Caption := rsFirstName;
+  Label_Initial.Caption := rsInitials;
+  Label_LastName.Caption := rsLastName;
+  Label_FullName.Caption := rsFullName;
+  Label_DisplayName.Caption := rsDisplayName;
 end;
 
 end.
