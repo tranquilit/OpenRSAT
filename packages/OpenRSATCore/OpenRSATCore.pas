@@ -14,7 +14,7 @@ uses
   umoduleadsioption, udns, ugplink, uproperty, usidcache, 
   uadvancedsecuritypresenter, uguidcache, uselectobjectguidpresenter, 
   uviewkeytabpresenter, unewsitelink, ugeneralpropertysitelink, ulog, 
-  LazarusPackageIntf;
+  ugeneralpropertysitelinkbridge, LazarusPackageIntf;
 
 implementation
 

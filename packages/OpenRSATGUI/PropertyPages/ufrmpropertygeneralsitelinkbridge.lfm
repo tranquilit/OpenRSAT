@@ -49,6 +49,7 @@ object FrmPropertyGeneralSiteLinkBridge: TFrmPropertyGeneralSiteLinkBridge
       BorderSpacing.Left = 32
       BorderSpacing.Right = 8
       TabOrder = 0
+      OnChange = Edit_DescriptionChange
     end
   end
   object Panel2: TPanel
