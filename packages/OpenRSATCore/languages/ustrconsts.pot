@@ -1,12 +1,184 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: ustrconsts.rsaccount
+msgid "Account"
+msgstr ""
+
+#: ustrconsts.rsaccountlockoutstatusonthisdomaincontroller
+msgid "Unlock the user's account"
+msgstr ""
+
 #: ustrconsts.rsadd
 msgid "Add"
 msgstr ""
 
+#: ustrconsts.rsaddcondition
+msgid "Add condition"
+msgstr ""
+
+#: ustrconsts.rsadvanced
+msgid "Advanced"
+msgstr ""
+
+#: ustrconsts.rsadvancedadd
+msgid "Advanced add"
+msgstr ""
+
+#: ustrconsts.rsadvanceddelete
+msgid "Advanced delete"
+msgstr ""
+
+#: ustrconsts.rsalgorithm
+msgid "Algorithm"
+msgstr ""
+
+#: ustrconsts.rsallconditions
+msgid "All conditions"
+msgstr ""
+
+#: ustrconsts.rsanonymous
+msgid "Anonymous"
+msgstr ""
+
+#: ustrconsts.rsanywritabledomaincontroller
+msgid "Any writable Domain Controller"
+msgstr ""
+
+#: ustrconsts.rsapply
+msgid "Apply"
+msgstr ""
+
+#: ustrconsts.rsassignedthiscomputeraccountaspre2000computer
+msgid "Assign this computer account as a pre-Windows 2000 computer"
+msgstr ""
+
+#: ustrconsts.rsat
+msgid "@"
+msgstr ""
+
+#: ustrconsts.rsatleastonecondition
+msgid "At least one condition"
+msgstr ""
+
+#: ustrconsts.rsauthmethod
+msgid "Auth method"
+msgstr ""
+
+#: ustrconsts.rsback
+msgid "Back"
+msgstr ""
+
+#: ustrconsts.rsbacklinks
+msgid "Backlinks"
+msgstr ""
+
+#: ustrconsts.rsbasic
+msgid "Basic"
+msgstr ""
+
+#: ustrconsts.rscancel
+msgid "Cancel"
+msgstr ""
+
+#: ustrconsts.rschange
+msgid "Change"
+msgstr ""
+
+#: ustrconsts.rschangeto
+msgid "Change to: "
+msgstr ""
+
+#: ustrconsts.rschannelbinding
+msgid "Channel binding"
+msgstr ""
+
+#: ustrconsts.rsclear
+msgid "Clear"
+msgstr ""
+
+#: ustrconsts.rsclose
+msgid "Close"
+msgstr ""
+
+#: ustrconsts.rscomputername
+msgid "Computer name: "
+msgstr ""
+
+#: ustrconsts.rscomputername2000
+msgid "Computer name (pre-Windows 2000): "
+msgstr ""
+
+#: ustrconsts.rscondition
+msgid "Condition"
+msgstr ""
+
+#: ustrconsts.rsconfirmpassword
+msgid "Confirm password: "
+msgstr ""
+
+#: ustrconsts.rsconstructed
+msgid "Constructed"
+msgstr ""
+
+#: ustrconsts.rscopypassword
+msgid "Copy password"
+msgstr ""
+
+#: ustrconsts.rscopytoclipboardbase64
+msgid "Copy to clipboard (base64)"
+msgstr ""
+
+#: ustrconsts.rscopytofile
+msgid "Copy to file"
+msgstr ""
+
+#: ustrconsts.rscreatein
+msgid "Create in: "
+msgstr ""
+
+#: ustrconsts.rscreaterecord
+msgid "Create record"
+msgstr ""
+
+#: ustrconsts.rscurrentdirectoryserver
+msgid "Current directory server: "
+msgstr ""
+
+#: ustrconsts.rscurrentusername
+msgid "Current username"
+msgstr ""
+
+#: ustrconsts.rsdctype
+msgid "DC Type"
+msgstr ""
+
+#: ustrconsts.rsdcversion
+msgid "DC Version"
+msgstr ""
+
 #: ustrconsts.rsdelete
 msgid "Delete"
+msgstr ""
+
+#: ustrconsts.rsdeletecondition
+msgid "Delete condition"
+msgstr ""
+
+#: ustrconsts.rsdescription
+msgid "Description"
+msgstr ""
+
+#: ustrconsts.rsdescription_1
+msgid "Description: "
+msgstr ""
+
+#: ustrconsts.rsdigest
+msgid "Digest"
+msgstr ""
+
+#: ustrconsts.rsdistinguishedname
+msgid "Distinguished name"
 msgstr ""
 
 #: ustrconsts.rsdomain
@@ -14,11 +186,67 @@ msgid "Domain"
 msgstr ""
 
 #: ustrconsts.rsdomaincontroller
-msgid "Domain Controller"
+msgid "Domain controller"
+msgstr ""
+
+#: ustrconsts.rsdomainnamingmaster
+msgid "Domain naming master"
 msgstr ""
 
 #: ustrconsts.rsedit
 msgid "Edit"
+msgstr ""
+
+#: ustrconsts.rsempty
+msgid "<empty>"
+msgstr ""
+
+#: ustrconsts.rsencryptiontype
+msgid "Encryption type"
+msgstr ""
+
+#: ustrconsts.rsexpert
+msgid "Expert"
+msgstr ""
+
+#: ustrconsts.rsexpirenow
+msgid "Expire now"
+msgstr ""
+
+#: ustrconsts.rsfilename
+msgid "Filename"
+msgstr ""
+
+#: ustrconsts.rsfilter
+msgid "Filter"
+msgstr ""
+
+#: ustrconsts.rsfilter_1
+msgid "Filter: "
+msgstr ""
+
+#: ustrconsts.rsfinish
+msgid "Finish"
+msgstr ""
+
+#: ustrconsts.rsfolder
+msgid "Folder"
+msgstr ""
+
+#: ustrconsts.rsinfrastructuremaster
+msgid "Infrastructure master"
+msgstr ""
+
+#: ustrconsts.rskerberos
+msgid "Kerberos"
+msgstr ""
+
+#: ustrconsts.rskey
+msgid "Key"
+msgstr ""
+
+#: ustrconsts.rskvno
+msgid "KVNO"
 msgstr ""
 
 #: ustrconsts.rslargeicons
@@ -29,27 +257,539 @@ msgstr ""
 msgid "List"
 msgstr ""
 
+#: ustrconsts.rsloadfromfile
+msgid "Load from file"
+msgstr ""
+
+#: ustrconsts.rslogonallowed
+msgid "Logon allowed"
+msgstr ""
+
+#: ustrconsts.rslogondenied
+msgid "Logon denied"
+msgstr ""
+
+#: ustrconsts.rslogonhoursselectutc
+msgid "Select the allowed logon period in UTC"
+msgstr ""
+
+#: ustrconsts.rslogonworkstationschoice1
+msgid "All computers"
+msgstr ""
+
+#: ustrconsts.rslogonworkstationschoice2
+msgid "The following computers"
+msgstr ""
+
+#: ustrconsts.rslogonworkstationsinfo
+msgid "In Computer name, type the computer's NetBIOS or Domain Name system (DNS) name."
+msgstr ""
+
+#: ustrconsts.rslogonworkstationsselect
+msgid "This user can logon to: "
+msgstr ""
+
+#: ustrconsts.rsmanagercanupdatemembershiplist
+msgid "Manager can update membership list"
+msgstr ""
+
+#: ustrconsts.rsmandatory
+msgid "Mandatory"
+msgstr ""
+
+#: ustrconsts.rsmodify
+msgid "Modify"
+msgstr ""
+
 #: ustrconsts.rsname
 msgid "Name"
+msgstr ""
+
+#: ustrconsts.rsname_1
+msgid "Name: "
+msgstr ""
+
+#: ustrconsts.rsnewpassword
+msgid "New password: "
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardcomplete
+msgid "Completing the New Zone Wizard"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardcompleteclose
+msgid "To close this wizard and create the new zone, click Finish."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardcompletemessage
+msgid "You have successfully completed the New Zone Wizard. You specified the following settings:"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardcompletenote
+msgid "Note: You should now add records to the zone or ensure that records are updated dynamically. You can then verify name resolution using nslookup."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizarddescription1
+msgid "This wizard helps you create a new zone for your DNS server."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizarddescription2
+msgid "A zone translates DNS names to related data, such as IP addresses or network services."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizarddescription3
+msgid "To continue, click Next."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizarddynamicupdate
+msgid "Dynamic Update"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizarddynamicupdatechoice1
+msgid "Allow only secure dynamic updates (recommanded for Active Directory)"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizarddynamicupdatechoice11
+msgid "This option is available only for Active Directory-integrated zones."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizarddynamicupdatechoice2
+msgid "Allow both nonsecure and secure dynamic updates"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizarddynamicupdatechoice21
+msgid "Dynamic updates of resource records are accepted from any client."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizarddynamicupdatechoice22
+msgid "This option is a significant security vulnerability because updates can be accepted from untrusted sources."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizarddynamicupdatechoice3
+msgid "Do not allow dynamic updates"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizarddynamicupdatechoice31
+msgid "Dynamic updates of resource records are not accepted by this zone. You must update these records manually."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizarddynamicupdatedescription
+msgid "You can specify that this DNS zone accepts secure, nonsecure, or no dynamic updates."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizarddynamicupdatemessage
+msgid "Dynamic updates enable DNS client computers to register and dynamically update their resource records with a DNS server whenever changes occur."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizarddynamicupdateselect
+msgid "Select the type of dynamic updates you want to allow:"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardwelcome
+msgid "Welcome to the New Zone Wizard"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonefile
+msgid "Zone File"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonefilechoice1
+msgid "Create a new file with this file name:"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonefilechoice2
+msgid "Use this existing file:"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonefiledescription
+msgid "You can create a new zone file or use a file copied from another DNS server."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonefilemessage
+msgid "To use this existing file, ensure that it has been copied to the folder %SystemRoot%\\system32\\dns on this server, and then click Next."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonefilequestion
+msgid "Do you want to create a new zone file or use an existing file that you have copied from another DNS server?"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonename
+msgid "Zone Name"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonenamedescription
+msgid "What is the name of the new zone?"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonenamemessage
+msgid "The zone name specifies the portion of the DNS namespace for which this server is autoritative. It might be your organization's domain name (for example, example.com) or a portion of the domain name (for example, newzone.example.com). The zone name is not the name of the DNS server."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonenamezonename
+msgid "Zone name:"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonereplication
+msgid "Active Directory Zone Replication Scope"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonereplicationchoice1
+msgid "To all DNS servers running on domain controllers in this forest:"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonereplicationchoice2
+msgid "To all DNS servers running on domain controllers in this domain:"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonereplicationchoice3
+msgid "To all domain controllers in this domain (for Windows 2000 compatibility):"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonereplicationchoice4
+msgid "To all domain controllers specified in the scoper of this directory partition:"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonereplicationdescription
+msgid "You can select how you want DNS data replicated throughout your network."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonereplicationselect
+msgid "Select how you want zone data replicated:"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonetype
+msgid "Zone Type"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonetypedescription
+msgid "The DNS server supports various types of zones and storage."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonetypeprimaryzonedescription
+msgid "Creates a copy of a zone that can be updated directly on this server."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonetypesecondaryzonedescription
+msgid "Create a copy of a zone that exists on another server. This option helps balance the processing load of primary servers and provides fault tolerance."
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonetypeselect
+msgid "Select the type of zone you want to create:"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonetypestorethezone
+msgid "Store the zone in Active Directory (available only if DNS server is a writeable domain controller)"
+msgstr ""
+
+#: ustrconsts.rsnewzonewizardzonetypestubzonedescription
+msgid "Create a copy of a zone containing inly Name Server (NS), Start of Authority (SOA), and possibly glue Host (A) records. A server containing a stub zone is not authoritative for that zone."
+msgstr ""
+
+#: ustrconsts.rsnext
+msgid "Next"
+msgstr ""
+
+#: ustrconsts.rsobjectlocation
+msgid "Object location: "
 msgstr ""
 
 #: ustrconsts.rsok
 msgid "OK"
 msgstr ""
 
+#: ustrconsts.rsoptional
+msgid "Optional"
+msgstr ""
+
+#: ustrconsts.rsoptions
+msgctxt "ustrconsts.rsoptions"
+msgid "Options"
+msgstr ""
+
+#: ustrconsts.rspagecount
+msgid "Page count"
+msgstr ""
+
+#: ustrconsts.rspagesize
+msgid "Page size"
+msgstr ""
+
+#: ustrconsts.rspassword
+msgid "Password"
+msgstr ""
+
+#: ustrconsts.rspath
+msgid "Path: "
+msgstr ""
+
+#: ustrconsts.rspdc
+msgid "PDC"
+msgstr ""
+
+#: ustrconsts.rsprimaryzone
+msgid "Primary zone"
+msgstr ""
+
+#: ustrconsts.rsprincipal
+msgid "Principal"
+msgstr ""
+
+#: ustrconsts.rsprofile
+msgid "Profile"
+msgstr ""
+
+#: ustrconsts.rsproperties
+msgid "Properties"
+msgstr ""
+
+#: ustrconsts.rsremove
+msgid "Remove"
+msgstr ""
+
+#: ustrconsts.rsrid
+msgid "RID"
+msgstr ""
+
+#: ustrconsts.rssavethissettingforthecurrentconsole
+msgid "Save this setting for the current console"
+msgstr ""
+
+#: ustrconsts.rssavetofile
+msgid "Save to file"
+msgstr ""
+
+#: ustrconsts.rsschemamaster
+msgid "Schema master"
+msgstr ""
+
+#: ustrconsts.rssearch
+msgctxt "ustrconsts.rssearch"
+msgid "Search"
+msgstr ""
+
+#: ustrconsts.rssearchaname
+msgid "Search a name: "
+msgstr ""
+
+#: ustrconsts.rssearchfrom
+msgid "Search from"
+msgstr ""
+
+#: ustrconsts.rssearchnew
+msgid "Search new"
+msgstr ""
+
+#: ustrconsts.rssearchscope
+msgid "Search scope"
+msgstr ""
+
+#: ustrconsts.rssearchusingldapfilter
+msgid "Search using ldap filter: "
+msgstr ""
+
+#: ustrconsts.rssecondaryzone
+msgid "Secondary zone"
+msgstr ""
+
+#: ustrconsts.rsselectaresourcerecordtype
+msgid "Select a resource record type: "
+msgstr ""
+
+#: ustrconsts.rsselectfolder
+msgid "SelectFolder"
+msgstr ""
+
+#: ustrconsts.rsserver
+msgid "Server"
+msgstr ""
+
+#: ustrconsts.rsserverinformationsavailablefromrootdse
+msgid "Server informations (available from RootDSE Object)"
+msgstr ""
+
+#: ustrconsts.rsshowdcinfos
+msgid "Show DC Infos"
+msgstr ""
+
+#: ustrconsts.rsshowinview
+msgid "Show in view"
+msgstr ""
+
+#: ustrconsts.rsshowonlyattributesthathavevalues
+msgid "Show only attributes that have values"
+msgstr ""
+
+#: ustrconsts.rsshowonlywritableattributes
+msgid "Show only writable attributes"
+msgstr ""
+
+#: ustrconsts.rsshowpassword
+msgid "Show password"
+msgstr ""
+
+#: ustrconsts.rssid
+msgid "SID"
+msgstr ""
+
+#: ustrconsts.rssimple
+msgid "Simple"
+msgstr ""
+
+#: ustrconsts.rssite
+msgid "Site"
+msgstr ""
+
 #: ustrconsts.rssmallicons
 msgid "Small Icons"
+msgstr ""
+
+#: ustrconsts.rsstatus
+msgid "Status"
+msgstr ""
+
+#: ustrconsts.rsstubzone
+msgid "Stub zone"
+msgstr ""
+
+#: ustrconsts.rssystemonly
+msgid "System-only"
 msgstr ""
 
 #: ustrconsts.rstable
 msgid "Table"
 msgstr ""
 
+#: ustrconsts.rstestauthentication
+msgid "Test authentication"
+msgstr ""
+
+#: ustrconsts.rstestconnection
+msgid "Test connection"
+msgstr ""
+
+#: ustrconsts.rsthefollowinguserorgroupcanjointhiscomputertoadomain
+msgid "The following user or group can join this computer to a domain."
+msgstr ""
+
+#: ustrconsts.rstheusermustlogoffandthenlogonagain
+msgid "The user must logoff and then logon again for the change to take effect."
+msgstr ""
+
+#: ustrconsts.rsthisdomaincontrolleroradldsinstance
+msgid "This Domain Controller or AD LDS instance"
+msgstr ""
+
+#: ustrconsts.rstimeout
+msgid "Timeout"
+msgstr ""
+
+#: ustrconsts.rstimestamp
+msgid "Timestamp"
+msgstr ""
+
+#: ustrconsts.rstls
+msgid "TLS"
+msgstr ""
+
+#: ustrconsts.rstype
+msgid "Type"
+msgstr ""
+
+#: ustrconsts.rsunlocktheuseraccount
+msgid "Account Lockout Status on this Domain Controller: "
+msgstr ""
+
+#: ustrconsts.rsunsafeconnection
+msgid "Unsafe connection"
+msgstr ""
+
+#: ustrconsts.rsusermustchangepasswordatnextlogon
+msgid "User must change password at next logon"
+msgstr ""
+
 #: ustrconsts.rsusername
 msgid "Username"
 msgstr ""
 
+#: ustrconsts.rsuserorgroup
+msgid "User or group: "
+msgstr ""
+
+#: ustrconsts.rsvalue
+msgid "Value"
+msgstr ""
+
+#: ustrconsts.rsviewcertificate
+msgid "View certificate"
+msgstr ""
+
+#: ustrconsts.rsvischangedirectoryserver
+msgid "Change directory server"
+msgstr ""
+
+#: ustrconsts.rsvislogonhours
+msgid "Logon hours"
+msgstr ""
+
+#: ustrconsts.rsvislogonworkstations
+msgid "Logon workstations"
+msgstr ""
+
+#: ustrconsts.rsvisnewzonewizard
+msgid "New Zone Wizard"
+msgstr ""
+
+#: ustrconsts.rsvisopenrsatauthentication
+msgid "OpenRSAT Authentication"
+msgstr ""
+
+#: ustrconsts.rsvisoperationmasters
+msgid "Operations masters"
+msgstr ""
+
+#: ustrconsts.rsvisoptions
+msgctxt "ustrconsts.rsvisoptions"
+msgid "Options"
+msgstr ""
+
+#: ustrconsts.rsvisprofileconfiguration
+msgid "Profile configuration"
+msgstr ""
+
 #: ustrconsts.rsvisprofilemanagercaption
-msgid "Profile Manager"
+msgid "Profile manager"
+msgstr ""
+
+#: ustrconsts.rsvisresourcerecordtype
+msgid "Resource record type"
+msgstr ""
+
+#: ustrconsts.rsvisrootdseinfos
+msgid "DC infos"
+msgstr ""
+
+#: ustrconsts.rsvissearch
+msgctxt "ustrconsts.rsvissearch"
+msgid "Search"
+msgstr ""
+
+#: ustrconsts.rsvisselectobjectguid
+msgid "Select object GUID"
+msgstr ""
+
+#: ustrconsts.rsvisselectobjectsid
+msgid "Select object SID"
+msgstr ""
+
+#: ustrconsts.rsvistaskmove
+msgid "Move"
+msgstr ""
+
+#: ustrconsts.rsvistaskresetpassword
+msgid "Reset password"
+msgstr ""
+
+#: ustrconsts.rsvisviewkeytabcaption
+msgid "View Keytab"
 msgstr ""
 
