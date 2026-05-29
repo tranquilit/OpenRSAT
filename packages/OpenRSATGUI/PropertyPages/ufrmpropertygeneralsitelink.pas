@@ -156,8 +156,8 @@ begin
   fSiteLinkLogic.GetAllSites;
   PrepareListBox;
 
-  Edit_Name.CaptionNoChange := fSiteLinkLogic.Props.name;
-  Edit_Description.CaptionNoChange := fSiteLinkLogic.Props.description;
+  Edit_Name.CaptionNoChange := Props.name;
+  Edit_Description.CaptionNoChange := Props.description;
 
   Value := fSiteLinkLogic.GetValueFromAttribute(fSiteLinkLogic.FindAttribute('cost'));
   if Value <> '' then
