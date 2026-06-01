@@ -362,6 +362,10 @@ msgstr ""
 msgid "Modify"
 msgstr ""
 
+#: ustrconsts.rsmsdskeyid
+msgid "msDS-KeyId: "
+msgstr ""
+
 #: ustrconsts.rsname
 msgid "Name"
 msgstr ""

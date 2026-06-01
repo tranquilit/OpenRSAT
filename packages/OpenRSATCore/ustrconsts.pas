@@ -260,6 +260,8 @@ resourcestring
 
   rsCn = 'cn: ';
 
+  rsMSDSKeyId = 'msDS-KeyId: ';
+
 implementation
 
 end.
