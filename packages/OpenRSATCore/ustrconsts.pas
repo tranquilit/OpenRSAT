@@ -317,6 +317,12 @@ resourcestring
   rsAttributes = 'Attributes';
   rsValues = 'Values';
 
+  rsOtherNewRecords = 'Other New Records';
+  rsNewZone = 'New Zone';
+  rsData = 'Data';
+  rsDNSSECStatus = 'DNSSEC Status';
+  rsKeyMaster = 'Key Master';
+
 implementation
 
 end.

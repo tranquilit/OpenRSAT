@@ -168,6 +168,7 @@ type
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
 
+    procedure ApplyTranslation;
   protected
     function GetModule: TModule; override;
     function GetFrmOptionClass: TFrameOptionClass; override;
@@ -188,6 +189,7 @@ uses
   mormot.net.dns,
   mormot.core.text,
   uvisselectnewrecordtype,
+  ustrconsts,
   ucommon,
   ucommonui,
   utheme,
@@ -922,6 +924,7 @@ begin
   Image1.Visible := not IsDarkMode;
   Image2.Visible := not Image1.Visible;
 
+  ApplyTranslation;
 end;
 
 destructor TFrmModuleDNS.Destroy;
@@ -930,6 +933,26 @@ begin
   FreeAndNil(fModule);
 
   inherited Destroy;
+end;
+
+procedure TFrmModuleDNS.ApplyTranslation;
+begin
+  Action_Previous.Caption := rsPrevious;
+  Action_Next.Caption := rsNext;
+  Action_Parent.Caption := rsParent;
+  Action_Property.Caption := rsProperties;
+  Action_OtherNewRecords.Caption := rsOtherNewRecords;
+  Action_Delete.Caption := rsDelete;
+  Action_Refresh.Caption := rsRefresh;
+  Action_NewZone.Caption := rsNewZone;
+
+  GridDNS.Header.Columns[0].Text := rsName;
+  GridDNS.Header.Columns[1].Text := rsType;
+  GridDNS.Header.Columns[2].Text := rsData;
+  GridDNS.Header.Columns[3].Text := rsTimestamp;
+  GridDNS.Header.Columns[4].Text := rsStatus;
+  GridDNS.Header.Columns[5].Text := rsDNSSECStatus;
+  GridDNS.Header.Columns[6].Text := rsKeyMaster;
 end;
 
 procedure TFrmModuleDNS.Refresh;
