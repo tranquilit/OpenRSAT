@@ -34,6 +34,10 @@ msgstr ""
 msgid "Advanced delete"
 msgstr ""
 
+#: ustrconsts.rsadvancedfeatures
+msgid "Advanced features"
+msgstr ""
+
 #: ustrconsts.rsalgorithm
 msgid "Algorithm"
 msgstr ""
@@ -130,6 +134,14 @@ msgstr ""
 msgid "Confirm password: "
 msgstr ""
 
+#: ustrconsts.rsconnect
+msgid "Connect"
+msgstr ""
+
+#: ustrconsts.rsconnectionoptions
+msgid "Connection options"
+msgstr ""
+
 #: ustrconsts.rsconstructed
 msgid "Constructed"
 msgstr ""
@@ -188,6 +200,10 @@ msgstr ""
 
 #: ustrconsts.rsdigest
 msgid "Digest"
+msgstr ""
+
+#: ustrconsts.rsdisconnect
+msgid "Disconnect"
 msgstr ""
 
 #: ustrconsts.rsdisplayname
@@ -686,6 +702,10 @@ msgstr ""
 
 #: ustrconsts.rsshowdcinfos
 msgid "Show DC Infos"
+msgstr ""
+
+#: ustrconsts.rsshowgpo
+msgid "Show GPO"
 msgstr ""
 
 #: ustrconsts.rsshowinview

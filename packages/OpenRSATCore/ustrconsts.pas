@@ -262,6 +262,12 @@ resourcestring
 
   rsMSDSKeyId = 'msDS-KeyId: ';
 
+  rsConnect = 'Connect';
+  rsDisconnect = 'Disconnect';
+  rsConnectionOptions = 'Connection options';
+  rsAdvancedFeatures = 'Advanced features';
+  rsShowGPO = 'Show GPO';
+
 implementation
 
 end.

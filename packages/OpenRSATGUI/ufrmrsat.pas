@@ -112,6 +112,7 @@ type
     procedure Load;
     procedure ChangeDomainController(DomainController: RawUtf8);
 
+    procedure ApplyTranslation;
   // Expose RSAT
   private
     function GetLdapClient: TRsatLdapClient;
@@ -141,6 +142,7 @@ uses
   uVisOptions,
   uvisconnectconfigs,
   mormot.net.dns,
+  ustrconsts,
   ucommon,
   umoduleaduc,
   ursatldapclientui,
@@ -473,6 +475,8 @@ begin
   fRSAT.LdapClient.OnConnect := @OnLdapConnect;
   fRSAT.LdapClient.OnClose := @OnLdapClose;
   fRSAT.LdapClient.OnError := @OnLdapError;
+
+  ApplyTranslation;
 end;
 
 destructor TFrmRSAT.Destroy;
@@ -532,6 +536,17 @@ end;
 procedure TFrmRSAT.ChangeDomainController(DomainController: RawUtf8);
 begin
   LdapClient.DomainControllerName := DomainController;
+end;
+
+procedure TFrmRSAT.ApplyTranslation;
+begin
+  Action_Options.Caption := rsOptions;
+  Action_LdapConnect.Caption := rsConnect;
+  Action_LdapDisconnect.Caption := rsDisconnect;
+  Action_LdapOptions.Caption := rsConnectionOptions;
+  Action_Properties.Caption := rsProperties;
+  Action_AdvancedFeatures.Caption := rsAdvancedFeatures;
+  Action_ShowGPO.Caption := rsShowGPO;
 end;
 
 end.
