@@ -140,6 +140,7 @@ resourcestring
   rsCurrentUsername = 'Current username';
   rsAlgorithm = 'Algorithm';
   rsPassword = 'Password';
+  rsPassword_1 = 'Password:';
   rsAt = '@';
   rsTestConnection = 'Test connection';
   rsTestAuthentication = 'Test authentication';
@@ -248,6 +249,15 @@ resourcestring
   rsUniversal = 'Universal';
   rsSecurity = 'Security';
   rsDistribution = 'Distribution';
+
+  rsUserLogonName = 'User logon name: ';
+  rsUserLogonNamePreWindows2000 = 'User logon name (pre-Windows 2000): ';
+  rsWhenYouClickOKTheFollowingObjectWillBeCreated = 'When you click OK, the following object will be created: ';
+  rsConfirm = 'Confirm:';
+  rsUserMustChangePasswordAtNextLogon = 'User must change password at next logon';
+  rsUserCannotChangePassword = 'User cannot change password';
+  rsPasswordNeverExpires = 'Password never expires';
+  rsAccountIsDisable = 'Account is disabled';
 
 implementation
 

@@ -116,10 +116,6 @@
         <Filename Value="unewsitelink.pas"/>
         <UnitName Value="unewsitelink"/>
       </Item>
-    </Files>
-    <i18n>
-      <EnableI18N Value="True"/>
-      </Item>
       <Item>
         <Filename Value="ustrconsts.pas"/>
         <UnitName Value="ustrconsts"/>

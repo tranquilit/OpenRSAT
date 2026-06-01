@@ -74,6 +74,8 @@ type
     procedure Load;
   public
     constructor Create(TheOwner: TComponent); override;
+
+    procedure ApplyTranslation;
   end;
 
 implementation
@@ -86,6 +88,7 @@ uses
   mormot.core.os.security,
   mormot.core.base,
   mormot.net.ldap,
+  ustrconsts,
   ucommon,
   ucoredatamodule,
   ursatldapclient,
@@ -380,16 +383,39 @@ var
 begin
   inherited Create(TheOwner);
 
-  OwnerNewObject.Caption := rsNewObjectInetOrgPerson;
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
   OwnerNewObject.Btn_Next.Default := True;
   OwnerNewObject.Btn_Back.Action := ActionList.ActionByName('Action_Back');
-  OwnerNewObject.Btn_Back.Caption := rsNewObjectBtnBack;
   PageID := 0;
   ComboBox_UserLogonName.Items.Add(FormatUtf8('@%', [UserLogonFormatDN(OwnerNewObject.Edit_DN.Text, '/')]));
   ComboBox_UserLogonName.ItemIndex := 0;
   Edit_PreWindowsPrefix.Text := FormatUtf8('%/', [UpperCase(UserLogonFormatDN(OwnerNewObject.Edit_DN.Text, '.lan'))]);
   OwnerNewObject.CallBack := @Load;
+
+  ApplyTranslation;
+end;
+
+procedure TFrmNewInetOrgPerson.ApplyTranslation;
+begin
+  (Owner as TVisNewObject).Caption := rsNewObjectInetOrgPerson;
+  (Owner as TVisNewObject).Btn_Back.Caption := rsBack;
+
+  Label_FirstName.Caption := rsFirstName;
+  Label_Initials.Caption := rsInitials;
+  Label_LastName.Caption := rsLastName;
+  Label_FullName.Caption := rsFullName;
+  Label_UserLogonName.Caption := rsUserLogonName;
+  Label_PreWindows.Caption := rsUserLogonNamePreWindows2000;
+  Label_Validation.Caption := rsWhenYouClickOKTheFollowingObjectWillBeCreated;
+  Label_Password.Caption := rsPassword_1;
+  Label_Confirm.Caption := rsConfirm;
+
+  CheckBox_NextLogon.Caption := rsUserMustChangePasswordAtNextLogon;
+  CheckBox_CannotChange.Caption := rsUserCannotChangePassword;
+  CheckBox_NeverExpires.Caption := rsPasswordNeverExpires;
+  CheckBox_AccountDisabled.Caption := rsAccountIsDisabled;
+
+  Action_Next.Caption := rsNext;
 end;
 
 end.
