@@ -39,6 +39,8 @@ type
     constructor Create(TheOwner: TComponent; Option: TOption); override;
     destructor Destroy; override;
 
+    procedure ApplyTranslation;
+
     property RSATOption: TRSATOption read fRSATOption;
   published
     // Inherited TFrameOptions
@@ -53,6 +55,7 @@ uses
   Dialogs,
   mormot.core.text,
   mormot.core.base,
+  ustrconsts,
   ucommon,
   ufrmrsat;
 
@@ -144,6 +147,8 @@ begin
     FrmRSAT.Restart;
 
   fChanged := False;
+
+  ApplyTranslation;
 end;
 
 destructor TFrmRSATOption.Destroy;
@@ -152,6 +157,13 @@ begin
     fLog.Log(sllTrace, 'Destroy', Self);
 
   inherited Destroy;
+end;
+
+procedure TFrmRSATOption.ApplyTranslation;
+begin
+  Label1.Caption := rsTheme;
+  Label2.Caption := rsLang;
+  Label3.Caption := rsAdvancedView;
 end;
 
 end.

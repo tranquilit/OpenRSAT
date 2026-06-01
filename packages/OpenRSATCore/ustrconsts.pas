@@ -268,6 +268,10 @@ resourcestring
   rsAdvancedFeatures = 'Advanced features';
   rsShowGPO = 'Show GPO';
 
+  rsTheme = 'Theme';
+  rsLang = 'Lang';
+  rsAdvancedView = 'Advanced view';
+
 implementation
 
 end.

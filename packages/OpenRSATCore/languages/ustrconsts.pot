@@ -38,6 +38,10 @@ msgstr ""
 msgid "Advanced features"
 msgstr ""
 
+#: ustrconsts.rsadvancedview
+msgid "Advanced view"
+msgstr ""
+
 #: ustrconsts.rsalgorithm
 msgid "Algorithm"
 msgstr ""
@@ -320,6 +324,10 @@ msgstr ""
 
 #: ustrconsts.rskvno
 msgid "KVNO"
+msgstr ""
+
+#: ustrconsts.rslang
+msgid "Lang"
 msgstr ""
 
 #: ustrconsts.rslargeicons
@@ -766,6 +774,10 @@ msgstr ""
 
 #: ustrconsts.rsthefollowinguserorgroupcanjointhiscomputertoadomain
 msgid "The following user or group can join this computer to a domain."
+msgstr ""
+
+#: ustrconsts.rstheme
+msgid "Theme"
 msgstr ""
 
 #: ustrconsts.rstheusermustlogoffandthenlogonagain
