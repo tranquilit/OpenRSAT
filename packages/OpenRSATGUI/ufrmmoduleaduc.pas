@@ -379,6 +379,8 @@ type
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
 
+    procedure ApplyTranslation;
+
     procedure Focus(DistinguishedName: String);
 
     procedure BeginUpdate;
@@ -406,6 +408,7 @@ uses
   uvischangedomaincontroller,
   uvisoperationmasters,
   uvismodifygplink,
+  ustrconsts,
   ucommon,
   ucommonui,
   ursatldapclientui,
@@ -3339,6 +3342,8 @@ begin
 
   FrmRSAT.IniPropStorage1.IniSection := Name;
   CheckBox_IncludeSubContainer.Checked := FrmRSAT.IniPropStorage1.ReadBoolean(CheckBox_IncludeSubContainer.Name, False);
+
+  ApplyTranslation;
 end;
 
 destructor TFrmModuleADUC.Destroy;
@@ -3353,6 +3358,71 @@ begin
   FreeAndNil(fModuleAduc);
 
   inherited Destroy;
+end;
+
+procedure TFrmModuleADUC.ApplyTranslation;
+begin
+  Action_Refresh.Caption := rsRefresh;
+  Action_Properties.Caption := rsProperties;
+  Action_NewUser.Caption := rsNewUser;
+  Action_NewGroup.Caption := rsNewGroup;
+  Action_Delete.Caption := rsDelete;
+  Action_TaskDelegateControl.Caption := rsDelegateControl;
+  Action_TaskCopy.Caption := rsCopy;
+  Action_TaskAddToAGroup.Caption := rsAddToAGroup;
+  Action_TaskNameMappings.Caption := rsNameMappings;
+  Action_TaskDisableEnableAccount.Caption := rsDisableEnableAccount;
+  Action_TaskResetPassword.Caption := rsResetPassword;
+  Action_TaskMove.Caption := rsMove;
+  Action_TaskOpenHomePage.Caption := rsOpenHomePage;
+  Action_TaskSendMail.Caption := rsSendMail;
+  Action_TaskManage.Caption := rsManage;
+  Action_NewComputer.Caption := rsNewComputer;
+  Action_NewOU.Caption := rsNewOU;
+  Action_NewAll.Caption := rsNew;
+  Action_NewDefault.Caption := rsDefault;
+  Action_NewContact.Caption := rsNewContact;
+  Action_NewInetOrgPerson.Caption := rsNewInetOrgPerson;
+  Action_NewSharedFolder.Caption := rsNewSharedFolder;
+  Action_Search.Caption := rsSearch;
+  Action_Filter.Caption := rsFilter;
+  Action_Copy.Caption := rsCopy;
+  Action_Cut.Caption := rsCut;
+  Action_Paste.Caption := rsPaste;
+  Action_TreeNewAll.Caption := rsNew;
+  Action_SearchRoot.Caption := rsSearch;
+  Action_Previous.Caption := rsPrevious;
+  Action_Next.Caption := rsNext;
+  Action_Parent.Caption := rsParent;
+  Action_ShowGPO.Caption := rsShowGPO;
+  Action_ChangeDomainController.Caption := rsChangeDomainController;
+  Action_SitesAndServices.Caption := rsSitesAndServices;
+  Action_UsersAndComputers.Caption := rsUsersAndComputers;
+  Action_DelegateControl.Caption := rsDelegateControl;
+  Action_OperationsMasters.Caption := rsOperationsMasters;
+  Action_ModifyGPLink.Caption := rsModifyGPLink;
+  Action_EnableGPO.Caption := rsEnableGPO;
+  Action_DisableGPO.Caption := rsDisableGPO;
+  Action_EnforceGPO.Caption := rsEnforceGPO;
+  Action_BlockGPOInheritance.Caption := rsBlockGPOInheritance;
+  Action_ShowObjectLocation.Caption := rsShowObjectLocation;
+  Action_ShowRelationShip.Caption := rsShowRelationShip;
+  Action_PrepareDJOIN.Caption := rsPrepareDJOIN;
+  Action_CreateKeyTab.Caption := rsCreateKeyTab;
+  Action_NewMsDSShadowPrincipalContainer.Caption := rsNewMsDSShadowPrincipalContainer;
+  Action_NewMsImagingPSPs.Caption := rsNewMsImagingPSPs;
+  Action_NewMsDSKeyCredential.Caption := rsNewMsDSKeyCredential;
+  Action_NewResourcePropertyList.Caption := rsNewResourcePropertyList;
+  Action_NewPrinter.Caption := rsNewPrinter;
+
+  GridADUC.Header.Columns[0].Text := rsName;
+  GridADUC.Header.Columns[1].Text := rsType;
+  GridADUC.Header.Columns[2].Text := rsDescription;
+
+  GridAttributes.Header.Columns[0].Text := rsAttributes;
+  GridAttributes.Header.Columns[1].Text := rsValues;
+
+  CheckBox_IncludeSubContainer.Caption := rsIncludeSubcontainer;
 end;
 
 procedure TFrmModuleADUC.Focus(DistinguishedName: String);

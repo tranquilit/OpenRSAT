@@ -272,6 +272,51 @@ resourcestring
   rsLang = 'Lang';
   rsAdvancedView = 'Advanced view';
 
+  rsRefresh = 'Refresh';
+  rsNewUser = 'New User';
+  rsNewGroup = 'New Group';
+  rsDelegateControl = 'Delegate Control';
+  rsCopy = 'Copy';
+  rsAddToAGroup = 'Add to a group';
+  rsNameMappings = 'Name mappings';
+  rsDisableEnableAccount = 'Disable Enable Account';
+  rsMove = 'Move';
+  rsOpenHomePage = 'Open home page';
+  rsSendMail = 'Send mail';
+  rsManage = 'Manage';
+  rsNewComputer = 'New Computer';
+  rsNewOU = 'New OU';
+  rsNew = 'New';
+  rsDefault = 'Default';
+  rsNewContact = 'New contact';
+  rsNewInetOrgPerson = 'New InetOrgPerson';
+  rsNewSharedFolder = 'New Shared Folder';
+  rsCut = 'Cut';
+  rsPaste = 'Paste';
+  rsPrevious = 'Previous';
+  rsParent = 'Parent';
+  rsChangeDomainController = 'Change Domain Controller';
+  rsSitesAndServices = 'Sites and services';
+  rsUsersAndComputers = 'Users and Computers';
+  rsOperationsMasters = 'Operations masters';
+  rsModifyGPLink = 'Modify GPLink';
+  rsEnableGPO = 'Enable GPO';
+  rsDisableGPO = 'Disable GPO';
+  rsEnforceGPO = 'Enforce GPO';
+  rsBlockGPOInheritance = 'Block GPO Inheritance';
+  rsShowObjectLocation = 'Show object location';
+  rsShowRelationShip = 'Show relationship';
+  rsPrepareDJOIN = 'Prepare DJOIN';
+  rsCreateKeyTab = 'Create KeyTab';
+  rsNewMsDSShadowPrincipalContainer = 'New MS-DS Shadow Principal Container';
+  rsNewMsImagingPSPs = 'New MS Imaging PSPs';
+  rsNewMsDSKeyCredential = 'New MS-DS Key Credential';
+  rsNewResourcePropertyList = 'New resource property list';
+  rsNewPrinter = 'New Printer';
+  rsIncludeSubcontainer = 'Include subcontainer';
+  rsAttributes = 'Attributes';
+  rsValues = 'Values';
+
 implementation
 
 end.

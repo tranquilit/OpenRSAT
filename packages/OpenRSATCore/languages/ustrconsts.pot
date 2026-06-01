@@ -22,6 +22,10 @@ msgstr ""
 msgid "Add condition"
 msgstr ""
 
+#: ustrconsts.rsaddtoagroup
+msgid "Add to a group"
+msgstr ""
+
 #: ustrconsts.rsadvanced
 msgid "Advanced"
 msgstr ""
@@ -74,6 +78,10 @@ msgstr ""
 msgid "At least one condition"
 msgstr ""
 
+#: ustrconsts.rsattributes
+msgid "Attributes"
+msgstr ""
+
 #: ustrconsts.rsauthmethod
 msgid "Auth method"
 msgstr ""
@@ -90,12 +98,20 @@ msgstr ""
 msgid "Basic"
 msgstr ""
 
+#: ustrconsts.rsblockgpoinheritance
+msgid "Block GPO Inheritance"
+msgstr ""
+
 #: ustrconsts.rscancel
 msgid "Cancel"
 msgstr ""
 
 #: ustrconsts.rschange
 msgid "Change"
+msgstr ""
+
+#: ustrconsts.rschangedomaincontroller
+msgid "Change Domain Controller"
 msgstr ""
 
 #: ustrconsts.rschangeto
@@ -150,6 +166,10 @@ msgstr ""
 msgid "Constructed"
 msgstr ""
 
+#: ustrconsts.rscopy
+msgid "Copy"
+msgstr ""
+
 #: ustrconsts.rscopypassword
 msgid "Copy password"
 msgstr ""
@@ -166,6 +186,10 @@ msgstr ""
 msgid "Create in: "
 msgstr ""
 
+#: ustrconsts.rscreatekeytab
+msgid "Create KeyTab"
+msgstr ""
+
 #: ustrconsts.rscreaterecord
 msgid "Create record"
 msgstr ""
@@ -178,12 +202,24 @@ msgstr ""
 msgid "Current username"
 msgstr ""
 
+#: ustrconsts.rscut
+msgid "Cut"
+msgstr ""
+
 #: ustrconsts.rsdctype
 msgid "DC Type"
 msgstr ""
 
 #: ustrconsts.rsdcversion
 msgid "DC Version"
+msgstr ""
+
+#: ustrconsts.rsdefault
+msgid "Default"
+msgstr ""
+
+#: ustrconsts.rsdelegatecontrol
+msgid "Delegate Control"
 msgstr ""
 
 #: ustrconsts.rsdelete
@@ -204,6 +240,14 @@ msgstr ""
 
 #: ustrconsts.rsdigest
 msgid "Digest"
+msgstr ""
+
+#: ustrconsts.rsdisableenableaccount
+msgid "Disable Enable Account"
+msgstr ""
+
+#: ustrconsts.rsdisablegpo
+msgid "Disable GPO"
 msgstr ""
 
 #: ustrconsts.rsdisconnect
@@ -246,8 +290,16 @@ msgstr ""
 msgid "<empty>"
 msgstr ""
 
+#: ustrconsts.rsenablegpo
+msgid "Enable GPO"
+msgstr ""
+
 #: ustrconsts.rsencryptiontype
 msgid "Encryption type"
+msgstr ""
+
+#: ustrconsts.rsenforcegpo
+msgid "Enforce GPO"
 msgstr ""
 
 #: ustrconsts.rsexpert
@@ -304,6 +356,10 @@ msgstr ""
 
 #: ustrconsts.rsgrouptype
 msgid "Group type"
+msgstr ""
+
+#: ustrconsts.rsincludesubcontainer
+msgid "Include subcontainer"
 msgstr ""
 
 #: ustrconsts.rsinfrastructuremaster
@@ -374,6 +430,10 @@ msgstr ""
 msgid "This user can logon to: "
 msgstr ""
 
+#: ustrconsts.rsmanage
+msgid "Manage"
+msgstr ""
+
 #: ustrconsts.rsmanagercanupdatemembershiplist
 msgid "Manager can update membership list"
 msgstr ""
@@ -386,6 +446,15 @@ msgstr ""
 msgid "Modify"
 msgstr ""
 
+#: ustrconsts.rsmodifygplink
+msgid "Modify GPLink"
+msgstr ""
+
+#: ustrconsts.rsmove
+msgctxt "ustrconsts.rsmove"
+msgid "Move"
+msgstr ""
+
 #: ustrconsts.rsmsdskeyid
 msgid "msDS-KeyId: "
 msgstr ""
@@ -394,12 +463,68 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+#: ustrconsts.rsnamemappings
+msgid "Name mappings"
+msgstr ""
+
 #: ustrconsts.rsname_1
 msgid "Name: "
 msgstr ""
 
+#: ustrconsts.rsnew
+msgid "New"
+msgstr ""
+
+#: ustrconsts.rsnewcomputer
+msgid "New Computer"
+msgstr ""
+
+#: ustrconsts.rsnewcontact
+msgid "New contact"
+msgstr ""
+
+#: ustrconsts.rsnewgroup
+msgid "New Group"
+msgstr ""
+
+#: ustrconsts.rsnewinetorgperson
+msgid "New InetOrgPerson"
+msgstr ""
+
+#: ustrconsts.rsnewmsdskeycredential
+msgid "New MS-DS Key Credential"
+msgstr ""
+
+#: ustrconsts.rsnewmsdsshadowprincipalcontainer
+msgid "New MS-DS Shadow Principal Container"
+msgstr ""
+
+#: ustrconsts.rsnewmsimagingpsps
+msgid "New MS Imaging PSPs"
+msgstr ""
+
+#: ustrconsts.rsnewou
+msgid "New OU"
+msgstr ""
+
 #: ustrconsts.rsnewpassword
 msgid "New password: "
+msgstr ""
+
+#: ustrconsts.rsnewprinter
+msgid "New Printer"
+msgstr ""
+
+#: ustrconsts.rsnewresourcepropertylist
+msgid "New resource property list"
+msgstr ""
+
+#: ustrconsts.rsnewsharedfolder
+msgid "New Shared Folder"
+msgstr ""
+
+#: ustrconsts.rsnewuser
+msgid "New User"
 msgstr ""
 
 #: ustrconsts.rsnewzonewizardcomplete
@@ -586,6 +711,15 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
+#: ustrconsts.rsopenhomepage
+msgid "Open home page"
+msgstr ""
+
+#: ustrconsts.rsoperationsmasters
+msgctxt "ustrconsts.rsoperationsmasters"
+msgid "Operations masters"
+msgstr ""
+
 #: ustrconsts.rsoptional
 msgid "Optional"
 msgstr ""
@@ -603,6 +737,10 @@ msgstr ""
 msgid "Page size"
 msgstr ""
 
+#: ustrconsts.rsparent
+msgid "Parent"
+msgstr ""
+
 #: ustrconsts.rspassword
 msgid "Password"
 msgstr ""
@@ -615,12 +753,24 @@ msgstr ""
 msgid "Password:"
 msgstr ""
 
+#: ustrconsts.rspaste
+msgid "Paste"
+msgstr ""
+
 #: ustrconsts.rspath
 msgid "Path: "
 msgstr ""
 
 #: ustrconsts.rspdc
 msgid "PDC"
+msgstr ""
+
+#: ustrconsts.rspreparedjoin
+msgid "Prepare DJOIN"
+msgstr ""
+
+#: ustrconsts.rsprevious
+msgid "Previous"
 msgstr ""
 
 #: ustrconsts.rsprimaryzone
@@ -637,6 +787,10 @@ msgstr ""
 
 #: ustrconsts.rsproperties
 msgid "Properties"
+msgstr ""
+
+#: ustrconsts.rsrefresh
+msgid "Refresh"
 msgstr ""
 
 #: ustrconsts.rsremove
@@ -700,6 +854,10 @@ msgstr ""
 msgid "SelectFolder"
 msgstr ""
 
+#: ustrconsts.rssendmail
+msgid "Send mail"
+msgstr ""
+
 #: ustrconsts.rsserver
 msgid "Server"
 msgstr ""
@@ -720,6 +878,10 @@ msgstr ""
 msgid "Show in view"
 msgstr ""
 
+#: ustrconsts.rsshowobjectlocation
+msgid "Show object location"
+msgstr ""
+
 #: ustrconsts.rsshowonlyattributesthathavevalues
 msgid "Show only attributes that have values"
 msgstr ""
@@ -732,6 +894,10 @@ msgstr ""
 msgid "Show password"
 msgstr ""
 
+#: ustrconsts.rsshowrelationship
+msgid "Show relationship"
+msgstr ""
+
 #: ustrconsts.rssid
 msgid "SID"
 msgstr ""
@@ -742,6 +908,10 @@ msgstr ""
 
 #: ustrconsts.rssite
 msgid "Site"
+msgstr ""
+
+#: ustrconsts.rssitesandservices
+msgid "Sites and services"
 msgstr ""
 
 #: ustrconsts.rssmallicons
@@ -840,8 +1010,16 @@ msgstr ""
 msgid "User or group: "
 msgstr ""
 
+#: ustrconsts.rsusersandcomputers
+msgid "Users and Computers"
+msgstr ""
+
 #: ustrconsts.rsvalue
 msgid "Value"
+msgstr ""
+
+#: ustrconsts.rsvalues
+msgid "Values"
 msgstr ""
 
 #: ustrconsts.rsviewcertificate
@@ -869,6 +1047,7 @@ msgid "OpenRSAT Authentication"
 msgstr ""
 
 #: ustrconsts.rsvisoperationmasters
+msgctxt "ustrconsts.rsvisoperationmasters"
 msgid "Operations masters"
 msgstr ""
 
@@ -907,6 +1086,7 @@ msgid "Select object SID"
 msgstr ""
 
 #: ustrconsts.rsvistaskmove
+msgctxt "ustrconsts.rsvistaskmove"
 msgid "Move"
 msgstr ""
 
