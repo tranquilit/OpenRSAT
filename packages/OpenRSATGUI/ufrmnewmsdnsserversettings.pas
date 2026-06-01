@@ -27,6 +27,8 @@ type
     procedure Load;
   public
     constructor Create(TheOwner: TComponent); override;
+
+    procedure ApplyTranslation;
   end;
 
 implementation
@@ -38,6 +40,7 @@ uses
   mormot.core.text,
   mormot.core.base,
   mormot.net.ldap,
+  ustrconsts,
   ucommon,
   ucoredatamodule,
   ursatldapclientui,
@@ -84,12 +87,21 @@ var
 begin
   inherited Create(TheOwner);
 
-  OwnerNewObject.Caption := rsNewObjectMsDNSServerSettings;
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
   OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnOK;
   OwnerNewObject.Btn_Next.Default := True;
   OwnerNewObject.Btn_Back.Visible := False;
   OwnerNewObject.CallBack := @Load;
+
+  ApplyTranslation;
+end;
+
+procedure TFrmNewMsDNSServerSettings.ApplyTranslation;
+begin
+  (Owner as TVisNewObject).Caption := rsNewObjectMsDNSServerSettings;
+  (Owner as TVisNewObject).Btn_Next.Caption := rsOK;
+
+  Label_cn.Caption := rsCn;
 end;
 
 end.

@@ -5,6 +5,11 @@ msgstr "Content-Type: text/plain; charset=UTF-8"
 msgid "Account"
 msgstr ""
 
+#: ustrconsts.rsaccountisdisabled
+msgctxt "ustrconsts.rsaccountisdisabled"
+msgid "Account is disabled"
+msgstr ""
+
 #: ustrconsts.rsaccountlockoutstatusonthisdomaincontroller
 msgid "Unlock the user's account"
 msgstr ""
@@ -101,6 +106,10 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+#: ustrconsts.rscn
+msgid "cn: "
+msgstr ""
+
 #: ustrconsts.rscomputername
 msgid "Computer name: "
 msgstr ""
@@ -111,6 +120,10 @@ msgstr ""
 
 #: ustrconsts.rscondition
 msgid "Condition"
+msgstr ""
+
+#: ustrconsts.rsconfirm
+msgid "Confirm:"
 msgstr ""
 
 #: ustrconsts.rsconfirmpassword
@@ -566,6 +579,14 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+#: ustrconsts.rspasswordneverexpires
+msgid "Password never expires"
+msgstr ""
+
+#: ustrconsts.rspassword_1
+msgid "Password:"
+msgstr ""
+
 #: ustrconsts.rspath
 msgid "Path: "
 msgstr ""
@@ -759,6 +780,18 @@ msgstr ""
 msgid "Unsafe connection"
 msgstr ""
 
+#: ustrconsts.rsusercannotchangepassword
+msgid "User cannot change password"
+msgstr ""
+
+#: ustrconsts.rsuserlogonname
+msgid "User logon name: "
+msgstr ""
+
+#: ustrconsts.rsuserlogonnameprewindows2000
+msgid "User logon name (pre-Windows 2000): "
+msgstr ""
+
 #: ustrconsts.rsusermustchangepasswordatnextlogon
 msgid "User must change password at next logon"
 msgstr ""
@@ -847,5 +880,9 @@ msgstr ""
 
 #: ustrconsts.rsvisviewkeytabcaption
 msgid "View Keytab"
+msgstr ""
+
+#: ustrconsts.rswhenyouclickokthefollowingobjectwillbecreated
+msgid "When you click OK, the following object will be created: "
 msgstr ""
 

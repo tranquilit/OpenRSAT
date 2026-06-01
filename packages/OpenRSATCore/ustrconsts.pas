@@ -254,10 +254,11 @@ resourcestring
   rsUserLogonNamePreWindows2000 = 'User logon name (pre-Windows 2000): ';
   rsWhenYouClickOKTheFollowingObjectWillBeCreated = 'When you click OK, the following object will be created: ';
   rsConfirm = 'Confirm:';
-  rsUserMustChangePasswordAtNextLogon = 'User must change password at next logon';
   rsUserCannotChangePassword = 'User cannot change password';
   rsPasswordNeverExpires = 'Password never expires';
-  rsAccountIsDisable = 'Account is disabled';
+  rsAccountIsDisabled = 'Account is disabled';
+
+  rsCn = 'cn: ';
 
 implementation
 
