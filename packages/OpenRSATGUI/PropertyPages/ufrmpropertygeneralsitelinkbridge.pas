@@ -99,11 +99,11 @@ var
   r: TLdapResult;
 begin
   ListBox_NotInSiteLinkBridge.Clear;
-  for r in fLogic.NotInSite do
+  for r in fLogic.OutResult do
     ListBox_NotInSiteLinkBridge.Items.Add(fLogic.GetResultName(r));
 
   ListBox_InSiteLinkBridge.Clear;
-  for r in fLogic.InSite do
+  for r in fLogic.InResult do
     ListBox_InSiteLinkBridge.Items.Add(fLogic.GetResultName(r));
 end;
 
@@ -117,12 +117,12 @@ begin
   if not Assigned(SiteList) then
     exit;
 
-  n := Length(fLogic.NotInSite) - 1;
+  n := Length(fLogic.OutResult) - 1;
   while n >= 0 do
   begin
     for Site in SiteList.GetAllReadable do
     begin
-      if fLogic.GetValueFromAttribute(fLogic.FindAttribute('distinguishedName', fLogic.NotInSite[n])) = Site then
+      if fLogic.GetValueFromAttribute(fLogic.FindAttribute('distinguishedName', fLogic.OutResult[n])) = Site then
       begin
         fLogic.MoveItemToInSite(n);
         break;

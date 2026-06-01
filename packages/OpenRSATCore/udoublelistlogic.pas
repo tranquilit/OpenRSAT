@@ -1,0 +1,135 @@
+unit udoublelistlogic;
+
+{$mode ObjFPC}{$H+}
+
+interface
+
+uses
+  Classes,
+  SysUtils,
+  mormot.core.base,
+  mormot.core.text,
+  mormot.net.ldap,
+  uproperty,
+  uintfdoublelistlogic,
+  ursatldapclient;
+
+type  
+  TLdapResultArray = array of TLdapResult;
+
+  TDoubleListLogic = class abstract(TInterfacedObject, IDoubleListLogic)
+  private
+    fProperty: TProperty;
+    fLdap: TRsatLdapClient;
+    fOutResult, fInResult: TLdapResultArray;
+
+    procedure RemoveFromArray(var List: TLdapResultArray; Index: Integer);
+  protected
+    procedure AddToNotInSite(Item: TLdapResult); virtual;
+    procedure AddToInSite(Item: TLdapResult); virtual;
+  public
+    procedure GetAllResources; virtual; abstract;
+    procedure MoveItemToInSite(Index: Integer); virtual;
+    procedure MoveItemToNotInSite(Index: Integer); virtual;
+    procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption); virtual;
+    procedure SyncAttributeProperty(Option: TLdapAddOption); virtual; abstract;
+    procedure AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult); virtual;
+
+    function GetItemAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8; virtual;
+    function GetResultName(Obj: TLdapResult): RawUtf8; virtual;
+    function GetNbSites: Integer; virtual;
+    function GetValueFromAttribute(Attribute: TLdapAttribute): RawUtf8; virtual;
+    function FindAttribute(Attribute: RawUtf8): TLdapAttribute; virtual;
+    function FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute; virtual;
+
+    property Props: TProperty read fProperty write fProperty;
+    property Ldap: TRsatLdapClient read fLdap write fLdap; 
+    property InResult: TLdapResultArray read fInResult write fInResult;
+    property OutResult: TLdapResultArray read fOutResult write fOutResult;
+  end;
+
+implementation
+
+procedure TDoubleListLogic.RemoveFromArray(var List: TLdapResultArray; Index: Integer);
+var
+  i: Integer;
+begin
+  for i := Index to High(List) - 1 do
+    List[i] := List[i + 1];
+  SetLength(List, Length(List) - 1);
+end;
+
+procedure TDoubleListLogic.AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult);
+var
+  ListLen: Integer;
+begin
+  if not Assigned(Item) then
+    exit;
+
+  ListLen := Length(List);
+  SetLength(List, ListLen + 1);
+  List[ListLen] := TLdapResult(Item.Clone);
+end;
+
+procedure TDoubleListLogic.AddToNotInSite(Item: TLdapResult);
+begin
+  AddItemInResultArray(fOutResult, Item);
+end;
+
+procedure TDoubleListLogic.AddToInSite(Item: TLdapResult);
+begin
+  AddItemInResultArray(fInResult, Item);
+end;
+
+procedure TDoubleListLogic.MoveItemToInSite(Index: Integer);
+begin
+  AddToInSite(fOutResult[Index]);
+  RemoveFromArray(fOutResult, Index);
+end;
+
+procedure TDoubleListLogic.MoveItemToNotInSite(Index: Integer);
+begin
+  AddToNotInSite(fInResult[Index]);
+  RemoveFromArray(fInResult, Index);
+end;
+
+procedure TDoubleListLogic.SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
+begin
+  fProperty.Add(Attribute, Value, Option);
+end;
+
+function TDoubleListLogic.GetItemAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
+begin
+  Result := List[idx].Find(attr).GetReadable();
+end;
+
+function TDoubleListLogic.GetResultName(Obj: TLdapResult): RawUtf8;
+begin
+  Result := Obj.Find('name').GetReadable();
+end;
+
+function TDoubleListLogic.GetNbSites: Integer;
+begin
+  Result := Length(fInResult) + Length(fOutResult);
+end;
+
+function TDoubleListLogic.GetValueFromAttribute(Attribute: TLdapAttribute): RawUtf8;
+begin
+  if Attribute <> nil then
+    Result := Attribute.GetReadable()
+  else
+    Result := '';
+end;
+
+function TDoubleListLogic.FindAttribute(Attribute: RawUtf8): TLdapAttribute;
+begin
+  Result := fProperty.Attributes.Find(Attribute);
+end;
+
+function TDoubleListLogic.FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute;
+begin
+  Result := LdapResult.Attributes.Find(Attribute);
+end;
+
+end.
+

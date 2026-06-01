@@ -125,12 +125,12 @@
         <UnitName Value="ugeneralpropertysitelinkbridge"/>
       </Item>
       <Item>
-        <Filename Value="uintfsitelinklogic.pas"/>
-        <UnitName Value="uintfsitelinklogic"/>
+        <Filename Value="uintfdoublelistlogic.pas"/>
+        <UnitName Value="uintfdoublelistlogic"/>
       </Item>
       <Item>
-        <Filename Value="usitelinklogic.pas"/>
-        <UnitName Value="usitelinklogic"/>
+        <Filename Value="udoublelistlogic.pas"/>
+        <UnitName Value="udoublelistlogic"/>
       </Item>
       <Item>
         <Filename Value="ulog.pas"/>

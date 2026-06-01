@@ -11,13 +11,13 @@ uses
   mormot.core.text,
   mormot.net.ldap,
   uproperty,
-  usitelinklogic,
+  udoublelistlogic,
   ursatldapclient;
 
 type
   TLdapResultArray = array of TLdapResult;
 
-  TGeneralPropertySiteLink = class(TSiteLinkLogic)
+  TGeneralPropertySiteLink = class(TDoubleListLogic)
   private
     function SearchSitesInLdap: boolean;
   public
@@ -60,18 +60,18 @@ var
   i: Integer;
   DN: RawUtf8;
 begin
-  if Length(InSite) = 0 then
+  if Length(InResult) = 0 then
   begin
     Props.Add('siteList', '', aoReplaceValue);
     Exit;
   end;
 
-  DN := InSite[0].Find('distinguishedName').GetReadable();
+  DN := InResult[0].Find('distinguishedName').GetReadable();
   Props.Add('siteList', DN, aoReplaceValue);
 
-  for i := 1 to High(InSite) do
+  for i := 1 to High(InResult) do
   begin
-    DN := InSite[i].Find('distinguishedName').GetReadable();
+    DN := InResult[i].Find('distinguishedName').GetReadable();
     Props.Add('siteList', DN, aoNoDuplicateValue);
   end;
 end;
