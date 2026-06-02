@@ -83,6 +83,7 @@ object FrmRSATOption: TFrmRSATOption
       'en'
       'fr'
       'el'
+      'pl'
     )
     ReadOnly = True
     Style = csDropDownList
