@@ -13,6 +13,8 @@ uses
   ActnList,
   ExtCtrls,
   StdCtrls,
+  LCLTranslator,
+  DefaultTranslator,
   IniPropStorage,
   mormot.core.base,
   mormot.core.log,
@@ -343,7 +345,8 @@ begin
     Lang := RsatOption.Lang;
     if Lang = '' then
       Lang := GetLanguageID.CountryCode;
-    TranslateFromResource(Lang);
+    //SetDefaultLang(Lang);
+    //TranslateFromResource(Lang);
   except
     on E: EResNotFound do
       if Assigned(fLog) then

@@ -716,10 +716,6 @@ msgstr ""
 msgid "Rename"
 msgstr ""
 
-#: ucommon.rsresetpassword
-msgid "Reset Password"
-msgstr ""
-
 #: ucommon.rsresetpasswordmessage
 msgid "Password has been reset successfully."
 msgstr ""

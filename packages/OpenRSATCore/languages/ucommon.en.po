@@ -1,3 +1,6 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
 #: ucommon.rsaccountunlocked
 msgid "Account Unlock"
 msgstr "Account Unlock"
@@ -733,10 +736,6 @@ msgstr "This should not be an error. Client should follow referral. Please try t
 #: ucommon.rsrename
 msgid "Rename"
 msgstr "Rename"
-
-#: ucommon.rsresetpassword
-msgid "Reset Password"
-msgstr "Reset Password"
 
 #: ucommon.rsresetpasswordmessage
 msgid "Password has been reset successfully."

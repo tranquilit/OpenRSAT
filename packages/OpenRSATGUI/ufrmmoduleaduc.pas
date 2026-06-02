@@ -25,6 +25,7 @@ uses
   tis.ui.grid.controls,
   tis.ui.searchedit,
   VirtualTrees,
+  Translations,
   mormot.core.log,
   umoduleADUC,
   IniFiles,
@@ -3362,6 +3363,8 @@ end;
 
 procedure TFrmModuleADUC.ApplyTranslation;
 begin
+  Translations.TranslateUnitResourceStrings('ustrconsts', Application.Location + 'languages\ustrconsts.%s.po', 'fr', 'fr');
+
   Action_Refresh.Caption := rsRefresh;
   Action_Properties.Caption := rsProperties;
   Action_NewUser.Caption := rsNewUser;

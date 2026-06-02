@@ -817,6 +817,10 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
+#: ustrconsts.rsresetpassword
+msgid "Reset Password"
+msgstr ""
+
 #: ustrconsts.rsrid
 msgid "RID"
 msgstr ""

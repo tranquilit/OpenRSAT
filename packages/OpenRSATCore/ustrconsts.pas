@@ -323,6 +323,8 @@ resourcestring
   rsDNSSECStatus = 'DNSSEC Status';
   rsKeyMaster = 'Key Master';
 
+  rsResetPassword = 'Reset Password';
+
 implementation
 
 end.

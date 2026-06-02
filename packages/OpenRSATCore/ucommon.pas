@@ -455,7 +455,7 @@ resourcestring
   rsAccountUnlocked = 'Account Unlock';
   rsAccountUnlockedMessage = 'Account has been unlocked successfully.';
 
-  rsResetPassword = 'Reset Password';
+  //rsResetPassword = 'Reset Password';
   rsResetPasswordMessage = 'Password has been reset successfully.';
 
   rsBitlockerRecoveryPassword = 'Recovery Password: ';
