@@ -171,7 +171,7 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="..\packages\OpenRSATCore\uintfdoublelistlogic.pas"/>
+        <Filename Value="integration\integrationtest.udoublelistlogic.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>

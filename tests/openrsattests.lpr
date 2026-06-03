@@ -6,7 +6,7 @@ uses
   unittest.uadvancedsecuritypresenter,
   unittest.ugeneratekeytab,
   unittest.uviewkeytabpresenter,
-  unittest.udoublelistlogic;
+  unittest.udoublelistlogic, integrationtest.udoublelistlogic;
 
 type
 
