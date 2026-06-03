@@ -125,10 +125,6 @@
         <UnitName Value="ugeneralpropertysitelinkbridge"/>
       </Item>
       <Item>
-        <Filename Value="uintfdoublelistlogic.pas"/>
-        <UnitName Value="uintfdoublelistlogic"/>
-      </Item>
-      <Item>
         <Filename Value="udoublelistlogic.pas"/>
         <UnitName Value="udoublelistlogic"/>
       </Item>
