@@ -5,7 +5,8 @@ uses
   integrationtest.uadvancedsecuritypresenter,
   unittest.uadvancedsecuritypresenter,
   unittest.ugeneratekeytab,
-  unittest.uviewkeytabpresenter;
+  unittest.uviewkeytabpresenter,
+  unittest.udoublelistlogic;
 
 type
 
@@ -26,7 +27,8 @@ begin
   AddCase([
     TTestAdvancedSecurityPresenter,
     TUnitTestGenerateKeyTab,
-    TUnitTestViewKeyTabPresenter
+    TUnitTestViewKeyTabPresenter,
+    TUnitTestDoubleListLogic
   ]);
 end;
 
