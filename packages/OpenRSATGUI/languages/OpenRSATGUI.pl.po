@@ -1,5 +1,3 @@
-msgid ""
-msgstr ""
 #: uvisconnectconfigs.lrj:$.strings.[7].value
 msgctxt "tformconnectconfigs.action_cancel.caption"
 msgid "Cancel"

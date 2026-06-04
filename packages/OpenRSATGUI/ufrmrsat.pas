@@ -294,7 +294,7 @@ procedure TFrmRSAT.Action_ShowGPOExecute(Sender: TObject);
 var
   FrmModule: TFrameModule;
 begin
-  FrmModule := FrmModules.Get(rsModuleADUCName);
+  FrmModule := FrmModules.Get('UsersAndComputers');
   if not Assigned(FrmModule) then
     Exit;
 
@@ -306,7 +306,7 @@ procedure TFrmRSAT.Action_ShowGPOUpdate(Sender: TObject);
 var
   FrmModule: TFrameModule;
 begin
-  FrmModule := FrmModules.Get(rsModuleADUCName);
+  FrmModule := FrmModules.Get('UsersAndComputers');
   if not Assigned(FrmModule) then
     Exit;
 

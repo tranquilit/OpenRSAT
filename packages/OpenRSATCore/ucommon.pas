@@ -428,13 +428,9 @@ resourcestring
   rsGridConfDeleteRow = 'Confirm the deletion of the %d selected rows?';
 
   // Module names
-  rsModuleADUCName = 'UsersAndComputers';
   rsModuleADUCDisplayName = 'Users and Computers';
-  rsModuleDNSName = 'DomainNameSystem';
   rsModuleDNSDisplayName = 'Domain Name System';
-  rsModuleADSSName = 'SitesAndServices';
   rsModuleADSSDisplayName = 'Sites and Services';
-  rsModuleADSIName = 'ServicesAndInterfaces';
   rsModuleADSIDisplayName = 'Services and Interfaces';
 
   rsRestartTitle = 'Restart confirmation';

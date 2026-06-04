@@ -505,33 +505,17 @@ msgstr ""
 msgid "Services and Interfaces"
 msgstr "Υπηρεσίες και Διεπαφές"
 
-#: ucommon.rsmoduleadsiname
-msgid "ServicesAndInterfaces"
-msgstr ""
-
 #: ucommon.rsmoduleadssdisplayname
 msgid "Sites and Services"
 msgstr "Τοποθεσίες και Υπηρεσίες"
-
-#: ucommon.rsmoduleadssname
-msgid "SitesAndServices"
-msgstr ""
 
 #: ucommon.rsmoduleaducdisplayname
 msgid "Users and Computers"
 msgstr "Χρήστες και Υπολογιστές"
 
-#: ucommon.rsmoduleaducname
-msgid "UsersAndComputers"
-msgstr ""
-
 #: ucommon.rsmodulednsdisplayname
 msgid "Domain Name System"
 msgstr "Σύστημα Ονομάτων Τομέα"
-
-#: ucommon.rsmodulednsname
-msgid "DomainNameSystem"
-msgstr ""
 
 #: ucommon.rsmonday
 msgid "Monday"

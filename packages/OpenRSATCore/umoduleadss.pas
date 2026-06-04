@@ -53,7 +53,7 @@ end;
 
 constructor TModuleADSS.Create(ARSAT: TRSAT);
 begin
-  inherited Create(rsModuleADSSName, rsModuleADSSDisplayName);
+  inherited Create('SitesAndServices', rsModuleADSSDisplayName);
 
   fEnabled := True;
   fOption := TModuleADSSOption.Create;

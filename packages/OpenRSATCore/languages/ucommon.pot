@@ -504,32 +504,16 @@ msgstr ""
 msgid "Services and Interfaces"
 msgstr ""
 
-#: ucommon.rsmoduleadsiname
-msgid "ServicesAndInterfaces"
-msgstr ""
-
 #: ucommon.rsmoduleadssdisplayname
 msgid "Sites and Services"
-msgstr ""
-
-#: ucommon.rsmoduleadssname
-msgid "SitesAndServices"
 msgstr ""
 
 #: ucommon.rsmoduleaducdisplayname
 msgid "Users and Computers"
 msgstr ""
 
-#: ucommon.rsmoduleaducname
-msgid "UsersAndComputers"
-msgstr ""
-
 #: ucommon.rsmodulednsdisplayname
 msgid "Domain Name System"
-msgstr ""
-
-#: ucommon.rsmodulednsname
-msgid "DomainNameSystem"
 msgstr ""
 
 #: ucommon.rsmonday

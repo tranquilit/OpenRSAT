@@ -43,7 +43,7 @@ end;
 
 constructor TModuleADSI.Create(ARSAT: TRSAT);
 begin
-  inherited Create(rsModuleADSIName, rsModuleADSIDisplayName);
+  inherited Create('ServicesAndInterfaces', rsModuleADSIDisplayName);
 
   fRSAT := ARSAT;
   fEnabled := True;

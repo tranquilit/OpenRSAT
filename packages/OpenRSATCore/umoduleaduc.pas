@@ -51,7 +51,7 @@ end;
 
 constructor TModuleADUC.Create(ARSAT: TRSAT);
 begin
-  inherited Create(rsModuleADUCName, rsModuleADUCDisplayName);
+  inherited Create('UsersAndComputers', rsModuleADUCDisplayName);
 
   fRSAT := ARSAT;
   fEnabled := True;

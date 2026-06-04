@@ -470,7 +470,7 @@ end;
 
 constructor TModuleADDNS.Create(ARSAT: TRSAT);
 begin
-  inherited Create(rsModuleDNSName, rsModuleDNSDisplayName);
+  inherited Create('DomainNameSystem', rsModuleDNSDisplayName);
 
   fEnabled := True;
   fOption := TModuleADDNSOption.Create;

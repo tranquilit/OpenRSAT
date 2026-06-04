@@ -522,33 +522,17 @@ msgstr "Le serveur a détecté une sorte de référence circulaire au cours du t
 msgid "Services and Interfaces"
 msgstr "Services et Interfaces"
 
-#: ucommon.rsmoduleadsiname
-msgid "ServicesAndInterfaces"
-msgstr ""
-
 #: ucommon.rsmoduleadssdisplayname
 msgid "Sites and Services"
 msgstr "Sites et Services"
-
-#: ucommon.rsmoduleadssname
-msgid "SitesAndServices"
-msgstr ""
 
 #: ucommon.rsmoduleaducdisplayname
 msgid "Users and Computers"
 msgstr "Utilisateurs et Ordinateurs"
 
-#: ucommon.rsmoduleaducname
-msgid "UsersAndComputers"
-msgstr ""
-
 #: ucommon.rsmodulednsdisplayname
 msgid "Domain Name System"
 msgstr "Système de nom de domaine"
-
-#: ucommon.rsmodulednsname
-msgid "DomainNameSystem"
-msgstr ""
 
 #: ucommon.rsmonday
 msgid "Monday"

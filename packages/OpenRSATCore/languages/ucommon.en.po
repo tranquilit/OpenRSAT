@@ -522,33 +522,17 @@ msgstr "The server detected some kind of circular reference in the course of pro
 msgid "Services and Interfaces"
 msgstr "Services and Interfaces"
 
-#: ucommon.rsmoduleadsiname
-msgid "ServicesAndInterfaces"
-msgstr "ServicesAndInterfaces"
-
 #: ucommon.rsmoduleadssdisplayname
 msgid "Sites and Services"
 msgstr "Sites and Services"
-
-#: ucommon.rsmoduleadssname
-msgid "SitesAndServices"
-msgstr "SitesAndServices"
 
 #: ucommon.rsmoduleaducdisplayname
 msgid "Users and Computers"
 msgstr "Users and Computers"
 
-#: ucommon.rsmoduleaducname
-msgid "UsersAndComputers"
-msgstr "UsersAndComputers"
-
 #: ucommon.rsmodulednsdisplayname
 msgid "Domain Name System"
 msgstr "Domain Name System"
-
-#: ucommon.rsmodulednsname
-msgid "DomainNameSystem"
-msgstr "DomainNameSystem"
 
 #: ucommon.rsmonday
 msgid "Monday"
