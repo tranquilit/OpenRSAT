@@ -192,12 +192,13 @@ begin
   try
     ProfileConfiguration := TVisProfileConfiguration.Create(Self, ASettings);
     try
+      ProfileConfiguration.ProfileName := DEFAULT_NAME;
       if (ProfileConfiguration.ShowModal <> mrOK) then
         Exit;
+      fLdapConfigs.SaveConfig(ProfileConfiguration.ProfileName, ASettings);
     finally
       FreeAndNil(ProfileConfiguration);
     end;
-    fLdapConfigs.SaveConfig(DEFAULT_NAME, ASettings);
   finally
     FreeAndNil(ASettings);
   end;

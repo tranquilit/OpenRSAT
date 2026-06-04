@@ -43,6 +43,7 @@ type
     ComboBox_Domains: TComboBox;
     ComboBox_DomainControllers: TComboBox;
     ComboBox_Algorithm: TComboBox;
+    Edit1: TEdit;
     Edit_Timeout: TEdit;
     Edit_Username: TEdit;
     Edit_Password: TEdit;
@@ -50,6 +51,7 @@ type
     GroupBox_Domain: TGroupBox;
     GroupBox_Account: TGroupBox;
     GroupBox_AuthMethods: TGroupBox;
+    Label_ProfileName: TLabel;
     Label_CurrentUsername: TLabel;
     Label_Domain: TLabel;
     Label_Unsafe: TLabel;
@@ -68,6 +70,7 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
+    Panel4: TPanel;
     Panel_AuthMethodSelectorInner: TPanel;
     Panel_Kerberos: TPanel;
     Panel_Digest: TPanel;
@@ -82,6 +85,7 @@ type
     procedure Action_TestAuthenticationExecute(Sender: TObject);
     procedure Action_TestConnectionExecute(Sender: TObject);
     procedure CheckBox_CurrentUsernameChange(Sender: TObject);
+    procedure ComboBox_DomainControllersEditingDone(Sender: TObject);
     procedure ComboBox_DomainsEditingDone(Sender: TObject);
     procedure ComboBox_DomainsSelect(Sender: TObject);
     procedure Edit_UsernameKeyPress(Sender: TObject; var Key: char);
@@ -94,6 +98,8 @@ type
   private
     fSettings: TMLdapClientSettings;
 
+    function GetProfileName: RawUtf8;
+    procedure SetProfileName(AValue: RawUtf8);
     procedure UpdateAuthMethodsPanel;
     procedure SettingsToGUI(ASettings: TMLdapClientSettings = nil);
     procedure GUIToSettings(ASettings: TMLdapClientSettings = nil);
@@ -101,6 +107,7 @@ type
     constructor Create(TheOwner: TComponent; ASettings: TMLdapClientSettings); reintroduce;
 
     property Settings: TMLdapClientSettings read fSettings;
+    property ProfileName: RawUtf8 read GetProfileName write SetProfileName;
   end;
 
 implementation
@@ -125,6 +132,12 @@ procedure TVisProfileConfiguration.CheckBox_CurrentUsernameChange(
   Sender: TObject);
 begin
   UpdateAuthMethodsPanel;
+end;
+
+procedure TVisProfileConfiguration.ComboBox_DomainControllersEditingDone(Sender: TObject);
+begin
+  if Edit1.Text = '' then
+    Edit1.Text := ComboBox_DomainControllers.Caption;
 end;
 
 procedure TVisProfileConfiguration.ComboBox_DomainsEditingDone(Sender: TObject);
@@ -358,6 +371,16 @@ begin
   GroupBox_Account.Visible := RadioButton_Digest.Checked or RadioButton_Simple.Checked or (RadioButton_Kerberos.Checked and not CheckBox_CurrentUsername.Checked);
   AutoSize := True;
   AutoSize := False;
+end;
+
+function TVisProfileConfiguration.GetProfileName: RawUtf8;
+begin
+  result := Edit1.Text;
+end;
+
+procedure TVisProfileConfiguration.SetProfileName(AValue: RawUtf8);
+begin
+  Edit1.Text := AValue;
 end;
 
 procedure TVisProfileConfiguration.SettingsToGUI(ASettings: TMLdapClientSettings

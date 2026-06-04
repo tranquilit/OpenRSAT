@@ -71,6 +71,8 @@ type
       reintroduce;
     destructor Destroy; override;
 
+    function ProfileExists(AProfileName: RawUtf8): Boolean;
+    function RenameProfile(AOldProfileName, ANewProfileName: RawUtf8; AReplace: Boolean = False): Boolean;
     procedure SwitchListView(ViewStyle: TViewStyle);
     procedure LoadProfiles(ForceUpdate: Boolean = True);
     procedure LoadProfile(Section: RawUtf8);
@@ -101,7 +103,7 @@ procedure TVisProfileManager.Action_AddExecute(Sender: TObject);
 var
   VisProfileConfiguration: TVisProfileConfiguration;
   DefaultConfig: TMLdapClientSettings;
-  SectionName, DomainController: RawUtf8;
+  SectionName, ProfileName: RawUtf8;
   Count: Integer;
 begin
   DefaultConfig := NewDefaultConfig;
@@ -110,17 +112,17 @@ begin
     try
       if VisProfileConfiguration.ShowModal <> mrOK then
         Exit;
-      DomainController := VisProfileConfiguration.ComboBox_DomainControllers.Caption;
+      ProfileName := VisProfileConfiguration.ProfileName;
     finally
       FreeAndNil(VisProfileConfiguration);
     end;
 
-    SectionName := DomainController;
+    SectionName := ProfileName;
     Count := 0;
     while fIniFile.SectionExists(SectionName) do
     begin
       Inc(Count);
-      SectionName := FormatUtf8('%_%', [DomainController, Count]);
+      SectionName := FormatUtf8('%_%', [ProfileName, Count]);
     end;
     fSelected := SectionName;
     fLdapConfigs.SaveConfig(SectionName, DefaultConfig);
@@ -155,9 +157,13 @@ begin
   fSelected := ListView1.Selected.Caption;
   VisProfileConfiguration := TVisProfileConfiguration.Create(Self, fLdapConfigs.LdapConnectionSettings);
   try
+    VisProfileConfiguration.ProfileName := fSelected;
     if VisProfileConfiguration.ShowModal <> mrOK then
       Exit;
-    fLdapConfigs.SaveConfig(ListView1.Selected.Caption, fLdapConfigs.LdapConnectionSettings);
+    if not RenameProfile(fSelected, VisProfileConfiguration.ProfileName) then
+      Exit;
+    fSelected := VisProfileConfiguration.ProfileName;
+    fLdapConfigs.SaveConfig(fSelected, fLdapConfigs.LdapConnectionSettings);
     LoadProfiles;
   finally
     FreeAndNil(VisProfileConfiguration);
@@ -181,30 +187,12 @@ end;
 
 procedure TVisProfileManager.ListView1Edited(Sender: TObject; Item: TListItem;
   var AValue: string);
-  procedure CopyStrings(Ini: TIniFile; Src, Dst: RawUtf8; Keys: TRawUtf8DynArray; Default: RawUtf8 = '');
-  var
-    Key: RawUtf8;
-  begin
-    for Key in Keys do
-      Ini.WriteString(Dst, Key, Ini.ReadString(Src, Key, Default));
-  end;
-  procedure CopyInts(Ini: TIniFile; Src, Dst: RawUtf8; Keys: TRawUtf8DynArray; Default: Integer = 0);
-  var
-    Key: RawUtf8;
-  begin
-    for Key in Keys do
-      Ini.WriteInteger(Dst, Key, Ini.ReadInteger(Src, Key, Default));
-  end;
-
 begin
-  if fIniFile.SectionExists(AValue) then
+  if not RenameProfile(Item.Caption, AValue) then
   begin
     AValue := Item.Caption;
     Exit;
   end;
-  CopyStrings(fIniFile, Item.Caption, AValue, ['TargetHost', 'Username', 'KerberosDN', 'KerberosSpn']);
-  CopyInts(fIniFile, Item.Caption, AValue, ['TargetPort', 'Tls', 'AllowUnsafePasswordBind', 'AutoReconnect', 'AutoBind', 'Timeout', 'KerberosDisableChannelBinding', 'UseCredentials', 'SearchPageSize', 'SearchPageNumber']);
-  fIniFile.EraseSection(Item.Caption);
 end;
 
 procedure TVisProfileManager.ListView1Resize(Sender: TObject);
@@ -245,6 +233,39 @@ begin
   FreeAndNil(fIniFile);
 
   inherited Destroy;
+end;
+
+function TVisProfileManager.ProfileExists(AProfileName: RawUtf8): Boolean;
+begin
+  result := fIniFile.SectionExists(AProfileName);
+end;
+
+function TVisProfileManager.RenameProfile(AOldProfileName, ANewProfileName: RawUtf8; AReplace: Boolean): Boolean;
+  procedure CopyStrings(Ini: TIniFile; Src, Dst: RawUtf8; Keys: TRawUtf8DynArray; Default: RawUtf8 = '');
+  var
+    Key: RawUtf8;
+  begin
+    for Key in Keys do
+      Ini.WriteString(Dst, Key, Ini.ReadString(Src, Key, Default));
+  end;
+  procedure CopyInts(Ini: TIniFile; Src, Dst: RawUtf8; Keys: TRawUtf8DynArray; Default: Integer = 0);
+  var
+    Key: RawUtf8;
+  begin
+    for Key in Keys do
+      Ini.WriteInteger(Dst, Key, Ini.ReadInteger(Src, Key, Default));
+  end;
+
+begin
+  result := not ProfileExists(ANewProfileName);
+
+  if not result and not AReplace then
+    Exit;
+
+  CopyStrings(fIniFile, AOldProfileName, ANewProfileName, ['TargetHost', 'Username', 'KerberosDN', 'KerberosSpn']);
+  CopyInts(fIniFile, AOldProfileName, ANewProfileName, ['TargetPort', 'Tls', 'AllowUnsafePasswordBind', 'AutoReconnect', 'AutoBind', 'Timeout', 'KerberosDisableChannelBinding', 'UseCredentials', 'SearchPageSize', 'SearchPageNumber']);
+  fIniFile.EraseSection(AOldProfileName);
+  result := True;
 end;
 
 procedure TVisProfileManager.SwitchListView(ViewStyle: TViewStyle);

@@ -14,7 +14,7 @@ object VisProfileConfiguration: TVisProfileConfiguration
   object GroupBox_Domain: TGroupBox
     Left = 8
     Height = 171
-    Top = 8
+    Top = 47
     Width = 384
     Align = alTop
     AutoSize = True
@@ -184,6 +184,7 @@ object VisProfileConfiguration: TVisProfileConfiguration
       Constraints.MinWidth = 150
       ItemHeight = 15
       TabOrder = 2
+      OnEditingDone = ComboBox_DomainControllersEditingDone
     end
     object Label_Unsafe: TLabel
       AnchorSideLeft.Control = GroupBox_Domain
@@ -229,14 +230,14 @@ object VisProfileConfiguration: TVisProfileConfiguration
   end
   object GroupBox_AuthMethods: TGroupBox
     Left = 8
-    Height = 339
-    Top = 187
+    Height = 300
+    Top = 226
     Width = 384
     Align = alClient
     AutoSize = True
     BorderSpacing.Around = 8
     Caption = 'Auth method'
-    ClientHeight = 319
+    ClientHeight = 280
     ClientWidth = 380
     TabOrder = 1
     object Panel_AuthMethodSelector: TPanel
@@ -377,7 +378,7 @@ object VisProfileConfiguration: TVisProfileConfiguration
     object Panel1: TPanel
       Left = 0
       Height = 41
-      Top = 278
+      Top = 239
       Width = 380
       Align = alBottom
       AutoSize = True
@@ -403,13 +404,13 @@ object VisProfileConfiguration: TVisProfileConfiguration
     end
     object Panel2: TPanel
       Left = 0
-      Height = 238
+      Height = 199
       Top = 40
       Width = 380
       Align = alClient
       AutoSize = True
       BevelOuter = bvNone
-      ClientHeight = 238
+      ClientHeight = 199
       ClientWidth = 380
       TabOrder = 1
       object Panel_Kerberos: TPanel
@@ -520,14 +521,14 @@ object VisProfileConfiguration: TVisProfileConfiguration
       end
       object GroupBox_Account: TGroupBox
         Left = 8
-        Height = 128
+        Height = 89
         Top = 102
         Width = 364
         Align = alClient
         AutoSize = True
         BorderSpacing.Around = 8
         Caption = 'Account'
-        ClientHeight = 108
+        ClientHeight = 69
         ClientWidth = 360
         TabOrder = 2
         object Label_Username: TLabel
@@ -657,6 +658,37 @@ object VisProfileConfiguration: TVisProfileConfiguration
     CancelButton.DefaultCaption = True
     TabOrder = 2
     ShowButtons = [pbOK, pbCancel]
+  end
+  object Panel4: TPanel
+    Left = 0
+    Height = 39
+    Top = 0
+    Width = 400
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 39
+    ClientWidth = 400
+    TabOrder = 3
+    object Label_ProfileName: TLabel
+      Left = 8
+      Height = 23
+      Top = 8
+      Width = 73
+      Align = alLeft
+      BorderSpacing.Around = 8
+      Caption = 'Profile name: '
+      Layout = tlCenter
+    end
+    object Edit1: TEdit
+      Left = 89
+      Height = 23
+      Top = 8
+      Width = 303
+      Align = alClient
+      BorderSpacing.Around = 8
+      TabOrder = 0
+    end
   end
   object ActionList1: TActionList
     Images = CoreDataModule.ImageList1
