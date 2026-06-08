@@ -17,25 +17,11 @@ uses
 type
   { TUnitTestDoubleListLogic }
   TUnitTestDoubleListLogic = class(TSynTestCase)
-  published
-    procedure RemoveFromArray_ValidList;
-    procedure RemoveFromArray_EmptyList;
+  private
+    fLogic: TDoubleListLogic;
   end;
 
 implementation
-
-procedure TUnitTestDoubleListLogic.RemoveFromArray_ValidList;
-var
-  ArrayTest: array of TLdapResult;
-begin
-  try
-  finally
-  end;
-end;
-
-procedure TUnitTestDoubleListLogic.RemoveFromArray_EmptyList;
-begin
-end;
 
 end.
 
