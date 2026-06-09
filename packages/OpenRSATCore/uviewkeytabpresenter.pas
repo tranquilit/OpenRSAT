@@ -128,7 +128,7 @@ begin
   bin := AKeyTab.SaveToBinary;
   fKeyTab.LoadFromBinary(bin);
   FillZero(bin);
-  fView.SetFileName(FormatUtf8('%.keytab', [fKeyTab.MachineAccountPrincipal]));
+  fView.SetFileName(FormatUtf8('%.keytab', [fKeyTab.MachineAccountPrincipal(True)]));
   Doc.Init(JSON_FAST);
   KeyTabToDoc(@Doc);
   fView.LoadEntries(@Doc);

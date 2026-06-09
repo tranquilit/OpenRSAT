@@ -40,15 +40,18 @@ var
   LdapResult: TLdapResult;
 begin
   Ldap.SearchBegin();
-  Ldap.SearchScope := lssSingleLevel;
-  repeat
-    if not SearchSitesInLdap then
-      Exit;
+  try
+    Ldap.SearchScope := lssSingleLevel;
+    repeat
+      if not SearchSitesInLdap then
+        Exit;
 
-    for LdapResult in Ldap.SearchResult.Items do
-      AddToNotInSite(LdapResult);
-  until Ldap.SearchCookie = '';
-  Ldap.SearchEnd;
+      for LdapResult in Ldap.SearchResult.Items do
+        AddToNotInSite(LdapResult);
+    until Ldap.SearchCookie = '';
+  finally
+    Ldap.SearchEnd;
+  end;
 end;
 
 function TGeneralPropertySiteLinkBridge.SearchSitesInLdap: boolean;
