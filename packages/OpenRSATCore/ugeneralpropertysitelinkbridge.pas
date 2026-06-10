@@ -47,7 +47,7 @@ begin
         Exit;
 
       for LdapResult in Ldap.SearchResult.Items do
-        AddToNotInSite(LdapResult);
+        AddToList(LdapResult);
     until Ldap.SearchCookie = '';
   finally
     Ldap.SearchEnd;

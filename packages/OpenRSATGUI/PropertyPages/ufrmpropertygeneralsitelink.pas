@@ -85,7 +85,7 @@ begin
   idx := ListBox_NotInSiteLink.ItemIndex;
   if idx <> -1 then
   begin
-    fLogic.MoveItemToInSite(idx);
+    fLogic.MoveItem(True, idx);
     fLogic.SyncAttributeProperty(aoReplaceValue);
     LoadListBox;
   end;
@@ -98,7 +98,7 @@ begin
   idx := ListBox_InSiteLink.ItemIndex;
   if idx <> -1 then
   begin
-    fLogic.MoveItemToNotInSite(idx);
+    fLogic.MoveItem(False, idx);
     fLogic.SyncAttributeProperty(aoReplaceValue);
     LoadListBox;
   end;
@@ -204,7 +204,7 @@ begin
     begin
       if fLogic.GetValueFromAttribute(fLogic.FindAttribute('distinguishedName', fLogic.OutResult[n])) = Site then
       begin
-        fLogic.MoveItemToInSite(n);
+        fLogic.MoveItem(True, n);
         break;
       end;
     end;
