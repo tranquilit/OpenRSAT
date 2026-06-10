@@ -20,12 +20,11 @@ type
   { ISiteLinkLogic }
   IDoubleListLogic = interface
     procedure GetAllResources;
-    procedure MoveItemToInSite(Index: Integer);
-    procedure MoveItemToNotInSite(Index: Integer);
+    procedure MoveItem(ShouldBeInResult: Boolean; Index: Integer);
     procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
     procedure SyncAttributeProperty(Option: TLdapAddOption);
-    procedure AddToNotInSite(Item: TLdapResult);
-    procedure AddToInSite(Item: TLdapResult);
+    procedure AddToList(Item: TLdapResult);
+    procedure AddToList(var List: TLdapResultArray; Item: TLdapResult);
     function GetItemAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
     function GetResultName(Obj: TLdapResult): RawUtf8;
     function GetNbSites: Integer;
@@ -43,15 +42,13 @@ type
 
     procedure RemoveFromArray(var List: TLdapResultArray; Index: Integer);
   protected
-    procedure AddToNotInSite(Item: TLdapResult); virtual;
-    procedure AddToInSite(Item: TLdapResult); virtual;
+    procedure AddToList(Item: TLdapResult); virtual;
+    procedure AddToList(var List: TLdapResultArray; Item: TLdapResult); virtual;
   public
     procedure GetAllResources; virtual; abstract;
-    procedure MoveItemToInSite(Index: Integer); virtual;
-    procedure MoveItemToNotInSite(Index: Integer); virtual;
+    procedure MoveItem(ShouldBeInResult: Boolean; Index: Integer); virtual;
     procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption); virtual;
     procedure SyncAttributeProperty(Option: TLdapAddOption); virtual; abstract;
-    procedure AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult); virtual;
 
     function GetItemAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8; virtual;
     function GetResultName(Obj: TLdapResult): RawUtf8; virtual;
@@ -77,7 +74,19 @@ begin
   SetLength(List, Length(List) - 1);
 end;
 
-procedure TDoubleListLogic.AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult);
+procedure TDoubleListLogic.AddToList(Item: TLdapResult);
+var
+  ListLen: Integer;
+begin
+  if not Assigned(Item) then
+    exit;
+
+  ListLen := Length(fOutResult);
+  SetLength(fOutResult, ListLen + 1);
+  fOutResult[ListLen] := TLdapResult(Item.Clone);
+end;
+
+procedure TDoubleListLogic.AddToList(var List: TLdapResultArray; Item: TLdapResult);
 var
   ListLen: Integer;
 begin
@@ -89,26 +98,18 @@ begin
   List[ListLen] := TLdapResult(Item.Clone);
 end;
 
-procedure TDoubleListLogic.AddToNotInSite(Item: TLdapResult);
+procedure TDoubleListLogic.MoveItem(ShouldBeInResult: Boolean; Index: Integer);
 begin
-  AddItemInResultArray(fOutResult, Item);
-end;
-
-procedure TDoubleListLogic.AddToInSite(Item: TLdapResult);
-begin
-  AddItemInResultArray(fInResult, Item);
-end;
-
-procedure TDoubleListLogic.MoveItemToInSite(Index: Integer);
-begin
-  AddToInSite(fOutResult[Index]);
-  RemoveFromArray(fOutResult, Index);
-end;
-
-procedure TDoubleListLogic.MoveItemToNotInSite(Index: Integer);
-begin
-  AddToNotInSite(fInResult[Index]);
-  RemoveFromArray(fInResult, Index);
+  if ShouldBeInResult then
+  begin
+    AddToList(fInResult, fOutResult[Index]);
+    RemoveFromArray(fOutResult, Index);
+  end
+  else
+  begin
+    AddToList(fOutResult, fInResult[Index]);
+    RemoveFromArray(fInResult, Index);
+  end;
 end;
 
 procedure TDoubleListLogic.SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
