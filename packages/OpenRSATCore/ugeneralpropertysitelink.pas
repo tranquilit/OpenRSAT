@@ -15,8 +15,6 @@ uses
   ursatldapclient;
 
 type
-  TLdapResultArray = array of TLdapResult;
-
   TGeneralPropertySiteLink = class(TDoubleListLogic)
   private
     function SearchSitesInLdap: boolean;
@@ -39,15 +37,18 @@ var
   LdapResult: TLdapResult;
 begin
   Ldap.SearchBegin();
-  Ldap.SearchScope := lssSingleLevel;
-  repeat
-    if not SearchSitesInLdap then
-      Exit;
+  try
+    Ldap.SearchScope := lssSingleLevel;
+    repeat
+      if not SearchSitesInLdap then
+        Exit;
 
-    for LdapResult in Ldap.SearchResult.Items do
-      AddToList(LdapResult);
-  until Ldap.SearchCookie = '';
-  Ldap.SearchEnd;
+      for LdapResult in Ldap.SearchResult.Items do
+        AddToList(LdapResult);
+    until Ldap.SearchCookie = '';
+  finally
+    Ldap.SearchEnd;
+  end;
 end;
 
 function TGeneralPropertySiteLink.SearchSitesInLdap: boolean;

@@ -21,7 +21,8 @@ uses
   uproperty,
   ursatldapclient,
   upropertyframe,
-  ugeneralpropertysitelink,
+  ugeneralpropertysitelink;
+  udoublelistlogic,
   ulog;
 
 type
@@ -56,10 +57,6 @@ type
     procedure ListBox_NotInSiteLinkSelectionChange(Sender: TObject; User: boolean);
     procedure SpinEdit_CostChange(Sender: TObject);
     procedure SpinEdit_ReplicateChange(Sender: TObject);
-    
-type
-  { LDAP Result }
-  TLdapResultArray = array of TLdapResult;
   
   private
     fLog: TSynLogClass;
@@ -85,7 +82,7 @@ begin
   idx := ListBox_NotInSiteLink.ItemIndex;
   if idx <> -1 then
   begin
-    fLogic.MoveItem(True, idx);
+    fLogic.MoveItem(msInResult, idx);
     fLogic.SyncAttributeProperty(aoReplaceValue);
     LoadListBox;
   end;
@@ -98,7 +95,7 @@ begin
   idx := ListBox_InSiteLink.ItemIndex;
   if idx <> -1 then
   begin
-    fLogic.MoveItem(False, idx);
+    fLogic.MoveItem(msOutOfResult, idx);
     fLogic.SyncAttributeProperty(aoReplaceValue);
     LoadListBox;
   end;
@@ -204,7 +201,7 @@ begin
     begin
       if fLogic.GetValueFromAttribute(fLogic.FindAttribute('distinguishedName', fLogic.OutResult[n])) = Site then
       begin
-        fLogic.MoveItem(True, n);
+        fLogic.MoveItem(msInResult, n);
         break;
       end;
     end;

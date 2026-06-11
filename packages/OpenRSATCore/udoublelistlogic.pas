@@ -13,21 +13,24 @@ uses
   uproperty,
   ursatldapclient;
 
-type  
+type
+  { TMovingState }
+  TMovingState = (msOutOfResult, msInResult);
+
   { TLdapResultArray }
   TLdapResultArray = array of TLdapResult;
 
   { ISiteLinkLogic }
   IDoubleListLogic = interface
     procedure GetAllResources;
-    procedure MoveItem(ShouldBeInResult: Boolean; Index: Integer);
+    procedure MoveItem(State: TMovingState; Index: Integer);
     procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
     procedure SyncAttributeProperty(Option: TLdapAddOption);
     procedure AddToList(Item: TLdapResult);
     procedure AddToList(var List: TLdapResultArray; Item: TLdapResult);
     function GetItemAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
     function GetResultName(Obj: TLdapResult): RawUtf8;
-    function GetNbSites: Integer;
+    function GetNbElementsInLists: Integer;
     function GetValueFromAttribute(Attribute: TLdapAttribute): RawUtf8;
     function FindAttribute(Attribute: RawUtf8): TLdapAttribute;
     function FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute;
@@ -46,13 +49,13 @@ type
     procedure AddToList(var List: TLdapResultArray; Item: TLdapResult); virtual;
   public
     procedure GetAllResources; virtual; abstract;
-    procedure MoveItem(ShouldBeInResult: Boolean; Index: Integer); virtual;
+    procedure MoveItem(State: TMovingState; Index: Integer); virtual;
     procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption); virtual;
     procedure SyncAttributeProperty(Option: TLdapAddOption); virtual; abstract;
 
     function GetItemAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8; virtual;
     function GetResultName(Obj: TLdapResult): RawUtf8; virtual;
-    function GetNbSites: Integer; virtual;
+    function GetNbElementsInLists: Integer; virtual;
     function GetValueFromAttribute(Attribute: TLdapAttribute): RawUtf8; virtual;
     function FindAttribute(Attribute: RawUtf8): TLdapAttribute; virtual;
     function FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute; virtual;
@@ -98,9 +101,9 @@ begin
   List[ListLen] := TLdapResult(Item.Clone);
 end;
 
-procedure TDoubleListLogic.MoveItem(ShouldBeInResult: Boolean; Index: Integer);
+procedure TDoubleListLogic.MoveItem(State: TMovingState; Index: Integer);
 begin
-  if ShouldBeInResult then
+  if State = msInResult then
   begin
     AddToList(fInResult, fOutResult[Index]);
     RemoveFromArray(fOutResult, Index);
@@ -127,7 +130,7 @@ begin
   Result := Obj.Find('name').GetReadable();
 end;
 
-function TDoubleListLogic.GetNbSites: Integer;
+function TDoubleListLogic.GetNbElementsInLists: Integer;
 begin
   Result := Length(fInResult) + Length(fOutResult);
 end;
