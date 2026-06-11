@@ -56,7 +56,7 @@ type
     procedure TisSearchEdit_ProfileSearch(Sender: TObject; const aText: string);
     procedure TisSearchEdit_ProfileSelect(Sender: TObject);
   private
-    fLog: ISynLog;
+    fILog: ISynLog;
     fLdapConfigs: TLdapConfigs;
 
     procedure CreateDefaultConfig;
@@ -152,8 +152,8 @@ begin
   fLdapConfigs.LdapConnectionSettings.Password := '';
   fLdapConfigs.LoadConfig(TisSearchEdit_Profile.Text);
 
-  if Assigned(fLog) then
-    fLog.Log(sllDebug, 'Config selected: %', [ConfigFilePath]);
+  if Assigned(fILog) then
+    fILog.Log(sllDebug, 'Config selected: %', [ConfigFilePath]);
 
   Edit_Password.Enabled := True;
   Edit_Username.Enabled := True;
@@ -210,8 +210,8 @@ var
   sections: TRawUtf8DynArray;
   section: RawUtf8;
 begin
-  if Assigned(fLog) then
-    fLog.Log(sllDebug, 'Retrieve config files from "%".', [ConfigFilePath]);
+  if Assigned(fILog) then
+    fILog.Log(sllDebug, 'Retrieve config files from "%".', [ConfigFilePath]);
   result := 0;
   TisSearchEdit_Profile.Clear;
   TisSearchEdit_Profile.Items.BeginUpdate;
@@ -240,12 +240,12 @@ constructor TFormConnectConfigs.Create(TheOwner: TComponent;
 begin
   inherited Create(TheOwner);
 
-  fLog := aLog;
+  fILog := aLog;
   fLdapConfigs := ALdapConfigs;
   fLdapConfigs.AutoConnect := True;
 
-  if Assigned(fLog) then
-    fLog.Log(sllInfo, 'Vis Connect Config');
+  if Assigned(fILog) then
+    fILog.Log(sllInfo, 'Vis Connect Config');
 
   Image1.Visible := not IsDarkMode;
   Image2.Visible := not Image1.Visible;

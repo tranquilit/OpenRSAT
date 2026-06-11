@@ -200,7 +200,7 @@ type
     procedure TreeView1GetImageIndex(Sender: TObject; Node: TTreeNode);
     {$pop}
   private
-    fLog: TADSSLog;
+    fLog: TSynLogClass;
     fEnabled: Boolean;
     fUpdating: Integer;
 
@@ -408,7 +408,7 @@ var
   c: TCursor;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute', [Action_Refresh.Name]);
+    fLog.Add.Log(sllTrace, '% - Execute', [Action_Refresh.Name]);
 
   c := Screen.Cursor;
   Screen.Cursor := crHourGlass;
@@ -434,7 +434,7 @@ end;
 procedure TFrmModuleSitesAndServices.Timer_TreeChangeNodeTimer(Sender: TObject);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Timer Tree Change', Self);
+    fLog.Add.Log(sllTrace, 'Timer Tree Change', Self);
 
   Timer_TreeChangeNode.Enabled := False;
 
@@ -667,7 +667,7 @@ begin
     'interSiteTransport': newList := InterSiteTransportNew;
     'container': newList := ServicesNew;
     else
-      TSynLog.Add.Log(sllWarning, FormatUtf8('"objectClass" not yet implemented: %', [ObjectClass]));
+      TOpenRSATLog.Add.Log(sllWarning, FormatUtf8('"objectClass" not yet implemented: %', [ObjectClass]));
   end;
 
   // Create filter to allow MenuItem_TreeNew visibility
@@ -736,7 +736,7 @@ var
   vis: TVisNewObject;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute', [Action_NewComputer.Caption]);
+    fLog.Add.Log(sllTrace, '% - Execute', [Action_NewComputer.Caption]);
 
   vis := TVisNewObject.Create(Self, vnotComputer, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
@@ -758,7 +758,7 @@ var
   vis: TVisNewObject;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute', [Action_NewContact.Caption]);
+    fLog.Add.Log(sllTrace, '% - Execute', [Action_NewContact.Caption]);
 
   vis := TVisNewObject.Create(Self, vnotContact, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
@@ -780,7 +780,7 @@ var
   vis: TVisNewObject;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute', [Action_NewGroup.Caption]);
+    fLog.Add.Log(sllTrace, '% - Execute', [Action_NewGroup.Caption]);
 
   vis := TVisNewObject.Create(Self, vnotGroup, GetFocusedObject(True), FrmRSAT.LdapClient.ConfigDN);
   try
@@ -983,7 +983,7 @@ var
   vis: TVisNewObject;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
+    fLog.Add.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
 
   vis := TVisNewObject.Create(Self, vnotUser, GetFocusedObject(True), FrmRSAT.LdapClient.DefaultDN);
   try
@@ -1169,7 +1169,7 @@ procedure TFrmModuleSitesAndServices.TreeView1Change(Sender: TObject;
   Node: TTreeNode);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Tree Change', Self);
+    fLog.Add.Log(sllTrace, 'Tree Change', Self);
 
   if Timer_TreeChangeNode.Enabled then
     Timer_TreeChangeNode.Enabled := False;
@@ -1323,7 +1323,7 @@ begin
   if not Assigned(Node) then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllError, '% - No node assigned.', [TisGrid1.Name]);
+      fLog.Add.Log(sllError, '% - No node assigned.', [TisGrid1.Name]);
     Exit;
   end;
 
@@ -1492,12 +1492,12 @@ function TFrmModuleSitesAndServices.GetSelectedObjects: TRawUtf8DynArray;
   begin
     result := nil;
     if Assigned(fLog) then
-      fLog.Log(sllTrace, 'Focus on TreeView', Self);
+      fLog.Add.Log(sllTrace, 'Focus on TreeView', Self);
 
     if not Assigned(TreeView1.Selected) then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllTrace, 'No selected node.', Self);
+        fLog.Add.Log(sllTrace, 'No selected node.', Self);
       Exit;
     end;
 
@@ -1512,11 +1512,11 @@ function TFrmModuleSitesAndServices.GetSelectedObjects: TRawUtf8DynArray;
   begin
     result := nil;
     if Assigned(fLog) then
-      fLog.Log(sllTrace, 'Focus on Grid', Self);
+      fLog.Add.Log(sllTrace, 'Focus on Grid', Self);
     if (TisGrid1.SelectedCount <= 0) then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllTrace, 'No selected item', Self);
+        fLog.Add.Log(sllTrace, 'No selected item', Self);
       Exit;
     end;
 
@@ -1552,7 +1552,7 @@ begin
   end
   else
     if Assigned(fLog) then
-      fLog.Log(sllWarning, 'Focus is not on grid nor tree.', Self);
+      fLog.Add.Log(sllWarning, 'Focus is not on grid nor tree.', Self);
 end;
 
 function TFrmModuleSitesAndServices.GetFocusedObject(OnlyContainer: Boolean
@@ -1568,7 +1568,7 @@ var
     if not Assigned(Row) or not Row^.Exists('distinguishedName') then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllTrace, 'No focused Row on Grid', Self);
+        fLog.Add.Log(sllTrace, 'No focused Row on Grid', Self);
       Exit;
     end;
 
@@ -1581,7 +1581,7 @@ var
     if not Assigned(TreeView1.Selected) then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllTrace, 'No node selected on TreeView', Self);
+        fLog.Add.Log(sllTrace, 'No node selected on TreeView', Self);
       Exit;
     end;
 
@@ -1604,7 +1604,7 @@ begin
   else
   begin
     if Assigned(fLog) then
-      fLog.Log(sllWarning, 'Focus is not on grid nor tree.', Self);
+      fLog.Add.Log(sllWarning, 'Focus is not on grid nor tree.', Self);
     Exit;
   end;
 
@@ -1621,7 +1621,7 @@ var
     if not Assigned(TreeView1.Selected) then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllTrace, 'No node selected', Self);
+        fLog.Add.Log(sllTrace, 'No node selected', Self);
       Exit;
     end;
 
@@ -1636,7 +1636,7 @@ begin
     if not Assigned(Row) or not Row^.Exists('objectClass') then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllTrace, 'Not assigned Row in grid or no objectClass', Self);
+        fLog.Add.Log(sllTrace, 'Not assigned Row in grid or no objectClass', Self);
       result := GetFocusedObjectClassInTree;
     end
     else
@@ -1649,7 +1649,7 @@ begin
   else
   begin
     if Assigned(fLog) then
-      fLog.Log(sllWarning, 'Focus is not on grid nor tree.', Self);
+      fLog.Add.Log(sllWarning, 'Focus is not on grid nor tree.', Self);
     Exit;
   end;
 end;
@@ -1771,9 +1771,9 @@ begin
 
   fEnabled := True;
   fUpdating := 0;
-  fLog := TADSSLog(TADSSLog.Add);
+  fLog := TADSSLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   fModule := TModuleADSS.Create(FrmRSAT.RSAT);
 

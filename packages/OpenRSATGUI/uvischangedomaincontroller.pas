@@ -19,7 +19,8 @@ uses
   mormot.core.base,
   mormot.core.log,
   mormot.core.variants,
-  mormot.net.ldap;
+  mormot.net.ldap,
+  ulog;
 
 type
 
@@ -73,7 +74,7 @@ type
 
   TChangeDomainController = class
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fSitesData: TDocVariantData;
 
     function GetSite(DistinguishedName: RawUtf8): RawUtf8;
@@ -113,7 +114,7 @@ type
     procedure TisGrid1DblClick(Sender: TObject);
     procedure TisGrid1KeyPress(Sender: TObject; var Key: char);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fChangeDomainController: TChangeDomainController;
     fSearchWord: RawUtf8;
     fAllowClose: Boolean;
@@ -215,7 +216,7 @@ procedure TThreadIsDCOnline.Execute;
 var
   LdapClient: TRsatLdapClient;
 begin
-  TSynLog.Add.Log(sllTrace, 'Is DC online?', self);
+  TOpenRSATLog.Add.Log(sllTrace, 'Is DC online?', self);
   fSettings.TargetHost := fDomainController;
   fSettings.KerberosSpn := '';
   fSettings.UserName := '';
@@ -226,10 +227,10 @@ begin
     LdapClient.Connect(); // Don't care about the success for an anonymous connection.
     if not Assigned(LdapClient.SearchObject('', '', 'dnsHostName')) then
     begin
-      TSynLog.Add.Log(sllTrace, 'Cannot retrieve root object "dnsHostName" attribute.', self);
+      TOpenRSATLog.Add.Log(sllTrace, 'Cannot retrieve root object "dnsHostName" attribute.', self);
       Exit;
     end;
-    TSynLog.Add.Log(sllTrace, 'DC is online!');
+    TOpenRSATLog.Add.Log(sllTrace, 'DC is online!');
     fSuccess := True;
   finally
     Synchronize(@SendResult);
@@ -286,7 +287,7 @@ begin
       if not Ldap.Search(Ldap.ConfigDN, False, '(objectClass=server)', ['distinguishedName', 'dNSHostName']) then
       begin
         if Assigned(fLog) then
-          fLog.Log(sllError, Ldap.ResultString);
+          fLog.Add.Log(sllError, Ldap.ResultString);
         Exit;
       end;
 
@@ -331,7 +332,7 @@ begin
       if not Ldap.Search(Ldap.ConfigDN, False, '(&(objectClass=nTDSDSA)(objectClass=applicationSettings))', ['options', 'msDS-Behavior-Version', 'distinguishedName']) then
       begin
         if Assigned(fLog) then
-          fLog.Log(sllError, 'Ldap Search Error: "%"', [Ldap.ResultString]);
+          fLog.Add.Log(sllError, 'Ldap Search Error: "%"', [Ldap.ResultString]);
         Exit;
       end;
 
@@ -510,9 +511,9 @@ begin
   fAllowClose := True;
 
   fChangeDomainController := TChangeDomainController.Create;
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'ChangeDomainController visual created.', Self);
+    fLog.Add.Log(sllTrace, 'ChangeDomainController visual created.', Self);
 end;
 
 destructor TVisChangeDomainController.Destroy;

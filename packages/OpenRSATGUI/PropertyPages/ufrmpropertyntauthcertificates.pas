@@ -13,7 +13,8 @@ uses
   mormot.core.log,
   mormot.core.text,
   upropertyframe,
-  uproperty, tis.ui.grid.core;
+  uproperty, tis.ui.grid.core,
+  ulog;
 
 type
 
@@ -42,7 +43,7 @@ type
     procedure Action_ViewUpdate(Sender: TObject);
     procedure TisGrid1DblClick(Sender: TObject);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
 
     procedure AddFromFiles(const FileNames: array of string);
@@ -172,7 +173,7 @@ begin
       if not CertX509.LoadFromDer(der) then
       begin
         if assigned(fLog) then
-          fLog.Log(sllWarning, 'Invalid certificate. (%)', [FilePath], Self);
+          fLog.Add.Log(sllWarning, 'Invalid certificate. (%)', [FilePath], Self);
         MessageDlg('Invalid Certificate', FormatUtf8('Certificate cannot be added. (%)', [FilePath]), mtWarning, mbOKCancel, 0);
         Continue;
       end;
@@ -188,9 +189,9 @@ constructor TFrmPropertyNTAuthCertificates.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'NTAuthCertificates';
 

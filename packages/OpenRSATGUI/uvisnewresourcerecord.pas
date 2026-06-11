@@ -22,7 +22,8 @@ uses
   mormot.core.log,
   mormot.core.base,
   ursatldapclient,
-  udns;
+  udns,
+  ulog;
 
 type
 
@@ -124,7 +125,7 @@ type
     fDcPrefix: String;
     fDistinguishedName: String;
     fDomainName: RawUtf8;
-    fLog: TSynLog;
+    fLog: TSynLogClass;
 
 
     function UpdateFQDN(HostName: RawUtf8): RawUtf8;
@@ -163,7 +164,7 @@ var
   DnsRecord: TDNSRecord;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'OK', Self);
+    fLog.Add.Log(sllTrace, 'OK', Self);
 
   DnsRecord.RecType := Ord(fRecordType);
   DnsRecord.Version := $05;
@@ -296,7 +297,7 @@ begin
       if not fLdapClient.Modify(DistinguishedName, lmoAdd, NewAttribute) then
       begin
         if Assigned(fLog) then
-          fLog.Log(sllError, 'Ldap Modify Error: %', [fLdapClient.ResultString]);
+          fLog.Add.Log(sllError, 'Ldap Modify Error: %', [fLdapClient.ResultString]);
         Exit;
       end;
     finally
@@ -315,7 +316,7 @@ begin
       if not fLdapClient.Add(DistinguishedName, NewAttributeList) then
       begin
         if Assigned(fLog) then
-          fLog.Log(sllError, 'Ldap Add Error: %', [fLdapClient.ResultString], Self);
+          fLog.Add.Log(sllError, 'Ldap Add Error: %', [fLdapClient.ResultString], Self);
         Exit;
       end;
     finally
@@ -341,7 +342,7 @@ begin
     on E: ExceptionInvalidIPFormat do
     begin
       if Assigned(fLog) then
-        fLog.Log(sllError, 'Invalid IP format: %', [E.Message], Self);
+        fLog.Add.Log(sllError, 'Invalid IP format: %', [E.Message], Self);
       MessageDlg(rsTitleInvalidFormat, rsInvalidIpFormat, mtError, mbOKCancel, 0);
       Exit;
     end;
@@ -435,9 +436,9 @@ var
 begin
   Inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   fSerial := Serial;
   fLdapClient := LdapClient;
@@ -451,7 +452,7 @@ begin
   PageControl1.ActivePage := nil;
 
   if Assigned(fLog) then
-    fLog.Log(sllInfo, 'Record Type: %', [fRecordType], Self);
+    fLog.Add.Log(sllInfo, 'Record Type: %', [fRecordType], Self);
 
   // Active a page
   case fRecordType of

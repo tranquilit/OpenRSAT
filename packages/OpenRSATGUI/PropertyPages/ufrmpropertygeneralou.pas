@@ -17,7 +17,8 @@ uses
   mormot.core.variants,
   uhelpersui,
   uproperty,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -48,7 +49,7 @@ type
     procedure Edit_STChange(Sender: TObject);
     procedure Memo_StreetChange(Sender: TObject);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
 
     fCountryCodes: TDocVariantData;
@@ -82,7 +83,7 @@ begin
   if not Assigned(PCountryCode) then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllWarning, 'Cannot retrieve CountryCode', Self);
+      fLog.Add.Log(sllWarning, 'Cannot retrieve CountryCode', Self);
     Exit;
   end;
   c := PCountryCode^.U['alpha2'];
@@ -143,9 +144,9 @@ constructor TFrmPropertyGeneralOU.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   LoadCountryCodes;
   Caption := 'General';
@@ -154,7 +155,7 @@ end;
 procedure TFrmPropertyGeneralOU.Update(Props: TProperty);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 

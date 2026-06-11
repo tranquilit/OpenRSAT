@@ -16,7 +16,8 @@ uses
   mormot.core.variants,
   uhelpersui,
   uproperty,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -37,7 +38,7 @@ type
     procedure ComboBox_SiteChange(Sender: TObject);
     procedure Edit_DescriptionChange(Sender: TObject);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
     fSubnets: TDocVariantData;
 
@@ -94,9 +95,9 @@ begin
 
   fSubnets.Init();
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'General';
 end;
@@ -104,7 +105,7 @@ end;
 procedure TFrmPropertyGeneralSubnet.Update(Props: TProperty);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 

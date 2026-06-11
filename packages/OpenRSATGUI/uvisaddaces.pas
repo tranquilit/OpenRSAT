@@ -24,7 +24,8 @@ uses
   mormot.net.ldap,
   mormot.core.log,
   mormot.core.variants,
-  ursatldapclient;
+  ursatldapclient,
+  ulog;
 
 type
 
@@ -177,7 +178,7 @@ var
   data: TDocVariantData;
   rowData: PDocVariantData;
 begin
-  aLog := TSynLog.Enter('Fill Properties ComboBox', []);
+  aLog := TOpenRSATLog.Enter('Fill Properties ComboBox', []);
   ComboBox_Property.Items.BeginUpdate;
   ComboBox_Property.Items.Clear;
   if Assigned(aLog) then
@@ -221,7 +222,7 @@ var
   rowData: PDocVariantData;
   ObjectClassArray: TRawUtf8DynArray;
 begin
-  aLog := TSynLog.Enter('Fill Inheritance ComboBox.', []);
+  aLog := TOpenRSATLog.Enter('Fill Inheritance ComboBox.', []);
   ComboBox_Inheritance.Items.BeginUpdate;
   ComboBox_Inheritance.Items.Clear;
   if Assigned(aLog) then

@@ -113,7 +113,7 @@ type
       var AllowExpansion: Boolean);
     procedure TreeView1GetImageIndex(Sender: TObject; Node: TTreeNode);
   private
-    fLog: TADSILog;
+    fLog: TSynLogClass;
 
     fModule: TModuleADSI;
 
@@ -213,7 +213,7 @@ end;
 procedure TFrmModuleADSI.Timer_TreeChangeNodeTimer(Sender: TObject);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Timer Tree Change', Self);
+    fLog.Add.Log(sllTrace, 'Timer Tree Change', Self);
 
   Timer_TreeChangeNode.Enabled := False;
 
@@ -283,14 +283,14 @@ begin
     if not SelectedObject^.Exists('distinguishedName') then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllWarning, 'No distinguishedName');
+        fLog.Add.Log(sllWarning, 'No distinguishedName');
       continue;
     end;
 
     if not FrmRSAT.LdapClient.Delete(SelectedObject^.S['distinguishedName']) then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllError, FrmRSAT.LdapClient.ResultString);
+        fLog.Add.Log(sllError, FrmRSAT.LdapClient.ResultString);
       continue;
     end;
   end;
@@ -461,7 +461,7 @@ end;
 procedure TFrmModuleADSI.TreeView1Change(Sender: TObject; Node: TTreeNode);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Tree Change', Self);
+    fLog.Add.Log(sllTrace, 'Tree Change', Self);
 
   if Timer_TreeChangeNode.Enabled then
     Timer_TreeChangeNode.Enabled := False;
@@ -520,7 +520,7 @@ begin
       if not FrmRSAT.LdapClient.Search(Node.DistinguishedName, False, '', ['description', 'distinguishedName', 'name', 'objectClass']) then
       begin
         if Assigned(fLog) then
-          fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, FrmRSAT.LdapClient.ResultString]);
+          fLog.Add.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, FrmRSAT.LdapClient.ResultString]);
         Exit;
       end;
 
@@ -592,7 +592,7 @@ begin
       if not FrmRSAT.LdapClient.Search(Node.DistinguishedName, False, '', ['description', 'distinguishedName', 'name', 'objectClass']) then
       begin
         if Assigned(fLog) then
-          fLog.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, FrmRSAT.LdapClient.ResultString]);
+          fLog.Add.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, FrmRSAT.LdapClient.ResultString]);
         Exit;
       end;
 
@@ -660,7 +660,7 @@ begin
     if not Assigned(Attributes) then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllError, '% - Ldap Search Object Error: "%"', [Self.Name, FrmRSAT.LdapClient.ResultString]);
+        fLog.Add.Log(sllError, '% - Ldap Search Object Error: "%"', [Self.Name, FrmRSAT.LdapClient.ResultString]);
       Exit;
     end;
 
@@ -698,17 +698,17 @@ constructor TFrmModuleADSI.Create(TheOwner: TComponent);
 begin
   Inherited Create(TheOwner);
 
-  fLog := TADSILog(TADSILog.Add);
+  fLog := TADSILog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Create', [Self.Name]);
+    fLog.Add.Log(sllTrace, '% - Create', [Self.Name]);
 
   fModule := TModuleADSI.Create(FrmRSAT.RSAT);
 
-  fLog.Log(sllTrace, 'Created');
+  fLog.Add.Log(sllTrace, 'Created');
   Image1.Visible := not IsDarkMode;
-  fLog.Log(sllTrace, 'visible1');
+  fLog.Add.Log(sllTrace, 'visible1');
   Image2.Visible := not Image1.Visible;
-  fLog.Log(sllTrace, 'visible2');
+  fLog.Add.Log(sllTrace, 'visible2');
 end;
 
 destructor TFrmModuleADSI.Destroy;

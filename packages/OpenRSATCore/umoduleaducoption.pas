@@ -10,7 +10,8 @@ uses
   IniFiles,
   mormot.core.base,
   mormot.core.log,
-  uoption;
+  uoption,
+  ulog;
 
 type
 
@@ -18,7 +19,7 @@ type
 
   TModuleADUCOption = class(TOption)
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fChanged: Boolean;
 
     fObservers: Array of TProcRsatOptionOfObject;
@@ -132,9 +133,9 @@ end;
 
 constructor TModuleADUCOption.Create;
 begin
-  fLog := TSynLog.Add;
+  fLog := TADUCLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   fObservers := [];
   fChanged := False;
@@ -151,7 +152,7 @@ const
   DEFAULT_TREE_OBJECT_CLASSES = 'container;organizationalUnit;lostAndFound;builtinDomain;msDS-QuotaContainer;msTPM-InformationObjectsContainer';
 begin
   if Assigned(fLog) then
-    fLog.Log(sllDebug, 'Load', Self);
+    fLog.Add.Log(sllDebug, 'Load', Self);
 
   fSearchPageSize := IniFile.ReadInt64(Section, 'SearchPageSize', 1000);
   fSearchPageNumber := IniFile.ReadInt64(Section, 'SearchPageNumber', 2);
@@ -169,7 +170,7 @@ const
   SECTION = 'ADUC';
 begin
   if Assigned(fLog) then
-    fLog.Log(sllDebug, 'Save', Self);
+    fLog.Add.Log(sllDebug, 'Save', Self);
 
   IniFile.WriteInt64(SECTION, 'SearchPageSize', fSearchPageSize);
   IniFile.WriteInt64(SECTION, 'SearchPageNumber', fSearchPageNumber);
@@ -190,7 +191,7 @@ end;
 procedure TModuleADUCOption.RegisterObserver(Observer: TProcRsatOptionOfObject);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'RegisterObserver', Self);
+    fLog.Add.Log(sllTrace, 'RegisterObserver', Self);
 
   MultiEventAdd(fObservers, TMethod(Observer));
 end;
@@ -198,7 +199,7 @@ end;
 procedure TModuleADUCOption.RemoveObserver(Observer: TProcRsatOptionOfObject);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'RemoveObserver', Self);
+    fLog.Add.Log(sllTrace, 'RemoveObserver', Self);
 
   MultiEventRemove(fObservers, TMethod(Observer));
 end;

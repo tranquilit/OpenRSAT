@@ -10,7 +10,8 @@ uses
   IniFiles,
   mormot.core.base,
   mormot.core.log,
-  uoption;
+  uoption,
+  ulog;
 
 type
 
@@ -18,7 +19,7 @@ type
 
   TModuleADSSOption = class(TOption)
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fChanged: Boolean;
 
     fObservers: Array of TProcRsatOptionOfObject;
@@ -67,7 +68,7 @@ var
   Observer: TProcRsatOptionOfObject;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Notify', Self);
+    fLog.Add.Log(sllTrace, 'Notify', Self);
 
   for Observer in fObservers do
     Observer(Self);
@@ -75,9 +76,9 @@ end;
 
 constructor TModuleADSSOption.Create;
 begin
-  fLog := TSynLog.Add;
+  fLog := TADSSLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   fObservers := [];
   fChanged := False;
@@ -93,7 +94,7 @@ const
   Section = 'ADSS';
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Load', Self);
+    fLog.Add.Log(sllTrace, 'Load', Self);
 
   fShowService := IniFile.ReadBool(Section, 'ShowService', False);
 
@@ -106,7 +107,7 @@ const
   Section = 'ADSS';
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Save', Self);
+    fLog.Add.Log(sllTrace, 'Save', Self);
 
   IniFile.WriteBool(Section, 'ShowService', fShowService);
 
@@ -123,7 +124,7 @@ procedure TModuleADSSOption.RegisterObserver(Observer: TProcRsatOptionOfObject
   );
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'RegisterObserver', Self);
+    fLog.Add.Log(sllTrace, 'RegisterObserver', Self);
 
   MultiEventAdd(fObservers, TMethod(Observer));
 end;
@@ -131,7 +132,7 @@ end;
 procedure TModuleADSSOption.RemoveObserver(Observer: TProcRsatOptionOfObject);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'RemoveObserver', Self);
+    fLog.Add.Log(sllTrace, 'RemoveObserver', Self);
 
   MultiEventRemove(fObservers, TMethod(Observer));
 end;

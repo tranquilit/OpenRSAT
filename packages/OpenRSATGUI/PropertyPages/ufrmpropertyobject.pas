@@ -18,7 +18,8 @@ uses
   mormot.core.os.security,
   uproperty,
   ucommon,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -26,7 +27,7 @@ type
 
   TPropertyObject = class
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
 
     function IsSelfProtected(PSecDesc: PSecurityDescriptor; Sid: RawSid): Boolean;
     function IsParentProtected(Props: TProperty; Sid: RawSid): Boolean;
@@ -67,7 +68,7 @@ type
     procedure Action_ProtectionExecute(Sender: TObject);
   private
     fPropertyObject: TPropertyObject;
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
   public
     constructor Create(TheOwner: TComponent); override;
@@ -136,7 +137,7 @@ begin
   if not Assigned(SecDescAddOrUpdateACE(PSecDesc, ATTR_UUID[kaNull], Sid, satAccessDenied, [samDelete, samDeleteTree])) then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllWarning, 'Cannot add ACE', Self);
+      fLog.Add.Log(sllWarning, 'Cannot add ACE', Self);
     Exit;
   end;
   result := True;
@@ -155,7 +156,7 @@ begin
   if i < 0 then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllWarning, 'Cannot find ACE', Self);
+      fLog.Add.Log(sllWarning, 'Cannot find ACE', Self);
     Dialogs.MessageDlg(rsTitleNotFound, 'Cannot find ACE', mtError, [mbOK], 0);
     Exit;
   end;
@@ -165,9 +166,9 @@ end;
 
 constructor TPropertyObject.Create;
 begin
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 end;
 
 function TPropertyObject.IsProtected(Props: TProperty): Boolean;
@@ -217,9 +218,9 @@ begin
 
   fPropertyObject := TPropertyObject.Create;
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'Object';
 end;

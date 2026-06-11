@@ -15,7 +15,8 @@ uses
   mormot.core.log,
   uhelpersui,
   uproperty,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -41,7 +42,7 @@ type
     Panel3: TPanel;
     Shape1: TShape;
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
     function GetArgByPosition(Attribute: RawUtf8; n: Integer): RawUtf8;
     function RemoveCN(Value: RawUtf8): RawUtf8;
@@ -61,9 +62,9 @@ constructor TFrmPropertyGeneralNTDSSiteSettings.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'General';
 end;
@@ -73,7 +74,7 @@ var
   att: TLdapAttribute;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 

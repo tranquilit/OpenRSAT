@@ -16,7 +16,8 @@ uses
   mormot.core.log,
   umoduleadssoption,
   uoption,
-  ufrmoption;
+  ufrmoption,
+  ulog;
 
 type
 
@@ -28,7 +29,7 @@ type
     Panel1: TPanel;
     procedure CheckBox1Change(Sender: TObject);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fChanged: Boolean;
 
     fOption: TModuleADSSOption;
@@ -87,12 +88,12 @@ var
   IniFile: TIniFile;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Load', Self);
+    fLog.Add.Log(sllTrace, 'Load', Self);
 
   if not Assigned(Self) or not Assigned(Option) then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllWarning, 'Could not be loaded: Self of Options not assigned', Self);
+      fLog.Add.Log(sllWarning, 'Could not be loaded: Self of Options not assigned', Self);
     Exit;
   end;
 
@@ -113,7 +114,7 @@ var
   IniFile: TIniFile;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Save', Self);
+    fLog.Add.Log(sllTrace, 'Save', Self);
 
   Option.ShowService := ShowService;
 

@@ -13,7 +13,8 @@ uses
   mormot.core.base,
   mormot.core.log,
   uproperty,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -28,7 +29,7 @@ type
     Label_OperatingSystemVersion: TLabel;
     Panel1: TPanel;
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
   public
     constructor Create(TheOwner: TComponent); override;
@@ -47,9 +48,9 @@ constructor TFrmPropertyOperatingSystem.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'Operating System';
 end;
@@ -57,7 +58,7 @@ end;
 procedure TFrmPropertyOperatingSystem.Update(Props: TProperty);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 

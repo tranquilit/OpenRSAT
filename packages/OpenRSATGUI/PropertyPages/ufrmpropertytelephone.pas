@@ -14,7 +14,8 @@ uses
   mormot.core.base,
   mormot.core.log,
   uproperty,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -51,7 +52,7 @@ type
     procedure Edit_PagerChange(Sender: TObject);
     procedure Memo_InfoChange(Sender: TObject);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
 
     procedure ChangeOther(OtherName, OtherAttributeName: RawUtf8);
@@ -162,9 +163,9 @@ constructor TFrmPropertyTelephone.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'Telephone';
 end;
@@ -172,7 +173,7 @@ end;
 procedure TFrmPropertyTelephone.Update(Props: TProperty);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 

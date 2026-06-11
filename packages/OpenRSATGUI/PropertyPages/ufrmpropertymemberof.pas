@@ -21,7 +21,8 @@ uses
   tis.ui.grid.core,
   ursatldapclient,
   uproperty, VirtualTrees,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -29,7 +30,7 @@ type
 
   TPropertyMemberOf = class
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
   public
     constructor Create;
     destructor Destroy; override;
@@ -73,7 +74,7 @@ type
       aRows: PDocVariantData; var aAskUser, aAbort: Boolean);
     procedure Grid_MemberOfDblClick(Sender: TObject);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fPropertyMemberOf: TPropertyMemberOf;
     fProperty: TProperty;
 
@@ -106,9 +107,9 @@ uses
 
 constructor TPropertyMemberOf.Create;
 begin
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 end;
 
 destructor TPropertyMemberOf.Destroy;
@@ -208,9 +209,9 @@ begin
 
   fPropertyMemberOf := TPropertyMemberOf.Create;
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'Member Of';
 end;

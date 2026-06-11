@@ -19,7 +19,8 @@ uses
   mormot.net.ldap,
   VirtualTrees,
   Controls,
-  ufrmmoduleaduc;
+  ufrmmoduleaduc,
+  ulog;
 
 type
 
@@ -256,7 +257,7 @@ var
   aLog: ISynLog;
   DN: RawUtf8;
 begin
-  aLog := TSynLog.Enter('Show in view', []);
+  aLog := TOpenRSATLog.Enter('Show in view', []);
 
   if not Assigned(TisGrid_Result.FocusedRow) or
      not TisGrid_Result.FocusedRow^.Exists('distinguishedName') then
@@ -398,7 +399,7 @@ begin
       Exit;
   end;
 
-  aLog := TSynLog.Enter('Search', []);
+  aLog := TOpenRSATLog.Enter('Search', []);
   if not TryStrToInt(Edit_PageSize.Text, pageSize) or
      not TryStrToInt(Edit_PageCount.Text, pageCount) then
     aLog.Log(sllWarning, 'Cannot search.');

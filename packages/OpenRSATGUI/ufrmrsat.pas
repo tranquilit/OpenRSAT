@@ -158,7 +158,7 @@ var
   pwd: TFormConnectConfigs;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute', [Action_LdapConnect.Name]);
+    fLog.Add.Log(sllTrace, '% - Execute', [Action_LdapConnect.Name]);
 
   // Close old connection
   if Assigned(LdapClient) and LdapClient.Connected then
@@ -167,7 +167,7 @@ begin
   if (LdapConfigs.LastConfig = '') then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllInfo, 'No last config. Open options...');
+      fLog.Add.Log(sllInfo, 'No last config. Open options...');
     Action_LdapOptions.Execute;
     Exit;
   end;
@@ -181,7 +181,7 @@ begin
       if (pwd.ShowModal <> mrOK) then
       begin
         if Assigned(fLog) then
-          fLog.Log(sllError, 'Invalid connection entries.');
+          fLog.Add.Log(sllError, 'Invalid connection entries.');
         Exit;
       end;
     finally
@@ -209,7 +209,7 @@ begin
     begin
       Screen.Cursor := crDefault;
       if Assigned(fLog) then
-        fLog.Log(sllError, 'Ldap connection failed: %', [LdapClient.ResultString]);
+        fLog.Add.Log(sllError, 'Ldap connection failed: %', [LdapClient.ResultString]);
       Action_LdapOptions.Execute();
       Exit;
     end;
@@ -237,7 +237,7 @@ end;
 procedure TFrmRSAT.Action_LdapDisconnectExecute(Sender: TObject);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute', [Action_LdapDisconnect.Name]);
+    fLog.Add.Log(sllTrace, '% - Execute', [Action_LdapDisconnect.Name]);
 
   LdapClient.Close;
 end;
@@ -252,7 +252,7 @@ var
   ConnectionConfig: TFormConnectConfigs;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute', [Action_LdapOptions.Name]);
+    fLog.Add.Log(sllTrace, '% - Execute', [Action_LdapOptions.Name]);
 
   ConnectionConfig := TFormConnectConfigs.Create(self, LdapConfigs);
   try
@@ -275,7 +275,7 @@ end;
 procedure TFrmRSAT.Action_OptionsExecute(Sender: TObject);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Execute');
+    fLog.Add.Log(sllTrace, '% - Execute');
 
   With TVisOptions.Create(Self) do
   try
@@ -317,7 +317,7 @@ end;
 procedure TFrmRSAT.PageControl1Change(Sender: TObject);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Change', [Self.Name]);
+    fLog.Add.Log(sllTrace, '% - Change', [Self.Name]);
 
   fFrmModules.Change(PageControl1.ActivePage.Name);
 end;
@@ -346,7 +346,7 @@ begin
   except
     on E: EResNotFound do
       if Assigned(fLog) then
-        fLog.Log(sllWarning, 'Translation resource not found', Self);
+        fLog.Add.Log(sllWarning, 'Translation resource not found', Self);
     on E: Exception do
       raise E;
   end;
@@ -369,7 +369,7 @@ var
     if not FrameModule.ModuleEnabled then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllInfo, '% - Module "%" not enabled.', [Self.Name, FrameModule.ModuleName]);
+        fLog.Add.Log(sllInfo, '% - Module "%" not enabled.', [Self.Name, FrameModule.ModuleName]);
       Exit;
     end;
 
@@ -384,7 +384,7 @@ var
     PageControl1.ShowTabs := (PageControl1.PageCount <> 1);
 
     if Assigned(fLog) then
-      fLog.Log(sllInfo, '% - Module "%" loaded.', [Self.Name, FrameModule.ModuleName]);
+      fLog.Add.Log(sllInfo, '% - Module "%" loaded.', [Self.Name, FrameModule.ModuleName]);
   end;
 
 begin
@@ -479,7 +479,7 @@ end;
 destructor TFrmRSAT.Destroy;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Destroy', [Self.Name]);
+    fLog.Add.Log(sllTrace, '% - Destroy', [Self.Name]);
 
   FreeAndNil(fRSAT);
   FreeAndNil(fFrmRSATOption);
@@ -493,7 +493,7 @@ end;
 function TFrmRSAT.RegisterModule(FrameModule: TFrameModule): boolean;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Register Module', [Self.Name]);
+    fLog.Add.Log(sllTrace, '% - Register Module', [Self.Name]);
 
   result := FrmModules.RegisterModule(FrameModule);
 end;

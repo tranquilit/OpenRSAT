@@ -33,7 +33,8 @@ uses
   ucommon,
   ucoredatamodule,
   upropertyframe,
-  uproperty;
+  uproperty,
+  ulog;
 
 type
 
@@ -734,7 +735,7 @@ end;
 
 procedure TVisProperties.PageControlChange(Sender: TObject);
 begin
-  TSynLog.Add.Log(sllDebug, FormatUtf8('TVisProperties: PageControlChange: %', [PageControl.ActivePage.Name]));
+  TOpenRSATLog.Add.Log(sllDebug, FormatUtf8('TVisProperties: PageControlChange: %', [PageControl.ActivePage.Name]));
 end;
 
 procedure TVisProperties.Action_ApplyExecute(Sender: TObject);

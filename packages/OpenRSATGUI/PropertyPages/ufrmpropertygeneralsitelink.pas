@@ -21,7 +21,8 @@ uses
   uproperty,
   ursatldapclient,
   upropertyframe,
-  ugeneralpropertysitelink;
+  ugeneralpropertysitelink,
+  ulog;
 
 type
   { TFrmPropertyGeneralSiteLink }
@@ -61,7 +62,7 @@ type
   TLdapResultArray = array of TLdapResult;
   
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fSiteLinkLogic: TGeneralPropertySiteLink;
     
     procedure LoadListBox;
@@ -134,9 +135,9 @@ constructor TFrmPropertyGeneralSiteLink.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'General';
 end;

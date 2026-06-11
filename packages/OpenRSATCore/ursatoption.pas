@@ -10,7 +10,8 @@ uses
   IniFiles,
   mormot.core.base,
   mormot.core.log,
-  uoption;
+  uoption,
+  ulog;
 
 type
 
@@ -21,7 +22,7 @@ type
   TRsatOption = class(TOption)
   private
     // If assigned, enable logging activities
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fUpdating: Integer;
     fOptionsPath: String;
     fChanged: Boolean;
@@ -67,7 +68,7 @@ var
   Observer: TProcRsatOptionOfObject;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Notify', Self);
+    fLog.Add.Log(sllTrace, 'Notify', Self);
 
   for Observer in fObservers do
     Observer(Self);
@@ -111,19 +112,19 @@ end;
 
 constructor TRsatOption.Create;
 begin
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   fOptionsPath := MakePath([GetAppConfigDir(False), 'options.ini']);
   if Assigned(fLog) then
-    fLog.Log(sllInfo, 'Options path: %', [fOptionsPath], Self);
+    fLog.Add.Log(sllInfo, 'Options path: %', [fOptionsPath], Self);
 end;
 
 procedure TRsatOption.Load(IniFile: TIniFile);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Load', Self);
+    fLog.Add.Log(sllTrace, 'Load', Self);
 
   // Load own options.
   fTheme := TThemeMode(IniFile.ReadInt64('General', 'theme', Ord(tmSystem)));
@@ -140,7 +141,7 @@ var
   IniFile: TIniFile;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllInfo, 'Load options from: %', [fOptionsPath], Self);
+    fLog.Add.Log(sllInfo, 'Load options from: %', [fOptionsPath], Self);
 
   // Create ini file
   IniFile := TIniFile.Create(fOptionsPath);
@@ -154,7 +155,7 @@ end;
 procedure TRsatOption.Save(IniFile: TIniFile);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Save', Self);
+    fLog.Add.Log(sllTrace, 'Save', Self);
 
   // Save own options.
   IniFile.WriteInt64('General', 'theme', Ord(fTheme));
@@ -171,7 +172,7 @@ var
   IniFile: TIniFile;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllInfo, 'Save options to: %', [fOptionsPath], Self);
+    fLog.Add.Log(sllInfo, 'Save options to: %', [fOptionsPath], Self);
 
   // Create ini file
   IniFile := TIniFile.Create(fOptionsPath);
@@ -191,7 +192,7 @@ end;
 procedure TRsatOption.BeginUpdate;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'BeginUpdate', Self);
+    fLog.Add.Log(sllTrace, 'BeginUpdate', Self);
 
   Inc(fUpdating);
 end;
@@ -199,7 +200,7 @@ end;
 procedure TRsatOption.EndUpdate;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'EndUpdate', Self);
+    fLog.Add.Log(sllTrace, 'EndUpdate', Self);
 
   Dec(fUpdating);
 end;
@@ -207,7 +208,7 @@ end;
 procedure TRsatOption.RegisterObserver(Observer: TProcRsatOptionOfObject);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'RegisterObserver', Self);
+    fLog.Add.Log(sllTrace, 'RegisterObserver', Self);
 
   MultiEventAdd(fObservers, TMethod(Observer));
 end;
@@ -215,7 +216,7 @@ end;
 procedure TRsatOption.RemoveObserver(Observer: TProcRsatOptionOfObject);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'RemoveObserver', Self);
+    fLog.Add.Log(sllTrace, 'RemoveObserver', Self);
 
   MultiEventRemove(fObservers, TMethod(Observer));
 end;

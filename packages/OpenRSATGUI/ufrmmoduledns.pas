@@ -136,7 +136,7 @@ type
     procedure TreeDNSMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
   private
-    fLog: TADDNSLog;
+    fLog: TSynLogClass;
     fTreeSelectionHistory: TTreeSelectionHistory;
 
     fModule: TModuleADDNS;
@@ -495,7 +495,7 @@ end;
 procedure TFrmModuleDNS.TreeDNSChange(Sender: TObject; Node: TTreeNode);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Change Node', Self);
+    fLog.Add.Log(sllTrace, 'Change Node', Self);
 
   GridDNS.Clear;
   if Timer_TreeChangeNode.Enabled then
@@ -596,7 +596,7 @@ end;
 procedure TFrmModuleDNS.Timer_TreeChangeNodeTimer(Sender: TObject);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Timer Tree Change', Self);
+    fLog.Add.Log(sllTrace, 'Timer Tree Change', Self);
 
   Timer_TreeChangeNode.Enabled := False;
 
@@ -605,7 +605,7 @@ begin
   if not Assigned(TreeDNS.Selected) then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllInfo, 'No node Assigned', Self);
+      fLog.Add.Log(sllInfo, 'No node Assigned', Self);
     Exit;
   end;
 
@@ -756,7 +756,7 @@ var
       if not FrmRSAT.LdapClient.Search(DC, False, Filter, ['dnsRecord']) then
       begin
         if Assigned(fLog) then
-          fLog.Log(sllError, '% - Ldap Search Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
+          fLog.Add.Log(sllError, '% - Ldap Search Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
         Exit;
       end;
 
@@ -773,22 +773,22 @@ var
         if AttributesEquals(AttributeToRemove, SearchResult.Find('dnsRecord')) then
         begin
           if Assigned(fLog) then
-            fLog.Log(sllInfo, '% - Delete "%"', [Action_Delete.Caption, SearchResult.ObjectName]);
+            fLog.Add.Log(sllInfo, '% - Delete "%"', [Action_Delete.Caption, SearchResult.ObjectName]);
           if not FrmRSAT.LdapClient.Delete(SearchResult.ObjectName) then
           begin
             if Assigned(fLog) then
-              fLog.Log(sllError, '% - Ldap Delete Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
+              fLog.Add.Log(sllError, '% - Ldap Delete Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
             Exit;
           end;
         end
         else
         begin
           if Assigned(fLog) then
-            fLog.Log(sllInfo, '% - Modify "%"', [Action_Delete.Caption, SearchResult.ObjectName]);
+            fLog.Add.Log(sllInfo, '% - Modify "%"', [Action_Delete.Caption, SearchResult.ObjectName]);
           if not FrmRSAT.LdapClient.Modify(SearchResult.ObjectName, lmoDelete, AttributeToRemove) then
           begin
             if Assigned(fLog) then
-              fLog.Log(sllError, '% - Ldap Modify Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
+              fLog.Add.Log(sllError, '% - Ldap Modify Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
             Exit;
           end;
         end;
@@ -802,7 +802,7 @@ begin
   if MessageDlg(rsTitleDeleteObject, rsDeleteObjectsConfirmation, mtConfirmation, mbYesNoCancel, 0) <> mrYes then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllInfo, 'Action cancelled by user.', Self);
+      fLog.Add.Log(sllInfo, 'Action cancelled by user.', Self);
     Exit;
   end;
 
@@ -909,9 +909,9 @@ constructor TFrmModuleDNS.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TADDNSLog(TADDNSLog.Add);
+  fLog := TADDNSLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Create', [Self.Name]);
+    fLog.Add.Log(sllTrace, '% - Create', [Self.Name]);
 
   fModule := TModuleADDNS.Create(FrmRSAT.RSAT);
 

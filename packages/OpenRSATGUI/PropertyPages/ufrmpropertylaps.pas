@@ -17,7 +17,8 @@ uses
   mormot.core.base,
   mormot.core.log,
   uproperty,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -78,7 +79,7 @@ type
     procedure Action_v2_ExpireNowExecute(Sender: TObject);
     procedure Action_v2_ShowPasswordExecute(Sender: TObject);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
   public
     constructor Create(TheOwner: TComponent); override;
@@ -165,9 +166,9 @@ constructor TFrmPropertyLAPS.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'LAPS';
 end;
@@ -177,7 +178,7 @@ var
   LAPSInformation: PLAPSInformation;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 
@@ -187,7 +188,7 @@ begin
   if not Assigned(LAPSInformation) then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllTrace, 'No laps information.', Self);
+      fLog.Add.Log(sllTrace, 'No laps information.', Self);
     Exit;
   end;
 

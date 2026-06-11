@@ -15,7 +15,8 @@ uses
   mormot.core.log,
   uhelpersui,
   uproperty, tis.ui.grid.core,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -32,7 +33,7 @@ type
     Panel_Content: TPanel;
     Panel_Header: TPanel;
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
   public
     constructor Create(TheOwner: TComponent); override;
@@ -49,9 +50,9 @@ constructor TFrmPropertyGeneralSite.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'General';
 end;
@@ -59,7 +60,7 @@ end;
 procedure TFrmPropertyGeneralSite.Update(Props: TProperty);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 

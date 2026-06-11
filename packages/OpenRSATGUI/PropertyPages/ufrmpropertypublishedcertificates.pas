@@ -20,7 +20,8 @@ uses
   uproperty,
   tis.ui.grid.core,
   VirtualTrees,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -56,7 +57,7 @@ type
     procedure Action_ViewExecute(Sender: TObject);
     procedure Action_ViewUpdate(Sender: TObject);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
 
     function CertToDoc(s: RawByteString; out PublishedCertificate: TPublishedCertificate): Boolean;
@@ -123,7 +124,7 @@ begin
     if not CertToDoc(FileContent, PublishedCertificate) then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllWarning, 'Invalid certificate. (%)', [FilePath], Self);
+        fLog.Add.Log(sllWarning, 'Invalid certificate. (%)', [FilePath], Self);
       MessageDlg('Invalid Certificate', FormatUtf8('Certificate cannot be added. (%)', [FilePath]), mtWarning, mbOKCancel, 0);
       continue;
     end;
@@ -211,13 +212,13 @@ begin
     if not Certx509.LoadFromDer(der) then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllWarning, 'Cannot load from DER certificate.');
+        fLog.Add.Log(sllWarning, 'Cannot load from DER certificate.');
       Exit;
     end;
     if (Certx509.SignatureAlgorithm = xsaNone) then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllWarning, 'Cannot find certificate signature algorithm.');
+        fLog.Add.Log(sllWarning, 'Cannot find certificate signature algorithm.');
       Exit;
     end;
 
@@ -241,9 +242,9 @@ constructor TFrmPropertyPublishedCertificates.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'Published Certificates';
 
@@ -259,7 +260,7 @@ var
   i: Integer;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 
@@ -276,13 +277,13 @@ begin
       if UserCert = '' then
       begin
         if Assigned(fLog) then
-          fLog.Log(sllInfo, 'Empty cert in list. Continue.');
+          fLog.Add.Log(sllInfo, 'Empty cert in list. Continue.');
         continue;
       end;
       if not CertToDoc(UserCert, PublishedCertificate) then
       begin
         if Assigned(fLog) then
-          fLog.Log(sllWarning, 'Cannot convert certificate to TPublishedCertificate.');
+          fLog.Add.Log(sllWarning, 'Cannot convert certificate to TPublishedCertificate.');
         continue;
       end;
       Row.AddValue('certificate', PublishedCertificate.Certificate);

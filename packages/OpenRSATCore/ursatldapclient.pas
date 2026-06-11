@@ -12,7 +12,8 @@ uses
   mormot.core.os.security,
   mormot.core.variants,
   mormot.net.ldap,
-  ucommon;
+  ucommon,
+  ulog;
 
 type
 
@@ -324,7 +325,7 @@ var
   parent, filter: RawUtf8;
   res: TLdapResult;
 begin
-  TSynLog.Add.Log(sllDebug, FormatUtf8('Start ordering ACL for %...', [aDN]));
+  TOpenRSATLog.Add.Log(sllDebug, FormatUtf8('Start ordering ACL for %...', [aDN]));
   sdArr := [];
 
   parent := aDN;
@@ -357,7 +358,7 @@ begin
 
   // Order acl
   InnerOrderAcl(aACL, sdArr);
-  TSynLog.Add.Log(sllDebug, 'End ordering ACL for.');
+  TOpenRSATLog.Add.Log(sllDebug, 'End ordering ACL for.');
 end;
 
 { TRsatLdapClient }
@@ -467,7 +468,7 @@ var
   aLog: ISynLog;
 begin
   result := False;
-  aLog := TSynLog.Enter('Move Ldap Entry', []);
+  aLog := TOpenRSATLog.Enter('Move Ldap Entry', []);
 
   assert(oldDN <> '', 'OldDN is empty.');
   assert(newDN <> '', 'NewDN is empty.');
@@ -495,7 +496,7 @@ var
   aLog: ISynLog;
 begin
   result := False;
-  aLog := TSynLog.Enter('Rename Ldap Entry', []);
+  aLog := TOpenRSATLog.Enter('Rename Ldap Entry', []);
 
   assert(DN <> '', 'DN is empty');
   assert(newName <> '', 'newName is empty');
@@ -643,7 +644,7 @@ var
   parent, filter: RawUtf8;
   res: TLdapResult;
 begin
-  TSynLog.Add.Log(sllDebug, FormatUtf8('Start ordering ACL for %...', [DN]));
+  TOpenRSATLog.Add.Log(sllDebug, FormatUtf8('Start ordering ACL for %...', [DN]));
   sdArr := [];
 
   parent := DN;
@@ -676,7 +677,7 @@ begin
 
   // Order acl
   InnerOrderAcl(acl, sdArr);
-  TSynLog.Add.Log(sllDebug, 'End ordering ACL for.');
+  TOpenRSATLog.Add.Log(sllDebug, 'End ordering ACL for.');
 end;
 
 function TRsatLdapClient.Search(const Attributes: TLdapAttributeTypes;

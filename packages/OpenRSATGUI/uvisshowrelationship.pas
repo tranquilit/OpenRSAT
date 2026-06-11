@@ -25,7 +25,9 @@ uses
   mormot.core.log,
   mormot.core.variants,
   mormot.net.ldap,
-  ursatldapclient, VirtualTrees;
+  ursatldapclient,
+  VirtualTrees,
+  ulog;
 
 type
 
@@ -37,7 +39,7 @@ type
 
   TRelationStorage = class
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fCount: Integer;
     fCapacity: Integer;
 
@@ -157,7 +159,7 @@ type
     procedure TisSearchEdit1Search(Sender: TObject; const aText: string);
     procedure TisSearchEdit2Search(Sender: TObject; const aText: string);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fMoving: Boolean;
     fOriginX, fOriginY: Integer;
 
@@ -322,15 +324,15 @@ begin
     AddMembers(ID, Item.Find('member').GetAllReadable);
     AddObjectClass(ID, Item.Find('objectClass').GetAllReadable);
   end;
-  TSynLog.Add.Log(sllInfo, 'Time spent: %', [FormatDateTime('hh:nn:ss zzz', Now - Start)]);
+  TOpenRSATLog.Add.Log(sllInfo, 'Time spent: %', [FormatDateTime('hh:nn:ss zzz', Now - Start)]);
 end;
 
 constructor TRelationStorage.Create;
 begin
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
 
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Clear;
   fDocVariantData.Init();
@@ -471,21 +473,21 @@ function TRelationStorage.ValidIndex(AID: StorageID): Boolean;
 begin
   result := (AID >= 0) and (AID < fCount);
   if Assigned(fLog) and not result then
-    fLog.Log(sllTrace, 'Invalid index (%)', [AID], Self);
+    fLog.Add.Log(sllTrace, 'Invalid index (%)', [AID], Self);
 end;
 
 function TRelationStorage.EmptyArray(AArray: TRawUtf8DynArray): Boolean;
 begin
   result := not Assigned(AArray);
   if Assigned(fLog) and result then
-    fLog.Log(sllTrace, 'No members', Self);
+    fLog.Add.Log(sllTrace, 'No members', Self);
 end;
 
 function TRelationStorage.EmptyRawUtf8(ARawUtf8: RawUtf8): Boolean;
 begin
   result := (ARawUtf8 = '');
   if Assigned(fLog) and result then
-    fLog.Log(sllTrace, 'Empty rawUtf8');
+    fLog.Add.Log(sllTrace, 'Empty rawUtf8');
 end;
 
 procedure TRelationStorage.IncreaseCapacity(ACount: Integer);
@@ -901,7 +903,7 @@ var
     end;
   end;
 begin
-  aLog := TSynLog.Enter('Start refresh', []);
+  aLog := TOpenRSATLog.Enter('Start refresh', []);
   LvlGraphControl.Clear;
 
   ID := fStorage.Get(ADistinguishedName);
@@ -1094,9 +1096,9 @@ constructor TVisShowRelationship.Create(TheOwner: TComponent;
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   fLdapClient := ALdapClient;
   Edit1.Text := ADistinguishedName;

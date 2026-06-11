@@ -15,7 +15,8 @@ uses
   mormot.core.base,
   mormot.core.log, mormot.core.variants, mormot.net.ldap,
   uproperty,
-  upropertyframe, VirtualTrees, Graphics, Menus;
+  upropertyframe, VirtualTrees, Graphics, Menus,
+  ulog;
 
 type
 
@@ -60,7 +61,7 @@ type
     procedure MenuItem1Click(Sender: TObject);
     procedure Timer_SearchInGridTimer(Sender: TObject);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
     fSearchWord: RawUtf8;
   public
@@ -211,9 +212,9 @@ constructor TFrmPropertyAttributes.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   MenuItem1.Checked := (Owner as TVisProperties).IniPropStorage1.ReadBoolean('PropertyAttributesFilterHaveValue', True);
   Caption := 'Attributes';
@@ -226,7 +227,7 @@ var
   Attribute: RawUtf8;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
   Attributes := fProperty.AttributesFromSchema;

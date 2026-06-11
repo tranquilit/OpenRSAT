@@ -19,7 +19,8 @@ uses
   mormot.core.text,
   mormot.core.variants,
   mormot.net.ldap,
-  tis.ui.grid.core;
+  tis.ui.grid.core,
+  ulog;
 
 type
 
@@ -44,7 +45,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fMultiSelect: Boolean;
     fLdapClient: TLdapClient;
     function GetSelectedDistinguishedName: RawUtf8;
@@ -308,10 +309,10 @@ constructor TVisSelectObjectSID.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
 
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   fLdapClient := nil;
   fMultiSelect := False;

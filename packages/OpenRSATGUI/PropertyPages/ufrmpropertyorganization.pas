@@ -15,7 +15,8 @@ uses
   mormot.core.log,
   uproperty,
   tis.ui.grid.core,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -51,7 +52,7 @@ type
     procedure Edit_DepartmentChange(Sender: TObject);
     procedure Edit_TitleChange(Sender: TObject);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
   public
     constructor Create(TheOwner: TComponent); override;
@@ -139,9 +140,9 @@ constructor TFrmPropertyOrganization.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'Organization';
 
@@ -154,7 +155,7 @@ var
   DirectReport: RawUtf8;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 

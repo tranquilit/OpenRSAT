@@ -16,7 +16,8 @@ uses
   gtk2,
   glib2,
   {$ENDIF LINUX}
-  SysUtils;
+  SysUtils,
+  ulog;
 
 function IsDarkMode: Boolean;
 
@@ -88,9 +89,9 @@ var
 begin
   result := '';
   Theme := nil;
-  TSynLog.Add.Log(sllTrace, 'get theme name');
+  TOpenRSATLog.Add.Log(sllTrace, 'get theme name');
   Settings := gtk_settings_get_default;
-  TSynLog.Add.Log(sllTrace, 'settings retrieved');
+  TOpenRSATLog.Add.Log(sllTrace, 'settings retrieved');
 
   if not Assigned(Settings) then
     Exit;
@@ -98,7 +99,7 @@ begin
   g_object_get(Settings, PChar('gtk-theme-name'), @Theme, nil);
   if Theme <> nil then
   begin
-    TSynLog.Add.Log(sllTrace, 'Theme name: ', [theme]);
+    TOpenRSATLog.Add.Log(sllTrace, 'Theme name: ', [theme]);
     result := StrPas(@Theme[1]);
     g_free(Theme);
   end;

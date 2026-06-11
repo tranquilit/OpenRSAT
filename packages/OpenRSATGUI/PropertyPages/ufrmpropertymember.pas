@@ -18,7 +18,8 @@ uses
   mormot.core.log, mormot.core.variants,
   uproperty,
   tis.ui.grid.core, VirtualTrees,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -46,7 +47,7 @@ type
       var Ghosted: Boolean; var ImageIndex: Integer);
     procedure TisGrid_MembersKeyPress(Sender: TObject; var Key: char);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
     fSearchWord: RawUtf8;
   public
@@ -182,9 +183,9 @@ constructor TFrmPropertyMember.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'Member';
 end;
@@ -197,7 +198,7 @@ var
   ObjectClass: TLdapAttribute;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 

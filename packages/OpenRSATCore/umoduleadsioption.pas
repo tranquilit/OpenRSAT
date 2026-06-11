@@ -10,7 +10,8 @@ uses
   IniFiles,
   mormot.core.base,
   mormot.core.log,
-  uoption;
+  uoption,
+  ulog;
 
 type
 
@@ -18,7 +19,7 @@ type
 
   TModuleADSIOption = class(TOption)
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fChanged: Boolean;
 
     fObservers: Array of TProcRsatOptionOfObject;
@@ -47,7 +48,7 @@ var
   Observer: TProcRsatOptionOfObject;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Notify', Self);
+    fLog.Add.Log(sllTrace, 'Notify', Self);
 
   for Observer in fObservers do
     Observer(Self);
@@ -55,9 +56,9 @@ end;
 
 constructor TModuleADSIOption.Create;
 begin
-  fLog := TSynLog.Add;
+  fLog := TADSILog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   fObservers := [];
   fChanged := False;
@@ -71,7 +72,7 @@ end;
 procedure TModuleADSIOption.Load(IniFile: TIniFile);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Load', Self);
+    fLog.Add.Log(sllTrace, 'Load', Self);
 
   fChanged := False;
   Notify;
@@ -80,7 +81,7 @@ end;
 procedure TModuleADSIOption.Save(IniFile: TIniFile);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Load', Self);
+    fLog.Add.Log(sllTrace, 'Load', Self);
 
   fChanged := False;
   Notify;
@@ -94,7 +95,7 @@ end;
 procedure TModuleADSIOption.RegisterObserver(Observer: TProcRsatOptionOfObject);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'RegisterObserver', Self);
+    fLog.Add.Log(sllTrace, 'RegisterObserver', Self);
 
   MultiEventAdd(fObservers, TMethod(Observer));
 end;
@@ -102,7 +103,7 @@ end;
 procedure TModuleADSIOption.RemoveObserver(Observer: TProcRsatOptionOfObject);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'RemoveObserver', Self);
+    fLog.Add.Log(sllTrace, 'RemoveObserver', Self);
 
   MultiEventRemove(fObservers, TMethod(Observer));
 end;

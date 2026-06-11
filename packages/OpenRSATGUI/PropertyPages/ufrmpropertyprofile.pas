@@ -14,7 +14,8 @@ uses
   mormot.core.base,
   mormot.core.log,
   uproperty,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -41,7 +42,7 @@ type
     procedure RadioButton_ConnectToChange(Sender: TObject);
     procedure RadioButton_HomeDirectoryChange(Sender: TObject);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
 
     procedure ChangeHomeFolderType;
@@ -143,9 +144,9 @@ constructor TFrmPropertyProfile.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'Profile';
 end;
@@ -156,7 +157,7 @@ var
   HasHomeDrive: Boolean;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 

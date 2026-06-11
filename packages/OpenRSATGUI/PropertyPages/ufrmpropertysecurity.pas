@@ -22,7 +22,8 @@ uses
   upropertyframe,
   uvisadvancedsecurity,
   VirtualTrees,
-  mormot.core.variants;
+  mormot.core.variants,
+  ulog;
 
 type
 
@@ -57,7 +58,7 @@ type
       Node: PVirtualNode; Column: TColumnIndex);
     procedure TisGrid_SecurityListUserKeyPress(Sender: TObject; var Key: char);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
     fSearchWord: RawUtf8;
 
@@ -279,9 +280,9 @@ constructor TFrmPropertySecurity.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'Security';
 end;
@@ -289,7 +290,7 @@ end;
 procedure TFrmPropertySecurity.Update(Props: TProperty);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 

@@ -12,7 +12,8 @@ uses
   mormot.core.base,
   mormot.core.os.security,
   mormot.net.ldap,
-  ursatldapclient;
+  ursatldapclient,
+  ulog;
 
 type
 
@@ -296,7 +297,7 @@ var
   parent, filter: RawUtf8;
   res: TLdapResult;
 begin
-  TSynLog.Add.Log(sllDebug, FormatUtf8('Start ordering ACL for %...', [DN]));
+  TOpenRSATLog.Add.Log(sllDebug, FormatUtf8('Start ordering ACL for %...', [DN]));
   sdArr := [];
 
   parent := DN;
@@ -329,7 +330,7 @@ begin
 
   // Order acl
   InnerOrderAcl(acl, sdArr);
-  TSynLog.Add.Log(sllDebug, 'End ordering ACL for.');
+  TOpenRSATLog.Add.Log(sllDebug, 'End ordering ACL for.');
 end;
 
 end.

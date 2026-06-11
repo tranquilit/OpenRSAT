@@ -12,7 +12,8 @@ uses
   mormot.core.test,
   {$ENDIF}
   uvisproperties,
-  ursatldapclient;
+  ursatldapclient,
+  ulog;
 
 type
 
@@ -22,7 +23,7 @@ type
 
   TVisPropertiesList = class
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fItems: TVisPropertiesDynArray;
   public
     constructor Create;
@@ -67,9 +68,9 @@ uses
 
 constructor TVisPropertiesList.Create;
 begin
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, '% - Create', [Self.ClassName]);
+    fLog.Add.Log(sllTrace, '% - Create', [Self.ClassName]);
 
   fItems := [];
 end;
@@ -79,7 +80,7 @@ function TVisPropertiesList.Open(AName: String; ADistinguishedName: String
 begin
   result := nil;
 
-  TSynLog.Add.Log(sllDebug, FormatUtf8('Open new view: %.', [AName]));
+  TOpenRSATLog.Add.Log(sllDebug, FormatUtf8('Open new view: %.', [AName]));
 
   if (AName = '') then
   begin
@@ -120,7 +121,7 @@ var
   c: SizeInt;
 begin
   result := True;
-  TSynLog.Add.Log(sllDebug, FormatUtf8('Close view: %', [aForm.Name]));
+  TOpenRSATLog.Add.Log(sllDebug, FormatUtf8('Close view: %', [aForm.Name]));
   c := Count;
 
   for i := 0 to c - 1 do

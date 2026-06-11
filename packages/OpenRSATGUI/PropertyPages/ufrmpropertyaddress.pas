@@ -17,7 +17,8 @@ uses
   mormot.core.variants,
   mormot.net.ldap,
   uproperty,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -47,7 +48,7 @@ type
   private
     fProperty: TProperty;
     fCountryCodes: TDocVariantData;
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     IsUpdating: Boolean;
 
     // Expose TLdapAttributeList.Add with default replace value option.
@@ -85,7 +86,7 @@ begin
   if not Assigned(PCountryCode) then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllWarning, 'Cannot retrieve CountryCode', Self);
+      fLog.Add.Log(sllWarning, 'Cannot retrieve CountryCode', Self);
     Exit;
   end;
   c := PCountryCode^.S['alpha2'];
@@ -158,9 +159,9 @@ constructor TFrmPropertyAddress.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   LoadCountryCodes;
   Caption := 'Address';

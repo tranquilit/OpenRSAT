@@ -15,7 +15,8 @@ uses
   mormot.core.log,
   uhelpersui,
   uproperty,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -40,7 +41,7 @@ type
     procedure Edit_DescriptionChange(Sender: TObject);
     procedure Edit_SamaccountNameChange(Sender: TObject);
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
   public
     constructor Create(TheOwner: TComponent); override;
@@ -73,9 +74,9 @@ constructor TFrmPropertyGeneralComputer.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'General';
 end;
@@ -83,7 +84,7 @@ end;
 procedure TFrmPropertyGeneralComputer.Update(Props: TProperty);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 

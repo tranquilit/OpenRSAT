@@ -15,7 +15,8 @@ uses
   mormot.core.log,
   uhelpersui,
   uproperty,
-  upropertyframe;
+  upropertyframe,
+  ulog;
 
 type
 
@@ -44,7 +45,7 @@ type
     Panel4: TPanel;
     Shape1: TShape;
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fProperty: TProperty;
     function GetDomain(Value: RawUtf8): RawUtf8;
   public
@@ -63,9 +64,9 @@ constructor TFrmPropertyGeneralServer.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog;
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'General';
 end;
@@ -73,7 +74,7 @@ end;
 procedure TFrmPropertyGeneralServer.Update(Props: TProperty);
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Update', Self);
+    fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 

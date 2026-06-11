@@ -12,7 +12,8 @@ uses
   umoduleaducoption,
   uoption,
   umodule,
-  ursat;
+  ursat,
+  ulog;
 
 type
 
@@ -22,7 +23,7 @@ type
 
   TModuleADUC = class(TModule)
   private
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     function GetADUCOption: TModuleADUCOption;
   public
     constructor Create(ARSAT: TRSAT);
@@ -55,7 +56,7 @@ begin
 
   fRSAT := ARSAT;
   fEnabled := True;
-  fLog := TSynLog.Add;
+  fLog := TADUCLog;
   fOption := TModuleADUCOption.Create;
   fOption.Load;
 end;
@@ -83,7 +84,7 @@ begin
   if not Assigned(UserData) then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllError, 'Cannot retrieve information about "%". (%)', [AObjectDN, RSAT.LdapClient.ResultString], Self);
+      fLog.Add.Log(sllError, 'Cannot retrieve information about "%". (%)', [AObjectDN, RSAT.LdapClient.ResultString], Self);
     Exit;
   end;
 
@@ -91,12 +92,12 @@ begin
   if not Assigned(ObjectClassAttr) then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllError, 'Cannot retrieve objectClass about "%".', [AObjectDN], Self);
+      fLog.Add.Log(sllError, 'Cannot retrieve objectClass about "%".', [AObjectDN], Self);
     Exit;
   end;
 
   if Assigned(fLog) then
-    fLog.Log(sllInfo, 'Reset password on %.', [ObjectClassAttr.GetReadable(Pred(ObjectClassAttr.Count))], Self);
+    fLog.Add.Log(sllInfo, 'Reset password on %.', [ObjectClassAttr.GetReadable(Pred(ObjectClassAttr.Count))], Self);
 
   if Assigned(AComputerWarning) then
     AComputerWarning(ObjectClassAttr);
@@ -105,7 +106,7 @@ begin
   if not Assigned(UserAccountControlAttr) then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllError, 'Cannot retrieve userAccountControl about "%".', [AObjectDN], Self);
+      fLog.Add.Log(sllError, 'Cannot retrieve userAccountControl about "%".', [AObjectDN], Self);
     Exit;
   end;
 
@@ -124,7 +125,7 @@ begin
       if not RSAT.LdapClient.Modify(AObjectDN, lmoReplace, Attribute) then
       begin
         if Assigned(fLog) then
-          fLog.Log(sllError, 'Ldap Modify Error: %', [RSAT.LdapClient.ResultString], Self);
+          fLog.Add.Log(sllError, 'Ldap Modify Error: %', [RSAT.LdapClient.ResultString], Self);
         Exit;
       end;
     finally
@@ -138,7 +139,7 @@ begin
     if not RSAT.LdapClient.Modify(AObjectDN, lmoReplace, Attribute) then
     begin
       if Assigned(fLog) then
-        fLog.Log(sllError, 'Ldap Modify Error: %', [RSAT.LdapClient.ResultString], Self);
+        fLog.Add.Log(sllError, 'Ldap Modify Error: %', [RSAT.LdapClient.ResultString], Self);
       Exit;
     end;
   finally
@@ -154,7 +155,7 @@ begin
       if not RSAT.LdapClient.Modify(AObjectDN, lmoReplace, Attribute) then
       begin
         if Assigned(fLog) then
-          fLog.Log(sllError, 'Ldap Modify Error: %', [RSAT.LdapClient.ResultString], Self);
+          fLog.Add.Log(sllError, 'Ldap Modify Error: %', [RSAT.LdapClient.ResultString], Self);
         Exit;
       end;
     finally

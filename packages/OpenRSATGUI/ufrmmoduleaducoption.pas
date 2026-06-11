@@ -17,7 +17,8 @@ uses
   mormot.core.log,
   umoduleaducoption,
   uoption,
-  ufrmoption;
+  ufrmoption,
+  ulog;
 
 type
 
@@ -49,7 +50,7 @@ type
     procedure Memo_FilterChange(Sender: TObject);
   private
     fSection: String;
-    fLog: TSynLog;
+    fLog: TSynLogClass;
     fChanged: Boolean;
 
     fADUCOption: TModuleADUCOption;
@@ -214,12 +215,12 @@ constructor TFrmModuleADUCOption.Create(TheOwner: TComponent; Option: TOption);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TADUCLog;
 
   fADUCOption := (Option as TModuleADUCOption);
 
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Create', Self);
+    fLog.Add.Log(sllTrace, 'Create', Self);
 
   fSection := 'ADUC';
   fChanged := False;
@@ -235,12 +236,12 @@ var
   IniFile: TIniFile;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Load', Self);
+    fLog.Add.Log(sllTrace, 'Load', Self);
 
   if not Assigned(Self) then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllWarning, 'Could not be loaded: Self or Options not assigned.', Self);
+      fLog.Add.Log(sllWarning, 'Could not be loaded: Self or Options not assigned.', Self);
     Exit;
   end;
 
@@ -266,12 +267,12 @@ var
   IniFile: TIniFile;
 begin
   if Assigned(fLog) then
-    fLog.Log(sllTrace, 'Save', Self);
+    fLog.Add.Log(sllTrace, 'Save', Self);
 
   if not Assigned(Self) then
   begin
     if Assigned(fLog) then
-      fLog.Log(sllWarning, 'Could not be saved: Self or Options not assigned.', Self);
+      fLog.Add.Log(sllWarning, 'Could not be saved: Self or Options not assigned.', Self);
     Exit;
   end;
 
