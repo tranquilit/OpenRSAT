@@ -29,10 +29,9 @@ uses
   mormot.lib.openssl11,
   mormot.crypt.openssl,
   // Rsat
-  uvisopenrsat;
+  uvisopenrsat,
+  ulog;
 
-const
-  LOG_TRC = LOG_NFO + [sllTrace];
 var
   cmd: TExecutableCommandLine;
   {$IFDEF DARWIN}
@@ -42,77 +41,53 @@ var
 {$R *.res}
 {$I mormot.defines.inc}
 
-procedure InitLogging(SynlogClass: TSynLogClass=Nil; LogLevel: String=''; AFileName:String='');
-begin
-  if not Assigned(SynlogClass) then
-    SynlogClass := TSynLog;
-
-  if loglevel <> '' then
-  begin
-    case loglevel of
-      'trace': SynlogClass.Family.Level := LOG_TRC;
-      'debug': SynlogClass.Family.Level := LOG_ALL;
-      'warning': SynlogClass.Family.Level := LOG_WNG;
-      'info': SynlogClass.Family.Level := LOG_NFO;
-      else SynlogClass.Family.Level := LOG_ERR;
-    end;
-    SynlogClass.Family.EchoToConsole := TSynLog.Family.Level;
-    SynlogClass.Family.PerThreadLog := ptIdentifiedInOneFile;
-  end
-  else
-    SynlogClass.Family.Level := LOG_ERR;
-
-  SynlogClass.Family.RotateFileCount := 5;
-  SynlogClass.Family.RotateFileSizeKB := 4096;
-  SynlogClass.Family.FileExistsAction := acAppend;
-
-  SynlogClass.Family.DestinationPath := MakePath([ExtractFileDir(ParamStr(0)), 'log']);
-  if not IsDirectoryWritable(SynlogClass.Family.DestinationPath) then
-    SynlogClass.Family.DestinationPath := GetSystemPath(spLog);
-  SynlogClass.Family.ArchivePath := SynlogClass.Family.DestinationPath;
-
-  if AFileName<>'' then
-    SynlogClass.Family.CustomFileName := AFileName;
-
-  if loglevel='debug' then
-    SynlogClass.Family.AutoFlushTimeOut := 1
-  else
-    SynlogClass.Family.AutoFlushTimeOut := 60;
-  TSynLog.Add.Log(sllInfo, 'Logging % with level=% to %%.log', [SynlogClass.ClassName, loglevel, SynlogClass.Family.DestinationPath, SynlogClass.Family.CustomFileName]);
-end;
-
-procedure InitLoggingFromCommandLine;
-var
-  loglevel: String;
-begin
-  Executable.Version.RetrieveInformationFromFileName;
-  loglevel := Executable.Command.ParamS('loglevel', 'Define the level of log (trace, debug, warning, info)'{$ifdef DEBUG}, 'debug'{$endif});
-  {$ifdef DEVMODE}
-  AllocConsole;
-  System.IsConsole := True; // in System unit
-  System.SysInitStdIO;      // in System unit
-  {$endif}
-  InitLogging(TSynLog, LogLevel);
-end;
-
 function GetApplicationName: String;
 begin
   result := 'OpenRSAT';
 end;
 
+function ParseArgs(out AOpenRSATArgs: TOpenRSATArgs): Boolean;
 begin
-  InitLoggingFromCommandLine;
-  TSynLog.Add.Log(sllDebug, 'Logger Initialization');
-  RequireDerivedFormResource := True;
-  Application.Scaled:=True;
-  Application.LayoutAdjustmentPolicy := lapAutoAdjustForDPI;
-  Application.Initialize;
+  result := False;
 
+  FillChar(AOpenRSATArgs, SizeOf(AOpenRSATArgs), 0);
+
+  With Executable.Command do
+  begin
+    ExeDescription := 'OpenRSAT';
+    {$IFDEF USE_OPENSSL}
+    // refine the OpenSSL library path - RegisterOpenSsl is done in Run method
+    OpenSslDefaultCrypto := ParamS('lib&crypto',   'the OpenSSL libcrypto #filename');
+    OpenSslDefaultSsl    := ParamS('lib&ssl',      'the OpenSSL libssl #filename');
+    OpenSslDefaultPath   := ParamS('openssl&path', 'the OpenSSL library #path');
+    {$ENDIF USE_OPENSSL}
+    {$IFDEF OSPOSIX}
+    GssLib_Custom := ParamS('lib&krb5', 'the Kerberos libgssapi #filename');
+    {$ENDIF OSPOSIX}
+
+    result := not (ConsoleHelpFailed());
+  end;
+end;
+
+var
+  OpenRSATArgs: TOpenRSATArgs;
+
+begin
   {$IFDEF DEBUG}
   if FileExists('heap.trc') then
     DeleteFile('heap.trc');
   SetHeapTraceOutput('heap.trc');
   {$ENDIF DEBUG}
+
+  InitLoggingFromCommandLine;
+  if not ParseArgs(OpenRSATArgs) then
+    Halt(1);
+
+  //TSynLog.Add.Log(sllDebug, 'Logger Initialization');
+  RequireDerivedFormResource := True;
+  Application.Scaled:=True;
+  Application.LayoutAdjustmentPolicy := lapAutoAdjustForDPI;
+  Application.Initialize;
 
   {$IFDEF DARWIN}
   AppPath := ExtractFilePath(ParamStr(0));
@@ -120,22 +95,12 @@ begin
     raise Exception.CreateFmt('Unable to load OpenSSL from %s', [MakePath([AppPath, 'lib', 'libssl.dylib'])]);
   {$ENDIF}
 
-  cmd := Executable.Command;
-
-  {$IFDEF USE_OPENSSL}
-  // refine the OpenSSL library path - RegisterOpenSsl is done in Run method
-  OpenSslDefaultCrypto := cmd.ParamS('lib&crypto',   'the OpenSSL libcrypto #filename');
-  OpenSslDefaultSsl    := cmd.ParamS('lib&ssl',      'the OpenSSL libssl #filename');
-  OpenSslDefaultPath   := cmd.ParamS('openssl&path', 'the OpenSSL library #path');
-  {$ENDIF USE_OPENSSL}
-  {$IFDEF OSPOSIX}
-  GssLib_Custom := cmd.ParamS('lib&krb5', 'the Kerberos libgssapi #filename');
-  {$ENDIF OSPOSIX}
   RegisterOpenSsl;
   TSynLog.Add.Log(sllDebug, 'OpenSSL version: %', [OpenSslVersionText]);
 
   OnGetApplicationName := @GetApplicationName;
   Application.CreateForm(TVisOpenRSAT, VisOpenRSAT);
+  VisOpenRSAT.Args := OpenRSATArgs;
   Application.Run();
 end.
 

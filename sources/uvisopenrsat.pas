@@ -25,6 +25,10 @@ uses
 
 type
 
+  TOpenRSATArgs = record
+
+  end;
+
   { TVisRsatConsole }
 
   { TVisOpenRSAT }
@@ -70,6 +74,7 @@ type
     procedure MenuItem_ViewThemeSystemClick(Sender: TObject);
   private
     fLog: TSynLog;
+    fArgs: TOpenRSATArgs;
 
     procedure RestoreOldConfig;
     procedure UpdateViewThemeButtons;
@@ -79,6 +84,7 @@ type
 
     procedure ViewMenuItemClick(Sender: TObject);
 
+    property Args: TOpenRSATArgs read fArgs write fArgs;
   end;
 
 {$I version.inc}

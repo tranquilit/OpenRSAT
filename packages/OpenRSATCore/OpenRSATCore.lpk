@@ -120,6 +120,10 @@
         <Filename Value="ugeneralpropertysitelink.pas"/>
         <UnitName Value="ugeneralpropertysitelink"/>
       </Item>
+      <Item>
+        <Filename Value="ulog.pas"/>
+        <UnitName Value="log"/>
+      </Item>
     </Files>
     <i18n>
       <EnableI18N Value="True"/>
