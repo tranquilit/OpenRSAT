@@ -147,6 +147,7 @@ type
 
     fSearchWord: RawUtf8;
 
+    function GetLdapClient: TRsatLdapClient;
     procedure UpdateGridColumns(Names: TStringArray);
     procedure UpdateNodeRoot(Node: TDNSTreeNode);
     procedure UpdateNodeCustom(Node: TDNSTreeNode);
@@ -168,6 +169,8 @@ type
   public
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
+
+    property LdapClient: TRsatLdapClient read GetLdapClient;
 
   protected
     function GetModule: TModule; override;
@@ -312,6 +315,11 @@ begin
     Column := GridDNS.FindColumnByIndex(i);
   end;
 
+end;
+
+function TFrmModuleDNS.GetLdapClient: TRsatLdapClient;
+begin
+  result := fModule.RSAT.LdapClient;
 end;
 
 procedure TFrmModuleDNS.UpdateNodeRoot(Node: TDNSTreeNode);
@@ -462,16 +470,16 @@ end;
 
 procedure TFrmModuleDNS.LdapConnectEvent(Sender: TObject);
 var
-  LdapClient: TLdapClient;
+  Ldap: TLdapClient;
 begin
-  LdapClient := (Sender as TLdapClient);
+  Ldap := (Sender as TLdapClient);
   if Assigned(fForwardLookupZonesNode) then
     FreeAndNil(fForwardLookupZonesNode);
   if Assigned(fReverseLookupZonesNode) then
     FreeAndNil(fReverseLookupZonesNode);
   if Assigned(fRootNode) then
     FreeAndNil(fRootNode);
-  fRootNode := (TreeDNS.Items.Add(nil, LdapClient.Settings.TargetHost) as TDNSTreeNode);
+  fRootNode := (TreeDNS.Items.Add(nil, Ldap.Settings.TargetHost) as TDNSTreeNode);
 
   fForwardLookupZonesNode := (TreeDNS.Items.AddChild(fRootNode, 'Forward Lookup Zones') as TDNSTreeNode);
   fForwardLookupZonesNode.NodeType := dtntCustom;
@@ -729,7 +737,7 @@ end;
 
 procedure TFrmModuleDNS.Action_PropertyUpdate(Sender: TObject);
 begin
-  Action_Property.Enabled := Assigned(FrmRSAT.LdapClient) and FrmRSAT.LdapClient.Connected and (GridDNS.SelectedCount > 0)
+  Action_Property.Enabled := Assigned(LdapClient) and LdapClient.Connected and (GridDNS.SelectedCount > 0)
 end;
 
 procedure TFrmModuleDNS.Action_NextExecute(Sender: TObject);
@@ -753,14 +761,14 @@ var
   procedure InnerDelete(DC: String);
   begin
     repeat
-      if not FrmRSAT.LdapClient.Search(DC, False, Filter, ['dnsRecord']) then
+      if not LdapClient.Search(DC, False, Filter, ['dnsRecord']) then
       begin
         if Assigned(fLog) then
-          fLog.Add.Log(sllError, '% - Ldap Search Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
+          fLog.Add.Log(sllError, '% - Ldap Search Error: %', [Action_Delete.Caption, LdapClient.ResultString]);
         Exit;
       end;
 
-      for SearchResult in FrmRSAT.LdapClient.SearchResult.Items do
+      for SearchResult in LdapClient.SearchResult.Items do
       begin
         if not Assigned(SearchResult) or not data.Exists(SearchResult.ObjectName) then
           continue;
@@ -774,10 +782,10 @@ var
         begin
           if Assigned(fLog) then
             fLog.Add.Log(sllInfo, '% - Delete "%"', [Action_Delete.Caption, SearchResult.ObjectName]);
-          if not FrmRSAT.LdapClient.Delete(SearchResult.ObjectName) then
+          if not LdapClient.Delete(SearchResult.ObjectName) then
           begin
             if Assigned(fLog) then
-              fLog.Add.Log(sllError, '% - Ldap Delete Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
+              fLog.Add.Log(sllError, '% - Ldap Delete Error: %', [Action_Delete.Caption, LdapClient.ResultString]);
             Exit;
           end;
         end
@@ -785,16 +793,16 @@ var
         begin
           if Assigned(fLog) then
             fLog.Add.Log(sllInfo, '% - Modify "%"', [Action_Delete.Caption, SearchResult.ObjectName]);
-          if not FrmRSAT.LdapClient.Modify(SearchResult.ObjectName, lmoDelete, AttributeToRemove) then
+          if not LdapClient.Modify(SearchResult.ObjectName, lmoDelete, AttributeToRemove) then
           begin
             if Assigned(fLog) then
-              fLog.Add.Log(sllError, '% - Ldap Modify Error: %', [Action_Delete.Caption, FrmRSAT.LdapClient.ResultString]);
+              fLog.Add.Log(sllError, '% - Ldap Modify Error: %', [Action_Delete.Caption, LdapClient.ResultString]);
             Exit;
           end;
         end;
         AttributeToRemove.Clear;
       end;
-    until FrmRSAT.LdapClient.SearchCookie = '';
+    until LdapClient.SearchCookie = '';
   end;
 
 begin
@@ -834,7 +842,7 @@ begin
   try
     if NewZone.ShowModal <> mrOK then
       Exit;
-    NewZone.Apply(FrmRSAT.LdapClient);
+    NewZone.Apply(LdapClient);
   finally
     FreeAndNil(NewZone);
   end;
@@ -880,7 +888,7 @@ begin
   if not Found then
     Exit;
 
-  With TVisSelectNewRecordType.Create(Self, Serial, FrmRSAT.LdapClient, DNSNodeZone.DistinguishedName, dcPrefix) do
+  With TVisSelectNewRecordType.Create(Self, Serial, LdapClient, DNSNodeZone.DistinguishedName, dcPrefix) do
   begin
     ShowModal;
   end;
