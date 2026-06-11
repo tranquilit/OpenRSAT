@@ -26,7 +26,8 @@ uses
   ufrmmodules,
   ufrmoption,
   ursat,
-  ursatoption;
+  ursatoption,
+  ulog;
 
 type
 
@@ -64,7 +65,7 @@ type
     procedure Timer_AutoConnectTimer(Sender: TObject);
     {$pop}
   private
-    fLog: TSynLog;
+    fLog: TOpenRSATLog;
 
     // Self core
     fRSAT: TRSAT;
@@ -195,7 +196,7 @@ begin
     LdapClient.ChangeSettings(Conf, False);
 
     {$IFDEF DEBUG}
-      LdapClient.Log := TSynLog;
+      LdapClient.Log := TLdapLog;
     {$ENDIF DEBUG}
 
     LdapClient.TlsContext^.IgnoreCertificateErrors := conf.AllowUnsafePasswordBind;
@@ -449,7 +450,7 @@ var
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TOpenRSATLog(TOpenRSATLog.Add);
 
   if Assigned(fLog) then
     aLog := fLog.Enter('% - Create', [Self.Name]);

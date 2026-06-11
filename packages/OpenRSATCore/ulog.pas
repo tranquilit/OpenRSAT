@@ -32,7 +32,7 @@ begin
   With LogClass.Family do
   begin
     DestinationPath := DestPath;
-    CustomFileName := LogClass.ClassName;
+    CustomFileName := 'OpenRSAT';
     PerThreadLog := ptIdentifiedInOneFile;
     Level := LOG_WNG;
   end;
@@ -80,29 +80,40 @@ begin
     Result := Result + [sllEnter, sllLeave];
 end;
 
-procedure ConfigureLogFamily(
+function ConfigureLogFamily(
   LogClass: TSynLogClass;
-  const FileBaseName: TFileName;
-  Levels: TSynLogLevels);
+  CustomLog: RawUtf8;
+  GlobalLog: RawUtf8;
+  DefaultLog: RawUtf8): TSynLogLevels;
 begin
   with LogClass.Family do
   begin
     DestinationPath := MakePath([ExtractFileDir(ParamStr(0)), 'log']);
     if not IsDirectoryWritable(DestinationPath) then
       DestinationPath := GetSystemPath(spLog);
-    CustomFileName := FileBaseName;
     PerThreadLog := ptIdentifiedInOneFile;
 
     // mORMot recommends initializing the family before using it;
     // set Level last.
-    Level := Levels;
-    EchoToConsole := Levels;
+    if CustomLog <> '' then
+      Level := LogLevelsFromText(CustomLog)
+    else if GlobalLog <> '' then
+      Level := LogLevelsFromText(GlobalLog)
+    else
+      Level := LogLevelsFromText(DefaultLog);
+
+    EchoToConsole := Level;
     FileExistsAction := acAppend;
 
-  if sllDebug in Levels then
-    AutoFlushTimeOut := 1
-  else
-    AutoFlushTimeOut := 60;
+    RotateFileCount := 5;
+    RotateFileSizeKB := 4096;
+    ArchivePath := MakePath([DestinationPath, 'archive']);
+
+    if sllDebug in Level then
+      AutoFlushTimeOut := 1
+    else
+      AutoFlushTimeOut := 60;
+    result := Level;
   end;
 
   TSynLog.Add.Log(sllInfo, 'Logging % to %%.log', [LogClass.ClassName, LogClass.Family.DestinationPath, LogClass.Family.CustomFileName]);
@@ -110,58 +121,34 @@ end;
 
 procedure InitLoggingFromCommandLine;
 var
-  V: RawUtf8;
-  OpenRSATLevels, ADUCLevels, ADDNSLevels, ADSSLevels, ADSILevels, LDAPLevels, GlobalLevels: TSynLogLevels;
+  V, G: RawUtf8;
+  Levels: TSynLogLevels;
 begin
-  GlobalLevels := LogLevelsFromText('warning');
-  OpenRSATLevels := LogLevelsFromText('warning');
-  ADUCLevels := LogLevelsFromText('warning');
-  ADDNSLevels := LogLevelsFromText('warning');
-  ADSSLevels := LogLevelsFromText('warning');
-  ADSILevels := LogLevelsFromText('warning');
-  LDAPLevels := LogLevelsFromText('warning');
-
-  if Executable.Command.Get(['l', 'loglevel', 'log-level'], V,
-     'global log #level: off, critical, error, warning, info, debug, trace, all') then
+  Levels := [];
+  with Executable.Command do
   begin
-    GlobalLevels := LogLevelsFromText(V);
-    OpenRSATLevels := LogLevelsFromText(V);
-    ADUCLevels := LogLevelsFromText(V);
-    ADDNSLevels := LogLevelsFromText(V);
-    ADSSLevels := LogLevelsFromText(V);
-    ADSILevels := LogLevelsFromText(V);
-    LDAPLevels := LogLevelsFromText(V);
+    G := Param(['l', 'loglevel', 'log-level'], 'global log #level: off, critical, error, warning, info, debug, trace, all');
+    ConfigureLogFamily(TSynLog, '', G, 'warning');
+    V := Param(['loglevel-openrsat', 'log-level-openrsat'], 'openrsat log #level');
+    Levels += ConfigureLogFamily(TOpenRSATLog, V, G, 'warning');
+    V := Param(['loglevel-aduc', 'log-level-aduc'], 'aduc log #level');
+    Levels += ConfigureLogFamily(TADUCLog, V, G, 'warning');
+    V := Param(['loglevel-addns', 'log-level-addns'], 'addns log #level');
+    Levels += ConfigureLogFamily(TADDNSLog, V, G, 'warning');
+    V := Param(['loglevel-adss', 'log-level-adss'], 'adss log #level');
+    Levels += ConfigureLogFamily(TADSSLog, V, G, 'warning');
+    V := Param(['loglevel-adsi', 'log-level-adsi'], 'adsi log #level');
+    Levels += ConfigureLogFamily(TADSILog, V, G, 'warning');
+    V := Param(['loglevel-ldap', 'log-level-ldap'], 'ldap log #level');
+    Levels += ConfigureLogFamily(TLdapLog, V, G, 'warning');
   end;
 
-  // Family-specific overrides:
-  if Executable.Command.Get(['loglevel-openrsat', 'log-level-openrsat'], V, 'openrsat log #level') then
-    OpenRSATLevels := LogLevelsFromText(V);
-  if Executable.Command.Get(['loglevel-aduc', 'log-level-aduc'], V, 'aduc log #level') then
-    ADUCLevels := LogLevelsFromText(V);
-  if Executable.Command.Get(['loglevel-addns', 'log-level-addns'], V, 'addns log #level') then
-    ADDNSLevels := LogLevelsFromText(V);
-  if Executable.Command.Get(['loglevel-adss', 'log-level-adss'], V, 'adss log #level') then
-    ADSSLevels := LogLevelsFromText(V);
-  if Executable.Command.Get(['loglevel-adsi', 'log-level-adsi'], V, 'adsi log #level') then
-    ADSILevels := LogLevelsFromText(V);
-  if Executable.Command.Get(['loglevel-ldap', 'log-level-ldap'], V, 'ldap log #level') then
-    LDAPLevels := LogLevelsFromText(V);
-
-  if (sllDebug in (GlobalLevels + OpenRSATLevels + ADUCLevels + ADDNSLevels + ADSSLevels + ADSILevels + LDAPLevels))
-    {$ifdef DEVMODE} or True{$endif} then
+  if (sllDebug in Levels){$ifdef DEVMODE} or True{$endif} then
   begin
     AllocConsole;
     System.IsConsole := True;
     System.SysInitStdIO;
   end;
-
-  ConfigureLogFamily(TSynLog, 'OpenRSAT', GlobalLevels);
-  ConfigureLogFamily(TOpenRSATLog, 'OpenRSAT', OpenRSATLevels);
-  ConfigureLogFamily(TADUCLog, 'aduc', ADUCLevels);
-  ConfigureLogFamily(TADDNSLog, 'addns', ADDNSLevels);
-  ConfigureLogFamily(TADSSLog, 'adss', ADSSLevels);
-  ConfigureLogFamily(TADSILog, 'adsi', ADSILevels);
-  ConfigureLogFamily(TLdapLog, 'ldap', LDAPLevels);
 end;
 
 initialization

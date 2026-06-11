@@ -24,7 +24,8 @@ uses
   ufrmmodule,
   ufrmoption,
   umodule,
-  umoduleadsi;
+  umoduleadsi,
+  ulog;
 
 type
 
@@ -112,7 +113,7 @@ type
       var AllowExpansion: Boolean);
     procedure TreeView1GetImageIndex(Sender: TObject; Node: TTreeNode);
   private
-    fLog: TSynLog;
+    fLog: TADSILog;
 
     fModule: TModuleADSI;
 
@@ -697,7 +698,7 @@ constructor TFrmModuleADSI.Create(TheOwner: TComponent);
 begin
   Inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TADSILog(TADSILog.Add);
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Create', [Self.Name]);
 

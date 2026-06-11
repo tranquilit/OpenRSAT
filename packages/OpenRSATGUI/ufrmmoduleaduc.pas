@@ -47,7 +47,8 @@ uses
   uDJoin,
   uLdapUtils,
   ursatldapclient,
-  uvisviewkeytab;
+  uvisviewkeytab,
+  ulog;
 
 type
 
@@ -337,7 +338,7 @@ type
     fTreeSelectionHistory: TTreeSelectionHistory;
 
     // Mormot2 logs
-    fLog: TSynLog;
+    fLog: TADUCLog;
 
     // Search word for grid
     fSearchWord: RawUtf8;
@@ -3315,7 +3316,7 @@ constructor TFrmModuleADUC.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TADUCLog(TADUCLog.Add);
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Create', [Self.Name]);
 

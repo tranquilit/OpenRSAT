@@ -29,7 +29,8 @@ uses
   ufrmoption,
   umodule,
   umoduleaddns,
-  ursatldapclient;
+  ursatldapclient,
+  ulog;
 
 type
 
@@ -135,7 +136,7 @@ type
     procedure TreeDNSMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
   private
-    fLog: TSynLog;
+    fLog: TADDNSLog;
     fTreeSelectionHistory: TTreeSelectionHistory;
 
     fModule: TModuleADDNS;
@@ -908,7 +909,7 @@ constructor TFrmModuleDNS.Create(TheOwner: TComponent);
 begin
   inherited Create(TheOwner);
 
-  fLog := TSynLog.Add;
+  fLog := TADDNSLog(TADDNSLog.Add);
   if Assigned(fLog) then
     fLog.Log(sllTrace, '% - Create', [Self.Name]);
 

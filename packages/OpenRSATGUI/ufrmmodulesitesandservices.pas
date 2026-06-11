@@ -29,7 +29,8 @@ uses
   umoduleadss,
   umoduleadssoption,
   umodule,
-  uoption;
+  uoption,
+  ulog;
 
 type
 
@@ -199,7 +200,7 @@ type
     procedure TreeView1GetImageIndex(Sender: TObject; Node: TTreeNode);
     {$pop}
   private
-    fLog: TSynLog;
+    fLog: TADSSLog;
     fEnabled: Boolean;
     fUpdating: Integer;
 
@@ -1770,7 +1771,7 @@ begin
 
   fEnabled := True;
   fUpdating := 0;
-  fLog := TSynLog.Add;
+  fLog := TADSSLog(TADSSLog.Add);
   if Assigned(fLog) then
     fLog.Log(sllTrace, 'Create', Self);
 
