@@ -76,9 +76,12 @@ Overview of OpenRSAT:
 
 [![OpenRSAT overview](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20Overview.gif "OpenRSAT overview")](/tranquilit/OpenRSAT/blob/main/assets/Screenshots/OpenRSAT%20-%20Overview.gif)
 
-Users and Computers of OpenRSAT:
+Overview of properties:
 
-[![OpenRSAT Users and Computers](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20ADUC.gif "OpenRSAT Users and Computers")](/tranquilit/OpenRSAT/blob/main/assets/Screenshots/OpenRSAT%20-%20ADUC.gif)
+[![OpenRSAT overview properties](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20Overview%20properties.gif "OpenRSAT overview properties")](/tranquilit/OpenRSAT/blob/main/assets/Screenshots/OpenRSAT%20-%20Overview%20properties.gif)
+
+Create user:
+[![OpenRSAT create user](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20Create%20user.gif "OpenRSAT create user")](/tranquilit/OpenRSAT/blob/main/assets/Screenshots/OpenRSAT%20-%20Create%20user.gif)
 
 ## Get started
 
