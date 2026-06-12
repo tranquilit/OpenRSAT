@@ -205,7 +205,10 @@ end;
 procedure TThreadIsDCOnline.SetSettings(Settings: TLdapClientSettings);
 begin
   if not Assigned(fSettings) then
+  begin
+    TOpenRSATLog.Add.Log(sllTrace, 'Set settings for: %', [Settings.TargetHost], Self);
     fSettings := TLdapClientSettings.Create;
+  end;
   CopyObject(Settings, fSettings);
 end;
 
@@ -223,21 +226,27 @@ procedure TThreadIsDCOnline.Execute;
 var
   LdapClient: TRsatLdapClient;
 begin
-  TOpenRSATLog.Add.Log(sllTrace, 'Is DC online?', self);
+  TOpenRSATLog.Add.Log(sllTrace, 'Is DC "%" online?', [fDomainController], self);
   fSettings.TargetHost := fDomainController;
   fSettings.KerberosSpn := '';
   fSettings.UserName := '';
   fSettings.Password := '';
+  fSettings.AutoBind := lcbNone;
   LdapClient := TRsatLdapClient.Create(fSettings);
   try
     fSuccess := False;
-    LdapClient.Connect(); // Don't care about the success for an anonymous connection.
-    if not Assigned(LdapClient.SearchObject('', '', 'dnsHostName')) then
+    LdapClient.Log := TLdapLog;
+    if not LdapClient.Bind then
     begin
-      TOpenRSATLog.Add.Log(sllTrace, 'Cannot retrieve root object "dnsHostName" attribute.', self);
+      TOpenRSATLog.Add.Log(sllWarning, 'Failed to bind to DC.', Self);
       Exit;
     end;
-    TOpenRSATLog.Add.Log(sllTrace, 'DC is online!');
+    if not Assigned(LdapClient.SearchObject('', '', 'dnsHostName')) then
+    begin
+      TOpenRSATLog.Add.Log(sllWarning, 'Cannot retrieve root object "dnsHostName" attribute.', self);
+      Exit;
+    end;
+    TOpenRSATLog.Add.Log(sllTrace, 'DC is online!', Self);
     fSuccess := True;
   finally
     Synchronize(@SendResult);
