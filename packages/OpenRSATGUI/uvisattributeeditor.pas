@@ -121,7 +121,6 @@ uses
   mormot.core.text,
   mormot.core.datetime,
   mormot.core.os,
-  ufrmrsat,
   ucommon,
   ucommonui;
 

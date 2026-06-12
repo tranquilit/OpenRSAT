@@ -467,7 +467,7 @@ begin
 
   fRSAT.Load;
 
-  fVisPropertiesList := TVisPropertiesList.Create;
+  fVisPropertiesList := TVisPropertiesList.Create(fRSAT);
 
   StatusBar1.Canvas.Font.Assign(StatusBar1.Font);
 

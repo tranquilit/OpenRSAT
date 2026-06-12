@@ -13,7 +13,8 @@ uses
   {$ENDIF}
   uvisproperties,
   ursatldapclient,
-  ulog;
+  ulog,
+  ursat;
 
 type
 
@@ -24,9 +25,10 @@ type
   TVisPropertiesList = class
   private
     fLog: TSynLogClass;
+    fRSAT: TRSAT;
     fItems: TVisPropertiesDynArray;
   public
-    constructor Create;
+    constructor Create(ARSAT: TRSAT);
     function Open(AName: String; ADistinguishedName: String): TVisProperties;
     function New(AName: String; ADistinguishedName: String): TVisProperties;
     function Close(aForm: TVisProperties): boolean;
@@ -66,12 +68,13 @@ uses
 
 { TVisPropertiesList }
 
-constructor TVisPropertiesList.Create;
+constructor TVisPropertiesList.Create(ARSAT: TRSAT);
 begin
   fLog := TOpenRSATLog;
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Create', [Self.ClassName]);
 
+  fRSAT := ARSAT;
   fItems := [];
 end;
 
@@ -108,7 +111,7 @@ begin
   c := Count;
   SetLength(fItems, c + 1);
 
-  fItems[c] := TVisProperties.Create(FrmRSAT, ADistinguishedName);
+  fItems[c] := TVisProperties.Create(FrmRSAT, ADistinguishedName, fRSAT);
   result := fItems[c];
   fItems[c].Caption := AName;
   if Assigned(fItems[c].Owner) then
@@ -151,8 +154,12 @@ begin
   result := True;
 
   for item in fItems do
+  begin
+    if not Assigned(Item) then
+      continue;
     if item.Caption = AName then
       Exit;
+  end;
   result := False;
 end;
 

@@ -34,7 +34,8 @@ uses
   ucoredatamodule,
   upropertyframe,
   uproperty,
-  ulog;
+  ulog,
+  ursat;
 
 type
 
@@ -122,7 +123,7 @@ type
     procedure UpdateTabs;
     procedure NewTab(NewFrameClass: TPropertyFrameClass);
   public
-    constructor Create(TheOwner: TComponent; ADistinguishedName: RawUtf8); reintroduce;
+    constructor Create(TheOwner: TComponent; ADistinguishedName: RawUtf8; ARsat: TRSAT); reintroduce;
     destructor Destroy(); override;
 
     property DistinguishedName: RawUtf8 read fDistinguishedName;
@@ -544,13 +545,13 @@ const
 { TVisProperties }
 
 constructor TVisProperties.Create(TheOwner: TComponent;
-  ADistinguishedName: RawUtf8);
+  ADistinguishedName: RawUtf8; ARsat: TRSAT);
 begin
   Inherited Create(TheOwner);
 
   fDistinguishedName := ADistinguishedName;
 
-  fProperty := TProperty.Create(fProperty.RSAT);
+  fProperty := TProperty.Create(ARSAT);
   if not Assigned(LdapClient) or
      not LdapClient.Connected or
      (fDistinguishedName = '') then
