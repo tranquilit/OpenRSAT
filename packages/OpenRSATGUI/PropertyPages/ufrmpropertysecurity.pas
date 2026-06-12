@@ -78,7 +78,6 @@ uses
   ucoredatamodule,
   uhelpersui,
   ursatldapclient,
-  ufrmrsat,
   ursatldapclientui;
 
 {$R *.lfm}

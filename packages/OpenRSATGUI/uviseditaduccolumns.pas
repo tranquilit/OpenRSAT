@@ -81,8 +81,7 @@ uses
   uhelpers,
   mormot.core.data,
   uconfig,
-  umoduleaducoption,
-  ufrmrsat;
+  umoduleaducoption;
 
 {$R *.lfm}
 

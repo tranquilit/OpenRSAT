@@ -268,7 +268,7 @@ end;
 function TChangeDomainController.GetCurrentServer: RawUtf8;
 begin
   result := '';
-  if Assigned(FrmRSAT) and Assigned(LdapClient) and Assigned(LdapClient.Settings) then
+  if Assigned(LdapClient) and Assigned(LdapClient.Settings) then
     result := LdapClient.Settings.TargetHost;
 end;
 
@@ -280,7 +280,7 @@ var
   NewObject: PDocVariantData;
 begin
   result := False;
-  if not Assigned(FrmRSAT) or not Assigned(LdapClient) then
+  if not Assigned(LdapClient) then
     Exit;
 
   LdapClient.SearchBegin();

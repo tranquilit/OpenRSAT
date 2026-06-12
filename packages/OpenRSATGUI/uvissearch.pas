@@ -105,8 +105,11 @@ type
   private
     SearchWord: RawUtf8;
     fModule: TFrmModuleADUC;
+    fLdapClient: TLdapClient;
   public
     constructor Create(TheOwner: TComponent; AModule: TFrmModuleADUC); reintroduce;
+
+    property LdapClient: TLdapClient read fLdapClient write fLdapClient;
   end;
 
 implementation
@@ -146,15 +149,15 @@ begin
 
   TisSearchEdit_AdvKey.Clear;
   TisSearchEdit_AdvKey.Items.BeginUpdate;
-  FrmRSAT.RSAT.LdapClient.SearchBegin();
+  LdapClient.SearchBegin();
   try
-    FrmRSAT.RSAT.LdapClient.SearchScope := lssWholeSubtree;
+    LdapClient.SearchScope := lssWholeSubtree;
 
     repeat
-      if not FrmRSAT.RSAT.LdapClient.Search(FrmRSAT.RSAT.LdapClient.SchemaDN, False, '', ['lDAPDisplayName']) then
+      if not LdapClient.Search(LdapClient.SchemaDN, False, '', ['lDAPDisplayName']) then
         Exit;
 
-      for SearchResult in FrmRSAT.RSAT.LdapClient.SearchResult.Items do
+      for SearchResult in LdapClient.SearchResult.Items do
       begin
         if not Assigned(SearchResult) then
           continue;
@@ -163,9 +166,9 @@ begin
           continue;
         TisSearchEdit_AdvKey.Items.Add(LdapDisplayName);
       end;
-    until FrmRSAT.RSAT.LdapClient.SearchCookie = '';
+    until LdapClient.SearchCookie = '';
   finally
-    FrmRSAT.RSAT.LdapClient.SearchEnd;
+    LdapClient.SearchEnd;
     TisSearchEdit_AdvKey.Items.EndUpdate;
   end;
 end;
@@ -284,7 +287,7 @@ end;
 
 procedure TVisSearch.Action_ChangeDNExecute(Sender: TObject); // ChangeDN
 begin
-  with TVisChangeDN.create(self, FrmRSAT.RSAT.LdapClient, Edit_Path.Text, FrmRSAT.RSAT.LdapClient.DefaultDN) do
+  with TVisChangeDN.create(self, LdapClient, Edit_Path.Text, LdapClient.DefaultDN) do
   try
     if ShowModal = mrOk then
       Edit_Path.Text := SelectedDN;
@@ -404,19 +407,19 @@ begin
      not TryStrToInt(Edit_PageCount.Text, pageCount) then
     aLog.Log(sllWarning, 'Cannot search.');
 
-  FrmRSAT.RSAT.LdapClient.SearchBegin(pageSize);
+  LdapClient.SearchBegin(pageSize);
   case ComboBox_SearchScope.ItemIndex of
-    0: FrmRSAT.RSAT.LdapClient.SearchScope := lssBaseObject;
-    1: FrmRSAT.RSAT.LdapClient.SearchScope := lssSingleLevel;
-    2: FrmRSAT.RSAT.LdapClient.SearchScope := lssWholeSubtree;
+    0: LdapClient.SearchScope := lssBaseObject;
+    1: LdapClient.SearchScope := lssSingleLevel;
+    2: LdapClient.SearchScope := lssWholeSubtree;
   end;
 
   TisGrid_Result.BeginUpdate;
   try
     repeat
-      if not FrmRSAT.RSAT.LdapClient.Search(Trim(Edit_Path.Text), False, Filter, Attributes) then
+      if not LdapClient.Search(Trim(Edit_Path.Text), False, Filter, Attributes) then
         Exit;
-      for item in FrmRSAT.RSAT.LdapClient.SearchResult.Items do
+      for item in LdapClient.SearchResult.Items do
       begin
         if not Assigned(item) or (item.Attributes.Count <= 0) then
           continue;
@@ -435,9 +438,9 @@ begin
         data.Clear;
       end;
       Inc(count);
-    until (FrmRSAT.RSAT.LdapClient.SearchCookie = '') or (count = pageCount);
+    until (LdapClient.SearchCookie = '') or (count = pageCount);
   finally
-    FrmRSAT.RSAT.LdapClient.SearchEnd;
+    LdapClient.SearchEnd;
     TisGrid_Result.EndUpdate;
     TisGrid_Result.LoadData;
   end;

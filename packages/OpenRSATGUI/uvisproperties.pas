@@ -550,7 +550,7 @@ begin
 
   fDistinguishedName := ADistinguishedName;
 
-  fProperty := TProperty.Create(FrmRSAT.RSAT);
+  fProperty := TProperty.Create(fProperty.RSAT);
   if not Assigned(LdapClient) or
      not LdapClient.Connected or
      (fDistinguishedName = '') then

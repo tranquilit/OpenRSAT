@@ -44,7 +44,7 @@ type
 
     procedure ChangeNode(node: TTreeNode);
   public
-    constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient; ACurrentDN,
+    constructor Create(TheOwner: TComponent; ALdap: TLdapClient; ACurrentDN,
       AbaseDN: RawUtf8); reintroduce;
 
     property SelectedDN: RawUtf8 read fSelectedDN;
@@ -170,7 +170,7 @@ begin
   end;
 end;
 
-constructor TVisChangeDN.Create(TheOwner: TComponent; ALdap: TRsatLdapClient;
+constructor TVisChangeDN.Create(TheOwner: TComponent; ALdap: TLdapClient;
   ACurrentDN, AbaseDN: RawUtf8);
 var
   res: TLdapResult;
@@ -183,7 +183,7 @@ begin
   inherited Create(TheOwner);
 
   fBaseDN := AbaseDN;
-  fLdap := ALdap;
+  fLdap := (ALdap as TRsatLdapClient);
   fSelectedDN := ACurrentDN;
 
   res := fLdap.SearchObject(fLdap.DefaultDN(fBaseDN), '', ['distinguishedName', 'objectClass']);

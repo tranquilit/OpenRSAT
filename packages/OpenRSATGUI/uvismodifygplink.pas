@@ -27,8 +27,7 @@ uses
   mormot.core.base,
   mormot.core.variants,
   mormot.net.ldap,
-  ugplink,
-  ufrmrsat;
+  ugplink;
 
 type
 

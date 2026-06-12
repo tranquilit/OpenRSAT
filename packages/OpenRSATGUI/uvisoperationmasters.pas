@@ -88,8 +88,7 @@ uses
   ursatldapclient,
   ursatldapclientui,
   uvischangedomaincontroller,
-  ucommon,
-  ufrmrsat;
+  ucommon;
 
 {$R *.lfm}
 

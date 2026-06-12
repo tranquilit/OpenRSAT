@@ -139,8 +139,7 @@ uses
   mormot.core.variants,
   ucommon,
   uOmniselect,
-  ursatldapclientui,
-  ufrmrsat;
+  ursatldapclientui;
 
 {$R *.lfm}
 
