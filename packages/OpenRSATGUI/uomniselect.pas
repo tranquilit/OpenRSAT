@@ -55,7 +55,7 @@ type
       var Ghosted: Boolean; var ImageIndex: Integer);
     procedure ToolButton_AttributesListClick(Sender: TObject);
   private
-    fLdap: TRsatLdapClient;
+    fLdapClient: TLdapClient;
     fBaseDN: RawUtf8;
 
     fAllowedObjectClass: TStringArray;
@@ -65,8 +65,10 @@ type
     function GetSelectedObjects: TRawUtf8DynArray;
     procedure ListRefresh();
   public
-    constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient; AllowedObjectClass: TStringArray; baseDN: RawUtf8 = ''; AllowMultiselect: Boolean = True; Filter: RawUtf8 = ''); reintroduce;
+    constructor Create(TheOwner: TComponent; AllowedObjectClass: TStringArray; baseDN: RawUtf8 = ''; AllowMultiselect: Boolean = True; Filter: RawUtf8 = ''); reintroduce;
+
     property SelectedObjects: TRawUtf8DynArray read GetSelectedObjects;
+    property LdapClient: TLdapClient read fLdapClient write fLdapClient;
   end;
 
 implementation
@@ -84,7 +86,7 @@ uses
 { TVisOmniselect }
 
 // Form
-constructor TVisOmniselect.Create(TheOwner: TComponent; ALdap: TRsatLdapClient;
+constructor TVisOmniselect.Create(TheOwner: TComponent;
   AllowedObjectClass: TStringArray; baseDN: RawUtf8; AllowMultiselect: Boolean;
   Filter: RawUtf8);
 var
@@ -93,7 +95,7 @@ var
 begin
   Inherited Create(TheOwner);
 
-  fLdap := ALdap;
+  fLdapClient := nil;
   fBaseDN := baseDN;
   fAllowedObjectClass := AllowedObjectClass;
   fAllowMultiselect := AllowMultiselect;
@@ -191,14 +193,14 @@ begin
   // Fill TisGrid_Items
   TisGrid_Items.Cursor := crHourGlass;
   TisGrid_Items.BeginUpdate();
-  fLdap.SearchBegin({VisMain.Storage.Options.SearchPageSize});
+  LdapClient.SearchBegin({VisMain.Storage.Options.SearchPageSize});
   try
     TisGrid_Items.Clear();
-    fLdap.SearchScope := lssWholeSubtree;
+    LdapClient.SearchScope := lssWholeSubtree;
     repeat
-      if not fLdap.Search(fLdap.DefaultDN(fBaseDN), False, SearchFilter, ['name', 'objectClass', 'description', 'distinguishedName']) then
+      if not LdapClient.Search(LdapClient.DefaultDN(fBaseDN), False, SearchFilter, ['name', 'objectClass', 'description', 'distinguishedName']) then
         Exit;
-      for item in fLdap.SearchResult.Items do
+      for item in LdapClient.SearchResult.Items do
       begin
         if not Assigned(item) then
           continue;
@@ -211,9 +213,9 @@ begin
         newItem.Clear;
       end;
       Dec(pageCount);
-    until (fLdap.SearchCookie = '') or (pageCount = 0);
+    until (LdapClient.SearchCookie = '') or (pageCount = 0);
   finally
-    fLdap.SearchEnd;
+    LdapClient.SearchEnd;
     TisGrid_Items.Cursor := crDefault;
     TisGrid_Items.EndUpdate();
     TisGrid_Items.LoadData();

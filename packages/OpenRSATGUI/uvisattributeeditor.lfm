@@ -7,8 +7,9 @@ object VisAttributeEditor: TVisAttributeEditor
   ClientWidth = 443
   KeyPreview = True
   Position = poOwnerFormCenter
-  LCLVersion = '4.1.0.0'
+  LCLVersion = '4.5.0.0'
   OnKeyDown = FormKeyDown
+  OnShow = FormShow
   object Panel_Bottom: TPanel
     Left = 8
     Height = 50

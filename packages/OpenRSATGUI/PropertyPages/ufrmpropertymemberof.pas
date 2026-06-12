@@ -363,8 +363,9 @@ begin
     Filter := FormatUtf8('(!(|%))', [Filter]);
 
   // Select groups to add
-  VisSelect := TVisOmniselect.Create(self, fProperty.LdapClient, ['group'], fProperty.LdapClient.DefaultDN(), True, Filter);
+  VisSelect := TVisOmniselect.Create(self, ['group'], fProperty.LdapClient.DefaultDN(), True, Filter);
   try
+    VisSelect.LdapClient := fProperty.LdapClient;
     VisSelect.Caption := rsTitleSelectGroups;
     if VisSelect.ShowModal() <> mrOK then
       Exit;

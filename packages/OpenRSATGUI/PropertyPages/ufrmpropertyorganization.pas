@@ -100,8 +100,9 @@ begin
   Filter := FormatUtf8('(!(distinguishedName=%))', [LdapEscape(fProperty.DistinguishedName)]); // Dont allow self
 
   // Omniselect
-  Omniselect := TVisOmniselect.Create(self, fProperty.LdapClient, ['user'], fProperty.LdapClient.DefaultDN, False, Filter);
+  Omniselect := TVisOmniselect.Create(self, ['user'], fProperty.LdapClient.DefaultDN, False, Filter);
   try
+    Omniselect.LdapClient := fProperty.LdapClient;
     Omniselect.Caption := rsTitleSelectNewManager;
     if Omniselect.ShowModal() <> mrOK then
       Exit;

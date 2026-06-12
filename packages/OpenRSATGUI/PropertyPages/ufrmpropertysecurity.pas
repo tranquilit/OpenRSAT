@@ -92,7 +92,7 @@ var
 begin
   Vis := TVisAdvancedSecurity.Create(Self);
   try
-    Vis.SetLdapClient(FrmRSAT.LdapClient);
+    Vis.SetLdapClient(fProperty.RSAT.LdapClient);
     Vis.SetDistinguishedName(fProperty.distinguishedName);
     Vis.SetObjectName(fProperty.name);
     Vis.SetSecurityDescriptor(fProperty.SecurityDescriptor^);

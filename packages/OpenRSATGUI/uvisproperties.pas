@@ -115,6 +115,7 @@ type
     fPropertyFrameList: Array of TPropertyFrame;
     fDistinguishedName: RawUtf8;
 
+    function GetLdapClient: TLdapClient;
     function LoadAttributes: Boolean;
     procedure OnSearchEventFillAttributes(Sender: TObject);
     procedure LoadView;
@@ -125,6 +126,7 @@ type
     destructor Destroy(); override;
 
     property DistinguishedName: RawUtf8 read fDistinguishedName;
+    property LdapClient: TLdapClient read GetLdapClient;
   end;
 
 const
@@ -548,16 +550,14 @@ begin
 
   fDistinguishedName := ADistinguishedName;
 
-  if not Assigned(FrmRSAT) or
-     not Assigned(FrmRSAT.LdapClient) or
-     not FrmRSAT.LdapClient.Connected or
+  fProperty := TProperty.Create(FrmRSAT.RSAT);
+  if not Assigned(LdapClient) or
+     not LdapClient.Connected or
      (fDistinguishedName = '') then
     Exit;
 
   IniPropStorage1.IniFileName := VisBakFilePath;
   UnifyButtonsWidth([Btn_BottomApply, Btn_BottomCancel, Btn_BottomOK]);
-
-  fProperty := TProperty.Create(FrmRSAT.RSAT);
 end;
 
 destructor TVisProperties.Destroy();
@@ -646,15 +646,20 @@ begin
   result := True;
 end;
 
+function TVisProperties.GetLdapClient: TLdapClient;
+begin
+  result := fProperty.RSAT.LdapClient;
+end;
+
 procedure TVisProperties.OnSearchEventFillAttributes(Sender: TObject);
 var
-  LdapClient: TRsatLdapClient;
+  Ldap: TRsatLdapClient;
 begin
-  LdapClient := (Sender as TRsatLdapClient);
+  Ldap := (Sender as TRsatLdapClient);
 
   // Fill Attributes
-  if LdapClient.SearchResult.Count > 0 then
-    fProperty.Attributes := LdapClient.SearchResult.Items[0].Attributes;
+  if Ldap.SearchResult.Count > 0 then
+    fProperty.Attributes := Ldap.SearchResult.Items[0].Attributes;
   fProperty.RSAT.LdapClient.OnSearch := nil;
 end;
 

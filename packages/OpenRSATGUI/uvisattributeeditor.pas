@@ -90,7 +90,9 @@ type
     procedure Action_UpExecute(Sender: TObject);
     procedure Action_UpUpdate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
   private
+    fLdapClient: TLdapClient;
     fData: TLdapAttribute;
     fAttributeName: RawUtf8;
     fAttr: TLdapAttribute;
@@ -108,6 +110,7 @@ type
     destructor Destroy; override;
 
     property Attr: TLdapAttribute read GetAttr;
+    property LdapClient: TLdapClient read fLdapClient write fLdapClient;
   end;
 
   function TLdapSyntaxFromString(AttributeSyntax, oMSyntax, oMObjectClass: RawUtf8): TLdapSyntax;
@@ -283,6 +286,59 @@ begin
   end;
 end;
 
+procedure TVisAttributeEditor.FormShow(Sender: TObject);
+var
+  Attributes: TLdapResult;
+  attributeSyntax, oMSyntax, oMObjectClass: RawUtf8;
+  isSingleValue: Boolean;
+  syntax: TLdapSyntax;
+begin
+  PageControl1.ShowTabs := False;
+
+  Attributes := LdapClient.SearchObject(
+    FormatUtf8('CN=Schema,%', [LdapClient.ConfigDN]),
+    FormatUtf8('(lDAPDisplayName=%)', [LdapEscape(fData.AttributeName)]),
+    ['attributeSyntax', 'oMSyntax', 'oMObjectClass', 'isSingleValued'],
+    lssSingleLevel
+  );
+
+  attributeSyntax := Attributes.Find('attributeSyntax').GetReadable();
+
+  oMSyntax := Attributes.Find('oMSyntax').GetReadable();
+
+  oMObjectClass := Attributes.Find('oMObjectClass').GetReadable();
+
+  case Attributes.Find('isSingleValued').GetReadable() of
+    'TRUE': isSingleValue := True;
+    'FALSE': isSingleValue := False;
+    else
+      isSingleValue := True;
+  end;
+
+
+  syntax := TLdapSyntaxFromString(attributeSyntax, oMSyntax, oMObjectClass);
+
+  case syntax of
+    lsStringCase,
+    lsStringIA5,
+    lsStringNTSecDesc,
+    lsStringNumeric,
+    lsStringObjectIdentifier,
+    lsStringOctet,
+    lsStringPrintable,
+    lsStringSid,
+    lsStringTeletex,
+    lsStringUnicode: EditString(isSingleValue);
+    lsStringUTCTime,
+    lsStringGenerelizedTime: EditTime(isSingleValue);
+    else
+      EditString(isSingleValue);
+  end;
+
+  UnifyButtonsWidth([BitBtn_OK, BitBtn_Cancel]);
+  UnifyButtonsWidth([BitBtn_Add, BitBtn_Delete, BitBtn_Down, BitBtn_Up]);
+end;
+
 procedure TVisAttributeEditor.EditString(isSingleValue: Boolean);
 var
   value: RawUtf8;
@@ -382,51 +438,6 @@ begin
     fData := TLdapAttribute(Data.Clone)
   else
     fData := TLdapAttribute.Create(fAttributeName, atUndefined);
-
-  PageControl1.ShowTabs := False;
-
-  Attributes := FrmRSAT.LdapClient.SearchObject(
-    FormatUtf8('CN=Schema,%', [FrmRSAT.LdapClient.ConfigDN]),
-    FormatUtf8('(lDAPDisplayName=%)', [LdapEscape(fData.AttributeName)]),
-    ['attributeSyntax', 'oMSyntax', 'oMObjectClass', 'isSingleValued'],
-    lssSingleLevel
-  );
-
-  attributeSyntax := Attributes.Find('attributeSyntax').GetReadable();
-
-  oMSyntax := Attributes.Find('oMSyntax').GetReadable();
-
-  oMObjectClass := Attributes.Find('oMObjectClass').GetReadable();
-
-  case Attributes.Find('isSingleValued').GetReadable() of
-    'TRUE': isSingleValue := True;
-    'FALSE': isSingleValue := False;
-    else
-      isSingleValue := True;
-  end;
-
-
-  syntax := TLdapSyntaxFromString(attributeSyntax, oMSyntax, oMObjectClass);
-
-  case syntax of
-    lsStringCase,
-    lsStringIA5,
-    lsStringNTSecDesc,
-    lsStringNumeric,
-    lsStringObjectIdentifier,
-    lsStringOctet,
-    lsStringPrintable,
-    lsStringSid,
-    lsStringTeletex,
-    lsStringUnicode: EditString(isSingleValue);
-    lsStringUTCTime,
-    lsStringGenerelizedTime: EditTime(isSingleValue);
-    else
-      EditString(isSingleValue);
-  end;
-
-  UnifyButtonsWidth([BitBtn_OK, BitBtn_Cancel]);
-  UnifyButtonsWidth([BitBtn_Add, BitBtn_Delete, BitBtn_Down, BitBtn_Up]);
 end;
 
 destructor TVisAttributeEditor.Destroy;

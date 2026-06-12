@@ -97,8 +97,9 @@ var
 begin
   // Omniselect
   DNarr := [''];
-  Omniselect := TVisOmniselect.Create(self, (owner as TVisNewObject).Ldap, ['user', 'group'], (Owner as TVisNewObject).BaseDN, False, '');
+  Omniselect := TVisOmniselect.Create(self, ['user', 'group'], (Owner as TVisNewObject).BaseDN, False, '');
   try
+    Omniselect.LdapClient := (owner as TVisNewObject).Ldap;
     Omniselect.Caption := rsTitleSelectOwner;
     if Omniselect.ShowModal() <> mrOK then
       Exit;

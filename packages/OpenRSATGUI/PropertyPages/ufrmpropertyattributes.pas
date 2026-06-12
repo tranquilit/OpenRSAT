@@ -137,6 +137,7 @@ begin
 
   vis := TVisAttributeEditor.Create(self, Attribute, List_Attributes.FocusedRow^.S['attribute']);
   try
+    vis.LdapClient := fProperty.RSAT.LdapClient;
     if (vis.ShowModal <> mrOK) then
       Exit;
 

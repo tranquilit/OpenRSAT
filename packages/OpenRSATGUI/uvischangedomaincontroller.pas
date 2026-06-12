@@ -75,6 +75,7 @@ type
   TChangeDomainController = class
   private
     fLog: TSynLogClass;
+    fLdapClient: TLdapClient;
     fSitesData: TDocVariantData;
 
     function GetSite(DistinguishedName: RawUtf8): RawUtf8;
@@ -84,6 +85,8 @@ type
     function RetrieveServersExtra(CallBack: TCallBack): Boolean;
     function ChangeConnection(DomainController: RawUtf8): Boolean;
     function TestConnection(DomainController: RawUtf8): Boolean;
+
+    property LdapClient: TLdapClient read fLdapClient write fLdapClient;
   end;
 
   { TVisChangeDomainController }
@@ -115,10 +118,12 @@ type
     procedure TisGrid1KeyPress(Sender: TObject; var Key: char);
   private
     fLog: TSynLogClass;
+    fLdapClient: TLdapClient;
     fChangeDomainController: TChangeDomainController;
     fSearchWord: RawUtf8;
     fAllowClose: Boolean;
 
+    procedure SetLdapClient(AValue: TLdapClient);
     procedure UpdateCurrentServer;
     procedure FillGrid;
     procedure OnRetrievedServers(data: Pointer);
@@ -128,6 +133,8 @@ type
     destructor Destroy; override;
 
     function DomainController: RawUtf8;
+
+    property LdapClient: TLdapClient read fLdapClient write SetLdapClient;
   end;
 
 const
@@ -261,37 +268,34 @@ end;
 function TChangeDomainController.GetCurrentServer: RawUtf8;
 begin
   result := '';
-  if Assigned(FrmRSAT) and Assigned(FrmRSAT.LdapClient) and Assigned(FrmRSAT.LdapClient.Settings) then
-    result := FrmRSAT.LdapClient.Settings.TargetHost;
+  if Assigned(FrmRSAT) and Assigned(LdapClient) and Assigned(LdapClient.Settings) then
+    result := LdapClient.Settings.TargetHost;
 end;
 
 function TChangeDomainController.RetrieveServers(CallBack: TCallBack;
   RetrieveExtra: Boolean): Boolean;
 var
-  Ldap: TRsatLdapClient;
   SearchResult: TLdapResult;
   DistinguishedName: RawUtf8;
   NewObject: PDocVariantData;
 begin
   result := False;
-  if not Assigned(FrmRSAT) or not Assigned(FrmRSAT.LdapClient) then
+  if not Assigned(FrmRSAT) or not Assigned(LdapClient) then
     Exit;
 
-  Ldap := FrmRSAT.LdapClient;
-
-  Ldap.SearchBegin();
+  LdapClient.SearchBegin();
   try
-    Ldap.SearchScope := lssWholeSubtree;
+    LdapClient.SearchScope := lssWholeSubtree;
 
     repeat
-      if not Ldap.Search(Ldap.ConfigDN, False, '(objectClass=server)', ['distinguishedName', 'dNSHostName']) then
+      if not LdapClient.Search(LdapClient.ConfigDN, False, '(objectClass=server)', ['distinguishedName', 'dNSHostName']) then
       begin
         if Assigned(fLog) then
-          fLog.Add.Log(sllError, Ldap.ResultString);
+          fLog.Add.Log(sllError, LdapClient.ResultString);
         Exit;
       end;
 
-      for SearchResult in Ldap.SearchResult.Items do
+      for SearchResult in LdapClient.SearchResult.Items do
       begin
         if not Assigned(SearchResult) then
           continue;
@@ -301,9 +305,9 @@ begin
         NewObject^.S['name'] := SearchResult.Find('dNSHostName').GetReadable();
         NewObject^.S['site'] := GetSite(DistinguishedName);
       end;
-    until Ldap.SearchCookie = '';
+    until LdapClient.SearchCookie = '';
   finally
-    Ldap.SearchEnd();
+    LdapClient.SearchEnd();
   end;
 
   if RetrieveExtra then
@@ -319,24 +323,22 @@ end;
 function TChangeDomainController.RetrieveServersExtra(CallBack: TCallBack
   ): Boolean;
 var
-  Ldap: TRsatLdapClient;
   SearchResult: TLdapResult;
   DistinguishedName: RawUtf8;
 begin
   result := False;
-  Ldap := FrmRSAT.LdapClient;
 
-  Ldap.SearchBegin();
+  LdapClient.SearchBegin();
   try
     repeat
-      if not Ldap.Search(Ldap.ConfigDN, False, '(&(objectClass=nTDSDSA)(objectClass=applicationSettings))', ['options', 'msDS-Behavior-Version', 'distinguishedName']) then
+      if not LdapClient.Search(LdapClient.ConfigDN, False, '(&(objectClass=nTDSDSA)(objectClass=applicationSettings))', ['options', 'msDS-Behavior-Version', 'distinguishedName']) then
       begin
         if Assigned(fLog) then
-          fLog.Add.Log(sllError, 'Ldap Search Error: "%"', [Ldap.ResultString]);
+          fLog.Add.Log(sllError, 'Ldap Search Error: "%"', [LdapClient.ResultString]);
         Exit;
       end;
 
-      for SearchResult in Ldap.SearchResult.Items do
+      for SearchResult in LdapClient.SearchResult.Items do
       begin
         if not Assigned(SearchResult) then
           continue;
@@ -346,9 +348,9 @@ begin
         fSitesData.O_[DistinguishedName]^.S['dctype'] := DCOptionFromText(SearchResult.Find('options').GetReadable());
         fSitesData.O_[DistinguishedName]^.S['status'] := 'Pending...';
       end;
-    until Ldap.SearchCookie = '';
+    until LdapClient.SearchCookie = '';
   finally
-    Ldap.SearchEnd();
+    LdapClient.SearchEnd();
   end;
 
   if Assigned(CallBack) then
@@ -362,8 +364,8 @@ var
   test: TRsatLdapClient;
 begin
   result := False;
-  test := TRsatLdapClient.Create(FrmRSAT.LdapClient.Settings);
-  test.OnError := FrmRSAT.LdapClient.OnError;
+  test := TRsatLdapClient.Create(LdapClient.Settings);
+  test.OnError := (LdapClient as TRsatLdapClient).OnError;
   try
     test.Settings.TargetHost := DomainController;
     test.Settings.KerberosSpn := '';
@@ -381,8 +383,8 @@ var
   test: TRsatLdapClient;
 begin
   result := False;
-  test := TRsatLdapClient.Create(FrmRSAT.LdapClient.Settings);
-  test.OnError := FrmRSAT.LdapClient.OnError;
+  test := TRsatLdapClient.Create(LdapClient.Settings);
+  test.OnError := (LdapClient as TRsatLdapClient).OnError;
   try
     test.Settings.TargetHost := DomainController;
     test.Settings.KerberosSpn := '';
@@ -448,6 +450,14 @@ begin
   Label2.Caption := fChangeDomainController.GetCurrentServer;
 end;
 
+procedure TVisChangeDomainController.SetLdapClient(AValue: TLdapClient);
+begin
+  if fLdapClient = AValue then
+    Exit;
+  fLdapClient := AValue;
+  fChangeDomainController.LdapClient := fLdapClient;
+end;
+
 procedure TVisChangeDomainController.FillGrid;
 begin
   fChangeDomainController.RetrieveServers(@OnRetrievedServers);
@@ -480,7 +490,7 @@ begin
       continue;
     thread := TThreadIsDCOnline.Create(True);
     thread.SetDomainController(Row^.S['name']);
-    thread.SetSettings(FrmRSAT.LdapClient.Settings);
+    thread.SetSettings(LdapClient.Settings);
     thread.SetCallBack(@UpdateRow);
     thread.FreeOnTerminate := True;
     thread.Start;

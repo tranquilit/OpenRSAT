@@ -291,8 +291,9 @@ begin
 
   // Omniselect
   DNarr := [''];
-  Omniselect := TVisOmniselect.Create(self, fProperty.RSAT.LdapClient, ['user', 'group', 'contacts'], fProperty.RSAT.LdapClient.DefaultDN(), False, Filter);
+  Omniselect := TVisOmniselect.Create(self, ['user', 'group', 'contacts'], fProperty.RSAT.LdapClient.DefaultDN(), False, Filter);
   try
+    Omniselect.LdapClient := fProperty.RSAT.LdapClient;
     Omniselect.Caption := rsTitleSelectNewManager;
     if Omniselect.ShowModal() <> mrOK then
     begin

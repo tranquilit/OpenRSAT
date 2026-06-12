@@ -67,6 +67,7 @@ type
     procedure Action_EnableGPOExecute(Sender: TObject);
     procedure Action_EnforceGPOExecute(Sender: TObject);
     procedure Action_OKExecute(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure TisGrid_AvailableGPOBeforeDeleteRows(aSender: TTisGrid;
       aRows: PDocVariantData; var aAskUser, aAbort: Boolean);
     procedure TisGrid_AvailableGPODragDrop(Sender: TBaseVirtualTree;
@@ -93,6 +94,7 @@ type
   private
     fGroupPolicyContainerArr: TLdapResultObjArray;
     fGPLinkArr: TGPLinkDynArr;
+    fLdapClient: TLdapClient;
 
     function GetGPLinkArr: TGPLinkDynArr;
     procedure SetGPLinkArr(AValue: TGPLinkDynArr);
@@ -110,6 +112,7 @@ type
     destructor Destroy; override;
 
     property DistinguishedName: RawUtf8 read GetDistinguishedName write SetDistinguishedName;
+    property LdapClient: TLdapClient read fLdapClient write fLdapClient;
   end;
 
 implementation
@@ -170,6 +173,11 @@ begin
   Action_Apply.Execute;
 end;
 
+procedure TVisModifyGPLink.FormShow(Sender: TObject);
+begin
+  RefreshGroupPolicyContainerArr;
+end;
+
 procedure TVisModifyGPLink.Action_DisableGPOExecute(Sender: TObject);
 begin
   ChangeGPOFlag(1);
@@ -195,7 +203,7 @@ begin
     Inc(Count);
   end;
   GPLink := GPLinkArrToGPLink(NewGPLinkArr);
-  if not FrmRSAT.LdapClient.Modify(Edit1.Text, lmoReplace, 'gPLink', GPLink) then
+  if not LdapClient.Modify(Edit1.Text, lmoReplace, 'gPLink', GPLink) then
     Exit;
 end;
 
@@ -282,24 +290,24 @@ var
   Count: Integer;
 begin
   Count := 0;
-  FrmRSAT.LdapClient.SearchBegin();
+  LdapClient.SearchBegin();
   try
-    FrmRSAT.LdapClient.SearchScope := lssSingleLevel;
+    LdapClient.SearchScope := lssSingleLevel;
     repeat
-      if not FrmRSAT.LdapClient.Search(FormatUtf8('CN=Policies,CN=System,%', [FrmRSAT.LdapClient.DefaultDN]), False, 'objectClass=groupPolicyContainer', ['displayName']) then
+      if not LdapClient.Search(FormatUtf8('CN=Policies,CN=System,%', [LdapClient.DefaultDN]), False, 'objectClass=groupPolicyContainer', ['displayName']) then
         Exit;
 
-      SetLength(fGroupPolicyContainerArr, Count + FrmRSAT.LdapClient.SearchResult.Count);
-      for SearchResult in FrmRSAT.LdapClient.SearchResult.Items do
+      SetLength(fGroupPolicyContainerArr, Count + LdapClient.SearchResult.Count);
+      for SearchResult in LdapClient.SearchResult.Items do
       begin
         if not Assigned(SearchResult) then
           continue;
         fGroupPolicyContainerArr[Count] := TLdapResult(SearchResult.Clone);
         Inc(Count);
       end;
-    until FrmRSAT.LdapClient.SearchCookie = '';
+    until LdapClient.SearchCookie = '';
   finally
-    FrmRSAT.LdapClient.SearchEnd;
+    LdapClient.SearchEnd;
   end;
 end;
 
@@ -307,7 +315,7 @@ procedure TVisModifyGPLink.RefreshDistinguishedNameGPLinkArr;
 var
   GPLinkAttribute: TLdapAttribute;
 begin
-  GPLinkAttribute := FrmRSAT.LdapClient.SearchObject(Edit1.Text, '', 'gPLink');
+  GPLinkAttribute := LdapClient.SearchObject(Edit1.Text, '', 'gPLink');
   GPLinkArr := GPLinkToGPLinkArr(GPLinkAttribute.GetReadable());
 end;
 
@@ -374,7 +382,6 @@ constructor TVisModifyGPLink.Create(TheOwner: TComponent;
 begin
   Inherited Create(TheOwner);
 
-  RefreshGroupPolicyContainerArr;
   DistinguishedName := ADistinguishedName;
 end;
 

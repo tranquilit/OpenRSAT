@@ -515,6 +515,7 @@ begin
   Vis := TVisChangeDomainController.Create(Self);
 
   try
+    Vis.LdapClient := LdapClient;
     mr := Vis.ShowModal;
     if (mr <> mrOK) or (Vis.DomainController = '') then
       Exit;
@@ -777,6 +778,7 @@ begin
   Vis := TVisModifyGPLink.Create(Self, GetFocusedObject(True));
 
   try
+    Vis.LdapClient := LdapClient;
     Vis.ShowModal;
     RefreshADUCTreeNode((TreeADUC.Selected as TADUCTreeNode));
   finally
@@ -1211,6 +1213,7 @@ var
 begin
   Vis := TVisOperationMasters.Create(Self);
   try
+    Vis.LdapClient := LdapClient;
     Vis.ShowModal();
   finally
     FreeAndNil(Vis);
@@ -1505,6 +1508,7 @@ procedure TFrmModuleADUC.Action_TaskAddToAGroupExecute(Sender: TObject);
 var
   DistinguishedName, SelectedDistinguishedName: String;
   selectedDistinguishedNameArray: TRawUtf8DynArray;
+  Vis: TVisOmniselect;
 
   // Create an attribute to add a member to a group.
   // It does a modify ldap request with an Add operation.
@@ -1572,14 +1576,15 @@ begin
   DistinguishedName := GridADUC.FocusedRow^.S['objectName'];
 
   // Open the vis to let the user select groups
-  With TVisOmniselect.Create(Self, LdapClient, ['group'], LdapClient.DefaultDN, True, ExclusionFilter(DistinguishedName)) do
+  Vis := TVisOmniselect.Create(Self, ['group'], LdapClient.DefaultDN, True, ExclusionFilter(DistinguishedName));
   try
-    Caption := rsTitleSelectGroups;
-    if (ShowModal <> mrOK) then
+    Vis.LdapClient := LdapClient;
+    Vis.Caption := rsTitleSelectGroups;
+    if (Vis.ShowModal <> mrOK) then
       Exit;
-    selectedDistinguishedNameArray := SelectedObjects;
+    selectedDistinguishedNameArray := Vis.SelectedObjects;
   finally
-    Free;
+    FreeAndNil(Vis);
   end;
 
   // Add the member to the selected groups

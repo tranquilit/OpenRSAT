@@ -7,6 +7,7 @@ object VisModifyGPLink: TVisModifyGPLink
   ClientHeight = 398
   ClientWidth = 674
   LCLVersion = '4.5.0.0'
+  OnShow = FormShow
   object Panel_Top: TPanel
     Left = 0
     Height = 39
@@ -107,6 +108,7 @@ object VisModifyGPLink: TVisModifyGPLink
             Width = 284
             PropertyName = 'name'
           end>
+        Header.DefaultHeight = 18
         Header.Height = 28
         Header.MaxHeight = 101
         Header.MinHeight = 19
@@ -189,6 +191,7 @@ object VisModifyGPLink: TVisModifyGPLink
             Width = 227
             PropertyName = 'name'
           end>
+        Header.DefaultHeight = 18
         Header.Height = 28
         Header.MaxHeight = 101
         Header.MinHeight = 19

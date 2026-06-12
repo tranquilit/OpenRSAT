@@ -149,8 +149,9 @@ begin
     Filter := FormatUtf8('(!(|%))', [Filter]);
 
   // Omniselect
-  Omniselect := TVisOmniselect.Create(self, fProperty.LdapClient, ['group', 'user', 'computer', 'contact', 'Managed Service Accounts'], fProperty.LdapClient.DefaultDN, True, Filter);
+  Omniselect := TVisOmniselect.Create(self, ['group', 'user', 'computer', 'contact', 'Managed Service Accounts'], fProperty.LdapClient.DefaultDN, True, Filter);
   try
+    Omniselect.LdapClient := fProperty.LdapClient;
     Omniselect.Caption := rsTitleSelectGroups;
     if Omniselect.ShowModal() <> mrOK then
       Exit;
