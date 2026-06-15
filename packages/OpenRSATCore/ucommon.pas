@@ -597,6 +597,15 @@ function GenerateKeyTab(ALdapClient: TLdapClient; ADistinguishedName: RawUtf8; A
 function PrepareDJoin(ALdapClient: TLdapClient; ADistinguishedName: Rawutf8): TDJoin;
 function PrepareDJoins(ALdapClient: TLdapClient; ADistinguishedNames: TRawUtf8DynArray): TDjoinDynArray;
 
+function PrepareNewUser(const GivenName, Surname, DisplayName, Initials, SamaccountName, UserPrincipalName: RawUtf8): TLdapAttributeList;
+function PrepareInetOrgPerson(const GivenName, Surname, DisplayName, Initials, SamaccountName, UserPrincipalName: RawUtf8): TLdapAttributeList;
+procedure ChangePassword(Attributes: TLdapAttributeList; const Password: SpiUtf8);
+procedure MustChangePassword(Attributes: TLdapAttributeList; ChangePassword: Boolean);
+procedure ChangeUserAccountControl(Attributes: TLdapAttributeList; UAC: TUserAccountControl; aInclude: Boolean);
+procedure PasswordNeverExpires(Attributes: TLdapAttributeList; NeverExpires: Boolean);
+procedure DisableAccount(Attributes: TLdapAttributeList; Disable: Boolean);
+
+
 const
 
   SEC_ACCESS: Array of TSecAccess = (
@@ -1284,6 +1293,101 @@ begin
       raise E;
     end;
   end;
+end;
+
+function PrepareNewUser(const GivenName, Surname, DisplayName, Initials,
+  SamaccountName, UserPrincipalName: RawUtf8): TLdapAttributeList;
+var
+  NewUser: TLdapAttributeList;
+  Att: TLdapAttribute;
+begin
+  result := nil;
+
+  NewUser := TLdapAttributeList.Create();
+  try
+    Att := NewUser.Add(atObjectClass, 'top');
+    Att.Add('person');
+    Att.Add('organizationalPerson');
+    Att.Add('user');
+
+    if GivenName <> '' then
+      NewUser.Add(atGivenName, GivenName);
+    if Surname <> '' then
+      NewUser.Add(atSurName, Surname);
+    if DisplayName <> '' then
+      NewUser.Add(atDisplayName, DisplayName);
+    if Initials <> '' then
+      NewUser.Add(atInitials, Initials);
+    if SamaccountName <> '' then
+      NewUser.Add(atSamAccountName, SamaccountName);
+    if UserPrincipalName <> '' then
+      NewUser.Add(atUserPrincipalName, UserPrincipalName);
+
+    result := NewUser;
+  finally
+    if not Assigned(result) then
+      FreeAndNil(NewUser);
+  end;
+end;
+
+function PrepareInetOrgPerson(const GivenName, Surname, DisplayName, Initials,
+  SamaccountName, UserPrincipalName: RawUtf8): TLdapAttributeList;
+var
+  NewPerson: TLdapAttributeList;
+begin
+  result := nil;
+
+  NewPerson := PrepareNewUser(GivenName, Surname, DisplayName, Initials, SamaccountName, UserPrincipalName);
+  try
+    NewPerson.Add(atObjectClass, 'inetOrgPerson');
+
+    result := NewPerson;
+  finally
+    if not Assigned(result) then
+      FreeAndNil(result);
+  end;
+end;
+
+procedure ChangePassword(Attributes: TLdapAttributeList; const Password: SpiUtf8
+  );
+begin
+  if Password <> '' then
+    Attributes.AddUnicodePwd(Password);
+end;
+
+procedure MustChangePassword(Attributes: TLdapAttributeList;
+  ChangePassword: Boolean);
+begin
+  if ChangePassword then
+    Attributes.Add(atPwdLastSet, '0');
+end;
+
+procedure ChangeUserAccountControl(Attributes: TLdapAttributeList;
+  UAC: TUserAccountControl; aInclude: Boolean);
+var
+  UserAccountControl: TLdapAttribute;
+  UACs: TUserAccountControls;
+begin
+  UserAccountControl := Attributes.Find(atUserAccountControl);
+  UACs := [];
+  if Assigned(UserAccountControl) then
+    UACs := UserAccountControlsFromText(UserAccountControl.GetReadable());
+  if aInclude then
+    Include(UACs, UAC)
+  else
+    Exclude(UACs, UAC);
+  Attributes.Add(atUserAccountControl, IntToStr(UserAccountControlsValue(UACs)), aoReplaceValue);
+end;
+
+procedure PasswordNeverExpires(Attributes: TLdapAttributeList;
+  NeverExpires: Boolean);
+begin
+  ChangeUserAccountControl(Attributes, uacPasswordDoNotExpire, NeverExpires);
+end;
+
+procedure DisableAccount(Attributes: TLdapAttributeList; Disable: Boolean);
+begin
+  ChangeUserAccountControl(Attributes, uacAccountDisable, Disable);
 end;
 
 { TGenerateKeyTabException }
