@@ -90,7 +90,7 @@ uses
 procedure TFrmNewUser.OKBtn();
 var
   NewObject: TVisNewObject;
-  AttList: TLdapAttributeList;
+  NewUser: TLdapAttributeList;
   Att: TLdapAttribute;
   UAC: TUserAccountControls = [uacNormalAccount];
   DN: String;
@@ -100,44 +100,25 @@ begin
   NewObject := (owner as TVisNewObject);
   Dec(NewObject.PageIdx);
 
-  AttList := TLdapAttributeList.Create();
+  NewUser := PrepareNewUser(
+    Edit_FirstName.Text,
+    Edit_LastName.Text,
+    Edit_FullName.Text,
+    Edit_Initials.Text,
+    Edit_nETBIOSName.Text,
+    FormatUtf8('%%', [Edit_UserLogon.Text, TisSearchEdit_UserLogonDomain.Text])
+  );
   try
-    Att := AttList.Add(atObjectClass, 'top');
-    Att.Add('person');
-    Att.Add('organizationalPerson');
-    Att.Add('user');
-
-    if Edit_FirstName.Text <> '' then
-      AttList.Add(atGivenName, Edit_FirstName.Text);
-    if Edit_LastName.Text <> '' then
-      AttList.Add(atSurName, Edit_LastName.Text);
-    if Edit_FullName.Text <> '' then
-      AttList.Add(atDisplayName, Edit_FullName.Text);
-    if Edit_Initials.Text <> '' then
-      AttList.Add(atInitials, Edit_Initials.Text);
-    if Edit_nETBIOSName.Text <> '' then
-      AttList.Add(atSAMAccountName, Edit_nETBIOSName.Text);
-    if (Edit_UserLogon.Text <> '') and (TisSearchEdit_UserLogonDomain.Text <> '') then
-      AttList.Add(atUserPrincipalName, Edit_UserLogon.Text + TisSearchEdit_UserLogonDomain.Text);
-
-    if Edit_Password.Text <> '' then
-      AttList.AddUnicodePwd(Edit_Password.Text);
-
-    if CheckBox_MustChangePassword.Checked then
-      AttList.Add(atPwdLastSet, '0');
-
-    if CheckBox_PasswordNeverExpires.Checked then
-      Include(UAC, uacPasswordDoNotExpire);
-    if CheckBox_AccountDisabled.Checked then
-      Include(UAC, uacAccountDisable);
-    if UAC <> [] then
-      AttList.Add(atUserAccountControl, UserAccountControlsValue(UAC).ToString());
+    ChangePassword(NewUser, Edit_Password.Text);
+    MustChangePassword(NewUser, CheckBox_MustChangePassword.Checked);
+    PasswordNeverExpires(NewUser, CheckBox_PasswordNeverExpires.Checked);
+    DisableAccount(NewUser, CheckBox_AccountDisabled.Checked);
 
     DN := FormatUtf8('CN=%,%', [Edit_FullName.Text, NewObject.ObjectOU]);
-    if not NewObject.Ldap.Add(DN, AttList) then
+    if not NewObject.Ldap.Add(DN, NewUser) then
       Exit;
   finally
-    FreeAndNil(AttList);
+    FreeAndNil(NewUser);
   end;
 
   if CheckBox_CannotChangePassword.Checked then
