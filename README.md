@@ -73,16 +73,11 @@ Features are split into different modules:
 
 ## Screenshots
 
-Overview of OpenRSAT:
-
-[![OpenRSAT overview](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20Overview.gif "OpenRSAT overview")](/tranquilit/OpenRSAT/blob/main/assets/Screenshots/OpenRSAT%20-%20Overview.gif)
-
-Overview of properties:
-
-[![OpenRSAT overview properties](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20Overview%20properties.gif "OpenRSAT overview properties")](/tranquilit/OpenRSAT/blob/main/assets/Screenshots/OpenRSAT%20-%20Overview%20properties.gif)
-
-Create user:
-[![OpenRSAT create user](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20Create%20user.gif "OpenRSAT create user")](/tranquilit/OpenRSAT/blob/main/assets/Screenshots/OpenRSAT%20-%20Create%20user.gif)
+| Context | Windows | Linux | Macos |
+|---------|---------|-------|-------|
+| Overview | [![OpenRSAT - Windows - Overview](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20Windows%20-%20Overview.gif "OpenRSAT - Windows - Overview")](assets/Screenshots/OpenRSAT%20-%20Windows%20-%20Overview.gif) | [![OpenRSAT - Linux(xfce) - Overview](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20Linux-xfce%20-%20Overview.gif "OpenRSAT - Linux(xfce) - Overview")](assets/Screenshots/OpenRSAT%20-%20Linux-xfce%20-%20Overview.gif) | [![OpenRSAT - MacOS - Overview](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20MacOS%20-%20Overview.gif "OpenRSAT - MacOS - Overview")](assets/Screenshots/OpenRSAT%20-%20MacOS%20-%20Overview.gif)
+| Properties | [![OpenRSAT - Windows - Properties](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20Windows%20-%20Overview%20properties.gif "OpenRSAT - Windows - Properties")](assets/Screenshots/OpenRSAT%20-%20Windows%20-%20Overview%20properties.gif) | [![OpenRSAT - Linux(xfce) - Properties](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20Linux-xfce%20-%20Overview%20properties.gif "OpenRSAT - Linux(xfce) - Properties")](assets/Screenshots/OpenRSAT%20-%20Linux-xfce%20-%20Overview%20properties.gif) | [![OpenRSAT - MacOS - Properties](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20MacOS%20-%20Overview%20properties.gif "OpenRSAT - MacOS - Properties")](assets/Screenshots/OpenRSAT%20-%20MacOS%20-%20Overview%20properties.gif) |
+| Create user | [![OpenRSAT - Windows - Create user](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20Windows%20-%20Create%20user.gif "OpenRSAT - Windows - Create user")](assets/Screenshots/OpenRSAT%20-%20Windows%20-%20Create%20user.gif) | [![OpenRSAT - Linux(xfce) - Create user](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20Linux-xfce%20-%20Create%20user.gif "OpenRSAT - Linux(xfce) - Create user")](assets/Screenshots/OpenRSAT%20-%20Linux-xfce%20-%20Create%20user.gif) | [![OpenRSAT - MacOS - Create user](https://github.com/tranquilit/OpenRSAT/raw/main/assets/Screenshots/OpenRSAT%20-%20MacOS%20-%20Create%20user.gif "OpenRSAT - MacOS - Create user")](assets/Screenshots/OpenRSAT%20-%20MacOS%20-%20Create%20user.gif) |
 
 ## Get started
 
