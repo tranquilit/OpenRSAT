@@ -366,17 +366,9 @@ end;
 constructor TFrmNewInetOrgPerson.Create(TheOwner: TComponent);
 var
   OwnerNewObject: TVisNewObject absolute TheOwner;
-  function UserLogonFormatDN(Text, Separator: RawUtf8): RawUtf8;
-  var
-    Position: Integer;
-  begin
-    result := '';
-    Position := Pos(Separator, Text);
-    if Position > 0 then
-      result := Copy(Text, 1, Position - 1)
-    else
-      result := Text;
-  end;
+  Ldap: TLdapClient;
+  SearchObject: TLdapResult;
+  Item: RawUtf8;
 begin
   inherited Create(TheOwner);
 
@@ -386,9 +378,23 @@ begin
   OwnerNewObject.Btn_Back.Action := ActionList.ActionByName('Action_Back');
   OwnerNewObject.Btn_Back.Caption := rsNewObjectBtnBack;
   PageID := 0;
-  ComboBox_UserLogonName.Items.Add(FormatUtf8('@%', [UserLogonFormatDN(OwnerNewObject.Edit_DN.Text, '/')]));
-  ComboBox_UserLogonName.ItemIndex := 0;
-  Edit_PreWindowsPrefix.Text := FormatUtf8('%/', [UpperCase(UserLogonFormatDN(OwnerNewObject.Edit_DN.Text, '.lan'))]);
+
+  Ldap := OwnerNewObject.Ldap;
+  ComboBox_UserLogonName.Items.BeginUpdate;
+  try
+    ComboBox_UserLogonName.Items.Add(FormatUtf8('@%', [DNToCN(Ldap.DefaultDN)]));
+    if Ldap.DefaultDN <> Ldap.RootDN then
+      ComboBox_UserLogonName.Items.Add(FormatUtf8('@%', [DNToCN(Ldap.RootDN)]));
+    SearchObject := Ldap.SearchObject(FormatUtf8('CN=Partitions,%', [Ldap.ConfigDN]), '', ['uPNSuffixes']);
+    if Assigned(SearchObject) then
+      for Item in SearchObject.Find('uPNSuffixes').GetAllReadable do
+        ComboBox_UserLogonName.Items.Add(FormatUtf8('@%', [Item]));
+  finally
+    ComboBox_UserLogonName.Items.EndUpdate;
+    ComboBox_UserLogonName.ItemIndex := 0;
+  end;
+
+  Edit_PreWindowsPrefix.Text := FormatUtf8('%/', [Ldap.NetbiosDN]);
   OwnerNewObject.CallBack := @Load;
 end;
 
