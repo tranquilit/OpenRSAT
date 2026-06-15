@@ -6,6 +6,7 @@ A cross-platform console inspired by Microsoft RSAT, written in modern Object Pa
 ![Latest release](https://img.shields.io/github/v/release/tranquilit/OpenRSAT)
 ![Stars](https://img.shields.io/github/stars/tranquilit/OpenRSAT)
 ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20Linux%20%7C%20macOS-blue)
+![download](https://img.shields.io/github/downloads/tranquilit/openrsat/total.svg)
 
 ## Table of contents
 
