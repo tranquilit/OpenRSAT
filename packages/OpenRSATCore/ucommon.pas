@@ -604,7 +604,7 @@ procedure MustChangePassword(Attributes: TLdapAttributeList; ChangePassword: Boo
 procedure ChangeUserAccountControl(Attributes: TLdapAttributeList; UAC: TUserAccountControl; aInclude: Boolean);
 procedure PasswordNeverExpires(Attributes: TLdapAttributeList; NeverExpires: Boolean);
 procedure DisableAccount(Attributes: TLdapAttributeList; Disable: Boolean);
-
+procedure CannotChangePassword(Ldap: TLdapClient; DistinguishedName: RawUtf8);
 
 const
 
@@ -745,6 +745,7 @@ uses
   mormot.core.log,
   mormot.core.text,
   mormot.net.sock,
+  ursatldapclient,
   uLdapUtils;
 
 function AceInDacl(Dacl: TSecAcl; Ace: TSecAce): Boolean;
@@ -1369,7 +1370,7 @@ var
   UACs: TUserAccountControls;
 begin
   UserAccountControl := Attributes.Find(atUserAccountControl);
-  UACs := [];
+  UACs := [uacNormalAccount];
   if Assigned(UserAccountControl) then
     UACs := UserAccountControlsFromText(UserAccountControl.GetReadable());
   if aInclude then
@@ -1388,6 +1389,34 @@ end;
 procedure DisableAccount(Attributes: TLdapAttributeList; Disable: Boolean);
 begin
   ChangeUserAccountControl(Attributes, uacAccountDisable, Disable);
+end;
+
+procedure CannotChangePassword(Ldap: TLdapClient; DistinguishedName: RawUtf8);
+var
+  Attribute: TLdapAttribute;
+  SecurityDescriptor: TSecurityDescriptor;
+  AceSelf, AceWorld: PSecAce;
+begin
+  // https://learn.microsoft.com/en-us/windows/win32/adsi/modifying-user-cannot-change-password-ldap-provider
+  Attribute := Ldap.SearchObject(DistinguishedName, '', 'nTSecurityDescriptor');
+  if not Assigned(Attribute) then
+    Exit;
+
+  if not SecurityDescriptor.FromBinary(Attribute.GetRaw()) then
+    Exit;
+
+  AceSelf := SecDescAddOrUpdateACE(@SecurityDescriptor, ATTR_UUID[kaUserChangePassword], KnownRawSid(wksSelf), satObjectAccessAllowed, [samControlAccess]);
+  if Assigned(AceSelf) then
+    AceSelf^.AceType := satObjectAccessDenied;
+
+  AceWorld := SecDescAddOrUpdateACE(@SecurityDescriptor, ATTR_UUID[kaUserChangePassword], KnownRawSid(wksWorld), satObjectAccessAllowed, [samControlAccess]);
+  if Assigned(AceWorld) then
+    AceWorld^.AceType := satObjectAccessDenied;
+
+  OrderACL(Ldap, DistinguishedName, @SecurityDescriptor.Dacl);
+
+  if not Ldap.Modify(DistinguishedName, lmoReplace, 'nTSecurityDescriptor', SecurityDescriptor.ToBinary) then
+    Exit;
 end;
 
 { TGenerateKeyTabException }
