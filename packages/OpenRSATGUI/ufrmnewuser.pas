@@ -13,6 +13,7 @@ uses
   Graphics,
   StdCtrls,
   // Submodules
+  mormot.core.base,
   tis.ui.searchedit;
 
 type
@@ -89,16 +90,14 @@ uses
 
 procedure TFrmNewUser.OKBtn();
 var
-  NewObject: TVisNewObject;
+  Ldap: TLdapClient;
   NewUser: TLdapAttributeList;
-  Att: TLdapAttribute;
-  UAC: TUserAccountControls = [uacNormalAccount];
   DN: String;
-  SecDesc: TSecurityDescriptor;
-  AceSelf, AceWorld: PSecAce;
+  ObjectOU: RawUtf8;
 begin
-  NewObject := (owner as TVisNewObject);
-  Dec(NewObject.PageIdx);
+  Ldap := (Owner as TVisNewObject).Ldap;
+  ObjectOU := (Owner as TVisNewObject).ObjectOU;
+  Dec((Owner as TVisNewObject).PageIdx);
 
   NewUser := PrepareNewUser(
     Edit_FirstName.Text,
@@ -114,36 +113,17 @@ begin
     PasswordNeverExpires(NewUser, CheckBox_PasswordNeverExpires.Checked);
     DisableAccount(NewUser, CheckBox_AccountDisabled.Checked);
 
-    DN := FormatUtf8('CN=%,%', [Edit_FullName.Text, NewObject.ObjectOU]);
-    if not NewObject.Ldap.Add(DN, NewUser) then
+    DN := FormatUtf8('CN=%,%', [Edit_FullName.Text, ObjectOU]);
+    if not Ldap.Add(DN, NewUser) then
       Exit;
   finally
     FreeAndNil(NewUser);
   end;
 
   if CheckBox_CannotChangePassword.Checked then
-  begin
-    // https://learn.microsoft.com/en-us/windows/win32/adsi/modifying-user-cannot-change-password-ldap-provider
-    Att := NewObject.Ldap.SearchObject(atNTSecurityDescriptor, DN, '');
-    if not Assigned(Att) then
-      Exit;
+    CannotChangePassword(Ldap, DN);
 
-    SecDesc.FromBinary(Att.GetRaw());
-    AceSelf  := SecDescAddOrUpdateACE(@SecDesc, ATTR_UUID[kaUserChangePassword],
-      KnownRawSid(wksSelf),  satObjectAccessAllowed, [samControlAccess]);
-    AceWorld := SecDescAddOrUpdateACE(@SecDesc, ATTR_UUID[kaUserChangePassword],
-      KnownRawSid(wksWorld), satObjectAccessAllowed, [samControlAccess]);
-
-    AceSelf^.AceType  := satObjectAccessDenied;
-    AceWorld^.AceType := satObjectAccessDenied;
-
-    (NewObject.Ldap as TRsatLdapClient).OrderAcl(DN, (Owner as TVisNewObject).BaseDN, @SecDesc.Dacl);
-
-    if not NewObject.Ldap.Modify(DN, lmoReplace, atNTSecurityDescriptor, SecDesc.ToBinary()) then
-      Exit;
-  end;
-
-  NewObject.ModalResult := mrOK;
+  (Owner as TVisNewObject).ModalResult := mrOK;
 end;
 
 procedure TFrmNewUser.Load;
