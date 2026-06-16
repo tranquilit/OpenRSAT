@@ -35,7 +35,8 @@ end;
 procedure TOpenRSATTests.Integrations;
 begin
   AddCase([
-    TIntegrationTestAdvancedSecurityPresenter
+    TIntegrationTestAdvancedSecurityPresenter,
+    TIntegrationTestDoubleListLogic
   ]);
 end;
 
