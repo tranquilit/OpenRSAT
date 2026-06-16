@@ -523,6 +523,7 @@ begin
   fSettings := TLdapClientSettings.Create;
 
   CopyObject(ASettings, fSettings);
+  TlsContext^.IgnoreCertificateErrors := Settings.AllowUnsafePasswordBind;
   if AutoConnect then
     Connect;
 end;

@@ -8,6 +8,7 @@ uses
   Classes,
   SysUtils,
   Controls,
+  Forms,
   mormot.core.base,
   mormot.net.ldap;
 
@@ -122,6 +123,10 @@ constructor TCoreDataModule.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
 end;
+
+initialization
+  if not Assigned(CoreDataModule) then
+    Application.CreateForm(TCoreDataModule, CoreDataModule);
 
 end.
 

@@ -18,7 +18,8 @@ uses
   ActnList,
   uproperty,
   mormot.net.ldap,
-  mormot.core.base;
+  mormot.core.base,
+  uopenrsatuicontextinterface;
 
 type
 
@@ -60,8 +61,9 @@ type
     procedure Action_SchemaMasterExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
-    fLdapClient: TLdapClient;
+    fIContext: IOpenRSATUIContext;
 
+    function GetLdapClient: TLdapClient;
     function SchemaMaster(LdapClient: TLdapClient): RawUtf8;
     function DomainNamingMaster(LdapClient: TLdapClient): RawUtf8;
     function PDC(LdapClient: TLdapClient): RawUtf8;
@@ -76,9 +78,9 @@ type
 
     procedure UpdateEdit(Edit: TEdit; DomainController: RawUtf8);
   public
-    constructor Create(TheOwner: TComponent); reintroduce;
+    constructor Create(Context: IOpenRSATUIContext);
 
-    property LdapClient: TLdapClient read fLdapClient write fLdapClient;
+    property LdapClient: TLdapClient read GetLdapClient;
   end;
 
 implementation
@@ -133,6 +135,11 @@ end;
 function TVisOperationMasters.SchemaMaster(LdapClient: TLdapClient): RawUtf8;
 begin
   result := FormatUtf8('CN=Schema,CN=Configuration,%', [LdapClient.DefaultDN]);
+end;
+
+function TVisOperationMasters.GetLdapClient: TLdapClient;
+begin
+  result := fIContext.RSAT.LdapClient;
 end;
 
 function TVisOperationMasters.DomainNamingMaster(LdapClient: TLdapClient
@@ -193,9 +200,8 @@ var
   mr: Integer;
 begin
   result := '';
-  Vis := TVisChangeDomainController.Create(Self);
+  Vis := TVisChangeDomainController.Create(fIContext);
   try
-    Vis.LdapClient := LdapClient;
     mr := Vis.ShowModal;
     if mr <> mrOK then
       Exit;
@@ -216,9 +222,11 @@ begin
     Edit.Caption := DomainController;
 end;
 
-constructor TVisOperationMasters.Create(TheOwner: TComponent);
+constructor TVisOperationMasters.Create(Context: IOpenRSATUIContext);
 begin
-  Inherited Create(TheOwner);
+  Inherited Create(Context.ComponentOwner);
+
+  fIContext := Context;
 end;
 
 end.

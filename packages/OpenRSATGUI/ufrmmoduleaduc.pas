@@ -40,6 +40,7 @@ uses
   uvisproperties,
   ucoredatamodule,
   ufrmmoduleaducoption,
+  uopenrsatuicontextinterface,
   ufrmmodule,
   ufrmoption,
   umodule,
@@ -48,6 +49,7 @@ uses
   uLdapUtils,
   ursatldapclient,
   uvisviewkeytab,
+  ursat,
   ulog;
 
 type
@@ -334,6 +336,8 @@ type
     // Self core
     fModuleAduc: TModuleADUC;
 
+    fIContext: IOpenRSATUIContext;
+
     // Selection history
     fTreeSelectionHistory: TTreeSelectionHistory;
 
@@ -378,7 +382,7 @@ type
   AUnlockAccount: Boolean): Boolean;
     procedure ViewKeyTab(AKeyTab: TKerberosKeyTab);
   public
-    constructor Create(TheOwner: TComponent); override;
+    constructor Create(Context: IOpenRSATUIContext);
     destructor Destroy; override;
 
     procedure Focus(DistinguishedName: String);
@@ -413,9 +417,7 @@ uses
   ucommon,
   ucommonui,
   ursatldapclientui,
-  ufrmrsatoptions,
   ursatoption,
-  ufrmrsat,
   uviseditaduccolumns,
   uvisshowrelationship,
   uconfig,
@@ -512,14 +514,13 @@ var
   Vis: TVisChangeDomainController;
   mr: Integer;
 begin
-  Vis := TVisChangeDomainController.Create(Self);
+  Vis := TVisChangeDomainController.Create(fIContext);
 
   try
-    Vis.LdapClient := LdapClient;
     mr := Vis.ShowModal;
     if (mr <> mrOK) or (Vis.DomainController = '') then
       Exit;
-    FrmRSAT.ChangeDomainController(Vis.DomainController);
+    fIContext.ChangeDomainController(Vis.DomainController);
   finally
     FreeAndNil(Vis);
   end;
@@ -1211,9 +1212,8 @@ procedure TFrmModuleADUC.Action_OperationsMastersExecute(Sender: TObject);
 var
   Vis: TVisOperationMasters;
 begin
-  Vis := TVisOperationMasters.Create(Self);
+  Vis := TVisOperationMasters.Create(fIContext);
   try
-    Vis.LdapClient := LdapClient;
     Vis.ShowModal();
   finally
     FreeAndNil(Vis);
@@ -1411,7 +1411,7 @@ begin
   end;
 
   if DistinguishedName <> '' then
-    FrmRSAT.OpenProperty(DistinguishedName, SelectedText);
+    fIContext.OpenProperty(DistinguishedName);
 end;
 
 procedure TFrmModuleADUC.Action_PropertiesUpdate(Sender: TObject);
@@ -1439,7 +1439,7 @@ begin
   if not Assigned(NodeData) then
     Exit;
 
-  With TVisSearch.Create(Self, Self) do
+  With TVisSearch.Create(fIContext, Self) do
   begin
     Edit_Path.Caption := NodeData.DistinguishedName;
     ShowModal;
@@ -1498,7 +1498,7 @@ begin
     if ObjectClass[Length(ObjectClass) - 1] = 'group' then
       ObjectName := GridADUC.SelectedObjects[0]^.S['objectName'];
   end;
-  Vis := TVisShowRelationship.Create(Self, LdapClient, ObjectName);
+  Vis := TVisShowRelationship.Create(fIContext, ObjectName);
 
   Vis.ShowModal;
   Vis.Free;
@@ -2633,7 +2633,7 @@ var
       Exit;
 
     result := '(&';
-    if not FrmRSAT.RSATOption.AdvancedView then
+    if not fModuleAduc.RSAT.RSATOption.AdvancedView then
       result := FormatUtf8('%(|(!(showInAdvancedViewOnly=*))(showInAdvancedViewOnly=FALSE))', [result]);
     result := FormatUtf8('%%(|', [result, fModuleAduc.ADUCOption.TreeFilter]);
     for i := 0 to High(fModuleAduc.ADUCOption.TreeObjectClasses) do
@@ -2643,8 +2643,7 @@ var
 
 begin
   // Fast Exit
-  if not Assigned(FrmRSAT) or
-     not Assigned(LdapClient) or
+  if not Assigned(LdapClient) or
      not LdapClient.Connected or
      (fUpdating > 0) then
     Exit;
@@ -2900,7 +2899,7 @@ begin
   PageCount := 0;
 
   Filter := '';
-  if not FrmRSAT.RSATOption.AdvancedView then
+  if not fModuleAduc.RSAT.RSATOption.AdvancedView then
     Filter := FormatUtf8('%(|(!(showInAdvancedViewOnly=*))(showInAdvancedViewOnly=FALSE))', [Filter]);
   if TisSearchEdit_GridADUC.Text <> '' then
   begin
@@ -3325,17 +3324,19 @@ begin
   end;
 end;
 
-constructor TFrmModuleADUC.Create(TheOwner: TComponent);
+constructor TFrmModuleADUC.Create(Context: IOpenRSATUIContext);
 begin
-  inherited Create(TheOwner);
+  inherited Create(Context.ComponentOwner);
 
   fLog := TADUCLog;
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Create', [Self.Name]);
 
+  fIContext := Context;
+
   fEnabled := True;
 
-  fModuleAduc := TModuleADUC.Create(FrmRSAT.RSAT);
+  fModuleAduc := TModuleADUC.Create(fIContext.RSAT);
   fTreeSelectionHistory := TTreeSelectionHistory.Create;
 
   fADUCRootNode := (TreeADUC.Items.Add(nil, 'Active Directory Users and Computers') as TADUCTreeNode);
@@ -3351,8 +3352,8 @@ begin
   Image1.Visible := not IsDarkMode;
   Image2.Visible := not Image1.Visible;
 
-  FrmRSAT.IniPropStorage1.IniSection := Name;
-  CheckBox_IncludeSubContainer.Checked := FrmRSAT.IniPropStorage1.ReadBoolean(CheckBox_IncludeSubContainer.Name, False);
+  fIContext.IniPropStorage.IniSection := Name;
+  CheckBox_IncludeSubContainer.Checked := fIContext.IniPropStorage.ReadBoolean(CheckBox_IncludeSubContainer.Name, False);
 end;
 
 destructor TFrmModuleADUC.Destroy;
@@ -3360,8 +3361,8 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Destroy', [Self.Name]);
 
-  FrmRSAT.IniPropStorage1.IniSection := Name;
-  FrmRSAT.IniPropStorage1.WriteBoolean(CheckBox_IncludeSubContainer.Name, CheckBox_IncludeSubContainer.Checked);
+  fIContext.IniPropStorage.IniSection := Name;
+  fIContext.IniPropStorage.WriteBoolean(CheckBox_IncludeSubContainer.Name, CheckBox_IncludeSubContainer.Checked);
 
   FreeAndNil(fTreeSelectionHistory);
   FreeAndNil(fModuleAduc);

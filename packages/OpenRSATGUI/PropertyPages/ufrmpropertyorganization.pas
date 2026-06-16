@@ -10,11 +10,14 @@ uses
   Forms,
   Controls,
   StdCtrls,
-  Buttons, ExtCtrls, ActnList,
+  Buttons,
+  ExtCtrls,
+  ActnList,
   mormot.core.base,
   mormot.core.log,
   uproperty,
   tis.ui.grid.core,
+  uopenrsatuicontextinterface,
   upropertyframe,
   ulog;
 
@@ -68,8 +71,7 @@ uses
   ucommon,
   ucommonui,
   uhelpersui,
-  uOmniselect,
-  ufrmrsat;
+  uOmniselect;
 
 {$R *.lfm}
 
@@ -129,7 +131,7 @@ end;
 
 procedure TFrmPropertyOrganization.Action_PropertiesExecute(Sender: TObject);
 begin
-  FrmRSAT.OpenProperty(fProperty.GetReadable('manager'));
+  fIContext.OpenProperty(fProperty.GetReadable('manager'));
 end;
 
 procedure TFrmPropertyOrganization.Action_PropertiesUpdate(Sender: TObject);

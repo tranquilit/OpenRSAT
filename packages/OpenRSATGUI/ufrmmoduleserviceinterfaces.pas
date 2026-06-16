@@ -25,8 +25,10 @@ uses
   ufrmmodule,
   ufrmoption,
   umodule,
+  uopenrsatuicontextinterface,
   ursatldapclient,
   umoduleadsi,
+  ursat,
   ulog;
 
 type
@@ -116,7 +118,7 @@ type
     procedure TreeView1GetImageIndex(Sender: TObject; Node: TTreeNode);
   private
     fLog: TSynLogClass;
-
+    fIContext: IOpenRSATUIContext;
     fModule: TModuleADSI;
 
     fSearchWord: RawUtf8;
@@ -130,7 +132,7 @@ type
     procedure LdapConnectEvent(Sender: TObject);
     procedure LdapCloseEvent(Sender: TObject);
   public
-    constructor Create(TheOwner: TComponent); override;
+    constructor Create(Context: IOpenRSATUIContext);
     destructor Destroy; override;
 
     property LdapClient: TRsatLdapClient read GetLdapClient;
@@ -151,8 +153,7 @@ uses
   ucommonui,
   utheme,
   ursatldapclientui,
-  uvisnewobject,
-  ufrmrsat;
+  uvisnewobject;
 
 {$R *.lfm}
 
@@ -239,11 +240,11 @@ begin
   if TisGrid1.SelectedCount = 1 then
   begin
     NodeData := TisGrid1.GetNodeAsPDocVariantData(TisGrid1.GetFirstSelected());
-    FrmRSAT.OpenProperty(NodeData^.S['distinguishedName'], NodeData^.S['name']);
+    fIContext.OpenProperty(NodeData^.S['distinguishedName']);
   end
   else if Assigned(TreeView1.Selected) then
   begin
-    FrmRSAT.OpenProperty((TreeView1.Selected as TADSITreeNode).DistinguishedName, TreeView1.Selected.Text);
+    fIContext.OpenProperty((TreeView1.Selected as TADSITreeNode).DistinguishedName);
   end;
 end;
 
@@ -342,7 +343,7 @@ begin
   end
   else
   begin
-    FrmRSAT.OpenProperty(NodeData^.S['distinguishedName'], NodeData^.S['name']);
+    fIContext.OpenProperty(NodeData^.S['distinguishedName']);
   end;
 end;
 
@@ -704,15 +705,17 @@ begin
   TisGrid1.Clear;
 end;
 
-constructor TFrmModuleADSI.Create(TheOwner: TComponent);
+constructor TFrmModuleADSI.Create(Context: IOpenRSATUIContext);
 begin
-  Inherited Create(TheOwner);
+  Inherited Create(Context.ComponentOwner);
 
   fLog := TADSILog;
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Create', [Self.Name]);
 
-  fModule := TModuleADSI.Create(FrmRSAT.RSAT);
+  fIContext := Context;
+
+  fModule := TModuleADSI.Create(Context.RSAT);
 
   fLog.Add.Log(sllTrace, 'Created');
   Image1.Visible := not IsDarkMode;

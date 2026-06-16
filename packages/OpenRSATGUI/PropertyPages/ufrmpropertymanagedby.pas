@@ -18,6 +18,7 @@ uses
   mormot.core.base,
   mormot.core.log,
   mormot.net.ldap,
+  uopenrsatuicontextinterface,
   upropertyframe,
   ulog;
 
@@ -100,8 +101,7 @@ uses
   ucommon,
   ucommonui,
   ursatldapclientui,
-  uOmniselect,
-  ufrmrsat;
+  uOmniselect;
 
 {$R *.lfm}
 
@@ -269,7 +269,7 @@ end;
 
 procedure TFrmPropertyManagedBy.Action_PropertyExecute(Sender: TObject);
 begin
-  FrmRSAT.OpenProperty(fProperty.managedBy);
+  fIContext.OpenProperty(fProperty.managedBy);
 end;
 
 procedure TFrmPropertyManagedBy.Action_PropertyUpdate(Sender: TObject);

@@ -54,8 +54,7 @@ uses
   Dialogs,
   mormot.core.text,
   mormot.core.base,
-  ucommon,
-  ufrmrsat;
+  ucommon;
 
 {$R *.lfm}
 
@@ -142,7 +141,7 @@ begin
   end;
 
   if ShouldRestart and (MessageDlg(rsRestartTitle, rsChangeOptionRequiredRestart, mtConfirmation, mbYesNoCancel, 0) = mrYes) then
-    FrmRSAT.Restart;
+    ((Owner as TForm).Owner as TForm).close;
 
   fChanged := False;
 end;

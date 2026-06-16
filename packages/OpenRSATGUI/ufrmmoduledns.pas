@@ -30,6 +30,8 @@ uses
   umodule,
   umoduleaddns,
   ursatldapclient,
+  uopenrsatuicontextinterface,
+  ursat,
   ulog;
 
 type
@@ -137,6 +139,7 @@ type
       Shift: TShiftState; X, Y: Integer);
   private
     fLog: TSynLogClass;
+    fIContext: IOpenRSATUIContext;
     fTreeSelectionHistory: TTreeSelectionHistory;
 
     fModule: TModuleADDNS;
@@ -167,7 +170,7 @@ type
     procedure LdapConnectEvent(Sender: TObject);
     procedure LdapCloseEvent(Sender: TObject);
   public
-    constructor Create(TheOwner: TComponent); override;
+    constructor Create(Context: IOpenRSATUIContext);
     destructor Destroy; override;
 
     property LdapClient: TRsatLdapClient read GetLdapClient;
@@ -199,8 +202,7 @@ uses
   uvisnewresourcerecord,
   ursatldapclientui,
   udns,
-  uhelpers,
-  ufrmrsat;
+  uhelpers;
 
 {$R *.lfm}
 
@@ -732,7 +734,7 @@ begin
     DistinguishedName := (TreeDNS.Selected as TDNSTreeNode).DistinguishedName;
 
   if DistinguishedName <> '' then
-    FrmRSAT.OpenProperty(DistinguishedName);
+    fIContext.OpenProperty(DistinguishedName);
 end;
 
 procedure TFrmModuleDNS.Action_PropertyUpdate(Sender: TObject);
@@ -913,15 +915,16 @@ begin
   TreeDNS.Select(NewNode);
 end;
 
-constructor TFrmModuleDNS.Create(TheOwner: TComponent);
+constructor TFrmModuleDNS.Create(Context: IOpenRSATUIContext);
 begin
-  inherited Create(TheOwner);
+  inherited Create(Context.ComponentOwner);
 
   fLog := TADDNSLog;
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Create', [Self.Name]);
 
-  fModule := TModuleADDNS.Create(FrmRSAT.RSAT);
+  fIContext := Context;
+  fModule := TModuleADDNS.Create(Context.RSAT);
 
 
   fRootNode := nil;
