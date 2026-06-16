@@ -18,6 +18,7 @@ uses
   mormot.net.ldap,
   uhelpersui,
   uproperty,
+  upropertyframe,
   ursatldapclient,
   udoublelistlogic,
   ugeneralpropertysitelinkbridge,
