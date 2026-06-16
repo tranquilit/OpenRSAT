@@ -12,9 +12,9 @@ uses
   umoduleaducoption, umoduleaduc, ursat, ursatoption, umoduleadssoption, 
   umoduleadss, umoduleaddns, umoduleaddnsoption, umoduleadsi, 
   umoduleadsioption, udns, ugplink, uproperty, usidcache, 
-  uadvancedsecuritypresenter, uguidcache, uselectobjectguidpresenter,
-  uviewkeytabpresenter, unewsitelink, ugeneralpropertysitelink, ulog, 
-  ugeneralpropertysitelinkbridge, udoublelistlogic, LazarusPackageIntf;
+  uadvancedsecuritypresenter, uguidcache, uselectobjectguidpresenter, 
+  uviewkeytabpresenter, unewsitelink, ugeneralpropertysitelink, 
+  ugeneralpropertysitelinkbridge, udoublelistlogic, ulog, LazarusPackageIntf;
 
 implementation
 

@@ -21,7 +21,7 @@ uses
   uproperty,
   ursatldapclient,
   upropertyframe,
-  ugeneralpropertysitelink;
+  ugeneralpropertysitelink,
   udoublelistlogic,
   ulog;
 
