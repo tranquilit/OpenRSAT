@@ -40,7 +40,7 @@ type
   TDoubleListLogic = class abstract(TInterfacedObject, IDoubleListLogic)
   private
     fProperty: TProperty;
-    fLdap: TRsatLdapClient;
+    fLdap: TLdapClient;
     fOutResult, fInResult: TLdapResultArray;
 
     procedure RemoveFromArray(var List: TLdapResultArray; Index: Integer);
@@ -61,7 +61,7 @@ type
     function FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute; virtual;
 
     property Props: TProperty read fProperty write fProperty;
-    property Ldap: TRsatLdapClient read fLdap write fLdap; 
+    property Ldap: TLdapClient read fLdap write fLdap;
     property InResult: TLdapResultArray read fInResult write fInResult;
     property OutResult: TLdapResultArray read fOutResult write fOutResult;
   end;
