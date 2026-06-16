@@ -20,7 +20,9 @@ uses
   mormot.net.ldap,
   tis.ui.grid.core,
   ursatldapclient,
-  uproperty, VirtualTrees,
+  uproperty,
+  VirtualTrees,
+  uopenrsatuicontextinterface,
   upropertyframe,
   ulog;
 
@@ -98,8 +100,7 @@ uses
   mormot.core.text,
   ucommon,
   ursatldapclientui,
-  uOmniselect,
-  ufrmrsat;
+  uOmniselect;
 
 {$R *.lfm}
 
@@ -293,8 +294,8 @@ end;
 
 procedure TFrmPropertyMemberOf.Grid_MemberOfDblClick(Sender: TObject);
 begin
-  if Assigned(FrmRSAT) and Assigned(Grid_MemberOf.FocusedRow) then
-    FrmRSAT.OpenProperty(Grid_MemberOf.FocusedRow^.S['distinguishedName']);
+  if Assigned(Grid_MemberOf.FocusedRow) then
+    fIContext.OpenProperty(Grid_MemberOf.FocusedRow^.S['distinguishedName']);
 end;
 
 procedure TFrmPropertyMemberOf.FillMemberOf;

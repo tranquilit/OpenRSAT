@@ -4,6 +4,8 @@ object VisOpenRSAT: TVisOpenRSAT
   Top = 338
   Width = 746
   Caption = 'OpenRSAT'
+  ClientHeight = 347
+  ClientWidth = 746
   Constraints.MinHeight = 100
   Constraints.MinWidth = 300
   Menu = MainMenu
@@ -11,6 +13,31 @@ object VisOpenRSAT: TVisOpenRSAT
   SessionProperties = 'Width;WindowState;Height;Left;Top'
   LCLVersion = '4.5.0.0'
   OnShow = FormShow
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 324
+    Top = 0
+    Width = 746
+    Align = alClient
+    TabOrder = 0
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 324
+    Width = 746
+    Panels = <    
+      item
+        Width = 50
+      end    
+      item
+        Width = 50
+      end    
+      item
+        Width = 50
+      end>
+    SimplePanel = False
+  end
   object MainMenu: TMainMenu
     Images = CoreDataModule.ImageList1
     Left = 24
@@ -18,10 +45,13 @@ object VisOpenRSAT: TVisOpenRSAT
     object MenuItem_File: TMenuItem
       Caption = 'File'
       object MenuItem_LdapConnect: TMenuItem
+        Action = Action_LdapConnect
       end
       object MenuItem_LdapConnectOption: TMenuItem
+        Action = Action_LdapOptions
       end
       object MenuItem_LdapDisconnect: TMenuItem
+        Action = Action_LdapDisconnect
       end
       object Separator4: TMenuItem
         Caption = '-'
@@ -35,8 +65,7 @@ object VisOpenRSAT: TVisOpenRSAT
         end
       end
       object MenuItem_FileOptions: TMenuItem
-        Caption = 'Options'
-        ImageIndex = 54
+        Action = Action_Settings
       end
       object Separator_File: TMenuItem
         Caption = '-'
@@ -108,10 +137,10 @@ object VisOpenRSAT: TVisOpenRSAT
         end
       end
       object MenuItem_AdvancedFeatures: TMenuItem
-        Caption = 'MenuItem_AdvancedFeatures'
+        Action = Action_AdvancedFeatures
       end
       object MenuItem_ShowGPO: TMenuItem
-        Caption = 'MenuItem_ShowGPO'
+        Action = Action_ShowGPO
       end
     end
     object MenuItem_DEBUG: TMenuItem
@@ -150,9 +179,46 @@ object VisOpenRSAT: TVisOpenRSAT
       Caption = 'About'
       OnExecute = Action_AboutExecute
     end
+    object Action_ShowGPO: TAction
+      Caption = 'Show GPO'
+      OnExecute = Action_ShowGPOExecute
+      OnUpdate = Action_ShowGPOUpdate
+    end
+    object Action_AdvancedFeatures: TAction
+      Caption = 'Advanced Features'
+      OnExecute = Action_AdvancedFeaturesExecute
+      OnUpdate = Action_AdvancedFeaturesUpdate
+    end
+    object Action_LdapConnect: TAction
+      Caption = 'Connect'
+      OnExecute = Action_LdapConnectExecute
+    end
+    object Action_LdapDisconnect: TAction
+      Caption = 'Disconnect'
+      OnExecute = Action_LdapDisconnectExecute
+      OnUpdate = Action_LdapDisconnectUpdate
+    end
+    object Action_LdapOptions: TAction
+      Caption = 'Connection Options'
+      OnExecute = Action_LdapOptionsExecute
+    end
+    object Action_Settings: TAction
+      Caption = 'Settings'
+      OnExecute = Action_SettingsExecute
+    end
+    object Action_Properties: TAction
+      Caption = 'Properties'
+    end
   end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>
+    Left = 8
+    Top = 8
+  end
+  object Timer_AutoConnect: TTimer
+    Enabled = False
+    Interval = 200
+    OnTimer = Timer_AutoConnectTimer
     Left = 8
     Top = 8
   end

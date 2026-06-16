@@ -28,9 +28,9 @@ uses
   ufrmpropertytelephone, ufrmpropertylocation, ufrmpropertyorganization, 
   ufrmpropertypublishedcertificates, ufrmpropertymember, ufrmpropertysecurity, 
   ufrmpropertyattributes, uhelpersui, ucommonui, ursatldapclientui, 
-  ufrmoption, ufrmmodule, ufrmmoduleaducoption, ufrmrsat, ufrmmodules, 
-  uvismodifygplink, uvisprofilemanager, uviseditaduccolumns, 
-  uvisprofileconfiguration, uvisrootdseinfos, uvisshowrelationship, utheme, 
+  ufrmoption, ufrmmodule, ufrmmoduleaducoption, ufrmmodules, uvismodifygplink, 
+  uvisprofilemanager, uviseditaduccolumns, uvisprofileconfiguration, 
+  uvisrootdseinfos, uvisshowrelationship, utheme, 
   ufrmpropertyntauthcertificates, ufrmpropertyunixattributes, 
   uvisselectobjectsid, ufrmnewinetorgperson, 
   ufrmnewmsdsshadowprincipalcontainer, ufrmnewmsimagingpsps, 
@@ -40,7 +40,7 @@ uses
   ufrmpropertygeneralntdssitesettings, ufrmpropertygeneralserver, 
   ufrmpropertygeneralntdsdsa, ufrmpropertyconnections, 
   ufrmnewmsdnsserversettings, ufrmpropertygeneralintersitetransport, 
-  uvisviewkeytab, LazarusPackageIntf;
+  uvisviewkeytab, uopenrsatuicontextinterface, LazarusPackageIntf;
 
 implementation
 

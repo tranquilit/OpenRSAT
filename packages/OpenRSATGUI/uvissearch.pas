@@ -19,6 +19,7 @@ uses
   mormot.net.ldap,
   VirtualTrees,
   Controls,
+  uopenrsatuicontextinterface,
   ufrmmoduleaduc,
   ulog;
 
@@ -105,11 +106,13 @@ type
   private
     SearchWord: RawUtf8;
     fModule: TFrmModuleADUC;
-    fLdapClient: TLdapClient;
-  public
-    constructor Create(TheOwner: TComponent; AModule: TFrmModuleADUC); reintroduce;
+    fIContext: IOpenRSATUIContext;
 
-    property LdapClient: TLdapClient read fLdapClient write fLdapClient;
+    function GetLdapClient: TLdapClient;
+  public
+    constructor Create(Context: IOpenRSATUIContext; AModule: TFrmModuleADUC); reintroduce;
+
+    property LdapClient: TLdapClient read GetLdapClient;
   end;
 
 implementation
@@ -124,8 +127,7 @@ uses
   ucommonui,
   ucoredatamodule,
   ursatldapclientui,
-  uvischangedn,
-  ufrmrsat;
+  uvischangedn;
 
 {$R *.lfm}
 
@@ -208,6 +210,11 @@ begin
   Timer_SearchInGrid.Enabled := True;
 end;
 
+function TVisSearch.GetLdapClient: TLdapClient;
+begin
+  result := fIContext.RSAT.LdapClient;
+end;
+
 procedure TVisSearch.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   CloseAction := caFree;
@@ -221,9 +228,12 @@ begin
   end;
 end;
 
-constructor TVisSearch.Create(TheOwner: TComponent; AModule: TFrmModuleADUC);
+constructor TVisSearch.Create(Context: IOpenRSATUIContext;
+  AModule: TFrmModuleADUC);
 begin
-  inherited Create(TheOwner);
+  inherited Create(Context.ComponentOwner);
+
+  fIContext := Context;
 
   fModule := AModule;
 end;
@@ -328,7 +338,7 @@ end;
 procedure TVisSearch.Action_PropertiesExecute(Sender: TObject);
 begin
   Action_ShowInView.Execute;
-  FrmRSAT.OpenProperty(TisGrid_Result.FocusedRow^.S['distinguishedName'], TisGrid_Result.FocusedRow^.S['name']);
+  fIContext.OpenProperty(TisGrid_Result.FocusedRow^.S['distinguishedName']);
 end;
 
 procedure TVisSearch.Action_PropertiesUpdate(Sender: TObject);

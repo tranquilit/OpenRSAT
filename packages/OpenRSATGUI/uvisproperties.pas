@@ -31,6 +31,7 @@ uses
   mormot.net.ldap,
   Controls,
   ucommon,
+  uopenrsatuicontextinterface,
   ucoredatamodule,
   upropertyframe,
   uproperty,
@@ -113,6 +114,7 @@ type
     procedure SetFocus; reintroduce;
   private
     fProperty: TProperty;
+    fIContext: IOpenRSATUIContext;
     fPropertyFrameList: Array of TPropertyFrame;
     fDistinguishedName: RawUtf8;
 
@@ -123,7 +125,7 @@ type
     procedure UpdateTabs;
     procedure NewTab(NewFrameClass: TPropertyFrameClass);
   public
-    constructor Create(TheOwner: TComponent; ADistinguishedName: RawUtf8; ARsat: TRSAT); reintroduce;
+    constructor Create(Context: IOpenRSATUIContext; ADistinguishedName: RawUtf8); reintroduce;
     destructor Destroy(); override;
 
     property DistinguishedName: RawUtf8 read fDistinguishedName;
@@ -275,7 +277,6 @@ uses
   uvislogonworkstation,
   uvislistother,
   uvisattributeeditor,
-  ufrmrsat,
   ufrmpropertyattributes,
   ufrmpropertyunixattributes,
   ufrmpropertyaccount,
@@ -544,14 +545,15 @@ const
 
 { TVisProperties }
 
-constructor TVisProperties.Create(TheOwner: TComponent;
-  ADistinguishedName: RawUtf8; ARsat: TRSAT);
+constructor TVisProperties.Create(Context: IOpenRSATUIContext;
+  ADistinguishedName: RawUtf8);
 begin
-  Inherited Create(TheOwner);
+  Inherited Create(Context.ComponentOwner);
 
   fDistinguishedName := ADistinguishedName;
+  fIContext := Context;
 
-  fProperty := TProperty.Create(ARSAT);
+  fProperty := TProperty.Create(Context.RSAT);
   if not Assigned(LdapClient) or
      not LdapClient.Connected or
      (fDistinguishedName = '') then
@@ -571,7 +573,7 @@ end;
 procedure TVisProperties.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   CloseAction := caFree;
-  FrmRSAT.CloseProperty(Self);
+  fIContext.CloseProperty(Self.DistinguishedName);
 end;
 
 procedure TVisProperties.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -732,7 +734,7 @@ var
   Frame: TPropertyFrame;
 begin
   Tab := PageControl.AddTabSheet;
-  Frame := NewFrameClass.Create(Self);
+  Frame := NewFrameClass.Create(Self, fIContext);
   Frame.Parent := Tab;
   Frame.Align := alClient;
   Tab.Caption := Frame.Caption;

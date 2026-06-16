@@ -22,6 +22,7 @@ uses
   ufrmmodule,
   ufrmoption,
   uoption,
+  ufrmmodules,
   ulog;
 
 type
@@ -56,9 +57,11 @@ type
 
     fOptionFrames: Array of TFrameOption;
 
-    procedure CreateOptionFrames;
+    procedure CreateOptionFrames(RSATOptionClass: TFrameOptionClass;
+      RSATOption: TOption; Modules: TFrmModules);
   public
-    constructor Create(TheOwner: TComponent); reintroduce;
+    constructor Create(TheOwner: TComponent; RSATOptionClass: TFrameOptionClass;
+      RSATOption: TOption; Modules: TFrmModules); reintroduce;
     destructor Destroy; override;
   end;
 
@@ -68,8 +71,7 @@ uses
   mormot.core.text,
   mormot.core.base,
   ucoredatamodule,
-  IniFiles,
-  ufrmrsat;
+  IniFiles;
 
 {$R *.lfm}
 
@@ -103,7 +105,7 @@ begin
       fLog.Add.Log(sllError, 'TreeView: No Node or no data assigned to node', Self);
 end;
 
-procedure TVisOptions.CreateOptionFrames;
+procedure TVisOptions.CreateOptionFrames(RSATOptionClass: TFrameOptionClass; RSATOption: TOption; Modules: TFrmModules);
 var
   Frame: TFrameModule;
 
@@ -124,14 +126,16 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, 'Create Option Frames');
 
-  AddFrame(FrmRSAT.FrmRSATOptionClass.Create(Self, FrmRSAT.RsatOption), 'Global').Selected := True;
+  AddFrame(RSATOptionClass.Create(Self, RsatOption), 'Global').Selected := True;
 
-  for Frame in FrmRSAT.FrmModules.Items do
+  for Frame in Modules.Items do
     if Assigned(Frame) and Assigned(Frame.FrmOptionClass) then
       AddFrame(Frame.FrmOptionClass.Create(Self, Frame.ModuleOption), Frame.ModuleDisplayName);
 end;
 
-constructor TVisOptions.Create(TheOwner: TComponent);
+constructor TVisOptions.Create(TheOwner: TComponent;
+  RSATOptionClass: TFrameOptionClass; RSATOption: TOption; Modules: TFrmModules
+  );
 begin
   inherited Create(TheOwner);
 
@@ -141,7 +145,7 @@ begin
 
   fOptionFrames := [];
 
-  CreateOptionFrames;
+  CreateOptionFrames(RSATOptionClass, RsatOption, Modules);
 end;
 
 destructor TVisOptions.Destroy;

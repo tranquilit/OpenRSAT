@@ -17,7 +17,9 @@ uses
   mormot.core.base,
   mormot.core.log, mormot.core.variants,
   uproperty,
-  tis.ui.grid.core, VirtualTrees,
+  tis.ui.grid.core,
+  VirtualTrees,
+  uopenrsatuicontextinterface,
   upropertyframe,
   ulog;
 
@@ -64,8 +66,7 @@ uses
   ucommonui,
   uhelpersui,
   uOmniselect,
-  ursatldapclientui,
-  ufrmrsat;
+  ursatldapclientui;
 
 {$R *.lfm}
 
@@ -73,8 +74,8 @@ uses
 
 procedure TFrmPropertyMember.TisGrid_MembersDblClick(Sender: TObject);
 begin
-  if Assigned(FrmRSAT) and Assigned(TisGrid_Members.FocusedRow) then
-    FrmRSAT.OpenProperty(TisGrid_Members.FocusedRow^.S['distinguishedName'], TisGrid_Members.FocusedRow^.S['name']);
+  if Assigned(TisGrid_Members.FocusedRow) then
+    fIContext.OpenProperty(TisGrid_Members.FocusedRow^.S['distinguishedName']);
 end;
 
 procedure TFrmPropertyMember.TisGrid_MembersGetImageIndex(Sender: TBaseVirtualTree;

@@ -39,6 +39,22 @@ msgctxt "tvisopenrsat.action_about.caption"
 msgid "About"
 msgstr "A propos"
 
+#: tvisopenrsat.action_advancedfeatures.caption
+msgid "Advanced Features"
+msgstr "Fonctionnalités avancés"
+
+#: tvisopenrsat.action_ldapconnect.caption
+msgid "Connect"
+msgstr "Connexion"
+
+#: tvisopenrsat.action_ldapdisconnect.caption
+msgid "Disconnect"
+msgstr "Déconnexion"
+
+#: tvisopenrsat.action_ldapoptions.caption
+msgid "Connection Options"
+msgstr "Options de connexion"
+
 #: tvisopenrsat.action_newwindow.caption
 msgid "Action_NewWindow"
 msgstr ""
@@ -48,10 +64,23 @@ msgctxt "tvisopenrsat.action_openedproperties.caption"
 msgid "Properties"
 msgstr "Propriétés"
 
+#: tvisopenrsat.action_properties.caption
+msgctxt "tvisopenrsat.action_properties.caption"
+msgid "Properties"
+msgstr "Propriétés"
+
 #: tvisopenrsat.action_quit.caption
 msgctxt "tvisopenrsat.action_quit.caption"
 msgid "Quit"
 msgstr "Quitter"
+
+#: tvisopenrsat.action_settings.caption
+msgid "Settings"
+msgstr "Paramètres"
+
+#: tvisopenrsat.action_showgpo.caption
+msgid "Show GPO"
+msgstr "Afficher les GPO"
 
 #: tvisopenrsat.caption
 msgctxt "tvisopenrsat.caption"
@@ -63,11 +92,6 @@ msgctxt "tvisopenrsat.menuitem3.caption"
 msgid "Change tool"
 msgstr "Changer d'outil"
 
-#: tvisopenrsat.menuitem_advancedfeatures.caption
-msgctxt "tvisopenrsat.menuitem_advancedfeatures.caption"
-msgid "MenuItem_AdvancedFeatures"
-msgstr ""
-
 #: tvisopenrsat.menuitem_debug.caption
 msgctxt "tvisopenrsat.menuitem_debug.caption"
 msgid "Debug options"
@@ -78,11 +102,6 @@ msgctxt "tvisopenrsat.menuitem_file.caption"
 msgid "File"
 msgstr "Fichier"
 
-#: tvisopenrsat.menuitem_fileoptions.caption
-msgctxt "tvisopenrsat.menuitem_fileoptions.caption"
-msgid "Options"
-msgstr "Options"
-
 #: tvisopenrsat.menuitem_help.caption
 msgctxt "tvisopenrsat.menuitem_help.caption"
 msgid "?"
@@ -91,10 +110,6 @@ msgstr ""
 #: tvisopenrsat.menuitem_retrieveoldconfiguration.caption
 msgid "Retrieve old configuration"
 msgstr "Récupérer l'ancienne configuration"
-
-#: tvisopenrsat.menuitem_showgpo.caption
-msgid "MenuItem_ShowGPO"
-msgstr ""
 
 #: tvisopenrsat.menuitem_view.caption
 msgctxt "tvisopenrsat.menuitem_view.caption"

@@ -67,6 +67,7 @@ end;
 function TFrmModules.RegisterModule(AFrmModule: TFrameModule): Boolean;
 var
   fm: TFrameModule;
+  c: SizeInt;
 begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, 'RegisterModule', Self);
@@ -88,7 +89,9 @@ begin
       Exit;
     end;
 
-  Insert(AFrmModule, fFrmModules, 0);
+  c := Length(fFrmModules);
+  SetLength(fFrmModules, c + 1);
+  fFrmModules[c] := AFrmModule;
   if Assigned(fLog) then
     fLog.Add.Log(sllInfo, 'Module "%" added.', [AFrmModule.ModuleName], self);
   result := True;

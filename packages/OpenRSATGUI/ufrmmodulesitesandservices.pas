@@ -29,8 +29,10 @@ uses
   umoduleadss,
   umoduleadssoption,
   umodule,
+  uopenrsatuicontextinterface,
   ursatldapclient,
   uoption,
+  ursat,
   ulog;
 
 type
@@ -205,6 +207,7 @@ type
     fEnabled: Boolean;
     fUpdating: Integer;
 
+    fIContext: IOpenRSATUIContext;
     fSearchWord: RawUtf8;
 
     fADSSRootNode: TADSSTreeNode;
@@ -236,7 +239,7 @@ type
     function CustomSortSitesNode(Node1, Node2: TTreeNode): integer;
     function CustomSortSubnetsNode(Node1, Node2: TTreeNode): integer;
   public
-    constructor Create(TheOwner: TComponent); override;
+    constructor Create(Context: IOpenRSATUIContext);
     destructor Destroy; override;
 
     property LdapClient: TRsatLdapClient read GetLdapClient;
@@ -262,8 +265,7 @@ uses
   ucommonui,
   utheme,
   ursatldapclientui,
-  uvisnewobject,
-  ufrmrsat;
+  uvisnewobject;
 
 {$R *.lfm}
 
@@ -424,7 +426,7 @@ end;
 
 procedure TFrmModuleSitesAndServices.Action_RefreshUpdate(Sender: TObject);
 begin
-  Action_Refresh.Enabled := Assigned(FrmRSAT) and Assigned(LdapClient) and LdapClient.Connected;
+  Action_Refresh.Enabled := Assigned(LdapClient) and LdapClient.Connected;
 end;
 
 procedure TFrmModuleSitesAndServices.PopupMenu1Popup(Sender: TObject);
@@ -1022,12 +1024,12 @@ begin
     DistinguishedName := TisGrid1.SelectedRows._[0]^.S['distinguishedName'];
   end;
   if (DistinguishedName <> '') then
-    FrmRSAT.OpenProperty(DistinguishedName, PropertyName);
+    fIContext.OpenProperty(DistinguishedName);
 end;
 
 procedure TFrmModuleSitesAndServices.Action_PropertyUpdate(Sender: TObject);
 begin
-  Action_Property.Enabled := Assigned(FrmRSAT) and Assigned(LdapClient) and LdapClient.Connected and (Assigned(TreeView1.Selected) or (TisGrid1.SelectedCount > 0));
+  Action_Property.Enabled := Assigned(LdapClient) and LdapClient.Connected and (Assigned(TreeView1.Selected) or (TisGrid1.SelectedCount > 0));
 end;
 
 procedure TFrmModuleSitesAndServices.TisGrid1DblClick(Sender: TObject);
@@ -1042,7 +1044,7 @@ begin
   if Assigned(Node) then
     Node.Selected := True
   else
-    FrmRSAT.OpenProperty(TisGrid1.FocusedRow^.S['distinguishedName'], TisGrid1.FocusedRow^.S['name']);
+    fIContext.OpenProperty(TisGrid1.FocusedRow^.S['distinguishedName']);
 end;
 
 procedure TFrmModuleSitesAndServices.TisGrid1GetImageIndex(
@@ -1772,9 +1774,9 @@ begin
   result := CompareIP(ParseIP(IP1), ParseIP(IP2));
 end;
 
-constructor TFrmModuleSitesAndServices.Create(TheOwner: TComponent);
+constructor TFrmModuleSitesAndServices.Create(Context: IOpenRSATUIContext);
 begin
-  inherited Create(TheOwner);
+  inherited Create(Context.ComponentOwner);
 
   fEnabled := True;
   fUpdating := 0;
@@ -1782,7 +1784,8 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, 'Create', Self);
 
-  fModule := TModuleADSS.Create(FrmRSAT.RSAT);
+  fIContext := Context;
+  fModule := TModuleADSS.Create(Context.RSAT);
 
   fModule.Option.RegisterObserver(@OnADSSOptionsChanged);
 

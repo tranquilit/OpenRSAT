@@ -7,10 +7,12 @@ interface
 uses
   Classes,
   SysUtils,
-  mormot.core.log,
+  mormot.core.base,
+  mormot.core.log, mormot.net.ldap,
   {$IFDEF OPENRSATTESTSOLD}
   mormot.core.test,
   {$ENDIF}
+  uopenrsatuicontextinterface,
   uvisproperties,
   ursatldapclient,
   ulog,
@@ -25,18 +27,24 @@ type
   TVisPropertiesList = class
   private
     fLog: TSynLogClass;
-    fRSAT: TRSAT;
+    fIContext: IOpenRSATUIContext;
     fItems: TVisPropertiesDynArray;
   public
-    constructor Create(ARSAT: TRSAT);
+    constructor Create(Context: IOpenRSATUIContext);
     function Open(AName: String; ADistinguishedName: String): TVisProperties;
+    function Open(const ADistinguishedName: RawUtf8): TVisProperties;
     function New(AName: String; ADistinguishedName: String): TVisProperties;
+    function New(const ADistinguishedName: RawUtf8): TVisProperties;
     function Close(aForm: TVisProperties): boolean;
+    function Close(const ADistinguishedName: RawUtf8): Boolean;
     function CloseAll: boolean;
     function Exists(AName: String): boolean;
+    function Exists(const ADistinguishedName: RawUtf8): Boolean;
     function Focus(DN: String): TVisProperties;
     function Focus(VisProperties: TVisProperties): TVisProperties;
     function Focus(index: Integer): TVisProperties;
+    function GetIndex(const ADistinguishedName: RawUtf8): Integer;
+    function Get(const ADistinguishedName: RawUtf8): TVisProperties;
     function Count: Integer;
     function GetNames: TStringArray;
   end;
@@ -62,19 +70,17 @@ type
 implementation
 uses
   dialogs,
-  mormot.core.base,
-  mormot.core.text,
-  ufrmrsat;
+  mormot.core.text;
 
 { TVisPropertiesList }
 
-constructor TVisPropertiesList.Create(ARSAT: TRSAT);
+constructor TVisPropertiesList.Create(Context: IOpenRSATUIContext);
 begin
   fLog := TOpenRSATLog;
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Create', [Self.ClassName]);
 
-  fRSAT := ARSAT;
+  fIContext := Context;
   fItems := [];
 end;
 
@@ -101,6 +107,18 @@ begin
   result := New(AName, ADistinguishedName);
 end;
 
+function TVisPropertiesList.Open(const ADistinguishedName: RawUtf8): TVisProperties;
+begin
+  result := nil;
+
+  TOpenRSATLog.Add.Log(sllInfo, 'Open properties for "%"', [ADistinguishedName], Self);
+
+  if Exists(ADistinguishedName) then
+    result := Focus(ADistinguishedName)
+  else
+    result := New(ADistinguishedName);
+end;
+
 function TVisPropertiesList.New(AName: String; ADistinguishedName: String
   ): TVisProperties;
 var
@@ -111,11 +129,28 @@ begin
   c := Count;
   SetLength(fItems, c + 1);
 
-  fItems[c] := TVisProperties.Create(FrmRSAT, ADistinguishedName, fRSAT);
+  fItems[c] := TVisProperties.Create(fIContext, ADistinguishedName);
   result := fItems[c];
   fItems[c].Caption := AName;
   if Assigned(fItems[c].Owner) then
     fItems[c].Show();
+end;
+
+function TVisPropertiesList.New(const ADistinguishedName: RawUtf8): TVisProperties;
+var
+  c: Integer;
+  Attribute: TLdapAttribute;
+begin
+  result := nil;
+
+  c := Count;
+  SetLength(fItems, c + 1);
+
+  fItems[c] := TVisProperties.Create(fIContext, ADistinguishedName);
+  result := fItems[c];
+  Attribute := fIContext.RSAT.LdapClient.SearchObject(ADistinguishedName, '', 'name');
+  result.Caption := Attribute.GetReadable();
+  result.Show;
 end;
 
 function TVisPropertiesList.Close(aForm: TVisProperties): boolean;
@@ -135,6 +170,21 @@ begin
       Exit;
     end;
   result := False;
+end;
+
+function TVisPropertiesList.Close(const ADistinguishedName: RawUtf8): Boolean;
+var
+  c, Idx: Integer;
+begin
+  result := False;
+  TOpenRSATLog.Add.Log(sllInfo, 'Close property for "%"', [ADistinguishedName], Self);
+
+  Idx := GetIndex(ADistinguishedName);
+  if Idx >= 0 then
+  begin
+    Delete(fItems, Idx, 1);
+    result := True;
+  end;
 end;
 
 function TVisPropertiesList.CloseAll: boolean;
@@ -161,6 +211,11 @@ begin
       Exit;
   end;
   result := False;
+end;
+
+function TVisPropertiesList.Exists(const ADistinguishedName: RawUtf8): Boolean;
+begin
+  result := GetIndex(ADistinguishedName) >= 0;
 end;
 
 function TVisPropertiesList.Focus(DN: String): TVisProperties;
@@ -213,6 +268,36 @@ begin
     fItems[index].SetFocus;
   end;
   result := fItems[index];
+end;
+
+function TVisPropertiesList.GetIndex(const ADistinguishedName: RawUtf8
+  ): Integer;
+var
+  i: Integer;
+begin
+  result := -1;
+  if not Assigned(fItems) then
+    Exit;
+
+  for i := 0 to Count - 1 do
+  begin
+    if Assigned(fItems[i]) and (fItems[i].DistinguishedName = ADistinguishedName) then
+    begin
+      result := i;
+      Exit;
+    end;
+  end;
+end;
+
+function TVisPropertiesList.Get(const ADistinguishedName: RawUtf8
+  ): TVisProperties;
+var
+  Idx: Integer;
+begin
+  result := nil;
+  Idx := GetIndex(ADistinguishedName);
+  if Idx >= 0 then
+    result := fItems[Idx];
 end;
 
 function TVisPropertiesList.Count: Integer;

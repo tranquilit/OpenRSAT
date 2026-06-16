@@ -20,6 +20,7 @@ uses
   mormot.core.log,
   mormot.core.variants,
   mormot.net.ldap,
+  uopenrsatuicontextinterface,
   ulog;
 
 type
@@ -80,13 +81,14 @@ type
 
     function GetSite(DistinguishedName: RawUtf8): RawUtf8;
   public
+    constructor Create(aLdapClient: TLdapClient);
+
     function GetCurrentServer: RawUtf8;
     function RetrieveServers(CallBack: TCallBack; RetrieveExtra: Boolean = True): Boolean;
     function RetrieveServersExtra(CallBack: TCallBack): Boolean;
-    function ChangeConnection(DomainController: RawUtf8): Boolean;
     function TestConnection(DomainController: RawUtf8): Boolean;
 
-    property LdapClient: TLdapClient read fLdapClient write fLdapClient;
+    property LdapClient: TLdapClient read fLdapClient;
   end;
 
   { TVisChangeDomainController }
@@ -118,23 +120,23 @@ type
     procedure TisGrid1KeyPress(Sender: TObject; var Key: char);
   private
     fLog: TSynLogClass;
-    fLdapClient: TLdapClient;
+    fIContext: IOpenRSATUIContext;
     fChangeDomainController: TChangeDomainController;
     fSearchWord: RawUtf8;
     fAllowClose: Boolean;
 
-    procedure SetLdapClient(AValue: TLdapClient);
+    function GetLdapClient: TLdapClient;
     procedure UpdateCurrentServer;
     procedure FillGrid;
     procedure OnRetrievedServers(data: Pointer);
     procedure UpdateRow(SiteName: RawUtf8; Success: Boolean);
   public
-    constructor Create(TheOwner: TComponent); override;
+    constructor Create(Context: IOpenRSATUIContext);
     destructor Destroy; override;
 
     function DomainController: RawUtf8;
 
-    property LdapClient: TLdapClient read fLdapClient write SetLdapClient;
+    property LdapClient: TLdapClient read GetLdapClient;
   end;
 
 const
@@ -159,8 +161,7 @@ uses
   ucommon,
   ucommonui,
   ursatldapclient,
-  ursatldapclientui,
-  ufrmrsat;
+  ursatldapclientui;
 
 var
   MsdsBehaviorVersionValue: Array[TMsdsBehaviorVersion] of String;
@@ -274,6 +275,11 @@ begin
   result := NameSplitted[1];
 end;
 
+constructor TChangeDomainController.Create(aLdapClient: TLdapClient);
+begin
+  fLdapClient := aLdapClient;
+end;
+
 function TChangeDomainController.GetCurrentServer: RawUtf8;
 begin
   result := '';
@@ -367,26 +373,6 @@ begin
   result := True;
 end;
 
-function TChangeDomainController.ChangeConnection(DomainController: RawUtf8
-  ): Boolean;
-var
-  test: TRsatLdapClient;
-begin
-  result := False;
-  test := TRsatLdapClient.Create(LdapClient.Settings);
-  test.OnError := (LdapClient as TRsatLdapClient).OnError;
-  try
-    test.Settings.TargetHost := DomainController;
-    test.Settings.KerberosSpn := '';
-    if not test.Connect() then
-      Exit;
-    FrmRSAT.ChangeDomainController(DomainController);
-    result := True;
-  finally
-    FreeAndNil(test);
-  end;
-end;
-
 function TChangeDomainController.TestConnection(DomainController: RawUtf8): Boolean;
 var
   test: TRsatLdapClient;
@@ -459,12 +445,9 @@ begin
   Label2.Caption := fChangeDomainController.GetCurrentServer;
 end;
 
-procedure TVisChangeDomainController.SetLdapClient(AValue: TLdapClient);
+function TVisChangeDomainController.GetLdapClient: TLdapClient;
 begin
-  if fLdapClient = AValue then
-    Exit;
-  fLdapClient := AValue;
-  fChangeDomainController.LdapClient := fLdapClient;
+  result := fIContext.RSAT.LdapClient;
 end;
 
 procedure TVisChangeDomainController.FillGrid;
@@ -523,13 +506,14 @@ begin
   TisGrid1.LoadData;
 end;
 
-constructor TVisChangeDomainController.Create(TheOwner: TComponent);
+constructor TVisChangeDomainController.Create(Context: IOpenRSATUIContext);
 begin
-  inherited Create(TheOwner);
+  inherited Create(Context.ComponentOwner);
 
   fAllowClose := True;
 
-  fChangeDomainController := TChangeDomainController.Create;
+  fIContext := Context;
+  fChangeDomainController := TChangeDomainController.Create(LdapClient);
   fLog := TOpenRSATLog;
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, 'ChangeDomainController visual created.', Self);
