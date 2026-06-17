@@ -1,12 +1,9 @@
 program openrsattests;
 
 uses
-  mormot.core.test,
-  integrationtest.uadvancedsecuritypresenter,
-  unittest.uadvancedsecuritypresenter,
-  unittest.ugeneratekeytab,
-  unittest.uviewkeytabpresenter,
-  unittest.udoublelistlogic, integrationtest.udoublelistlogic;
+  mormot.core.test, integrationtest.uadvancedsecuritypresenter,
+  integrationtest.ugeneralpropertysitelink, unittest.uadvancedsecuritypresenter,
+  unittest.ugeneratekeytab, unittest.uviewkeytabpresenter, unittest.udoublelistlogic;
 
 type
 
@@ -36,7 +33,7 @@ procedure TOpenRSATTests.Integrations;
 begin
   AddCase([
     TIntegrationTestAdvancedSecurityPresenter,
-    TIntegrationTestDoubleListLogic
+    TIntegrationTestGeneralPropertySiteLink
   ]);
 end;
 
