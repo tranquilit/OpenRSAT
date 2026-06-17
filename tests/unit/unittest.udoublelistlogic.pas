@@ -16,7 +16,6 @@ type
   TDoubleListLogicTest = class(TDoubleListLogic)
   public
     procedure GetAllResources; override;
-    procedure SyncAttributeProperty(Option: TLdapAddOption); override;
   end;
 
   TUnitTestDoubleListLogic = class(TSynTestCase)
@@ -35,10 +34,6 @@ type
 implementation
 
 procedure TDoubleListLogicTest.GetAllResources;
-begin
-end;
-
-procedure TDoubleListLogicTest.SyncAttributeProperty(Option: TLdapAddOption);
 begin
 end;
 
