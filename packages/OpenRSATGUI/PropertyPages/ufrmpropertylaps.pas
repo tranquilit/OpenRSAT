@@ -99,15 +99,18 @@ uses
 {$R *.lfm}
 
 { TFrmPropertyLAPS }
-function DateTimeToFileTime(ADateTime: TDateTime): QWord;
+function fDateTimeToFileTime(ADateTime: TDateTime): QWord;
+var
+  FileTime: TFileTime;
 begin
-  result := UnixMSTimeToWindowsFileTime64(DateTimeToUnixMSTime(ADateTime));
+  DateTimeToFileTime(ADateTime, FileTime);
+  result := QWord(FileTime);
 end;
 
 procedure TFrmPropertyLAPS.Action_v2_ExpireNowExecute(Sender: TObject);
 begin
   DateTimePicker_v2_NewExpiration.DateTime := Now;
-  fProperty.Add('msLAPS-PasswordExpirationTime', IntToStr(DateTimeToFileTime(LocalTimeToUniversal(DateTimePicker_v2_NewExpiration.DateTime))));
+  fProperty.Add('msLAPS-PasswordExpirationTime', IntToStr(fDateTimeToFileTime(LocalTimeToUniversal(DateTimePicker_v2_NewExpiration.DateTime))));
 end;
 
 procedure ShowPassword(AEdit: TEdit; AAction: TAction);
@@ -149,7 +152,7 @@ end;
 procedure TFrmPropertyLAPS.Action_v1_ExpireNowExecute(Sender: TObject);
 begin
   DateTimePicker_v1_NewExpiration.DateTime := Now;
-  fProperty.Add('ms-Mcs-AdmPwdExpirationTime', IntToStr(DateTimeToFileTime(LocalTimeToUniversal(DateTimePicker_v1_NewExpiration.DateTime))));
+  fProperty.Add('ms-Mcs-AdmPwdExpirationTime', IntToStr(fDateTimeToFileTime(LocalTimeToUniversal(DateTimePicker_v1_NewExpiration.DateTime))));
 end;
 
 procedure TFrmPropertyLAPS.Action_v1_ShowPasswordExecute(Sender: TObject);
