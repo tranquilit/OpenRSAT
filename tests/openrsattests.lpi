@@ -178,6 +178,14 @@
         <Filename Value="integration\integrationtest.ugeneralpropertysitelink.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="integration\integrationtest.ugeneralpropertysitelinkbridge.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\packages\OpenRSATCore\ugeneralpropertysitelinkbridge.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

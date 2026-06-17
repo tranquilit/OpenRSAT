@@ -17,6 +17,9 @@ uses
 type
   TGeneralPropertySiteLinkBridge = class(TDoubleListLogic)
   private
+    fProperty: TProperty;
+    fLdap: TLdapClient;
+
     function SearchSitesInLdap: boolean;
     function ExtractGroup(const S: RawUtf8): RawUtf8;
   public
@@ -25,6 +28,11 @@ type
     procedure GetAllResources; override;
     procedure SyncAttributeProperty(Option: TLdapAddOption);
     procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
+    function FindAttribute(Attribute: RawUtf8): TLdapAttribute; virtual;
+    function FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute; virtual;
+
+    property Props: TProperty read fProperty write fProperty;
+    property Ldap: TLdapClient read fLdap write fLdap;
   end;
 
 implementation
@@ -94,6 +102,16 @@ end;
 procedure TGeneralPropertySiteLinkBridge.SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
 begin
   Props.Add(Attribute, Value, Option);
+end;
+
+function TGeneralPropertySiteLinkBridge.FindAttribute(Attribute: RawUtf8): TLdapAttribute;
+begin
+  Result := fProperty.Attributes.Find(Attribute);
+end;
+
+function TGeneralPropertySiteLinkBridge.FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute;
+begin
+  Result := LdapResult.Attributes.Find(Attribute);
 end;
 
 end.

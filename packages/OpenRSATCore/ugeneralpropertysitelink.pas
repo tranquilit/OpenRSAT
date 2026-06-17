@@ -17,20 +17,29 @@ uses
 type
   TGeneralPropertySiteLink = class(TDoubleListLogic)
   private
+    fProperty: TProperty;
+    fLdap: TLdapClient;
+
     function SearchSitesInLdap: boolean;
   public
     constructor Create(P: TProperty);
+
     procedure GetAllResources; override;
     procedure SyncAttributeProperty(Option: TLdapAddOption);
     procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
+    function FindAttribute(Attribute: RawUtf8): TLdapAttribute; virtual;
+    function FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute; virtual;
+
+    property Props: TProperty read fProperty write fProperty;
+    property Ldap: TLdapClient read fLdap write fLdap;
   end;
 
 implementation
 
 constructor TGeneralPropertySiteLink.Create(P: TProperty);
 begin
-  Props := P;
-  Ldap := P.LdapClient;
+  fProperty := P;
+  fLdap := P.LdapClient;
 end;
 
 procedure TGeneralPropertySiteLink.GetAllResources;
@@ -81,6 +90,16 @@ end;
 procedure TGeneralPropertySiteLink.SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
 begin
   Props.Add(Attribute, Value, Option);
+end;
+
+function TGeneralPropertySiteLink.FindAttribute(Attribute: RawUtf8): TLdapAttribute;
+begin
+  Result := fProperty.Attributes.Find(Attribute);
+end;
+
+function TGeneralPropertySiteLink.FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute;
+begin
+  Result := LdapResult.Attributes.Find(Attribute);
 end;
 
 end.

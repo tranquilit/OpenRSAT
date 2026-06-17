@@ -37,8 +37,6 @@ type
   { TDoubleListLogic }
   TDoubleListLogic = class abstract(TInterfacedObject, IDoubleListLogic)
   private
-    fProperty: TProperty;
-    fLdap: TLdapClient;
     fOutResult, fInResult: TLdapResultArray;
 
     procedure RemoveFromArray(var List: TLdapResultArray; Index: Integer);
@@ -46,7 +44,7 @@ type
     procedure AddToList(Item: TLdapResult); virtual;
     procedure AddToList(var List: TLdapResultArray; Item: TLdapResult); virtual;
   public
-    destructor Destroy;
+    destructor Destroy; override;
 
     procedure GetAllResources; virtual; abstract;
     procedure MoveItem(State: TMovingState; Index: Integer); virtual;
@@ -55,11 +53,9 @@ type
     function GetResultName(Obj: TLdapResult): RawUtf8; virtual;
     function GetNbElementsInLists: Integer; virtual;
     function GetValueFromAttribute(Attribute: TLdapAttribute): RawUtf8; virtual;
-    function FindAttribute(Attribute: RawUtf8): TLdapAttribute; virtual;
-    function FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute; virtual;
+    function FindAttribute(Attribute: RawUtf8): TLdapAttribute; virtual; abstract;
+    function FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute; virtual; abstract;
 
-    property Props: TProperty read fProperty write fProperty;
-    property Ldap: TLdapClient read fLdap write fLdap;
     property InResult: TLdapResultArray read fInResult write fInResult;
     property OutResult: TLdapResultArray read fOutResult write fOutResult;
   end;
@@ -67,9 +63,18 @@ type
 implementation
 
 destructor TDoubleListLogic.Destroy;
+var
+  i: Integer;
 begin
-  FreeAndNil(fInResult);
-  FreeAndNil(fOutResult);
+  for i := 0 to High(fInResult) do
+    FreeAndNil(fInResult[i]);
+  SetLength(fInResult, 0);
+
+  for i := 0 to High(fOutResult) do
+    FreeAndNil(fOutResult[i]);
+  SetLength(fOutResult, 0);
+
+  inherited Destroy;
 end;
 
 procedure TDoubleListLogic.RemoveFromArray(var List: TLdapResultArray; Index: Integer);
@@ -77,7 +82,10 @@ var
   i: Integer;
 begin
   for i := Index to High(List) - 1 do
+  begin
+    FreeAndNil(List[i]);
     List[i] := List[i + 1];
+  end;
   SetLength(List, Length(List) - 1);
 end;
 
@@ -140,16 +148,6 @@ begin
     Result := Attribute.GetReadable()
   else
     Result := '';
-end;
-
-function TDoubleListLogic.FindAttribute(Attribute: RawUtf8): TLdapAttribute;
-begin
-  Result := fProperty.Attributes.Find(Attribute);
-end;
-
-function TDoubleListLogic.FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute;
-begin
-  Result := LdapResult.Attributes.Find(Attribute);
 end;
 
 end.
