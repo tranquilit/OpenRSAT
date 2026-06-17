@@ -15,8 +15,6 @@ uses
   ursatldapclient;
 
 type
-  TLdapResultArray = array of TLdapResult;
-
   TGeneralPropertySiteLinkBridge = class(TDoubleListLogic)
   private
     function SearchSitesInLdap: boolean;
@@ -24,7 +22,8 @@ type
   public
     constructor Create(P: TProperty);
     procedure GetAllResources; override;
-    procedure SyncAttributeProperty(Option: TLdapAddOption); override;
+    procedure SyncAttributeProperty(Option: TLdapAddOption);
+    procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
   end;
 
 implementation
@@ -64,23 +63,10 @@ end;
 
 function TGeneralPropertySiteLinkBridge.ExtractGroup(const S: RawUtf8): RawUtf8;
 var
-  p1, p2: Integer;
+  Pairs: TNameValueDNs;
 begin
-  Result := '';
-
-  p1 := Pos('CN=', S);
-  if p1 = 0 then
-    Exit;
-
-  p1 := PosEx('CN=', S, p1 + 3);
-  if p1 = 0 then
-    Exit;
-
-  p2 := PosEx(',', S, p1);
-  if p2 = 0 then
-    Result := Copy(S, p1, Length(S) - p1 + 1)
-  else
-    Result := Copy(S, p1, p2 - p1);
+  ParseDN(Props.distinguishedName, Pairs);
+  Result := FormatUtf8('CN=%', [Pairs[1].Value]);
 end;
 
 procedure TGeneralPropertySiteLinkBridge.SyncAttributeProperty(Option: TLdapAddOption);
@@ -102,6 +88,11 @@ begin
     DN := InResult[i].Find('distinguishedName').GetReadable();
     Props.Add('siteLinkList', DN, aoNoDuplicateValue);
   end;
+end;
+
+procedure TGeneralPropertySiteLinkBridge.SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
+begin
+  Props.Add(Attribute, Value, Option);
 end;
 
 end.

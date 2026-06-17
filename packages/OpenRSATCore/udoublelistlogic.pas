@@ -24,8 +24,6 @@ type
   IDoubleListLogic = interface
     procedure GetAllResources;
     procedure MoveItem(State: TMovingState; Index: Integer);
-    procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
-    procedure SyncAttributeProperty(Option: TLdapAddOption);
     procedure AddToList(Item: TLdapResult);
     procedure AddToList(var List: TLdapResultArray; Item: TLdapResult);
     function GetItemAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
@@ -50,8 +48,6 @@ type
   public
     procedure GetAllResources; virtual; abstract;
     procedure MoveItem(State: TMovingState; Index: Integer); virtual;
-    procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption); virtual;
-    procedure SyncAttributeProperty(Option: TLdapAddOption); virtual; abstract;
 
     function GetItemAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8; virtual;
     function GetResultName(Obj: TLdapResult): RawUtf8; virtual;
@@ -113,11 +109,6 @@ begin
     AddToList(fOutResult, fInResult[Index]);
     RemoveFromArray(fInResult, Index);
   end;
-end;
-
-procedure TDoubleListLogic.SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
-begin
-  fProperty.Add(Attribute, Value, Option);
 end;
 
 function TDoubleListLogic.GetItemAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;

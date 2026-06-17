@@ -21,7 +21,8 @@ type
   public
     constructor Create(P: TProperty);
     procedure GetAllResources; override;
-    procedure SyncAttributeProperty(Option: TLdapAddOption); override;
+    procedure SyncAttributeProperty(Option: TLdapAddOption);
+    procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
   end;
 
 implementation
@@ -75,6 +76,11 @@ begin
     DN := InResult[i].Find('distinguishedName').GetReadable();
     Props.Add('siteList', DN, aoNoDuplicateValue);
   end;
+end;
+
+procedure TGeneralPropertySiteLink.SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
+begin
+  Props.Add(Attribute, Value, Option);
 end;
 
 end.
