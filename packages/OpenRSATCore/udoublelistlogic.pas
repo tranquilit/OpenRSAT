@@ -46,6 +46,8 @@ type
     procedure AddToList(Item: TLdapResult); virtual;
     procedure AddToList(var List: TLdapResultArray; Item: TLdapResult); virtual;
   public
+    destructor Destroy;
+
     procedure GetAllResources; virtual; abstract;
     procedure MoveItem(State: TMovingState; Index: Integer); virtual;
 
@@ -63,6 +65,12 @@ type
   end;
 
 implementation
+
+destructor TDoubleListLogic.Destroy;
+begin
+  FreeAndNil(fInResult);
+  FreeAndNil(fOutResult);
+end;
 
 procedure TDoubleListLogic.RemoveFromArray(var List: TLdapResultArray; Index: Integer);
 var

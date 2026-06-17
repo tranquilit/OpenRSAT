@@ -21,6 +21,7 @@ type
     function ExtractGroup(const S: RawUtf8): RawUtf8;
   public
     constructor Create(P: TProperty);
+
     procedure GetAllResources; override;
     procedure SyncAttributeProperty(Option: TLdapAddOption);
     procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
