@@ -1,4 +1,4 @@
-unit integrationtest.udoublelistlogic;
+unit integrationtest.ugeneralpropertysitelink;
 
 {$mode ObjFPC}{$H+}
 
@@ -21,7 +21,7 @@ uses
 type
 
   { TIntegrationTestDoubleListLogic }
-  TIntegrationTestDoubleListLogic = class(TSynTestCase)
+  TIntegrationTestGeneralPropertySiteLink = class(TSynTestCase)
   private
     PropertyObj: TProperty;
     Logic: TGeneralPropertySiteLink;
@@ -41,22 +41,22 @@ type
     procedure SyncAttributeProperty_SingleSite;
     procedure SyncAttributeProperty_MultipleSites;
   end;
-  
+
 implementation
 
-procedure TIntegrationTestDoubleListLogic.Setup;
+procedure TIntegrationTestGeneralPropertySiteLink.Setup;
 begin
   LdapClient := SetupLdapClient;
   BaseDN := GetBaseDN(LdapClient.DefaultDN());
 end;
 
-procedure TIntegrationTestDoubleListLogic.CleanUp;
+procedure TIntegrationTestGeneralPropertySiteLink.CleanUp;
 begin
   if Assigned(LdapClient) then
     FreeAndNil(LdapClient);
 end;
 
-procedure TIntegrationTestDoubleListLogic.MethodSetup;
+procedure TIntegrationTestGeneralPropertySiteLink.MethodSetup;
 begin
   if not SetupTestUser(LdapClient, ClassName, DN) then
     raise Exception.Create('Failed to setup test user.');
@@ -69,13 +69,13 @@ begin
   Logic.Ldap := LdapClient;
 end;
 
-procedure TIntegrationTestDoubleListLogic.MethodCleanUp;
+procedure TIntegrationTestGeneralPropertySiteLink.MethodCleanUp;
 begin
   if Assigned(LdapClient) then
     LdapClient.Delete(DN);
 end;
 
-procedure TIntegrationTestDoubleListLogic.GetAllResources_Valid;
+procedure TIntegrationTestGeneralPropertySiteLink.GetAllResources_Valid;
 begin
   Logic.GetAllResources;
 
@@ -83,7 +83,7 @@ begin
   Check(Logic.GetNbElementsInLists = Length(Logic.OutResult), 'All entries are initially in OutResult');
 end;
 
-procedure TIntegrationTestDoubleListLogic.MoveItem_OutToIn;
+procedure TIntegrationTestGeneralPropertySiteLink.MoveItem_OutToIn;
 var
   InitialCount: Integer;
 begin
@@ -96,7 +96,7 @@ begin
   Check(Length(Logic.InResult) = 1, 'One item added');
 end;
 
-procedure TIntegrationTestDoubleListLogic.MoveItem_InToOut;
+procedure TIntegrationTestGeneralPropertySiteLink.MoveItem_InToOut;
 var
   InitialCount: Integer;
 begin
@@ -110,14 +110,14 @@ begin
   Check(Length(Logic.InResult) = 0, 'InResult empty');
 end;
 
-procedure TIntegrationTestDoubleListLogic.SyncAttributeProperty_Empty;
+procedure TIntegrationTestGeneralPropertySiteLink.SyncAttributeProperty_Empty;
 begin
   Logic.SyncAttributeProperty(aoReplaceValue);
 
   Check(PropertyObj.GetReadable('siteList') = '', 'Empty siteList expected');
 end;
 
-procedure TIntegrationTestDoubleListLogic.SyncAttributeProperty_SingleSite;
+procedure TIntegrationTestGeneralPropertySiteLink.SyncAttributeProperty_SingleSite;
 var
   DNValue: RawUtf8;
 begin
@@ -131,7 +131,7 @@ begin
   Check(PropertyObj.GetReadable('siteList') = DNValue, 'Selected site stored');
 end;
 
-procedure TIntegrationTestDoubleListLogic.SyncAttributeProperty_MultipleSites;
+procedure TIntegrationTestGeneralPropertySiteLink.SyncAttributeProperty_MultipleSites;
 var
   Values: TRawUtf8DynArray;
 begin

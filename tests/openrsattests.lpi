@@ -171,11 +171,11 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="integration\integrationtest.udoublelistlogic.pas"/>
+        <Filename Value="..\packages\OpenRSATCore\ugeneralpropertysitelink.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="..\packages\OpenRSATCore\ugeneralpropertysitelink.pas"/>
+        <Filename Value="integration\integrationtest.ugeneralpropertysitelink.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>
