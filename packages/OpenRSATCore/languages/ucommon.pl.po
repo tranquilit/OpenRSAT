@@ -251,11 +251,11 @@ msgstr "Interwał odświeżania"
 
 #: ucommon.rsdnspropertyzonescavengingservers
 msgid "Scavenging servers"
-msgstr "Wyszukiwanie serwerów"
+msgstr "Oczyszczanie serwerów"
 
 #: ucommon.rsdnspropertyzonescavengingserversda
 msgid "Scavenging servers DA"
-msgstr "Wyszukiwanie serwerów DA"
+msgstr "Oczyszczanie serwerów DA"
 
 #: ucommon.rsdnspropertyzonesecuretime
 msgid "Secure Time"
