@@ -138,15 +138,15 @@ msgstr "Potwierdzenie"
 
 #: ucommon.rsconnectedondomainas
 msgid "You are connected as \"%\"."
-msgstr "Jesteś połączony jako „%”."
+msgstr "Jesteś połączony jako \"%\"."
 
 #: ucommon.rsconnectedondomainwithdc
 msgid "The DC of this domain is \"%\"."
-msgstr "Kontroler domeny to „%”."
+msgstr "Kontroler domeny to \"%\"."
 
 #: ucommon.rsconnectsuccess
 msgid "Successfully connected to domain controller \"%\""
-msgstr "Pomyślnie połączono z kontrolerem domeny „%”"
+msgstr "Pomyślnie połączono z kontrolerem domeny \"%\""
 
 #: ucommon.rsconstraintviolation
 msgid "The requests violates some constraint defined within the server."
@@ -251,11 +251,11 @@ msgstr "Interwał odświeżania"
 
 #: ucommon.rsdnspropertyzonescavengingservers
 msgid "Scavenging servers"
-msgstr "Serwery oczyszczania"
+msgstr "Wyszukiwanie serwerów"
 
 #: ucommon.rsdnspropertyzonescavengingserversda
 msgid "Scavenging servers DA"
-msgstr "Serwery oczyszczania DA"
+msgstr "Wyszukiwanie serwerów DA"
 
 #: ucommon.rsdnspropertyzonesecuretime
 msgid "Secure Time"
@@ -452,15 +452,15 @@ msgstr "Nieprawidłowy format IP"
 
 #: ucommon.rsldapaddfailed
 msgid "Ldap add failed: \"%\""
-msgstr "Dodawanie LDAP nie powiodło się: „%”"
+msgstr "Dodawanie LDAP nie powiodło się: \"%\""
 
 #: ucommon.rsldapconnectfailed
 msgid "Ldap connect failed: \"%\""
-msgstr "Połączenie LDAP nie powiodło się: „%”"
+msgstr "Połączenie LDAP nie powiodło się: \"%\""
 
 #: ucommon.rsldapdeletefailed
 msgid "Ldap delete failed: \"%\""
-msgstr "Usuwanie LDAP nie powiodło się: „%”"
+msgstr "Usuwanie LDAP nie powiodło się: \"%\""
 
 #: ucommon.rsldaperror
 msgid "Ldap Error"
@@ -468,7 +468,7 @@ msgstr "Błąd LDAP"
 
 #: ucommon.rsldapfailed
 msgid "Ldap failed: \"%\""
-msgstr "LDAP nie powiodło się: „%”"
+msgstr "LDAP nie powiodło się: \"%\""
 
 #: ucommon.rsldapmissingtls
 msgid "You try to connect to a Domain Controller without TLS connection. It is highly recommanded to enable TLS with a simple connection."
@@ -476,7 +476,7 @@ msgstr "Próbujesz połączyć się z kontrolerem domeny bez połączenia TLS. Z
 
 #: ucommon.rsldapmodifyfailed
 msgid "Ldap modify failed: \"%\""
-msgstr "Modyfikacja LDAP nie powiodła się: „%”"
+msgstr "Modyfikacja LDAP nie powiodła się: \"%\""
 
 #: ucommon.rsldapmovewarningmessage
 msgid ""
@@ -488,7 +488,7 @@ msgstr ""
 
 #: ucommon.rsldapsearchfailed
 msgid "Ldap search failed: \"%\""
-msgstr "Wyszukiwanie LDAP nie powiodło się: „%”"
+msgstr "Wyszukiwanie LDAP nie powiodło się: \"%\""
 
 #: ucommon.rsldapsuccess
 msgid "Ldap Success"
@@ -496,11 +496,11 @@ msgstr "Sukces LDAP"
 
 #: ucommon.rsldapsuccessauthmessage
 msgid "Authentication with user \"%\" has succeeded."
-msgstr "Uwierzytelnienie użytkownika „%” powiodło się."
+msgstr "Uwierzytelnienie użytkownika \"%\" powiodło się."
 
 #: ucommon.rsldapsuccessconnmessage
 msgid "Connection to domain \"%\" with domain controller \"%\" on port \"%\" can be established."
-msgstr "Połączenie z domeną „%” za pomocą kontrolera „%” na porcie „%” może zostać ustanowione."
+msgstr "Połączenie z domeną \"%\" za pomocą kontrolera \"%\" na porcie \"%\" może zostać ustanowione."
 
 #: ucommon.rsldaptlsinvalidcert
 msgid "TLS connection is enabled, but the certificate is not recognized. Be carefull."
