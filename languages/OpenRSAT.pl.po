@@ -41,19 +41,19 @@ msgstr "O programie"
 
 #: tvisopenrsat.action_advancedfeatures.caption
 msgid "Advanced Features"
-msgstr ""
+msgstr "Zaawansowane funkcje"
 
 #: tvisopenrsat.action_ldapconnect.caption
 msgid "Connect"
-msgstr ""
+msgstr "Połącz"
 
 #: tvisopenrsat.action_ldapdisconnect.caption
 msgid "Disconnect"
-msgstr ""
+msgstr "Rozłącz"
 
 #: tvisopenrsat.action_ldapoptions.caption
 msgid "Connection Options"
-msgstr ""
+msgstr "Opcje połączenia"
 
 #: tvisopenrsat.action_newwindow.caption
 msgid "Action_NewWindow"
@@ -77,11 +77,11 @@ msgstr "Zamknij"
 
 #: tvisopenrsat.action_settings.caption
 msgid "Settings"
-msgstr ""
+msgstr "Ustawienia"
 
 #: tvisopenrsat.action_showgpo.caption
 msgid "Show GPO"
-msgstr ""
+msgstr "Pokaż GPO"
 
 #: tvisopenrsat.caption
 msgctxt "tvisopenrsat.caption"
