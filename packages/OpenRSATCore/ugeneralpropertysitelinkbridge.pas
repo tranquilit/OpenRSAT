@@ -39,8 +39,9 @@ implementation
 
 constructor TGeneralPropertySiteLinkBridge.Create(P: TProperty);
 begin
-  Props := P;
-  Ldap := P.LdapClient;
+  inherited Create;
+  fProperty := P;
+  fLdap := P.LdapClient;
 end;
 
 procedure TGeneralPropertySiteLinkBridge.GetAllResources;
@@ -67,6 +68,10 @@ var
   Group: RawUtf8;
 begin
   Group := ExtractGroup(Props.distinguishedName);
+
+  if Group = '' then
+    Exit(False);
+
   Result := Ldap.Search(FormatUtf8('%,CN=Inter-Site Transports,CN=Sites,%', [Group, Ldap.ConfigDN]), false, '(&(objectClass=siteLink))', ['name', 'distinguishedName']);
 end;
 
@@ -74,8 +79,11 @@ function TGeneralPropertySiteLinkBridge.ExtractGroup(const S: RawUtf8): RawUtf8;
 var
   Pairs: TNameValueDNs;
 begin
-  ParseDN(Props.distinguishedName, Pairs);
-  Result := FormatUtf8('CN=%', [Pairs[1].Value]);
+  Result := '';
+  ParseDN(S, Pairs);
+
+  if Length(Pairs) > 1 then
+    Result := FormatUtf8('CN=%', [Pairs[1].Value]);
 end;
 
 procedure TGeneralPropertySiteLinkBridge.SyncAttributeProperty(Option: TLdapAddOption);
@@ -99,17 +107,22 @@ begin
   end;
 end;
 
-procedure TGeneralPropertySiteLinkBridge.SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
+procedure TGeneralPropertySiteLinkBridge.SetScalarProperty(
+  const Attribute, Value: RawUtf8; Option: TLdapAddOption);
 begin
   Props.Add(Attribute, Value, Option);
 end;
 
 function TGeneralPropertySiteLinkBridge.FindAttribute(Attribute: RawUtf8): TLdapAttribute;
 begin
-  Result := fProperty.Attributes.Find(Attribute);
+  if fProperty <> nil then
+    Result := fProperty.Attributes.Find(Attribute)
+  else
+    Result := nil;
 end;
 
-function TGeneralPropertySiteLinkBridge.FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute;
+function TGeneralPropertySiteLinkBridge.FindAttribute(
+  Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute;
 begin
   Result := LdapResult.Attributes.Find(Attribute);
 end;

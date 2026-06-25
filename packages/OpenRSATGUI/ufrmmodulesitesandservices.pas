@@ -1671,6 +1671,7 @@ var
   Ldap: TRsatLdapClient;
 begin
   Ldap := (Sender as TRSATLdapClient);
+  TreeView1.Items.Clear;
   fADSSRootNode := (TreeView1.Items.Add(nil, 'Active Directory Sites and Services') as TADSSTreeNode);
   fADSSRootNode.ImageIndex := Ord(ileADSiteTool);
   fADSSRootNode.SelectedIndex := fADSSRootNode.ImageIndex;

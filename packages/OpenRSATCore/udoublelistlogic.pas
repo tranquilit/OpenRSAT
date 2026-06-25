@@ -79,13 +79,16 @@ end;
 
 procedure TDoubleListLogic.RemoveFromArray(var List: TLdapResultArray; Index: Integer);
 var
-  i: Integer;
+  i, Last: Integer;
 begin
-  for i := Index to High(List) - 1 do
-  begin
-    FreeAndNil(List[i]);
+  Last := High(List);
+  if (Index < 0) or (Index > Last) then
+    Exit;
+
+  for i := Index to Last - 1 do
     List[i] := List[i + 1];
-  end;
+
+  FreeAndNil(List[Last]);
   SetLength(List, Length(List) - 1);
 end;
 
