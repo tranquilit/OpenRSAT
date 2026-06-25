@@ -68,11 +68,11 @@ var
 begin
   for i := 0 to High(fInResult) do
     FreeAndNil(fInResult[i]);
-  SetLength(fInResult, 0);
+  fInResult := nil;
 
   for i := 0 to High(fOutResult) do
     FreeAndNil(fOutResult[i]);
-  SetLength(fOutResult, 0);
+  fOutResult := nil;
 
   inherited Destroy;
 end;
@@ -85,11 +85,11 @@ begin
   if (Index < 0) or (Index > Last) then
     Exit;
 
+  FreeAndNil(List[Index]);
   for i := Index to Last - 1 do
     List[i] := List[i + 1];
 
-  FreeAndNil(List[Last]);
-  SetLength(List, Length(List) - 1);
+  SetLength(List, Last);
 end;
 
 procedure TDoubleListLogic.AddToList(Item: TLdapResult);
