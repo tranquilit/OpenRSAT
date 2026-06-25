@@ -115,7 +115,7 @@ end;
 
 function TGeneralPropertySiteLinkBridge.FindAttribute(Attribute: RawUtf8): TLdapAttribute;
 begin
-  if fProperty <> nil then
+  if Assigned(fProperty) then
     Result := fProperty.Attributes.Find(Attribute)
   else
     Result := nil;
