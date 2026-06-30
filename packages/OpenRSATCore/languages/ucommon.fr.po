@@ -942,7 +942,7 @@ msgstr "Permissions pour %"
 
 #: ucommon.rstitleselectgroups
 msgid "Select groups"
-msgstr "Sélectionner les gorupes"
+msgstr "Sélectionner les groupes"
 
 #: ucommon.rstitleselectnewmanager
 msgid "Select new Manager"
