@@ -71,6 +71,7 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
+    Panel5: TPanel;
     Panel_AuthMethodSelectorInner: TPanel;
     Panel_Kerberos: TPanel;
     Panel_Digest: TPanel;
