@@ -412,7 +412,7 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       Left = 0
       Height = 314
       Top = 33
-      Width = 625
+      Width = 210
       Align = alClient
       Header.AutoSizeIndex = -1
       Header.Columns = <      

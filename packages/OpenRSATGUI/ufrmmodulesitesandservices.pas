@@ -471,7 +471,7 @@ procedure TFrmModuleSitesAndServices.Action_NewSiteExecute(Sender: TObject);
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotSite, Format('CN=Sites,%s', [LdapClient.ConfigDN]), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotSite, GetFocusedObject(True), LdapClient.ConfigDN);
   try
     vis.Ldap := LdapClient;
     vis.ShowModal;
@@ -486,7 +486,7 @@ procedure TFrmModuleSitesAndServices.Action_NewSiteLinkBridgeExecute(
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotSiteLinkBridge, Format('CN=Sites,%s', [LdapClient.ConfigDN]), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotSiteLinkBridge, GetFocusedObject(True), LdapClient.ConfigDN);
   try
     vis.Ldap := LdapClient;
     vis.ShowModal;
@@ -506,7 +506,7 @@ procedure TFrmModuleSitesAndServices.Action_NewSiteLinkExecute(Sender: TObject);
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotSiteLink, Format('CN=Sites,%s', [LdapClient.ConfigDN]), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotSiteLink, GetFocusedObject(True), LdapClient.ConfigDN);
   try
     vis.Ldap := LdapClient;
     vis.ShowModal;
