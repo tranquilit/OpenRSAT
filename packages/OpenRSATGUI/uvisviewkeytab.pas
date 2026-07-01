@@ -149,6 +149,8 @@ end;
 function TVisViewKeyTab.GetFolder: RawUtf8;
 begin
   result := Edit2.Text;
+  if not String(result).EndsWith('/') then
+    result := result + '/';
 end;
 
 procedure TVisViewKeyTab.SetFolder(AFolder: RawUtf8);

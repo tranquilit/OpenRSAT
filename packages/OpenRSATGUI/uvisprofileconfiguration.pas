@@ -1,6 +1,6 @@
 unit uvisprofileconfiguration;
 
-{$mode objfpc}{$H+}
+{$I mormot.defines.inc}
 
 interface
 
@@ -24,12 +24,14 @@ type
   { TVisProfileConfiguration }
 
   TVisProfileConfiguration = class(TForm)
+    Action_SelectKeytab: TAction;
     Action_ShowDCInfos: TAction;
     Action_TestConnection: TAction;
     Action_TestAuthentication: TAction;
     Action_SearchDomains: TAction;
     Action_SearchDomainControllers: TAction;
     ActionList1: TActionList;
+    BitBtn1: TBitBtn;
     BitBtn_DCInfos: TBitBtn;
     BitBtn_SearchDomains: TBitBtn;
     BitBtn_SearchDomainController: TBitBtn;
@@ -44,10 +46,12 @@ type
     ComboBox_DomainControllers: TComboBox;
     ComboBox_Algorithm: TComboBox;
     Edit1: TEdit;
+    Edit2: TEdit;
     Edit_Timeout: TEdit;
     Edit_Username: TEdit;
     Edit_Password: TEdit;
     Edit_UsernameDomain: TEdit;
+    GroupBox_KeyTab: TGroupBox;
     GroupBox_Domain: TGroupBox;
     GroupBox_Account: TGroupBox;
     GroupBox_AuthMethods: TGroupBox;
@@ -67,11 +71,13 @@ type
     Label_Simple: TLabel;
     Label_Digest: TLabel;
     Label_Kerberos: TLabel;
+    OpenDialog1: TOpenDialog;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
     Panel5: TPanel;
+    Panel6: TPanel;
     Panel_AuthMethodSelectorInner: TPanel;
     Panel_Kerberos: TPanel;
     Panel_Digest: TPanel;
@@ -82,6 +88,7 @@ type
     RadioButton_Kerberos: TRadioButton;
     procedure Action_SearchDomainControllersExecute(Sender: TObject);
     procedure Action_SearchDomainsExecute(Sender: TObject);
+    procedure Action_SelectKeytabExecute(Sender: TObject);
     procedure Action_ShowDCInfosExecute(Sender: TObject);
     procedure Action_TestAuthenticationExecute(Sender: TObject);
     procedure Action_TestConnectionExecute(Sender: TObject);
@@ -207,6 +214,13 @@ begin
     ComboBox_Domains.Items.EndUpdate;
     Screen.Cursor := crDefault;
   end;
+end;
+
+procedure TVisProfileConfiguration.Action_SelectKeytabExecute(Sender: TObject);
+begin
+  if not OpenDialog1.Execute then
+    Exit;
+  Edit2.Text := OpenDialog1.FileName;
 end;
 
 procedure TVisProfileConfiguration.Action_ShowDCInfosExecute(Sender: TObject);
@@ -370,6 +384,7 @@ begin
   Panel_Digest.Visible := RadioButton_Digest.Checked;
   Panel_Kerberos.Visible := RadioButton_Kerberos.Checked;
   GroupBox_Account.Visible := RadioButton_Digest.Checked or RadioButton_Simple.Checked or (RadioButton_Kerberos.Checked and not CheckBox_CurrentUsername.Checked);
+  GroupBox_KeyTab.Visible := {$ifdef OSPOSIX}RadioButton_Kerberos.Checked and not CheckBox_CurrentUsername.Checked{$else}False{$endif OSPOSIX};
   AutoSize := True;
   AutoSize := False;
 end;
@@ -418,6 +433,9 @@ begin
   else
     Edit_Username.Text := ASettings.UserName;
   Edit_Password.Text := ASettings.Password;
+  {$ifdef OSPOSIX}
+  Edit2.Text := ASettings.KerberosLocal;
+  {$endif OSPOSIX}
 end;
 
 procedure TVisProfileConfiguration.GUIToSettings(ASettings: TMLdapClientSettings
@@ -477,6 +495,9 @@ begin
   else
     ASettings.UserName := Edit_Username.Text;
   ASettings.Password := Edit_Password.Text;
+  {$ifdef OSPOSIX}
+  ASettings.KerberosLocal := Edit2.Text;
+  {$endif OSPOSIX}
 end;
 
 constructor TVisProfileConfiguration.Create(TheOwner: TComponent;

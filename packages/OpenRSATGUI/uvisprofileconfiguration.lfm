@@ -1,10 +1,10 @@
 object VisProfileConfiguration: TVisProfileConfiguration
   Left = 818
-  Height = 574
+  Height = 660
   Top = 141
   Width = 400
   Caption = 'Profil configuration'
-  ClientHeight = 574
+  ClientHeight = 660
   ClientWidth = 400
   Constraints.MinHeight = 400
   Constraints.MinWidth = 400
@@ -235,14 +235,14 @@ object VisProfileConfiguration: TVisProfileConfiguration
   end
   object GroupBox_AuthMethods: TGroupBox
     Left = 8
-    Height = 300
+    Height = 386
     Top = 226
     Width = 384
     Align = alClient
     AutoSize = True
     BorderSpacing.Around = 8
     Caption = 'Auth method'
-    ClientHeight = 280
+    ClientHeight = 366
     ClientWidth = 380
     TabOrder = 1
     object Panel_AuthMethodSelector: TPanel
@@ -383,7 +383,7 @@ object VisProfileConfiguration: TVisProfileConfiguration
     object Panel1: TPanel
       Left = 0
       Height = 41
-      Top = 239
+      Top = 325
       Width = 380
       Align = alBottom
       AutoSize = True
@@ -409,13 +409,13 @@ object VisProfileConfiguration: TVisProfileConfiguration
     end
     object Panel2: TPanel
       Left = 0
-      Height = 199
+      Height = 285
       Top = 40
       Width = 380
       Align = alClient
       AutoSize = True
       BevelOuter = bvNone
-      ClientHeight = 199
+      ClientHeight = 285
       ClientWidth = 380
       TabOrder = 1
       object Panel_Kerberos: TPanel
@@ -526,14 +526,14 @@ object VisProfileConfiguration: TVisProfileConfiguration
       end
       object GroupBox_Account: TGroupBox
         Left = 8
-        Height = 89
+        Height = 91
         Top = 102
         Width = 364
-        Align = alClient
+        Align = alTop
         AutoSize = True
         BorderSpacing.Around = 8
         Caption = 'Account'
-        ClientHeight = 69
+        ClientHeight = 71
         ClientWidth = 360
         TabOrder = 2
         object Label_Username: TLabel
@@ -645,12 +645,58 @@ object VisProfileConfiguration: TVisProfileConfiguration
           end
         end
       end
+      object GroupBox_KeyTab: TGroupBox
+        Left = 8
+        Height = 76
+        Top = 201
+        Width = 364
+        Align = alClient
+        AutoSize = True
+        BorderSpacing.Around = 8
+        Caption = 'KeyTab'
+        ClientHeight = 56
+        ClientWidth = 360
+        TabOrder = 3
+        object Panel6: TPanel
+          Left = 0
+          Height = 41
+          Top = 0
+          Width = 360
+          Align = alTop
+          AutoSize = True
+          BevelOuter = bvNone
+          ClientHeight = 41
+          ClientWidth = 360
+          TabOrder = 0
+          object Edit2: TEdit
+            Left = 8
+            Height = 25
+            Top = 8
+            Width = 279
+            Align = alClient
+            BorderSpacing.Around = 8
+            TabOrder = 0
+          end
+          object BitBtn1: TBitBtn
+            AnchorSideLeft.Side = asrBottom
+            Left = 295
+            Height = 25
+            Top = 8
+            Width = 57
+            Action = Action_SelectKeytab
+            Align = alRight
+            AutoSize = True
+            BorderSpacing.Around = 8
+            TabOrder = 1
+          end
+        end
+      end
     end
   end
   object ButtonPanel1: TButtonPanel
     Left = 6
     Height = 34
-    Top = 534
+    Top = 620
     Width = 388
     OKButton.Name = 'OKButton'
     OKButton.DefaultCaption = True
@@ -721,5 +767,13 @@ object VisProfileConfiguration: TVisProfileConfiguration
       Caption = 'Show DC infos'
       OnExecute = Action_ShowDCInfosExecute
     end
+    object Action_SelectKeytab: TAction
+      Caption = 'Select'
+      OnExecute = Action_SelectKeytabExecute
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 280
+    Top = 328
   end
 end
