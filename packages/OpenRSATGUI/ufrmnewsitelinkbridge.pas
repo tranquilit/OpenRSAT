@@ -143,9 +143,8 @@ begin
   fLogic.GetAllResources;
   if Length(fLogic.OutResult) < 2 then
   begin
-    MessageDlg(rsTooFewSitesAvailableForSiteLink, mtError,[mbOK], 0);
-    if Length(fLogic.OutResult) > 0 then
-      fLogic.MoveItem(msInResult, 0);
+    MessageDlg(rsTooFewSiteLinksAvailableForSiteLinkBridge, mtError,[mbOK], 0);
+    raise Exception.Create(rsTooFewSiteLinksAvailableForSiteLinkBridge);
   end
   else if Length(fLogic.InResult) = 2 then
   begin
