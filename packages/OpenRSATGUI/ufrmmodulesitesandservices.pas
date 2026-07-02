@@ -1582,7 +1582,10 @@ var
     end;
 
     result := Row^.U['distinguishedName'];
-    ObjectClass := Row^.U['objectClass'];
+    if Row^.Exists('objectClass') then
+      ObjectClass := Row^.U['objectClass']
+    else
+      ObjectClass := Row^.U['type']
   end;
 
   function GetFocusedObjectInTree(var ObjectClass: RawUtf8): RawUtf8;
