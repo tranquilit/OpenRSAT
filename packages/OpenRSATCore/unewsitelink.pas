@@ -10,37 +10,26 @@ uses
   mormot.core.base,
   mormot.core.text,
   mormot.net.ldap,
+  udoublelistlogic,
   ursatldapclient;
 
 type
 
-  { Ldap Result }
-  TLdapResultArray = array of TLdapResult;
-
   { TNewSiteLinkPresenter }
-  TNewSiteLinkPresenter = class
+  TNewSiteLinkPresenter = class(TDoubleListLogic)
   private
+    fObjectOU: RawUtf8;
     fLdap: TRsatLdapClient;
-    fInSite, fNotInSite: TLdapResultArray;
-    
-    procedure RemoveItemFromArray(var List: TLdapResultArray; Index: Integer);
-    procedure AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult);
 
     function SearchSitesInLdap: boolean;
 
   public
-    constructor Create(ALdap: TRsatLdapClient);
+    constructor Create(ALdap: TRsatLdapClient; ObjectOU: RawUtf8);
     destructor Destroy; override;
 
-    procedure GetAllSites;
-    procedure MoveItemToInSite(Index: Integer);
-    procedure MoveItemToNotInSite(Index: Integer);
-
-    function GetSitesInSiteLink: TLdapResultArray;
-    function GetSitesNotInSiteLink: TLdapResultArray;
+    procedure GetAllResources; override;
     function GetResultName(Obj: TLdapResult): RawUtf8;
     function GetSiteAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
-    function GetNbSites: Integer;
     function CanCreateSiteLink(const Name: RawUtf8): Boolean;
     function CreateSiteLink(const Name: RawUtf8): Boolean;
 
@@ -49,9 +38,10 @@ type
 
 implementation
 
-constructor TNewSiteLinkPresenter.Create(ALdap: TRsatLdapClient);
+constructor TNewSiteLinkPresenter.Create(ALdap: TRsatLdapClient; ObjectOU: RawUtf8);
 begin
   fLdap := ALdap;
+  fObjectOU := ObjectOU;
 end;
 
 destructor TNewSiteLinkPresenter.Destroy;
@@ -59,71 +49,28 @@ begin
   inherited Destroy;
 end;
 
-procedure TNewSiteLinkPresenter.RemoveItemFromArray(var List: TLdapResultArray; Index: Integer);
-var
-  i: Integer;
-begin
-  for i := Index to High(List) - 1 do
-    List[i] := List[i + 1];
-
-  SetLength(List, Length(List) - 1);
-end;
-
-procedure TNewSiteLinkPresenter.AddItemInResultArray(var List: TLdapResultArray; Item: TLdapResult);
-var
-  ListLen: Integer;
-begin
-  if not Assigned(Item) then
-    exit;
-  
-  ListLen := Length(List);
-  SetLength(List, ListLen + 1);
-  List[ListLen] := TLdapResult(Item.Clone);
-end;
-
 function TNewSiteLinkPresenter.SearchSitesInLdap: boolean;
 begin
   Result := fLdap.Search(FormatUtf8('CN=Sites,%', [fLdap.ConfigDN]), false, '(&(objectClass=site))', ['name', 'distinguishedName']);
 end;
 
-procedure TNewSiteLinkPresenter.MoveItemToInSite(Index: Integer);
-begin
-  SetLength(fInSite, Length(fInSite) + 1);
-  fInSite[High(fInSite)] := fNotInSite[Index];
-  RemoveItemFromArray(fNotInSite, Index);
-end;
-
-procedure TNewSiteLinkPresenter.MoveItemToNotInSite(Index: Integer);
-begin
-  SetLength(fNotInSite, Length(fNotInSite) + 1);
-  fNotInSite[High(fNotInSite)] := fInSite[Index];
-  RemoveItemFromArray(fInSite, Index);
-end;
-
-procedure TNewSiteLinkPresenter.GetAllSites;
+procedure TNewSiteLinkPresenter.GetAllResources;
 var
   LdapResult: TLdapResult;
 begin
-  fLdap.SearchBegin();
-  fLdap.SearchScope := lssSingleLevel;
-  repeat
-    if not SearchSitesInLdap then
-      Exit;
-    
-    for LdapResult in fLdap.SearchResult.Items do
-      AddItemInResultArray(fNotInSite, LdapResult);
-  until fLdap.SearchCookie = '';
-  fLdap.SearchEnd;
-end;
+  Ldap.SearchBegin();
+  try
+    Ldap.SearchScope := lssSingleLevel;
+    repeat
+      if not SearchSitesInLdap then
+        Exit;
 
-function TNewSiteLinkPresenter.GetSitesInSiteLink: TLdapResultArray;
-begin
-  Result := fInSite;
-end;
-
-function TNewSiteLinkPresenter.GetSitesNotInSiteLink: TLdapResultArray;
-begin
-  Result := fNotInSite;
+      for LdapResult in Ldap.SearchResult.Items do
+        AddToList(LdapResult);
+    until Ldap.SearchCookie = '';
+  finally
+    Ldap.SearchEnd;
+  end;
 end;
 
 function TNewSiteLinkPresenter.GetResultName(Obj: TLdapResult): RawUtf8;
@@ -133,17 +80,12 @@ end;
 
 function TNewSiteLinkPresenter.GetSiteAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
 begin
-  Result := List[idx].Find(attr).GetReadable()
-end;
-
-function TNewSiteLinkPresenter.GetNbSites: Integer;
-begin
-  Result := Length(fInSite) + Length(fNotInSite);
+  Result := List[idx].Find(attr).GetReadable();
 end;
 
 function TNewSiteLinkPresenter.CanCreateSiteLink(const Name: RawUtf8): Boolean;
 begin
-  Result := (Name <> '') and (Length(fInSite) >= 2);
+  Result := (Name <> '') and (Length(InResult) >= 2);
 end;
 
 function TNewSiteLinkPresenter.CreateSiteLink(const Name: RawUtf8): Boolean;
@@ -154,15 +96,15 @@ var
   i, n: Integer;
 begin
   Result := False;
-  DN := FormatUtf8('CN=%,CN=SMTP,CN=Inter-Site Transports,CN=Sites,%', [Name, fLdap.ConfigDN]);
+  DN := FormatUtf8('CN=%,%', [Name, fObjectOU]);
   AttrList := TLdapAttributeList.Create;
   try
     Attr := AttrList.Add('objectClass', 'top');
     Attr.Add('siteLink');
-    Attr := AttrList.Add('siteList', GetSiteAttrValue(fInSite, 0, 'distinguishedName'));
 
-    for i := 1 to High(fInSite) do
-      Attr.Add(GetSiteAttrValue(fInSite, i, 'distinguishedName'));
+    Attr := AttrList.Add('siteList', GetSiteAttrValue(InResult, 0, 'distinguishedName'));
+    for i := 1 to High(InResult) do
+      Attr.Add(GetSiteAttrValue(InResult, i, 'distinguishedName'));
 
     AttrList.Add('cost', '100');
     AttrList.Add('replInterval', '180');
@@ -170,10 +112,10 @@ begin
     Result := fLdap.Add(DN, AttrList);
   finally
     AttrList.Free;
-    for n := 0 to High(fInSite) do
-      FreeAndNil(fInSite[n]);
-    for n := 0 to High(fNotInSite) do
-      FreeAndNil(fNotInSite[n]);
+    for n := 0 to High(InResult) do
+      FreeAndNil(InResult[n]);
+    for n := 0 to High(OutResult) do
+      FreeAndNil(OutResult[n]);
   end;
 end;
 

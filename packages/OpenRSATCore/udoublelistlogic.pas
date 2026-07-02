@@ -30,8 +30,6 @@ type
     function GetResultName(Obj: TLdapResult): RawUtf8;
     function GetNbElementsInLists: Integer;
     function GetValueFromAttribute(Attribute: TLdapAttribute): RawUtf8;
-    function FindAttribute(Attribute: RawUtf8): TLdapAttribute;
-    function FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute;
   end;
   
   { TDoubleListLogic }
@@ -53,8 +51,6 @@ type
     function GetResultName(Obj: TLdapResult): RawUtf8; virtual;
     function GetNbElementsInLists: Integer; virtual;
     function GetValueFromAttribute(Attribute: TLdapAttribute): RawUtf8; virtual;
-    function FindAttribute(Attribute: RawUtf8): TLdapAttribute; virtual; abstract;
-    function FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute; virtual; abstract;
 
     property InResult: TLdapResultArray read fInResult write fInResult;
     property OutResult: TLdapResultArray read fOutResult write fOutResult;

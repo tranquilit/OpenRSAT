@@ -80,7 +80,7 @@ end;
 
 function TNewSiteLinkBridgePresenter.GetSiteLinkAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
 begin
-  Result := List[idx].Find(attr).GetReadable()
+  Result := List[idx].Find(attr).GetReadable();
 end;
 
 function TNewSiteLinkBridgePresenter.CanCreateSiteLinkBridge(const Name: RawUtf8): Boolean;

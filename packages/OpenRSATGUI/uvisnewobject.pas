@@ -140,7 +140,7 @@ begin
     vnotSharedFolder: Frame := TFrmNewSharedFolder.Create(Self);
     vnotPrinter: Frame := TFrmNewPrinter.Create(Self);
     vnotServer: Frame := TFrmNewServer.Create(Self, Ldap);
-    vnotSiteLink: Frame := TFrmNewSiteLink.Create(Self, Ldap);
+    vnotSiteLink: Frame := TFrmNewSiteLink.Create(Self, Ldap, fObjectOU);
     vnotSiteLinkBridge: Frame := TFrmNewSiteLinkBridge.Create(Self, Ldap, fObjectOU);
     else
     begin
