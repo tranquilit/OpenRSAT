@@ -1,4 +1,4 @@
-unit unewsitelink;
+unit unewsitelinkbridge;
 
 {$mode ObjFPC}{$H+}
 
@@ -15,13 +15,13 @@ uses
 
 type
 
-  { TNewSiteLinkPresenter }
-  TNewSiteLinkPresenter = class(TDoubleListLogic)
+  { TNewSiteLinkBridgePresenter }
+  TNewSiteLinkBridgePresenter = class(TDoubleListLogic)
   private
     fObjectOU: RawUtf8;
     fLdap: TRsatLdapClient;
 
-    function SearchSitesInLdap: boolean;
+    function SearchSiteLinksInLdap: boolean;
 
   public
     constructor Create(ALdap: TRsatLdapClient; ObjectOU: RawUtf8);
@@ -29,32 +29,32 @@ type
 
     procedure GetAllResources; override;
     function GetResultName(Obj: TLdapResult): RawUtf8;
-    function GetSiteAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
-    function CanCreateSiteLink(const Name: RawUtf8): Boolean;
-    function CreateSiteLink(const Name: RawUtf8): Boolean;
+    function GetSiteLinkAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
+    function CanCreateSiteLinkBridge(const Name: RawUtf8): Boolean;
+    function CreateSiteLinkBridge(const Name: RawUtf8): Boolean;
 
     property Ldap: TRsatLdapClient read fLdap;
   end;
 
 implementation
 
-constructor TNewSiteLinkPresenter.Create(ALdap: TRsatLdapClient; ObjectOU: RawUtf8);
+constructor TNewSiteLinkBridgePresenter.Create(ALdap: TRsatLdapClient; ObjectOU: RawUtf8);
 begin
   fLdap := ALdap;
   fObjectOU := ObjectOU;
 end;
 
-destructor TNewSiteLinkPresenter.Destroy;
+destructor TNewSiteLinkBridgePresenter.Destroy;
 begin
   inherited Destroy;
 end;
 
-function TNewSiteLinkPresenter.SearchSitesInLdap: boolean;
+function TNewSiteLinkBridgePresenter.SearchSiteLinksInLdap: boolean;
 begin
-  Result := fLdap.Search(FormatUtf8('CN=Sites,%', [fLdap.ConfigDN]), false, '(&(objectClass=site))', ['name', 'distinguishedName']);
+  Result := Ldap.Search(fObjectOU, false, '(&(objectClass=siteLink))', ['name', 'distinguishedName']);
 end;
 
-procedure TNewSiteLinkPresenter.GetAllResources;
+procedure TNewSiteLinkBridgePresenter.GetAllResources;
 var
   LdapResult: TLdapResult;
 begin
@@ -62,7 +62,7 @@ begin
   try
     Ldap.SearchScope := lssSingleLevel;
     repeat
-      if not SearchSitesInLdap then
+      if not SearchSiteLinksInLdap then
         Exit;
 
       for LdapResult in Ldap.SearchResult.Items do
@@ -73,22 +73,22 @@ begin
   end;
 end;
 
-function TNewSiteLinkPresenter.GetResultName(Obj: TLdapResult): RawUtf8;
+function TNewSiteLinkBridgePresenter.GetResultName(Obj: TLdapResult): RawUtf8;
 begin
   Result := Obj.Find('name').GetReadable();
 end;
 
-function TNewSiteLinkPresenter.GetSiteAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
+function TNewSiteLinkBridgePresenter.GetSiteLinkAttrValue(List: TLdapResultArray; idx: Integer; attr: RawUtf8): RawUtf8;
 begin
   Result := List[idx].Find(attr).GetReadable();
 end;
 
-function TNewSiteLinkPresenter.CanCreateSiteLink(const Name: RawUtf8): Boolean;
+function TNewSiteLinkBridgePresenter.CanCreateSiteLinkBridge(const Name: RawUtf8): Boolean;
 begin
   Result := (Name <> '') and (Length(InResult) >= 2);
 end;
 
-function TNewSiteLinkPresenter.CreateSiteLink(const Name: RawUtf8): Boolean;
+function TNewSiteLinkBridgePresenter.CreateSiteLinkBridge(const Name: RawUtf8): Boolean;
 var
   DN: RawUtf8;
   AttrList: TLdapAttributeList;
@@ -100,14 +100,11 @@ begin
   AttrList := TLdapAttributeList.Create;
   try
     Attr := AttrList.Add('objectClass', 'top');
-    Attr.Add('siteLink');
+    Attr.Add('siteLinkBridge');
 
-    Attr := AttrList.Add('siteList', GetSiteAttrValue(InResult, 0, 'distinguishedName'));
+    Attr := AttrList.Add('siteLinkList', GetSiteLinkAttrValue(InResult, 0, 'distinguishedName'));
     for i := 1 to High(InResult) do
-      Attr.Add(GetSiteAttrValue(InResult, i, 'distinguishedName'));
-
-    AttrList.Add('cost', '100');
-    AttrList.Add('replInterval', '180');
+      Attr.Add(GetSiteLinkAttrValue(InResult, i, 'distinguishedName'));
 
     Result := fLdap.Add(DN, AttrList);
   finally

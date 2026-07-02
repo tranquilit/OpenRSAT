@@ -15,6 +15,8 @@ uses
   tis.ui.grid.core,
   mormot.core.base,
   mormot.net.ldap,
+  udoublelistlogic,
+  unewsitelinkbridge,
   ursatldapclient;
 
 type
@@ -40,15 +42,19 @@ type
     procedure Action_NextUpdate(Sender: TObject);
     procedure Button_AddClick(Sender: TObject);
     procedure Button_RemoveClick(Sender: TObject);
-    procedure ListBox_InSiteLinkBridgeSelectionChange(Sender: TObject;
-      User: boolean);
-    procedure ListBox_NotInSiteLinkBridgeSelectionChange(Sender: TObject;
-      User: boolean);
+    procedure ListBox_InSiteLinkBridgeSelectionChange(Sender: TObject;User: boolean);
+    procedure ListBox_NotInSiteLinkBridgeSelectionChange(Sender: TObject;User: boolean);
+
   private
+    fLogic: TNewSiteLinkBridgePresenter;
     fLdap: TRsatLdapClient;
+    fObjectOU: RawUtf8;
+
     procedure Load;
+    procedure LoadListBox;
   public
-    constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient); reintroduce;
+    constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient; ObjectOU: RawUtf8); reintroduce;
+    destructor Destroy; override;
   end;
 
 implementation
@@ -64,28 +70,13 @@ uses
 {$R *.lfm}
 
 procedure TFrmNewSiteLinkBridge.Action_NextExecute(Sender: TObject);
-var
-  DistinguishedName: RawUtf8;
-  AttributeList: TLdapAttributeList;
-  Attribute: TLdapAttribute;
 begin
-  DistinguishedName := Format('CN=%s,CN=SMTP,CN=Inter-Site Transports,CN=Sites,%s', [Edit_Name.Text, fLdap.ConfigDN]);
-  AttributeList := TLdapAttributeList.Create;
-
-  try
-    Attribute := AttributeList.Add('objectClass', 'top');
-    Attribute.Add('siteLinkBridge');
-
-    if not fLdap.Add(DistinguishedName, AttributeList) then
-      Exit;
-  finally
-    FreeAndNil(AttributeList);
-  end;
+  fLogic.CreateSiteLinkBridge(Edit_Name.Text);
 end;
 
 procedure TFrmNewSiteLinkBridge.Action_NextUpdate(Sender: TObject);
 begin
-  Action_Next.Enabled := (Edit_Name.Text <> '');
+  Action_Next.Enabled := fLogic.CanCreateSiteLinkBridge(Edit_Name.Text);
 end;
 
 procedure TFrmNewSiteLinkBridge.Button_AddClick(Sender: TObject);
@@ -93,12 +84,10 @@ var
   idx: Integer;
 begin
   idx := ListBox_NotInSiteLinkBridge.ItemIndex;
-  if idx <> -1 then
+  if ListBox_NotInSiteLinkBridge.ItemIndex <> -1 then
   begin
-    ListBox_InSiteLinkBridge.Items.Add(ListBox_NotInSiteLinkBridge.Items[idx]);
-    ListBox_InSiteLinkBridge.ItemIndex := ListBox_InSiteLinkBridge.Items.Count - 1;
-    ListBox_InSiteLinkBridge.SetFocus;
-    ListBox_NotInSiteLinkBridge.Items.Delete(idx);
+    fLogic.MoveItem(msInResult, idx);
+    LoadListBox;
   end;
 end;
 
@@ -107,24 +96,20 @@ var
   idx: Integer;
 begin
   idx := ListBox_InSiteLinkBridge.ItemIndex;
-  if idx <> -1 then
+  if ListBox_InSiteLinkBridge.ItemIndex <> -1 then
   begin
-    ListBox_NotInSiteLinkBridge.Items.Add(ListBox_InSiteLinkBridge.Items[idx]);
-    ListBox_NotInSiteLinkBridge.ItemIndex := ListBox_NotInSiteLinkBridge.Items.Count - 1;
-    ListBox_NotInSiteLinkBridge.SetFocus;
-    ListBox_InSiteLinkBridge.Items.Delete(idx);
+    fLogic.MoveItem(msOutOfResult, idx);
+    LoadListBox;
   end;
 end;
 
-procedure TFrmNewSiteLinkBridge.ListBox_InSiteLinkBridgeSelectionChange(
-  Sender: TObject; User: boolean);
+procedure TFrmNewSiteLinkBridge.ListBox_InSiteLinkBridgeSelectionChange(Sender: TObject; User: boolean);
 begin
   Button_Remove.Enabled := True;
   Button_Add.Enabled := False;
 end;
 
-procedure TFrmNewSiteLinkBridge.ListBox_NotInSiteLinkBridgeSelectionChange(
-  Sender: TObject; User: boolean);
+procedure TFrmNewSiteLinkBridge.ListBox_NotInSiteLinkBridgeSelectionChange(Sender: TObject; User: boolean);
 begin
   Button_Add.Enabled := True;
   Button_Remove.Enabled := False;
@@ -135,13 +120,16 @@ begin
   Edit_Name.SetFocus;
 end;
 
-constructor TFrmNewSiteLinkBridge.Create(TheOwner: TComponent; ALdap: TRsatLdapClient);
+constructor TFrmNewSiteLinkBridge.Create(TheOwner: TComponent; ALdap: TRsatLdapClient; ObjectOU: RawUtf8);
 var
   OwnerNewObject: TVisNewObject absolute TheOwner;
 begin
   inherited Create(TheOwner);
 
   fLdap := ALdap;
+  fObjectOU := ObjectOU;
+
+  fLogic := TNewSiteLinkBridgePresenter.Create(fLdap, fObjectOU);
 
   OwnerNewObject.Caption := rsNewObjectSiteLink;
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
@@ -151,6 +139,39 @@ begin
   OwnerNewObject.Btn_Back.Visible := False;
   OwnerNewObject.Image_Object.ImageIndex := Ord(ileADUnknown);
   OwnerNewObject.CallBack := @Load;
+
+  fLogic.GetAllResources;
+  if Length(fLogic.OutResult) < 2 then
+  begin
+    MessageDlg(rsTooFewSiteLinksAvailableForSiteLinkBridge, mtError,[mbOK], 0);
+    raise Exception.Create(rsTooFewSiteLinksAvailableForSiteLinkBridge);
+  end
+  else if Length(fLogic.InResult) = 2 then
+  begin
+    fLogic.MoveItem(msInResult, 0);;
+    fLogic.MoveItem(msInResult, 0);
+  end;
+
+  LoadListBox;
+end;
+
+destructor TFrmNewSiteLinkBridge.Destroy;
+begin
+  FreeAndNil(fLogic);
+  inherited Destroy;
+end;
+
+procedure TFrmNewSiteLinkBridge.LoadListBox;
+var
+  r: TLdapResult;
+begin
+  ListBox_NotInSiteLinkBridge.Clear;
+  for r in fLogic.OutResult do
+    ListBox_NotInSiteLinkBridge.Items.Add(fLogic.GetResultName(r));
+
+  ListBox_InSiteLinkBridge.Clear;
+  for r in fLogic.InResult do
+    ListBox_InSiteLinkBridge.Items.Add(fLogic.GetResultName(r));
 end;
 
 end.
