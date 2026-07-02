@@ -181,6 +181,7 @@ resourcestring
   'Are you sure you want to move this object?';
   
   rsTooFewSitesAvailableForSiteLink = 'Active Directory Sites and Services cannot locate two sites to create a working site link object. You may create a new site link that links only one site, but it will have no effect until it links at least two sites.';
+  rsTooFewSiteLinksAvailableForSiteLinkBridge = 'Active Directory Sites and Services cannot locate two site link objects using the same transport as the site link bridge. You cannot create a site link bridge until there are at least two site links for this transport.';
 
   // Well Known Sid
   rsWellKnownSidNull = '';
