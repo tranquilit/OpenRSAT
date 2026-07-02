@@ -54,6 +54,7 @@ type
     procedure LoadListBox;
   public
     constructor Create(TheOwner: TComponent; ALdap: TRsatLdapClient; ObjectOU: RawUtf8); reintroduce;
+    destructor Destroy; override;
   end;
 
 implementation
@@ -153,6 +154,12 @@ begin
   end;
 
   LoadListBox;
+end;
+
+destructor TFrmNewSiteLinkBridge.Destroy;
+begin
+  FreeAndNil(fLogic);
+  inherited Destroy;
 end;
 
 procedure TFrmNewSiteLinkBridge.LoadListBox;
