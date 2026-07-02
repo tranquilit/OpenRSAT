@@ -119,6 +119,9 @@ type
 
     fVisPropertiesList: TVisPropertiesList;
 
+    function SelectConfig: TConnectionSettings;
+    function GetLdapSettings: TConnectionSettings;
+
     function GetLdapClient: TRsatLdapClient;
     function GetLdapConfigs: TLdapConfigs;
     procedure OnOptionChange(Option: TOption);
@@ -314,63 +317,27 @@ end;
 
 procedure TVisOpenRSAT.Action_LdapConnectExecute(Sender: TObject);
 var
-  pwd: TFormConnectConfigs;
   conf: TConnectionSettings;
+  Client: TRsatLdapClient;
 begin
-  if Assigned(LdapClient) and LdapClient.Connected then
-    LdapClient.Close;
+  LdapClient.Close;
 
-  if (LdapConfigs.LastConfig = '') then
-  begin
-    if Assigned(fLog) then
-      fLog.Add.Log(sllInfo, 'No last config. Open options...');
-    Action_LdapOptions.Execute;
-    Exit;
-  end;
-
-  LdapConfigs.LoadConfig();
-
-  if not LdapConfigs.IsConfigValid then
-  begin
-    pwd := TFormConnectConfigs.Create(Self, LdapConfigs);
-    try
-      if (pwd.ShowModal <> mrOK) then
-      begin
-        if Assigned(fLog) then
-          fLog.Add.Log(sllError, 'Invalid connection entries.');
-        Exit;
-      end;
-    finally
-      FreeAndNil(pwd);
-    end;
-  end;
-
-  Screen.Cursor := crHourGlass;
+  Client := fRSAT.LdapClient;
   try
-    // TLdapClientSettings
-    conf := LdapConfigs.LdapConnectionSettings;
-    LdapClient.ChangeSettings(conf);
-
-    {$IFDEF DEBUG}
-      LdapClient.Log := TLdapLog;
-    {$ENDIF DEBUG}
-
-    LdapClient.TlsContext^.IgnoreCertificateErrors := conf.AllowUnsafePasswordBind;
-    // lsfSaclSecurityInformation sould not be used.
-    // A regular user will not be able to get the NTSecurityDesriptor is Ldap is trying to fetch SACL
-    LdapClient.SearchSDFlags := [lsfOwnerSecurityInformation, lsfGroupSecurityInformation, lsfDaclSecurityInformation];
-
-    // Connection & bind
-    if not LdapClient.Connect then
-    begin
-      Screen.Cursor := crDefault;
-      if Assigned(fLog) then
-        fLog.Add.Log(sllError, 'Ldap connection failed: %', [LdapClient.ResultString]);
-      Action_LdapOptions.Execute();
+    Conf := GetLdapSettings;
+    if not Assigned(Conf) then
       Exit;
-    end;
+
+    repeat
+      if not ChangeLdapSettings(Client, Conf) then
+        Conf := SelectConfig;
+      if not Assigned(Conf) then
+        Exit;
+    until Client.Connected;
   finally
-    Screen.Cursor := crDefault;
+    fRSAT.LdapClient := Client;
+    OnLdapConnect(LdapClient);
+    Exit;
   end;
 end;
 
@@ -385,23 +352,12 @@ begin
 end;
 
 procedure TVisOpenRSAT.Action_LdapOptionsExecute(Sender: TObject);
-var
-  ConnectionConfig: TFormConnectConfigs;
 begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_LdapOptions.Name]);
 
-  ConnectionConfig := TFormConnectConfigs.Create(self, LdapConfigs);
-  try
-    if (ConnectionConfig.ShowModal() = mrOK) then
-    begin
-      Action_LdapDisconnect.Execute();
-      if LdapConfigs.AutoConnect then
-        Action_LdapConnect.Execute();
-    end;
-  finally
-    FreeAndNil(ConnectionConfig);
-  end;
+  if Assigned(SelectConfig) then
+    Action_LdapConnect.Execute;
 end;
 
 procedure TVisOpenRSAT.FormShow(Sender: TObject);
@@ -442,6 +398,45 @@ procedure TVisOpenRSAT.Timer_AutoConnectTimer(Sender: TObject);
 begin
   Timer_AutoConnect.Enabled := False;
   Action_LdapConnect.Execute;
+end;
+
+function TVisOpenRSAT.SelectConfig: TConnectionSettings;
+var
+  ConnectionConfig: TFormConnectConfigs;
+begin
+  result := nil;
+  ConnectionConfig := TFormConnectConfigs.Create(self, LdapConfigs);
+  try
+    if (ConnectionConfig.ShowModal() = mrOK) then
+      result := LdapConfigs.LdapConnectionSettings;
+  finally
+    FreeAndNil(ConnectionConfig);
+  end;
+end;
+
+function TVisOpenRSAT.GetLdapSettings: TConnectionSettings;
+begin
+  result := nil;
+
+  if (LdapConfigs.LastConfig = '') then
+  begin
+    if Assigned(fLog) then
+      fLog.Add.Log(sllInfo, 'No last config. Open options...');
+    result := SelectConfig;
+    Exit;
+  end;
+
+  LdapConfigs.LoadConfig();
+
+  if not LdapConfigs.IsConfigValid then
+  begin
+    if Assigned(fLog) then
+      fLog.Add.Log(sllInfo, 'Invalid last config. Open options...');
+    result := SelectConfig;
+    Exit;
+  end;
+
+  result := LdapConfigs.LdapConnectionSettings;
 end;
 
 procedure TVisOpenRSAT.RestoreOldConfig;

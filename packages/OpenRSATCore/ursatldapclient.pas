@@ -125,6 +125,8 @@ function GetDefaultACLFromObjectClass(ALdapClient: TLdapClient; AObjectClass: TR
 
 procedure OrderACL(aLdapClient: TLdapClient; aDN: RawUtf8; aACL: PSecAcl);
 
+function ChangeLdapSettings(var LdapClient: TRsatLdapClient; Settings: TLdapClientSettings; AutoConnect: Boolean = True): Boolean;
+
 const
   LDAP_ERROR_CUSTOM_MESSAGE: Array[leOperationsError..leOther] of RawUtf8 = (
     rsOperationsError,
@@ -359,6 +361,43 @@ begin
   // Order acl
   InnerOrderAcl(aACL, sdArr);
   TOpenRSATLog.Add.Log(sllDebug, 'End ordering ACL for.');
+end;
+
+function ChangeLdapSettings(var LdapClient: TRsatLdapClient;
+  Settings: TLdapClientSettings; AutoConnect: Boolean): Boolean;
+var
+  NewClient: TRsatLdapClient;
+begin
+  result := True;
+
+  NewClient := TRsatLdapClient.Create(Settings);
+  try
+    NewClient.TlsContext^.IgnoreCertificateErrors := Settings.AllowUnsafePasswordBind;
+    NewClient.OnError := LdapClient.OnError;
+
+    {$IFDEF DEBUG}
+    NewClient.Log := TLdapLog;
+    {$ENDIF DEBUG}
+
+    // lsfSaclSecurityInformation sould not be used.
+    // A regular user will not be able to get the NTSecurityDesriptor is Ldap is trying to fetch SACL
+    NewClient.SearchSDFlags := [lsfOwnerSecurityInformation, lsfGroupSecurityInformation, lsfDaclSecurityInformation];
+
+    if AutoConnect then
+      result := NewClient.Connect();
+    if result then
+    begin
+      NewClient.OnConnect := LdapClient.OnConnect;
+      NewClient.OnClose := LdapClient.OnClose;
+      NewClient.OnDisconnect := LdapClient.OnDisconnect;
+      if Assigned(LdapClient) then
+        FreeAndNil(LdapClient);
+      LdapClient := NewClient;
+    end;
+  finally
+    if LdapClient <> NewClient then
+      FreeAndNil(NewClient);
+  end;
 end;
 
 { TRsatLdapClient }

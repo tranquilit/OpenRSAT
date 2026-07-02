@@ -27,7 +27,7 @@ type
     destructor Destroy; override;
     procedure Load;
   published
-    property LdapClient: TRsatLdapClient read fLdapClient;
+    property LdapClient: TRsatLdapClient read fLdapClient write fLdapClient;
     property LdapConfigs: TLdapConfigs read fLdapConfig;
     property RsatOption: TRsatOption read fRsatOption;
   end;
