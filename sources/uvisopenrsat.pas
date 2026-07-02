@@ -337,7 +337,6 @@ begin
   finally
     fRSAT.LdapClient := Client;
     OnLdapConnect(LdapClient);
-    Exit;
   end;
 end;
 
