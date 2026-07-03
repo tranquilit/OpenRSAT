@@ -140,8 +140,6 @@ begin
     fLog.Add.Log(sllTrace, 'Update', Self);
 
   fLogic := TGeneralPropertyServer.Create(Props);
-  if not Assigned(fLogic.Settings) then
-    ShowMessage('Failed to set server settings up');
 
   Edit_Name.Text := Props.name;
   Edit_Computer.Text := Props.CN;

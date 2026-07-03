@@ -706,10 +706,16 @@ begin
   'nTDSDSA': property_tabs := PROPERTY_NTDSDSA;
   'server':
   begin
-    if not Assigned(fProperty.Attributes.Find('dNSHostName')) then
-      property_tabs := PROPERTY_NO_GENERAL
-    else
-      property_tabs := PROPERTY_SERVER;
+    fProperty.LdapClient.SearchBegin();
+    try
+      fProperty.LdapClient.SearchScope := lssSingleLevel;
+      if Assigned(fProperty.LdapClient.SearchObject(fProperty.distinguishedName, '(&(objectClass=nTDSDSA))', [], lssSingleLevel)) then
+        property_tabs := PROPERTY_SERVER
+      else
+        property_tabs := PROPERTY_NO_GENERAL;
+    finally
+      fProperty.LdapClient.SearchEnd;
+    end;
   end;
   'subnet': property_tabs := PROPERTY_SUBNET;
   'interSiteTransport': property_tabs := PROPERTY_INTER_SITE_TRANSPORT;
