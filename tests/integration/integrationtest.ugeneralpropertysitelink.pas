@@ -112,7 +112,7 @@ end;
 
 procedure TIntegrationTestGeneralPropertySiteLink.SyncAttributeProperty_Empty;
 begin
-  Logic.SyncAttributeProperty(aoReplaceValue);
+  Logic.SyncAttributeProperty;
 
   Check(PropertyObj.GetReadable('siteList') = '', 'Empty siteList expected');
 end;
@@ -126,7 +126,7 @@ begin
   Logic.MoveItem(msInResult, 0);
 
   DNValue := Logic.InResult[0].Find('distinguishedName').GetReadable();
-  Logic.SyncAttributeProperty(aoReplaceValue);
+  Logic.SyncAttributeProperty;
 
   Check(PropertyObj.GetReadable('siteList') = DNValue, 'Selected site stored');
 end;
@@ -143,7 +143,7 @@ begin
   Logic.MoveItem(msInResult, 0);
   Logic.MoveItem(msInResult, 0);
 
-  Logic.SyncAttributeProperty(aoReplaceValue);
+  Logic.SyncAttributeProperty;
 
   Values := PropertyObj.GetAllReadable('siteList');
   Check(Length(Values) = 2, 'Two sites stored');
