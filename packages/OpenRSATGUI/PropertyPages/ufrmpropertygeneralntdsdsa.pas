@@ -13,6 +13,7 @@ uses
   StdCtrls,
   Dialogs,
   mormot.core.base,
+  mormot.core.text,
   mormot.core.log,
   mormot.net.ldap,
   ucommon,
@@ -41,7 +42,7 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     Shape1: TShape;
-    procedure CheckBox_GlobalCatalogClick(Sender: TObject);
+    procedure CheckBox_GlobalCatalogChange(Sender: TObject);
     procedure ComboBox_QueryPolicyChange(Sender: TObject);
     procedure Edit_DescriptionChange(Sender: TObject);
   private
@@ -87,7 +88,7 @@ begin
   fLogic.SetScalarProperty('queryPolicyObject', fLogic.GetDNbyName(ComboBox_QueryPolicy.Text), aoReplaceValue);
 end;
 
-procedure TFrmPropertyGeneralNTDSDSA.CheckBox_GlobalCatalogClick(Sender: TObject);
+procedure TFrmPropertyGeneralNTDSDSA.CheckBox_GlobalCatalogChange(Sender: TObject);
 var
   res: Integer;
 begin
@@ -104,6 +105,11 @@ begin
     fInternalChange := False;
     Exit;
   end;
+
+  if CheckBox_GlobalCatalog.Checked then
+    fLogic.SetScalarProperty('options', '1', aoReplaceValue)
+  else
+    fLogic.SetScalarProperty('options', '', aoReplaceValue)
 end;
 
 constructor TFrmPropertyGeneralNTDSDSA.Create(TheOwner: TComponent);
@@ -129,11 +135,14 @@ begin
 
   Edit_Name.Text := Props.name;
   Edit_Description.Text := Props.description;
+  Edit_DNSAlias.Text := FormatUtf8('%._msdcs.%', [Props.objectGuid, fLogic.GetDomainController]);
 
   for Policy in fLogic.QueryPolicies do
   begin
     ComboBox_QueryPolicy.Items.Add(fLogic.GetAttributeName(Policy.Attributes));
   end;
+
+  CheckBox_GlobalCatalog.Checked := fLogic.IsGlobalCatalog;
 
   LoadQueryPolicy;
 end;

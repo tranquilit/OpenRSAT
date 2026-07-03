@@ -188,7 +188,7 @@ object FrmPropertyGeneralNTDSDSA: TFrmPropertyGeneralNTDSDSA
       BorderSpacing.Top = 8
       Caption = 'Global Catalog'
       TabOrder = 3
-      OnClick = CheckBox_GlobalCatalogClick
+      OnChange = CheckBox_GlobalCatalogChange
     end
     object Label_Info: TLabel
       AnchorSideLeft.Control = Panel2
