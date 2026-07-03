@@ -83,7 +83,7 @@ begin
   if idx <> -1 then
   begin
     fLogic.MoveItem(msInResult, idx);
-    fLogic.SyncAttributeProperty(aoReplaceValue);
+    fLogic.SyncAttributeProperty;
     LoadListBox;
   end;
 end;
@@ -96,7 +96,7 @@ begin
   if idx <> -1 then
   begin
     fLogic.MoveItem(msOutOfResult, idx);
-    fLogic.SyncAttributeProperty(aoReplaceValue);
+    fLogic.SyncAttributeProperty;
     LoadListBox;
   end;
 end;

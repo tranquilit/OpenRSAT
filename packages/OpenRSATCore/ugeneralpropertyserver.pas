@@ -19,19 +19,22 @@ type
   private
     fProperty: TProperty;
     fLdap: TLdapClient;
+    fServerSettings: TLdapResult;
 
     function SearchTransportsInLdap: boolean;
   public
     constructor Create(P: TProperty);
 
     procedure GetAllResources; override;
-    procedure SyncAttributeProperty(Option: TLdapAddOption);
+    procedure SyncAttributeProperty;
     procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
+    function ServerIsGC: boolean;
     function FindAttribute(Attribute: RawUtf8): TLdapAttribute; virtual;
     function FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute; virtual;
 
     property Props: TProperty read fProperty write fProperty;
     property Ldap: TLdapClient read fLdap write fLdap;
+    property Settings: TLdapResult read fServerSettings write fServerSettings;
   end;
 
 implementation
@@ -40,6 +43,8 @@ constructor TGeneralPropertyServer.Create(P: TProperty);
 begin
   fProperty := P;
   fLdap := P.LdapClient;
+
+  fServerSettings := fLdap.SearchObject(fProperty.distinguishedName,'(&(objectClass=nTDSDSA))', ['name', 'distinguishedName'], lssSingleLevel);
 end;
 
 procedure TGeneralPropertyServer.GetAllResources;
@@ -66,7 +71,7 @@ begin
   Result := Ldap.Search(FormatUtf8('CN=Inter-Site Transports,CN=Sites,%', [Ldap.ConfigDN]), false, '(&(objectClass=interSiteTransport))', ['name', 'distinguishedName']);
 end;
 
-procedure TGeneralPropertyServer.SyncAttributeProperty(Option: TLdapAddOption);
+procedure TGeneralPropertyServer.SyncAttributeProperty;
 var
   i: Integer;
   DN: RawUtf8;
@@ -90,6 +95,19 @@ end;
 procedure TGeneralPropertyServer.SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
 begin
   Props.Add(Attribute, Value, Option);
+end;
+
+function TGeneralPropertyServer.ServerIsGC: boolean;
+var
+  Value: TLdapAttribute;
+begin
+  Value := fServerSettings.Attributes.Find('options');
+  if not Assigned(Value) then
+    Result := False;
+
+  if Value.GetReadable() <> '1' then
+    Result := False;
+  Result := True;
 end;
 
 function TGeneralPropertyServer.FindAttribute(Attribute: RawUtf8): TLdapAttribute;
