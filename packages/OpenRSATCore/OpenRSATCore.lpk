@@ -128,7 +128,7 @@
         <Filename Value="udoublelistlogic.pas"/>
         <UnitName Value="udoublelistlogic"/>
       </Item>
-	  <Item>
+      <Item>
         <Filename Value="unewsitelinkbridge.pas"/>
         <UnitName Value="unewsitelinkbridge"/>
       </Item>
@@ -139,6 +139,10 @@
       <Item>
         <Filename Value="ugeneralpropertyserver.pas"/>
         <UnitName Value="ugeneralpropertyserver"/>
+      </Item>
+      <Item>
+        <Filename Value="ugeneralpropertyntdsdsa.pas"/>
+        <UnitName Value="ugeneralpropertyntdsdsa"/>
       </Item>
     </Files>
     <i18n>
