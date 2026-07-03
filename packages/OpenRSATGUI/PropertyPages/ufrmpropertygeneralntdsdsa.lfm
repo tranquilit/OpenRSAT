@@ -114,8 +114,8 @@ object FrmPropertyGeneralNTDSDSA: TFrmPropertyGeneralNTDSDSA
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Left = 32
       BorderSpacing.Right = 8
-      ReadOnly = True
       TabOrder = 0
+      OnChange = Edit_DescriptionChange
     end
     object Label_QueryPolicy: TLabel
       AnchorSideLeft.Control = Panel2
@@ -143,10 +143,11 @@ object FrmPropertyGeneralNTDSDSA: TFrmPropertyGeneralNTDSDSA
       BorderSpacing.Right = 8
       ItemHeight = 15
       Items.Strings = (
-        'Default Query Policy'
+        ''
       )
       ReadOnly = True
       TabOrder = 1
+      OnChange = ComboBox_QueryPolicyChange
     end
     object Label_DNSAlias: TLabel
       AnchorSideLeft.Control = Panel2

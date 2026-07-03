@@ -196,7 +196,6 @@ object FrmPropertyGeneralServer: TFrmPropertyGeneralServer
       Width = 283
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Right = 8
-      ReadOnly = True
       TabOrder = 3
       OnChange = Edit_DescriptionChange
     end
