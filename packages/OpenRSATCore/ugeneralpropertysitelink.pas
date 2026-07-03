@@ -25,7 +25,7 @@ type
     constructor Create(P: TProperty);
 
     procedure GetAllResources; override;
-    procedure SyncAttributeProperty(Option: TLdapAddOption);
+    procedure SyncAttributeProperty;
     procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
     function FindAttribute(Attribute: RawUtf8): TLdapAttribute; virtual;
     function FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute; virtual;
@@ -66,7 +66,7 @@ begin
   Result := Ldap.Search(FormatUtf8('CN=Sites,%', [Ldap.ConfigDN]), false, '(&(objectClass=site))', ['name', 'distinguishedName']);
 end;
 
-procedure TGeneralPropertySiteLink.SyncAttributeProperty(Option: TLdapAddOption);
+procedure TGeneralPropertySiteLink.SyncAttributeProperty;
 var
   i: Integer;
   DN: RawUtf8;

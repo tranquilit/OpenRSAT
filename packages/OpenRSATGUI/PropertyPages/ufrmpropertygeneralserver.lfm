@@ -198,6 +198,7 @@ object FrmPropertyGeneralServer: TFrmPropertyGeneralServer
       BorderSpacing.Right = 8
       ReadOnly = True
       TabOrder = 3
+      OnChange = Edit_DescriptionChange
     end
   end
   object Panel3: TPanel
@@ -258,6 +259,7 @@ object FrmPropertyGeneralServer: TFrmPropertyGeneralServer
       BorderSpacing.Left = 8
       ItemHeight = 0
       TabOrder = 0
+      OnSelectionChange = ListBox_TransportsAvailableSelectionChange
     end
     object ListBox_Transports: TListBox
       AnchorSideTop.Control = Label_Transports
@@ -275,6 +277,7 @@ object FrmPropertyGeneralServer: TFrmPropertyGeneralServer
       BorderSpacing.Bottom = 8
       ItemHeight = 0
       TabOrder = 1
+      OnSelectionChange = ListBox_TransportsSelectionChange
     end
     object Panel4: TPanel
       AnchorSideLeft.Control = ListBox_TransportsAvailable
@@ -307,6 +310,7 @@ object FrmPropertyGeneralServer: TFrmPropertyGeneralServer
         AutoSize = True
         Caption = 'Add >>'
         TabOrder = 0
+        OnClick = Button_AddClick
       end
       object Button_Remove: TButton
         AnchorSideLeft.Control = Panel4
@@ -322,6 +326,7 @@ object FrmPropertyGeneralServer: TFrmPropertyGeneralServer
         AutoSize = True
         Caption = '<< Remove'
         TabOrder = 1
+        OnClick = Button_RemoveClick
       end
     end
   end
