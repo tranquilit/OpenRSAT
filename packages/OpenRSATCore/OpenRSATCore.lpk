@@ -136,6 +136,10 @@
         <Filename Value="ulog.pas"/>
         <UnitName Value="ulog"/>
       </Item>
+      <Item>
+        <Filename Value="ugeneralpropertyserver.pas"/>
+        <UnitName Value="ugeneralpropertyserver"/>
+      </Item>
     </Files>
     <i18n>
       <EnableI18N Value="True"/>
