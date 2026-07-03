@@ -136,6 +136,10 @@ msgstr "The server do not allow your operation, cause your connection is not sec
 msgid "Confirmation"
 msgstr "Confirmation"
 
+#: ucommon.rsconfirmremovinggc
+msgid "Are you sure that you want to remove the Global Catalog role from this Domain Controller?"
+msgstr "Are you sure that you want to remove the Global Catalog role from this Domain Controller?"
+
 #: ucommon.rsconnectedondomainas
 msgid "You are connected as \"%\"."
 msgstr "You are connected as \"%\"."
@@ -662,6 +666,10 @@ msgstr "The Password never expires."
 msgid "This server does not contain a settings object. As a result, the General Properties page cannot be populated, and all fields will be empty."
 msgstr ""
 
+#: ucommon.rsnogcdetected
+msgid "No other Global Catalogs can be detected in the forest."
+msgstr "No other Global Catalogs can be detected in the forest."
+
 #: ucommon.rsnosuchattribute
 msgid "The targeted attribute does not exist in the specified entry."
 msgstr "The targeted attribute does not exist in the specified entry."
@@ -1009,6 +1017,10 @@ msgstr "Advanced Security Settings for %"
 #: ucommon.rswarning
 msgid "Warning"
 msgstr "Warning"
+
+#: ucommon.rswarningnogc
+msgid "If no Global Catalogs exist in the forest, users will not be able to log on."
+msgstr "If no Global Catalogs exist in the forest, users will not be able to log on."
 
 #: ucommon.rswednesday
 msgid "Wednesday"

@@ -185,6 +185,10 @@ resourcestring
 
   rsNoSettingsFound = 'This server does not contain a settings object. As a result, the General Properties page cannot be populated, and all fields will be empty.';
 
+  rsNoGCDetected = 'No other Global Catalogs can be detected in the forest.';
+  rsWarningNoGC = 'If no Global Catalogs exist in the forest, users will not be able to log on.';
+  rsConfirmRemovingGC = 'Are you sure that you want to remove the Global Catalog role from this Domain Controller?';
+
   // Well Known Sid
   rsWellKnownSidNull = '';
   rsWellKnownSidWorld = 'Everyone';

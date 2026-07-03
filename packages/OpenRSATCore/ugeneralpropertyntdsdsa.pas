@@ -9,6 +9,7 @@ uses
   SysUtils,
   mormot.core.base,
   mormot.core.text,
+  mormot.core.variants,
   mormot.net.ldap,
   uproperty,
   ursatldapclient;
@@ -24,13 +25,13 @@ type
     fProperty: TProperty;
     fLdap: TLdapClient;
     fQueryPolicies: TQueryPoliciesList;
+    fContainer: RawUtf8;
 
     procedure AddItemToQueryList(Item: TLdapResult);
   public
     constructor Create(P: TProperty);
 
     procedure GetAllQueryPolicies;
-    procedure SyncAttributeProperty;
     procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
     function GetPolicyDistinguishedName: RawUtf8;
     function GetAttributeName(Attr: TLdapAttributeList): RawUtf8;
@@ -40,6 +41,7 @@ type
     property Props: TProperty read fProperty write fProperty;
     property Ldap: TLdapClient read fLdap write fLdap;
     property QueryPolicies: TQueryPoliciesList read fQueryPolicies write fQueryPolicies;
+    property Container: RawUtf8 read fContainer write fContainer;
   end;
 
 implementation
@@ -57,9 +59,17 @@ begin
 end;
 
 constructor TGeneralPropertyNTDSDSA.Create(P: TProperty);
+var
+  n: Integer;
 begin
   fProperty := P;
   fLdap := P.LdapClient;
+
+  n := Pos(',', fProperty.distinguishedName);
+  if n > 0 then
+    fContainer := Copy(fProperty.distinguishedName, n + 1, Length(fProperty.distinguishedName) - n)
+  else
+    fContainer := '';
 end;
 
 procedure TGeneralPropertyNTDSDSA.GetAllQueryPolicies;
@@ -80,27 +90,6 @@ begin
   finally
     fLdap.SearchEnd;
   end;
-end;
-
-procedure TGeneralPropertyNTDSDSA.SyncAttributeProperty;
-//var
-  //i: Integer;
-  //DN: RawUtf8;
-begin
-  //if Length(InResult) = 0 then
-  //begin
-  //  Props.Add('bridgeheadTransportList', '', aoReplaceValue);
-  //  Exit;
-  //end;
-  //
-  //DN := InResult[0].Find('distinguishedName').GetReadable();
-  //Props.Add('bridgeheadTransportList', DN, aoReplaceValue);
-  //
-  //for i := 1 to High(InResult) do
-  //begin
-  //  DN := InResult[i].Find('distinguishedName').GetReadable();
-  //  Props.Add('bridgeheadTransportList', DN, aoNoDuplicateValue);
-  //end;
 end;
 
 procedure TGeneralPropertyNTDSDSA.SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
