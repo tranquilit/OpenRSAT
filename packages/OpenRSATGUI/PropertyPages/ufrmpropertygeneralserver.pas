@@ -8,6 +8,7 @@ uses
   Classes,
   SysUtils,
   Forms,
+  Dialogs,
   Controls,
   ExtCtrls,
   StdCtrls,
@@ -16,6 +17,8 @@ uses
   uhelpersui,
   uproperty,
   upropertyframe,
+  ugeneralpropertyserver,
+  udoublelistlogic,
   ulog;
 
 type
@@ -44,12 +47,18 @@ type
     Panel3: TPanel;
     Panel4: TPanel;
     Shape1: TShape;
+    procedure Button_AddClick(Sender: TObject);
+    procedure Button_RemoveClick(Sender: TObject);
   private
     fLog: TSynLogClass;
-    fProperty: TProperty;
+    fLogic: TGeneralPropertyServer;
+
+    procedure LoadListBox;
+    procedure PrepareListBox;
     function GetDomain(Value: RawUtf8): RawUtf8;
   public
     constructor Create(TheOwner: TComponent); override;
+    destructor Destroy; override;
     procedure Update(Props: TProperty); override;
   end;
 
@@ -71,17 +80,92 @@ begin
   Caption := 'General';
 end;
 
+destructor TFrmPropertyGeneralServer.Destroy;
+begin
+  FreeAndNil(fLogic);
+  inherited Destroy;
+end;
+
 procedure TFrmPropertyGeneralServer.Update(Props: TProperty);
 begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, 'Update', Self);
 
-  fProperty := Props;
+  fLogic := TGeneralPropertyServer.Create(Props);
 
-  Edit_Name.Text := fProperty.name;
-  Edit_Computer.Text := fProperty.CN;
-  Edit_Description.Text := fProperty.description;
-  Edit_Domain.Text := DNToCN(fProperty.LdapClient.DefaultDN);
+  Edit_Name.Text := Props.name;
+  Edit_Computer.Text := Props.CN;
+  Edit_Description.Text := Props.description;
+  Edit_Domain.Text := DNToCN(Props.LdapClient.DefaultDN);
+
+  fLogic.GetAllResources;
+  PrepareListBox;
+  LoadListBox;
+end;
+
+procedure TFrmPropertyGeneralServer.Button_AddClick(Sender: TObject);
+var
+  idx: Integer;
+begin
+  idx := ListBox_TransportsAvailable.ItemIndex;
+  if idx <> -1 then
+  begin
+    fLogic.MoveItem(msInResult, idx);
+    fLogic.SyncAttributeProperty(aoReplaceValue);
+    LoadListBox;
+  end;
+end;
+
+procedure TFrmPropertyGeneralServer.Button_RemoveClick(Sender: TObject);
+var
+  idx: Integer;
+begin
+  idx := ListBox_Transports.ItemIndex;
+  if idx <> -1 then
+  begin
+    fLogic.MoveItem(msOutOfResult, idx);
+    fLogic.SyncAttributeProperty(aoReplaceValue);
+    LoadListBox;
+  end;
+end;
+
+procedure TFrmPropertyGeneralServer.LoadListBox;
+var
+  r: TLdapResult;
+begin
+  ListBox_TransportsAvailable.Clear;
+  for r in fLogic.OutResult do
+    ListBox_TransportsAvailable.Items.Add(fLogic.GetResultName(r));
+
+  ListBox_Transports.Clear;
+  for r in fLogic.InResult do
+    ListBox_Transports.Items.Add(fLogic.GetResultName(r));
+end;
+
+procedure TFrmPropertyGeneralServer.PrepareListBox;
+var
+  BridgeheadTransportList: TLdapAttribute;
+  Transport: RawUtf8;
+  n: Integer;
+begin
+  BridgeheadTransportList := fLogic.FindAttribute('bridgeheadTransportList');
+  if not Assigned(BridgeheadTransportList) then
+    exit;
+
+  n := Length(fLogic.OutResult) - 1;
+  while n >= 0 do
+  begin
+    for Transport in BridgeheadTransportList.GetAllReadable do
+    begin
+      if fLogic.GetValueFromAttribute(fLogic.FindAttribute('distinguishedName', fLogic.OutResult[n])) = Transport then
+      begin
+        fLogic.MoveItem(msInResult, n);
+        break;
+      end;
+    end;
+
+    Dec(n);
+  end
 end;
 
 function TFrmPropertyGeneralServer.GetDomain(Value: RawUtf8): RawUtf8;
