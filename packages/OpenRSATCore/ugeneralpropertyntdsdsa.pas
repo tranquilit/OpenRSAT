@@ -33,6 +33,8 @@ type
 
     procedure GetAllQueryPolicies;
     procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
+    function GetDomainController: RawUtf8;
+    function IsGlobalCatalog: Boolean;
     function GetPolicyDistinguishedName: RawUtf8;
     function GetAttributeName(Attr: TLdapAttributeList): RawUtf8;
     function GetDNbyName(Name: RawUtf8): RawUtf8;
@@ -95,6 +97,22 @@ end;
 procedure TGeneralPropertyNTDSDSA.SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
 begin
   Props.Add(Attribute, Value, Option);
+end;
+
+function TGeneralPropertyNTDSDSA.GetDomainController: RawUtf8;
+var
+  p: Integer;
+begin
+  p := Pos('/', fProperty.canonicalName);
+  if p > 0 then
+    Result := Copy(fProperty.canonicalName, 1, p - 1)
+  else
+    Result := '';
+end;
+
+function TGeneralPropertyNTDSDSA.IsGlobalCatalog: Boolean;
+begin
+  Result := fProperty.Attributes.Find('options').GetReadable() = '1';
 end;
 
 function TGeneralPropertyNTDSDSA.GetPolicyDistinguishedName: RawUtf8;
