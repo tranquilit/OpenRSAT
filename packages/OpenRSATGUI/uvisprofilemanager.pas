@@ -160,7 +160,7 @@ begin
     VisProfileConfiguration.ProfileName := fSelected;
     if VisProfileConfiguration.ShowModal <> mrOK then
       Exit;
-    if not RenameProfile(fSelected, VisProfileConfiguration.ProfileName) then
+    if (fSelected <> VisProfileConfiguration.ProfileName) and not RenameProfile(fSelected, VisProfileConfiguration.ProfileName) then
       Exit;
     fSelected := VisProfileConfiguration.ProfileName;
     fLdapConfigs.SaveConfig(fSelected, fLdapConfigs.LdapConnectionSettings);
