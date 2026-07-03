@@ -11,9 +11,11 @@ uses
   Controls,
   ExtCtrls,
   StdCtrls,
+  Dialogs,
   mormot.core.base,
   mormot.core.log,
   mormot.net.ldap,
+  ucommon,
   uhelpersui,
   uproperty,
   upropertyframe,
@@ -39,11 +41,13 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     Shape1: TShape;
+    procedure CheckBox_GlobalCatalogClick(Sender: TObject);
     procedure ComboBox_QueryPolicyChange(Sender: TObject);
     procedure Edit_DescriptionChange(Sender: TObject);
   private
     fLog: TSynLogClass;
     fLogic: TGeneralPropertyNTDSDSA;
+    fInternalChange: Boolean;
 
     procedure LoadQueryPolicy;
   public
@@ -81,6 +85,25 @@ end;
 procedure TFrmPropertyGeneralNTDSDSA.ComboBox_QueryPolicyChange(Sender: TObject);
 begin
   fLogic.SetScalarProperty('queryPolicyObject', fLogic.GetDNbyName(ComboBox_QueryPolicy.Text), aoReplaceValue);
+end;
+
+procedure TFrmPropertyGeneralNTDSDSA.CheckBox_GlobalCatalogClick(Sender: TObject);
+var
+  res: Integer;
+begin
+  if FInternalChange then
+    Exit;
+
+  if not CheckBox_GlobalCatalog.Checked then
+    res := MessageDlg(rsNoGCDetected + LineEnding + LineEnding + rsWarningNoGC + LineEnding + LineEnding + rsConfirmRemovingGC, mtWarning, [mbYes, mbNo], 0);
+
+  if res = mrNo then
+  begin
+    fInternalChange := True;
+    CheckBox_GlobalCatalog.Checked := not CheckBox_GlobalCatalog.Checked;
+    fInternalChange := False;
+    Exit;
+  end;
 end;
 
 constructor TFrmPropertyGeneralNTDSDSA.Create(TheOwner: TComponent);
