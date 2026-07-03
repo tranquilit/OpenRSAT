@@ -336,7 +336,8 @@ begin
     until Client.Connected;
   finally
     fRSAT.LdapClient := Client;
-    OnLdapConnect(LdapClient);
+    if Assigned(LdapClient) and LdapClient.Connected then
+      OnLdapConnect(LdapClient);
   end;
 end;
 
