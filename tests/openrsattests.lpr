@@ -1,9 +1,16 @@
 program openrsattests;
 
 uses
-  mormot.core.test, integrationtest.uadvancedsecuritypresenter,
-  integrationtest.ugeneralpropertysitelink, unittest.uadvancedsecuritypresenter,
-  unittest.ugeneratekeytab, unittest.uviewkeytabpresenter, unittest.udoublelistlogic;
+  {$IFDEF UNIX}
+    cthreads,
+  {$ENDIF}
+  mormot.core.test,
+  integrationtest.uadvancedsecuritypresenter,
+  integrationtest.ugeneralpropertysitelink,
+  unittest.uadvancedsecuritypresenter,
+  unittest.ugeneratekeytab,
+  unittest.uviewkeytabpresenter,
+  unittest.udoublelistlogic;
 
 type
 
