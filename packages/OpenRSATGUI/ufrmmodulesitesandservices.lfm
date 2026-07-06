@@ -379,6 +379,7 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       TabOrder = 0
       Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
       OnChange = TreeView1Change
+      OnCollapsing = TreeView1Collapsing
       OnCreateNodeClass = TreeView1CreateNodeClass
       OnExpanding = TreeView1Expanding
       OnGetImageIndex = TreeView1GetImageIndex

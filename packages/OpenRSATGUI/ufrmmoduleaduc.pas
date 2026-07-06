@@ -299,6 +299,8 @@ type
     procedure TisSearchEdit_GridADUCSearch(Sender: TObject; const aText: string);
     procedure ToolButton_AttributesGridClick(Sender: TObject);
     procedure TreeADUCChange(Sender: TObject; Node: TTreeNode);
+    procedure TreeADUCCollapsing(Sender: TObject; Node: TTreeNode;
+      var AllowCollapse: Boolean);
     procedure TreeADUCContextPopup(Sender: TObject; MousePos: TPoint; var Handled: Boolean);
     procedure TreeADUCCreateNodeClass(Sender: TCustomTreeView;
       var NodeClass: TTreeNodeClass);
@@ -1887,6 +1889,12 @@ begin
   if Timer_TreeChangeNode.Enabled then
     Timer_TreeChangeNode.Enabled := False;
   Timer_TreeChangeNode.Enabled := True;
+end;
+
+procedure TFrmModuleADUC.TreeADUCCollapsing(Sender: TObject; Node: TTreeNode;
+  var AllowCollapse: Boolean);
+begin
+  AllowCollapse := Node <> fADUCRootNode;
 end;
 
 procedure TFrmModuleADUC.TreeADUCContextPopup(Sender: TObject;
