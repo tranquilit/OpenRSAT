@@ -1675,13 +1675,14 @@ var
 begin
   Ldap := (Sender as TRSATLdapClient);
   TreeView1.Items.Clear;
+  TreeView1.ShowRoot := False;
   fADSSRootNode := (TreeView1.Items.Add(nil, 'Active Directory Sites and Services') as TADSSTreeNode);
   fADSSRootNode.ImageIndex := Ord(ileADSiteTool);
   fADSSRootNode.SelectedIndex := fADSSRootNode.ImageIndex;
 
-  fADSSSiteNode := (TreeView1.Items.Add(fADSSRootNode, 'Sites') as TADSSTreeNode);
+  fADSSSiteNode := (TreeView1.Items.AddChild(fADSSRootNode, 'Sites') as TADSSTreeNode);
   fADSSSiteNode.HasChildren := True;
-  fADSSServiceNode := (TreeView1.Items.Add(nil, 'Services') as TADSSTreeNode);
+  fADSSServiceNode := (TreeView1.Items.AddChild(fADSSRootNode, 'Services') as TADSSTreeNode);
   fADSSServiceNode.HasChildren := True;
   fADSSServiceNode.Visible := fModule.ShowService;
 
@@ -1716,6 +1717,7 @@ begin
     Screen.Cursor := BackupCursor;
   end;
   fADSSSiteNode.Expand(False);
+  fADSSRootNode.Expand(False);
 end;
 
 procedure TFrmModuleSitesAndServices.LdapCloseEvent(Sender: TObject);
