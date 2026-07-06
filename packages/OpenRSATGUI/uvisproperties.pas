@@ -703,19 +703,7 @@ begin
   'mSMQEnterpriseSettings': property_tabs := PROPERTY_NO_GENERAL;
   'nTDSSiteSettings': property_tabs := PROPERTY_NTDS_SITE_SETTINGS;
   'nTDSDSA': property_tabs := PROPERTY_NTDSDSA;
-  'server':
-  begin
-    fProperty.LdapClient.SearchBegin();
-    try
-      fProperty.LdapClient.SearchScope := lssSingleLevel;
-      if Assigned(fProperty.LdapClient.SearchObject(fProperty.distinguishedName, '(&(objectClass=nTDSDSA))', [], lssSingleLevel)) then
-        property_tabs := PROPERTY_SERVER
-      else
-        property_tabs := PROPERTY_NO_GENERAL;
-    finally
-      fProperty.LdapClient.SearchEnd;
-    end;
-  end;
+  'server': property_tabs := PROPERTY_SERVER;
   'subnet': property_tabs := PROPERTY_SUBNET;
   'interSiteTransport': property_tabs := PROPERTY_INTER_SITE_TRANSPORT;
   end;

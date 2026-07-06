@@ -15,6 +15,7 @@ uses
   mormot.core.base,
   mormot.core.log,
   uhelpersui,
+  ucommon,
   uproperty,
   upropertyframe,
   ugeneralpropertyserver,
@@ -140,10 +141,16 @@ begin
     fLog.Add.Log(sllTrace, 'Update', Self);
 
   fLogic := TGeneralPropertyServer.Create(Props);
+  if not Assigned(fLogic.Settings) then
+  begin
+    MessageDlg(rsNoSettingsFound, mtInformation, [mbOK], 0);
+    Exit;
+  end;
 
   Edit_Name.Text := Props.name;
   Edit_Computer.Text := Props.CN;
   Edit_Description.Text := Props.description;
+  Edit_Description.ReadOnly := False;
   Edit_Domain.Text := DNToCN(Props.LdapClient.DefaultDN);
 
   if fLogic.ServerIsGC then

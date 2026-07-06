@@ -658,6 +658,10 @@ msgstr "L'utilisateur ne peut changer de mot de passe."
 msgid "The Password never expires."
 msgstr "Le mot de passe n'expire jamais."
 
+#: ucommon.rsnosettingsfound
+msgid "This server does not contain a settings object. As a result, the General Properties page cannot be populated, and all fields will be empty."
+msgstr "Ce serveur ne contient pas d'objet paramètres. Par conséquent, la page Propriétés Générales ne peut pas être remplie et tous les champs seront vides."
+
 #: ucommon.rsnosuchattribute
 msgid "The targeted attribute does not exist in the specified entry."
 msgstr "L'attribut ciblé n'existe pas dans l'entrée spécifié."
