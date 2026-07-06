@@ -113,6 +113,7 @@ type
     CheckBox_IncludeSubContainer: TCheckBox;
     Image1: TImage;
     Image2: TImage;
+    MenuItem_New: TMenuItem;
     MenuItem_CreateKeyTab: TMenuItem;
     MenuItem_PrepareDJOIN: TMenuItem;
     MenuItem_ShowObjectLocation: TMenuItem;
@@ -172,7 +173,6 @@ type
     MenuItem_Delete: TMenuItem;
     MenuItem_Refresh: TMenuItem;
     MenuItem_Properties: TMenuItem;
-    MenuItem_New: TMenuItem;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
@@ -1934,6 +1934,7 @@ begin
 
   for Item in PopupMenu1.Items do
     Item.Visible := Contains(VisibleItems, Item);
+  BuildNewMenuItem(MenuItem_New, GetFocusedObjectClass);
 end;
 
 procedure TFrmModuleADUC.TreeADUCCreateNodeClass(Sender: TCustomTreeView;
@@ -2122,6 +2123,7 @@ begin
   Handled := not Assigned(LdapClient) or not LdapClient.Connected;
   for Item in PopupMenu1.Items do
     Item.Visible := Contains(VisibleItems, Item);
+  BuildNewMenuItem(MenuItem_New, GetFocusedObjectClass);
 end;
 
 procedure TFrmModuleADUC.GridADUCDblClick(Sender: TObject);
@@ -3349,6 +3351,11 @@ begin
   Image1.Visible := not IsDarkMode;
   Image2.Visible := not Image1.Visible;
 
+  RegisterNewMenuActions('domainDNS', [Action_NewComputer, Action_NewContact, Action_NewGroup, Action_NewInetOrgPerson, Action_NewMsDSShadowPrincipalContainer, Action_NewMsImagingPSPs, Action_NewOU, Action_NewPrinter, Action_NewUser, Action_NewSharedFolder]);
+  RegisterNewMenuActions('builtinDomain', [Action_NewComputer, Action_NewGroup, Action_NewInetOrgPerson, Action_NewUser]);
+  RegisterNewMenuActions('organizationalUnit', [Action_NewComputer, Action_NewContact, Action_NewGroup, Action_NewInetOrgPerson, Action_NewMsDSShadowPrincipalContainer, Action_NewMsImagingPSPs, Action_NewOU, Action_NewPrinter, Action_NewUser, Action_NewSharedFolder]);
+  RegisterNewMenuActions('container', [Action_NewComputer, Action_NewContact, Action_NewGroup, Action_NewInetOrgPerson, Action_NewMsDSKeyCredential, Action_NewResourcePropertyList, Action_NewMsDSShadowPrincipalContainer, Action_NewMsImagingPSPs, Action_NewOU, Action_NewPrinter, Action_NewUser, Action_NewSharedFolder]);
+  RegisterNewMenuActions('lostAndFound', [Action_NewComputer, Action_NewContact, Action_NewGroup, Action_NewInetOrgPerson, Action_NewMsDSKeyCredential, Action_NewResourcePropertyList, Action_NewMsDSShadowPrincipalContainer, Action_NewMsImagingPSPs, Action_NewOU, Action_NewPrinter, Action_NewUser, Action_NewSharedFolder]);
   fIContext.IniPropStorage.IniSection := Name;
   CheckBox_IncludeSubContainer.Checked := fIContext.IniPropStorage.ReadBoolean(CheckBox_IncludeSubContainer.Name, False);
 end;
