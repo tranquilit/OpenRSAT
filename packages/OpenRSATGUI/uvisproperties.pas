@@ -663,7 +663,6 @@ begin
   // Fill Attributes
   if Ldap.SearchResult.Count > 0 then
     fProperty.Attributes := Ldap.SearchResult.Items[0].Attributes;
-  fProperty.RSAT.LdapClient.OnSearch := nil;
 end;
 
 procedure TVisProperties.LoadView;

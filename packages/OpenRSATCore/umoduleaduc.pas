@@ -121,13 +121,13 @@ begin
     try
       Include(UserAccountControls, uacLockedOut);
       Attribute.Add(IntToStr(UserAccountControlsValue(UserAccountControls)));
-      RSAT.LdapClient.OnModify := AOnUnlockedAccount;
       if not RSAT.LdapClient.Modify(AObjectDN, lmoReplace, Attribute) then
       begin
         if Assigned(fLog) then
           fLog.Add.Log(sllError, 'Ldap Modify Error: %', [RSAT.LdapClient.ResultString], Self);
         Exit;
       end;
+      AOnUnlockedAccount(RSAT.LdapClient);
     finally
       FreeAndNil(Attribute);
     end;
@@ -135,13 +135,13 @@ begin
   Attribute := TLdapAttribute.Create('unicodePwd', atUndefined);
   try
     Attribute.add(LdapUnicodePwd(NewPassword));
-    RSAT.LdapClient.OnModify := AOnPasswordChanged;
     if not RSAT.LdapClient.Modify(AObjectDN, lmoReplace, Attribute) then
     begin
       if Assigned(fLog) then
         fLog.Add.Log(sllError, 'Ldap Modify Error: %', [RSAT.LdapClient.ResultString], Self);
       Exit;
     end;
+    AOnPasswordChanged(RSAT.LdapClient);
   finally
     FreeAndNil(Attribute);
   end;

@@ -97,21 +97,17 @@ begin
 
   ListBox1.Clear;
   ListBox2.Clear;
-  With LdapClient do
-  begin
-    SearchBegin(fADUC.ADUCOption.SearchPageSize);
-    try
-      SearchScope := lssSingleLevel;
-      OnSearch := @OnSearchEventFillColumnAttributes;
+  LdapClient.SearchBegin(fADUC.ADUCOption.SearchPageSize);
+  try
+    LdapClient.SearchScope := lssSingleLevel;
 
-      repeat
-        if not Search(SchemaDN, False, Filter, Attributes) then
-          Exit;
-      until SearchCookie = '';
-    finally
-      OnSearch := nil;
-      SearchEnd;
-    end;
+    repeat
+      if not LdapClient.Search(LdapClient.SchemaDN, False, Filter, Attributes) then
+        Exit;
+      OnSearchEventFillColumnAttributes(LdapClient);
+    until LdapClient.SearchCookie = '';
+  finally
+    LdapClient.SearchEnd;
   end;
 
   TisSearchEdit1.Search;

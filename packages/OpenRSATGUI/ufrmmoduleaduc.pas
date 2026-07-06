@@ -1721,7 +1721,6 @@ end;
 procedure TFrmModuleADUC.GridADUCFocusChanged(Sender: TBaseVirtualTree;
   Node: PVirtualNode; Column: TColumnIndex);
 var
-  OnSearch: TNotifyEvent;
   NewRow: TDocVariantData;
   VariantData: PDocVariantData;
   LdapResult: TLdapResult;
@@ -1735,9 +1734,7 @@ begin
   VariantData := GridADUC.GetNodeAsPDocVariantData(Node, True);
   GridAttributes.Clear;
   GridAttributes.BeginUpdate;
-  OnSearch := LdapClient.OnSearch;
   try
-    LdapClient.OnSearch := nil;
     if Assigned(VariantData) then
     begin
       LdapResult := LdapClient.SearchObject(VariantData^.S['objectName'], '', ['*']);
@@ -1760,7 +1757,6 @@ begin
     end;
     finally
       GridAttributes.EndUpdate;
-      LdapClient.OnSearch := OnSearch;
       GridAttributes.LoadData();
   end;
 end;
@@ -2811,7 +2807,6 @@ var
   NewColumn: TTisGridColumn;
   item: TLdapResult;
   a: TLdapAttribute;
-  OnSearch: TNotifyEvent;
   Filter: RawUtf8;
 begin
   Columns := fModuleAduc.ADUCOption.GridAttributesFilter;
@@ -2835,8 +2830,6 @@ begin
   Filter := FormatUtf8('(|%)', [Filter]);
 
   try
-    OnSearch := LdapClient.OnSearch;
-    LdapClient.OnSearch := nil;
     if not LdapClient.Search(LdapClient.SchemaDN, False, Filter, ['lDAPDisplayName', 'name']) then
        exit;
 
@@ -2855,7 +2848,6 @@ begin
       end;
     end;
   finally
-    LdapClient.OnSearch := OnSearch;
   end;
 end;
 
@@ -2919,14 +2911,13 @@ begin
       LdapClient.SearchScope := lssWholeSubtree
     else
       LdapClient.SearchScope := lssSingleLevel;
-    LdapClient.OnSearch := @OnSearchEventFillGrid;
     repeat
       if not LdapClient.Search(DistinguishedName, False, Filter, Concat(fModuleAduc.ADUCOption.GridAttributesFilter, ['userAccountControl'])) then
         Exit;
+      OnSearchEventFillGrid(LdapClient);
       Inc(PageCount);
     until (LdapClient.SearchCookie = '') or (PageCount = fModuleAduc.ADUCOption.SearchPageNumber);
   finally
-    LdapClient.OnSearch := nil;
     LdapClient.SearchEnd;
   end;
 
@@ -3232,13 +3223,11 @@ end;
 procedure TFrmModuleADUC.OnModifyEventAccountUnlock(Sender: TObject);
 begin
   MessageDlg(rsAccountUnlocked, rsAccountUnlockedMessage, mtInformation, [mbOK], 0);
-  (Sender as TRsatLdapClient).OnModify := nil;
 end;
 
 procedure TFrmModuleADUC.OnModifyEventPasswordChanged(Sender: TObject);
 begin
   MessageDlg(rsResetPassword, rsResetPasswordMessage, mtInformation, [mbOK], 0);
-  (Sender as TRsatLdapClient).OnModify := nil;
 end;
 
 procedure TFrmModuleADUC.OnSearchEventFillGrid(Sender: TObject);
