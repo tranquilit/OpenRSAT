@@ -707,6 +707,8 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
     end
   end
   object PopupMenu1: TPopupMenu
+    Images = CoreDataModule.ImageList1
+    OwnerDraw = True
     OnPopup = PopupMenu1Popup
     Left = 256
     Top = 96
@@ -729,6 +731,7 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       object MenuItem_NewGroup: TMenuItem
         Action = Action_NewGroup
         Caption = 'Group'
+        ImageIndex = 8
       end
       object MenuItem_NewInetOrgPerson: TMenuItem
         Action = Action_NewInetOrgPerson
@@ -737,14 +740,17 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       object MenuItem_NewSite: TMenuItem
         Action = Action_NewSite
         Caption = 'Site'
+        ImageIndex = 36
       end
       object MenuItem_NewServer: TMenuItem
         Action = Action_NewServer
         Caption = 'Server'
+        ImageIndex = 39
       end
       object MenuItem_NewSubnet: TMenuItem
         Action = Action_NewSubnet
         Caption = 'Subnet'
+        ImageIndex = 40
       end
       object MenuItem_NewConnection: TMenuItem
         Caption = 'Connection'
@@ -752,16 +758,20 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       object MenuItem_NewSiteLink: TMenuItem
         Action = Action_NewSiteLink
         Caption = 'Site Link'
+        ImageIndex = 35
       end
       object MenuItem_NewSiteLinkBridge: TMenuItem
         Action = Action_NewSiteLinkBridge
         Caption = 'Site Link Bridge'
+        ImageIndex = 35
       end
       object MenuItem_NewSiteSettings: TMenuItem
         Caption = 'Site Settings'
+        ImageIndex = 38
       end
       object MenuItem_NewSitesContainer: TMenuItem
         Caption = 'Sites Container'
+        ImageIndex = 9
       end
       object MenuItem_NewServersContainer: TMenuItem
         Caption = 'Servers Container'
@@ -788,10 +798,12 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       object MenuItem_NewPrinter: TMenuItem
         Action = Action_NewPrinter
         Caption = 'Printer'
+        ImageIndex = 24
       end
       object MenuItem_NewUser: TMenuItem
         Action = Action_NewUser
         Caption = 'User'
+        ImageIndex = 7
       end
       object MenuItem_NewSharedFolder: TMenuItem
         Action = Action_NewSharedFolder
