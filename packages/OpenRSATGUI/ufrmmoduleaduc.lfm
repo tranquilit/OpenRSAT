@@ -449,6 +449,7 @@ object FrmModuleADUC: TFrmModuleADUC
       TabOrder = 1
       Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoReadOnly, tvoRightClickSelect, tvoShowButtons, tvoToolTips, tvoThemedDraw]
       OnChange = TreeADUCChange
+      OnCollapsing = TreeADUCCollapsing
       OnContextPopup = TreeADUCContextPopup
       OnCreateNodeClass = TreeADUCCreateNodeClass
       OnDragDrop = TreeADUCDragDrop

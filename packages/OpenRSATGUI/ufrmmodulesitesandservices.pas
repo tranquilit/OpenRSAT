@@ -196,6 +196,7 @@ type
     procedure TisSearchEdit_GridADSSSearch(Sender: TObject; const aText: string);
     procedure ToolButton8Click(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
+    procedure TreeView1Collapsing(Sender: TObject; Node: TTreeNode; var AllowCollapse: Boolean);
     procedure TreeView1CreateNodeClass(Sender: TCustomTreeView;
       var NodeClass: TTreeNodeClass);
     procedure TreeView1Expanding(Sender: TObject; Node: TTreeNode;
@@ -221,6 +222,7 @@ type
 
     procedure UpdateGrid(Node: TADSSTreeNode);
     procedure UpdateGridColumns(Names: TStringArray);
+    procedure UpdateRootGrid;
 
     procedure BackupNodes(BackupData: PDocVariantData);
     procedure RestoreNodes(BackupData: PDocVariantData; RootNode: TADSSTreeNode);
@@ -1180,6 +1182,12 @@ begin
   Timer_TreeChangeNode.Enabled := True;
 end;
 
+procedure TFrmModuleSitesAndServices.TreeView1Collapsing(Sender: TObject;
+  Node: TTreeNode; var AllowCollapse: Boolean);
+begin
+  AllowCollapse := Node <> fADSSRootNode;
+end;
+
 procedure TFrmModuleSitesAndServices.TreeView1CreateNodeClass(
   Sender: TCustomTreeView; var NodeClass: TTreeNodeClass);
 begin
@@ -1336,9 +1344,12 @@ begin
     Exit;
   end;
 
-  { Should be probably changed }
   if Node = fADSSRootNode then
+  begin
+    UpdateRootGrid;
     Exit;
+  end;
+
 
   case Node.ObjectType of
     'siteContainer': UpdateGridColumns(['name', 'type', 'description', 'location']);
@@ -1426,6 +1437,36 @@ begin
     Column.Position := i;
   end;
 end;
+
+procedure TFrmModuleSitesAndServices.UpdateRootGrid;
+var
+  RowData: TDocVariantData;
+begin
+  TisGrid1.Clear;
+  UpdateGridColumns(['name', 'type']);
+
+  RowData.Init;
+
+  RowData.AddOrUpdateValue('name', fADSSSiteNode.Text);
+  RowData.AddOrUpdateValue('type', fADSSSiteNode.ObjectType);
+  RowData.AddOrUpdateValue('distinguishedName',
+    fADSSSiteNode.DistinguishedName);
+  TisGrid1.Data.AddItem(RowData);
+
+  RowData.Clear;
+
+  if fADSSServiceNode.Visible then
+  begin
+    RowData.AddOrUpdateValue('name', fADSSServiceNode.Text);
+    RowData.AddOrUpdateValue('type', fADSSServiceNode.ObjectType);
+    RowData.AddOrUpdateValue('distinguishedName',
+      fADSSServiceNode.DistinguishedName);
+    TisGrid1.Data.AddItem(RowData);
+  end;
+
+  TisGrid1.LoadData;
+end;
+
 
 procedure TFrmModuleSitesAndServices.BackupNodes(BackupData: PDocVariantData);
 var
