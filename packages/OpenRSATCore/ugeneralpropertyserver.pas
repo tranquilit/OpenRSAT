@@ -44,7 +44,7 @@ begin
   fProperty := P;
   fLdap := P.LdapClient;
 
-  fServerSettings := fLdap.SearchObject(fProperty.distinguishedName,'(&(objectClass=nTDSDSA))', ['name', 'distinguishedName'], lssSingleLevel);
+  fServerSettings := fLdap.SearchObject(fProperty.distinguishedName,'(&(objectClass=nTDSDSA))', ['name', 'distinguishedName', 'options'], lssSingleLevel);
 end;
 
 procedure TGeneralPropertyServer.GetAllResources;
