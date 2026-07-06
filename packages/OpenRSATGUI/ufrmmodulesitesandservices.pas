@@ -192,6 +192,8 @@ type
       Node: PVirtualNode; Kind: TVTImageKind; Column: TColumnIndex;
       var Ghosted: Boolean; var ImageIndex: Integer);
     procedure TisGrid1KeyPress(Sender: TObject; var Key: char);
+    procedure TisGrid1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure TisSearchEdit_TreeADSSSearch(Sender: TObject; const aText: string);
     procedure TisSearchEdit_GridADSSSearch(Sender: TObject; const aText: string);
     procedure ToolButton8Click(Sender: TObject);
@@ -1074,6 +1076,21 @@ begin
   SearchInGrid(Timer_SearchInGrid, TisGrid1, fSearchWord, Key);
 end;
 
+
+procedure TFrmModuleSitesAndServices.TisGrid1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var
+  HitInfo: THitInfo;
+begin
+  TisGrid1.GetHitTestInfoAt(X, Y, True, HitInfo);
+
+  if not (hiOnItem in HitInfo.HitPositions) then
+  begin
+    TisGrid1.ClearSelection;
+    TisGrid1.FocusedNode := nil;
+  end;
+end;
+
+
 procedure TFrmModuleSitesAndServices.TisSearchEdit_TreeADSSSearch(Sender: TObject;
   const aText: string);
 
@@ -1400,6 +1417,8 @@ begin
     LdapClient.SearchEnd;
     TisGrid1.EndUpdate;
     TisGrid1.LoadData();
+    TisGrid1.ClearSelection;
+    TisGrid1.FocusedNode := nil;
     Screen.Cursor := c;
   end;
 end;
@@ -1465,6 +1484,8 @@ begin
   end;
 
   TisGrid1.LoadData;
+  TisGrid1.ClearSelection;
+  TisGrid1.FocusedNode := nil;
 end;
 
 
