@@ -920,11 +920,18 @@ function TProperty.GetSiteFromServerReference: RawUtf8;
 var
   Attribute: TLdapAttribute;
   Pairs: TNameValueDNs;
+  OnErrorBak: TNotifyEvent;
 begin
   result := '';
   if not Assigned(LdapClient) then
     Exit;
-  Attribute := LdapClient.SearchObject(LdapClient.ConfigDN, FormatUtf8('(serverReference=%)', [LdapEscape(distinguishedName)]), 'distinguishedName', lssWholeSubtree);
+  OnErrorBak := LdapClient.OnError;
+  try
+    LdapClient.OnError := nil;
+    Attribute := LdapClient.SearchObject(LdapClient.ConfigDN, FormatUtf8('(serverReference=%)', [LdapEscape(distinguishedName)]), 'distinguishedName', lssWholeSubtree);
+  finally
+    LdapClient.OnError := OnErrorBak;
+  end;
   if not Assigned(Attribute) then
     Exit;
   if not ParseDN(Attribute.GetReadable(), Pairs, True) then
@@ -1335,15 +1342,19 @@ end;
 function TProperty.UPNSuffixes: TRawUtf8DynArray;
 var
   Attribute: TLdapAttribute;
+  OnErrorBak: TNotifyEvent;
 begin
   if not Assigned(LdapClient) then
     Exit;
   LdapClient.SearchRangeBegin;
+  OnErrorBak := LdapClient.OnError;
   try
+    LdapClient.OnError := nil;
     Attribute := LdapClient.SearchObject(FormatUtf8('CN=Partitions,%', [LdapClient.ConfigDN]), '', 'uPNSuffixes');
     if not Assigned(Attribute) and (LdapClient.ResultCode > 0) then
       Exit;
   finally
+    LdapClient.OnError := OnErrorBak;
     LdapClient.SearchRangeEnd;
   end;
   result := Attribute.GetAllReadable;
