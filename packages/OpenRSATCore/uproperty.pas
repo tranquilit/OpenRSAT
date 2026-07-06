@@ -118,6 +118,8 @@ type
     function GetRaw(Name: RawUtf8; index: Integer = 0): RawByteString;
     /// Retrieve an attribute by name.
     function Get(Name: RawUtf8): TLdapAttribute;
+    /// Retrieve a variant value of an attribute.
+    function GetVariant(Name: RawUtf8): variant;
 
     /// Add a value to an attribute by name.
     procedure Add(Name: RawUtf8; Value: RawUtf8; Option: TLdapAddOption = aoReplaceValue);
@@ -830,6 +832,16 @@ begin
   result := fModifiedAttributes.Find(Name);
   if not Assigned(result) then
     result := fAttributes.Find(Name);
+end;
+
+function TProperty.GetVariant(Name: RawUtf8): variant;
+var
+  Attribute: TLdapAttribute;
+begin
+  Attribute := fModifiedAttributes.Find(Name);
+  if not Assigned(Attribute) then
+    Attribute := fAttributes.Find(Name);
+  result := Attribute.GetVariant();
 end;
 
 procedure TProperty.Add(Name: RawUtf8; Value: RawUtf8; Option: TLdapAddOption);

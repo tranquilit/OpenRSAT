@@ -233,7 +233,7 @@ begin
   fProperty := Props;
   Attributes := fProperty.AttributesFromSchema;
 
-  Row.Init();
+  Row.Init(JSON_FAST);
   List_Attributes.Clear;
   List_Attributes.FocusedColumn := 0;
   List_Attributes.BeginUpdate;
@@ -244,6 +244,7 @@ begin
       if (not MenuItem1.Checked) or (MenuItem1.Checked and Assigned(value)) then
       begin
         Row.AddOrUpdateValue('attribute', Attribute);
+        Row.AddOrUpdateValue('value', fProperty.GetVariant(Attribute));
         List_Attributes.Data.AddItem(Row);
         Row.Clear;
       end;
