@@ -518,6 +518,7 @@ object FrmModuleSitesAndServices: TFrmModuleSitesAndServices
       OnDblClick = TisGrid1DblClick
       OnGetImageIndex = TisGrid1GetImageIndex
       OnKeyPress = TisGrid1KeyPress
+      OnMouseDown = TisGrid1MouseDown
       OnCompareByRow = TisGrid1CompareByRow
     end
     object Panel5: TPanel
