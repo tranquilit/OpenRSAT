@@ -9,6 +9,8 @@ uses
   SysUtils,
   controls,
   ExtCtrls,
+  ActnList,
+  Menus,
   tis.ui.grid.core,
   VirtualTrees,
   mormot.core.base;
@@ -17,6 +19,10 @@ procedure SearchInGrid(const Timer: TTimer; const TisGrid: TTisGrid; var SearchW
 procedure TTisGridClearSelection(grid: TTisGrid);
 function TTisGridGetNextUnselected(grid: TTisGrid; Node: PVirtualNode): PVirtualNode;
 procedure UnifyButtonsWidth(Butons: array of TControl; default: Integer = -1);
+
+procedure RegisterNewMenuAction(ObjectClass: RawUtf8; Action: TAction);
+procedure RegisterNewMenuActions(ObjectClass: RawUtf8; Actions: Array of TAction);
+procedure BuildNewMenuItem(var NewMenuItem: TMenuItem; ObjectClass: RawUtf8);
 
 implementation
 uses
@@ -95,6 +101,96 @@ begin
   begin
     Butons[i].Constraints.MinWidth := BtnWidth;
     Butons[i].Width := BtnWidth;
+  end;
+end;
+
+type
+  TActionObjectClassLink = record
+    ObjectClass: RawUtf8;
+    Actions: Array of TAction;
+  end;
+
+  TActionObjectClassLinks = Array of TActionObjectClassLink;
+
+var
+  ActionObjectClassLinks: TActionObjectClassLinks;
+
+function GetObjectClassIndex(ObjectClass: RawUtf8): Integer;
+var
+  i: Integer;
+begin
+  result := -1;
+  for i := 0 to High(ActionObjectClassLinks) do
+    if ActionObjectClassLinks[i].ObjectClass = ObjectClass then
+    begin
+      result := i;
+      Exit;
+    end;
+end;
+
+procedure RegisterNewMenuAction(ObjectClass: RawUtf8; Action: TAction);
+var
+  Idx, c: SizeInt;
+begin
+  Idx := GetObjectClassIndex(ObjectClass);
+  if Idx < 0 then
+  begin
+    Idx := Length(ActionObjectClassLinks);
+    SetLength(ActionObjectClassLinks, Idx + 1);
+    ActionObjectClassLinks[Idx].ObjectClass := ObjectClass;
+  end;
+  c := Length(ActionObjectClassLinks[Idx].Actions);
+  SetLength(ActionObjectClassLinks[Idx].Actions, c + 1);
+  ActionObjectClassLinks[Idx].Actions[c] := Action;
+end;
+
+procedure RegisterNewMenuActions(ObjectClass: RawUtf8; Actions: array of TAction
+  );
+var
+  Action: TAction;
+begin
+  for Action in Actions do
+    RegisterNewMenuAction(ObjectClass, Action);
+end;
+
+function AnyContainsArray(const Elements1, Elements2: TRawUtf8DynArray): Boolean;
+var
+  i, j: Integer;
+begin
+  result := true;
+  for i := 0 to High(Elements1) do
+    for j := 0 to High(Elements2) do
+      if Elements1[i] = Elements2[j] then
+        Exit;
+  result := False;
+end;
+
+procedure BuildNewMenuItem(var NewMenuItem: TMenuItem;
+  ObjectClass: RawUtf8);
+var
+  ActionLink: TActionObjectClassLink;
+  MenuItem: TMenuItem;
+  MenuItemList: array of TMenuItem;
+  Idx, i: Integer;
+  Count: SizeInt;
+begin
+  NewMenuItem.Clear;
+  try
+    Idx := GetObjectClassIndex(ObjectClass);
+    if Idx < 0 then
+      Exit;
+    Count := Length(ActionObjectClassLinks[Idx].Actions);
+
+    SetLength(MenuItemList, Count);
+    for i := 0 to Count - 1 do
+    begin
+      MenuItemList[i] := TMenuItem.Create(NewMenuItem);
+      MenuItemList[i].Action := ActionObjectClassLinks[Idx].Actions[i];
+    end;
+
+    NewMenuItem.Add(MenuItemList);
+  finally
+    NewMenuItem.Visible := NewMenuItem.Count > 0;
   end;
 end;
 
