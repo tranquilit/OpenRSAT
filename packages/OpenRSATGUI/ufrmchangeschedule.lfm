@@ -1,0 +1,265 @@
+object FrmChangeSchedule: TFrmChangeSchedule
+  Left = 141
+  Height = 364
+  Top = 582
+  Width = 816
+  AutoSize = True
+  ClientHeight = 364
+  ClientWidth = 816
+  LCLVersion = '4.6.0.0'
+  object Panel_ClosingBtns: TPanel
+    AnchorSideLeft.Control = Panel_Replication
+    AnchorSideTop.Control = Owner
+    Left = 190
+    Height = 66
+    Top = 8
+    Width = 75
+    AutoSize = True
+    BorderSpacing.Top = 8
+    BevelOuter = bvNone
+    ClientHeight = 66
+    ClientWidth = 75
+    TabOrder = 0
+    object Button_OK: TButton
+      AnchorSideLeft.Control = Panel_ClosingBtns
+      AnchorSideTop.Control = Panel_ClosingBtns
+      Left = 0
+      Height = 25
+      Top = 8
+      Width = 75
+      BorderSpacing.Top = 8
+      Caption = 'OK'
+      TabOrder = 0
+    end
+    object Button_Cancel: TButton
+      AnchorSideLeft.Control = Button_OK
+      AnchorSideTop.Control = Button_OK
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 25
+      Top = 41
+      Width = 75
+      BorderSpacing.Top = 8
+      Caption = 'Cancel'
+      TabOrder = 1
+    end
+  end
+  object Panel_Replication: TPanel
+    AnchorSideLeft.Control = DrawGrid1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Panel_ClosingBtns
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 190
+    Height = 68
+    Top = 90
+    Width = 618
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = True
+    BorderSpacing.Left = 32
+    BorderSpacing.Top = 16
+    BorderSpacing.Right = 8
+    BevelOuter = bvNone
+    ClientHeight = 68
+    ClientWidth = 618
+    TabOrder = 1
+    object RadioButton_NotAvailable: TRadioButton
+      AnchorSideLeft.Control = Shape_NotAvailable
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Shape_NotAvailable
+      AnchorSideTop.Side = asrCenter
+      Left = 18
+      Height = 19
+      Top = 6
+      Width = 151
+      BorderSpacing.Left = 8
+      Caption = 'Replication Not Available'
+      TabOrder = 0
+      OnClick = RadioButton_NotAvailableClick
+    end
+    object RadioButton_Available: TRadioButton
+      AnchorSideLeft.Control = RadioButton_NotAvailable
+      AnchorSideTop.Control = Shape_Available
+      AnchorSideTop.Side = asrCenter
+      Left = 18
+      Height = 19
+      Top = 44
+      Width = 128
+      Caption = 'Replication Available'
+      TabOrder = 1
+      OnClick = RadioButton_AvailableClick
+    end
+    object Shape_NotAvailable: TShape
+      AnchorSideLeft.Control = Panel_Replication
+      AnchorSideTop.Control = Panel_Replication
+      Left = 0
+      Height = 30
+      Top = 0
+      Width = 10
+      Pen.Style = psClear
+    end
+    object Shape_Available: TShape
+      AnchorSideLeft.Control = Shape_NotAvailable
+      AnchorSideTop.Control = Shape_NotAvailable
+      AnchorSideTop.Side = asrBottom
+      Left = 0
+      Height = 30
+      Top = 38
+      Width = 10
+      BorderSpacing.Top = 8
+      Brush.Color = clBlue
+      Pen.Style = psClear
+    end
+  end
+  object Label_Selection: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = DrawGrid1
+    AnchorSideTop.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 8
+    Height = 225
+    Top = 131
+    Width = 235
+    Anchors = [akTop, akLeft, akBottom]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    BorderSpacing.Bottom = 8
+    Caption = 'Monday through Sunday from 00:00 to 00:00'
+  end
+  object DrawGrid1: TDrawGrid
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 100
+    Top = 23
+    Width = 150
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    BorderSpacing.Bottom = 8
+    ColCount = 25
+    Columns = <    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end    
+      item
+        Title.Caption = ''
+        Width = 10
+      end>
+    DefaultColWidth = 75
+    DefaultRowHeight = 22
+    RowCount = 8
+    ScrollBars = ssNone
+    TabOrder = 2
+    OnDrawCell = DrawGrid1DrawCell
+    OnMouseDown = DrawGrid1MouseDown
+    OnMouseMove = DrawGrid1MouseMove
+    OnMouseUp = DrawGrid1MouseUp
+  end
+  object Label1: TLabel
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = DrawGrid1
+    AnchorSideRight.Side = asrBottom
+    Left = 190
+    Height = 15
+    Top = 8
+    Width = 246
+    Anchors = [akTop]
+    BorderSpacing.Left = 8
+    BorderSpacing.Top = 8
+    Caption = '0  ·  2  ·  4  ·  6  ·  8  · 10 · 12 ·14 ·16 ·18 ·20 · 22 ·  0'
+    ParentFont = False
+    OnClick = Label1Click
+  end
+end
