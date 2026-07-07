@@ -12,7 +12,7 @@
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Files Count="103">
+    <Files Count="104">
       <Item1>
         <Filename Value="ufrmmoduleaduc.pas"/>
         <UnitName Value="ufrmmoduleaduc"/>
@@ -425,6 +425,10 @@
         <Filename Value="uopenrsatuicontextinterface.pas"/>
         <UnitName Value="uopenrsatuicontextinterface"/>
       </Item103>
+      <Item104>
+        <Filename Value="ufrmchangeschedule.pas"/>
+        <UnitName Value="ufrmchangeschedule"/>
+      </Item104>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>

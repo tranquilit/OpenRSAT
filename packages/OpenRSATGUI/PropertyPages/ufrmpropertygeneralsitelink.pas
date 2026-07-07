@@ -17,6 +17,7 @@ uses
   mormot.core.log,
   mormot.core.text,
   mormot.net.ldap,
+  ufrmchangeschedule,
   uhelpersui,
   uproperty,
   ursatldapclient,
@@ -52,6 +53,7 @@ type
     SpinEdit_Cost: TSpinEdit;
     procedure Button_AddClick(Sender: TObject);
     procedure Button_RemoveClick(Sender: TObject);
+    procedure Button_ScheduleClick(Sender: TObject);
     procedure Edit_DescriptionChange(Sender: TObject);
     procedure ListBox_InSiteLinkSelectionChange(Sender: TObject; User: boolean);
     procedure ListBox_NotInSiteLinkSelectionChange(Sender: TObject; User: boolean);
@@ -100,6 +102,19 @@ begin
     LoadListBox;
   end;
 end;
+
+procedure TFrmPropertyGeneralSiteLink.Button_ScheduleClick(Sender: TObject);
+
+
+begin
+  with TFrmChangeSchedule.Create(nil) do
+  try
+    ShowModal;
+  finally
+    Free;
+  end;
+end;
+
 
 procedure TFrmPropertyGeneralSiteLink.Edit_DescriptionChange(Sender: TObject);
 begin

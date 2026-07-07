@@ -267,7 +267,7 @@ object FrmPropertyGeneralSiteLink: TFrmPropertyGeneralSiteLink
       BorderSpacing.Top = 8
       Caption = 'Change Schedule...'
       TabOrder = 2
-      Visible = False
+      OnClick = Button_ScheduleClick
     end
   end
   object Panel5: TPanel
