@@ -40,8 +40,7 @@ uses
   ufrmpropertygeneralntdssitesettings, ufrmpropertygeneralserver, 
   ufrmpropertygeneralntdsdsa, ufrmpropertyconnections, 
   ufrmnewmsdnsserversettings, ufrmpropertygeneralintersitetransport, 
-  uvisviewkeytab, uopenrsatuicontextinterface, ufrmchangeschedule, 
-  LazarusPackageIntf;
+  uvisviewkeytab, uopenrsatuicontextinterface, LazarusPackageIntf;
 
 implementation
 

@@ -11,6 +11,7 @@ uses
   ComCtrls,
   Controls,
   ExtCtrls,
+  Dialogs,
   Forms,
   Grids,
   SpinEx,
@@ -57,7 +58,7 @@ type
   end;
 
 const
-  days: array[0..6] of String = (rsMonday, rsTuesday, rsWednesday, rsThursday, rsFriday, rsSaturday, rsSunday);
+  days: array[0..6] of String = (rsMonday, rsTuesday, rsWednesday, rsThursday, rsFriday, rsSaturday,rsSunday);
 
 implementation
 uses
@@ -72,7 +73,7 @@ uses
 // Form
 constructor TVisLogonHours.Create(TheOwner: TComponent; _PHours: PRawByteString);
 var
-  colWidth, max: Integer;
+  colWidth, max, i: Integer;
   s: String;
 begin
   ReadingData := True;
@@ -166,7 +167,7 @@ begin
   // Cells
   if (aRow > 0) and (aCol > 0) then
   begin
-    if GetBit((aRow) * HoursPerDay + aCol-1 - Integer(SpinEdit_UTC.Value)) then
+    if GetBit((aRow - 1) * HoursPerDay + aCol - 1 - Integer(SpinEdit_UTC.Value)) then
       DrawGrid.Canvas.Brush.Color := clBlue
     else
       DrawGrid.Canvas.Brush.Color := clBtnShadow;
@@ -263,7 +264,7 @@ begin
   if defRect.Top = defRect.Bottom then
     Label_Recap.Caption := FormatUtf8('On % from %:00 to %:59', [days[defRect.Top - 1], defRect.Left - 1, defRect.Right - 1])
   else
-    Label_Recap.Caption := FormatUtf8('On % to % from %:00 to %:59', [days[defRect.Top - 1], days[defRect.Bottom - 1], defRect.Left - 1, defRect.Right - 1]);
+    Label_Recap.Caption := FormatUtf8('On % through % from %:00 to %:59', [days[defRect.Top - 1], days[defRect.Bottom - 1], defRect.Left - 1, defRect.Right - 1]);
 end;
 
 // Buttons
