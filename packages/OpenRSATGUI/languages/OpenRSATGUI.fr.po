@@ -2969,7 +2969,7 @@ msgstr "Terminer l'assistant de délégation de contrôle"
 #: uvisdelegatecontrol.lrj:$.strings.[9].value
 msgctxt "tvisdelegatecontrol.radiobutton1.caption"
 msgid "Delegate the following common tasks:"
-msgstr "Déléguer la tâche cummune suivante :"
+msgstr "Déléguer la tâche commune suivante :"
 
 #: uvisdelegatecontrol.lrj:$.strings.[10].value
 msgctxt "tvisdelegatecontrol.radiobutton2.caption"
