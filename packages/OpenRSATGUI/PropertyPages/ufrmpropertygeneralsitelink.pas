@@ -116,7 +116,7 @@ begin
   ScheduleData := fLogic.GetByteFromAttribute(fLogic.FindAttribute('schedule'));
   fLogic.LoadScheduleToHours(ScheduleData, Hours);
 
-  LogonHours := TVisLogonHours.Create(Self, @Hours);
+  LogonHours := TVisLogonHours.Create(Self, @Hours, SiteLinkSchedulingPage);
   try
     if LogonHours.ShowModal <> mrOK then
       Exit;
