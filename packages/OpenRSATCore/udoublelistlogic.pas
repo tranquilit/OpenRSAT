@@ -30,6 +30,7 @@ type
     function GetResultName(Obj: TLdapResult): RawUtf8;
     function GetNbElementsInLists: Integer;
     function GetValueFromAttribute(Attribute: TLdapAttribute): RawUtf8;
+    function GetByteFromAttribute(Attribute: TLdapAttribute): RawByteString;
   end;
   
   { TDoubleListLogic }
@@ -51,6 +52,7 @@ type
     function GetResultName(Obj: TLdapResult): RawUtf8; virtual;
     function GetNbElementsInLists: Integer; virtual;
     function GetValueFromAttribute(Attribute: TLdapAttribute): RawUtf8; virtual;
+    function GetByteFromAttribute(Attribute: TLdapAttribute): RawByteString; virtual;
 
     property InResult: TLdapResultArray read fInResult write fInResult;
     property OutResult: TLdapResultArray read fOutResult write fOutResult;
@@ -145,6 +147,14 @@ function TDoubleListLogic.GetValueFromAttribute(Attribute: TLdapAttribute): RawU
 begin
   if Attribute <> nil then
     Result := Attribute.GetReadable()
+  else
+    Result := '';
+end;
+
+function TDoubleListLogic.GetByteFromAttribute(Attribute: TLdapAttribute): RawByteString;
+begin
+  if Attribute <> nil then
+    Result := Attribute.GetRaw()
   else
     Result := '';
 end;
