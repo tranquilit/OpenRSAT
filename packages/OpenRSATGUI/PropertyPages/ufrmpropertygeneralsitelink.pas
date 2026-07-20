@@ -17,12 +17,12 @@ uses
   mormot.core.log,
   mormot.core.text,
   mormot.net.ldap,
-  ufrmchangeschedule,
   uhelpersui,
   uproperty,
   ursatldapclient,
   upropertyframe,
   ugeneralpropertysitelink,
+  uvislogonhours,
   udoublelistlogic,
   ulog;
 
@@ -104,15 +104,27 @@ begin
 end;
 
 procedure TFrmPropertyGeneralSiteLink.Button_ScheduleClick(Sender: TObject);
-
-
+var
+  ScheduleData: RawByteString;
+  Hours: RawByteString;
+  LogonHours: TVisLogonHours;
 begin
-  with TFrmChangeSchedule.Create(nil) do
+  Hours := '';
+  SetLength(Hours, 21);
+  FillByte(Hours[1], 21, 0);
+
+  ScheduleData := fLogic.GetByteFromAttribute(fLogic.FindAttribute('schedule'));
+  fLogic.LoadScheduleToHours(ScheduleData, Hours);
+
+  LogonHours := TVisLogonHours.Create(Self, @Hours);
   try
-    ShowModal;
+    if LogonHours.ShowModal <> mrOK then
+      Exit;
   finally
-    Free;
+    LogonHours.Free;
   end;
+
+  fLogic.SaveSchedule(Hours);
 end;
 
 
