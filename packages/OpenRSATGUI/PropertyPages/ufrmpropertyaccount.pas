@@ -166,7 +166,7 @@ begin
     Hours := default;
 
   // LogonHours Form
-  LogonHours := TVisLogonHours.Create(self, @Hours);
+  LogonHours := TVisLogonHours.Create(self, @Hours, LogonHoursPage);
   try
     if LogonHours.ShowModal() <> mrOK then
       Exit;

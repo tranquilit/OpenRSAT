@@ -21,8 +21,10 @@ uses
 
 type
 
-  { TVisLogonHours }
+  { KindOfPage }
+  KindOfPage = (LogonHoursPage, SiteLinkSchedulingPage);
 
+  { TVisLogonHours }
   TVisLogonHours = class(TForm)
     Label_Title: TLabel;
     RadioButton_Secret: TRadioButton;
@@ -54,7 +56,7 @@ type
     function GetBit(i: Integer): Boolean;
     procedure SetBit(i: Integer; b: Boolean);
   public
-    constructor Create(TheOwner: TComponent; _PHours: PRawByteString); reintroduce;
+    constructor Create(TheOwner: TComponent; _PHours: PRawByteString; PageOption: KindOfPage); reintroduce;
   end;
 
 const
@@ -71,13 +73,20 @@ uses
 { TVisLogonHours }
 
 // Form
-constructor TVisLogonHours.Create(TheOwner: TComponent; _PHours: PRawByteString);
+constructor TVisLogonHours.Create(TheOwner: TComponent; _PHours: PRawByteString; PageOption: KindOfPage);
 var
   colWidth, max, i: Integer;
   s: String;
 begin
   ReadingData := True;
   Inherited Create(TheOwner);
+
+  if PageOption = SiteLinkSchedulingPage then
+  begin
+    Caption := 'Site Link Scheduling';
+    RadioButton_Allowed.Caption := 'Replication Available';
+    RadioButton_Denied.Caption := 'Replication Not Available';
+  end;
 
   // Timezone
   SpinEdit_UTC.Value := -(GetLocalTimeOffset() div 60);
