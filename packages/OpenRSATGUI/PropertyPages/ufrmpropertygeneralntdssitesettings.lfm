@@ -132,6 +132,7 @@ object FrmPropertyGeneralNTDSSiteSettings: TFrmPropertyGeneralNTDSSiteSettings
     BorderSpacing.Top = 8
     Caption = 'Change Schedule...'
     TabOrder = 2
+    OnClick = Button_ScheduleClick
   end
   object Panel3: TPanel
     AnchorSideLeft.Control = Owner

@@ -106,17 +106,12 @@ end;
 procedure TFrmPropertyGeneralSiteLink.Button_ScheduleClick(Sender: TObject);
 var
   ScheduleData: RawByteString;
-  Hours: RawByteString;
   LogonHours: TVisLogonHours;
 begin
-  Hours := '';
-  SetLength(Hours, 21);
-  FillByte(Hours[1], 21, 0);
-
   ScheduleData := fLogic.GetByteFromAttribute(fLogic.FindAttribute('schedule'));
-  fLogic.LoadScheduleToHours(ScheduleData, Hours);
+  fLogic.Scheduling.LoadScheduleToHours(ScheduleData);
 
-  LogonHours := TVisLogonHours.Create(Self, @Hours, SiteLinkSchedulingPage);
+  LogonHours := TVisLogonHours.Create(Self, @fLogic.Scheduling.Hours, SiteLinkSchedulingPage);
   try
     if LogonHours.ShowModal <> mrOK then
       Exit;
@@ -124,7 +119,7 @@ begin
     LogonHours.Free;
   end;
 
-  fLogic.SaveSchedule(Hours);
+  fLogic.SaveSchedule;
 end;
 
 
