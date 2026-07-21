@@ -138,7 +138,7 @@ msgstr "Potwierdzenie"
 
 #: ucommon.rsconfirmremovinggc
 msgid "Are you sure that you want to remove the Global Catalog role from this Domain Controller?"
-msgstr ""
+msgstr "Czy na pewno chcesz usunąć rolę katalogu globalnego z tego kontrolera domeny?"
 
 #: ucommon.rsconnectedondomainas
 msgid "You are connected as \"%\"."
@@ -664,11 +664,11 @@ msgstr "Hasło nigdy nie wygasa."
 
 #: ucommon.rsnosettingsfound
 msgid "This server does not contain a settings object. As a result, the General Properties page cannot be populated, and all fields will be empty."
-msgstr ""
+msgstr "Ten serwer nie zawiera obiektu ustawień. W rezultacie karta Właściwości ogólne nie może zostać wypełniona, a wszystkie pola będą puste."
 
 #: ucommon.rsnogcdetected
 msgid "No other Global Catalogs can be detected in the forest."
-msgstr ""
+msgstr "Nie można wykryć żadnych innych katalogów globalnych w lesie."
 
 #: ucommon.rsnosuchattribute
 msgid "The targeted attribute does not exist in the specified entry."
@@ -966,11 +966,11 @@ msgstr "Wybierz właściciela"
 
 #: ucommon.rstoofewsitelinksavailableforsitelinkbridge
 msgid "Active Directory Sites and Services cannot locate two site link objects using the same transport as the site link bridge. You cannot create a site link bridge until there are at least two site links for this transport."
-msgstr ""
+msgstr "Witryny i usługi Active Directory nie mogą odnaleźć dwóch obiektów łączy witryn używających tego samego transportu co most łączy witryn. Nie można utworzyć mostu łączy witryn, dopóki dla tego transportu nie będą istniały co najmniej dwa łącza witryn."
 
 #: ucommon.rstoofewsitesavailableforsitelink
 msgid "Active Directory Sites and Services cannot locate two sites to create a working site link object. You may create a new site link that links only one site, but it will have no effect until it links at least two sites."
-msgstr ""
+msgstr "Witryny i usługi Active Directory nie mogą odnaleźć dwóch witryn w celu utworzenia działającego obiektu łącza witryny. Możesz utworzyć nowe łącze witryny łączące tylko jedną witrynę, ale nie przyniesie ono żadnego efektu, dopóki nie połączy co najmniej dwóch witryn."
 
 #: ucommon.rstuesday
 msgid "Tuesday"
@@ -1019,7 +1019,7 @@ msgstr "Ostrzeżenie"
 
 #: ucommon.rswarningnogc
 msgid "If no Global Catalogs exist in the forest, users will not be able to log on."
-msgstr ""
+msgstr "Jeśli w lesie nie istnieją żadne katalogi globalne, użytkownicy nie będą mogli się zalogować."
 
 #: ucommon.rswednesday
 msgid "Wednesday"
