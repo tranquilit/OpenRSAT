@@ -15,7 +15,8 @@ uses
   uadvancedsecuritypresenter, uguidcache, uselectobjectguidpresenter, 
   uviewkeytabpresenter, unewsitelink, ugeneralpropertysitelink, 
   ugeneralpropertysitelinkbridge, udoublelistlogic, unewsitelinkbridge, ulog, 
-  ugeneralpropertyserver, ugeneralpropertyntdsdsa, LazarusPackageIntf;
+  ugeneralpropertyserver, ugeneralpropertyntdsdsa, uschedulinglogic, 
+  LazarusPackageIntf;
 
 implementation
 
