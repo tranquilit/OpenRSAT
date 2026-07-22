@@ -960,7 +960,6 @@ object FrmModuleADUC: TFrmModuleADUC
     end
     object MenuItem_DisableAccount: TMenuItem
       Action = Action_TaskDisableEnableAccount
-      Caption = 'Disable Account'
     end
     object MenuItem_ResetPassword: TMenuItem
       Action = Action_TaskResetPassword

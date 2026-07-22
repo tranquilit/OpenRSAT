@@ -1610,8 +1610,10 @@ var
   UAC: TUserAccountControls;
   UACAttr, AttrName: TLdapAttribute;
   Obj: RawUtf8;
+  Node: PVirtualNode;
 begin
-  Data := GridADUC.GetNodeAsPDocVariantData(nil, True);
+  Node := GridADUC.FocusedNode;
+  Data := GridADUC.GetNodeAsPDocVariantData(Node);
   if not Assigned(Data) then
     Exit;
 
@@ -1641,6 +1643,7 @@ begin
     ShowMessage(FormatUtf8(rsActionDisableObject, [Obj]))
   else
     ShowMessage(FormatUtf8(rsActionEnableObject, [Obj]));
+  Data^.U['userAccountControl'] := UACAttr.GetReadable();
   UpdateGridADUC(nil);
 end;
 
@@ -2337,7 +2340,7 @@ begin
   if GridADUC.FindColumnByIndex(Column).PropertyName <> 'name' then
     Exit;
   try
-    ImageIndex := ObjectClassToImageIndex(GridADUC.GetNodeAsPDocVariantData(Node)^.A['objectClass']^.ToRawUtf8DynArray);
+    ImageIndex := LdapObjectToImageIndex(GridADUC.GetNodeAsPDocVariantData(Node));
   except
     ImageIndex := Ord(ileADUnknown);
   end;

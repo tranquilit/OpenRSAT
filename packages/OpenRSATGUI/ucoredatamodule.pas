@@ -10,6 +10,7 @@ uses
   Controls,
   Forms,
   mormot.core.base,
+  mormot.core.variants,
   mormot.net.ldap;
 
 type
@@ -74,6 +75,7 @@ type
 
 function ObjectClassToImageIndex(ObjectClass: RawUtf8): Integer;
 function ObjectClassToImageIndex(ObjectClass: TRawUtf8DynArray): Integer;
+function LdapObjectToImageIndex(NodeData: PDocVariantData): Integer;
 
 var
   CoreDataModule: TCoreDataModule;
@@ -113,6 +115,23 @@ begin
   idx := High(ObjectClass);
   if (idx >= 0) then
     result := ObjectClassToImageIndex(ObjectClass[idx]);
+end;
+
+function LdapObjectToImageIndex(NodeData: PDocVariantData): Integer;
+var
+  UAC: TUserAccountControls;
+begin
+  result := Ord(ileADUnknown);
+
+  if not Assigned(NodeData) or not NodeData^.Exists('objectClass') then
+    Exit;
+  result := ObjectClassToImageIndex(NodeData^.A_['objectClass']^.ToRawUtf8DynArray);
+  if not NodeData^.Exists('userAccountControl') then
+    Exit;
+  UAC := UserAccountControlsFromText(NodeData^.U['userAccountControl']);
+
+  if (result = Ord(ileADUser)) and (uacAccountDisable in UAC) then
+    result := 51;
 end;
 
 {$R *.lfm}
