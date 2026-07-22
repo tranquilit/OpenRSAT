@@ -15,14 +15,14 @@ object FrmModuleADUCOption: TFrmModuleADUCOption
   DesignTop = 189
   object Panel1: TPanel
     Left = 4
-    Height = 220
+    Height = 189
     Top = 4
     Width = 516
     Align = alTop
     AutoSize = True
     BorderSpacing.Around = 4
     BevelOuter = bvNone
-    ClientHeight = 220
+    ClientHeight = 189
     ClientWidth = 516
     TabOrder = 0
     object Edit_SearchPageSize: TEdit
@@ -42,23 +42,6 @@ object FrmModuleADUCOption: TFrmModuleADUCOption
       TabOrder = 0
       OnChange = Edit_SearchPageSizeChange
     end
-    object Edit_SearchPageNumber: TEdit
-      AnchorSideLeft.Control = Label_SearchPageNumber
-      AnchorSideLeft.Side = asrBottom
-      AnchorSideTop.Control = Edit_SearchPageSize
-      AnchorSideTop.Side = asrBottom
-      AnchorSideRight.Control = Panel1
-      AnchorSideRight.Side = asrBottom
-      Left = 166
-      Height = 23
-      Top = 68
-      Width = 342
-      Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Around = 8
-      NumbersOnly = True
-      TabOrder = 1
-      OnChange = Edit_SearchPageNumberChange
-    end
     object Label_SearchPageSize: TLabel
       AnchorSideLeft.Control = Panel1
       AnchorSideTop.Control = Edit_SearchPageSize
@@ -71,25 +54,13 @@ object FrmModuleADUCOption: TFrmModuleADUCOption
       Caption = 'Search Page Size'
       Constraints.MinWidth = 150
     end
-    object Label_SearchPageNumber: TLabel
-      AnchorSideLeft.Control = Panel1
-      AnchorSideTop.Control = Edit_SearchPageNumber
-      AnchorSideTop.Side = asrCenter
-      Left = 8
-      Height = 15
-      Top = 72
-      Width = 150
-      BorderSpacing.Around = 8
-      Caption = 'Search Page Number'
-      Constraints.MinWidth = 150
-    end
     object Label_Filter: TLabel
       AnchorSideLeft.Control = Panel1
-      AnchorSideTop.Control = Edit_SearchPageNumber
+      AnchorSideTop.Control = Edit_SearchPageSize
       AnchorSideTop.Side = asrBottom
       Left = 8
       Height = 15
-      Top = 99
+      Top = 68
       Width = 26
       BorderSpacing.Left = 8
       BorderSpacing.Top = 8
@@ -104,14 +75,14 @@ object FrmModuleADUCOption: TFrmModuleADUCOption
       AnchorSideBottom.Side = asrBottom
       Left = 8
       Height = 90
-      Top = 122
+      Top = 91
       Width = 500
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Left = 8
       BorderSpacing.Top = 8
       BorderSpacing.Right = 8
       BorderSpacing.Bottom = 8
-      TabOrder = 2
+      TabOrder = 1
       OnChange = Memo_FilterChange
     end
     object Label1: TLabel
@@ -131,7 +102,7 @@ object FrmModuleADUCOption: TFrmModuleADUCOption
   object Panel2: TPanel
     Left = 4
     Height = 421
-    Top = 228
+    Top = 197
     Width = 516
     Align = alTop
     AutoSize = True

@@ -2915,7 +2915,7 @@ begin
   if (Filter <> '') then
     Filter := FormatUtf8('(&%)', [Filter]);
 
-  LdapClient.SearchBegin(fModuleAduc.ADUCOption.SearchPageSize);
+  LdapClient.SearchBegin();
   try
     if CheckBox_IncludeSubContainer.Checked then
       LdapClient.SearchScope := lssWholeSubtree
@@ -2925,8 +2925,7 @@ begin
       if not LdapClient.Search(DistinguishedName, False, Filter, Concat(fModuleAduc.ADUCOption.GridAttributesFilter, ['userAccountControl'])) then
         Exit;
       OnSearchEventFillGrid(LdapClient);
-      Inc(PageCount);
-    until (LdapClient.SearchCookie = '') or (PageCount = fModuleAduc.ADUCOption.SearchPageNumber);
+    until (LdapClient.SearchCookie = '') or (LdapClient.SearchPageCount >= fModuleAduc.ADUCOption.SearchPageSize);
   finally
     LdapClient.SearchEnd;
   end;

@@ -25,7 +25,6 @@ type
     fObservers: Array of TProcRsatOptionOfObject;
 
     fSearchPageSize: Integer;
-    fSearchPageNumber: Integer;
     fGridFilter: RawUtf8;
     fTreeFilter: RawUtf8;
     fTreeObjectClasses: TRawUtf8DynArray;
@@ -34,7 +33,6 @@ type
 
     procedure SetGridAttributesFilter(AValue: TRawUtf8DynArray);
     procedure SetGridFilter(AValue: RawUtf8);
-    procedure SetSearchPageNumber(AValue: Integer);
     procedure SetSearchPageSize(AValue: Integer);
     procedure SetShowGPO(AValue: Boolean);
     procedure SetTreeFilter(AValue: RawUtf8);
@@ -45,7 +43,6 @@ type
     destructor Destroy; override;
 
     property SearchPageSize: Integer read fSearchPageSize write SetSearchPageSize;
-    property SearchPageNumber: Integer read fSearchPageNumber write SetSearchPageNumber;
     property GridFilter: RawUtf8 read fGridFilter write SetGridFilter;
     property TreeFilter: RawUtf8 read fTreeFilter write SetTreeFilter;
     property TreeObjectClasses: TRawUtf8DynArray read fTreeObjectClasses write SetTreeObjectClasses;
@@ -82,15 +79,6 @@ begin
   if FGridAttributesFilter = AValue then
     Exit;
   fGridAttributesFilter := AValue;
-
-  fChanged := True;
-end;
-
-procedure TModuleADUCOption.SetSearchPageNumber(AValue: Integer);
-begin
-  if fSearchPageNumber = AValue then
-    Exit;
-  fSearchPageNumber := AValue;
 
   fChanged := True;
 end;
@@ -155,7 +143,6 @@ begin
     fLog.Add.Log(sllDebug, 'Load', Self);
 
   fSearchPageSize := IniFile.ReadInt64(Section, 'SearchPageSize', 1000);
-  fSearchPageNumber := IniFile.ReadInt64(Section, 'SearchPageNumber', 2);
   fGridFilter := IniFile.ReadString(Section, 'GridFilter', '');
   fTreeFilter := IniFile.ReadString(Section, 'TreeFilter', '');
   fTreeObjectClasses := TRawUtf8DynArray(IniFile.ReadString(Section, 'TreeObjectClasses', DEFAULT_TREE_OBJECT_CLASSES).Split(';'));
@@ -173,7 +160,6 @@ begin
     fLog.Add.Log(sllDebug, 'Save', Self);
 
   IniFile.WriteInt64(SECTION, 'SearchPageSize', fSearchPageSize);
-  IniFile.WriteInt64(SECTION, 'SearchPageNumber', fSearchPageNumber);
   IniFile.WriteString(SECTION, 'GridFilter', fGridFilter);
   IniFile.WriteString(SECTION, 'TreeFilter', fTreeFilter);
   IniFile.WriteString(SECTION, 'TreeObjectClasses', String.Join(';', TStringArray(fTreeObjectClasses)));
