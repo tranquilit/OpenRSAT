@@ -1,11 +1,9 @@
-msgid ""
-msgstr ""
-#: uvisconnectconfigs.lrj:$.strings.[7].value
+#: uvisconnectconfigs.lrj:$.strings.[6].value
 msgctxt "tformconnectconfigs.action_cancel.caption"
 msgid "Cancel"
 msgstr ""
 
-#: uvisconnectconfigs.lrj:$.strings.[6].value
+#: uvisconnectconfigs.lrj:$.strings.[5].value
 msgctxt "tformconnectconfigs.action_ok.caption"
 msgid "OK"
 msgstr ""
@@ -13,11 +11,6 @@ msgstr ""
 #: uvisconnectconfigs.lrj:$.strings.[0].value
 msgctxt "tformconnectconfigs.caption"
 msgid "OpenRSAT Authentication"
-msgstr ""
-
-#: uvisconnectconfigs.lrj:$.strings.[5].value
-msgctxt "tformconnectconfigs.label_autoconnect.caption"
-msgid "Auto connect"
 msgstr ""
 
 #: uvisconnectconfigs.lrj:$.strings.[1].value
@@ -120,234 +113,279 @@ msgctxt "tfrmmoduleadssoptions.label1.caption"
 msgid "Show Service"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[64].value
+#: ufrmmoduleaduc.lrj:$.strings.[66].value
 msgctxt "tfrmmoduleaduc.action_blockgpoinheritance.caption"
 msgid "Block GPO Inheritance"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[55].value
+#: ufrmmoduleaduc.lrj:$.strings.[57].value
 msgctxt "tfrmmoduleaduc.action_changedomaincontroller.caption"
 msgid "Change Domain Controller"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[45].value
+#: ufrmmoduleaduc.lrj:$.strings.[48].value
 msgctxt "tfrmmoduleaduc.action_copy.caption"
 msgid "Copy"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[46].value
+#: ufrmmoduleaduc.lrj:$.strings.[70].value
+msgctxt "tfrmmoduleaduc.action_createkeytab.caption"
+msgid "Create KeyTab"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[49].value
 msgctxt "tfrmmoduleaduc.action_cut.caption"
 msgid "Cut"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[58].value
+#: ufrmmoduleaduc.lrj:$.strings.[60].value
 msgctxt "tfrmmoduleaduc.action_delegatecontrol.caption"
 msgid "Delegate control"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[25].value
+#: ufrmmoduleaduc.lrj:$.strings.[28].value
 msgctxt "tfrmmoduleaduc.action_delete.caption"
 msgid "Delete"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[62].value
+#: ufrmmoduleaduc.lrj:$.strings.[64].value
 msgctxt "tfrmmoduleaduc.action_disablegpo.caption"
 msgid "Disable GPO"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[61].value
+#: ufrmmoduleaduc.lrj:$.strings.[63].value
 msgctxt "tfrmmoduleaduc.action_enablegpo.caption"
 msgid "Enable GPO"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[63].value
+#: ufrmmoduleaduc.lrj:$.strings.[65].value
 msgctxt "tfrmmoduleaduc.action_enforcegpo.caption"
 msgid "Enforce GPO"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[44].value
+#: ufrmmoduleaduc.lrj:$.strings.[47].value
 msgctxt "tfrmmoduleaduc.action_filter.caption"
 msgid "Filter"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[60].value
+#: ufrmmoduleaduc.lrj:$.strings.[62].value
 msgctxt "tfrmmoduleaduc.action_modifygplink.caption"
 msgid "Modify GPLink"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[38].value
+#: ufrmmoduleaduc.lrj:$.strings.[41].value
 msgctxt "tfrmmoduleaduc.action_newall.caption"
 msgid "New"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[36].value
+#: ufrmmoduleaduc.lrj:$.strings.[39].value
 msgctxt "tfrmmoduleaduc.action_newcomputer.caption"
 msgid "Computer"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[40].value
+#: ufrmmoduleaduc.lrj:$.strings.[43].value
 msgctxt "tfrmmoduleaduc.action_newcontact.caption"
 msgid "Contact"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[39].value
+#: ufrmmoduleaduc.lrj:$.strings.[42].value
 msgctxt "tfrmmoduleaduc.action_newdefault.caption"
 msgid "Default"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[24].value
+#: ufrmmoduleaduc.lrj:$.strings.[27].value
 msgctxt "tfrmmoduleaduc.action_newgroup.caption"
 msgid "New Group"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[37].value
+#: ufrmmoduleaduc.lrj:$.strings.[73].value
+msgctxt "tfrmmoduleaduc.action_newmsdskeycredential.caption"
+msgid "msDS-KeyCredential"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[71].value
+msgctxt "tfrmmoduleaduc.action_newmsdsshadowprincipalcontainer.caption"
+msgid "msDS-ShadowPrincipalContainer"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[72].value
+msgctxt "tfrmmoduleaduc.action_newmsimagingpsps.caption"
+msgid "msImaging-PSPs"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[40].value
 msgctxt "tfrmmoduleaduc.action_newou.caption"
 msgid "New OU"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[42].value
+#: ufrmmoduleaduc.lrj:$.strings.[75].value
+msgctxt "tfrmmoduleaduc.action_newprinter.caption"
+msgid "Printer"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[74].value
+msgctxt "tfrmmoduleaduc.action_newresourcepropertylist.caption"
+msgid "msDS-ResourcePropertyList"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[45].value
 msgctxt "tfrmmoduleaduc.action_newsharedfolder.caption"
 msgid "Shared Folder"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[23].value
+#: ufrmmoduleaduc.lrj:$.strings.[26].value
 msgctxt "tfrmmoduleaduc.action_newuser.caption"
 msgid "New User"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[52].value
+#: ufrmmoduleaduc.lrj:$.strings.[54].value
 msgctxt "tfrmmoduleaduc.action_next.caption"
 msgid "Next"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[59].value
+#: ufrmmoduleaduc.lrj:$.strings.[61].value
 msgctxt "tfrmmoduleaduc.action_operationsmasters.caption"
 msgid "Operations masters"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[47].value
+#: ufrmmoduleaduc.lrj:$.strings.[50].value
 msgctxt "tfrmmoduleaduc.action_paste.caption"
 msgid "Paste"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[51].value
+#: ufrmmoduleaduc.lrj:$.strings.[69].value
+msgctxt "tfrmmoduleaduc.action_preparedjoin.caption"
+msgid "Prepare DJOIN"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[53].value
 msgctxt "tfrmmoduleaduc.action_previous.caption"
 msgid "Previous"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[22].value
+#: ufrmmoduleaduc.lrj:$.strings.[25].value
 msgctxt "tfrmmoduleaduc.action_properties.caption"
 msgid "Properties"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[21].value
+#: ufrmmoduleaduc.lrj:$.strings.[24].value
 msgctxt "tfrmmoduleaduc.action_refresh.caption"
 msgid "Refresh"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[43].value
+#: ufrmmoduleaduc.lrj:$.strings.[46].value
 msgctxt "tfrmmoduleaduc.action_search.caption"
 msgid "Search"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[49].value
+#: ufrmmoduleaduc.lrj:$.strings.[52].value
 msgctxt "tfrmmoduleaduc.action_searchroot.caption"
 msgid "Search"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[54].value
+#: ufrmmoduleaduc.lrj:$.strings.[56].value
 msgctxt "tfrmmoduleaduc.action_showgpo.caption"
 msgid "Show GPO"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[56].value
+#: ufrmmoduleaduc.lrj:$.strings.[67].value
+msgctxt "tfrmmoduleaduc.action_showobjectlocation.caption"
+msgid "Show object location"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[58].value
 msgctxt "tfrmmoduleaduc.action_sitesandservices.caption"
 msgid "Sites and services"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[50].value
-msgctxt "tfrmmoduleaduc.action_switchtoolbarcaption.caption"
-msgid "Switch toolbar size"
-msgstr ""
-
-#: ufrmmoduleaduc.lrj:$.strings.[28].value
+#: ufrmmoduleaduc.lrj:$.strings.[31].value
 msgctxt "tfrmmoduleaduc.action_taskaddtoagroup.caption"
 msgid "Add to a group"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[27].value
+#: ufrmmoduleaduc.lrj:$.strings.[30].value
 msgctxt "tfrmmoduleaduc.action_taskcopy.caption"
 msgid "Copy"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[26].value
+#: ufrmmoduleaduc.lrj:$.strings.[29].value
 msgctxt "tfrmmoduleaduc.action_taskdelegatecontrol.caption"
 msgid "Delagate Control"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[30].value
-msgctxt "tfrmmoduleaduc.action_taskdisableaccount.caption"
-msgid "Disable Account"
+#: ufrmmoduleaduc.lrj:$.strings.[33].value
+msgctxt "tfrmmoduleaduc.action_taskdisableenableaccount.caption"
+msgid "Disable Enable Account"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[35].value
+#: ufrmmoduleaduc.lrj:$.strings.[38].value
 msgctxt "tfrmmoduleaduc.action_taskmanage.caption"
 msgid "Manage"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[32].value
+#: ufrmmoduleaduc.lrj:$.strings.[35].value
 msgctxt "tfrmmoduleaduc.action_taskmove.caption"
 msgid "Move"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[29].value
+#: ufrmmoduleaduc.lrj:$.strings.[32].value
 msgctxt "tfrmmoduleaduc.action_tasknamemappings.caption"
 msgid "Name mappings"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[33].value
+#: ufrmmoduleaduc.lrj:$.strings.[36].value
 msgctxt "tfrmmoduleaduc.action_taskopenhomepage.caption"
 msgid "Open Home Page"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[31].value
+#: ufrmmoduleaduc.lrj:$.strings.[34].value
 msgctxt "tfrmmoduleaduc.action_taskresetpassword.caption"
 msgid "Reset Password"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[34].value
+#: ufrmmoduleaduc.lrj:$.strings.[37].value
 msgctxt "tfrmmoduleaduc.action_tasksendmail.caption"
 msgid "Send Mail"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[48].value
+#: ufrmmoduleaduc.lrj:$.strings.[51].value
 msgctxt "tfrmmoduleaduc.action_treenewall.caption"
 msgid "New"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[57].value
+#: ufrmmoduleaduc.lrj:$.strings.[59].value
 msgctxt "tfrmmoduleaduc.action_usersandcomputers.caption"
 msgid "Users and computers"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[20].value
-msgctxt "tfrmmoduleaduc.checkbox1.caption"
+#: ufrmmoduleaduc.lrj:$.strings.[21].value
+msgctxt "tfrmmoduleaduc.checkbox_includesubcontainer.caption"
 msgid "Include subcontainer"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[17].value
+#: ufrmmoduleaduc.lrj:$.strings.[18].value
 msgctxt "tfrmmoduleaduc.gridaduc.header.columns[0].text"
 msgid "Name"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[18].value
+#: ufrmmoduleaduc.lrj:$.strings.[19].value
 msgctxt "tfrmmoduleaduc.gridaduc.header.columns[1].text"
 msgid "Type"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[19].value
+#: ufrmmoduleaduc.lrj:$.strings.[20].value
 msgctxt "tfrmmoduleaduc.gridaduc.header.columns[2].text"
 msgid "Description"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[22].value
+msgctxt "tfrmmoduleaduc.gridattributes.header.columns[0].text"
+msgid "Attributes"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[23].value
+msgctxt "tfrmmoduleaduc.gridattributes.header.columns[1].text"
+msgid "Values"
 msgstr ""
 
 #: ufrmmoduleaduc.lrj:$.strings.[0].value
@@ -355,9 +393,14 @@ msgctxt "tfrmmoduleaduc.label1.caption"
 msgid "Total : 0 elements"
 msgstr ""
 
-#: ufrmmoduleaduc.lrj:$.strings.[91].value
+#: ufrmmoduleaduc.lrj:$.strings.[77].value
 msgctxt "tfrmmoduleaduc.menuitem_editcolumns.caption"
 msgid "Edit columns"
+msgstr ""
+
+#: ufrmmoduleaduc.lrj:$.strings.[76].value
+msgctxt "tfrmmoduleaduc.menuitem_new.caption"
+msgid "New"
 msgstr ""
 
 #: ufrmmoduleaduc.lrj:$.strings.[16].value
@@ -425,39 +468,39 @@ msgctxt "tfrmmoduleaduc.toolbutton_search.hint"
 msgid "Search"
 msgstr ""
 
+#: ufrmmoduleaduc.lrj:$.strings.[17].value
+msgctxt "tfrmmoduleaduc.toolbutton_showrelation.caption"
+msgid "Show group relation"
+msgstr ""
+
 #: ufrmmoduleaduc.lrj:$.strings.[8].value
 msgctxt "tfrmmoduleaduc.toolbutton_user.hint"
 msgid "New User"
 msgstr ""
 
-#: ufrmmoduleaducoption.lrj:$.strings.[3].value
+#: ufrmmoduleaducoption.lrj:$.strings.[2].value
 msgctxt "tfrmmoduleaducoption.label1.caption"
 msgid "Grid options"
 msgstr ""
 
-#: ufrmmoduleaducoption.lrj:$.strings.[6].value
+#: ufrmmoduleaducoption.lrj:$.strings.[5].value
 msgctxt "tfrmmoduleaducoption.label2.caption"
 msgid "Tree options"
 msgstr ""
 
-#: ufrmmoduleaducoption.lrj:$.strings.[4].value
+#: ufrmmoduleaducoption.lrj:$.strings.[3].value
 msgctxt "tfrmmoduleaducoption.label3.caption"
 msgid "Filter"
 msgstr ""
 
-#: ufrmmoduleaducoption.lrj:$.strings.[5].value
+#: ufrmmoduleaducoption.lrj:$.strings.[4].value
 msgctxt "tfrmmoduleaducoption.label4.caption"
 msgid "Ldap attributes"
 msgstr ""
 
-#: ufrmmoduleaducoption.lrj:$.strings.[2].value
+#: ufrmmoduleaducoption.lrj:$.strings.[1].value
 msgctxt "tfrmmoduleaducoption.label_filter.caption"
 msgid "Filter"
-msgstr ""
-
-#: ufrmmoduleaducoption.lrj:$.strings.[1].value
-msgctxt "tfrmmoduleaducoption.label_searchpagenumber.caption"
-msgid "Search Page Number"
 msgstr ""
 
 #: ufrmmoduleaducoption.lrj:$.strings.[0].value
@@ -465,47 +508,47 @@ msgctxt "tfrmmoduleaducoption.label_searchpagesize.caption"
 msgid "Search Page Size"
 msgstr ""
 
-#: ufrmmoduleaducoption.lrj:$.strings.[7].value
+#: ufrmmoduleaducoption.lrj:$.strings.[6].value
 msgctxt "tfrmmoduleaducoption.label_showgpo.caption"
 msgid "Show GPO"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[13].value
+#: ufrmmoduledns.lrj:$.strings.[15].value
 msgctxt "tfrmmoduledns.action_delete.caption"
 msgid "Delete"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[15].value
+#: ufrmmoduledns.lrj:$.strings.[17].value
 msgctxt "tfrmmoduledns.action_newzone.caption"
 msgid "New Zone"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[9].value
+#: ufrmmoduledns.lrj:$.strings.[11].value
 msgctxt "tfrmmoduledns.action_next.caption"
 msgid "Next"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[12].value
+#: ufrmmoduledns.lrj:$.strings.[14].value
 msgctxt "tfrmmoduledns.action_othernewrecords.caption"
 msgid "Other New Records"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[10].value
+#: ufrmmoduledns.lrj:$.strings.[12].value
 msgctxt "tfrmmoduledns.action_parent.caption"
 msgid "Parent"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[8].value
+#: ufrmmoduledns.lrj:$.strings.[10].value
 msgctxt "tfrmmoduledns.action_previous.caption"
 msgid "Previous"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[11].value
+#: ufrmmoduledns.lrj:$.strings.[13].value
 msgctxt "tfrmmoduledns.action_property.caption"
 msgid "Property"
 msgstr ""
 
-#: ufrmmoduledns.lrj:$.strings.[14].value
+#: ufrmmoduledns.lrj:$.strings.[16].value
 msgctxt "tfrmmoduledns.action_refresh.caption"
 msgid "Refresh"
 msgstr ""
@@ -550,27 +593,42 @@ msgctxt "tfrmmoduledns.label1.caption"
 msgid "Total : 0 elements"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[17].value
+#: ufrmmoduledns.lrj:$.strings.[8].value
+msgctxt "tfrmmoduledns.label2.caption"
+msgid "Retrieve records: "
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[22].value
+msgctxt "tfrmmodulesitesandservices.action_newall.caption"
+msgid "New"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[23].value
+msgctxt "tfrmmodulesitesandservices.action_newserver.caption"
+msgid "New Server"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[18].value
 msgctxt "tfrmmodulesitesandservices.action_newsite.caption"
 msgid "New Site"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[18].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[19].value
 msgctxt "tfrmmodulesitesandservices.action_newsubnet.caption"
 msgid "New Subnet"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[15].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[16].value
 msgctxt "tfrmmodulesitesandservices.action_next.caption"
 msgid "Action_Next"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[19].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[20].value
 msgctxt "tfrmmodulesitesandservices.action_property.caption"
 msgid "Property"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[13].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[14].value
 msgctxt "tfrmmodulesitesandservices.action_refresh.caption"
 msgid "Refresh"
 msgstr ""
@@ -580,64 +638,179 @@ msgctxt "tfrmmodulesitesandservices.label1.caption"
 msgid "Total : 0 elements"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[1].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[36].value
+msgctxt "tfrmmodulesitesandservices.menuitem_delegatecontrol.caption"
+msgid "Delegate Control"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[58].value
+msgctxt "tfrmmodulesitesandservices.menuitem_delete.caption"
+msgid "Delete"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[37].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newcomputer.caption"
+msgid "Computer"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[44].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newconnection.caption"
+msgid "Connection"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[38].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newcontact.caption"
+msgid "Contact"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[39].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newgroup.caption"
+msgid "Group"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[50].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newmsdnsserversettings.caption"
+msgid "msDNS-ServerSettings"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[51].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newmsdskeycredential.caption"
+msgid "msDS-KeyCredential"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[52].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newmsdsshadowprincipal.caption"
+msgid "msDS-ShadowPrincipal"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[53].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newmsdsshadowprincipalcontainer.caption"
+msgid "msDS-ShadowPrincipalContainer"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[54].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newmsimagingpsps.caption"
+msgid "msImaging-PSPs"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[55].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newprinter.caption"
+msgid "Printer"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[42].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newserver.caption"
+msgid "Server"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[49].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newserverscontainer.caption"
+msgid "Servers Container"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[57].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newsharedfolder.caption"
+msgid "Shared Folder"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[41].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newsite.caption"
+msgid "Site"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[45].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newsitelink.caption"
+msgid "Site Link"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[46].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newsitelinkbridge.caption"
+msgid "Site Link Bridge"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[48].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newsitescontainer.caption"
+msgid "Sites Container"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[47].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newsitesettings.caption"
+msgid "Site Settings"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[43].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newsubnet.caption"
+msgid "Subnet"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[56].value
+msgctxt "tfrmmodulesitesandservices.menuitem_newuser.caption"
+msgid "User"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[2].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[0].text"
 msgid "Name"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[11].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[12].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[10].text"
 msgid "From Server"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[12].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[13].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[11].text"
 msgid "From Site"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[2].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[3].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[1].text"
 msgid "Type"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[3].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[4].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[2].text"
 msgid "Description"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[4].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[5].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[3].text"
 msgid "Location"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[5].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[6].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[4].text"
 msgid "Site"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[6].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[7].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[5].text"
 msgid "Cost"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[7].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[8].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[6].text"
 msgid "Replication Interval"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[8].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[9].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[7].text"
 msgid "Domain"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[9].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[10].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[8].text"
 msgid "Bridgehead"
 msgstr ""
 
-#: ufrmmodulesitesandservices.lrj:$.strings.[10].value
+#: ufrmmodulesitesandservices.lrj:$.strings.[11].value
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[9].text"
 msgid "DC Type"
+msgstr ""
+
+#: ufrmmodulesitesandservices.lrj:$.strings.[1].value
+msgctxt "tfrmmodulesitesandservices.toolbutton8.caption"
+msgid "ToolButton8"
 msgstr ""
 
 #: ufrmnewcomputer.lrj:$.strings.[4].value
@@ -745,6 +918,116 @@ msgctxt "tfrmnewgroup.radiogroup_type.caption"
 msgid "Group type"
 msgstr ""
 
+#: ufrmnewinetorgperson.lrj:$.strings.[13].value
+msgctxt "tfrmnewinetorgperson.action_next.caption"
+msgid "Next"
+msgstr ""
+
+#: ufrmnewinetorgperson.lrj:$.strings.[12].value
+msgctxt "tfrmnewinetorgperson.checkbox_accountdisabled.caption"
+msgid "Account is disabled"
+msgstr ""
+
+#: ufrmnewinetorgperson.lrj:$.strings.[10].value
+msgctxt "tfrmnewinetorgperson.checkbox_cannotchange.caption"
+msgid "User cannot change password"
+msgstr ""
+
+#: ufrmnewinetorgperson.lrj:$.strings.[11].value
+msgctxt "tfrmnewinetorgperson.checkbox_neverexpires.caption"
+msgid "Password never expires"
+msgstr ""
+
+#: ufrmnewinetorgperson.lrj:$.strings.[9].value
+msgctxt "tfrmnewinetorgperson.checkbox_nextlogon.caption"
+msgid "User must change password at next logon"
+msgstr ""
+
+#: ufrmnewinetorgperson.lrj:$.strings.[8].value
+msgctxt "tfrmnewinetorgperson.label_confirm.caption"
+msgid "Confirm:"
+msgstr ""
+
+#: ufrmnewinetorgperson.lrj:$.strings.[0].value
+msgctxt "tfrmnewinetorgperson.label_firstname.caption"
+msgid "First name:"
+msgstr ""
+
+#: ufrmnewinetorgperson.lrj:$.strings.[3].value
+msgctxt "tfrmnewinetorgperson.label_fullname.caption"
+msgid "Full name:"
+msgstr ""
+
+#: ufrmnewinetorgperson.lrj:$.strings.[1].value
+msgctxt "tfrmnewinetorgperson.label_initials.caption"
+msgid "Initials:"
+msgstr ""
+
+#: ufrmnewinetorgperson.lrj:$.strings.[2].value
+msgctxt "tfrmnewinetorgperson.label_lastname.caption"
+msgid "Last name:"
+msgstr ""
+
+#: ufrmnewinetorgperson.lrj:$.strings.[7].value
+msgctxt "tfrmnewinetorgperson.label_password.caption"
+msgid "Password:"
+msgstr ""
+
+#: ufrmnewinetorgperson.lrj:$.strings.[5].value
+msgctxt "tfrmnewinetorgperson.label_prewindows.caption"
+msgid "User logon name (pre-Windows 2000):"
+msgstr ""
+
+#: ufrmnewinetorgperson.lrj:$.strings.[4].value
+msgctxt "tfrmnewinetorgperson.label_userlogonname.caption"
+msgid "User logon name:"
+msgstr ""
+
+#: ufrmnewinetorgperson.lrj:$.strings.[6].value
+msgctxt "tfrmnewinetorgperson.label_validation.caption"
+msgid "When you click OK, the following object will be created:"
+msgstr ""
+
+#: ufrmnewmsdnsserversettings.lrj:$.strings.[1].value
+msgctxt "tfrmnewmsdnsserversettings.action_next.caption"
+msgid "Next"
+msgstr ""
+
+#: ufrmnewmsdnsserversettings.lrj:$.strings.[0].value
+msgctxt "tfrmnewmsdnsserversettings.label_cn.caption"
+msgid "cn:"
+msgstr ""
+
+#: ufrmnewmsdskeycredential.lrj:$.strings.[3].value
+msgctxt "tfrmnewmsdskeycredential.action_back.caption"
+msgid "Action_Back"
+msgstr ""
+
+#: ufrmnewmsdskeycredential.lrj:$.strings.[2].value
+msgctxt "tfrmnewmsdskeycredential.action_next.caption"
+msgid "Action_Next"
+msgstr ""
+
+#: ufrmnewmsdskeycredential.lrj:$.strings.[0].value
+msgctxt "tfrmnewmsdskeycredential.label_cn.caption"
+msgid "cn:"
+msgstr ""
+
+#: ufrmnewmsdskeycredential.lrj:$.strings.[1].value
+msgctxt "tfrmnewmsdskeycredential.label_keyid.caption"
+msgid "msDS-KeyId:"
+msgstr ""
+
+#: ufrmnewmsdsresourcepropertylist.lrj:$.strings.[0].value
+msgctxt "tfrmnewmsdsresourcepropertylist.label_cn.caption"
+msgid "cn:"
+msgstr ""
+
+#: ufrmnewmsimagingpsps.lrj:$.strings.[0].value
+msgctxt "tfrmnewmsimagingpsps.label_cn.caption"
+msgid "cn:"
+msgstr ""
+
 #: ufrmnewobject.lrj:$.strings.[2].value
 msgctxt "tfrmnewobject.label1.caption"
 msgid "Object class"
@@ -778,6 +1061,21 @@ msgstr ""
 #: ufrmnewou.lrj:$.strings.[0].value
 msgctxt "tfrmnewou.label_name.caption"
 msgid "Name :"
+msgstr ""
+
+#: ufrmnewprinter.lrj:$.strings.[0].value
+msgctxt "tfrmnewprinter.label_networkpath.caption"
+msgid "Network path of the pre-Windows 2000 print share (\\\\server\\share):"
+msgstr ""
+
+#: ufrmnewserver.lrj:$.strings.[1].value
+msgctxt "tfrmnewserver.action_next.caption"
+msgid "Next"
+msgstr ""
+
+#: ufrmnewserver.lrj:$.strings.[0].value
+msgctxt "tfrmnewserver.label_name.caption"
+msgid "Name:"
 msgstr ""
 
 #: ufrmnewsharedfolder.lrj:$.strings.[2].value
@@ -819,6 +1117,76 @@ msgstr ""
 #: ufrmnewsite.lrj:$.strings.[3].value
 msgctxt "tfrmnewsite.tisgrid1.header.columns[1].text"
 msgid "Transport"
+msgstr ""
+
+#: ufrmnewsitelink.lrj:$.strings.[6].value
+msgctxt "tfrmnewsitelink.action_next.caption"
+msgid "Next"
+msgstr ""
+
+#: ufrmnewsitelink.lrj:$.strings.[4].value
+msgctxt "tfrmnewsitelink.button_add.caption"
+msgid "Add >>"
+msgstr ""
+
+#: ufrmnewsitelink.lrj:$.strings.[5].value
+msgctxt "tfrmnewsitelink.button_remove.caption"
+msgid "<< Remove"
+msgstr ""
+
+#: ufrmnewsitelink.lrj:$.strings.[1].value
+msgctxt "tfrmnewsitelink.label_leftlist.caption"
+msgid "Sites not in this site link:"
+msgstr ""
+
+#: ufrmnewsitelink.lrj:$.strings.[0].value
+msgctxt "tfrmnewsitelink.label_name.caption"
+msgid "Name:"
+msgstr ""
+
+#: ufrmnewsitelink.lrj:$.strings.[2].value
+msgctxt "tfrmnewsitelink.label_rightlist.caption"
+msgid "Sites in this site link:"
+msgstr ""
+
+#: ufrmnewsitelink.lrj:$.strings.[3].value
+msgctxt "tfrmnewsitelink.label_warning.caption"
+msgid "A site link must contain at least two sites."
+msgstr ""
+
+#: ufrmnewsitelinkbridge.lrj:$.strings.[6].value
+msgctxt "tfrmnewsitelinkbridge.action_next.caption"
+msgid "Next"
+msgstr ""
+
+#: ufrmnewsitelinkbridge.lrj:$.strings.[4].value
+msgctxt "tfrmnewsitelinkbridge.button_add.caption"
+msgid "Add >>"
+msgstr ""
+
+#: ufrmnewsitelinkbridge.lrj:$.strings.[5].value
+msgctxt "tfrmnewsitelinkbridge.button_remove.caption"
+msgid "<< Remove"
+msgstr ""
+
+#: ufrmnewsitelinkbridge.lrj:$.strings.[1].value
+msgctxt "tfrmnewsitelinkbridge.label_leftlistbox.caption"
+msgid "Site links not in this site link bridge:"
+msgstr ""
+
+#: ufrmnewsitelinkbridge.lrj:$.strings.[0].value
+msgctxt "tfrmnewsitelinkbridge.label_name.caption"
+msgid "Name:"
+msgstr ""
+
+#: ufrmnewsitelinkbridge.lrj:$.strings.[2].value
+msgctxt "tfrmnewsitelinkbridge.label_rightlistbox.caption"
+msgid "Site links in this site link bridge:"
+msgstr ""
+
+#: ufrmnewsitelinkbridge.lrj:$.strings.[3].value
+msgctxt "tfrmnewsitelinkbridge.label_warning.caption"
+msgid "A site link bridge must contain at least two site links."
 msgstr ""
 
 #: ufrmnewsubnet.lrj:$.strings.[8].value
@@ -948,67 +1316,62 @@ msgctxt "tfrmpropertyaccount.action_logonto.caption"
 msgid "Log On To"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[7].value
+#: ufrmpropertyaccount.lrj:$.strings.[6].value
 msgctxt "tfrmpropertyaccount.checkbox_cannotchange.caption"
 msgid "User cannot change password"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[10].value
+#: ufrmpropertyaccount.lrj:$.strings.[9].value
 msgctxt "tfrmpropertyaccount.checkbox_disabled.caption"
 msgid "Account is disabled"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[14].value
+#: ufrmpropertyaccount.lrj:$.strings.[13].value
 msgctxt "tfrmpropertyaccount.checkbox_kerberosaes128encryption.caption"
 msgid "This account supports Kerberos AES 128 bit encryption"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[15].value
+#: ufrmpropertyaccount.lrj:$.strings.[14].value
 msgctxt "tfrmpropertyaccount.checkbox_kerberosaes256encryption.caption"
 msgid "This account supports Kerberos AES 256 bit encryption"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[13].value
+#: ufrmpropertyaccount.lrj:$.strings.[12].value
 msgctxt "tfrmpropertyaccount.checkbox_kerberosdesencryption.caption"
 msgid "Use only Kerberos DES encryption types for this account"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[6].value
+#: ufrmpropertyaccount.lrj:$.strings.[5].value
 msgctxt "tfrmpropertyaccount.checkbox_mustchange.caption"
 msgid "User must change password at next logon"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[8].value
+#: ufrmpropertyaccount.lrj:$.strings.[7].value
 msgctxt "tfrmpropertyaccount.checkbox_neverexpires.caption"
 msgid "Password never expires"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[16].value
+#: ufrmpropertyaccount.lrj:$.strings.[15].value
 msgctxt "tfrmpropertyaccount.checkbox_nokerberospreauth.caption"
 msgid "Do not require Kerberos preauthentification"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[9].value
+#: ufrmpropertyaccount.lrj:$.strings.[8].value
 msgctxt "tfrmpropertyaccount.checkbox_reversibleencryption.caption"
 msgid "Store password using reversible encryption"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[12].value
+#: ufrmpropertyaccount.lrj:$.strings.[11].value
 msgctxt "tfrmpropertyaccount.checkbox_sensitive.caption"
 msgid "Account is sensitive and cannot be delegated"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[11].value
+#: ufrmpropertyaccount.lrj:$.strings.[10].value
 msgctxt "tfrmpropertyaccount.checkbox_smartcard.caption"
 msgid "Smart card is required for interactive logon"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[4].value
-msgctxt "tfrmpropertyaccount.checkbox_unlock.caption"
-msgid "Unlock account"
-msgstr ""
-
-#: ufrmpropertyaccount.lrj:$.strings.[20].value
+#: ufrmpropertyaccount.lrj:$.strings.[19].value
 msgctxt "tfrmpropertyaccount.datetimepicker_expires.textfornulldate"
 msgid "NULL"
 msgstr ""
@@ -1026,14 +1389,19 @@ msgid "The logon name used to support clients and servers running earlier versio
 "nd LAN Manager"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[17].value
+#: ufrmpropertyaccount.lrj:$.strings.[16].value
 msgctxt "tfrmpropertyaccount.goupbox_expires.caption"
 msgid "Account expires"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[5].value
+#: ufrmpropertyaccount.lrj:$.strings.[4].value
 msgctxt "tfrmpropertyaccount.label_options.caption"
 msgid "Account options :"
+msgstr ""
+
+#: ufrmpropertyaccount.lrj:$.strings.[20].value
+msgctxt "tfrmpropertyaccount.label_unlock.caption"
+msgid "Unlock account."
 msgstr ""
 
 #: ufrmpropertyaccount.lrj:$.strings.[0].value
@@ -1046,12 +1414,12 @@ msgctxt "tfrmpropertyaccount.label_usersamaccountname.caption"
 msgid "User logon name (pre-Windows 2000) :"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[19].value
+#: ufrmpropertyaccount.lrj:$.strings.[18].value
 msgctxt "tfrmpropertyaccount.radiobutton_endof.caption"
 msgid "End of :"
 msgstr ""
 
-#: ufrmpropertyaccount.lrj:$.strings.[18].value
+#: ufrmpropertyaccount.lrj:$.strings.[17].value
 msgctxt "tfrmpropertyaccount.radiobutton_never.caption"
 msgid "Never"
 msgstr ""
@@ -1191,24 +1559,69 @@ msgctxt "tfrmpropertyattributes.menuitem9.caption"
 msgid "System-only"
 msgstr ""
 
-#: ufrmpropertybitlocker.lrj:$.strings.[1].value
+#: ufrmpropertybitlocker.lrj:$.strings.[6].value
+msgctxt "tfrmpropertybitlocker.action_copypassword.caption"
+msgid "Copy password"
+msgstr ""
+
+#: ufrmpropertybitlocker.lrj:$.strings.[5].value
 msgctxt "tfrmpropertybitlocker.label_bitclockerdetails.caption"
-msgid "Détails :"
+msgid "Details:"
+msgstr ""
+
+#: ufrmpropertybitlocker.lrj:$.strings.[4].value
+msgctxt "tfrmpropertybitlocker.label_bitlockerpassword.caption"
+msgid "Bitlocker recovery password:"
 msgstr ""
 
 #: ufrmpropertybitlocker.lrj:$.strings.[0].value
-msgctxt "tfrmpropertybitlocker.label_bitlockerpassword.caption"
-msgid "Mot de passe de récupération BitLocker :"
+msgctxt "tfrmpropertybitlocker.tisgrid1.header.columns[0].text"
+msgid "Date"
+msgstr ""
+
+#: ufrmpropertybitlocker.lrj:$.strings.[1].value
+msgctxt "tfrmpropertybitlocker.tisgrid1.header.columns[1].text"
+msgid "Password ID"
 msgstr ""
 
 #: ufrmpropertybitlocker.lrj:$.strings.[2].value
-msgctxt "tfrmpropertybitlocker.tisgrid1.header.columns[0].text"
-msgid "Date d'ajout"
+msgctxt "tfrmpropertybitlocker.tisgrid1.header.columns[2].text"
+msgid "Recovery Password"
 msgstr ""
 
 #: ufrmpropertybitlocker.lrj:$.strings.[3].value
-msgctxt "tfrmpropertybitlocker.tisgrid1.header.columns[1].text"
-msgid "ID de mdp"
+msgctxt "tfrmpropertybitlocker.tisgrid1.header.columns[3].text"
+msgid "Computer"
+msgstr ""
+
+#: ufrmpropertyconnections.lrj:$.strings.[1].value
+msgctxt "tfrmpropertyconnections.grid_from.header.columns[0].text"
+msgid "Name"
+msgstr ""
+
+#: ufrmpropertyconnections.lrj:$.strings.[2].value
+msgctxt "tfrmpropertyconnections.grid_from.header.columns[1].text"
+msgid "Site"
+msgstr ""
+
+#: ufrmpropertyconnections.lrj:$.strings.[4].value
+msgctxt "tfrmpropertyconnections.grid_to.header.columns[0].text"
+msgid "Name"
+msgstr ""
+
+#: ufrmpropertyconnections.lrj:$.strings.[5].value
+msgctxt "tfrmpropertyconnections.grid_to.header.columns[1].text"
+msgid "Site"
+msgstr ""
+
+#: ufrmpropertyconnections.lrj:$.strings.[0].value
+msgctxt "tfrmpropertyconnections.label_from.caption"
+msgid "Replicate From:"
+msgstr ""
+
+#: ufrmpropertyconnections.lrj:$.strings.[3].value
+msgctxt "tfrmpropertyconnections.label_to.caption"
+msgid "Replicate To:"
 msgstr ""
 
 #: ufrmpropertygeneralcomputer.lrj:$.strings.[6].value
@@ -1325,6 +1738,93 @@ msgctxt "tfrmpropertygeneralgroup.rb_universal.caption"
 msgid "Universal"
 msgstr ""
 
+#: ufrmpropertygeneralintersitetransport.lrj:$.strings.[2].value
+msgctxt "tfrmpropertygeneralintersitetransport.checkbox_bridge.caption"
+msgid "Bridge all site links"
+msgstr ""
+
+#: ufrmpropertygeneralintersitetransport.lrj:$.strings.[1].value
+msgctxt "tfrmpropertygeneralintersitetransport.checkbox_schedules.caption"
+msgid "Ignore schedules"
+msgstr ""
+
+#: ufrmpropertygeneralintersitetransport.lrj:$.strings.[0].value
+msgctxt "tfrmpropertygeneralintersitetransport.label_description.caption"
+msgid "Description:"
+msgstr ""
+
+#: ufrmpropertygeneralntdsdsa.lrj:$.strings.[3].value
+msgctxt "tfrmpropertygeneralntdsdsa.checkbox_globalcatalog.caption"
+msgid "Global Catalog"
+msgstr ""
+
+#: ufrmpropertygeneralntdsdsa.lrj:$.strings.[0].value
+msgctxt "tfrmpropertygeneralntdsdsa.label_description.caption"
+msgid "Description:"
+msgstr ""
+
+#: ufrmpropertygeneralntdsdsa.lrj:$.strings.[2].value
+msgctxt "tfrmpropertygeneralntdsdsa.label_dnsalias.caption"
+msgid "DNS Alias:"
+msgstr ""
+
+#: ufrmpropertygeneralntdsdsa.lrj:$.strings.[4].value
+msgctxt "tfrmpropertygeneralntdsdsa.label_info.caption"
+msgid "The amount of time it will take to publish the Global Catalog varies dependi"
+"ng on your replication topology."
+msgstr ""
+
+#: ufrmpropertygeneralntdsdsa.lrj:$.strings.[1].value
+msgctxt "tfrmpropertygeneralntdsdsa.label_querypolicy.caption"
+msgid "Query Policy:"
+msgstr ""
+
+#: ufrmpropertygeneralntdssitesettings.lrj:$.strings.[1].value
+msgctxt "tfrmpropertygeneralntdssitesettings.button_schedule.caption"
+msgid "Change Schedule..."
+msgstr ""
+
+#: ufrmpropertygeneralntdssitesettings.lrj:$.strings.[6].value
+msgctxt "tfrmpropertygeneralntdssitesettings.checkbox_enable.caption"
+msgid "Enable Universal Membership Caching"
+msgstr ""
+
+#: ufrmpropertygeneralntdssitesettings.lrj:$.strings.[8].value
+msgctxt "tfrmpropertygeneralntdssitesettings.combobox_refresh.text"
+msgid "<Default>"
+msgstr ""
+
+#: ufrmpropertygeneralntdssitesettings.lrj:$.strings.[2].value
+msgctxt "tfrmpropertygeneralntdssitesettings.groupbox_intersitetopologygenerator.capt"
+"ion"
+msgid "Inter-Site Topology Generator"
+msgstr ""
+
+#: ufrmpropertygeneralntdssitesettings.lrj:$.strings.[5].value
+msgctxt "tfrmpropertygeneralntdssitesettings.groupbox_universalgroup.caption"
+msgid "Universal Group Membership Caching"
+msgstr ""
+
+#: ufrmpropertygeneralntdssitesettings.lrj:$.strings.[0].value
+msgctxt "tfrmpropertygeneralntdssitesettings.label_description.caption"
+msgid "Description:"
+msgstr ""
+
+#: ufrmpropertygeneralntdssitesettings.lrj:$.strings.[7].value
+msgctxt "tfrmpropertygeneralntdssitesettings.label_refresh.caption"
+msgid "Refresh cache from:"
+msgstr ""
+
+#: ufrmpropertygeneralntdssitesettings.lrj:$.strings.[3].value
+msgctxt "tfrmpropertygeneralntdssitesettings.label_server.caption"
+msgid "Server:"
+msgstr ""
+
+#: ufrmpropertygeneralntdssitesettings.lrj:$.strings.[4].value
+msgctxt "tfrmpropertygeneralntdssitesettings.label_site.caption"
+msgid "Site:"
+msgstr ""
+
 #: ufrmpropertygeneralou.lrj:$.strings.[10].value
 msgctxt "tfrmpropertygeneralou.combobox_co.hint"
 msgid "The country/region in which the user is located"
@@ -1380,6 +1880,46 @@ msgctxt "tfrmpropertygeneralou.memo_street.hint"
 msgid "A street address"
 msgstr ""
 
+#: ufrmpropertygeneralserver.lrj:$.strings.[6].value
+msgctxt "tfrmpropertygeneralserver.button_add.caption"
+msgid "Add >>"
+msgstr ""
+
+#: ufrmpropertygeneralserver.lrj:$.strings.[7].value
+msgctxt "tfrmpropertygeneralserver.button_remove.caption"
+msgid "<< Remove"
+msgstr ""
+
+#: ufrmpropertygeneralserver.lrj:$.strings.[0].value
+msgctxt "tfrmpropertygeneralserver.label_computer.caption"
+msgid "Computer:"
+msgstr ""
+
+#: ufrmpropertygeneralserver.lrj:$.strings.[2].value
+msgctxt "tfrmpropertygeneralserver.label_dctype.caption"
+msgid "DC Type:"
+msgstr ""
+
+#: ufrmpropertygeneralserver.lrj:$.strings.[3].value
+msgctxt "tfrmpropertygeneralserver.label_description.caption"
+msgid "Description:"
+msgstr ""
+
+#: ufrmpropertygeneralserver.lrj:$.strings.[1].value
+msgctxt "tfrmpropertygeneralserver.label_domain.caption"
+msgid "Domain:"
+msgstr ""
+
+#: ufrmpropertygeneralserver.lrj:$.strings.[5].value
+msgctxt "tfrmpropertygeneralserver.label_transports.caption"
+msgid "This server is a preferred bridgehead server for the following transports:"
+msgstr ""
+
+#: ufrmpropertygeneralserver.lrj:$.strings.[4].value
+msgctxt "tfrmpropertygeneralserver.label_transportsavailable.caption"
+msgid "Transports available for inter-site data transfer:"
+msgstr ""
+
 #: ufrmpropertygeneralsite.lrj:$.strings.[0].value
 msgctxt "tfrmpropertygeneralsite.label_description.caption"
 msgid "Description:"
@@ -1388,6 +1928,76 @@ msgstr ""
 #: ufrmpropertygeneralsite.lrj:$.strings.[1].value
 msgctxt "tfrmpropertygeneralsite.label_subnet.caption"
 msgid "Subnets:"
+msgstr ""
+
+#: ufrmpropertygeneralsitelink.lrj:$.strings.[3].value
+msgctxt "tfrmpropertygeneralsitelink.button_add.caption"
+msgid "Add >>"
+msgstr ""
+
+#: ufrmpropertygeneralsitelink.lrj:$.strings.[4].value
+msgctxt "tfrmpropertygeneralsitelink.button_remove.caption"
+msgid "<< Remove"
+msgstr ""
+
+#: ufrmpropertygeneralsitelink.lrj:$.strings.[8].value
+msgctxt "tfrmpropertygeneralsitelink.button_schedule.caption"
+msgid "Change Schedule..."
+msgstr ""
+
+#: ufrmpropertygeneralsitelink.lrj:$.strings.[5].value
+msgctxt "tfrmpropertygeneralsitelink.label_cost.caption"
+msgid "Cost:"
+msgstr ""
+
+#: ufrmpropertygeneralsitelink.lrj:$.strings.[0].value
+msgctxt "tfrmpropertygeneralsitelink.label_description.caption"
+msgid "Description:"
+msgstr ""
+
+#: ufrmpropertygeneralsitelink.lrj:$.strings.[2].value
+msgctxt "tfrmpropertygeneralsitelink.label_insitelink.caption"
+msgid "Sites in this site link:"
+msgstr ""
+
+#: ufrmpropertygeneralsitelink.lrj:$.strings.[7].value
+msgctxt "tfrmpropertygeneralsitelink.label_minutes.caption"
+msgid "minutes"
+msgstr ""
+
+#: ufrmpropertygeneralsitelink.lrj:$.strings.[1].value
+msgctxt "tfrmpropertygeneralsitelink.label_notinsitelink.caption"
+msgid "Sites not in this site link:"
+msgstr ""
+
+#: ufrmpropertygeneralsitelink.lrj:$.strings.[6].value
+msgctxt "tfrmpropertygeneralsitelink.label_replicate.caption"
+msgid "Replicate every"
+msgstr ""
+
+#: ufrmpropertygeneralsitelinkbridge.lrj:$.strings.[3].value
+msgctxt "tfrmpropertygeneralsitelinkbridge.button_add.caption"
+msgid "Add >>"
+msgstr ""
+
+#: ufrmpropertygeneralsitelinkbridge.lrj:$.strings.[4].value
+msgctxt "tfrmpropertygeneralsitelinkbridge.button_remove.caption"
+msgid "<< Remove"
+msgstr ""
+
+#: ufrmpropertygeneralsitelinkbridge.lrj:$.strings.[0].value
+msgctxt "tfrmpropertygeneralsitelinkbridge.label_description.caption"
+msgid "Description:"
+msgstr ""
+
+#: ufrmpropertygeneralsitelinkbridge.lrj:$.strings.[2].value
+msgctxt "tfrmpropertygeneralsitelinkbridge.label_insitelinkbridge.caption"
+msgid "Site links in this site link bridge:"
+msgstr ""
+
+#: ufrmpropertygeneralsitelinkbridge.lrj:$.strings.[1].value
+msgctxt "tfrmpropertygeneralsitelinkbridge.label_notinsitelinkbridge.caption"
+msgid "Site links not in this site link bridge:"
 msgstr ""
 
 #: ufrmpropertygeneralsubnet.lrj:$.strings.[0].value
@@ -1487,7 +2097,7 @@ msgstr ""
 
 #: ufrmpropertygeneraluser.lrj:$.strings.[12].value
 msgctxt "tfrmpropertygeneraluser.label_mail.caption"
-msgid "Email adress :"
+msgid "Email address :"
 msgstr ""
 
 #: ufrmpropertygeneraluser.lrj:$.strings.[2].value
@@ -1525,48 +2135,118 @@ msgctxt "tfrmpropertygeneralvolume.label_uncname.caption"
 msgid "UNC name: (Example: \\\\server\\share)"
 msgstr ""
 
-#: ufrmpropertylaps.lrj:$.strings.[7].value
-msgctxt "tfrmpropertylaps.action_copypassword.caption"
+#: ufrmpropertylaps.lrj:$.strings.[19].value
+msgctxt "tfrmpropertylaps.action_v1_copypassword.caption"
 msgid "Copy password"
 msgstr ""
 
-#: ufrmpropertylaps.lrj:$.strings.[6].value
-msgctxt "tfrmpropertylaps.action_expirenow.caption"
+#: ufrmpropertylaps.lrj:$.strings.[18].value
+msgctxt "tfrmpropertylaps.action_v1_expirenow.caption"
 msgid "Expire now"
 msgstr ""
 
-#: ufrmpropertylaps.lrj:$.strings.[8].value
-msgctxt "tfrmpropertylaps.action_showpassword.caption"
+#: ufrmpropertylaps.lrj:$.strings.[20].value
+msgctxt "tfrmpropertylaps.action_v1_showpassword.caption"
 msgid "Show password"
 msgstr ""
 
-#: ufrmpropertylaps.lrj:$.strings.[3].value
-msgctxt "tfrmpropertylaps.datetimepicker_newexpiration.textfornulldate"
+#: ufrmpropertylaps.lrj:$.strings.[16].value
+msgctxt "tfrmpropertylaps.action_v2_copypassword.caption"
+msgid "Copy password"
+msgstr ""
+
+#: ufrmpropertylaps.lrj:$.strings.[21].value
+msgctxt "tfrmpropertylaps.action_v2_encryptedcopypassword.caption"
+msgid "Copy password"
+msgstr ""
+
+#: ufrmpropertylaps.lrj:$.strings.[22].value
+msgctxt "tfrmpropertylaps.action_v2_encryptedshowpassword.caption"
+msgid "Show password"
+msgstr ""
+
+#: ufrmpropertylaps.lrj:$.strings.[15].value
+msgctxt "tfrmpropertylaps.action_v2_expirenow.caption"
+msgid "Expire now"
+msgstr ""
+
+#: ufrmpropertylaps.lrj:$.strings.[17].value
+msgctxt "tfrmpropertylaps.action_v2_showpassword.caption"
+msgid "Show password"
+msgstr ""
+
+#: ufrmpropertylaps.lrj:$.strings.[14].value
+msgctxt "tfrmpropertylaps.datetimepicker_v1_newexpiration.textfornulldate"
 msgid "NULL"
 msgstr ""
 
-#: ufrmpropertylaps.lrj:$.strings.[0].value
-msgctxt "tfrmpropertylaps.groupbox1.caption"
-msgid "Local Administrator Password Solution"
+#: ufrmpropertylaps.lrj:$.strings.[5].value
+msgctxt "tfrmpropertylaps.datetimepicker_v2_newexpiration.textfornulldate"
+msgid "NULL"
 msgstr ""
 
-#: ufrmpropertylaps.lrj:$.strings.[1].value
-msgctxt "tfrmpropertylaps.label_currentexpiration.caption"
+#: ufrmpropertylaps.lrj:$.strings.[6].value
+msgctxt "tfrmpropertylaps.groupbox_lapsencrypted.caption"
+msgid "Encrypted"
+msgstr ""
+
+#: ufrmpropertylaps.lrj:$.strings.[10].value
+msgctxt "tfrmpropertylaps.groupbox_lapsv1.caption"
+msgid "Local Administrator Password Solution (V1)"
+msgstr ""
+
+#: ufrmpropertylaps.lrj:$.strings.[0].value
+msgctxt "tfrmpropertylaps.groupbox_lapsv2.caption"
+msgid "Local Administrator Password Solution (V2)"
+msgstr ""
+
+#: ufrmpropertylaps.lrj:$.strings.[11].value
+msgctxt "tfrmpropertylaps.label_v1_currentexpiration.caption"
 msgid "Current LAPS password expiration:"
 msgstr ""
 
-#: ufrmpropertylaps.lrj:$.strings.[4].value
-msgctxt "tfrmpropertylaps.label_localadminaccountname.caption"
+#: ufrmpropertylaps.lrj:$.strings.[12].value
+msgctxt "tfrmpropertylaps.label_v1_newexpiration.caption"
+msgid "Set new LAPS password expiration:"
+msgstr ""
+
+#: ufrmpropertylaps.lrj:$.strings.[13].value
+msgctxt "tfrmpropertylaps.label_v1_password.caption"
 msgid "LAPS local admin account name:"
 msgstr ""
 
-#: ufrmpropertylaps.lrj:$.strings.[5].value
-msgctxt "tfrmpropertylaps.label_localadminaccountpassword.caption"
+#: ufrmpropertylaps.lrj:$.strings.[1].value
+msgctxt "tfrmpropertylaps.label_v2_currentexpiration.caption"
+msgid "Current LAPS password expiration:"
+msgstr ""
+
+#: ufrmpropertylaps.lrj:$.strings.[8].value
+msgctxt "tfrmpropertylaps.label_v2_encryptedlocaladminaccountname.caption"
+msgid "LAPS local admin account name:"
+msgstr ""
+
+#: ufrmpropertylaps.lrj:$.strings.[9].value
+msgctxt "tfrmpropertylaps.label_v2_encryptedlocaladminpassword.caption"
+msgid "LAPS local admin account password:"
+msgstr ""
+
+#: ufrmpropertylaps.lrj:$.strings.[7].value
+msgctxt "tfrmpropertylaps.label_v2_encryptedpassworddata.caption"
+msgid "Encrypted password data: (cannot be unencrypted, gkdi not implemented)"
+msgstr ""
+
+#: ufrmpropertylaps.lrj:$.strings.[3].value
+msgctxt "tfrmpropertylaps.label_v2_localadminaccountname.caption"
+msgid "LAPS local admin account name:"
+msgstr ""
+
+#: ufrmpropertylaps.lrj:$.strings.[4].value
+msgctxt "tfrmpropertylaps.label_v2_localadminaccountpassword.caption"
 msgid "LAPS local admin account password:"
 msgstr ""
 
 #: ufrmpropertylaps.lrj:$.strings.[2].value
-msgctxt "tfrmpropertylaps.label_newexpiration.caption"
+msgctxt "tfrmpropertylaps.label_v2_newexpiration.caption"
 msgid "Set new LAPS password expiration:"
 msgstr ""
 
@@ -1710,6 +2390,51 @@ msgstr ""
 #: ufrmpropertymemberof.lrj:$.strings.[4].value
 msgctxt "tfrmpropertymemberof.label_primarygroupkey.caption"
 msgid "Primary group :"
+msgstr ""
+
+#: ufrmpropertyntauthcertificates.lrj:$.strings.[5].value
+msgctxt "tfrmpropertyntauthcertificates.action_add.caption"
+msgid "Add"
+msgstr ""
+
+#: ufrmpropertyntauthcertificates.lrj:$.strings.[6].value
+msgctxt "tfrmpropertyntauthcertificates.action_delete.caption"
+msgid "Delete"
+msgstr ""
+
+#: ufrmpropertyntauthcertificates.lrj:$.strings.[8].value
+msgctxt "tfrmpropertyntauthcertificates.action_export.caption"
+msgid "Export"
+msgstr ""
+
+#: ufrmpropertyntauthcertificates.lrj:$.strings.[7].value
+msgctxt "tfrmpropertyntauthcertificates.action_view.caption"
+msgid "View"
+msgstr ""
+
+#: ufrmpropertyntauthcertificates.lrj:$.strings.[0].value
+msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[0].text"
+msgid "Name"
+msgstr ""
+
+#: ufrmpropertyntauthcertificates.lrj:$.strings.[1].value
+msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[1].text"
+msgid "Status"
+msgstr ""
+
+#: ufrmpropertyntauthcertificates.lrj:$.strings.[2].value
+msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[2].text"
+msgid "Issued By"
+msgstr ""
+
+#: ufrmpropertyntauthcertificates.lrj:$.strings.[3].value
+msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[3].text"
+msgid "Intended Purposes"
+msgstr ""
+
+#: ufrmpropertyntauthcertificates.lrj:$.strings.[4].value
+msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[4].text"
+msgid "Expiration Date"
 msgstr ""
 
 #: ufrmpropertyobject.lrj:$.strings.[7].value
@@ -2084,44 +2809,56 @@ msgctxt "tfrmpropertytelephone.memo_info.hint"
 msgid "The group/user comments"
 msgstr ""
 
-#: ufrmrsat.lrj:$.strings.[6].value
-msgctxt "tfrmrsat.action_advancedfeatures.caption"
-msgid "Advanced Features"
+#: ufrmpropertyunixattributes.lrj:$.strings.[0].value
+msgctxt "tfrmpropertyunixattributes.label1.caption"
+msgid "NIS Domain:"
 msgstr ""
 
-#: ufrmrsat.lrj:$.strings.[1].value
-msgctxt "tfrmrsat.action_ldapconnect.caption"
-msgid "Connect"
+#: ufrmpropertyunixattributes.lrj:$.strings.[6].value
+msgctxt "tfrmpropertyunixattributes.label_gid.caption"
+msgid "GID (Group ID):"
 msgstr ""
 
-#: ufrmrsat.lrj:$.strings.[2].value
-msgctxt "tfrmrsat.action_ldapconnect.hint"
-msgid "Open a connection to ldap server"
+#: ufrmpropertyunixattributes.lrj:$.strings.[3].value
+msgctxt "tfrmpropertyunixattributes.label_homedirectory.caption"
+msgid "Home Directory:"
 msgstr ""
 
-#: ufrmrsat.lrj:$.strings.[3].value
-msgctxt "tfrmrsat.action_ldapdisconnect.caption"
-msgid "Disconnect"
+#: ufrmpropertyunixattributes.lrj:$.strings.[9].value
+msgctxt "tfrmpropertyunixattributes.label_infogroup.caption"
+msgid "To enable access to this group for UNIX clients, you will have to specify th"
+"e NIS domain this group belongs to."
 msgstr ""
 
-#: ufrmrsat.lrj:$.strings.[4].value
-msgctxt "tfrmrsat.action_ldapoptions.caption"
-msgid "Connection Options"
+#: ufrmpropertyunixattributes.lrj:$.strings.[8].value
+msgctxt "tfrmpropertyunixattributes.label_infouser.caption"
+msgid "To enable access to this user for UNIX clients, you will have to specify the"
+" NIS domain this user belongs to."
 msgstr ""
 
-#: ufrmrsat.lrj:$.strings.[0].value
-msgctxt "tfrmrsat.action_options.caption"
-msgid "Options"
+#: ufrmpropertyunixattributes.lrj:$.strings.[2].value
+msgctxt "tfrmpropertyunixattributes.label_loginshell.caption"
+msgid "Login Shell:"
 msgstr ""
 
-#: ufrmrsat.lrj:$.strings.[5].value
-msgctxt "tfrmrsat.action_properties.caption"
-msgid "Properties"
+#: ufrmpropertyunixattributes.lrj:$.strings.[4].value
+msgctxt "tfrmpropertyunixattributes.label_primarygroup.caption"
+msgid "Primary group name/GID:"
 msgstr ""
 
-#: ufrmrsat.lrj:$.strings.[7].value
-msgctxt "tfrmrsat.action_showgpo.caption"
-msgid "Show GPO"
+#: ufrmpropertyunixattributes.lrj:$.strings.[1].value
+msgctxt "tfrmpropertyunixattributes.label_uid.caption"
+msgid "UID:"
+msgstr ""
+
+#: ufrmpropertyunixattributes.lrj:$.strings.[5].value
+msgctxt "tfrmpropertyunixattributes.panel_gid.caption"
+msgid "Panel_Gid"
+msgstr ""
+
+#: ufrmpropertyunixattributes.lrj:$.strings.[7].value
+msgctxt "tfrmpropertyunixattributes.panel_info.caption"
+msgid "Panel_Info"
 msgstr ""
 
 #: ufrmrsatoptions.lrj:$.strings.[3].value
@@ -2329,259 +3066,219 @@ msgctxt "tvisaddaces.tisgrid1.header.columns[5].text"
 msgid "Inherit to"
 msgstr ""
 
-#: uvisadvancedsecurity.lrj:$.strings.[44].value
+#: uvisadvancedsecurity.lrj:$.strings.[33].value
 msgctxt "tvisadvancedsecurity.action_addace.caption"
 msgid "Add"
 msgstr ""
 
-#: uvisadvancedsecurity.lrj:$.strings.[49].value
+#: uvisadvancedsecurity.lrj:$.strings.[34].value
 msgctxt "tvisadvancedsecurity.action_apply.caption"
 msgid "Apply"
 msgstr ""
 
-#: uvisadvancedsecurity.lrj:$.strings.[48].value
+#: uvisadvancedsecurity.lrj:$.strings.[35].value
 msgctxt "tvisadvancedsecurity.action_cancel.caption"
 msgid "Cancel"
 msgstr ""
 
-#: uvisadvancedsecurity.lrj:$.strings.[45].value
+#: uvisadvancedsecurity.lrj:$.strings.[36].value
 msgctxt "tvisadvancedsecurity.action_deleteace.caption"
 msgid "Delete"
 msgstr ""
 
-#: uvisadvancedsecurity.lrj:$.strings.[46].value
-msgctxt "tvisadvancedsecurity.action_editace.caption"
-msgid "Edit"
+#: uvisadvancedsecurity.lrj:$.strings.[37].value
+msgctxt "tvisadvancedsecurity.action_duplicateace.caption"
+msgid "Duplicate"
 msgstr ""
 
-#: uvisadvancedsecurity.lrj:$.strings.[47].value
+#: uvisadvancedsecurity.lrj:$.strings.[38].value
 msgctxt "tvisadvancedsecurity.action_ok.caption"
 msgid "OK"
 msgstr ""
 
-#: uvisadvancedsecurity.lrj:$.strings.[50].value
-msgctxt "tvisadvancedsecurity.action_restore.caption"
+#: uvisadvancedsecurity.lrj:$.strings.[44].value
+msgctxt "tvisadvancedsecurity.action_restoredefault.caption"
 msgid "Restore default"
 msgstr ""
 
-#: uvisadvancedsecurity.lrj:$.strings.[0].value
-msgctxt "tvisadvancedsecurity.caption"
-msgid "Advanced Security Settings"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[20].value
-msgctxt "tvisadvancedsecurity.checkbox_dc.caption"
-msgid "DACL Computed Inheritance Required"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[19].value
-msgctxt "tvisadvancedsecurity.checkbox_dc.hint"
-msgid "DC"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[30].value
-msgctxt "tvisadvancedsecurity.checkbox_dd.caption"
-msgid "DACL Defaulted"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[29].value
-msgctxt "tvisadvancedsecurity.checkbox_dd.hint"
-msgid "DD"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[16].value
-msgctxt "tvisadvancedsecurity.checkbox_di.caption"
-msgid "DACL Auto-inherited"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[15].value
-msgctxt "tvisadvancedsecurity.checkbox_di.hint"
-msgid "DI"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[32].value
-msgctxt "tvisadvancedsecurity.checkbox_dp.caption"
-msgid "DACL Present"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[31].value
-msgctxt "tvisadvancedsecurity.checkbox_dp.hint"
-msgid "DP"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[24].value
-msgctxt "tvisadvancedsecurity.checkbox_dt.caption"
-msgid "DACL Trusted"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[23].value
-msgctxt "tvisadvancedsecurity.checkbox_dt.hint"
-msgid "DT"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[34].value
-msgctxt "tvisadvancedsecurity.checkbox_gd.caption"
-msgid "Group Defaulted"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[33].value
-msgctxt "tvisadvancedsecurity.checkbox_gd.hint"
-msgid "GD"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[36].value
-msgctxt "tvisadvancedsecurity.checkbox_od.caption"
-msgid "Owner Defaulted"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[35].value
-msgctxt "tvisadvancedsecurity.checkbox_od.hint"
-msgid "OD"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[12].value
-msgctxt "tvisadvancedsecurity.checkbox_pd.caption"
-msgid "DACL Protected"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[11].value
-msgctxt "tvisadvancedsecurity.checkbox_pd.hint"
-msgid "PD"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[10].value
-msgctxt "tvisadvancedsecurity.checkbox_ps.caption"
-msgid "SACL Protected"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[9].value
-msgctxt "tvisadvancedsecurity.checkbox_ps.hint"
-msgid "PS"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[3].value
-msgctxt "tvisadvancedsecurity.checkbox_raw.caption"
-msgid "View raw data"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[8].value
-msgctxt "tvisadvancedsecurity.checkbox_rm.caption"
-msgid "Control Valid"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[7].value
-msgctxt "tvisadvancedsecurity.checkbox_rm.hint"
-msgid "RM"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[18].value
-msgctxt "tvisadvancedsecurity.checkbox_sc.caption"
-msgid "SACL Computed Inheritance Required"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[17].value
-msgctxt "tvisadvancedsecurity.checkbox_sc.hint"
-msgid "SC"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[26].value
-msgctxt "tvisadvancedsecurity.checkbox_sd.caption"
-msgid "SACL Defaulted"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[25].value
-msgctxt "tvisadvancedsecurity.checkbox_sd.hint"
-msgid "SD"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[14].value
-msgctxt "tvisadvancedsecurity.checkbox_si.caption"
-msgid "SACL Auto-inherited"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[13].value
-msgctxt "tvisadvancedsecurity.checkbox_si.hint"
-msgid "SI"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[28].value
-msgctxt "tvisadvancedsecurity.checkbox_sp.caption"
-msgid "SACL Present"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[27].value
-msgctxt "tvisadvancedsecurity.checkbox_sp.hint"
-msgid "SP"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[6].value
-msgctxt "tvisadvancedsecurity.checkbox_sr.caption"
-msgid "Self-Relative"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[5].value
-msgctxt "tvisadvancedsecurity.checkbox_sr.hint"
-msgid "SR"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[22].value
-msgctxt "tvisadvancedsecurity.checkbox_ss.caption"
-msgid "Server Security"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[21].value
-msgctxt "tvisadvancedsecurity.checkbox_ss.hint"
-msgid "SS"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[4].value
-msgctxt "tvisadvancedsecurity.checkgroup_aclflags.caption"
-msgid "ACL Flags"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[2].value
-msgctxt "tvisadvancedsecurity.label_group.caption"
-msgid "Group:"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[1].value
-msgctxt "tvisadvancedsecurity.label_owner.caption"
-msgid "Owner:"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[37].value
-msgctxt "tvisadvancedsecurity.tisgrid_acl.header.columns[0].text"
-msgid "Type"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[38].value
-msgctxt "tvisadvancedsecurity.tisgrid_acl.header.columns[1].text"
-msgid "Trustee"
-msgstr ""
-
-#: uvisadvancedsecurity.lrj:$.strings.[39].value
-msgctxt "tvisadvancedsecurity.tisgrid_acl.header.columns[2].text"
-msgid "Access"
-msgstr ""
-
 #: uvisadvancedsecurity.lrj:$.strings.[40].value
-msgctxt "tvisadvancedsecurity.tisgrid_acl.header.columns[3].text"
-msgid "Target property"
+msgctxt "tvisadvancedsecurity.action_selectinheritedobject.caption"
+msgid "Select"
 msgstr ""
 
 #: uvisadvancedsecurity.lrj:$.strings.[41].value
-msgctxt "tvisadvancedsecurity.tisgrid_acl.header.columns[4].text"
-msgid "Applies to"
+msgctxt "tvisadvancedsecurity.action_selectobject.caption"
+msgid "Select"
 msgstr ""
 
 #: uvisadvancedsecurity.lrj:$.strings.[42].value
-msgctxt "tvisadvancedsecurity.tisgrid_acl.header.columns[5].text"
-msgid "Inherit to"
+msgctxt "tvisadvancedsecurity.action_selectowner.caption"
+msgid "Select"
 msgstr ""
 
 #: uvisadvancedsecurity.lrj:$.strings.[43].value
-msgctxt "tvisadvancedsecurity.tisgrid_acl.header.columns[6].text"
-msgid "Inherited from"
+msgctxt "tvisadvancedsecurity.action_selectprincipal.caption"
+msgid "Select"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[2].value
+msgctxt "tvisadvancedsecurity.bitbtn_group.caption"
+msgid "Select"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[19].value
+msgctxt "tvisadvancedsecurity.checkboxca.caption"
+msgid "Control access"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[11].value
+msgctxt "tvisadvancedsecurity.checkboxcc.caption"
+msgid "Create child"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[27].value
+msgctxt "tvisadvancedsecurity.checkboxci.caption"
+msgid "Container inherited"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[20].value
+msgctxt "tvisadvancedsecurity.checkboxd.caption"
+msgid "Delete"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[12].value
+msgctxt "tvisadvancedsecurity.checkboxdc.caption"
+msgid "Delete child"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[17].value
+msgctxt "tvisadvancedsecurity.checkboxdt.caption"
+msgid "Delete tree"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[28].value
+msgctxt "tvisadvancedsecurity.checkboxio.caption"
+msgid "Inherit only"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[13].value
+msgctxt "tvisadvancedsecurity.checkboxlc.caption"
+msgid "List children"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[18].value
+msgctxt "tvisadvancedsecurity.checkboxlo.caption"
+msgid "List object"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[29].value
+msgctxt "tvisadvancedsecurity.checkboxnp.caption"
+msgid "No propagate"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[26].value
+msgctxt "tvisadvancedsecurity.checkboxoi.caption"
+msgid "Object inherited"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[21].value
+msgctxt "tvisadvancedsecurity.checkboxrc.caption"
+msgid "Read control"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[15].value
+msgctxt "tvisadvancedsecurity.checkboxrp.caption"
+msgid "Read property"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[14].value
+msgctxt "tvisadvancedsecurity.checkboxsw.caption"
+msgid "Self write"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[22].value
+msgctxt "tvisadvancedsecurity.checkboxwdac.caption"
+msgid "Write DAC"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[23].value
+msgctxt "tvisadvancedsecurity.checkboxwo.caption"
+msgid "Write owner"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[16].value
+msgctxt "tvisadvancedsecurity.checkboxwp.caption"
+msgid "Write property"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[10].value
+msgctxt "tvisadvancedsecurity.groupbox1.caption"
+msgid "Permissions"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[25].value
+msgctxt "tvisadvancedsecurity.groupbox2.caption"
+msgid "Inheritance flags"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[1].value
+msgctxt "tvisadvancedsecurity.label_group.caption"
+msgid "Group"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[24].value
+msgctxt "tvisadvancedsecurity.label_object.caption"
+msgid "Object"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[30].value
+msgctxt "tvisadvancedsecurity.label_objectinheritance.caption"
+msgid "Object inheritance"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[3].value
+msgctxt "tvisadvancedsecurity.label_owner.caption"
+msgid "Owner"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[32].value
+msgctxt "tvisadvancedsecurity.label_principal.caption"
+msgid "Principal"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[31].value
+msgctxt "tvisadvancedsecurity.label_type.caption"
+msgid "Type"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[4].value
+msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[0].text"
+msgid "Type"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[5].value
+msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[1].text"
+msgid "Principal"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[6].value
+msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[2].text"
+msgid "Permissions"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[7].value
+msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[3].text"
+msgid "Object"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[8].value
+msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[4].text"
+msgid "Inheritance flags"
+msgstr ""
+
+#: uvisadvancedsecurity.lrj:$.strings.[9].value
+msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[5].text"
+msgid "Object inheritance"
 msgstr ""
 
 #: uvisattributeeditor.lrj:$.strings.[11].value
@@ -2722,21 +3419,6 @@ msgstr ""
 #: uvischangedomaincontroller.lrj:$.strings.[10].value
 msgctxt "tvischangedomaincontroller.tisgrid1.header.columns[4].text"
 msgid "Status"
-msgstr ""
-
-#: uvischangepartition.lrj:$.strings.[1].value
-msgctxt "tvischangepartition.bitbtn1.caption"
-msgid "Cancel"
-msgstr ""
-
-#: uvischangepartition.lrj:$.strings.[2].value
-msgctxt "tvischangepartition.bitbtn2.caption"
-msgid "OK"
-msgstr ""
-
-#: uvischangepartition.lrj:$.strings.[0].value
-msgctxt "tvischangepartition.caption"
-msgid "Change partition"
 msgstr ""
 
 #: uvisdelegatecontrol.lrj:$.strings.[32].value
@@ -3841,27 +4523,32 @@ msgctxt "tvisoptions.caption"
 msgid "Options"
 msgstr ""
 
-#: uvisprofileconfiguration.lrj:$.strings.[21].value
+#: uvisprofileconfiguration.lrj:$.strings.[23].value
 msgctxt "tvisprofileconfiguration.action_searchdomaincontrollers.hint"
 msgid "Search domain controllers"
 msgstr ""
 
-#: uvisprofileconfiguration.lrj:$.strings.[20].value
+#: uvisprofileconfiguration.lrj:$.strings.[22].value
 msgctxt "tvisprofileconfiguration.action_searchdomains.hint"
 msgid "Search domains"
 msgstr ""
 
-#: uvisprofileconfiguration.lrj:$.strings.[24].value
+#: uvisprofileconfiguration.lrj:$.strings.[27].value
+msgctxt "tvisprofileconfiguration.action_selectkeytab.caption"
+msgid "Select"
+msgstr ""
+
+#: uvisprofileconfiguration.lrj:$.strings.[26].value
 msgctxt "tvisprofileconfiguration.action_showdcinfos.caption"
 msgid "Show DC infos"
 msgstr ""
 
-#: uvisprofileconfiguration.lrj:$.strings.[23].value
+#: uvisprofileconfiguration.lrj:$.strings.[25].value
 msgctxt "tvisprofileconfiguration.action_testauthentication.caption"
 msgid "Test Authentication"
 msgstr ""
 
-#: uvisprofileconfiguration.lrj:$.strings.[22].value
+#: uvisprofileconfiguration.lrj:$.strings.[24].value
 msgctxt "tvisprofileconfiguration.action_testconnection.caption"
 msgid "Test Connection"
 msgstr ""
@@ -3884,6 +4571,11 @@ msgstr ""
 #: uvisprofileconfiguration.lrj:$.strings.[1].value
 msgctxt "tvisprofileconfiguration.groupbox_domain.caption"
 msgid "Domain"
+msgstr ""
+
+#: uvisprofileconfiguration.lrj:$.strings.[20].value
+msgctxt "tvisprofileconfiguration.groupbox_keytab.caption"
+msgid "KeyTab"
 msgstr ""
 
 #: uvisprofileconfiguration.lrj:$.strings.[15].value
@@ -3934,6 +4626,11 @@ msgstr ""
 #: uvisprofileconfiguration.lrj:$.strings.[18].value
 msgctxt "tvisprofileconfiguration.label_password.caption"
 msgid "Password"
+msgstr ""
+
+#: uvisprofileconfiguration.lrj:$.strings.[21].value
+msgctxt "tvisprofileconfiguration.label_profilename.caption"
+msgid "Profile name: "
 msgstr ""
 
 #: uvisprofileconfiguration.lrj:$.strings.[10].value
@@ -4381,6 +5078,211 @@ msgctxt "tvisselectnewrecordtype.label2.caption"
 msgid "Description:"
 msgstr ""
 
+#: uvisselectobjectguid.lrj:$.strings.[9].value
+msgctxt "tvisselectobjectguid.action1.caption"
+msgid "Search"
+msgstr ""
+
+#: uvisselectobjectguid.lrj:$.strings.[6].value
+msgctxt "tvisselectobjectguid.bitbtn2.caption"
+msgid "OK"
+msgstr ""
+
+#: uvisselectobjectguid.lrj:$.strings.[7].value
+msgctxt "tvisselectobjectguid.bitbtn3.caption"
+msgid "Cancel"
+msgstr ""
+
+#: uvisselectobjectguid.lrj:$.strings.[0].value
+msgctxt "tvisselectobjectguid.caption"
+msgid "Select Object GUID"
+msgstr ""
+
+#: uvisselectobjectguid.lrj:$.strings.[5].value
+msgctxt "tvisselectobjectguid.label1.caption"
+msgid "Filter:"
+msgstr ""
+
+#: uvisselectobjectguid.lrj:$.strings.[8].value
+msgctxt "tvisselectobjectguid.label2.caption"
+msgid "Total : 0 elements"
+msgstr ""
+
+#: uvisselectobjectguid.lrj:$.strings.[1].value
+msgctxt "tvisselectobjectguid.tisgrid1.header.columns[0].text"
+msgid "Distinguished Name"
+msgstr ""
+
+#: uvisselectobjectguid.lrj:$.strings.[2].value
+msgctxt "tvisselectobjectguid.tisgrid1.header.columns[1].text"
+msgid "Name"
+msgstr ""
+
+#: uvisselectobjectguid.lrj:$.strings.[3].value
+msgctxt "tvisselectobjectguid.tisgrid1.header.columns[2].text"
+msgid "GUID"
+msgstr ""
+
+#: uvisselectobjectguid.lrj:$.strings.[4].value
+msgctxt "tvisselectobjectguid.tisgrid1.header.columns[3].text"
+msgid "Type"
+msgstr ""
+
+#: uvisselectobjectsid.lrj:$.strings.[8].value
+msgctxt "tvisselectobjectsid.action1.caption"
+msgid "Search"
+msgstr ""
+
+#: uvisselectobjectsid.lrj:$.strings.[5].value
+msgctxt "tvisselectobjectsid.bitbtn2.caption"
+msgid "Cancel"
+msgstr ""
+
+#: uvisselectobjectsid.lrj:$.strings.[6].value
+msgctxt "tvisselectobjectsid.bitbtn3.caption"
+msgid "OK"
+msgstr ""
+
+#: uvisselectobjectsid.lrj:$.strings.[0].value
+msgctxt "tvisselectobjectsid.caption"
+msgid "Select ObjectSID"
+msgstr ""
+
+#: uvisselectobjectsid.lrj:$.strings.[4].value
+msgctxt "tvisselectobjectsid.label1.caption"
+msgid "Filter:"
+msgstr ""
+
+#: uvisselectobjectsid.lrj:$.strings.[7].value
+msgctxt "tvisselectobjectsid.label2.caption"
+msgid "Total : 0 elements"
+msgstr ""
+
+#: uvisselectobjectsid.lrj:$.strings.[1].value
+msgctxt "tvisselectobjectsid.tisgrid1.header.columns[0].text"
+msgid "Distinguished Name"
+msgstr ""
+
+#: uvisselectobjectsid.lrj:$.strings.[2].value
+msgctxt "tvisselectobjectsid.tisgrid1.header.columns[1].text"
+msgid "Name"
+msgstr ""
+
+#: uvisselectobjectsid.lrj:$.strings.[3].value
+msgctxt "tvisselectobjectsid.tisgrid1.header.columns[2].text"
+msgid "SID"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[15].value
+msgctxt "tvisshowrelationship.action_focusselectedgroup.caption"
+msgid "Focus selected group"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[21].value
+msgctxt "tvisshowrelationship.action_focusselectedingrid.caption"
+msgid "Focus Selected"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[14].value
+msgctxt "tvisshowrelationship.action_property.caption"
+msgid "Property"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[16].value
+msgctxt "tvisshowrelationship.action_refresh.caption"
+msgid "Refresh"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[20].value
+msgctxt "tvisshowrelationship.action_savetodot.caption"
+msgid "Save to DOT"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[18].value
+msgctxt "tvisshowrelationship.action_savetopng.caption"
+msgid "Save to PNG"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[17].value
+msgctxt "tvisshowrelationship.action_synchronize.caption"
+msgid "Synchronize"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[19].value
+msgctxt "tvisshowrelationship.action_unfocusgroup.caption"
+msgid "Clear focused group"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[3].value
+msgctxt "tvisshowrelationship.bitbtn_next.caption"
+msgid "Next"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[4].value
+msgctxt "tvisshowrelationship.bitbtn_previous.caption"
+msgid "Previous"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[0].value
+msgctxt "tvisshowrelationship.caption"
+msgid "Group relations"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[7].value
+msgctxt "tvisshowrelationship.checkbox1.caption"
+msgid "Circular dependencies"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[6].value
+msgctxt "tvisshowrelationship.checkbox_hidesinglenode.caption"
+msgid "Hide single node"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[5].value
+msgctxt "tvisshowrelationship.checkbox_showuser.caption"
+msgid "Show user"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[13].value
+msgctxt "tvisshowrelationship.label1.caption"
+msgid "Search: "
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[1].value
+msgctxt "tvisshowrelationship.label2.caption"
+msgid "Selected: "
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[2].value
+msgctxt "tvisshowrelationship.label_search.caption"
+msgid "Search:"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[8].value
+msgctxt "tvisshowrelationship.tisgrid_groupdata.header.columns[0].text"
+msgid "Index"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[9].value
+msgctxt "tvisshowrelationship.tisgrid_groupdata.header.columns[1].text"
+msgid "DN"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[10].value
+msgctxt "tvisshowrelationship.tisgrid_groupdata.header.columns[2].text"
+msgid "Name"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[11].value
+msgctxt "tvisshowrelationship.tisgrid_groupdata.header.columns[3].text"
+msgid "Member"
+msgstr ""
+
+#: uvisshowrelationship.lrj:$.strings.[12].value
+msgctxt "tvisshowrelationship.tisgrid_groupdata.header.columns[4].text"
+msgid "Member of"
+msgstr ""
+
 #: uvistaskmove.lrj:$.strings.[4].value
 msgctxt "tvistaskmove.action_ok.caption"
 msgid "OK"
@@ -4449,5 +5351,70 @@ msgstr ""
 #: uvistaskresetpassword.lrj:$.strings.[6].value
 msgctxt "tvistaskresetpassword.label_status.caption"
 msgid "Account Lockout Status on this Domain Controller : "
+msgstr ""
+
+#: uvisviewkeytab.lrj:$.strings.[12].value
+msgctxt "tvisviewkeytab.action_copytoclipboard.caption"
+msgid "Copy to clipboard (base64)"
+msgstr ""
+
+#: uvisviewkeytab.lrj:$.strings.[9].value
+msgctxt "tvisviewkeytab.action_loadfromfile.caption"
+msgid "Load from file"
+msgstr ""
+
+#: uvisviewkeytab.lrj:$.strings.[11].value
+msgctxt "tvisviewkeytab.action_savetofile.caption"
+msgid "Save to file"
+msgstr ""
+
+#: uvisviewkeytab.lrj:$.strings.[10].value
+msgctxt "tvisviewkeytab.action_selectfolder.caption"
+msgid "Select folder"
+msgstr ""
+
+#: uvisviewkeytab.lrj:$.strings.[6].value
+msgctxt "tvisviewkeytab.bitbtn5.caption"
+msgid "Close"
+msgstr ""
+
+#: uvisviewkeytab.lrj:$.strings.[0].value
+msgctxt "tvisviewkeytab.caption"
+msgid "View KeyTab"
+msgstr ""
+
+#: uvisviewkeytab.lrj:$.strings.[7].value
+msgctxt "tvisviewkeytab.label1.caption"
+msgid "Filename"
+msgstr ""
+
+#: uvisviewkeytab.lrj:$.strings.[8].value
+msgctxt "tvisviewkeytab.label2.caption"
+msgid "Folder"
+msgstr ""
+
+#: uvisviewkeytab.lrj:$.strings.[1].value
+msgctxt "tvisviewkeytab.tisgrid1.header.columns[0].text"
+msgid "KVNO"
+msgstr ""
+
+#: uvisviewkeytab.lrj:$.strings.[2].value
+msgctxt "tvisviewkeytab.tisgrid1.header.columns[1].text"
+msgid "Timestamp"
+msgstr ""
+
+#: uvisviewkeytab.lrj:$.strings.[3].value
+msgctxt "tvisviewkeytab.tisgrid1.header.columns[2].text"
+msgid "Principal"
+msgstr ""
+
+#: uvisviewkeytab.lrj:$.strings.[4].value
+msgctxt "tvisviewkeytab.tisgrid1.header.columns[3].text"
+msgid "Encryption type"
+msgstr ""
+
+#: uvisviewkeytab.lrj:$.strings.[5].value
+msgctxt "tvisviewkeytab.tisgrid1.header.columns[4].text"
+msgid "Key"
 msgstr ""
 
