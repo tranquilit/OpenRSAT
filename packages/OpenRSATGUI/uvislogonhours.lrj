@@ -29,5 +29,7 @@
 {"hash":77089212,"name":"tvislogonhours.btn_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
 {"hash":93130148,"name":"tvislogonhours.radiobutton_allowed.caption","sourcebytes":[76,111,103,111,110,32,65,108,108,111,119,101,100],"value":"Logon Allowed"},
 {"hash":27240884,"name":"tvislogonhours.radiobutton_denied.caption","sourcebytes":[76,111,103,111,110,32,68,101,110,105,101,100],"value":"Logon Denied"},
+{"hash":168665586,"name":"tvislogonhours.radiobutton_once.caption","sourcebytes":[79,110,99,101,32,112,101,114,32,72,111,117,114],"value":"Once per Hour"},
+{"hash":29205522,"name":"tvislogonhours.radiobutton_twice.caption","sourcebytes":[84,119,105,99,101,32,112,101,114,32,72,111,117,114],"value":"Twice per Hour"},
 {"hash":1339,"name":"tvislogonhours.action_ok.caption","sourcebytes":[79,75],"value":"OK"}
 ]}

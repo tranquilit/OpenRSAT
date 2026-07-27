@@ -16,6 +16,9 @@ uses
   uhelpersui,
   uproperty,
   upropertyframe,
+  ugeneralpropertyntds,
+  uvislogonhours,
+  uschedulinglogic,
   ulog;
 
 type
@@ -41,9 +44,11 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     Shape1: TShape;
+    procedure Button_ScheduleClick(Sender: TObject);
   private
     fLog: TSynLogClass;
     fProperty: TProperty;
+    fLogic: TGeneralPropertyNTDSLogic;
     function GetArgByPosition(Attribute: RawUtf8; n: Integer): RawUtf8;
     function RemoveCN(Value: RawUtf8): RawUtf8;
   public
@@ -77,6 +82,7 @@ begin
     fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
+  fLogic := TGeneralPropertyNTDSLogic.Create(Props);
 
   Edit_Name.Text := fProperty.name;
   Edit_Description.Text := fProperty.description;
@@ -86,6 +92,25 @@ begin
     Edit_Server.Text := RemoveCN(GetArgByPosition(att.GetReadable, 2));
     Edit_Site.Text := RemoveCN(GetArgByPosition(att.GetReadable, 4));
   end;
+end;
+
+procedure TFrmPropertyGeneralNTDSSiteSettings.Button_ScheduleClick(Sender: TObject);
+var
+  ScheduleData: RawByteString;
+  LogonHours: TVisLogonHours;
+begin
+  ScheduleData := fLogic.GetByteFromAttribute(fLogic.FindAttribute('schedule'));
+  fLogic.Scheduling.LoadScheduleToHours(ScheduleData);
+
+  LogonHours := TVisLogonHours.Create(Self, @fLogic.Scheduling.Hours, NTDSSchedulingPage);
+  try
+    if LogonHours.ShowModal <> mrOK then
+      Exit;
+  finally
+    LogonHours.Free;
+  end;
+
+  fLogic.SaveSchedule;
 end;
 
 function TFrmPropertyGeneralNTDSSiteSettings.GetArgByPosition(Attribute: RawUtf8; n: Integer): RawUtf8;
