@@ -17,12 +17,13 @@ uses
   SpinEx,
   StdCtrls,
   Types,
+  uschedulinglogic,
   ucommon;
 
 type
 
-  { KindOfPage }
-  KindOfPage = (LogonHoursPage, SiteLinkSchedulingPage);
+  { TScheduleValue }
+  TScheduleValue = (svDenied, svAvailable, svOnce, svTwice);
 
   { TVisLogonHours }
   TVisLogonHours = class(TForm)
@@ -36,10 +37,14 @@ type
     RadioButton_Allowed: TRadioButton;
     Panel_Denied: TPanel;
     RadioButton_Denied: TRadioButton;
+    Panel_Once: TPanel;
+    RadioButton_Once: TRadioButton;
+    Panel_Twice: TPanel;
+    RadioButton_Twice: TRadioButton;
     Label_Recap: TLabel;
     Timer_Fix: TTimer;
     ActionList: TActionList;
-      Action_OK: TAction;
+    Action_OK: TAction;
     procedure Action_OKExecute(Sender: TObject);
     procedure Action_OKUpdate(Sender: TObject);
     procedure DrawGridAfterSelection(Sender: TObject; aCol, aRow: Integer);
@@ -81,11 +86,23 @@ begin
   ReadingData := True;
   Inherited Create(TheOwner);
 
-  if PageOption = SiteLinkSchedulingPage then
-  begin
-    Caption := 'Site Link Scheduling';
-    RadioButton_Allowed.Caption := 'Replication Available';
-    RadioButton_Denied.Caption := 'Replication Not Available';
+  case PageOption of
+    SiteLinkSchedulingPage:
+    begin
+      Caption := 'Site Link Scheduling';
+      RadioButton_Allowed.Caption := 'Replication Available';
+      RadioButton_Denied.Caption := 'Replication Not Available';
+    end;
+    NTDSSchedulingPage:
+    begin
+      Caption := 'Schedule for Site Settings';
+      RadioButton_Allowed.Caption := 'Replication Available';
+      RadioButton_Denied.Caption := 'Replication Not Available';
+      Panel_Once.Visible := True;
+      Panel_Twice.Visible := True;
+      RadioButton_Once.Visible := True;
+      RadioButton_Twice.Visible := True;
+    end;
   end;
 
   // Timezone

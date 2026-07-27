@@ -24,6 +24,7 @@ uses
   ugeneralpropertysitelink,
   uvislogonhours,
   udoublelistlogic,
+  uschedulinglogic,
   ulog;
 
 type
@@ -121,7 +122,6 @@ begin
 
   fLogic.SaveSchedule;
 end;
-
 
 procedure TFrmPropertyGeneralSiteLink.Edit_DescriptionChange(Sender: TObject);
 begin

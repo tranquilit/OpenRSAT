@@ -106,6 +106,7 @@ uses
   uhelpersui,
   ursatldapclientui,
   uvislogonhours,
+  uschedulinglogic,
   uvislogonworkstation;
 
 {$R *.lfm}
