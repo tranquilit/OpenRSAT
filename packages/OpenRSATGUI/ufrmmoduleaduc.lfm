@@ -169,6 +169,7 @@ object FrmModuleADUC: TFrmModuleADUC
         Top = 2
         Action = Action_ShowRelationShip
         Caption = 'Show group relation'
+        Visible = False
       end
       object ToolButton_AttributesGrid: TToolButton
         Left = 385
