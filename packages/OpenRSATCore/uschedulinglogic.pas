@@ -14,25 +14,23 @@ uses
   ursatldapclient;
 
 type
-  { ISchedulingLogic }
-  ISchedulingLogic = interface
+
+  { KindOfPage }
+  KindOfPage = (LogonHoursPage, SiteLinkSchedulingPage, NTDSSchedulingPage);
+
+  { TSchedulingLogic }
+  TSchedulingLogic = class
+  private
+    fHours: RawByteString;
+    fOpt1, fOpt2, fOpt3, fOpt4: Byte;
+  public
+    constructor Create(Page: KindOfPage);
+    destructor Destroy; override;
+
     procedure SetupHoursRawByteString;
     procedure LoadScheduleToHours(const ScheduleData: RawByteString);
     function SaveSchedule: RawByteString;
     function GetScheduleHeader: RawByteString;
-  end;
-
-  { TSchedulingLogic }
-  TSchedulingLogic = class abstract(TInterfacedObject, ISchedulingLogic)
-  private
-    fScheduleHeader, fHours: RawByteString;
-  public
-    destructor Destroy; override;
-
-    procedure SetupHoursRawByteString; virtual;
-    procedure LoadScheduleToHours(const ScheduleData: RawByteString); virtual;
-    function SaveSchedule: RawByteString; virtual;
-    function GetScheduleHeader: RawByteString; virtual;
 
     property Hours: RawByteString read fHours write fHours;
   end;
@@ -41,6 +39,29 @@ const
   ScheduleHeader = #$BC#0#0#0#0#0#0#0#1#0#0#0#0#0#0#0#$14#0#0#0;
 
 implementation
+
+constructor TSchedulingLogic.Create(Page: KindOfPage);
+begin
+  fOpt1 := $00;
+  fOpt2 := $00;
+  fOpt3 := $00;
+  fOpt4 := $00;
+
+  case Page of
+    SiteLinkSchedulingPage:
+    begin
+      fOpt1 := $F0;
+      fOpt2 := $FF;
+    end;
+    NTDSSchedulingPage:
+    begin
+      fOpt1 := $00;
+      fOpt2 := $01;
+      fOpt3 := $05;
+      fOpt4 := $0F;
+    end;
+  end;
+end;
 
 destructor TSchedulingLogic.Destroy;
 begin
@@ -62,7 +83,7 @@ begin
   FillByte(fHours[1], Length(fHours), 0);
   if ScheduleData = '' then
   begin
-    FillByte(fHours[1], Length(fHours), $0F);
+    FillByte(fHours[1], Length(fHours), fOpt1);
     Exit;
   end;
 
@@ -75,7 +96,7 @@ begin
 
     GridDay := (ADDay + 6) mod 7;
     GridIndex := GridDay * 24 + ADHour;
-    if Byte(Data[i + 1]) = $FF then
+    if Byte(Data[i + 1]) = fOpt2 then
       fHours[1 + GridIndex div 8] := Char(Byte(fHours[1 + GridIndex div 8]) or (1 shl (GridIndex mod 8)));
   end;
 end;
@@ -94,9 +115,9 @@ begin
     GridDay := (ADDay + 6) mod 7;
     GridIndex := GridDay * 24 + ADHour;
     if (Byte(fHours[1 + GridIndex div 8]) and (1 shl (GridIndex mod 8))) <> 0 then
-      Result[i + 1] := Char($FF)
+      Result[i + 1] := Char(fOpt2)
     else
-      Result[i + 1] := Char($00);
+      Result[i + 1] := Char(fOpt1);
   end;
 end;
 

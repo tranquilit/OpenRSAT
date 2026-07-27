@@ -148,6 +148,10 @@
         <Filename Value="uschedulinglogic.pas"/>
         <UnitName Value="uschedulinglogic"/>
       </Item>
+      <Item>
+        <Filename Value="ugeneralpropertyntds.pas"/>
+        <UnitName Value="ugeneralpropertyntds"/>
+      </Item>
     </Files>
     <i18n>
       <EnableI18N Value="True"/>

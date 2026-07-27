@@ -49,7 +49,7 @@ begin
   fProperty := P;
   fLdap := P.LdapClient;
 
-  fScheduling := TSchedulingLogic.Create;
+  fScheduling := TSchedulingLogic.Create(SiteLinkSchedulingPage);
   fScheduling.SetupHoursRawByteString;
 end;
 
