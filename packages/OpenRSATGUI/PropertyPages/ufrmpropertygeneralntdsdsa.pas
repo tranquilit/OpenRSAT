@@ -53,6 +53,7 @@ type
     procedure LoadQueryPolicy;
   public
     constructor Create(TheOwner: TComponent); override;
+    destructor Destroy; override;
     procedure Update(Props: TProperty); override;
   end;
 
@@ -121,6 +122,12 @@ begin
     fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'General';
+end;
+
+destructor TFrmPropertyGeneralNTDSDSA.Destroy;
+begin
+  FreeAndNil(fLogic);
+  inherited Destroy;
 end;
 
 procedure TFrmPropertyGeneralNTDSDSA.Update(Props: TProperty);
