@@ -257,6 +257,8 @@ var
   row, col, l, w: Integer;
   defRect, rect: TRect;
   AllBlue, AllGrey, bit: Boolean;
+  FirstValue: TScheduleValue;
+  SameValue: Boolean;
 begin
   defRect := DrawGrid.Selection;
   // Row Select
@@ -295,23 +297,61 @@ begin
 
   // Set RadioButtons
   ReadingData := True;
-  AllBlue := True;
-  AllGrey := True;
-  for row := defRect.Top to defRect.Bottom do
-    if AllBlue or AllGrey then
+  if fPageOption = NTDSSchedulingPage then
+  begin
+    FirstValue := GetScheduleValue((defRect.Top - 1) * HoursPerDay + defRect.Left - 1 - Integer(SpinEdit_UTC.Value));
+    SameValue := True;
+    for row := defRect.Top to defRect.Bottom do
+    begin
       for col := defRect.Left to defRect.Right do
       begin
-        bit := GetBit((row - 1) * HoursPerDay + col - 1 - Integer(SpinEdit_UTC.Value));
-        AllBlue := AllBlue and bit;
-        AllGrey := AllGrey and not bit;
-        if not (AllBlue or AllGrey) then
-          break;
-      end
-    else
-      break;
-  RadioButton_Allowed.Checked := AllBlue;
-  RadioButton_Denied.Checked  := AllGrey;
-  RadioButton_Secret.Checked  := not (AllBlue or AllGrey);
+        if GetScheduleValue((row - 1) * HoursPerDay + col - 1 - Integer(SpinEdit_UTC.Value)) <> FirstValue then
+        begin
+          SameValue := False;
+          Break;
+        end;
+      end;
+
+      if not SameValue then
+        Break;
+    end;
+
+    RadioButton_Denied.Checked := False;
+    RadioButton_Allowed.Checked := False;
+    RadioButton_Once.Checked := False;
+    RadioButton_Twice.Checked := False;
+
+    if SameValue then
+    begin
+      case FirstValue of
+        svDenied: RadioButton_Denied.Checked := True;
+        svAvailable: RadioButton_Allowed.Checked := True;
+        svOnce: RadioButton_Once.Checked := True;
+        svTwice: RadioButton_Twice.Checked := True;
+      end;
+    end;
+  end
+  else
+  begin
+    AllBlue := True;
+    AllGrey := True;
+    for row := defRect.Top to defRect.Bottom do
+      if AllBlue or AllGrey then
+        for col := defRect.Left to defRect.Right do
+        begin
+          bit := GetBit((row - 1) * HoursPerDay + col - 1 - Integer(SpinEdit_UTC.Value));
+          AllBlue := AllBlue and bit;
+          AllGrey := AllGrey and not bit;
+          if not (AllBlue or AllGrey) then
+            break;
+        end
+      else
+        break;
+    RadioButton_Allowed.Checked := AllBlue;
+    RadioButton_Denied.Checked  := AllGrey;
+    RadioButton_Secret.Checked  := not (AllBlue or AllGrey);
+  end;
+
   ReadingData := False;
 
   // Set Label_Recap
@@ -339,10 +379,13 @@ var
   defRect: TGridRect;
   b: Boolean;
   aRow, aCol: LongInt;
+  NewValue: TScheduleValue;
 begin
   if ReadingData then
     Exit;
+
   defRect := DrawGrid.Selection;
+
   // Row Select
   if DrawGrid.Selection.Left = 0 then
   begin
@@ -350,6 +393,7 @@ begin
     if DrawGrid.Selection.Width = 0 then
       defRect.Width := DrawGrid.ColCount - 2;
   end;
+
   if DrawGrid.Selection.Top = 0 then
   begin
     defRect.Top := 1;
@@ -358,10 +402,28 @@ begin
   end;
 
   // color
-  b := (Sender as TRadioButton).Name = RadioButton_Allowed.Name;
-  for aRow := defRect.Top to defRect.Bottom do
-    for aCol := defRect.Left to defRect.Right do
-      SetBit((aRow-1) * HoursPerDay + aCol-1 - Integer(SpinEdit_UTC.Value), b);
+  if fPageOption = NTDSSchedulingPage then
+  begin
+    if Sender = RadioButton_Denied then
+      NewValue := svDenied
+    else if Sender = RadioButton_Allowed then
+      NewValue := svAvailable
+    else if Sender = RadioButton_Once then
+      NewValue := svOnce
+    else
+      NewValue := svTwice;
+
+    for aRow := defRect.Top to defRect.Bottom do
+      for aCol := defRect.Left to defRect.Right do
+        SetScheduleValue((aRow - 1) * HoursPerDay + aCol-1 - Integer(SpinEdit_UTC.Value), NewValue);
+  end
+  else
+  begin
+    b := (Sender as TRadioButton).Name = RadioButton_Allowed.Name;
+    for aRow := defRect.Top to defRect.Bottom do
+      for aCol := defRect.Left to defRect.Right do
+        SetBit((aRow-1) * HoursPerDay + aCol-1 - Integer(SpinEdit_UTC.Value), b);
+  end;
 
   // Paint
   DrawGrid.Repaint();
