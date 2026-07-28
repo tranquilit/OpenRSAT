@@ -22,6 +22,7 @@ type
   TSchedulingLogic = class
   private
     fHours: RawByteString;
+    fKindOfPage: KindOfPage;
     fOpt1, fOpt2, fOpt3, fOpt4: Byte;
   public
     constructor Create(Page: KindOfPage);
@@ -47,7 +48,8 @@ begin
   fOpt3 := $00;
   fOpt4 := $00;
 
-  case Page of
+  fKindOfPage := Page;
+  case fKindOfPage of
     SiteLinkSchedulingPage:
     begin
       fOpt1 := $F0;
@@ -71,8 +73,18 @@ end;
 procedure TSchedulingLogic.SetupHoursRawByteString;
 begin
   fHours := '';
-  SetLength(fHours, 21);
-  FillByte(fHours[1], 21, 0);
+  case fKindOfPage of
+    NTDSSchedulingPage:
+    begin
+      SetLength(fHours, 168);
+      FillByte(fHours[1], 168, 0);
+    end
+  else
+    begin
+      SetLength(fHours, 21);
+      FillByte(fHours[1], 21, 0);
+    end;
+  end;
 end;
 
 procedure TSchedulingLogic.LoadScheduleToHours(const ScheduleData: RawByteString);
@@ -89,6 +101,12 @@ begin
 
   Data := ScheduleData;
   Delete(Data, 1, 20);
+  if fKindOfPage = NTDSSchedulingPage then
+  begin
+    fHours := Data;
+    Exit;
+  end;
+
   for i := 0 to 167 do
   begin
     ADDay  := i div 24;
@@ -105,8 +123,13 @@ function TSchedulingLogic.SaveSchedule: RawByteString;
 var
   i, ADDay, ADHour, GridDay, GridIndex: Integer;
 begin
-  SetLength(Result, 168);
+  if fKindOfPage = NTDSSchedulingPage then
+  begin
+    Result := fHours;
+    Exit;
+  end;
 
+  SetLength(Result, 168);
   for i := 0 to 167 do
   begin
     ADDay  := i div 24;

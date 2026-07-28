@@ -58,8 +58,11 @@ type
     PHours: PRawByteString;
     HoursUTC: RawByteString;
     ReadingData: Boolean;
+    fPageOption: KindOfPage;
     function GetBit(i: Integer): Boolean;
+    function GetScheduleValue(i: Integer): TScheduleValue;
     procedure SetBit(i: Integer; b: Boolean);
+    procedure SetScheduleValue(i: Integer; Value: TScheduleValue);
   public
     constructor Create(TheOwner: TComponent; _PHours: PRawByteString; PageOption: KindOfPage); reintroduce;
   end;
@@ -86,7 +89,8 @@ begin
   ReadingData := True;
   Inherited Create(TheOwner);
 
-  case PageOption of
+  fPageOption := PageOption;
+  case fPageOption of
     SiteLinkSchedulingPage:
     begin
       Caption := 'Site Link Scheduling';
@@ -124,8 +128,20 @@ begin
   DrawGrid.Selection := Rect(1, 1, 0, 0);
 
   // Buttons
-  RadioButton_Allowed.Checked := GetBit(-Integer(SpinEdit_UTC.Value));
-  RadioButton_Denied.Checked  := not RadioButton_Allowed.Checked;
+  if fPageOption = NTDSSchedulingPage then
+  begin
+    case GetScheduleValue(-Integer(SpinEdit_UTC.Value)) of
+      svAvailable: RadioButton_Allowed.Checked := True;
+      svTwice: RadioButton_Twice.Checked := True;
+      svOnce: RadioButton_Once.Checked := True;
+      svDenied: RadioButton_Denied.Checked := True;
+    end;
+  end
+  else
+  begin
+    RadioButton_Allowed.Checked := GetBit(-Integer(SpinEdit_UTC.Value));
+    RadioButton_Denied.Checked  := not RadioButton_Allowed.Checked;
+  end;
   UnifyButtonsWidth([Btn_OK, Btn_Cancel]);
 end;
 
@@ -193,10 +209,22 @@ begin
   // Cells
   if (aRow > 0) and (aCol > 0) then
   begin
-    if GetBit((aRow - 1) * HoursPerDay + aCol - 1 - Integer(SpinEdit_UTC.Value)) then
-      DrawGrid.Canvas.Brush.Color := clBlue
+    if fPageOption = NTDSSchedulingPage then
+    begin
+      case GetScheduleValue((aRow - 1) * HoursPerDay + aCol - 1 - Integer(SpinEdit_UTC.Value)) of
+        svDenied: DrawGrid.Canvas.Brush.Color := clBtnShadow;
+        svAvailable: DrawGrid.Canvas.Brush.Color := clBlue;
+        svOnce: DrawGrid.Canvas.Brush.Color := clGradientInactiveCaption;
+        svTwice: DrawGrid.Canvas.Brush.Color := clGradientActiveCaption;
+      end;
+    end
     else
-      DrawGrid.Canvas.Brush.Color := clBtnShadow;
+    begin
+      if GetBit((aRow - 1) * HoursPerDay + aCol - 1 - Integer(SpinEdit_UTC.Value)) then
+        DrawGrid.Canvas.Brush.Color := clBlue
+      else
+        DrawGrid.Canvas.Brush.Color := clBtnShadow;
+    end;
     DrawGrid.Canvas.Rectangle(aRect);
   end;
 
@@ -273,7 +301,7 @@ begin
     if AllBlue or AllGrey then
       for col := defRect.Left to defRect.Right do
       begin
-        bit     := GetBit((row - 1) * HoursPerDay + col - 1 - Integer(SpinEdit_UTC.Value));
+        bit := GetBit((row - 1) * HoursPerDay + col - 1 - Integer(SpinEdit_UTC.Value));
         AllBlue := AllBlue and bit;
         AllGrey := AllGrey and not bit;
         if not (AllBlue or AllGrey) then
@@ -365,6 +393,31 @@ begin
   result := Boolean(Byte(HoursUTC[1 + i div 8]) and Byte(1 Shl (i mod 8)));
 end;
 
+function TVisLogonHours.GetScheduleValue(i: Integer): TScheduleValue;
+var
+  Value: Byte;
+  GridDay, GridHour: Integer;
+  ADDay, ADIndex: Integer;
+begin
+  if i < 0 then
+    i += 168;
+  i := i mod 168;
+
+  GridDay := i div 24;
+  GridHour := i mod 24;
+
+  ADDay := (GridDay + 1) mod 7;
+  ADIndex := ADDay * 24 + GridHour;
+
+  Value := Byte(HoursUTC[ADIndex + 1]);
+  case Value of
+    $00: Result := svDenied;
+    $01: Result := svOnce;
+    $05: Result := svTwice;
+    $0F: Result := svAvailable;
+  end;
+end;
+
 procedure TVisLogonHours.SetBit(i: Integer; b: Boolean);
 begin
   if i < 0 then
@@ -372,6 +425,29 @@ begin
   i := i mod 168;
   // Warning: bits are set right-to-left
   HoursUTC[1 + i div 8] := Char(Byte(HoursUTC[1 + i div 8]) and not (Byte(1) Shl (i mod 8)) or (Byte(b) Shl (i mod 8)))
+end;
+
+procedure TVisLogonHours.SetScheduleValue(i: Integer; Value: TScheduleValue);
+var
+  GridDay, GridHour: Integer;
+  ADDay, ADIndex: Integer;
+begin
+  if i < 0 then
+    i += 168;
+  i := i mod 168;
+
+  GridDay := i div 24;
+  GridHour := i mod 24;
+
+  ADDay := (GridDay + 1) mod 7;
+  ADIndex := ADDay * 24 + GridHour;
+
+  case Value of
+    svDenied: HoursUTC[ADIndex + 1] := Char($00);
+    svAvailable: HoursUTC[ADIndex + 1] := Char($0F);
+    svOnce: HoursUTC[ADIndex + 1] := Char($01);
+    svTwice: HoursUTC[ADIndex + 1] := Char($05);
+  end;
 end;
 
 end.

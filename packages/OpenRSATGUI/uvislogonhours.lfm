@@ -1,17 +1,17 @@
 object VisLogonHours: TVisLogonHours
-  Left = 663
-  Height = 233
-  Top = 334
+  Left = 1321
+  Height = 265
+  Top = 112
   Width = 521
   AutoSize = True
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Logon Hours'
-  ClientHeight = 233
+  ClientHeight = 265
   ClientWidth = 521
   KeyPreview = True
   Position = poOwnerFormCenter
-  LCLVersion = '4.5.0.0'
+  LCLVersion = '4.6.0.0'
   OnKeyDown = FormKeyDown
   object RadioButton_Secret: TRadioButton
     AnchorSideLeft.Control = Btn_Cancel
@@ -316,7 +316,7 @@ object VisLogonHours: TVisLogonHours
     AnchorSideTop.Side = asrBottom
     Left = 384
     Height = 29
-    Top = 159
+    Top = 219
     Width = 13
     BorderSpacing.Left = 16
     Color = clBtnShadow
@@ -331,7 +331,7 @@ object VisLogonHours: TVisLogonHours
     AnchorSideTop.Side = asrCenter
     Left = 405
     Height = 19
-    Top = 164
+    Top = 224
     Width = 92
     BorderSpacing.Left = 8
     Caption = 'Logon Denied'
