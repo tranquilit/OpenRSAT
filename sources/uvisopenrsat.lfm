@@ -10,7 +10,7 @@ object VisOpenRSAT: TVisOpenRSAT
   Constraints.MinWidth = 300
   Menu = MainMenu
   Position = poWorkAreaCenter
-  SessionProperties = 'Width;WindowState;Height;Left;Top'
+  SessionProperties = 'WindowState'
   LCLVersion = '4.5.0.0'
   OnShow = FormShow
   object PageControl1: TPageControl
@@ -182,6 +182,8 @@ object VisOpenRSAT: TVisOpenRSAT
   end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>
+    OnSaveProperties = IniPropStorage1SaveProperties
+    OnRestoreProperties = IniPropStorage1RestoreProperties
     Left = 8
     Top = 8
   end

@@ -107,6 +107,8 @@ type
       ): Boolean;
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure IniPropStorage1RestoreProperties(Sender: TObject);
+    procedure IniPropStorage1SaveProperties(Sender: TObject);
 
     procedure PageControlChange(Sender: TObject);
 
@@ -619,6 +621,26 @@ begin
   if LoadAttributes then
     LoadView;
   MakeFullyVisible;
+end;
+
+procedure TVisProperties.IniPropStorage1RestoreProperties(Sender: TObject);
+begin
+  IniPropStorage1.IniSection := Name;
+  Width := MulDiv(IniPropStorage1.ReadInteger(FormatUtf8('%_Width', [Name]), Width), PixelsPerInch, 96);
+  Top := MulDiv(IniPropStorage1.ReadInteger(FormatUtf8('%_Top', [Name]), Top), PixelsPerInch, 96);
+  Left := MulDiv(IniPropStorage1.ReadInteger(FormatUtf8('%_Left', [Name]), Left), PixelsPerInch, 96);
+  Height := MulDiv(IniPropStorage1.ReadInteger(FormatUtf8('%_Height', [Name]), Height), PixelsPerInch, 96);
+  IniPropStorage1.IniSection := '';
+end;
+
+procedure TVisProperties.IniPropStorage1SaveProperties(Sender: TObject);
+begin
+  IniPropStorage1.IniSection := Name;
+  IniPropStorage1.WriteInteger(FormatUtf8('%_Width', [Name]), MulDiv(Width, 96, PixelsPerInch));
+  IniPropStorage1.WriteInteger(FormatUtf8('%_Top', [Name]), MulDiv(Top, 96, PixelsPerInch));
+  IniPropStorage1.WriteInteger(FormatUtf8('%_Left', [Name]), MulDiv(Left, 96, PixelsPerInch));
+  IniPropStorage1.WriteInteger(FormatUtf8('%_Height', [Name]), MulDiv(Height, 96, PixelsPerInch));
+  IniPropStorage1.IniSection := '';
 end;
 
 procedure TVisProperties.Show;

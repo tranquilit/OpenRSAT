@@ -11,8 +11,8 @@ object VisProperties: TVisProperties
   Constraints.MinWidth = 480
   KeyPreview = True
   Position = poOwnerFormCenter
-  SessionProperties = 'Width;Top;Left;Height;WindowState'
-  LCLVersion = '4.6.0.0'
+  SessionProperties = 'WindowState'
+  LCLVersion = '4.5.0.0'
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDropFiles = FormDropFiles
@@ -248,6 +248,8 @@ object VisProperties: TVisProperties
   end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>
+    OnSaveProperties = IniPropStorage1SaveProperties
+    OnRestoreProperties = IniPropStorage1RestoreProperties
     Left = 160
     Top = 440
   end

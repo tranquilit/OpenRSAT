@@ -18,6 +18,7 @@ uses
   IniPropStorage,
   ExtCtrls,
   Translations,
+  LCLType,
   {$IFDEF WINDOWS} // Adds dark mode support, must be included after the LCL widgetset
     uDarkStyleParams,
     uMetaDarkStyle,
@@ -106,6 +107,8 @@ type
     procedure Action_ShowGPOExecute(Sender: TObject);
     procedure Action_ShowGPOUpdate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure IniPropStorage1RestoreProperties(Sender: TObject);
+    procedure IniPropStorage1SaveProperties(Sender: TObject);
     procedure MenuItem_ViewThemeDarkClick(Sender: TObject);
     procedure MenuItem_ViewThemeLightClick(Sender: TObject);
     procedure MenuItem_ViewThemeSystemClick(Sender: TObject);
@@ -377,6 +380,26 @@ begin
   end;
   {$ENDIF WINDOWS}
   SetStatusBar(2, FormatUtf8('Version: %', [VERSION]));
+end;
+
+procedure TVisOpenRSAT.IniPropStorage1RestoreProperties(Sender: TObject);
+begin
+  IniPropStorage1.IniSection := Name;
+  Width := MulDiv(IniPropStorage1.ReadInteger(FormatUtf8('%_Width', [Name]), Width), PixelsPerInch, 96);
+  Top := MulDiv(IniPropStorage1.ReadInteger(FormatUtf8('%_Top', [Name]), Top), PixelsPerInch, 96);
+  Left := MulDiv(IniPropStorage1.ReadInteger(FormatUtf8('%_Left', [Name]), Left), PixelsPerInch, 96);
+  Height := MulDiv(IniPropStorage1.ReadInteger(FormatUtf8('%_Height', [Name]), Height), PixelsPerInch, 96);
+  IniPropStorage1.IniSection := '';
+end;
+
+procedure TVisOpenRSAT.IniPropStorage1SaveProperties(Sender: TObject);
+begin
+  IniPropStorage1.IniSection := Name;
+  IniPropStorage1.WriteInteger(FormatUtf8('%_Width', [Name]), MulDiv(Width, 96, PixelsPerInch));
+  IniPropStorage1.WriteInteger(FormatUtf8('%_Top', [Name]), MulDiv(Top, 96, PixelsPerInch));
+  IniPropStorage1.WriteInteger(FormatUtf8('%_Left', [Name]), MulDiv(Left, 96, PixelsPerInch));
+  IniPropStorage1.WriteInteger(FormatUtf8('%_Height', [Name]), MulDiv(Height, 96, PixelsPerInch));
+  IniPropStorage1.IniSection := '';
 end;
 
 procedure TVisOpenRSAT.MenuItem_ViewThemeDarkClick(Sender: TObject);
