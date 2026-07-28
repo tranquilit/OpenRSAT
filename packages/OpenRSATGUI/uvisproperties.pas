@@ -308,6 +308,7 @@ uses
   ufrmpropertypublishedcertificates,
   ufrmpropertyprofile,
   ufrmpropertyntauthcertificates,
+  ufrmpropertygplinks,
   ufrmpropertysecurity,
   ufrmpropertytelephone,
   ursatldapclient,
@@ -329,6 +330,7 @@ const
     TFrmPropertyPublishedCertificates,
     TFrmPropertyMemberOf,
     TFrmPropertyObject,
+    TFrmPropertyGPLinks,
     TFrmPropertySecurity,
     TFrmPropertyAttributes,
     TFrmPropertyUnixAttributes
@@ -340,6 +342,7 @@ const
     TFrmPropertyMemberOf,
     TFrmPropertyManagedBy,
     TFrmPropertyObject,
+    TFrmPropertyGPLinks,
     TFrmPropertySecurity,
     TFrmPropertyAttributes,
     TFrmPropertyUnixAttributes
@@ -354,6 +357,7 @@ const
     TFrmPropertyLocation,
     TFrmPropertyManagedBy,
     TFrmPropertyObject,
+    TFrmPropertyGPLinks,
     TFrmPropertySecurity,
     TFrmPropertyAttributes
   );
@@ -362,6 +366,7 @@ const
     TFrmPropertyGeneralOU,
     TFrmPropertyManagedBy,
     TFrmPropertyObject,
+    TFrmPropertyGPLinks,
     TFrmPropertySecurity,
     TFrmPropertyAttributes
   );
@@ -389,6 +394,7 @@ const
     TFrmPropertyGeneralSite,
     TFrmPropertyLocation,
     TFrmPropertyObject,
+    TFrmPropertyGPLinks,
     TFrmPropertySecurity,
     TFrmPropertyAttributes
   );
@@ -439,6 +445,7 @@ const
     TFrmPropertyGeneralDefault,
     TFrmPropertyObject,
     TFrmPropertyNTAuthCertificates,
+    TFrmPropertyGPLinks,
     TFrmPropertySecurity,
     TFrmPropertyAttributes
   );
