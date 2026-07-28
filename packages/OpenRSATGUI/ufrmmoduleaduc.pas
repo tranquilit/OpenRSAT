@@ -778,10 +778,11 @@ procedure TFrmModuleADUC.Action_ModifyGPLinkExecute(Sender: TObject);
 var
   Vis: TVisModifyGPLink;
 begin
-  Vis := TVisModifyGPLink.Create(Self, GetFocusedObject(True));
+  Vis := TVisModifyGPLink.Create(Self);
 
   try
     Vis.LdapClient := LdapClient;
+    Vis.DistinguishedName := GetFocusedObject(True);
     Vis.ShowModal;
     RefreshADUCTreeNode((TreeADUC.Selected as TADUCTreeNode));
   finally

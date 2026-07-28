@@ -107,7 +107,6 @@ type
 
     property GPLinkArr: TGPLinkDynArr read GetGPLinkArr write SetGPLinkArr;
   public
-    constructor Create(TheOwner: TComponent; ADistinguishedName: RawUtf8); reintroduce;
     destructor Destroy; override;
 
     property DistinguishedName: RawUtf8 read GetDistinguishedName write SetDistinguishedName;
@@ -374,14 +373,6 @@ begin
     if Assigned(Row) then
       Row^.AddOrUpdateValue('flag', Flag);
   TisGrid_LinkedGPO.LoadData();
-end;
-
-constructor TVisModifyGPLink.Create(TheOwner: TComponent;
-  ADistinguishedName: RawUtf8);
-begin
-  Inherited Create(TheOwner);
-
-  DistinguishedName := ADistinguishedName;
 end;
 
 destructor TVisModifyGPLink.Destroy;
