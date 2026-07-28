@@ -380,6 +380,7 @@ object VisLogonHours: TVisLogonHours
     Caption = 'Once per Hour'
     TabOrder = 10
     Visible = False
+    OnClick = RadioButton_Click
   end
   object Panel_Twice: TPanel
     AnchorSideLeft.Control = DrawGrid
@@ -410,6 +411,7 @@ object VisLogonHours: TVisLogonHours
     Caption = 'Twice per Hour'
     TabOrder = 12
     Visible = False
+    OnClick = RadioButton_Click
   end
   object Timer_Fix: TTimer
     Enabled = False
