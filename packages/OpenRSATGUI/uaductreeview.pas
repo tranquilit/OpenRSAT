@@ -18,8 +18,8 @@ type
   TADUCTreeNodeType = (
     atntNone,
     atntQuery,
-    atntObject,
-    atntGPO
+    atntGPO,
+    atntObject
   );
 
   // Node data for query type
