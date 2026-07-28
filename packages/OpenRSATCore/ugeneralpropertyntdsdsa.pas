@@ -30,6 +30,7 @@ type
     procedure AddItemToQueryList(Item: TLdapResult);
   public
     constructor Create(P: TProperty);
+    destructor Destroy; override;
 
     procedure GetAllQueryPolicies;
     procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
@@ -72,6 +73,17 @@ begin
     fContainer := Copy(fProperty.distinguishedName, n + 1, Length(fProperty.distinguishedName) - n)
   else
     fContainer := '';
+end;
+
+destructor TGeneralPropertyNTDSDSA.Destroy;
+var
+  Item: TLdapResult;
+begin
+  for Item in fQueryPolicies do
+    Item.Free;
+
+  fQueryPolicies := nil;
+  inherited Destroy;
 end;
 
 procedure TGeneralPropertyNTDSDSA.GetAllQueryPolicies;
