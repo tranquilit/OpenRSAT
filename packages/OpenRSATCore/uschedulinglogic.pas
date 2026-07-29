@@ -31,13 +31,9 @@ type
     procedure SetupHoursRawByteString;
     procedure LoadScheduleToHours(const ScheduleData: RawByteString);
     function SaveSchedule: RawByteString;
-    function GetScheduleHeader: RawByteString;
 
     property Hours: RawByteString read fHours write fHours;
   end;
-
-const
-  ScheduleHeader = #$BC#0#0#0#0#0#0#0#1#0#0#0#0#0#0#0#$14#0#0#0;
 
 implementation
 
@@ -142,11 +138,6 @@ begin
     else
       Result[i + 1] := Char(fOpt1);
   end;
-end;
-
-function TSchedulingLogic.GetScheduleHeader: RawByteString;
-begin
-  Result := ScheduleHeader;
 end;
 
 end.

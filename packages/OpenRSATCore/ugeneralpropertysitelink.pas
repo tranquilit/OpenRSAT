@@ -111,10 +111,25 @@ end;
 
 procedure TGeneralPropertySiteLink.SaveSchedule;
 var
+  Header: RawByteString;
   Schedule: RawByteString;
+  Value: UInt32;
 begin
   Schedule := fScheduling.SaveSchedule();
-  Props.Add('schedule', fScheduling.GetScheduleHeader + Schedule);
+
+  SetLength(Header, 20);
+  Value := Length(Header) + Length(Schedule);
+  Move(Value, Header[1], SizeOf(UInt32));
+  Value := 0;
+  Move(Value, Header[5], SizeOf(UInt32));
+  Value := 1;
+  Move(Value, Header[9], SizeOf(UInt32));
+  Value := 0;
+  Move(Value, Header[13], SizeOf(UInt32));
+  Value := Length(Header);
+  Move(Value, Header[17], SizeOf(UInt32));
+
+  Props.Add('schedule', Header + Schedule);
 end;
 
 function TGeneralPropertySiteLink.FindAttribute(Attribute: RawUtf8): TLdapAttribute;
