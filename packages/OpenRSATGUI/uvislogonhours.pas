@@ -24,6 +24,8 @@ type
 
   { TScheduleValue }
   TScheduleValue = (svDenied, svAvailable, svOnce, svTwice);
+  TScheduleValueGetter = function(i: Integer): TScheduleValue of object;
+  TScheduleValueSetter = procedure(i: Integer; Value: TScheduleValue) of object;
 
   { TVisLogonHours }
   TVisLogonHours = class(TForm)
@@ -54,15 +56,21 @@ type
     procedure RadioButton_Click(Sender: TObject);
     procedure SpinEdit_UTCChange(Sender: TObject);
     procedure Timer_FixTimer(Sender: TObject);
+
   private
     PHours: PRawByteString;
     HoursUTC: RawByteString;
     ReadingData: Boolean;
+    GetScheduleValue: TScheduleValueGetter;
+    SetScheduleValue: TScheduleValueSetter;
     fPageOption: KindOfPage;
     function GetBit(i: Integer): Boolean;
-    function GetScheduleValue(i: Integer): TScheduleValue;
+    function GetScheduleValueSiteLinkGUI(i: Integer): TScheduleValue;
+    function GetScheduleValueNTDSGUI(i: Integer): TScheduleValue;
     procedure SetBit(i: Integer; b: Boolean);
-    procedure SetScheduleValue(i: Integer; Value: TScheduleValue);
+    procedure SetScheduleValueSiteLinkGUI(i: Integer; Value: TScheduleValue);
+    procedure SetScheduleValueNTDSGUI(i: Integer; Value: TScheduleValue);
+
   public
     constructor Create(TheOwner: TComponent; _PHours: PRawByteString; PageOption: KindOfPage); reintroduce;
   end;
@@ -96,6 +104,8 @@ begin
       Caption := 'Site Link Scheduling';
       RadioButton_Allowed.Caption := 'Replication Available';
       RadioButton_Denied.Caption := 'Replication Not Available';
+      GetScheduleValue := @GetScheduleValueSiteLinkGUI;
+      SetScheduleValue := @SetScheduleValueSiteLinkGUI;
     end;
     NTDSSchedulingPage:
     begin
@@ -106,6 +116,8 @@ begin
       Panel_Twice.Visible := True;
       RadioButton_Once.Visible := True;
       RadioButton_Twice.Visible := True;
+      GetScheduleValue := @GetScheduleValueNTDSGUI;
+      SetScheduleValue := @SetScheduleValueNTDSGUI;
     end;
   end;
 
@@ -128,7 +140,7 @@ begin
   DrawGrid.Selection := Rect(1, 1, 0, 0);
 
   // Buttons
-  if fPageOption = NTDSSchedulingPage then
+  if fPageOption <> LogonHoursPage then
   begin
     case GetScheduleValue(-Integer(SpinEdit_UTC.Value)) of
       svAvailable: RadioButton_Allowed.Checked := True;
@@ -209,7 +221,7 @@ begin
   // Cells
   if (aRow > 0) and (aCol > 0) then
   begin
-    if fPageOption = NTDSSchedulingPage then
+    if fPageOption <> LogonHoursPage then
     begin
       case GetScheduleValue((aRow - 1) * HoursPerDay + aCol - 1 - Integer(SpinEdit_UTC.Value)) of
         svDenied: DrawGrid.Canvas.Brush.Color := clBtnShadow;
@@ -297,7 +309,7 @@ begin
 
   // Set RadioButtons
   ReadingData := True;
-  if fPageOption = NTDSSchedulingPage then
+  if fPageOption <> LogonHoursPage then
   begin
     FirstValue := GetScheduleValue((defRect.Top - 1) * HoursPerDay + defRect.Left - 1 - Integer(SpinEdit_UTC.Value));
     SameValue := True;
@@ -402,7 +414,7 @@ begin
   end;
 
   // color
-  if fPageOption = NTDSSchedulingPage then
+  if fPageOption <> LogonHoursPage then
   begin
     if Sender = RadioButton_Denied then
       NewValue := svDenied
@@ -455,7 +467,30 @@ begin
   result := Boolean(Byte(HoursUTC[1 + i div 8]) and Byte(1 Shl (i mod 8)));
 end;
 
-function TVisLogonHours.GetScheduleValue(i: Integer): TScheduleValue;
+function TVisLogonHours.GetScheduleValueSiteLinkGUI(i: Integer): TScheduleValue;
+var
+  Value: Byte;
+  GridDay, GridHour: Integer;
+  ADDay, ADIndex: Integer;
+begin
+  if i < 0 then
+    i += 168;
+  i := i mod 168;
+
+  GridDay := i div 24;
+  GridHour := i mod 24;
+
+  ADDay := (GridDay + 1) mod 7;
+  ADIndex := ADDay * 24 + GridHour;
+
+  Value := Byte(HoursUTC[ADIndex + 1]);
+  case Value of
+    $F0: Result := svDenied;
+    $FF: Result := svAvailable;
+  end;
+end;
+
+function TVisLogonHours.GetScheduleValueNTDSGUI(i: Integer): TScheduleValue;
 var
   Value: Byte;
   GridDay, GridHour: Integer;
@@ -489,7 +524,28 @@ begin
   HoursUTC[1 + i div 8] := Char(Byte(HoursUTC[1 + i div 8]) and not (Byte(1) Shl (i mod 8)) or (Byte(b) Shl (i mod 8)))
 end;
 
-procedure TVisLogonHours.SetScheduleValue(i: Integer; Value: TScheduleValue);
+procedure TVisLogonHours.SetScheduleValueSiteLinkGUI(i: Integer; Value: TScheduleValue);
+var
+  GridDay, GridHour: Integer;
+  ADDay, ADIndex: Integer;
+begin
+  if i < 0 then
+    i += 168;
+  i := i mod 168;
+
+  GridDay := i div 24;
+  GridHour := i mod 24;
+
+  ADDay := (GridDay + 1) mod 7;
+  ADIndex := ADDay * 24 + GridHour;
+
+  case Value of
+    svDenied: HoursUTC[ADIndex + 1] := Char($F0);
+    svAvailable: HoursUTC[ADIndex + 1] := Char($FF);
+  end;
+end;
+
+procedure TVisLogonHours.SetScheduleValueNTDSGUI(i: Integer; Value: TScheduleValue);
 var
   GridDay, GridHour: Integer;
   ADDay, ADIndex: Integer;
