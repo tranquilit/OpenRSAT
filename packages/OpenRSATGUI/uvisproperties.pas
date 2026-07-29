@@ -299,6 +299,7 @@ uses
   ufrmpropertygeneralntdsdsa,
   ufrmpropertygeneralintersitetransport,
   ufrmpropertygeneralserver,
+  ufrmpropertygeneralgpo,
   ufrmpropertylaps,
   ufrmpropertylocation,
   ufrmpropertymanagedby,
@@ -462,6 +463,13 @@ const
   PROPERTY_NTDSDSA: Array of TPropertyFrameClass = (
     TFrmPropertyGeneralNTDSDSA,
     TFrmPropertyConnections,
+    TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  );
+
+  PROPERTY_GPO: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralGPO,
     TFrmPropertyObject,
     TFrmPropertySecurity,
     TFrmPropertyAttributes
@@ -735,6 +743,7 @@ begin
   'server': property_tabs := PROPERTY_SERVER;
   'subnet': property_tabs := PROPERTY_SUBNET;
   'interSiteTransport': property_tabs := PROPERTY_INTER_SITE_TRANSPORT;
+  'groupPolicyContainer': property_tabs := PROPERTY_GPO;
   end;
 
   for property_tab in property_tabs do

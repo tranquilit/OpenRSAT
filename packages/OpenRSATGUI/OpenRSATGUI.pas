@@ -41,7 +41,7 @@ uses
   ufrmpropertygeneralntdsdsa, ufrmpropertyconnections, 
   ufrmnewmsdnsserversettings, ufrmpropertygeneralintersitetransport, 
   uvisviewkeytab, uopenrsatuicontextinterface, ufrmpropertygplinks, 
-  uvislistgpo, LazarusPackageIntf;
+  uvislistgpo, ufrmpropertygeneralgpo, LazarusPackageIntf;
 
 implementation
 
