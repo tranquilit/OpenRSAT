@@ -12,7 +12,7 @@
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
-    <Files Count="104">
+    <Files Count="105">
       <Item1>
         <Filename Value="ufrmmoduleaduc.pas"/>
         <UnitName Value="ufrmmoduleaduc"/>
@@ -429,6 +429,10 @@
         <Filename Value="PropertyPages\ufrmpropertygplinks.pas"/>
         <UnitName Value="ufrmpropertygplinks"/>
       </Item104>
+      <Item105>
+        <Filename Value="uvislistgpo.pas"/>
+        <UnitName Value="uvislistgpo"/>
+      </Item105>
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>

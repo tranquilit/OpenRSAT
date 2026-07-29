@@ -1,0 +1,159 @@
+object FrmPropertyGPLinks: TFrmPropertyGPLinks
+  Left = 0
+  Height = 361
+  Top = 0
+  Width = 405
+  ClientHeight = 361
+  ClientWidth = 405
+  LCLVersion = '4.5.0.0'
+  TabOrder = 0
+  DesignLeft = 986
+  DesignTop = 140
+  object TisGrid_GPLinks: TTisGrid
+    Left = 4
+    Height = 285
+    Top = 31
+    Width = 397
+    Align = alClient
+    BorderSpacing.Around = 4
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'DistinguishedName'
+        Width = 200
+        PropertyName = 'distinguishedName'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Text = 'ID'
+        Width = 200
+        PropertyName = 'id'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 2
+        Text = 'Name'
+        Width = 200
+        PropertyName = 'name'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 3
+        Text = 'Link flags'
+        PropertyName = 'link_flags'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 4
+        Text = 'GPO Flags'
+        PropertyName = 'gpo_flags'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MaxHeight = 100
+    Header.MinHeight = 18
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.Style = hsFlatButtons
+    PopupMenu = PopupMenu_GPLinks
+    TabOrder = 0
+    TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+    ZebraColor = 15593713
+    OnKeyPress = TisGrid_GPLinksKeyPress
+  end
+  object Label_GPLinks: TLabel
+    Left = 8
+    Height = 15
+    Top = 8
+    Width = 389
+    Align = alTop
+    BorderSpacing.Around = 8
+    Caption = 'Group Policies Links'
+  end
+  object Panel_Bottom: TPanel
+    Left = 0
+    Height = 41
+    Top = 320
+    Width = 405
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 405
+    TabOrder = 1
+    object BitBtn_GPLinksAdd: TBitBtn
+      Left = 8
+      Height = 25
+      Top = 8
+      Width = 48
+      Action = Action_Add
+      Align = alLeft
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 0
+    end
+    object BitBtn_GPLinksDelete: TBitBtn
+      Left = 64
+      Height = 25
+      Top = 8
+      Width = 59
+      Action = Action_Delete
+      Align = alLeft
+      AutoSize = True
+      BorderSpacing.Around = 8
+      TabOrder = 1
+    end
+  end
+  object Timer_GPLinks: TTimer
+    Enabled = False
+    OnTimer = Timer_GPLinksTimer
+    Left = 320
+    Top = 152
+  end
+  object ActionList_GPLinks: TActionList
+    Left = 96
+    Top = 152
+    object Action_Add: TAction
+      Caption = 'Add'
+      OnExecute = Action_AddExecute
+    end
+    object Action_Delete: TAction
+      Caption = 'Delete'
+      OnExecute = Action_DeleteExecute
+      OnUpdate = Action_DeleteUpdate
+    end
+    object Action_EnableLink: TAction
+      Caption = 'Enable Link'
+      OnExecute = Action_EnableLinkExecute
+    end
+    object Action_DisableLink: TAction
+      Caption = 'Disable Link'
+      OnExecute = Action_DisableLinkExecute
+    end
+    object Action_EnforceLink: TAction
+      Caption = 'Enforce Link'
+      OnExecute = Action_EnforceLinkExecute
+    end
+  end
+  object PopupMenu_GPLinks: TPopupMenu
+    Left = 216
+    Top = 152
+    object MenuItem_Delete: TMenuItem
+      Action = Action_Delete
+    end
+    object Separator1: TMenuItem
+      Caption = '-'
+    end
+    object MenuItem_Enable: TMenuItem
+      Action = Action_EnableLink
+    end
+    object MenuItem_Disable: TMenuItem
+      Action = Action_DisableLink
+    end
+    object MenuItem_Enforce: TMenuItem
+      Action = Action_EnforceLink
+    end
+  end
+end

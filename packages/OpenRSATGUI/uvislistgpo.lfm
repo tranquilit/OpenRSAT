@@ -1,0 +1,150 @@
+object VisListGPO: TVisListGPO
+  Left = 423
+  Height = 325
+  Top = 250
+  Width = 566
+  Caption = 'Group Policy Objects'
+  ClientHeight = 325
+  ClientWidth = 566
+  LCLVersion = '4.5.0.0'
+  OnShow = FormShow
+  object TisGrid1: TTisGrid
+    Left = 4
+    Height = 235
+    Top = 45
+    Width = 558
+    Align = alClient
+    BorderSpacing.Around = 4
+    Header.AutoSizeIndex = -1
+    Header.Columns = <    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus, coWrapCaption, coEditable]
+        Position = 0
+        Text = 'Distinguished Name'
+        Width = 200
+        PropertyName = 'distinguishedName'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 1
+        Tag = 1
+        Text = 'Name'
+        Width = 200
+        PropertyName = 'name'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 2
+        Tag = 2
+        Text = 'Display Name'
+        Width = 200
+        PropertyName = 'displayName'
+      end    
+      item
+        Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+        Position = 3
+        Tag = 3
+        Text = 'Flags'
+        PropertyName = 'flags'
+      end>
+    Header.DefaultHeight = 18
+    Header.Height = 28
+    Header.MainColumn = 1
+    Header.MaxHeight = 100
+    Header.MinHeight = 18
+    Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+    Header.Style = hsFlatButtons
+    TabOrder = 0
+    TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+    ZebraColor = 15593713
+  end
+  object Panel_Top: TPanel
+    Left = 0
+    Height = 41
+    Top = 0
+    Width = 566
+    Align = alTop
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 566
+    TabOrder = 1
+    object Edit_Search: TEdit
+      Left = 8
+      Height = 25
+      Top = 8
+      Width = 200
+      Align = alLeft
+      BorderSpacing.Around = 8
+      TabOrder = 0
+      OnChange = Edit_SearchChange
+    end
+    object BitBtn_Search: TBitBtn
+      Left = 216
+      Height = 25
+      Top = 8
+      Width = 61
+      Action = Action_Search
+      Align = alLeft
+      AutoSize = True
+      BorderSpacing.Around = 8
+      Default = True
+      TabOrder = 1
+    end
+  end
+  object Panel_Bottom: TPanel
+    Left = 0
+    Height = 41
+    Top = 284
+    Width = 566
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 566
+    TabOrder = 2
+    object BitBtn_OK: TBitBtn
+      Left = 446
+      Height = 25
+      Top = 8
+      Width = 42
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      Caption = 'OK'
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object BitBtn_Cancel: TBitBtn
+      Left = 496
+      Height = 25
+      Top = 8
+      Width = 62
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object Timer_Search: TTimer
+    Enabled = False
+    OnTimer = Timer_SearchTimer
+    Left = 200
+    Top = 152
+  end
+  object Timer_SearchInGrid: TTimer
+    Enabled = False
+    Left = 392
+    Top = 152
+  end
+  object ActionList1: TActionList
+    Left = 296
+    Top = 152
+    object Action_Search: TAction
+      Caption = 'Search'
+      OnExecute = Action_SearchExecute
+    end
+  end
+end

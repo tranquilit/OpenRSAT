@@ -35,8 +35,8 @@ implementation
 constructor TPropertyFrame.Create(TheOwner: TComponent;
   Context: IOpenRSATUIContext);
 begin
-  Create(TheOwner);
   IContext := Context;
+  Create(TheOwner);
 end;
 
 procedure TPropertyFrame.DropFiles(const FileNames: array of string);

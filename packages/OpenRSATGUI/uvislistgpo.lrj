@@ -1,0 +1,10 @@
+{"version":1,"strings":[
+{"hash":148058195,"name":"tvislistgpo.caption","sourcebytes":[71,114,111,117,112,32,80,111,108,105,99,121,32,79,98,106,101,99,116,115],"value":"Group Policy Objects"},
+{"hash":188344021,"name":"tvislistgpo.tisgrid1.header.columns[0].text","sourcebytes":[68,105,115,116,105,110,103,117,105,115,104,101,100,32,78,97,109,101],"value":"Distinguished Name"},
+{"hash":346165,"name":"tvislistgpo.tisgrid1.header.columns[1].text","sourcebytes":[78,97,109,101],"value":"Name"},
+{"hash":201711893,"name":"tvislistgpo.tisgrid1.header.columns[2].text","sourcebytes":[68,105,115,112,108,97,121,32,78,97,109,101],"value":"Display Name"},
+{"hash":5056483,"name":"tvislistgpo.tisgrid1.header.columns[3].text","sourcebytes":[70,108,97,103,115],"value":"Flags"},
+{"hash":1339,"name":"tvislistgpo.bitbtn_ok.caption","sourcebytes":[79,75],"value":"OK"},
+{"hash":77089212,"name":"tvislistgpo.bitbtn_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
+{"hash":94079128,"name":"tvislistgpo.action_search.caption","sourcebytes":[83,101,97,114,99,104],"value":"Search"}
+]}
