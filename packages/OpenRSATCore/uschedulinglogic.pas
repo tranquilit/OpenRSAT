@@ -21,7 +21,7 @@ type
   { TSchedulingLogic }
   TSchedulingLogic = class
   private
-    fHours: RawByteString;
+    fHeader, fHours: RawByteString;
     fKindOfPage: KindOfPage;
 
     procedure SetupHoursRawByteString;
@@ -58,9 +58,7 @@ end;
 procedure TSchedulingLogic.LoadScheduleToHours(const ScheduleData: RawByteString);
 var
   Data: RawByteString;
-  i, ADDay, ADHour, GridDay, GridIndex: Integer;
 begin
-  FillByte(fHours[1], Length(fHours), 0);
   if ScheduleData = '' then
   begin
     FillByte(fHours[1], Length(fHours), $00);
@@ -68,39 +66,48 @@ begin
   end;
 
   Data := ScheduleData;
+  Delete(Data, 21, Length(Data));
+  fHeader := Data;
+
+  Data := ScheduleData;
   Delete(Data, 1, 20);
   fHours := Data;
-  Exit;
 end;
 
 function TSchedulingLogic.GetHeader: RawByteString;
 var
-  Header: RawByteString;
+  NewHeader: RawByteString;
   Value: UInt32;
 begin
-  SetLength(Header, 20);
+  if fHeader <> '' then
+  begin
+    Result := fHeader;
+    Exit;
+  end;
+
+  SetLength(NewHeader, 20);
 
   // Header + Schedule size
-  Value := Length(Header) + Length(fHours);
-  Move(Value, Header[1], SizeOf(UInt32));
+  Value := Length(NewHeader) + Length(fHours);
+  Move(Value, NewHeader[1], SizeOf(UInt32));
 
   // Bandwidth (not used)
   Value := 0;
-  Move(Value, Header[5], SizeOf(UInt32));
+  Move(Value, NewHeader[5], SizeOf(UInt32));
 
   // Number of schedule (default 1)
   Value := 1;
-  Move(Value, Header[9], SizeOf(UInt32));
+  Move(Value, NewHeader[9], SizeOf(UInt32));
 
   // Offset
   Value := 0;
-  Move(Value, Header[13], SizeOf(UInt32));
+  Move(Value, NewHeader[13], SizeOf(UInt32));
 
   // Header size
-  Value := Length(Header);
-  Move(Value, Header[17], SizeOf(UInt32));
+  Value := Length(NewHeader);
+  Move(Value, NewHeader[17], SizeOf(UInt32));
 
-  Result := Header;
+  Result := NewHeader;
 end;
 
 end.
