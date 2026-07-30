@@ -43,7 +43,6 @@ begin
   fLdap := P.LdapClient;
 
   fScheduling := TSchedulingLogic.Create(NTDSSchedulingPage);
-  fScheduling.SetupHoursRawByteString;
 end;
 
 destructor TGeneralPropertyNTDSLogic.Destroy;

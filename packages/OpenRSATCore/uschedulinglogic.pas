@@ -23,11 +23,12 @@ type
   private
     fHours: RawByteString;
     fKindOfPage: KindOfPage;
+
+    procedure SetupHoursRawByteString;
   public
     constructor Create(Page: KindOfPage);
     destructor Destroy; override;
 
-    procedure SetupHoursRawByteString;
     procedure LoadScheduleToHours(const ScheduleData: RawByteString);
     function GetHeader: RawByteString;
 
@@ -39,6 +40,7 @@ implementation
 constructor TSchedulingLogic.Create(Page: KindOfPage);
 begin
   fKindOfPage := Page;
+  SetupHoursRawByteString
 end;
 
 destructor TSchedulingLogic.Destroy;
