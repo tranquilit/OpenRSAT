@@ -58,7 +58,7 @@ end;
 
 function TGeneralPropertyNTDSLogic.FindAttribute(Attribute: RawUtf8): TLdapAttribute;
 begin
-  Result := fProperty.Attributes.Find(Attribute);
+  Result := fProperty.Get(Attribute);
 end;
 
 function TGeneralPropertyNTDSLogic.GetByteFromAttribute(Attribute: TLdapAttribute): RawByteString;

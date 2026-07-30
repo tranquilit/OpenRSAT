@@ -115,7 +115,7 @@ end;
 
 function TGeneralPropertySiteLink.FindAttribute(Attribute: RawUtf8): TLdapAttribute;
 begin
-  Result := fProperty.Attributes.Find(Attribute);
+  Result := fProperty.Get(Attribute);
 end;
 
 function TGeneralPropertySiteLink.FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute;
