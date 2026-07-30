@@ -318,6 +318,7 @@ msgid "Forest"
 msgstr "Forêt"
 
 #: ucommon.rsdnszonedcpromoconvertnone
+msgctxt "ucommon.rsdnszonedcpromoconvertnone"
 msgid "None"
 msgstr "Aucun"
 
@@ -380,6 +381,10 @@ msgstr "Descendant direct"
 #: ucommon.rsflagthisobject
 msgid "this object"
 msgstr "Cet objet"
+
+#: ucommon.rsfourperhour
+msgid "Four Times per Hour"
+msgstr "Quatre Fois par Heure"
 
 #: ucommon.rsfriday
 msgid "Friday"
@@ -662,6 +667,12 @@ msgstr "L'utilisateur ne peut changer de mot de passe."
 msgid "The Password never expires."
 msgstr "Le mot de passe n'expire jamais."
 
+#: ucommon.rsnone
+#, fuzzy
+msgctxt "ucommon.rsnone"
+msgid "None"
+msgstr "Aucun"
+
 #: ucommon.rsnosettingsfound
 msgid "This server does not contain a settings object. As a result, the General Properties page cannot be populated, and all fields will be empty."
 msgstr "Ce serveur ne contient pas d'objet paramètres. Par conséquent, la page Propriétés Générales ne peut pas être remplie et tous les champs seront vides."
@@ -693,6 +704,10 @@ msgstr ""
 #: ucommon.rsobjectclassviolation
 msgid "The requested operation would have resulted in an entry that has an inappropriate set of object classes, or whose attributes violate the constraints associated with its set of object classes."
 msgstr "L'opération demandée aurait donné lieu à une entrée comportant un ensemble inapproprié de classes d'objets ou dont les attributs enfreignent les contraintes associées à son ensemble de classes d'objets."
+
+#: ucommon.rsonceperhour
+msgid "Once per Hour"
+msgstr "Une fois par Heure"
 
 #: ucommon.rsoperationserror
 msgid "Operation occurs in a wrong order."
@@ -729,6 +744,14 @@ msgstr "Ceci ne devrait pas être une erreur. Le client doit suivre la redirecti
 #: ucommon.rsrename
 msgid "Rename"
 msgstr "Renommer"
+
+#: ucommon.rsreplicationavailable
+msgid "Replication Available"
+msgstr "Replication Possible"
+
+#: ucommon.rsreplicationdenied
+msgid "Replication Not Available"
+msgstr "Replication Non Autorisée"
 
 #: ucommon.rsresetpassword
 msgid "Reset Password"
@@ -975,6 +998,10 @@ msgstr "Active Directory Sites and Services n'a pas pu localiser deux sites pour
 #: ucommon.rstuesday
 msgid "Tuesday"
 msgstr "Mardi"
+
+#: ucommon.rstwiceperhour
+msgid "Twice per Hour"
+msgstr "Deux fois par Heure"
 
 #: ucommon.rsuacserver
 msgid "Domain controller"
