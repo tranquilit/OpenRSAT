@@ -29,7 +29,7 @@ type
 
     procedure SetupHoursRawByteString;
     procedure LoadScheduleToHours(const ScheduleData: RawByteString);
-    function SaveSchedule: RawByteString;
+    function GetHeader: RawByteString;
 
     property Hours: RawByteString read fHours write fHours;
   end;
@@ -49,18 +49,8 @@ end;
 procedure TSchedulingLogic.SetupHoursRawByteString;
 begin
   fHours := '';
-  case fKindOfPage of
-    NTDSSchedulingPage:
-    begin
-      SetLength(fHours, 168);
-      FillByte(fHours[1], 168, 0);
-    end
-  else
-    begin
-      SetLength(fHours, 21);
-      FillByte(fHours[1], 21, 0);
-    end;
-  end;
+  SetLength(fHours, 168);
+  FillByte(fHours[1], 168, $00);
 end;
 
 procedure TSchedulingLogic.LoadScheduleToHours(const ScheduleData: RawByteString);
@@ -81,9 +71,34 @@ begin
   Exit;
 end;
 
-function TSchedulingLogic.SaveSchedule: RawByteString;
+function TSchedulingLogic.GetHeader: RawByteString;
+var
+  Header: RawByteString;
+  Value: UInt32;
 begin
-  Result := fHours;
+  SetLength(Header, 20);
+
+  // Header + Schedule size
+  Value := Length(Header) + Length(fHours);
+  Move(Value, Header[1], SizeOf(UInt32));
+
+  // Bandwidth (not used)
+  Value := 0;
+  Move(Value, Header[5], SizeOf(UInt32));
+
+  // Number of schedule (default 1)
+  Value := 1;
+  Move(Value, Header[9], SizeOf(UInt32));
+
+  // Offset
+  Value := 0;
+  Move(Value, Header[13], SizeOf(UInt32));
+
+  // Header size
+  Value := Length(Header);
+  Move(Value, Header[17], SizeOf(UInt32));
+
+  Result := Header;
 end;
 
 end.
