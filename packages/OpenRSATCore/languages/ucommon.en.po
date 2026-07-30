@@ -318,6 +318,7 @@ msgid "Forest"
 msgstr "Forest"
 
 #: ucommon.rsdnszonedcpromoconvertnone
+msgctxt "ucommon.rsdnszonedcpromoconvertnone"
 msgid "None"
 msgstr "None"
 
@@ -380,6 +381,10 @@ msgstr "direct descendants"
 #: ucommon.rsflagthisobject
 msgid "this object"
 msgstr "this object"
+
+#: ucommon.rsfourperhour
+msgid "Four Times per Hour"
+msgstr ""
 
 #: ucommon.rsfriday
 msgid "Friday"
@@ -662,6 +667,12 @@ msgstr "The user cannot change his password."
 msgid "The Password never expires."
 msgstr "The Password never expires."
 
+#: ucommon.rsnone
+#, fuzzy
+msgctxt "ucommon.rsnone"
+msgid "None"
+msgstr "None"
+
 #: ucommon.rsnosettingsfound
 msgid "This server does not contain a settings object. As a result, the General Properties page cannot be populated, and all fields will be empty."
 msgstr ""
@@ -693,6 +704,10 @@ msgstr ""
 #: ucommon.rsobjectclassviolation
 msgid "The requested operation would have resulted in an entry that has an inappropriate set of object classes, or whose attributes violate the constraints associated with its set of object classes."
 msgstr "The requested operation would have resulted in an entry that has an inappropriate set of object classes, or whose attributes violate the constraints associated with its set of object classes."
+
+#: ucommon.rsonceperhour
+msgid "Once per Hour"
+msgstr ""
 
 #: ucommon.rsoperationserror
 msgid "Operation occurs in a wrong order."
@@ -729,6 +744,14 @@ msgstr "This should not be an error. Client should follow referral. Please try t
 #: ucommon.rsrename
 msgid "Rename"
 msgstr "Rename"
+
+#: ucommon.rsreplicationavailable
+msgid "Replication Available"
+msgstr ""
+
+#: ucommon.rsreplicationdenied
+msgid "Replication Not Available"
+msgstr ""
 
 #: ucommon.rsresetpassword
 msgid "Reset Password"
@@ -975,6 +998,10 @@ msgstr "Active Directory Sites and Services cannot locate two sites to create a 
 #: ucommon.rstuesday
 msgid "Tuesday"
 msgstr "Tuesday"
+
+#: ucommon.rstwiceperhour
+msgid "Twice per Hour"
+msgstr ""
 
 #: ucommon.rsuacserver
 msgid "Domain controller"

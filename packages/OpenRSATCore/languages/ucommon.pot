@@ -302,6 +302,7 @@ msgid "Forest"
 msgstr ""
 
 #: ucommon.rsdnszonedcpromoconvertnone
+msgctxt "ucommon.rsdnszonedcpromoconvertnone"
 msgid "None"
 msgstr ""
 
@@ -363,6 +364,10 @@ msgstr ""
 
 #: ucommon.rsflagthisobject
 msgid "this object"
+msgstr ""
+
+#: ucommon.rsfourperhour
+msgid "Four Times per Hour"
 msgstr ""
 
 #: ucommon.rsfriday
@@ -644,6 +649,11 @@ msgstr ""
 msgid "The Password never expires."
 msgstr ""
 
+#: ucommon.rsnone
+msgctxt "ucommon.rsnone"
+msgid "None"
+msgstr ""
+
 #: ucommon.rsnosettingsfound
 msgid "This server does not contain a settings object. As a result, the General Properties page cannot be populated, and all fields will be empty."
 msgstr ""
@@ -674,6 +684,10 @@ msgstr ""
 
 #: ucommon.rsobjectclassviolation
 msgid "The requested operation would have resulted in an entry that has an inappropriate set of object classes, or whose attributes violate the constraints associated with its set of object classes."
+msgstr ""
+
+#: ucommon.rsonceperhour
+msgid "Once per Hour"
 msgstr ""
 
 #: ucommon.rsoperationserror
@@ -710,6 +724,14 @@ msgstr ""
 
 #: ucommon.rsrename
 msgid "Rename"
+msgstr ""
+
+#: ucommon.rsreplicationavailable
+msgid "Replication Available"
+msgstr ""
+
+#: ucommon.rsreplicationdenied
+msgid "Replication Not Available"
 msgstr ""
 
 #: ucommon.rsresetpassword
@@ -956,6 +978,10 @@ msgstr ""
 
 #: ucommon.rstuesday
 msgid "Tuesday"
+msgstr ""
+
+#: ucommon.rstwiceperhour
+msgid "Twice per Hour"
 msgstr ""
 
 #: ucommon.rsuacserver

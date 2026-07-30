@@ -318,6 +318,7 @@ msgid "Forest"
 msgstr "Las"
 
 #: ucommon.rsdnszonedcpromoconvertnone
+msgctxt "ucommon.rsdnszonedcpromoconvertnone"
 msgid "None"
 msgstr "Brak"
 
@@ -380,6 +381,10 @@ msgstr "bezpośrednie elementy podrzędne"
 #: ucommon.rsflagthisobject
 msgid "this object"
 msgstr "ten obiekt"
+
+#: ucommon.rsfourperhour
+msgid "Four Times per Hour"
+msgstr ""
 
 #: ucommon.rsfriday
 msgid "Friday"
@@ -662,6 +667,12 @@ msgstr "Użytkownik nie może zmienić hasła."
 msgid "The Password never expires."
 msgstr "Hasło nigdy nie wygasa."
 
+#: ucommon.rsnone
+#, fuzzy
+msgctxt "ucommon.rsnone"
+msgid "None"
+msgstr "Brak"
+
 #: ucommon.rsnosettingsfound
 msgid "This server does not contain a settings object. As a result, the General Properties page cannot be populated, and all fields will be empty."
 msgstr "Ten serwer nie zawiera obiektu ustawień. W rezultacie karta Właściwości ogólne nie może zostać wypełniona, a wszystkie pola będą puste."
@@ -693,6 +704,10 @@ msgstr "Użytkownik nie będzie musiał zmieniać hasła przy następnym logowan
 #: ucommon.rsobjectclassviolation
 msgid "The requested operation would have resulted in an entry that has an inappropriate set of object classes, or whose attributes violate the constraints associated with its set of object classes."
 msgstr "Żądana operacja spowodowałaby utworzenie wpisu z nieodpowiednim zestawem klas obiektów lub atrybutami naruszającymi ograniczenia klas."
+
+#: ucommon.rsonceperhour
+msgid "Once per Hour"
+msgstr ""
 
 #: ucommon.rsoperationserror
 msgid "Operation occurs in a wrong order."
@@ -729,6 +744,14 @@ msgstr "To nie powinno być błędem. Klient powinien podążać za odesłaniem 
 #: ucommon.rsrename
 msgid "Rename"
 msgstr "Zmień nazwę"
+
+#: ucommon.rsreplicationavailable
+msgid "Replication Available"
+msgstr ""
+
+#: ucommon.rsreplicationdenied
+msgid "Replication Not Available"
+msgstr ""
 
 #: ucommon.rsresetpassword
 msgid "Reset Password"
@@ -975,6 +998,10 @@ msgstr "Witryny i usługi Active Directory nie mogą odnaleźć dwóch witryn w 
 #: ucommon.rstuesday
 msgid "Tuesday"
 msgstr "Wtorek"
+
+#: ucommon.rstwiceperhour
+msgid "Twice per Hour"
+msgstr ""
 
 #: ucommon.rsuacserver
 msgid "Domain controller"

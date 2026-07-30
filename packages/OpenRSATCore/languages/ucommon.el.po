@@ -299,6 +299,7 @@ msgid "Forest"
 msgstr "Δάσος"
 
 #: ucommon.rsdnszonedcpromoconvertnone
+msgctxt "ucommon.rsdnszonedcpromoconvertnone"
 msgid "None"
 msgstr "Κανένας"
 
@@ -361,6 +362,10 @@ msgstr "άμεσοι απόγονοι"
 #: ucommon.rsflagthisobject
 msgid "this object"
 msgstr "αυτό το αντικείμενο"
+
+#: ucommon.rsfourperhour
+msgid "Four Times per Hour"
+msgstr ""
 
 #: ucommon.rsfriday
 msgid "Friday"
@@ -645,6 +650,12 @@ msgstr "Ο χρήστης δεν μπορεί να αλλάξει τον κωδ�
 msgid "The Password never expires."
 msgstr "Ο κωδικός δεν λήγει ποτέ."
 
+#: ucommon.rsnone
+#, fuzzy
+msgctxt "ucommon.rsnone"
+msgid "None"
+msgstr "Κανένας"
+
 #: ucommon.rsnosettingsfound
 msgid "This server does not contain a settings object. As a result, the General Properties page cannot be populated, and all fields will be empty."
 msgstr ""
@@ -675,6 +686,10 @@ msgstr ""
 
 #: ucommon.rsobjectclassviolation
 msgid "The requested operation would have resulted in an entry that has an inappropriate set of object classes, or whose attributes violate the constraints associated with its set of object classes."
+msgstr ""
+
+#: ucommon.rsonceperhour
+msgid "Once per Hour"
 msgstr ""
 
 #: ucommon.rsoperationserror
@@ -712,6 +727,14 @@ msgstr "Αυτό δεν θα έπρεπε να είναι σφάλμα. Ο πε�
 #: ucommon.rsrename
 msgid "Rename"
 msgstr "Μετονομασία"
+
+#: ucommon.rsreplicationavailable
+msgid "Replication Available"
+msgstr ""
+
+#: ucommon.rsreplicationdenied
+msgid "Replication Not Available"
+msgstr ""
 
 #: ucommon.rsresetpassword
 msgid "Reset Password"
@@ -958,6 +981,10 @@ msgstr ""
 #: ucommon.rstuesday
 msgid "Tuesday"
 msgstr "Τρίτη"
+
+#: ucommon.rstwiceperhour
+msgid "Twice per Hour"
+msgstr ""
 
 #: ucommon.rsuacserver
 msgid "Domain controller"

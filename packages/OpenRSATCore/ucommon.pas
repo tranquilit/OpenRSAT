@@ -174,6 +174,13 @@ resourcestring
   rsNewUserPasswordNoExpire = 'The Password never expires.';
   rsNewUserDisabled = 'The account is disabled.';
 
+  rsReplicationAvailable = 'Replication Available';
+  rsReplicationDenied = 'Replication Not Available';
+  rsNone = 'None';
+  rsOncePerHour = 'Once per Hour';
+  rsTwicePerHour = 'Twice per Hour';
+  rsFourPerHour = 'Four Times per Hour';
+
   rsTitleParsing = 'Parsing error';
   rsACEParsing = 'Failed to parse ACL.';
 
