@@ -310,7 +310,7 @@ end;
 procedure TVisOpenRSAT.Action_AdvancedFeaturesExecute(Sender: TObject);
 begin
   fRSAT.RsatOption.AdvancedView := not fRSAT.RsatOption.AdvancedView;
-  fModules.Refresh;
+  fModules.RefreshAll;
 end;
 
 procedure TVisOpenRSAT.Action_AdvancedFeaturesUpdate(Sender: TObject);
@@ -336,7 +336,7 @@ begin
         Conf := SelectConfig;
       if not Assigned(Conf) then
         Exit;
-    until Client.Connected;
+    until Client.Connected and Client.Bound;
     Client.OnClose := @OnLdapClose;
     Client.OnConnect := @OnLdapConnect;
     Client.OnError := @OnLdapError;
