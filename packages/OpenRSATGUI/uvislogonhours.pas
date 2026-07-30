@@ -28,13 +28,15 @@ type
   TScheduleValueSetter = procedure(i: Integer; Value: TScheduleValue) of object;
 
   TCheckButtonInConstructor = procedure of object;
-  TApplyColorOnTile = procedure(aCol, aRow: Integer) of object;
+  TApplyColorOnTile = function(aCol, aRow: Integer): Integer of object;
   TSetRadioButtonsAfterSelection = procedure(defRect: TRect) of object;
   TUpdateColor = procedure(Sender: TObject; defRect: TRect) of object;
 
   { TVisLogonHours }
   TVisLogonHours = class(TForm)
     Label_Title: TLabel;
+    Panel_TwiceInner: TPanel;
+    Panel_OnceInner: TPanel;
     RadioButton_Secret: TRadioButton;
     SpinEdit_UTC: TSpinEditEx;
     DrawGrid: TDrawGrid;
@@ -80,7 +82,7 @@ type
 
     // logonHours functions
     procedure CheckButtonForLogonHours;
-    procedure ApplyColorOnLogonHours(aCol, aRow: Integer);
+    function ApplyColorOnLogonHours(aCol, aRow: Integer): Integer;
     procedure SetRadioButtonsForLogonHours(defRect: TRect);
     procedure UpdateColorForLogonHours(Sender: TObject; defRect: TRect);
     function GetBit(i: Integer): Boolean;
@@ -88,7 +90,7 @@ type
 
     // schedule functions
     procedure CheckButtonForSchedules;
-    procedure ApplyColorOnSchedules(aCol, aRow: Integer);
+    function ApplyColorOnSchedules(aCol, aRow: Integer): Integer;
     procedure SetRadioButtonsForSchedules(defRect: TRect);
     procedure UpdateColorForSchedules(Sender: TObject; defRect: TRect);
     function GetScheduleValueSiteLinkGUI(i: Integer): TScheduleValue;
@@ -197,7 +199,8 @@ end;
 procedure TVisLogonHours.DrawGridDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRect; aState: TGridDrawState);
 var
   style: TTextStyle;
-  newRect: TRect;
+  newRect, innerRect: TRect;
+  Percent: Integer;
 begin
   // Header rows
   if aCol = 0 then
@@ -257,8 +260,18 @@ begin
   // Cells
   if (aRow > 0) and (aCol > 0) then
   begin
-    ApplyColorOnTile(aCol, aRow);
+    DrawGrid.Canvas.Brush.Color := clBtnShadow;
     DrawGrid.Canvas.Rectangle(aRect);
+
+    Percent := ApplyColorOnTile(aCol, aRow);
+    if Percent > 0 then
+    begin
+      innerRect := aRect;
+      innerRect.Top := aRect.Bottom - ((aRect.Bottom - aRect.Top) * Percent div 100);
+
+      DrawGrid.Canvas.Brush.Color := clBlue;
+      DrawGrid.Canvas.Rectangle(innerRect);
+    end;
   end;
 
   // Fix draw selection
@@ -412,22 +425,22 @@ begin
   RadioButton_Denied.Checked  := not RadioButton_Allowed.Checked;
 end;
 
-procedure TVisLogonHours.ApplyColorOnSchedules(aCol, aRow: Integer);
+function TVisLogonHours.ApplyColorOnSchedules(aCol, aRow: Integer): Integer;
 begin
   case GetScheduleValue((aRow - 1) * HoursPerDay + aCol - 1 - Integer(SpinEdit_UTC.Value)) of
-    svDenied: DrawGrid.Canvas.Brush.Color := clBtnShadow;
-    svAvailable: DrawGrid.Canvas.Brush.Color := clBlue;
-    svOnce: DrawGrid.Canvas.Brush.Color := clGradientInactiveCaption;
-    svTwice: DrawGrid.Canvas.Brush.Color := clGradientActiveCaption;
+    svDenied: Result := 0;
+    svAvailable: Result := 100;
+    svOnce: Result := 25;
+    svTwice: Result := 50;
   end;
 end;
 
-procedure TVisLogonHours.ApplyColorOnLogonHours(aCol, aRow: Integer);
+function TVisLogonHours.ApplyColorOnLogonHours(aCol, aRow: Integer): Integer;
 begin
   if GetBit((aRow - 1) * HoursPerDay + aCol - 1 - Integer(SpinEdit_UTC.Value)) then
-    DrawGrid.Canvas.Brush.Color := clBlue
+    Result := 100
   else
-    DrawGrid.Canvas.Brush.Color := clBtnShadow;
+    Result := 0;
 end;
 
 procedure TVisLogonHours.SetRadioButtonsForSchedules(defRect: TRect);
