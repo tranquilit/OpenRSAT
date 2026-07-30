@@ -50,7 +50,6 @@ begin
   fLdap := P.LdapClient;
 
   fScheduling := TSchedulingLogic.Create(SiteLinkSchedulingPage);
-  fScheduling.SetupHoursRawByteString;
 end;
 
 destructor TGeneralPropertySiteLink.Destroy;

@@ -53,6 +53,7 @@ type
     function RemoveCN(Value: RawUtf8): RawUtf8;
   public
     constructor Create(TheOwner: TComponent); override;
+    destructor Destroy; override;
     procedure Update(Props: TProperty); override;
   end;
 
@@ -72,6 +73,12 @@ begin
     fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'General';
+end;
+
+destructor TFrmPropertyGeneralNTDSSiteSettings.Destroy;
+begin
+  FreeAndNil(fLogic);
+  inherited Destroy;
 end;
 
 procedure TFrmPropertyGeneralNTDSSiteSettings.Update(Props: TProperty);
