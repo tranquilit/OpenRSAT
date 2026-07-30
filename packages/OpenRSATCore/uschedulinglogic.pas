@@ -23,6 +23,7 @@ type
   private
     fHeader, fHours: RawByteString;
     fKindOfPage: KindOfPage;
+    fDefaultType: Byte;
 
     procedure SetupHoursRawByteString;
   public
@@ -40,6 +41,11 @@ implementation
 constructor TSchedulingLogic.Create(Page: KindOfPage);
 begin
   fKindOfPage := Page;
+  case Page of
+    SiteLinkSchedulingPage: fDefaultType := $FF;
+    NTDSSchedulingPage: fDefaultType := $0F;
+  end;
+
   SetupHoursRawByteString
 end;
 
@@ -52,7 +58,7 @@ procedure TSchedulingLogic.SetupHoursRawByteString;
 begin
   fHours := '';
   SetLength(fHours, 168);
-  FillByte(fHours[1], 168, $00);
+  FillByte(fHours[1], 168, fDefaultType);
 end;
 
 procedure TSchedulingLogic.LoadScheduleToHours(const ScheduleData: RawByteString);
@@ -61,7 +67,7 @@ var
 begin
   if ScheduleData = '' then
   begin
-    FillByte(fHours[1], Length(fHours), $00);
+    FillByte(fHours[1], Length(fHours), fDefaultType);
     Exit;
   end;
 
