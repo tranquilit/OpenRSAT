@@ -29,6 +29,8 @@ type
 
   TCheckButtonInConstructor = procedure of object;
   TApplyColorOnTile = procedure(aCol, aRow: Integer) of object;
+  TSetRadioButtonsAfterSelection = procedure(defRect: TRect) of object;
+  TUpdateColor = procedure(Sender: TObject; defRect: TRect) of object;
 
   { TVisLogonHours }
   TVisLogonHours = class(TForm)
@@ -68,6 +70,8 @@ type
     SetScheduleValue: TScheduleValueSetter;
     CheckRadioButton: TCheckButtonInConstructor;
     ApplyColorOnTile: TApplyColorOnTile;
+    SetRadioButtonsAfterSelection: TSetRadioButtonsAfterSelection;
+    UpdateColor: TUpdateColor;
     fPageOption: KindOfPage;
     procedure CreateLogonHours;
     procedure CreateBasicSchedule(pageName, allowedCaption, deniedCaption: String);
@@ -77,12 +81,16 @@ type
     // logonHours functions
     procedure CheckButtonForLogonHours;
     procedure ApplyColorOnLogonHours(aCol, aRow: Integer);
+    procedure SetRadioButtonsForLogonHours(defRect: TRect);
+    procedure UpdateColorForLogonHours(Sender: TObject; defRect: TRect);
     function GetBit(i: Integer): Boolean;
     procedure SetBit(i: Integer; b: Boolean);
 
     // schedule functions
     procedure CheckButtonForSchedules;
     procedure ApplyColorOnSchedules(aCol, aRow: Integer);
+    procedure SetRadioButtonsForSchedules(defRect: TRect);
+    procedure UpdateColorForSchedules(Sender: TObject; defRect: TRect);
     function GetScheduleValueSiteLinkGUI(i: Integer): TScheduleValue;
     function GetScheduleValueNTDSGUI(i: Integer): TScheduleValue;
     procedure SetScheduleValueSiteLinkGUI(i: Integer; Value: TScheduleValue);
@@ -133,6 +141,8 @@ procedure TVisLogonHours.CreateLogonHours;
 begin
   CheckRadioButton := @CheckButtonForLogonHours;
   ApplyColorOnTile:= @ApplyColorOnLogonHours;
+  SetRadioButtonsAfterSelection := @SetRadioButtonsForLogonHours;
+  UpdateColor := @UpdateColorForLogonHours;
 end;
 
 procedure TVisLogonHours.CreateBasicSchedule(pageName, allowedCaption, deniedCaption: String);
@@ -142,6 +152,8 @@ begin
   RadioButton_Denied.Caption := deniedCaption;
   CheckRadioButton := @CheckButtonForSchedules;
   ApplyColorOnTile:= @ApplyColorOnSchedules;
+  SetRadioButtonsAfterSelection := @SetRadioButtonsForSchedules;
+  UpdateColor := @UpdateColorForSchedules;
   GetScheduleValue := @GetScheduleValueSiteLinkGUI;
   SetScheduleValue := @SetScheduleValueSiteLinkGUI;
 end;
@@ -159,6 +171,8 @@ begin
   RadioButton_Twice.Visible := True;
   CheckRadioButton := @CheckButtonForSchedules;
   ApplyColorOnTile:= @ApplyColorOnSchedules;
+  SetRadioButtonsAfterSelection := @SetRadioButtonsForSchedules;
+  UpdateColor := @UpdateColorForSchedules;
   GetScheduleValue := @GetScheduleValueNTDSGUI;
   SetScheduleValue := @SetScheduleValueNTDSGUI;
 end;
@@ -273,11 +287,8 @@ end;
 
 procedure TVisLogonHours.DrawGridAfterSelection(Sender: TObject; aCol, aRow: Integer);
 var
-  row, col, l, w: Integer;
+  col, l, w: Integer;
   defRect, rect: TRect;
-  AllBlue, AllGrey, bit: Boolean;
-  FirstValue: TScheduleValue;
-  SameValue: Boolean;
 begin
   defRect := DrawGrid.Selection;
   // Row Select
@@ -316,60 +327,7 @@ begin
 
   // Set RadioButtons
   ReadingData := True;
-  if fPageOption <> LogonHoursPage then
-  begin
-    FirstValue := GetScheduleValue((defRect.Top - 1) * HoursPerDay + defRect.Left - 1 - Integer(SpinEdit_UTC.Value));
-    SameValue := True;
-    for row := defRect.Top to defRect.Bottom do
-    begin
-      for col := defRect.Left to defRect.Right do
-      begin
-        if GetScheduleValue((row - 1) * HoursPerDay + col - 1 - Integer(SpinEdit_UTC.Value)) <> FirstValue then
-        begin
-          SameValue := False;
-          Break;
-        end;
-      end;
-
-      if not SameValue then
-        Break;
-    end;
-
-    RadioButton_Denied.Checked := False;
-    RadioButton_Allowed.Checked := False;
-    RadioButton_Once.Checked := False;
-    RadioButton_Twice.Checked := False;
-
-    if SameValue then
-    begin
-      case FirstValue of
-        svDenied: RadioButton_Denied.Checked := True;
-        svAvailable: RadioButton_Allowed.Checked := True;
-        svOnce: RadioButton_Once.Checked := True;
-        svTwice: RadioButton_Twice.Checked := True;
-      end;
-    end;
-  end
-  else
-  begin
-    AllBlue := True;
-    AllGrey := True;
-    for row := defRect.Top to defRect.Bottom do
-      if AllBlue or AllGrey then
-        for col := defRect.Left to defRect.Right do
-        begin
-          bit := GetBit((row - 1) * HoursPerDay + col - 1 - Integer(SpinEdit_UTC.Value));
-          AllBlue := AllBlue and bit;
-          AllGrey := AllGrey and not bit;
-          if not (AllBlue or AllGrey) then
-            break;
-        end
-      else
-        break;
-    RadioButton_Allowed.Checked := AllBlue;
-    RadioButton_Denied.Checked  := AllGrey;
-    RadioButton_Secret.Checked  := not (AllBlue or AllGrey);
-  end;
+  SetRadioButtonsAfterSelection(defRect);
 
   ReadingData := False;
 
@@ -396,16 +354,12 @@ end;
 procedure TVisLogonHours.RadioButton_Click(Sender: TObject);
 var
   defRect: TGridRect;
-  b: Boolean;
-  aRow, aCol: LongInt;
-  NewValue: TScheduleValue;
 begin
   if ReadingData then
     Exit;
 
   defRect := DrawGrid.Selection;
 
-  // Row Select
   if DrawGrid.Selection.Left = 0 then
   begin
     defRect.Left := 1;
@@ -420,31 +374,8 @@ begin
       defRect.Height := DrawGrid.RowCount - 2;
   end;
 
-  // color
-  if fPageOption <> LogonHoursPage then
-  begin
-    if Sender = RadioButton_Denied then
-      NewValue := svDenied
-    else if Sender = RadioButton_Allowed then
-      NewValue := svAvailable
-    else if Sender = RadioButton_Once then
-      NewValue := svOnce
-    else
-      NewValue := svTwice;
+  UpdateColor(Sender, defRect);
 
-    for aRow := defRect.Top to defRect.Bottom do
-      for aCol := defRect.Left to defRect.Right do
-        SetScheduleValue((aRow - 1) * HoursPerDay + aCol-1 - Integer(SpinEdit_UTC.Value), NewValue);
-  end
-  else
-  begin
-    b := (Sender as TRadioButton).Name = RadioButton_Allowed.Name;
-    for aRow := defRect.Top to defRect.Bottom do
-      for aCol := defRect.Left to defRect.Right do
-        SetBit((aRow-1) * HoursPerDay + aCol-1 - Integer(SpinEdit_UTC.Value), b);
-  end;
-
-  // Paint
   DrawGrid.Repaint();
   DrawGridAfterSelection(DrawGrid, 0, 0);
 end;
@@ -464,16 +395,7 @@ begin
   Timer_Fix.Enabled := True;
 end;
 
-// Bits
-function TVisLogonHours.GetBit(i: Integer): Boolean;
-begin
-  if i < 0 then
-    i += 168; // 7days * 24hours
-  i := i mod 168;
-  // Warning: bits are set right-to-left
-  result := Boolean(Byte(HoursUTC[1 + i div 8]) and Byte(1 Shl (i mod 8)));
-end;
-
+// Functions for Schedules and LogonHours
 procedure TVisLogonHours.CheckButtonForSchedules;
 begin
   case GetScheduleValue(-Integer(SpinEdit_UTC.Value)) of
@@ -506,6 +428,100 @@ begin
     DrawGrid.Canvas.Brush.Color := clBlue
   else
     DrawGrid.Canvas.Brush.Color := clBtnShadow;
+end;
+
+procedure TVisLogonHours.SetRadioButtonsForSchedules(defRect: TRect);
+var
+  col, row: Integer;
+  FirstValue: TScheduleValue;
+  SameValue: Boolean;
+begin
+  FirstValue := GetScheduleValue((defRect.Top - 1) * HoursPerDay + defRect.Left - 1 - Integer(SpinEdit_UTC.Value));
+  SameValue := True;
+  for row := defRect.Top to defRect.Bottom do
+  begin
+    for col := defRect.Left to defRect.Right do
+    begin
+      if GetScheduleValue((row - 1) * HoursPerDay + col - 1 - Integer(SpinEdit_UTC.Value)) <> FirstValue then
+      begin
+        SameValue := False;
+        Break;
+      end;
+    end;
+
+    if not SameValue then
+      Break;
+  end;
+
+  RadioButton_Denied.Checked := False;
+  RadioButton_Allowed.Checked := False;
+  RadioButton_Once.Checked := False;
+  RadioButton_Twice.Checked := False;
+
+  if SameValue then
+  begin
+    case FirstValue of
+      svDenied: RadioButton_Denied.Checked := True;
+      svAvailable: RadioButton_Allowed.Checked := True;
+      svOnce: RadioButton_Once.Checked := True;
+      svTwice: RadioButton_Twice.Checked := True;
+    end;
+  end;
+end;
+
+procedure TVisLogonHours.SetRadioButtonsForLogonHours(defRect: TRect);
+var
+  col, row: Integer;
+  Blue, Grey, bit: Boolean;
+begin
+  Blue := True;
+  Grey := True;
+  for row := defRect.Top to defRect.Bottom do
+    if Blue or Grey then
+      for col := defRect.Left to defRect.Right do
+      begin
+        bit := GetBit((row - 1) * HoursPerDay + col - 1 - Integer(SpinEdit_UTC.Value));
+        Blue := Blue and bit;
+        Grey := Grey and not bit;
+        if not (Blue or Grey) then
+          break;
+      end
+    else
+      break;
+
+  RadioButton_Allowed.Checked := Blue;
+  RadioButton_Denied.Checked  := Grey;
+  RadioButton_Secret.Checked  := not (Blue or Grey);
+end;
+
+procedure TVisLogonHours.UpdateColorForSchedules(Sender: TObject; defRect: TRect);
+var
+  NewValue: TScheduleValue;
+  aRow, aCol: LongInt;
+begin
+  if Sender = RadioButton_Denied then
+    NewValue := svDenied
+  else if Sender = RadioButton_Allowed then
+    NewValue := svAvailable
+  else if Sender = RadioButton_Once then
+    NewValue := svOnce
+  else
+    NewValue := svTwice;
+
+  for aRow := defRect.Top to defRect.Bottom do
+    for aCol := defRect.Left to defRect.Right do
+      SetScheduleValue((aRow - 1) * HoursPerDay + aCol - 1 - Integer(SpinEdit_UTC.Value), NewValue);
+end;
+
+procedure TVisLogonHours.UpdateColorForLogonHours(Sender: TObject; defRect: TRect);
+var
+  b: Boolean;
+  aRow, aCol: LongInt;
+begin
+  b := (Sender as TRadioButton).Name = RadioButton_Allowed.Name;
+  for aRow := defRect.Top to defRect.Bottom do
+    for aCol := defRect.Left to defRect.Right do
+      SetBit((aRow-1) * HoursPerDay + aCol-1 - Integer(SpinEdit_UTC.Value), b);
 end;
 
 function TVisLogonHours.GetScheduleValueSiteLinkGUI(i: Integer): TScheduleValue;
@@ -556,12 +572,21 @@ begin
   end;
 end;
 
+function TVisLogonHours.GetBit(i: Integer): Boolean;
+begin
+  if i < 0 then
+    i += 168;
+  i := i mod 168;
+
+  result := Boolean(Byte(HoursUTC[1 + i div 8]) and Byte(1 Shl (i mod 8)));
+end;
+
 procedure TVisLogonHours.SetBit(i: Integer; b: Boolean);
 begin
   if i < 0 then
-    i += 168; // 7days * 24hours
+    i += 168;
   i := i mod 168;
-  // Warning: bits are set right-to-left
+
   HoursUTC[1 + i div 8] := Char(Byte(HoursUTC[1 + i div 8]) and not (Byte(1) Shl (i mod 8)) or (Byte(b) Shl (i mod 8)))
 end;
 
