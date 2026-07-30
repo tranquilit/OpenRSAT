@@ -361,11 +361,30 @@ object VisLogonHours: TVisLogonHours
     Top = 189
     Width = 13
     BorderSpacing.Left = 16
-    Color = clGradientInactiveCaption
+    ClientHeight = 30
+    ClientWidth = 13
+    Color = clBtnShadow
     ParentBackground = False
     ParentColor = False
     TabOrder = 9
     Visible = False
+    object Panel_OnceInner: TPanel
+      AnchorSideLeft.Control = Panel_Once
+      AnchorSideRight.Control = Panel_Once
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Panel_Once
+      AnchorSideBottom.Side = asrBottom
+      Left = 1
+      Height = 10
+      Top = 19
+      Width = 11
+      Anchors = [akLeft, akRight, akBottom]
+      BevelOuter = bvNone
+      Color = clBlue
+      ParentBackground = False
+      ParentColor = False
+      TabOrder = 0
+    end
   end
   object RadioButton_Once: TRadioButton
     AnchorSideLeft.Control = Panel_Once
@@ -392,11 +411,30 @@ object VisLogonHours: TVisLogonHours
     Top = 159
     Width = 13
     BorderSpacing.Left = 16
-    Color = clGradientActiveCaption
+    ClientHeight = 30
+    ClientWidth = 13
+    Color = clBtnShadow
     ParentBackground = False
     ParentColor = False
     TabOrder = 11
     Visible = False
+    object Panel_TwiceInner: TPanel
+      AnchorSideLeft.Control = Panel_Twice
+      AnchorSideRight.Control = Panel_Twice
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = Panel_Twice
+      AnchorSideBottom.Side = asrBottom
+      Left = 1
+      Height = 20
+      Top = 9
+      Width = 11
+      Anchors = [akLeft, akRight, akBottom]
+      BevelOuter = bvNone
+      Color = clBlue
+      ParentBackground = False
+      ParentColor = False
+      TabOrder = 0
+    end
   end
   object RadioButton_Twice: TRadioButton
     AnchorSideLeft.Control = Panel_Twice
