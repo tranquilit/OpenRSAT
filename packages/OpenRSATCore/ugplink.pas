@@ -28,11 +28,12 @@ type
     fGPLinks: TGPLinkDynArr;
     fLdapClient: TLdapClient;
 
-    function GetData: TDocVariantData;
     function GetGPLink: RawUtf8;
     procedure SetGPLink(AValue: RawUtf8);
     procedure ChangeFlag(const Elements: TRawUtf8DynArray; Flag: Integer);
   public
+    function GetData: TDocVariantData;
+
     function IndexOf(const DistinguishedName: RawUtf8): Integer;
     function Exists(const DistinguishedName: RawUtf8): Boolean;
     procedure Disable(const Elements: TRawUtf8DynArray);
@@ -44,7 +45,6 @@ type
 
     property GPLink: RawUtf8 read GetGPLink write SetGPLink;
     property LdapClient: TLdapClient read fLdapClient write fLdapClient;
-    property Data: TDocVariantData read GetData;
   end;
 
 operator=(Destination, Source: TGPLink): Boolean;

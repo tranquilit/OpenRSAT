@@ -233,7 +233,7 @@ begin
 
   TisGrid_GPLinks.Clear;
   fGPLinks.GPLink := fProperty.GetReadable('gPLink');
-  TisGrid_GPLinks.Data := fGPLinks.Data;
+  TisGrid_GPLinks.Data := fGPLinks.GetData;
   TisGrid_GPLinks.LoadData();
   Node := TisGrid_GPLinks.GetFirst();
   while Assigned(Node) do
