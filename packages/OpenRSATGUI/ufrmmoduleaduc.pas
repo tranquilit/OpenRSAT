@@ -57,6 +57,7 @@ type
   { TFrmModuleADUC }
 
   TFrmModuleADUC = class(TFrameModule)
+    Action_Rename: TAction;
     Action_NewPrinter: TAction;
     Action_NewResourcePropertyList: TAction;
     Action_NewMsDSKeyCredential: TAction;
@@ -113,6 +114,7 @@ type
     CheckBox_IncludeSubContainer: TCheckBox;
     Image1: TImage;
     Image2: TImage;
+    MenuItem_Rename: TMenuItem;
     MenuItem_New: TMenuItem;
     MenuItem_CreateKeyTab: TMenuItem;
     MenuItem_PrepareDJOIN: TMenuItem;
@@ -274,6 +276,8 @@ type
     procedure Action_PropertiesUpdate(Sender: TObject);
     procedure Action_RefreshExecute(Sender: TObject);
     procedure Action_RefreshUpdate(Sender: TObject);
+    procedure Action_RenameExecute(Sender: TObject);
+    procedure Action_RenameUpdate(Sender: TObject);
     procedure Action_SearchExecute(Sender: TObject);
     procedure Action_SearchUpdate(Sender: TObject);
     procedure Action_ShowObjectLocationExecute(Sender: TObject);
@@ -1427,6 +1431,18 @@ begin
   Action_Refresh.Enabled := {Active and} Assigned(LdapClient) and LdapClient.Connected();
 end;
 
+procedure TFrmModuleADUC.Action_RenameExecute(Sender: TObject);
+begin
+  GridADUC.TreeOptions.MiscOptions := GridADUC.TreeOptions.MiscOptions - [toReadOnly] + [toEditable];
+  GridADUC.EditNode(GridADUC.FocusedNode, GridADUC.FocusedColumn);
+  GridADUC.TreeOptions.MiscOptions := GridADUC.TreeOptions.MiscOptions + [toReadOnly] - [toEditable];
+end;
+
+procedure TFrmModuleADUC.Action_RenameUpdate(Sender: TObject);
+begin
+  Action_Rename.Enabled := GridADUC.SelectedCount = 1;
+end;
+
 procedure TFrmModuleADUC.Action_SearchExecute(Sender: TObject);
 var
   NodeData: TADUCTreeNodeObject;
@@ -2118,6 +2134,7 @@ begin
     MenuItem_Copy,
     MenuItem_Cut,
     MenuItem_Paste,
+    MenuItem_Rename,
     MenuItem_ShowObjectLocation,
     MenuItem_Search,
     MenuItem_Delete,

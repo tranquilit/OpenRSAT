@@ -939,6 +939,11 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExecute = Action_NewPrinterExecute
       OnUpdate = Action_NewPrinterUpdate
     end
+    object Action_Rename: TAction
+      Caption = 'Action_Rename'
+      OnExecute = Action_RenameExecute
+      OnUpdate = Action_RenameUpdate
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
@@ -1015,6 +1020,10 @@ object FrmModuleADUC: TFrmModuleADUC
     end
     object MenuItem_Paste: TMenuItem
       Action = Action_Paste
+    end
+    object MenuItem_Rename: TMenuItem
+      Action = Action_Rename
+      Caption = 'Rename'
     end
     object Separator4: TMenuItem
       Caption = '-'

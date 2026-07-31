@@ -75,6 +75,8 @@
 {"hash":206541292,"name":"tfrmmoduleaduc.action_newmsdskeycredential.caption","sourcebytes":[109,115,68,83,45,75,101,121,67,114,101,100,101,110,116,105,97,108],"value":"msDS-KeyCredential"},
 {"hash":188152836,"name":"tfrmmoduleaduc.action_newresourcepropertylist.caption","sourcebytes":[109,115,68,83,45,82,101,115,111,117,114,99,101,80,114,111,112,101,114,116,121,76,105,115,116],"value":"msDS-ResourcePropertyList"},
 {"hash":126900882,"name":"tfrmmoduleaduc.action_newprinter.caption","sourcebytes":[80,114,105,110,116,101,114],"value":"Printer"},
+{"hash":52511413,"name":"tfrmmoduleaduc.action_rename.caption","sourcebytes":[65,99,116,105,111,110,95,82,101,110,97,109,101],"value":"Action_Rename"},
 {"hash":21703,"name":"tfrmmoduleaduc.menuitem_new.caption","sourcebytes":[78,101,119],"value":"New"},
+{"hash":93079605,"name":"tfrmmoduleaduc.menuitem_rename.caption","sourcebytes":[82,101,110,97,109,101],"value":"Rename"},
 {"hash":251184691,"name":"tfrmmoduleaduc.menuitem_editcolumns.caption","sourcebytes":[69,100,105,116,32,99,111,108,117,109,110,115],"value":"Edit columns"}
 ]}
