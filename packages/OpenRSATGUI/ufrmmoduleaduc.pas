@@ -49,6 +49,7 @@ uses
   uLdapUtils,
   ursatldapclient,
   uvisviewkeytab,
+  uvisrename,
   ursat,
   ulog;
 
@@ -2301,6 +2302,9 @@ var
   DistinguishedNameParsed: TNameValueDNs;
   i: Integer;
   newRDN: RawUtf8;
+  Vis: TVisRename;
+  NodeData: PDocVariantData;
+  ObjectClass: TRawUtf8DynArray;
 begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Edited', [Self.Name]);
@@ -2312,34 +2316,52 @@ begin
     Exit;
   end;
 
-  DistinguishedName := GridADUC.GetNodeAsPDocVariantData(Node)^.U['objectName'];
-  ParseDN(DistinguishedName, DistinguishedNameParsed);
-  newRDN := GridADUC.GetNodeAsPDocVariantData(Node)^.U['name'];
-  if newRDN = DistinguishedNameParsed[0].Value then
+  NodeData := GridADUC.GetNodeAsPDocVariantData(Node);
+  ObjectClass := NodeData^.A['objectClass']^.ToRawUtf8DynArray;
+  DistinguishedName := NodeData^.U['objectName'];
+  if ObjectClass[High(ObjectClass)] = 'user' then
   begin
-    if Assigned(fLog) then
-      fLog.Add.Log(sllWarning, '% - Name "%" haven''t changed.', [Self.Name, newRDN]);
-    Exit;
-  end;
+    Vis := TVisRename.Create(Self);
+    try
+      Vis.NewName := NodeData^.U['name'];;
+      Vis.DistinguishedName := DistinguishedName;
+      Vis.LdapClient := LdapClient;
+      Vis.ShowModal;
+      DistinguishedName := Vis.DistinguishedName;
+    finally
+      FreeAndNil(Vis);
+    end;
+  end
+  else
+  begin
+    ParseDN(DistinguishedName, DistinguishedNameParsed);
+    newRDN := NodeData^.U['name'];
+    if newRDN = DistinguishedNameParsed[0].Value then
+    begin
+      if Assigned(fLog) then
+        fLog.Add.Log(sllWarning, '% - Name "%" haven''t changed.', [Self.Name, newRDN]);
+      Exit;
+    end;
 
-  if not LdapEscapeName(newRDN, newRDN) then
-  begin
-    if Assigned(fLog) then
-      fLog.Add.Log(sllWarning, '% - Name "%" is invalid.', [Self.Name, newRDN]);
-    Exit;
-  end;
-  newRDN := Join([DistinguishedNameParsed[0].Name + '=' + newRDN]);
-  if not LdapClient.RenameLdapEntry(DistinguishedName, newRDN) then
-  begin
-    if Assigned(fLog) then
-      fLog.Add.Log(sllError, 'Rename Ldap Entry: "%"', [LdapClient.ResultString], Self);
-    Exit;
-  end;
+    if not LdapEscapeName(newRDN, newRDN) then
+    begin
+      if Assigned(fLog) then
+        fLog.Add.Log(sllWarning, '% - Name "%" is invalid.', [Self.Name, newRDN]);
+      Exit;
+    end;
+    newRDN := Join([DistinguishedNameParsed[0].Name + '=' + newRDN]);
+    if not LdapClient.RenameLdapEntry(DistinguishedName, newRDN) then
+    begin
+      if Assigned(fLog) then
+        fLog.Add.Log(sllError, 'Rename Ldap Entry: "%"', [LdapClient.ResultString], Self);
+      Exit;
+    end;
 
-  DistinguishedName := newRDN;
-  for i := 1 to High(DistinguishedNameParsed) do
-    DistinguishedName := Format('%s,%s=%s', [DistinguishedName, DistinguishedNameParsed[i].Name, DistinguishedNameParsed[i].Value]);
-  GridADUC.GetNodeAsPDocVariantData(Node)^.U['objectName'] := DistinguishedName;
+    DistinguishedName := newRDN;
+    for i := 1 to High(DistinguishedNameParsed) do
+      DistinguishedName := Format('%s,%s=%s', [DistinguishedName, DistinguishedNameParsed[i].Name, DistinguishedNameParsed[i].Value]);
+  end;
+  NodeData^.U['objectName'] := DistinguishedName;
 end;
 
 procedure TFrmModuleADUC.GridADUCEndDrag(Sender, Target: TObject; X, Y: Integer

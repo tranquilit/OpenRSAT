@@ -1,0 +1,12 @@
+{"version":1,"strings":[
+{"hash":93079605,"name":"tvisrename.caption","sourcebytes":[82,101,110,97,109,101],"value":"Rename"},
+{"hash":127854081,"name":"tvisrename.tabsheet1.caption","sourcebytes":[84,97,98,83,104,101,101,116,49],"value":"TabSheet1"},
+{"hash":242270122,"name":"tvisrename.label_fullname.caption","sourcebytes":[70,117,108,108,32,110,97,109,101,58],"value":"Full name:"},
+{"hash":104434218,"name":"tvisrename.label_firstname.caption","sourcebytes":[70,105,114,115,116,32,110,97,109,101,58],"value":"First name:"},
+{"hash":108096298,"name":"tvisrename.label_lastname.caption","sourcebytes":[76,97,115,116,32,110,97,109,101,58],"value":"Last name:"},
+{"hash":8261962,"name":"tvisrename.label_displayname.caption","sourcebytes":[68,105,115,112,108,97,121,32,110,97,109,101,58],"value":"Display name:"},
+{"hash":70055466,"name":"tvisrename.label_userlogonname.caption","sourcebytes":[85,115,101,114,32,108,111,103,111,110,32,110,97,109,101,58],"value":"User logon name:"},
+{"hash":11367210,"name":"tvisrename.label_userlogonname2000.caption","sourcebytes":[85,115,101,114,32,108,111,103,111,110,32,110,97,109,101,32,40,112,114,101,45,87,105,110,100,111,119,115,32,50,48,48,48,41,58],"value":"User logon name (pre-Windows 2000):"},
+{"hash":77089212,"name":"tvisrename.bitbtn_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
+{"hash":1339,"name":"tvisrename.action_ok.caption","sourcebytes":[79,75],"value":"OK"}
+]}

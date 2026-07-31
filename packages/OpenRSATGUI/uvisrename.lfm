@@ -1,0 +1,309 @@
+object VisRename: TVisRename
+  Left = 2127
+  Height = 339
+  Top = 267
+  Width = 441
+  Caption = 'Rename'
+  ClientHeight = 339
+  ClientWidth = 441
+  Position = poOwnerFormCenter
+  LCLVersion = '4.5.0.0'
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 298
+    Top = 0
+    Width = 441
+    ActivePage = TabSheet1
+    Align = alClient
+    ShowTabs = False
+    TabIndex = 0
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'TabSheet1'
+      ClientHeight = 290
+      ClientWidth = 433
+      object Panel1: TPanel
+        Left = 0
+        Height = 156
+        Top = 0
+        Width = 433
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvNone
+        ClientHeight = 156
+        ClientWidth = 433
+        TabOrder = 0
+        object Panel_FullName: TPanel
+          Left = 0
+          Height = 39
+          Top = 0
+          Width = 433
+          Align = alTop
+          AutoSize = True
+          BevelOuter = bvNone
+          ClientHeight = 39
+          ClientWidth = 433
+          TabOrder = 0
+          object Edit_FullName: TEdit
+            Left = 116
+            Height = 23
+            Top = 8
+            Width = 309
+            Align = alClient
+            BorderSpacing.Around = 8
+            TabOrder = 0
+          end
+          object Label_FullName: TLabel
+            Left = 8
+            Height = 23
+            Top = 8
+            Width = 100
+            Align = alLeft
+            BorderSpacing.Around = 8
+            Caption = 'Full name:'
+            Constraints.MaxWidth = 100
+            Constraints.MinWidth = 100
+            Layout = tlCenter
+          end
+        end
+        object Panel_FirstName: TPanel
+          Left = 0
+          Height = 39
+          Top = 117
+          Width = 433
+          Align = alTop
+          AutoSize = True
+          BevelOuter = bvNone
+          ClientHeight = 39
+          ClientWidth = 433
+          TabOrder = 3
+          object Edit_FirstName: TEdit
+            Left = 116
+            Height = 23
+            Top = 8
+            Width = 309
+            Align = alClient
+            BorderSpacing.Around = 8
+            TabOrder = 0
+          end
+          object Label_FirstName: TLabel
+            Left = 8
+            Height = 23
+            Top = 8
+            Width = 100
+            Align = alLeft
+            BorderSpacing.Around = 8
+            Caption = 'First name:'
+            Constraints.MaxWidth = 100
+            Constraints.MinWidth = 100
+            Layout = tlCenter
+          end
+        end
+        object Panel_LastName: TPanel
+          Left = 0
+          Height = 39
+          Top = 78
+          Width = 433
+          Align = alTop
+          AutoSize = True
+          BevelOuter = bvNone
+          ClientHeight = 39
+          ClientWidth = 433
+          TabOrder = 2
+          object Edit_LastName: TEdit
+            Left = 116
+            Height = 23
+            Top = 8
+            Width = 309
+            Align = alClient
+            BorderSpacing.Around = 8
+            TabOrder = 0
+          end
+          object Label_LastName: TLabel
+            Left = 8
+            Height = 23
+            Top = 8
+            Width = 100
+            Align = alLeft
+            BorderSpacing.Around = 8
+            Caption = 'Last name:'
+            Constraints.MaxWidth = 100
+            Constraints.MinWidth = 100
+            Layout = tlCenter
+          end
+        end
+        object Panel_DisplayName: TPanel
+          Left = 0
+          Height = 39
+          Top = 39
+          Width = 433
+          Align = alTop
+          AutoSize = True
+          BevelOuter = bvNone
+          ClientHeight = 39
+          ClientWidth = 433
+          TabOrder = 1
+          object Edit_DisplayName: TEdit
+            Left = 116
+            Height = 23
+            Top = 8
+            Width = 309
+            Align = alClient
+            BorderSpacing.Around = 8
+            TabOrder = 0
+          end
+          object Label_DisplayName: TLabel
+            Left = 8
+            Height = 23
+            Top = 8
+            Width = 100
+            Align = alLeft
+            BorderSpacing.Around = 8
+            Caption = 'Display name:'
+            Constraints.MaxWidth = 100
+            Constraints.MinWidth = 100
+            Layout = tlCenter
+          end
+        end
+      end
+      object Panel2: TPanel
+        Left = 0
+        Height = 134
+        Top = 156
+        Width = 433
+        Align = alClient
+        BevelOuter = bvNone
+        ClientHeight = 134
+        ClientWidth = 433
+        TabOrder = 1
+        object Panel_UserLogonName: TPanel
+          Left = 0
+          Height = 62
+          Top = 0
+          Width = 433
+          Align = alTop
+          AutoSize = True
+          BevelOuter = bvNone
+          ClientHeight = 62
+          ClientWidth = 433
+          TabOrder = 0
+          object Label_UserLogonName: TLabel
+            Left = 8
+            Height = 15
+            Top = 8
+            Width = 417
+            Align = alTop
+            BorderSpacing.Around = 8
+            Caption = 'User logon name:'
+          end
+          object Edit_UserLogonName: TEdit
+            Left = 8
+            Height = 23
+            Top = 31
+            Width = 200
+            Align = alLeft
+            BorderSpacing.Around = 8
+            TabOrder = 0
+          end
+          object ComboBox_UserLogonName: TComboBox
+            Left = 216
+            Height = 23
+            Top = 31
+            Width = 209
+            Align = alClient
+            BorderSpacing.Around = 8
+            ItemHeight = 15
+            ReadOnly = True
+            Style = csDropDownList
+            TabOrder = 1
+          end
+        end
+        object Panel_UserLogonName2000: TPanel
+          Left = 0
+          Height = 62
+          Top = 62
+          Width = 433
+          Align = alTop
+          AutoSize = True
+          BevelOuter = bvNone
+          ClientHeight = 62
+          ClientWidth = 433
+          TabOrder = 1
+          object Label_UserLogonName2000: TLabel
+            Left = 8
+            Height = 15
+            Top = 8
+            Width = 417
+            Align = alTop
+            BorderSpacing.Around = 8
+            Caption = 'User logon name (pre-Windows 2000):'
+          end
+          object Edit_UserLogonName2000_prefix: TEdit
+            Left = 8
+            Height = 23
+            Top = 31
+            Width = 200
+            Align = alLeft
+            BorderSpacing.Around = 8
+            Enabled = False
+            ReadOnly = True
+            TabOrder = 0
+          end
+          object Edit_UserLogonName2000_suffix: TEdit
+            Left = 216
+            Height = 23
+            Top = 31
+            Width = 209
+            Align = alClient
+            BorderSpacing.Around = 8
+            TabOrder = 1
+          end
+        end
+      end
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Height = 41
+    Top = 298
+    Width = 441
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 441
+    TabOrder = 1
+    object BitBtn_OK: TBitBtn
+      Left = 321
+      Height = 25
+      Top = 8
+      Width = 42
+      Action = Action_OK
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object BitBtn_Cancel: TBitBtn
+      Left = 371
+      Height = 25
+      Top = 8
+      Width = 62
+      Align = alRight
+      AutoSize = True
+      BorderSpacing.Around = 8
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object ActionList1: TActionList
+    Left = 312
+    Top = 40
+    object Action_OK: TAction
+      Caption = 'OK'
+      OnExecute = Action_OKExecute
+    end
+  end
+end
