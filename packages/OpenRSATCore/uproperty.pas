@@ -1507,11 +1507,18 @@ var
   Attribute: TLdapAttribute;
   i, j: Integer;
   TempArr: TRawByteStringDynArray;
+  Bak: TNotifyEvent;
 begin
   result := nil;
-  Attribute := RSAT.LdapClient.SearchObject(NTAuthCertificatesDN, '', 'cACertificate');
-  if not Assigned(Attribute) then
-    Exit;
+  Bak := RSAT.LdapClient.OnError;
+  RSAT.LdapClient.OnError := nil;
+  try
+    Attribute := RSAT.LdapClient.SearchObject(NTAuthCertificatesDN, '', 'cACertificate');
+    if not Assigned(Attribute) then
+      Exit;
+  finally
+    RSAT.LdapClient.OnError := Bak;
+  end;
 
   SetLength(result, Attribute.Count);
   for i := 0 to Pred(Attribute.Count) do
