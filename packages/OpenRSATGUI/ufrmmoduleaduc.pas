@@ -1942,11 +1942,12 @@ begin
   case (TreeADUC.Selected as TADUCTreeNode).NodeType of
     atntObject:
     begin
-      VisibleItems := Concat(VisibleItems, [MenuItem_DelegateControl,
-        MenuItem_ChangeDomainController,MenuItem_OperationsMasters,MenuItem_New,
+      VisibleItems := Concat(VisibleItems, [MenuItem_DelegateControl,MenuItem_New,
         MenuItem_Search,MenuItem_Refresh,MenuItem_Delete,MenuItem_Properties]);
       if fModuleAduc.ADUCOption.ShowGPO then
         VisibleItems := Concat(VisibleItems, [MenuItem_BlockGPOInheritance]);
+      if ((TreeADUC.Selected as TADUCTreeNode).GetNodeDataObject.LastObjectClass = 'domainDNS') then
+        VisibleItems := Concat(VisibleItems, [MenuItem_ChangeDomainController, MenuItem_OperationsMasters]);
     end;
     atntGPO: VisibleItems := Concat(VisibleItems, [MenuItem_EnableGPO,
       MenuItem_DisableGPO, MenuItem_EnforceGPO]);
