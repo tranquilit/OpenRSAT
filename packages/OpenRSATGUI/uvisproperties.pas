@@ -446,6 +446,7 @@ const
 
   PROPERTY_DOMAIN_DNS: Array of TPropertyFrameClass = (
     TFrmPropertyGeneralDefault,
+    TFrmPropertyManagedBy,
     TFrmPropertyObject,
     TFrmPropertyNTAuthCertificates,
     TFrmPropertyGPLinks,
@@ -470,6 +471,14 @@ const
 
   PROPERTY_GPO: Array of TPropertyFrameClass = (
     TFrmPropertyGeneralGPO,
+    TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  );
+
+  PROPERTY_CERTIFICATION_AUTHORITY: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralDefault,
+    TFrmPropertyPublishedCertificates,
     TFrmPropertyObject,
     TFrmPropertySecurity,
     TFrmPropertyAttributes
@@ -744,6 +753,7 @@ begin
   'subnet': property_tabs := PROPERTY_SUBNET;
   'interSiteTransport': property_tabs := PROPERTY_INTER_SITE_TRANSPORT;
   'groupPolicyContainer': property_tabs := PROPERTY_GPO;
+  'certificationAuthority': property_tabs := PROPERTY_CERTIFICATION_AUTHORITY;
   end;
 
   for property_tab in property_tabs do

@@ -267,7 +267,10 @@ begin
   TisGrid_ListX509.Clear;
   TisGrid_ListX509.BeginUpdate;
   try
-    UserCertificate := fProperty.Get('userCertificate');
+    if fProperty.objectType = 'certificationAuthority' then
+      UserCertificate := fProperty.Get('cACertificate')
+    else
+      UserCertificate := fProperty.Get('userCertificate');
     if not Assigned(UserCertificate) then
       Exit;
     Row.Init();
