@@ -107,13 +107,18 @@ begin
 end;
 
 procedure TVisRename.Action_OKExecute(Sender: TObject);
+var
+  Attributes: TLdapAttributeList;
 begin
-  LdapClient.Modify(DistinguishedName, lmoReplace, 'displayName', DisplayName);
-  LdapClient.Modify(DistinguishedName, lmoReplace, 'sn', LastName);
-  LdapClient.Modify(DistinguishedName, lmoReplace, 'givenName', FirstName);
-  LdapClient.Modify(DistinguishedName, lmoReplace, 'userPrincipalName', UserPrincipalName);
-  LdapClient.Modify(DistinguishedName, lmoReplace, 'displayName', DisplayName);
-  LdapClient.Modify(DistinguishedName, lmoReplace, 'sAMAccountName', SAMAccountName);
+  Attributes := TLdapAttributeList.Create;
+  Attributes.Add('displayName', DisplayName);
+  Attributes.Add('sn', LastName);
+  Attributes.Add('givenName', FirstName);
+  Attributes.Add('userPrincipalName', UserPrincipalName);
+  Attributes.Add('sAMAccountName', SAMAccountName);
+
+  if not LdapClient.Modify(DistinguishedName, lmoReplace, Attributes) then
+    Exit;
 
   DistinguishedName := RenameDistinguishedName(LdapClient, DistinguishedName, FullName);
 end;
