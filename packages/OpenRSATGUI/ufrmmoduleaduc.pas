@@ -675,6 +675,7 @@ begin
 
   With TVisDelegateControl.Create(Self) do
   try
+    LdapClient := fModuleAduc.RSAT.LdapClient;
     NodeData := (TreeADUC.Selected as TADUCTreeNode).GetNodeDataObject;
     if not Assigned(NodeData) then
     begin
