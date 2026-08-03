@@ -203,7 +203,7 @@ end;
 
 procedure TFrmPropertyGPLinks.Update(Props: TProperty);
 var
-  DV: TDocVariantData;
+  DV, data: TDocVariantData;
   Elements: TRawUtf8DynArray;
   Node: PVirtualNode;
   NodeData: PDocVariantData;
@@ -233,8 +233,8 @@ begin
 
   TisGrid_GPLinks.Clear;
   fGPLinks.GPLink := fProperty.GetReadable('gPLink');
-  TisGrid_GPLinks.Data := fGPLinks.GetData;
-  TisGrid_GPLinks.LoadData();
+  data := fGPLinks.GetData;
+  TisGrid_GPLinks.LoadData(@data);
   Node := TisGrid_GPLinks.GetFirst();
   while Assigned(Node) do
   begin
