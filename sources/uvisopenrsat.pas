@@ -341,7 +341,6 @@ begin
     Client.OnConnect := @OnLdapConnect;
     Client.OnError := @OnLdapError;
   finally
-    fRSAT.LdapClient := Client;
     if Assigned(LdapClient) and LdapClient.Connected then
       OnLdapConnect(LdapClient);
   end;
