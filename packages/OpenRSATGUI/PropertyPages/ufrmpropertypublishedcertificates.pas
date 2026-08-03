@@ -60,6 +60,7 @@ type
     fLog: TSynLogClass;
     fProperty: TProperty;
 
+    fCertificateAttribute: RawUtf8;
     function CertToDoc(s: RawByteString; out PublishedCertificate: TPublishedCertificate): Boolean;
   public
     constructor Create(TheOwner: TComponent); override;
@@ -128,7 +129,7 @@ begin
       MessageDlg('Invalid Certificate', FormatUtf8('Certificate cannot be added. (%)', [FilePath]), mtWarning, mbOKCancel, 0);
       continue;
     end;
-    fProperty.Add('userCertificate', FileContent, aoAlways);
+    fProperty.Add(fCertificateAttribute, FileContent, aoAlways);
   end;
   Update(fProperty);
 end;
@@ -162,14 +163,14 @@ begin
   // No node, clear userCertificate
   if not Assigned(Node) then
   begin
-    fProperty.Add('userCertificate', '');
+    fProperty.Add(fCertificateAttribute, '');
     Exit;
   end;
   NodeData := TisGrid_ListX509.GetNodeAsPDocVariantData(Node);
   if not Assigned(Node) then
     Exit;
   // Clear and set first certificate
-  fProperty.Add('userCertificate', NodeData^.U['certificate']);
+  fProperty.Add(fCertificateAttribute, NodeData^.U['certificate']);
   Node := TisGrid_ListX509.GetNext(Node);
   // Add all certificates
   while Assigned(Node) do
@@ -178,7 +179,7 @@ begin
     Node := TisGrid_ListX509.GetNext(Node);
     if not Assigned(NodeData) then
       continue;
-    fProperty.Add('userCertificate', NodeData^.U['certificate'], aoAlways);
+    fProperty.Add(fCertificateAttribute, NodeData^.U['certificate'], aoAlways);
   end;
 end;
 
@@ -268,9 +269,11 @@ begin
   TisGrid_ListX509.BeginUpdate;
   try
     if fProperty.objectType = 'certificationAuthority' then
-      UserCertificate := fProperty.Get('cACertificate')
+      fCertificateAttribute := 'cACertificate'
     else
-      UserCertificate := fProperty.Get('userCertificate');
+      fCertificateAttribute := 'userCertificate';
+
+    UserCertificate := fProperty.Get(fCertificateAttribute);
     if not Assigned(UserCertificate) then
       Exit;
     Row.Init();
