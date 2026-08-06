@@ -19,6 +19,8 @@ uses
   tis.ui.searchedit,
   mormot.core.log,
   mormot.core.base,
+  mormot.core.text,
+  mormot.core.variants,
   mormot.net.ldap,
   ucoredatamodule,
   VirtualTrees,
@@ -37,15 +39,28 @@ type
 
   TADSITreeNode = class(TTreeNode)
   private
-    fAttributes: TLdapAttributeList;
+    fData: TLdapEntryData;
+    fUpdated: Boolean;
 
-    function GetDistinguishedName: String;
-    function GetObjectType: String;
+    function GetDescription: RawUtf8;
+    function GetDisplayName: RawUtf8;
+    function GetDistinguishedName: RawUtf8;
+    function GetObjectClass: TRawUtf8DynArray;
+    function GetObjectType: RawUtf8;
   public
     destructor Destroy; override;
+
+    function FindDN(const DistinguishedName: RawUtf8): TTreeNode;
+    procedure SetEntry(const Entry: TLdapEntryData);
+    procedure StartUpdateChildren;
+    procedure EndUpdateChildren;
   published
-    property DistinguishedName: String read GetDistinguishedName;
-    property ObjectType: String read GetObjectType;
+    property DistinguishedName: RawUtf8 read GetDistinguishedName;
+    property ObjectType: RawUtf8 read GetObjectType;
+    property ObjectClass: TRawUtf8DynArray read GetObjectClass;
+    property DisplayName: RawUtf8 read GetDisplayName;
+    property Description: RawUtf8 read GetDescription;
+    property Updated: Boolean read fUpdated write fUpdated;
   end;
 
   { TFrmModuleADSI }
@@ -123,7 +138,7 @@ type
 
     fSearchWord: RawUtf8;
 
-    function GetLdapClient: TRsatLdapClient;
+    function GetLdap: ILdapConnection;
     procedure RefreshNode(Node: TADSITreeNode);
     procedure UpdateGrid(Node: TADSITreeNode);
     procedure UpdateGridAttribute(Node: TADSITreeNode); overload;
@@ -135,7 +150,7 @@ type
     constructor Create(Context: IOpenRSATUIContext);
     destructor Destroy; override;
 
-    property LdapClient: TRsatLdapClient read GetLdapClient;
+    property Ldap: ILdapConnection read GetLdap;
   protected
     function GetModule: TModule; override;
     function GetFrmOptionClass: TFrameOptionClass; override;
@@ -148,7 +163,6 @@ type
 
 implementation
 uses
-  mormot.core.variants,
   ucommon,
   ucommonui,
   utheme,
@@ -159,35 +173,79 @@ uses
 
 { TADSITreeNode }
 
-function TADSITreeNode.GetDistinguishedName: String;
+function TADSITreeNode.GetDistinguishedName: RawUtf8;
 begin
-  result := fAttributes.Find('distinguishedName').GetReadable();
+  result := GetLdapEntryReadable(fData, 'distinguishedName', 0);
 end;
 
-function TADSITreeNode.GetObjectType: String;
+function TADSITreeNode.GetObjectClass: TRawUtf8DynArray;
+begin
+  result := GetLdapEntryAllReadable(fData, 'objectClass');
+end;
+
+function TADSITreeNode.GetDisplayName: RawUtf8;
+begin
+  result := GetLdapEntryReadable(fData, 'name', 0);
+end;
+
+function TADSITreeNode.GetDescription: RawUtf8;
+begin
+  result := GetLdapEntryReadable(fData, 'description', 0);
+end;
+
+function TADSITreeNode.GetObjectType: RawUtf8;
 var
-  Attribute: TLdapAttribute;
+  Values: TRawUtf8DynArray;
 begin
   result := '';
-  Attribute := fAttributes.Find('objectClass');
-  if not Assigned(Attribute) then
-    Exit;
-  result := Attribute.GetReadable(Attribute.Count - 1);
+  Values := GetLdapEntryAllReadable(fData, 'objectClass');
+  if Assigned(Values) then
+    result := Values[High(Values)];
 end;
 
 destructor TADSITreeNode.Destroy;
 begin
   inherited Destroy;
-  FreeAndNil(fAttributes);
+end;
+
+function TADSITreeNode.FindDN(const DistinguishedName: RawUtf8): TTreeNode;
+begin
+  result := GetFirstChild;
+  while (Result <> nil) and not (EqualBuf((result as TADSITreeNode).DistinguishedName, DistinguishedName)) do
+    result := result.GetNextSibling;
+end;
+
+procedure TADSITreeNode.SetEntry(const Entry: TLdapEntryData);
+begin
+  fData := Entry;
+  fUpdated := True;
+end;
+
+procedure TADSITreeNode.StartUpdateChildren;
+var
+  i: Integer;
+begin
+  for i := 0 to Count - 1 do
+    (Items[i] as TADSITreeNode).Updated := False;
+end;
+
+procedure TADSITreeNode.EndUpdateChildren;
+var
+  i: Integer;
+begin
+  for i := Count - 1 downto 0 do
+    if not (Items[i] as TADSITreeNode).Updated then
+      TreeView.Items.Delete(Items[i]);
 end;
 
 { TFrmModuleADSI }
 
 procedure TFrmModuleADSI.Action_RefreshExecute(Sender: TObject);
 var
-  Context, NodeName: RawUtf8;
+  NamingContext: RawUtf8;
   RootNode: TADSITreeNode;
-  SearchResult: TLdapResult;
+  res: TLdapSearchResult;
+  SR: TLdapSearchRequest;
   c: TCursor;
 begin
   c := Screen.Cursor;
@@ -198,16 +256,18 @@ begin
   TreeView1.Items.Clear;
   TreeView1.BeginUpdate;
   try
-    RootNode := (TreeView1.Items.Add(nil, 'RootDSE') as TADSITreeNode);
-    for Context in LdapClient.NamingContexts do
+    SR.Options := DefaultSearchRequestOptions;
+    for NamingContext in Ldap.Context.NamingContexts do
     begin
-      SearchResult := LdapClient.SearchObject(Context, '', ['description', 'distinguishedName', 'name', 'objectClass']);
-      if not Assigned(SearchResult) then
-        continue;
-      NodeName := DNToCN(SearchResult.ObjectName);
-      RootNode := (TreeView1.Items.Add(nil, NodeName) as TADSITreeNode);
+      SearchRequest(SR, NamingContext, '', ['description', 'distinguishedName', 'name', 'objectClass'], lssBaseObject);
+      res := LDAP.Search(SR);
+      if not res.OperationResult.Success then
+        Exit;
+      if res.ReturnedCount <> 1 then
+        Exit;
+      RootNode := (TreeView1.Items.Add(nil, GetLdapEntryReadable(res.Entries[0], 'name', 0)) as TADSITreeNode);
       RootNode.HasChildren := True;
-      RootNode.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone);
+      RootNode.SetEntry(res.Entries[0]);
     end;
   finally
     TreeView1.AlphaSort;
@@ -250,21 +310,21 @@ end;
 
 procedure TFrmModuleADSI.Action_PropertyUpdate(Sender: TObject);
 begin
-  Action_Property.Enabled := Assigned(LdapClient) and LdapClient.Connected and (TisGrid1.SelectedCount > 0);
+  Action_Property.Enabled := (TisGrid1.SelectedCount > 0) and Ldap.IsConnected;
 end;
 
 procedure TFrmModuleADSI.Action_NewObjectExecute(Sender: TObject);
-var
-  vis: TVisNewObject;
+//var
+//  vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotNone, LdapClient.DefaultDN, LdapClient.DefaultDN);
-
-  try
-    vis.Ldap := LdapClient;
-    vis.ShowModal;
-  finally
-    FreeAndNil(vis);
-  end;
+  //vis := TVisNewObject.Create(Self, vnotNone, LdapClient.DefaultDN, LdapClient.DefaultDN);
+  //
+  //try
+  //  vis.Ldap := LdapClient;
+  //  vis.ShowModal;
+  //finally
+  //  FreeAndNil(vis);
+  //end;
 end;
 
 procedure TFrmModuleADSI.Action_NewObjectUpdate(Sender: TObject);
@@ -276,6 +336,8 @@ procedure TFrmModuleADSI.Action_DeleteObjectExecute(Sender: TObject);
 var
   SelectedObjects: TDocVariantData;
   SelectedObject: PDocVariantData;
+  Res: TLdapOperationResult;
+  Request: TLdapDeleteRequest;
 begin
   SelectedObjects := TisGrid1.SelectedRows;
 
@@ -293,19 +355,18 @@ begin
       continue;
     end;
 
-    if not LdapClient.Delete(SelectedObject^.S['distinguishedName']) then
-    begin
-      if Assigned(fLog) then
-        fLog.Add.Log(sllError, LdapClient.ResultString);
-      continue;
-    end;
+    Request.DistinguishedName := SelectedObject^.S['distinguishedName'];
+    Request.DeleteChildren := True;
+    Res := Ldap.Delete(Request);
+    if not Res.Success then
+      Exit;
   end;
   TisGrid1.DeleteRows(@SelectedObjects);
 end;
 
 procedure TFrmModuleADSI.Action_DeleteObjectUpdate(Sender: TObject);
 begin
-  Action_DeleteObject.Enabled := Assigned(LdapClient) and LdapClient.Connected and (TisGrid1.SelectedCount > 0);
+  Action_DeleteObject.Enabled := (TisGrid1.SelectedCount > 0) and Ldap.IsConnected;
 end;
 
 procedure TFrmModuleADSI.TisGrid1Change(Sender: TBaseVirtualTree;
@@ -502,13 +563,14 @@ end;
 
 procedure TFrmModuleADSI.RefreshNode(Node: TADSITreeNode);
 var
-  SearchResult: TLdapResult;
   ChildNode: TADSITreeNode;
-  NodeCache: TDocVariantData;
-  NodeName: RawUtf8;
-  i, Count: Integer;
+  EntryName: RawUtf8;
+  i: Integer;
   c: TCursor;
-  NodeNameAttribute: TLdapAttribute;
+  Req: TLdapSearchRequest;
+  Res: TLdapSearchResult;
+  PEntry: PLdapEntryData;
+  Timer: TPrecisionTimer;
 begin
   if not Assigned(Node) or (Node.DistinguishedName = '') then
     Exit;
@@ -516,131 +578,69 @@ begin
   c := Screen.Cursor;
   Screen.Cursor := crHourGlass;
 
-  NodeCache.Init();
+  Req.Options := DefaultSearchRequestOptions;
+  SearchRequest(Req, Node.DistinguishedName, '', ['description', 'distinguishedName', 'name', 'objectClass']);
+  Res := Ldap.Search(Req);
+
+  fLog.Add.Log(sllTrace, 'Ldap Search (%)', [Timer.Time]);
+  Timer.Resume;
   TreeView1.Items.BeginUpdate;
-  LdapClient.SearchBegin();
+  Node.StartUpdateChildren;
   try
-    LdapClient.SearchScope := lssSingleLevel;
-
-    repeat
-      if not LdapClient.Search(Node.DistinguishedName, False, '', ['description', 'distinguishedName', 'name', 'objectClass']) then
-      begin
-        if Assigned(fLog) then
-          fLog.Add.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, LdapClient.ResultString]);
-        Exit;
-      end;
-
-      for SearchResult in LdapClient.SearchResult.Items do
-      begin
-        if not Assigned(SearchResult) then
-          continue;
-
-        NodeNameAttribute := SearchResult.Find('name');
-        if not Assigned(NodeNameAttribute) then
-          continue;
-
-        NodeName := NodeNameAttribute.GetReadable();
-        if NodeName = '' then
-          continue;
-
-        ChildNode := (Node.FindNode(NodeName) as TADSITreeNode);
-        if not Assigned(ChildNode) then
-        begin
-          ChildNode := (TreeView1.Items.AddChild(Node, NodeName) as TADSITreeNode);
-          ChildNode.HasChildren := True;
-        end
-        else
-          FreeAndNil(ChildNode.fAttributes);
-        NodeCache.B[NodeName] := True;
-        ChildNode.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone);
-      end;
-    until LdapClient.SearchCookie = '';
-
-    Count := Node.Count;
-    for i := 0 to Node.Count - 1 do
+    for i := 0 to Res.ReturnedCount - 1 do
     begin
-      if not NodeCache.Exists(Node.Items[Count - 1 - i].Text) then
-        TreeView1.Items.Delete(Node.Items[Count - 1 - i]);
+      PEntry := @Res.Entries[i];
+      EntryName := GetLdapEntryReadable(PEntry^, 'name', 0);
+      if EntryName = '' then
+        Continue;
+      ChildNode := (Node.FindDN(PEntry^.DistinguishedName) as TADSITreeNode);
+      if not Assigned(ChildNode) then
+      begin
+        ChildNode := (TreeView1.Items.AddChild(Node, EntryName) as TADSITreeNode);
+        ChildNode.HasChildren := True;
+      end;
+      ChildNode.SetEntry(PEntry^);
     end;
     Node.AlphaSort;
     Node.HasChildren := Node.Count > 0;
   finally
-    LdapClient.SearchEnd;
+    Node.EndUpdateChildren;
     TreeView1.Items.EndUpdate;
     Screen.Cursor := c;
   end;
 end;
 
-function TFrmModuleADSI.GetLdapClient: TRsatLdapClient;
+function TFrmModuleADSI.GetLdap: ILdapConnection;
 begin
-  result := fModule.RSAT.LdapClient;
+  result := fModule.RSAT.LdapConnection;
 end;
 
 procedure TFrmModuleADSI.UpdateGrid(Node: TADSITreeNode);
 var
-  SearchResult: TLdapResult;
   data: TDocVariantData;
-  Attribute: TLdapAttribute;
-  c: TCursor;
+  i: Integer;
+  ChildNode: TADSITreeNode;
 begin
   if not Assigned(Node) then
     Exit;
 
-  c := Screen.Cursor;
-  Screen.Cursor := crHourGlass;
-
-  data.Init;
-
   TisGrid1.Clear;
   TisGrid1.BeginUpdate;
-  LdapClient.SearchBegin();
   try
-    if (Node.DistinguishedName = '') then
-      Exit;
-    LdapClient.SearchScope := lssSingleLevel;
-
-    repeat
-      if not LdapClient.Search(Node.DistinguishedName, False, '', ['description', 'distinguishedName', 'name', 'objectClass']) then
-      begin
-        if Assigned(fLog) then
-          fLog.Add.Log(sllError, '% - Ldap Search Error: "%"', [Self.Name, LdapClient.ResultString]);
-        Exit;
-      end;
-
-      for SearchResult in LdapClient.SearchResult.Items do
-      begin
-        if not Assigned(SearchResult) then
-          continue;
-
-        Attribute := SearchResult.Find('name');
-        if not Assigned(Attribute) then
-          continue;
-        if (Attribute.GetReadable() = '') then
-          continue;
-
-        data.AddOrUpdateValue('name', Attribute.GetReadable());
-
-        Attribute := SearchResult.Find('objectClass');
-        if Assigned(Attribute) and (Attribute.Count > 0) then
-          data.AddOrUpdateValue('type', Attribute.GetReadable(Attribute.Count - 1));
-        Attribute := SearchResult.Find('description');
-        if Assigned(Attribute) then
-          data.AddOrUpdateValue('description', Attribute.GetReadable());
-        Attribute := SearchResult.Find('distinguishedName');
-        if Assigned(Attribute) then
-          data.AddOrUpdateValue('distinguishedName', Attribute.GetReadable())
-        else
-          data.AddOrUpdateValue('distinguishedName', SearchResult.ObjectName);
-        TisGrid1.Data.AddItem(data);
-        data.Clear;
-      end;
-    until LdapClient.SearchCookie = '';
+    for i := 0 to Node.Count - 1 do
+    begin
+      ChildNode := (Node.Items[i] as TADSITreeNode);
+      data.init(JSON_FAST);
+      data.U['description'] := ChildNode.Description;
+      data.U['distinguishedName'] := ChildNode.DistinguishedName;
+      data.U['name'] := ChildNode.DisplayName;
+      data.U['type'] := ChildNode.ObjectType;
+      TisGrid1.Data.AddItem(data);
+      data.Clear;
+    end;
   finally
-    LdapClient.SearchEnd;
     TisGrid1.EndUpdate;
     TisGrid1.LoadData();
-    TisGrid1.ClearSelection;
-    Screen.Cursor := c;
   end;
 end;
 
@@ -654,48 +654,63 @@ end;
 
 procedure TFrmModuleADSI.UpdateGridAttribute(DistinguishedName: String);
 var
-  c: TCursor;
-  Attribute: TLdapAttribute;
-  Attributes: TLdapResult;
   data: TDocVariantData;
-  i: Integer;
+  i, j: Integer;
+  Request: TLdapSearchRequest;
+  Res: TLdapSearchResult;
+  PEntry: PLdapEntryData;
+  v: RawUtf8;
 begin
-  c := Screen.Cursor;
-  Screen.Cursor := crHourGlass;
+  SearchRequestOptions(Request.Options, 1, 5, 1, []);
+  SearchRequest(Request, DistinguishedName, '', ['*'], lssBaseObject);
+  Res := Ldap.Search(Request);
+  if not Res.OperationResult.Success then
+    Exit;
 
-  data.Init;
+  if Res.ReturnedCount <> 1 then
+    Exit;
+
   TisGrid2.Clear;
   TisGrid2.BeginUpdate;
   try
-    Attributes := LdapClient.SearchObject(DistinguishedName, '', ['*']);
-    if not Assigned(Attributes) then
+    PEntry := @Res.Entries[0];
+    for i := 0 to PEntry^.AttributeCount - 1 do
     begin
-      if Assigned(fLog) then
-        fLog.Add.Log(sllError, '% - Ldap Search Object Error: "%"', [Self.Name, LdapClient.ResultString]);
-      Exit;
-    end;
-
-    for Attribute in Attributes.Attributes.Items do
-    begin
-      if not Assigned(Attribute) then
-        continue;
-      data.AddOrUpdateValue('attribute', Attribute.AttributeName);
-      for i := 0 to Attribute.Count - 1 do
+      Data.init(JSON_FAST);
+      Data.AddOrUpdateValue('attribute', PEntry^.Attributes[i].Name);
+      for j := 0 to High(PEntry^.Attributes[i].Values) do
       begin
-        data.AddOrUpdateValue('value', Attribute.GetReadable(i));
+        v := PEntry^.Attributes[i].Values[j];
+        AttributeValueMakeReadable(v, AttrTypeStorage[AttributeNameType(PEntry^.Attributes[i].Name)]);
+        Data.AddOrUpdateValue('value',  v);
         TisGrid2.Data.AddItem(data);
       end;
-      data.Clear;
+      Data.Clear;
     end;
   finally
     TisGrid2.EndUpdate;
     TisGrid2.LoadData();
-    Screen.Cursor := c;
   end;
 end;
 
 procedure TFrmModuleADSI.LdapConnectEvent(Sender: TObject);
+var
+  Settings: TLdapConnectionSettings;
+  Res: TLdapOperationResult;
+  Credentials: TLdapCredentials;
 begin
+  Settings.UseCldapDiscovery := True;
+  Settings.DiscoverWhenHostEmpty := True;
+  Settings.DiscoveryDelayMS := 5000;
+  Settings.AutoReconnect := True;
+  Settings.SelectClosestServer := True;
+  Settings.UseCldapDiscovery := True;
+
+  Res := Ldap.Connect(Settings);
+
+  Credentials.AllowUnsafePasswordBind := True;
+  Credentials.Authentication := ldamKerberos;
+  Res := Ldap.Bind(Credentials);
   Action_Refresh.Execute;
 end;
 

@@ -18,6 +18,7 @@ type
 
   TRSAT = class
   private
+    fLdapConnection: ILdapConnection;
     fLdapClient: TRsatLdapClient;
     fLdapConfig: TLdapConfigs;
     fRSATOption: TRSATOption;
@@ -30,6 +31,7 @@ type
     property LdapClient: TRsatLdapClient read fLdapClient;
     property LdapConfigs: TLdapConfigs read fLdapConfig;
     property RsatOption: TRsatOption read fRsatOption;
+    property LdapConnection: ILdapConnection read fLdapConnection;
   end;
 
 implementation
@@ -38,6 +40,7 @@ implementation
 
 constructor TRSAT.Create(AOnOptionChange: TProcRsatOptionOfObject);
 begin
+  fLdapConnection := TMormotLdapConnection.Create;
   fLdapClient := TRsatLdapClient.Create;
   fLdapConfig := TLdapConfigs.Create;
   fRSATOption := TRsatOption.Create;

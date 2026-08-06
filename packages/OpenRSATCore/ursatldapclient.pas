@@ -17,17 +17,302 @@ uses
 
 type
 
+  TLdapConnectionTransport = (
+    /// LDAPS direct, généralement sur le port 636.
+    ldctTls,
+
+    /// LDAP non chiffré, généralement sur le port 389.
+    ldctPlain
+  );
+
+  TLdapAuthenticationMode = (
+    /// Bind anonyme.
+    ldamAnonymous,
+
+    /// Simple Bind avec UserName/Password.
+    ldamSimple,
+
+    /// Bind SASL DIGEST.
+    ldamSaslDigest,
+
+    /// Bind SASL Kerberos/GSSAPI.
+    ldamKerberos
+  );
+
+  TLdapCredentials = record
+    UserName: RawUtf8;
+    Password: SpiUtf8;
+    Authentication: TLdapAuthenticationMode;
+    AllowUnsafePasswordBind: Boolean;
+    KerberosDisableChannelBinding: Boolean;
+    KerberosSignSeal: TLdapKerberosSignSeal;
+    KerberosCredentialFile: RawUtf8;
+    KerberosAuthIdentity: RawUtf8;
+  end;
+
+  TLdapConnectionSettings = record
+    TargetHost: RawUtf8;
+    Port: RawUtf8;
+    Transport: TLdapConnectionTransport;
+    IgnoreCertificateErrors: Boolean;
+    DiscoverWhenHostEmpty: Boolean;
+    UseCldapDiscovery: Boolean;
+    SelectClosestServer: Boolean;
+    TryTlsFirst: Boolean;
+    DiscoveryDelayMS: Integer;
+    TimeoutMS: Integer;
+    PingIdleSeconds: Integer;
+    AutoReconnect: Boolean;
+    KerberosDN: RawUtf8;
+    KerberosSPN: RawUtf8;
+  end;
+
+  TLdapErrorKind = (
+    lekNone,
+    lekNotFound,
+    lekAuthentication,
+    lekAuthorization,
+    lekValidation,
+    lekNetwork,
+    lekTls,
+    lekServer,
+    lekCancelled,
+    lekUnknown
+  );
+
+  TLdapOperationResult = record
+    Success: Boolean;
+    ErrorKind: TLdapErrorKind;
+    LdapCode: Integer;
+    Message: RawUtf8;
+    DistinguishedName: RawUtf8;
+    ElapsedTimeMS: Int64;
+  end;
+
+  TLdapSearchRequestOptions = record
+    SizeLimit: Integer;
+    TimeLimitSeconds: Integer;
+    PageSize: Integer;
+    SearchSDFlags: TLdapSearchSDFlags;
+  end;
+
+  TLdapSearchRequest = record
+    Scope: TLdapSearchScope;
+    BaseDN: RawUtf8;
+    Attributes: TRawUtf8DynArray;
+    Filter: RawUtf8;
+    Options: TLdapSearchRequestOptions;
+  end;
+
+  TLdapAttributeData = record
+    Name: RawUtf8;
+    Values: TRawByteStringDynArray;
+  end;
+
+  PLdapAttributeData = ^TLdapAttributeData;
+  TLdapAttributeDataDynArray = Array of TLdapAttributeData;
+
+  TLdapEntryData = record
+    DistinguishedName: RawUtf8;
+    AttributeCount: Integer;
+    Attributes: TLdapAttributeDataDynArray;
+  end;
+
+  PLdapEntryData = ^TLdapEntryData;
+  TLdapEntryDataDynArray = Array of TLdapEntryData;
+
+  TLdapSearchStatus = (
+    lssOk,
+    lssPartial,
+    lssInvalidRequest,
+    lssConnectionError,
+    lssLdapError,
+    lssInternalError
+  );
+
+  TLdapSearchResult = record
+    Status: TLdapSearchStatus;
+    OperationResult: TLdapOperationResult;
+    Entries: TLdapEntryDataDynArray;
+    ReturnedCount: Integer;
+  end;
+
+  TLdapAddRequest = record
+    DistinguishedName: RawUtf8;
+    Attributes: TLdapAttributeDataDynArray;
+  end;
+
+  TLdapModifyChange = record
+    Operation: TLdapModifyOp;
+    Attribute: TLdapAttributeData;
+  end;
+
+  TLdapModifyChanges = Array of TLdapModifyChange;
+
+  TLdapModifyRequest = record
+    DistinguishedName: RawUtf8;
+    Changes: TLdapModifyChanges;
+  end;
+
+  TLdapDeleteRequest = record
+    DistinguishedName: RawUtf8;
+    DeleteChildren: Boolean;
+  end;
+
+  TLdapModifyDNRequest = record
+    DistinguishedName: RawUtf8;
+    NewRDN: RawUtf8;
+    NewSuperior: RawUtf8;
+    DeleteOldRDN: Boolean;
+  end;
+
+  ILdapConnectionContext = Interface
+    function NamingContexts: TRawUtf8DynArray;
+    function DefaultNamingContext: RawUtf8;
+    function RootNamingContext: RawUtf8;
+    function ConfigNamingContext: RawUtf8;
+    function SchemaNamingContext: RawUtf8;
+  end;
+
+  { TMormotLdapConnectionContext }
+
+  TMormotLdapConnectionContext = class(TInterfacedObject, ILdapConnectionContext)
+  private
+    fLdapClient: TLdapClient;
+  public
+    constructor Create(const LdapClient: TLdapClient);
+
+    function NamingContexts: TRawUtf8DynArray;
+    function DefaultNamingContext: RawUtf8;
+    function RootNamingContext: RawUtf8;
+    function ConfigNamingContext: RawUtf8;
+    function SchemaNamingContext: RawUtf8;
+  end;
+
+  { ILdapConnection }
+
+  ILdapConnection = Interface
+    function Connect(const ASettings: TLdapConnectionSettings): TLdapOperationResult;
+    function Bind(const ACredentials: TLdapCredentials): TLdapOperationResult;
+    procedure Disconnect;
+    function IsConnected: Boolean;
+    function Search(const ARequest: TLdapSearchRequest): TLdapSearchResult;
+    function Add(const ARequest: TLdapAddRequest): TLdapOperationResult;
+    function Modify(const ARequest: TLdapModifyRequest): TLdapOperationResult;
+    function Delete(const ARequest: TLdapDeleteRequest): TLdapOperationResult;
+    function ModifyDN(const ARequest: TLdapModifyDNRequest): TLdapOperationResult;
+    function Context: ILdapConnectionContext;
+  end;
+
+  { TMormotLdapConnection }
+
+  TMormotLdapConnection = class(TInterfacedObject, ILdapConnection)
+  private
+    fLdapClient: TLdapClient;
+    fContext: ILdapConnectionContext;
+
+    procedure LdapOperationResult(out r: TLdapOperationResult; Success: Boolean;
+      const DistinguishedName: RawUtf8; Code: Integer; const Message: RawUtf8;
+      Error: TLdapError; ElapsedTimeMS: Int64);
+  public
+    constructor Create;
+    destructor destroy; override;
+
+    function Connect(const ASettings: TLdapConnectionSettings
+  ): TLdapOperationResult;
+    function Bind(const ACredentials: TLdapCredentials): TLdapOperationResult;
+    procedure Disconnect;
+    function IsConnected: Boolean;
+    function Search(const ARequest: TLdapSearchRequest): TLdapSearchResult;
+    function Add(const ARequest: TLdapAddRequest): TLdapOperationResult;
+    function Modify(const ARequest: TLdapModifyRequest): TLdapOperationResult;
+    function Delete(const ARequest: TLdapDeleteRequest): TLdapOperationResult;
+    function ModifyDN(const ARequest: TLdapModifyDNRequest): TLdapOperationResult;
+    function Context: ILdapConnectionContext;
+  end;
+
+  TLdapSessionManager = class
+  private
+    fLdapConnection: ILdapConnection;
+  public
+
+  end;
+
+  { ILdapAttribute }
+
+  //ILdapAttribute = Interface
+  //  function GetName: RawUtf8;
+  //  function IsModified: Boolean;
+  //  procedure Add(const Value: RawByteString);
+  //  procedure Replace(const Value: RawByteString);
+  //  procedure Delete;
+  //  function GetRaw(Idx: Integer = 0): RawByteString;
+  //  function GetReadable(Idx: Integer = 0): RawUtf8;
+  //  function GetAllRaw: TRawByteStringDynArray;
+  //  function GetAllReadable: TRawUtf8DynArray;
+  //
+  //  property Name: RawUtf8 read GetName write SetName;
+  //end;
+
+  { TMormotLdapAttribute }
+
+  //TMormotLdapAttribute = class(TInterfacedObjectClass, ILdapAttribute)
+  //private
+  //  fName: RawUtf8;
+  //  fCurrentValues: TRawByteStringDynArray;
+  //  fOriginalValues: TRawByteStringDynArray;
+  //
+  //  function GetName: RawUtf8;
+  //public
+  //  constructor Create(const AttributeName: RawUtf8; const AttributeValues: TRawByteStringDynArray);
+  //
+  //  procedure Add(const Value: RawByteString);
+  //  procedure Replace(const Value: RawByteString);
+  //  procedure Delete;
+  //end;
+
+  { ILdapObject }
+
+  //ILdapObject = Interface
+  //  procedure LoadAttributes(const Attributes: TRawUtf8DynArray);
+  //  procedure Refresh;
+  //  procedure Commit;
+  //
+  //  procedure Delete;
+  //  procedure MoveTo(const AParentDN: RawUtf8);
+  //  procedure Rename(const ANewRDN: RawUtf8);
+  //  procedure DiscardChanges;
+  //  function HasObjectClass(const AObjectClass: RawUtf8): Boolean;
+  //  function IsNew: Boolean;
+  //  function IsDeleted: Boolean;
+  //  function IsDirty: Boolean;
+  //
+  //  function GetRaw(const Name: RawUtf8; Idx: Integer = 0): RawByteString;
+  //  function GetReadable(const Name: RawUt8; Idx: Integer = 0): RawUtf8;
+  //  function GetAllRaw(const Name: RawUtf8): TRawByteStringDynArray;
+  //  function GetAllReadable(const Name: RawUtf8): TRawUtf8DynArray;
+  //end;
+
+  { TMormotLdapObject }
+
+  //TMormotLdapObject = class(TInterfacedObjectClass, ILdapObject)
+  //private
+  //  fLdap: ILdapConnection;
+  //  fIdentity: RawUtf8;
+  //public
+  //  constructor Create(const Ldap: ILdapConnection; const DistinguishedName: RawUtf8);
+  //
+  //  procedure LoadAttributes(const Attributes: TRawUtf8DynArray);
+  //  procedure Refresh;
+  //  procedure Commit;
+  //end;
+
   TProcLdapClientObject = procedure(LdapClient: TLdapClient) of Object;
 
   { TRsatLdapClient }
 
   TRsatLdapClient = class(TLdapClient)
   private
-    fDomainControllerName: RawUtf8;
-    fDomainName: RawUtf8;
-    procedure SetDomainControllerName(AValue: RawUtf8);
-    procedure SetDomainName(AValue: RawUtf8);
-
     function AddProtection(PSecDesc: PSecurityDescriptor; Sid: RawSid): Boolean;
     function DelProtection(PSecDesc: PSecurityDescriptor; Sid: RawSid): Boolean;
   protected
@@ -41,9 +326,6 @@ type
     procedure SearchPagingEnd;
     function MoveLdapEntry(oldDN, newDN: string): Boolean;
     function RenameLdapEntry(DN, newName: string): Boolean;
-
-    property DomainName: RawUtf8 read fDomainName write SetDomainName;
-    property DomainControllerName: RawUtf8 read fDomainControllerName write SetDomainControllerName;
 
     procedure ChangeSettings(ASettings: TLdapClientSettings; AutoConnect: Boolean = True);
 
@@ -105,6 +387,14 @@ type
     property OnError: TNotifyEvent read fOnError write SetOnError;
   end;
 
+function GetLdapEntryAttribute(const Entry: TLdapEntryData; const AttributeName: RawUtf8): PLdapAttributeData;
+function GetLdapEntryReadable(const Entry: TLdapEntryData; const AttributeName: RawUtf8; Idx: Integer): RawUtf8;
+function GetLdapEntryAllReadable(const Entry: TLdapEntryData; const AttributeName: RawUtf8): TRawUtf8DynArray;
+
+function DefaultSearchRequestOptions: TLdapSearchRequestOptions;
+procedure SearchRequestOptions(var RequestOptions: TLdapSearchRequestOptions; SizeLimit: Integer; TimeLimitSeconds: Integer; PageSize: Integer; SearchSDFlags: TLdapSearchSDFlags);
+procedure SearchRequest(var Request: TLdapSearchRequest; BaseDN: RawUtf8; Filter: RawUtf8; Attributes: TRawUtf8DynArray; Scope: TLdapSearchScope = lssSingleLevel);
+
 function GetLdapErrorCustomMessage(LdapClient: TLdapClient): RawUtf8;
 
 function ConcatACL(ADacls: Array of TSecAcl; AAllowDuplicated: Boolean = False): TSecAcl;
@@ -164,9 +454,73 @@ const
 implementation
 
 uses
+  Math,
+  DateUtils,
   mormot.core.log,
   mormot.core.text,
   mormot.core.rtti;
+
+function GetLdapEntryAttribute(const Entry: TLdapEntryData;
+  const AttributeName: RawUtf8): PLdapAttributeData;
+var
+  i: Integer;
+begin
+  for i := 0 to Entry.AttributeCount - 1 do
+    if EqualBuf(Entry.Attributes[i].Name, AttributeName) then
+    begin
+      result := @Entry.Attributes[i];
+      Exit;
+    end;
+  result := nil;
+end;
+
+function GetLdapEntryReadable(const Entry: TLdapEntryData;
+  const AttributeName: RawUtf8; Idx: Integer): RawUtf8;
+var
+  A: PLdapAttributeData;
+begin
+  A := GetLdapEntryAttribute(Entry, AttributeName);
+  if Assigned(A) and (PtrUInt(Idx) < Length(A^.Values)) then
+    result := A^.Values[Idx]
+  else
+    result := '';
+end;
+
+function GetLdapEntryAllReadable(const Entry: TLdapEntryData;
+  const AttributeName: RawUtf8): TRawUtf8DynArray;
+var
+  A: PLdapAttributeData;
+begin
+  A := GetLdapEntryAttribute(Entry, AttributeName);
+  if Assigned(A) then
+    result := TRawUtf8DynArray(A^.Values)
+  else
+    result := nil;
+end;
+
+function DefaultSearchRequestOptions: TLdapSearchRequestOptions;
+begin
+  SearchRequestOptions(result, 2000, 5, 1000, []);
+end;
+
+procedure SearchRequestOptions(var RequestOptions: TLdapSearchRequestOptions;
+  SizeLimit: Integer; TimeLimitSeconds: Integer; PageSize: Integer;
+  SearchSDFlags: TLdapSearchSDFlags);
+begin
+  RequestOptions.PageSize := PageSize;
+  RequestOptions.SearchSDFlags := SearchSDFlags;
+  RequestOptions.TimeLimitSeconds := TimeLimitSeconds;
+  RequestOptions.SizeLimit := SizeLimit;
+end;
+
+procedure SearchRequest(var Request: TLdapSearchRequest; BaseDN: RawUtf8;
+  Filter: RawUtf8; Attributes: TRawUtf8DynArray; Scope: TLdapSearchScope);
+begin
+  Request.BaseDN := BaseDN;
+  Request.Attributes := Attributes;
+  Request.Filter := Filter;
+  Request.Scope := Scope;
+end;
 
 function GetLdapErrorCustomMessage(LdapClient: TLdapClient): RawUtf8;
 begin
@@ -365,28 +719,392 @@ begin
   Exit;
 end;
 
+{ TMormotLdapConnectionContext }
+
+constructor TMormotLdapConnectionContext.Create(const LdapClient: TLdapClient);
+begin
+  fLdapClient := LdapClient;
+end;
+
+function TMormotLdapConnectionContext.NamingContexts: TRawUtf8DynArray;
+begin
+  result := fLdapClient.NamingContexts;
+end;
+
+function TMormotLdapConnectionContext.DefaultNamingContext: RawUtf8;
+begin
+  result := fLdapClient.DefaultDN();
+end;
+
+function TMormotLdapConnectionContext.RootNamingContext: RawUtf8;
+begin
+  result := fLdapClient.RootDN;
+end;
+
+function TMormotLdapConnectionContext.ConfigNamingContext: RawUtf8;
+begin
+  result := fLdapClient.ConfigDN;
+end;
+
+function TMormotLdapConnectionContext.SchemaNamingContext: RawUtf8;
+begin
+  result := fLdapClient.SchemaDN;
+end;
+
+{ TMormotLdapConnection }
+
+procedure TMormotLdapConnection.LdapOperationResult(out
+  r: TLdapOperationResult; Success: Boolean; const DistinguishedName: RawUtf8;
+  Code: Integer; const Message: RawUtf8; Error: TLdapError; ElapsedTimeMS: Int64
+  );
+begin
+  r.Success := Success;
+  r.DistinguishedName := DistinguishedName;
+  r.LdapCode := Code;
+  r.Message := Message;
+  case Error of
+    leSuccess: r.ErrorKind := lekNone;
+    else
+      r.ErrorKind := lekUnknown;
+  end;
+  r.ElapsedTimeMS := ElapsedTimeMS;
+end;
+
+constructor TMormotLdapConnection.Create;
+begin
+  fLdapClient := TLdapClient.Create;
+
+  fContext := TMormotLdapConnectionContext.Create(fLdapClient);
+end;
+
+destructor TMormotLdapConnection.destroy;
+begin
+  FreeAndNil(fLdapClient);
+
+  inherited destroy;
+end;
+
+function TMormotLdapConnection.Connect(const ASettings: TLdapConnectionSettings
+  ): TLdapOperationResult;
+var
+  Start: TDateTime;
+  DiscoverMode: TLdapClientConnect;
+begin
+  With fLdapClient.Settings do
+  begin
+    TargetHost := ASettings.TargetHost;
+    if ASettings.Port = '' then
+    begin
+      if ASettings.Transport = ldctTls then
+        TargetPort := '636'
+      else
+        TargetPort := '389';
+    end
+    else
+      TargetPort := ASettings.Port;
+    Tls := ASettings.Transport = ldctTls;
+    KerberosDN := ASettings.KerberosDN;
+    fLdapClient.TlsContext^.IgnoreCertificateErrors := ASettings.IgnoreCertificateErrors;
+    PingIdleSeconds := ASettings.PingIdleSeconds;
+    Timeout := ASettings.TimeoutMS;
+    AutoReconnect := ASettings.AutoReconnect;
+    KerberosSpn := ASettings.KerberosSPN;
+  end;
+  Start := Now();
+
+  DiscoverMode := [lccNoDiscovery];
+  if ASettings.DiscoverWhenHostEmpty and (ASettings.TargetHost = '') then
+    Exclude(DiscoverMode, lccNoDiscovery);
+  if ASettings.SelectClosestServer then
+    Include(DiscoverMode, lccClosest);
+  if ASettings.UseCldapDiscovery then
+    Include(DiscoverMode, lccCldap);
+  if ASettings.TryTlsFirst then
+    Include(DiscoverMode, lccTlsFirst);
+
+
+  result.Success := fLdapClient.Connect(DiscoverMode, ASettings.DiscoveryDelayMS);
+  LdapOperationResult(result, result.Success, '', fLdapClient.ResultCode, fLdapClient.ResultString, fLdapClient.ResultError, MilliSecondsBetween(Start, Now));
+end;
+
+function TMormotLdapConnection.Bind(const ACredentials: TLdapCredentials
+  ): TLdapOperationResult;
+var
+  Start: TDateTime;
+begin
+  Start := Now;
+  With fLdapClient.Settings do
+  begin
+    AllowUnsafePasswordBind := ACredentials.AllowUnsafePasswordBind;
+    KerberosSignSeal := ACredentials.KerberosSignSeal;
+    KerberosDisableChannelBinding := ACredentials.KerberosDisableChannelBinding;
+    UserName := ACredentials.UserName;
+    Password := ACredentials.Password;
+  end;
+  case ACredentials.Authentication of
+    ldamAnonymous:
+    begin
+      fLdapClient.Settings.UserName := '';
+      fLdapClient.Settings.Password := '';
+      result.Success := fLdapClient.Bind;
+    end;
+    ldamSimple:
+    begin
+      result.Success := fLdapClient.Bind;
+    end;
+    ldamSaslDigest:
+    begin
+      result.Success := fLdapClient.BindSaslDigest();
+    end;
+    ldamKerberos:
+    begin
+      result.Success := fLdapClient.BindSaslKerberos(ACredentials.KerberosAuthIdentity);
+    end;
+  end;
+  LdapOperationResult(result, result.Success, '', fLdapClient.ResultCode, fLdapClient.ResultString, fLdapClient.ResultError, MilliSecondsBetween(Start, Now));
+end;
+
+procedure TMormotLdapConnection.Disconnect;
+begin
+  fLdapClient.Close;
+end;
+
+function TMormotLdapConnection.IsConnected: Boolean;
+begin
+  result := fLdapClient.Connected;
+end;
+
+function TMormotLdapConnection.Search(const ARequest: TLdapSearchRequest
+  ): TLdapSearchResult;
+var
+  SearchResult: TLdapResult;
+  Attribute: TLdapAttribute;
+  i: Integer;
+  PEntry: PLdapEntryData;
+  PAttribute: PLdapAttributeData;
+  Start: TDateTime;
+begin
+  Start := Now;
+  result := Default(TLdapSearchResult);
+  fLdapClient.SearchBegin(ARequest.Options.PageSize);
+  try
+    fLdapClient.SearchScope := ARequest.Scope;
+    fLdapClient.SearchSDFlags := ARequest.Options.SearchSDFlags;
+    fLdapClient.SearchTimeLimit := ARequest.Options.TimeLimitSeconds;
+    repeat
+      fLdapClient.SearchPageSize := Min(ARequest.Options.PageSize, ARequest.Options.SizeLimit - Result.returnedCount);
+      fLdapClient.SearchRangeBegin;
+      try
+        result.OperationResult.Success := fLdapClient.Search(ARequest.BaseDN, False, ARequest.Filter, ARequest.Attributes);
+        if not result.OperationResult.Success then
+          Exit;
+      finally
+        fLdapClient.SearchRangeEnd;
+      end;
+      SetLength(result.Entries, result.ReturnedCount + fLdapClient.SearchResult.Count);
+      for SearchResult in fLdapClient.SearchResult.Items do
+      begin
+        if not Assigned(SearchResult) then
+          continue;
+        PEntry := @result.Entries[result.ReturnedCount];
+        PEntry^.DistinguishedName := SearchResult.ObjectName;
+        SetLength(PEntry^.Attributes, SearchResult.Attributes.Count);
+        for Attribute in SearchResult.Attributes.Items do
+        begin
+          if not Assigned(Attribute) then
+            Continue;
+          PAttribute := @PEntry^.Attributes[PEntry^.AttributeCount];
+          PAttribute^.Name := Attribute.AttributeName;
+          SetLength(PAttribute^.Values, Attribute.Count);
+          for i := 0 to Attribute.Count - 1 do
+            PAttribute^.Values[i] := Attribute.GetRaw(i);
+          Inc(PEntry^.AttributeCount);
+        end;
+        Inc(result.ReturnedCount);
+      end;
+    until (fLdapClient.SearchCookie = '') or (result.ReturnedCount >= ARequest.Options.SizeLimit);
+  finally
+    fLdapClient.SearchEnd;
+    LdapOperationResult(result.OperationResult, result.OperationResult.Success,
+    '', fLdapClient.ResultCode, fLdapClient.ResultString, fLdapClient.ResultError,
+    MilliSecondsBetween(Start, Now));
+  end;
+end;
+
+function TMormotLdapConnection.Add(const ARequest: TLdapAddRequest
+  ): TLdapOperationResult;
+var
+  Attributes: TLdapAttributeList;
+  Attribute: TLdapAttributeData;
+  A: TLdapAttribute;
+  v: RawByteString;
+  Start: TDateTime;
+begin
+  Attributes := TLdapAttributeList.Create;
+  try
+    for Attribute in ARequest.Attributes do
+    begin
+      A := Attributes.Add(Attribute.Name);
+      for v in Attribute.Values do
+        A.Add(v);
+    end;
+    Start := Now;
+    Result.Success := fLdapClient.Add(ARequest.DistinguishedName, Attributes);
+  finally
+    FreeAndNil(Attributes);
+    LdapOperationResult(result,
+      result.Success,
+      ARequest.DistinguishedName,
+      fLdapClient.ResultCode,
+      fLdapClient.ResultString,
+      fLdapClient.ResultError,
+      MilliSecondsBetween(Start, Now));
+  end;
+end;
+
+function TMormotLdapConnection.Modify(const ARequest: TLdapModifyRequest
+  ): TLdapOperationResult;
+var
+  Modifications: array of TAsnObject;
+  i: Integer;
+  Attribute: TLdapAttribute;
+  Start: TDateTime;
+  v: RawByteString;
+begin
+  Start := Now();
+  SetLength(Modifications, Length(ARequest.Changes));
+  for i := 0 to High(ARequest.Changes) do
+  begin
+    Attribute := TLdapAttribute.Create(ARequest.Changes[i].Attribute.Name, atUndefined);
+    try
+      for v in ARequest.Changes[i].Attribute.Values do
+        Attribute.Add(v);
+      Modifications[i] := Modifier(ARequest.Changes[i].Operation, Attribute.ExportToAsnSeq);
+    finally
+      FreeAndNil(Attribute);
+    end;
+  end;
+  result.Success := fLdapClient.Modify(ARequest.DistinguishedName, Modifications);
+
+  LdapOperationResult(result, result.Success, ARequest.DistinguishedName, fLdapClient.ResultCode,
+    fLdapClient.ResultString, fLdapClient.ResultError, MilliSecondsBetween(Start, Now));
+end;
+
+function TMormotLdapConnection.Delete(const ARequest: TLdapDeleteRequest
+  ): TLdapOperationResult;
+var
+  Start: TDateTime;
+begin
+  Start := Now();
+
+  result.Success := fLdapClient.Delete(ARequest.DistinguishedName, ARequest.DeleteChildren);
+
+  LdapOperationResult(result, result.Success, ARequest.DistinguishedName, fLdapClient.ResultCode,
+    fLdapClient.ResultString, fLdapClient.ResultError, MilliSecondsBetween(Start, Now));
+end;
+
+function TMormotLdapConnection.ModifyDN(const ARequest: TLdapModifyDNRequest
+  ): TLdapOperationResult;
+var
+  Start: TDateTime;
+begin
+  Start := Now();
+
+  result.Success := fLdapClient.ModifyDN(ARequest.DistinguishedName, ARequest.NewRDN, ARequest.NewSuperior, ARequest.DeleteOldRDN);
+
+  LdapOperationResult(result, result.Success, ARequest.DistinguishedName, fLdapClient.ResultCode,
+    fLdapClient.ResultString, fLdapClient.ResultError, MilliSecondsBetween(Start, Now));
+end;
+
+function TMormotLdapConnection.Context: ILdapConnectionContext;
+begin
+  result := fContext;
+end;
+
+{ TMormotLdapAttribute }
+
+//function TMormotLdapAttribute.GetName: RawUtf8;
+//begin
+//  result := fName;
+//end;
+//
+//constructor TMormotLdapAttribute.Create(const AttributeName: RawUtf8;
+//  const AttributeValues: TRawByteStringDynArray);
+//begin
+//  fName := AttributeName;
+//  fOriginalValues := AttributeValues;
+//  fCurrentValues := fOriginalValues;
+//end;
+//
+//procedure TMormotLdapAttribute.Add(const Value: RawByteString);
+//var
+//  C: SizeInt;
+//begin
+//  C := Length(fCurrentValues);
+//  SetLength(fCurrentValues, C + 1);
+//  fCurrentValues[C] := Value;
+//end;
+//
+//procedure TMormotLdapAttribute.Replace(const Value: RawByteString);
+//begin
+//  Delete;
+//  Add(Value);
+//end;
+//
+//procedure TMormotLdapAttribute.Delete;
+//begin
+//  fCurrentValues := nil;
+//end;
+
+{ TMormotLdapObject }
+
+//constructor TMormotLdapObject.Create(const Ldap: ILdapConnection;
+//  const DistinguishedName: RawUtf8);
+//begin
+//  fLdap := Ldap;
+//  fIdentity := DistinguishedName;
+//end;
+//
+//procedure TMormotLdapObject.LoadAttributes(const Attributes: TRawUtf8DynArray);
+//var
+//  Request: TLdapSearchRequest;
+//  Res: TLdapSearchResult;
+//begin
+//  SearchRequestOptions(Request.Options, 1, 5, 1, [lsfOwnerSecurityInformation, lsfGroupSecurityInformation, lsfDaclSecurityInformation]);
+//  SearchRequest(Request, fIdentity, '', Attributes, lssBaseObject);
+//
+//  Res := fLdap.Search(Request);
+//  if not Res.OperationResult.Success then
+//    Exit;
+//
+//  // Manage Attributes
+//end;
+//
+//procedure TMormotLdapObject.Refresh;
+//begin
+//  // LoadAttributes with already loaded attributes
+//end;
+//
+//procedure TMormotLdapObject.Commit;
+//var
+//  DR: TLdapDeleteRequest;
+//  Res: TLdapOperationResult;
+//begin
+//  // Retrieve changes, and perform operations
+//  if IsDeleted then
+//  begin
+//    DR.DistinguishedName := fIdentity;
+//    DR.DeleteChildren := True;
+//    Res := fLdap.Delete(DR);
+//    Exit;
+//  end;
+//  if IsNew then
+//  begin
+//    DR.DistinguishedName:=;
+//  end;
+//end;
+
 { TRsatLdapClient }
-
-procedure TRsatLdapClient.SetDomainControllerName(AValue: RawUtf8);
-begin
-  if fDomainControllerName = AValue then
-    Exit;
-  Close;
-  fDomainControllerName := AValue;
-  Settings.TargetHost := fDomainControllerName;
-  Settings.KerberosSpn := '';
-  Connect();
-end;
-
-procedure TRsatLdapClient.SetDomainName(AValue: RawUtf8);
-begin
-  if fDomainName = AValue then
-    Exit;
-  Close;
-  fDomainName := AValue;
-  Settings.KerberosDN := fDomainName;
-  Connect;
-end;
 
 function TRsatLdapClient.AddProtection(PSecDesc: PSecurityDescriptor;
   Sid: RawSid): Boolean;
