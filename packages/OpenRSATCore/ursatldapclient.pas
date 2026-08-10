@@ -113,7 +113,7 @@ function GetDefaultACLFromObjectClass(ALdapClient: TLdapClient; AObjectClass: TR
 
 procedure OrderACL(aLdapClient: TLdapClient; aDN: RawUtf8; aACL: PSecAcl);
 
-function ChangeLdapSettings(LdapClient: TLdapClient; Settings: TLdapClientSettings; AutoConnect: Boolean = True): Boolean;
+function ChangeLdapSettings(LdapClient: TRsatLdapClient; Settings: TLdapClientSettings; AutoConnect: Boolean = True): Boolean;
 
 const
   LDAP_ERROR_CUSTOM_MESSAGE: Array[leOperationsError..leOther] of RawUtf8 = (
@@ -351,7 +351,7 @@ begin
   TOpenRSATLog.Add.Log(sllDebug, 'End ordering ACL for.');
 end;
 
-function ChangeLdapSettings(LdapClient: TLdapClient;
+function ChangeLdapSettings(LdapClient: TRsatLdapClient;
   Settings: TLdapClientSettings; AutoConnect: Boolean): Boolean;
 begin
   result := LdapClient.Close;
