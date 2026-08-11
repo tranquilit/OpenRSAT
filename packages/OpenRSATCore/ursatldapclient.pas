@@ -18,24 +18,14 @@ uses
 type
 
   TLdapConnectionTransport = (
-    /// LDAPS direct, généralement sur le port 636.
     ldctTls,
-
-    /// LDAP non chiffré, généralement sur le port 389.
     ldctPlain
   );
 
   TLdapAuthenticationMode = (
-    /// Bind anonyme.
     ldamAnonymous,
-
-    /// Simple Bind avec UserName/Password.
     ldamSimple,
-
-    /// Bind SASL DIGEST.
     ldamSaslDigest,
-
-    /// Bind SASL Kerberos/GSSAPI.
     ldamKerberos
   );
 
@@ -238,75 +228,6 @@ type
 
   end;
 
-  { ILdapAttribute }
-
-  //ILdapAttribute = Interface
-  //  function GetName: RawUtf8;
-  //  function IsModified: Boolean;
-  //  procedure Add(const Value: RawByteString);
-  //  procedure Replace(const Value: RawByteString);
-  //  procedure Delete;
-  //  function GetRaw(Idx: Integer = 0): RawByteString;
-  //  function GetReadable(Idx: Integer = 0): RawUtf8;
-  //  function GetAllRaw: TRawByteStringDynArray;
-  //  function GetAllReadable: TRawUtf8DynArray;
-  //
-  //  property Name: RawUtf8 read GetName write SetName;
-  //end;
-
-  { TMormotLdapAttribute }
-
-  //TMormotLdapAttribute = class(TInterfacedObjectClass, ILdapAttribute)
-  //private
-  //  fName: RawUtf8;
-  //  fCurrentValues: TRawByteStringDynArray;
-  //  fOriginalValues: TRawByteStringDynArray;
-  //
-  //  function GetName: RawUtf8;
-  //public
-  //  constructor Create(const AttributeName: RawUtf8; const AttributeValues: TRawByteStringDynArray);
-  //
-  //  procedure Add(const Value: RawByteString);
-  //  procedure Replace(const Value: RawByteString);
-  //  procedure Delete;
-  //end;
-
-  { ILdapObject }
-
-  //ILdapObject = Interface
-  //  procedure LoadAttributes(const Attributes: TRawUtf8DynArray);
-  //  procedure Refresh;
-  //  procedure Commit;
-  //
-  //  procedure Delete;
-  //  procedure MoveTo(const AParentDN: RawUtf8);
-  //  procedure Rename(const ANewRDN: RawUtf8);
-  //  procedure DiscardChanges;
-  //  function HasObjectClass(const AObjectClass: RawUtf8): Boolean;
-  //  function IsNew: Boolean;
-  //  function IsDeleted: Boolean;
-  //  function IsDirty: Boolean;
-  //
-  //  function GetRaw(const Name: RawUtf8; Idx: Integer = 0): RawByteString;
-  //  function GetReadable(const Name: RawUt8; Idx: Integer = 0): RawUtf8;
-  //  function GetAllRaw(const Name: RawUtf8): TRawByteStringDynArray;
-  //  function GetAllReadable(const Name: RawUtf8): TRawUtf8DynArray;
-  //end;
-
-  { TMormotLdapObject }
-
-  //TMormotLdapObject = class(TInterfacedObjectClass, ILdapObject)
-  //private
-  //  fLdap: ILdapConnection;
-  //  fIdentity: RawUtf8;
-  //public
-  //  constructor Create(const Ldap: ILdapConnection; const DistinguishedName: RawUtf8);
-  //
-  //  procedure LoadAttributes(const Attributes: TRawUtf8DynArray);
-  //  procedure Refresh;
-  //  procedure Commit;
-  //end;
-
   TProcLdapClientObject = procedure(LdapClient: TLdapClient) of Object;
 
   { TRsatLdapClient }
@@ -456,9 +377,124 @@ implementation
 uses
   Math,
   DateUtils,
+  IniFiles,
   mormot.core.log,
+  mormot.core.unicode,
   mormot.core.text,
   mormot.core.rtti;
+
+function FieldToIniText(
+  const Prop: TRttiCustomProp;
+  Data: Pointer): RawUtf8;
+var
+  Ordinal: Int64;
+begin
+  Result := Prop.GetValueText(Data);
+
+  // Boolean : mORMot renvoie normalement l'ordinal 0/1
+  // pour un champ direct de record.
+  if rcfBoolean in Prop.Value.Cache.Flags then
+  begin
+    if Result = '0' then
+      Result := 'false'
+    else
+      Result := 'true';
+  end
+
+  // Enum : écrire le nom Pascal plutôt que l'ordinal.
+  else if Prop.Value.Kind = rkEnumeration then
+  begin
+    Ordinal := StrToInt64(Utf8ToString(Result));
+
+    Result := ToUtf8(
+      GetEnumName(
+        Prop.Value.Info,
+        Ordinal)^);
+  end;
+end;
+
+procedure SaveRecordToIni(
+  Ini: TCustomIniFile;
+  const Section: string;
+  Data: Pointer;
+  Info: PRttiInfo);
+var
+  R: TRttiCustom;
+  Props: TRttiCustomProps;
+  I: Integer;
+  Key: string;
+  Value: RawUtf8;
+begin
+  R := Rtti[Info];
+
+  if (R = nil) or
+     not (R.Kind in rkRecordTypes) then
+    raise Exception.Create('TypeInfo ne correspond pas à un record');
+
+  Props := R.Props;
+
+  for I := 0 to Props.Count - 1 do
+  begin
+    if Props.List[I].Name = '' then
+      Continue;
+
+    Key := Utf8ToString(Props.List[I].Name);
+    Value := FieldToIniText(Props.List[I], Data);
+
+    Ini.WriteString(
+      Section,
+      Key,
+      Utf8ToString(Value));
+  end;
+end;
+
+function LoadRecordFromIni(
+  Ini: TCustomIniFile;
+  const Section: string;
+  Data: Pointer;
+  Info: PRttiInfo): Boolean;
+var
+  R: TRttiCustom;
+  Props: TRttiCustomProps;
+  I: Integer;
+  Key: string;
+  S: RawUtf8;
+begin
+  Result := False;
+
+  R := Rtti[Info];
+
+  if (R = nil) or
+     not (R.Kind in rkRecordTypes) then
+    Exit;
+
+  Props := R.Props;
+
+  for I := 0 to Props.Count - 1 do
+  begin
+    if Props.List[I].Name = '' then
+      Continue;
+
+    Key := Utf8ToString(Props.List[I].Name);
+
+    // Important :
+    // si la clé n'existe pas, on conserve la valeur actuelle
+    // du record (donc éventuellement une valeur par défaut).
+    if not Ini.ValueExists(Section, Key) then
+      Continue;
+
+    S := StringToUtf8(
+      Ini.ReadString(
+        Section,
+        Key,
+        ''));
+
+    if not Props.List[I].SetValueText(Data, S) then
+      Exit;
+  end;
+
+  Result := True;
+end;
 
 function GetLdapEntryAttribute(const Entry: TLdapEntryData;
   const AttributeName: RawUtf8): PLdapAttributeData;
@@ -821,7 +857,6 @@ begin
     Include(DiscoverMode, lccCldap);
   if ASettings.TryTlsFirst then
     Include(DiscoverMode, lccTlsFirst);
-
 
   result.Success := fLdapClient.Connect(DiscoverMode, ASettings.DiscoveryDelayMS);
   LdapOperationResult(result, result.Success, '', fLdapClient.ResultCode, fLdapClient.ResultString, fLdapClient.ResultError, MilliSecondsBetween(Start, Now));

@@ -570,7 +570,6 @@ var
   Req: TLdapSearchRequest;
   Res: TLdapSearchResult;
   PEntry: PLdapEntryData;
-  Timer: TPrecisionTimer;
 begin
   if not Assigned(Node) or (Node.DistinguishedName = '') then
     Exit;
@@ -582,8 +581,6 @@ begin
   SearchRequest(Req, Node.DistinguishedName, '', ['description', 'distinguishedName', 'name', 'objectClass']);
   Res := Ldap.Search(Req);
 
-  fLog.Add.Log(sllTrace, 'Ldap Search (%)', [Timer.Time]);
-  Timer.Resume;
   TreeView1.Items.BeginUpdate;
   Node.StartUpdateChildren;
   try
