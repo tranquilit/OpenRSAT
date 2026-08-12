@@ -13,14 +13,15 @@ uses
   Graphics,
   StdCtrls,
   // Submodules
-  mormot.core.base,
-  tis.ui.searchedit;
+  mormot.net.ldap,
+  mormot.core.base;
 
 type
 
   { TFrmNewUser }
 
   TFrmNewUser = class(TFrame)
+    ComboBox1: TComboBox;
 
     Panel_Page0: TPanel;
       Label_FirstName: TLabel;
@@ -33,7 +34,6 @@ type
       Edit_FullName: TEdit;
       Label_UserLogon: TLabel;
       Edit_UserLogon: TEdit;
-      TisSearchEdit_UserLogonDomain: TTisSearchEdit;
       Label_WinUserLogonName: TLabel;
       Edit_nETBIOSDomain: TEdit;
       Edit_nETBIOSName: TEdit;
@@ -62,10 +62,13 @@ type
     procedure Edit_PasswordChange(Sender: TObject);
     procedure Edit_UserLogonChange(Sender: TObject);
   private
+    BaseObj: TLdapAttributeList;
+
     procedure OKBtn();
     procedure Load;
   public
     constructor Create(TheOwner: TComponent); override;
+    procedure Copy(const DistinguishedName: RawUtf8);
   end;
 
 implementation
@@ -77,7 +80,6 @@ uses
   // Submodules
   mormot.core.text,
   mormot.core.os.security,
-  mormot.net.ldap,
   // Rsat
   ucommon,
   ucoredatamodule,
@@ -91,9 +93,9 @@ uses
 procedure TFrmNewUser.OKBtn();
 var
   Ldap: TLdapClient;
-  NewUser: TLdapAttributeList;
   DN: String;
   ObjectOU: RawUtf8;
+  NewUser: TLdapAttributeList;
 begin
   Ldap := (Owner as TVisNewObject).Ldap;
   ObjectOU := (Owner as TVisNewObject).ObjectOU;
@@ -105,19 +107,26 @@ begin
     Edit_FullName.Text,
     Edit_Initials.Text,
     Edit_nETBIOSName.Text,
-    FormatUtf8('%%', [Edit_UserLogon.Text, TisSearchEdit_UserLogonDomain.Text])
+    FormatUtf8('%%', [Edit_UserLogon.Text, ComboBox1.Text])
   );
+  BaseObj.Add(atGivenName, Edit_FirstName.Text, aoReplaceValue);
+  BaseObj.Add(atSurName, Edit_LastName.Text, aoReplaceValue);
+  BaseObj.Add(atDisplayName, Edit_FullName.Text, aoReplaceValue);
+  BaseObj.Add(atInitials, Edit_Initials.Text, aoReplaceValue);
+  BaseObj.Add(atSamAccountName, Edit_nETBIOSName.Text, aoReplaceValue);
+  BaseObj.Add(atUserPrincipalName, FormatUtf8('%%', [Edit_UserLogon.Text, ComboBox1.Text]), aoReplaceValue);
+  end;
   try
-    ChangePassword(NewUser, Edit_Password.Text);
-    MustChangePassword(NewUser, CheckBox_MustChangePassword.Checked);
-    PasswordNeverExpires(NewUser, CheckBox_PasswordNeverExpires.Checked);
-    DisableAccount(NewUser, CheckBox_AccountDisabled.Checked);
+    ChangePassword(BaseObj, Edit_Password.Text);
+    MustChangePassword(BaseObj, CheckBox_MustChangePassword.Checked);
+    PasswordNeverExpires(BaseObj, CheckBox_PasswordNeverExpires.Checked);
+    DisableAccount(BaseObj, CheckBox_AccountDisabled.Checked);
 
     DN := FormatUtf8('CN=%,%', [Edit_FullName.Text, ObjectOU]);
-    if not Ldap.Add(DN, NewUser) then
+    if not Ldap.Add(DN, BaseObj) then
       Exit;
   finally
-    FreeAndNil(NewUser);
+    FreeAndNil(BaseObj);
   end;
 
   if CheckBox_CannotChangePassword.Checked then
@@ -139,6 +148,8 @@ var
 begin
   inherited Create(TheOwner);
 
+  BaseObj := nil;
+
   OwnerNewObject.Caption := rsNewObjectUser;
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
   OwnerNewObject.Btn_Next.Default := True;
@@ -148,19 +159,45 @@ begin
   OwnerNewObject.Image_Object.ImageIndex := Ord(ileADUser);
   OwnerNewObject.CallBack := @Load;
 
-  TisSearchEdit_UserLogonDomain.Items.Add('@' + DNToCN((TheOwner as TVisNewObject).Ldap.DefaultDN));
+  ComboBox1.Items.Add('@' + DNToCN((TheOwner as TVisNewObject).Ldap.DefaultDN));
   if (TheOwner as TVisNewObject).Ldap.DefaultDN <> (TheOwner as TVisNewObject).Ldap.RootDN then
-    TisSearchEdit_UserLogonDomain.Items.Add('@' + DNToCN((TheOwner as TVisNewObject).Ldap.RootDN));
+    ComboBox1.Items.Add('@' + DNToCN((TheOwner as TVisNewObject).Ldap.RootDN));
 
-  TisSearchEdit_UserLogonDomain.ItemIndex := 0;
+  ComboBox1.ItemIndex := 0;
   Edit_nETBIOSDomain.Caption := (TheOwner as TVisNewObject).Ldap.NetbiosDN + '\';
 
   SearchObject := (TheOwner as TVisNewObject).Ldap.SearchObject(FormatUtf8('CN=Partitions,%', [(TheOwner as TVisNewObject).Ldap.ConfigDN]), '', ['uPNSuffixes']);
   if Assigned(SearchObject) then
   begin
     for Item in SearchObject.Find('uPNSuffixes').GetAllReadable do
-      TisSearchEdit_UserLogonDomain.Items.Add('@' + Item);
+      ComboBox1.Items.Add('@' + Item);
   end;
+end;
+
+procedure TFrmNewUser.Copy(const DistinguishedName: RawUtf8);
+var
+  UserPrincipalName, PwdLastSet: RawUtf8;
+  UAC: TUserAccountControls;
+  Idx: SizeInt;
+  suffix: String;
+  Obj: TLdapResult;
+begin
+  Obj := (Owner as TVisNewObject).Ldap.SearchObject(DistinguishedName, '', ['*']);
+  if not Assigned(Obj) then
+    Exit;
+
+  BaseObj := TLdapAttributeList(Obj.Attributes.Clone);
+  UserPrincipalName := Obj.Find('userPrincipalName').GetReadable();
+  UAC := UserAccountControlsFromText(Obj.Find('userAccountControl').GetReadable());
+  PwdLastSet := Obj.Find('pwdLastSet').GetReadable();
+
+  Idx := Pos('@', UserPrincipalName);
+  suffix := String(UserPrincipalName).Substring(Idx - 1);
+  ComboBox1.Caption := suffix;
+  CheckBox_AccountDisabled.Checked := (uacAccountDisable in UAC);
+  CheckBox_CannotChangePassword.Checked := (uacPasswordCannotChange in UAC);
+  CheckBox_MustChangePassword.Checked := PwdLastSet = '0';
+  CheckBox_PasswordNeverExpires.Checked := (uacPasswordDoNotExpire in UAC);
 end;
 
 { TFrmNewUser - public }

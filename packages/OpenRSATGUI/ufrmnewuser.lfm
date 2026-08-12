@@ -7,6 +7,7 @@ object FrmNewUser: TFrmNewUser
   ClientWidth = 424
   Constraints.MaxHeight = 232
   Constraints.MinHeight = 232
+  LCLVersion = '4.5.0.0'
   TabOrder = 0
   DesignLeft = 3114
   DesignTop = 538
@@ -160,24 +161,6 @@ object FrmNewUser: TFrmNewUser
       TabOrder = 4
       OnChange = Edit_UserLogonChange
     end
-    object TisSearchEdit_UserLogonDomain: TTisSearchEdit
-      AnchorSideLeft.Control = Edit_UserLogon
-      AnchorSideLeft.Side = asrBottom
-      AnchorSideTop.Control = Label_UserLogon
-      AnchorSideTop.Side = asrBottom
-      AnchorSideRight.Control = Panel_Page0
-      AnchorSideRight.Side = asrBottom
-      Left = 224
-      Height = 23
-      Top = 126
-      Width = 184
-      Anchors = [akTop, akLeft, akRight]
-      BorderSpacing.Left = 8
-      BorderSpacing.Right = 16
-      ItemHeight = 15
-      TabOrder = 5
-      Buttons = <>
-    end
     object Label_WinUserLogonName: TLabel
       AnchorSideLeft.Control = Panel_Page0
       AnchorSideTop.Control = Edit_UserLogon
@@ -201,7 +184,7 @@ object FrmNewUser: TFrmNewUser
       Width = 200
       BorderSpacing.Left = 16
       ReadOnly = True
-      TabOrder = 6
+      TabOrder = 5
     end
     object Edit_nETBIOSName: TEdit
       AnchorSideLeft.Control = Edit_nETBIOSDomain
@@ -218,7 +201,25 @@ object FrmNewUser: TFrmNewUser
       BorderSpacing.Left = 8
       BorderSpacing.Right = 16
       MaxLength = 20
+      TabOrder = 6
+    end
+    object ComboBox1: TComboBox
+      AnchorSideLeft.Control = Edit_UserLogon
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideTop.Control = Label_UserLogon
+      AnchorSideTop.Side = asrBottom
+      AnchorSideRight.Control = Panel_Page0
+      AnchorSideRight.Side = asrBottom
+      Left = 224
+      Height = 23
+      Top = 126
+      Width = 184
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      BorderSpacing.Right = 16
+      ItemHeight = 15
       TabOrder = 7
+      Text = 'ComboBox1'
     end
   end
   object Panel_Page1: TPanel

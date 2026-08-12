@@ -257,10 +257,8 @@ procedure TFrmModuleADSI.Action_NewObjectExecute(Sender: TObject);
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotNone, LdapClient.DefaultDN, LdapClient.DefaultDN);
-
+  vis := TVisNewObject.Create(Self, vnotNone, LdapClient.DefaultDN, LdapClient.DefaultDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
   finally
     FreeAndNil(vis);

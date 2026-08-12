@@ -1,7 +1,7 @@
 object VisNewObject: TVisNewObject
-  Left = 2325
+  Left = 2522
   Height = 353
-  Top = 462
+  Top = 476
   Width = 424
   AutoSize = True
   ClientHeight = 353
@@ -10,7 +10,7 @@ object VisNewObject: TVisNewObject
   Constraints.MinWidth = 424
   KeyPreview = True
   Position = poOwnerFormCenter
-  LCLVersion = '4.6.0.0'
+  LCLVersion = '4.5.0.0'
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   object Panel_Header: TPanel

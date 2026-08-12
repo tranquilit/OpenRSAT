@@ -58,20 +58,24 @@ type
     procedure FormShow(Sender: TObject);
   private
     fBaseDN: RawUtf8;
-    Frame: TFrame;
+    fFrame: TFrame;
     fNewObjectType: TVisNewObjectType;
     fObjectOU: RawUtf8;
+    fLdap: TRsatLdapClient;
 
     // Create the custom frame based on fNewObjectType.
     procedure ConstructFrame;
+    procedure ShowFrame;
   public
     PageIdx, PageCount: Integer;
-    Ldap: TRsatLdapClient;
 
     CallBack: procedure of Object;
-    constructor Create(TheOwner: TComponent; NewObjectType: TVisNewObjectType; OU, BaseDN: RawUtf8); reintroduce;
+    constructor Create(TheOwner: TComponent; NewObjectType: TVisNewObjectType; OU,
+      BaseDN: RawUtf8; Ldap: TRsatLdapClient); reintroduce;
     property ObjectOU: RawUtf8 read fObjectOU write fObjectOU;
     property BaseDN: RawUtf8 read fBaseDN write fBaseDN;
+    property Frame: TFrame read fFrame;
+    property Ldap: TRsatLdapClient read fLdap;
   end;
 
 implementation
@@ -106,7 +110,7 @@ uses
 
 procedure TVisNewObject.FormShow(Sender: TObject);
 begin
-  ConstructFrame;
+  ShowFrame;
 
   UnifyButtonsWidth([Btn_Back, Btn_Next, Btn_Cancel]);
 end;
@@ -122,31 +126,35 @@ end;
 procedure TVisNewObject.ConstructFrame;
 begin
   case fNewObjectType of
-    vnotNone: Frame := TFrmNewObject.Create(Self, Ldap);
-    vnotComputer: Frame := TFrmNewComputer.Create(Self);
-    vnotContact: Frame := TFrmNewContact.Create(Self);
-    vnotGroup: Frame := TFrmNewGroup.Create(Self);
-    vnotInetOrgPerson: Frame := TFrmNewInetOrgPerson.Create(Self);
-    vnotMsDNSServerSettings: Frame := TFrmNewMsDNSServerSettings.Create(Self);
-    vnotMsDSKeyCredential: Frame := TFrmNewMsDSKeyCredential.Create(Self);
-    vnotMsDSResourcePropertyList: Frame := TFrmNewMsDSResourcePropertyList.Create(Self);
-    vnotMsDSShadowPrincipalContainer: Frame := TFrmNewMsDSShadowPrincipalContainer.Create(Self);
-    vnotMsImagingPSPs: Frame := TFrmNewMsImagingPSPs.Create(Self); 
-    vnotOrganizationalUnit: Frame := TFrmNewOU.Create(Self);
-    vnotUser: Frame := TFrmNewUser.Create(Self);
-    vnotVolume: Frame := TFrmNewSharedFolder.Create(Self);
-    vnotSite: Frame := TFrmNewSite.Create(Self, Ldap);
-    vnotSubnet: Frame := TFrmNewSubnet.Create(Self, Ldap);
-    vnotSharedFolder: Frame := TFrmNewSharedFolder.Create(Self);
-    vnotPrinter: Frame := TFrmNewPrinter.Create(Self);
-    vnotServer: Frame := TFrmNewServer.Create(Self, Ldap);
-    vnotSiteLink: Frame := TFrmNewSiteLink.Create(Self, Ldap, fObjectOU);
-    vnotSiteLinkBridge: Frame := TFrmNewSiteLinkBridge.Create(Self, Ldap, fObjectOU);
+    vnotNone: fFrame := TFrmNewObject.Create(Self, Ldap);
+    vnotComputer: fFrame := TFrmNewComputer.Create(Self);
+    vnotContact: fFrame := TFrmNewContact.Create(Self);
+    vnotGroup: fFrame := TFrmNewGroup.Create(Self);
+    vnotInetOrgPerson: fFrame := TFrmNewInetOrgPerson.Create(Self);
+    vnotMsDNSServerSettings: fFrame := TFrmNewMsDNSServerSettings.Create(Self);
+    vnotMsDSKeyCredential: fFrame := TFrmNewMsDSKeyCredential.Create(Self);
+    vnotMsDSResourcePropertyList: fFrame := TFrmNewMsDSResourcePropertyList.Create(Self);
+    vnotMsDSShadowPrincipalContainer: fFrame := TFrmNewMsDSShadowPrincipalContainer.Create(Self);
+    vnotMsImagingPSPs: fFrame := TFrmNewMsImagingPSPs.Create(Self);
+    vnotOrganizationalUnit: fFrame := TFrmNewOU.Create(Self);
+    vnotUser: fFrame := TFrmNewUser.Create(Self);
+    vnotVolume: fFrame := TFrmNewSharedFolder.Create(Self);
+    vnotSite: fFrame := TFrmNewSite.Create(Self, Ldap);
+    vnotSubnet: fFrame := TFrmNewSubnet.Create(Self, Ldap);
+    vnotSharedFolder: fFrame := TFrmNewSharedFolder.Create(Self);
+    vnotPrinter: fFrame := TFrmNewPrinter.Create(Self);
+    vnotServer: fFrame := TFrmNewServer.Create(Self, Ldap);
+    vnotSiteLink: fFrame := TFrmNewSiteLink.Create(Self, Ldap, fObjectOU);
+    vnotSiteLinkBridge: fFrame := TFrmNewSiteLinkBridge.Create(Self, Ldap, fObjectOU);
     else
     begin
       Close;
     end;
   end;
+end;
+
+procedure TVisNewObject.ShowFrame;
+begin
   Frame.Parent := Panel_Frame;
   Frame.Align := alClient;
   if Assigned(CallBack) then
@@ -154,7 +162,7 @@ begin
 end;
 
 constructor TVisNewObject.Create(TheOwner: TComponent;
-  NewObjectType: TVisNewObjectType; OU, BaseDN: RawUtf8);
+  NewObjectType: TVisNewObjectType; OU, BaseDN: RawUtf8; Ldap: TRsatLdapClient);
 begin
   inherited Create(TheOwner);
 
@@ -164,6 +172,8 @@ begin
 
   Edit_DN.Text := DNToCN(ObjectOU);
   PageIdx := 0;
+  fLdap := Ldap;
+  ConstructFrame;
 end;
 
 end.

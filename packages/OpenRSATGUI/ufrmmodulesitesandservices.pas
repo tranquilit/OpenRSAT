@@ -476,9 +476,8 @@ procedure TFrmModuleSitesAndServices.Action_NewSiteExecute(Sender: TObject);
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotSite, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotSite, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -491,9 +490,8 @@ procedure TFrmModuleSitesAndServices.Action_NewSiteLinkBridgeExecute(
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotSiteLinkBridge, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotSiteLinkBridge, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -511,9 +509,8 @@ procedure TFrmModuleSitesAndServices.Action_NewSiteLinkExecute(Sender: TObject);
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotSiteLink, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotSiteLink, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -747,9 +744,8 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewComputer.Caption]);
 
-  vis := TVisNewObject.Create(Self, vnotComputer, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotComputer, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -769,9 +765,8 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewContact.Caption]);
 
-  vis := TVisNewObject.Create(Self, vnotContact, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotContact, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -791,9 +786,8 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewGroup.Caption]);
 
-  vis := TVisNewObject.Create(Self, vnotGroup, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotGroup, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -810,9 +804,8 @@ procedure TFrmModuleSitesAndServices.Action_NewInetOrgPersonExecute(Sender: TObj
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotInetOrgPerson, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotInetOrgPerson, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -831,9 +824,8 @@ procedure TFrmModuleSitesAndServices.Action_NewMsDNSServerSettingsExecute(Sender
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotMsDNSServerSettings, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotMsDNSServerSettings, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -851,9 +843,8 @@ procedure TFrmModuleSitesAndServices.Action_NewMsDSKeyCredentialExecute(Sender: 
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotMsDSKeyCredential, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotMsDSKeyCredential, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -871,9 +862,8 @@ procedure TFrmModuleSitesAndServices.Action_NewMsDSShadowPrincipalContainerExecu
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotMsDSShadowPrincipalContainer, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotMsDSShadowPrincipalContainer, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -890,9 +880,8 @@ procedure TFrmModuleSitesAndServices.Action_NewMsImagingPSPsExecute(Sender: TObj
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotMsImagingPSPs, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotMsImagingPSPs, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -909,9 +898,8 @@ procedure TFrmModuleSitesAndServices.Action_NewPrinterExecute(Sender: TObject);
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotPrinter, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotPrinter, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -928,9 +916,8 @@ procedure TFrmModuleSitesAndServices.Action_NewServerExecute(Sender: TObject);
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotServer, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotServer, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -947,9 +934,8 @@ procedure TFrmModuleSitesAndServices.Action_NewSharedFolderExecute(Sender: TObje
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotSharedFolder, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotSharedFolder, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -972,9 +958,8 @@ procedure TFrmModuleSitesAndServices.Action_NewSubnetExecute(Sender: TObject);
 var
   vis: TVisNewObject;
 begin
-  vis := TVisNewObject.Create(Self, vnotSubnet, GetFocusedObject(True), LdapClient.ConfigDN);
+  vis := TVisNewObject.Create(Self, vnotSubnet, GetFocusedObject(True), LdapClient.ConfigDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
@@ -994,9 +979,8 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
 
-  vis := TVisNewObject.Create(Self, vnotUser, GetFocusedObject(True), LdapClient.DefaultDN);
+  vis := TVisNewObject.Create(Self, vnotUser, GetFocusedObject(True), LdapClient.DefaultDN, LdapClient);
   try
-    vis.Ldap := LdapClient;
     vis.ShowModal;
     Action_RefreshExecute(nil);
   finally
