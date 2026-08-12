@@ -423,6 +423,7 @@ uses
   uvismodifygplink,
   ucommon,
   ucommonui,
+  ufrmnewuser,
   ursatldapclientui,
   ursatoption,
   uviseditaduccolumns,
@@ -506,9 +507,30 @@ begin
 end;
 
 procedure TFrmModuleADUC.Action_CopyExecute(Sender: TObject);
+var
+  Vis: TVisNewObject;
+  User: RawUtf8;
+  UserRes: TLdapResult;
+  Attr: TLdapAttribute;
 begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_Copy.Name]);
+
+  User := GetFocusedObject();
+
+  UserRes := LdapClient.SearchObject(User, '', ['objectClass']);
+  Attr := UserRes.Find('objectClass');
+  if not (Attr.GetReadable(Attr.Count - 1) = 'user') then
+    Exit;
+  Vis := TVisNewObject.Create(Self, vnotUser, GetParentDN(User), LdapClient.DefaultDN, LdapClient);
+  try
+    Vis.PageCount := 3;
+    (Vis.Frame as TFrmNewUser).Copy(User);
+    if Vis.ShowModal = mrOK then
+      Action_Refresh.Execute;
+  finally
+    FreeAndNil(Vis);
+  end;
 end;
 
 procedure TFrmModuleADUC.Action_ChangeDomainControllerUpdate(Sender: TObject);
@@ -975,10 +997,9 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewComputer.Caption]);
 
-  With TVisNewObject.Create(Self, vnotComputer, GetFocusedObject(True), LdapClient.DefaultDN) do
+  With TVisNewObject.Create(Self, vnotComputer, GetFocusedObject(True), LdapClient.DefaultDN, LdapClient) do
   begin
     PageCount := 1;
-    Ldap := LdapClient;
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;
@@ -994,10 +1015,9 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewContact.Caption]);
 
-  With TVisNewObject.Create(Self, vnotContact, GetFocusedObject(True), LdapClient.DefaultDN) do
+  With TVisNewObject.Create(Self, vnotContact, GetFocusedObject(True), LdapClient.DefaultDN, LdapClient) do
   begin
     PageCount := 1;
-    Ldap := LdapClient;
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;
@@ -1013,10 +1033,9 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewGroup.Caption]);
 
-  With TVisNewObject.Create(Self, vnotGroup, GetFocusedObject(True), LdapClient.DefaultDN) do
+  With TVisNewObject.Create(Self, vnotGroup, GetFocusedObject(True), LdapClient.DefaultDN, LdapClient) do
   begin
     PageCount := 1;
-    Ldap := LdapClient;
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;
@@ -1032,10 +1051,9 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewInetOrgPerson.Caption]);
 
-  With TVisNewObject.Create(Self, vnotInetOrgPerson, GetFocusedObject(True), LdapClient.DefaultDN) do
+  With TVisNewObject.Create(Self, vnotInetOrgPerson, GetFocusedObject(True), LdapClient.DefaultDN, LdapClient) do
   begin
     PageCount := 1;
-    Ldap := LdapClient;
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;
@@ -1051,10 +1069,9 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewMsDSKeyCredential.Caption]);
 
-  With TVisNewObject.Create(Self, vnotMsDSKeyCredential, GetFocusedObject(True), LdapClient.DefaultDN) do
+  With TVisNewObject.Create(Self, vnotMsDSKeyCredential, GetFocusedObject(True), LdapClient.DefaultDN, LdapClient) do
   begin
     PageCount := 1;
-    Ldap := LdapClient;
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;
@@ -1071,10 +1088,9 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewMsDSShadowPrincipalContainer.Caption]);
 
-  With TVisNewObject.Create(Self, vnotMsDSShadowPrincipalContainer, GetFocusedObject(True), LdapClient.DefaultDN) do
+  With TVisNewObject.Create(Self, vnotMsDSShadowPrincipalContainer, GetFocusedObject(True), LdapClient.DefaultDN, LdapClient) do
   begin
     PageCount := 1;
-    Ldap := LdapClient;
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;
@@ -1091,10 +1107,9 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewMsImagingPSPs.Caption]);
 
-  With TVisNewObject.Create(Self, vnotMsImagingPSPs, GetFocusedObject(True), LdapClient.DefaultDN) do
+  With TVisNewObject.Create(Self, vnotMsImagingPSPs, GetFocusedObject(True), LdapClient.DefaultDN, LdapClient) do
   begin
     PageCount := 1;
-    Ldap := LdapClient;
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;
@@ -1110,10 +1125,9 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewOU.Caption]);
 
-  With TVisNewObject.Create(Self, vnotOrganizationalUnit, GetFocusedObject(True), LdapClient.DefaultDN()) do
+  With TVisNewObject.Create(Self, vnotOrganizationalUnit, GetFocusedObject(True), LdapClient.DefaultDN(), LdapClient) do
   begin
     PageCount := 1;
-    Ldap := LdapClient;
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;
@@ -1129,10 +1143,9 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
 
-  With TVisNewObject.Create(Self, vnotPrinter, GetFocusedObject(True), LdapClient.DefaultDN) do
+  With TVisNewObject.Create(Self, vnotPrinter, GetFocusedObject(True), LdapClient.DefaultDN, LdapClient) do
   begin
     PageCount := 1;
-    Ldap := LdapClient;
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;
@@ -1148,10 +1161,9 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
 
-  With TVisNewObject.Create(Self, vnotMsDSResourcePropertyList, GetFocusedObject(True), LdapClient.DefaultDN) do
+  With TVisNewObject.Create(Self, vnotMsDSResourcePropertyList, GetFocusedObject(True), LdapClient.DefaultDN, LdapClient) do
   begin
     PageCount := 1;
-    Ldap := LdapClient;
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;
@@ -1167,10 +1179,9 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
 
-  With TVisNewObject.Create(Self, vnotSharedFolder, GetFocusedObject(True), LdapClient.DefaultDN) do
+  With TVisNewObject.Create(Self, vnotSharedFolder, GetFocusedObject(True), LdapClient.DefaultDN, LdapClient) do
   begin
     PageCount := 3;
-    Ldap := LdapClient;
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;
@@ -1186,10 +1197,9 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
 
-  With TVisNewObject.Create(Self, vnotUser, GetFocusedObject(True), LdapClient.DefaultDN) do
+  With TVisNewObject.Create(Self, vnotUser, GetFocusedObject(True), LdapClient.DefaultDN, LdapClient) do
   begin
     PageCount := 3;
-    Ldap := LdapClient;
     if ShowModal = mrOK then
       Action_Refresh.Execute;
   end;

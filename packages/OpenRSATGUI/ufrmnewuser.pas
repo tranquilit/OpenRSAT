@@ -13,14 +13,15 @@ uses
   Graphics,
   StdCtrls,
   // Submodules
-  mormot.core.base,
-  tis.ui.searchedit;
+  mormot.net.ldap,
+  mormot.core.base;
 
 type
 
   { TFrmNewUser }
 
   TFrmNewUser = class(TFrame)
+    ComboBox1: TComboBox;
 
     Panel_Page0: TPanel;
       Label_FirstName: TLabel;
@@ -33,7 +34,6 @@ type
       Edit_FullName: TEdit;
       Label_UserLogon: TLabel;
       Edit_UserLogon: TEdit;
-      TisSearchEdit_UserLogonDomain: TTisSearchEdit;
       Label_WinUserLogonName: TLabel;
       Edit_nETBIOSDomain: TEdit;
       Edit_nETBIOSName: TEdit;
@@ -62,10 +62,14 @@ type
     procedure Edit_PasswordChange(Sender: TObject);
     procedure Edit_UserLogonChange(Sender: TObject);
   private
+    BaseObj: TLdapAttributeList;
+
     procedure OKBtn();
     procedure Load;
   public
     constructor Create(TheOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure Copy(const DistinguishedName: RawUtf8);
   end;
 
 implementation
@@ -77,7 +81,6 @@ uses
   // Submodules
   mormot.core.text,
   mormot.core.os.security,
-  mormot.net.ldap,
   // Rsat
   ucommon,
   ucoredatamodule,
@@ -91,9 +94,32 @@ uses
 procedure TFrmNewUser.OKBtn();
 var
   Ldap: TLdapClient;
-  NewUser: TLdapAttributeList;
   DN: String;
-  ObjectOU: RawUtf8;
+  ObjectOU, MemberOf: RawUtf8;
+  NewUser: TLdapAttributeList;
+  MemberOfAttr: TLdapAttribute;
+
+  procedure CopyAttribute(Src, Dest: TLdapAttributeList; const AttributeName: RawUtf8);
+  var
+    A, B: TLdapAttribute;
+    i: Integer;
+  begin
+    A := Src.Find(AttributeName);
+    if not Assigned(A) then
+      Exit;
+
+    B := Dest.Add(AttributeName);
+    B.AddFrom(A);
+  end;
+
+  procedure CopyAttributes(Src, Dest: TLdapAttributeList; const AttributeNames: TRawUtf8DynArray);
+  var
+    i: Integer;
+  begin
+    for i := 0 to High(AttributeNames) do
+      CopyAttribute(Src, Dest, AttributeNames[i]);
+  end;
+
 begin
   Ldap := (Owner as TVisNewObject).Ldap;
   ObjectOU := (Owner as TVisNewObject).ObjectOU;
@@ -105,9 +131,28 @@ begin
     Edit_FullName.Text,
     Edit_Initials.Text,
     Edit_nETBIOSName.Text,
-    FormatUtf8('%%', [Edit_UserLogon.Text, TisSearchEdit_UserLogonDomain.Text])
+    FormatUtf8('%%', [Edit_UserLogon.Text, ComboBox1.Text])
   );
+
   try
+    if Assigned(BaseObj) then
+    begin
+      CopyAttributes(BaseObj, NewUser, [
+        'c',
+        'l',
+        'st',
+        'postalCode',
+        'postOfficeBox',
+        'co',
+        'department',
+        'company',
+        'codePage',
+        'countryCode',
+        'logonHours',
+        'accountExpires',
+        'userAccountControl']);
+    end;
+
     ChangePassword(NewUser, Edit_Password.Text);
     MustChangePassword(NewUser, CheckBox_MustChangePassword.Checked);
     PasswordNeverExpires(NewUser, CheckBox_PasswordNeverExpires.Checked);
@@ -116,6 +161,20 @@ begin
     DN := FormatUtf8('CN=%,%', [Edit_FullName.Text, ObjectOU]);
     if not Ldap.Add(DN, NewUser) then
       Exit;
+    if Assigned(BaseObj) then
+    begin
+      MemberOfAttr := BaseObj.Find('memberOf');
+      if Assigned(MemberOfAttr) then
+      begin
+        for MemberOf in MemberOfAttr.GetAllReadable do
+        begin
+          if MemberOf = '' then
+            Continue;
+          if not Ldap.Modify(MemberOf, lmoAdd, 'member', DN) then
+            Exit;
+        end;
+      end;
+    end;
   finally
     FreeAndNil(NewUser);
   end;
@@ -139,6 +198,8 @@ var
 begin
   inherited Create(TheOwner);
 
+  BaseObj := nil;
+
   OwnerNewObject.Caption := rsNewObjectUser;
   OwnerNewObject.Btn_Next.Action := ActionList.ActionByName('Action_Next');
   OwnerNewObject.Btn_Next.Default := True;
@@ -148,19 +209,52 @@ begin
   OwnerNewObject.Image_Object.ImageIndex := Ord(ileADUser);
   OwnerNewObject.CallBack := @Load;
 
-  TisSearchEdit_UserLogonDomain.Items.Add('@' + DNToCN((TheOwner as TVisNewObject).Ldap.DefaultDN));
+  ComboBox1.Items.Add('@' + DNToCN((TheOwner as TVisNewObject).Ldap.DefaultDN));
   if (TheOwner as TVisNewObject).Ldap.DefaultDN <> (TheOwner as TVisNewObject).Ldap.RootDN then
-    TisSearchEdit_UserLogonDomain.Items.Add('@' + DNToCN((TheOwner as TVisNewObject).Ldap.RootDN));
+    ComboBox1.Items.Add('@' + DNToCN((TheOwner as TVisNewObject).Ldap.RootDN));
 
-  TisSearchEdit_UserLogonDomain.ItemIndex := 0;
+  ComboBox1.ItemIndex := 0;
   Edit_nETBIOSDomain.Caption := (TheOwner as TVisNewObject).Ldap.NetbiosDN + '\';
 
   SearchObject := (TheOwner as TVisNewObject).Ldap.SearchObject(FormatUtf8('CN=Partitions,%', [(TheOwner as TVisNewObject).Ldap.ConfigDN]), '', ['uPNSuffixes']);
   if Assigned(SearchObject) then
   begin
     for Item in SearchObject.Find('uPNSuffixes').GetAllReadable do
-      TisSearchEdit_UserLogonDomain.Items.Add('@' + Item);
+      ComboBox1.Items.Add('@' + Item);
   end;
+end;
+
+destructor TFrmNewUser.Destroy;
+begin
+  if Assigned(BaseObj) then
+    FreeAndNil(BaseObj);
+  inherited Destroy;
+end;
+
+procedure TFrmNewUser.Copy(const DistinguishedName: RawUtf8);
+var
+  UserPrincipalName, PwdLastSet: RawUtf8;
+  UAC: TUserAccountControls;
+  Idx: SizeInt;
+  suffix: String;
+  Obj: TLdapResult;
+begin
+  Obj := (Owner as TVisNewObject).Ldap.SearchObject(DistinguishedName, '', ['*']);
+  if not Assigned(Obj) then
+    Exit;
+
+  BaseObj := TLdapAttributeList(Obj.Attributes.Clone);
+  UserPrincipalName := Obj.Find('userPrincipalName').GetReadable();
+  UAC := UserAccountControlsFromText(Obj.Find('userAccountControl').GetReadable());
+  PwdLastSet := Obj.Find('pwdLastSet').GetReadable();
+
+  Idx := Pos('@', UserPrincipalName);
+  suffix := String(UserPrincipalName).Substring(Idx - 1);
+  ComboBox1.Caption := suffix;
+  CheckBox_AccountDisabled.Checked := (uacAccountDisable in UAC);
+  CheckBox_CannotChangePassword.Checked := (uacPasswordCannotChange in UAC);
+  CheckBox_MustChangePassword.Checked := PwdLastSet = '0';
+  CheckBox_PasswordNeverExpires.Checked := (uacPasswordDoNotExpire in UAC);
 end;
 
 { TFrmNewUser - public }
