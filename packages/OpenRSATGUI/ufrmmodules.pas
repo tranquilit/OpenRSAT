@@ -35,6 +35,7 @@ type
     function Refresh: Boolean;
     function RefreshAll: Boolean;
     property Items: TFrameModuleDynArray read fFrmModules;
+    property ActiveModule: TFrameModule read fActiveModule;
   end;
 
 implementation
@@ -45,8 +46,10 @@ function TFrmModules.InternalRefresh(AModule: TFrameModule): Boolean;
 begin
   result := False;
   if Assigned(AModule) then
+  begin
     AModule.Refresh;
-  result := True;
+    result := True;
+  end;
 end;
 
 constructor TFrmModules.Create;

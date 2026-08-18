@@ -25,9 +25,6 @@ type
     destructor Destroy; override;
 
     property ADSIOption: TModuleADSIOption read GetADSIOption;
-    /// TModule
-  protected
-    procedure SetEnabled(AValue: Boolean); override;
   end;
 
 implementation
@@ -46,7 +43,6 @@ begin
   inherited Create('ServicesAndInterfaces', rsModuleADSIDisplayName);
 
   fRSAT := ARSAT;
-  fEnabled := True;
   fOption := TModuleADSIOption.Create;
 end;
 
@@ -55,13 +51,6 @@ begin
   FreeAndNil(fOption);
 
   inherited Destroy;
-end;
-
-procedure TModuleADSI.SetEnabled(AValue: Boolean);
-begin
-  if AValue = fEnabled then
-    Exit;
-  fEnabled := AValue;
 end;
 
 end.

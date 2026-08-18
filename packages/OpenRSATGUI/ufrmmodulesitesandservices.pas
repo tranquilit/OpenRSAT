@@ -40,6 +40,8 @@ type
 
   { TSSNode }
 
+  { TADSSTreeNode }
+
   TADSSTreeNode = class(TTreeNode)
   private
     fAttributes: TLdapAttributeList;
@@ -50,6 +52,7 @@ type
     procedure SetDistinguishedName(AValue: String);
     procedure SetObjectTypes(AValue: TRawUtf8DynArray);
   public
+    constructor Create(AnOwner: TTreeNodes); override;
     destructor Destroy; override;
   published
     property DistinguishedName: String read GetDistinguishedName write SetDistinguishedName;
@@ -244,7 +247,7 @@ type
     function CustomSortSitesNode(Node1, Node2: TTreeNode): integer;
     function CustomSortSubnetsNode(Node1, Node2: TTreeNode): integer;
   public
-    constructor Create(Context: IOpenRSATUIContext);
+    constructor Create(Context: IOpenRSATUIContext); reintroduce;
     destructor Destroy; override;
 
     property LdapClient: TRsatLdapClient read GetLdapClient;
@@ -404,6 +407,13 @@ begin
     Attribute.Add(AV);
 end;
 
+constructor TADSSTreeNode.Create(AnOwner: TTreeNodes);
+begin
+  inherited Create(AnOwner);
+
+  fAttributes := nil;
+end;
+
 destructor TADSSTreeNode.Destroy;
 begin
   inherited Destroy;
@@ -413,20 +423,8 @@ end;
 { TFrmModuleSitesAndServices }
 
 procedure TFrmModuleSitesAndServices.Action_RefreshExecute(Sender: TObject);
-var
-  c: TCursor;
 begin
-  if Assigned(fLog) then
-    fLog.Add.Log(sllTrace, '% - Execute', [Action_Refresh.Name]);
-
-  c := Screen.Cursor;
-  Screen.Cursor := crHourGlass;
-  try
-    RefreshLdapNode();
-    UpdateGrid(nil);
-  finally
-    Screen.Cursor := c;
-  end;
+  Refresh;
 end;
 
 procedure TFrmModuleSitesAndServices.Action_RefreshUpdate(Sender: TObject);
@@ -1714,62 +1712,17 @@ begin
 end;
 
 procedure TFrmModuleSitesAndServices.LdapConnectEvent(Sender: TObject);
-var
-  SearchResult: TLdapResult;
-  Filter, cn: RawUtf8;
-  BackupCursor: TCursor;
-  Ldap: TRsatLdapClient;
 begin
-  Ldap := (Sender as TRSATLdapClient);
-  TreeView1.Items.Clear;
-  TreeView1.ShowRoot := False;
-  fADSSRootNode := (TreeView1.Items.Add(nil, 'Active Directory Sites and Services') as TADSSTreeNode);
-  fADSSRootNode.ImageIndex := Ord(ileADSiteTool);
-  fADSSRootNode.SelectedIndex := fADSSRootNode.ImageIndex;
-
-  fADSSSiteNode := (TreeView1.Items.AddChild(fADSSRootNode, 'Sites') as TADSSTreeNode);
-  fADSSSiteNode.HasChildren := True;
-  fADSSServiceNode := (TreeView1.Items.AddChild(fADSSRootNode, 'Services') as TADSSTreeNode);
-  fADSSServiceNode.HasChildren := True;
-  fADSSServiceNode.Visible := fModule.ShowService;
-
-  Ldap.SearchBegin();
-  BeginUpdate;
-  try
-    BackupCursor := Screen.Cursor;
-    Screen.Cursor := crHourGlass;
-
-    Ldap.SearchScope := lssSingleLevel;
-
-    Filter := '(|(cn=Sites)(cn=Services))';
-    repeat
-      if not Ldap.Search(Ldap.ConfigDN, False, Filter, ['*']) then
-        Exit;
-      for SearchResult in Ldap.SearchResult.Items do
-      begin
-        if not Assigned(SearchResult) then
-          continue;
-
-        cn := SearchResult.Find('cn').GetReadable();
-
-        if (cn = fADSSServiceNode.Text) then
-          fADSSServiceNode.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone)
-        else if (cn = fADSSSiteNode.Text) then
-          fADSSSiteNode.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone);
-      end;
-    until Ldap.SearchCookie = '';
-  finally
-    EndUpdate;
-    Ldap.SearchEnd;
-    Screen.Cursor := BackupCursor;
-  end;
-  fADSSSiteNode.Expand(False);
-  fADSSRootNode.Expand(False);
+  fModule.NeedRefresh := True;
 end;
 
 procedure TFrmModuleSitesAndServices.LdapCloseEvent(Sender: TObject);
 begin
-  TreeView1.Items.Clear;
+  fADSSServiceNode.DeleteChildren;
+  fADSSSiteNode.DeleteChildren;
+  FreeAndNil(fADSSServiceNode.fAttributes);
+  FreeAndNil(fADSSSiteNode.fAttributes);
+
   TisGrid1.Clear;
 end;
 
@@ -1844,6 +1797,17 @@ begin
 
   Image1.Visible := not IsDarkMode;
   Image2.Visible := not Image1.Visible;
+
+  fADSSRootNode := (TreeView1.Items.Add(nil, 'Active Directory Sites and Services') as TADSSTreeNode);
+  fADSSRootNode.ImageIndex := Ord(ileADSiteTool);
+  fADSSRootNode.SelectedIndex := fADSSRootNode.ImageIndex;
+
+  fADSSSiteNode := (TreeView1.Items.AddChild(fADSSRootNode, 'Sites') as TADSSTreeNode);
+  fADSSSiteNode.HasChildren := True;
+  fADSSServiceNode := (TreeView1.Items.AddChild(fADSSRootNode, 'Services') as TADSSTreeNode);
+  fADSSServiceNode.HasChildren := True;
+  fADSSServiceNode.Visible := fModule.ShowService;
+  fADSSRootNode.Expand(False);
 end;
 
 destructor TFrmModuleSitesAndServices.Destroy;
@@ -1854,8 +1818,60 @@ begin
 end;
 
 procedure TFrmModuleSitesAndServices.Refresh;
+var
+  c: TCursor;
+  SearchResult: TLdapResult;
+  Filter, cn: RawUtf8;
+  BackupCursor: TCursor;
 begin
-  Action_Refresh.Execute;
+  if Assigned(fLog) then
+    fLog.Add.Log(sllTrace, 'Refresh');
+
+  if not Assigned(fADSSServiceNode.fAttributes) or not Assigned(fADSSSiteNode.fAttributes) then
+  begin
+    LdapClient.SearchBegin();
+    BeginUpdate;
+    try
+      BackupCursor := Screen.Cursor;
+      Screen.Cursor := crHourGlass;
+
+      LdapClient.SearchScope := lssSingleLevel;
+
+      Filter := '(|(cn=Sites)(cn=Services))';
+      repeat
+        if not LdapClient.Search(LdapClient.ConfigDN, False, Filter, ['*']) then
+          Exit;
+        for SearchResult in LdapClient.SearchResult.Items do
+        begin
+          if not Assigned(SearchResult) then
+            continue;
+
+          cn := SearchResult.Find('cn').GetReadable();
+
+          if (cn = fADSSServiceNode.Text) then
+            fADSSServiceNode.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone)
+          else if (cn = fADSSSiteNode.Text) then
+            fADSSSiteNode.fAttributes := TLdapAttributeList(SearchResult.Attributes.Clone);
+        end;
+      until LdapClient.SearchCookie = '';
+    finally
+      EndUpdate;
+      LdapClient.SearchEnd;
+      Screen.Cursor := BackupCursor;
+    end;
+    fADSSSiteNode.Expand(False);
+    if fADSSServiceNode.Visible then
+      fADSSServiceNode.Expand(False);
+  end;
+
+  c := Screen.Cursor;
+  Screen.Cursor := crHourGlass;
+  try
+    RefreshLdapNode();
+    UpdateGrid(nil);
+  finally
+    Screen.Cursor := c;
+  end;
 end;
 
 procedure TFrmModuleSitesAndServices.Load;

@@ -471,34 +471,13 @@ begin
 end;
 
 procedure TFrmModuleDNS.LdapConnectEvent(Sender: TObject);
-var
-  Ldap: TLdapClient;
 begin
-  Ldap := (Sender as TLdapClient);
-  if Assigned(fForwardLookupZonesNode) then
-    FreeAndNil(fForwardLookupZonesNode);
-  if Assigned(fReverseLookupZonesNode) then
-    FreeAndNil(fReverseLookupZonesNode);
-  if Assigned(fRootNode) then
-    FreeAndNil(fRootNode);
-  fRootNode := (TreeDNS.Items.Add(nil, Ldap.Settings.TargetHost) as TDNSTreeNode);
-
-  fForwardLookupZonesNode := (TreeDNS.Items.AddChild(fRootNode, 'Forward Lookup Zones') as TDNSTreeNode);
-  fForwardLookupZonesNode.NodeType := dtntCustom;
-
-  fReverseLookupZonesNode := (TreeDNS.Items.AddChild(fRootNode, 'Reverse Lookup Zones') as TDNSTreeNode);
-  fReverseLookupZonesNode.NodeType := dtntCustom;
-
-  fRootNode.Expand(False);
-  fRootNode.Selected := True;
-  Refresh;
+  fModule.NeedRefresh := True;
 end;
 
 procedure TFrmModuleDNS.LdapCloseEvent(Sender: TObject);
 begin
-  FreeAndNil(fForwardLookupZonesNode);
-  FreeAndNil(fReverseLookupZonesNode);
-  FreeAndNil(fRootNode);
+  fRootNode.Text := '<EMPTY>';
   GridDNS.Clear;
 end;
 
@@ -515,6 +494,7 @@ end;
 
 procedure TFrmModuleDNS.Action_RefreshExecute(Sender: TObject);
 begin
+  fRootNode.Text := LdapClient.Settings.TargetHost;
   ReloadZones;
   UpdateNode();
 end;
@@ -926,14 +906,19 @@ begin
   fIContext := Context;
   fModule := TModuleADDNS.Create(Context.RSAT);
 
-
-  fRootNode := nil;
-  fForwardLookupZonesNode := nil;
-  fReverseLookupZonesNode := nil;
-
   Image1.Visible := not IsDarkMode;
   Image2.Visible := not Image1.Visible;
 
+  fRootNode := (TreeDNS.Items.Add(nil, '<EMPTY>') as TDNSTreeNode);
+
+  fForwardLookupZonesNode := (TreeDNS.Items.AddChild(fRootNode, 'Forward Lookup Zones') as TDNSTreeNode);
+  fForwardLookupZonesNode.NodeType := dtntCustom;
+
+  fReverseLookupZonesNode := (TreeDNS.Items.AddChild(fRootNode, 'Reverse Lookup Zones') as TDNSTreeNode);
+  fReverseLookupZonesNode.NodeType := dtntCustom;
+
+  fRootNode.Expand(False);
+  fRootNode.Selected := True;
 end;
 
 destructor TFrmModuleDNS.Destroy;

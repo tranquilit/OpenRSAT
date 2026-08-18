@@ -20,6 +20,7 @@ object VisOpenRSAT: TVisOpenRSAT
     Width = 746
     Align = alClient
     TabOrder = 0
+    OnChange = PageControl1Change
   end
   object StatusBar1: TStatusBar
     Left = 0

@@ -182,9 +182,6 @@ type
     property UpdateZoneOnFinished: TThreadUpdateZoneFinished read fUpdateZoneOnFinished write fUpdateZoneOnFinished;
 
     property ADDNSOption: TModuleADDNSOption read GetADDNSOption;
-    /// TModule
-  protected
-    procedure SetEnabled(AValue: Boolean); override;
   end;
 
 implementation
@@ -472,7 +469,6 @@ constructor TModuleADDNS.Create(ARSAT: TRSAT);
 begin
   inherited Create('DomainNameSystem', rsModuleDNSDisplayName);
 
-  fEnabled := True;
   fOption := TModuleADDNSOption.Create;
   fRSAT := ARSAT;
 
@@ -687,12 +683,6 @@ begin
   SetLength(result, Len);
   for i := 0 to Pred(Len) do
     result[i] := fZoneStorages[i].Name;
-end;
-
-procedure TModuleADDNS.SetEnabled(AValue: Boolean);
-begin
-  if AValue = fEnabled then
-    Exit;
 end;
 
 end.

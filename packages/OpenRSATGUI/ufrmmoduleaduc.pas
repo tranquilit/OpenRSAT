@@ -3252,7 +3252,7 @@ end;
 
 procedure TFrmModuleADUC.LdapConnectEvent(Sender: TObject);
 begin
-  RefreshADUCTreeNode(fADUCDomainNode);
+  fModuleAduc.NeedRefresh := True;
 end;
 
 procedure TFrmModuleADUC.LdapCloseEvent(Sender: TObject);

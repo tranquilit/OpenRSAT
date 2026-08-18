@@ -32,10 +32,6 @@ type
     property ADUCOption: TModuleADUCOption read GetADUCOption;
 
     function ResetPassword(AResetPasswordCallback: TResetPasswordCallback; AObjectDN: RawUtf8; AComputerWarning, AOnUnlockedAccount, AOnPasswordChanged: TNotifyEvent): Boolean;
-
-    /// TModule
-  protected
-    procedure SetEnabled(AValue: Boolean); override;
   end;
 
 implementation
@@ -55,7 +51,6 @@ begin
   inherited Create('UsersAndComputers', rsModuleADUCDisplayName);
 
   fRSAT := ARSAT;
-  fEnabled := True;
   fLog := TADUCLog;
   fOption := TModuleADUCOption.Create;
   fOption.Load;
@@ -162,13 +157,6 @@ begin
       FreeAndNil(Attribute);
     end;
   end;
-end;
-
-procedure TModuleADUC.SetEnabled(AValue: Boolean);
-begin
-  if AValue = fEnabled then
-    Exit;
-  fEnabled := AValue;
 end;
 
 end.

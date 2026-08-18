@@ -112,6 +112,7 @@ type
     procedure MenuItem_ViewThemeDarkClick(Sender: TObject);
     procedure MenuItem_ViewThemeLightClick(Sender: TObject);
     procedure MenuItem_ViewThemeSystemClick(Sender: TObject);
+    procedure PageControl1Change(Sender: TObject);
     procedure Timer_AutoConnectTimer(Sender: TObject);
   private
     fLog: TSynLogClass;
@@ -195,7 +196,7 @@ begin
   With TVisOptions.Create(Self, TFrmRSATOption, fRSAT.RsatOption, fModules) do
   try
     ShowModal;
-    fModules.RefreshAll;
+    fModules.Refresh;
   finally
     Free;
   end;
@@ -310,7 +311,7 @@ end;
 procedure TVisOpenRSAT.Action_AdvancedFeaturesExecute(Sender: TObject);
 begin
   fRSAT.RsatOption.AdvancedView := not fRSAT.RsatOption.AdvancedView;
-  fModules.RefreshAll;
+  fModules.Refresh;
 end;
 
 procedure TVisOpenRSAT.Action_AdvancedFeaturesUpdate(Sender: TObject);
@@ -418,6 +419,13 @@ procedure TVisOpenRSAT.MenuItem_ViewThemeSystemClick(Sender: TObject);
 begin
   fRSAT.RsatOption.Theme := tmSystem;
   UpdateViewThemeButtons;
+end;
+
+procedure TVisOpenRSAT.PageControl1Change(Sender: TObject);
+begin
+  fModules.Change(PageControl1.ActivePage.Name);
+  if fModules.ActiveModule.Module.NeedRefresh then
+    fModules.ActiveModule.Refresh;
 end;
 
 procedure TVisOpenRSAT.Timer_AutoConnectTimer(Sender: TObject);
@@ -565,6 +573,7 @@ begin
 
   for Module in fModules.Items do
     Module.OnLdapConnect(LdapClient);
+  fModules.ActiveModule.Refresh;
 end;
 
 procedure TVisOpenRSAT.OnLdapClose(Sender: TObject);
@@ -601,6 +610,7 @@ begin
   RegisterModule(TFrmModuleSitesAndServices.Create(Self));
   RegisterModule(TFrmModuleADSI.Create(Self));
   CreateTabFromRegisteredModules;
+  fModules.Change(PageControl1.ActivePage.Name);
 
   // Setup theme for windows
   {$IFDEF WINDOWS}
