@@ -21,40 +21,16 @@ type
   private
     fProperty: TProperty;
     fLdap: TLdapClient;
-    fScheduling: TSchedulingLogic;
   public
-    constructor Create(P: TProperty);
-    destructor Destroy; override;
 
-    procedure SaveSchedule;
     function FindAttribute(Attribute: RawUtf8): TLdapAttribute;
     function GetByteFromAttribute(Attribute: TLdapAttribute): RawByteString;
 
     property Props: TProperty read fProperty write fProperty;
     property Ldap: TLdapClient read fLdap write fLdap;
-    property Scheduling: TSchedulingLogic read fScheduling write fScheduling;
   end;
 
 implementation
-
-constructor TGeneralPropertyNTDSLogic.Create(P: TProperty);
-begin
-  fProperty := P;
-  fLdap := P.LdapClient;
-
-  fScheduling := TSchedulingLogic.Create(NTDSSchedulingPage);
-end;
-
-destructor TGeneralPropertyNTDSLogic.Destroy;
-begin
-  Inherited Destroy;
-  fScheduling.Free;
-end;
-
-procedure TGeneralPropertyNTDSLogic.SaveSchedule;
-begin
-  Props.Add('schedule', fScheduling.GetHeader + fScheduling.Hours);
-end;
 
 function TGeneralPropertyNTDSLogic.FindAttribute(Attribute: RawUtf8): TLdapAttribute;
 begin

@@ -26,10 +26,16 @@
 {"hash":4294967295,"name":"tvislogonhours.drawgrid.columns[22].title.caption","sourcebytes":[],"value":""},
 {"hash":4294967295,"name":"tvislogonhours.drawgrid.columns[23].title.caption","sourcebytes":[],"value":""},
 {"hash":4294967295,"name":"tvislogonhours.drawgrid.columns[24].title.caption","sourcebytes":[],"value":""},
+{"hash":1339,"name":"tvislogonhours.btn_ok.caption","sourcebytes":[79,75],"value":"OK"},
 {"hash":77089212,"name":"tvislogonhours.btn_cancel.caption","sourcebytes":[67,97,110,99,101,108],"value":"Cancel"},
-{"hash":93130148,"name":"tvislogonhours.radiobutton_allowed.caption","sourcebytes":[76,111,103,111,110,32,65,108,108,111,119,101,100],"value":"Logon Allowed"},
-{"hash":27240884,"name":"tvislogonhours.radiobutton_denied.caption","sourcebytes":[76,111,103,111,110,32,68,101,110,105,101,100],"value":"Logon Denied"},
-{"hash":168665586,"name":"tvislogonhours.radiobutton_once.caption","sourcebytes":[79,110,99,101,32,112,101,114,32,72,111,117,114],"value":"Once per Hour"},
-{"hash":29205522,"name":"tvislogonhours.radiobutton_twice.caption","sourcebytes":[84,119,105,99,101,32,112,101,114,32,72,111,117,114],"value":"Twice per Hour"},
-{"hash":1339,"name":"tvislogonhours.action_ok.caption","sourcebytes":[79,75],"value":"OK"}
+{"hash":123780900,"name":"tvislogonhours.radiobutton_logonpermitted.caption","sourcebytes":[76,111,103,111,110,32,80,101,114,109,105,116,116,101,100],"value":"Logon Permitted"},
+{"hash":27240884,"name":"tvislogonhours.radiobutton_logondenied.caption","sourcebytes":[76,111,103,111,110,32,68,101,110,105,101,100],"value":"Logon Denied"},
+{"hash":247165077,"name":"tvislogonhours.panel_ntdsschedule.caption","sourcebytes":[80,97,110,101,108,95,78,84,68,83,83,99,104,101,100,117,108,101],"value":"Panel_NTDSSchedule"},
+{"hash":253035586,"name":"tvislogonhours.radiobutton_fourtimesperhour.caption","sourcebytes":[70,111,117,114,32,84,105,109,101,115,32,112,101,114,32,72,111,117,114],"value":"Four Times per Hour"},
+{"hash":29205522,"name":"tvislogonhours.radiobutton_twiceperhour.caption","sourcebytes":[84,119,105,99,101,32,112,101,114,32,72,111,117,114],"value":"Twice per Hour"},
+{"hash":168665586,"name":"tvislogonhours.radiobutton_onceperhour.caption","sourcebytes":[79,110,99,101,32,112,101,114,32,72,111,117,114],"value":"Once per Hour"},
+{"hash":349765,"name":"tvislogonhours.radiobutton_none.caption","sourcebytes":[78,111,110,101],"value":"None"},
+{"hash":266724437,"name":"tvislogonhours.panel_sitelinkschedule.caption","sourcebytes":[80,97,110,101,108,95,83,105,116,101,76,105,110,107,83,99,104,101,100,117,108,101],"value":"Panel_SiteLinkSchedule"},
+{"hash":244183429,"name":"tvislogonhours.radiobutton_replicationavailable.caption","sourcebytes":[82,101,112,108,105,99,97,116,105,111,110,32,65,118,97,105,108,97,98,108,101],"value":"Replication Available"},
+{"hash":51232885,"name":"tvislogonhours.radiobutton_replicationnotavailable.caption","sourcebytes":[82,101,112,108,105,99,97,116,105,111,110,32,78,111,116,32,65,118,97,105,108,97,98,108,101],"value":"Replication Not Available"}
 ]}

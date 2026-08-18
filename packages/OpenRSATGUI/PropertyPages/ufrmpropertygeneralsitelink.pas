@@ -64,7 +64,8 @@ type
   private
     fLog: TSynLogClass;
     fLogic: TGeneralPropertySiteLink;
-    
+    fProperty: TProperty;
+
     procedure LoadListBox;
     procedure PrepareListBox;
     
@@ -109,18 +110,17 @@ var
   ScheduleData: RawByteString;
   LogonHours: TVisLogonHours;
 begin
-  ScheduleData := fLogic.GetByteFromAttribute(fLogic.FindAttribute('schedule'));
-  fLogic.Scheduling.LoadScheduleToHours(ScheduleData);
+  ScheduleData := fProperty.GetRaw('schedule');
 
-  LogonHours := TVisLogonHours.Create(Self, @fLogic.Scheduling.Hours, SiteLinkSchedulingPage);
+  LogonHours := TVisLogonHours.Create(Self, spkSiteLinkSchedule);
   try
+    LogonHours.RawValue := ScheduleData;
     if LogonHours.ShowModal <> mrOK then
       Exit;
+    fProperty.Add('schedule', LogonHours.RawValue);
   finally
     LogonHours.Free;
   end;
-
-  fLogic.SaveSchedule;
 end;
 
 procedure TFrmPropertyGeneralSiteLink.Edit_DescriptionChange(Sender: TObject);
@@ -159,6 +159,8 @@ begin
     fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'General';
+
+  fLogic := TGeneralPropertySiteLink.Create();
 end;
 
 destructor TFrmPropertyGeneralSiteLink.Destroy;
@@ -171,7 +173,9 @@ procedure TFrmPropertyGeneralSiteLink.Update(Props: TProperty);
 var
   Value: RawUtf8;
 begin
-  fLogic := TGeneralPropertySiteLink.Create(Props);
+  fProperty := Props;
+  fLogic.Props := fProperty;
+  fLogic.Ldap := fProperty.LdapClient;
 
   Edit_Name.CaptionNoChange := Props.name;
   Edit_Description.CaptionNoChange := Props.description;

@@ -69,6 +69,9 @@
         </CompilerOptions>
       </Item>
       <Item Name="test_macos_intel">
+        <MacroValues Count="1">
+          <Macro1 Name="LCLWidgetType" Value="cocoa"/>
+        </MacroValues>
         <CompilerOptions>
           <Version Value="11"/>
           <PathDelim Value="\"/>
@@ -184,6 +187,10 @@
       </Unit>
       <Unit>
         <Filename Value="..\packages\OpenRSATCore\ugeneralpropertysitelinkbridge.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="unit\unittest.uscheduling.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>

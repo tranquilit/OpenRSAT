@@ -73,6 +73,7 @@ begin
     fLog.Add.Log(sllTrace, 'Create', Self);
 
   Caption := 'General';
+  fLogic := TGeneralPropertyNTDSLogic.Create;
 end;
 
 destructor TFrmPropertyGeneralNTDSSiteSettings.Destroy;
@@ -89,7 +90,8 @@ begin
     fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
-  fLogic := TGeneralPropertyNTDSLogic.Create(Props);
+  fLogic.Props := fProperty;
+  fLogic.Ldap := fProperty.LdapClient;
 
   Edit_Name.Text := fProperty.name;
   Edit_Description.Text := fProperty.description;
@@ -106,18 +108,17 @@ var
   ScheduleData: RawByteString;
   LogonHours: TVisLogonHours;
 begin
-  ScheduleData := fLogic.GetByteFromAttribute(fLogic.FindAttribute('schedule'));
-  fLogic.Scheduling.LoadScheduleToHours(ScheduleData);
+  ScheduleData := fProperty.GetRaw('schedule');
 
-  LogonHours := TVisLogonHours.Create(Self, @fLogic.Scheduling.Hours, NTDSSchedulingPage);
+  LogonHours := TVisLogonHours.Create(Self, spkNTDSSchedule);
   try
+    LogonHours.RawValue := ScheduleData;
     if LogonHours.ShowModal <> mrOK then
       Exit;
+    fProperty.Add('schedule', LogonHours.RawValue);
   finally
     LogonHours.Free;
   end;
-
-  fLogic.SaveSchedule;
 end;
 
 function TFrmPropertyGeneralNTDSSiteSettings.GetArgByPosition(Attribute: RawUtf8; n: Integer): RawUtf8;

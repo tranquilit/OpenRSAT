@@ -7,6 +7,7 @@ interface
 uses
   Classes,
   SysUtils,
+  DateUtils,
   mormot.core.base,
   mormot.core.text,
   mormot.net.ldap,
@@ -15,105 +16,267 @@ uses
 
 type
 
-  { KindOfPage }
-  KindOfPage = (LogonHoursPage, SiteLinkSchedulingPage, NTDSSchedulingPage);
+  TSchedule = record
+    Slots: TByteDynArray;
+    HeaderSize: Integer;
+    BodySize: Integer;
+  end;
 
-  { TSchedulingLogic }
-  TSchedulingLogic = class
+  TScheduleAttributKind = (
+    sakLogonHour,
+    sakSchedule
+  );
+
+  { TSchedulePresenter }
+  TSchedulePresenter = class
   private
-    fHeader, fHours: RawByteString;
-    fKindOfPage: KindOfPage;
-    fDefaultType: Byte;
+    fDayOffset: Integer;
+    fSchedule: TSchedule;
+    fScheduleAttributKind: TScheduleAttributKind;
+    fUTCOffset: Integer;
 
-    procedure SetupHoursRawByteString;
+    function GetRawValue: RawByteString;
+    procedure SetRawValue(AValue: RawByteString);
   public
-    constructor Create(Page: KindOfPage);
+    constructor Create(AScheduleAttributKind: TScheduleAttributKind);
     destructor Destroy; override;
 
-    procedure LoadScheduleToHours(const ScheduleData: RawByteString);
-    function GetHeader: RawByteString;
+    procedure SetLocalValue(ADay, AHour, AValue: Integer);
+    function GetLocalValue(ADay, AHour: Integer): Integer;
 
-    property Hours: RawByteString read fHours write fHours;
+    procedure SetLocalValues(ADayFrom, ADayTo, AHourFrom, AHourTo, AValue: Integer);
+
+    property RawValue: RawByteString read GetRawValue write SetRawValue;
+    property UTCOffset: Integer read fUTCOffset write fUTCOffset;
+    property DayOffset: Integer read fDayOffset write fDayOffset;
   end;
+
+function LogonHoursSlotIndex(ADay, AHour: Integer): Integer;
+function ScheduleSlotIndex(ADay, AHour: Integer): Integer;
+
+procedure LogonHoursDecode(const AValue: RawByteString; out ASchedule: TSchedule);
+function LogonHoursEncode(const ASchedule: TSchedule): RawByteString;
+procedure ADScheduleDecode(const AValue: RawByteString; out ASchedule: TSchedule);
+function ADScheduleEncode(const ASchedule: TSchedule): RawByteString;
 
 implementation
 
-constructor TSchedulingLogic.Create(Page: KindOfPage);
+function LogonHoursSlotIndex(ADay, AHour: Integer): Integer;
 begin
-  fKindOfPage := Page;
-  case Page of
-    SiteLinkSchedulingPage: fDefaultType := $FF;
-    NTDSSchedulingPage: fDefaultType := $0F;
-  end;
-
-  SetupHoursRawByteString
+  /// calculate index
+  result := ((ADay * 24) + AHour);
+  /// make it circular
+  result := ((result mod 168) + 168) mod 168;
 end;
 
-destructor TSchedulingLogic.Destroy;
+function ScheduleSlotIndex(ADay, AHour: Integer): Integer;
+begin
+  /// calculate index
+  result := (ADay * 24 * 4) + (AHour * 4);
+  /// make it circular
+  result := ((result mod 672) + 672) mod 672;
+end;
+
+procedure ScheduleSetIndex(var ASchedule: TSchedule; AIdx: Integer; AState: Boolean);
+var
+  i, s, m: Integer;
+begin
+  if (AIdx < 0) or (AIdx >= ASchedule.BodySize * 8) then
+    raise Exception.Create('Invalid range.');
+
+  i := ASchedule.HeaderSize + (AIdx div 8);
+  s := AIdx mod 8;
+  m := (1 shl s);
+
+  if AState then
+    ASchedule.Slots[i] := ASchedule.Slots[i] or m
+  else
+    ASchedule.Slots[i] := ASchedule.Slots[i] and not m;
+end;
+
+function ScheduleGetIndex(var ASchedule: TSchedule; AIdx: Integer): Boolean;
+var
+  i, s, m: Integer;
+begin
+  if (AIdx < 0) or (AIdx >= ASchedule.BodySize * 8) then
+    raise Exception.Create('Invalid range.');
+
+  i := ASchedule.HeaderSize + (AIdx div 8);
+  s := AIdx mod 8;
+  m := (1 shl s);
+
+  result := (ASchedule.Slots[i] and m) <> 0;
+end;
+
+procedure LogonHoursDecode(const AValue: RawByteString; out ASchedule: TSchedule);
+var
+  i: Integer;
+begin
+  // Define structure of a logonHours attribut.
+  // 7 days * 24 hours / 8 bits in a byte
+  // 21 bytes length
+  ASchedule.BodySize := 21;
+  ASchedule.HeaderSize := 0;
+
+  if Length(AValue) <> ASchedule.BodySize then
+    raise Exception.Create('Invalid logonHours length.');
+
+  // Copy bytes from logonHours to slots.
+  SetLength(ASchedule.Slots, ASchedule.BodySize);
+  for i := 0 to ASchedule.BodySize - 1 do
+    ASchedule.Slots[i] := Byte(AValue[i + 1]);
+end;
+
+function LogonHoursEncode(const ASchedule: TSchedule): RawByteString;
+var
+  i: Integer;
+begin
+  SetLength(result, ASchedule.BodySize);
+  for i := 0 to ASchedule.BodySize - 1 do
+    result[i + 1] := Char(ASchedule.Slots[i]);
+end;
+
+procedure ADScheduleDecode(const AValue: RawByteString; out ASchedule: TSchedule);
+var
+  i: Integer;
+  vl, vr: Byte;
+begin
+  // Define structure of a schedule attribut.
+  // 7 days * 24 hours * 4 quarters / 4 bits in a byte
+  // 168 bytes length
+  // I prefer to fill bytes.
+  // 168 bytes / 2 (8 bits in a bit)
+  // 84 bytes length
+  ASchedule.BodySize := 84;
+  // Header size is 20.
+  ASchedule.HeaderSize := 20;
+
+  if Length(AValue) <> (ASchedule.BodySize * 2) + ASchedule.HeaderSize then
+    raise Exception.Create('Invalid schedule length.');
+
+  // Set Length of slots (84 + 20 = 104)
+  SetLength(ASchedule.Slots, ASchedule.BodySize + ASchedule.HeaderSize);
+
+  // Copy header (20)
+  for i := 0 to ASchedule.HeaderSize - 1 do
+    ASchedule.Slots[i] := Byte(AValue[i + 1]);
+
+  // Copy body (84)
+  for i := 0 to ASchedule.BodySize - 1 do
+  begin
+    // Get left part:
+    //  - Retrieve value at header + (index * 2)
+    //  - Shift left value
+    // Get right part:
+    //  - Retrieve value at header + (index * 2) + 1
+    //  - Shift left value
+    //  - Shift right value
+    vl := Byte(AValue[ASchedule.HeaderSize + (i * 2) + 1]);
+    vr := Byte(AValue[ASchedule.HeaderSize + (i * 2) + 2]);
+    ASchedule.Slots[ASchedule.HeaderSize + i] := ((vl and $0f)) or ((vr and $0f) shl 4);
+  end;
+end;
+
+function ADScheduleEncode(const ASchedule: TSchedule): RawByteString;
+var
+  i: Integer;
+  v: Byte;
+begin
+  SetLength(result, ASchedule.HeaderSize + (ASchedule.BodySize * 2));
+
+  for i := 0 to ASchedule.HeaderSize - 1 do
+    result[i + 1] := Char(ASchedule.Slots[i]);
+
+  for i := 0 to ASchedule.BodySize - 1 do
+  begin
+    v := (ASchedule.Slots[ASchedule.HeaderSize + i]);
+    result[(i * 2) + ASchedule.HeaderSize + 1] := Char(($f shl 4) or ((v and $0f)));
+    result[(i * 2) + ASchedule.HeaderSize + 2] := Char(($f shl 4) or ((v and $f0) shr 4));
+  end;
+end;
+
+function TSchedulePresenter.GetRawValue: RawByteString;
+begin
+  case fScheduleAttributKind of
+    sakLogonHour: result := LogonHoursEncode(fSchedule);
+    sakSchedule: result := ADScheduleEncode(fSchedule);
+    else
+      raise Exception.Create('Invalid TScheduleAttributKind.');
+  end;
+end;
+
+procedure TSchedulePresenter.SetRawValue(AValue: RawByteString);
+begin
+  case fScheduleAttributKind of
+    sakLogonHour: LogonHoursDecode(AValue, fSchedule);
+    sakSchedule: ADScheduleDecode(AValue, fSchedule);
+    else
+      raise Exception.Create('Invalid TScheduleAttributKind.');
+  end;
+end;
+
+constructor TSchedulePresenter.Create(
+  AScheduleAttributKind: TScheduleAttributKind);
+begin
+  fScheduleAttributKind := AScheduleAttributKind;
+  fUTCOffset := -(GetLocalTimeOffset() div 60);
+  fDayOffset := 1;
+end;
+
+destructor TSchedulePresenter.Destroy;
 begin
   inherited Destroy;
 end;
 
-procedure TSchedulingLogic.SetupHoursRawByteString;
+procedure TSchedulePresenter.SetLocalValue(ADay, AHour, AValue: Integer);
+var
+  Idx, i: Integer;
 begin
-  fHours := '';
-  SetLength(fHours, 168);
-  FillByte(fHours[1], 168, fDefaultType);
+  case fScheduleAttributKind of
+    sakLogonHour: ScheduleSetIndex(fSchedule, LogonHoursSlotIndex(ADay + DayOffset, AHour - UTCOffset), (AValue <> 0));
+    sakSchedule:
+    begin
+      Idx := ScheduleSlotIndex(ADay + DayOffset, AHour - UTCOffset);
+      for i := 0 to 3 do
+        ScheduleSetIndex(fSchedule, Idx + i, (AValue and ($01 shl (3 - i))) <> 0);
+    end;
+    else
+      raise Exception.Create('Invalid TScheduleAttributKind.');
+  end;
 end;
 
-procedure TSchedulingLogic.LoadScheduleToHours(const ScheduleData: RawByteString);
+function TSchedulePresenter.GetLocalValue(ADay, AHour: Integer): Integer;
 var
-  Data: RawByteString;
+  Idx, i: Integer;
 begin
-  if ScheduleData = '' then
-  begin
-    FillByte(fHours[1], Length(fHours), fDefaultType);
-    Exit;
+  result := 0;
+
+  case fScheduleAttributKind of
+    sakLogonHour:
+    begin
+      if ScheduleGetIndex(fSchedule, LogonHoursSlotIndex(ADay + DayOffset, AHour - UTCOffset)) then
+        result := 1;
+    end;
+    sakSchedule:
+    begin
+      Idx := ScheduleSlotIndex(ADay + DayOffset, AHour - UTCOffset);
+      for i := 0 to 3 do
+        if ScheduleGetIndex(fSchedule, Idx + i) then
+          result := result + (1 shl (3 - i));
+    end;
+    else
+      raise Exception.Create('Invalid TScheduleAttributKind.');
   end;
-
-  Data := ScheduleData;
-  Delete(Data, 21, Length(Data));
-  fHeader := Data;
-
-  Data := ScheduleData;
-  Delete(Data, 1, 20);
-  fHours := Data;
 end;
 
-function TSchedulingLogic.GetHeader: RawByteString;
+procedure TSchedulePresenter.SetLocalValues(ADayFrom, ADayTo, AHourFrom,
+  AHourTo, AValue: Integer);
 var
-  NewHeader: RawByteString;
-  Value: UInt32;
+  Day, Hour: Integer;
 begin
-  if fHeader <> '' then
-  begin
-    Result := fHeader;
-    Exit;
-  end;
-
-  SetLength(NewHeader, 20);
-
-  // Header + Schedule size
-  Value := Length(NewHeader) + Length(fHours);
-  Move(Value, NewHeader[1], SizeOf(UInt32));
-
-  // Bandwidth (not used)
-  Value := 0;
-  Move(Value, NewHeader[5], SizeOf(UInt32));
-
-  // Number of schedule (default 1)
-  Value := 1;
-  Move(Value, NewHeader[9], SizeOf(UInt32));
-
-  // Offset
-  Value := 0;
-  Move(Value, NewHeader[13], SizeOf(UInt32));
-
-  // Header size
-  Value := Length(NewHeader);
-  Move(Value, NewHeader[17], SizeOf(UInt32));
-
-  Result := NewHeader;
+  for Day := ADayFrom to ADayTo do
+    for Hour := AHourFrom to AHourTo do
+      SetLocalValue(Day, Hour, AValue);
 end;
 
 end.

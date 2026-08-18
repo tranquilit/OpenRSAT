@@ -5,12 +5,15 @@ uses
     cthreads,
   {$ENDIF}
   mormot.core.test,
+  {$IFDEF INTEGRATION}
   integrationtest.uadvancedsecuritypresenter,
   integrationtest.ugeneralpropertysitelink,
+  {$ENDIF INTEGRATION}
   unittest.uadvancedsecuritypresenter,
   unittest.ugeneratekeytab,
   unittest.uviewkeytabpresenter,
-  unittest.udoublelistlogic;
+  unittest.udoublelistlogic,
+  unittest.uscheduling;
 
 type
 
@@ -19,7 +22,9 @@ type
   TOpenRSATTests = class(TSynTestsLogged)
   published
     procedure Units;
+    {$IFDEF INTEGRATION}
     procedure Integrations;
+    {$ENDIF INTEGRATION}
     procedure Performances;
     procedure Security;
   end;
@@ -32,10 +37,12 @@ begin
     TTestAdvancedSecurityPresenter,
     TUnitTestGenerateKeyTab,
     TUnitTestViewKeyTabPresenter,
-    TUnitTestDoubleListLogic
+    TUnitTestDoubleListLogic,
+    TUnitTestScheduling
   ]);
 end;
 
+{$IFDEF INTEGRATION}
 procedure TOpenRSATTests.Integrations;
 begin
   AddCase([
@@ -43,6 +50,7 @@ begin
     TIntegrationTestGeneralPropertySiteLink
   ]);
 end;
+{$ENDIF INTEGRATION}
 
 procedure TOpenRSATTests.Performances;
 begin

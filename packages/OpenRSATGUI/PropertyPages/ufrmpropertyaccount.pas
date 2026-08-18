@@ -167,15 +167,15 @@ begin
     Hours := default;
 
   // LogonHours Form
-  LogonHours := TVisLogonHours.Create(self, @Hours, LogonHoursPage);
+  LogonHours := TVisLogonHours.Create(self, spkLogonHours);
   try
+    LogonHours.RawValue := Hours;
     if LogonHours.ShowModal() <> mrOK then
       Exit;
+    fProperty.Add('logonHours', LogonHours.RawValue);
   finally
     FreeAndNil(LogonHours);
   end;
-
-  fProperty.Add('logonHours', Hours);
 end;
 
 procedure TFrmPropertyAccount.Action_LogonToExecute(Sender: TObject);

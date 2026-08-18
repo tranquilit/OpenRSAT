@@ -23,39 +23,25 @@ type
   private
     fProperty: TProperty;
     fLdap: TLdapClient;
-    fScheduling: TSchedulingLogic;
 
     function SearchSitesInLdap: boolean;
   public
-    constructor Create(P: TProperty);
-    destructor Destroy; override;
+    constructor Create;
 
     procedure GetAllResources; override;
     procedure SyncAttributeProperty;
     procedure SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
-    procedure SaveSchedule();
     function FindAttribute(Attribute: RawUtf8): TLdapAttribute; virtual;
     function FindAttribute(Attribute: RawUtf8; LdapResult: TLdapResult): TLdapAttribute; virtual;
 
     property Props: TProperty read fProperty write fProperty;
     property Ldap: TLdapClient read fLdap write fLdap;
-    property Scheduling: TSchedulingLogic read fScheduling write fScheduling;
   end;
 
 implementation
 
-constructor TGeneralPropertySiteLink.Create(P: TProperty);
+constructor TGeneralPropertySiteLink.Create;
 begin
-  fProperty := P;
-  fLdap := P.LdapClient;
-
-  fScheduling := TSchedulingLogic.Create(SiteLinkSchedulingPage);
-end;
-
-destructor TGeneralPropertySiteLink.Destroy;
-begin
-  Inherited Destroy;
-  fScheduling.Free;
 end;
 
 procedure TGeneralPropertySiteLink.GetAllResources;
@@ -106,11 +92,6 @@ end;
 procedure TGeneralPropertySiteLink.SetScalarProperty(const Attribute, Value: RawUtf8; Option: TLdapAddOption);
 begin
   Props.Add(Attribute, Value, Option);
-end;
-
-procedure TGeneralPropertySiteLink.SaveSchedule;
-begin
-  Props.Add('schedule', fScheduling.GetHeader + fScheduling.Hours);
 end;
 
 function TGeneralPropertySiteLink.FindAttribute(Attribute: RawUtf8): TLdapAttribute;
