@@ -502,6 +502,8 @@ resourcestring
 
   rsVisAdvancedSecurityTitle = 'Advanced Security Settings for %';
 
+  rsUserCreationAlreadyExists = 'The pre-Windows 2000 logon name you have chosen is already in use in this domain.' + LineEnding + 'Choose another pre-Windows 2000 logon name, and then try again.';
+
 const
   DAYS_BETWEEN_1601_AND_1900 = 109205;
   HUNDRED_OF_MS_IN_A_DAY = 864000000000;
