@@ -104,6 +104,7 @@ You will find all the steps just here: [build.md](https://github.com/tranquilit/
 
 OpenRSAT is built by a French company, so the tool ships with English and French. A Greek translation is also available, contributed by [@parapente](https://github.com/parapente).
 Don't hesitate to ask for more languages, or to contribute one yourself.
+Translation files (.pot / .po) can be updated by running the `update_package.py` python script.
 
 ## Documentation
 
