@@ -444,9 +444,7 @@
     </Files>
     <CompatibilityMode Value="True"/>
     <i18n>
-      <EnableI18N Value="True"/>
       <OutDir Value="languages"/>
-      <EnableI18NForLFM Value="True"/>
     </i18n>
     <RequiredPkgs Count="9">
       <Item1>
