@@ -24,13 +24,15 @@ uses
   mormot.core.text;
 
 function LocaleFolderPath: RawUtf8;
+var
+  AppFolder: String;
 begin
   AppFolder := ExtractFilePath(Application.ExeName);
-  {$IFDEF WINDOWS}
+  {$IF Defined(WINDOWS)}
   result := MakePath([AppFolder, 'locale']);
-  {$ELSEIF DARWIN}
+  {$ELSEIF Defined(DARWIN)}
   result := MakePath([AppFolder, '..', 'Resources', 'locale']);
-  {$ELSEIF LINUX}
+  {$ELSEIF Defined(LINUX)}
   result := '/usr/share/openrsat/locale/';
   {$ELSE}
   result := MakePath([AppFolder, 'locale']);
