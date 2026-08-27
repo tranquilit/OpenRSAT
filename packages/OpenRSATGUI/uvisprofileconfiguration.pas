@@ -127,6 +127,7 @@ uses
   mormot.net.sock,
   mormot.crypt.secure,
   ucommon,
+  ulog,
   ucoredatamodule,
   uvisrootdseinfos,
   ursatldapclient,
@@ -252,6 +253,7 @@ begin
     ASettings := TMLdapClientSettings.Create();
     GUIToSettings(ASettings);
     LdapTest := TRsatLdapClient.Create(ASettings);
+    LdapTest.Log := TLdapLog;
     LdapTest.TlsContext^.IgnoreCertificateErrors := LdapTest.Settings.AllowUnsafePasswordBind;
     if LdapTest.Connect() then
       MessageDlg(rsLdapSuccess, FormatUtf8(rsLdapSuccessAuthMessage, [LdapTest.BoundUser]), mtConfirmation, [mbOK], 0)

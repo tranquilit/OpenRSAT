@@ -356,9 +356,7 @@ function ChangeLdapSettings(LdapClient: TRsatLdapClient;
 begin
   result := LdapClient.Close;
   CopyObject(Settings, LdapClient.Settings);
-  {$IFDEF DEBUG}
   LdapClient.Log := TLdapLog;
-  {$ENDIF DEBUG}
   LdapClient.SearchSDFlags := [lsfOwnerSecurityInformation, lsfGroupSecurityInformation, lsfDaclSecurityInformation];
   if AutoConnect then
     result := LdapClient.Connect();
