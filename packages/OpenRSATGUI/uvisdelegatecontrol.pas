@@ -19,7 +19,8 @@ uses
   CheckLst,
   mormot.core.base,
   mormot.net.ldap,
-  ursatldapclient;
+  ursatldapclient,
+  uvisobjectsselector;
 
 type
 
@@ -138,7 +139,6 @@ uses
   mormot.core.text,
   mormot.core.variants,
   ucommon,
-  uOmniselect,
   ursatldapclientui;
 
 {$R *.lfm}
@@ -169,48 +169,55 @@ end;
 
 procedure TVisDelegateControl.Action_AddExecute(Sender: TObject);
 var
-  vis: TVisOmniselect;
   Filter: RawUtf8;
   Item: String;
   ResItem: TLdapResult;
   Index: SizeInt;
+  Vis: TVisObjectsSelector;
+  SelectedObjects: TRawUtf8DynArray;
 begin
-  vis := TVisOmniselect.Create(Self, ['user', 'group', 'computer']);
+  Vis := TVisObjectsSelector.Create(Self);
   try
-    vis.LdapClient := LdapClient;
-    if Vis.ShowModal <> mrOK then
+    Vis.LdapClient := LdapClient;
+    Vis.AllowedObjectTypes := [otfUser, otfGroup, otfComputer];
+    Vis.SelectedObjectTypes := [otfUser, otfGroup, otfComputer];
+    Vis.AllowMultiSelect := True;
+    if (Vis.ShowModal <> mrOK) then
       Exit;
-    Filter := '(|';
-    for Item in vis.SelectedObjects do
-      Filter := FormatUtf8('%(distinguishedName=%)', [Filter, LdapEscape(Item)]);
-    Filter := FormatUtf8('%)', [Filter]);
-
-    try
-      LdapClient.SearchBegin();
-      LdapClient.SearchScope := lssWholeSubtree;
-      repeat
-        if not LdapClient.Search(LdapClient.DefaultDN, False, Filter, ['distinguishedName', 'objectSID', 'sAMAccountName']) then
-          Exit;
-
-        Index := Length(fUsersAndGroups);
-        SetLength(fUsersAndGroups, Index + LdapClient.SearchResult.Count);
-        for ResItem in LdapClient.SearchResult.Items do
-        begin
-          fUsersAndGroups[Index].sAMAccountName := ResItem.Find('sAMAccountName').GetReadable();
-          fUsersAndGroups[Index].distinguishedName := ResItem.Find('distinguishedName').GetReadable();
-          fUsersAndGroups[Index].objectSid := ResItem.Find('objectSID').GetReadable();
-          fUsersAndGroups[Index].dc := String(DNToCN(fUsersAndGroups[Index].distinguishedName)).Split('/')[0];
-          ListBox1.Items.Add(fUsersAndGroups[Index].sAMAccountName);
-          Inc(Index);
-        end;
-      until LdapClient.SearchCookie = '';
-    finally
-      LdapClient.SearchEnd;
-    end;
-    ListBox1.Refresh;
+    SelectedObjects := Vis.SelectedObjects;
   finally
-    FreeAndNil(vis);
+    FreeAndNil(Vis);
   end;
+
+  Filter := '(|';
+  for Item in SelectedObjects do
+    Filter := FormatUtf8('%(distinguishedName=%)', [Filter, LdapEscape(Item)]);
+  Filter := FormatUtf8('%)', [Filter]);
+
+  try
+    LdapClient.SearchBegin();
+    LdapClient.SearchScope := lssWholeSubtree;
+    repeat
+      if not LdapClient.Search(LdapClient.DefaultDN, False, Filter, ['distinguishedName', 'objectSID', 'sAMAccountName']) then
+        Exit;
+
+      Index := Length(fUsersAndGroups);
+      SetLength(fUsersAndGroups, Index + LdapClient.SearchResult.Count);
+      for ResItem in LdapClient.SearchResult.Items do
+      begin
+        fUsersAndGroups[Index].sAMAccountName := ResItem.Find('sAMAccountName').GetReadable();
+        fUsersAndGroups[Index].distinguishedName := ResItem.Find('distinguishedName').GetReadable();
+        fUsersAndGroups[Index].objectSid := ResItem.Find('objectSID').GetReadable();
+        fUsersAndGroups[Index].dc := String(DNToCN(fUsersAndGroups[Index].distinguishedName)).Split('/')[0];
+        ListBox1.Items.Add(fUsersAndGroups[Index].sAMAccountName);
+        Inc(Index);
+      end;
+    until LdapClient.SearchCookie = '';
+  finally
+    LdapClient.SearchEnd;
+  end;
+  ListBox1.Refresh;
+
   Action_Next.Update;
   if Btn_Next.Enabled then
     Btn_Next.SetFocus

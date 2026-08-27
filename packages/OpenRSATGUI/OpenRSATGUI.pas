@@ -9,7 +9,7 @@ interface
 
 uses
   ufrmmoduleaduc, ucoredatamodule, uvisconnectconfigs, ufrmmoduledns, 
-  utreeselectionhistory, uvisproperties, uOmniselect, uvisadvancedsecurity, 
+  utreeselectionhistory, uvisproperties, uvisadvancedsecurity, 
   uvisattributeeditor, uvislistother, uvislogonhours, uvislogonworkstation, 
   uvisaddaces, uvissearch, ufrmnewcomputer, ufrmnewcontact, ufrmnewgroup, 
   ufrmnewou, ufrmnewsharedfolder, ufrmnewuser, uvisnewobject, uvischangedn, 
@@ -41,7 +41,7 @@ uses
   ufrmpropertygeneralntdsdsa, ufrmpropertyconnections, 
   ufrmnewmsdnsserversettings, ufrmpropertygeneralintersitetransport, 
   uvisviewkeytab, uopenrsatuicontextinterface, ufrmpropertygplinks, 
-  uvislistgpo, ufrmpropertygeneralgpo, uvisrename, 
+  uvislistgpo, ufrmpropertygeneralgpo, uvisrename, uvisobjectsselector, 
   LazarusPackageIntf;
 
 implementation

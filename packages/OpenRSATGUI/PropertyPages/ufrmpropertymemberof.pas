@@ -24,6 +24,7 @@ uses
   VirtualTrees,
   uopenrsatuicontextinterface,
   upropertyframe,
+  uvisobjectsselector,
   ulog;
 
 type
@@ -99,8 +100,7 @@ uses
   mormot.core.os.security,
   mormot.core.text,
   ucommon,
-  ursatldapclientui,
-  uOmniselect;
+  ursatldapclientui;
 
 {$R *.lfm}
 
@@ -344,35 +344,36 @@ end;
 
 function TFrmPropertyMemberOf.GetGroupToAdd(): TRawUtf8DynArray;
 var
-  Filter: RawUtf8;
-  VisSelect: TVisOmniselect;
   Row: PDocVariantData;
+  Vis: TVisObjectsSelector;
+  ExcludedObjects: TRawUtf8DynArray;
+  i: Integer;
 begin
   result := nil;
 
-  // Exclude self being a member of a group
-  // Do not use member=[self] cause it doesn't take care of the current modification.
-  // Filter := FormatUtf8('(!(member=%))', [LdapEscape(fProperty.distinguishedName)]);
-  Filter := '';
-  for Row in Grid_MemberOf.Data.Objects do
+  ExcludedObjects := nil;
+  SetLength(ExcludedObjects, Grid_MemberOf.Data.Count);
+  for i := 0 to Grid_MemberOf.Data.Count - 1 do
   begin
-    if not Assigned(Row) then
+    Row := Grid_MemberOf.Data._[i];
+    if not Assigned(Row) or not Row^.Exists('distinguishedName') then
       continue;
-    Filter := FormatUtf8('%(distinguishedName=%)', [Filter, LdapEscape(Row^.S['distinguishedName'])]);
+    ExcludedObjects[i] := Row^.U['distinguishedName'];
   end;
-  if Filter <> '' then
-    Filter := FormatUtf8('(!(|%))', [Filter]);
 
   // Select groups to add
-  VisSelect := TVisOmniselect.Create(self, ['group'], fProperty.LdapClient.DefaultDN(), True, Filter);
+  Vis := TVisObjectsSelector.Create(Self);
   try
-    VisSelect.LdapClient := fProperty.LdapClient;
-    VisSelect.Caption := rsTitleSelectGroups;
-    if VisSelect.ShowModal() <> mrOK then
+    Vis.LdapClient := fProperty.LdapClient;
+    Vis.AllowedObjectTypes := [otfGroup];
+    Vis.SelectedObjectTypes := [otfGroup];
+    Vis.ExcludedObjects := ExcludedObjects;
+    Vis.AllowMultiSelect := True;
+    if (Vis.ShowModal <> mrOK) then
       Exit;
-    result := VisSelect.SelectedObjects;
+    result := Vis.SelectedObjects;
   finally
-    FreeAndNil(VisSelect);
+    FreeAndNil(Vis);
   end;
 end;
 
