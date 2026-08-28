@@ -43,6 +43,7 @@ echo "Remove remaining .deb files."
 echo "Create folder structure."
 mkdir -p $BUILDDIR/DEBIAN
 mkdir -p $BUILDDIR/{opt/openrsat/,usr/share/applications}
+mkdir -p $BUILDDIR/usr/share/locale/{en,fr,pl,el}
 
 echo "Copy control and postinst files."
 cp ./control $BUILDDIR/DEBIAN
@@ -66,10 +67,21 @@ echo "Copy desktop file."
 [ -f "./OpenRSAT.desktop" ] || (echo "./OpenRSAT.desktop does not exists." && exit)
 cp ./OpenRSAT.desktop $BUILDDIR/usr/share/applications/
 
+echo "Copy locale files."
+for l in en fr pl el
+do
+  [ -f "../../../languages/OpenRSAT.$l.po" ] || (echo "../../../languages/OpenRSAT.$l.po does not exists." && exit)
+  cp ../../../languages/OpenRSAT.$l.po $BUILDDIR/usr/share/locale/$l/OpenRSAT.po
+done
+
 echo "Set permissions to binary, icon and desktop files."
 chmod 755 $BUILDDIR/opt/openrsat/OpenRSAT
 chmod 755 $BUILDDIR/opt/openrsat/OpenRSAT.png
 chmod 755 $BUILDDIR/usr/share/applications/OpenRSAT.desktop
+chmod 755 $BUILDDIR/usr/share/locale/en/OpenRSAT.po
+chmod 755 $BUILDDIR/usr/share/locale/fr/OpenRSAT.po
+chmod 755 $BUILDDIR/usr/share/locale/pl/OpenRSAT.po
+chmod 755 $BUILDDIR/usr/share/locale/el/OpenRSAT.po
 
 echo "Build deb file."
 dpkg-deb --build $BUILDDIR OpenRSAT-${VERSION}-${DEBARCH}.deb
