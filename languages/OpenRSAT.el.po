@@ -101,7 +101,7 @@ msgstr "OK"
 
 #: tformconnectconfigs.caption
 msgid "OpenRSAT Authentication"
-msgstr ""
+msgstr "Αυθεντικοποίηση OpenRSAT"
 
 #: tformconnectconfigs.label_password.caption
 msgctxt "tformconnectconfigs.label_password.caption"
@@ -110,7 +110,7 @@ msgstr "Κωδικός:"
 
 #: tformconnectconfigs.label_profile.caption
 msgid "Profile"
-msgstr ""
+msgstr "Διαδρομή προφίλ :"
 
 #: tformconnectconfigs.label_server.caption
 msgctxt "tformconnectconfigs.label_server.caption"
@@ -119,7 +119,7 @@ msgstr "Διακομιστής"
 
 #: tformconnectconfigs.label_username.caption
 msgid "Username: "
-msgstr ""
+msgstr "Όνομα χρήστη: "
 
 #: tfrmmoduleadsi.action_deleteobject.caption
 msgctxt "tfrmmoduleadsi.action_deleteobject.caption"
@@ -198,19 +198,19 @@ msgstr "Τύπος"
 
 #: tfrmmoduleadsi.tisgrid2.header.columns[3].text
 msgid "Size"
-msgstr ""
+msgstr "Μέγεθος"
 
 #: tfrmmoduleadssoptions.label1.caption
 msgid "Show Service"
-msgstr ""
+msgstr "Εμφάνιση Υπηρεσίας"
 
 #: tfrmmoduleaduc.action_blockgpoinheritance.caption
 msgid "Block GPO Inheritance"
-msgstr ""
+msgstr "Κληρονόμηση"
 
 #: tfrmmoduleaduc.action_changedomaincontroller.caption
 msgid "Change Domain Controller"
-msgstr ""
+msgstr "Αλλαγή Ελεγκτή Τομέα"
 
 #: tfrmmoduleaduc.action_copy.caption
 msgctxt "tfrmmoduleaduc.action_copy.caption"
@@ -228,7 +228,7 @@ msgstr "Αποκοπή"
 
 #: tfrmmoduleaduc.action_delegatecontrol.caption
 msgid "Delegate control"
-msgstr ""
+msgstr "Ανάθεση ελέγχου"
 
 #: tfrmmoduleaduc.action_delete.caption
 msgctxt "tfrmmoduleaduc.action_delete.caption"
@@ -238,7 +238,7 @@ msgstr "Διαγραφή"
 #: tfrmmoduleaduc.action_disablegpo.caption
 msgctxt "tfrmmoduleaduc.action_disablegpo.caption"
 msgid "Disable GPO"
-msgstr ""
+msgstr "Απενεργοποίηση Λογαριασμού"
 
 #: tfrmmoduleaduc.action_enablegpo.caption
 msgctxt "tfrmmoduleaduc.action_enablegpo.caption"
@@ -257,7 +257,7 @@ msgstr "Φίλτρο"
 
 #: tfrmmoduleaduc.action_modifygplink.caption
 msgid "Modify GPLink"
-msgstr ""
+msgstr "Τροποποίηση"
 
 #: tfrmmoduleaduc.action_newall.caption
 msgctxt "tfrmmoduleaduc.action_newall.caption"
@@ -397,11 +397,11 @@ msgstr ""
 
 #: tfrmmoduleaduc.action_sitesandservices.caption
 msgid "Sites and services"
-msgstr ""
+msgstr "Τοποθεσίες και υπηρεσίες"
 
 #: tfrmmoduleaduc.action_taskaddtoagroup.caption
 msgid "Add to a group"
-msgstr ""
+msgstr "Προσθήκη σε ομάδα"
 
 #: tfrmmoduleaduc.action_taskcopy.caption
 msgctxt "tfrmmoduleaduc.action_taskcopy.caption"
@@ -410,7 +410,7 @@ msgstr "Αντιγραφή"
 
 #: tfrmmoduleaduc.action_taskdelegatecontrol.caption
 msgid "Delagate Control"
-msgstr ""
+msgstr "Ανάθεση Ελέγχου"
 
 #: tfrmmoduleaduc.action_taskdisableenableaccount.caption
 msgid "Disable Enable Account"
@@ -418,7 +418,7 @@ msgstr ""
 
 #: tfrmmoduleaduc.action_taskmanage.caption
 msgid "Manage"
-msgstr ""
+msgstr "Διαχείριση"
 
 #: tfrmmoduleaduc.action_taskmove.caption
 msgctxt "tfrmmoduleaduc.action_taskmove.caption"
@@ -427,11 +427,11 @@ msgstr "Μετακίνηση"
 
 #: tfrmmoduleaduc.action_tasknamemappings.caption
 msgid "Name mappings"
-msgstr ""
+msgstr "Αντιστοιχίσεις ονομάτων"
 
 #: tfrmmoduleaduc.action_taskopenhomepage.caption
 msgid "Open Home Page"
-msgstr ""
+msgstr "Άνοιγμα Αρχικής Σελίδας"
 
 #: tfrmmoduleaduc.action_taskresetpassword.caption
 msgctxt "tfrmmoduleaduc.action_taskresetpassword.caption"
@@ -440,7 +440,7 @@ msgstr "Επαναφορά Κωδικού"
 
 #: tfrmmoduleaduc.action_tasksendmail.caption
 msgid "Send Mail"
-msgstr ""
+msgstr "Αποστολή Mail"
 
 #: tfrmmoduleaduc.action_treenewall.caption
 msgctxt "tfrmmoduleaduc.action_treenewall.caption"
@@ -449,11 +449,11 @@ msgstr "Νέο"
 
 #: tfrmmoduleaduc.action_usersandcomputers.caption
 msgid "Users and computers"
-msgstr ""
+msgstr "Χρήστες και υπολογιστές"
 
 #: tfrmmoduleaduc.checkbox_includesubcontainer.caption
 msgid "Include subcontainer"
-msgstr ""
+msgstr "Συμπερίληψη subcontainers"
 
 #: tfrmmoduleaduc.gridaduc.header.columns[0].text
 msgctxt "tfrmmoduleaduc.gridaduc.header.columns[0].text"
@@ -473,7 +473,7 @@ msgstr "Περιγραφή"
 #: tfrmmoduleaduc.gridattributes.header.columns[0].text
 msgctxt "tfrmmoduleaduc.gridattributes.header.columns[0].text"
 msgid "Attributes"
-msgstr ""
+msgstr "Χαρακτηριστικά"
 
 #: tfrmmoduleaduc.gridattributes.header.columns[1].text
 msgctxt "tfrmmoduleaduc.gridattributes.header.columns[1].text"
@@ -492,7 +492,7 @@ msgstr ""
 #: tfrmmoduleaduc.menuitem_new.caption
 msgctxt "tfrmmoduleaduc.menuitem_new.caption"
 msgid "New"
-msgstr ""
+msgstr "Νέο"
 
 #: tfrmmoduleaduc.menuitem_rename.caption
 msgctxt "tfrmmoduleaduc.menuitem_rename.caption"
@@ -501,7 +501,7 @@ msgstr ""
 
 #: tfrmmoduleaduc.toolbutton_addtogroup.hint
 msgid "Add to a Group"
-msgstr ""
+msgstr "Προσθήκη σε ομάδα"
 
 #: tfrmmoduleaduc.toolbutton_copy.hint
 msgctxt "tfrmmoduleaduc.toolbutton_copy.hint"
@@ -582,11 +582,11 @@ msgstr "Νέος Χρήστης"
 
 #: tfrmmoduleaducoption.label1.caption
 msgid "Grid options"
-msgstr ""
+msgstr "Επιλογές πλέγματος"
 
 #: tfrmmoduleaducoption.label2.caption
 msgid "Tree options"
-msgstr ""
+msgstr "Επιλογές δέντρου"
 
 #: tfrmmoduleaducoption.label3.caption
 msgctxt "tfrmmoduleaducoption.label3.caption"
@@ -595,7 +595,7 @@ msgstr "Φίλτρο"
 
 #: tfrmmoduleaducoption.label4.caption
 msgid "Ldap attributes"
-msgstr ""
+msgstr "Χαρακτηριστικά Ldap"
 
 #: tfrmmoduleaducoption.label_filter.caption
 msgctxt "tfrmmoduleaducoption.label_filter.caption"
@@ -604,7 +604,7 @@ msgstr "Φίλτρο"
 
 #: tfrmmoduleaducoption.label_searchpagesize.caption
 msgid "Search Page Size"
-msgstr ""
+msgstr "Μέγεθος Σελίδας Αναζήτησης"
 
 #: tfrmmoduleaducoption.label_showgpo.caption
 msgctxt "tfrmmoduleaducoption.label_showgpo.caption"
@@ -618,7 +618,7 @@ msgstr "Διαγραφή"
 
 #: tfrmmoduledns.action_newzone.caption
 msgid "New Zone"
-msgstr ""
+msgstr "Νέα Ζώνη"
 
 #: tfrmmoduledns.action_next.caption
 msgctxt "tfrmmoduledns.action_next.caption"
@@ -627,7 +627,7 @@ msgstr "Επόμενο"
 
 #: tfrmmoduledns.action_othernewrecords.caption
 msgid "Other New Records"
-msgstr ""
+msgstr "Άλλες Νέες Εγγραφές"
 
 #: tfrmmoduledns.action_parent.caption
 msgctxt "tfrmmoduledns.action_parent.caption"
@@ -676,7 +676,7 @@ msgstr "Κατάσταση"
 
 #: tfrmmoduledns.griddns.header.columns[5].text
 msgid "DNSSEC Status"
-msgstr ""
+msgstr "Κατάσταση DNSSEC"
 
 #: tfrmmoduledns.griddns.header.columns[6].text
 msgid "Key Master"
@@ -704,7 +704,7 @@ msgstr ""
 #: tfrmmodulesitesandservices.action_newall.caption
 msgctxt "tfrmmodulesitesandservices.action_newall.caption"
 msgid "New"
-msgstr ""
+msgstr "Νέο"
 
 #: tfrmmodulesitesandservices.action_newcomputer.caption
 msgid "Action_NewComputer"
@@ -752,7 +752,7 @@ msgstr ""
 
 #: tfrmmodulesitesandservices.action_newsite.caption
 msgid "New Site"
-msgstr ""
+msgstr "Νέος Τόπος"
 
 #: tfrmmodulesitesandservices.action_newsitelinkbridge.caption
 msgid "Action_NewSiteLinkBridge"
@@ -760,7 +760,7 @@ msgstr ""
 
 #: tfrmmodulesitesandservices.action_newsubnet.caption
 msgid "New Subnet"
-msgstr ""
+msgstr "Νέο Υποδίκτυο"
 
 #: tfrmmodulesitesandservices.action_newuser.caption
 msgid "Action_NewUser"
@@ -802,12 +802,12 @@ msgstr ""
 #: tfrmmodulesitesandservices.menuitem_delete.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_delete.caption"
 msgid "Delete"
-msgstr ""
+msgstr "Διαγραφή"
 
 #: tfrmmodulesitesandservices.menuitem_newcomputer.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newcomputer.caption"
 msgid "Computer"
-msgstr ""
+msgstr "Υπολογιστής"
 
 #: tfrmmodulesitesandservices.menuitem_newconnection.caption
 msgid "Connection"
@@ -816,7 +816,7 @@ msgstr ""
 #: tfrmmodulesitesandservices.menuitem_newcontact.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newcontact.caption"
 msgid "Contact"
-msgstr ""
+msgstr "Επαφή"
 
 #: tfrmmodulesitesandservices.menuitem_newgroup.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newgroup.caption"
@@ -859,7 +859,7 @@ msgstr ""
 #: tfrmmodulesitesandservices.menuitem_newserver.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newserver.caption"
 msgid "Server"
-msgstr ""
+msgstr "Διακομιστής"
 
 #: tfrmmodulesitesandservices.menuitem_newserverscontainer.caption
 msgid "Servers Container"
@@ -868,12 +868,12 @@ msgstr ""
 #: tfrmmodulesitesandservices.menuitem_newsharedfolder.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newsharedfolder.caption"
 msgid "Shared Folder"
-msgstr ""
+msgstr "Κοινόχρηστος Φάκελος"
 
 #: tfrmmodulesitesandservices.menuitem_newsite.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newsite.caption"
 msgid "Site"
-msgstr ""
+msgstr "Τοποθεσία"
 
 #: tfrmmodulesitesandservices.menuitem_newsitelink.caption
 msgid "Site Link"
@@ -906,11 +906,11 @@ msgstr "Όνομα"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[10].text
 msgid "From Server"
-msgstr ""
+msgstr "Από Εξυπηρετητή"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[11].text
 msgid "From Site"
-msgstr ""
+msgstr "Από Τόπο"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[1].text
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[1].text"
@@ -924,7 +924,7 @@ msgstr "Περιγραφή"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[3].text
 msgid "Location"
-msgstr ""
+msgstr "Τοποθεσία"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[4].text
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[4].text"
@@ -933,11 +933,11 @@ msgstr "Τόπος"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[5].text
 msgid "Cost"
-msgstr ""
+msgstr "Κόστος"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[6].text
 msgid "Replication Interval"
-msgstr ""
+msgstr "Διάστημα Αναπαραγωγής"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[7].text
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[7].text"
@@ -964,15 +964,15 @@ msgstr "Αλλαγή..."
 
 #: tfrmnewcomputer.checkbox_assigncomputer.caption
 msgid "Assign this computer account as a pre-Windows 2000 computer"
-msgstr ""
+msgstr "Προδιορισμός αυτού του λογαριασμού υπολογιστή ως υπολογιστή προ-Windows 2000"
 
 #: tfrmnewcomputer.label1.caption
 msgid "The following user or group can join this computer to a domain."
-msgstr ""
+msgstr "Ο παρακάτω χρήστης ή ομάδα μπορεί να συνδέσει αυτόν τον υπολογιστή σε έναν τομέα."
 
 #: tfrmnewcomputer.label_computername.caption
 msgid "Computer name:"
-msgstr ""
+msgstr "Όνομα υπολογιστή:"
 
 #: tfrmnewcomputer.label_computername2000.caption
 msgctxt "tfrmnewcomputer.label_computername2000.caption"
@@ -981,7 +981,7 @@ msgstr "Όνομα υπολογιστή (προ-Windows 2000):"
 
 #: tfrmnewcomputer.label_userorgroup.caption
 msgid "User or group:"
-msgstr ""
+msgstr "Χρήστης ή ομάδα:"
 
 #: tfrmnewcontact.action_next.caption
 msgctxt "tfrmnewcontact.action_next.caption"
@@ -1015,11 +1015,11 @@ msgstr "Επώνυμο:"
 
 #: tfrmnewgroup.label_name.caption
 msgid "Group name :"
-msgstr ""
+msgstr "Όνομα ομάδας :"
 
 #: tfrmnewgroup.label_netbiosname.caption
 msgid "Group name (pre-Windows 2000) :"
-msgstr ""
+msgstr "Όνομα ομάδας (προ-Windows 2000) :"
 
 #: tfrmnewgroup.radiobtn_distribution.caption
 msgctxt "tfrmnewgroup.radiobtn_distribution.caption"
@@ -1059,27 +1059,27 @@ msgstr "Τύπος ομάδας"
 #: tfrmnewinetorgperson.action_next.caption
 msgctxt "tfrmnewinetorgperson.action_next.caption"
 msgid "Next"
-msgstr ""
+msgstr "Επόμενο"
 
 #: tfrmnewinetorgperson.checkbox_accountdisabled.caption
 msgctxt "tfrmnewinetorgperson.checkbox_accountdisabled.caption"
 msgid "Account is disabled"
-msgstr ""
+msgstr "Ο λογαριασμός είναι απενεργοποιημένος"
 
 #: tfrmnewinetorgperson.checkbox_cannotchange.caption
 msgctxt "tfrmnewinetorgperson.checkbox_cannotchange.caption"
 msgid "User cannot change password"
-msgstr ""
+msgstr "Ο χρήστης δεν μπορεί να αλλάξει τον κωδικό πρόσβασης"
 
 #: tfrmnewinetorgperson.checkbox_neverexpires.caption
 msgctxt "tfrmnewinetorgperson.checkbox_neverexpires.caption"
 msgid "Password never expires"
-msgstr ""
+msgstr "Ο κωδικός πρόσβασης δεν λήγει ποτέ"
 
 #: tfrmnewinetorgperson.checkbox_nextlogon.caption
 msgctxt "tfrmnewinetorgperson.checkbox_nextlogon.caption"
 msgid "User must change password at next logon"
-msgstr ""
+msgstr "Ο χρήστης πρέπει να αλλάξει τον κωδικό πρόσβασης κατά την επόμενη σύνδεση"
 
 #: tfrmnewinetorgperson.label_confirm.caption
 msgid "Confirm:"
@@ -1088,12 +1088,12 @@ msgstr ""
 #: tfrmnewinetorgperson.label_firstname.caption
 msgctxt "tfrmnewinetorgperson.label_firstname.caption"
 msgid "First name:"
-msgstr ""
+msgstr "Όνομα:"
 
 #: tfrmnewinetorgperson.label_fullname.caption
 msgctxt "tfrmnewinetorgperson.label_fullname.caption"
 msgid "Full name:"
-msgstr ""
+msgstr "Πλήρες όνομα:"
 
 #: tfrmnewinetorgperson.label_initials.caption
 msgid "Initials:"
@@ -1102,12 +1102,12 @@ msgstr ""
 #: tfrmnewinetorgperson.label_lastname.caption
 msgctxt "tfrmnewinetorgperson.label_lastname.caption"
 msgid "Last name:"
-msgstr ""
+msgstr "Επώνυμο:"
 
 #: tfrmnewinetorgperson.label_password.caption
 msgctxt "tfrmnewinetorgperson.label_password.caption"
 msgid "Password:"
-msgstr ""
+msgstr "Κωδικός:"
 
 #: tfrmnewinetorgperson.label_prewindows.caption
 msgctxt "tfrmnewinetorgperson.label_prewindows.caption"
@@ -1126,7 +1126,7 @@ msgstr ""
 #: tfrmnewmsdnsserversettings.action_next.caption
 msgctxt "tfrmnewmsdnsserversettings.action_next.caption"
 msgid "Next"
-msgstr ""
+msgstr "Επόμενο"
 
 #: tfrmnewmsdnsserversettings.label_cn.caption
 msgctxt "tfrmnewmsdnsserversettings.label_cn.caption"
@@ -1163,11 +1163,11 @@ msgstr ""
 
 #: tfrmnewobject.label1.caption
 msgid "Object class"
-msgstr ""
+msgstr "Κλάση αντικειμένου"
 
 #: tfrmnewobject.label2.caption
 msgid "Object name"
-msgstr ""
+msgstr "Όνομα αντικειμένου"
 
 #: tfrmnewobject.label3.caption
 msgctxt "tfrmnewobject.label3.caption"
@@ -1186,7 +1186,7 @@ msgstr "Τιμή"
 
 #: tfrmnewou.checkbox_protected.caption
 msgid "Protect container from accidental deletion"
-msgstr ""
+msgstr "Προστασία container από τυχαία διαγραφή"
 
 #: tfrmnewou.label_name.caption
 msgctxt "tfrmnewou.label_name.caption"
@@ -1200,12 +1200,12 @@ msgstr ""
 #: tfrmnewserver.action_next.caption
 msgctxt "tfrmnewserver.action_next.caption"
 msgid "Next"
-msgstr ""
+msgstr "Επόμενο"
 
 #: tfrmnewserver.label_name.caption
 msgctxt "tfrmnewserver.label_name.caption"
 msgid "Name:"
-msgstr ""
+msgstr "Όνομα:"
 
 #: tfrmnewsharedfolder.action_next.caption
 msgctxt "tfrmnewsharedfolder.action_next.caption"
@@ -1219,7 +1219,7 @@ msgstr "Όνομα:"
 
 #: tfrmnewsharedfolder.label_path.caption
 msgid "Network path (\\\\server\\share):"
-msgstr ""
+msgstr "Διαδρομή δικτύου (\\\\διακομιστής\\κοινόχρηστος τόμος):"
 
 #: tfrmnewsite.action_ok.caption
 msgctxt "tfrmnewsite.action_ok.caption"
@@ -1237,7 +1237,7 @@ msgstr "Όνομα"
 
 #: tfrmnewsite.tisgrid1.header.columns[0].text
 msgid "Link Name"
-msgstr ""
+msgstr "Όνομα Συνδέσμου"
 
 #: tfrmnewsite.tisgrid1.header.columns[1].text
 msgid "Transport"
@@ -1246,7 +1246,7 @@ msgstr ""
 #: tfrmnewsitelink.action_next.caption
 msgctxt "tfrmnewsitelink.action_next.caption"
 msgid "Next"
-msgstr ""
+msgstr "Επόμενο"
 
 #: tfrmnewsitelink.button_add.caption
 msgctxt "tfrmnewsitelink.button_add.caption"
@@ -1266,7 +1266,7 @@ msgstr ""
 #: tfrmnewsitelink.label_name.caption
 msgctxt "tfrmnewsitelink.label_name.caption"
 msgid "Name:"
-msgstr ""
+msgstr "Όνομα:"
 
 #: tfrmnewsitelink.label_rightlist.caption
 msgctxt "tfrmnewsitelink.label_rightlist.caption"
@@ -1280,7 +1280,7 @@ msgstr ""
 #: tfrmnewsitelinkbridge.action_next.caption
 msgctxt "tfrmnewsitelinkbridge.action_next.caption"
 msgid "Next"
-msgstr ""
+msgstr "Επόμενο"
 
 #: tfrmnewsitelinkbridge.button_add.caption
 msgctxt "tfrmnewsitelinkbridge.button_add.caption"
@@ -1300,7 +1300,7 @@ msgstr ""
 #: tfrmnewsitelinkbridge.label_name.caption
 msgctxt "tfrmnewsitelinkbridge.label_name.caption"
 msgid "Name:"
-msgstr ""
+msgstr "Όνομα:"
 
 #: tfrmnewsitelinkbridge.label_rightlistbox.caption
 msgctxt "tfrmnewsitelinkbridge.label_rightlistbox.caption"
@@ -1318,35 +1318,35 @@ msgstr "ΟΚ"
 
 #: tfrmnewsubnet.label1.caption
 msgid "Enter the address prefix using network prefix notation (address/prefix length), where the prefix length indicates the number of fixed bits. You can enter either an IPv4 or an IPv6 subnet prefix."
-msgstr ""
+msgstr "Εισάγετε το πρόθεμα διεύθυνσης χρησιμοποιώντας τη σημειογραφία προθέματος δικτύου (διεύθυνση/μήκος προθέματος), όπου το μήκος προθέματος υποδεικνύει τον αριθμό των σταθερών bits. Μπορείτε να εισαγάγετε είτε ένα πρόθεμα υποδικτύου IPv4 είτε ένα πρόθεμα υποδικτύου IPv6."
 
 #: tfrmnewsubnet.label2.caption
 msgid "Learn more about entering address prefixes."
-msgstr ""
+msgstr "Μάθετε περισσότερα σχετικά με την εισαγωγή προθεμάτων διευθύνσεων."
 
 #: tfrmnewsubnet.label3.caption
 msgid "IPv4 example:   157.54.208.0/20"
-msgstr ""
+msgstr "IPv4 παράδειγμα:   157.54.208.0/20"
 
 #: tfrmnewsubnet.label4.caption
 msgid "IPv6 example:   3FFE:FFFF:0:C000::/64"
-msgstr ""
+msgstr "IPv6 παράδειγμα:   3FFE:FFFF:0:C000::/64"
 
 #: tfrmnewsubnet.label5.caption
 msgid "Prefix:"
-msgstr ""
+msgstr "Πρόθεμα:"
 
 #: tfrmnewsubnet.label6.caption
 msgid "Prefix name in Active Directory Domain Services:"
-msgstr ""
+msgstr "Όνομα προθέματος στις Υπηρεσίες Τομέα Active Directory:"
 
 #: tfrmnewsubnet.label7.caption
 msgid "Select a site object for this prefix."
-msgstr ""
+msgstr "Επιλέξτε ένα αντικείμενο τοποθεσίας για αυτό το πρόθεμα."
 
 #: tfrmnewsubnet.tisgrid1.header.columns[0].text
 msgid "Site Name"
-msgstr ""
+msgstr "Όνομα Τοποθεσίας"
 
 #: tfrmnewuser.checkbox_accountdisabled.caption
 msgctxt "tfrmnewuser.checkbox_accountdisabled.caption"
@@ -1384,7 +1384,7 @@ msgstr "Επιβεβαίωση Κωδικού :"
 
 #: tfrmnewuser.label_firstname.caption
 msgid "First name :"
-msgstr ""
+msgstr "Όνομα :"
 
 #: tfrmnewuser.label_fullname.caption
 msgctxt "tfrmnewuser.label_fullname.caption"
@@ -1403,11 +1403,11 @@ msgstr "Επώνυμο :"
 
 #: tfrmnewuser.label_password.caption
 msgid "Password :"
-msgstr ""
+msgstr "Κωδικός :"
 
 #: tfrmnewuser.label_resume.caption
 msgid "When you click Finish, the following object will be created :"
-msgstr ""
+msgstr "Όταν κάνετε κλικ στο Ολοκλήρωση, θα δημιουργηθεί το ακόλουθο αντικείμενο :"
 
 #: tfrmnewuser.label_userlogon.caption
 msgctxt "tfrmnewuser.label_userlogon.caption"
@@ -1426,7 +1426,7 @@ msgstr "Ώρες Σύνδεσης"
 
 #: tfrmpropertyaccount.action_logonto.caption
 msgid "Log On To"
-msgstr ""
+msgstr "Σύνδεση Σε"
 
 #: tfrmpropertyaccount.checkbox_cannotchange.caption
 msgctxt "tfrmpropertyaccount.checkbox_cannotchange.caption"
@@ -1440,15 +1440,15 @@ msgstr "Ο λογαριασμός είναι απενεργοποιημένος"
 
 #: tfrmpropertyaccount.checkbox_kerberosaes128encryption.caption
 msgid "This account supports Kerberos AES 128 bit encryption"
-msgstr ""
+msgstr "Αυτός ο λογαριασμός υποστηρίζει κρυπτογράφηση Kerberos AES 128 bit"
 
 #: tfrmpropertyaccount.checkbox_kerberosaes256encryption.caption
 msgid "This account supports Kerberos AES 256 bit encryption"
-msgstr ""
+msgstr "Αυτός ο λογαριασμός υποστηρίζει κρυπτογράφηση Kerberos AES 256 bit"
 
 #: tfrmpropertyaccount.checkbox_kerberosdesencryption.caption
 msgid "Use only Kerberos DES encryption types for this account"
-msgstr ""
+msgstr "Χρήση μόνο τύπων κρυπτογράφησης Kerberos DES για αυτόν τον λογαριασμό"
 
 #: tfrmpropertyaccount.checkbox_mustchange.caption
 msgctxt "tfrmpropertyaccount.checkbox_mustchange.caption"
@@ -1462,19 +1462,19 @@ msgstr "Ο κωδικός πρόσβασης δεν λήγει ποτέ"
 
 #: tfrmpropertyaccount.checkbox_nokerberospreauth.caption
 msgid "Do not require Kerberos preauthentification"
-msgstr ""
+msgstr "Να μην απαιτείται προεπαλήθευση Kerberos"
 
 #: tfrmpropertyaccount.checkbox_reversibleencryption.caption
 msgid "Store password using reversible encryption"
-msgstr ""
+msgstr "Αποθήκευση κωδικού πρόσβασης χρησιμοποιώντας αντιστρέψιμη κρυπτογράφηση"
 
 #: tfrmpropertyaccount.checkbox_sensitive.caption
 msgid "Account is sensitive and cannot be delegated"
-msgstr ""
+msgstr "Ο λογαριασμός είναι ευαίσθητος και δεν μπορούν να του ανατεθούν εργασίες"
 
 #: tfrmpropertyaccount.checkbox_smartcard.caption
 msgid "Smart card is required for interactive logon"
-msgstr ""
+msgstr "Απαιτείται έξυπνη κάρτα για διαδραστική σύνδεση"
 
 #: tfrmpropertyaccount.datetimepicker_expires.textfornulldate
 msgctxt "tfrmpropertyaccount.datetimepicker_expires.textfornulldate"
@@ -1496,11 +1496,11 @@ msgstr ""
 
 #: tfrmpropertyaccount.goupbox_expires.caption
 msgid "Account expires"
-msgstr ""
+msgstr "Ο λογαριασμός λήγει"
 
 #: tfrmpropertyaccount.label_options.caption
 msgid "Account options :"
-msgstr ""
+msgstr "Επιλογές λογαριασμού :"
 
 #: tfrmpropertyaccount.label_unlock.caption
 msgid "Unlock account."
@@ -1518,11 +1518,11 @@ msgstr "Όνομα σύνδεσης χρήστη (προ-Windows 2000) :"
 
 #: tfrmpropertyaccount.radiobutton_endof.caption
 msgid "End of :"
-msgstr ""
+msgstr "Στο τέλος του :"
 
 #: tfrmpropertyaccount.radiobutton_never.caption
 msgid "Never"
-msgstr ""
+msgstr "Ποτέ"
 
 #: tfrmpropertyaddress.combobox_countrycode.hint
 msgctxt "tfrmpropertyaddress.combobox_countrycode.hint"
@@ -1541,7 +1541,7 @@ msgstr "Ο zip ή ταχυδρομικός κώδικας για την παρά
 
 #: tfrmpropertyaddress.edit_postofficebox.hint
 msgid "The post office box number for this object"
-msgstr ""
+msgstr "Ο αριθμός ταχυδρομικού κουτιού για αυτό το αντικείμενο"
 
 #: tfrmpropertyaddress.edit_state.hint
 msgctxt "tfrmpropertyaddress.edit_state.hint"
@@ -1550,27 +1550,27 @@ msgstr "Το όνομα μιας πολιτείας ή επαρχίας"
 
 #: tfrmpropertyaddress.label_city.caption
 msgid "City :"
-msgstr ""
+msgstr "Πόλη :"
 
 #: tfrmpropertyaddress.label_countrycode.caption
 msgid "Country :"
-msgstr ""
+msgstr "Χώρα :"
 
 #: tfrmpropertyaddress.label_postalcode.caption
 msgid "ZIP/Postal Code :"
-msgstr ""
+msgstr "ZIP/Ταχυδρομικός Κώδικας :"
 
 #: tfrmpropertyaddress.label_postofficebox.caption
 msgid "P.O Box :"
-msgstr ""
+msgstr "Ταχυδρομικό Κουτί :"
 
 #: tfrmpropertyaddress.label_state.caption
 msgid "State/province :"
-msgstr ""
+msgstr "Πολιτεία/Επαρχία :"
 
 #: tfrmpropertyaddress.label_street.caption
 msgid "Street :"
-msgstr ""
+msgstr "Οδός :"
 
 #: tfrmpropertyaddress.memo_street.hint
 msgctxt "tfrmpropertyaddress.memo_street.hint"
@@ -1594,7 +1594,7 @@ msgstr "Φίλτρο"
 
 #: tfrmpropertyattributes.label_attributes.caption
 msgid "Attributes :"
-msgstr ""
+msgstr "Χαρακτηριστικά :"
 
 #: tfrmpropertyattributes.list_attributes.header.columns[0].text
 msgctxt "tfrmpropertyattributes.list_attributes.header.columns[0].text"
@@ -1603,7 +1603,7 @@ msgstr "Χαρακτηριστικό"
 
 #: tfrmpropertyattributes.list_attributes.header.columns[1].text
 msgid "value"
-msgstr ""
+msgstr "Τιμή"
 
 #: tfrmpropertyattributes.menuitem1.caption
 msgctxt "tfrmpropertyattributes.menuitem1.caption"
@@ -1617,19 +1617,19 @@ msgstr "Εμφάνιση μόνο εγγράψιμων χαρακτηριστι�
 
 #: tfrmpropertyattributes.menuitem3.caption
 msgid "Show attributes:"
-msgstr ""
+msgstr "Εμφάνιση χαρακτηριστικών:"
 
 #: tfrmpropertyattributes.menuitem4.caption
 msgid "  Mandatory"
-msgstr ""
+msgstr "  Υποχρεωτικό"
 
 #: tfrmpropertyattributes.menuitem5.caption
 msgid "  Optional"
-msgstr ""
+msgstr "  Προαιρετικό"
 
 #: tfrmpropertyattributes.menuitem6.caption
 msgid "Show read-only attributes:"
-msgstr ""
+msgstr "Εμφάνιση χαρακτηριστικών μόνο για ανάγνωση:"
 
 #: tfrmpropertyattributes.menuitem7.caption
 msgctxt "tfrmpropertyattributes.menuitem7.caption"
@@ -1649,7 +1649,7 @@ msgstr "Μόνο συστήματος"
 #: tfrmpropertybitlocker.action_copypassword.caption
 msgctxt "tfrmpropertybitlocker.action_copypassword.caption"
 msgid "Copy password"
-msgstr ""
+msgstr "Αντιγραφή κωδικού πρόσβασης"
 
 #: tfrmpropertybitlocker.label_bitclockerdetails.caption
 msgid "Details:"
@@ -1674,27 +1674,27 @@ msgstr ""
 #: tfrmpropertybitlocker.tisgrid1.header.columns[3].text
 msgctxt "tfrmpropertybitlocker.tisgrid1.header.columns[3].text"
 msgid "Computer"
-msgstr ""
+msgstr "Υπολογιστής"
 
 #: tfrmpropertyconnections.grid_from.header.columns[0].text
 msgctxt "tfrmpropertyconnections.grid_from.header.columns[0].text"
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: tfrmpropertyconnections.grid_from.header.columns[1].text
 msgctxt "tfrmpropertyconnections.grid_from.header.columns[1].text"
 msgid "Site"
-msgstr ""
+msgstr "Τοποθεσία"
 
 #: tfrmpropertyconnections.grid_to.header.columns[0].text
 msgctxt "tfrmpropertyconnections.grid_to.header.columns[0].text"
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: tfrmpropertyconnections.grid_to.header.columns[1].text
 msgctxt "tfrmpropertyconnections.grid_to.header.columns[1].text"
 msgid "Site"
-msgstr ""
+msgstr "Τοποθεσία"
 
 #: tfrmpropertyconnections.label_from.caption
 msgid "Replicate From:"
@@ -1706,7 +1706,7 @@ msgstr ""
 
 #: tfrmpropertygeneralcomputer.edit_dnshostname.hint
 msgid "Name of computer as registered in DNS."
-msgstr ""
+msgstr "Όνομα υπολογιστή όπως καταχωρήθηκε στο DNS."
 
 #: tfrmpropertygeneralcomputer.edit_samaccountname.hint
 msgctxt "tfrmpropertygeneralcomputer.edit_samaccountname.hint"
@@ -1727,7 +1727,7 @@ msgstr "Περιγραφή:"
 
 #: tfrmpropertygeneralcomputer.label_dnshostname.caption
 msgid "DNS name:"
-msgstr ""
+msgstr "Όνομα DNS:"
 
 #: tfrmpropertygeneralcomputer.label_samaccountname.caption
 msgctxt "tfrmpropertygeneralcomputer.label_samaccountname.caption"
@@ -1764,11 +1764,11 @@ msgstr ""
 #: tfrmpropertygeneralgpo.label_description.caption
 msgctxt "tfrmpropertygeneralgpo.label_description.caption"
 msgid "Description:"
-msgstr ""
+msgstr "Περιγραφή:"
 
 #: tfrmpropertygeneralgroup.edit_mail.hint
 msgid "The group's E-mail address"
-msgstr ""
+msgstr "Η διεύθυνση E-mail της ομάδας"
 
 #: tfrmpropertygeneralgroup.edit_samaccountname.hint
 msgctxt "tfrmpropertygeneralgroup.edit_samaccountname.hint"
@@ -1789,15 +1789,15 @@ msgstr "Σημειώσεις :"
 
 #: tfrmpropertygeneralgroup.label_mail.caption
 msgid "E-mail :"
-msgstr ""
+msgstr "E-mail :"
 
 #: tfrmpropertygeneralgroup.label_samaccountname.caption
 msgid "Group Name (pre-windows 2000) :"
-msgstr ""
+msgstr "Όνομα Ομάδας (προ-windows 2000) :"
 
 #: tfrmpropertygeneralgroup.memo_info.hint
 msgid "The group's comments"
-msgstr ""
+msgstr "Σχόλια ομάδας"
 
 #: tfrmpropertygeneralgroup.radiogroup_scope.caption
 msgctxt "tfrmpropertygeneralgroup.radiogroup_scope.caption"
@@ -1845,7 +1845,7 @@ msgstr ""
 #: tfrmpropertygeneralintersitetransport.label_description.caption
 msgctxt "tfrmpropertygeneralintersitetransport.label_description.caption"
 msgid "Description:"
-msgstr ""
+msgstr "Περιγραφή:"
 
 #: tfrmpropertygeneralntdsdsa.checkbox_globalcatalog.caption
 msgid "Global Catalog"
@@ -1854,7 +1854,7 @@ msgstr ""
 #: tfrmpropertygeneralntdsdsa.label_description.caption
 msgctxt "tfrmpropertygeneralntdsdsa.label_description.caption"
 msgid "Description:"
-msgstr ""
+msgstr "Περιγραφή:"
 
 #: tfrmpropertygeneralntdsdsa.label_dnsalias.caption
 msgid "DNS Alias:"
@@ -1892,7 +1892,7 @@ msgstr ""
 #: tfrmpropertygeneralntdssitesettings.label_description.caption
 msgctxt "tfrmpropertygeneralntdssitesettings.label_description.caption"
 msgid "Description:"
-msgstr ""
+msgstr "Περιγραφή:"
 
 #: tfrmpropertygeneralntdssitesettings.label_refresh.caption
 msgid "Refresh cache from:"
@@ -1905,7 +1905,7 @@ msgstr ""
 #: tfrmpropertygeneralntdssitesettings.label_site.caption
 msgctxt "tfrmpropertygeneralntdssitesettings.label_site.caption"
 msgid "Site:"
-msgstr ""
+msgstr "Τοποθεσία:"
 
 #: tfrmpropertygeneralou.combobox_co.hint
 msgctxt "tfrmpropertygeneralou.combobox_co.hint"
@@ -1954,7 +1954,7 @@ msgstr "Οδός:"
 
 #: tfrmpropertygeneralou.label_zip.caption
 msgid "Zip/Postal Code:"
-msgstr ""
+msgstr "Zip/Ταχυδρομικός Κώδικας:"
 
 #: tfrmpropertygeneralou.memo_street.hint
 msgctxt "tfrmpropertygeneralou.memo_street.hint"
@@ -1978,17 +1978,17 @@ msgstr ""
 #: tfrmpropertygeneralserver.label_dctype.caption
 msgctxt "tfrmpropertygeneralserver.label_dctype.caption"
 msgid "DC Type:"
-msgstr ""
+msgstr "Τύπος DC:"
 
 #: tfrmpropertygeneralserver.label_description.caption
 msgctxt "tfrmpropertygeneralserver.label_description.caption"
 msgid "Description:"
-msgstr ""
+msgstr "Περιγραφή:"
 
 #: tfrmpropertygeneralserver.label_domain.caption
 msgctxt "tfrmpropertygeneralserver.label_domain.caption"
 msgid "Domain:"
-msgstr ""
+msgstr "Τομέας:"
 
 #: tfrmpropertygeneralserver.label_transports.caption
 msgid "This server is a preferred bridgehead server for the following transports:"
@@ -2005,7 +2005,7 @@ msgstr "Περιγραφή:"
 
 #: tfrmpropertygeneralsite.label_subnet.caption
 msgid "Subnets:"
-msgstr ""
+msgstr "Υποδίκτυα:"
 
 #: tfrmpropertygeneralsitelink.button_add.caption
 msgctxt "tfrmpropertygeneralsitelink.button_add.caption"
@@ -2029,7 +2029,7 @@ msgstr ""
 #: tfrmpropertygeneralsitelink.label_description.caption
 msgctxt "tfrmpropertygeneralsitelink.label_description.caption"
 msgid "Description:"
-msgstr ""
+msgstr "Περιγραφή:"
 
 #: tfrmpropertygeneralsitelink.label_insitelink.caption
 msgctxt "tfrmpropertygeneralsitelink.label_insitelink.caption"
@@ -2062,7 +2062,7 @@ msgstr ""
 #: tfrmpropertygeneralsitelinkbridge.label_description.caption
 msgctxt "tfrmpropertygeneralsitelinkbridge.label_description.caption"
 msgid "Description:"
-msgstr ""
+msgstr "Περιγραφή:"
 
 #: tfrmpropertygeneralsitelinkbridge.label_insitelinkbridge.caption
 msgctxt "tfrmpropertygeneralsitelinkbridge.label_insitelinkbridge.caption"
@@ -2081,7 +2081,7 @@ msgstr "Περιγραφή:"
 
 #: tfrmpropertygeneralsubnet.label_prefix.caption
 msgid "Prefix"
-msgstr ""
+msgstr "Πρόθεμα"
 
 #: tfrmpropertygeneralsubnet.label_site.caption
 msgctxt "tfrmpropertygeneralsubnet.label_site.caption"
@@ -2105,31 +2105,31 @@ msgstr "Το προτιμώμενο όνομα του ατόμου που θα �
 
 #: tfrmpropertygeneraluser.edit_givenname.hint
 msgid "The person's First Name"
-msgstr ""
+msgstr "Το όνομα του ατόμου"
 
 #: tfrmpropertygeneraluser.edit_homepage.hint
 msgid "A web page that is the primary landing page of a website"
-msgstr ""
+msgstr "Μια ιστοσελίδα που είναι η κύρια σελίδα προσέγγισης ενός ιστότοπου"
 
 #: tfrmpropertygeneraluser.edit_initials.hint
 msgid "The person's initals"
-msgstr ""
+msgstr "Τα αρχικά του ατόμου"
 
 #: tfrmpropertygeneraluser.edit_mail.hint
 msgid "The person's E-mail address"
-msgstr ""
+msgstr "Η διεύθυνση ηλεκτρονικού ταχυδρομείου του ατόμου"
 
 #: tfrmpropertygeneraluser.edit_physicaldeliveryofficename.hint
 msgid "The person's office location in the user's place of business"
-msgstr ""
+msgstr "Η τοποθεσία του γραφείου του ατόμου στην τοποθεσία εργασίας του χρήστη"
 
 #: tfrmpropertygeneraluser.edit_surname.hint
 msgid "The person's family name or last name"
-msgstr ""
+msgstr "Το επώνυμο του ατόμου"
 
 #: tfrmpropertygeneraluser.edit_telephonenumber.hint
 msgid "The person's phone number"
-msgstr ""
+msgstr "Το τηλέφωνο του ατόμου"
 
 #: tfrmpropertygeneraluser.label_description.caption
 msgctxt "tfrmpropertygeneraluser.label_description.caption"
@@ -2138,7 +2138,7 @@ msgstr "Περιγραφή :"
 
 #: tfrmpropertygeneraluser.label_desktopprofile.caption
 msgid "Desktop :"
-msgstr ""
+msgstr "Γραφείο :"
 
 #: tfrmpropertygeneraluser.label_displayname.caption
 msgctxt "tfrmpropertygeneraluser.label_displayname.caption"
@@ -2152,7 +2152,7 @@ msgstr "Όνομα :"
 
 #: tfrmpropertygeneraluser.label_homepage.caption
 msgid "Web page :"
-msgstr ""
+msgstr "ιστοσελίδα :"
 
 #: tfrmpropertygeneraluser.label_initials.caption
 msgctxt "tfrmpropertygeneraluser.label_initials.caption"
@@ -2170,19 +2170,19 @@ msgstr "Επώνυμο :"
 
 #: tfrmpropertygeneraluser.label_telephonenumber.caption
 msgid "Phone Number :"
-msgstr ""
+msgstr "Τηλέφωνο :"
 
 #: tfrmpropertygeneralvolume.bitbtn_keywords.caption
 msgid "Keywords..."
-msgstr ""
+msgstr "Λέξεις κλειδιά..."
 
 #: tfrmpropertygeneralvolume.bitbtn_keywords.hint
 msgid "A list of keywords that can be used to locate a given connection point"
-msgstr ""
+msgstr "Μια λίστα λέξεων κλειδιών που μπορούν να χρησιμοποιηθούν για την εύρεση ενός δεδομένου σημείου σύνδεσης"
 
 #: tfrmpropertygeneralvolume.edit_uncname.hint
 msgid "The universal naming convention name for shared volumes and printers"
-msgstr ""
+msgstr "Το όνομα της καθολικής συμβάσεως ονοματοδοσίας για κοινόχρηστους τόμους και εκτυπωτές"
 
 #: tfrmpropertygeneralvolume.label_description.caption
 msgctxt "tfrmpropertygeneralvolume.label_description.caption"
@@ -2191,17 +2191,17 @@ msgstr "Περιγραφή:"
 
 #: tfrmpropertygeneralvolume.label_uncname.caption
 msgid "UNC name: (Example: \\\\server\\share)"
-msgstr ""
+msgstr "Όνομα UNC: (Παράδειγμα: \\\\διακομιστής\\κοινόχρηστος τόμος)"
 
 #: tfrmpropertygplinks.action_add.caption
 msgctxt "tfrmpropertygplinks.action_add.caption"
 msgid "Add"
-msgstr ""
+msgstr "Προσθήκη"
 
 #: tfrmpropertygplinks.action_delete.caption
 msgctxt "tfrmpropertygplinks.action_delete.caption"
 msgid "Delete"
-msgstr ""
+msgstr "Διαγραφή"
 
 #: tfrmpropertygplinks.action_disablelink.caption
 msgid "Disable Link"
@@ -2231,7 +2231,7 @@ msgstr ""
 #: tfrmpropertygplinks.tisgrid_gplinks.header.columns[2].text
 msgctxt "tfrmpropertygplinks.tisgrid_gplinks.header.columns[2].text"
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: tfrmpropertygplinks.tisgrid_gplinks.header.columns[3].text
 msgid "Link flags"
@@ -2244,52 +2244,52 @@ msgstr ""
 #: tfrmpropertylaps.action_v1_copypassword.caption
 msgctxt "tfrmpropertylaps.action_v1_copypassword.caption"
 msgid "Copy password"
-msgstr ""
+msgstr "Αντιγραφή κωδικού πρόσβασης"
 
 #: tfrmpropertylaps.action_v1_expirenow.caption
 msgctxt "tfrmpropertylaps.action_v1_expirenow.caption"
 msgid "Expire now"
-msgstr ""
+msgstr "Λήξη τώρα"
 
 #: tfrmpropertylaps.action_v1_showpassword.caption
 msgctxt "tfrmpropertylaps.action_v1_showpassword.caption"
 msgid "Show password"
-msgstr ""
+msgstr "Εμφάνιση κωδικού πρόσβασης"
 
 #: tfrmpropertylaps.action_v2_copypassword.caption
 msgctxt "tfrmpropertylaps.action_v2_copypassword.caption"
 msgid "Copy password"
-msgstr ""
+msgstr "Αντιγραφή κωδικού πρόσβασης"
 
 #: tfrmpropertylaps.action_v2_encryptedcopypassword.caption
 msgctxt "tfrmpropertylaps.action_v2_encryptedcopypassword.caption"
 msgid "Copy password"
-msgstr ""
+msgstr "Αντιγραφή κωδικού πρόσβασης"
 
 #: tfrmpropertylaps.action_v2_encryptedshowpassword.caption
 msgctxt "tfrmpropertylaps.action_v2_encryptedshowpassword.caption"
 msgid "Show password"
-msgstr ""
+msgstr "Εμφάνιση κωδικού πρόσβασης"
 
 #: tfrmpropertylaps.action_v2_expirenow.caption
 msgctxt "tfrmpropertylaps.action_v2_expirenow.caption"
 msgid "Expire now"
-msgstr ""
+msgstr "Λήξη τώρα"
 
 #: tfrmpropertylaps.action_v2_showpassword.caption
 msgctxt "tfrmpropertylaps.action_v2_showpassword.caption"
 msgid "Show password"
-msgstr ""
+msgstr "Εμφάνιση κωδικού πρόσβασης"
 
 #: tfrmpropertylaps.datetimepicker_v1_newexpiration.textfornulldate
 msgctxt "tfrmpropertylaps.datetimepicker_v1_newexpiration.textfornulldate"
 msgid "NULL"
-msgstr ""
+msgstr "ΚΕΝΟ"
 
 #: tfrmpropertylaps.datetimepicker_v2_newexpiration.textfornulldate
 msgctxt "tfrmpropertylaps.datetimepicker_v2_newexpiration.textfornulldate"
 msgid "NULL"
-msgstr ""
+msgstr "ΚΕΝΟ"
 
 #: tfrmpropertylaps.groupbox_lapsencrypted.caption
 msgid "Encrypted"
@@ -2354,11 +2354,11 @@ msgstr ""
 
 #: tfrmpropertylocation.edit_location.hint
 msgid "The user's location, such as office number"
-msgstr ""
+msgstr "Η τοποθεσία του χρήστη, όπως αριθμός γραφείου"
 
 #: tfrmpropertylocation.label_location.caption
 msgid "Location:"
-msgstr ""
+msgstr "Τοποθεσία:"
 
 #: tfrmpropertymanagedby.action_change.caption
 msgctxt "tfrmpropertymanagedby.action_change.caption"
@@ -2392,7 +2392,7 @@ msgstr "Χώρα/περιοχή:"
 
 #: tfrmpropertymanagedby.label_faxnumber.caption
 msgid "Fax number:"
-msgstr ""
+msgstr "Αριθμός φαξ:"
 
 #: tfrmpropertymanagedby.label_managedby.caption
 msgctxt "tfrmpropertymanagedby.label_managedby.caption"
@@ -2411,11 +2411,11 @@ msgstr "Οδός:"
 
 #: tfrmpropertymanagedby.label_telephonenumber.caption
 msgid "Telephone number:"
-msgstr ""
+msgstr "Αριθμός τηλεφώνου:"
 
 #: tfrmpropertymanagedby.labe_office.caption
 msgid "Office:"
-msgstr ""
+msgstr "Γραφείο:"
 
 #: tfrmpropertymember.action_add.caption
 msgctxt "tfrmpropertymember.action_add.caption"
@@ -2429,7 +2429,7 @@ msgstr "Διαγραφη"
 
 #: tfrmpropertymember.label_members.caption
 msgid "Members:"
-msgstr ""
+msgstr "Μέλη:"
 
 #: tfrmpropertymember.tisgrid_members.header.columns[0].text
 msgctxt "tfrmpropertymember.tisgrid_members.header.columns[0].text"
@@ -2438,7 +2438,7 @@ msgstr "όνομα"
 
 #: tfrmpropertymember.tisgrid_members.header.columns[1].text
 msgid "Active Directory Domain Services Folder"
-msgstr ""
+msgstr "Φάκελος Υπηρεσιών Τομέα Active Directory"
 
 #: tfrmpropertymemberof.action_add.caption
 msgctxt "tfrmpropertymemberof.action_add.caption"
@@ -2452,7 +2452,7 @@ msgstr "Διαγραφή"
 
 #: tfrmpropertymemberof.action_primarygroup.caption
 msgid "Define primary group"
-msgstr ""
+msgstr "Ορισμός κύριας ομάδας"
 
 #: tfrmpropertymemberof.grid_memberof.header.columns[0].text
 msgctxt "tfrmpropertymemberof.grid_memberof.header.columns[0].text"
@@ -2461,33 +2461,33 @@ msgstr "Όνομα"
 
 #: tfrmpropertymemberof.grid_memberof.header.columns[1].text
 msgid "Active Directory's Services Folder"
-msgstr ""
+msgstr "Φάκελος Υπηρεσιών Active Directory"
 
 #: tfrmpropertymemberof.label_defineprimarygroup.caption
 msgid "It is useless to modify the primary goup, unless you're using Macintosh or other POSIX compliant apps."
-msgstr ""
+msgstr "Είναι ανώφελο να τροποποιήσετε την κύρια ομάδα, εκτός εάν χρησιμοποιείτε εφαρμογές Macintosh ή άλλες συμβατές με POSIX."
 
 #: tfrmpropertymemberof.label_mof_noprimarygroup.caption
 msgid "This list  shows only the current domain's groups and the groups handled in the Global catalog, such as unviversals groups."
-msgstr ""
+msgstr "Αυτή η λίστα εμφανίζει μόνο τις ομάδες του τρέχοντος τομέα και τις ομάδες που διαχειρίζεται ο Καθολικός κατάλογος, όπως οι οικουμενικές ομάδες."
 
 #: tfrmpropertymemberof.label_mof_title.caption
 msgid "Member of :"
-msgstr ""
+msgstr "Μέλος του :"
 
 #: tfrmpropertymemberof.label_primarygroupkey.caption
 msgid "Primary group :"
-msgstr ""
+msgstr "Κύρια ομάδα :"
 
 #: tfrmpropertyntauthcertificates.action_add.caption
 msgctxt "tfrmpropertyntauthcertificates.action_add.caption"
 msgid "Add"
-msgstr ""
+msgstr "Προσθήκη"
 
 #: tfrmpropertyntauthcertificates.action_delete.caption
 msgctxt "tfrmpropertyntauthcertificates.action_delete.caption"
 msgid "Delete"
-msgstr ""
+msgstr "Διαγραφή"
 
 #: tfrmpropertyntauthcertificates.action_export.caption
 msgid "Export"
@@ -2502,71 +2502,71 @@ msgstr "Προβολή"
 #: tfrmpropertyntauthcertificates.tisgrid1.header.columns[0].text
 msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[0].text"
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: tfrmpropertyntauthcertificates.tisgrid1.header.columns[1].text
 msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[1].text"
 msgid "Status"
-msgstr ""
+msgstr "Κατάσταση"
 
 #: tfrmpropertyntauthcertificates.tisgrid1.header.columns[2].text
 msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[2].text"
 msgid "Issued By"
-msgstr ""
+msgstr "Έχει εκδοθεί από"
 
 #: tfrmpropertyntauthcertificates.tisgrid1.header.columns[3].text
 msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[3].text"
 msgid "Intended Purposes"
-msgstr ""
+msgstr "Προβλεπόμενες Χρήσεις"
 
 #: tfrmpropertyntauthcertificates.tisgrid1.header.columns[4].text
 msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[4].text"
 msgid "Expiration Date"
-msgstr ""
+msgstr "Ημερομηνία Λήξης"
 
 #: tfrmpropertyobject.action_protection.caption
 msgid "Protect object from accidental deletion"
-msgstr ""
+msgstr "Προστασία αντικειμένου από τυχαία διαγραφή"
 
 #: tfrmpropertyobject.label_canonicalname.caption
 msgid "Objects's canonical name"
-msgstr ""
+msgstr "Κανονικό όνομα αντικειμένου"
 
 #: tfrmpropertyobject.label_objectclass.caption
 msgid "Object's Class :"
-msgstr ""
+msgstr "Κλάση αντικειμένου :"
 
 #: tfrmpropertyobject.label_usnactual.caption
 msgid "Actual :"
-msgstr ""
+msgstr "Πραγματικό :"
 
 #: tfrmpropertyobject.label_usnoriginal.caption
 msgid "Original :"
-msgstr ""
+msgstr "Αρχικό :"
 
 #: tfrmpropertyobject.label_usnupdate.caption
 msgid "Amount of sequential updates (USN):"
-msgstr ""
+msgstr "Ποσότητα σειριακών ενημερώσεων (USN):"
 
 #: tfrmpropertyobject.label_whenchanged.caption
 msgid "Modified :"
-msgstr ""
+msgstr "Τροποποιήθηκε :"
 
 #: tfrmpropertyobject.label_whencreated.caption
 msgid "Created :"
-msgstr ""
+msgstr "Δημιουργήθηκε :"
 
 #: tfrmpropertyoperatingsystem.edit_operatingsystem.hint
 msgid "The Operating System name, for example, Windows Vista Enterprise"
-msgstr ""
+msgstr "Το όνομα του Λειτουργικού Συστήματος, για παράδειγμα, Windows Vista Enterprise"
 
 #: tfrmpropertyoperatingsystem.edit_operatingsystemservicepack.hint
 msgid "The operating system service pack ID (for example, SP3)"
-msgstr ""
+msgstr "Το αναγνωριστικό πακέτου υπηρεσιών λειτουργικού συστήματος (για παράδειγμα, SP3)"
 
 #: tfrmpropertyoperatingsystem.edit_operatingsystemversion.hint
 msgid "The operating system version, for example, 4.0"
-msgstr ""
+msgstr "Η έκδοση του λειτουργικού συστήματος, για παράδειγμα, 4.0"
 
 #: tfrmpropertyoperatingsystem.label_operatingsystem.caption
 msgctxt "tfrmpropertyoperatingsystem.label_operatingsystem.caption"
@@ -2575,11 +2575,11 @@ msgstr "Όνομα:"
 
 #: tfrmpropertyoperatingsystem.label_operatingsystemservicepack.caption
 msgid "Service Pack:"
-msgstr ""
+msgstr "Πακέτο Υπηρεσιών:"
 
 #: tfrmpropertyoperatingsystem.label_operatingsystemversion.caption
 msgid "Version:"
-msgstr ""
+msgstr "Έκδοση:"
 
 #: tfrmpropertyorganization.action_change.caption
 msgctxt "tfrmpropertyorganization.action_change.caption"
@@ -2599,11 +2599,11 @@ msgstr "Ιδιότητες"
 
 #: tfrmpropertyorganization.edit_company.hint
 msgid "The user's company name"
-msgstr ""
+msgstr "Το όνομα της εταιρείας του χρήστη"
 
 #: tfrmpropertyorganization.edit_department.hint
 msgid "Contains the name for the department in which the user works"
-msgstr ""
+msgstr "Περιέχει το όνομα του τμήματος στο οποίο εργάζεται ο χρήστης"
 
 #: tfrmpropertyorganization.edit_title.hint
 msgid ""
@@ -2614,19 +2614,19 @@ msgstr ""
 
 #: tfrmpropertyorganization.groupbox_manager.caption
 msgid "Manager :"
-msgstr ""
+msgstr "Διευθυντής :"
 
 #: tfrmpropertyorganization.label_company.caption
 msgid "Company :"
-msgstr ""
+msgstr "Εταιρεία :"
 
 #: tfrmpropertyorganization.label_department.caption
 msgid "Departement :"
-msgstr ""
+msgstr "Τμήμα :"
 
 #: tfrmpropertyorganization.label_directreports.caption
 msgid "Direct reports / Subordinates :"
-msgstr ""
+msgstr "Άμεσοι υφιστάμενοι / Υφιστάμενοι :"
 
 #: tfrmpropertyorganization.label_manager.caption
 msgctxt "tfrmpropertyorganization.label_manager.caption"
@@ -2635,7 +2635,7 @@ msgstr "Όνομα :"
 
 #: tfrmpropertyorganization.label_title.caption
 msgid "Job Title :"
-msgstr ""
+msgstr "Τίτλος Εργασίας :"
 
 #: tfrmpropertyorganization.tisgrid_directreports.header.columns[0].text
 msgctxt "tfrmpropertyorganization.tisgrid_directreports.header.columns[0].text"
@@ -2644,7 +2644,7 @@ msgstr "όνομα"
 
 #: tfrmpropertyprofile.combobox_connectto.hint
 msgid "Specifies the drive letter to which to map the UNC path specified by homeDirectory"
-msgstr ""
+msgstr "Καθορίζει το γράμμα μονάδας δίσκου στο οποίο θα αντιστοιχιστεί η διαδρομή UNC που καθορίζεται από το homeDirectory"
 
 #: tfrmpropertyprofile.edit_connectto.hint
 msgid ""
@@ -2663,43 +2663,43 @@ msgstr ""
 
 #: tfrmpropertyprofile.edit_profilepath.hint
 msgid "Specifies a path to the user's profile"
-msgstr ""
+msgstr "Καθορίζει μια διαδρομή προς το προφίλ του χρήστη"
 
 #: tfrmpropertyprofile.edit_scriptpath.hint
 msgid "The path for the user's logon script"
-msgstr ""
+msgstr "Η διαδρομή για το σενάριο εισόδου του χρήστη"
 
 #: tfrmpropertyprofile.groupbox_homefolder.caption
 msgid "Home folder"
-msgstr ""
+msgstr "Προσωπικός φάκελος"
 
 #: tfrmpropertyprofile.groupbox_userprofile.caption
 msgid "User profile"
-msgstr ""
+msgstr "Προφίλ χρήστη"
 
 #: tfrmpropertyprofile.label_connectto.caption
 msgid "To :"
-msgstr ""
+msgstr "Στο :"
 
 #: tfrmpropertyprofile.label_profilepath.caption
 msgid "Profile path :"
-msgstr ""
+msgstr "Διαδρομή προφίλ :"
 
 #: tfrmpropertyprofile.label_scriptpath.caption
 msgid "Logon script path :"
-msgstr ""
+msgstr "Διαδρομή σεναρίου εισόδου :"
 
 #: tfrmpropertyprofile.radiobutton_connectto.caption
 msgid "Connect :"
-msgstr ""
+msgstr "Σύνδεση :"
 
 #: tfrmpropertyprofile.radiobutton_homedirectory.caption
 msgid "Local path :"
-msgstr ""
+msgstr "Τοπική διαδρομή :"
 
 #: tfrmpropertypublishedcertificates.action_add.caption
 msgid "Add from File"
-msgstr ""
+msgstr "Προσθήκη από Αρχείο"
 
 #: tfrmpropertypublishedcertificates.action_copy.caption
 msgctxt "tfrmpropertypublishedcertificates.action_copy.caption"
@@ -2713,15 +2713,15 @@ msgstr "Αφαίρεση"
 
 #: tfrmpropertypublishedcertificates.action_view.caption
 msgid "View Certificate"
-msgstr ""
+msgstr "Προβολή Πιστοποιητικού"
 
 #: tfrmpropertypublishedcertificates.label_listx509.caption
 msgid "List of X509 certificates published for the user account"
-msgstr ""
+msgstr "Λίστα πιστοποιητικών X509 που έχουν δημοσιευτεί για τον λογαριασμό χρήστη"
 
 #: tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[0].text
 msgid "Issued To"
-msgstr ""
+msgstr "Έχει εκδοθεί σε"
 
 #: tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[1].text
 msgctxt "tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[1].text"
@@ -2755,7 +2755,7 @@ msgstr "Διαγραφή"
 
 #: tfrmpropertysecurity.tisgrid_securitylistright.header.columns[0].text
 msgid "Permissions for"
-msgstr ""
+msgstr "Δικαιώματα για"
 
 #: tfrmpropertysecurity.tisgrid_securitylistright.header.columns[1].text
 msgctxt "tfrmpropertysecurity.tisgrid_securitylistright.header.columns[1].text"
@@ -2769,7 +2769,7 @@ msgstr "Απαγορεύεται"
 
 #: tfrmpropertysecurity.tisgrid_securitylistuser.header.columns[0].text
 msgid "Group or user names"
-msgstr ""
+msgstr "Ομάδα ή ονόματα χρηστών"
 
 #: tfrmpropertytelephone.bitbtn_otherfacsimiletelephonenumber.caption
 msgctxt "tfrmpropertytelephone.bitbtn_otherfacsimiletelephonenumber.caption"
@@ -2798,35 +2798,35 @@ msgstr "Άλλη..."
 
 #: tfrmpropertytelephone.edit_facsimiletelephonenumber.hint
 msgid "The user's main fax number"
-msgstr ""
+msgstr "Ο κύριος αριθμός φαξ του χρήστη"
 
 #: tfrmpropertytelephone.edit_homephone.hint
 msgid "The user's main home phone number"
-msgstr ""
+msgstr "Ο κύριος αριθμός τηλεφώνου σπιτιού του χρήστη"
 
 #: tfrmpropertytelephone.edit_ipphone.hint
 msgid "The TCP/IP address for the phone. Used by Telephony"
-msgstr ""
+msgstr "Η διεύθυνση TCP/IP για το τηλέφωνο. Χρησιμοποιείται από την Τηλεφωνία"
 
 #: tfrmpropertytelephone.edit_mobile.hint
 msgid "The user's main mobile phone number"
-msgstr ""
+msgstr "Ο κύριος αριθμός κινητού τηλεφώνου του χρήστη"
 
 #: tfrmpropertytelephone.edit_pager.hint
 msgid "The user's main pager number"
-msgstr ""
+msgstr "Ο κύριος αριθμός βομβητή του χρήστη"
 
 #: tfrmpropertytelephone.groupbox_numbers.caption
 msgid "Telephone numbers"
-msgstr ""
+msgstr "Αριθμοί Τηλεφώνου"
 
 #: tfrmpropertytelephone.label_facsimiletelephonenumber.caption
 msgid "Fax :"
-msgstr ""
+msgstr "Φαξ :"
 
 #: tfrmpropertytelephone.label_homephone.caption
 msgid "Home :"
-msgstr ""
+msgstr "Σπίτι :"
 
 #: tfrmpropertytelephone.label_info.caption
 msgctxt "tfrmpropertytelephone.label_info.caption"
@@ -2835,19 +2835,19 @@ msgstr "Σημειώσεις :"
 
 #: tfrmpropertytelephone.label_ipphone.caption
 msgid "IP phone :"
-msgstr ""
+msgstr "IP τηλέφωνο :"
 
 #: tfrmpropertytelephone.label_mobile.caption
 msgid "Mobile :"
-msgstr ""
+msgstr "Κινητό :"
 
 #: tfrmpropertytelephone.label_pager.caption
 msgid "Pager :"
-msgstr ""
+msgstr "Βομβητής :"
 
 #: tfrmpropertytelephone.memo_info.hint
 msgid "The group/user comments"
-msgstr ""
+msgstr "Τα σχόλια για την ομάδα/τον χρήστη"
 
 #: tfrmpropertyunixattributes.label1.caption
 msgid "NIS Domain:"
@@ -2891,7 +2891,7 @@ msgstr ""
 
 #: tfrmrsatoption.combobox3.text
 msgid "False"
-msgstr ""
+msgstr "Ψευδές"
 
 #: tfrmrsatoption.label1.caption
 #, fuzzy
@@ -2901,11 +2901,11 @@ msgstr "Θέμα"
 
 #: tfrmrsatoption.label2.caption
 msgid "Lang"
-msgstr ""
+msgstr "Γλώσσα"
 
 #: tfrmrsatoption.label3.caption
 msgid "AdvancedView"
-msgstr ""
+msgstr "Προχωρημένη Προβολή"
 
 #: tgridframe.asynchcheckbox.caption
 msgid "asynchronous"
@@ -2979,7 +2979,7 @@ msgstr ""
 #: tgridframe.functionrefreshlabel.caption
 msgctxt "tgridframe.functionrefreshlabel.caption"
 msgid "Refresh"
-msgstr ""
+msgstr "Ανανέωση"
 
 #: tgridframe.functionrefreshlabel.hint
 msgctxt "tgridframe.functionrefreshlabel.hint"
@@ -3062,7 +3062,7 @@ msgstr ""
 #: tgridframe.gridtotallabel.caption
 msgctxt "tgridframe.gridtotallabel.caption"
 msgid "Total : 0 elements"
-msgstr ""
+msgstr "Συνολικά : 0 στοιχεία"
 
 #: tgridframe.groupbox1.caption
 msgid " Functions "
@@ -3305,7 +3305,7 @@ msgstr ""
 #: tsearcheditframe.label1.caption
 msgctxt "tsearcheditframe.label1.caption"
 msgid "Search"
-msgstr ""
+msgstr "Αναζήτηση"
 
 #: tsearcheditframe.label2.caption
 msgctxt "tsearcheditframe.label2.caption"
@@ -3516,7 +3516,7 @@ msgstr ""
 #: ttischartform.cbmarkattachment.text
 msgctxt "ttischartform.cbmarkattachment.text"
 msgid "Default"
-msgstr ""
+msgstr "Προκαθορισμένο"
 
 #: ttischartform.cbmarkpositions.text
 msgid "Around"
@@ -3659,7 +3659,7 @@ msgstr ""
 #: ttisgrideditor.actdelcolumn.caption
 msgctxt "ttisgrideditor.actdelcolumn.caption"
 msgid "Delete"
-msgstr ""
+msgstr "Διαγραφή"
 
 #: ttisgrideditor.actloaddata.caption
 msgid "Load Data"
@@ -3838,7 +3838,7 @@ msgstr ""
 #: ttisgrideditor.tabsheet1.caption
 msgctxt "ttisgrideditor.tabsheet1.caption"
 msgid "Data"
-msgstr ""
+msgstr "Δεδομένα"
 
 #: ttisgrideditor.treemodecheckbox.caption
 msgid "Tree Mode"
@@ -3861,7 +3861,7 @@ msgstr ""
 #: ttistoolbareditor.buttonslistview.columns[0].caption
 msgctxt "ttistoolbareditor.buttonslistview.columns[0].caption"
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: ttistoolbareditor.buttonslistviewselectlabel.caption
 msgid "0 / 0"
@@ -4017,7 +4017,7 @@ msgstr "ΟΚ"
 
 #: tvisaddaces.action_replace.caption
 msgid "Replace"
-msgstr ""
+msgstr "Αντικατάσταση"
 
 #: tvisaddaces.bitbtn_cancel.caption
 msgctxt "tvisaddaces.bitbtn_cancel.caption"
@@ -4026,11 +4026,11 @@ msgstr "Άκυρο"
 
 #: tvisaddaces.checkbox_cc.caption
 msgid "Create Child"
-msgstr ""
+msgstr "Δημιουργία Παιδιού"
 
 #: tvisaddaces.checkbox_ci.caption
 msgid "Container Inherited"
-msgstr ""
+msgstr "Κληρονομημένα από Container"
 
 #: tvisaddaces.checkbox_cr.caption
 msgctxt "tvisaddaces.checkbox_cr.caption"
@@ -4039,7 +4039,7 @@ msgstr "Έλεγχος Πρόσβασης"
 
 #: tvisaddaces.checkbox_dc.caption
 msgid "Delete Child"
-msgstr ""
+msgstr "Διαγραφή Παιδιού"
 
 #: tvisaddaces.checkbox_dt.caption
 msgctxt "tvisaddaces.checkbox_dt.caption"
@@ -4068,7 +4068,7 @@ msgstr "Χωρίς Διάδοση"
 
 #: tvisaddaces.checkbox_oi.caption
 msgid "Object Inherited"
-msgstr ""
+msgstr "Κληρονομημένα από Αντικειμένο"
 
 #: tvisaddaces.checkbox_rc.caption
 msgctxt "tvisaddaces.checkbox_rc.caption"
@@ -4077,7 +4077,7 @@ msgstr "Ανάγνωση Ελέγχου"
 
 #: tvisaddaces.checkbox_rp.caption
 msgid "Read Property"
-msgstr ""
+msgstr "Ανάγνωση Ιδιότητας"
 
 #: tvisaddaces.checkbox_sd.caption
 msgctxt "tvisaddaces.checkbox_sd.caption"
@@ -4101,7 +4101,7 @@ msgstr "Εγγραφή Ιδιοκτήτη"
 
 #: tvisaddaces.checkbox_wp.caption
 msgid "Write Property"
-msgstr ""
+msgstr "Εγγραφή Ιδιότητας"
 
 #: tvisaddaces.checkgroup_access.caption
 msgctxt "tvisaddaces.checkgroup_access.caption"
@@ -4110,23 +4110,23 @@ msgstr "Πρόσβαση"
 
 #: tvisaddaces.checkgroup_inheritance.caption
 msgid "Inheritance"
-msgstr ""
+msgstr "Κληρονόμηση"
 
 #: tvisaddaces.label_inheritance.caption
 msgid "Inheritance:"
-msgstr ""
+msgstr "Κληρονόμηση:"
 
 #: tvisaddaces.label_property.caption
 msgid "Target Property :"
-msgstr ""
+msgstr "Στόχευση Ιδιότητας :"
 
 #: tvisaddaces.label_title.caption
 msgid "Create and add new Rights (ACEs) :"
-msgstr ""
+msgstr "Δημιουργία και προσθήκη νέων Δικαιωμάτων (ACEs) :"
 
 #: tvisaddaces.label_trustee.caption
 msgid "Trustee :"
-msgstr ""
+msgstr "Εμπιστευόμενος :"
 
 #: tvisaddaces.radiobutton_allow.caption
 msgctxt "tvisaddaces.radiobutton_allow.caption"
@@ -4145,7 +4145,7 @@ msgstr "Τύπος"
 
 #: tvisaddaces.tisgrid1.header.columns[1].text
 msgid "Trustee"
-msgstr ""
+msgstr "Εμπιστευόμενος"
 
 #: tvisaddaces.tisgrid1.header.columns[2].text
 msgctxt "tvisaddaces.tisgrid1.header.columns[2].text"
@@ -4154,15 +4154,15 @@ msgstr "Πρόσβαση"
 
 #: tvisaddaces.tisgrid1.header.columns[3].text
 msgid "Target Property"
-msgstr ""
+msgstr "Στόχευση Ιδιότητας"
 
 #: tvisaddaces.tisgrid1.header.columns[4].text
 msgid "Applies to"
-msgstr ""
+msgstr "Εφαρμογή σε"
 
 #: tvisaddaces.tisgrid1.header.columns[5].text
 msgid "Inherit to"
-msgstr ""
+msgstr "Κληρονομείται σε"
 
 #: tvisadvancedsecurity.action_addace.caption
 msgctxt "tvisadvancedsecurity.action_addace.caption"
@@ -4195,7 +4195,7 @@ msgstr "ΟΚ"
 
 #: tvisadvancedsecurity.action_restoredefault.caption
 msgid "Restore default"
-msgstr ""
+msgstr "Επαναφορά προεπιλογής"
 
 #: tvisadvancedsecurity.action_selectgroup.caption
 msgid "Action_SelectGroup"
@@ -4246,7 +4246,7 @@ msgstr ""
 #: tvisadvancedsecurity.checkboxd.caption
 msgctxt "tvisadvancedsecurity.checkboxd.caption"
 msgid "Delete"
-msgstr ""
+msgstr "Διαγραφή"
 
 #: tvisadvancedsecurity.checkboxdc.caption
 msgctxt "tvisadvancedsecurity.checkboxdc.caption"
@@ -4304,7 +4304,7 @@ msgstr ""
 #: tvisadvancedsecurity.groupbox1.caption
 msgctxt "tvisadvancedsecurity.groupbox1.caption"
 msgid "Permissions"
-msgstr ""
+msgstr "Άδειες"
 
 #: tvisadvancedsecurity.groupbox2.caption
 msgctxt "tvisadvancedsecurity.groupbox2.caption"
@@ -4338,12 +4338,12 @@ msgstr ""
 #: tvisadvancedsecurity.label_type.caption
 msgctxt "tvisadvancedsecurity.label_type.caption"
 msgid "Type"
-msgstr ""
+msgstr "Τύπος"
 
 #: tvisadvancedsecurity.tisgrid1.header.columns[0].text
 msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[0].text"
 msgid "Type"
-msgstr ""
+msgstr "Τύπος"
 
 #: tvisadvancedsecurity.tisgrid1.header.columns[1].text
 msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[1].text"
@@ -4353,7 +4353,7 @@ msgstr ""
 #: tvisadvancedsecurity.tisgrid1.header.columns[2].text
 msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[2].text"
 msgid "Permissions"
-msgstr ""
+msgstr "Άδειες"
 
 #: tvisadvancedsecurity.tisgrid1.header.columns[3].text
 msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[3].text"
@@ -4387,7 +4387,7 @@ msgstr "Διαγραφή"
 
 #: tvisattributeeditor.action_down.caption
 msgid "Move down"
-msgstr ""
+msgstr "Μετακίνηση κάτω"
 
 #: tvisattributeeditor.action_ok.caption
 msgctxt "tvisattributeeditor.action_ok.caption"
@@ -4396,7 +4396,7 @@ msgstr "ΟΚ"
 
 #: tvisattributeeditor.action_up.caption
 msgid "Move up"
-msgstr ""
+msgstr "Μετακίνηση πάνω"
 
 #: tvisattributeeditor.datetimepicker1.textfornulldate
 msgctxt "tvisattributeeditor.datetimepicker1.textfornulldate"
@@ -4405,19 +4405,19 @@ msgstr "ΚΕΝΟ"
 
 #: tvisattributeeditor.label1.caption
 msgid "Values:"
-msgstr ""
+msgstr "Τιμές:"
 
 #: tvisattributeeditor.label2.caption
 msgid "Date:"
-msgstr ""
+msgstr "Ημερομηνία:"
 
 #: tvisattributeeditor.label_string.caption
 msgid "Value:"
-msgstr ""
+msgstr "Τιμή:"
 
 #: tvisattributeeditor.label_stringlist.caption
 msgid "Value to add:"
-msgstr ""
+msgstr "Τιμή προς προσθήκη:"
 
 #: tvisattributeeditor.ts_multistringeditor.caption
 msgid "TS_MultiStringEditor"
@@ -4447,7 +4447,7 @@ msgstr "ΟΚ"
 
 #: tvischangedn.caption
 msgid "Change DN"
-msgstr ""
+msgstr "Αλλαγή DN"
 
 #: tvischangedomaincontroller.action_ok.caption
 msgctxt "tvischangedomaincontroller.action_ok.caption"
@@ -4461,31 +4461,31 @@ msgstr "Ακύρωση"
 
 #: tvischangedomaincontroller.caption
 msgid "Change Directory Server"
-msgstr ""
+msgstr "Αλλαγή Διακομιστή Καταλόγου"
 
 #: tvischangedomaincontroller.checkbox1.caption
 msgid "Save this setting for the current console"
-msgstr ""
+msgstr "Αποθήκευση αυτής της ρύθμισης για την τρέχουσα κονσόλα"
 
 #: tvischangedomaincontroller.label1.caption
 msgid "Current Directory Server:"
-msgstr ""
+msgstr "Τρέχων Διακομιστής Καταλόγου:"
 
 #: tvischangedomaincontroller.label2.caption
 msgid "<Empty>"
-msgstr ""
+msgstr "<Κενό>"
 
 #: tvischangedomaincontroller.label3.caption
 msgid "Change to:"
-msgstr ""
+msgstr "Αλλαγή σε:"
 
 #: tvischangedomaincontroller.radiobutton1.caption
 msgid "Any writable Domain Controller"
-msgstr ""
+msgstr "Οποιοδήποτε εγγράψιμο Ελεγκτή Τομέα"
 
 #: tvischangedomaincontroller.radiobutton2.caption
 msgid "This Domain Controller or AD LDS instance"
-msgstr ""
+msgstr "Αυτόν τον Ελεγκτή Τομέα ή instance AD LDS"
 
 #: tvischangedomaincontroller.tisgrid1.header.columns[0].text
 msgctxt "tvischangedomaincontroller.tisgrid1.header.columns[0].text"
@@ -4504,7 +4504,7 @@ msgstr "Τύπος DC"
 
 #: tvischangedomaincontroller.tisgrid1.header.columns[3].text
 msgid "DC Version"
-msgstr ""
+msgstr "Έκδοση DC"
 
 #: tvischangedomaincontroller.tisgrid1.header.columns[4].text
 msgctxt "tvischangedomaincontroller.tisgrid1.header.columns[4].text"
@@ -4543,51 +4543,51 @@ msgstr "Ολοκλήρωση"
 
 #: tvisdelegatecontrol.caption
 msgid "Delegation of Control Wizard"
-msgstr ""
+msgstr "Οδηγός Ανάθεσης Ελέγχου"
 
 #: tvisdelegatecontrol.checkbox1.caption
 msgid "Create selected objects in this folder"
-msgstr ""
+msgstr "Δημιουργία επιλεγμένων αντικειμένων σε αυτό το φάκελο"
 
 #: tvisdelegatecontrol.checkbox2.caption
 msgid "Delete selected objects in this folder"
-msgstr ""
+msgstr "Διαγραφή επιλεγμένων αντικειμένων σε αυτό το φάκελο"
 
 #: tvisdelegatecontrol.checkbox3.caption
 msgid "General"
-msgstr ""
+msgstr "Γενικές"
 
 #: tvisdelegatecontrol.checkbox4.caption
 msgid "Property-specific"
-msgstr ""
+msgstr "Συγκεκριμένες για την ιδιότητα"
 
 #: tvisdelegatecontrol.checkbox5.caption
 msgid "Creation/deletion of specific child objects"
-msgstr ""
+msgstr "Δημιουργία/διαγραφή συγκεκριμένων αντικειμένων-παιδιών"
 
 #: tvisdelegatecontrol.label1.caption
 msgid "Welcome to the Delegation of Control Wizard"
-msgstr ""
+msgstr "Καλωσορίσατε στον Οδηγό Ανάθεσης Ελέγχου"
 
 #: tvisdelegatecontrol.label10.caption
 msgid "You have successfully completed the Delegation of Control wizard."
-msgstr ""
+msgstr "Έχετε ολοκληρώσει με επιτυχία τον Οδηγό Ανάθεσης Ελέγχου."
 
 #: tvisdelegatecontrol.label11.caption
 msgid "To close this wizard, click Finish."
-msgstr ""
+msgstr "Για να κλείσετε αυτόν τον οδηγό, κάντε κλικ στο Ολοκλήρωση."
 
 #: tvisdelegatecontrol.label12.caption
 msgid "Active Directory Object Type"
-msgstr ""
+msgstr "Τύπος Αντικειμένου Active Directory"
 
 #: tvisdelegatecontrol.label13.caption
 msgid "Indicate the scope of the task you want to delegate."
-msgstr ""
+msgstr "Καθορίστε το εύρος εργασιών που θέλετε να αναθέσετε."
 
 #: tvisdelegatecontrol.label14.caption
 msgid "Delegate control of:"
-msgstr ""
+msgstr "Ανάθεση ελέγχου των:"
 
 #: tvisdelegatecontrol.label15.caption
 msgctxt "tvisdelegatecontrol.label15.caption"
@@ -4596,19 +4596,19 @@ msgstr "Άδειες"
 
 #: tvisdelegatecontrol.label16.caption
 msgid "Select the permissions you want to delegate."
-msgstr ""
+msgstr "Επιλέξτε τα δικαιώματα που θέλετε να αναθέσετε."
 
 #: tvisdelegatecontrol.label17.caption
 msgid "Show these permissions:"
-msgstr ""
+msgstr "Εμφάνιση αυτών των δικαιωμάτων:"
 
 #: tvisdelegatecontrol.label18.caption
 msgid "Permissions:"
-msgstr ""
+msgstr "Άδειες:"
 
 #: tvisdelegatecontrol.label2.caption
 msgid "This wizard helps you delegate control of Active Directory objects. You can grant users permission to manage users, groups, computers, organizational units, and other objects stored in Active Directory Domain Services."
-msgstr ""
+msgstr "Αυτός ο οδηγός σάς βοηθά να αναθέσετε τον έλεγχο αντικειμένων του Active Directory. Μπορείτε να χορηγήσετε στους χρήστες άδειες για τη διαχείριση χρηστών, ομάδων, υπολογιστών, οργανωτικών μονάδων και άλλων αντικειμένων που αποθηκεύονται στις Υπηρεσίες Τομέα Active Directory."
 
 #: tvisdelegatecontrol.label3.caption
 msgctxt "tvisdelegatecontrol.label3.caption"
@@ -4617,43 +4617,43 @@ msgstr "Για να συνεχίσετε, κάντε κλικ στο Επόμε�
 
 #: tvisdelegatecontrol.label4.caption
 msgid "Selected users and groups:"
-msgstr ""
+msgstr "Επιλεγμένοι χρήστες και ομάδες:"
 
 #: tvisdelegatecontrol.label5.caption
 msgid "Users and Groups"
-msgstr ""
+msgstr "Χρήστες και Ομάδες"
 
 #: tvisdelegatecontrol.label6.caption
 msgid "Select one or more users or groups to whom you want to delegate control."
-msgstr ""
+msgstr "Επιλέξτε έναν ή περισσότερους χρήστες ή ομάδες στους οποίους θέλετε να αναθέσετε τον έλεγχο."
 
 #: tvisdelegatecontrol.label7.caption
 msgid "Tasks to Delegate"
-msgstr ""
+msgstr "Εργασίες προς Ανάθεση"
 
 #: tvisdelegatecontrol.label8.caption
 msgid "You can select common tasks or customize your own."
-msgstr ""
+msgstr "Μπορείτε να επιλέξετε κοινές εργασίες ή να προσαρμόσετε τις δικές σας."
 
 #: tvisdelegatecontrol.label9.caption
 msgid "Completing the Delegation of Control Wizard"
-msgstr ""
+msgstr "Ολοκλήρωση του Οδηγού Ανάθεσης Ελέγχου"
 
 #: tvisdelegatecontrol.radiobutton1.caption
 msgid "Delegate the following common tasks:"
-msgstr ""
+msgstr "Ανάθεση των παρακάτω κοινών εργασιών:"
 
 #: tvisdelegatecontrol.radiobutton2.caption
 msgid "Create a custom task to delegate"
-msgstr ""
+msgstr "Δημιουργία προσαρμοσμένης εργασίας για ανάθεση"
 
 #: tvisdelegatecontrol.radiobutton3.caption
 msgid "This folder, existing objects in this folder, and creation of new objects in this folder"
-msgstr ""
+msgstr "Αυτός ο φάκελος, υπάρχοντα αντικείμενα σε αυτόν το φάκελο και δημιουργία νέων αντικειμένων σε αυτόν το φάκελο"
 
 #: tvisdelegatecontrol.radiobutton4.caption
 msgid "Only the following objects in the folder:"
-msgstr ""
+msgstr "Μόνο τα παρακάτω αντικείμενα στο φάκελο:"
 
 #: tviseditaduccolumns.action1.caption
 msgid "Add ->"
@@ -4661,19 +4661,19 @@ msgstr ""
 
 #: tviseditaduccolumns.action2.caption
 msgid "<- Remove"
-msgstr ""
+msgstr "Αφαίρεση"
 
 #: tviseditaduccolumns.action3.caption
 msgid "Move UP"
-msgstr ""
+msgstr "Μετακίνηση"
 
 #: tviseditaduccolumns.action4.caption
 msgid "Move DOWN"
-msgstr ""
+msgstr "Μετακίνηση πάνω"
 
 #: tviseditaduccolumns.action5.caption
 msgid "Restore Default"
-msgstr ""
+msgstr "Επαναφορά προεπιλογής"
 
 #: tviseditaduccolumns.caption
 msgid "Edit Columns"
@@ -4681,26 +4681,26 @@ msgstr ""
 
 #: tviseditaduccolumns.label1.caption
 msgid "Available columns:"
-msgstr ""
+msgstr "Απενεργοποίηση Λογαριασμού"
 
 #: tviseditaduccolumns.label2.caption
 msgid "Displayed columns:"
-msgstr ""
+msgstr "Εμφανιζόμενο όνομα:"
 
 #: tvislistgpo.action_search.caption
 msgctxt "tvislistgpo.action_search.caption"
 msgid "Search"
-msgstr ""
+msgstr "Αναζήτηση"
 
 #: tvislistgpo.bitbtn_cancel.caption
 msgctxt "tvislistgpo.bitbtn_cancel.caption"
 msgid "Cancel"
-msgstr ""
+msgstr "Ακύρωση"
 
 #: tvislistgpo.bitbtn_ok.caption
 msgctxt "tvislistgpo.bitbtn_ok.caption"
 msgid "OK"
-msgstr ""
+msgstr "ΟΚ"
 
 #: tvislistgpo.caption
 msgid "Group Policy Objects"
@@ -4714,7 +4714,7 @@ msgstr ""
 #: tvislistgpo.tisgrid1.header.columns[1].text
 msgctxt "tvislistgpo.tisgrid1.header.columns[1].text"
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: tvislistgpo.tisgrid1.header.columns[2].text
 msgctxt "tvislistgpo.tisgrid1.header.columns[2].text"
@@ -4752,15 +4752,15 @@ msgstr "Ακύρωση"
 
 #: tvislistother.caption
 msgid "(Other)"
-msgstr ""
+msgstr "(Άλλο)"
 
 #: tvislistother.label_current.caption
 msgid "Current values :"
-msgstr ""
+msgstr "Τρέχουσες τιμές :"
 
 #: tvislistother.label_newvalue.caption
 msgid "New value :"
-msgstr ""
+msgstr "Νέα τιμή :"
 
 #: tvislogonhours.btn_cancel.caption
 msgctxt "tvislogonhours.btn_cancel.caption"
@@ -4770,7 +4770,7 @@ msgstr "Ακύρωση"
 #: tvislogonhours.btn_ok.caption
 msgctxt "tvislogonhours.btn_ok.caption"
 msgid "OK"
-msgstr ""
+msgstr "ΟΚ"
 
 #: tvislogonhours.caption
 msgctxt "tvislogonhours.caption"
@@ -4779,7 +4779,7 @@ msgstr "Ώρες Σύνδεσης"
 
 #: tvislogonhours.label_title.caption
 msgid "Select the allowed logon period in UTC "
-msgstr ""
+msgstr "Επιλέξτε την επιτρεπόμενη περίοδο σύνδεσης σε UTC"
 
 #: tvislogonhours.panel_ntdsschedule.caption
 msgid "Panel_NTDSSchedule"
@@ -4796,7 +4796,7 @@ msgstr ""
 
 #: tvislogonhours.radiobutton_logondenied.caption
 msgid "Logon Denied"
-msgstr ""
+msgstr "Απαγορεύεται η Σύνδεση"
 
 #: tvislogonhours.radiobutton_logonpermitted.caption
 msgid "Logon Permitted"
@@ -4854,37 +4854,37 @@ msgstr "Ακύρωση"
 
 #: tvislogonworkstation.caption
 msgid "Logon Workstations"
-msgstr ""
+msgstr "Σταθμοί Εργασίας Σύνδεσης"
 
 #: tvislogonworkstation.label_info.caption
 msgid "In Computer name, type the computer''s NetBIOS or Domain Name system (DNS) name."
-msgstr ""
+msgstr "Στο όνομα του υπολογιστή, πληκτρολογήστε το NetBIOS ή το DNS όνομα του υπολογιστή."
 
 #: tvislogonworkstation.label_name.caption
 msgid "Computer name :"
-msgstr ""
+msgstr "Όνομα υπολογιστή :"
 
 #: tvislogonworkstation.label_title.caption
 msgid "This user can logon to :"
-msgstr ""
+msgstr "Αυτός ο χρήστης μπορεί να συνδεθεί σε :"
 
 #: tvislogonworkstation.radiobutton_all.caption
 msgid "All computers"
-msgstr ""
+msgstr "Όλους τους υπολογιστές"
 
 #: tvislogonworkstation.radiobutton_following.caption
 msgid "The following computers"
-msgstr ""
+msgstr "Στους ακόλουθους υπολογιστές"
 
 #: tvismodifygplink.action_apply.caption
 msgctxt "tvismodifygplink.action_apply.caption"
 msgid "Apply"
-msgstr ""
+msgstr "Εφαρμογή"
 
 #: tvismodifygplink.action_disablegpo.caption
 msgctxt "tvismodifygplink.action_disablegpo.caption"
 msgid "Disable GPO"
-msgstr ""
+msgstr "Απενεργοποίηση Λογαριασμού"
 
 #: tvismodifygplink.action_enablegpo.caption
 msgctxt "tvismodifygplink.action_enablegpo.caption"
@@ -4899,12 +4899,12 @@ msgstr ""
 #: tvismodifygplink.action_ok.caption
 msgctxt "tvismodifygplink.action_ok.caption"
 msgid "OK"
-msgstr ""
+msgstr "ΟΚ"
 
 #: tvismodifygplink.bitbtn_cancel.caption
 msgctxt "tvismodifygplink.bitbtn_cancel.caption"
 msgid "Cancel"
-msgstr ""
+msgstr "Ακύρωση"
 
 #: tvismodifygplink.caption
 msgid "VisModifyGPLink"
@@ -4912,7 +4912,7 @@ msgstr ""
 
 #: tvismodifygplink.label1.caption
 msgid "Object:"
-msgstr ""
+msgstr "Όνομα αντικειμένου"
 
 #: tvismodifygplink.label_availablegpo.caption
 msgid "Available GPO"
@@ -4925,12 +4925,12 @@ msgstr ""
 #: tvismodifygplink.tisgrid_availablegpo.header.columns[0].text
 msgctxt "tvismodifygplink.tisgrid_availablegpo.header.columns[0].text"
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: tvismodifygplink.tisgrid_linkedgpo.header.columns[0].text
 msgctxt "tvismodifygplink.tisgrid_linkedgpo.header.columns[0].text"
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: tvisnewobject.btn_cancel.caption
 msgctxt "tvisnewobject.btn_cancel.caption"
@@ -4939,7 +4939,7 @@ msgstr "Ακύρωση"
 
 #: tvisnewobject.label_dn.caption
 msgid "Create in :"
-msgstr ""
+msgstr "Δημιουργία σε :"
 
 #: tvisnewquery.action_browse.caption
 msgid "Action_Browse"
@@ -4963,7 +4963,7 @@ msgstr ""
 
 #: tvisnewquery.checkbox_includesubcontainers.caption
 msgid "Include subcontainers"
-msgstr ""
+msgstr "Συμπερίληψη subcontainers"
 
 #: tvisnewquery.label_description.caption
 msgctxt "tvisnewquery.label_description.caption"
@@ -4977,11 +4977,11 @@ msgstr "Όνομα:"
 
 #: tvisnewquery.label_queryroot.caption
 msgid "Query root:"
-msgstr ""
+msgstr "Ρίζα ερωτήματος:"
 
 #: tvisnewquery.label_querystring.caption
 msgid "Query string:"
-msgstr ""
+msgstr "Αλφαριθμητικό ερωτήματος:"
 
 #: tvisnewresourcerecord.action_cancel.caption
 msgctxt "tvisnewresourcerecord.action_cancel.caption"
@@ -5010,7 +5010,7 @@ msgstr "Αναζήτηση"
 
 #: tvisnewresourcerecord.caption
 msgid "New Record Resource"
-msgstr ""
+msgstr "Νέα Πηγή Εγγραφών"
 
 #: tvisnewresourcerecord.edit2.text
 msgctxt "tvisnewresourcerecord.edit2.text"
@@ -5033,31 +5033,31 @@ msgstr "Τομέας:"
 
 #: tvisnewresourcerecord.label2.caption
 msgid "Service:"
-msgstr ""
+msgstr "Υπηρεσία:"
 
 #: tvisnewresourcerecord.label3.caption
 msgid "Protocol:"
-msgstr ""
+msgstr "Πρωτόκολλο:"
 
 #: tvisnewresourcerecord.label4.caption
 msgid "Priority:"
-msgstr ""
+msgstr "Προτεραιότητα:"
 
 #: tvisnewresourcerecord.label5.caption
 msgid "Weight:"
-msgstr ""
+msgstr "Βάρος:"
 
 #: tvisnewresourcerecord.label6.caption
 msgid "Port number:"
-msgstr ""
+msgstr "Αριθμός θύρας:"
 
 #: tvisnewresourcerecord.label7.caption
 msgid "Host offering this service:"
-msgstr ""
+msgstr "Υπολογιστής που προσφέρει αυτή την υπηρεσία:"
 
 #: tvisnewresourcerecord.label8.caption
 msgid "Allow any authenticated user to update all DNS records with the same nam. This setting applies only to DNS records for a new name."
-msgstr ""
+msgstr "Επίτρεψε σε οποιονδήποτε πιστοποιημένο χρήστη να ενημερώσει όλες τις εγγραφές DNS με το ίδιο όνομα. Αυτή η ρύθμιση ισχύει μόνο για εγγραφές DNS για ένα νέο όνομα."
 
 #: tvisnewresourcerecord.label_aallow.caption
 msgctxt "tvisnewresourcerecord.label_aallow.caption"
@@ -5076,15 +5076,15 @@ msgstr "Πλήρες όνομα τομέα (FQDN):"
 
 #: tvisnewresourcerecord.label_ahost.caption
 msgid "Host (uses parent domain if left blank):"
-msgstr ""
+msgstr "Υπολογιστής (χρησιμοποιεί τον γονικό τομέα αν αφεθεί κενό):"
 
 #: tvisnewresourcerecord.label_aipaddress.caption
 msgid "IP address:"
-msgstr ""
+msgstr "Διεύθυνση IP:"
 
 #: tvisnewresourcerecord.label_aptr.caption
 msgid "Update associated pointer (PTR) record"
-msgstr ""
+msgstr "Ενημέρωση σχετικής εγγραφής δείκτη (PTR)"
 
 #: tvisnewresourcerecord.label_atimestamp.caption
 msgctxt "tvisnewresourcerecord.label_atimestamp.caption"
@@ -5093,7 +5093,7 @@ msgstr "Χρονοσήμανση εγγραφής:"
 
 #: tvisnewresourcerecord.label_cnamealias.caption
 msgid "Alias name (uses parent domain if left blank):"
-msgstr ""
+msgstr "Ψευδόνυμο όνομα (χρησιμοποιεί τον γονικό τομέα αν αφεθεί κενό):"
 
 #: tvisnewresourcerecord.label_cnameallow.caption
 msgctxt "tvisnewresourcerecord.label_cnameallow.caption"
@@ -5112,7 +5112,7 @@ msgstr "Πλήρες όνομα τομέα (FQDN):"
 
 #: tvisnewresourcerecord.label_cnamefqdntarget.caption
 msgid "Fully qualified domain name (FQDN) for target host:"
-msgstr ""
+msgstr "Πλήρες όνομα τομέα (FQDN) για τον υπολογιστή-στόχο:"
 
 #: tvisnewresourcerecord.label_cnametimestamp.caption
 msgctxt "tvisnewresourcerecord.label_cnametimestamp.caption"
@@ -5121,7 +5121,7 @@ msgstr "Χρονοσήμανση εγγραφής:"
 
 #: tvisnewresourcerecord.label_mxdefault.caption
 msgid "By default. DNS uses the parent domain name when creating a Mail Exchange record. You can specify a host or child name, but in most deployements, the above field is left blank."
-msgstr ""
+msgstr "Εξ ορισμού. Το DNS χρησιμοποιεί το όνομα του γονικού τομέα κατά τη δημιουργία εγγραφής Ανταλλαγής Αλληλογραφίας. Μπορείτε να καθορίσετε ένα όνομα υπολογιστή ή θυγατρικού τομέα, αλλά στις περισσότερες εγκαταστάσεις, το παραπάνω πεδίο αφήνεται κενό."
 
 #: tvisnewresourcerecord.label_mxfqdn.caption
 msgctxt "tvisnewresourcerecord.label_mxfqdn.caption"
@@ -5130,15 +5130,15 @@ msgstr "Πλήρες όνομα τομέα (FQDN):"
 
 #: tvisnewresourcerecord.label_mxhost.caption
 msgid "Host or child domain:"
-msgstr ""
+msgstr "Υπολογιστής ή θυγατρικός τομέας:"
 
 #: tvisnewresourcerecord.label_mxmailserver.caption
 msgid "Fully qualified domain name (FQDN) of mail server:"
-msgstr ""
+msgstr "Πλήρες όνομα τομέα (FQDN) του διακομιστή αλληλογραφίας:"
 
 #: tvisnewresourcerecord.label_mxpriority.caption
 msgid "Mail server priority:"
-msgstr ""
+msgstr "Προτεραιότητα διακομιστή αλληλογραφίας:"
 
 #: tvisnewresourcerecord.label_ptrallowany.caption
 msgctxt "tvisnewresourcerecord.label_ptrallowany.caption"
@@ -5152,15 +5152,15 @@ msgstr "Πλήρες όνομα τομέα (FQDN):"
 
 #: tvisnewresourcerecord.label_ptrhost.caption
 msgid "Host IP Address:"
-msgstr ""
+msgstr "Διεύθυνση IP υπολογιστή:"
 
 #: tvisnewresourcerecord.label_ptrhostname.caption
 msgid "Host name:"
-msgstr ""
+msgstr "Όνομα υπολογιστή:"
 
 #: tvisnewresourcerecord.ts_a.caption
 msgid "Host (A)"
-msgstr ""
+msgstr "Υπολογιστής (A)"
 
 #: tvisnewresourcerecord.ts_cname.caption
 msgctxt "tvisnewresourcerecord.ts_cname.caption"
@@ -5269,139 +5269,139 @@ msgstr "Επόμενο"
 
 #: tvisnewzonewizard.caption
 msgid "New Zone Wizard"
-msgstr ""
+msgstr "Οδηγός Νέας Ζώνης"
 
 #: tvisnewzonewizard.label1.caption
 msgid "Welcome to the New Zone Wizard"
-msgstr ""
+msgstr "Καλώς ήρθατε στον Οδηγό Νέας Ζώνης"
 
 #: tvisnewzonewizard.label10.caption
 msgid "Create a copy of a zone containing inly Name Server (NS), Start of Authority (SOA), and possibly glue Host (A) records. A server containing a stub zone is not authoritative for that zone."
-msgstr ""
+msgstr "Δημιουργία αντιγράφου μιας ζώνης που περιέχει μόνο εγγραφές Διακομιστή Ονομάτων (NS), Έναρξης Αρχής (SOA) και ενδεχομένως glue εγγραφές Υπολογιστή (A). Ένας  διακομιστής που περιέχει μια stub ζώνη δεν είναι εξουσιοδοτημένος για αυτή τη ζώνη."
 
 #: tvisnewzonewizard.label11.caption
 msgid "Store the zone in Active Directory (available only if DNS server is a writeable domain controller)"
-msgstr ""
+msgstr "Αποθήκευση της ζώνης στο Active Directory (διαθέσιμο μόνο εάν ο διακομιστής DNS είναι εγγράψιμος ελεγκτής τομέα)"
 
 #: tvisnewzonewizard.label12.caption
 msgid "Active Directory Zone Replication Scope"
-msgstr ""
+msgstr "Πεδίο Εφαρμογής Αναπαραγωγής Ζώνης Active Directory"
 
 #: tvisnewzonewizard.label13.caption
 msgid "You can select how you want DNS data replicated throughout your network."
-msgstr ""
+msgstr "Μπορείτε να επιλέξετε πώς θέλετε να αναπαραχθούν τα δεδομένα DNS στο δίκτυό σας."
 
 #: tvisnewzonewizard.label14.caption
 msgid "Select how you want zone data replicated:"
-msgstr ""
+msgstr "Επιλέξτε πώς θέλετε να αναπαραχθούν τα δεδομένα ζώνης:"
 
 #: tvisnewzonewizard.label15.caption
 msgid "To all DNS servers running on domain controllers in this forest:"
-msgstr ""
+msgstr "Σε όλους τους διακομιστές DNS που εκτελούνται σε ελεγκτές τομέα σε αυτό το δάσος:"
 
 #: tvisnewzonewizard.label16.caption
 msgid "To all DNS servers running on domain controllers in this domain:"
-msgstr ""
+msgstr "Σε όλους τους διακομιστές DNS που εκτελούνται σε ελεγκτές τομέα σε αυτόν τον τομέα:"
 
 #: tvisnewzonewizard.label17.caption
 msgid "To all domain controllers in this domain (for Windows 2000 compatibility):"
-msgstr ""
+msgstr "Σε όλους τους ελεγκτές τομέα σε αυτόν τον τομέα (για συμβατότητα με Windows 2000):"
 
 #: tvisnewzonewizard.label18.caption
 msgid "To all domain controllers specified in the scoper of this directory partition:"
-msgstr ""
+msgstr "Σε όλους τους ελεγκτές τομέα που ορίζονται στο πεδίο αυτής της κατατμησης καταλόγου:"
 
 #: tvisnewzonewizard.label19.caption
 msgid "Zone Name"
-msgstr ""
+msgstr "Όνομα Ζώνης"
 
 #: tvisnewzonewizard.label2.caption
 msgid "This wizard helps you create a new zone for your DNS server."
-msgstr ""
+msgstr "Αυτός ο οδηγός σάς βοηθά να δημιουργήσετε μια νέα ζώνη για τον διακομιστή DNS σας."
 
 #: tvisnewzonewizard.label20.caption
 msgid "What is the name of the new zone?"
-msgstr ""
+msgstr "Ποιο είναι το όνομα της νέας ζώνης;"
 
 #: tvisnewzonewizard.label21.caption
 msgid "The zone name specifies the portion of the DNS namespace for which this server is autoritative. It might be your organization's domain name (for example, example.com) or a portion of the domain name (for example, newzone.example.com). The zone name is not the name of the DNS server."
-msgstr ""
+msgstr "Το όνομα ζώνης καθορίζει το τμήμα του χώρου ονομάτων DNS για το οποίο αυτός ο διακομιστής είναι εξουσιοδοτημένος. Μπορεί να είναι το όνομα τομέα της οργάνωσής σας (για παράδειγμα, example.com) ή ένα τμήμα του ονόματος τομέα (για παράδειγμα, newzone.example.com). Το όνομα ζώνης δεν είναι το όνομα του διακομιστή DNS."
 
 #: tvisnewzonewizard.label22.caption
 msgid "Zone name:"
-msgstr ""
+msgstr "Όνομα ζώνης:"
 
 #: tvisnewzonewizard.label23.caption
 msgid "Zone File"
-msgstr ""
+msgstr "Αρχείο Ζώνης"
 
 #: tvisnewzonewizard.label24.caption
 msgid "You can create a new zone file or use a file copied from another DNS server."
-msgstr ""
+msgstr "Μπορείτε να δημιουργήσετε ένα νέο αρχείο ζώνης ή να χρησιμοποιήσετε ένα αρχείο που έχετε αντιγράψει από άλλο διακομιστή DNS."
 
 #: tvisnewzonewizard.label25.caption
 msgid "Do you want to create a new zone file or use an existing file that you have copied from another DNS server?"
-msgstr ""
+msgstr "Θέλετε να δημιουργήσετε ένα νέο αρχείο ζώνης ή να χρησιμοποιήσετε ένα υπάρχον αρχείο που έχετε αντιγράψει από άλλο διακομιστή DNS;"
 
 #: tvisnewzonewizard.label26.caption
 msgid "To use this existing file, ensure that it has been copied to the folder %SystemRoot%\\system32\\dns on this server, and then click Next."
-msgstr ""
+msgstr "Για να χρησιμοποιήσετε αυτό το υπάρχον αρχείο, βεβαιωθείτε ότι έχει αντιγραφεί στο φάκελο %SystemRoot%\\system32\\dns σε αυτόν το διακομιστή και μετά κάντε κλικ στο Επόμενο."
 
 #: tvisnewzonewizard.label27.caption
 msgid "Create a new file with this file name:"
-msgstr ""
+msgstr "Δημιουργείστε ένα νέο αρχείο με αυτό το όνομα αρχείου:"
 
 #: tvisnewzonewizard.label28.caption
 msgid "Use this existing file:"
-msgstr ""
+msgstr "Χρησιμοποιήστε αυτό το υπάρχον αρχείο:"
 
 #: tvisnewzonewizard.label29.caption
 msgid "You can specify that this DNS zone accepts secure, nonsecure, or no dynamic updates."
-msgstr ""
+msgstr "Μπορείτε να καθορίσετε ότι αυτή η ζώνη DNS δέχεται ασφαλή, μη ασφαλή ή καμία δυναμική ενημέρωση."
 
 #: tvisnewzonewizard.label3.caption
 msgid "A zone translates DNS names to related data, such as IP addresses or network services."
-msgstr ""
+msgstr "Μια ζώνη μεταφράζει τα ονόματα DNS σε σχετικά δεδομένα, όπως διευθύνσεις IP ή δικτυακές υπηρεσίες."
 
 #: tvisnewzonewizard.label30.caption
 msgid "Dynamic Update"
-msgstr ""
+msgstr "Δυναμική Ενημέρωση"
 
 #: tvisnewzonewizard.label31.caption
 msgid "Dynamic updates enable DNS client computers to register and dynamically update their resource records with a DNS server whenever changes occur."
-msgstr ""
+msgstr "Οι δυναμικές ενημερώσεις επιτρέπουν στους υπολογιστές πελάτες DNS να εγγράφονται και να ενημερώνουν δυναμικά τις εγγραφές πόρων τους με ένα διακομιστή DNS όποτε προκύψουν αλλαγές."
 
 #: tvisnewzonewizard.label32.caption
 msgid "Select the type of dynamic updates you want to allow:"
-msgstr ""
+msgstr "Επιλέξτε τον τύπο δυναμικών ενημερώσεων που θέλετε να επιτρέψετε:"
 
 #: tvisnewzonewizard.label33.caption
 msgid "Allow only secure dynamic updates (recommanded for Active Directory)"
-msgstr ""
+msgstr "Να επιτρέπονται μόνο ασφαλείς δυναμικές ενημερώσεις (συνιστάται για το Active Directory)"
 
 #: tvisnewzonewizard.label34.caption
 msgid "This option is available only for Active Directory-integrated zones."
-msgstr ""
+msgstr "Αυτή η επιλογή είναι διαθέσιμη μόνο για ζώνες που είναι ενσωματωμένες στο Active Directory."
 
 #: tvisnewzonewizard.label35.caption
 msgid "Allow both nonsecure and secure dynamic updates"
-msgstr ""
+msgstr "Να επιτρέπονται και οι μη ασφαλείς και οι ασφαλείς δυναμικές ενημερώσεις"
 
 #: tvisnewzonewizard.label36.caption
 msgid "Dynamic updates of resource records are accepted from any client."
-msgstr ""
+msgstr "Οι δυναμικές ενημερώσεις των εγγραφών πόρων γίνονται αποδεκτές από οποιοδήποτε πελάτη."
 
 #: tvisnewzonewizard.label37.caption
 msgid "This option is a significant security vulnerability because updates can be accepted from untrusted sources."
-msgstr ""
+msgstr "Αυτή η επιλογή αποτελεί σημαντικό κενό ασφαλείας επειδή οι ενημερώσεις μπορούν να γίνονται αποδεκτές από μη αξιόπιστες πηγές."
 
 #: tvisnewzonewizard.label38.caption
 msgid "Do not allow dynamic updates"
-msgstr ""
+msgstr "Να μην επιτρέπονται δυναμικές ενημερώσεις"
 
 #: tvisnewzonewizard.label39.caption
 msgid "Dynamic updates of resource records are not accepted by this zone. You must update these records manually."
-msgstr ""
+msgstr "Οι δυναμικές ενημερώσεις των εγγραφών πόρων δεν γίνονται αποδεκτές από αυτή τη ζώνη. Πρέπει να ενημερώσετε αυτές τις εγγραφές χειροκίνητα."
 
 #: tvisnewzonewizard.label4.caption
 msgctxt "tvisnewzonewizard.label4.caption"
@@ -5410,51 +5410,51 @@ msgstr "Για να συνεχίσετε, κάντε κλικ στο Επόμε�
 
 #: tvisnewzonewizard.label40.caption
 msgid "Completing the New Zone Wizard"
-msgstr ""
+msgstr "Ολοκλήρωση του Οδηγού Δημιουργίας Ζώνης"
 
 #: tvisnewzonewizard.label41.caption
 msgid "You have successfully completed the New Zone Wizard. You specified the following settings:"
-msgstr ""
+msgstr "Έχετε ολοκληρώσει με επιτυχία τον Οδηγό Δημιουργίας Ζώνης. Έχετε καθορίσει τις ακόλουθες ρυθμίσεις:"
 
 #: tvisnewzonewizard.label42.caption
 msgid "Note: You should now add records to the zone or ensure that records are updated dynamically. You can then verify name resolution using nslookup."
-msgstr ""
+msgstr "Σημείωση: Πρέπει τώρα να προσθέσετε εγγραφές στη ζώνη ή να εξασφαλίσετε ότι οι εγγραφές ενημερώνονται δυναμικά. Μπορείτε στη συνέχεια να επιβεβαιώσετε την ανάλυση ονόματος χρησιμοποιώντας το nslookup."
 
 #: tvisnewzonewizard.label43.caption
 msgid "To close this wizard and create the new zone, click Finish."
-msgstr ""
+msgstr "Για να κλείσετε αυτόν τον οδηγό και να δημιουργήσετε τη νέα ζώνη, κάντε κλικ στο Ολοκλήρωση."
 
 #: tvisnewzonewizard.label5.caption
 msgid "Zone Type"
-msgstr ""
+msgstr "Τύπος Ζώνης"
 
 #: tvisnewzonewizard.label6.caption
 msgid "The DNS server supports various types of zones and storage."
-msgstr ""
+msgstr "Ο διακομιστής DNS υποστηρίζει διάφορους τύπους ζωνών και αποθήκευσης."
 
 #: tvisnewzonewizard.label7.caption
 msgid "Select the type of zone you want to create:"
-msgstr ""
+msgstr "Επιλέξτε τον τύπο ζώνης που θέλετε να δημιουργήσετε:"
 
 #: tvisnewzonewizard.label8.caption
 msgid "Creates a copy of a zone that can be updated directly on this server."
-msgstr ""
+msgstr "Δημιουργεί ένα αντίγραφο μιας ζώνης που μπορεί να ενημερωθεί απευθείας σε αυτόν το διακομιστή."
 
 #: tvisnewzonewizard.label9.caption
 msgid "Create a copy of a zone that exists on another server. This option helps balance the processing load of primary servers and provides fault tolerance."
-msgstr ""
+msgstr "Δημιουργεί ένα αντίγραφο μιας ζώνης που υπάρχει σε άλλο διακομιστή. Αυτή η επιλογή βοηθά να εξισορροπήσει το φορτίο επεξεργασίας των πρωτευόντων διακομιστών και παρέχει ανοχή σε σφάλματα."
 
 #: tvisnewzonewizard.radiobutton1.caption
 msgid "Primary zone"
-msgstr ""
+msgstr "Πρωτεύουσα ζώνη"
 
 #: tvisnewzonewizard.radiobutton2.caption
 msgid "Secondary zone"
-msgstr ""
+msgstr "Δευτερεύουσα ζώνη"
 
 #: tvisnewzonewizard.radiobutton3.caption
 msgid "Stub zone"
-msgstr ""
+msgstr "Stub ζώνη"
 
 #: tvisomniselect.action_menuitemclick.caption
 msgid "Action_MenuItemClick"
@@ -5472,7 +5472,7 @@ msgstr "Ακύρωση"
 
 #: tvisomniselect.label_search.caption
 msgid "Search :"
-msgstr ""
+msgstr "Αναζήτηση :"
 
 #: tvisomniselect.tisgrid_items.header.columns[0].text
 msgctxt "tvisomniselect.tisgrid_items.header.columns[0].text"
@@ -5491,7 +5491,7 @@ msgstr "Φάκελος"
 
 #: tvisomniselect.toolbutton_attributeslist.caption
 msgid "Search selection"
-msgstr ""
+msgstr "Αναζήτηση επιλογής"
 
 #: tvisopenrsat.action_about.caption
 msgctxt "tvisopenrsat.action_about.caption"
@@ -5500,19 +5500,19 @@ msgstr "Σχετικά"
 
 #: tvisopenrsat.action_advancedfeatures.caption
 msgid "Advanced Features"
-msgstr ""
+msgstr "Προχωρημένα Χαρακτηριστικά"
 
 #: tvisopenrsat.action_ldapconnect.caption
 msgid "Connect"
-msgstr ""
+msgstr "Σύνδεση"
 
 #: tvisopenrsat.action_ldapdisconnect.caption
 msgid "Disconnect"
-msgstr ""
+msgstr "Αποσύνδεση"
 
 #: tvisopenrsat.action_ldapoptions.caption
 msgid "Connection Options"
-msgstr ""
+msgstr "Επιλογές Σύνδεσης"
 
 #: tvisopenrsat.action_newwindow.caption
 msgid "Action_NewWindow"
@@ -5542,7 +5542,7 @@ msgstr ""
 #: tvisopenrsat.action_showgpo.caption
 msgctxt "tvisopenrsat.action_showgpo.caption"
 msgid "Show GPO"
-msgstr ""
+msgstr "Εμφάνιση GPO"
 
 #: tvisopenrsat.caption
 msgctxt "tvisopenrsat.caption"
@@ -5674,11 +5674,11 @@ msgstr "Επιλογές"
 
 #: tvisprofileconfiguration.action_searchdomaincontrollers.hint
 msgid "Search domain controllers"
-msgstr ""
+msgstr "Ελεγκτής Τομέα"
 
 #: tvisprofileconfiguration.action_searchdomains.hint
 msgid "Search domains"
-msgstr ""
+msgstr "Αναζήτηση από"
 
 #: tvisprofileconfiguration.action_selectkeytab.caption
 msgctxt "tvisprofileconfiguration.action_selectkeytab.caption"
@@ -5691,11 +5691,11 @@ msgstr ""
 
 #: tvisprofileconfiguration.action_testauthentication.caption
 msgid "Test Authentication"
-msgstr ""
+msgstr "Απλή Πιστοποίηση"
 
 #: tvisprofileconfiguration.action_testconnection.caption
 msgid "Test Connection"
-msgstr ""
+msgstr "Σύνδεση :"
 
 #: tvisprofileconfiguration.caption
 msgid "Profil configuration"
@@ -5707,7 +5707,7 @@ msgstr ""
 
 #: tvisprofileconfiguration.groupbox_account.caption
 msgid "Account"
-msgstr ""
+msgstr "Λογαριασμός :"
 
 #: tvisprofileconfiguration.groupbox_authmethods.caption
 msgid "Auth method"
@@ -5716,7 +5716,7 @@ msgstr ""
 #: tvisprofileconfiguration.groupbox_domain.caption
 msgctxt "tvisprofileconfiguration.groupbox_domain.caption"
 msgid "Domain"
-msgstr ""
+msgstr "Τομέας"
 
 #: tvisprofileconfiguration.groupbox_keytab.caption
 msgid "KeyTab"
@@ -5729,7 +5729,7 @@ msgstr ""
 #: tvisprofileconfiguration.label_anonymous.caption
 msgctxt "tvisprofileconfiguration.label_anonymous.caption"
 msgid "Anonymous"
-msgstr ""
+msgstr "Ανώνυμη Σύνδεση"
 
 #: tvisprofileconfiguration.label_at.caption
 msgid "@"
@@ -5741,7 +5741,7 @@ msgstr ""
 
 #: tvisprofileconfiguration.label_currentusername.caption
 msgid "Current username"
-msgstr ""
+msgstr "Ομάδα ή ονόματα χρηστών"
 
 #: tvisprofileconfiguration.label_digest.caption
 msgid "Digest"
@@ -5750,12 +5750,12 @@ msgstr ""
 #: tvisprofileconfiguration.label_domain.caption
 msgctxt "tvisprofileconfiguration.label_domain.caption"
 msgid "Domain"
-msgstr ""
+msgstr "Τομέας"
 
 #: tvisprofileconfiguration.label_domaincontroller.caption
 msgctxt "tvisprofileconfiguration.label_domaincontroller.caption"
 msgid "Domain Controller"
-msgstr ""
+msgstr "Ελεγκτής Τομέα"
 
 #: tvisprofileconfiguration.label_kerberos.caption
 msgid "Kerberos"
@@ -5763,7 +5763,7 @@ msgstr ""
 
 #: tvisprofileconfiguration.label_password.caption
 msgid "Password"
-msgstr ""
+msgstr "Κωδικός Πρόσβασης"
 
 #: tvisprofileconfiguration.label_profilename.caption
 msgid "Profile name: "
@@ -5776,7 +5776,7 @@ msgstr ""
 
 #: tvisprofileconfiguration.label_timeout.caption
 msgid "Timeout"
-msgstr ""
+msgstr "Χρονικό όριο"
 
 #: tvisprofileconfiguration.label_tls.caption
 msgid "TLS"
@@ -5784,12 +5784,12 @@ msgstr ""
 
 #: tvisprofileconfiguration.label_unsafe.caption
 msgid "Unsafe connection"
-msgstr ""
+msgstr "Ανώνυμη Σύνδεση"
 
 #: tvisprofileconfiguration.label_username.caption
 msgctxt "tvisprofileconfiguration.label_username.caption"
 msgid "Username"
-msgstr ""
+msgstr "Όνομα Χρήστη"
 
 #: tvisprofilemanager.action_add.caption
 msgid "Action_Add"
@@ -5807,31 +5807,31 @@ msgstr ""
 #: tvisprofilemanager.bitbtn_ok.caption
 msgctxt "tvisprofilemanager.bitbtn_ok.caption"
 msgid "OK"
-msgstr ""
+msgstr "ΟΚ"
 
 #: tvisprofilemanager.caption
 msgid "Profile manager"
-msgstr ""
+msgstr "Διαδρομή προφίλ :"
 
 #: tvisprofilemanager.listview1.columns[0].caption
 msgctxt "tvisprofilemanager.listview1.columns[0].caption"
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: tvisprofilemanager.listview1.columns[1].caption
 msgctxt "tvisprofilemanager.listview1.columns[1].caption"
 msgid "Domain"
-msgstr ""
+msgstr "Τομέας"
 
 #: tvisprofilemanager.listview1.columns[2].caption
 msgctxt "tvisprofilemanager.listview1.columns[2].caption"
 msgid "Domain Controller"
-msgstr ""
+msgstr "Ελεγκτής Τομέα"
 
 #: tvisprofilemanager.listview1.columns[3].caption
 msgctxt "tvisprofilemanager.listview1.columns[3].caption"
 msgid "Username"
-msgstr ""
+msgstr "Όνομα Χρήστη"
 
 #: tvisprofilemanager.menuitem_largeicons.caption
 msgid "Large icons"
@@ -5880,7 +5880,7 @@ msgstr "Φίλτρο"
 
 #: tvisproperties.action_attributesmandatory.caption
 msgid "Mandatory"
-msgstr ""
+msgstr "Υποχρεωτικό"
 
 #: tvisproperties.action_attributesmodify.caption
 msgctxt "tvisproperties.action_attributesmodify.caption"
@@ -5889,7 +5889,7 @@ msgstr "Τροποποίηση"
 
 #: tvisproperties.action_attributesoptional.caption
 msgid "Optional"
-msgstr ""
+msgstr "Προαιρετικό"
 
 #: tvisproperties.action_attributesshowvalues.caption
 msgctxt "tvisproperties.action_attributesshowvalues.caption"
@@ -5923,7 +5923,7 @@ msgstr "Αφαίρεση"
 
 #: tvisproperties.action_certificateview.caption
 msgid "View Certificate..."
-msgstr ""
+msgstr "Εμφάνιση Πιστοποιητικού..."
 
 #: tvisproperties.action_lapscopypassword.caption
 msgctxt "tvisproperties.action_lapscopypassword.caption"
@@ -6015,12 +6015,12 @@ msgstr "Διαγραφή"
 #: tvisrename.action_ok.caption
 msgctxt "tvisrename.action_ok.caption"
 msgid "OK"
-msgstr ""
+msgstr "ΟΚ"
 
 #: tvisrename.bitbtn_cancel.caption
 msgctxt "tvisrename.bitbtn_cancel.caption"
 msgid "Cancel"
-msgstr ""
+msgstr "Ακύρωση"
 
 #: tvisrename.caption
 msgctxt "tvisrename.caption"
@@ -6030,22 +6030,22 @@ msgstr ""
 #: tvisrename.label_displayname.caption
 msgctxt "tvisrename.label_displayname.caption"
 msgid "Display name:"
-msgstr ""
+msgstr "Εμφανιζόμενο όνομα:"
 
 #: tvisrename.label_firstname.caption
 msgctxt "tvisrename.label_firstname.caption"
 msgid "First name:"
-msgstr ""
+msgstr "Όνομα:"
 
 #: tvisrename.label_fullname.caption
 msgctxt "tvisrename.label_fullname.caption"
 msgid "Full name:"
-msgstr ""
+msgstr "Πλήρες όνομα:"
 
 #: tvisrename.label_lastname.caption
 msgctxt "tvisrename.label_lastname.caption"
 msgid "Last name:"
-msgstr ""
+msgstr "Επώνυμο:"
 
 #: tvisrename.label_userlogonname.caption
 msgctxt "tvisrename.label_userlogonname.caption"
@@ -6067,35 +6067,35 @@ msgstr ""
 
 #: tvisrootdseinfos.label1.caption
 msgid "Server informations (available from RootDSE Object)"
-msgstr ""
+msgstr "Πληροφορίες διακομιστή (διαθέσιμες από το RootDSE Object)"
 
 #: tvisrootdseinfos.label_domain.caption
 msgctxt "tvisrootdseinfos.label_domain.caption"
 msgid "Domain"
-msgstr ""
+msgstr "Τομέας"
 
 #: tvisrootdseinfos.label_domaincontroller.caption
 msgctxt "tvisrootdseinfos.label_domaincontroller.caption"
 msgid "Domain Controller"
-msgstr ""
+msgstr "Ελεγκτής Τομέα"
 
 #: tvisrootdseinfos.tisgrid1.header.columns[0].text
 msgctxt "tvisrootdseinfos.tisgrid1.header.columns[0].text"
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: tvisrootdseinfos.tisgrid1.header.columns[1].text
 msgctxt "tvisrootdseinfos.tisgrid1.header.columns[1].text"
 msgid "Value"
-msgstr ""
+msgstr "Τιμή"
 
 #: tvissearch.action_advadd.caption
 msgid "Add condition"
-msgstr ""
+msgstr "Προσθήκη συνθήκης"
 
 #: tvissearch.action_advdel.caption
 msgid "Delete condition"
-msgstr ""
+msgstr "Διαγραφή συνθήκης"
 
 #: tvissearch.action_changedn.caption
 msgctxt "tvissearch.action_changedn.caption"
@@ -6115,15 +6115,15 @@ msgstr "Αναζήτηση"
 
 #: tvissearch.action_searchfrom.caption
 msgid "Search from"
-msgstr ""
+msgstr "Αναζήτηση από"
 
 #: tvissearch.action_searchnew.caption
 msgid "Search New"
-msgstr ""
+msgstr "Αναζήτηση Νέου"
 
 #: tvissearch.action_showinview.caption
 msgid "Show in view"
-msgstr ""
+msgstr "Εμφάνιση σε προβολή"
 
 #: tvissearch.caption
 msgctxt "tvissearch.caption"
@@ -6132,7 +6132,7 @@ msgstr "Αναζήτηση"
 
 #: tvissearch.combobox_advcondition.text
 msgid "Start with"
-msgstr ""
+msgstr "Ξεκινάει με"
 
 #: tvissearch.edit_pagecount.text
 msgid "1"
@@ -6144,23 +6144,23 @@ msgstr ""
 
 #: tvissearch.label_basicvalue.caption
 msgid "Search a name:"
-msgstr ""
+msgstr "Αναζήτηση ονόματος:"
 
 #: tvissearch.label_expfilter.caption
 msgid "Search using Ldap filter:"
-msgstr ""
+msgstr "Αναζήτηση χρησιμοποιώντας φίλτρο Ldap:"
 
 #: tvissearch.label_pagecount.caption
 msgid "Page count"
-msgstr ""
+msgstr "Αριθμός σελίδων"
 
 #: tvissearch.label_pagesize.caption
 msgid "Page size"
-msgstr ""
+msgstr "Μέγεθος σελίδας"
 
 #: tvissearch.label_path.caption
 msgid "Path:"
-msgstr ""
+msgstr "Διαδρομή:"
 
 #: tvissearch.label_resultcount.caption
 msgctxt "tvissearch.label_resultcount.caption"
@@ -6169,15 +6169,15 @@ msgstr "Συνολικά : 0 στοιχεία"
 
 #: tvissearch.label_searchscope.caption
 msgid "Search Scope"
-msgstr ""
+msgstr "Εύρος Αναζήτησης"
 
 #: tvissearch.radiobutton_allcondition.caption
 msgid "All conditions"
-msgstr ""
+msgstr "Όλες οι συνθήκες"
 
 #: tvissearch.radiobutton_onecondition.caption
 msgid "At least one condition"
-msgstr ""
+msgstr "Τουλάχιστον μία συνθήκη"
 
 #: tvissearch.tabsheet_advanced.caption
 msgctxt "tvissearch.tabsheet_advanced.caption"
@@ -6204,7 +6204,7 @@ msgstr "Κλειδί"
 
 #: tvissearch.tisgrid_advdetails.header.columns[1].text
 msgid "Condition"
-msgstr ""
+msgstr "Συνθήκη"
 
 #: tvissearch.tisgrid_advdetails.header.columns[2].text
 msgctxt "tvissearch.tisgrid_advdetails.header.columns[2].text"
@@ -6233,15 +6233,15 @@ msgstr "Ακύρωση"
 
 #: tvisselectnewrecordtype.action_createrecord.caption
 msgid "Create Record"
-msgstr ""
+msgstr "Δημιουργία Εγγραφής"
 
 #: tvisselectnewrecordtype.caption
 msgid "Resource Record Type"
-msgstr ""
+msgstr "Τύπος Εγγραφής Πόρου"
 
 #: tvisselectnewrecordtype.label1.caption
 msgid "Select a resource record type:"
-msgstr ""
+msgstr "Επιλέξτε έναν τύπο εγγραφής πόρου:"
 
 #: tvisselectnewrecordtype.label2.caption
 msgctxt "tvisselectnewrecordtype.label2.caption"
@@ -6251,17 +6251,17 @@ msgstr "Περιγραφή:"
 #: tvisselectobjectguid.action1.caption
 msgctxt "tvisselectobjectguid.action1.caption"
 msgid "Search"
-msgstr ""
+msgstr "Αναζήτηση"
 
 #: tvisselectobjectguid.bitbtn2.caption
 msgctxt "tvisselectobjectguid.bitbtn2.caption"
 msgid "OK"
-msgstr ""
+msgstr "ΟΚ"
 
 #: tvisselectobjectguid.bitbtn3.caption
 msgctxt "tvisselectobjectguid.bitbtn3.caption"
 msgid "Cancel"
-msgstr ""
+msgstr "Ακύρωση"
 
 #: tvisselectobjectguid.caption
 msgid "Select Object GUID"
@@ -6275,7 +6275,7 @@ msgstr ""
 #: tvisselectobjectguid.label2.caption
 msgctxt "tvisselectobjectguid.label2.caption"
 msgid "Total : 0 elements"
-msgstr ""
+msgstr "Συνολικά : 0 στοιχεία"
 
 #: tvisselectobjectguid.tisgrid1.header.columns[0].text
 msgctxt "tvisselectobjectguid.tisgrid1.header.columns[0].text"
@@ -6285,7 +6285,7 @@ msgstr ""
 #: tvisselectobjectguid.tisgrid1.header.columns[1].text
 msgctxt "tvisselectobjectguid.tisgrid1.header.columns[1].text"
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: tvisselectobjectguid.tisgrid1.header.columns[2].text
 msgid "GUID"
@@ -6294,22 +6294,22 @@ msgstr ""
 #: tvisselectobjectguid.tisgrid1.header.columns[3].text
 msgctxt "tvisselectobjectguid.tisgrid1.header.columns[3].text"
 msgid "Type"
-msgstr ""
+msgstr "Τύπος"
 
 #: tvisselectobjectsid.action1.caption
 msgctxt "tvisselectobjectsid.action1.caption"
 msgid "Search"
-msgstr ""
+msgstr "Αναζήτηση"
 
 #: tvisselectobjectsid.bitbtn2.caption
 msgctxt "tvisselectobjectsid.bitbtn2.caption"
 msgid "Cancel"
-msgstr ""
+msgstr "Ακύρωση"
 
 #: tvisselectobjectsid.bitbtn3.caption
 msgctxt "tvisselectobjectsid.bitbtn3.caption"
 msgid "OK"
-msgstr ""
+msgstr "ΟΚ"
 
 #: tvisselectobjectsid.caption
 msgid "Select ObjectSID"
@@ -6323,7 +6323,7 @@ msgstr ""
 #: tvisselectobjectsid.label2.caption
 msgctxt "tvisselectobjectsid.label2.caption"
 msgid "Total : 0 elements"
-msgstr ""
+msgstr "Συνολικά : 0 στοιχεία"
 
 #: tvisselectobjectsid.tisgrid1.header.columns[0].text
 msgctxt "tvisselectobjectsid.tisgrid1.header.columns[0].text"
@@ -6333,7 +6333,7 @@ msgstr ""
 #: tvisselectobjectsid.tisgrid1.header.columns[1].text
 msgctxt "tvisselectobjectsid.tisgrid1.header.columns[1].text"
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: tvisselectobjectsid.tisgrid1.header.columns[2].text
 msgid "SID"
@@ -6350,12 +6350,12 @@ msgstr ""
 #: tvisshowrelationship.action_property.caption
 msgctxt "tvisshowrelationship.action_property.caption"
 msgid "Property"
-msgstr ""
+msgstr "Ιδιότητα"
 
 #: tvisshowrelationship.action_refresh.caption
 msgctxt "tvisshowrelationship.action_refresh.caption"
 msgid "Refresh"
-msgstr ""
+msgstr "Ανανέωση"
 
 #: tvisshowrelationship.action_savetodot.caption
 msgid "Save to DOT"
@@ -6377,12 +6377,12 @@ msgstr ""
 #: tvisshowrelationship.bitbtn_next.caption
 msgctxt "tvisshowrelationship.bitbtn_next.caption"
 msgid "Next"
-msgstr ""
+msgstr "Επόμενο"
 
 #: tvisshowrelationship.bitbtn_previous.caption
 msgctxt "tvisshowrelationship.bitbtn_previous.caption"
 msgid "Previous"
-msgstr ""
+msgstr "Προηγούμενο"
 
 #: tvisshowrelationship.caption
 msgid "Group relations"
@@ -6423,7 +6423,7 @@ msgstr ""
 #: tvisshowrelationship.tisgrid_groupdata.header.columns[2].text
 msgctxt "tvisshowrelationship.tisgrid_groupdata.header.columns[2].text"
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: tvisshowrelationship.tisgrid_groupdata.header.columns[3].text
 msgid "Member"
@@ -6450,7 +6450,7 @@ msgstr "Μετακίνηση"
 
 #: tvistaskmove.label_dn.caption
 msgid "Object location :"
-msgstr ""
+msgstr "Τοποθεσία αντικειμένου :"
 
 #: tvistaskmove.label_rdn.caption
 msgctxt "tvistaskmove.label_rdn.caption"
@@ -6464,7 +6464,7 @@ msgstr "Ακύρωση"
 
 #: tvistaskresetpassword.btn_ok.caption
 msgid "Ok"
-msgstr ""
+msgstr "ΟΚ"
 
 #: tvistaskresetpassword.caption
 msgctxt "tvistaskresetpassword.caption"
@@ -6478,7 +6478,7 @@ msgstr "Ο χρήστης πρέπει να αλλάξει τον κωδικό �
 
 #: tvistaskresetpassword.checkbox_unlock.caption
 msgid "Unlock the user's account"
-msgstr ""
+msgstr "Ξεκλείδωμα του λογαριασμού χρήστη"
 
 #: tvistaskresetpassword.label_confirmpassword.caption
 msgctxt "tvistaskresetpassword.label_confirmpassword.caption"
@@ -6487,15 +6487,15 @@ msgstr "Επιβεβαίωση Κωδικού Πρόσβασης :"
 
 #: tvistaskresetpassword.label_effect.caption
 msgid "The user must logoff and then logon again for the change to take effect."
-msgstr ""
+msgstr "Ο χρήστης πρέπει να αποσυνδεθεί και στη συνέχεια να συνδεθεί ξανά για να εφαρμοστεί η αλλαγή."
 
 #: tvistaskresetpassword.label_newpassword.caption
 msgid "New Password :"
-msgstr ""
+msgstr "Νέος Κωδικός Πρόσβασης :"
 
 #: tvistaskresetpassword.label_status.caption
 msgid "Account Lockout Status on this Domain Controller : "
-msgstr ""
+msgstr "Κατάσταση Κλειδώματος Λογαριασμού σε αυτόν τον Ελεγκτή Τομέα : "
 
 #: tvisviewkeytab.action_copytoclipboard.caption
 msgid "Copy to clipboard (base64)"
@@ -6529,7 +6529,7 @@ msgstr ""
 #: tvisviewkeytab.label2.caption
 msgctxt "tvisviewkeytab.label2.caption"
 msgid "Folder"
-msgstr ""
+msgstr "Φάκελος"
 
 #: tvisviewkeytab.tisgrid1.header.columns[0].text
 msgid "KVNO"
@@ -6538,7 +6538,7 @@ msgstr ""
 #: tvisviewkeytab.tisgrid1.header.columns[1].text
 msgctxt "tvisviewkeytab.tisgrid1.header.columns[1].text"
 msgid "Timestamp"
-msgstr ""
+msgstr "Χρονοσφραγίδα"
 
 #: tvisviewkeytab.tisgrid1.header.columns[2].text
 msgctxt "tvisviewkeytab.tisgrid1.header.columns[2].text"
@@ -6552,7 +6552,7 @@ msgstr ""
 #: tvisviewkeytab.tisgrid1.header.columns[4].text
 msgctxt "tvisviewkeytab.tisgrid1.header.columns[4].text"
 msgid "Key"
-msgstr ""
+msgstr "Κλειδί"
 
 #: ucommon.rsaccountunlocked
 msgid "Account Unlock"
@@ -6624,7 +6624,7 @@ msgstr ""
 #: ucommon.rsallow
 msgctxt "ucommon.rsallow"
 msgid "Allow"
-msgstr ""
+msgstr "Επίτρεψε"
 
 #: ucommon.rsand
 msgid "% and %"
@@ -6738,11 +6738,11 @@ msgstr "Θέλετε να διαγράψετε το προφίλ %?"
 #: ucommon.rsdeny
 msgctxt "ucommon.rsdeny"
 msgid "Deny"
-msgstr ""
+msgstr "Απόρριψε"
 
 #: ucommon.rsdisableaccount
 msgid "Disable Account"
-msgstr ""
+msgstr "Απενεργοποίηση Λογαριασμού"
 
 #: ucommon.rsdnspropertyzoneagingenabledtime
 msgid "Aging enabled time"
@@ -6807,7 +6807,7 @@ msgstr ""
 #: ucommon.rsdnspropertyzonetype
 msgctxt "ucommon.rsdnspropertyzonetype"
 msgid "Type"
-msgstr ""
+msgstr "Τύπος"
 
 #: ucommon.rsdnsrecorda
 msgid "Host (A or AAAA)"
@@ -6820,7 +6820,7 @@ msgstr "Εγγραφή διεύθυνσης υπολογιστή (A ή AAAA). Α
 #: ucommon.rsdnsrecordcname
 msgctxt "ucommon.rsdnsrecordcname"
 msgid "Alias (CNAME)"
-msgstr ""
+msgstr "Ψευδώνυμο (CNAME)"
 
 #: ucommon.rsdnsrecordcnamedescription
 msgid "Alias record. Indicates an alternate or alias DNS domain name for a name already specified in other resource record types used in this zone. The record is also known as the canonical name (CNAME) record type. (RFC 1035)"
@@ -6829,7 +6829,7 @@ msgstr "Εγγραφή ψευδώνυμου. Υποδεικνύει ένα εν�
 #: ucommon.rsdnsrecordmx
 msgctxt "ucommon.rsdnsrecordmx"
 msgid "Mail Exchanger (MX)"
-msgstr ""
+msgstr "Ανταλλαγή Αλληλογραφίας (MX)"
 
 #: ucommon.rsdnsrecordmxdescription
 msgid "Mail exchanger (MX) record. Provides message routing to a specified mail exchange host that is acting as a mail exchanger for a specified DNS domain name. MX records use a 16-bit integer to indicate host priority in message routing where multiple mail exchange hosts are specified. For each mail exchange host specified in this record type, a corresponding host address (A) type record is needed. (RFC 1035)"
@@ -6838,7 +6838,7 @@ msgstr "Εγγραφή ανταλλαγής αλληλογραφίας (MX). Π�
 #: ucommon.rsdnsrecordptr
 msgctxt "ucommon.rsdnsrecordptr"
 msgid "Pointer (PTR)"
-msgstr ""
+msgstr "Δείκτης (PTR)"
 
 #: ucommon.rsdnsrecordptrdescription
 msgid "Pointer (PTR) record. Points to a location in the domain name space. PTR records are typically used in special domains to perform reverse lookups of address-to-name mappings. Each record provides simple data that points to some other location in the domain name space (usually a forward lookup zone). Where PTR records are used, no additional section processing is implied or caused by their presence. (RFC 1035)"
@@ -6847,7 +6847,7 @@ msgstr "Εγγραφή δείκτη (PTR). Δείχνει σε μια τοποθ
 #: ucommon.rsdnsrecordsrv
 msgctxt "ucommon.rsdnsrecordsrv"
 msgid "Service Location (SRV)"
-msgstr ""
+msgstr "Τοποθεσία Υπηρεσίας (SRV)"
 
 #: ucommon.rsdnsrecordsrvdescription
 msgid "Service (SRV) record. Allows administrators to use several servers for a single DNS domain, to easily move a TCP/IP service from one host to another host with administration, and to designate some service provider hosts as primary servers for a service and other hosts as backups. DNS clients that use a SRV-type query ask for a specific TCP/IP service and protocol mapped to a specific DNS domain and receive the names of any available servers. (RFC 2052)"
@@ -6856,7 +6856,7 @@ msgstr "Εγγραφή υπηρεσίας (SRV). Επιτρέπει στους �
 #: ucommon.rsdnszonedcpromoconvertdomain
 msgctxt "ucommon.rsdnszonedcpromoconvertdomain"
 msgid "Domain"
-msgstr ""
+msgstr "Τομέας"
 
 #: ucommon.rsdnszonedcpromoconvertforest
 msgid "Forest"
@@ -7110,17 +7110,17 @@ msgstr "Ο Νέος κωδικός και ο κωδικός Επιβεβαίωσ
 #: ucommon.rsnewobjectbtnback
 msgctxt "ucommon.rsnewobjectbtnback"
 msgid "< Back"
-msgstr ""
+msgstr "< Πίσω"
 
 #: ucommon.rsnewobjectbtnnext
 msgctxt "ucommon.rsnewobjectbtnnext"
 msgid "Next >"
-msgstr ""
+msgstr "Επόμενο >"
 
 #: ucommon.rsnewobjectbtnok
 msgctxt "ucommon.rsnewobjectbtnok"
 msgid "OK"
-msgstr ""
+msgstr "ΟΚ"
 
 #: ucommon.rsnewobjectcomputer
 msgid "New object - Computer"
@@ -7307,7 +7307,7 @@ msgstr ""
 #: ucommon.rsresetpassword
 msgctxt "ucommon.rsresetpassword"
 msgid "Reset Password"
-msgstr ""
+msgstr "Επαναφορά Κωδικού Πρόσβασης"
 
 #: ucommon.rsresetpasswordmessage
 msgid "Password has been reset successfully."
@@ -7336,12 +7336,12 @@ msgstr ""
 #: ucommon.rssafinheritonly
 msgctxt "ucommon.rssafinheritonly"
 msgid "Inherit Only"
-msgstr ""
+msgstr "Μόνο Κληρονόμηση"
 
 #: ucommon.rssafnopropagate
 msgctxt "ucommon.rssafnopropagate"
 msgid "No Propagate"
-msgstr ""
+msgstr "Χωρίς Διάδοση"
 
 #: ucommon.rssafobjectinherit
 msgid "Object Inherit"
@@ -7370,7 +7370,7 @@ msgstr "Ολόκληρο το υποδέντρο"
 #: ucommon.rssecaccesscontrolaccess
 msgctxt "ucommon.rssecaccesscontrolaccess"
 msgid "Control Access"
-msgstr ""
+msgstr "Έλεγχος Πρόσβασης"
 
 #: ucommon.rssecaccesscreatechild
 msgctxt "ucommon.rssecaccesscreatechild"
@@ -7390,7 +7390,7 @@ msgstr ""
 #: ucommon.rssecaccessdeletetree
 msgctxt "ucommon.rssecaccessdeletetree"
 msgid "Delete Tree"
-msgstr ""
+msgstr "Διαγραφή Δέντρου"
 
 #: ucommon.rssecaccessfullcontrol
 msgid "Full control"
@@ -7415,7 +7415,7 @@ msgstr "Γενική Εγγραφή"
 #: ucommon.rssecaccesslistchildren
 msgctxt "ucommon.rssecaccesslistchildren"
 msgid "List Children"
-msgstr ""
+msgstr "Λίστα Παιδιών"
 
 #: ucommon.rssecaccesslistcontent
 msgid "List content"
@@ -7424,12 +7424,12 @@ msgstr ""
 #: ucommon.rssecaccesslistobject
 msgctxt "ucommon.rssecaccesslistobject"
 msgid "List Object"
-msgstr ""
+msgstr "Λίστα Αντικειμένου"
 
 #: ucommon.rssecaccessreadcontrol
 msgctxt "ucommon.rssecaccessreadcontrol"
 msgid "Read Control"
-msgstr ""
+msgstr "Ανάγνωση Ελέγχου"
 
 #: ucommon.rssecaccessreadprop
 msgid "Read"
@@ -7438,7 +7438,7 @@ msgstr "Ανάγνωση"
 #: ucommon.rssecaccessselfwrite
 msgctxt "ucommon.rssecaccessselfwrite"
 msgid "Self Write"
-msgstr ""
+msgstr "Εγγραφή Εαυτού"
 
 #: ucommon.rssecaccesssynchronize
 msgctxt "ucommon.rssecaccesssynchronize"
@@ -7448,12 +7448,12 @@ msgstr ""
 #: ucommon.rssecaccesswritedac
 msgctxt "ucommon.rssecaccesswritedac"
 msgid "Write Dac"
-msgstr ""
+msgstr "Εγγραφή Dac"
 
 #: ucommon.rssecaccesswriteowner
 msgctxt "ucommon.rssecaccesswriteowner"
 msgid "Write Owner"
-msgstr ""
+msgstr "Εγγραφή Ιδιοκτήτη"
 
 #: ucommon.rssecaccesswriteprop
 msgid "Write"
@@ -7466,7 +7466,7 @@ msgstr "Αποτυχία ανάγνωσης περιγραφής ασφαλεί�
 #: ucommon.rsshowpassword
 msgctxt "ucommon.rsshowpassword"
 msgid "Show password"
-msgstr ""
+msgstr "Εμφάνιση κωδικού πρόσβασης"
 
 #: ucommon.rssinglestringeditor
 msgid "Single String Editor"
@@ -7626,7 +7626,7 @@ msgstr "Τετάρτη"
 #: ucommon.rswellknownsidanonymous
 msgctxt "ucommon.rswellknownsidanonymous"
 msgid "Anonymous"
-msgstr ""
+msgstr "Ανώνυμη Σύνδεση"
 
 #: ucommon.rswellknownsidauthenticateduser
 msgid "Authenticated User"

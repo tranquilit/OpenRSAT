@@ -101,7 +101,7 @@ msgstr "OK"
 
 #: tformconnectconfigs.caption
 msgid "OpenRSAT Authentication"
-msgstr ""
+msgstr "OpenRSAT Authentication"
 
 #: tformconnectconfigs.label_password.caption
 msgctxt "tformconnectconfigs.label_password.caption"
@@ -119,7 +119,7 @@ msgstr "Server"
 
 #: tformconnectconfigs.label_username.caption
 msgid "Username: "
-msgstr ""
+msgstr "Username: "
 
 #: tfrmmoduleadsi.action_deleteobject.caption
 msgctxt "tfrmmoduleadsi.action_deleteobject.caption"
@@ -198,11 +198,11 @@ msgstr "Type"
 
 #: tfrmmoduleadsi.tisgrid2.header.columns[3].text
 msgid "Size"
-msgstr ""
+msgstr "Size"
 
 #: tfrmmoduleadssoptions.label1.caption
 msgid "Show Service"
-msgstr ""
+msgstr "Show Service"
 
 #: tfrmmoduleaduc.action_blockgpoinheritance.caption
 msgid "Block GPO Inheritance"
@@ -210,7 +210,7 @@ msgstr ""
 
 #: tfrmmoduleaduc.action_changedomaincontroller.caption
 msgid "Change Domain Controller"
-msgstr ""
+msgstr "Change Domain Controller"
 
 #: tfrmmoduleaduc.action_copy.caption
 msgctxt "tfrmmoduleaduc.action_copy.caption"
@@ -228,7 +228,7 @@ msgstr "Cut"
 
 #: tfrmmoduleaduc.action_delegatecontrol.caption
 msgid "Delegate control"
-msgstr ""
+msgstr "Delegate control"
 
 #: tfrmmoduleaduc.action_delete.caption
 msgctxt "tfrmmoduleaduc.action_delete.caption"
@@ -335,7 +335,7 @@ msgstr "Next"
 
 #: tfrmmoduleaduc.action_operationsmasters.caption
 msgid "Operations masters"
-msgstr ""
+msgstr "Operations masters"
 
 #: tfrmmoduleaduc.action_parent.caption
 msgctxt "tfrmmoduleaduc.action_parent.caption"
@@ -397,11 +397,11 @@ msgstr ""
 
 #: tfrmmoduleaduc.action_sitesandservices.caption
 msgid "Sites and services"
-msgstr ""
+msgstr "Sites and services"
 
 #: tfrmmoduleaduc.action_taskaddtoagroup.caption
 msgid "Add to a group"
-msgstr ""
+msgstr "Add to a group"
 
 #: tfrmmoduleaduc.action_taskcopy.caption
 msgctxt "tfrmmoduleaduc.action_taskcopy.caption"
@@ -410,7 +410,7 @@ msgstr "Copy"
 
 #: tfrmmoduleaduc.action_taskdelegatecontrol.caption
 msgid "Delagate Control"
-msgstr ""
+msgstr "Delagate Control"
 
 #: tfrmmoduleaduc.action_taskdisableenableaccount.caption
 msgid "Disable Enable Account"
@@ -418,7 +418,7 @@ msgstr ""
 
 #: tfrmmoduleaduc.action_taskmanage.caption
 msgid "Manage"
-msgstr ""
+msgstr "Manage"
 
 #: tfrmmoduleaduc.action_taskmove.caption
 msgctxt "tfrmmoduleaduc.action_taskmove.caption"
@@ -427,11 +427,11 @@ msgstr "Move"
 
 #: tfrmmoduleaduc.action_tasknamemappings.caption
 msgid "Name mappings"
-msgstr ""
+msgstr "Name mappings"
 
 #: tfrmmoduleaduc.action_taskopenhomepage.caption
 msgid "Open Home Page"
-msgstr ""
+msgstr "Open Home Page"
 
 #: tfrmmoduleaduc.action_taskresetpassword.caption
 msgctxt "tfrmmoduleaduc.action_taskresetpassword.caption"
@@ -440,7 +440,7 @@ msgstr "Reset Password"
 
 #: tfrmmoduleaduc.action_tasksendmail.caption
 msgid "Send Mail"
-msgstr ""
+msgstr "Send Mail"
 
 #: tfrmmoduleaduc.action_treenewall.caption
 msgctxt "tfrmmoduleaduc.action_treenewall.caption"
@@ -449,7 +449,7 @@ msgstr "New"
 
 #: tfrmmoduleaduc.action_usersandcomputers.caption
 msgid "Users and computers"
-msgstr ""
+msgstr "Users and computers"
 
 #: tfrmmoduleaduc.checkbox_includesubcontainer.caption
 msgid "Include subcontainer"
@@ -473,7 +473,7 @@ msgstr "Description"
 #: tfrmmoduleaduc.gridattributes.header.columns[0].text
 msgctxt "tfrmmoduleaduc.gridattributes.header.columns[0].text"
 msgid "Attributes"
-msgstr ""
+msgstr "Attributes"
 
 #: tfrmmoduleaduc.gridattributes.header.columns[1].text
 msgctxt "tfrmmoduleaduc.gridattributes.header.columns[1].text"
@@ -492,7 +492,7 @@ msgstr ""
 #: tfrmmoduleaduc.menuitem_new.caption
 msgctxt "tfrmmoduleaduc.menuitem_new.caption"
 msgid "New"
-msgstr ""
+msgstr "New"
 
 #: tfrmmoduleaduc.menuitem_rename.caption
 msgctxt "tfrmmoduleaduc.menuitem_rename.caption"
@@ -501,7 +501,7 @@ msgstr ""
 
 #: tfrmmoduleaduc.toolbutton_addtogroup.hint
 msgid "Add to a Group"
-msgstr ""
+msgstr "Add to a Group"
 
 #: tfrmmoduleaduc.toolbutton_copy.hint
 msgctxt "tfrmmoduleaduc.toolbutton_copy.hint"
@@ -582,11 +582,11 @@ msgstr "New User"
 
 #: tfrmmoduleaducoption.label1.caption
 msgid "Grid options"
-msgstr ""
+msgstr "Grid options"
 
 #: tfrmmoduleaducoption.label2.caption
 msgid "Tree options"
-msgstr ""
+msgstr "Tree options"
 
 #: tfrmmoduleaducoption.label3.caption
 msgctxt "tfrmmoduleaducoption.label3.caption"
@@ -595,7 +595,7 @@ msgstr "Filter"
 
 #: tfrmmoduleaducoption.label4.caption
 msgid "Ldap attributes"
-msgstr ""
+msgstr "Ldap attributes"
 
 #: tfrmmoduleaducoption.label_filter.caption
 msgctxt "tfrmmoduleaducoption.label_filter.caption"
@@ -604,7 +604,7 @@ msgstr "Filter"
 
 #: tfrmmoduleaducoption.label_searchpagesize.caption
 msgid "Search Page Size"
-msgstr ""
+msgstr "Search Page Size"
 
 #: tfrmmoduleaducoption.label_showgpo.caption
 msgctxt "tfrmmoduleaducoption.label_showgpo.caption"
@@ -618,7 +618,7 @@ msgstr "Delete"
 
 #: tfrmmoduledns.action_newzone.caption
 msgid "New Zone"
-msgstr ""
+msgstr "New Zone"
 
 #: tfrmmoduledns.action_next.caption
 msgctxt "tfrmmoduledns.action_next.caption"
@@ -627,7 +627,7 @@ msgstr "Next"
 
 #: tfrmmoduledns.action_othernewrecords.caption
 msgid "Other New Records"
-msgstr ""
+msgstr "Other New Records"
 
 #: tfrmmoduledns.action_parent.caption
 msgctxt "tfrmmoduledns.action_parent.caption"
@@ -676,11 +676,11 @@ msgstr "Status"
 
 #: tfrmmoduledns.griddns.header.columns[5].text
 msgid "DNSSEC Status"
-msgstr ""
+msgstr "DNSSEC Status"
 
 #: tfrmmoduledns.griddns.header.columns[6].text
 msgid "Key Master"
-msgstr ""
+msgstr "Key Master"
 
 #: tfrmmoduledns.label1.caption
 msgctxt "tfrmmoduledns.label1.caption"
@@ -704,7 +704,7 @@ msgstr ""
 #: tfrmmodulesitesandservices.action_newall.caption
 msgctxt "tfrmmodulesitesandservices.action_newall.caption"
 msgid "New"
-msgstr ""
+msgstr "New"
 
 #: tfrmmodulesitesandservices.action_newcomputer.caption
 msgid "Action_NewComputer"
@@ -752,7 +752,7 @@ msgstr ""
 
 #: tfrmmodulesitesandservices.action_newsite.caption
 msgid "New Site"
-msgstr ""
+msgstr "New Site"
 
 #: tfrmmodulesitesandservices.action_newsitelinkbridge.caption
 msgid "Action_NewSiteLinkBridge"
@@ -760,7 +760,7 @@ msgstr ""
 
 #: tfrmmodulesitesandservices.action_newsubnet.caption
 msgid "New Subnet"
-msgstr ""
+msgstr "New Subnet"
 
 #: tfrmmodulesitesandservices.action_newuser.caption
 msgid "Action_NewUser"
@@ -802,12 +802,12 @@ msgstr ""
 #: tfrmmodulesitesandservices.menuitem_delete.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_delete.caption"
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: tfrmmodulesitesandservices.menuitem_newcomputer.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newcomputer.caption"
 msgid "Computer"
-msgstr ""
+msgstr "Computer"
 
 #: tfrmmodulesitesandservices.menuitem_newconnection.caption
 msgid "Connection"
@@ -816,7 +816,7 @@ msgstr ""
 #: tfrmmodulesitesandservices.menuitem_newcontact.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newcontact.caption"
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #: tfrmmodulesitesandservices.menuitem_newgroup.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newgroup.caption"
@@ -859,7 +859,7 @@ msgstr ""
 #: tfrmmodulesitesandservices.menuitem_newserver.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newserver.caption"
 msgid "Server"
-msgstr ""
+msgstr "Server"
 
 #: tfrmmodulesitesandservices.menuitem_newserverscontainer.caption
 msgid "Servers Container"
@@ -868,12 +868,12 @@ msgstr ""
 #: tfrmmodulesitesandservices.menuitem_newsharedfolder.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newsharedfolder.caption"
 msgid "Shared Folder"
-msgstr ""
+msgstr "Shared Folder"
 
 #: tfrmmodulesitesandservices.menuitem_newsite.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newsite.caption"
 msgid "Site"
-msgstr ""
+msgstr "Site"
 
 #: tfrmmodulesitesandservices.menuitem_newsitelink.caption
 msgid "Site Link"
@@ -906,11 +906,11 @@ msgstr "Name"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[10].text
 msgid "From Server"
-msgstr ""
+msgstr "From Server"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[11].text
 msgid "From Site"
-msgstr ""
+msgstr "From Site"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[1].text
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[1].text"
@@ -924,7 +924,7 @@ msgstr "Description"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[3].text
 msgid "Location"
-msgstr ""
+msgstr "Location"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[4].text
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[4].text"
@@ -933,11 +933,11 @@ msgstr "Site"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[5].text
 msgid "Cost"
-msgstr ""
+msgstr "Cost"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[6].text
 msgid "Replication Interval"
-msgstr ""
+msgstr "Replication Interval"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[7].text
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[7].text"
@@ -946,7 +946,7 @@ msgstr "Domain"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[8].text
 msgid "Bridgehead"
-msgstr ""
+msgstr "Bridgehead"
 
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[9].text
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[9].text"
@@ -964,15 +964,15 @@ msgstr "Change..."
 
 #: tfrmnewcomputer.checkbox_assigncomputer.caption
 msgid "Assign this computer account as a pre-Windows 2000 computer"
-msgstr ""
+msgstr "Assign this computer account as a pre-Windows 2000 computer"
 
 #: tfrmnewcomputer.label1.caption
 msgid "The following user or group can join this computer to a domain."
-msgstr ""
+msgstr "The following user or group can join this computer to a domain."
 
 #: tfrmnewcomputer.label_computername.caption
 msgid "Computer name:"
-msgstr ""
+msgstr "Computer name:"
 
 #: tfrmnewcomputer.label_computername2000.caption
 msgctxt "tfrmnewcomputer.label_computername2000.caption"
@@ -981,7 +981,7 @@ msgstr "Computer name (pre-Windows 2000):"
 
 #: tfrmnewcomputer.label_userorgroup.caption
 msgid "User or group:"
-msgstr ""
+msgstr "User or group:"
 
 #: tfrmnewcontact.action_next.caption
 msgctxt "tfrmnewcontact.action_next.caption"
@@ -1015,11 +1015,11 @@ msgstr "Last name:"
 
 #: tfrmnewgroup.label_name.caption
 msgid "Group name :"
-msgstr ""
+msgstr "Group name :"
 
 #: tfrmnewgroup.label_netbiosname.caption
 msgid "Group name (pre-Windows 2000) :"
-msgstr ""
+msgstr "Group name (pre-Windows 2000) :"
 
 #: tfrmnewgroup.radiobtn_distribution.caption
 msgctxt "tfrmnewgroup.radiobtn_distribution.caption"
@@ -1059,27 +1059,27 @@ msgstr "Group type"
 #: tfrmnewinetorgperson.action_next.caption
 msgctxt "tfrmnewinetorgperson.action_next.caption"
 msgid "Next"
-msgstr ""
+msgstr "Next"
 
 #: tfrmnewinetorgperson.checkbox_accountdisabled.caption
 msgctxt "tfrmnewinetorgperson.checkbox_accountdisabled.caption"
 msgid "Account is disabled"
-msgstr ""
+msgstr "Account is disabled"
 
 #: tfrmnewinetorgperson.checkbox_cannotchange.caption
 msgctxt "tfrmnewinetorgperson.checkbox_cannotchange.caption"
 msgid "User cannot change password"
-msgstr ""
+msgstr "User cannot change password"
 
 #: tfrmnewinetorgperson.checkbox_neverexpires.caption
 msgctxt "tfrmnewinetorgperson.checkbox_neverexpires.caption"
 msgid "Password never expires"
-msgstr ""
+msgstr "Password never expires"
 
 #: tfrmnewinetorgperson.checkbox_nextlogon.caption
 msgctxt "tfrmnewinetorgperson.checkbox_nextlogon.caption"
 msgid "User must change password at next logon"
-msgstr ""
+msgstr "User must change password at next logon"
 
 #: tfrmnewinetorgperson.label_confirm.caption
 msgid "Confirm:"
@@ -1088,12 +1088,12 @@ msgstr ""
 #: tfrmnewinetorgperson.label_firstname.caption
 msgctxt "tfrmnewinetorgperson.label_firstname.caption"
 msgid "First name:"
-msgstr ""
+msgstr "First name:"
 
 #: tfrmnewinetorgperson.label_fullname.caption
 msgctxt "tfrmnewinetorgperson.label_fullname.caption"
 msgid "Full name:"
-msgstr ""
+msgstr "Full name:"
 
 #: tfrmnewinetorgperson.label_initials.caption
 msgid "Initials:"
@@ -1102,12 +1102,12 @@ msgstr ""
 #: tfrmnewinetorgperson.label_lastname.caption
 msgctxt "tfrmnewinetorgperson.label_lastname.caption"
 msgid "Last name:"
-msgstr ""
+msgstr "Last name:"
 
 #: tfrmnewinetorgperson.label_password.caption
 msgctxt "tfrmnewinetorgperson.label_password.caption"
 msgid "Password:"
-msgstr ""
+msgstr "Password:"
 
 #: tfrmnewinetorgperson.label_prewindows.caption
 msgctxt "tfrmnewinetorgperson.label_prewindows.caption"
@@ -1126,7 +1126,7 @@ msgstr ""
 #: tfrmnewmsdnsserversettings.action_next.caption
 msgctxt "tfrmnewmsdnsserversettings.action_next.caption"
 msgid "Next"
-msgstr ""
+msgstr "Next"
 
 #: tfrmnewmsdnsserversettings.label_cn.caption
 msgctxt "tfrmnewmsdnsserversettings.label_cn.caption"
@@ -1140,7 +1140,7 @@ msgstr ""
 #: tfrmnewmsdskeycredential.action_next.caption
 msgctxt "tfrmnewmsdskeycredential.action_next.caption"
 msgid "Action_Next"
-msgstr ""
+msgstr "Action_Next"
 
 #: tfrmnewmsdskeycredential.label_cn.caption
 msgctxt "tfrmnewmsdskeycredential.label_cn.caption"
@@ -1163,11 +1163,11 @@ msgstr ""
 
 #: tfrmnewobject.label1.caption
 msgid "Object class"
-msgstr ""
+msgstr "Object class"
 
 #: tfrmnewobject.label2.caption
 msgid "Object name"
-msgstr ""
+msgstr "Object name"
 
 #: tfrmnewobject.label3.caption
 msgctxt "tfrmnewobject.label3.caption"
@@ -1186,7 +1186,7 @@ msgstr "Value"
 
 #: tfrmnewou.checkbox_protected.caption
 msgid "Protect container from accidental deletion"
-msgstr ""
+msgstr "Protect container from accidental deletion"
 
 #: tfrmnewou.label_name.caption
 msgctxt "tfrmnewou.label_name.caption"
@@ -1200,12 +1200,12 @@ msgstr ""
 #: tfrmnewserver.action_next.caption
 msgctxt "tfrmnewserver.action_next.caption"
 msgid "Next"
-msgstr ""
+msgstr "Next"
 
 #: tfrmnewserver.label_name.caption
 msgctxt "tfrmnewserver.label_name.caption"
 msgid "Name:"
-msgstr ""
+msgstr "Name:"
 
 #: tfrmnewsharedfolder.action_next.caption
 msgctxt "tfrmnewsharedfolder.action_next.caption"
@@ -1219,7 +1219,7 @@ msgstr "Name:"
 
 #: tfrmnewsharedfolder.label_path.caption
 msgid "Network path (\\\\server\\share):"
-msgstr ""
+msgstr "Network path (\\\\server\\share):"
 
 #: tfrmnewsite.action_ok.caption
 msgctxt "tfrmnewsite.action_ok.caption"
@@ -1228,7 +1228,7 @@ msgstr "OK"
 
 #: tfrmnewsite.label_info.caption
 msgid "Select a site link object for this site. Site link objects are located in the Sites/Inter-Site Transports container."
-msgstr ""
+msgstr "Select a site link object for this site. Site link objects are located in the Sites/Inter-Site Transports container."
 
 #: tfrmnewsite.label_name.caption
 msgctxt "tfrmnewsite.label_name.caption"
@@ -1237,16 +1237,16 @@ msgstr "Name"
 
 #: tfrmnewsite.tisgrid1.header.columns[0].text
 msgid "Link Name"
-msgstr ""
+msgstr "Link Name"
 
 #: tfrmnewsite.tisgrid1.header.columns[1].text
 msgid "Transport"
-msgstr ""
+msgstr "Transport"
 
 #: tfrmnewsitelink.action_next.caption
 msgctxt "tfrmnewsitelink.action_next.caption"
 msgid "Next"
-msgstr ""
+msgstr "Next"
 
 #: tfrmnewsitelink.button_add.caption
 msgctxt "tfrmnewsitelink.button_add.caption"
@@ -1266,7 +1266,7 @@ msgstr ""
 #: tfrmnewsitelink.label_name.caption
 msgctxt "tfrmnewsitelink.label_name.caption"
 msgid "Name:"
-msgstr ""
+msgstr "Name:"
 
 #: tfrmnewsitelink.label_rightlist.caption
 msgctxt "tfrmnewsitelink.label_rightlist.caption"
@@ -1280,7 +1280,7 @@ msgstr ""
 #: tfrmnewsitelinkbridge.action_next.caption
 msgctxt "tfrmnewsitelinkbridge.action_next.caption"
 msgid "Next"
-msgstr ""
+msgstr "Next"
 
 #: tfrmnewsitelinkbridge.button_add.caption
 msgctxt "tfrmnewsitelinkbridge.button_add.caption"
@@ -1300,7 +1300,7 @@ msgstr ""
 #: tfrmnewsitelinkbridge.label_name.caption
 msgctxt "tfrmnewsitelinkbridge.label_name.caption"
 msgid "Name:"
-msgstr ""
+msgstr "Name:"
 
 #: tfrmnewsitelinkbridge.label_rightlistbox.caption
 msgctxt "tfrmnewsitelinkbridge.label_rightlistbox.caption"
@@ -1318,35 +1318,35 @@ msgstr "OK"
 
 #: tfrmnewsubnet.label1.caption
 msgid "Enter the address prefix using network prefix notation (address/prefix length), where the prefix length indicates the number of fixed bits. You can enter either an IPv4 or an IPv6 subnet prefix."
-msgstr ""
+msgstr "Enter the address prefix using network prefix notation (address/prefix length), where the prefix length indicates the number of fixed bits. You can enter either an IPv4 or an IPv6 subnet prefix."
 
 #: tfrmnewsubnet.label2.caption
 msgid "Learn more about entering address prefixes."
-msgstr ""
+msgstr "Learn more about entering address prefixes."
 
 #: tfrmnewsubnet.label3.caption
 msgid "IPv4 example:   157.54.208.0/20"
-msgstr ""
+msgstr "IPv4 example:   157.54.208.0/20"
 
 #: tfrmnewsubnet.label4.caption
 msgid "IPv6 example:   3FFE:FFFF:0:C000::/64"
-msgstr ""
+msgstr "IPv6 example:   3FFE:FFFF:0:C000::/64"
 
 #: tfrmnewsubnet.label5.caption
 msgid "Prefix:"
-msgstr ""
+msgstr "Prefix:"
 
 #: tfrmnewsubnet.label6.caption
 msgid "Prefix name in Active Directory Domain Services:"
-msgstr ""
+msgstr "Prefix name in Active Directory Domain Services:"
 
 #: tfrmnewsubnet.label7.caption
 msgid "Select a site object for this prefix."
-msgstr ""
+msgstr "Select a site object for this prefix."
 
 #: tfrmnewsubnet.tisgrid1.header.columns[0].text
 msgid "Site Name"
-msgstr ""
+msgstr "Site Name"
 
 #: tfrmnewuser.checkbox_accountdisabled.caption
 msgctxt "tfrmnewuser.checkbox_accountdisabled.caption"
@@ -1384,7 +1384,7 @@ msgstr "Confirm Password :"
 
 #: tfrmnewuser.label_firstname.caption
 msgid "First name :"
-msgstr ""
+msgstr "First name :"
 
 #: tfrmnewuser.label_fullname.caption
 msgctxt "tfrmnewuser.label_fullname.caption"
@@ -1403,11 +1403,11 @@ msgstr "Last name :"
 
 #: tfrmnewuser.label_password.caption
 msgid "Password :"
-msgstr ""
+msgstr "Password :"
 
 #: tfrmnewuser.label_resume.caption
 msgid "When you click Finish, the following object will be created :"
-msgstr ""
+msgstr "When you click Finish, the following object will be created :"
 
 #: tfrmnewuser.label_userlogon.caption
 msgctxt "tfrmnewuser.label_userlogon.caption"
@@ -1426,7 +1426,7 @@ msgstr "Logon Hours"
 
 #: tfrmpropertyaccount.action_logonto.caption
 msgid "Log On To"
-msgstr ""
+msgstr "Log On To"
 
 #: tfrmpropertyaccount.checkbox_cannotchange.caption
 msgctxt "tfrmpropertyaccount.checkbox_cannotchange.caption"
@@ -1440,15 +1440,15 @@ msgstr "Account is disabled"
 
 #: tfrmpropertyaccount.checkbox_kerberosaes128encryption.caption
 msgid "This account supports Kerberos AES 128 bit encryption"
-msgstr ""
+msgstr "This account supports Kerberos AES 128 bit encryption"
 
 #: tfrmpropertyaccount.checkbox_kerberosaes256encryption.caption
 msgid "This account supports Kerberos AES 256 bit encryption"
-msgstr ""
+msgstr "This account supports Kerberos AES 256 bit encryption"
 
 #: tfrmpropertyaccount.checkbox_kerberosdesencryption.caption
 msgid "Use only Kerberos DES encryption types for this account"
-msgstr ""
+msgstr "Use only Kerberos DES encryption types for this account"
 
 #: tfrmpropertyaccount.checkbox_mustchange.caption
 msgctxt "tfrmpropertyaccount.checkbox_mustchange.caption"
@@ -1462,19 +1462,19 @@ msgstr "Password never expires"
 
 #: tfrmpropertyaccount.checkbox_nokerberospreauth.caption
 msgid "Do not require Kerberos preauthentification"
-msgstr ""
+msgstr "Do not require Kerberos preauthentification"
 
 #: tfrmpropertyaccount.checkbox_reversibleencryption.caption
 msgid "Store password using reversible encryption"
-msgstr ""
+msgstr "Store password using reversible encryption"
 
 #: tfrmpropertyaccount.checkbox_sensitive.caption
 msgid "Account is sensitive and cannot be delegated"
-msgstr ""
+msgstr "Account is sensitive and cannot be delegated"
 
 #: tfrmpropertyaccount.checkbox_smartcard.caption
 msgid "Smart card is required for interactive logon"
-msgstr ""
+msgstr "Smart card is required for interactive logon"
 
 #: tfrmpropertyaccount.datetimepicker_expires.textfornulldate
 msgctxt "tfrmpropertyaccount.datetimepicker_expires.textfornulldate"
@@ -1496,11 +1496,11 @@ msgstr ""
 
 #: tfrmpropertyaccount.goupbox_expires.caption
 msgid "Account expires"
-msgstr ""
+msgstr "Account expires"
 
 #: tfrmpropertyaccount.label_options.caption
 msgid "Account options :"
-msgstr ""
+msgstr "Account options :"
 
 #: tfrmpropertyaccount.label_unlock.caption
 msgid "Unlock account."
@@ -1518,11 +1518,11 @@ msgstr "User logon name (pre-Windows 2000) :"
 
 #: tfrmpropertyaccount.radiobutton_endof.caption
 msgid "End of :"
-msgstr ""
+msgstr "End of :"
 
 #: tfrmpropertyaccount.radiobutton_never.caption
 msgid "Never"
-msgstr ""
+msgstr "Never"
 
 #: tfrmpropertyaddress.combobox_countrycode.hint
 msgctxt "tfrmpropertyaddress.combobox_countrycode.hint"
@@ -1541,7 +1541,7 @@ msgstr "The postal or zip code for mail delivery"
 
 #: tfrmpropertyaddress.edit_postofficebox.hint
 msgid "The post office box number for this object"
-msgstr ""
+msgstr "The post office box number for this object"
 
 #: tfrmpropertyaddress.edit_state.hint
 msgctxt "tfrmpropertyaddress.edit_state.hint"
@@ -1550,27 +1550,27 @@ msgstr "The name of a state or province"
 
 #: tfrmpropertyaddress.label_city.caption
 msgid "City :"
-msgstr ""
+msgstr "City :"
 
 #: tfrmpropertyaddress.label_countrycode.caption
 msgid "Country :"
-msgstr ""
+msgstr "Country :"
 
 #: tfrmpropertyaddress.label_postalcode.caption
 msgid "ZIP/Postal Code :"
-msgstr ""
+msgstr "ZIP/Postal Code :"
 
 #: tfrmpropertyaddress.label_postofficebox.caption
 msgid "P.O Box :"
-msgstr ""
+msgstr "P.O Box :"
 
 #: tfrmpropertyaddress.label_state.caption
 msgid "State/province :"
-msgstr ""
+msgstr "State/province :"
 
 #: tfrmpropertyaddress.label_street.caption
 msgid "Street :"
-msgstr ""
+msgstr "Street :"
 
 #: tfrmpropertyaddress.memo_street.hint
 msgctxt "tfrmpropertyaddress.memo_street.hint"
@@ -1594,7 +1594,7 @@ msgstr "Filter"
 
 #: tfrmpropertyattributes.label_attributes.caption
 msgid "Attributes :"
-msgstr ""
+msgstr "Attributes :"
 
 #: tfrmpropertyattributes.list_attributes.header.columns[0].text
 msgctxt "tfrmpropertyattributes.list_attributes.header.columns[0].text"
@@ -1603,7 +1603,7 @@ msgstr "Attribute"
 
 #: tfrmpropertyattributes.list_attributes.header.columns[1].text
 msgid "value"
-msgstr ""
+msgstr "value"
 
 #: tfrmpropertyattributes.menuitem1.caption
 msgctxt "tfrmpropertyattributes.menuitem1.caption"
@@ -1617,19 +1617,19 @@ msgstr "Show only writable attributes"
 
 #: tfrmpropertyattributes.menuitem3.caption
 msgid "Show attributes:"
-msgstr ""
+msgstr "Show attributes:"
 
 #: tfrmpropertyattributes.menuitem4.caption
 msgid "  Mandatory"
-msgstr ""
+msgstr "  Mandatory"
 
 #: tfrmpropertyattributes.menuitem5.caption
 msgid "  Optional"
-msgstr ""
+msgstr "  Optional"
 
 #: tfrmpropertyattributes.menuitem6.caption
 msgid "Show read-only attributes:"
-msgstr ""
+msgstr "Show read-only attributes:"
 
 #: tfrmpropertyattributes.menuitem7.caption
 msgctxt "tfrmpropertyattributes.menuitem7.caption"
@@ -1649,7 +1649,7 @@ msgstr "System-only"
 #: tfrmpropertybitlocker.action_copypassword.caption
 msgctxt "tfrmpropertybitlocker.action_copypassword.caption"
 msgid "Copy password"
-msgstr ""
+msgstr "Copy password"
 
 #: tfrmpropertybitlocker.label_bitclockerdetails.caption
 msgid "Details:"
@@ -1674,27 +1674,27 @@ msgstr ""
 #: tfrmpropertybitlocker.tisgrid1.header.columns[3].text
 msgctxt "tfrmpropertybitlocker.tisgrid1.header.columns[3].text"
 msgid "Computer"
-msgstr ""
+msgstr "Computer"
 
 #: tfrmpropertyconnections.grid_from.header.columns[0].text
 msgctxt "tfrmpropertyconnections.grid_from.header.columns[0].text"
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: tfrmpropertyconnections.grid_from.header.columns[1].text
 msgctxt "tfrmpropertyconnections.grid_from.header.columns[1].text"
 msgid "Site"
-msgstr ""
+msgstr "Site"
 
 #: tfrmpropertyconnections.grid_to.header.columns[0].text
 msgctxt "tfrmpropertyconnections.grid_to.header.columns[0].text"
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: tfrmpropertyconnections.grid_to.header.columns[1].text
 msgctxt "tfrmpropertyconnections.grid_to.header.columns[1].text"
 msgid "Site"
-msgstr ""
+msgstr "Site"
 
 #: tfrmpropertyconnections.label_from.caption
 msgid "Replicate From:"
@@ -1706,7 +1706,7 @@ msgstr ""
 
 #: tfrmpropertygeneralcomputer.edit_dnshostname.hint
 msgid "Name of computer as registered in DNS."
-msgstr ""
+msgstr "Name of computer as registered in DNS."
 
 #: tfrmpropertygeneralcomputer.edit_samaccountname.hint
 msgctxt "tfrmpropertygeneralcomputer.edit_samaccountname.hint"
@@ -1727,7 +1727,7 @@ msgstr "Description:"
 
 #: tfrmpropertygeneralcomputer.label_dnshostname.caption
 msgid "DNS name:"
-msgstr ""
+msgstr "DNS name:"
 
 #: tfrmpropertygeneralcomputer.label_samaccountname.caption
 msgctxt "tfrmpropertygeneralcomputer.label_samaccountname.caption"
@@ -1764,11 +1764,11 @@ msgstr ""
 #: tfrmpropertygeneralgpo.label_description.caption
 msgctxt "tfrmpropertygeneralgpo.label_description.caption"
 msgid "Description:"
-msgstr ""
+msgstr "Description:"
 
 #: tfrmpropertygeneralgroup.edit_mail.hint
 msgid "The group's E-mail address"
-msgstr ""
+msgstr "The group's E-mail address"
 
 #: tfrmpropertygeneralgroup.edit_samaccountname.hint
 msgctxt "tfrmpropertygeneralgroup.edit_samaccountname.hint"
@@ -1789,15 +1789,15 @@ msgstr "Notes :"
 
 #: tfrmpropertygeneralgroup.label_mail.caption
 msgid "E-mail :"
-msgstr ""
+msgstr "E-mail :"
 
 #: tfrmpropertygeneralgroup.label_samaccountname.caption
 msgid "Group Name (pre-windows 2000) :"
-msgstr ""
+msgstr "Group Name (pre-windows 2000) :"
 
 #: tfrmpropertygeneralgroup.memo_info.hint
 msgid "The group's comments"
-msgstr ""
+msgstr "The group's comments"
 
 #: tfrmpropertygeneralgroup.radiogroup_scope.caption
 msgctxt "tfrmpropertygeneralgroup.radiogroup_scope.caption"
@@ -1845,7 +1845,7 @@ msgstr ""
 #: tfrmpropertygeneralintersitetransport.label_description.caption
 msgctxt "tfrmpropertygeneralintersitetransport.label_description.caption"
 msgid "Description:"
-msgstr ""
+msgstr "Description:"
 
 #: tfrmpropertygeneralntdsdsa.checkbox_globalcatalog.caption
 msgid "Global Catalog"
@@ -1854,7 +1854,7 @@ msgstr ""
 #: tfrmpropertygeneralntdsdsa.label_description.caption
 msgctxt "tfrmpropertygeneralntdsdsa.label_description.caption"
 msgid "Description:"
-msgstr ""
+msgstr "Description:"
 
 #: tfrmpropertygeneralntdsdsa.label_dnsalias.caption
 msgid "DNS Alias:"
@@ -1892,7 +1892,7 @@ msgstr ""
 #: tfrmpropertygeneralntdssitesettings.label_description.caption
 msgctxt "tfrmpropertygeneralntdssitesettings.label_description.caption"
 msgid "Description:"
-msgstr ""
+msgstr "Description:"
 
 #: tfrmpropertygeneralntdssitesettings.label_refresh.caption
 msgid "Refresh cache from:"
@@ -1905,7 +1905,7 @@ msgstr ""
 #: tfrmpropertygeneralntdssitesettings.label_site.caption
 msgctxt "tfrmpropertygeneralntdssitesettings.label_site.caption"
 msgid "Site:"
-msgstr ""
+msgstr "Site:"
 
 #: tfrmpropertygeneralou.combobox_co.hint
 msgctxt "tfrmpropertygeneralou.combobox_co.hint"
@@ -1954,7 +1954,7 @@ msgstr "Street:"
 
 #: tfrmpropertygeneralou.label_zip.caption
 msgid "Zip/Postal Code:"
-msgstr ""
+msgstr "Zip/Postal Code:"
 
 #: tfrmpropertygeneralou.memo_street.hint
 msgctxt "tfrmpropertygeneralou.memo_street.hint"
@@ -1978,17 +1978,17 @@ msgstr ""
 #: tfrmpropertygeneralserver.label_dctype.caption
 msgctxt "tfrmpropertygeneralserver.label_dctype.caption"
 msgid "DC Type:"
-msgstr ""
+msgstr "DC Type:"
 
 #: tfrmpropertygeneralserver.label_description.caption
 msgctxt "tfrmpropertygeneralserver.label_description.caption"
 msgid "Description:"
-msgstr ""
+msgstr "Description:"
 
 #: tfrmpropertygeneralserver.label_domain.caption
 msgctxt "tfrmpropertygeneralserver.label_domain.caption"
 msgid "Domain:"
-msgstr ""
+msgstr "Domain:"
 
 #: tfrmpropertygeneralserver.label_transports.caption
 msgid "This server is a preferred bridgehead server for the following transports:"
@@ -2005,7 +2005,7 @@ msgstr "Description:"
 
 #: tfrmpropertygeneralsite.label_subnet.caption
 msgid "Subnets:"
-msgstr ""
+msgstr "Subnets:"
 
 #: tfrmpropertygeneralsitelink.button_add.caption
 msgctxt "tfrmpropertygeneralsitelink.button_add.caption"
@@ -2029,7 +2029,7 @@ msgstr ""
 #: tfrmpropertygeneralsitelink.label_description.caption
 msgctxt "tfrmpropertygeneralsitelink.label_description.caption"
 msgid "Description:"
-msgstr ""
+msgstr "Description:"
 
 #: tfrmpropertygeneralsitelink.label_insitelink.caption
 msgctxt "tfrmpropertygeneralsitelink.label_insitelink.caption"
@@ -2062,7 +2062,7 @@ msgstr ""
 #: tfrmpropertygeneralsitelinkbridge.label_description.caption
 msgctxt "tfrmpropertygeneralsitelinkbridge.label_description.caption"
 msgid "Description:"
-msgstr ""
+msgstr "Description:"
 
 #: tfrmpropertygeneralsitelinkbridge.label_insitelinkbridge.caption
 msgctxt "tfrmpropertygeneralsitelinkbridge.label_insitelinkbridge.caption"
@@ -2081,7 +2081,7 @@ msgstr "Description:"
 
 #: tfrmpropertygeneralsubnet.label_prefix.caption
 msgid "Prefix"
-msgstr ""
+msgstr "Prefix"
 
 #: tfrmpropertygeneralsubnet.label_site.caption
 msgctxt "tfrmpropertygeneralsubnet.label_site.caption"
@@ -2105,31 +2105,31 @@ msgstr "The person's preferred name to be used when beeing displayed"
 
 #: tfrmpropertygeneraluser.edit_givenname.hint
 msgid "The person's First Name"
-msgstr ""
+msgstr "The person's First Name"
 
 #: tfrmpropertygeneraluser.edit_homepage.hint
 msgid "A web page that is the primary landing page of a website"
-msgstr ""
+msgstr "A web page that is the primary landing page of a website"
 
 #: tfrmpropertygeneraluser.edit_initials.hint
 msgid "The person's initals"
-msgstr ""
+msgstr "The person's initals"
 
 #: tfrmpropertygeneraluser.edit_mail.hint
 msgid "The person's E-mail address"
-msgstr ""
+msgstr "The person's E-mail address"
 
 #: tfrmpropertygeneraluser.edit_physicaldeliveryofficename.hint
 msgid "The person's office location in the user's place of business"
-msgstr ""
+msgstr "The person's office location in the user's place of business"
 
 #: tfrmpropertygeneraluser.edit_surname.hint
 msgid "The person's family name or last name"
-msgstr ""
+msgstr "The person's family name or last name"
 
 #: tfrmpropertygeneraluser.edit_telephonenumber.hint
 msgid "The person's phone number"
-msgstr ""
+msgstr "The person's phone number"
 
 #: tfrmpropertygeneraluser.label_description.caption
 msgctxt "tfrmpropertygeneraluser.label_description.caption"
@@ -2138,7 +2138,7 @@ msgstr "Description :"
 
 #: tfrmpropertygeneraluser.label_desktopprofile.caption
 msgid "Desktop :"
-msgstr ""
+msgstr "Desktop :"
 
 #: tfrmpropertygeneraluser.label_displayname.caption
 msgctxt "tfrmpropertygeneraluser.label_displayname.caption"
@@ -2152,7 +2152,7 @@ msgstr "Name :"
 
 #: tfrmpropertygeneraluser.label_homepage.caption
 msgid "Web page :"
-msgstr ""
+msgstr "Web page :"
 
 #: tfrmpropertygeneraluser.label_initials.caption
 msgctxt "tfrmpropertygeneraluser.label_initials.caption"
@@ -2170,19 +2170,19 @@ msgstr "Last name :"
 
 #: tfrmpropertygeneraluser.label_telephonenumber.caption
 msgid "Phone Number :"
-msgstr ""
+msgstr "Phone Number :"
 
 #: tfrmpropertygeneralvolume.bitbtn_keywords.caption
 msgid "Keywords..."
-msgstr ""
+msgstr "Keywords..."
 
 #: tfrmpropertygeneralvolume.bitbtn_keywords.hint
 msgid "A list of keywords that can be used to locate a given connection point"
-msgstr ""
+msgstr "A list of keywords that can be used to locate a given connection point"
 
 #: tfrmpropertygeneralvolume.edit_uncname.hint
 msgid "The universal naming convention name for shared volumes and printers"
-msgstr ""
+msgstr "The universal naming convention name for shared volumes and printers"
 
 #: tfrmpropertygeneralvolume.label_description.caption
 msgctxt "tfrmpropertygeneralvolume.label_description.caption"
@@ -2191,17 +2191,17 @@ msgstr "Description:"
 
 #: tfrmpropertygeneralvolume.label_uncname.caption
 msgid "UNC name: (Example: \\\\server\\share)"
-msgstr ""
+msgstr "UNC name: (Example: \\\\server\\share)"
 
 #: tfrmpropertygplinks.action_add.caption
 msgctxt "tfrmpropertygplinks.action_add.caption"
 msgid "Add"
-msgstr ""
+msgstr "Add"
 
 #: tfrmpropertygplinks.action_delete.caption
 msgctxt "tfrmpropertygplinks.action_delete.caption"
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: tfrmpropertygplinks.action_disablelink.caption
 msgid "Disable Link"
@@ -2231,7 +2231,7 @@ msgstr ""
 #: tfrmpropertygplinks.tisgrid_gplinks.header.columns[2].text
 msgctxt "tfrmpropertygplinks.tisgrid_gplinks.header.columns[2].text"
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: tfrmpropertygplinks.tisgrid_gplinks.header.columns[3].text
 msgid "Link flags"
@@ -2244,52 +2244,52 @@ msgstr ""
 #: tfrmpropertylaps.action_v1_copypassword.caption
 msgctxt "tfrmpropertylaps.action_v1_copypassword.caption"
 msgid "Copy password"
-msgstr ""
+msgstr "Copy password"
 
 #: tfrmpropertylaps.action_v1_expirenow.caption
 msgctxt "tfrmpropertylaps.action_v1_expirenow.caption"
 msgid "Expire now"
-msgstr ""
+msgstr "Expire now"
 
 #: tfrmpropertylaps.action_v1_showpassword.caption
 msgctxt "tfrmpropertylaps.action_v1_showpassword.caption"
 msgid "Show password"
-msgstr ""
+msgstr "Show password"
 
 #: tfrmpropertylaps.action_v2_copypassword.caption
 msgctxt "tfrmpropertylaps.action_v2_copypassword.caption"
 msgid "Copy password"
-msgstr ""
+msgstr "Copy password"
 
 #: tfrmpropertylaps.action_v2_encryptedcopypassword.caption
 msgctxt "tfrmpropertylaps.action_v2_encryptedcopypassword.caption"
 msgid "Copy password"
-msgstr ""
+msgstr "Copy password"
 
 #: tfrmpropertylaps.action_v2_encryptedshowpassword.caption
 msgctxt "tfrmpropertylaps.action_v2_encryptedshowpassword.caption"
 msgid "Show password"
-msgstr ""
+msgstr "Show password"
 
 #: tfrmpropertylaps.action_v2_expirenow.caption
 msgctxt "tfrmpropertylaps.action_v2_expirenow.caption"
 msgid "Expire now"
-msgstr ""
+msgstr "Expire now"
 
 #: tfrmpropertylaps.action_v2_showpassword.caption
 msgctxt "tfrmpropertylaps.action_v2_showpassword.caption"
 msgid "Show password"
-msgstr ""
+msgstr "Show password"
 
 #: tfrmpropertylaps.datetimepicker_v1_newexpiration.textfornulldate
 msgctxt "tfrmpropertylaps.datetimepicker_v1_newexpiration.textfornulldate"
 msgid "NULL"
-msgstr ""
+msgstr "NULL"
 
 #: tfrmpropertylaps.datetimepicker_v2_newexpiration.textfornulldate
 msgctxt "tfrmpropertylaps.datetimepicker_v2_newexpiration.textfornulldate"
 msgid "NULL"
-msgstr ""
+msgstr "NULL"
 
 #: tfrmpropertylaps.groupbox_lapsencrypted.caption
 msgid "Encrypted"
@@ -2354,11 +2354,11 @@ msgstr ""
 
 #: tfrmpropertylocation.edit_location.hint
 msgid "The user's location, such as office number"
-msgstr ""
+msgstr "The user's location, such as office number"
 
 #: tfrmpropertylocation.label_location.caption
 msgid "Location:"
-msgstr ""
+msgstr "Location:"
 
 #: tfrmpropertymanagedby.action_change.caption
 msgctxt "tfrmpropertymanagedby.action_change.caption"
@@ -2392,7 +2392,7 @@ msgstr "Country/region:"
 
 #: tfrmpropertymanagedby.label_faxnumber.caption
 msgid "Fax number:"
-msgstr ""
+msgstr "Fax number:"
 
 #: tfrmpropertymanagedby.label_managedby.caption
 msgctxt "tfrmpropertymanagedby.label_managedby.caption"
@@ -2411,11 +2411,11 @@ msgstr "Street:"
 
 #: tfrmpropertymanagedby.label_telephonenumber.caption
 msgid "Telephone number:"
-msgstr ""
+msgstr "Telephone number:"
 
 #: tfrmpropertymanagedby.labe_office.caption
 msgid "Office:"
-msgstr ""
+msgstr "Office:"
 
 #: tfrmpropertymember.action_add.caption
 msgctxt "tfrmpropertymember.action_add.caption"
@@ -2429,7 +2429,7 @@ msgstr "Delete"
 
 #: tfrmpropertymember.label_members.caption
 msgid "Members:"
-msgstr ""
+msgstr "Members:"
 
 #: tfrmpropertymember.tisgrid_members.header.columns[0].text
 msgctxt "tfrmpropertymember.tisgrid_members.header.columns[0].text"
@@ -2438,7 +2438,7 @@ msgstr "name"
 
 #: tfrmpropertymember.tisgrid_members.header.columns[1].text
 msgid "Active Directory Domain Services Folder"
-msgstr ""
+msgstr "Active Directory Domain Services Folder"
 
 #: tfrmpropertymemberof.action_add.caption
 msgctxt "tfrmpropertymemberof.action_add.caption"
@@ -2452,7 +2452,7 @@ msgstr "Delete"
 
 #: tfrmpropertymemberof.action_primarygroup.caption
 msgid "Define primary group"
-msgstr ""
+msgstr "Define primary group"
 
 #: tfrmpropertymemberof.grid_memberof.header.columns[0].text
 msgctxt "tfrmpropertymemberof.grid_memberof.header.columns[0].text"
@@ -2461,33 +2461,33 @@ msgstr "Name"
 
 #: tfrmpropertymemberof.grid_memberof.header.columns[1].text
 msgid "Active Directory's Services Folder"
-msgstr ""
+msgstr "Active Directory's Services Folder"
 
 #: tfrmpropertymemberof.label_defineprimarygroup.caption
 msgid "It is useless to modify the primary goup, unless you're using Macintosh or other POSIX compliant apps."
-msgstr ""
+msgstr "It is useless to modify the primary goup, unless you're using Macintosh or other POSIX compliant apps."
 
 #: tfrmpropertymemberof.label_mof_noprimarygroup.caption
 msgid "This list  shows only the current domain's groups and the groups handled in the Global catalog, such as unviversals groups."
-msgstr ""
+msgstr "This list  shows only the current domain's groups and the groups handled in the Global catalog, such as unviversals groups."
 
 #: tfrmpropertymemberof.label_mof_title.caption
 msgid "Member of :"
-msgstr ""
+msgstr "Member of :"
 
 #: tfrmpropertymemberof.label_primarygroupkey.caption
 msgid "Primary group :"
-msgstr ""
+msgstr "Primary group :"
 
 #: tfrmpropertyntauthcertificates.action_add.caption
 msgctxt "tfrmpropertyntauthcertificates.action_add.caption"
 msgid "Add"
-msgstr ""
+msgstr "Add"
 
 #: tfrmpropertyntauthcertificates.action_delete.caption
 msgctxt "tfrmpropertyntauthcertificates.action_delete.caption"
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: tfrmpropertyntauthcertificates.action_export.caption
 msgid "Export"
@@ -2502,71 +2502,71 @@ msgstr "View"
 #: tfrmpropertyntauthcertificates.tisgrid1.header.columns[0].text
 msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[0].text"
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: tfrmpropertyntauthcertificates.tisgrid1.header.columns[1].text
 msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[1].text"
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: tfrmpropertyntauthcertificates.tisgrid1.header.columns[2].text
 msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[2].text"
 msgid "Issued By"
-msgstr ""
+msgstr "Issued By"
 
 #: tfrmpropertyntauthcertificates.tisgrid1.header.columns[3].text
 msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[3].text"
 msgid "Intended Purposes"
-msgstr ""
+msgstr "Intended Purposes"
 
 #: tfrmpropertyntauthcertificates.tisgrid1.header.columns[4].text
 msgctxt "tfrmpropertyntauthcertificates.tisgrid1.header.columns[4].text"
 msgid "Expiration Date"
-msgstr ""
+msgstr "Expiration Date"
 
 #: tfrmpropertyobject.action_protection.caption
 msgid "Protect object from accidental deletion"
-msgstr ""
+msgstr "Protect object from accidental deletion"
 
 #: tfrmpropertyobject.label_canonicalname.caption
 msgid "Objects's canonical name"
-msgstr ""
+msgstr "Objects's canonical name"
 
 #: tfrmpropertyobject.label_objectclass.caption
 msgid "Object's Class :"
-msgstr ""
+msgstr "Object's Class :"
 
 #: tfrmpropertyobject.label_usnactual.caption
 msgid "Actual :"
-msgstr ""
+msgstr "Actual :"
 
 #: tfrmpropertyobject.label_usnoriginal.caption
 msgid "Original :"
-msgstr ""
+msgstr "Original :"
 
 #: tfrmpropertyobject.label_usnupdate.caption
 msgid "Amount of sequential updates (USN):"
-msgstr ""
+msgstr "Amount of sequential updates (USN):"
 
 #: tfrmpropertyobject.label_whenchanged.caption
 msgid "Modified :"
-msgstr ""
+msgstr "Modified :"
 
 #: tfrmpropertyobject.label_whencreated.caption
 msgid "Created :"
-msgstr ""
+msgstr "Created :"
 
 #: tfrmpropertyoperatingsystem.edit_operatingsystem.hint
 msgid "The Operating System name, for example, Windows Vista Enterprise"
-msgstr ""
+msgstr "The Operating System name, for example, Windows Vista Enterprise"
 
 #: tfrmpropertyoperatingsystem.edit_operatingsystemservicepack.hint
 msgid "The operating system service pack ID (for example, SP3)"
-msgstr ""
+msgstr "The operating system service pack ID (for example, SP3)"
 
 #: tfrmpropertyoperatingsystem.edit_operatingsystemversion.hint
 msgid "The operating system version, for example, 4.0"
-msgstr ""
+msgstr "The operating system version, for example, 4.0"
 
 #: tfrmpropertyoperatingsystem.label_operatingsystem.caption
 msgctxt "tfrmpropertyoperatingsystem.label_operatingsystem.caption"
@@ -2575,11 +2575,11 @@ msgstr "Name:"
 
 #: tfrmpropertyoperatingsystem.label_operatingsystemservicepack.caption
 msgid "Service Pack:"
-msgstr ""
+msgstr "Service Pack:"
 
 #: tfrmpropertyoperatingsystem.label_operatingsystemversion.caption
 msgid "Version:"
-msgstr ""
+msgstr "Version:"
 
 #: tfrmpropertyorganization.action_change.caption
 msgctxt "tfrmpropertyorganization.action_change.caption"
@@ -2599,11 +2599,11 @@ msgstr "Properties"
 
 #: tfrmpropertyorganization.edit_company.hint
 msgid "The user's company name"
-msgstr ""
+msgstr "The user's company name"
 
 #: tfrmpropertyorganization.edit_department.hint
 msgid "Contains the name for the department in which the user works"
-msgstr ""
+msgstr "Contains the name for the department in which the user works"
 
 #: tfrmpropertyorganization.edit_title.hint
 msgid ""
@@ -2614,19 +2614,19 @@ msgstr ""
 
 #: tfrmpropertyorganization.groupbox_manager.caption
 msgid "Manager :"
-msgstr ""
+msgstr "Manager :"
 
 #: tfrmpropertyorganization.label_company.caption
 msgid "Company :"
-msgstr ""
+msgstr "Company :"
 
 #: tfrmpropertyorganization.label_department.caption
 msgid "Departement :"
-msgstr ""
+msgstr "Departement :"
 
 #: tfrmpropertyorganization.label_directreports.caption
 msgid "Direct reports / Subordinates :"
-msgstr ""
+msgstr "Direct reports / Subordinates :"
 
 #: tfrmpropertyorganization.label_manager.caption
 msgctxt "tfrmpropertyorganization.label_manager.caption"
@@ -2635,7 +2635,7 @@ msgstr "Name :"
 
 #: tfrmpropertyorganization.label_title.caption
 msgid "Job Title :"
-msgstr ""
+msgstr "Job Title :"
 
 #: tfrmpropertyorganization.tisgrid_directreports.header.columns[0].text
 msgctxt "tfrmpropertyorganization.tisgrid_directreports.header.columns[0].text"
@@ -2644,7 +2644,7 @@ msgstr "name"
 
 #: tfrmpropertyprofile.combobox_connectto.hint
 msgid "Specifies the drive letter to which to map the UNC path specified by homeDirectory"
-msgstr ""
+msgstr "Specifies the drive letter to which to map the UNC path specified by homeDirectory"
 
 #: tfrmpropertyprofile.edit_connectto.hint
 msgid ""
@@ -2663,43 +2663,43 @@ msgstr ""
 
 #: tfrmpropertyprofile.edit_profilepath.hint
 msgid "Specifies a path to the user's profile"
-msgstr ""
+msgstr "Specifies a path to the user's profile"
 
 #: tfrmpropertyprofile.edit_scriptpath.hint
 msgid "The path for the user's logon script"
-msgstr ""
+msgstr "The path for the user's logon script"
 
 #: tfrmpropertyprofile.groupbox_homefolder.caption
 msgid "Home folder"
-msgstr ""
+msgstr "Home folder"
 
 #: tfrmpropertyprofile.groupbox_userprofile.caption
 msgid "User profile"
-msgstr ""
+msgstr "User profile"
 
 #: tfrmpropertyprofile.label_connectto.caption
 msgid "To :"
-msgstr ""
+msgstr "To :"
 
 #: tfrmpropertyprofile.label_profilepath.caption
 msgid "Profile path :"
-msgstr ""
+msgstr "Profile path :"
 
 #: tfrmpropertyprofile.label_scriptpath.caption
 msgid "Logon script path :"
-msgstr ""
+msgstr "Logon script path :"
 
 #: tfrmpropertyprofile.radiobutton_connectto.caption
 msgid "Connect :"
-msgstr ""
+msgstr "Connect :"
 
 #: tfrmpropertyprofile.radiobutton_homedirectory.caption
 msgid "Local path :"
-msgstr ""
+msgstr "Local path :"
 
 #: tfrmpropertypublishedcertificates.action_add.caption
 msgid "Add from File"
-msgstr ""
+msgstr "Add from File"
 
 #: tfrmpropertypublishedcertificates.action_copy.caption
 msgctxt "tfrmpropertypublishedcertificates.action_copy.caption"
@@ -2713,15 +2713,15 @@ msgstr "Remove"
 
 #: tfrmpropertypublishedcertificates.action_view.caption
 msgid "View Certificate"
-msgstr ""
+msgstr "View Certificate"
 
 #: tfrmpropertypublishedcertificates.label_listx509.caption
 msgid "List of X509 certificates published for the user account"
-msgstr ""
+msgstr "List of X509 certificates published for the user account"
 
 #: tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[0].text
 msgid "Issued To"
-msgstr ""
+msgstr "Issued To"
 
 #: tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[1].text
 msgctxt "tfrmpropertypublishedcertificates.tisgrid_listx509.header.columns[1].text"
@@ -2755,7 +2755,7 @@ msgstr "Delete"
 
 #: tfrmpropertysecurity.tisgrid_securitylistright.header.columns[0].text
 msgid "Permissions for"
-msgstr ""
+msgstr "Permissions for"
 
 #: tfrmpropertysecurity.tisgrid_securitylistright.header.columns[1].text
 msgctxt "tfrmpropertysecurity.tisgrid_securitylistright.header.columns[1].text"
@@ -2769,7 +2769,7 @@ msgstr "Deny"
 
 #: tfrmpropertysecurity.tisgrid_securitylistuser.header.columns[0].text
 msgid "Group or user names"
-msgstr ""
+msgstr "Group or user names"
 
 #: tfrmpropertytelephone.bitbtn_otherfacsimiletelephonenumber.caption
 msgctxt "tfrmpropertytelephone.bitbtn_otherfacsimiletelephonenumber.caption"
@@ -2798,35 +2798,35 @@ msgstr "Other..."
 
 #: tfrmpropertytelephone.edit_facsimiletelephonenumber.hint
 msgid "The user's main fax number"
-msgstr ""
+msgstr "The user's main fax number"
 
 #: tfrmpropertytelephone.edit_homephone.hint
 msgid "The user's main home phone number"
-msgstr ""
+msgstr "The user's main home phone number"
 
 #: tfrmpropertytelephone.edit_ipphone.hint
 msgid "The TCP/IP address for the phone. Used by Telephony"
-msgstr ""
+msgstr "The TCP/IP address for the phone. Used by Telephony"
 
 #: tfrmpropertytelephone.edit_mobile.hint
 msgid "The user's main mobile phone number"
-msgstr ""
+msgstr "The user's main mobile phone number"
 
 #: tfrmpropertytelephone.edit_pager.hint
 msgid "The user's main pager number"
-msgstr ""
+msgstr "The user's main pager number"
 
 #: tfrmpropertytelephone.groupbox_numbers.caption
 msgid "Telephone numbers"
-msgstr ""
+msgstr "Telephone numbers"
 
 #: tfrmpropertytelephone.label_facsimiletelephonenumber.caption
 msgid "Fax :"
-msgstr ""
+msgstr "Fax :"
 
 #: tfrmpropertytelephone.label_homephone.caption
 msgid "Home :"
-msgstr ""
+msgstr "Home :"
 
 #: tfrmpropertytelephone.label_info.caption
 msgctxt "tfrmpropertytelephone.label_info.caption"
@@ -2835,19 +2835,19 @@ msgstr "Notes :"
 
 #: tfrmpropertytelephone.label_ipphone.caption
 msgid "IP phone :"
-msgstr ""
+msgstr "IP phone :"
 
 #: tfrmpropertytelephone.label_mobile.caption
 msgid "Mobile :"
-msgstr ""
+msgstr "Mobile :"
 
 #: tfrmpropertytelephone.label_pager.caption
 msgid "Pager :"
-msgstr ""
+msgstr "Pager :"
 
 #: tfrmpropertytelephone.memo_info.hint
 msgid "The group/user comments"
-msgstr ""
+msgstr "The group/user comments"
 
 #: tfrmpropertyunixattributes.label1.caption
 msgid "NIS Domain:"
@@ -2891,7 +2891,7 @@ msgstr ""
 
 #: tfrmrsatoption.combobox3.text
 msgid "False"
-msgstr ""
+msgstr "False"
 
 #: tfrmrsatoption.label1.caption
 #, fuzzy
@@ -2901,11 +2901,11 @@ msgstr "Theme"
 
 #: tfrmrsatoption.label2.caption
 msgid "Lang"
-msgstr ""
+msgstr "Lang"
 
 #: tfrmrsatoption.label3.caption
 msgid "AdvancedView"
-msgstr ""
+msgstr "AdvancedView"
 
 #: tgridframe.asynchcheckbox.caption
 msgid "asynchronous"
@@ -2979,7 +2979,7 @@ msgstr ""
 #: tgridframe.functionrefreshlabel.caption
 msgctxt "tgridframe.functionrefreshlabel.caption"
 msgid "Refresh"
-msgstr ""
+msgstr "Refresh"
 
 #: tgridframe.functionrefreshlabel.hint
 msgctxt "tgridframe.functionrefreshlabel.hint"
@@ -3062,7 +3062,7 @@ msgstr ""
 #: tgridframe.gridtotallabel.caption
 msgctxt "tgridframe.gridtotallabel.caption"
 msgid "Total : 0 elements"
-msgstr ""
+msgstr "Total : 0 elements"
 
 #: tgridframe.groupbox1.caption
 msgid " Functions "
@@ -3305,7 +3305,7 @@ msgstr ""
 #: tsearcheditframe.label1.caption
 msgctxt "tsearcheditframe.label1.caption"
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
 #: tsearcheditframe.label2.caption
 msgctxt "tsearcheditframe.label2.caption"
@@ -3516,7 +3516,7 @@ msgstr ""
 #: ttischartform.cbmarkattachment.text
 msgctxt "ttischartform.cbmarkattachment.text"
 msgid "Default"
-msgstr ""
+msgstr "Default"
 
 #: ttischartform.cbmarkpositions.text
 msgid "Around"
@@ -3659,7 +3659,7 @@ msgstr ""
 #: ttisgrideditor.actdelcolumn.caption
 msgctxt "ttisgrideditor.actdelcolumn.caption"
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: ttisgrideditor.actloaddata.caption
 msgid "Load Data"
@@ -3838,7 +3838,7 @@ msgstr ""
 #: ttisgrideditor.tabsheet1.caption
 msgctxt "ttisgrideditor.tabsheet1.caption"
 msgid "Data"
-msgstr ""
+msgstr "Data"
 
 #: ttisgrideditor.treemodecheckbox.caption
 msgid "Tree Mode"
@@ -3861,7 +3861,7 @@ msgstr ""
 #: ttistoolbareditor.buttonslistview.columns[0].caption
 msgctxt "ttistoolbareditor.buttonslistview.columns[0].caption"
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: ttistoolbareditor.buttonslistviewselectlabel.caption
 msgid "0 / 0"
@@ -4017,7 +4017,7 @@ msgstr "OK"
 
 #: tvisaddaces.action_replace.caption
 msgid "Replace"
-msgstr ""
+msgstr "Replace"
 
 #: tvisaddaces.bitbtn_cancel.caption
 msgctxt "tvisaddaces.bitbtn_cancel.caption"
@@ -4026,11 +4026,11 @@ msgstr "Cancel"
 
 #: tvisaddaces.checkbox_cc.caption
 msgid "Create Child"
-msgstr ""
+msgstr "Create Child"
 
 #: tvisaddaces.checkbox_ci.caption
 msgid "Container Inherited"
-msgstr ""
+msgstr "Container Inherited"
 
 #: tvisaddaces.checkbox_cr.caption
 msgctxt "tvisaddaces.checkbox_cr.caption"
@@ -4039,7 +4039,7 @@ msgstr "Control Access"
 
 #: tvisaddaces.checkbox_dc.caption
 msgid "Delete Child"
-msgstr ""
+msgstr "Delete Child"
 
 #: tvisaddaces.checkbox_dt.caption
 msgctxt "tvisaddaces.checkbox_dt.caption"
@@ -4068,7 +4068,7 @@ msgstr "No Propagate"
 
 #: tvisaddaces.checkbox_oi.caption
 msgid "Object Inherited"
-msgstr ""
+msgstr "Object Inherited"
 
 #: tvisaddaces.checkbox_rc.caption
 msgctxt "tvisaddaces.checkbox_rc.caption"
@@ -4077,7 +4077,7 @@ msgstr "Read Control"
 
 #: tvisaddaces.checkbox_rp.caption
 msgid "Read Property"
-msgstr ""
+msgstr "Read Property"
 
 #: tvisaddaces.checkbox_sd.caption
 msgctxt "tvisaddaces.checkbox_sd.caption"
@@ -4101,7 +4101,7 @@ msgstr "Write Owner"
 
 #: tvisaddaces.checkbox_wp.caption
 msgid "Write Property"
-msgstr ""
+msgstr "Write Property"
 
 #: tvisaddaces.checkgroup_access.caption
 msgctxt "tvisaddaces.checkgroup_access.caption"
@@ -4110,23 +4110,23 @@ msgstr "Access"
 
 #: tvisaddaces.checkgroup_inheritance.caption
 msgid "Inheritance"
-msgstr ""
+msgstr "Inheritance"
 
 #: tvisaddaces.label_inheritance.caption
 msgid "Inheritance:"
-msgstr ""
+msgstr "Inheritance:"
 
 #: tvisaddaces.label_property.caption
 msgid "Target Property :"
-msgstr ""
+msgstr "Target Property :"
 
 #: tvisaddaces.label_title.caption
 msgid "Create and add new Rights (ACEs) :"
-msgstr ""
+msgstr "Create and add new Rights (ACEs) :"
 
 #: tvisaddaces.label_trustee.caption
 msgid "Trustee :"
-msgstr ""
+msgstr "Trustee :"
 
 #: tvisaddaces.radiobutton_allow.caption
 msgctxt "tvisaddaces.radiobutton_allow.caption"
@@ -4145,7 +4145,7 @@ msgstr "Type"
 
 #: tvisaddaces.tisgrid1.header.columns[1].text
 msgid "Trustee"
-msgstr ""
+msgstr "Trustee"
 
 #: tvisaddaces.tisgrid1.header.columns[2].text
 msgctxt "tvisaddaces.tisgrid1.header.columns[2].text"
@@ -4154,15 +4154,15 @@ msgstr "Access"
 
 #: tvisaddaces.tisgrid1.header.columns[3].text
 msgid "Target Property"
-msgstr ""
+msgstr "Target Property"
 
 #: tvisaddaces.tisgrid1.header.columns[4].text
 msgid "Applies to"
-msgstr ""
+msgstr "Applies to"
 
 #: tvisaddaces.tisgrid1.header.columns[5].text
 msgid "Inherit to"
-msgstr ""
+msgstr "Inherit to"
 
 #: tvisadvancedsecurity.action_addace.caption
 msgctxt "tvisadvancedsecurity.action_addace.caption"
@@ -4195,7 +4195,7 @@ msgstr "OK"
 
 #: tvisadvancedsecurity.action_restoredefault.caption
 msgid "Restore default"
-msgstr ""
+msgstr "Restore default"
 
 #: tvisadvancedsecurity.action_selectgroup.caption
 msgid "Action_SelectGroup"
@@ -4246,7 +4246,7 @@ msgstr ""
 #: tvisadvancedsecurity.checkboxd.caption
 msgctxt "tvisadvancedsecurity.checkboxd.caption"
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: tvisadvancedsecurity.checkboxdc.caption
 msgctxt "tvisadvancedsecurity.checkboxdc.caption"
@@ -4304,7 +4304,7 @@ msgstr ""
 #: tvisadvancedsecurity.groupbox1.caption
 msgctxt "tvisadvancedsecurity.groupbox1.caption"
 msgid "Permissions"
-msgstr ""
+msgstr "Permissions"
 
 #: tvisadvancedsecurity.groupbox2.caption
 msgctxt "tvisadvancedsecurity.groupbox2.caption"
@@ -4338,12 +4338,12 @@ msgstr ""
 #: tvisadvancedsecurity.label_type.caption
 msgctxt "tvisadvancedsecurity.label_type.caption"
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: tvisadvancedsecurity.tisgrid1.header.columns[0].text
 msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[0].text"
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: tvisadvancedsecurity.tisgrid1.header.columns[1].text
 msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[1].text"
@@ -4353,7 +4353,7 @@ msgstr ""
 #: tvisadvancedsecurity.tisgrid1.header.columns[2].text
 msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[2].text"
 msgid "Permissions"
-msgstr ""
+msgstr "Permissions"
 
 #: tvisadvancedsecurity.tisgrid1.header.columns[3].text
 msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[3].text"
@@ -4387,7 +4387,7 @@ msgstr "Delete"
 
 #: tvisattributeeditor.action_down.caption
 msgid "Move down"
-msgstr ""
+msgstr "Move down"
 
 #: tvisattributeeditor.action_ok.caption
 msgctxt "tvisattributeeditor.action_ok.caption"
@@ -4396,7 +4396,7 @@ msgstr "OK"
 
 #: tvisattributeeditor.action_up.caption
 msgid "Move up"
-msgstr ""
+msgstr "Move up"
 
 #: tvisattributeeditor.datetimepicker1.textfornulldate
 msgctxt "tvisattributeeditor.datetimepicker1.textfornulldate"
@@ -4405,19 +4405,19 @@ msgstr "NULL"
 
 #: tvisattributeeditor.label1.caption
 msgid "Values:"
-msgstr ""
+msgstr "Values:"
 
 #: tvisattributeeditor.label2.caption
 msgid "Date:"
-msgstr ""
+msgstr "Date:"
 
 #: tvisattributeeditor.label_string.caption
 msgid "Value:"
-msgstr ""
+msgstr "Value:"
 
 #: tvisattributeeditor.label_stringlist.caption
 msgid "Value to add:"
-msgstr ""
+msgstr "Value to add:"
 
 #: tvisattributeeditor.ts_multistringeditor.caption
 msgid "TS_MultiStringEditor"
@@ -4447,7 +4447,7 @@ msgstr "OK"
 
 #: tvischangedn.caption
 msgid "Change DN"
-msgstr ""
+msgstr "Change DN"
 
 #: tvischangedomaincontroller.action_ok.caption
 msgctxt "tvischangedomaincontroller.action_ok.caption"
@@ -4461,31 +4461,31 @@ msgstr "Cancel"
 
 #: tvischangedomaincontroller.caption
 msgid "Change Directory Server"
-msgstr ""
+msgstr "Change Directory Server"
 
 #: tvischangedomaincontroller.checkbox1.caption
 msgid "Save this setting for the current console"
-msgstr ""
+msgstr "Save this setting for the current console"
 
 #: tvischangedomaincontroller.label1.caption
 msgid "Current Directory Server:"
-msgstr ""
+msgstr "Current Directory Server:"
 
 #: tvischangedomaincontroller.label2.caption
 msgid "<Empty>"
-msgstr ""
+msgstr "<Empty>"
 
 #: tvischangedomaincontroller.label3.caption
 msgid "Change to:"
-msgstr ""
+msgstr "Change to:"
 
 #: tvischangedomaincontroller.radiobutton1.caption
 msgid "Any writable Domain Controller"
-msgstr ""
+msgstr "Any writable Domain Controller"
 
 #: tvischangedomaincontroller.radiobutton2.caption
 msgid "This Domain Controller or AD LDS instance"
-msgstr ""
+msgstr "This Domain Controller or AD LDS instance"
 
 #: tvischangedomaincontroller.tisgrid1.header.columns[0].text
 msgctxt "tvischangedomaincontroller.tisgrid1.header.columns[0].text"
@@ -4504,7 +4504,7 @@ msgstr "DC Type"
 
 #: tvischangedomaincontroller.tisgrid1.header.columns[3].text
 msgid "DC Version"
-msgstr ""
+msgstr "DC Version"
 
 #: tvischangedomaincontroller.tisgrid1.header.columns[4].text
 msgctxt "tvischangedomaincontroller.tisgrid1.header.columns[4].text"
@@ -4543,51 +4543,51 @@ msgstr "Finish"
 
 #: tvisdelegatecontrol.caption
 msgid "Delegation of Control Wizard"
-msgstr ""
+msgstr "Delegation of Control Wizard"
 
 #: tvisdelegatecontrol.checkbox1.caption
 msgid "Create selected objects in this folder"
-msgstr ""
+msgstr "Create selected objects in this folder"
 
 #: tvisdelegatecontrol.checkbox2.caption
 msgid "Delete selected objects in this folder"
-msgstr ""
+msgstr "Delete selected objects in this folder"
 
 #: tvisdelegatecontrol.checkbox3.caption
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: tvisdelegatecontrol.checkbox4.caption
 msgid "Property-specific"
-msgstr ""
+msgstr "Property-specific"
 
 #: tvisdelegatecontrol.checkbox5.caption
 msgid "Creation/deletion of specific child objects"
-msgstr ""
+msgstr "Creation/deletion of specific child objects"
 
 #: tvisdelegatecontrol.label1.caption
 msgid "Welcome to the Delegation of Control Wizard"
-msgstr ""
+msgstr "Welcome to the Delegation of Control Wizard"
 
 #: tvisdelegatecontrol.label10.caption
 msgid "You have successfully completed the Delegation of Control wizard."
-msgstr ""
+msgstr "You have successfully completed the Delegation of Control wizard."
 
 #: tvisdelegatecontrol.label11.caption
 msgid "To close this wizard, click Finish."
-msgstr ""
+msgstr "To close this wizard, click Finish."
 
 #: tvisdelegatecontrol.label12.caption
 msgid "Active Directory Object Type"
-msgstr ""
+msgstr "Active Directory Object Type"
 
 #: tvisdelegatecontrol.label13.caption
 msgid "Indicate the scope of the task you want to delegate."
-msgstr ""
+msgstr "Indicate the scope of the task you want to delegate."
 
 #: tvisdelegatecontrol.label14.caption
 msgid "Delegate control of:"
-msgstr ""
+msgstr "Delegate control of:"
 
 #: tvisdelegatecontrol.label15.caption
 msgctxt "tvisdelegatecontrol.label15.caption"
@@ -4596,15 +4596,15 @@ msgstr "Permissions"
 
 #: tvisdelegatecontrol.label16.caption
 msgid "Select the permissions you want to delegate."
-msgstr ""
+msgstr "Select the permissions you want to delegate."
 
 #: tvisdelegatecontrol.label17.caption
 msgid "Show these permissions:"
-msgstr ""
+msgstr "Show these permissions:"
 
 #: tvisdelegatecontrol.label18.caption
 msgid "Permissions:"
-msgstr ""
+msgstr "Permissions:"
 
 #: tvisdelegatecontrol.label2.caption
 msgid "This wizard helps you delegate control of Active Directory objects. You can grant users permission to manage users, groups, computers, organizational units, and other objects stored in Active Directory Domain Services."
@@ -4617,35 +4617,35 @@ msgstr "To continue, click Next."
 
 #: tvisdelegatecontrol.label4.caption
 msgid "Selected users and groups:"
-msgstr ""
+msgstr "Selected users and groups:"
 
 #: tvisdelegatecontrol.label5.caption
 msgid "Users and Groups"
-msgstr ""
+msgstr "Users and Groups"
 
 #: tvisdelegatecontrol.label6.caption
 msgid "Select one or more users or groups to whom you want to delegate control."
-msgstr ""
+msgstr "Select one or more users or groups to whom you want to delegate control."
 
 #: tvisdelegatecontrol.label7.caption
 msgid "Tasks to Delegate"
-msgstr ""
+msgstr "Tasks to Delegate"
 
 #: tvisdelegatecontrol.label8.caption
 msgid "You can select common tasks or customize your own."
-msgstr ""
+msgstr "You can select common tasks or customize your own."
 
 #: tvisdelegatecontrol.label9.caption
 msgid "Completing the Delegation of Control Wizard"
-msgstr ""
+msgstr "Completing the Delegation of Control Wizard"
 
 #: tvisdelegatecontrol.radiobutton1.caption
 msgid "Delegate the following common tasks:"
-msgstr ""
+msgstr "Delegate the following common tasks:"
 
 #: tvisdelegatecontrol.radiobutton2.caption
 msgid "Create a custom task to delegate"
-msgstr ""
+msgstr "Create a custom task to delegate"
 
 #: tvisdelegatecontrol.radiobutton3.caption
 msgid "This folder, existing objects in this folder, and creation of new objects in this folder"
@@ -4653,7 +4653,7 @@ msgstr ""
 
 #: tvisdelegatecontrol.radiobutton4.caption
 msgid "Only the following objects in the folder:"
-msgstr ""
+msgstr "Only the following objects in the folder:"
 
 #: tviseditaduccolumns.action1.caption
 msgid "Add ->"
@@ -4690,17 +4690,17 @@ msgstr ""
 #: tvislistgpo.action_search.caption
 msgctxt "tvislistgpo.action_search.caption"
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
 #: tvislistgpo.bitbtn_cancel.caption
 msgctxt "tvislistgpo.bitbtn_cancel.caption"
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: tvislistgpo.bitbtn_ok.caption
 msgctxt "tvislistgpo.bitbtn_ok.caption"
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: tvislistgpo.caption
 msgid "Group Policy Objects"
@@ -4714,7 +4714,7 @@ msgstr ""
 #: tvislistgpo.tisgrid1.header.columns[1].text
 msgctxt "tvislistgpo.tisgrid1.header.columns[1].text"
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: tvislistgpo.tisgrid1.header.columns[2].text
 msgctxt "tvislistgpo.tisgrid1.header.columns[2].text"
@@ -4752,15 +4752,15 @@ msgstr "Cancel"
 
 #: tvislistother.caption
 msgid "(Other)"
-msgstr ""
+msgstr "(Other)"
 
 #: tvislistother.label_current.caption
 msgid "Current values :"
-msgstr ""
+msgstr "Current values :"
 
 #: tvislistother.label_newvalue.caption
 msgid "New value :"
-msgstr ""
+msgstr "New value :"
 
 #: tvislogonhours.btn_cancel.caption
 msgctxt "tvislogonhours.btn_cancel.caption"
@@ -4770,7 +4770,7 @@ msgstr "Cancel"
 #: tvislogonhours.btn_ok.caption
 msgctxt "tvislogonhours.btn_ok.caption"
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: tvislogonhours.caption
 msgctxt "tvislogonhours.caption"
@@ -4779,7 +4779,7 @@ msgstr "Logon Hours"
 
 #: tvislogonhours.label_title.caption
 msgid "Select the allowed logon period in UTC "
-msgstr ""
+msgstr "Select the allowed logon period in UTC "
 
 #: tvislogonhours.panel_ntdsschedule.caption
 msgid "Panel_NTDSSchedule"
@@ -4796,7 +4796,7 @@ msgstr ""
 
 #: tvislogonhours.radiobutton_logondenied.caption
 msgid "Logon Denied"
-msgstr ""
+msgstr "Logon Denied"
 
 #: tvislogonhours.radiobutton_logonpermitted.caption
 msgid "Logon Permitted"
@@ -4854,7 +4854,7 @@ msgstr "Cancel"
 
 #: tvislogonworkstation.caption
 msgid "Logon Workstations"
-msgstr ""
+msgstr "Logon Workstations"
 
 #: tvislogonworkstation.label_info.caption
 msgid "In Computer name, type the computer''s NetBIOS or Domain Name system (DNS) name."
@@ -4862,24 +4862,24 @@ msgstr ""
 
 #: tvislogonworkstation.label_name.caption
 msgid "Computer name :"
-msgstr ""
+msgstr "Computer name :"
 
 #: tvislogonworkstation.label_title.caption
 msgid "This user can logon to :"
-msgstr ""
+msgstr "This user can logon to :"
 
 #: tvislogonworkstation.radiobutton_all.caption
 msgid "All computers"
-msgstr ""
+msgstr "All computers"
 
 #: tvislogonworkstation.radiobutton_following.caption
 msgid "The following computers"
-msgstr ""
+msgstr "The following computers"
 
 #: tvismodifygplink.action_apply.caption
 msgctxt "tvismodifygplink.action_apply.caption"
 msgid "Apply"
-msgstr ""
+msgstr "Apply"
 
 #: tvismodifygplink.action_disablegpo.caption
 msgctxt "tvismodifygplink.action_disablegpo.caption"
@@ -4899,12 +4899,12 @@ msgstr ""
 #: tvismodifygplink.action_ok.caption
 msgctxt "tvismodifygplink.action_ok.caption"
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: tvismodifygplink.bitbtn_cancel.caption
 msgctxt "tvismodifygplink.bitbtn_cancel.caption"
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: tvismodifygplink.caption
 msgid "VisModifyGPLink"
@@ -4925,12 +4925,12 @@ msgstr ""
 #: tvismodifygplink.tisgrid_availablegpo.header.columns[0].text
 msgctxt "tvismodifygplink.tisgrid_availablegpo.header.columns[0].text"
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: tvismodifygplink.tisgrid_linkedgpo.header.columns[0].text
 msgctxt "tvismodifygplink.tisgrid_linkedgpo.header.columns[0].text"
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: tvisnewobject.btn_cancel.caption
 msgctxt "tvisnewobject.btn_cancel.caption"
@@ -4939,7 +4939,7 @@ msgstr "Cancel"
 
 #: tvisnewobject.label_dn.caption
 msgid "Create in :"
-msgstr ""
+msgstr "Create in :"
 
 #: tvisnewquery.action_browse.caption
 msgid "Action_Browse"
@@ -4955,15 +4955,15 @@ msgstr ""
 
 #: tvisnewquery.action_ok.caption
 msgid "Action_OK"
-msgstr ""
+msgstr "Action_OK"
 
 #: tvisnewquery.caption
 msgid "VisNewQuery"
-msgstr ""
+msgstr "VisNewQuery"
 
 #: tvisnewquery.checkbox_includesubcontainers.caption
 msgid "Include subcontainers"
-msgstr ""
+msgstr "Include subcontainers"
 
 #: tvisnewquery.label_description.caption
 msgctxt "tvisnewquery.label_description.caption"
@@ -4977,11 +4977,11 @@ msgstr "Name:"
 
 #: tvisnewquery.label_queryroot.caption
 msgid "Query root:"
-msgstr ""
+msgstr "Query root:"
 
 #: tvisnewquery.label_querystring.caption
 msgid "Query string:"
-msgstr ""
+msgstr "Query string:"
 
 #: tvisnewresourcerecord.action_cancel.caption
 msgctxt "tvisnewresourcerecord.action_cancel.caption"
@@ -5010,7 +5010,7 @@ msgstr "Browse"
 
 #: tvisnewresourcerecord.caption
 msgid "New Record Resource"
-msgstr ""
+msgstr "New Record Resource"
 
 #: tvisnewresourcerecord.edit2.text
 msgctxt "tvisnewresourcerecord.edit2.text"
@@ -5033,27 +5033,27 @@ msgstr "Domain:"
 
 #: tvisnewresourcerecord.label2.caption
 msgid "Service:"
-msgstr ""
+msgstr "Service:"
 
 #: tvisnewresourcerecord.label3.caption
 msgid "Protocol:"
-msgstr ""
+msgstr "Protocol:"
 
 #: tvisnewresourcerecord.label4.caption
 msgid "Priority:"
-msgstr ""
+msgstr "Priority:"
 
 #: tvisnewresourcerecord.label5.caption
 msgid "Weight:"
-msgstr ""
+msgstr "Weight:"
 
 #: tvisnewresourcerecord.label6.caption
 msgid "Port number:"
-msgstr ""
+msgstr "Port number:"
 
 #: tvisnewresourcerecord.label7.caption
 msgid "Host offering this service:"
-msgstr ""
+msgstr "Host offering this service:"
 
 #: tvisnewresourcerecord.label8.caption
 msgid "Allow any authenticated user to update all DNS records with the same nam. This setting applies only to DNS records for a new name."
@@ -5076,15 +5076,15 @@ msgstr "Fully qualified domain name (FQDN):"
 
 #: tvisnewresourcerecord.label_ahost.caption
 msgid "Host (uses parent domain if left blank):"
-msgstr ""
+msgstr "Host (uses parent domain if left blank):"
 
 #: tvisnewresourcerecord.label_aipaddress.caption
 msgid "IP address:"
-msgstr ""
+msgstr "IP address:"
 
 #: tvisnewresourcerecord.label_aptr.caption
 msgid "Update associated pointer (PTR) record"
-msgstr ""
+msgstr "Update associated pointer (PTR) record"
 
 #: tvisnewresourcerecord.label_atimestamp.caption
 msgctxt "tvisnewresourcerecord.label_atimestamp.caption"
@@ -5093,7 +5093,7 @@ msgstr "Record time stamp:"
 
 #: tvisnewresourcerecord.label_cnamealias.caption
 msgid "Alias name (uses parent domain if left blank):"
-msgstr ""
+msgstr "Alias name (uses parent domain if left blank):"
 
 #: tvisnewresourcerecord.label_cnameallow.caption
 msgctxt "tvisnewresourcerecord.label_cnameallow.caption"
@@ -5112,7 +5112,7 @@ msgstr "Fully qualified domain name (FQDN):"
 
 #: tvisnewresourcerecord.label_cnamefqdntarget.caption
 msgid "Fully qualified domain name (FQDN) for target host:"
-msgstr ""
+msgstr "Fully qualified domain name (FQDN) for target host:"
 
 #: tvisnewresourcerecord.label_cnametimestamp.caption
 msgctxt "tvisnewresourcerecord.label_cnametimestamp.caption"
@@ -5130,15 +5130,15 @@ msgstr "Fully qualified domain name (FQDN):"
 
 #: tvisnewresourcerecord.label_mxhost.caption
 msgid "Host or child domain:"
-msgstr ""
+msgstr "Host or child domain:"
 
 #: tvisnewresourcerecord.label_mxmailserver.caption
 msgid "Fully qualified domain name (FQDN) of mail server:"
-msgstr ""
+msgstr "Fully qualified domain name (FQDN) of mail server:"
 
 #: tvisnewresourcerecord.label_mxpriority.caption
 msgid "Mail server priority:"
-msgstr ""
+msgstr "Mail server priority:"
 
 #: tvisnewresourcerecord.label_ptrallowany.caption
 msgctxt "tvisnewresourcerecord.label_ptrallowany.caption"
@@ -5152,15 +5152,15 @@ msgstr "Fully qualified domain name (FQDN):"
 
 #: tvisnewresourcerecord.label_ptrhost.caption
 msgid "Host IP Address:"
-msgstr ""
+msgstr "Host IP Address:"
 
 #: tvisnewresourcerecord.label_ptrhostname.caption
 msgid "Host name:"
-msgstr ""
+msgstr "Host name:"
 
 #: tvisnewresourcerecord.ts_a.caption
 msgid "Host (A)"
-msgstr ""
+msgstr "Host (A)"
 
 #: tvisnewresourcerecord.ts_cname.caption
 msgctxt "tvisnewresourcerecord.ts_cname.caption"
@@ -5269,11 +5269,11 @@ msgstr "Next"
 
 #: tvisnewzonewizard.caption
 msgid "New Zone Wizard"
-msgstr ""
+msgstr "New Zone Wizard"
 
 #: tvisnewzonewizard.label1.caption
 msgid "Welcome to the New Zone Wizard"
-msgstr ""
+msgstr "Welcome to the New Zone Wizard"
 
 #: tvisnewzonewizard.label10.caption
 msgid "Create a copy of a zone containing inly Name Server (NS), Start of Authority (SOA), and possibly glue Host (A) records. A server containing a stub zone is not authoritative for that zone."
@@ -5285,27 +5285,27 @@ msgstr ""
 
 #: tvisnewzonewizard.label12.caption
 msgid "Active Directory Zone Replication Scope"
-msgstr ""
+msgstr "Active Directory Zone Replication Scope"
 
 #: tvisnewzonewizard.label13.caption
 msgid "You can select how you want DNS data replicated throughout your network."
-msgstr ""
+msgstr "You can select how you want DNS data replicated throughout your network."
 
 #: tvisnewzonewizard.label14.caption
 msgid "Select how you want zone data replicated:"
-msgstr ""
+msgstr "Select how you want zone data replicated:"
 
 #: tvisnewzonewizard.label15.caption
 msgid "To all DNS servers running on domain controllers in this forest:"
-msgstr ""
+msgstr "To all DNS servers running on domain controllers in this forest:"
 
 #: tvisnewzonewizard.label16.caption
 msgid "To all DNS servers running on domain controllers in this domain:"
-msgstr ""
+msgstr "To all DNS servers running on domain controllers in this domain:"
 
 #: tvisnewzonewizard.label17.caption
 msgid "To all domain controllers in this domain (for Windows 2000 compatibility):"
-msgstr ""
+msgstr "To all domain controllers in this domain (for Windows 2000 compatibility):"
 
 #: tvisnewzonewizard.label18.caption
 msgid "To all domain controllers specified in the scoper of this directory partition:"
@@ -5313,15 +5313,15 @@ msgstr ""
 
 #: tvisnewzonewizard.label19.caption
 msgid "Zone Name"
-msgstr ""
+msgstr "Zone Name"
 
 #: tvisnewzonewizard.label2.caption
 msgid "This wizard helps you create a new zone for your DNS server."
-msgstr ""
+msgstr "This wizard helps you create a new zone for your DNS server."
 
 #: tvisnewzonewizard.label20.caption
 msgid "What is the name of the new zone?"
-msgstr ""
+msgstr "What is the name of the new zone?"
 
 #: tvisnewzonewizard.label21.caption
 msgid "The zone name specifies the portion of the DNS namespace for which this server is autoritative. It might be your organization's domain name (for example, example.com) or a portion of the domain name (for example, newzone.example.com). The zone name is not the name of the DNS server."
@@ -5329,15 +5329,15 @@ msgstr ""
 
 #: tvisnewzonewizard.label22.caption
 msgid "Zone name:"
-msgstr ""
+msgstr "Zone name:"
 
 #: tvisnewzonewizard.label23.caption
 msgid "Zone File"
-msgstr ""
+msgstr "Zone File"
 
 #: tvisnewzonewizard.label24.caption
 msgid "You can create a new zone file or use a file copied from another DNS server."
-msgstr ""
+msgstr "You can create a new zone file or use a file copied from another DNS server."
 
 #: tvisnewzonewizard.label25.caption
 msgid "Do you want to create a new zone file or use an existing file that you have copied from another DNS server?"
@@ -5349,11 +5349,11 @@ msgstr ""
 
 #: tvisnewzonewizard.label27.caption
 msgid "Create a new file with this file name:"
-msgstr ""
+msgstr "Create a new file with this file name:"
 
 #: tvisnewzonewizard.label28.caption
 msgid "Use this existing file:"
-msgstr ""
+msgstr "Use this existing file:"
 
 #: tvisnewzonewizard.label29.caption
 msgid "You can specify that this DNS zone accepts secure, nonsecure, or no dynamic updates."
@@ -5365,7 +5365,7 @@ msgstr ""
 
 #: tvisnewzonewizard.label30.caption
 msgid "Dynamic Update"
-msgstr ""
+msgstr "Dynamic Update"
 
 #: tvisnewzonewizard.label31.caption
 msgid "Dynamic updates enable DNS client computers to register and dynamically update their resource records with a DNS server whenever changes occur."
@@ -5373,23 +5373,23 @@ msgstr ""
 
 #: tvisnewzonewizard.label32.caption
 msgid "Select the type of dynamic updates you want to allow:"
-msgstr ""
+msgstr "Select the type of dynamic updates you want to allow:"
 
 #: tvisnewzonewizard.label33.caption
 msgid "Allow only secure dynamic updates (recommanded for Active Directory)"
-msgstr ""
+msgstr "Allow only secure dynamic updates (recommanded for Active Directory)"
 
 #: tvisnewzonewizard.label34.caption
 msgid "This option is available only for Active Directory-integrated zones."
-msgstr ""
+msgstr "This option is available only for Active Directory-integrated zones."
 
 #: tvisnewzonewizard.label35.caption
 msgid "Allow both nonsecure and secure dynamic updates"
-msgstr ""
+msgstr "Allow both nonsecure and secure dynamic updates"
 
 #: tvisnewzonewizard.label36.caption
 msgid "Dynamic updates of resource records are accepted from any client."
-msgstr ""
+msgstr "Dynamic updates of resource records are accepted from any client."
 
 #: tvisnewzonewizard.label37.caption
 msgid "This option is a significant security vulnerability because updates can be accepted from untrusted sources."
@@ -5397,7 +5397,7 @@ msgstr ""
 
 #: tvisnewzonewizard.label38.caption
 msgid "Do not allow dynamic updates"
-msgstr ""
+msgstr "Do not allow dynamic updates"
 
 #: tvisnewzonewizard.label39.caption
 msgid "Dynamic updates of resource records are not accepted by this zone. You must update these records manually."
@@ -5410,7 +5410,7 @@ msgstr "To continue, click Next."
 
 #: tvisnewzonewizard.label40.caption
 msgid "Completing the New Zone Wizard"
-msgstr ""
+msgstr "Completing the New Zone Wizard"
 
 #: tvisnewzonewizard.label41.caption
 msgid "You have successfully completed the New Zone Wizard. You specified the following settings:"
@@ -5422,23 +5422,23 @@ msgstr ""
 
 #: tvisnewzonewizard.label43.caption
 msgid "To close this wizard and create the new zone, click Finish."
-msgstr ""
+msgstr "To close this wizard and create the new zone, click Finish."
 
 #: tvisnewzonewizard.label5.caption
 msgid "Zone Type"
-msgstr ""
+msgstr "Zone Type"
 
 #: tvisnewzonewizard.label6.caption
 msgid "The DNS server supports various types of zones and storage."
-msgstr ""
+msgstr "The DNS server supports various types of zones and storage."
 
 #: tvisnewzonewizard.label7.caption
 msgid "Select the type of zone you want to create:"
-msgstr ""
+msgstr "Select the type of zone you want to create:"
 
 #: tvisnewzonewizard.label8.caption
 msgid "Creates a copy of a zone that can be updated directly on this server."
-msgstr ""
+msgstr "Creates a copy of a zone that can be updated directly on this server."
 
 #: tvisnewzonewizard.label9.caption
 msgid "Create a copy of a zone that exists on another server. This option helps balance the processing load of primary servers and provides fault tolerance."
@@ -5446,15 +5446,15 @@ msgstr ""
 
 #: tvisnewzonewizard.radiobutton1.caption
 msgid "Primary zone"
-msgstr ""
+msgstr "Primary zone"
 
 #: tvisnewzonewizard.radiobutton2.caption
 msgid "Secondary zone"
-msgstr ""
+msgstr "Secondary zone"
 
 #: tvisnewzonewizard.radiobutton3.caption
 msgid "Stub zone"
-msgstr ""
+msgstr "Stub zone"
 
 #: tvisomniselect.action_menuitemclick.caption
 msgid "Action_MenuItemClick"
@@ -5472,7 +5472,7 @@ msgstr "Cancel"
 
 #: tvisomniselect.label_search.caption
 msgid "Search :"
-msgstr ""
+msgstr "Search :"
 
 #: tvisomniselect.tisgrid_items.header.columns[0].text
 msgctxt "tvisomniselect.tisgrid_items.header.columns[0].text"
@@ -5491,7 +5491,7 @@ msgstr "Folder"
 
 #: tvisomniselect.toolbutton_attributeslist.caption
 msgid "Search selection"
-msgstr ""
+msgstr "Search selection"
 
 #: tvisopenrsat.action_about.caption
 msgctxt "tvisopenrsat.action_about.caption"
@@ -5500,19 +5500,19 @@ msgstr "About"
 
 #: tvisopenrsat.action_advancedfeatures.caption
 msgid "Advanced Features"
-msgstr ""
+msgstr "Advanced Features"
 
 #: tvisopenrsat.action_ldapconnect.caption
 msgid "Connect"
-msgstr ""
+msgstr "Connect"
 
 #: tvisopenrsat.action_ldapdisconnect.caption
 msgid "Disconnect"
-msgstr ""
+msgstr "Disconnect"
 
 #: tvisopenrsat.action_ldapoptions.caption
 msgid "Connection Options"
-msgstr ""
+msgstr "Connection Options"
 
 #: tvisopenrsat.action_newwindow.caption
 msgid "Action_NewWindow"
@@ -5542,7 +5542,7 @@ msgstr ""
 #: tvisopenrsat.action_showgpo.caption
 msgctxt "tvisopenrsat.action_showgpo.caption"
 msgid "Show GPO"
-msgstr ""
+msgstr "Show GPO"
 
 #: tvisopenrsat.caption
 msgctxt "tvisopenrsat.caption"
@@ -5625,27 +5625,27 @@ msgstr "Change..."
 
 #: tvisoperationmasters.caption
 msgid "Operations Masters"
-msgstr ""
+msgstr "Operations Masters"
 
 #: tvisoperationmasters.label_domainnamingmaster.caption
 msgid "Domain naming master"
-msgstr ""
+msgstr "Domain naming master"
 
 #: tvisoperationmasters.label_infrastructuremaster.caption
 msgid "Infrastructure master"
-msgstr ""
+msgstr "Infrastructure master"
 
 #: tvisoperationmasters.label_pdc.caption
 msgid "PDC"
-msgstr ""
+msgstr "PDC"
 
 #: tvisoperationmasters.label_rid.caption
 msgid "RID"
-msgstr ""
+msgstr "RID"
 
 #: tvisoperationmasters.label_schemamaster.caption
 msgid "Schema master"
-msgstr ""
+msgstr "Schema master"
 
 #: tvisoptions.action_apply.caption
 msgctxt "tvisoptions.action_apply.caption"
@@ -5716,7 +5716,7 @@ msgstr ""
 #: tvisprofileconfiguration.groupbox_domain.caption
 msgctxt "tvisprofileconfiguration.groupbox_domain.caption"
 msgid "Domain"
-msgstr ""
+msgstr "Domain"
 
 #: tvisprofileconfiguration.groupbox_keytab.caption
 msgid "KeyTab"
@@ -5750,12 +5750,12 @@ msgstr ""
 #: tvisprofileconfiguration.label_domain.caption
 msgctxt "tvisprofileconfiguration.label_domain.caption"
 msgid "Domain"
-msgstr ""
+msgstr "Domain"
 
 #: tvisprofileconfiguration.label_domaincontroller.caption
 msgctxt "tvisprofileconfiguration.label_domaincontroller.caption"
 msgid "Domain Controller"
-msgstr ""
+msgstr "Domain Controller"
 
 #: tvisprofileconfiguration.label_kerberos.caption
 msgid "Kerberos"
@@ -5763,7 +5763,7 @@ msgstr ""
 
 #: tvisprofileconfiguration.label_password.caption
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #: tvisprofileconfiguration.label_profilename.caption
 msgid "Profile name: "
@@ -5776,11 +5776,11 @@ msgstr ""
 
 #: tvisprofileconfiguration.label_timeout.caption
 msgid "Timeout"
-msgstr ""
+msgstr "Timeout"
 
 #: tvisprofileconfiguration.label_tls.caption
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
 #: tvisprofileconfiguration.label_unsafe.caption
 msgid "Unsafe connection"
@@ -5789,7 +5789,7 @@ msgstr ""
 #: tvisprofileconfiguration.label_username.caption
 msgctxt "tvisprofileconfiguration.label_username.caption"
 msgid "Username"
-msgstr ""
+msgstr "Username"
 
 #: tvisprofilemanager.action_add.caption
 msgid "Action_Add"
@@ -5807,7 +5807,7 @@ msgstr ""
 #: tvisprofilemanager.bitbtn_ok.caption
 msgctxt "tvisprofilemanager.bitbtn_ok.caption"
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: tvisprofilemanager.caption
 msgid "Profile manager"
@@ -5816,22 +5816,22 @@ msgstr ""
 #: tvisprofilemanager.listview1.columns[0].caption
 msgctxt "tvisprofilemanager.listview1.columns[0].caption"
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: tvisprofilemanager.listview1.columns[1].caption
 msgctxt "tvisprofilemanager.listview1.columns[1].caption"
 msgid "Domain"
-msgstr ""
+msgstr "Domain"
 
 #: tvisprofilemanager.listview1.columns[2].caption
 msgctxt "tvisprofilemanager.listview1.columns[2].caption"
 msgid "Domain Controller"
-msgstr ""
+msgstr "Domain Controller"
 
 #: tvisprofilemanager.listview1.columns[3].caption
 msgctxt "tvisprofilemanager.listview1.columns[3].caption"
 msgid "Username"
-msgstr ""
+msgstr "Username"
 
 #: tvisprofilemanager.menuitem_largeicons.caption
 msgid "Large icons"
@@ -5880,7 +5880,7 @@ msgstr "Filter"
 
 #: tvisproperties.action_attributesmandatory.caption
 msgid "Mandatory"
-msgstr ""
+msgstr "Mandatory"
 
 #: tvisproperties.action_attributesmodify.caption
 msgctxt "tvisproperties.action_attributesmodify.caption"
@@ -5889,7 +5889,7 @@ msgstr "Modify"
 
 #: tvisproperties.action_attributesoptional.caption
 msgid "Optional"
-msgstr ""
+msgstr "Optional"
 
 #: tvisproperties.action_attributesshowvalues.caption
 msgctxt "tvisproperties.action_attributesshowvalues.caption"
@@ -5923,7 +5923,7 @@ msgstr "Remove"
 
 #: tvisproperties.action_certificateview.caption
 msgid "View Certificate..."
-msgstr ""
+msgstr "View Certificate..."
 
 #: tvisproperties.action_lapscopypassword.caption
 msgctxt "tvisproperties.action_lapscopypassword.caption"
@@ -6015,12 +6015,12 @@ msgstr "Delete"
 #: tvisrename.action_ok.caption
 msgctxt "tvisrename.action_ok.caption"
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: tvisrename.bitbtn_cancel.caption
 msgctxt "tvisrename.bitbtn_cancel.caption"
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: tvisrename.caption
 msgctxt "tvisrename.caption"
@@ -6030,22 +6030,22 @@ msgstr ""
 #: tvisrename.label_displayname.caption
 msgctxt "tvisrename.label_displayname.caption"
 msgid "Display name:"
-msgstr ""
+msgstr "Display name:"
 
 #: tvisrename.label_firstname.caption
 msgctxt "tvisrename.label_firstname.caption"
 msgid "First name:"
-msgstr ""
+msgstr "First name:"
 
 #: tvisrename.label_fullname.caption
 msgctxt "tvisrename.label_fullname.caption"
 msgid "Full name:"
-msgstr ""
+msgstr "Full name:"
 
 #: tvisrename.label_lastname.caption
 msgctxt "tvisrename.label_lastname.caption"
 msgid "Last name:"
-msgstr ""
+msgstr "Last name:"
 
 #: tvisrename.label_userlogonname.caption
 msgctxt "tvisrename.label_userlogonname.caption"
@@ -6067,35 +6067,35 @@ msgstr ""
 
 #: tvisrootdseinfos.label1.caption
 msgid "Server informations (available from RootDSE Object)"
-msgstr ""
+msgstr "Server informations (available from RootDSE Object)"
 
 #: tvisrootdseinfos.label_domain.caption
 msgctxt "tvisrootdseinfos.label_domain.caption"
 msgid "Domain"
-msgstr ""
+msgstr "Domain"
 
 #: tvisrootdseinfos.label_domaincontroller.caption
 msgctxt "tvisrootdseinfos.label_domaincontroller.caption"
 msgid "Domain Controller"
-msgstr ""
+msgstr "Domain Controller"
 
 #: tvisrootdseinfos.tisgrid1.header.columns[0].text
 msgctxt "tvisrootdseinfos.tisgrid1.header.columns[0].text"
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: tvisrootdseinfos.tisgrid1.header.columns[1].text
 msgctxt "tvisrootdseinfos.tisgrid1.header.columns[1].text"
 msgid "Value"
-msgstr ""
+msgstr "Value"
 
 #: tvissearch.action_advadd.caption
 msgid "Add condition"
-msgstr ""
+msgstr "Add condition"
 
 #: tvissearch.action_advdel.caption
 msgid "Delete condition"
-msgstr ""
+msgstr "Delete condition"
 
 #: tvissearch.action_changedn.caption
 msgctxt "tvissearch.action_changedn.caption"
@@ -6115,15 +6115,15 @@ msgstr "Search"
 
 #: tvissearch.action_searchfrom.caption
 msgid "Search from"
-msgstr ""
+msgstr "Search from"
 
 #: tvissearch.action_searchnew.caption
 msgid "Search New"
-msgstr ""
+msgstr "Search New"
 
 #: tvissearch.action_showinview.caption
 msgid "Show in view"
-msgstr ""
+msgstr "Show in view"
 
 #: tvissearch.caption
 msgctxt "tvissearch.caption"
@@ -6132,7 +6132,7 @@ msgstr "Search"
 
 #: tvissearch.combobox_advcondition.text
 msgid "Start with"
-msgstr ""
+msgstr "Start with"
 
 #: tvissearch.edit_pagecount.text
 msgid "1"
@@ -6144,23 +6144,23 @@ msgstr ""
 
 #: tvissearch.label_basicvalue.caption
 msgid "Search a name:"
-msgstr ""
+msgstr "Search a name:"
 
 #: tvissearch.label_expfilter.caption
 msgid "Search using Ldap filter:"
-msgstr ""
+msgstr "Search using Ldap filter:"
 
 #: tvissearch.label_pagecount.caption
 msgid "Page count"
-msgstr ""
+msgstr "Page count"
 
 #: tvissearch.label_pagesize.caption
 msgid "Page size"
-msgstr ""
+msgstr "Page size"
 
 #: tvissearch.label_path.caption
 msgid "Path:"
-msgstr ""
+msgstr "Path:"
 
 #: tvissearch.label_resultcount.caption
 msgctxt "tvissearch.label_resultcount.caption"
@@ -6169,15 +6169,15 @@ msgstr "Total : 0 elements"
 
 #: tvissearch.label_searchscope.caption
 msgid "Search Scope"
-msgstr ""
+msgstr "Search Scope"
 
 #: tvissearch.radiobutton_allcondition.caption
 msgid "All conditions"
-msgstr ""
+msgstr "All conditions"
 
 #: tvissearch.radiobutton_onecondition.caption
 msgid "At least one condition"
-msgstr ""
+msgstr "At least one condition"
 
 #: tvissearch.tabsheet_advanced.caption
 msgctxt "tvissearch.tabsheet_advanced.caption"
@@ -6186,11 +6186,11 @@ msgstr "Advanced"
 
 #: tvissearch.tabsheet_basic.caption
 msgid "Basic"
-msgstr ""
+msgstr "Basic"
 
 #: tvissearch.tabsheet_expert.caption
 msgid "Expert"
-msgstr ""
+msgstr "Expert"
 
 #: tvissearch.tabsheet_options.caption
 msgctxt "tvissearch.tabsheet_options.caption"
@@ -6204,7 +6204,7 @@ msgstr "Key"
 
 #: tvissearch.tisgrid_advdetails.header.columns[1].text
 msgid "Condition"
-msgstr ""
+msgstr "Condition"
 
 #: tvissearch.tisgrid_advdetails.header.columns[2].text
 msgctxt "tvissearch.tisgrid_advdetails.header.columns[2].text"
@@ -6233,15 +6233,15 @@ msgstr "Cancel"
 
 #: tvisselectnewrecordtype.action_createrecord.caption
 msgid "Create Record"
-msgstr ""
+msgstr "Create Record"
 
 #: tvisselectnewrecordtype.caption
 msgid "Resource Record Type"
-msgstr ""
+msgstr "Resource Record Type"
 
 #: tvisselectnewrecordtype.label1.caption
 msgid "Select a resource record type:"
-msgstr ""
+msgstr "Select a resource record type:"
 
 #: tvisselectnewrecordtype.label2.caption
 msgctxt "tvisselectnewrecordtype.label2.caption"
@@ -6251,17 +6251,17 @@ msgstr "Description:"
 #: tvisselectobjectguid.action1.caption
 msgctxt "tvisselectobjectguid.action1.caption"
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
 #: tvisselectobjectguid.bitbtn2.caption
 msgctxt "tvisselectobjectguid.bitbtn2.caption"
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: tvisselectobjectguid.bitbtn3.caption
 msgctxt "tvisselectobjectguid.bitbtn3.caption"
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: tvisselectobjectguid.caption
 msgid "Select Object GUID"
@@ -6275,7 +6275,7 @@ msgstr ""
 #: tvisselectobjectguid.label2.caption
 msgctxt "tvisselectobjectguid.label2.caption"
 msgid "Total : 0 elements"
-msgstr ""
+msgstr "Total : 0 elements"
 
 #: tvisselectobjectguid.tisgrid1.header.columns[0].text
 msgctxt "tvisselectobjectguid.tisgrid1.header.columns[0].text"
@@ -6285,7 +6285,7 @@ msgstr ""
 #: tvisselectobjectguid.tisgrid1.header.columns[1].text
 msgctxt "tvisselectobjectguid.tisgrid1.header.columns[1].text"
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: tvisselectobjectguid.tisgrid1.header.columns[2].text
 msgid "GUID"
@@ -6294,22 +6294,22 @@ msgstr ""
 #: tvisselectobjectguid.tisgrid1.header.columns[3].text
 msgctxt "tvisselectobjectguid.tisgrid1.header.columns[3].text"
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: tvisselectobjectsid.action1.caption
 msgctxt "tvisselectobjectsid.action1.caption"
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
 #: tvisselectobjectsid.bitbtn2.caption
 msgctxt "tvisselectobjectsid.bitbtn2.caption"
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: tvisselectobjectsid.bitbtn3.caption
 msgctxt "tvisselectobjectsid.bitbtn3.caption"
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: tvisselectobjectsid.caption
 msgid "Select ObjectSID"
@@ -6323,7 +6323,7 @@ msgstr ""
 #: tvisselectobjectsid.label2.caption
 msgctxt "tvisselectobjectsid.label2.caption"
 msgid "Total : 0 elements"
-msgstr ""
+msgstr "Total : 0 elements"
 
 #: tvisselectobjectsid.tisgrid1.header.columns[0].text
 msgctxt "tvisselectobjectsid.tisgrid1.header.columns[0].text"
@@ -6333,7 +6333,7 @@ msgstr ""
 #: tvisselectobjectsid.tisgrid1.header.columns[1].text
 msgctxt "tvisselectobjectsid.tisgrid1.header.columns[1].text"
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: tvisselectobjectsid.tisgrid1.header.columns[2].text
 msgid "SID"
@@ -6350,12 +6350,12 @@ msgstr ""
 #: tvisshowrelationship.action_property.caption
 msgctxt "tvisshowrelationship.action_property.caption"
 msgid "Property"
-msgstr ""
+msgstr "Property"
 
 #: tvisshowrelationship.action_refresh.caption
 msgctxt "tvisshowrelationship.action_refresh.caption"
 msgid "Refresh"
-msgstr ""
+msgstr "Refresh"
 
 #: tvisshowrelationship.action_savetodot.caption
 msgid "Save to DOT"
@@ -6377,12 +6377,12 @@ msgstr ""
 #: tvisshowrelationship.bitbtn_next.caption
 msgctxt "tvisshowrelationship.bitbtn_next.caption"
 msgid "Next"
-msgstr ""
+msgstr "Next"
 
 #: tvisshowrelationship.bitbtn_previous.caption
 msgctxt "tvisshowrelationship.bitbtn_previous.caption"
 msgid "Previous"
-msgstr ""
+msgstr "Previous"
 
 #: tvisshowrelationship.caption
 msgid "Group relations"
@@ -6423,7 +6423,7 @@ msgstr ""
 #: tvisshowrelationship.tisgrid_groupdata.header.columns[2].text
 msgctxt "tvisshowrelationship.tisgrid_groupdata.header.columns[2].text"
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: tvisshowrelationship.tisgrid_groupdata.header.columns[3].text
 msgid "Member"
@@ -6450,7 +6450,7 @@ msgstr "Move"
 
 #: tvistaskmove.label_dn.caption
 msgid "Object location :"
-msgstr ""
+msgstr "Object location :"
 
 #: tvistaskmove.label_rdn.caption
 msgctxt "tvistaskmove.label_rdn.caption"
@@ -6464,7 +6464,7 @@ msgstr "Cancel"
 
 #: tvistaskresetpassword.btn_ok.caption
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: tvistaskresetpassword.caption
 msgctxt "tvistaskresetpassword.caption"
@@ -6478,7 +6478,7 @@ msgstr "User must change password at next logon"
 
 #: tvistaskresetpassword.checkbox_unlock.caption
 msgid "Unlock the user's account"
-msgstr ""
+msgstr "Unlock the user's account"
 
 #: tvistaskresetpassword.label_confirmpassword.caption
 msgctxt "tvistaskresetpassword.label_confirmpassword.caption"
@@ -6487,15 +6487,15 @@ msgstr "Confirm Password :"
 
 #: tvistaskresetpassword.label_effect.caption
 msgid "The user must logoff and then logon again for the change to take effect."
-msgstr ""
+msgstr "The user must logoff and then logon again for the change to take effect."
 
 #: tvistaskresetpassword.label_newpassword.caption
 msgid "New Password :"
-msgstr ""
+msgstr "New Password :"
 
 #: tvistaskresetpassword.label_status.caption
 msgid "Account Lockout Status on this Domain Controller : "
-msgstr ""
+msgstr "Account Lockout Status on this Domain Controller : "
 
 #: tvisviewkeytab.action_copytoclipboard.caption
 msgid "Copy to clipboard (base64)"
@@ -6529,7 +6529,7 @@ msgstr ""
 #: tvisviewkeytab.label2.caption
 msgctxt "tvisviewkeytab.label2.caption"
 msgid "Folder"
-msgstr ""
+msgstr "Folder"
 
 #: tvisviewkeytab.tisgrid1.header.columns[0].text
 msgid "KVNO"
@@ -6538,7 +6538,7 @@ msgstr ""
 #: tvisviewkeytab.tisgrid1.header.columns[1].text
 msgctxt "tvisviewkeytab.tisgrid1.header.columns[1].text"
 msgid "Timestamp"
-msgstr ""
+msgstr "Timestamp"
 
 #: tvisviewkeytab.tisgrid1.header.columns[2].text
 msgctxt "tvisviewkeytab.tisgrid1.header.columns[2].text"
@@ -6552,7 +6552,7 @@ msgstr ""
 #: tvisviewkeytab.tisgrid1.header.columns[4].text
 msgctxt "tvisviewkeytab.tisgrid1.header.columns[4].text"
 msgid "Key"
-msgstr ""
+msgstr "Key"
 
 #: ucommon.rsaccountunlocked
 msgid "Account Unlock"
@@ -6624,7 +6624,7 @@ msgstr "A problem occured while attempting to dereference an alias during search
 #: ucommon.rsallow
 msgctxt "ucommon.rsallow"
 msgid "Allow"
-msgstr ""
+msgstr "Allow"
 
 #: ucommon.rsand
 msgid "% and %"
@@ -6738,7 +6738,7 @@ msgstr "Do you want to delete the profile %?"
 #: ucommon.rsdeny
 msgctxt "ucommon.rsdeny"
 msgid "Deny"
-msgstr ""
+msgstr "Deny"
 
 #: ucommon.rsdisableaccount
 msgid "Disable Account"
@@ -6807,7 +6807,7 @@ msgstr "Secure Time"
 #: ucommon.rsdnspropertyzonetype
 msgctxt "ucommon.rsdnspropertyzonetype"
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: ucommon.rsdnsrecorda
 msgid "Host (A or AAAA)"
@@ -6820,7 +6820,7 @@ msgstr "Host address (A or AAAA) record. Maps a DNS domain name to a 32-bit IP v
 #: ucommon.rsdnsrecordcname
 msgctxt "ucommon.rsdnsrecordcname"
 msgid "Alias (CNAME)"
-msgstr ""
+msgstr "Alias (CNAME)"
 
 #: ucommon.rsdnsrecordcnamedescription
 msgid "Alias record. Indicates an alternate or alias DNS domain name for a name already specified in other resource record types used in this zone. The record is also known as the canonical name (CNAME) record type. (RFC 1035)"
@@ -6829,7 +6829,7 @@ msgstr "Alias record. Indicates an alternate or alias DNS domain name for a name
 #: ucommon.rsdnsrecordmx
 msgctxt "ucommon.rsdnsrecordmx"
 msgid "Mail Exchanger (MX)"
-msgstr ""
+msgstr "Mail Exchanger (MX)"
 
 #: ucommon.rsdnsrecordmxdescription
 msgid "Mail exchanger (MX) record. Provides message routing to a specified mail exchange host that is acting as a mail exchanger for a specified DNS domain name. MX records use a 16-bit integer to indicate host priority in message routing where multiple mail exchange hosts are specified. For each mail exchange host specified in this record type, a corresponding host address (A) type record is needed. (RFC 1035)"
@@ -6838,7 +6838,7 @@ msgstr "Mail exchanger (MX) record. Provides message routing to a specified mail
 #: ucommon.rsdnsrecordptr
 msgctxt "ucommon.rsdnsrecordptr"
 msgid "Pointer (PTR)"
-msgstr ""
+msgstr "Pointer (PTR)"
 
 #: ucommon.rsdnsrecordptrdescription
 msgid "Pointer (PTR) record. Points to a location in the domain name space. PTR records are typically used in special domains to perform reverse lookups of address-to-name mappings. Each record provides simple data that points to some other location in the domain name space (usually a forward lookup zone). Where PTR records are used, no additional section processing is implied or caused by their presence. (RFC 1035)"
@@ -6847,7 +6847,7 @@ msgstr "Pointer (PTR) record. Points to a location in the domain name space. PTR
 #: ucommon.rsdnsrecordsrv
 msgctxt "ucommon.rsdnsrecordsrv"
 msgid "Service Location (SRV)"
-msgstr ""
+msgstr "Service Location (SRV)"
 
 #: ucommon.rsdnsrecordsrvdescription
 msgid "Service (SRV) record. Allows administrators to use several servers for a single DNS domain, to easily move a TCP/IP service from one host to another host with administration, and to designate some service provider hosts as primary servers for a service and other hosts as backups. DNS clients that use a SRV-type query ask for a specific TCP/IP service and protocol mapped to a specific DNS domain and receive the names of any available servers. (RFC 2052)"
@@ -6856,7 +6856,7 @@ msgstr "Service (SRV) record. Allows administrators to use several servers for a
 #: ucommon.rsdnszonedcpromoconvertdomain
 msgctxt "ucommon.rsdnszonedcpromoconvertdomain"
 msgid "Domain"
-msgstr ""
+msgstr "Domain"
 
 #: ucommon.rsdnszonedcpromoconvertforest
 msgid "Forest"
@@ -7110,17 +7110,17 @@ msgstr "The New and Confirm passwords must match. Please re-type them."
 #: ucommon.rsnewobjectbtnback
 msgctxt "ucommon.rsnewobjectbtnback"
 msgid "< Back"
-msgstr ""
+msgstr "< Back"
 
 #: ucommon.rsnewobjectbtnnext
 msgctxt "ucommon.rsnewobjectbtnnext"
 msgid "Next >"
-msgstr ""
+msgstr "Next >"
 
 #: ucommon.rsnewobjectbtnok
 msgctxt "ucommon.rsnewobjectbtnok"
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ucommon.rsnewobjectcomputer
 msgid "New object - Computer"
@@ -7307,7 +7307,7 @@ msgstr ""
 #: ucommon.rsresetpassword
 msgctxt "ucommon.rsresetpassword"
 msgid "Reset Password"
-msgstr ""
+msgstr "Reset Password"
 
 #: ucommon.rsresetpasswordmessage
 msgid "Password has been reset successfully."
@@ -7336,12 +7336,12 @@ msgstr "Inherited"
 #: ucommon.rssafinheritonly
 msgctxt "ucommon.rssafinheritonly"
 msgid "Inherit Only"
-msgstr ""
+msgstr "Inherit Only"
 
 #: ucommon.rssafnopropagate
 msgctxt "ucommon.rssafnopropagate"
 msgid "No Propagate"
-msgstr ""
+msgstr "No Propagate"
 
 #: ucommon.rssafobjectinherit
 msgid "Object Inherit"
@@ -7370,7 +7370,7 @@ msgstr "Whole subtree"
 #: ucommon.rssecaccesscontrolaccess
 msgctxt "ucommon.rssecaccesscontrolaccess"
 msgid "Control Access"
-msgstr ""
+msgstr "Control Access"
 
 #: ucommon.rssecaccesscreatechild
 msgctxt "ucommon.rssecaccesscreatechild"
@@ -7390,7 +7390,7 @@ msgstr ""
 #: ucommon.rssecaccessdeletetree
 msgctxt "ucommon.rssecaccessdeletetree"
 msgid "Delete Tree"
-msgstr ""
+msgstr "Delete Tree"
 
 #: ucommon.rssecaccessfullcontrol
 msgid "Full control"
@@ -7415,7 +7415,7 @@ msgstr "Generic Write"
 #: ucommon.rssecaccesslistchildren
 msgctxt "ucommon.rssecaccesslistchildren"
 msgid "List Children"
-msgstr ""
+msgstr "List Children"
 
 #: ucommon.rssecaccesslistcontent
 msgid "List content"
@@ -7424,12 +7424,12 @@ msgstr "List content"
 #: ucommon.rssecaccesslistobject
 msgctxt "ucommon.rssecaccesslistobject"
 msgid "List Object"
-msgstr ""
+msgstr "List Object"
 
 #: ucommon.rssecaccessreadcontrol
 msgctxt "ucommon.rssecaccessreadcontrol"
 msgid "Read Control"
-msgstr ""
+msgstr "Read Control"
 
 #: ucommon.rssecaccessreadprop
 msgid "Read"
@@ -7438,7 +7438,7 @@ msgstr "Read"
 #: ucommon.rssecaccessselfwrite
 msgctxt "ucommon.rssecaccessselfwrite"
 msgid "Self Write"
-msgstr ""
+msgstr "Self Write"
 
 #: ucommon.rssecaccesssynchronize
 msgctxt "ucommon.rssecaccesssynchronize"
@@ -7448,12 +7448,12 @@ msgstr ""
 #: ucommon.rssecaccesswritedac
 msgctxt "ucommon.rssecaccesswritedac"
 msgid "Write Dac"
-msgstr ""
+msgstr "Write Dac"
 
 #: ucommon.rssecaccesswriteowner
 msgctxt "ucommon.rssecaccesswriteowner"
 msgid "Write Owner"
-msgstr ""
+msgstr "Write Owner"
 
 #: ucommon.rssecaccesswriteprop
 msgid "Write"
@@ -7466,7 +7466,7 @@ msgstr "Fail to read security descriptor"
 #: ucommon.rsshowpassword
 msgctxt "ucommon.rsshowpassword"
 msgid "Show password"
-msgstr ""
+msgstr "Show password"
 
 #: ucommon.rssinglestringeditor
 msgid "Single String Editor"
