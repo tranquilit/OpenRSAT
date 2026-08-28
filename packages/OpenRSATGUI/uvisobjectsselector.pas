@@ -481,8 +481,7 @@ begin
   end;
 
   LdapResult.TrimAsArray;
-  TisGrid1.Data := LdapResult;
-  TisGrid1.LoadData();
+  TisGrid1.LoadData(@LdapResult);
 end;
 
 procedure TVisObjectsSelector.SelectLocation;
