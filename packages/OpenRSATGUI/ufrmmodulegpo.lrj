@@ -1,0 +1,18 @@
+{"version":1,"strings":[
+{"hash": 201842965, "name": "tfrmmodulegpo.tisgrid_gpolist.header.columns[0].text", "sourcebytes": [68, 105, 115, 112, 108, 97, 121, 32, 110, 97, 109, 101], "value": "Display name"}
+{"hash": 95062979, "name": "tfrmmodulegpo.tisgrid_gpolist.header.columns[1].text", "sourcebytes": [83, 116, 97, 116, 117, 115], "value": "Status"}
+{"hash": 95406836, "name": "tfrmmodulegpo.tisgrid_gpolist.header.columns[2].text", "sourcebytes": [77, 111, 100, 105, 102, 105, 101, 100], "value": "Modified"}
+{"hash": 157732041, "name": "tfrmmodulegpo.tisgrid_summary.header.columns[0].text", "sourcebytes": [80, 114, 111, 112, 101, 114, 116, 121], "value": "Property"}
+{"hash": 6063029, "name": "tfrmmodulegpo.tisgrid_summary.header.columns[1].text", "sourcebytes": [86, 97, 108, 117, 101], "value": "Value"}
+{"hash": 157732041, "name": "tfrmmodulegpo.tisgrid_attributes.header.columns[0].text", "sourcebytes": [80, 114, 111, 112, 101, 114, 116, 121], "value": "Property"}
+{"hash": 6063029, "name": "tfrmmodulegpo.tisgrid_attributes.header.columns[1].text", "sourcebytes": [86, 97, 108, 117, 101], "value": "Value"}
+{"hash": 180631753, "name": "tfrmmodulegpo.tabsheet_summary.caption", "sourcebytes": [83, 117, 109, 109, 97, 114, 121], "value": "Summary"}
+{"hash": 116154878, "name": "tfrmmodulegpo.tabsheet_configuration.caption", "sourcebytes": [67, 111, 110, 102, 105, 103, 117, 114, 97, 116, 105, 111, 110], "value": "Configuration"}
+{"hash": 160072471, "name": "tfrmmodulegpo.tabsheet_catalog.caption", "sourcebytes": [67, 97, 116, 97, 108, 111, 103], "value": "Catalog"}
+{"hash": 167027660, "name": "tfrmmodulegpo.tabsheet_technical.caption", "sourcebytes": [84, 101, 99, 104, 110, 105, 99, 97, 108], "value": "Technical"}
+{"hash": 34464936, "name": "tfrmmodulegpo.action_refresh.caption", "sourcebytes": [65, 99, 116, 105, 111, 110, 95, 82, 101, 102, 114, 101, 115, 104], "value": "Action_Refresh"}
+{"hash": 67354149, "name": "tfrmmodulegpo.action_create.caption", "sourcebytes": [65, 99, 116, 105, 111, 110, 95, 67, 114, 101, 97, 116, 101], "value": "Action_Create"}
+{"hash": 52511413, "name": "tfrmmodulegpo.action_rename.caption", "sourcebytes": [65, 99, 116, 105, 111, 110, 95, 82, 101, 110, 97, 109, 101], "value": "Action_Rename"}
+{"hash": 122149333, "name": "tfrmmodulegpo.action_duplicate.caption", "sourcebytes": [65, 99, 116, 105, 111, 110, 95, 68, 117, 112, 108, 105, 99, 97, 116, 101], "value": "Action_Duplicate"}
+{"hash": 67185189, "name": "tfrmmodulegpo.action_delete.caption", "sourcebytes": [65, 99, 116, 105, 111, 110, 95, 68, 101, 108, 101, 116, 101], "value": "Action_Delete"}
+]}

@@ -16,7 +16,8 @@ uses
   uviewkeytabpresenter, unewsitelink, ugeneralpropertysitelink, 
   ugeneralpropertysitelinkbridge, udoublelistlogic, unewsitelinkbridge, ulog, 
   ugeneralpropertyserver, ugeneralpropertyntdsdsa, uschedulinglogic, 
-  ugeneralpropertyntds, LazarusPackageIntf;
+  ugeneralpropertyntds, ugpocore, ugpregpol, ugptcore, umodulegpooption, umodulegpo, 
+  LazarusPackageIntf;
 
 implementation
 

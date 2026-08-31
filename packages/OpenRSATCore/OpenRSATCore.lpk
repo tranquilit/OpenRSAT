@@ -152,6 +152,26 @@
         <Filename Value="ugeneralpropertyntds.pas"/>
         <UnitName Value="ugeneralpropertyntds"/>
       </Item>
+      <Item>
+        <Filename Value="ugpocore.pas"/>
+        <UnitName Value="ugpocore"/>
+      </Item>
+      <Item>
+        <Filename Value="ugpregpol.pas"/>
+        <UnitName Value="ugpregpol"/>
+      </Item>
+      <Item>
+        <Filename Value="ugptcore.pas"/>
+        <UnitName Value="ugptcore"/>
+      </Item>
+      <Item>
+        <Filename Value="umodulegpooption.pas"/>
+        <UnitName Value="umodulegpooption"/>
+      </Item>
+      <Item>
+        <Filename Value="umodulegpo.pas"/>
+        <UnitName Value="umodulegpo"/>
+      </Item>
     </Files>
     <i18n>
       <EnableI18N Value="True"/>

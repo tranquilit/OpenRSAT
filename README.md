@@ -40,6 +40,7 @@ Features are split into different modules:
 * **DNS**: manage the network entries of your AD.
 * **Sites and Services**: manage the sites and services of your AD.
 * **Services and Interfaces**: get an overview of every object in your AD.
+* **Group Policy**: list, create, duplicate, rename and delete Group Policy Objects, and edit their content.
 
 ### Users and Computers
 
@@ -70,6 +71,17 @@ Features are split into different modules:
 ### Services and Interfaces
 
 * Overview of every object in your AD, useful to inspect the raw content of the directory.
+
+### Group Policy
+
+> [!NOTE]
+> The Group Policy module edits the Group Policy Container (GPC) through LDAP, and the Group Policy Template (GPT) files through SMB (`smbclient` on Linux and macOS, native UNC on Windows).
+
+* Overview of every GPO of the domain, with its status, versions and statistics.
+* Create, duplicate, rename and delete GPOs.
+* View and edit the GPC parameters (summary, configuration, catalog, technical tabs).
+* Edit the Registry.pol files (User and Machine sides) of the GPT with a local staging model: nothing is written to the domain until the save action.
+* Update the GPT.INI and the GPO version numbers on save.
 
 ## Screenshots
 

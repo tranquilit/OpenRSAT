@@ -1,0 +1,1005 @@
+object FrmModuleGPO: TFrmModuleGPO
+  Left = 0
+  Height = 520
+  Top = 0
+  Width = 800
+  ClientHeight = 520
+  ClientWidth = 800
+  LCLVersion = '4.5.0.0'
+  TabOrder = 0
+  DesignLeft = 670
+  DesignTop = 346
+  object Panel_Top: TPanel
+    Left = 0
+    Height = 28
+    Top = 0
+    Width = 800
+    Align = alTop
+    AutoSize = True
+    ClientHeight = 28
+    ClientWidth = 800
+    TabOrder = 0
+    object ToolBar1: TToolBar
+      Left = 1
+      Height = 26
+      Top = 1
+      Width = 798
+      Align = alClient
+      AutoSize = True
+      ButtonHeight = 24
+      ButtonWidth = 24
+      EdgeBorders = [ebLeft, ebTop, ebRight]
+      Images = CoreDataModule.ImageList1
+      ImagesWidth = 18
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      object ToolButton_Refresh: TToolButton
+        Left = 3
+        Top = 2
+        Action = Action_Refresh
+      end
+      object ToolButton_Separator1: TToolButton
+        Left = 27
+        Height = 24
+        Top = 2
+        Style = tbsSeparator
+      end
+      object ToolButton_Create: TToolButton
+        Left = 35
+        Top = 2
+        Action = Action_Create
+        Style = tbsButton
+      end
+      object ToolButton_Rename: TToolButton
+        Left = 92
+        Top = 2
+        Action = Action_Rename
+        Style = tbsButton
+      end
+      object ToolButton_Duplicate: TToolButton
+        Left = 149
+        Top = 2
+        Action = Action_Duplicate
+        Style = tbsButton
+      end
+      object ToolButton_Separator2: TToolButton
+        Left = 206
+        Height = 24
+        Top = 2
+        Style = tbsSeparator
+      end
+      object ToolButton_Delete: TToolButton
+        Left = 214
+        Top = 2
+        Action = Action_Delete
+        Style = tbsButton
+      end
+    end
+  end
+  object Panel_Left: TPanel
+    Left = 0
+    Height = 372
+    Top = 28
+    Width = 260
+    Align = alLeft
+    ClientHeight = 372
+    ClientWidth = 260
+    TabOrder = 1
+    object Label_GPOList: TLabel
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 244
+      Align = alTop
+      BorderSpacing.Around = 8
+    end
+    object TisGrid_GPOList: TTisGrid
+      Left = 1
+      Height = 330
+      Top = 23
+      Width = 258
+      Align = alClient
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Text = 'Display name'
+          Width = 140
+          PropertyName = 'displayName'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 1
+          Text = 'Status'
+          Width = 70
+          PropertyName = 'status'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 2
+          Text = 'Modified'
+          Width = 70
+          PropertyName = 'whenChanged'
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MaxHeight = 101
+      Header.MinHeight = 19
+      Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.Style = hsFlatButtons
+      Images = CoreDataModule.ImageList1
+      TabOrder = 1
+      SelectedAndTotalLabel = Label_Total
+      TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
+      TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+      ZebraColor = 15593713
+      PopupMenuOptions = []
+      OnFocusChanged = TisGrid_GPOListFocusChanged
+      OnGetImageIndex = TisGrid_GPOListGetImageIndex
+    end
+    object Label_Total: TLabel
+      Left = 5
+      Height = 15
+      Top = 355
+      Width = 250
+      Align = alBottom
+      Alignment = taRightJustify
+      BorderSpacing.Around = 4
+    end
+  end
+  object Splitter1: TSplitter
+    Left = 260
+    Height = 372
+    Top = 28
+    Width = 5
+  end
+  object PageControl1: TPageControl
+    Left = 265
+    Height = 372
+    Top = 28
+    Width = 535
+    ActivePage = TabSheet_Summary
+    Align = alClient
+    TabOrder = 3
+    object TabSheet_Summary: TTabSheet
+      Caption = 'Summary'
+      ClientHeight = 344
+      ClientWidth = 527
+      object TisGrid_Summary: TTisGrid
+        Left = 0
+        Height = 344
+        Top = 0
+        Width = 527
+        Align = alClient
+        Header.AutoSizeIndex = -1
+        Header.Columns = <        
+          item
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+            Position = 0
+            Text = 'Property'
+            Width = 200
+            PropertyName = 'name'
+          end        
+          item
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+            Position = 1
+            Text = 'Value'
+            Width = 300
+            PropertyName = 'value'
+          end>
+        Header.DefaultHeight = 18
+        Header.Height = 28
+        Header.MaxHeight = 101
+        Header.MinHeight = 19
+        Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+        Header.Style = hsFlatButtons
+        Images = CoreDataModule.ImageList1
+        TabOrder = 0
+        TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
+        TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+        ZebraColor = 15593713
+        PopupMenuOptions = []
+      end
+    end
+    object TabSheet_Configuration: TTabSheet
+      Caption = 'Configuration'
+      ClientHeight = 464
+      ClientWidth = 527
+      object Panel_ConfigurationSource: TPanel
+        Left = 0
+        Height = 34
+        Top = 0
+        Width = 527
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvNone
+        BorderSpacing.Around = 8
+        ClientHeight = 34
+        ClientWidth = 527
+        TabOrder = 0
+        object Label_ConfigurationSource: TLabel
+          AnchorSideLeft.Control = Panel_ConfigurationSource
+          AnchorSideTop.Control = ComboBox_ConfigurationSource
+          AnchorSideTop.Side = asrCenter
+          Left = 8
+          Height = 15
+          Top = 10
+          Width = 100
+          BorderSpacing.Around = 8
+          Constraints.MaxWidth = 100
+          Constraints.MinWidth = 100
+        end
+        object ComboBox_ConfigurationSource: TComboBox
+          AnchorSideLeft.Control = Label_ConfigurationSource
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = Panel_ConfigurationSource
+          AnchorSideTop.Side = asrCenter
+          Left = 116
+          Height = 23
+          Top = 6
+          Width = 230
+          Anchors = [akTop, akLeft]
+          BorderSpacing.Around = 8
+          ItemHeight = 15
+          Items.Strings = (
+            'GPC parameters'
+            'User Registry.pol'
+            'Machine Registry.pol'
+          )
+          Style = csDropDownList
+          TabOrder = 0
+          OnChange = ComboBox_ConfigurationSourceChange
+        end
+      end
+      object Panel_ConfigurationList: TPanel
+        Left = 0
+        Height = 430
+        Top = 34
+        Width = 260
+        Align = alLeft
+        BevelOuter = bvNone
+        ClientHeight = 430
+        ClientWidth = 260
+        TabOrder = 1
+        object TisGrid_Parameters: TTisGrid
+          Left = 0
+          Height = 336
+          Top = 0
+          Width = 260
+          Align = alClient
+          Header.AutoSizeIndex = -1
+          Header.Columns = <          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 0
+              Text = 'Parameter'
+              Width = 110
+              PropertyName = 'name'
+            end          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 1
+              Text = 'Value'
+              Width = 110
+              PropertyName = 'value'
+            end          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 2
+              Text = 'Staged'
+              Width = 40
+              PropertyName = 'staged'
+            end>
+          Header.DefaultHeight = 18
+          Header.Height = 28
+          Header.MaxHeight = 101
+          Header.MinHeight = 19
+          Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+          Header.Style = hsFlatButtons
+          Images = CoreDataModule.ImageList1
+          TabOrder = 0
+          TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
+          TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+          ZebraColor = 15593713
+          PopupMenuOptions = []
+          OnFocusChanged = TisGrid_ParametersFocusChanged
+        end
+      end
+      object Splitter_Configuration: TSplitter
+        Left = 260
+        Height = 430
+        Top = 34
+        Width = 5
+      end
+      object Panel_ConfigurationEditor: TPanel
+        Left = 265
+        Height = 430
+        Top = 34
+        Width = 262
+        Align = alClient
+        BevelOuter = bvNone
+        BorderSpacing.Around = 8
+        ClientHeight = 430
+        ClientWidth = 262
+        TabOrder = 3
+        object Panel_GPCEditor: TPanel
+          Left = 8
+          Height = 274
+          Top = 8
+          Width = 246
+          Align = alClient
+          BevelOuter = bvNone
+          ClientHeight = 274
+          ClientWidth = 246
+          TabOrder = 0
+          object Label_ParameterName: TLabel
+            Left = 8
+            Height = 17
+            Top = 8
+            Width = 230
+            Align = alTop
+            BorderSpacing.Around = 8
+            Font.Height = -13
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label_ParameterDescription: TLabel
+            Left = 8
+            Height = 30
+            Top = 33
+            Width = 230
+            Align = alTop
+            AutoSize = True
+            BorderSpacing.Around = 8
+            WordWrap = True
+          end
+          object Memo_ParameterValue: TMemo
+            Left = 8
+            Height = 80
+            Top = 71
+            Width = 230
+            Align = alTop
+            BorderSpacing.Around = 8
+            ScrollBars = ssAutoVertical
+            TabOrder = 0
+          end
+          object Panel_ParameterActions: TPanel
+            Left = 8
+            Height = 34
+            Top = 159
+            Width = 230
+            Align = alTop
+            AutoSize = True
+            BevelOuter = bvNone
+            BorderSpacing.Around = 8
+            ClientHeight = 34
+            ClientWidth = 230
+            TabOrder = 1
+            object Button_ParameterStage: TButton
+              AnchorSideLeft.Control = Panel_ParameterActions
+              AnchorSideTop.Control = Panel_ParameterActions
+              AnchorSideTop.Side = asrCenter
+              Left = 8
+              Height = 26
+              Top = 4
+              Width = 100
+              Anchors = [akTop, akLeft]
+              BorderSpacing.Around = 8
+              Caption = 'Stage'
+              TabOrder = 0
+              OnClick = Button_ParameterStageClick
+            end
+            object Button_ParameterDiscard: TButton
+              AnchorSideLeft.Control = Button_ParameterStage
+              AnchorSideLeft.Side = asrBottom
+              AnchorSideTop.Control = Panel_ParameterActions
+              AnchorSideTop.Side = asrCenter
+              Left = 116
+              Height = 26
+              Top = 4
+              Width = 100
+              Anchors = [akTop, akLeft]
+              BorderSpacing.Around = 8
+              Caption = 'Discard'
+              TabOrder = 1
+              OnClick = Button_ParameterDiscardClick
+            end
+          end
+        end
+        object Panel_RegistryEditor: TPanel
+          Left = 8
+          Height = 274
+          Top = 8
+          Width = 246
+          Align = alClient
+          BevelOuter = bvNone
+          ClientHeight = 274
+          ClientWidth = 246
+          TabOrder = 1
+          Visible = False
+          object Panel_RegValueForm: TPanel
+            Left = 8
+            Height = 130
+            Top = 8
+            Width = 230
+            Align = alTop
+            AutoSize = True
+            BevelOuter = bvNone
+            BorderSpacing.Around = 8
+            ClientHeight = 130
+            ClientWidth = 230
+            TabOrder = 0
+            object Label_RegValueName: TLabel
+              AnchorSideLeft.Control = Panel_RegValueForm
+              AnchorSideTop.Control = Edit_RegValueName
+              AnchorSideTop.Side = asrCenter
+              Left = 8
+              Height = 15
+              Top = 12
+              Width = 100
+              BorderSpacing.Around = 8
+              Constraints.MaxWidth = 100
+              Constraints.MinWidth = 100
+            end
+            object Edit_RegValueName: TEdit
+              AnchorSideLeft.Control = Label_RegValueName
+              AnchorSideLeft.Side = asrBottom
+              AnchorSideTop.Control = Panel_RegValueForm
+              AnchorSideRight.Control = Panel_RegValueForm
+              AnchorSideRight.Side = asrBottom
+              Left = 116
+              Height = 23
+              Top = 8
+              Width = 106
+              Anchors = [akTop, akLeft, akRight]
+              BorderSpacing.Around = 8
+              TabOrder = 0
+            end
+            object Label_RegValueType: TLabel
+              AnchorSideLeft.Control = Panel_RegValueForm
+              AnchorSideTop.Control = ComboBox_RegValueType
+              AnchorSideTop.Side = asrCenter
+              Left = 8
+              Height = 15
+              Top = 47
+              Width = 100
+              BorderSpacing.Around = 8
+              Constraints.MaxWidth = 100
+              Constraints.MinWidth = 100
+            end
+            object ComboBox_RegValueType: TComboBox
+              AnchorSideLeft.Control = Label_RegValueType
+              AnchorSideLeft.Side = asrBottom
+              AnchorSideTop.Control = Edit_RegValueName
+              AnchorSideTop.Side = asrBottom
+              AnchorSideRight.Control = Panel_RegValueForm
+              AnchorSideRight.Side = asrBottom
+              Left = 116
+              Height = 23
+              Top = 43
+              Width = 106
+              Anchors = [akTop, akLeft, akRight]
+              BorderSpacing.Around = 8
+              ItemHeight = 15
+              Items.Strings = (
+                'REG_SZ'
+                'REG_EXPAND_SZ'
+                'REG_DWORD'
+                'REG_QWORD'
+                'REG_BINARY'
+                'REG_MULTI_SZ'
+              )
+              Style = csDropDownList
+              TabOrder = 1
+            end
+            object Label_RegValueData: TLabel
+              AnchorSideLeft.Control = Panel_RegValueForm
+              AnchorSideTop.Control = Memo_RegValueData
+              AnchorSideTop.Side = asrTop
+              Left = 8
+              Height = 15
+              Top = 82
+              Width = 100
+              BorderSpacing.Around = 8
+              Constraints.MaxWidth = 100
+              Constraints.MinWidth = 100
+            end
+            object Memo_RegValueData: TMemo
+              AnchorSideLeft.Control = Label_RegValueData
+              AnchorSideLeft.Side = asrBottom
+              AnchorSideTop.Control = ComboBox_RegValueType
+              AnchorSideTop.Side = asrBottom
+              AnchorSideRight.Control = Panel_RegValueForm
+              AnchorSideRight.Side = asrBottom
+              Left = 116
+              Height = 56
+              Top = 78
+              Width = 106
+              Anchors = [akTop, akLeft, akRight]
+              BorderSpacing.Around = 8
+              ScrollBars = ssAutoVertical
+              TabOrder = 2
+            end
+          end
+          object Panel_RegValueButtons: TPanel
+            Left = 8
+            Height = 34
+            Top = 146
+            Width = 230
+            Align = alTop
+            AutoSize = True
+            BevelOuter = bvNone
+            BorderSpacing.Around = 8
+            ClientHeight = 34
+            ClientWidth = 230
+            TabOrder = 1
+            object Button_RegValueApply: TButton
+              AnchorSideLeft.Control = Panel_RegValueButtons
+              AnchorSideTop.Control = Panel_RegValueButtons
+              AnchorSideTop.Side = asrCenter
+              Left = 8
+              Height = 26
+              Top = 4
+              Width = 75
+              Anchors = [akTop, akLeft]
+              BorderSpacing.Around = 8
+              Caption = 'Apply'
+              Default = True
+              TabOrder = 0
+              OnClick = Button_RegValueApplyClick
+            end
+            object Button_RegValueDelete: TButton
+              AnchorSideLeft.Control = Button_RegValueApply
+              AnchorSideLeft.Side = asrBottom
+              AnchorSideTop.Control = Panel_RegValueButtons
+              AnchorSideTop.Side = asrCenter
+              Left = 91
+              Height = 26
+              Top = 4
+              Width = 75
+              Anchors = [akTop, akLeft]
+              BorderSpacing.Around = 8
+              Caption = 'Delete'
+              TabOrder = 1
+              OnClick = Button_RegValueDeleteClick
+            end
+            object Button_RegKeyAdd: TButton
+              AnchorSideLeft.Control = Button_RegValueDelete
+              AnchorSideLeft.Side = asrBottom
+              AnchorSideTop.Control = Panel_RegValueButtons
+              AnchorSideTop.Side = asrCenter
+              Left = 174
+              Height = 26
+              Top = 4
+              Width = 48
+              Anchors = [akTop, akLeft]
+              BorderSpacing.Around = 8
+              Caption = 'Key'
+              TabOrder = 2
+              OnClick = Button_RegKeyAddClick
+            end
+          end
+          object Label_RegHint: TLabel
+            Left = 8
+            Height = 15
+            Top = 251
+            Width = 230
+            Align = alBottom
+            BorderSpacing.Around = 8
+          end
+          object TisGrid_RegistryValues: TTisGrid
+            Left = 8
+            Height = 107
+            Top = 188
+            Width = 230
+            Align = alClient
+            Header.AutoSizeIndex = -1
+            Header.Columns = <            
+              item
+                Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+                Position = 0
+                Text = 'Name'
+                Width = 70
+                PropertyName = 'name'
+              end            
+              item
+                Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+                Position = 1
+                Text = 'Type'
+                Width = 60
+                PropertyName = 'vtype'
+              end            
+              item
+                Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+                Position = 2
+                Text = 'Value'
+                Width = 95
+                PropertyName = 'value'
+              end>
+            Header.DefaultHeight = 18
+            Header.Height = 28
+            Header.MaxHeight = 101
+            Header.MinHeight = 19
+            Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+            Header.Style = hsFlatButtons
+            Images = CoreDataModule.ImageList1
+            TabOrder = 2
+            TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
+            TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+            ZebraColor = 15593713
+            PopupMenuOptions = []
+            OnFocusChanged = TisGrid_RegistryValuesFocusChanged
+          end
+        end
+        object Panel_Staging: TPanel
+          Left = 8
+          Height = 140
+          Top = 196
+          Width = 246
+          Align = alBottom
+          BevelOuter = bvNone
+          BorderSpacing.Around = 8
+          ClientHeight = 140
+          ClientWidth = 246
+          TabOrder = 2
+          object Label_StagedCount: TLabel
+            Left = 8
+            Height = 15
+            Top = 8
+            Width = 230
+            Align = alTop
+            BorderSpacing.Around = 8
+            Caption = 'No staged changes.'
+          end
+          object CheckBox_IncrementUser: TCheckBox
+            Left = 8
+            Height = 20
+            Top = 31
+            Width = 230
+            Align = alTop
+            BorderSpacing.Around = 8
+            Caption = 'Increment user version on save'
+            TabOrder = 0
+          end
+          object CheckBox_IncrementMachine: TCheckBox
+            Left = 8
+            Height = 20
+            Top = 59
+            Width = 230
+            Align = alTop
+            BorderSpacing.Around = 8
+            Caption = 'Increment machine version on save'
+            TabOrder = 1
+          end
+          object CheckBox_UpdateGptIni: TCheckBox
+            Left = 8
+            Height = 20
+            Top = 87
+            Width = 230
+            Align = alTop
+            BorderSpacing.Around = 8
+            Caption = 'Update GPT.INI on SYSVOL on save'
+            TabOrder = 2
+          end
+          object Button_ConfigurationSave: TButton
+            AnchorSideLeft.Control = Panel_Staging
+            AnchorSideTop.Control = CheckBox_UpdateGptIni
+            AnchorSideTop.Side = asrBottom
+            Left = 8
+            Height = 26
+            Top = 115
+            Width = 100
+            Anchors = [akTop, akLeft]
+            BorderSpacing.Around = 8
+            Caption = 'Save'
+            Default = True
+            TabOrder = 3
+            OnClick = Button_ConfigurationSaveClick
+          end
+          object Button_ConfigurationDiscardAll: TButton
+            AnchorSideLeft.Control = Button_ConfigurationSave
+            AnchorSideLeft.Side = asrBottom
+            AnchorSideTop.Control = Button_ConfigurationSave
+            AnchorSideTop.Side = asrCenter
+            Left = 116
+            Height = 26
+            Top = 115
+            Width = 100
+            Anchors = [akTop, akLeft]
+            BorderSpacing.Around = 8
+            Caption = 'Discard changes'
+            TabOrder = 4
+            OnClick = Button_ConfigurationDiscardAllClick
+          end
+        end
+      end
+    end
+    object TabSheet_Catalog: TTabSheet
+      Caption = 'Catalog'
+      ClientHeight = 344
+      ClientWidth = 527
+      object TisGrid_Catalog: TTisGrid
+        Left = 0
+        Height = 310
+        Top = 0
+        Width = 527
+        Align = alClient
+        Header.AutoSizeIndex = -1
+        Header.Columns = <        
+          item
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+            Position = 0
+            Text = 'Parameter'
+            Width = 180
+            PropertyName = 'name'
+          end        
+          item
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+            Position = 1
+            Text = 'Description'
+            Width = 320
+            PropertyName = 'description'
+          end>
+        Header.DefaultHeight = 18
+        Header.Height = 28
+        Header.MaxHeight = 101
+        Header.MinHeight = 19
+        Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+        Header.Style = hsFlatButtons
+        Images = CoreDataModule.ImageList1
+        TabOrder = 0
+        TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
+        TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+        ZebraColor = 15593713
+        PopupMenuOptions = []
+        OnFocusChanged = TisGrid_CatalogFocusChanged
+      end
+      object Panel_CatalogBottom: TPanel
+        Left = 0
+        Height = 34
+        Top = 310
+        Width = 527
+        Align = alBottom
+        AutoSize = True
+        BevelOuter = bvNone
+        BorderSpacing.Around = 8
+        ClientHeight = 34
+        ClientWidth = 527
+        TabOrder = 1
+        object Button_CatalogAdd: TButton
+          AnchorSideLeft.Control = Panel_CatalogBottom
+          AnchorSideTop.Control = Panel_CatalogBottom
+          AnchorSideTop.Side = asrCenter
+          Left = 8
+          Height = 26
+          Top = 4
+          Width = 130
+          Anchors = [akTop, akLeft]
+          BorderSpacing.Around = 8
+          Caption = 'Add to GPO'
+          Default = True
+          TabOrder = 0
+          OnClick = Button_CatalogAddClick
+        end
+      end
+    end
+    object TabSheet_Technical: TTabSheet
+      Caption = 'Technical'
+      ClientHeight = 344
+      ClientWidth = 527
+      object Panel_FilePath: TPanel
+        Left = 0
+        Height = 17
+        Top = 0
+        Width = 527
+        Align = alTop
+        AutoSize = True
+        BevelOuter = bvNone
+        BorderSpacing.Around = 8
+        ClientHeight = 17
+        ClientWidth = 527
+        TabOrder = 0
+        object Label_FilePath: TLabel
+          Left = 0
+          Height = 15
+          Top = 0
+          Width = 527
+          Align = alClient
+          BorderSpacing.Around = 8
+        end
+      end
+      object Panel_GPTFiles: TPanel
+        Left = 0
+        Height = 200
+        Top = 144
+        Width = 527
+        Align = alBottom
+        BevelOuter = bvNone
+        BorderSpacing.Around = 8
+        ClientHeight = 200
+        ClientWidth = 527
+        TabOrder = 1
+        object Label_GPTFiles: TLabel
+          Left = 8
+          Height = 15
+          Top = 8
+          Width = 511
+          Align = alTop
+          BorderSpacing.Around = 8
+          Caption = 'GPT files'
+        end
+        object Panel_GPTButtons: TPanel
+          Left = 8
+          Height = 34
+          Top = 31
+          Width = 511
+          Align = alTop
+          AutoSize = True
+          BevelOuter = bvNone
+          BorderSpacing.Around = 8
+          ClientHeight = 34
+          ClientWidth = 511
+          TabOrder = 0
+          object Button_GPTFilesRefresh: TButton
+            AnchorSideLeft.Control = Panel_GPTButtons
+            AnchorSideTop.Control = Panel_GPTButtons
+            AnchorSideTop.Side = asrCenter
+            Left = 8
+            Height = 26
+            Top = 4
+            Width = 130
+            Anchors = [akTop, akLeft]
+            BorderSpacing.Around = 8
+            Caption = 'List GPT files'
+            TabOrder = 0
+            OnClick = Button_GPTFilesRefreshClick
+          end
+          object Button_GPTIniRead: TButton
+            AnchorSideLeft.Control = Button_GPTFilesRefresh
+            AnchorSideLeft.Side = asrBottom
+            AnchorSideTop.Control = Panel_GPTButtons
+            AnchorSideTop.Side = asrCenter
+            Left = 146
+            Height = 26
+            Top = 4
+            Width = 130
+            Anchors = [akTop, akLeft]
+            BorderSpacing.Around = 8
+            Caption = 'Read GPT.INI'
+            TabOrder = 1
+            OnClick = Button_GPTIniReadClick
+          end
+        end
+        object TisGrid_GPTFiles: TTisGrid
+          Left = 8
+          Height = 60
+          Top = 73
+          Width = 511
+          Align = alTop
+          Header.AutoSizeIndex = -1
+          Header.Columns = <          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 0
+              Text = 'File'
+              Width = 330
+              PropertyName = 'path'
+            end          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 1
+              Text = 'Size'
+              Width = 80
+              PropertyName = 'size'
+            end          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 2
+              Text = 'Modified'
+              Width = 100
+              PropertyName = 'modified'
+            end>
+          Header.DefaultHeight = 18
+          Header.Height = 28
+          Header.MaxHeight = 101
+          Header.MinHeight = 19
+          Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+          Header.Style = hsFlatButtons
+          Images = CoreDataModule.ImageList1
+          TabOrder = 1
+          TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
+          TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+          ZebraColor = 15593713
+          PopupMenuOptions = []
+        end
+        object Memo_GPTIni: TMemo
+          Left = 8
+          Height = 59
+          Top = 141
+          Width = 511
+          Align = alClient
+          BorderSpacing.Around = 8
+          ReadOnly = True
+          ScrollBars = ssAutoVertical
+          TabOrder = 2
+        end
+      end
+      object TisGrid_Attributes: TTisGrid
+        Left = 0
+        Height = 207
+        Top = 17
+        Width = 527
+        Align = alClient
+        Header.AutoSizeIndex = -1
+        Header.Columns = <        
+          item
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+            Position = 0
+            Text = 'Property'
+            Width = 200
+            PropertyName = 'name'
+          end        
+          item
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+            Position = 1
+            Text = 'Value'
+            Width = 300
+            PropertyName = 'value'
+          end>
+        Header.DefaultHeight = 18
+        Header.Height = 28
+        Header.MaxHeight = 101
+        Header.MinHeight = 19
+        Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+        Header.Style = hsFlatButtons
+        Images = CoreDataModule.ImageList1
+        TabOrder = 1
+        TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toVariableNodeHeight, toFullRowDrag, toEditOnClick]
+        TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+        ZebraColor = 15593713
+        PopupMenuOptions = []
+      end
+    end
+  end
+  object ActionList1: TActionList
+    Left = 688
+    Top = 64
+    object Action_Refresh: TAction
+      Category = 'GPO'
+      Caption = 'Action_Refresh'
+      ImageIndex = 31
+      OnExecute = Action_RefreshExecute
+      OnUpdate = Action_RefreshUpdate
+    end
+    object Action_Create: TAction
+      Category = 'GPO'
+      Caption = 'Action_Create'
+      ImageIndex = 29
+      OnExecute = Action_CreateExecute
+      OnUpdate = Action_CreateUpdate
+    end
+    object Action_Rename: TAction
+      Category = 'GPO'
+      Caption = 'Action_Rename'
+      ImageIndex = 30
+      OnExecute = Action_RenameExecute
+      OnUpdate = Action_RenameUpdate
+    end
+    object Action_Duplicate: TAction
+      Category = 'GPO'
+      Caption = 'Action_Duplicate'
+      ImageIndex = 10
+      OnExecute = Action_DuplicateExecute
+      OnUpdate = Action_DuplicateUpdate
+    end
+    object Action_Delete: TAction
+      Category = 'GPO'
+      Caption = 'Action_Delete'
+      ImageIndex = 13
+      OnExecute = Action_DeleteExecute
+      OnUpdate = Action_DeleteUpdate
+    end
+  end
+end
