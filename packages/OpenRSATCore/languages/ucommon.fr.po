@@ -1,3 +1,6 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
 #: ucommon.rsaccountunlocked
 msgid "Account Unlock"
 msgstr "Déverrouillage du compte"
@@ -266,6 +269,7 @@ msgid "Secure Time"
 msgstr "Temps sécurisé"
 
 #: ucommon.rsdnspropertyzonetype
+msgctxt "ucommon.rsdnspropertyzonetype"
 msgid "Type"
 msgstr "Type"
 
@@ -418,6 +422,447 @@ msgstr ""
 msgid "Select folder to store KeyTab file"
 msgstr "Sélectionnez le dossier dans lequel enregistrer le fichier keytab"
 
+#: ucommon.rsgpoactioncreate
+msgctxt "ucommon.rsgpoactioncreate"
+msgid "New GPO"
+msgstr ""
+
+#: ucommon.rsgpoactionduplicate
+msgid "Duplicate"
+msgstr ""
+
+#: ucommon.rsgpoactionduplicatenotimplemented
+msgid "Duplicating a GPO is not implemented yet."
+msgstr ""
+
+#: ucommon.rsgpoactionrefresh
+msgid "Refresh"
+msgstr ""
+
+#: ucommon.rsgpocatalogadd
+msgctxt "ucommon.rsgpocatalogadd"
+msgid "Add to GPO"
+msgstr ""
+
+#: ucommon.rsgpocatalogaddprompt
+msgctxt "ucommon.rsgpocatalogaddprompt"
+msgid "Value of the parameter \"%\":"
+msgstr ""
+
+#: ucommon.rsgpocatalogalreadyexists
+msgctxt "ucommon.rsgpocatalogalreadyexists"
+msgid "The parameter \"%\" already exists on this GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogcn
+msgctxt "ucommon.rsgpocatalogcn"
+msgid "Name of the GPO container (GUID)."
+msgstr ""
+
+#: ucommon.rsgpocatalogcolumndescription
+msgctxt "ucommon.rsgpocatalogcolumndescription"
+msgid "Description"
+msgstr ""
+
+#: ucommon.rsgpocatalogcolumnname
+msgctxt "ucommon.rsgpocatalogcolumnname"
+msgid "Parameter"
+msgstr ""
+
+#: ucommon.rsgpocatalogdescription
+msgctxt "ucommon.rsgpocatalogdescription"
+msgid "Description of the GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogdisplayname
+msgctxt "ucommon.rsgpocatalogdisplayname"
+msgid "Display name of the GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogdistinguishedname
+msgctxt "ucommon.rsgpocatalogdistinguishedname"
+msgid "Distinguished name of the GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogfilesyspath
+msgctxt "ucommon.rsgpocatalogfilesyspath"
+msgid "UNC path of the GPT in the SYSVOL."
+msgstr ""
+
+#: ucommon.rsgpocatalogflags
+msgctxt "ucommon.rsgpocatalogflags"
+msgid "Status of the GPO (enabled, user disabled, machine disabled, all disabled)."
+msgstr ""
+
+#: ucommon.rsgpocatalogfunctionalityversion
+msgctxt "ucommon.rsgpocatalogfunctionalityversion"
+msgid "Functionality version (2 = Windows 2008+)."
+msgstr ""
+
+#: ucommon.rsgpocatalogmachineextensions
+msgctxt "ucommon.rsgpocatalogmachineextensions"
+msgid "Machine-side extensions (CSEs) of the GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogshowinadvanced
+msgctxt "ucommon.rsgpocatalogshowinadvanced"
+msgid "Show the GPO in the advanced view only."
+msgstr ""
+
+#: ucommon.rsgpocataloguserextensions
+msgctxt "ucommon.rsgpocataloguserextensions"
+msgid "User-side extensions (CSEs) of the GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogversionnumber
+msgctxt "ucommon.rsgpocatalogversionnumber"
+msgid "Version of the GPO (user in the low word, machine in the high word)."
+msgstr ""
+
+#: ucommon.rsgpocatalogwhenchanged
+msgctxt "ucommon.rsgpocatalogwhenchanged"
+msgid "Last modification date of the GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogwhencreated
+msgctxt "ucommon.rsgpocatalogwhencreated"
+msgid "Creation date of the GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogwqlfilter
+msgctxt "ucommon.rsgpocatalogwqlfilter"
+msgid "DN of the WMI filter applied to the GPO."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationapply
+msgctxt "ucommon.rsgpoconfigurationapply"
+msgid "Apply"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationdescription
+msgctxt "ucommon.rsgpoconfigurationdescription"
+msgid "Description"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationdiscard
+msgid "Discard changes"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationdiscardconfirmation
+msgid "Discard all staged changes?"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationfailed
+msgid "Unable to update the configuration of the GPO."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationincrementmachine
+msgid "Increment machine version on save"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationincrementuser
+msgid "Increment user version on save"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationmachineextensions
+msgid "Machine extensions"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationnogposelected
+msgid "No GPO selected"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationparametername
+msgctxt "ucommon.rsgpoconfigurationparametername"
+msgid "Parameter"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationparametervalue
+msgctxt "ucommon.rsgpoconfigurationparametervalue"
+msgid "Value"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregaddkey
+msgctxt "ucommon.rsgpoconfigurationregaddkey"
+msgid "Key"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregaddkeyprompt
+msgid "Full path of the new key (e.g. Software\\Policies\\Test):"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregapply
+msgctxt "ucommon.rsgpoconfigurationregapply"
+msgid "Apply"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregdelete
+#, fuzzy
+msgctxt "ucommon.rsgpoconfigurationregdelete"
+msgid "Delete"
+msgstr "Supprimer"
+
+#: ucommon.rsgpoconfigurationreghint
+msgid "Select a key, then edit its values."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationreginvaliddword
+msgid "The value must be a 32-bit number."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationreginvalidqword
+msgid "The value must be a 64-bit number."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregkey
+msgctxt "ucommon.rsgpoconfigurationregkey"
+msgid "Key"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregvaluedata
+msgctxt "ucommon.rsgpoconfigurationregvaluedata"
+msgid "Value"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregvaluename
+msgid "Name"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregvaluetype
+#, fuzzy
+msgctxt "ucommon.rsgpoconfigurationregvaluetype"
+msgid "Type"
+msgstr "Type"
+
+#: ucommon.rsgpoconfigurationregwritefailed
+msgid "Unable to write the Registry.pol on the SYSVOL."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationreset
+msgid "Reset"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationsave
+msgid "Save"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationsaved
+msgid "GPO changes saved."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationsource
+msgid "Source"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationsourcegpc
+msgid "GPC parameters"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationsourcemachine
+msgid "Machine Registry.pol"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationsourceuser
+msgid "User Registry.pol"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationstage
+msgid "Stage"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationstaged
+msgid "Staged"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationstagedchanges
+msgid "Staged changes: %"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationstagedempty
+msgid "No staged changes."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationupdated
+msgid "Configuration of the GPO updated."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationupdategptini
+msgid "Update GPT.INI on SYSVOL on save"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationuserextensions
+msgid "User extensions"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationwqlfilter
+msgid "WMI Filter"
+msgstr ""
+
+#: ucommon.rsgpodeleteconfirmation
+msgid "Do you want to delete the GPO \"%\"?"
+msgstr ""
+
+#: ucommon.rsgpodeletetitle
+msgid "Delete GPO"
+msgstr ""
+
+#: ucommon.rsgpoduplicateprompt
+msgid "Display name of the duplicated GPO:"
+msgstr ""
+
+#: ucommon.rsgpoelementscount
+msgid "Total: % elements"
+msgstr ""
+
+#: ucommon.rsgpofilepath
+msgid "Path"
+msgstr ""
+
+#: ucommon.rsgpofunctionalityversion
+msgid "Functionality version"
+msgstr ""
+
+#: ucommon.rsgpolist
+msgid "Group Policy Objects"
+msgstr ""
+
+#: ucommon.rsgpomachineversion
+msgid "Machine version"
+msgstr ""
+
+#: ucommon.rsgponewprompt
+msgid "Display name of the new GPO:"
+msgstr ""
+
+#: ucommon.rsgponewtitle
+msgctxt "ucommon.rsgponewtitle"
+msgid "New GPO"
+msgstr ""
+
+#: ucommon.rsgponotimplemented
+msgid "This feature is not implemented yet."
+msgstr ""
+
+#: ucommon.rsgporenameprompt
+msgid "New display name of the GPO:"
+msgstr ""
+
+#: ucommon.rsgporenametitle
+msgid "Rename GPO"
+msgstr ""
+
+#: ucommon.rsgpostatus
+msgid "Status"
+msgstr ""
+
+#: ucommon.rsgpostatusalldisabled
+msgid "All settings disabled"
+msgstr ""
+
+#: ucommon.rsgpostatusallenabled
+msgid "All settings enabled"
+msgstr ""
+
+#: ucommon.rsgpostatusmachinedisabled
+msgid "Computer configuration settings disabled"
+msgstr ""
+
+#: ucommon.rsgpostatususerdisabled
+msgid "User configuration settings disabled"
+msgstr ""
+
+#: ucommon.rsgposummaryknownattributes
+msgid "Known parameters"
+msgstr ""
+
+#: ucommon.rsgposummarymachinetechnologies
+msgid "Machine-side technologies"
+msgstr ""
+
+#: ucommon.rsgposummarytotalattributes
+msgid "Total parameters"
+msgstr ""
+
+#: ucommon.rsgposummaryunknownattributes
+msgid "Unknown parameters"
+msgstr ""
+
+#: ucommon.rsgposummaryusertechnologies
+msgid "User-side technologies"
+msgstr ""
+
+#: ucommon.rsgpotabcatalog
+msgid "Catalog"
+msgstr ""
+
+#: ucommon.rsgpotabconfiguration
+msgid "Configuration"
+msgstr ""
+
+#: ucommon.rsgpotabsummary
+msgid "Summary"
+msgstr ""
+
+#: ucommon.rsgpotabtechnical
+msgid "Technical"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptempty
+msgid "The GPT is empty or could not be read."
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptfilecolumn
+msgid "File"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptfiles
+msgid "GPT files"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptfilesrefresh
+msgid "List GPT files"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptinidisplayname
+msgid "Display name"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptiniempty
+msgid "GPT.INI exists but its [General] section is empty."
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptinioptions
+msgid "Options"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptiniread
+msgid "Read GPT.INI"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptiniunavailable
+msgid "GPT.INI not reachable (smbclient missing or no credentials)."
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptiniupdatefailed
+msgid "Unable to update the GPT.INI on the SYSVOL."
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptiniversion
+msgid "Version"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptsizecolumn
+msgid "Size"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptunavailable
+msgid "GPT not reachable (smbclient missing or no credentials)."
+msgstr ""
+
+#: ucommon.rsgpouserversion
+msgid "User version"
+msgstr ""
+
 #: ucommon.rsgridconfdeleterow
 #, object-pascal-format
 msgid "Confirm the deletion of the %d selected rows?"
@@ -543,6 +988,10 @@ msgstr "Utilisateurs et Ordinateurs"
 msgid "Domain Name System"
 msgstr "Système de nom de domaine"
 
+#: ucommon.rsmodulegpodisplayname
+msgid "Group Policy"
+msgstr ""
+
 #: ucommon.rsmonday
 msgid "Monday"
 msgstr "Lundi"
@@ -667,6 +1116,7 @@ msgstr "L'utilisateur ne peut changer de mot de passe."
 msgid "The Password never expires."
 msgstr "Le mot de passe n'expire jamais."
 
+
 #: ucommon.rsnone
 #, fuzzy
 msgctxt "ucommon.rsnone"
@@ -760,6 +1210,445 @@ msgstr "Réinitialiser le mot de passe"
 #: ucommon.rsresetpasswordmessage
 msgid "Password has been reset successfully."
 msgstr "Le mot de passe a été réinitialisé avec succès."
+
+#: ucommon.rsgpoactioncreate
+msgctxt "ucommon.rsgpoactioncreate"
+msgid "New GPO"
+msgstr ""
+
+#: ucommon.rsgpoactionduplicate
+msgid "Duplicate"
+msgstr ""
+
+#: ucommon.rsgpoactionduplicatenotimplemented
+msgid "Duplicating a GPO is not implemented yet."
+msgstr ""
+
+#: ucommon.rsgpoactionrefresh
+msgid "Refresh"
+msgstr ""
+
+#: ucommon.rsgpocatalogadd
+msgctxt "ucommon.rsgpocatalogadd"
+msgid "Add to GPO"
+msgstr ""
+
+#: ucommon.rsgpocatalogaddprompt
+msgctxt "ucommon.rsgpocatalogaddprompt"
+msgid "Value of the parameter \"%\":"
+msgstr ""
+
+#: ucommon.rsgpocatalogalreadyexists
+msgctxt "ucommon.rsgpocatalogalreadyexists"
+msgid "The parameter \"%\" already exists on this GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogcn
+msgctxt "ucommon.rsgpocatalogcn"
+msgid "Name of the GPO container (GUID)."
+msgstr ""
+
+#: ucommon.rsgpocatalogcolumndescription
+msgctxt "ucommon.rsgpocatalogcolumndescription"
+msgid "Description"
+msgstr ""
+
+#: ucommon.rsgpocatalogcolumnname
+msgctxt "ucommon.rsgpocatalogcolumnname"
+msgid "Parameter"
+msgstr ""
+
+#: ucommon.rsgpocatalogdescription
+msgctxt "ucommon.rsgpocatalogdescription"
+msgid "Description of the GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogdisplayname
+msgctxt "ucommon.rsgpocatalogdisplayname"
+msgid "Display name of the GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogdistinguishedname
+msgctxt "ucommon.rsgpocatalogdistinguishedname"
+msgid "Distinguished name of the GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogfilesyspath
+msgctxt "ucommon.rsgpocatalogfilesyspath"
+msgid "UNC path of the GPT in the SYSVOL."
+msgstr ""
+
+#: ucommon.rsgpocatalogflags
+msgctxt "ucommon.rsgpocatalogflags"
+msgid "Status of the GPO (enabled, user disabled, machine disabled, all disabled)."
+msgstr ""
+
+#: ucommon.rsgpocatalogfunctionalityversion
+msgctxt "ucommon.rsgpocatalogfunctionalityversion"
+msgid "Functionality version (2 = Windows 2008+)."
+msgstr ""
+
+#: ucommon.rsgpocatalogmachineextensions
+msgctxt "ucommon.rsgpocatalogmachineextensions"
+msgid "Machine-side extensions (CSEs) of the GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogshowinadvanced
+msgctxt "ucommon.rsgpocatalogshowinadvanced"
+msgid "Show the GPO in the advanced view only."
+msgstr ""
+
+#: ucommon.rsgpocataloguserextensions
+msgctxt "ucommon.rsgpocataloguserextensions"
+msgid "User-side extensions (CSEs) of the GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogversionnumber
+msgctxt "ucommon.rsgpocatalogversionnumber"
+msgid "Version of the GPO (user in the low word, machine in the high word)."
+msgstr ""
+
+#: ucommon.rsgpocatalogwhenchanged
+msgctxt "ucommon.rsgpocatalogwhenchanged"
+msgid "Last modification date of the GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogwhencreated
+msgctxt "ucommon.rsgpocatalogwhencreated"
+msgid "Creation date of the GPO."
+msgstr ""
+
+#: ucommon.rsgpocatalogwqlfilter
+msgctxt "ucommon.rsgpocatalogwqlfilter"
+msgid "DN of the WMI filter applied to the GPO."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationapply
+msgctxt "ucommon.rsgpoconfigurationapply"
+msgid "Apply"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationdescription
+msgctxt "ucommon.rsgpoconfigurationdescription"
+msgid "Description"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationdiscard
+msgid "Discard changes"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationdiscardconfirmation
+msgid "Discard all staged changes?"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationfailed
+msgid "Unable to update the configuration of the GPO."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationincrementmachine
+msgid "Increment machine version on save"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationincrementuser
+msgid "Increment user version on save"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationmachineextensions
+msgid "Machine extensions"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationnogposelected
+msgid "No GPO selected"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationparametername
+msgctxt "ucommon.rsgpoconfigurationparametername"
+msgid "Parameter"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationparametervalue
+msgctxt "ucommon.rsgpoconfigurationparametervalue"
+msgid "Value"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregaddkey
+msgctxt "ucommon.rsgpoconfigurationregaddkey"
+msgid "Key"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregaddkeyprompt
+msgid "Full path of the new key (e.g. Software\\Policies\\Test):"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregapply
+msgctxt "ucommon.rsgpoconfigurationregapply"
+msgid "Apply"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregdelete
+msgctxt "ucommon.rsgpoconfigurationregdelete"
+msgid "Delete"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationreghint
+msgid "Select a key, then edit its values."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationreginvaliddword
+msgid "The value must be a 32-bit number."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationreginvalidqword
+msgid "The value must be a 64-bit number."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregkey
+msgctxt "ucommon.rsgpoconfigurationregkey"
+msgid "Key"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregvaluedata
+msgctxt "ucommon.rsgpoconfigurationregvaluedata"
+msgid "Value"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregvaluename
+msgid "Name"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregvaluetype
+msgctxt "ucommon.rsgpoconfigurationregvaluetype"
+msgid "Type"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationregwritefailed
+msgid "Unable to write the Registry.pol on the SYSVOL."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationreset
+msgid "Reset"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationsave
+msgid "Save"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationsaved
+msgid "GPO changes saved."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationsource
+msgid "Source"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationsourcegpc
+msgid "GPC parameters"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationsourcemachine
+msgid "Machine Registry.pol"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationsourceuser
+msgid "User Registry.pol"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationstage
+msgid "Stage"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationstaged
+msgid "Staged"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationstagedchanges
+msgid "Staged changes: %"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationstagedempty
+msgid "No staged changes."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationupdated
+msgid "Configuration of the GPO updated."
+msgstr ""
+
+#: ucommon.rsgpoconfigurationupdategptini
+msgid "Update GPT.INI on SYSVOL on save"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationuserextensions
+msgid "User extensions"
+msgstr ""
+
+#: ucommon.rsgpoconfigurationwqlfilter
+msgid "WMI Filter"
+msgstr ""
+
+#: ucommon.rsgpodeleteconfirmation
+msgid "Do you want to delete the GPO \"%\"?"
+msgstr ""
+
+#: ucommon.rsgpodeletetitle
+msgid "Delete GPO"
+msgstr ""
+
+#: ucommon.rsgpoduplicateprompt
+msgid "Display name of the duplicated GPO:"
+msgstr ""
+
+#: ucommon.rsgpoelementscount
+msgid "Total: % elements"
+msgstr ""
+
+#: ucommon.rsgpofilepath
+msgid "Path"
+msgstr ""
+
+#: ucommon.rsgpofunctionalityversion
+msgid "Functionality version"
+msgstr ""
+
+#: ucommon.rsgpolist
+msgid "Group Policy Objects"
+msgstr ""
+
+#: ucommon.rsgpomachineversion
+msgid "Machine version"
+msgstr ""
+
+#: ucommon.rsgponewprompt
+msgid "Display name of the new GPO:"
+msgstr ""
+
+#: ucommon.rsgponewtitle
+msgctxt "ucommon.rsgponewtitle"
+msgid "New GPO"
+msgstr ""
+
+#: ucommon.rsgponotimplemented
+msgid "This feature is not implemented yet."
+msgstr ""
+
+#: ucommon.rsgporenameprompt
+msgid "New display name of the GPO:"
+msgstr ""
+
+#: ucommon.rsgporenametitle
+msgid "Rename GPO"
+msgstr ""
+
+#: ucommon.rsgpostatus
+msgid "Status"
+msgstr ""
+
+#: ucommon.rsgpostatusalldisabled
+msgid "All settings disabled"
+msgstr ""
+
+#: ucommon.rsgpostatusallenabled
+msgid "All settings enabled"
+msgstr ""
+
+#: ucommon.rsgpostatusmachinedisabled
+msgid "Computer configuration settings disabled"
+msgstr ""
+
+#: ucommon.rsgpostatususerdisabled
+msgid "User configuration settings disabled"
+msgstr ""
+
+#: ucommon.rsgposummaryknownattributes
+msgid "Known parameters"
+msgstr ""
+
+#: ucommon.rsgposummarymachinetechnologies
+msgid "Machine-side technologies"
+msgstr ""
+
+#: ucommon.rsgposummarytotalattributes
+msgid "Total parameters"
+msgstr ""
+
+#: ucommon.rsgposummaryunknownattributes
+msgid "Unknown parameters"
+msgstr ""
+
+#: ucommon.rsgposummaryusertechnologies
+msgid "User-side technologies"
+msgstr ""
+
+#: ucommon.rsgpotabcatalog
+msgid "Catalog"
+msgstr ""
+
+#: ucommon.rsgpotabconfiguration
+msgid "Configuration"
+msgstr ""
+
+#: ucommon.rsgpotabsummary
+msgid "Summary"
+msgstr ""
+
+#: ucommon.rsgpotabtechnical
+msgid "Technical"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptempty
+msgid "The GPT is empty or could not be read."
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptfilecolumn
+msgid "File"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptfiles
+msgid "GPT files"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptfilesrefresh
+msgid "List GPT files"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptinidisplayname
+msgid "Display name"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptiniempty
+msgid "GPT.INI exists but its [General] section is empty."
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptinioptions
+msgid "Options"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptiniread
+msgid "Read GPT.INI"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptiniunavailable
+msgid "GPT.INI not reachable (smbclient missing or no credentials)."
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptiniupdatefailed
+msgid "Unable to update the GPT.INI on the SYSVOL."
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptiniversion
+msgid "Version"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptsizecolumn
+msgid "Size"
+msgstr ""
+
+#: ucommon.rsgpotechnicalgptunavailable
+msgid "GPT not reachable (smbclient missing or no credentials)."
+msgstr ""
+
+#: ucommon.rsgpouserversion
+msgid "User version"
+msgstr ""
 
 #: ucommon.rsrestarttitle
 msgid "Restart confirmation"
