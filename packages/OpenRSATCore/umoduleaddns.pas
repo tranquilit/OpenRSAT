@@ -228,8 +228,13 @@ begin
     try
       fLdapClient.SearchScope := lssSingleLevel;
       repeat
-        if not fLdapClient.Search(fCurrentZoneStorage.ZoneObjectName, False, '', ['name', 'dnsRecord', 'whenChanged']) then
-          raise Exception.Create(FormatUtf8('Ldap Search Failed: %', [fLdapClient.ResultString]));
+        fLdapClient.SearchRangeBegin;
+        try
+          if not fLdapClient.Search(fCurrentZoneStorage.ZoneObjectName, False, '', ['name', 'dnsRecord', 'whenChanged']) then
+            raise Exception.Create(FormatUtf8('Ldap Search Failed: %', [fLdapClient.ResultString]));
+        finally
+          fLdapClient.SearchRangeEnd;
+        end;
 
         if Terminated then
           Exit;
