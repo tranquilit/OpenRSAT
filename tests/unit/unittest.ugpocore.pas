@@ -9,6 +9,7 @@ uses
   SysUtils,
   mormot.core.test,
   mormot.core.base,
+  mormot.core.unicode,
   mormot.net.ldap,
   ucommon,
   ugpocore,
@@ -60,6 +61,7 @@ type
     procedure RegPol_LoadTruncated;
     procedure RegPol_RoundTrip;
     procedure RegPol_EditAndSave;
+    procedure RegPol_Utf16LeStrings;
   end;
 
 implementation
@@ -462,17 +464,17 @@ begin
   CheckEqual(Ini.Options, 2);
 end;
 
-function BuildSampleRegPol: RawByteString;
+function Utf16(const S: RawUtf8): RawByteString;
+var
+  W: SynUnicode;
+begin
+  W := Utf8ToSynUnicode(S);
+  SetLength(result, Length(W) * 2);
+  if (Length(W) > 0) then
+    Move(W[1], result[1], Length(W) * 2);
+end;
 
-  function Utf16(const S: RawUtf8): RawByteString;
-  var
-    W: WideString;
-  begin
-    W := UTF8Decode(S);
-    SetLength(result, Length(W) * 2);
-    if (Length(W) > 0) then
-      Move(W[1], result[1], Length(W) * 2);
-  end;
+function BuildSampleRegPol: RawByteString;
 begin
   // 24-byte REGF header: PRegf, 0, 1, 1, flags, reserved, machine=0, reserved.
   // Nested key records, as written by the GPMC:
@@ -605,6 +607,74 @@ begin
     Key := Pol.FindKey('Software\Policies\Test');
     Check(Assigned(Key));
     CheckEqual(Key.GetValue('Enabled').AsDWord, 1);
+  finally
+    Pol.Free;
+  end;
+end;
+
+procedure TUnitTestGPOCore.RegPol_Utf16LeStrings;
+var
+  OLA_UTF8: RawUtf8;
+  OLA_UNICODE: SynUnicode;
+  Pol: TGPRegPol;
+  Key: TGPRegPolKey;
+  Bytes: RawByteString;
+begin
+  // 'Olá' built from code units (keeps the test encoding-independent:
+  // string literals with chars above #$7F may be re-encoded by the compiler).
+  OLA_UNICODE := 'Ol';
+  SetLength(OLA_UNICODE, 3);
+  OLA_UNICODE[3] := WideChar($00E1);
+  OLA_UTF8 := SynUnicodeToUtf8(OLA_UNICODE);
+  // Windows-written Registry.pol: string values are stored as UTF-16LE.
+  //   Key "Software" (size 98 = 0x62)
+  //     Value "Name"  = REG_SZ 'Olá'       (size 29 = 0x1D)
+  //     Value "Paths" = REG_MULTI_SZ       (size 45 = 0x2D)
+  Bytes := 'PRegf' + #0 + #1 + #1 + #0#0 + #0#0 + #0#0#0#0 +
+    #0#0#0#0 + #0#0#0#0 +
+    #$6C + #$62#$00 + Utf16('Software') + #0#0 +
+    #$76 + #$1D#$00 + Utf16('Name') + #0#0 +
+    #$01#$00#$00#$00 + #$08#$00#$00#$00 +
+    'O'#0'l'#0 + AnsiChar($E1) + #0 + #0#0 +
+    #$76 + #$2D#$00 + Utf16('Paths') + #0#0 +
+    #$07#$00#$00#$00 + #$16#$00#$00#$00 +
+    Utf16('C:\a') + #0#0 + Utf16('D:\b') + #0#0#0#0 +
+    #$00#$03#$00;
+
+  Pol := TGPRegPol.LoadFromBytes(Bytes);
+  try
+    Key := Pol.FindKey('Software');
+    Check(Assigned(Key), 'Key should be found');
+    if not Assigned(Key) then
+      Exit;
+
+    CheckEqual(Key.GetValue('Name').AsString, OLA_UTF8);
+    CheckEqual(Key.GetValue('Paths').AsString, 'C:\a' + #10 + 'D:\b');
+  finally
+    Pol.Free;
+  end;
+
+  // Round trip: strings are stored back as UTF-16LE and read again.
+  Pol := TGPRegPol.Create;
+  try
+    Key := Pol.AddKey('Software');
+    Key.SetStringValue('Name', OLA_UTF8);
+    Key.SetValueData('Paths', REG_MULTI_SZ,
+      Utf16('C:\a') + #0#0 + Utf16('D:\b') + #0#0#0#0);
+    Bytes := Pol.SaveToBytes;
+  finally
+    Pol.Free;
+  end;
+
+  Pol := TGPRegPol.LoadFromBytes(Bytes);
+  try
+    Key := Pol.FindKey('Software');
+    Check(Assigned(Key));
+    if not Assigned(Key) then
+      Exit;
+
+    CheckEqual(Key.GetValue('Name').AsString, OLA_UTF8);
+    CheckEqual(Key.GetValue('Paths').AsString, 'C:\a' + #10 + 'D:\b');
   finally
     Pol.Free;
   end;

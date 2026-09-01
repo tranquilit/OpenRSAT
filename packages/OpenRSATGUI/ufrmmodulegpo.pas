@@ -94,6 +94,8 @@ type
     Panel_Top: TPanel;
     Splitter1: TSplitter;
     Splitter_Configuration: TSplitter;
+    Splitter_GPTArea: TSplitter;
+    Splitter_GPTFiles: TSplitter;
     TabSheet_Catalog: TTabSheet;
     TabSheet_Configuration: TTabSheet;
     TabSheet_Summary: TTabSheet;
@@ -357,7 +359,7 @@ begin
   LdapClient.OnError := nil;
   try
     try
-      fLogic.Create(LdapClient.DefaultDN, DisplayName);
+      fLogic.Add(LdapClient.DefaultDN, DisplayName);
     except
       on E: EGPOException do
       begin

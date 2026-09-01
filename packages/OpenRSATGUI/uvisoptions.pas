@@ -89,11 +89,14 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, 'Change TreeView', Self);
 
-  if Assigned(TreeView1.Selected) and Assigned(TreeView1.Selected.Data) then
-    TFrameOption(TreeView1.Selected.Data).Visible := False
-  else
-    if Assigned(fLog) then
-      fLog.Add.Log(sllError, 'TreeView: No SelectedNode or no data assigned to SelectedNode', Self);
+  if Assigned(TreeView1.Selected) then
+  begin
+    if Assigned(TreeView1.Selected.Data) then
+      TFrameOption(TreeView1.Selected.Data).Visible := False
+    else
+      if Assigned(fLog) then
+        fLog.Add.Log(sllError, 'TreeView: No data assigned to SelectedNode', Self);
+  end;
 
   if Assigned(Node) and Assigned(Node.Data) then
   begin

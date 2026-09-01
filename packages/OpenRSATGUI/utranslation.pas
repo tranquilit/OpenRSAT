@@ -24,38 +24,64 @@ uses
 function TranslateFromResource(const ALang: RawUtf8; ForceUpdate: Boolean;
   const ResBaseName: RawUtf8): Boolean;
 var
-  Res: TResourceStream;
-  PoFile: TPOFile;
-  LocalTr: TUpdateTranslator;
-  I: Integer;
-  ResName: RawUtf8;
+  Lang: RawUtf8;
+
+  function LoadLang(const ALanguage: RawUtf8): Boolean;
+  var
+    Res: TResourceStream;
+    PoFile: TPOFile;
+    LocalTr: TUpdateTranslator;
+    I: Integer;
+    ResName: RawUtf8;
+  begin
+    Result := False;
+
+    ResName := FormatUtf8('%.%', [ResBaseName, ALanguage]);
+
+    Res := TResourceStream.Create(HInstance, ResName, RT_RCDATA);
+    try
+      PoFile := TPOFile.Create(Res);
+      try
+        Result := TranslateResourceStrings(PoFile);
+        LocalTr := TPOTranslator.Create(PoFile);
+
+        if Assigned(LRSTranslator) then
+          LRSTranslator.Free;
+        LRSTranslator := LocalTr;
+
+        if ForceUpdate then
+        begin
+          for I := 0 to Pred(Screen.CustomFormCount) do
+            LocalTr.UpdateTranslation(Screen.CustomForms[I]);
+          for I := 0 to Pred(Screen.DataModuleCount) do
+            LocalTr.UpdateTranslation(Screen.DataModules[I]);
+        end;
+      finally
+      end;
+    finally
+      Res.Free;
+    end;
+  end;
+
 begin
   Result := False;
 
-  ResName := FormatUtf8('%.%', [ResBaseName, ALang]);
-
-  Res := TResourceStream.Create(HInstance, ResName, RT_RCDATA);
-  try
-    PoFile := TPOFile.Create(Res);
+  // The requested language (e.g. the country code of the locale) may have no
+  // translation resource: fall back to English instead of failing.
+  Lang := ALang;
+  while True do
+  begin
     try
-      Result := TranslateResourceStrings(PoFile);
-      LocalTr := TPOTranslator.Create(PoFile);
-
-      if Assigned(LRSTranslator) then
-        LRSTranslator.Free;
-      LRSTranslator := LocalTr;
-
-      if ForceUpdate then
+      Result := LoadLang(Lang);
+      Exit;
+    except
+      on EResNotFound do
       begin
-        for I := 0 to Pred(Screen.CustomFormCount) do
-          LocalTr.UpdateTranslation(Screen.CustomForms[I]);
-        for I := 0 to Pred(Screen.DataModuleCount) do
-          LocalTr.UpdateTranslation(Screen.DataModules[I]);
+        if (Lang = 'en') then
+          Exit;
+        Lang := 'en';
       end;
-    finally
     end;
-  finally
-    Res.Free;
   end;
 end;
 

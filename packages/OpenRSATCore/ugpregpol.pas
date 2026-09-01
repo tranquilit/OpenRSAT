@@ -10,6 +10,7 @@ uses
   StrUtils,
   mormot.core.base,
   mormot.core.text,
+  mormot.core.unicode,
   ugpocore;
 
 const
@@ -143,6 +144,92 @@ TGPRegPolKey = class
 
 implementation
 
+{ String encoding helpers }
+
+// The .pol file format stores keys, value names and string values as
+// UTF-16LE. OpenRSAT itself manipulates UTF-8; these helpers convert.
+
+function Utf8ToUtf16Le(const AValue: RawUtf8): RawByteString;
+var
+  W: SynUnicode;
+begin
+  // Utf8ToSynUnicode() converts the raw UTF-8 bytes without any RTL
+  // codepage conversion, unlike UTF8Decode() on an AnsiString.
+  W := Utf8ToSynUnicode(AValue);
+  SetLength(result, Length(W) * 2);
+  if (Length(W) > 0) then
+    Move(W[1], result[1], Length(W) * 2);
+end;
+
+function Utf16LeToUtf8(const ABytes: RawByteString): RawUtf8;
+var
+  W: SynUnicode;
+begin
+  SetLength(W, Length(ABytes) div 2);
+  if (Length(ABytes) >= 2) then
+    Move(ABytes[1], W[1], (Length(ABytes) div 2) * 2);
+  result := SynUnicodeToUtf8(W);
+end;
+
+/// Decode a UTF-16LE string and strip its single trailing null terminator.
+function Utf16LeToUtf8Trimmed(const ABytes: RawByteString): RawUtf8;
+begin
+  result := Utf16LeToUtf8(ABytes);
+  if (result <> '') and (result[Length(result)] = #0) then
+    Delete(result, Length(result), 1);
+end;
+
+/// True when AData looks like a UTF-16LE string, as written by Windows in
+/// the .pol files: an even number of bytes, and re-encoding the decoded
+/// text yields the exact same bytes. OpenRSAT itself stores strings as
+/// UTF-8, which never matches.
+function LooksLikeUtf16Le(const AData: RawByteString): Boolean;
+begin
+  result := (Length(AData) >= 2) and (not Odd(Length(AData))) and
+    (Utf8ToUtf16Le(Utf16LeToUtf8Trimmed(AData) + #0) = AData);
+end;
+
+/// Decode a REG_MULTI_SZ value (a sequence of null-terminated UTF-16LE
+/// strings) into a list of lines.
+function Utf16LeMultiToUtf8(const ABytes: RawByteString): RawUtf8;
+var
+  S: RawUtf8;
+  i, PartStart: Integer;
+begin
+  result := '';
+  S := Utf16LeToUtf8(ABytes);
+  PartStart := 1;
+  for i := 1 to Length(S) do
+    if (S[i] = #0) then
+    begin
+      if (i > PartStart) then
+      begin
+        if (result <> '') then
+          result := result + #10;
+        result := result + Copy(S, PartStart, i - PartStart);
+      end;
+      PartStart := i + 1;
+    end;
+end;
+
+/// Encode a multi-line text (REG_MULTI_SZ) as a sequence of null-terminated
+/// UTF-16LE strings, ending with a final null terminator.
+function Utf8MultiToUtf16Le(const AValue: RawUtf8): RawByteString;
+var
+  i, LineStart: Integer;
+begin
+  result := '';
+  LineStart := 1;
+  for i := 1 to Length(AValue) do
+    if (AValue[i] = #10) then
+    begin
+      result := result + Utf8ToUtf16Le(Copy(AValue, LineStart, i - LineStart) + #0);
+      LineStart := i + 1;
+    end;
+  result := result + Utf8ToUtf16Le(Copy(AValue, LineStart, MaxInt) + #0);
+  result := result + #0#0;
+end;
+
 { TGPRegPolValue }
 
 constructor TGPRegPolValue.Create(const AName: RawUtf8; AValueType: Cardinal;
@@ -185,10 +272,20 @@ end;
 
 function TGPRegPolValue.AsString: RawUtf8;
 begin
-  if (fValueType in [REG_SZ, REG_EXPAND_SZ]) then
-    result := fData
-  else
-    result := '';
+  case fValueType of
+    REG_SZ, REG_EXPAND_SZ:
+      if LooksLikeUtf16Le(fData) then
+        result := Utf16LeToUtf8Trimmed(fData)
+      else
+        result := fData;
+    REG_MULTI_SZ:
+      if LooksLikeUtf16Le(fData) then
+        result := Utf16LeMultiToUtf8(fData)
+      else
+        result := fData;
+    else
+      result := '';
+  end;
 end;
 
 function TGPRegPolValue.AsDWord: Cardinal;
@@ -454,26 +551,6 @@ end;
 // All offsets below are 0-based byte positions. RawByteString indexing is
 // 1-based, hence the systematic AOffset + 1 in string accesses.
 
-function Utf8ToUtf16Le(const AValue: RawUtf8): RawByteString;
-var
-  W: WideString;
-begin
-  W := UTF8Decode(AValue);
-  SetLength(result, Length(W) * 2);
-  if (Length(W) > 0) then
-    Move(W[1], result[1], Length(W) * 2);
-end;
-
-function Utf16LeToUtf8(const ABytes: RawByteString): RawUtf8;
-var
-  W: WideString;
-begin
-  SetLength(W, Length(ABytes) div 2);
-  if (Length(ABytes) >= 2) then
-    Move(ABytes[1], W[1], Length(ABytes));
-  result := UTF8Encode(W);
-end;
-
 function ReadWordLE(const ABytes: RawByteString; AOffset: Integer): Word; inline;
 begin
   result := Ord(ABytes[AOffset + 1]) or
@@ -657,7 +734,15 @@ function TGPRegPol.SaveToBytes: RawByteString;
     begin
       Value := AKey.fValues[i];
       ValueNameBytes := Utf8ToUtf16Le(Value.fName + #0);
-      ValueData := Value.fData;
+      case Value.fValueType of
+        REG_SZ, REG_EXPAND_SZ:
+          // Windows stores string values as null-terminated UTF-16LE.
+          ValueData := Utf8ToUtf16Le(Value.AsString + #0);
+        REG_MULTI_SZ:
+          ValueData := Utf8MultiToUtf16Le(Value.AsString);
+        else
+          ValueData := Value.fData;
+      end;
       ValueRecord := #$76 + #0#0 + ValueNameBytes +
         AnsiChar(Value.fValueType and $FF) +
         AnsiChar((Value.fValueType shr 8) and $FF) +

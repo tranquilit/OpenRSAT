@@ -19,10 +19,10 @@
       <Icon Value="0"/>
       <Resources Count="5">
         <Resource_0 FileName="..\languages\country_codes_en.json" Type="RCDATA" ResourceName="COUNTRY_CODES_EN"/>
-        <Resource_1 FileName="..\languages\Translation.fr.po" Type="RCDATA" ResourceName="TRANSLATION.FR"/>
-        <Resource_2 FileName="..\languages\Translation.en.po" Type="RCDATA" ResourceName="TRANSLATION.EN"/>
-        <Resource_3 FileName="..\languages\Translation.el.po" Type="RCDATA" ResourceName="TRANSLATION.EL"/>
-        <Resource_4 FileName="..\languages\Translation.pl.po" Type="RCDATA" ResourceName="TRANSLATION.PL"/>
+        <Resource_1 FileName="..\languages\OpenRSAT.fr.po" Type="RCDATA" ResourceName="TRANSLATION.FR"/>
+        <Resource_2 FileName="..\languages\OpenRSAT.en.po" Type="RCDATA" ResourceName="TRANSLATION.EN"/>
+        <Resource_3 FileName="..\languages\OpenRSAT.el.po" Type="RCDATA" ResourceName="TRANSLATION.EL"/>
+        <Resource_4 FileName="..\languages\OpenRSAT.pl.po" Type="RCDATA" ResourceName="TRANSLATION.PL"/>
       </Resources>
     </General>
     <i18n>
@@ -455,6 +455,7 @@
       </Item>
       <Item>
         <PackageName Value="mormot2"/>
+        <Filename Value="..\submodules\mORMot2\packages\lazarus\mormot2.lpk"/>
       </Item>
     </RequiredPackages>
     <Units>

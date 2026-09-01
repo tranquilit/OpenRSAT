@@ -86,7 +86,7 @@ procedure TIntegrationTestGPOCore.Create_ValidGPO;
 var
   DN: RawUtf8;
 begin
-  DN := Logic.Create(DomainDN, 'OpenRSAT Test GPO');
+  DN := Logic.Add(DomainDN, 'OpenRSAT Test GPO');
 
   Check(DN <> '', 'Created GPO should return its distinguished name');
 
@@ -100,7 +100,7 @@ var
 begin
   RaisedException := False;
   try
-    Logic.Create(DomainDN, '');
+    Logic.Add(DomainDN, '');
   except
     on E: EGPOException do
       RaisedException := True;
@@ -114,12 +114,12 @@ var
   DN: RawUtf8;
   RaisedException: Boolean;
 begin
-  DN := Logic.Create(DomainDN, 'OpenRSAT Test GPO');
+  DN := Logic.Add(DomainDN, 'OpenRSAT Test GPO');
   Check(DN <> '', 'Created GPO should return its distinguished name');
 
   RaisedException := False;
   try
-    Logic.Create(DomainDN, 'OpenRSAT Test GPO');
+    Logic.Add(DomainDN, 'OpenRSAT Test GPO');
   except
     on E: EGPOException do
       RaisedException := True;
@@ -136,7 +136,7 @@ var
   DN: RawUtf8;
   GPO: TGPO;
 begin
-  DN := Logic.Create(DomainDN, 'OpenRSAT Test GPO');
+  DN := Logic.Add(DomainDN, 'OpenRSAT Test GPO');
   if (DN = '') then
     Exit;
 
@@ -169,7 +169,7 @@ var
   DN: RawUtf8;
   GPO: TGPO;
 begin
-  DN := Logic.Create(DomainDN, 'OpenRSAT Test GPO');
+  DN := Logic.Add(DomainDN, 'OpenRSAT Test GPO');
   if (DN = '') then
     Exit;
 
@@ -193,7 +193,7 @@ var
   GPO: TGPO;
   RaisedException: Boolean;
 begin
-  DN := Logic.Create(DomainDN, 'OpenRSAT Test GPO');
+  DN := Logic.Add(DomainDN, 'OpenRSAT Test GPO');
   if (DN = '') then
     Exit;
 
@@ -220,7 +220,7 @@ var
   DN, DuplicatedDN: RawUtf8;
   GPO, DuplicatedGPO: TGPO;
 begin
-  DN := Logic.Create(DomainDN, 'OpenRSAT Test GPO');
+  DN := Logic.Add(DomainDN, 'OpenRSAT Test GPO');
   if (DN = '') then
     Exit;
 
@@ -263,7 +263,7 @@ var
   GPO: TGPO;
   RaisedException: Boolean;
 begin
-  DN := Logic.Create(DomainDN, 'OpenRSAT Test GPO');
+  DN := Logic.Add(DomainDN, 'OpenRSAT Test GPO');
   if (DN = '') then
     Exit;
 
@@ -290,7 +290,7 @@ var
   DN: RawUtf8;
   GPO: TGPO;
 begin
-  DN := Logic.Create(DomainDN, 'OpenRSAT Test GPO');
+  DN := Logic.Add(DomainDN, 'OpenRSAT Test GPO');
   if (DN = '') then
     Exit;
 
@@ -325,7 +325,7 @@ var
   DN: RawUtf8;
   GPO: TGPO;
 begin
-  DN := Logic.Create(DomainDN, 'OpenRSAT Test GPO');
+  DN := Logic.Add(DomainDN, 'OpenRSAT Test GPO');
   if (DN = '') then
     Exit;
 
@@ -348,7 +348,7 @@ var
   DN: RawUtf8;
   GPO: TGPO;
 begin
-  DN := Logic.Create(DomainDN, 'OpenRSAT Test GPO');
+  DN := Logic.Add(DomainDN, 'OpenRSAT Test GPO');
   if (DN = '') then
     Exit;
 

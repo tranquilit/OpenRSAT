@@ -184,6 +184,7 @@
       </Item>
       <Item>
         <PackageName Value="mormot2"/>
+        <Filename Value="..\..\submodules\mORMot2\packages\lazarus\mormot2.lpk"/>
       </Item>
       <Item>
         <PackageName Value="FCL"/>

@@ -375,9 +375,20 @@ begin
 end;
 {$ENDIF}
 
-{ Parsing helpers }
-
-function ParseSmbListOutput(const AOutput: RawUtf8): TGPTFileInfoDynArray;
+{ Parsing helpers }
+
+/// Replace non UTF-8 content (e.g. Windows-1252 text from a SYSVOL file or a
+/// locale-dependent smbclient output) with a valid UTF-8 equivalent, so that
+/// it can be displayed safely in the UI.
+function Utf8Sanitize(const AText: RawUtf8): RawUtf8;
+begin
+  result := AText;
+  if IsValidUtf8(AText) then
+    Exit;
+  result := WinAnsiToUtf8(WinAnsiString(AText));
+end;
+
+function ParseSmbListOutput(const AOutput: RawUtf8): TGPTFileInfoDynArray;
 var
   Lines: TStringList;
   i, SpacePos, TypePos: Integer;
@@ -388,10 +399,10 @@ begin
 
   Lines := TStringList.Create;
   try
-    Lines.Text := UTF8ToString(AOutput);
-    for i := 0 to Lines.Count - 1 do
-    begin
-      Line := Trim(Lines[i]);
+Lines.Text := UTF8ToString(Utf8Sanitize(AOutput));
+    for i := 0 to Lines.Count - 1 do
+    begin
+      Line := Trim(Lines[i]);
       if (Line = '') then
         Continue;
 
@@ -588,8 +599,8 @@ begin
       end;
     end;
 
-    AOutput := OutputStream.DataString;
-    if (Process.ExitStatus <> 0) then
+AOutput := Utf8Sanitize(OutputStream.DataString);
+    if (Process.ExitStatus <> 0) then
     begin
       // Report the real smbclient error (stderr is captured in AOutput).
       fLastError := Trim(AOutput);
@@ -908,10 +919,10 @@ begin
   InGeneral := False;
   Lines := TStringList.Create;
   try
-    Lines.Text := UTF8ToString(AContent);
-    for i := 0 to Lines.Count - 1 do
-    begin
-      Line := Trim(Lines[i]);
+Lines.Text := UTF8ToString(Utf8Sanitize(AContent));
+    for i := 0 to Lines.Count - 1 do
+    begin
+      Line := Trim(Lines[i]);
       if (Line = '') then
         Continue;
 
