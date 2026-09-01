@@ -1,93 +1,96 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
-
 #: metadarkstyledsgnoptions.rsamoptallowdarkname
 msgid "Allow dark"
-msgstr ""
+msgstr "Zezwalaj na ciemny"
 
 #: metadarkstyledsgnoptions.rsamoptforcedarkname
 msgid "Force dark"
-msgstr ""
+msgstr "Wymuś ciemny"
 
 #: metadarkstyledsgnoptions.rsamoptforcelightname
 msgid "Force light"
-msgstr ""
+msgstr "Wymuś jasny"
 
 #: metadarkstyledsgnoptionsframe.rsdarkstyledsgnoptionsframe
 msgid "Dark style"
-msgstr ""
+msgstr "Ciemny motyw"
 
 #: tcopyspecialform.caption
 msgid "Copy Special"
-msgstr ""
+msgstr "Kopiuj specjalnie"
 
 #: tcopyspecialform.columnsgroupbox.caption
 msgid "Columns"
-msgstr ""
+msgstr "Kolumny"
 
 #: tcopyspecialform.columnsvisibleonlycheckbox.caption
 msgid "Visible only"
-msgstr ""
+msgstr "Tylko widoczne"
 
 #: tcopyspecialform.columnsvisibleonlycheckbox.hint
 msgid ""
 "Visible only\n"
 "- uncheck it to use all columns"
 msgstr ""
+"Tylko widoczne\n"
+"- odznacz, aby użyć wszystkich kolumn"
 
 #: tcopyspecialform.formatlabel.caption
 msgid "Format"
-msgstr ""
+msgstr "Format"
 
 #: tcopyspecialform.rowslabel.caption
 msgid "Rows"
-msgstr ""
+msgstr "Wiersze"
 
 #: tcopyspecialform.translatedcolumnscheckbox.caption
 msgid "Use Caption"
-msgstr ""
+msgstr "Używaj nagłówków"
 
 #: tcopyspecialform.translatedcolumnscheckbox.hint
 msgid ""
 "Translated columns captions\n"
 "- uncheck it to use PropertyName"
 msgstr ""
+"Przetłumaczone nagłówki kolumn\n"
+"- odznacz, aby użyć NazwyWłaściwości"
 
 #: tform1.bitbtn1.caption
 msgid "BitBtn1"
-msgstr ""
+msgstr "BitBtn1"
 
 #: tform1.bitbtn2.caption
 msgid "BitBtn2"
-msgstr ""
+msgstr "BitBtn2"
 
 #: tform1.bitbtn3.caption
 msgid "BitBtn3"
-msgstr ""
+msgstr "BitBtn3"
 
 #: tform1.caption
 msgid "Form1"
-msgstr ""
+msgstr "Form1"
 
 #: tform1.edit1.text
 msgid "Edit1"
-msgstr ""
+msgstr "Edit1"
 
 #: tform1.panel1.caption
 msgid "Panel1"
-msgstr ""
+msgstr "Panel1"
 
 #: tform1.panel2.caption
 msgid "Panel2"
-msgstr ""
+msgstr "Panel2"
 
 #: tform1.panel3.caption
 msgid "Panel3"
-msgstr ""
+msgstr "Panel3"
 
 #: tform1.panel4.caption
 msgid "Panel4"
-msgstr ""
+msgstr "Panel4"
 
 #: tformconnectconfigs.action_cancel.caption
 msgctxt "tformconnectconfigs.action_cancel.caption"
@@ -164,7 +167,7 @@ msgstr "Razem: 0 elementów"
 #: tfrmmoduleadsi.tisgrid1.header.columns[0].text
 msgctxt "tfrmmoduleadsi.tisgrid1.header.columns[0].text"
 msgid "DistinguishedName"
-msgstr ""
+msgstr "DistinguishedName"
 
 #: tfrmmoduleadsi.tisgrid1.header.columns[1].text
 msgctxt "tfrmmoduleadsi.tisgrid1.header.columns[1].text"
@@ -219,7 +222,7 @@ msgstr "Kopiuj"
 
 #: tfrmmoduleaduc.action_createkeytab.caption
 msgid "Create KeyTab"
-msgstr ""
+msgstr "Utwórz KeyTab"
 
 #: tfrmmoduleaduc.action_cut.caption
 msgctxt "tfrmmoduleaduc.action_cut.caption"
@@ -287,36 +290,36 @@ msgstr "Nowa grupa"
 #: tfrmmoduleaduc.action_newinetorgperson.caption
 msgctxt "tfrmmoduleaduc.action_newinetorgperson.caption"
 msgid "InetOrgPerson"
-msgstr ""
+msgstr "InetOrgPerson"
 
 #: tfrmmoduleaduc.action_newmsdskeycredential.caption
 msgctxt "tfrmmoduleaduc.action_newmsdskeycredential.caption"
 msgid "msDS-KeyCredential"
-msgstr ""
+msgstr "msDS-KeyCredential"
 
 #: tfrmmoduleaduc.action_newmsdsshadowprincipalcontainer.caption
 msgctxt "tfrmmoduleaduc.action_newmsdsshadowprincipalcontainer.caption"
 msgid "msDS-ShadowPrincipalContainer"
-msgstr ""
+msgstr "msDS-ShadowPrincipalContainer"
 
 #: tfrmmoduleaduc.action_newmsimagingpsps.caption
 msgctxt "tfrmmoduleaduc.action_newmsimagingpsps.caption"
 msgid "msImaging-PSPs"
-msgstr ""
+msgstr "msImaging-PSPs"
 
 #: tfrmmoduleaduc.action_newou.caption
 msgctxt "tfrmmoduleaduc.action_newou.caption"
 msgid "New OU"
-msgstr "Nowa j. organizacyjna (OU)"
+msgstr "Nowa OU"
 
 #: tfrmmoduleaduc.action_newprinter.caption
 msgctxt "tfrmmoduleaduc.action_newprinter.caption"
 msgid "Printer"
-msgstr ""
+msgstr "Drukarka"
 
 #: tfrmmoduleaduc.action_newresourcepropertylist.caption
 msgid "msDS-ResourcePropertyList"
-msgstr ""
+msgstr "msDS-ResourcePropertyList"
 
 #: tfrmmoduleaduc.action_newsharedfolder.caption
 msgctxt "tfrmmoduleaduc.action_newsharedfolder.caption"
@@ -340,7 +343,7 @@ msgstr "Wzorce operacji (FSMO)"
 #: tfrmmoduleaduc.action_parent.caption
 msgctxt "tfrmmoduleaduc.action_parent.caption"
 msgid "Action_Parent"
-msgstr ""
+msgstr "Katalog nadrzędny"
 
 #: tfrmmoduleaduc.action_paste.caption
 msgctxt "tfrmmoduleaduc.action_paste.caption"
@@ -350,15 +353,14 @@ msgstr "Wklej"
 #: tfrmmoduleaduc.action_preparedjoin.caption
 msgctxt "tfrmmoduleaduc.action_preparedjoin.caption"
 msgid "Prepare DJOIN"
-msgstr ""
+msgstr "Przygotuj DJOIN"
 
 #: tfrmmoduleaduc.action_previous.caption
 msgctxt "tfrmmoduleaduc.action_previous.caption"
 msgid "Previous"
-msgstr "Wstecz"
+msgstr "Poprzedni"
 
 #: tfrmmoduleaduc.action_properties.caption
-#, fuzzy
 msgctxt "tfrmmoduleaduc.action_properties.caption"
 msgid "Properties"
 msgstr "Właściwości"
@@ -370,7 +372,7 @@ msgstr "Odśwież"
 
 #: tfrmmoduleaduc.action_rename.caption
 msgid "Action_Rename"
-msgstr ""
+msgstr "Zmień nazwę"
 
 #: tfrmmoduleaduc.action_search.caption
 msgctxt "tfrmmoduleaduc.action_search.caption"
@@ -390,12 +392,11 @@ msgstr "Pokaż GPO"
 
 #: tfrmmoduleaduc.action_showobjectlocation.caption
 msgid "Show object location"
-msgstr ""
+msgstr "Pokaż lokalizację obiektu"
 
 #: tfrmmoduleaduc.action_showrelationship.caption
 msgid "Action_ShowRelationShip"
-msgstr ""
-
+msgstr "Action_ShowRelationShip"
 #: tfrmmoduleaduc.action_sitesandservices.caption
 msgid "Sites and services"
 msgstr "Witryny i usługi"
@@ -415,7 +416,7 @@ msgstr "Deleguj sterowanie"
 
 #: tfrmmoduleaduc.action_taskdisableenableaccount.caption
 msgid "Disable Enable Account"
-msgstr ""
+msgstr "Wyłącz / Włącz konto”"
 
 #: tfrmmoduleaduc.action_taskmanage.caption
 msgid "Manage"
@@ -479,7 +480,7 @@ msgstr "Atrybuty"
 #: tfrmmoduleaduc.gridattributes.header.columns[1].text
 msgctxt "tfrmmoduleaduc.gridattributes.header.columns[1].text"
 msgid "Values"
-msgstr ""
+msgstr "Wartości"
 
 #: tfrmmoduleaduc.label1.caption
 msgctxt "tfrmmoduleaduc.label1.caption"
@@ -498,7 +499,7 @@ msgstr "Nowy"
 #: tfrmmoduleaduc.menuitem_rename.caption
 msgctxt "tfrmmoduleaduc.menuitem_rename.caption"
 msgid "Rename"
-msgstr ""
+msgstr "Zmień nazwę"
 
 #: tfrmmoduleaduc.toolbutton_addtogroup.hint
 msgid "Add to a Group"
@@ -521,11 +522,11 @@ msgstr "Usuń"
 
 #: tfrmmoduleaduc.toolbutton_divider2.caption
 msgid "ToolButton_Divider2"
-msgstr ""
+msgstr "ToolButton_Divider2"
 
 #: tfrmmoduleaduc.toolbutton_divider3.caption
 msgid "ToolButton_Divider3"
-msgstr ""
+msgstr "ToolButton_Divider3"
 
 #: tfrmmoduleaduc.toolbutton_filter.hint
 msgctxt "tfrmmoduleaduc.toolbutton_filter.hint"
@@ -574,7 +575,7 @@ msgstr "Szukaj"
 
 #: tfrmmoduleaduc.toolbutton_showrelation.caption
 msgid "Show group relation"
-msgstr ""
+msgstr "Pokaż relacje grupy"
 
 #: tfrmmoduleaduc.toolbutton_user.hint
 msgctxt "tfrmmoduleaduc.toolbutton_user.hint"
@@ -691,17 +692,17 @@ msgstr "Razem: 0 elementów"
 
 #: tfrmmoduledns.label2.caption
 msgid "Retrieve records: "
-msgstr ""
+msgstr "Pobierz rekordy: "
 
 #: tfrmmoduledns.label3.caption
 msgctxt "tfrmmoduledns.label3.caption"
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: tfrmmodulesitesandservices.action_delete.caption
 msgctxt "tfrmmodulesitesandservices.action_delete.caption"
 msgid "Action_Delete"
-msgstr ""
+msgstr "Usuń"
 
 #: tfrmmodulesitesandservices.action_newall.caption
 msgctxt "tfrmmodulesitesandservices.action_newall.caption"
@@ -710,47 +711,47 @@ msgstr "Nowy"
 
 #: tfrmmodulesitesandservices.action_newcomputer.caption
 msgid "Action_NewComputer"
-msgstr ""
+msgstr "Nowy komputer"
 
 #: tfrmmodulesitesandservices.action_newcontact.caption
 msgid "Action_NewContact"
-msgstr ""
+msgstr "Nowy kontakt"
 
 #: tfrmmodulesitesandservices.action_newgroup.caption
 msgid "Action_NewGroup"
-msgstr ""
+msgstr "Nowa grupa"
 
 #: tfrmmodulesitesandservices.action_newinetorgperson.caption
 msgid "Action_NewInetOrgPerson"
-msgstr ""
+msgstr "Nowy InetOrgPerson"
 
 #: tfrmmodulesitesandservices.action_newmsdnsserversettings.caption
 msgid "NewMsDNSServerSettings"
-msgstr ""
+msgstr "Nowe msDNS-ServerSettings"
 
 #: tfrmmodulesitesandservices.action_newmsdskeycredential.caption
 msgid "Action_NewMsDSKeyCredential"
-msgstr ""
+msgstr "Nowy msDS-KeyCredential"
 
 #: tfrmmodulesitesandservices.action_newmsdsshadowprincipalcontainer.caption
 msgid "NewMsDSShadowPrincipalContainer"
-msgstr ""
+msgstr "Nowy msDS-ShadowPrincipalContainer"
 
 #: tfrmmodulesitesandservices.action_newmsimagingpsps.caption
 msgid "Action_NewMsImagingPSPs"
-msgstr ""
+msgstr "Nowy msImaging-PSPs"
 
 #: tfrmmodulesitesandservices.action_newprinter.caption
 msgid "Action_NewPrinter"
-msgstr ""
+msgstr "Nowa drukarka"
 
 #: tfrmmodulesitesandservices.action_newserver.caption
 msgid "New Server"
-msgstr ""
+msgstr "Nowy serwer"
 
 #: tfrmmodulesitesandservices.action_newsharedfolder.caption
 msgid "Action_NewSharedFolder"
-msgstr ""
+msgstr "Nowy folder udostępniony"
 
 #: tfrmmodulesitesandservices.action_newsite.caption
 msgid "New Site"
@@ -758,7 +759,7 @@ msgstr "Nowa witryna"
 
 #: tfrmmodulesitesandservices.action_newsitelinkbridge.caption
 msgid "Action_NewSiteLinkBridge"
-msgstr ""
+msgstr "Nowe mostkowanie łączy do witryn"
 
 #: tfrmmodulesitesandservices.action_newsubnet.caption
 msgid "New Subnet"
@@ -766,26 +767,26 @@ msgstr "Nowa podsieć"
 
 #: tfrmmodulesitesandservices.action_newuser.caption
 msgid "Action_NewUser"
-msgstr ""
+msgstr "Nowy użytkownik"
 
 #: tfrmmodulesitesandservices.action_next.caption
 msgctxt "tfrmmodulesitesandservices.action_next.caption"
 msgid "Action_Next"
-msgstr "Dalej"
+msgstr "Następny"
 
 #: tfrmmodulesitesandservices.action_parent.caption
 msgctxt "tfrmmodulesitesandservices.action_parent.caption"
 msgid "Action_Parent"
-msgstr ""
+msgstr "Katalog nadrzędny"
 
 #: tfrmmodulesitesandservices.action_previous.caption
 msgid "Action_Previous"
-msgstr ""
+msgstr "Poprzedni"
 
 #: tfrmmodulesitesandservices.action_property.caption
 msgctxt "tfrmmodulesitesandservices.action_property.caption"
 msgid "Property"
-msgstr "Właściwość"
+msgstr "Właściwości"
 
 #: tfrmmodulesitesandservices.action_refresh.caption
 msgctxt "tfrmmodulesitesandservices.action_refresh.caption"
@@ -799,7 +800,7 @@ msgstr "Razem: 0 elementów"
 
 #: tfrmmodulesitesandservices.menuitem_delegatecontrol.caption
 msgid "Delegate Control"
-msgstr ""
+msgstr "Deleguj kontrolę..."
 
 #: tfrmmodulesitesandservices.menuitem_delete.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_delete.caption"
@@ -813,7 +814,7 @@ msgstr "Komputer"
 
 #: tfrmmodulesitesandservices.menuitem_newconnection.caption
 msgid "Connection"
-msgstr ""
+msgstr "Połączenie"
 
 #: tfrmmodulesitesandservices.menuitem_newcontact.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newcontact.caption"
@@ -823,40 +824,40 @@ msgstr "Kontakt"
 #: tfrmmodulesitesandservices.menuitem_newgroup.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newgroup.caption"
 msgid "Group"
-msgstr ""
+msgstr "Grupa"
 
 #: tfrmmodulesitesandservices.menuitem_newinetorgperson.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newinetorgperson.caption"
 msgid "InetOrgPerson"
-msgstr ""
+msgstr "InetOrgPerson"
 
 #: tfrmmodulesitesandservices.menuitem_newmsdnsserversettings.caption
 msgid "msDNS-ServerSettings"
-msgstr ""
+msgstr "msDNS-ServerSettings"
 
 #: tfrmmodulesitesandservices.menuitem_newmsdskeycredential.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newmsdskeycredential.caption"
 msgid "msDS-KeyCredential"
-msgstr ""
+msgstr "msDS-KeyCredential"
 
 #: tfrmmodulesitesandservices.menuitem_newmsdsshadowprincipal.caption
 msgid "msDS-ShadowPrincipal"
-msgstr ""
+msgstr "msDS-ShadowPrincipal"
 
 #: tfrmmodulesitesandservices.menuitem_newmsdsshadowprincipalcontainer.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newmsdsshadowprincipalcontainer.caption"
 msgid "msDS-ShadowPrincipalContainer"
-msgstr ""
+msgstr "msDS-ShadowPrincipalContainer"
 
 #: tfrmmodulesitesandservices.menuitem_newmsimagingpsps.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newmsimagingpsps.caption"
 msgid "msImaging-PSPs"
-msgstr ""
+msgstr "msImaging-PSPs"
 
 #: tfrmmodulesitesandservices.menuitem_newprinter.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newprinter.caption"
 msgid "Printer"
-msgstr ""
+msgstr "Drukarka"
 
 #: tfrmmodulesitesandservices.menuitem_newserver.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newserver.caption"
@@ -865,7 +866,7 @@ msgstr "Serwer"
 
 #: tfrmmodulesitesandservices.menuitem_newserverscontainer.caption
 msgid "Servers Container"
-msgstr ""
+msgstr "Kontener serwerów"
 
 #: tfrmmodulesitesandservices.menuitem_newsharedfolder.caption
 msgctxt "tfrmmodulesitesandservices.menuitem_newsharedfolder.caption"
@@ -879,28 +880,27 @@ msgstr "Witryna"
 
 #: tfrmmodulesitesandservices.menuitem_newsitelink.caption
 msgid "Site Link"
-msgstr ""
+msgstr "Łącze do witryn"
 
 #: tfrmmodulesitesandservices.menuitem_newsitelinkbridge.caption
 msgid "Site Link Bridge"
-msgstr ""
+msgstr "Mostkowanie łączy do witryn"
 
 #: tfrmmodulesitesandservices.menuitem_newsitescontainer.caption
 msgid "Sites Container"
-msgstr ""
+msgstr "Kontener witryn"
 
 #: tfrmmodulesitesandservices.menuitem_newsitesettings.caption
 msgid "Site Settings"
-msgstr ""
+msgstr "Ustawienia witryny"
 
 #: tfrmmodulesitesandservices.menuitem_newsubnet.caption
 msgid "Subnet"
-msgstr ""
+msgstr "Podsieć"
 
 #: tfrmmodulesitesandservices.menuitem_newuser.caption
 msgid "User"
-msgstr ""
-
+msgstr "Użytkownik"
 #: tfrmmodulesitesandservices.tisgrid1.header.columns[0].text
 msgctxt "tfrmmodulesitesandservices.tisgrid1.header.columns[0].text"
 msgid "Name"
@@ -957,7 +957,7 @@ msgstr "Typ kontrolera domeny"
 
 #: tfrmmodulesitesandservices.toolbutton8.caption
 msgid "ToolButton8"
-msgstr ""
+msgstr "ToolButton8"
 
 #: tfrmnewcomputer.bitbtn_changeuserorgroup.caption
 msgctxt "tfrmnewcomputer.bitbtn_changeuserorgroup.caption"
@@ -1085,7 +1085,7 @@ msgstr "Użytkownik musi zmienić hasło przy następnym logowaniu"
 
 #: tfrmnewinetorgperson.label_confirm.caption
 msgid "Confirm:"
-msgstr ""
+msgstr "Potwierdź:"
 
 #: tfrmnewinetorgperson.label_firstname.caption
 msgctxt "tfrmnewinetorgperson.label_firstname.caption"
@@ -1099,7 +1099,7 @@ msgstr "Pełna nazwa:"
 
 #: tfrmnewinetorgperson.label_initials.caption
 msgid "Initials:"
-msgstr ""
+msgstr "Inicjały:"
 
 #: tfrmnewinetorgperson.label_lastname.caption
 msgctxt "tfrmnewinetorgperson.label_lastname.caption"
@@ -1114,16 +1114,16 @@ msgstr "Hasło:"
 #: tfrmnewinetorgperson.label_prewindows.caption
 msgctxt "tfrmnewinetorgperson.label_prewindows.caption"
 msgid "User logon name (pre-Windows 2000):"
-msgstr ""
+msgstr "Nazwa logowania użytkownika (sprzed systemu Windows 2000):"
 
 #: tfrmnewinetorgperson.label_userlogonname.caption
 msgctxt "tfrmnewinetorgperson.label_userlogonname.caption"
 msgid "User logon name:"
-msgstr ""
+msgstr "Nazwa logowania użytkownika:"
 
 #: tfrmnewinetorgperson.label_validation.caption
 msgid "When you click OK, the following object will be created:"
-msgstr ""
+msgstr "Po kliknięciu przycisku OK zostanie utworzony następujący obiekt:"
 
 #: tfrmnewmsdnsserversettings.action_next.caption
 msgctxt "tfrmnewmsdnsserversettings.action_next.caption"
@@ -1133,11 +1133,11 @@ msgstr "Dalej"
 #: tfrmnewmsdnsserversettings.label_cn.caption
 msgctxt "tfrmnewmsdnsserversettings.label_cn.caption"
 msgid "cn:"
-msgstr ""
+msgstr "cn:"
 
 #: tfrmnewmsdskeycredential.action_back.caption
 msgid "Action_Back"
-msgstr ""
+msgstr "Wstecz"
 
 #: tfrmnewmsdskeycredential.action_next.caption
 msgctxt "tfrmnewmsdskeycredential.action_next.caption"
@@ -1147,21 +1147,21 @@ msgstr "Dalej"
 #: tfrmnewmsdskeycredential.label_cn.caption
 msgctxt "tfrmnewmsdskeycredential.label_cn.caption"
 msgid "cn:"
-msgstr ""
+msgstr "cn:"
 
 #: tfrmnewmsdskeycredential.label_keyid.caption
 msgid "msDS-KeyId:"
-msgstr ""
+msgstr "msDS-KeyId:"
 
 #: tfrmnewmsdsresourcepropertylist.label_cn.caption
 msgctxt "tfrmnewmsdsresourcepropertylist.label_cn.caption"
 msgid "cn:"
-msgstr ""
+msgstr "cn:"
 
 #: tfrmnewmsimagingpsps.label_cn.caption
 msgctxt "tfrmnewmsimagingpsps.label_cn.caption"
 msgid "cn:"
-msgstr ""
+msgstr "cn:"
 
 #: tfrmnewobject.label1.caption
 msgid "Object class"
@@ -1197,7 +1197,7 @@ msgstr "Nazwa:"
 
 #: tfrmnewprinter.label_networkpath.caption
 msgid "Network path of the pre-Windows 2000 print share (\\\\server\\share):"
-msgstr ""
+msgstr "Ścieżka sieciowa udostępnienia wydruku sprzed systemu Windows 2000 (\\\\serwer\\udział):"
 
 #: tfrmnewserver.action_next.caption
 msgctxt "tfrmnewserver.action_next.caption"
@@ -1253,17 +1253,17 @@ msgstr "Dalej"
 #: tfrmnewsitelink.button_add.caption
 msgctxt "tfrmnewsitelink.button_add.caption"
 msgid "Add >>"
-msgstr ""
+msgstr "Dodaj >>"
 
 #: tfrmnewsitelink.button_remove.caption
 msgctxt "tfrmnewsitelink.button_remove.caption"
 msgid "<< Remove"
-msgstr ""
+msgstr "<< Usuń"
 
 #: tfrmnewsitelink.label_leftlist.caption
 msgctxt "tfrmnewsitelink.label_leftlist.caption"
 msgid "Sites not in this site link:"
-msgstr ""
+msgstr "Witryny nienależące do tego łącza do witryn:"
 
 #: tfrmnewsitelink.label_name.caption
 msgctxt "tfrmnewsitelink.label_name.caption"
@@ -1273,11 +1273,11 @@ msgstr "Nazwa:"
 #: tfrmnewsitelink.label_rightlist.caption
 msgctxt "tfrmnewsitelink.label_rightlist.caption"
 msgid "Sites in this site link:"
-msgstr ""
+msgstr "Witryny należące do tego łącza do witryn:"
 
 #: tfrmnewsitelink.label_warning.caption
 msgid "A site link must contain at least two sites."
-msgstr ""
+msgstr "Łącze do witryn musi zawierać co najmniej dwie witryny."
 
 #: tfrmnewsitelinkbridge.action_next.caption
 msgctxt "tfrmnewsitelinkbridge.action_next.caption"
@@ -1287,17 +1287,17 @@ msgstr "Dalej"
 #: tfrmnewsitelinkbridge.button_add.caption
 msgctxt "tfrmnewsitelinkbridge.button_add.caption"
 msgid "Add >>"
-msgstr ""
+msgstr "Dodaj >>"
 
 #: tfrmnewsitelinkbridge.button_remove.caption
 msgctxt "tfrmnewsitelinkbridge.button_remove.caption"
 msgid "<< Remove"
-msgstr ""
+msgstr "<< Usuń"
 
 #: tfrmnewsitelinkbridge.label_leftlistbox.caption
 msgctxt "tfrmnewsitelinkbridge.label_leftlistbox.caption"
 msgid "Site links not in this site link bridge:"
-msgstr ""
+msgstr "Łącza do witryn nienależące do tego mostkowania łączy do witryn:"
 
 #: tfrmnewsitelinkbridge.label_name.caption
 msgctxt "tfrmnewsitelinkbridge.label_name.caption"
@@ -1307,11 +1307,11 @@ msgstr "Nazwa:"
 #: tfrmnewsitelinkbridge.label_rightlistbox.caption
 msgctxt "tfrmnewsitelinkbridge.label_rightlistbox.caption"
 msgid "Site links in this site link bridge:"
-msgstr ""
+msgstr "Łącza do witryn należące do tego mostkowania łączy do witryn:"
 
 #: tfrmnewsitelinkbridge.label_warning.caption
 msgid "A site link bridge must contain at least two site links."
-msgstr ""
+msgstr "Mostkowanie łączy do witryn musi zawierać co najmniej dwa łącza do witryn."
 
 #: tfrmnewsubnet.action_ok.caption
 msgctxt "tfrmnewsubnet.action_ok.caption"
@@ -1372,7 +1372,7 @@ msgstr "Hasło nigdy nie wygasa"
 
 #: tfrmnewuser.combobox1.text
 msgid "ComboBox1"
-msgstr ""
+msgstr "ComboBox1"
 
 #: tfrmnewuser.edit_fullname.hint
 msgctxt "tfrmnewuser.edit_fullname.hint"
@@ -1488,6 +1488,8 @@ msgid ""
 "This attribute contains the UPN for a user based on the Internet standard RFC 822\n"
 "(name@domain.lan)"
 msgstr ""
+"Ten atrybut zawiera główną nazwę użytkownika (UPN) zgodną ze standardem internetowym RFC 822\n"
+"(nazwa@domena.lan)"
 
 #: tfrmpropertyaccount.edit_samaccountname.hint
 msgctxt "tfrmpropertyaccount.edit_samaccountname.hint"
@@ -1495,6 +1497,8 @@ msgid ""
 "The logon name used to support clients and servers running earlier versions of the operating system\n"
 "Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager"
 msgstr ""
+"Nazwa logowania używana do obsługi klientów i serwerów ze starszymi wersjami systemu operacyjnego,\n"
+"takimi jak Windows NT 4.0, Windows 95, Windows 98 oraz LAN Manager"
 
 #: tfrmpropertyaccount.goupbox_expires.caption
 msgid "Account expires"
@@ -1506,7 +1510,7 @@ msgstr "Opcje konta:"
 
 #: tfrmpropertyaccount.label_unlock.caption
 msgid "Unlock account."
-msgstr ""
+msgstr "Odblokuj konto"
 
 #: tfrmpropertyaccount.label_userlogonname.caption
 msgctxt "tfrmpropertyaccount.label_userlogonname.caption"
@@ -1655,23 +1659,23 @@ msgstr "Kopiuj hasło"
 
 #: tfrmpropertybitlocker.label_bitclockerdetails.caption
 msgid "Details:"
-msgstr ""
+msgstr "Szczegóły:"
 
 #: tfrmpropertybitlocker.label_bitlockerpassword.caption
 msgid "Bitlocker recovery password:"
-msgstr ""
+msgstr "Hasło odzyskiwania BitLocker:"
 
 #: tfrmpropertybitlocker.tisgrid1.header.columns[0].text
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: tfrmpropertybitlocker.tisgrid1.header.columns[1].text
 msgid "Password ID"
-msgstr ""
+msgstr "ID hasła"
 
 #: tfrmpropertybitlocker.tisgrid1.header.columns[2].text
 msgid "Recovery Password"
-msgstr ""
+msgstr "Hasło odzyskiwania"
 
 #: tfrmpropertybitlocker.tisgrid1.header.columns[3].text
 msgctxt "tfrmpropertybitlocker.tisgrid1.header.columns[3].text"
@@ -1700,11 +1704,11 @@ msgstr "Witryna"
 
 #: tfrmpropertyconnections.label_from.caption
 msgid "Replicate From:"
-msgstr ""
+msgstr "Replikuj z:"
 
 #: tfrmpropertyconnections.label_to.caption
 msgid "Replicate To:"
-msgstr ""
+msgstr "Replikuj do:"
 
 #: tfrmpropertygeneralcomputer.edit_dnshostname.hint
 msgid "Name of computer as registered in DNS."
@@ -1716,6 +1720,8 @@ msgid ""
 "The logon name used to support clients and servers running earlier versions of the operating system\n"
 "Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager"
 msgstr ""
+"Nazwa logowania używana do obsługi klientów i serwerów ze starszymi wersjami systemu operacyjnego,\n"
+"takimi jak Windows NT 4.0, Windows 95, Windows 98 oraz LAN Manager"
 
 #: tfrmpropertygeneralcomputer.label_dctype.caption
 msgctxt "tfrmpropertygeneralcomputer.label_dctype.caption"
@@ -1748,20 +1754,20 @@ msgstr "Opis:"
 
 #: tfrmpropertygeneralgpo.label1.caption
 msgid "GPO Status:"
-msgstr ""
+msgstr "Stan obiektu GPO:"
 
 #: tfrmpropertygeneralgpo.label2.caption
 msgctxt "tfrmpropertygeneralgpo.label2.caption"
 msgid "Display Name"
-msgstr ""
+msgstr "Nazwa wyświetlana"
 
 #: tfrmpropertygeneralgpo.label3.caption
 msgid "Sysvol Path"
-msgstr ""
+msgstr "Ścieżka SYSVOL"
 
 #: tfrmpropertygeneralgpo.label4.caption
 msgid "<>"
-msgstr ""
+msgstr "<>"
 
 #: tfrmpropertygeneralgpo.label_description.caption
 msgctxt "tfrmpropertygeneralgpo.label_description.caption"
@@ -1778,6 +1784,8 @@ msgid ""
 "The logon name used to support clients and servers running earlier versions of the operating system\n"
 "Such as Windows NT 4.0, Windows 95, Windows 98, and LAN Manager"
 msgstr ""
+"Nazwa logowania używana do obsługi klientów i serwerów ze starszymi wersjami systemu operacyjnego,\n"
+"takimi jak Windows NT 4.0, Windows 95, Windows 98 oraz LAN Manager"
 
 #: tfrmpropertygeneralgroup.label_description.caption
 msgctxt "tfrmpropertygeneralgroup.label_description.caption"
@@ -1838,11 +1846,11 @@ msgstr "Uniwersalny"
 
 #: tfrmpropertygeneralintersitetransport.checkbox_bridge.caption
 msgid "Bridge all site links"
-msgstr ""
+msgstr "Mostkuj wszystkie łącza do witryn"
 
 #: tfrmpropertygeneralintersitetransport.checkbox_schedules.caption
 msgid "Ignore schedules"
-msgstr ""
+msgstr "Ignoruj harmonogramy"
 
 #: tfrmpropertygeneralintersitetransport.label_description.caption
 msgctxt "tfrmpropertygeneralintersitetransport.label_description.caption"
@@ -1851,7 +1859,7 @@ msgstr "Opis:"
 
 #: tfrmpropertygeneralntdsdsa.checkbox_globalcatalog.caption
 msgid "Global Catalog"
-msgstr ""
+msgstr "Katalog globalny"
 
 #: tfrmpropertygeneralntdsdsa.label_description.caption
 msgctxt "tfrmpropertygeneralntdsdsa.label_description.caption"
@@ -1860,36 +1868,36 @@ msgstr "Opis:"
 
 #: tfrmpropertygeneralntdsdsa.label_dnsalias.caption
 msgid "DNS Alias:"
-msgstr ""
+msgstr "Alias DNS:"
 
 #: tfrmpropertygeneralntdsdsa.label_info.caption
 msgid "The amount of time it will take to publish the Global Catalog varies depending on your replication topology."
-msgstr ""
+msgstr "Czas potrzebny na opublikowanie Katalogu globalnego zależy od topologii replikacji."
 
 #: tfrmpropertygeneralntdsdsa.label_querypolicy.caption
 msgid "Query Policy:"
-msgstr ""
+msgstr "Zasady zapytania:"
 
 #: tfrmpropertygeneralntdssitesettings.button_schedule.caption
 msgctxt "tfrmpropertygeneralntdssitesettings.button_schedule.caption"
 msgid "Change Schedule..."
-msgstr ""
+msgstr "Zmień harmonogram..."
 
 #: tfrmpropertygeneralntdssitesettings.checkbox_enable.caption
 msgid "Enable Universal Membership Caching"
-msgstr ""
+msgstr "Włącz buforowanie członkostwa w grupach uniwersalnych"
 
 #: tfrmpropertygeneralntdssitesettings.combobox_refresh.text
 msgid "<Default>"
-msgstr ""
+msgstr "<Domyślnie>"
 
 #: tfrmpropertygeneralntdssitesettings.groupbox_intersitetopologygenerator.caption
 msgid "Inter-Site Topology Generator"
-msgstr ""
+msgstr "Generator topologii międzywitrynowej"
 
 #: tfrmpropertygeneralntdssitesettings.groupbox_universalgroup.caption
 msgid "Universal Group Membership Caching"
-msgstr ""
+msgstr "Buforowanie członkostwa w grupach uniwersalnych"
 
 #: tfrmpropertygeneralntdssitesettings.label_description.caption
 msgctxt "tfrmpropertygeneralntdssitesettings.label_description.caption"
@@ -1898,11 +1906,11 @@ msgstr "Opis:"
 
 #: tfrmpropertygeneralntdssitesettings.label_refresh.caption
 msgid "Refresh cache from:"
-msgstr ""
+msgstr "Odśwież pamięć podręczną z:"
 
 #: tfrmpropertygeneralntdssitesettings.label_server.caption
 msgid "Server:"
-msgstr ""
+msgstr "Serwer:"
 
 #: tfrmpropertygeneralntdssitesettings.label_site.caption
 msgctxt "tfrmpropertygeneralntdssitesettings.label_site.caption"
@@ -1966,16 +1974,16 @@ msgstr "Numer ulicy"
 #: tfrmpropertygeneralserver.button_add.caption
 msgctxt "tfrmpropertygeneralserver.button_add.caption"
 msgid "Add >>"
-msgstr ""
+msgstr "Dodaj >>"
 
 #: tfrmpropertygeneralserver.button_remove.caption
 msgctxt "tfrmpropertygeneralserver.button_remove.caption"
 msgid "<< Remove"
-msgstr ""
+msgstr "<< Usuń"
 
 #: tfrmpropertygeneralserver.label_computer.caption
 msgid "Computer:"
-msgstr ""
+msgstr "Komputer"
 
 #: tfrmpropertygeneralserver.label_dctype.caption
 msgctxt "tfrmpropertygeneralserver.label_dctype.caption"
@@ -1994,11 +2002,11 @@ msgstr "Domena:"
 
 #: tfrmpropertygeneralserver.label_transports.caption
 msgid "This server is a preferred bridgehead server for the following transports:"
-msgstr ""
+msgstr "Ten serwer jest preferowanym serwerem bazowym (bridgehead) dla następujących transportów:"
 
 #: tfrmpropertygeneralserver.label_transportsavailable.caption
 msgid "Transports available for inter-site data transfer:"
-msgstr ""
+msgstr "Dostępne transporty do przesłania danych między witrynami:"
 
 #: tfrmpropertygeneralsite.label_description.caption
 msgctxt "tfrmpropertygeneralsite.label_description.caption"
@@ -2012,21 +2020,21 @@ msgstr "Podsieci:"
 #: tfrmpropertygeneralsitelink.button_add.caption
 msgctxt "tfrmpropertygeneralsitelink.button_add.caption"
 msgid "Add >>"
-msgstr ""
+msgstr "Dodaj >>"
 
 #: tfrmpropertygeneralsitelink.button_remove.caption
 msgctxt "tfrmpropertygeneralsitelink.button_remove.caption"
 msgid "<< Remove"
-msgstr ""
+msgstr "<< Usuń"
 
 #: tfrmpropertygeneralsitelink.button_schedule.caption
 msgctxt "tfrmpropertygeneralsitelink.button_schedule.caption"
 msgid "Change Schedule..."
-msgstr ""
+msgstr "Zmień harmonogram..."
 
 #: tfrmpropertygeneralsitelink.label_cost.caption
 msgid "Cost:"
-msgstr ""
+msgstr "Koszt:"
 
 #: tfrmpropertygeneralsitelink.label_description.caption
 msgctxt "tfrmpropertygeneralsitelink.label_description.caption"
@@ -2036,30 +2044,30 @@ msgstr "Opis:"
 #: tfrmpropertygeneralsitelink.label_insitelink.caption
 msgctxt "tfrmpropertygeneralsitelink.label_insitelink.caption"
 msgid "Sites in this site link:"
-msgstr ""
+msgstr "Witryny należące do tego łącza do witryn:"
 
 #: tfrmpropertygeneralsitelink.label_minutes.caption
 msgid "minutes"
-msgstr ""
+msgstr "minut"
 
 #: tfrmpropertygeneralsitelink.label_notinsitelink.caption
 msgctxt "tfrmpropertygeneralsitelink.label_notinsitelink.caption"
 msgid "Sites not in this site link:"
-msgstr ""
+msgstr "Witryny nienależące do tego łącza do witryn:"
 
 #: tfrmpropertygeneralsitelink.label_replicate.caption
 msgid "Replicate every"
-msgstr ""
+msgstr "Replikuj co"
 
 #: tfrmpropertygeneralsitelinkbridge.button_add.caption
 msgctxt "tfrmpropertygeneralsitelinkbridge.button_add.caption"
 msgid "Add >>"
-msgstr ""
+msgstr "Dodaj >>"
 
 #: tfrmpropertygeneralsitelinkbridge.button_remove.caption
 msgctxt "tfrmpropertygeneralsitelinkbridge.button_remove.caption"
 msgid "<< Remove"
-msgstr ""
+msgstr "<< Usuń"
 
 #: tfrmpropertygeneralsitelinkbridge.label_description.caption
 msgctxt "tfrmpropertygeneralsitelinkbridge.label_description.caption"
@@ -2069,12 +2077,12 @@ msgstr "Opis:"
 #: tfrmpropertygeneralsitelinkbridge.label_insitelinkbridge.caption
 msgctxt "tfrmpropertygeneralsitelinkbridge.label_insitelinkbridge.caption"
 msgid "Site links in this site link bridge:"
-msgstr ""
+msgstr "Łącza do witryn należące do tego mostkowania łączy do witryn:"
 
 #: tfrmpropertygeneralsitelinkbridge.label_notinsitelinkbridge.caption
 msgctxt "tfrmpropertygeneralsitelinkbridge.label_notinsitelinkbridge.caption"
 msgid "Site links not in this site link bridge:"
-msgstr ""
+msgstr "Łącza do witryn nienależące do tego mostkowania łączy do witryn:"
 
 #: tfrmpropertygeneralsubnet.label_description.caption
 msgctxt "tfrmpropertygeneralsubnet.label_description.caption"
@@ -2163,7 +2171,7 @@ msgstr "Inicjały:"
 
 #: tfrmpropertygeneraluser.label_mail.caption
 msgid "Email address :"
-msgstr ""
+msgstr "Adres e-mail :"
 
 #: tfrmpropertygeneraluser.label_surname.caption
 msgctxt "tfrmpropertygeneraluser.label_surname.caption"
@@ -2207,29 +2215,28 @@ msgstr "Usuń"
 
 #: tfrmpropertygplinks.action_disablelink.caption
 msgid "Disable Link"
-msgstr ""
+msgstr "Wyłącz łącze"
 
 #: tfrmpropertygplinks.action_enablelink.caption
 msgid "Enable Link"
-msgstr ""
+msgstr "Włącz łącze"
 
 #: tfrmpropertygplinks.action_enforcelink.caption
 msgid "Enforce Link"
-msgstr ""
+msgstr "Wymuś łącze"
 
 #: tfrmpropertygplinks.label_gplinks.caption
 msgid "Group Policies Links"
-msgstr ""
+msgstr "Łącza zasad grupy"
 
 #: tfrmpropertygplinks.tisgrid_gplinks.header.columns[0].text
 msgctxt "tfrmpropertygplinks.tisgrid_gplinks.header.columns[0].text"
 msgid "DistinguishedName"
-msgstr ""
+msgstr "DistinguishedName"
 
 #: tfrmpropertygplinks.tisgrid_gplinks.header.columns[1].text
 msgid "ID"
-msgstr ""
-
+msgstr "ID"
 #: tfrmpropertygplinks.tisgrid_gplinks.header.columns[2].text
 msgctxt "tfrmpropertygplinks.tisgrid_gplinks.header.columns[2].text"
 msgid "Name"
@@ -2237,11 +2244,11 @@ msgstr "Nazwa"
 
 #: tfrmpropertygplinks.tisgrid_gplinks.header.columns[3].text
 msgid "Link flags"
-msgstr ""
+msgstr "Flagi łączy"
 
 #: tfrmpropertygplinks.tisgrid_gplinks.header.columns[4].text
 msgid "GPO Flags"
-msgstr ""
+msgstr "Flagi GPO"
 
 #: tfrmpropertylaps.action_v1_copypassword.caption
 msgctxt "tfrmpropertylaps.action_v1_copypassword.caption"
@@ -2295,15 +2302,15 @@ msgstr "PUSTY"
 
 #: tfrmpropertylaps.groupbox_lapsencrypted.caption
 msgid "Encrypted"
-msgstr ""
+msgstr "Zaszyfrowane"
 
 #: tfrmpropertylaps.groupbox_lapsv1.caption
 msgid "Local Administrator Password Solution (V1)"
-msgstr ""
+msgstr "Local Administrator Password Solution (V1)"
 
 #: tfrmpropertylaps.groupbox_lapsv2.caption
 msgid "Local Administrator Password Solution (V2)"
-msgstr ""
+msgstr "Local Administrator Password Solution (V2)"
 
 #: tfrmpropertylaps.label_v1_currentexpiration.caption
 msgctxt "tfrmpropertylaps.label_v1_currentexpiration.caption"
@@ -2337,7 +2344,7 @@ msgstr "Hasło konta lokalnego administratora LAPS:"
 
 #: tfrmpropertylaps.label_v2_encryptedpassworddata.caption
 msgid "Encrypted password data: (cannot be unencrypted, gkdi not implemented)"
-msgstr ""
+msgstr "Zaszyfrowane dane hasła: (nie można odszyfrować, nie zaimplementowano gKDI)"
 
 #: tfrmpropertylaps.label_v2_localadminaccountname.caption
 msgctxt "tfrmpropertylaps.label_v2_localadminaccountname.caption"
@@ -2493,7 +2500,7 @@ msgstr "Usuń"
 
 #: tfrmpropertyntauthcertificates.action_export.caption
 msgid "Export"
-msgstr ""
+msgstr "Eksport"
 
 #: tfrmpropertyntauthcertificates.action_view.caption
 #, fuzzy
@@ -2613,6 +2620,9 @@ msgid ""
 "This property is commonly used to indicate the formal job title\n"
 "Such as Senior Programmer, rather than occupational class, such as programmer"
 msgstr ""
+"Zawiera stanowisko użytkownika\n"
+"Ta właściwość jest zazwyczaj używana do określenia formalnego stanowiska,\n"
+"takiego jak Starszy programista, a nie grupy zawodowej, takiej jak programista"
 
 #: tfrmpropertyorganization.groupbox_manager.caption
 msgid "Manager :"
@@ -2654,6 +2664,9 @@ msgid ""
 "HomeDirectory must be a UNC path\n"
 "(for example, \\\\**servername\\**path)"
 msgstr ""
+"Katalog macierzysty konta\n"
+"Parametr HomeDirectory musi być ścieżką UNC\n"
+"(na przykład \\\\**nazwaserwera\\**ścieżka)"
 
 #: tfrmpropertyprofile.edit_homedirectory.hint
 msgid ""
@@ -2662,6 +2675,10 @@ msgid ""
 "Otherwise, homeDirectory is a fully qualified local path including the drive letter\n"
 "(for example, DriveLetter**:\\Directory\\**Folder)"
 msgstr ""
+"Katalog macierzysty konta\n"
+"Jeśli właściwość homeDrive jest ustawiona i określa literę dysku, właściwość homeDirectory musi być ścieżką UNC\n"
+"W przeciwnym razie homeDirectory jest w pełni kwalifikowaną ścieżką lokalną zawierającą literę dysku\n"
+"(na przykład LiteraDysku**:\\Katalog\\**Folder)"
 
 #: tfrmpropertyprofile.edit_profilepath.hint
 msgid "Specifies a path to the user's profile"
@@ -2853,43 +2870,43 @@ msgstr "Komentarze grupy/użytkownika"
 
 #: tfrmpropertyunixattributes.label1.caption
 msgid "NIS Domain:"
-msgstr ""
+msgstr "Domena NIS:"
 
 #: tfrmpropertyunixattributes.label_gid.caption
 msgid "GID (Group ID):"
-msgstr ""
+msgstr "GID (ID grupy):"
 
 #: tfrmpropertyunixattributes.label_homedirectory.caption
 msgid "Home Directory:"
-msgstr ""
+msgstr "Katalog macierzysty:"
 
 #: tfrmpropertyunixattributes.label_infogroup.caption
 msgid "To enable access to this group for UNIX clients, you will have to specify the NIS domain this group belongs to."
-msgstr ""
+msgstr "Aby umożliwić dostęp do tej grupy klientom systemu UNIX, należy określić domenę NIS, do której ta grupa należy."
 
 #: tfrmpropertyunixattributes.label_infouser.caption
 msgid "To enable access to this user for UNIX clients, you will have to specify the NIS domain this user belongs to."
-msgstr ""
+msgstr "Aby umożliwić dostęp do tego użytkownika klientom systemu UNIX, należy określić domenę NIS, do której ten użytkownik należy."
 
 #: tfrmpropertyunixattributes.label_loginshell.caption
 msgid "Login Shell:"
-msgstr ""
+msgstr "Powłoka logowania:"
 
 #: tfrmpropertyunixattributes.label_primarygroup.caption
 msgid "Primary group name/GID:"
-msgstr ""
+msgstr "Nazwa grupy podstawowej/GID:"
 
 #: tfrmpropertyunixattributes.label_uid.caption
 msgid "UID:"
-msgstr ""
+msgstr "UID:"
 
 #: tfrmpropertyunixattributes.panel_gid.caption
 msgid "Panel_Gid"
-msgstr ""
+msgstr "Panel_Gid"
 
 #: tfrmpropertyunixattributes.panel_info.caption
 msgid "Panel_Info"
-msgstr ""
+msgstr "Panel_Info"
 
 #: tfrmrsatoption.combobox3.text
 msgid "False"
@@ -2911,72 +2928,72 @@ msgstr "Widok zaawansowany"
 
 #: tgridframe.asynchcheckbox.caption
 msgid "asynchronous"
-msgstr ""
+msgstr "asynchronicznie"
 
 #: tgridframe.asynchcheckbox.hint
 msgid "Get items asynchronously, using OnSearch event"
-msgstr ""
+msgstr "Pobieraj elementy asynchronicznie, używając zdarzenia OnSearch"
 
 #: tgridframe.clipboardgriddatalabel.caption
 msgid "from grid data"
-msgstr ""
+msgstr "z danych siatki"
 
 #: tgridframe.clipboardlabel.caption
 msgid "from clipboard"
-msgstr ""
+msgstr "z schowka"
 
 #: tgridframe.clipboardlabel1.caption
 msgctxt "tgridframe.clipboardlabel1.caption"
 msgid "clear"
-msgstr ""
+msgstr "wyczyść"
 
 #: tgridframe.clipboardselectedrowlabel.caption
 msgid "from selected rows"
-msgstr ""
+msgstr "z zaznaczonych wierszy"
 
 #: tgridframe.clipboardselectedrowlabel1.caption
 msgid "from selected rows as CSV"
-msgstr ""
+msgstr "z zaznaczonych wierszy jako CSV"
 
 #: tgridframe.displayfieldedit.text
 msgctxt "tgridframe.displayfieldedit.text"
 msgid "text"
-msgstr ""
+msgstr "tekst"
 
 #: tgridframe.eddatatype.caption
 msgid "If Data Type is"
-msgstr ""
+msgstr "Jeśli typ danych to"
 
 #: tgridframe.eddatatype1.caption
 msgctxt "tgridframe.eddatatype1.caption"
 msgid "Column"
-msgstr ""
+msgstr "Kolumna"
 
 #: tgridframe.eddatatype2.caption
 msgctxt "tgridframe.eddatatype2.caption"
 msgid "Column"
-msgstr ""
+msgstr "Kolumna"
 
 #: tgridframe.fromgriddataasobjectlabel.caption
 msgid "from grid as json object"
-msgstr ""
+msgstr "z siatki jako obiekt JSON"
 
 #: tgridframe.functiondatalabel.caption
 msgctxt "tgridframe.functiondatalabel.caption"
 msgid "Grid"
-msgstr ""
+msgstr "Siatka"
 
 #: tgridframe.functiondatalabel.hint
 msgid "Grid properties"
-msgstr ""
+msgstr "Właściwości siatki"
 
 #: tgridframe.functiondatalabel1.caption
 msgid "Input"
-msgstr ""
+msgstr "Wejście"
 
 #: tgridframe.functiondatalabel1.hint
 msgid "Work with Grid Data"
-msgstr ""
+msgstr "Praca z danymi siatki"
 
 #: tgridframe.functionrefreshlabel.caption
 msgctxt "tgridframe.functionrefreshlabel.caption"
@@ -2986,81 +3003,80 @@ msgstr "Odśwież"
 #: tgridframe.functionrefreshlabel.hint
 msgctxt "tgridframe.functionrefreshlabel.hint"
 msgid "MetaData"
-msgstr ""
+msgstr "Metadane"
 
 #: tgridframe.functionselrowslabel.caption
 msgid "Selected Rows"
-msgstr ""
+msgstr "Zaznaczone wiersze"
 
 #: tgridframe.functionselrowslabel.hint
 msgid "Selected rows"
-msgstr ""
+msgstr "Zaznaczone wiersze"
 
 #: tgridframe.functionselrowslabel1.caption
 msgctxt "tgridframe.functionselrowslabel1.caption"
 msgid "MetaData"
-msgstr ""
+msgstr "Metadane"
 
 #: tgridframe.functionselrowslabel1.hint
 msgctxt "tgridframe.functionselrowslabel1.hint"
 msgid "MetaData"
-msgstr ""
+msgstr "Metadane"
 
 #: tgridframe.functionsettingslabel.caption
-#, fuzzy
 msgctxt "tgridframe.functionsettingslabel.caption"
 msgid "Settings"
 msgstr "Ustawienia"
 
 #: tgridframe.functionsettingslabel.hint
 msgid "Grid Settings"
-msgstr ""
+msgstr "Ustawienia siatki"
 
 #: tgridframe.griddataaddrowsmenuitem.caption
 msgid "Add Rows"
-msgstr ""
+msgstr "Dodaj wiersze"
 
 #: tgridframe.griddataaddrowsmenuitem.hint
 msgid "Add rows from Input JSON"
-msgstr ""
+msgstr "Dodaj wiersze z wejściowego pliku JSON"
 
 #: tgridframe.griddatacustomizemenuitem1.caption
 msgctxt "tgridframe.griddatacustomizemenuitem1.caption"
 msgid "Customize"
-msgstr ""
+msgstr "Dostosuj"
 
 #: tgridframe.griddatacustomizemenuitem1.hint
 msgid "Open Grid Editor"
-msgstr ""
+msgstr "Otwórz edytor siatki"
 
 #: tgridframe.gridinputdeleterowsmenuitem.caption
 msgid "Delete Rows"
-msgstr ""
+msgstr "Usuń wiersze"
 
 #: tgridframe.gridinputdeleterowsmenuitem.hint
 msgid "Delete rows from Input JSON"
-msgstr ""
+msgstr "Usuń wiersze z wejściowego pliku JSON"
 
 #: tgridframe.gridmetadatagetmenuitem.caption
 msgid "Get"
-msgstr ""
+msgstr "Pobierz"
 
 #: tgridframe.gridmetadatasetmenuitem.caption
 msgid "Set"
-msgstr ""
+msgstr "Ustaw"
 
 #: tgridframe.gridselrowsmenuitem.caption
 msgid "Update Columns"
-msgstr ""
+msgstr "Aktualizuj kolumny"
 
 #: tgridframe.gridsettingsloadmenuitem.caption
 msgctxt "tgridframe.gridsettingsloadmenuitem.caption"
 msgid "Load"
-msgstr ""
+msgstr "Wczytaj"
 
 #: tgridframe.gridsettingssavemenuitem.caption
 msgid "Save"
-msgstr ""
+msgstr "Zapisz"
 
 #: tgridframe.gridtotallabel.caption
 msgctxt "tgridframe.gridtotallabel.caption"
@@ -3069,7 +3085,7 @@ msgstr "Łącznie : 0 elementów"
 
 #: tgridframe.groupbox1.caption
 msgid " Functions "
-msgstr ""
+msgstr " Funkcje "
 
 #: tgridframe.groupbox2.caption
 msgctxt "tgridframe.groupbox2.caption"
@@ -3078,232 +3094,232 @@ msgstr "Proste"
 
 #: tgridframe.groupbox3.caption
 msgid " Search "
-msgstr ""
+msgstr " Wyszukiwanie "
 
 #: tgridframe.groupbox4.caption
 msgid " Colors "
-msgstr ""
+msgstr " Kolory "
 
 #: tgridframe.keyfieldedit.text
 msgctxt "tgridframe.keyfieldedit.text"
 msgid "id"
-msgstr ""
+msgstr "id"
 
 #: tgridframe.label1.caption
 msgid "Input/Output:"
-msgstr ""
+msgstr "Wejście/Wyjście:"
 
 #: tgridframe.label2.caption
 msgid "Then use Color"
-msgstr ""
+msgstr "Następnie użyj koloru"
 
 #: tgridframe.label3.caption
 msgctxt "tgridframe.label3.caption"
 msgid "Key Field"
-msgstr ""
+msgstr "Pole klucza"
 
 #: tgridframe.label4.caption
 msgctxt "tgridframe.label4.caption"
 msgid "Display Field"
-msgstr ""
+msgstr "Pole wyświetlane"
 
 #: tgridframe.label5.caption
 msgid "For column name (PropertyName)"
-msgstr ""
+msgstr "Dla nazwy kolumny (PropertyName)"
 
 #: tgridframe.label6.caption
 msgid "If edited value is"
-msgstr ""
+msgstr "Jeśli edytowana wartość to"
 
 #: tgridframe.label7.caption
 msgid "Then"
-msgstr ""
+msgstr "Wtedy"
 
 #: tgridframe.label8.caption
 msgid "And show message"
-msgstr ""
+msgstr "I pokaż komunikat"
 
 #: tgridframe.label9.caption
 msgctxt "tgridframe.label9.caption"
 msgid "Bg Color"
-msgstr ""
+msgstr "Kolor tła"
 
 #: tgridframe.menuitem1.caption
 msgid "Test User Menu Item"
-msgstr ""
+msgstr "Testowy element menu użytkownika"
 
 #: tgridframe.panel3.caption
 msgid "Events"
-msgstr ""
+msgstr "Zdarzenia"
 
 #: tgridframe.preparereadonlycheckbox.caption
 msgctxt "tgridframe.preparereadonlycheckbox.caption"
 msgid "Read Only"
-msgstr ""
+msgstr "Tylko do odczytu"
 
 #: tgridframe.tabsheet1.caption
 msgid "OnPrepareEditor"
-msgstr ""
+msgstr "OnPrepareEditor"
 
 #: tgridframe.tabsheet2.caption
 msgid "OnEditorLookup"
-msgstr ""
+msgstr "OnEditorLookup"
 
 #: tgridframe.tabsheet3.caption
 msgid "OnEditValidated"
-msgstr ""
+msgstr "OnEditValidated"
 
 #: tgridframe.validabortcheckbox.caption
 msgid "Abort"
-msgstr ""
+msgstr "Przerwij"
 
 #: tgridframe.validmsgedit.text
 msgid "Invalid value for this column"
-msgstr ""
+msgstr "Nieprawidłowa wartość dla tej kolumny"
 
 #: tgridframe.zebralightnesslabel.caption
 msgid "Zebra Lightness"
-msgstr ""
+msgstr "Jasność paskowania (pasy)"
 
 #: tisstrings.rsargumentisnull
 #, object-pascal-format
 msgid "Argument %d is null"
-msgstr ""
+msgstr "Argument %d ma wartość null"
 
 #: tisstrings.rsargumentoutofrange
 msgid "Argument out of range"
-msgstr ""
+msgstr "Argument spoza zakresu"
 
 #: tisstrings.rsarg_nullreferenceexception
 msgid "Object reference not set to an instance of an object."
-msgstr ""
+msgstr "Odwołanie do obiektu nie zostało ustawione na instancję obiektu."
 
 #: tisstrings.rsblanksearchstring
 msgid "Search string cannot be blank"
-msgstr ""
+msgstr "Ciąg wyszukiwania nie może być pusty"
 
 #: tisstrings.rsdotnetformatargumentnotsupported
 #, object-pascal-format
 msgid "Argument type of %d is not supported"
-msgstr ""
+msgstr "Typ argumentu %d nie jest obsługiwany"
 
 #: tisstrings.rsdotnetformatnullformat
 msgid "Format string is null"
-msgstr ""
+msgstr "Ciąg formatujący ma wartość null"
 
 #: tisstrings.rsformatexception
 msgid "Format exception"
-msgstr ""
+msgstr "Wyjątek formatowania"
 
 #: tisstrings.rsinvalidemptystringitem
 msgid "String list passed to StringsToMultiSz cannot contain empty strings."
-msgstr ""
+msgstr "Lista ciągów przekazana do StringsToMultiSz nie może zawierać pustych ciągów."
 
 #: tisstrings.rsnumericconstanttoolarge
 #, object-pascal-format
 msgid "Numeric constant too large (%d) at position %d."
-msgstr ""
+msgstr "Stała numeryczna jest zbyt duża (%d) na pozycji %d."
 
 #: tisstrings.rstabs_closebracketexpected
 msgid "Closing bracket expected."
-msgstr ""
+msgstr "Oczekiwano nawiasu zamykającego."
 
 #: tisstrings.rstabs_duplicatesnotallowed
 msgid "Duplicate tab stops are not allowed."
-msgstr ""
+msgstr "Duplikaty pozycji tabulacji są niedozwolone."
 
 #: tisstrings.rstabs_stopexpected
 msgid "A tab stop was expected but not found."
-msgstr ""
+msgstr "Oczekiwano pozycji tabulacji, ale jej nie znaleziono."
 
 #: tisstrings.rstabs_tabwidthexpected
 msgid "Tab width expected."
-msgstr ""
+msgstr "Oczekiwano szerokości tabulacji."
 
 #: tmainform.caption
 msgid "UI Demo"
-msgstr ""
+msgstr "UI Demo"
 
 #: tmainform.gridtab.caption
 msgctxt "tmainform.gridtab.caption"
 msgid "Grid"
-msgstr ""
+msgstr "Siatka"
 
 #: tmainform.langdemenuitem.caption
 msgid "de"
-msgstr ""
+msgstr "de"
 
 #: tmainform.langenmenuitem.caption
 msgid "en"
-msgstr ""
+msgstr "en"
 
 #: tmainform.langfrmenuitem.caption
 msgid "fr"
-msgstr ""
+msgstr "fr"
 
 #: tmainform.langmenuitem.caption
 msgid "Languages"
-msgstr ""
+msgstr "Języki"
 
 #: tmainform.searchedittab.caption
 msgid "SearchEdit"
-msgstr ""
+msgstr "SearchEdit"
 
 #: tmainform.tageditortab.caption
 msgid "TagEditor"
-msgstr ""
+msgstr "TagEditor"
 
 #: tmainform.toolbartab.caption
 msgid "ToolBar"
-msgstr ""
+msgstr "Pasek narzędzi"
 
 #: tsearcheditframe.autosearchcheckbox.caption
 msgid "Auto Search"
-msgstr ""
+msgstr "Automatyczne wyszukiwanie"
 
 #: tsearcheditframe.clearbuttoncheckbox.caption
 msgid "Clear Button"
-msgstr ""
+msgstr "Przycisk wyczyszczenia"
 
 #: tsearcheditframe.customclickcheckbox.caption
 msgid "Custom OnClick"
-msgstr ""
+msgstr "Własne zdarzenie OnClick"
 
 #: tsearcheditframe.displayfieldedit.text
 msgctxt "tsearcheditframe.displayfieldedit.text"
 msgid "text"
-msgstr ""
+msgstr "tekst"
 
 #: tsearcheditframe.donelabel.caption
 msgid "Done."
-msgstr ""
+msgstr "Gotowe."
 
 #: tsearcheditframe.groupbox1.caption
 msgid " JSON "
-msgstr ""
+msgstr " JSON "
 
 #: tsearcheditframe.groupbox2.caption
 msgctxt "tsearcheditframe.groupbox2.caption"
 msgid " Options "
-msgstr ""
+msgstr " Opcje "
 
 #: tsearcheditframe.jsonloadbutton.caption
 msgctxt "tsearcheditframe.jsonloadbutton.caption"
 msgid "Load"
-msgstr ""
+msgstr "Wczytaj"
 
 #: tsearcheditframe.jsonloadbutton.hint
 msgid "It will use JSON to fill Items"
-msgstr ""
+msgstr "Użyje pliku JSON do wypełnienia elementów"
 
 #: tsearcheditframe.keyfieldedit.text
 msgctxt "tsearcheditframe.keyfieldedit.text"
 msgid "id"
-msgstr ""
+msgstr "id"
 
 #: tsearcheditframe.keyvaluelabel.caption
 msgid "KeyValueLabel:"
-msgstr ""
+msgstr "KeyValueLabel:"
 
 #: tsearcheditframe.label1.caption
 msgctxt "tsearcheditframe.label1.caption"
@@ -3313,301 +3329,301 @@ msgstr "Szukaj"
 #: tsearcheditframe.label2.caption
 msgctxt "tsearcheditframe.label2.caption"
 msgid "Key Field"
-msgstr ""
+msgstr "Pole klucza"
 
 #: tsearcheditframe.label3.caption
 msgctxt "tsearcheditframe.label3.caption"
 msgid "Display Field"
-msgstr ""
+msgstr "Pole wyświetlane"
 
 #: tsearcheditframe.label4.caption
 msgid "Interval"
-msgstr ""
+msgstr "Interwał"
 
 #: tsearcheditframe.label5.caption
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #: tsearcheditframe.searchbuttoncheckbox.caption
 msgid "Search Button"
-msgstr ""
+msgstr "Przycisk wyszukiwania"
 
 #: tsearcheditframe.searchinglabel.caption
 msgid "Searching for... "
-msgstr ""
+msgstr "Wyszukiwanie... "
 
 #: tsearcheditframe.sortedcheckbox.caption
 msgid "Sorted"
-msgstr ""
+msgstr "Posortowane"
 
 #: ttageditorframe.allowduplicatescheckbox.caption
 msgid "Allow Duplicates"
-msgstr ""
+msgstr "Zezwalaj na duplikaty"
 
 #: ttageditorframe.autocompletecheckbox.caption
 msgid "Auto Complete"
-msgstr ""
+msgstr "Automatyczne uzupełnianie"
 
 #: ttageditorframe.autoheightcheckbox.caption
 msgid "Auto Height"
-msgstr ""
+msgstr "Automatyczna wysokość"
 
 #: ttageditorframe.dropdowncheckbox.caption
 msgid "DropDown"
-msgstr ""
+msgstr "Lista rozwijana"
 
 #: ttageditorframe.enabledcheckbox.caption
 msgid "Enabled"
-msgstr ""
+msgstr "Włączony"
 
 #: ttageditorframe.groupbox1.caption
 msgctxt "ttageditorframe.groupbox1.caption"
 msgid " Options "
-msgstr ""
+msgstr " Opcje "
 
 #: ttageditorframe.groupbox2.caption
 msgid " Test Events "
-msgstr ""
+msgstr " Zdarzenia testowe "
 
 #: ttageditorframe.inputtagsasarraylabel.caption
 msgid "input tags as delimited text"
-msgstr ""
+msgstr "wprowadź tagi jako tekst rozdzielony"
 
 #: ttageditorframe.inputtagsasarraylabel.hint
 msgid "you can use any char from TagInput.DelimiterChars"
-msgstr ""
+msgstr "możesz użyć dowolnego znaku z TagInput.DelimiterChars"
 
 #: ttageditorframe.itemsupdatebutton.caption
 msgid "update"
-msgstr ""
+msgstr "aktualizuj"
 
 #: ttageditorframe.label1.caption
 msgid "Max Tags"
-msgstr ""
+msgstr "Maksymalna liczba tagów"
 
 #: ttageditorframe.label10.caption
 msgctxt "ttageditorframe.label10.caption"
 msgid "Tag Editor"
-msgstr ""
+msgstr "Edytor tagów"
 
 #: ttageditorframe.label11.caption
 msgid "Tags: "
-msgstr ""
+msgstr "Tagi: "
 
 #: ttageditorframe.label2.caption
 msgctxt "ttageditorframe.label2.caption"
 msgid "Bg Color"
-msgstr ""
+msgstr "Kolor tła"
 
 #: ttageditorframe.label3.caption
 msgid "Text Color"
-msgstr ""
+msgstr "Kolor tekstu"
 
 #: ttageditorframe.label4.caption
 msgid "Combo Items"
-msgstr ""
+msgstr "Elementy listy rozwijanej"
 
 #: ttageditorframe.label5.caption
 msgctxt "ttageditorframe.label5.caption"
 msgid "Tag Editor"
-msgstr ""
+msgstr "Edytor tagów"
 
 #: ttageditorframe.label6.caption
 msgid "invalid tag name"
-msgstr ""
+msgstr "nieprawidłowa nazwa tagu"
 
 #: ttageditorframe.label7.caption
 msgid "don't delete, if tag name"
-msgstr ""
+msgstr "nie usuwaj, jeśli nazwa tagu"
 
 #: ttageditorframe.label8.caption
 msgid "prefix"
-msgstr ""
+msgstr "prefiks"
 
 #: ttageditorframe.label9.caption
 msgid "Tag Disabled"
-msgstr ""
+msgstr "Tag wyłączony"
 
 #: ttageditorframe.multilinescheckbox.caption
 msgid "Multi Lines"
-msgstr ""
+msgstr "Wiele wierszy"
 
 #: ttageditorframe.rttiitemsedit.text
 msgid "Android, Haiku, Nintendo"
-msgstr ""
+msgstr "Android, Haiku, Nintendo"
 
 #: ttageditorframe.rttilinktoeditradiobutton.caption
 msgid "Link to Edit"
-msgstr ""
+msgstr "Połącz z polem edycyjnym"
 
 #: ttageditorframe.rttilinktomemoradiobutton.caption
 msgid "Link to Memo"
-msgstr ""
+msgstr "Połącz z polem Memo"
 
 #: ttageditorframe.rttilinktotpersistentradiobutton.caption
 msgid "Link to TPersistent instance"
-msgstr ""
+msgstr "Połącz z instancją TPersistent"
 
 #: ttageditorframe.rttipersistentaddbutton.caption
 msgid "add"
-msgstr ""
+msgstr "dodaj"
 
 #: ttageditorframe.rttipersistentlabel.caption
 msgid "        "
-msgstr ""
+msgstr "        "
 
 #: ttageditorframe.showtagsasarraylabel.caption
 msgid "show tags as array"
-msgstr ""
+msgstr "pokaż tagi jako tablicę"
 
 #: ttageditorframe.speedbutton1.hint
 msgid "set clDefault"
-msgstr ""
+msgstr "ustaw clDefault"
 
 #: ttageditorframe.tabsheet1.caption
 msgid "Standard"
-msgstr ""
+msgstr "Standardowe"
 
 #: ttageditorframe.tabsheet2.caption
 msgid "RTTI"
-msgstr ""
+msgstr "RTTI"
 
 #: ttageditorframe.tagafteraddcheckbox.caption
 msgid "OnTagAfterAdd"
-msgstr ""
+msgstr "OnTagAfterAdd"
 
 #: ttageditorframe.tagafteraddedit.text
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ttageditorframe.tagafterdragcheckbox.caption
 msgid "OnTagAfterDrag"
-msgstr ""
+msgstr "OnTagAfterDrag"
 
 #: ttageditorframe.tagbeforeaddcheckbox.caption
 msgid "OnTagBeforeAdd"
-msgstr ""
+msgstr "OnTagBeforeAdd"
 
 #: ttageditorframe.tagbeforeaddedit.text
 msgid "abc"
-msgstr ""
+msgstr "abc"
 
 #: ttageditorframe.tagbeforedeletecheckbox.caption
 msgid "OnTagBeforeDelete"
-msgstr ""
+msgstr "OnTagBeforeDelete"
 
 #: ttageditorframe.tagbeforedeleteedit.text
 msgid "windows"
-msgstr ""
+msgstr "windows"
 
 #: ttageditorframe.tagclearalllabel.caption
 msgid "clear all"
-msgstr ""
+msgstr "wyczyść wszystko"
 
 #: ttageditorframe.tagclickcheckbox.caption
 msgid "OnTagClick"
-msgstr ""
+msgstr "OnTagClick"
 
 #: ttischartform.caption
 msgid "Chart"
-msgstr ""
+msgstr "Wykres"
 
 #: ttischartform.cb3d.caption
 msgid "3D"
-msgstr ""
+msgstr "3D"
 
 #: ttischartform.cbmarkattachment.text
 msgctxt "ttischartform.cbmarkattachment.text"
 msgid "Default"
-msgstr "Domyślny"
+msgstr "Domyślnie"
 
 #: ttischartform.cbmarkpositions.text
 msgid "Around"
-msgstr ""
+msgstr "Wokół"
 
 #: ttischartform.cbmarkpositionscentered.caption
 msgid "Mark positions centered"
-msgstr ""
+msgstr "Wyśrodkuj pozycje znaczników"
 
 #: ttischartform.cbrotate.caption
 msgid "Rotate labels"
-msgstr ""
+msgstr "Obróć etykiety"
 
 #: ttischartform.cbshowlabels.caption
 msgid "Show labels"
-msgstr ""
+msgstr "Pokaż etykiety"
 
 #: ttischartform.cmborientation.text
 msgid "normal"
-msgstr ""
+msgstr "normalny"
 
 #: ttischartform.label1.caption
 msgctxt "ttischartform.label1.caption"
 msgid "Values"
-msgstr ""
+msgstr "Wartości"
 
 #: ttischartform.lblanglerange.caption
 msgid "Angle range"
-msgstr ""
+msgstr "Zakres kąta"
 
 #: ttischartform.lbldepth.caption
 msgid "Depth"
-msgstr ""
+msgstr "Głębokość"
 
 #: ttischartform.lbldepthbrightnessdelta.caption
 msgid "Brightness delta"
-msgstr ""
+msgstr "Zmiana jasności"
 
 #: ttischartform.lbldistance.caption
 msgid "Distance"
-msgstr ""
+msgstr "Odległość"
 
 #: ttischartform.lblinnerradius.caption
 msgid "Inner radius %"
-msgstr ""
+msgstr "Promień wewnętrzny %"
 
 #: ttischartform.lbllabelangle.caption
 msgid "Label angle"
-msgstr ""
+msgstr "Kąt etykiety"
 
 #: ttischartform.lblstartangle.caption
 msgid "Start angle"
-msgstr ""
+msgstr "Kąt początkowy"
 
 #: ttischartform.lblviewangle.caption
 msgid "View angle"
-msgstr ""
+msgstr "Kąt widoku"
 
 #: ttischartform.lblwords.caption
 msgid "Label words"
-msgstr ""
+msgstr "Słowa etykiety"
 
 #: ttischartform.mostusedcheckbox.caption
 msgid "Most used values"
-msgstr ""
+msgstr "Najczęściej używane wartości"
 
 #: ttischartform.pieclipboardaction.caption
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Kopiuj do schowka"
 
 #: ttischartform.piecloseaction.caption
 msgctxt "ttischartform.piecloseaction.caption"
 msgid "Close"
-msgstr ""
+msgstr "Zamknij"
 
 #: ttischartform.piecustomizeaction.caption
 msgctxt "ttischartform.piecustomizeaction.caption"
 msgid "Customize"
-msgstr ""
+msgstr "Dostosuj"
 
 #: ttischartform.pierestoreaction.caption
 msgctxt "ttischartform.pierestoreaction.caption"
 msgid "Restore"
-msgstr ""
+msgstr "Przywróć"
 
 #: ttischartform.pietitleedit.texthint
 msgid "Title"
-msgstr ""
+msgstr "Tytuł"
 
 #: ttischartform.toolbar1.caption
 msgctxt "ttischartform.toolbar1.caption"
@@ -3616,48 +3632,48 @@ msgstr "Pasek narzędzi 1"
 
 #: ttischartform.toolbutton1.caption
 msgid "ToolButton1"
-msgstr ""
+msgstr "ToolButton1"
 
 #: ttischartform.toolbutton3.caption
 msgid "ToolButton3"
-msgstr ""
+msgstr "ToolButton3"
 
 #: ttischartform.toolbutton4.caption
 msgctxt "ttischartform.toolbutton4.caption"
 msgid "ToolButton4"
-msgstr ""
+msgstr "ToolButton4"
 
 #: ttischartform.topmostusedlabel.caption
 msgid "Top used"
-msgstr ""
+msgstr "Najczęściej używane"
 
 #: ttischartform.tspie.caption
 msgid "Pie"
-msgstr ""
+msgstr "Kołowy"
 
 #: ttisgrideditor.actaddcolumn.caption
 msgid "Add column"
-msgstr ""
+msgstr "Dodaj kolumnę"
 
 #: ttisgrideditor.actaddcolumns.caption
 msgid "Add missing columns from sample data"
-msgstr ""
+msgstr "Dodaj brakujące kolumny z danych przykładowych"
 
 #: ttisgrideditor.actclearall.caption
 msgid "Clear All"
-msgstr ""
+msgstr "Wyczyść wszystko"
 
 #: ttisgrideditor.actclearrows.caption
 msgid "Clear rows"
-msgstr ""
+msgstr "Wyczyść wiersze"
 
 #: ttisgrideditor.actclearselrows.caption
 msgid "Clear selected rows"
-msgstr ""
+msgstr "Wyczyść zaznaczone wiersze"
 
 #: ttisgrideditor.actcopysettings.caption
 msgid "Copy grid configuration to clipboard"
-msgstr ""
+msgstr "Kopiuj konfigurację siatki do schowka"
 
 #: ttisgrideditor.actdelcolumn.caption
 msgctxt "ttisgrideditor.actdelcolumn.caption"
@@ -3666,151 +3682,153 @@ msgstr "Usuń"
 
 #: ttisgrideditor.actloaddata.caption
 msgid "Load Data"
-msgstr ""
+msgstr "Wczytaj dane"
 
 #: ttisgrideditor.actloaddata.hint
 msgid "Load/refresh data"
-msgstr ""
+msgstr "Wczytaj/odśwież dane"
 
 #: ttisgrideditor.actmetadatacopy.caption
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "Kopiuj do schowka"
 
 #: ttisgrideditor.actmetadatapaste.caption
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Wklej ze schowka"
 
 #: ttisgrideditor.actpastecsv.caption
 msgid "Paste CSV data"
-msgstr ""
+msgstr "Wklej dane CSV"
 
 #: ttisgrideditor.actpastejsontemplate.caption
 msgid "Paste JSON template data"
-msgstr ""
+msgstr "Wklej dane szablonu JSON"
 
 #: ttisgrideditor.actremoveallcolumns.caption
 msgid "Remove all columns"
-msgstr ""
+msgstr "Usuń wszystkie kolumny"
 
 #: ttisgrideditor.actupdatecolumn.caption
 msgid "Update"
-msgstr ""
+msgstr "Aktualizuj"
 
 #: ttisgrideditor.autosortcheckbox.caption
 msgid "Auto Sort"
-msgstr ""
+msgstr "Automatyczne sortowanie"
 
 #: ttisgrideditor.autosortcheckbox.hint
 msgid "Check this option to use hoHeaderClickAutoSort in Header.Options"
-msgstr ""
+msgstr "Zaznacz tę opcję, aby użyć hoHeaderClickAutoSort w Header.Options"
 
 #: ttisgrideditor.caption
 msgid "Grid Editor"
-msgstr ""
+msgstr "Edytor siatki"
 
 #: ttisgrideditor.columnpropstab.caption
 msgid "Column Properties"
-msgstr ""
+msgstr "Właściwości kolumny"
 
 #: ttisgrideditor.edcolumnindex.editlabel.caption
 msgid "Column index"
-msgstr ""
+msgstr "Indeks kolumny"
 
 #: ttisgrideditor.edcolumnproperty.editlabel.caption
 msgid "Property name"
-msgstr ""
+msgstr "Nazwa właściwości"
 
 #: ttisgrideditor.edcolumntitle.editlabel.caption
 msgid "Column title"
-msgstr ""
+msgstr "Tytuł kolumny"
 
 #: ttisgrideditor.eddatatype.caption
 msgid "Data Type"
-msgstr ""
+msgstr "Typ danych"
 
 #: ttisgrideditor.editablecheckbox.caption
 msgid "Editable"
-msgstr ""
+msgstr "Edytowalne"
 
 #: ttisgrideditor.editablecheckbox.hint
 msgid "Check this option to use toEditable in TreeOptions.MiscOptions"
-msgstr ""
+msgstr "Zaznacz tę opcję, aby użyć toEditable w TreeOptions.MiscOptions"
 
 #: ttisgrideditor.gridpropstab.caption
 msgid "Common Properties"
-msgstr ""
+msgstr "Właściwości wspólne"
 
 #: ttisgrideditor.keepdatacheckbox.caption
 msgid "Keep data"
-msgstr ""
+msgstr "Zachowaj dane"
 
 #: ttisgrideditor.keepdatacheckbox.hint
 msgid "Check this option to use current data in the target grid"
-msgstr ""
+msgstr "Zaznacz tę opcję, aby użyć bieżących danych w siatce docelowej"
 
 #: ttisgrideditor.keynameslabel.caption
 msgid "Key Names"
-msgstr ""
+msgstr "Nazwy kluczy"
 
 #: ttisgrideditor.label1.caption
 msgid "Pos"
-msgstr ""
+msgstr "Poz"
 
 #: ttisgrideditor.label2.caption
 msgid "height offset"
-msgstr ""
+msgstr "przesunięcie wysokości"
 
 #: ttisgrideditor.metadatabutton.caption
 msgctxt "ttisgrideditor.metadatabutton.caption"
 msgid "MetaData"
-msgstr ""
+msgstr "Metadane"
 
 #: ttisgrideditor.multilinecheckbox.caption
 msgid "Multi Line"
-msgstr ""
+msgstr "Wielowierszowy"
 
 #: ttisgrideditor.multilinecheckbox.hint
 msgid ""
 "Check this option to used in DoInitNode method, indicating how the node state should be initiated\n"
 "- you better check \"Variable Node Height\" too"
 msgstr ""
+"Zaznacz tę opcję, aby użyć w metodzie DoInitNode, wskazując sposób inicjowania stanu węzła\n"
+"- zaleca się również zaznaczenie opcji „Zmienna wysokość węzła”"
 
 #: ttisgrideditor.multilineheightedit.hint
 msgid "Multi line height a node shall have"
-msgstr ""
+msgstr "Wielowierszowa wysokość, jaką powinien mieć węzeł"
 
 #: ttisgrideditor.multiselectcheckbox.caption
 msgid "Multi Select"
-msgstr ""
+msgstr "Wielokrotny wybór"
 
 #: ttisgrideditor.multiselectcheckbox.hint
 msgid "Check this option to use toMultiSelect in TreeOptions.SelectionOptions"
-msgstr ""
+msgstr "Zaznacz tę opcję, aby użyć toMultiSelect w TreeOptions.SelectionOptions"
 
 #: ttisgrideditor.parentnameslabel.caption
 msgid "Parent Names"
-msgstr ""
+msgstr "Nazwy elementów nadrzędnych"
 
 #: ttisgrideditor.readonlycheckbox.caption
 msgctxt "ttisgrideditor.readonlycheckbox.caption"
 msgid "Read Only"
-msgstr ""
+msgstr "Tylko do odczytu"
 
 #: ttisgrideditor.readonlycheckbox.hint
 msgid "Mark it for users do not be allow to set any value for this column"
-msgstr ""
+msgstr "Zaznacz, aby uniemożliwić użytkownikom ustawianie wartości dla tej kolumny"
 
 #: ttisgrideditor.requiredcheckbox.caption
 msgid "Required"
-msgstr ""
+msgstr "Wymagane"
 
 #: ttisgrideditor.requiredcheckbox.hint
 msgid "Mark it for users do not be allow to set NULL for this column"
-msgstr ""
+msgstr "Zaznacz, aby uniemożliwić użytkownikom ustawianie wartości NULL dla tej kolumny"
 
 #: ttisgrideditor.showchildrennodescheckbox.caption
 msgid "Children Nodes"
-msgstr ""
+msgstr "Węzły potomne"
 
 #: ttisgrideditor.showchildrennodescheckbox.hint
 msgid ""
@@ -3818,25 +3836,30 @@ msgid ""
 "- you should check this option before paste some JSON in grid,\n"
 "because it changes the algorithm that will parse the JSON"
 msgstr ""
+"Zaznacz tę opcję, aby pokazywać węzły potomne w trybie drzewa\n"
+"- należy zaznaczyć tę opcję przed wklejeniem danych JSON do siatki,\n"
+"ponieważ zmienia ona algorytm analizujący dane JSON"
 
 #: ttisgrideditor.sortcolumnclearlabel.caption
 msgctxt "ttisgrideditor.sortcolumnclearlabel.caption"
 msgid "clear"
-msgstr ""
+msgstr "wyczyść"
 
 #: ttisgrideditor.sortcolumnclearlabel.hint
 msgid ""
 "Clear Header Sort Column\n"
 "-> Header.SortColumn := -1"
 msgstr ""
+"Wyczyść kolumnę sortowania nagłówka\n"
+"-> Header.SortColumn := -1"
 
 #: ttisgrideditor.sortcolumnclearlabel1.caption
 msgid "2 columns"
-msgstr ""
+msgstr "2 kolumny"
 
 #: ttisgrideditor.sortcolumnclearlabel1.hint
 msgid "To create only Property and Value columns"
-msgstr ""
+msgstr "Aby utworzyć tylko kolumny Właściwość i Wartość"
 
 #: ttisgrideditor.tabsheet1.caption
 msgctxt "ttisgrideditor.tabsheet1.caption"
@@ -3845,21 +3868,23 @@ msgstr "Dane"
 
 #: ttisgrideditor.treemodecheckbox.caption
 msgid "Tree Mode"
-msgstr ""
+msgstr "Tryb drzewa"
 
 #: ttisgrideditor.treemodecheckbox.hint
 msgid ""
 "Check this option to use toShowRoot, toShowButtons, and toShowTreeLines in TreeOptions.PaintOptions\n"
 "- use KeyNames and ParentNames to define a relationship using column name(s)"
 msgstr ""
+"Zaznacz tę opcję, aby użyć toShowRoot, toShowButtons oraz toShowTreeLines w TreeOptions.PaintOptions\n"
+"- użyj parametrów KeyNames i ParentNames, aby zdefiniować relację za pomocą nazw kolumn"
 
 #: ttisgrideditor.variablenodeheightcheckbox.caption
 msgid "Variable Node Height"
-msgstr ""
+msgstr "Zmienna wysokość węzła"
 
 #: ttisgrideditor.variablenodeheightcheckbox.hint
 msgid "Check this option to use toVariableNodeHeight in TreeOptions.MiscOptions"
-msgstr ""
+msgstr "Zaznacz tę opcję, aby użyć toVariableNodeHeight w TreeOptions.MiscOptions"
 
 #: ttistoolbareditor.buttonslistview.columns[0].caption
 msgctxt "ttistoolbareditor.buttonslistview.columns[0].caption"
@@ -3868,102 +3893,102 @@ msgstr "Nazwa"
 
 #: ttistoolbareditor.buttonslistviewselectlabel.caption
 msgid "0 / 0"
-msgstr ""
+msgstr "0 / 0"
 
 #: ttistoolbareditor.caption
 msgid "ToolBar Editor"
-msgstr ""
+msgstr "Edytor paska narzędzi"
 
 #: ttistoolbareditor.lblmenutree.caption
 msgid "Available commands"
-msgstr ""
+msgstr "Dostępne polecenia"
 
 #: ttistoolbareditor.lbltoolbar.caption
 msgid "Toolbar commands"
-msgstr ""
+msgstr "Polecenia paska narzędzi"
 
 #: ttistoolbareditor.toolbarrestorebutton.caption
 msgctxt "ttistoolbareditor.toolbarrestorebutton.caption"
 msgid "Restore"
-msgstr ""
+msgstr "Przywróć"
 
 #: ttoolbarframe.action1.caption
 msgid "Action1"
-msgstr ""
+msgstr "Action1"
 
 #: ttoolbarframe.action2.caption
 msgid "Action2"
-msgstr ""
+msgstr "Action2"
 
 #: ttoolbarframe.action5.caption
 msgid "Action5"
-msgstr ""
+msgstr "Action5"
 
 #: ttoolbarframe.action6.caption
 msgid "Action6"
-msgstr ""
+msgstr "Action6"
 
 #: ttoolbarframe.autocheckaction.caption
 msgid "Check/Uncheck"
-msgstr ""
+msgstr "Zaznacz/Odznacz"
 
 #: ttoolbarframe.getsessionvaluesaction.caption
 msgid "Get Session Values"
-msgstr ""
+msgstr "Pobierz wartości sesji"
 
 #: ttoolbarframe.helloaction.caption
 msgid "Hello"
-msgstr ""
+msgstr "Witaj"
 
 #: ttoolbarframe.label1.caption
 msgid "Session Values"
-msgstr ""
+msgstr "Wartości sesji"
 
 #: ttoolbarframe.menuitem1.caption
 msgid "Do nothing"
-msgstr ""
+msgstr "Nic nie rób"
 
 #: ttoolbarframe.nohandleraction.caption
 msgid "NoHandler"
-msgstr ""
+msgstr "NoHandler"
 
 #: ttoolbarframe.popupaction.caption
 msgid "Popup"
-msgstr ""
+msgstr "Menu podręczne"
 
 #: ttoolbarframe.restoreaction.caption
 msgctxt "ttoolbarframe.restoreaction.caption"
 msgid "Restore"
-msgstr ""
+msgstr "Przywróć"
 
 #: ttoolbarframe.setsessionvaluesaction.caption
 msgid "Set Session Values"
-msgstr ""
+msgstr "Ustaw wartości sesji"
 
 #: ttoolbarframe.showeditoraction.caption
 msgid "Show Editor"
-msgstr ""
+msgstr "Pokaż edytor"
 
 #: ttoolbarframe.tistoolbar1.caption
 msgid "TisToolBar1"
-msgstr ""
+msgstr "TisToolBar1"
 
 #: ttoolbarframe.toolbutton4.caption
 msgctxt "ttoolbarframe.toolbutton4.caption"
 msgid "ToolButton4"
-msgstr ""
+msgstr "ToolButton4"
 
 #: ttoolbarframe.toolbutton6.caption
 msgid "ToolButton6"
-msgstr ""
+msgstr "ToolButton6"
 
 #: ttoolbarframe.toolbutton8.caption
 msgid "no action"
-msgstr ""
+msgstr "brak akcji"
 
 #: ttoolbarframe.toolbutton9.caption
 msgid "ToolButton9"
-msgstr ""
+msgstr "ToolButton9"
 
 #: tvisabout.caption
 msgctxt "tvisabout.caption"
@@ -4189,7 +4214,7 @@ msgstr "Usuń"
 
 #: tvisadvancedsecurity.action_duplicateace.caption
 msgid "Duplicate"
-msgstr ""
+msgstr "Duplikuj"
 
 #: tvisadvancedsecurity.action_ok.caption
 msgctxt "tvisadvancedsecurity.action_ok.caption"
@@ -4202,49 +4227,49 @@ msgstr "Przywróć domyślne"
 
 #: tvisadvancedsecurity.action_selectgroup.caption
 msgid "Action_SelectGroup"
-msgstr ""
+msgstr "Action_SelectGroup"
 
 #: tvisadvancedsecurity.action_selectinheritedobject.caption
 msgctxt "tvisadvancedsecurity.action_selectinheritedobject.caption"
 msgid "Select"
-msgstr ""
+msgstr "Wybierz"
 
 #: tvisadvancedsecurity.action_selectobject.caption
 msgctxt "tvisadvancedsecurity.action_selectobject.caption"
 msgid "Select"
-msgstr ""
+msgstr "Wybierz"
 
 #: tvisadvancedsecurity.action_selectowner.caption
 msgctxt "tvisadvancedsecurity.action_selectowner.caption"
 msgid "Select"
-msgstr ""
+msgstr "Wybierz"
 
 #: tvisadvancedsecurity.action_selectprincipal.caption
 msgctxt "tvisadvancedsecurity.action_selectprincipal.caption"
 msgid "Select"
-msgstr ""
+msgstr "Wybierz"
 
 #: tvisadvancedsecurity.bitbtn_group.caption
 msgctxt "tvisadvancedsecurity.bitbtn_group.caption"
 msgid "Select"
-msgstr ""
+msgstr "Wybierz"
 
 #: tvisadvancedsecurity.caption
 msgid "VisAdvancedSecurity"
-msgstr ""
+msgstr "VisAdvancedSecurity"
 
 #: tvisadvancedsecurity.checkboxca.caption
 msgid "Control access"
-msgstr ""
+msgstr "Kontrola dostępu"
 
 #: tvisadvancedsecurity.checkboxcc.caption
 msgctxt "tvisadvancedsecurity.checkboxcc.caption"
 msgid "Create child"
-msgstr ""
+msgstr "Tworzenie obiektów podrzędnych"
 
 #: tvisadvancedsecurity.checkboxci.caption
 msgid "Container inherited"
-msgstr ""
+msgstr "Dziedziczone przez kontener"
 
 #: tvisadvancedsecurity.checkboxd.caption
 msgctxt "tvisadvancedsecurity.checkboxd.caption"
@@ -4254,55 +4279,55 @@ msgstr "Usuń"
 #: tvisadvancedsecurity.checkboxdc.caption
 msgctxt "tvisadvancedsecurity.checkboxdc.caption"
 msgid "Delete child"
-msgstr ""
+msgstr "Usuwanie obiektów podrzędnych"
 
 #: tvisadvancedsecurity.checkboxdt.caption
 msgid "Delete tree"
-msgstr ""
+msgstr "Usuwanie drzewa"
 
 #: tvisadvancedsecurity.checkboxio.caption
 msgid "Inherit only"
-msgstr ""
+msgstr "Tylko dziedzicz"
 
 #: tvisadvancedsecurity.checkboxlc.caption
 msgid "List children"
-msgstr ""
+msgstr "Wyświetlanie zawartości"
 
 #: tvisadvancedsecurity.checkboxlo.caption
 msgid "List object"
-msgstr ""
+msgstr "Wyświetlanie obiektu"
 
 #: tvisadvancedsecurity.checkboxnp.caption
 msgid "No propagate"
-msgstr ""
+msgstr "Bez propagacji"
 
 #: tvisadvancedsecurity.checkboxoi.caption
 msgid "Object inherited"
-msgstr ""
+msgstr "Dziedziczone przez obiekt"
 
 #: tvisadvancedsecurity.checkboxrc.caption
 msgid "Read control"
-msgstr ""
+msgstr "Odczyt kontroli"
 
 #: tvisadvancedsecurity.checkboxrp.caption
 msgid "Read property"
-msgstr ""
+msgstr "Odczyt właściwości"
 
 #: tvisadvancedsecurity.checkboxsw.caption
 msgid "Self write"
-msgstr ""
+msgstr "Zapis własny"
 
 #: tvisadvancedsecurity.checkboxwdac.caption
 msgid "Write DAC"
-msgstr ""
+msgstr "Zapis DAC"
 
 #: tvisadvancedsecurity.checkboxwo.caption
 msgid "Write owner"
-msgstr ""
+msgstr "Zapis właściciela"
 
 #: tvisadvancedsecurity.checkboxwp.caption
 msgid "Write property"
-msgstr ""
+msgstr "Zapis właściwości"
 
 #: tvisadvancedsecurity.groupbox1.caption
 msgctxt "tvisadvancedsecurity.groupbox1.caption"
@@ -4312,31 +4337,31 @@ msgstr "Uprawnienia"
 #: tvisadvancedsecurity.groupbox2.caption
 msgctxt "tvisadvancedsecurity.groupbox2.caption"
 msgid "Inheritance flags"
-msgstr ""
+msgstr "Flagi dziedziczenia"
 
 #: tvisadvancedsecurity.label_group.caption
 msgctxt "tvisadvancedsecurity.label_group.caption"
 msgid "Group"
-msgstr ""
+msgstr "Grupa"
 
 #: tvisadvancedsecurity.label_object.caption
 msgctxt "tvisadvancedsecurity.label_object.caption"
 msgid "Object"
-msgstr ""
+msgstr "Obiekt"
 
 #: tvisadvancedsecurity.label_objectinheritance.caption
 msgctxt "tvisadvancedsecurity.label_objectinheritance.caption"
 msgid "Object inheritance"
-msgstr ""
+msgstr "Dziedziczenie obiektu"
 
 #: tvisadvancedsecurity.label_owner.caption
 msgid "Owner"
-msgstr ""
+msgstr "Właściciel"
 
 #: tvisadvancedsecurity.label_principal.caption
 msgctxt "tvisadvancedsecurity.label_principal.caption"
 msgid "Principal"
-msgstr ""
+msgstr "Podmiot zabezpieczeń"
 
 #: tvisadvancedsecurity.label_type.caption
 msgctxt "tvisadvancedsecurity.label_type.caption"
@@ -4351,7 +4376,7 @@ msgstr "Typ"
 #: tvisadvancedsecurity.tisgrid1.header.columns[1].text
 msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[1].text"
 msgid "Principal"
-msgstr ""
+msgstr "Podmiot zabezpieczeń"
 
 #: tvisadvancedsecurity.tisgrid1.header.columns[2].text
 msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[2].text"
@@ -4361,17 +4386,17 @@ msgstr "Uprawnienia"
 #: tvisadvancedsecurity.tisgrid1.header.columns[3].text
 msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[3].text"
 msgid "Object"
-msgstr ""
+msgstr "Obiekt"
 
 #: tvisadvancedsecurity.tisgrid1.header.columns[4].text
 msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[4].text"
 msgid "Inheritance flags"
-msgstr ""
+msgstr "Flagi dziedziczenia"
 
 #: tvisadvancedsecurity.tisgrid1.header.columns[5].text
 msgctxt "tvisadvancedsecurity.tisgrid1.header.columns[5].text"
 msgid "Object inheritance"
-msgstr ""
+msgstr "Dziedziczenie obiektu"
 
 #: tvisattributeeditor.action_add.caption
 msgctxt "tvisattributeeditor.action_add.caption"
@@ -4424,19 +4449,19 @@ msgstr "Wartość do dodania:"
 
 #: tvisattributeeditor.ts_multistringeditor.caption
 msgid "TS_MultiStringEditor"
-msgstr ""
+msgstr "TS_MultiStringEditor"
 
 #: tvisattributeeditor.ts_multitimeeditor.caption
 msgid "TS_MultiTimeEditor"
-msgstr ""
+msgstr "TS_MultiTimeEditor"
 
 #: tvisattributeeditor.ts_stringeditor.caption
 msgid "TS_StringEditor"
-msgstr ""
+msgstr "TS_StringEditor"
 
 #: tvisattributeeditor.ts_timeeditor.caption
 msgid "TS_TimeEditor"
-msgstr ""
+msgstr "TS_TimeEditor"
 
 #: tvischangedn.bitbtn_cancel.caption
 msgctxt "tvischangedn.bitbtn_cancel.caption"
@@ -4707,12 +4732,12 @@ msgstr "OK"
 
 #: tvislistgpo.caption
 msgid "Group Policy Objects"
-msgstr ""
+msgstr "Group Policy Objects"
 
 #: tvislistgpo.tisgrid1.header.columns[0].text
 msgctxt "tvislistgpo.tisgrid1.header.columns[0].text"
 msgid "Distinguished Name"
-msgstr ""
+msgstr "Distinguished Name"
 
 #: tvislistgpo.tisgrid1.header.columns[1].text
 msgctxt "tvislistgpo.tisgrid1.header.columns[1].text"
@@ -4722,11 +4747,11 @@ msgstr "Nazwa"
 #: tvislistgpo.tisgrid1.header.columns[2].text
 msgctxt "tvislistgpo.tisgrid1.header.columns[2].text"
 msgid "Display Name"
-msgstr ""
+msgstr "Nazwa wyświetlana"
 
 #: tvislistgpo.tisgrid1.header.columns[3].text
 msgid "Flags"
-msgstr ""
+msgstr "Flagi"
 
 #: tvislistother.action_add.caption
 msgctxt "tvislistother.action_add.caption"
@@ -4786,16 +4811,16 @@ msgstr "Wybierz dozwolony okres logowania w formacie UTC "
 
 #: tvislogonhours.panel_ntdsschedule.caption
 msgid "Panel_NTDSSchedule"
-msgstr ""
+msgstr "Panel_NTDSSchedule"
 
 #: tvislogonhours.panel_sitelinkschedule.caption
 msgid "Panel_SiteLinkSchedule"
-msgstr ""
+msgstr "Panel_SiteLinkSchedule"
 
 #: tvislogonhours.radiobutton_fourtimesperhour.caption
 msgctxt "tvislogonhours.radiobutton_fourtimesperhour.caption"
 msgid "Four Times per Hour"
-msgstr ""
+msgstr "Cztery razy na godzinę"
 
 #: tvislogonhours.radiobutton_logondenied.caption
 msgid "Logon Denied"
@@ -4803,32 +4828,32 @@ msgstr "Logowanie zabronione"
 
 #: tvislogonhours.radiobutton_logonpermitted.caption
 msgid "Logon Permitted"
-msgstr ""
+msgstr "Logowanie dozwolone"
 
 #: tvislogonhours.radiobutton_none.caption
 msgctxt "tvislogonhours.radiobutton_none.caption"
 msgid "None"
-msgstr ""
+msgstr "Brak"
 
 #: tvislogonhours.radiobutton_onceperhour.caption
 msgctxt "tvislogonhours.radiobutton_onceperhour.caption"
 msgid "Once per Hour"
-msgstr ""
+msgstr "Raz na godzinę"
 
 #: tvislogonhours.radiobutton_replicationavailable.caption
 msgctxt "tvislogonhours.radiobutton_replicationavailable.caption"
 msgid "Replication Available"
-msgstr ""
+msgstr "Replikacja dostępna"
 
 #: tvislogonhours.radiobutton_replicationnotavailable.caption
 msgctxt "tvislogonhours.radiobutton_replicationnotavailable.caption"
 msgid "Replication Not Available"
-msgstr ""
+msgstr "Replikacja niedostępna"
 
 #: tvislogonhours.radiobutton_twiceperhour.caption
 msgctxt "tvislogonhours.radiobutton_twiceperhour.caption"
 msgid "Twice per Hour"
-msgstr ""
+msgstr "Dwa razy na godzinę"
 
 #: tvislogonworkstation.action_add.caption
 msgctxt "tvislogonworkstation.action_add.caption"
@@ -4911,7 +4936,7 @@ msgstr "Anuluj"
 
 #: tvismodifygplink.caption
 msgid "VisModifyGPLink"
-msgstr ""
+msgstr "VisModifyGPLink"
 
 #: tvismodifygplink.label1.caption
 msgid "Object:"
@@ -4946,15 +4971,15 @@ msgstr "Utwórz w:"
 
 #: tvisnewquery.action_browse.caption
 msgid "Action_Browse"
-msgstr ""
+msgstr "Action_Browse"
 
 #: tvisnewquery.action_cancel.caption
 msgid "Action_Cancel"
-msgstr ""
+msgstr "Action_Cancel"
 
 #: tvisnewquery.action_definequery.caption
 msgid "Action_DefineQuery"
-msgstr ""
+msgstr "Action_DefineQuery"
 
 #: tvisnewquery.action_ok.caption
 msgid "Action_OK"
@@ -5018,16 +5043,16 @@ msgstr "Nowy rekord zasobu"
 #: tvisnewresourcerecord.edit2.text
 msgctxt "tvisnewresourcerecord.edit2.text"
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: tvisnewresourcerecord.edit3.text
 msgctxt "tvisnewresourcerecord.edit3.text"
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: tvisnewresourcerecord.edit_mxpriority.text
 msgid "10"
-msgstr ""
+msgstr "10"
 
 #: tvisnewresourcerecord.label1.caption
 msgctxt "tvisnewresourcerecord.label1.caption"
@@ -5364,7 +5389,7 @@ msgstr "Możesz określić, czy ta strefa DNS akceptuje bezpieczne, niezabezpiec
 
 #: tvisnewzonewizard.label3.caption
 msgid "A zone translates DNS names to related data, such as IP addresses or network services."
-msgstr ""
+msgstr "Strefa tłumaczy nazwy DNS na powiązane dane, takie jak adresy IP lub usługi sieciowe."
 
 #: tvisnewzonewizard.label30.caption
 msgid "Dynamic Update"
@@ -5461,7 +5486,7 @@ msgstr "Strefa szczątkowa"
 
 #: tvisomniselect.action_menuitemclick.caption
 msgid "Action_MenuItemClick"
-msgstr ""
+msgstr "Action_MenuItemClick"
 
 #: tvisomniselect.action_ok.caption
 msgctxt "tvisomniselect.action_ok.caption"
@@ -5686,7 +5711,7 @@ msgstr "Wyszukaj domeny"
 #: tvisprofileconfiguration.action_selectkeytab.caption
 msgctxt "tvisprofileconfiguration.action_selectkeytab.caption"
 msgid "Select"
-msgstr ""
+msgstr "Wybierz"
 
 #: tvisprofileconfiguration.action_showdcinfos.caption
 msgid "Show DC infos"
@@ -5706,7 +5731,7 @@ msgstr "Konfiguracja profilu"
 
 #: tvisprofileconfiguration.edit_timeout.text
 msgid "5000"
-msgstr ""
+msgstr "5000"
 
 #: tvisprofileconfiguration.groupbox_account.caption
 msgid "Account"
@@ -5723,7 +5748,7 @@ msgstr "Domena"
 
 #: tvisprofileconfiguration.groupbox_keytab.caption
 msgid "KeyTab"
-msgstr ""
+msgstr "KeyTab"
 
 #: tvisprofileconfiguration.label_algorithm.caption
 msgid "Algorithm"
@@ -5770,7 +5795,7 @@ msgstr "Hasło"
 
 #: tvisprofileconfiguration.label_profilename.caption
 msgid "Profile name: "
-msgstr ""
+msgstr "Nazwa profilu:"
 
 #: tvisprofileconfiguration.label_simple.caption
 msgctxt "tvisprofileconfiguration.label_simple.caption"
@@ -5801,7 +5826,7 @@ msgstr "Dodaj"
 #: tvisprofilemanager.action_delete.caption
 msgctxt "tvisprofilemanager.action_delete.caption"
 msgid "Action_Delete"
-msgstr ""
+msgstr "Action_Delete"
 
 #: tvisprofilemanager.action_edit.caption
 msgid "Action_Edit"
@@ -5859,7 +5884,7 @@ msgstr "Pasek narzędzi 1"
 
 #: tvisprofilemanager.toolbutton_switchlistview.caption
 msgid "ToolButton_SwitchListView"
-msgstr ""
+msgstr "ToolButton_SwitchListView"
 
 #: tvisproperties.action_apply.caption
 msgctxt "tvisproperties.action_apply.caption"
@@ -6028,7 +6053,7 @@ msgstr "Anuluj"
 #: tvisrename.caption
 msgctxt "tvisrename.caption"
 msgid "Rename"
-msgstr ""
+msgstr "Zmień nazwę"
 
 #: tvisrename.label_displayname.caption
 msgctxt "tvisrename.label_displayname.caption"
@@ -6053,16 +6078,16 @@ msgstr "Nazwisko:"
 #: tvisrename.label_userlogonname.caption
 msgctxt "tvisrename.label_userlogonname.caption"
 msgid "User logon name:"
-msgstr ""
+msgstr "Nazwa logowania użytkownika:"
 
 #: tvisrename.label_userlogonname2000.caption
 msgctxt "tvisrename.label_userlogonname2000.caption"
 msgid "User logon name (pre-Windows 2000):"
-msgstr ""
+msgstr "Nazwa logowania użytkownika (poprzednia niż system Windows 2000):"
 
 #: tvisrename.tabsheet1.caption
 msgid "TabSheet1"
-msgstr ""
+msgstr "TabSheet1"
 
 #: tvisrootdseinfos.caption
 msgid "DC infos"
@@ -6139,11 +6164,11 @@ msgstr "Rozpoczyna się od"
 
 #: tvissearch.edit_pagecount.text
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #: tvissearch.edit_pagesize.text
 msgid "2000"
-msgstr ""
+msgstr "2000"
 
 #: tvissearch.label_basicvalue.caption
 msgid "Search a name:"
@@ -6265,15 +6290,14 @@ msgstr "OK"
 msgctxt "tvisselectobjectguid.bitbtn3.caption"
 msgid "Cancel"
 msgstr "Anuluj"
-
 #: tvisselectobjectguid.caption
 msgid "Select Object GUID"
-msgstr ""
+msgstr "Wybierz identyfikator GUID obiektu"
 
 #: tvisselectobjectguid.label1.caption
 msgctxt "tvisselectobjectguid.label1.caption"
 msgid "Filter:"
-msgstr ""
+msgstr "Filtr:"
 
 #: tvisselectobjectguid.label2.caption
 msgctxt "tvisselectobjectguid.label2.caption"
@@ -6283,7 +6307,7 @@ msgstr "Łącznie : 0 elementów"
 #: tvisselectobjectguid.tisgrid1.header.columns[0].text
 msgctxt "tvisselectobjectguid.tisgrid1.header.columns[0].text"
 msgid "Distinguished Name"
-msgstr ""
+msgstr "Distinguished Name"
 
 #: tvisselectobjectguid.tisgrid1.header.columns[1].text
 msgctxt "tvisselectobjectguid.tisgrid1.header.columns[1].text"
@@ -6292,7 +6316,7 @@ msgstr "Nazwa"
 
 #: tvisselectobjectguid.tisgrid1.header.columns[2].text
 msgid "GUID"
-msgstr ""
+msgstr "GUID"
 
 #: tvisselectobjectguid.tisgrid1.header.columns[3].text
 msgctxt "tvisselectobjectguid.tisgrid1.header.columns[3].text"
@@ -6316,12 +6340,12 @@ msgstr "OK"
 
 #: tvisselectobjectsid.caption
 msgid "Select ObjectSID"
-msgstr ""
+msgstr "Wybierz identyfikator ObjectSID"
 
 #: tvisselectobjectsid.label1.caption
 msgctxt "tvisselectobjectsid.label1.caption"
 msgid "Filter:"
-msgstr ""
+msgstr "Filtr:"
 
 #: tvisselectobjectsid.label2.caption
 msgctxt "tvisselectobjectsid.label2.caption"
@@ -6331,7 +6355,7 @@ msgstr "Łącznie : 0 elementów"
 #: tvisselectobjectsid.tisgrid1.header.columns[0].text
 msgctxt "tvisselectobjectsid.tisgrid1.header.columns[0].text"
 msgid "Distinguished Name"
-msgstr ""
+msgstr "Distinguished Name"
 
 #: tvisselectobjectsid.tisgrid1.header.columns[1].text
 msgctxt "tvisselectobjectsid.tisgrid1.header.columns[1].text"
@@ -6340,15 +6364,15 @@ msgstr "Nazwa"
 
 #: tvisselectobjectsid.tisgrid1.header.columns[2].text
 msgid "SID"
-msgstr ""
+msgstr "SID"
 
 #: tvisshowrelationship.action_focusselectedgroup.caption
 msgid "Focus selected group"
-msgstr ""
+msgstr "Przejdź do zaznaczonej grupy"
 
 #: tvisshowrelationship.action_focusselectedingrid.caption
 msgid "Focus Selected"
-msgstr ""
+msgstr "Przejdź do zaznaczonego"
 
 #: tvisshowrelationship.action_property.caption
 msgctxt "tvisshowrelationship.action_property.caption"
@@ -6362,20 +6386,20 @@ msgstr "Odśwież"
 
 #: tvisshowrelationship.action_savetodot.caption
 msgid "Save to DOT"
-msgstr ""
+msgstr "Zapisz do pliku DOT"
 
 #: tvisshowrelationship.action_savetopng.caption
 msgid "Save to PNG"
-msgstr ""
+msgstr "Zapisz do pliku PNG"
 
 #: tvisshowrelationship.action_synchronize.caption
 msgctxt "tvisshowrelationship.action_synchronize.caption"
 msgid "Synchronize"
-msgstr ""
+msgstr "Synchronizuj"
 
 #: tvisshowrelationship.action_unfocusgroup.caption
 msgid "Clear focused group"
-msgstr ""
+msgstr "Wyczyszczenie wyboru grupy"
 
 #: tvisshowrelationship.bitbtn_next.caption
 msgctxt "tvisshowrelationship.bitbtn_next.caption"
@@ -6389,39 +6413,39 @@ msgstr "Wstecz"
 
 #: tvisshowrelationship.caption
 msgid "Group relations"
-msgstr ""
+msgstr "Relacje grup"
 
 #: tvisshowrelationship.checkbox1.caption
 msgid "Circular dependencies"
-msgstr ""
+msgstr "Zależności cykliczne"
 
 #: tvisshowrelationship.checkbox_hidesinglenode.caption
 msgid "Hide single node"
-msgstr ""
+msgstr "Ukryj pojedyncze węzły"
 
 #: tvisshowrelationship.checkbox_showuser.caption
 msgid "Show user"
-msgstr ""
+msgstr "Pokaż użytkowników"
 
 #: tvisshowrelationship.label1.caption
 msgid "Search: "
-msgstr ""
+msgstr "Szukaj: "
 
 #: tvisshowrelationship.label2.caption
 msgid "Selected: "
-msgstr ""
+msgstr "Zaznaczone: "
 
 #: tvisshowrelationship.label_search.caption
 msgid "Search:"
-msgstr ""
+msgstr "Szukaj:"
 
 #: tvisshowrelationship.tisgrid_groupdata.header.columns[0].text
 msgid "Index"
-msgstr ""
+msgstr "Indeks"
 
 #: tvisshowrelationship.tisgrid_groupdata.header.columns[1].text
 msgid "DN"
-msgstr ""
+msgstr "DN"
 
 #: tvisshowrelationship.tisgrid_groupdata.header.columns[2].text
 msgctxt "tvisshowrelationship.tisgrid_groupdata.header.columns[2].text"
@@ -6430,11 +6454,11 @@ msgstr "Nazwa"
 
 #: tvisshowrelationship.tisgrid_groupdata.header.columns[3].text
 msgid "Member"
-msgstr ""
+msgstr "Członek"
 
 #: tvisshowrelationship.tisgrid_groupdata.header.columns[4].text
 msgid "Member of"
-msgstr ""
+msgstr "Członek grupy"
 
 #: tvistaskmove.action_ok.caption
 msgctxt "tvistaskmove.action_ok.caption"
@@ -6502,32 +6526,32 @@ msgstr "Status blokady konta na tym kontrolerze domeny : "
 
 #: tvisviewkeytab.action_copytoclipboard.caption
 msgid "Copy to clipboard (base64)"
-msgstr ""
+msgstr "Kopiuj do schowka (base64)"
 
 #: tvisviewkeytab.action_loadfromfile.caption
 msgid "Load from file"
-msgstr ""
+msgstr "Wczytaj z pliku"
 
 #: tvisviewkeytab.action_savetofile.caption
 msgid "Save to file"
-msgstr ""
+msgstr "Zapisz do pliku"
 
 #: tvisviewkeytab.action_selectfolder.caption
 msgid "Select folder"
-msgstr ""
+msgstr "Wybierz folder"
 
 #: tvisviewkeytab.bitbtn5.caption
 msgctxt "tvisviewkeytab.bitbtn5.caption"
 msgid "Close"
-msgstr ""
+msgstr "Zamknij"
 
 #: tvisviewkeytab.caption
 msgid "View KeyTab"
-msgstr ""
+msgstr "Wyświetl plik KeyTab"
 
 #: tvisviewkeytab.label1.caption
 msgid "Filename"
-msgstr ""
+msgstr "Nazwa pliku"
 
 #: tvisviewkeytab.label2.caption
 msgctxt "tvisviewkeytab.label2.caption"
@@ -6536,7 +6560,7 @@ msgstr "Folder"
 
 #: tvisviewkeytab.tisgrid1.header.columns[0].text
 msgid "KVNO"
-msgstr ""
+msgstr "KVNO"
 
 #: tvisviewkeytab.tisgrid1.header.columns[1].text
 msgctxt "tvisviewkeytab.tisgrid1.header.columns[1].text"
@@ -6546,11 +6570,11 @@ msgstr "Znacznik czasu"
 #: tvisviewkeytab.tisgrid1.header.columns[2].text
 msgctxt "tvisviewkeytab.tisgrid1.header.columns[2].text"
 msgid "Principal"
-msgstr ""
+msgstr "Podmiot zabezpieczeń"
 
 #: tvisviewkeytab.tisgrid1.header.columns[3].text
 msgid "Encryption type"
-msgstr ""
+msgstr "Typ szyfrowania"
 
 #: tvisviewkeytab.tisgrid1.header.columns[4].text
 msgctxt "tvisviewkeytab.tisgrid1.header.columns[4].text"
@@ -6933,7 +6957,7 @@ msgstr "ten obiekt"
 #: ucommon.rsfourperhour
 msgctxt "ucommon.rsfourperhour"
 msgid "Four Times per Hour"
-msgstr ""
+msgstr "Cztery razy na godzinę"
 
 #: ucommon.rsfriday
 msgid "Friday"
@@ -7224,7 +7248,7 @@ msgstr "Nie można wykryć żadnych innych katalogów globalnych w lesie."
 #: ucommon.rsnone
 msgctxt "ucommon.rsnone"
 msgid "None"
-msgstr ""
+msgstr "Żaden"
 
 #: ucommon.rsnosettingsfound
 msgid "This server does not contain a settings object. As a result, the General Properties page cannot be populated, and all fields will be empty."
@@ -7257,7 +7281,7 @@ msgstr "Żądana operacja spowodowałaby utworzenie wpisu z nieodpowiednim zesta
 #: ucommon.rsonceperhour
 msgctxt "ucommon.rsonceperhour"
 msgid "Once per Hour"
-msgstr ""
+msgstr "Raz na godzinę"
 
 #: ucommon.rsoperationserror
 msgid "Operation occurs in a wrong order."
@@ -7270,7 +7294,7 @@ msgstr "Określono, że hasło nigdy nie powinno wygasać."
 #: ucommon.rspreparedjoin
 msgctxt "ucommon.rspreparedjoin"
 msgid "Prepare DJOIN"
-msgstr ""
+msgstr "Przygotuj DJOIN"
 
 #: ucommon.rspreparedjoinconfirmation
 msgid "You are about to change the password for the selected machines. This will remove the trust relationships with the domain. Continue?"
@@ -7295,17 +7319,17 @@ msgstr "To nie powinno być błędem. Klient powinien podążać za odesłaniem 
 #: ucommon.rsrename
 msgctxt "ucommon.rsrename"
 msgid "Rename"
-msgstr ""
+msgstr "Zmień nazwę"
 
 #: ucommon.rsreplicationavailable
 msgctxt "ucommon.rsreplicationavailable"
 msgid "Replication Available"
-msgstr ""
+msgstr "Replikacja dostępna"
 
 #: ucommon.rsreplicationdenied
 msgctxt "ucommon.rsreplicationdenied"
 msgid "Replication Not Available"
-msgstr ""
+msgstr "Replikacja niedostępna"
 
 #: ucommon.rsresetpassword
 msgctxt "ucommon.rsresetpassword"
@@ -7378,17 +7402,17 @@ msgstr "Kontrola dostępu"
 #: ucommon.rssecaccesscreatechild
 msgctxt "ucommon.rssecaccesscreatechild"
 msgid "Create child"
-msgstr ""
+msgstr "Stwórz obiekt podrzędny"
 
 #: ucommon.rssecaccessdelete
 msgctxt "ucommon.rssecaccessdelete"
 msgid "Delete"
-msgstr "Usuwanie"
+msgstr "Usuń"
 
 #: ucommon.rssecaccessdeletechild
 msgctxt "ucommon.rssecaccessdeletechild"
 msgid "Delete child"
-msgstr ""
+msgstr "Usuń obiekt podrzędny"
 
 #: ucommon.rssecaccessdeletetree
 msgctxt "ucommon.rssecaccessdeletetree"
@@ -7446,7 +7470,7 @@ msgstr "Zapis osobisty"
 #: ucommon.rssecaccesssynchronize
 msgctxt "ucommon.rssecaccesssynchronize"
 msgid "Synchronize"
-msgstr ""
+msgstr "Synchronizuj"
 
 #: ucommon.rssecaccesswritedac
 msgctxt "ucommon.rssecaccesswritedac"
@@ -7571,7 +7595,7 @@ msgstr "Wtorek"
 #: ucommon.rstwiceperhour
 msgctxt "ucommon.rstwiceperhour"
 msgid "Twice per Hour"
-msgstr ""
+msgstr "Dwa razy na godzinę"
 
 #: ucommon.rsuacserver
 msgid "Domain controller"
@@ -7589,7 +7613,8 @@ msgstr "Docelowy atrybut nie istnieje w schemacie serwera."
 msgid ""
 "There are unsaved changes.\n"
 "Are you sure you want to quit?"
-msgstr "Istnieją niezapisane zmiany.\nCzy na pewno chcesz wyjść?"
+msgstr "Istnieją niezapisane zmiany.\n"
+"Czy na pewno chcesz wyjść?"
 
 #: ucommon.rsunwillingtoperform
 msgid "The server is not willing to process the requested operation for some reason. This is a fairly generic result code that may be used if the server refuses to process an operation for a reason that is not covered by a more specific result code."
@@ -7604,6 +7629,8 @@ msgid ""
 "The pre-Windows 2000 logon name you have chosen is already in use in this domain.\n"
 "Choose another pre-Windows 2000 logon name, and then try again."
 msgstr ""
+"Wybrana nazwa logowania (poprzednia niż system Windows 2000) jest już używana w tej domenie.\n"
+"Wybierz inną nazwę logowania (poprzednią niż system Windows 2000), a następnie spróbuj ponownie."
 
 #: ucommon.rsusermustchangepasswordandcannotchange
 msgid "You cannot check both User must change password at next logon and User cannot change password for the same user."
