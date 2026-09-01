@@ -1093,6 +1093,9 @@ msgstr ""
 msgid "The Password never expires."
 msgstr ""
 
+#: ucommon.rsnogcdetected
+msgid "No other Global Catalogs can be detected in the forest."
+msgstr ""
 
 #: ucommon.rsnone
 msgctxt "ucommon.rsnone"
@@ -1101,10 +1104,6 @@ msgstr ""
 
 #: ucommon.rsnosettingsfound
 msgid "This server does not contain a settings object. As a result, the General Properties page cannot be populated, and all fields will be empty."
-msgstr ""
-
-#: ucommon.rsnogcdetected
-msgid "No other Global Catalogs can be detected in the forest."
 msgstr ""
 
 #: ucommon.rsnosuchattribute

@@ -1099,6 +1099,9 @@ msgstr "Ο χρήστης δεν μπορεί να αλλάξει τον κωδ�
 msgid "The Password never expires."
 msgstr "Ο κωδικός δεν λήγει ποτέ."
 
+#: ucommon.rsnogcdetected
+msgid "No other Global Catalogs can be detected in the forest."
+msgstr ""
 
 #: ucommon.rsnone
 #, fuzzy
@@ -1108,10 +1111,6 @@ msgstr "Κανένας"
 
 #: ucommon.rsnosettingsfound
 msgid "This server does not contain a settings object. As a result, the General Properties page cannot be populated, and all fields will be empty."
-msgstr ""
-
-#: ucommon.rsnogcdetected
-msgid "No other Global Catalogs can be detected in the forest."
 msgstr ""
 
 #: ucommon.rsnosuchattribute
