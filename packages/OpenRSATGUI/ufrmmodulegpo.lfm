@@ -257,7 +257,7 @@ object FrmModuleGPO: TFrmModuleGPO
         Left = 0
         Height = 430
         Top = 34
-        Width = 260
+        Width = 250
         Align = alLeft
         BevelOuter = bvNone
         ClientHeight = 430
@@ -308,7 +308,7 @@ object FrmModuleGPO: TFrmModuleGPO
         end
       end
       object Splitter_Configuration: TSplitter
-        Left = 260
+        Left = 250
         Height = 430
         Top = 34
         Width = 5
@@ -384,8 +384,9 @@ object FrmModuleGPO: TFrmModuleGPO
               Left = 8
               Height = 26
               Top = 4
-              Width = 100
+              Width = 110
               Anchors = [akTop, akLeft]
+              AutoSize = True
               BorderSpacing.Around = 8
               Caption = 'Stage'
               TabOrder = 0
@@ -396,11 +397,12 @@ object FrmModuleGPO: TFrmModuleGPO
               AnchorSideLeft.Side = asrBottom
               AnchorSideTop.Control = Panel_ParameterActions
               AnchorSideTop.Side = asrCenter
-              Left = 116
+              Left = 126
               Height = 26
               Top = 4
-              Width = 100
+              Width = 110
               Anchors = [akTop, akLeft]
+              AutoSize = True
               BorderSpacing.Around = 8
               Caption = 'Discard'
               TabOrder = 1
@@ -690,8 +692,9 @@ object FrmModuleGPO: TFrmModuleGPO
             Left = 8
             Height = 26
             Top = 115
-            Width = 100
+            Width = 110
             Anchors = [akTop, akLeft]
+            AutoSize = True
             BorderSpacing.Around = 8
             Caption = 'Save'
             Default = True
@@ -703,11 +706,12 @@ object FrmModuleGPO: TFrmModuleGPO
             AnchorSideLeft.Side = asrBottom
             AnchorSideTop.Control = Button_ConfigurationSave
             AnchorSideTop.Side = asrCenter
-            Left = 116
+            Left = 126
             Height = 26
             Top = 115
-            Width = 100
+            Width = 130
             Anchors = [akTop, akLeft]
+            AutoSize = True
             BorderSpacing.Around = 8
             Caption = 'Discard changes'
             TabOrder = 4
@@ -812,14 +816,15 @@ object FrmModuleGPO: TFrmModuleGPO
       end
       object Panel_GPTFiles: TPanel
         Left = 0
-        Height = 200
-        Top = 144
+        Height = 280
+        Top = 64
         Width = 527
         Align = alBottom
         BevelOuter = bvNone
         BorderSpacing.Around = 8
-        ClientHeight = 200
+        ClientHeight = 280
         ClientWidth = 527
+        Constraints.MinHeight = 120
         TabOrder = 1
         object Label_GPTFiles: TLabel
           Left = 8
@@ -874,10 +879,11 @@ object FrmModuleGPO: TFrmModuleGPO
         end
         object TisGrid_GPTFiles: TTisGrid
           Left = 8
-          Height = 60
+          Height = 160
           Top = 73
           Width = 511
           Align = alTop
+          Constraints.MinHeight = 60
           Header.AutoSizeIndex = -1
           Header.Columns = <          
             item
@@ -914,10 +920,19 @@ object FrmModuleGPO: TFrmModuleGPO
           ZebraColor = 15593713
           PopupMenuOptions = []
         end
+        object Splitter_GPTFiles: TSplitter
+          Left = 8
+          Height = 5
+          Top = 233
+          Width = 511
+          Align = alTop
+          ResizeAnchor = akTop
+          MinSize = 60
+        end
         object Memo_GPTIni: TMemo
           Left = 8
-          Height = 59
-          Top = 141
+          Height = 42
+          Top = 238
           Width = 511
           Align = alClient
           BorderSpacing.Around = 8
@@ -925,6 +940,15 @@ object FrmModuleGPO: TFrmModuleGPO
           ScrollBars = ssAutoVertical
           TabOrder = 2
         end
+      end
+      object Splitter_GPTArea: TSplitter
+        Left = 0
+        Height = 5
+        Top = 59
+        Width = 527
+        Align = alBottom
+        ResizeAnchor = akBottom
+        MinSize = 120
       end
       object TisGrid_Attributes: TTisGrid
         Left = 0
