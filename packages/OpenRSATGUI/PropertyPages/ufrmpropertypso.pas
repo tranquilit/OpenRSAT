@@ -10,13 +10,17 @@ uses
   Forms,
   Controls,
   StdCtrls,
-  ExtCtrls;
+  ExtCtrls,
+  Buttons,
+  tis.ui.grid.core;
 
 type
 
   { TFrmPropertyPSO }
 
   TFrmPropertyPSO = class(TFrame)
+    BitBtn_Add: TBitBtn;
+    BitBtn_Remove: TBitBtn;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
     Edit1: TEdit;
@@ -49,6 +53,8 @@ type
     Panel6: TPanel;
     Panel7: TPanel;
     Panel8: TPanel;
+    Panel9: TPanel;
+    TisGrid_AppliesTo: TTisGrid;
   private
 
   public

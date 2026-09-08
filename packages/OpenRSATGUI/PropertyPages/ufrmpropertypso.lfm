@@ -1,10 +1,10 @@
 object FrmPropertyPSO: TFrmPropertyPSO
   Left = 0
-  Height = 462
+  Height = 557
   Top = 0
-  Width = 409
-  ClientHeight = 462
-  ClientWidth = 409
+  Width = 427
+  ClientHeight = 557
+  ClientWidth = 427
   LCLVersion = '4.5.0.0'
   TabOrder = 0
   DesignLeft = 525
@@ -13,24 +13,24 @@ object FrmPropertyPSO: TFrmPropertyPSO
     Left = 8
     Height = 398
     Top = 8
-    Width = 393
+    Width = 411
     Align = alTop
     AutoSize = True
     BorderSpacing.Around = 8
     Caption = 'Password settings'
     ClientHeight = 378
-    ClientWidth = 389
+    ClientWidth = 407
     TabOrder = 0
     object Panel1: TPanel
       Left = 0
       Height = 39
       Top = 0
-      Width = 389
+      Width = 407
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
       ClientHeight = 39
-      ClientWidth = 389
+      ClientWidth = 407
       TabOrder = 0
       object Label1: TLabel
         Left = 8
@@ -48,7 +48,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Left = 116
         Height = 23
         Top = 8
-        Width = 265
+        Width = 283
         Align = alClient
         BorderSpacing.Around = 8
         ParentBidiMode = False
@@ -59,12 +59,12 @@ object FrmPropertyPSO: TFrmPropertyPSO
       Left = 0
       Height = 39
       Top = 39
-      Width = 389
+      Width = 407
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
       ClientHeight = 39
-      ClientWidth = 389
+      ClientWidth = 407
       TabOrder = 1
       object Label2: TLabel
         Left = 8
@@ -82,7 +82,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Left = 116
         Height = 23
         Top = 8
-        Width = 265
+        Width = 283
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
@@ -92,12 +92,12 @@ object FrmPropertyPSO: TFrmPropertyPSO
       Left = 0
       Height = 39
       Top = 78
-      Width = 389
+      Width = 407
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
       ClientHeight = 39
-      ClientWidth = 389
+      ClientWidth = 407
       TabOrder = 2
       object Label3: TLabel
         Left = 8
@@ -115,7 +115,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Left = 316
         Height = 23
         Top = 8
-        Width = 65
+        Width = 83
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
@@ -125,12 +125,12 @@ object FrmPropertyPSO: TFrmPropertyPSO
       Left = 0
       Height = 39
       Top = 117
-      Width = 389
+      Width = 407
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
       ClientHeight = 39
-      ClientWidth = 389
+      ClientWidth = 407
       TabOrder = 3
       object Label4: TLabel
         Left = 8
@@ -148,7 +148,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Left = 316
         Height = 23
         Top = 8
-        Width = 65
+        Width = 83
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
@@ -158,12 +158,12 @@ object FrmPropertyPSO: TFrmPropertyPSO
       Left = 0
       Height = 33
       Top = 156
-      Width = 389
+      Width = 407
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
       ClientHeight = 33
-      ClientWidth = 389
+      ClientWidth = 407
       TabOrder = 4
       object Label5: TLabel
         Left = 8
@@ -181,7 +181,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Left = 316
         Height = 17
         Top = 8
-        Width = 65
+        Width = 83
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
@@ -191,12 +191,12 @@ object FrmPropertyPSO: TFrmPropertyPSO
       Left = 0
       Height = 33
       Top = 189
-      Width = 389
+      Width = 407
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
       ClientHeight = 33
-      ClientWidth = 389
+      ClientWidth = 407
       TabOrder = 5
       object Label6: TLabel
         Left = 8
@@ -214,7 +214,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Left = 316
         Height = 17
         Top = 8
-        Width = 65
+        Width = 83
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
@@ -224,12 +224,12 @@ object FrmPropertyPSO: TFrmPropertyPSO
       Left = 0
       Height = 39
       Top = 222
-      Width = 389
+      Width = 407
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
       ClientHeight = 39
-      ClientWidth = 389
+      ClientWidth = 407
       TabOrder = 6
       object Label7: TLabel
         Left = 8
@@ -247,7 +247,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Left = 316
         Height = 23
         Top = 8
-        Width = 65
+        Width = 83
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
@@ -257,12 +257,12 @@ object FrmPropertyPSO: TFrmPropertyPSO
       Left = 0
       Height = 39
       Top = 261
-      Width = 389
+      Width = 407
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
       ClientHeight = 39
-      ClientWidth = 389
+      ClientWidth = 407
       TabOrder = 7
       object Label8: TLabel
         Left = 8
@@ -280,7 +280,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Left = 316
         Height = 23
         Top = 8
-        Width = 65
+        Width = 83
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
@@ -290,12 +290,12 @@ object FrmPropertyPSO: TFrmPropertyPSO
       Left = 0
       Height = 39
       Top = 300
-      Width = 389
+      Width = 407
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
       ClientHeight = 39
-      ClientWidth = 389
+      ClientWidth = 407
       TabOrder = 8
       object Label10: TLabel
         Left = 8
@@ -313,7 +313,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Left = 316
         Height = 23
         Top = 8
-        Width = 65
+        Width = 83
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
@@ -323,12 +323,12 @@ object FrmPropertyPSO: TFrmPropertyPSO
       Left = 0
       Height = 39
       Top = 339
-      Width = 389
+      Width = 407
       Align = alTop
       AutoSize = True
       BevelOuter = bvNone
       ClientHeight = 39
-      ClientWidth = 389
+      ClientWidth = 407
       TabOrder = 9
       object Label11: TLabel
         Left = 8
@@ -346,7 +346,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Left = 316
         Height = 23
         Top = 8
-        Width = 65
+        Width = 83
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
@@ -355,13 +355,81 @@ object FrmPropertyPSO: TFrmPropertyPSO
   end
   object GroupBox_AppliesTo: TGroupBox
     Left = 8
-    Height = 40
+    Height = 135
     Top = 414
-    Width = 393
+    Width = 411
     Align = alClient
     AutoSize = True
     BorderSpacing.Around = 8
     Caption = 'Applies to'
+    ClientHeight = 115
+    ClientWidth = 407
     TabOrder = 1
+    object TisGrid_AppliesTo: TTisGrid
+      Left = 4
+      Height = 107
+      Top = 4
+      Width = 314
+      Align = alClient
+      BorderSpacing.Around = 4
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Text = 'Name'
+          Width = 200
+          PropertyName = 'name'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 1
+          Text = 'Mail'
+          Width = 100
+          PropertyName = 'mail'
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MaxHeight = 100
+      Header.MinHeight = 18
+      Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+      Header.Style = hsFlatButtons
+      TabOrder = 0
+      ZebraColor = 15593713
+    end
+    object Panel9: TPanel
+      Left = 322
+      Height = 115
+      Top = 0
+      Width = 85
+      Align = alRight
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 115
+      ClientWidth = 85
+      TabOrder = 1
+      object BitBtn_Add: TBitBtn
+        Left = 8
+        Height = 25
+        Top = 8
+        Width = 69
+        Align = alTop
+        AutoSize = True
+        BorderSpacing.Around = 8
+        Caption = 'Add'
+        TabOrder = 0
+      end
+      object BitBtn_Remove: TBitBtn
+        Left = 8
+        Height = 25
+        Top = 41
+        Width = 69
+        Align = alTop
+        AutoSize = True
+        BorderSpacing.Around = 8
+        Caption = 'Remove'
+        TabOrder = 1
+      end
+    end
   end
 end
