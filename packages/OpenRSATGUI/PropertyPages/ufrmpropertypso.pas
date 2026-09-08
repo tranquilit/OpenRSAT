@@ -24,6 +24,20 @@ type
 
   { TFrmPropertyPSO }
 
+  /// Documentation about PSO parameters:
+  /// - msDS-MinimumPasswordLength (integer) (default=7) (value=0-255)
+  /// - msDS-PasswordHistoryLength (integer) (default=24) (value=0-24)
+  /// - msDS-MaximumPasswordAge (TimeSpan?) (default=42 days) (value=1-999 days)
+  /// - msDS-MinimumPasswordAge (TimeSpan?) (default=1 day) (value=1-998 days)
+  /// - msDS-PasswordComplexityEnabled (Boolean) (default=true) (value=false/true)
+  /// - msDS-PasswordReversibleEncryptionEnabled (Boolean) (default=false) (value=false/true)
+  /// -
+  /// - msDS-LockoutThreshold (integer) (default=0) (value=0-999)
+  /// - msDS-LockoutDuration (TimeSpan) (default=Undefined) (value=1-99999 minutes)
+  /// - msDS-LockoutObservationWindow (TimeSpan) (default=Undefined) (value=1-99999 minutes)
+  /// TimeSpanToSeconds: Abs(Value) div 10000000
+  /// Source:
+  /// - https://byebyeprof.com/fr/Intranet/PSO
   TFrmPropertyPSO = class(TPropertyFrame)
     BitBtn_Add: TBitBtn;
     BitBtn_Remove: TBitBtn;
@@ -90,6 +104,7 @@ var
   Filter: RawUtf8;
   DN: RawByteString;
   P: PDocVariantData;
+  v: int64;
 begin
   fProperty := Props;
 
@@ -99,10 +114,13 @@ begin
   Edit_PwdHistoryLength.Text := fProperty.GetRaw('msDS-PasswordHistoryLength');
   CheckBox_PwdComplexity.Checked := fProperty.GetRaw('msDS-PasswordComplexityEnabled') <> 'FALSE';
   CheckBox_PwdReversibleEncryption.Checked := fProperty.GetRaw('msDS-PasswordReversibleEncryptionEnabled') <> 'FALSE';
-  Edit_MinPwdAge.Text := fProperty.GetRaw('msDS-MinimumPasswordAge');
-  Edit_MaxPwdAge.Text := fProperty.GetRaw('msDS-MaximumPasswordAge');
+  if TryStrToInt64(fProperty.GetRaw('msDS-MinimumPasswordAge'), v) then
+    Edit_MinPwdAge.Text := IntToStr((Abs(v) div 10000000) div (3600 * 24));
+  if TryStrToInt64(fProperty.GetRaw('msDS-MaximumPasswordAge'), v) then
+    Edit_MaxPwdAge.Text := IntToStr((Abs(v) div 10000000) div (3600 * 24));
   Edit_LockoutPwdThreshold.Text := fProperty.GetRaw('msDS-LockoutThreshold');
-  Edit_LockoutPwdObservationWindow.Text := fProperty.GetRaw('msDS-LockoutObservationWindow');
+  if TryStrToInt64(fProperty.GetRaw('msDS-LockoutObservationWindow'), v) then
+    Edit_LockoutPwdObservationWindow.Text := IntToStr((Abs(v) div 10000000) div 60);
 
   TisGrid_AppliesTo.Clear;
   AppliesTo := fProperty.Get('msDS-PSOAppliesTo');
