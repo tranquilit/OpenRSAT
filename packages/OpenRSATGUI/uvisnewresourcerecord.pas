@@ -280,7 +280,7 @@ begin
 
   Len := DNSRecordRecordToBytes(PByteArray(@BytesArray[0])^, dnsRecord);
 
-  ARawByteString := Copy(String(@BytesArray[0]), 0, Len + 1);
+  ARawByteString := Copy(String(@BytesArray[0]), 0, Len);
 
   BakOnError := fLdapClient.OnError;
   fLdapClient.OnError := nil;
