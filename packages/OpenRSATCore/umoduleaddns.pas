@@ -571,7 +571,7 @@ begin
       continue;
     if (fZoneStorages[i].Name = 'RootDNSServers') then
       continue;
-    IsReverseZone := String(fZoneStorages[i].ZoneObjectName).EndsWith('in-addr.arpa') or String(fZoneStorages[i].ZoneObjectName).EndsWith('ip6.arpa');
+    IsReverseZone := String(fZoneStorages[i].DC).EndsWith('in-addr.arpa') or String(fZoneStorages[i].DC).EndsWith('ip6.arpa');
     if not (IsReverseZone = AReverseZone) then
       continue;
     NewRow.AddValue('name', fZoneStorages[i].Name);
