@@ -1,0 +1,10 @@
+object FrmPropertyPSO: TFrmPropertyPSO
+  Left = 0
+  Height = 487
+  Top = 0
+  Width = 596
+  LCLVersion = '4.5.0.0'
+  TabOrder = 0
+  DesignLeft = 1059
+  DesignTop = 127
+end

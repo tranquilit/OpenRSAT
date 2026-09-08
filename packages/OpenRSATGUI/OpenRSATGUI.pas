@@ -42,7 +42,7 @@ uses
   ufrmnewmsdnsserversettings, ufrmpropertygeneralintersitetransport, 
   uvisviewkeytab, uopenrsatuicontextinterface, ufrmpropertygplinks, 
   uvislistgpo, ufrmpropertygeneralgpo, uvisrename, uvisobjectsselector, 
-  LazarusPackageIntf;
+  ufrmpropertypso, LazarusPackageIntf;
 
 implementation
 
