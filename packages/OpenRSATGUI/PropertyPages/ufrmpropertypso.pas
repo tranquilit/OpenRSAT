@@ -12,13 +12,15 @@ uses
   StdCtrls,
   ExtCtrls,
   Buttons,
-  tis.ui.grid.core;
+  tis.ui.grid.core,
+  uproperty,
+  upropertyframe;
 
 type
 
   { TFrmPropertyPSO }
 
-  TFrmPropertyPSO = class(TFrame)
+  TFrmPropertyPSO = class(TPropertyFrame)
     BitBtn_Add: TBitBtn;
     BitBtn_Remove: TBitBtn;
     CheckBox3: TCheckBox;
@@ -58,6 +60,8 @@ type
   private
 
   public
+    constructor Create(TheOwner: TComponent); override;
+    procedure Update(Props: TProperty); override;
 
   end;
 
@@ -66,6 +70,18 @@ implementation
 {$R *.lfm}
 
 { TFrmPropertyPSO }
+
+constructor TFrmPropertyPSO.Create(TheOwner: TComponent);
+begin
+  inherited Create(TheOwner);
+
+  Caption := 'PSO';
+end;
+
+procedure TFrmPropertyPSO.Update(Props: TProperty);
+begin
+
+end;
 
 end.
 
