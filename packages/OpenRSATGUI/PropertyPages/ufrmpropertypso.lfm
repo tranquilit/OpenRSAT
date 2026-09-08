@@ -21,7 +21,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
     ClientHeight = 378
     ClientWidth = 407
     TabOrder = 0
-    object Panel1: TPanel
+    object Panel_Name: TPanel
       Left = 0
       Height = 39
       Top = 0
@@ -32,7 +32,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
       ClientHeight = 39
       ClientWidth = 407
       TabOrder = 0
-      object Label1: TLabel
+      object Label_Name: TLabel
         Left = 8
         Height = 23
         Top = 8
@@ -44,7 +44,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Layout = tlCenter
         WordWrap = True
       end
-      object Edit1: TEdit
+      object Edit_Name: TEdit
         Left = 116
         Height = 23
         Top = 8
@@ -55,7 +55,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         TabOrder = 0
       end
     end
-    object Panel2: TPanel
+    object Panel_Precedence: TPanel
       Left = 0
       Height = 39
       Top = 39
@@ -66,7 +66,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
       ClientHeight = 39
       ClientWidth = 407
       TabOrder = 1
-      object Label2: TLabel
+      object Label_Precedence: TLabel
         Left = 8
         Height = 23
         Top = 8
@@ -78,7 +78,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Layout = tlCenter
         WordWrap = True
       end
-      object Edit2: TEdit
+      object Edit_Precedence: TEdit
         Left = 116
         Height = 23
         Top = 8
@@ -88,7 +88,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         TabOrder = 0
       end
     end
-    object Panel3: TPanel
+    object Panel_MinPwdLength: TPanel
       Left = 0
       Height = 39
       Top = 78
@@ -99,7 +99,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
       ClientHeight = 39
       ClientWidth = 407
       TabOrder = 2
-      object Label3: TLabel
+      object Label_MinPwdLength: TLabel
         Left = 8
         Height = 23
         Top = 8
@@ -111,7 +111,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Layout = tlCenter
         WordWrap = True
       end
-      object Edit3: TEdit
+      object Edit_MinPwdLength: TEdit
         Left = 316
         Height = 23
         Top = 8
@@ -121,7 +121,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         TabOrder = 0
       end
     end
-    object Panel4: TPanel
+    object Panel_PwdHistoryLength: TPanel
       Left = 0
       Height = 39
       Top = 117
@@ -132,7 +132,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
       ClientHeight = 39
       ClientWidth = 407
       TabOrder = 3
-      object Label4: TLabel
+      object Label_PwdHistoryLength: TLabel
         Left = 8
         Height = 23
         Top = 8
@@ -144,7 +144,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Layout = tlCenter
         WordWrap = True
       end
-      object Edit4: TEdit
+      object Edit_PwdHistoryLength: TEdit
         Left = 316
         Height = 23
         Top = 8
@@ -154,7 +154,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         TabOrder = 0
       end
     end
-    object Panel5: TPanel
+    object Panel_PwdComplexity: TPanel
       Left = 0
       Height = 33
       Top = 156
@@ -165,7 +165,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
       ClientHeight = 33
       ClientWidth = 407
       TabOrder = 4
-      object Label5: TLabel
+      object Label_PwdComplexity: TLabel
         Left = 8
         Height = 17
         Top = 8
@@ -177,7 +177,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Layout = tlCenter
         WordWrap = True
       end
-      object CheckBox3: TCheckBox
+      object CheckBox_PwdComplexity: TCheckBox
         Left = 316
         Height = 17
         Top = 8
@@ -187,7 +187,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         TabOrder = 0
       end
     end
-    object Panel6: TPanel
+    object Panel_PwdReversibleEncryption: TPanel
       Left = 0
       Height = 33
       Top = 189
@@ -198,7 +198,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
       ClientHeight = 33
       ClientWidth = 407
       TabOrder = 5
-      object Label6: TLabel
+      object Label_PwdReversibleEncryption: TLabel
         Left = 8
         Height = 17
         Top = 8
@@ -210,7 +210,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Layout = tlCenter
         WordWrap = True
       end
-      object CheckBox4: TCheckBox
+      object CheckBox_PwdReversibleEncryption: TCheckBox
         Left = 316
         Height = 17
         Top = 8
@@ -220,7 +220,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         TabOrder = 0
       end
     end
-    object Panel7: TPanel
+    object Panel_MinPwdAge: TPanel
       Left = 0
       Height = 39
       Top = 222
@@ -231,7 +231,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
       ClientHeight = 39
       ClientWidth = 407
       TabOrder = 6
-      object Label7: TLabel
+      object Label_MinPwdAge: TLabel
         Left = 8
         Height = 23
         Top = 8
@@ -243,7 +243,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Layout = tlCenter
         WordWrap = True
       end
-      object Edit5: TEdit
+      object Edit_MinPwdAge: TEdit
         Left = 316
         Height = 23
         Top = 8
@@ -253,7 +253,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         TabOrder = 0
       end
     end
-    object Panel8: TPanel
+    object Panel_MaxPwdAge: TPanel
       Left = 0
       Height = 39
       Top = 261
@@ -264,7 +264,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
       ClientHeight = 39
       ClientWidth = 407
       TabOrder = 7
-      object Label8: TLabel
+      object Label_MaxPwdAge: TLabel
         Left = 8
         Height = 23
         Top = 8
@@ -276,7 +276,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Layout = tlCenter
         WordWrap = True
       end
-      object Edit6: TEdit
+      object Edit_MaxPwdAge: TEdit
         Left = 316
         Height = 23
         Top = 8
@@ -286,7 +286,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         TabOrder = 0
       end
     end
-    object Panel10: TPanel
+    object Panel_LockoutPwdThreshold: TPanel
       Left = 0
       Height = 39
       Top = 300
@@ -297,7 +297,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
       ClientHeight = 39
       ClientWidth = 407
       TabOrder = 8
-      object Label10: TLabel
+      object Label_LockoutPwdThreshold: TLabel
         Left = 8
         Height = 23
         Top = 8
@@ -309,7 +309,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Layout = tlCenter
         WordWrap = True
       end
-      object Edit8: TEdit
+      object Edit_LockoutPwdThreshold: TEdit
         Left = 316
         Height = 23
         Top = 8
@@ -319,7 +319,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         TabOrder = 0
       end
     end
-    object Panel11: TPanel
+    object Panel_LockoutPwdObservationWindow: TPanel
       Left = 0
       Height = 39
       Top = 339
@@ -330,7 +330,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
       ClientHeight = 39
       ClientWidth = 407
       TabOrder = 9
-      object Label11: TLabel
+      object Label_LockoutPwdObservationWindow: TLabel
         Left = 8
         Height = 23
         Top = 8
@@ -342,7 +342,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Layout = tlCenter
         WordWrap = True
       end
-      object Edit7: TEdit
+      object Edit_LockoutPwdObservationWindow: TEdit
         Left = 316
         Height = 23
         Top = 8
