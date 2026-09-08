@@ -1,10 +1,367 @@
 object FrmPropertyPSO: TFrmPropertyPSO
   Left = 0
-  Height = 487
+  Height = 462
   Top = 0
-  Width = 596
+  Width = 409
+  ClientHeight = 462
+  ClientWidth = 409
   LCLVersion = '4.5.0.0'
   TabOrder = 0
-  DesignLeft = 1059
-  DesignTop = 127
+  DesignLeft = 525
+  DesignTop = 186
+  object GroupBox_PasswordSettings: TGroupBox
+    Left = 8
+    Height = 398
+    Top = 8
+    Width = 393
+    Align = alTop
+    AutoSize = True
+    BorderSpacing.Around = 8
+    Caption = 'Password settings'
+    ClientHeight = 378
+    ClientWidth = 389
+    TabOrder = 0
+    object Panel1: TPanel
+      Left = 0
+      Height = 39
+      Top = 0
+      Width = 389
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 39
+      ClientWidth = 389
+      TabOrder = 0
+      object Label1: TLabel
+        Left = 8
+        Height = 23
+        Top = 8
+        Width = 100
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'Name:'
+        Constraints.MinWidth = 100
+        Layout = tlCenter
+        WordWrap = True
+      end
+      object Edit1: TEdit
+        Left = 116
+        Height = 23
+        Top = 8
+        Width = 265
+        Align = alClient
+        BorderSpacing.Around = 8
+        ParentBidiMode = False
+        TabOrder = 0
+      end
+    end
+    object Panel2: TPanel
+      Left = 0
+      Height = 39
+      Top = 39
+      Width = 389
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 39
+      ClientWidth = 389
+      TabOrder = 1
+      object Label2: TLabel
+        Left = 8
+        Height = 23
+        Top = 8
+        Width = 100
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'Precedence:'
+        Constraints.MinWidth = 100
+        Layout = tlCenter
+        WordWrap = True
+      end
+      object Edit2: TEdit
+        Left = 116
+        Height = 23
+        Top = 8
+        Width = 265
+        Align = alClient
+        BorderSpacing.Around = 8
+        TabOrder = 0
+      end
+    end
+    object Panel3: TPanel
+      Left = 0
+      Height = 39
+      Top = 78
+      Width = 389
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 39
+      ClientWidth = 389
+      TabOrder = 2
+      object Label3: TLabel
+        Left = 8
+        Height = 23
+        Top = 8
+        Width = 300
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'Minimum password length (characters):'
+        Constraints.MinWidth = 300
+        Layout = tlCenter
+        WordWrap = True
+      end
+      object Edit3: TEdit
+        Left = 316
+        Height = 23
+        Top = 8
+        Width = 65
+        Align = alClient
+        BorderSpacing.Around = 8
+        TabOrder = 0
+      end
+    end
+    object Panel4: TPanel
+      Left = 0
+      Height = 39
+      Top = 117
+      Width = 389
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 39
+      ClientWidth = 389
+      TabOrder = 3
+      object Label4: TLabel
+        Left = 8
+        Height = 23
+        Top = 8
+        Width = 300
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'Number of passwords remembered:'
+        Constraints.MinWidth = 300
+        Layout = tlCenter
+        WordWrap = True
+      end
+      object Edit4: TEdit
+        Left = 316
+        Height = 23
+        Top = 8
+        Width = 65
+        Align = alClient
+        BorderSpacing.Around = 8
+        TabOrder = 0
+      end
+    end
+    object Panel5: TPanel
+      Left = 0
+      Height = 33
+      Top = 156
+      Width = 389
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 33
+      ClientWidth = 389
+      TabOrder = 4
+      object Label5: TLabel
+        Left = 8
+        Height = 17
+        Top = 8
+        Width = 300
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'Password must meet complexity requirements'
+        Constraints.MinWidth = 300
+        Layout = tlCenter
+        WordWrap = True
+      end
+      object CheckBox3: TCheckBox
+        Left = 316
+        Height = 17
+        Top = 8
+        Width = 65
+        Align = alClient
+        BorderSpacing.Around = 8
+        TabOrder = 0
+      end
+    end
+    object Panel6: TPanel
+      Left = 0
+      Height = 33
+      Top = 189
+      Width = 389
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 33
+      ClientWidth = 389
+      TabOrder = 5
+      object Label6: TLabel
+        Left = 8
+        Height = 17
+        Top = 8
+        Width = 300
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'Store password using reversible encryption'
+        Constraints.MinWidth = 300
+        Layout = tlCenter
+        WordWrap = True
+      end
+      object CheckBox4: TCheckBox
+        Left = 316
+        Height = 17
+        Top = 8
+        Width = 65
+        Align = alClient
+        BorderSpacing.Around = 8
+        TabOrder = 0
+      end
+    end
+    object Panel7: TPanel
+      Left = 0
+      Height = 39
+      Top = 222
+      Width = 389
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 39
+      ClientWidth = 389
+      TabOrder = 6
+      object Label7: TLabel
+        Left = 8
+        Height = 23
+        Top = 8
+        Width = 300
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'User cannot change the password within (days):'
+        Constraints.MinWidth = 300
+        Layout = tlCenter
+        WordWrap = True
+      end
+      object Edit5: TEdit
+        Left = 316
+        Height = 23
+        Top = 8
+        Width = 65
+        Align = alClient
+        BorderSpacing.Around = 8
+        TabOrder = 0
+      end
+    end
+    object Panel8: TPanel
+      Left = 0
+      Height = 39
+      Top = 261
+      Width = 389
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 39
+      ClientWidth = 389
+      TabOrder = 7
+      object Label8: TLabel
+        Left = 8
+        Height = 23
+        Top = 8
+        Width = 300
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'User must change the password after (days):'
+        Constraints.MinWidth = 300
+        Layout = tlCenter
+        WordWrap = True
+      end
+      object Edit6: TEdit
+        Left = 316
+        Height = 23
+        Top = 8
+        Width = 65
+        Align = alClient
+        BorderSpacing.Around = 8
+        TabOrder = 0
+      end
+    end
+    object Panel10: TPanel
+      Left = 0
+      Height = 39
+      Top = 300
+      Width = 389
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 39
+      ClientWidth = 389
+      TabOrder = 8
+      object Label10: TLabel
+        Left = 8
+        Height = 23
+        Top = 8
+        Width = 300
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'Number of failed logon attempts allowed:'
+        Constraints.MinWidth = 300
+        Layout = tlCenter
+        WordWrap = True
+      end
+      object Edit8: TEdit
+        Left = 316
+        Height = 23
+        Top = 8
+        Width = 65
+        Align = alClient
+        BorderSpacing.Around = 8
+        TabOrder = 0
+      end
+    end
+    object Panel11: TPanel
+      Left = 0
+      Height = 39
+      Top = 339
+      Width = 389
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 39
+      ClientWidth = 389
+      TabOrder = 9
+      object Label11: TLabel
+        Left = 8
+        Height = 23
+        Top = 8
+        Width = 300
+        Align = alLeft
+        BorderSpacing.Around = 8
+        Caption = 'Reset failed logon attemps count after (mins):'
+        Constraints.MinWidth = 300
+        Layout = tlCenter
+        WordWrap = True
+      end
+      object Edit7: TEdit
+        Left = 316
+        Height = 23
+        Top = 8
+        Width = 65
+        Align = alClient
+        BorderSpacing.Around = 8
+        TabOrder = 0
+      end
+    end
+  end
+  object GroupBox_AppliesTo: TGroupBox
+    Left = 8
+    Height = 40
+    Top = 414
+    Width = 393
+    Align = alClient
+    AutoSize = True
+    BorderSpacing.Around = 8
+    Caption = 'Applies to'
+    TabOrder = 1
+  end
 end

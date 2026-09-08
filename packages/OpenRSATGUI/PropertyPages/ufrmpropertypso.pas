@@ -8,10 +8,47 @@ uses
   Classes,
   SysUtils,
   Forms,
-  Controls;
+  Controls,
+  StdCtrls,
+  ExtCtrls;
 
 type
+
+  { TFrmPropertyPSO }
+
   TFrmPropertyPSO = class(TFrame)
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Edit5: TEdit;
+    Edit6: TEdit;
+    Edit7: TEdit;
+    Edit8: TEdit;
+    GroupBox_PasswordSettings: TGroupBox;
+    GroupBox_AppliesTo: TGroupBox;
+    Label1: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Panel1: TPanel;
+    Panel10: TPanel;
+    Panel11: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Panel7: TPanel;
+    Panel8: TPanel;
   private
 
   public
@@ -21,6 +58,8 @@ type
 implementation
 
 {$R *.lfm}
+
+{ TFrmPropertyPSO }
 
 end.
 
