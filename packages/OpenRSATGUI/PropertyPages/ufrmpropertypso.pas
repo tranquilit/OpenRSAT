@@ -105,16 +105,17 @@ begin
   Edit_LockoutPwdObservationWindow.Text := fProperty.GetRaw('msDS-LockoutObservationWindow');
 
   TisGrid_AppliesTo.Clear;
-  AppliesTo := fProperty.Get('appliesTo');
+  AppliesTo := fProperty.Get('msDS-PSOAppliesTo');
   if Assigned(AppliesTo) then
   begin
     Filter := '';
     for i := 0 to AppliesTo.Count - 1 do
-       Filter := FormatUtf8('%(distinguishedName=%)', [Filter, LdapEscape(AppliesTo.GetRaw())]);
+       Filter := FormatUtf8('%(distinguishedName=%)', [Filter, LdapEscape(AppliesTo.GetRaw(i))]);
     if Filter = '' then
       Exit;
     Filter := FormatUtf8('(|%)', [Filter]);
 
+    fProperty.LdapClient.SearchScope := lssWholeSubtree;
     if not fProperty.LdapClient.SearchAllDocRaw(SearchResultData, fProperty.LdapClient.DefaultDN, Filter, ['name', 'mail'], [roRawValues, roObjectNameAtRoot, roKnownValuesAsArray]) then
       Exit;
 

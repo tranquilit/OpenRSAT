@@ -313,6 +313,7 @@ uses
   ufrmpropertygplinks,
   ufrmpropertysecurity,
   ufrmpropertytelephone,
+  ufrmpropertypso,
   ursatldapclient,
   ursatldapclientui,
   uconfig,
@@ -479,6 +480,14 @@ const
     TFrmPropertyGeneralDefault,
     TFrmPropertyPublishedCertificates,
     TFrmPropertyObject,
+    TFrmPropertySecurity,
+    TFrmPropertyAttributes
+  );
+
+  PROPERTY_PSO: Array of TPropertyFrameClass = (
+    TFrmPropertyGeneralDefault,
+    TFrmPropertyObject,
+    TFrmPropertyPSO,
     TFrmPropertySecurity,
     TFrmPropertyAttributes
   );
@@ -753,6 +762,7 @@ begin
   'interSiteTransport': property_tabs := PROPERTY_INTER_SITE_TRANSPORT;
   'groupPolicyContainer': property_tabs := PROPERTY_GPO;
   'certificationAuthority': property_tabs := PROPERTY_CERTIFICATION_AUTHORITY;
+  'msDS-PasswordSettings': property_tabs := PROPERTY_PSO;
   end;
 
   for property_tab in property_tabs do
