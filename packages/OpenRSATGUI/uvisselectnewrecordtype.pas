@@ -149,11 +149,15 @@ begin
 end;
 
 procedure TVisSelectNewRecordType.Action_CreateRecordExecute(Sender: TObject);
+var
+  Vis: TVisNewResourceRecord;
 begin
-  With TVisNewResourceRecord.Create(Self, GetDnsRecordType(ListBox1.GetSelectedText), fSerial, fLdapClient, fDistinguishedName, fDcPrefix) do
-  begin
-    if ShowModal = mrOK then
+  Vis := TVisNewResourceRecord.Create(Self, GetDnsRecordType(ListBox1.GetSelectedText), fSerial, fLdapClient, fDistinguishedName, fDcPrefix);
+  try
+    if Vis.ShowModal = mrOK then
       Close;
+  finally
+    FreeAndNil(Vis);
   end;
 end;
 

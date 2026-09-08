@@ -873,6 +873,7 @@ begin
   With TVisSelectNewRecordType.Create(Self, Serial, LdapClient, DNSNodeZone.DistinguishedName, dcPrefix) do
   begin
     ShowModal;
+    Action_Refresh.Execute;
   end;
 end;
 
