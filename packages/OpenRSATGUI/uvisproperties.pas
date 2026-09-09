@@ -120,6 +120,8 @@ type
     fPropertyFrameList: Array of TPropertyFrame;
     fDistinguishedName: RawUtf8;
 
+    function DoBeforeApply: Boolean;
+    procedure DoAfterApply;
     function GetLdapClient: TLdapClient;
     function LoadAttributes: Boolean;
     procedure OnSearchEventFillAttributes(Sender: TObject);
@@ -682,6 +684,31 @@ begin
   {$endif}
 end;
 
+function TVisProperties.DoBeforeApply: Boolean;
+var
+  Cancel: Boolean;
+  i: Integer;
+begin
+  result := True;
+  Cancel := False;
+
+  for i := 0 to Length(fPropertyFrameList) do
+  begin
+    fPropertyFrameList[i].DoBeforeApply(Cancel);
+    if Cancel then
+      Exit;
+  end;
+  result := False;
+end;
+
+procedure TVisProperties.DoAfterApply;
+var
+  i: Integer;
+begin
+  for i := 0 to Length(fPropertyFrameList) do
+    fPropertyFrameList[i].DoAfterApply;
+end;
+
 function TVisProperties.LoadAttributes: Boolean;
 var
   LdapObject: TLdapResult;
@@ -798,7 +825,10 @@ end;
 
 procedure TVisProperties.Action_ApplyExecute(Sender: TObject);
 begin
+  if not DoBeforeApply then
+    Exit;
   fProperty.ApplyModification;
+  DoAfterApply;
 end;
 
 procedure TVisProperties.Action_ApplyUpdate(Sender: TObject);
