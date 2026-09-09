@@ -12,12 +12,15 @@ uses
   StdCtrls,
   ExtCtrls,
   Buttons,
+  Graphics,
   tis.ui.grid.core,
   mormot.core.base,
   mormot.core.text,
   mormot.core.variants,
   mormot.net.ldap,
   uproperty,
+  uhintwindow,
+  ucommon,
   upropertyframe;
 
 type
@@ -103,9 +106,17 @@ var
   v: int64;
 begin
   if TryStrToInt64(Edit_Precedence.Text, v) and (v > 0) then
-    fProperty.Add('msDS-PasswordSettingsPrecedence', Edit_Precedence.Text)
+  begin
+    Edit_Precedence.Font.Color := clDefault;
+    HideHintWindow;
+    fProperty.Add('msDS-PasswordSettingsPrecedence', Edit_Precedence.Text);
+  end
   else
+  begin
+    Edit_Precedence.Font.Color := clRed;
+    ShowHintWindow(Edit_Precedence, rsPSOInvalidPrecedence, 5000);
     fProperty.Restore('msDS-PasswordSettingsPrecedence');
+  end;
 end;
 
 procedure TFrmPropertyPSO.Edit_PwdHistoryLengthChange(Sender: TObject);
@@ -113,9 +124,17 @@ var
   v: int64;
 begin
   if TryStrToInt64(Edit_PwdHistoryLength.Text, v) and (v >= 0) and (v <= 24) then
-    fProperty.Add('msDS-PasswordHistoryLength', Edit_PwdHistoryLength.Text)
+  begin
+    Edit_PwdHistoryLength.Font.Color := clDefault;
+    HideHintWindow;
+    fProperty.Add('msDS-PasswordHistoryLength', Edit_PwdHistoryLength.Text);
+  end
   else
+  begin
+    Edit_PwdHistoryLength.Font.Color := clRed;
+    ShowHintWindow(Edit_PwdHistoryLength, rsPSOInvalidPwdHistory, 5000);
     fProperty.Restore('msDS-PasswordHistoryLength');
+  end;
 end;
 
 procedure TFrmPropertyPSO.Edit_MinPwdLengthChange(Sender: TObject);
@@ -123,9 +142,17 @@ var
   v: int64;
 begin
   if TryStrToInt64(Edit_MinPwdLength.Text, v) and (v >= 0) and (v <= 255) then
-    fProperty.Add('msDS-MinimumPasswordLength', Edit_MinPwdLength.Text)
+  begin
+    Edit_MinPwdLength.Font.Color := clDefault;
+    HideHintWindow;
+    fProperty.Add('msDS-MinimumPasswordLength', Edit_MinPwdLength.Text);
+  end
   else
+  begin
+    Edit_MinPwdLength.Font.Color := clRed;
+    ShowHintWindow(Edit_MinPwdLength, rsPSOInvalidMinPwdLength, 5000);
     fProperty.Restore('msDS-MinimumPasswordLength');
+  end;
 end;
 
 procedure TFrmPropertyPSO.CheckBox_PwdComplexityChange(Sender: TObject);
@@ -153,10 +180,16 @@ begin
   if TryStrToInt64(Edit_LockoutPwdObservationWindow.Text, v) and (v >= 1) and (v <= 99999) then
   begin
     v := v * 60 * 10000000;
+    Edit_LockoutPwdObservationWindow.Font.Color := clDefault;
+    HideHintWindow;
     fProperty.Add('msDS-LockoutObservationWindow', IntToStr(-v));
   end
   else
+  begin
+    Edit_LockoutPwdObservationWindow.Font.Color := clRed;
+    ShowHintWindow(Edit_LockoutPwdObservationWindow, rsPSOInvalidLockoutPwdObservationWindow, 5000);
     fProperty.Restore('msDS-LockoutObservationWindow');
+  end;
 end;
 
 procedure TFrmPropertyPSO.Edit_LockoutPwdThresholdChange(Sender: TObject);
@@ -164,9 +197,17 @@ var
   v: int64;
 begin
   if TryStrToInt64(Edit_LockoutPwdThreshold.Text, v) and (v >= 0) and (v <= 999) then
-    fProperty.Add('msDS-LockoutThreshold', Edit_LockoutPwdThreshold.Text)
+  begin
+    Edit_LockoutPwdThreshold.Font.Color := clDefault;
+    HideHintWindow;
+    fProperty.Add('msDS-LockoutThreshold', Edit_LockoutPwdThreshold.Text);
+  end
   else
+  begin
+    Edit_LockoutPwdThreshold.Font.Color := clRed;
+    ShowHintWindow(Edit_LockoutPwdThreshold, rsPSOInvalidLockoutPwdThreshold);
     fProperty.Restore('msDS-LockoutThreshold');
+  end;
 end;
 
 procedure TFrmPropertyPSO.Edit_MaxPwdAgeChange(Sender: TObject);
@@ -176,10 +217,16 @@ begin
   if TryStrToInt64(Edit_MaxPwdAge.Text, v) and (v >= 1) and (v <= 999) then
   begin
     v := v * (24 * 3600) * 10000000;
+    Edit_MaxPwdAge.Font.Color := clDefault;
+    HideHintWindow;
     fProperty.Add('msDS-MaximumPasswordAge', IntToStr(-v));
   end
   else
+  begin
+    Edit_MaxPwdAge.Font.Color := clRed;
+    ShowHintWindow(Edit_MaxPwdAge, rsPSOInvalidMaxPwdAge, 5000);
     fProperty.Restore('msDS-MaximumPasswordAge');
+  end;
 end;
 
 procedure TFrmPropertyPSO.Edit_MinPwdAgeChange(Sender: TObject);
@@ -189,10 +236,16 @@ begin
   if TryStrToInt64(Edit_MinPwdAge.Text, v) and (v >= 0) and (v <= 998) then
   begin
     v := v * (24 * 3600) * 10000000;
+    Edit_MinPwdAge.Font.Color := clDefault;
+    HideHintWindow;
     fProperty.Add('msDS-MinimumPasswordAge', IntToStr(-v));
   end
   else
+  begin
+    Edit_MinPwdAge.Font.Color := clRed;
+    ShowHintWindow(Edit_MinPwdAge, rsPSOInvalidMinPwdAge, 5000);
     fProperty.Restore('msDS-MinimumPasswordAge');
+  end;
 end;
 
 constructor TFrmPropertyPSO.Create(TheOwner: TComponent);

@@ -504,6 +504,14 @@ resourcestring
 
   rsUserCreationAlreadyExists = 'The pre-Windows 2000 logon name you have chosen is already in use in this domain.' + LineEnding + 'Choose another pre-Windows 2000 logon name, and then try again.';
 
+  rsPSOInvalidPrecedence = 'Invalid precedence (X > 0)';
+  rsPSOInvalidPwdHistory = 'Invalid password history length (0 <= X <= 24)';
+  rsPSOInvalidMinPwdLength = 'Invalid minimum password length (0 <= X <= 255)';
+  rsPSOInvalidLockoutPwdObservationWindow = 'Invalid lockout password observation window (1 <= X <= 99999)';
+  rsPSOInvalidLockoutPwdThreshold = 'Invalid lockout password threshold (0 <= X <= 999)';
+  rsPSOInvalidMaxPwdAge = 'Invalid maximum password age (1 <= X <= 999)';
+  rsPSOInvalidMinPwdAge = 'Invalid minimum password age (0 <= X <= 998)';
+
 const
   DAYS_BETWEEN_1601_AND_1900 = 109205;
   HUNDRED_OF_MS_IN_A_DAY = 864000000000;
