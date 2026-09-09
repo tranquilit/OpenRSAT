@@ -13,6 +13,7 @@ uses
   ExtCtrls,
   Buttons,
   Graphics,
+  ActnList,
   tis.ui.grid.core,
   mormot.core.base,
   mormot.core.text,
@@ -42,6 +43,9 @@ type
   /// Source:
   /// - https://byebyeprof.com/fr/Intranet/PSO
   TFrmPropertyPSO = class(TPropertyFrame)
+    Action_Add: TAction;
+    Action_Remove: TAction;
+    ActionList1: TActionList;
     BitBtn_Add: TBitBtn;
     BitBtn_Remove: TBitBtn;
     CheckBox_PwdComplexity: TCheckBox;
@@ -77,6 +81,7 @@ type
     Panel_MinPwdAge: TPanel;
     Panel_MaxPwdAge: TPanel;
     Panel9: TPanel;
+    ScrollBox1: TScrollBox;
     TisGrid_AppliesTo: TTisGrid;
     procedure CheckBox_PwdComplexityChange(Sender: TObject);
     procedure CheckBox_PwdReversibleEncryptionChange(Sender: TObject);
