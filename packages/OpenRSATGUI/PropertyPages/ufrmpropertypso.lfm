@@ -416,6 +416,8 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
         Header.Style = hsFlatButtons
         TabOrder = 0
+        WantTabs = False
+        TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
         ZebraColor = 15593713
       end
       object Panel9: TPanel
@@ -455,13 +457,15 @@ object FrmPropertyPSO: TFrmPropertyPSO
     end
   end
   object ActionList1: TActionList
-    Left = 8
-    Top = 8
+    Left = 88
+    Top = 32
     object Action_Add: TAction
       Caption = 'Add'
+      OnExecute = Action_AddExecute
     end
     object Action_Remove: TAction
       Caption = 'Remove'
+      OnExecute = Action_RemoveExecute
     end
   end
 end

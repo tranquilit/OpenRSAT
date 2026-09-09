@@ -83,6 +83,8 @@ type
     Panel9: TPanel;
     ScrollBox1: TScrollBox;
     TisGrid_AppliesTo: TTisGrid;
+    procedure Action_AddExecute(Sender: TObject);
+    procedure Action_RemoveExecute(Sender: TObject);
     procedure CheckBox_PwdComplexityChange(Sender: TObject);
     procedure CheckBox_PwdReversibleEncryptionChange(Sender: TObject);
     procedure Edit_LockoutPwdObservationWindowChange(Sender: TObject);
@@ -94,6 +96,13 @@ type
     procedure Edit_PwdHistoryLengthChange(Sender: TObject);
   private
     fProperty: TProperty;
+
+    procedure AppliesToAdd; overload;
+    procedure AppliesToAdd(const Objects: TRawUtf8DynArray); overload;
+    procedure AppliesToRemove; overload;
+    procedure AppliesToRemove(const Objects: TRawUtf8DynArray); overload;
+    function ShowObjectsSelector(out SelectedObjects: TRawUtf8DynArray): Boolean;
+    procedure UpdateAppliesToGrid;
   public
     constructor Create(TheOwner: TComponent); override;
     procedure Update(Props: TProperty); override;
@@ -101,6 +110,8 @@ type
   end;
 
 implementation
+uses
+  uvisobjectsselector;
 
 {$R *.lfm}
 
@@ -142,6 +153,165 @@ begin
   end;
 end;
 
+procedure TFrmPropertyPSO.AppliesToAdd;
+var
+  SelectedObjects: TRawUtf8DynArray;
+begin
+  if not ShowObjectsSelector(SelectedObjects) then
+    Exit;
+
+  AppliesToAdd(SelectedObjects);
+end;
+
+procedure TFrmPropertyPSO.AppliesToAdd(const Objects: TRawUtf8DynArray);
+var
+  i: Integer;
+begin
+  for i := 0 to Length(Objects) - 1 do
+    fProperty.Add('msDS-PSOAppliesTo', Objects[i], aoNoDuplicateValue);
+  UpdateAppliesToGrid;
+end;
+
+procedure TFrmPropertyPSO.AppliesToRemove;
+var
+  Rows: TDocVariantData;
+  i: Integer;
+  P: PDocVariantData;
+  SelectedObjects: TRawUtf8DynArray;
+begin
+  Rows := TisGrid_AppliesTo.SelectedRows;
+
+  SetLength(SelectedObjects, Rows.Count);
+  for i := 0 to Rows.Count - 1 do
+  begin
+    P := Rows._[i];
+    if not Assigned(P) or not P^.Exists('distinguishedName') then
+      Continue;
+    SelectedObjects[i] := P^.U['distinguishedName'];
+  end;
+
+  AppliesToRemove(SelectedObjects);
+end;
+
+procedure TFrmPropertyPSO.AppliesToRemove(const Objects: TRawUtf8DynArray);
+var
+  AppliesToAttribute: TLdapAttribute;
+  KeptObjects: TRawUtf8DynArray;
+  c, i: Integer;
+
+  function Contains(const Value: RawUtf8; const Values: TRawUtf8DynArray): Boolean;
+  var
+    i: Integer;
+  begin
+    result := True;
+    for i := 0 to High(Values) do
+      if Values[i] = Value then
+        Exit;
+    result := False;
+  end;
+
+begin
+  AppliesToAttribute := fProperty.Get('msDS-PSOAppliesTo');
+  if not Assigned(AppliesToAttribute) then
+    Exit;
+
+  c := 0;
+  for i := 0 to AppliesToAttribute.Count - 1 do
+  begin
+    if not Contains(AppliesToAttribute.GetRaw(i), Objects) then
+    begin
+      SetLength(KeptObjects, c + 1);
+      KeptObjects[c] := AppliesToAttribute.GetRaw(i);
+      Inc(c);
+    end;
+  end;
+
+  c := Length(KeptObjects);
+  if c > 0 then
+  begin
+    fProperty.Add('msDS-PSOAppliesTo', KeptObjects[0]);
+    for i := 1 to c - 1 do
+      fProperty.Add('msDS-PSOAppliesTo', KeptObjects[i], aoAlways);
+  end
+  else
+    fProperty.Add('msDS-PSOAppliesTo', '');
+  UpdateAppliesToGrid;
+end;
+
+function TFrmPropertyPSO.ShowObjectsSelector(out
+  SelectedObjects: TRawUtf8DynArray): Boolean;
+var
+  Vis: TVisObjectsSelector;
+begin
+  result := False;
+  Vis := TVisObjectsSelector.Create(Self);
+  try
+    Vis.AllowMultiSelect := True;
+    Vis.AllowedObjectTypes := [otfGroup, otfUser, otfComputer, otfContact];
+    Vis.SelectedObjectTypes := [otfGroup, otfUser, otfComputer, otfContact];
+    Vis.LdapClient := fProperty.LdapClient;
+    if Vis.ShowModal <> mrOK then
+      Exit;
+    SelectedObjects := Vis.SelectedObjects;
+  finally
+    FreeAndNil(Vis);
+  end;
+
+  result := True;
+end;
+
+procedure TFrmPropertyPSO.UpdateAppliesToGrid;
+var
+  AppliesTo: TLdapAttribute;
+  Filter: RawUtf8;
+  AppliesToData, SearchResultData, Row: TDocVariantData;
+  DN: RawByteString;
+  i: Integer;
+  P: PDocVariantData;
+begin
+  TisGrid_AppliesTo.Clear;
+
+  AppliesTo := fProperty.Get('msDS-PSOAppliesTo');
+  if Assigned(AppliesTo) then
+  begin
+    Filter := '';
+    for i := 0 to AppliesTo.Count - 1 do
+       Filter := FormatUtf8('%(distinguishedName=%)', [Filter, LdapEscape(AppliesTo.GetRaw(i))]);
+    if Filter = '' then
+      Exit;
+    Filter := FormatUtf8('(|%)', [Filter]);
+
+    fProperty.LdapClient.SearchScope := lssWholeSubtree;
+    if not fProperty.LdapClient.SearchAllDocRaw(SearchResultData, fProperty.LdapClient.DefaultDN, Filter, ['name', 'mail'], [roRawValues, roObjectNameAtRoot, roKnownValuesAsArray]) then
+      Exit;
+
+    AppliesToData.Init(JSON_FAST);
+    TisGrid_AppliesTo.BeginUpdate;
+    try
+      for i := 0 to AppliesTo.Count - 1 do
+      begin
+        DN := AppliesTo.GetRaw(i);
+        if not SearchResultData.Exists(DN) then
+          Continue;
+        P := SearchResultData.O[DN];
+        if not Assigned(P) then
+          Continue;
+
+        Row.Init(JSON_FAST);
+        Row.U['distinguishedName'] := AppliesTo.GetRaw(i);
+        Row.U['name'] := P^.U['name'];
+        Row.U['mail'] := P^.U['mail'];
+
+        AppliesToData.AddItem(Row);
+        Row.Clear;
+      end;
+    finally
+      TisGrid_AppliesTo.EndUpdate;
+      TisGrid_AppliesTo.LoadData(@AppliesToData);
+    end;
+  end;
+end;
+
 procedure TFrmPropertyPSO.Edit_MinPwdLengthChange(Sender: TObject);
 var
   v: int64;
@@ -166,6 +336,16 @@ begin
     fProperty.Add('msDS-PasswordComplexityEnabled', 'TRUE')
   else
     fProperty.Add('msDS-PasswordComplexityEnabled', 'FALSE');
+end;
+
+procedure TFrmPropertyPSO.Action_AddExecute(Sender: TObject);
+begin
+  AppliesToAdd;
+end;
+
+procedure TFrmPropertyPSO.Action_RemoveExecute(Sender: TObject);
+begin
+  AppliesToRemove;
 end;
 
 procedure TFrmPropertyPSO.CheckBox_PwdReversibleEncryptionChange(Sender: TObject
@@ -262,12 +442,6 @@ end;
 
 procedure TFrmPropertyPSO.Update(Props: TProperty);
 var
-  AppliesTo: TLdapAttribute;
-  i: Integer;
-  AppliesToData, SearchResultData, Row: TDocVariantData;
-  Filter: RawUtf8;
-  DN: RawByteString;
-  P: PDocVariantData;
   v: int64;
 begin
   fProperty := Props;
@@ -286,45 +460,7 @@ begin
   if TryStrToInt64(fProperty.GetRaw('msDS-LockoutObservationWindow'), v) then
     Edit_LockoutPwdObservationWindow.Text := IntToStr((Abs(v) div 10000000) div 60);
 
-  TisGrid_AppliesTo.Clear;
-  AppliesTo := fProperty.Get('msDS-PSOAppliesTo');
-  if Assigned(AppliesTo) then
-  begin
-    Filter := '';
-    for i := 0 to AppliesTo.Count - 1 do
-       Filter := FormatUtf8('%(distinguishedName=%)', [Filter, LdapEscape(AppliesTo.GetRaw(i))]);
-    if Filter = '' then
-      Exit;
-    Filter := FormatUtf8('(|%)', [Filter]);
-
-    fProperty.LdapClient.SearchScope := lssWholeSubtree;
-    if not fProperty.LdapClient.SearchAllDocRaw(SearchResultData, fProperty.LdapClient.DefaultDN, Filter, ['name', 'mail'], [roRawValues, roObjectNameAtRoot, roKnownValuesAsArray]) then
-      Exit;
-
-    AppliesToData.Init(JSON_FAST);
-    TisGrid_AppliesTo.BeginUpdate;
-    try
-      for i := 0 to AppliesTo.Count - 1 do
-      begin
-        DN := AppliesTo.GetRaw(i);
-        if not SearchResultData.Exists(DN) then
-          Continue;
-        P := SearchResultData.O[DN];
-        if not Assigned(P) then
-          Continue;
-
-        Row.Init(JSON_FAST);
-        Row.U['distinguishedName'] := AppliesTo.GetRaw(i);
-        Row.U['name'] := P^.U['name'];
-        Row.U['mail'] := P^.U['mail'];
-        AppliesToData.AddItem(Row);
-        Row.Clear;
-      end;
-    finally
-      TisGrid_AppliesTo.EndUpdate;
-      TisGrid_AppliesTo.LoadData(@AppliesToData);
-    end;
-  end;
+  UpdateAppliesToGrid;
 end;
 
 end.
