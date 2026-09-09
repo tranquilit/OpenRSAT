@@ -75,6 +75,15 @@ type
     Panel_MaxPwdAge: TPanel;
     Panel9: TPanel;
     TisGrid_AppliesTo: TTisGrid;
+    procedure CheckBox_PwdComplexityChange(Sender: TObject);
+    procedure CheckBox_PwdReversibleEncryptionChange(Sender: TObject);
+    procedure Edit_LockoutPwdObservationWindowChange(Sender: TObject);
+    procedure Edit_LockoutPwdThresholdChange(Sender: TObject);
+    procedure Edit_MaxPwdAgeChange(Sender: TObject);
+    procedure Edit_MinPwdAgeChange(Sender: TObject);
+    procedure Edit_MinPwdLengthChange(Sender: TObject);
+    procedure Edit_PrecedenceChange(Sender: TObject);
+    procedure Edit_PwdHistoryLengthChange(Sender: TObject);
   private
     fProperty: TProperty;
   public
@@ -88,6 +97,103 @@ implementation
 {$R *.lfm}
 
 { TFrmPropertyPSO }
+
+procedure TFrmPropertyPSO.Edit_PrecedenceChange(Sender: TObject);
+var
+  v: int64;
+begin
+  if TryStrToInt64(Edit_Precedence.Text, v) and (v > 0) then
+    fProperty.Add('msDS-PasswordSettingsPrecedence', Edit_Precedence.Text)
+  else
+    fProperty.Restore('msDS-PasswordSettingsPrecedence');
+end;
+
+procedure TFrmPropertyPSO.Edit_PwdHistoryLengthChange(Sender: TObject);
+var
+  v: int64;
+begin
+  if TryStrToInt64(Edit_PwdHistoryLength.Text, v) and (v >= 0) and (v <= 24) then
+    fProperty.Add('msDS-PasswordHistoryLength', Edit_PwdHistoryLength.Text)
+  else
+    fProperty.Restore('msDS-PasswordHistoryLength');
+end;
+
+procedure TFrmPropertyPSO.Edit_MinPwdLengthChange(Sender: TObject);
+var
+  v: int64;
+begin
+  if TryStrToInt64(Edit_MinPwdLength.Text, v) and (v >= 0) and (v <= 255) then
+    fProperty.Add('msDS-MinimumPasswordLength', Edit_MinPwdLength.Text)
+  else
+    fProperty.Restore('msDS-MinimumPasswordLength');
+end;
+
+procedure TFrmPropertyPSO.CheckBox_PwdComplexityChange(Sender: TObject);
+begin
+  if CheckBox_PwdComplexity.Checked then
+    fProperty.Add('msDS-PasswordComplexityEnabled', 'TRUE')
+  else
+    fProperty.Add('msDS-PasswordComplexityEnabled', 'FALSE');
+end;
+
+procedure TFrmPropertyPSO.CheckBox_PwdReversibleEncryptionChange(Sender: TObject
+  );
+begin
+  if CheckBox_PwdReversibleEncryption.Checked then
+    fProperty.Add('msDS-PasswordReversibleEncryptionEnabled', 'TRUE')
+  else
+    fProperty.Add('msDS-PasswordReversibleEncryptionEnabled', 'FALSE');
+end;
+
+procedure TFrmPropertyPSO.Edit_LockoutPwdObservationWindowChange(Sender: TObject
+  );
+var
+  v: int64;
+begin
+  if TryStrToInt64(Edit_LockoutPwdObservationWindow.Text, v) and (v >= 1) and (v <= 99999) then
+  begin
+    v := v * 60 * 10000000;
+    fProperty.Add('msDS-LockoutObservationWindow', IntToStr(-v));
+  end
+  else
+    fProperty.Restore('msDS-LockoutObservationWindow');
+end;
+
+procedure TFrmPropertyPSO.Edit_LockoutPwdThresholdChange(Sender: TObject);
+var
+  v: int64;
+begin
+  if TryStrToInt64(Edit_LockoutPwdThreshold.Text, v) and (v >= 0) and (v <= 999) then
+    fProperty.Add('msDS-LockoutThreshold', Edit_LockoutPwdThreshold.Text)
+  else
+    fProperty.Restore('msDS-LockoutThreshold');
+end;
+
+procedure TFrmPropertyPSO.Edit_MaxPwdAgeChange(Sender: TObject);
+var
+  v: int64;
+begin
+  if TryStrToInt64(Edit_MaxPwdAge.Text, v) and (v >= 1) and (v <= 999) then
+  begin
+    v := v * (24 * 3600) * 10000000;
+    fProperty.Add('msDS-MaximumPasswordAge', IntToStr(-v));
+  end
+  else
+    fProperty.Restore('msDS-MaximumPasswordAge');
+end;
+
+procedure TFrmPropertyPSO.Edit_MinPwdAgeChange(Sender: TObject);
+var
+  v: int64;
+begin
+  if TryStrToInt64(Edit_MinPwdAge.Text, v) and (v >= 0) and (v <= 998) then
+  begin
+    v := v * (24 * 3600) * 10000000;
+    fProperty.Add('msDS-MinimumPasswordAge', IntToStr(-v));
+  end
+  else
+    fProperty.Restore('msDS-MinimumPasswordAge');
+end;
 
 constructor TFrmPropertyPSO.Create(TheOwner: TComponent);
 begin

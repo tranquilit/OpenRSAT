@@ -86,6 +86,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
+        OnChange = Edit_PrecedenceChange
       end
     end
     object Panel_MinPwdLength: TPanel
@@ -119,6 +120,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
+        OnChange = Edit_MinPwdLengthChange
       end
     end
     object Panel_PwdHistoryLength: TPanel
@@ -152,6 +154,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
+        OnChange = Edit_PwdHistoryLengthChange
       end
     end
     object Panel_PwdComplexity: TPanel
@@ -185,6 +188,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
+        OnChange = CheckBox_PwdComplexityChange
       end
     end
     object Panel_PwdReversibleEncryption: TPanel
@@ -218,6 +222,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
+        OnChange = CheckBox_PwdReversibleEncryptionChange
       end
     end
     object Panel_MinPwdAge: TPanel
@@ -251,6 +256,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
+        OnChange = Edit_MinPwdAgeChange
       end
     end
     object Panel_MaxPwdAge: TPanel
@@ -284,6 +290,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
+        OnChange = Edit_MaxPwdAgeChange
       end
     end
     object Panel_LockoutPwdThreshold: TPanel
@@ -317,6 +324,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
+        OnChange = Edit_LockoutPwdThresholdChange
       end
     end
     object Panel_LockoutPwdObservationWindow: TPanel
@@ -350,6 +358,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
         Align = alClient
         BorderSpacing.Around = 8
         TabOrder = 0
+        OnChange = Edit_LockoutPwdObservationWindowChange
       end
     end
   end
