@@ -59,6 +59,7 @@ type
   { TFrmModuleADUC }
 
   TFrmModuleADUC = class(TFrameModule)
+    Action_NewPasswordSettings: TAction;
     Action_Rename: TAction;
     Action_NewPrinter: TAction;
     Action_NewResourcePropertyList: TAction;
@@ -255,6 +256,7 @@ type
     procedure Action_NewMsImagingPSPsUpdate(Sender: TObject);
     procedure Action_NewOUExecute(Sender: TObject);
     procedure Action_NewOUUpdate(Sender: TObject);
+    procedure Action_NewPasswordSettingsExecute(Sender: TObject);
     procedure Action_NewPrinterExecute(Sender: TObject);
     procedure Action_NewPrinterUpdate(Sender: TObject);
     procedure Action_NewResourcePropertyListExecute(Sender: TObject);
@@ -1136,6 +1138,23 @@ end;
 procedure TFrmModuleADUC.Action_NewOUUpdate(Sender: TObject);
 begin
   Action_NewOU.Enabled := Assigned(LdapClient) and LdapClient.Connected;
+end;
+
+procedure TFrmModuleADUC.Action_NewPasswordSettingsExecute(Sender: TObject);
+var
+  Vis: TVisNewObject;
+begin
+  if Assigned(fLog) then
+    fLog.Add.Log(sllTrace, '% - Execute', [Action_NewPasswordSettings.Caption]);
+
+  Vis := TVisNewObject.Create(Self, vnotPasswordSettings, GetFocusedObject(True), LdapClient.DefaultDN(), LdapClient);
+  try
+    Vis.PageCount := 1;
+    if Vis.ShowModal = mrOK then
+      Action_Refresh.Execute;
+  finally
+    FreeAndNil(Vis);
+  end;
 end;
 
 procedure TFrmModuleADUC.Action_NewPrinterExecute(Sender: TObject);
@@ -3396,6 +3415,7 @@ begin
   RegisterNewMenuActions('organizationalUnit', [Action_NewComputer, Action_NewContact, Action_NewGroup, Action_NewInetOrgPerson, Action_NewMsDSShadowPrincipalContainer, Action_NewMsImagingPSPs, Action_NewOU, Action_NewPrinter, Action_NewUser, Action_NewSharedFolder]);
   RegisterNewMenuActions('container', [Action_NewComputer, Action_NewContact, Action_NewGroup, Action_NewInetOrgPerson, Action_NewMsDSKeyCredential, Action_NewResourcePropertyList, Action_NewMsDSShadowPrincipalContainer, Action_NewMsImagingPSPs, Action_NewOU, Action_NewPrinter, Action_NewUser, Action_NewSharedFolder]);
   RegisterNewMenuActions('lostAndFound', [Action_NewComputer, Action_NewContact, Action_NewGroup, Action_NewInetOrgPerson, Action_NewMsDSKeyCredential, Action_NewResourcePropertyList, Action_NewMsDSShadowPrincipalContainer, Action_NewMsImagingPSPs, Action_NewOU, Action_NewPrinter, Action_NewUser, Action_NewSharedFolder]);
+  RegisterNewMenuActions('msDS-PasswordSettingsContainer', [Action_NewPasswordSettings]);
   fIContext.IniPropStorage.IniSection := Name;
   CheckBox_IncludeSubContainer.Checked := fIContext.IniPropStorage.ReadBoolean(CheckBox_IncludeSubContainer.Name, False);
 end;

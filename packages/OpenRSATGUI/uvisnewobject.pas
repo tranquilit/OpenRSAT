@@ -38,7 +38,8 @@ type
     vnotPrinter,
     vnotServer,
     vnotSiteLink,
-    vnotSiteLinkBridge
+    vnotSiteLinkBridge,
+    vnotPasswordSettings
   );
   { TVisNewObject }
 
@@ -102,6 +103,7 @@ uses
   ufrmnewserver,
   ufrmnewsitelink,
   ufrmnewsitelinkbridge,
+  ufrmnewpasswordsettings,
   ucommonui;
 
 {$R *.lfm}
@@ -146,6 +148,7 @@ begin
     vnotServer: fFrame := TFrmNewServer.Create(Self, Ldap);
     vnotSiteLink: fFrame := TFrmNewSiteLink.Create(Self, Ldap, fObjectOU);
     vnotSiteLinkBridge: fFrame := TFrmNewSiteLinkBridge.Create(Self, Ldap, fObjectOU);
+    vnotPasswordSettings: fFrame := TFrmNewPasswordSettings.Create(Self, Ldap);
     else
     begin
       Close;

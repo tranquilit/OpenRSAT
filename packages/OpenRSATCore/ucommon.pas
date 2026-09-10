@@ -162,6 +162,7 @@ resourcestring
   rsNewObjectPrinter = 'New object - Printer';
   rsNewObjectServer = 'New object - Server';
   rsNewObjectSiteLink = 'New Object - Site Link';
+  rsNewObjectPasswordSettings = 'New Object - Password Settings';
 
   rsNewObjectBtnBack = '< Back';
   rsNewObjectBtnNext = 'Next >';

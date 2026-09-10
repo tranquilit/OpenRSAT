@@ -944,6 +944,10 @@ object FrmModuleADUC: TFrmModuleADUC
       OnExecute = Action_RenameExecute
       OnUpdate = Action_RenameUpdate
     end
+    object Action_NewPasswordSettings: TAction
+      Caption = 'Password settings'
+      OnExecute = Action_NewPasswordSettingsExecute
+    end
   end
   object PopupMenu1: TPopupMenu
     Images = CoreDataModule.ImageList1
