@@ -63,7 +63,9 @@ object FrmPropertyPSO: TFrmPropertyPSO
           Width = 283
           Align = alClient
           BorderSpacing.Around = 8
+          Enabled = False
           ParentBidiMode = False
+          ReadOnly = True
           TabOrder = 0
         end
       end
@@ -457,7 +459,7 @@ object FrmPropertyPSO: TFrmPropertyPSO
     end
   end
   object ActionList1: TActionList
-    Left = 88
+    Left = 72
     Top = 32
     object Action_Add: TAction
       Caption = 'Add'
