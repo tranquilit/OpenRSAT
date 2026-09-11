@@ -17,7 +17,7 @@ procedure HideHintWindow;
 implementation
 
 var
-  HintWnd: THintWindow;
+  HintWnd: THintWindow = nil;
 
 procedure ShowHintWindow(const TheParent: TControl; const Msg: RawUtf8;
   HideDelay: Integer);
@@ -41,7 +41,7 @@ end;
 procedure HideHintWindow;
 begin
   if Assigned(HintWnd) then
-    FreeAndNil(HintWnd);
+    HintWnd.Hide;
 end;
 
 end.
