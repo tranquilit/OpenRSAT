@@ -34,6 +34,7 @@ type
     BitBtn_Remove: TBitBtn;
     CheckBox_PwdComplexity: TCheckBox;
     CheckBox_PwdReversibleEncryption: TCheckBox;
+    Edit_LockoutDuration: TEdit;
     Edit_Name: TEdit;
     Edit_Precedence: TEdit;
     Edit_MinPwdLength: TEdit;
@@ -42,6 +43,7 @@ type
     Edit_MaxPwdAge: TEdit;
     Edit_LockoutThreshold: TEdit;
     Edit_LockoutObservationWindow: TEdit;
+    Label_LockoutDuration: TLabel;
     Label_Name: TLabel;
     Label_LockoutObservationWindow: TLabel;
     Label_Precedence: TLabel;
@@ -53,6 +55,7 @@ type
     Label_MaxPwdAge: TLabel;
     Label_LockoutThreshold: TLabel;
     PageControl1: TPageControl;
+    Panel_LockoutDuration: TPanel;
     Panel_Actions: TPanel;
     Panel_LockoutThreshold: TPanel;
     Panel_LockoutObservationWindow: TPanel;
@@ -71,15 +74,21 @@ type
     procedure Action_BackExecute(Sender: TObject);
     procedure Action_NextExecute(Sender: TObject);
   private
+    function GetDistinguishedName: RawUtf8;
+  private
     fLdap: TLdapClient;
 
+    function CheckSettings: Boolean;
     procedure Finish;
+
+    property DistinguishedName: RawUtf8 read GetDistinguishedName;
   public
     constructor Create(TheOwner: TComponent; ALdap: TLdapClient); reintroduce;
   end;
 
 implementation
 uses
+  uhintwindow,
   ucommon,
   uvisnewobject;
 
@@ -90,9 +99,30 @@ uses
 procedure TFrmNewPasswordSettings.Action_NextExecute(Sender: TObject);
 begin
   case PageControl1.ActivePageIndex of
-    0: PageControl1.ActivePageIndex := 1;
+    0: if CheckSettings then PageControl1.ActivePageIndex := 1;
     1: Finish;
   end;
+end;
+
+function TFrmNewPasswordSettings.GetDistinguishedName: RawUtf8;
+begin
+  result := FormatUtf8('CN=%,%', [LdapEscape(Edit_Name.Text), (Owner as TVisNewObject).ObjectOU]);
+end;
+
+function TFrmNewPasswordSettings.CheckSettings: Boolean;
+var
+  Attribute: TLdapAttribute;
+begin
+  result := False;
+
+  Attribute := fLdap.SearchObject(DistinguishedName, '', 'cn');
+  if Assigned(Attribute) then
+  begin
+    ShowHintWindow(Edit_Name, 'Already exists.', 5);
+    Exit;
+  end;
+
+  result := True;
 end;
 
 procedure TFrmNewPasswordSettings.Action_BackExecute(Sender: TObject);
@@ -105,17 +135,15 @@ end;
 procedure TFrmNewPasswordSettings.Finish;
 var
   Attributes: TLdapAttributeList;
-  OwnerNewObject: TVisNewObject;
-  DistinguishedName: RawUtf8;
   i: Integer;
   P: PDocVariantData;
   Attribute: TLdapAttribute;
 begin
-  OwnerNewObject := (Owner as TVisNewObject);
-
-  DistinguishedName := FormatUtf8('CN=%,%', [Edit_Name.Text, OwnerNewObject.ObjectOU]);
   Attributes := TLdapAttributeList.Create;
   try
+    Attribute := Attributes.Add('objectClass', 'top');
+    Attribute.Add('msDS-PasswordSettings');
+
     Attributes.Add('msDS-PasswordSettingsPrecedence', Edit_Precedence.Text);
     Attributes.Add('msDS-MinimumPasswordLength', Edit_MinPwdLength.Text);
     Attributes.Add('msDS-PasswordHistoryLength', Edit_PwdHistoryLength.Text);
@@ -131,6 +159,7 @@ begin
     Attributes.Add('msDS-MaximumPasswordAge', IntToStr(-(Utf8ToInt64(Edit_MaxPwdAge.Text) * 24 * 3600 * 10000000)));
     Attributes.Add('msDS-LockoutThreshold', Edit_LockoutThreshold.Text);
     Attributes.Add('msDS-LockoutObservationWindow', IntToStr(-(Utf8ToInt64(Edit_LockoutObservationWindow.Text) * 60 * 10000000)));
+    Attributes.Add('msDS-LockoutDuration', IntToStr(-(Utf8ToInt64(Edit_LockoutDuration.Text) * 60 * 10000000)));
 
     Attribute := Attributes.Add('msDS-PSOAppliesTo');
     for i := 0 to TisGrid_AppliesTo.Data.Count - 1 do
@@ -140,13 +169,14 @@ begin
         Continue;
       Attribute.Add(P^.U['distinguishedName']);
     end;
-    if not OwnerNewObject.Ldap.Add(DistinguishedName, Attributes) then
+
+    if not fLdap.Add(DistinguishedName, Attributes) then
       Exit;
   finally
     FreeAndNil(Attributes);
   end;
 
-  OwnerNewObject.ModalResult := mrOK;
+  (Owner as TVisNewObject).ModalResult := mrOK;
 end;
 
 constructor TFrmNewPasswordSettings.Create(TheOwner: TComponent;

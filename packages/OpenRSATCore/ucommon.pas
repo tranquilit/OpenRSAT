@@ -914,7 +914,7 @@ end;
 
 function IsContainer(ObjectClass: RawUtf8): Boolean;
 const
-  CONTAINERS: Array of String = ('organizationalUnit', 'container', 'domainDNS');
+  CONTAINERS: Array of String = ('organizationalUnit', 'container', 'domainDNS', 'msDS-PasswordSettingsContainer');
 var
   Container: String;
 begin
