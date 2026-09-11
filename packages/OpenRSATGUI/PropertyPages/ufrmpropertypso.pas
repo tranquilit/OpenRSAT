@@ -32,13 +32,13 @@ type
   /// - msDS-MinimumPasswordLength (integer) (default=7) (value=0-255)
   /// - msDS-PasswordHistoryLength (integer) (default=24) (value=0-24)
   /// - msDS-MaximumPasswordAge (TimeSpan?) (default=42 days) (value=1-999 days)
-  /// - msDS-MinimumPasswordAge (TimeSpan?) (default=1 day) (value=1-998 days)
+  /// - msDS-MinimumPasswordAge (TimeSpan?) (default=1 day) (value=0-998 days)
   /// - msDS-PasswordComplexityEnabled (Boolean) (default=true) (value=false/true)
   /// - msDS-PasswordReversibleEncryptionEnabled (Boolean) (default=false) (value=false/true)
   /// -
   /// - msDS-LockoutThreshold (integer) (default=0) (value=0-999)
-  /// - msDS-LockoutDuration (TimeSpan) (default=Undefined) (value=1-99999 minutes)
-  /// - msDS-LockoutObservationWindow (TimeSpan) (default=Undefined) (value=1-99999 minutes)
+  /// - msDS-LockoutDuration (TimeSpan) (default=Undefined) (value=0-99999 minutes)
+  /// - msDS-LockoutObservationWindow (TimeSpan) (default=Undefined) (value=0-99999 minutes)
   /// TimeSpanToSeconds: Abs(Value) div 10000000
   /// Source:
   /// - https://byebyeprof.com/fr/Intranet/PSO
@@ -362,7 +362,7 @@ procedure TFrmPropertyPSO.Edit_LockoutPwdObservationWindowChange(Sender: TObject
 var
   v: int64;
 begin
-  if TryStrToInt64(Edit_LockoutPwdObservationWindow.Text, v) and (v >= 1) and (v <= 99999) then
+  if TryStrToInt64(Edit_LockoutPwdObservationWindow.Text, v) and (v >= 0) and (v <= 99999) then
   begin
     v := v * 60 * 10000000;
     Edit_LockoutPwdObservationWindow.Font.Color := clDefault;
