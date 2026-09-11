@@ -16,6 +16,7 @@ uses
   StdCtrls,
   mormot.core.base,
   mormot.core.text,
+  mormot.core.variants,
   mormot.net.ldap,
   tis.ui.grid.core;
 
@@ -24,9 +25,10 @@ type
   { TFrmNewPasswordSettings }
 
   TFrmNewPasswordSettings = class(TFrame)
+    Action_Back: TAction;
     Action_Add: TAction;
     Action_Remove: TAction;
-    Action_OK: TAction;
+    Action_Next: TAction;
     ActionList1: TActionList;
     BitBtn_Add: TBitBtn;
     BitBtn_Remove: TBitBtn;
@@ -66,8 +68,12 @@ type
     TabSheet_Settings: TTabSheet;
     TabSheet_AppliesTo: TTabSheet;
     TisGrid_AppliesTo: TTisGrid;
+    procedure Action_BackExecute(Sender: TObject);
+    procedure Action_NextExecute(Sender: TObject);
   private
     fLdap: TLdapClient;
+
+    procedure Finish;
   public
     constructor Create(TheOwner: TComponent; ALdap: TLdapClient); reintroduce;
   end;
@@ -81,6 +87,66 @@ uses
 
 { TFrmNewPasswordSettings }
 
+procedure TFrmNewPasswordSettings.Action_NextExecute(Sender: TObject);
+begin
+  case PageControl1.ActivePageIndex of
+    0: PageControl1.ActivePageIndex := 1;
+    1: Finish;
+  end;
+end;
+
+procedure TFrmNewPasswordSettings.Action_BackExecute(Sender: TObject);
+begin
+  case PageControl1.ActivePageIndex of
+    1: PageControl1.ActivePageIndex := 0;
+  end;
+end;
+
+procedure TFrmNewPasswordSettings.Finish;
+var
+  Attributes: TLdapAttributeList;
+  OwnerNewObject: TVisNewObject absolute TheOwner;
+  DistinguishedName: RawUtf8;
+  i: Integer;
+  P: PDocVariantData;
+  Attribute: TLdapAttribute;
+begin
+  DistinguishedName := FormatUtf8('CN=%,%', [Edit_Name.Text, OwnerNewObject.ObjectOU])
+  Attributes := TLdapAttributeList.Create;
+  try
+    Attributes.Add('msDS-PasswordSettingsPrecedence', Edit_Precedence.Text);
+    Attributes.Add('msDS-MinimumPasswordLength', Edit_MinPwdLength.Text);
+    Attributes.Add('msDS-PasswordHistoryLength', Edit_PwdHistoryLength.Text);
+    if CheckBox_PwdComplexity.Checked then
+      Attributes.Add('msDS-PasswordComplexityEnabled', 'TRUE')
+    else
+      Attributes.Add('msDS-PasswordComplexityEnabled', 'FALSE');
+    if CheckBox_PwdReversibleEncryption.Checked then
+      Attributes.Add('msDS-PasswordReversibleEncryptionEnabled', 'TRUE')
+    else
+      Attributes.Add('msDS-PasswordReversibleEncryptionEnabled', 'FALSE');
+    Attributes.Add('msDS-MinimumPasswordAge', IntToStr(-(Utf8ToInt64(Edit_MinPwdAge.Text) * 24 * 3600 * 10000000)));
+    Attributes.Add('msDS-MaximumPasswordAge', IntToStr(-(Utf8ToInt64(Edit_MaxPwdAge.Text) * 24 * 3600 * 10000000)));
+    Attributes.Add('msDS-LockoutThreshold', Edit_LockoutThreshold.Text);
+    Attributes.Add('msDS-LockoutObservationWindow', IntToStr(-(Utf8ToInt64(Edit_LockoutObservationWindow.Text) * 60 * 10000000)));
+
+    Attribute := Attributes.Add('msDS-PSOAppliesTo');
+    for i := 0 to TisGrid_AppliesTo.Data.Count - 1 do
+    begin
+      P := TisGrid_AppliesTo.Data._[i];
+      if not Assigned(P) or not P^.Exists('distinguishedName') then
+        Continue;
+      Attribute.Add(P^.U['distinguishedName']);
+    end;
+    if not OwnerNewObject.Ldap.Add(DistinguishedName, Attributes) then
+      Exit;
+  finally
+    FreeAndNil(Attributes);
+  end;
+
+  OwnerNewObject.ModalResult := mrOK;
+end;
+
 constructor TFrmNewPasswordSettings.Create(TheOwner: TComponent;
   ALdap: TLdapClient);
 var
@@ -90,11 +156,13 @@ begin
 
   fLdap := ALdap;
 
+  PageControl1.ActivePageIndex := 0;
   OwnerNewObject.Caption := rsNewObjectPasswordSettings;
-  OwnerNewObject.Btn_Next.Action := Action_OK;
-  OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnOK;
+  OwnerNewObject.Btn_Next.Action := Action_Next;
+  OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnNext;
   OwnerNewObject.Btn_Next.Default := True;
-  OwnerNewObject.Btn_Back.Visible := False;
+  OwnerNewObject.Btn_Back.Action := Action_Prev;
+  OwnerNewObject.Btn_Back.Caption := rsNewObjectBtnBack;
   OwnerNewObject.Image_Object.ImageIndex := -1;
 end;
 
