@@ -24,6 +24,7 @@ type
 
     fObservers: Array of TProcRsatOptionOfObject;
 
+    fVersion: Int64;
     fSearchPageSize: Integer;
     fGridFilter: RawUtf8;
     fTreeFilter: RawUtf8;
@@ -37,11 +38,14 @@ type
     procedure SetShowGPO(AValue: Boolean);
     procedure SetTreeFilter(AValue: RawUtf8);
     procedure SetTreeObjectClasses(AValue: TRawUtf8DynArray);
+    procedure SetVersion(AValue: Int64);
 
+    procedure UpgradeVersion;
   public
     constructor Create;
     destructor Destroy; override;
 
+    property Version: Int64 read fVersion write SetVersion;
     property SearchPageSize: Integer read fSearchPageSize write SetSearchPageSize;
     property GridFilter: RawUtf8 read fGridFilter write SetGridFilter;
     property TreeFilter: RawUtf8 read fTreeFilter write SetTreeFilter;
@@ -60,6 +64,7 @@ type
 
 const
   DEFAULT_GRID_ATTRIBUTES_FILTER: RawUtf8 = 'name;objectClass;description';
+  CURRENT_VERSION: Int64 = 1;
 
 implementation
 
@@ -119,6 +124,30 @@ begin
   fChanged := True;
 end;
 
+procedure TModuleADUCOption.SetVersion(AValue: Int64);
+begin
+  if fVersion = AValue then
+    Exit;
+
+  fVersion := AValue;
+  fChanged := True;
+end;
+
+procedure TModuleADUCOption.UpgradeVersion;
+var
+  c: SizeInt;
+begin
+  if fVersion < 1 then
+  begin
+    c := Length(fTreeObjectClasses);
+    SetLength(fTreeObjectClasses, c + 1);
+    fTreeObjectClasses[c] := 'msDS-PasswordSettingsContainer';
+    fVersion := 1;
+  end;
+
+  Save;
+end;
+
 constructor TModuleADUCOption.Create;
 begin
   fLog := TADUCLog;
@@ -137,11 +166,12 @@ end;
 procedure TModuleADUCOption.Load(IniFile: TIniFile);
 const
   Section = 'ADUC';
-  DEFAULT_TREE_OBJECT_CLASSES = 'container;organizationalUnit;lostAndFound;builtinDomain;msDS-QuotaContainer;msTPM-InformationObjectsContainer';
+  DEFAULT_TREE_OBJECT_CLASSES = 'container;organizationalUnit;lostAndFound;builtinDomain;msDS-QuotaContainer;msTPM-InformationObjectsContainer;msDS-PasswordSettingsContainer';
 begin
   if Assigned(fLog) then
     fLog.Add.Log(sllDebug, 'Load', Self);
 
+  fVersion := IniFile.ReadInt64(Section, 'Version', 0);
   fSearchPageSize := IniFile.ReadInt64(Section, 'SearchPageSize', 1000);
   fGridFilter := IniFile.ReadString(Section, 'GridFilter', '');
   fTreeFilter := IniFile.ReadString(Section, 'TreeFilter', '');
@@ -150,6 +180,8 @@ begin
   fGridAttributesFilter := TRawUtf8DynArray(IniFile.ReadString(Section, 'GridAttributesFilter', DEFAULT_GRID_ATTRIBUTES_FILTER).Split(';'));
 
   fChanged := False;
+  if fVersion < CURRENT_VERSION then
+    UpgradeVersion;
 end;
 
 procedure TModuleADUCOption.Save(IniFile: TIniFile);
@@ -159,6 +191,7 @@ begin
   if Assigned(fLog) then
     fLog.Add.Log(sllDebug, 'Save', Self);
 
+  IniFile.WriteInt64(SECTION, 'Version', fVersion);
   IniFile.WriteInt64(SECTION, 'SearchPageSize', fSearchPageSize);
   IniFile.WriteString(SECTION, 'GridFilter', fGridFilter);
   IniFile.WriteString(SECTION, 'TreeFilter', fTreeFilter);
