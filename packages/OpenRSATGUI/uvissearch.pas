@@ -371,7 +371,7 @@ begin
       if (Filter <> '') then
         // https://ldapwiki.com/wiki/Wiki.jsp?page=Ambiguous%20Name%20Resolution
         // Ambiguous Name Resolution (aNR) is a search algorithm in Microsoft Active Directory that permits a client to search multiple Naming Attributes on objects via a single clause in a search filter
-        Filter := FormatUtf8('(anr=%*)', [LdapEscape(Filter)])
+        Filter := FormatUtf8('(anr=%*)', [LdapEscape(Filter, true)])
       else
         Filter := 'name=*';
     end;
