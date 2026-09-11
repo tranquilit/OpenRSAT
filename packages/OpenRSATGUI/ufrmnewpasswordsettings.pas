@@ -105,13 +105,15 @@ end;
 procedure TFrmNewPasswordSettings.Finish;
 var
   Attributes: TLdapAttributeList;
-  OwnerNewObject: TVisNewObject absolute TheOwner;
+  OwnerNewObject: TVisNewObject;
   DistinguishedName: RawUtf8;
   i: Integer;
   P: PDocVariantData;
   Attribute: TLdapAttribute;
 begin
-  DistinguishedName := FormatUtf8('CN=%,%', [Edit_Name.Text, OwnerNewObject.ObjectOU])
+  OwnerNewObject := (Owner as TVisNewObject);
+
+  DistinguishedName := FormatUtf8('CN=%,%', [Edit_Name.Text, OwnerNewObject.ObjectOU]);
   Attributes := TLdapAttributeList.Create;
   try
     Attributes.Add('msDS-PasswordSettingsPrecedence', Edit_Precedence.Text);
@@ -161,7 +163,7 @@ begin
   OwnerNewObject.Btn_Next.Action := Action_Next;
   OwnerNewObject.Btn_Next.Caption := rsNewObjectBtnNext;
   OwnerNewObject.Btn_Next.Default := True;
-  OwnerNewObject.Btn_Back.Action := Action_Prev;
+  OwnerNewObject.Btn_Back.Action := Action_Back;
   OwnerNewObject.Btn_Back.Caption := rsNewObjectBtnBack;
   OwnerNewObject.Image_Object.ImageIndex := -1;
 end;
