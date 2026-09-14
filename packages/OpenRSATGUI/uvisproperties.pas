@@ -689,23 +689,23 @@ var
   Cancel: Boolean;
   i: Integer;
 begin
-  result := True;
+  result := False;
   Cancel := False;
 
-  for i := 0 to Length(fPropertyFrameList) do
+  for i := 0 to Length(fPropertyFrameList) - 1 do
   begin
     fPropertyFrameList[i].DoBeforeApply(Cancel);
     if Cancel then
       Exit;
   end;
-  result := False;
+  result := True;
 end;
 
 procedure TVisProperties.DoAfterApply;
 var
   i: Integer;
 begin
-  for i := 0 to Length(fPropertyFrameList) do
+  for i := 0 to Length(fPropertyFrameList) - 1 do
     fPropertyFrameList[i].DoAfterApply;
 end;
 
