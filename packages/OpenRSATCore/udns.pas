@@ -1685,6 +1685,7 @@ begin
     drrMB: result := 'MB';
     drrSRV: result := 'Service Location (SRV)';
     drrMX: result := 'Mail Exchanger (MX)';
+    drrPTR: result := 'Pointer (PTR)';
   end;
 end;
 
