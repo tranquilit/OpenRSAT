@@ -40,6 +40,9 @@ type
     /// Status message. Used to provide item count.
     fStatus: String;
 
+    Count: Integer;
+
+    procedure OnSearchPage(Sender: TLdapClient);
     /// Method to sync status with main thread.
     procedure StatusChange;
     /// Method to sync data when thread finished.
@@ -203,6 +206,31 @@ begin
     fOnStatus(fStatus);
 end;
 
+procedure TThreadUpdateZone.OnSearchPage(Sender: TLdapClient);
+var
+  Item: TLdapResult;
+  idx: Integer;
+begin
+  if Terminated then
+    Sender.SearchAllAbort;
+
+  Inc(Count, Sender.SearchResult.Count);
+  ReportStatus(IntToStr(Count));
+
+  fCurrentZoneStorage.IncreaseStorageCapacity(Sender.SearchResult.Count);
+  for Item in Sender.SearchResult.Items do
+  begin
+    if not Assigned(Item) then
+      continue;
+
+    idx := fCurrentZoneStorage.AddByObjectName(Item.ObjectName);
+    fCurrentZoneStorage.UpdateName(idx, Item.Find('name').GetReadable());
+    fCurrentZoneStorage.UpdateObjectClass(idx, Item.Find('objectClass').GetAllReadable);
+    fCurrentZoneStorage.UpdateWhenChanged(idx, Item.Find('whenChanged').GetReadable());
+    fCurrentZoneStorage.UpdateDnsRecord(idx, Item.Find('dnsRecord'));
+  end;
+end;
+
 procedure TThreadUpdateZone.SyncFinished;
 begin
   if Assigned(fOnFinished) then
@@ -217,41 +245,21 @@ end;
 
 procedure TThreadUpdateZone.Execute;
 var
-  Count, idx: Integer;
-  Item: TLdapResult;
+  Bak: TOnLdapClientEvent;
+  SearchResult: TDocVariantData;
 begin
   try
+    Count := 0;
     fCurrentZoneStorage.Clear;
 
-    Count := 0;
-    fLdapClient.SearchBegin();
+    Bak := fLdapClient.OnSearchPage;
     try
       fLdapClient.SearchScope := lssSingleLevel;
-      repeat
-        if not fLdapClient.Search(fCurrentZoneStorage.ZoneObjectName, False, '', ['name', 'dnsRecord', 'whenChanged']) then
-          raise Exception.Create(FormatUtf8('Ldap Search Failed: %', [fLdapClient.ResultString]));
-
-        if Terminated then
-          Exit;
-
-        Inc(Count, fLdapClient.SearchResult.Count);
-        ReportStatus(IntToString(Count));
-
-        fCurrentZoneStorage.IncreaseStorageCapacity(fLdapClient.SearchResult.Count);
-        for Item in fLdapClient.SearchResult.Items do
-        begin
-          if not Assigned(Item) then
-            continue;
-
-          idx := fCurrentZoneStorage.AddByObjectName(Item.ObjectName);
-          fCurrentZoneStorage.UpdateName(idx, Item.Find('name').GetReadable());
-          fCurrentZoneStorage.UpdateObjectClass(idx, Item.Find('objectClass').GetAllReadable);
-          fCurrentZoneStorage.UpdateWhenChanged(idx, Item.Find('whenChanged').GetReadable());
-          fCurrentZoneStorage.UpdateDnsRecord(idx, Item.Find('dnsRecord'));
-        end;
-      until fLdapClient.SearchCookie = '';
+      fLdapClient.OnSearchPage := @OnSearchPage;
+      if not fLdapClient.SearchAllDocRaw(SearchResult, fCurrentZoneStorage.ZoneObjectName, '', ['name', 'dnsRecord', 'whenChanged'], [roAutoRange, roKnownValuesAsArray, roObjectNameAtRoot, roRawValues]) then
+        raise Exception.Create(FormatUtf8('Ldap Search Failed: %', [fLdapClient.ResultString]));
     finally
-      fLdapClient.SearchEnd;
+      fLdapClient.OnSearchPage := Bak;
     end;
   finally
     Synchronize(@SyncFinished);
