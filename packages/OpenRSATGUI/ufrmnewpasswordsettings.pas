@@ -76,6 +76,7 @@ type
     procedure Action_BackExecute(Sender: TObject);
     procedure Action_NextExecute(Sender: TObject);
     procedure Action_RemoveExecute(Sender: TObject);
+    procedure PageControl1Change(Sender: TObject);
   private
     function GetDistinguishedName: RawUtf8;
   private
@@ -93,7 +94,7 @@ type
 
     property DistinguishedName: RawUtf8 read GetDistinguishedName;
   public
-    constructor Create(TheOwner: TComponent; ALdap: TLdapClient);
+    constructor Create(TheOwner: TComponent; ALdap: TLdapClient); reintroduce;
   end;
 
 implementation
@@ -117,6 +118,27 @@ end;
 procedure TFrmNewPasswordSettings.Action_RemoveExecute(Sender: TObject);
 begin
   AppliesToRemove;
+end;
+
+procedure TFrmNewPasswordSettings.PageControl1Change(Sender: TObject);
+begin
+  case PageControl1.ActivePageIndex of
+    0:
+    begin
+      Edit_Name.SetFocus;
+      Action_Next.Caption := rsNewObjectBtnNext;
+      Action_Next.Enabled := True;
+      Action_Back.Caption := rsNewObjectBtnBack;
+      Action_Back.Enabled := False;
+    end;
+    1:
+    begin
+      Action_Next.Caption := rsNewObjectBtnOK;
+      Action_Next.Enabled := True;
+      Action_Back.Caption := rsNewObjectBtnBack;
+      Action_Back.Enabled := True;
+    end;
+  end;
 end;
 
 function TFrmNewPasswordSettings.GetDistinguishedName: RawUtf8;
@@ -359,6 +381,7 @@ begin
 
   fLdap := ALdap;
 
+  PageControl1.ActivePageIndex := -1;
   PageControl1.ActivePageIndex := 0;
   OwnerNewObject.Caption := rsNewObjectPasswordSettings;
   OwnerNewObject.Btn_Next.Action := Action_Next;
@@ -367,7 +390,6 @@ begin
   OwnerNewObject.Btn_Back.Action := Action_Back;
   OwnerNewObject.Btn_Back.Caption := rsNewObjectBtnBack;
   OwnerNewObject.Image_Object.ImageIndex := -1;
-  Edit_Name.SetFocus;
 end;
 
 end.
