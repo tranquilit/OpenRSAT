@@ -211,6 +211,8 @@ var
   Item: TLdapResult;
   idx: Integer;
 begin
+  if (sender.SearchPageCount = 0) then
+    Exit;
   if Terminated then
     Sender.SearchAllAbort;
 
