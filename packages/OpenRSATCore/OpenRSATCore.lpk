@@ -152,6 +152,10 @@
         <Filename Value="ugeneralpropertyntds.pas"/>
         <UnitName Value="ugeneralpropertyntds"/>
       </Item>
+      <Item>
+        <Filename Value="uwindows.ncrypt.pas"/>
+        <UnitName Value="uwindows.ncrypt"/>
+      </Item>
     </Files>
     <i18n>
       <OutDir Value="languages"/>

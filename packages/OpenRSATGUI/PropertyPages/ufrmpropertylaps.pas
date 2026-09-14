@@ -94,6 +94,9 @@ uses
   mormot.net.ldap,
   ucommon,
   DateUtils,
+  {$IFDEF WINDOWS}
+  uwindows.ncrypt,
+  {$ENDIF WINDOWS}
   uhelpersui;
 
 {$R *.lfm}
@@ -179,6 +182,11 @@ end;
 procedure TFrmPropertyLAPS.Update(Props: TProperty);
 var
   LAPSInformation: PLAPSInformation;
+  {$IFDEF WINDOWS}
+  UnencryptedData: TBytes;
+  Account, Password: RawUtf8;
+  WhenChanged: TDateTime;
+  {$ENDIF WINDOWS}
 begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, 'Update', Self);
@@ -214,6 +222,17 @@ begin
     if GroupBox_LAPSEncrypted.Visible then
     begin
       Edit_v2_EncryptedPasswordData.CaptionNoChange := LAPSInformation^.LAPSV2.EncryptedPassword;
+      {$IFDEF WINDOWS}
+      if LAPSInformation^.LAPSV2.EncryptedPassword <> '' then
+      begin
+        UnencryptedData := DecryptDpapiNgWindows(TBytes(LAPSInformation^.LAPSV2.EncryptedPassword));
+        if ConvertLAPSPassword(RawUtf8(UnencryptedData), Account, Password, WhenChanged) then
+        begin
+          Edit_v2_EncryptedLocalAdminAccountName.CaptionNoChange := Account;
+          Edit_v2_EncryptedLocalAdminAccountPassword.CaptionNoChange := Password;
+        end;
+      end;
+      {$ENDIF WINDOWS}
     end;
   end;
 end;

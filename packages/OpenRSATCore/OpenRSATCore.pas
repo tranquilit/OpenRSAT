@@ -16,7 +16,7 @@ uses
   uviewkeytabpresenter, unewsitelink, ugeneralpropertysitelink, 
   ugeneralpropertysitelinkbridge, udoublelistlogic, unewsitelinkbridge, ulog, 
   ugeneralpropertyserver, ugeneralpropertyntdsdsa, uschedulinglogic, 
-  ugeneralpropertyntds, LazarusPackageIntf;
+  ugeneralpropertyntds, uwindows.ncrypt, LazarusPackageIntf;
 
 implementation
 
