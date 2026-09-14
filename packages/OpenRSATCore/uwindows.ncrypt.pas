@@ -6,8 +6,10 @@ interface
 
 uses
   Classes,
-  SysUtils,
-  windows;
+  SysUtils
+  {$IFDEF WINDOWS}
+  ,windows
+  {$ENDIF WINDOWS};
 
 type
   NCRYPT_DESCRIPTOR_HANDLE = Pointer;
