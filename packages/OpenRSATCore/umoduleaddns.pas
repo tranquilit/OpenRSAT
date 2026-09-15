@@ -90,6 +90,7 @@ type
     fWhenChanged: TRawUtf8DynArray;
 
     fDocVariantData: TDocVariantData;
+    function GetIsReverseZone: Boolean;
   public
     constructor Create(AZoneObjectName: RawUtf8);
 
@@ -144,6 +145,7 @@ type
     property DC: RawUtf8 read fDC write fDC;
     property DnsProperties: TRawByteStringDynArray read fDnsProperties write fDnsProperties;
     property Name: RawUtf8 read fName write fName;
+    property IsReverseZone: Boolean read GetIsReverseZone;
   end;
 
   TZoneDnsStorageDynArray = Array of TZoneDnsStorage;
@@ -283,6 +285,11 @@ end;
 
 { TZoneDnsStorage }
 
+function TZoneDnsStorage.GetIsReverseZone: Boolean;
+begin
+  result := String(Name).EndsWith('in-addr.arpa');
+end;
+
 constructor TZoneDnsStorage.Create(AZoneObjectName: RawUtf8);
 begin
   fZoneObjectName := AZoneObjectName;
@@ -324,6 +331,45 @@ begin
   fWhenChanged := nil;
 end;
 
+function ReverseDnsToIP(const AZone, ARecord: RawUtf8): RawUtf8;
+var
+  Parts: TRawUtf8DynArray;
+  i: Integer;
+
+  function EndsWithText(const Value, Suffix: RawUtf8): Boolean;
+  begin
+    result := False;
+    if Length(Value) < Length(Suffix) then
+      Exit;
+    result := Copy(Value, Length(Value) - Length(Suffix) + 1, Length(Suffix)) = Suffix;
+  end;
+
+  procedure AddParts(const Value: RawUtf8);
+  begin
+    Parts := Concat(Parts ,TRawUtf8DynArray(String(Value).Split('.')));
+  end;
+
+begin
+  result := '';
+  Parts := nil;
+  if EndsWithText(AZone, 'in-addr.arpa') then
+  begin
+    AddParts(ARecord);
+    AddParts(Copy(AZone, 0, Length(AZone) - Length('in-addr.arpa')));
+
+    for i := 0 to 3 do
+    begin
+      if i > 0 then
+        result := FormatUtf8('.%', [result]);
+      result := FormatUtf8('%%', [parts[i], result]);
+    end;
+  end
+  else if EndsWithText(AZone, 'ip6.arpa') then
+  begin
+
+  end;
+end;
+
 function TZoneDnsStorage.ToDocVariantData(): PDocVariantData;
 var
   i: Integer;
@@ -342,7 +388,10 @@ begin
     begin
       if not DNSRecordBytesToRecord(DNSRecord, PByteArray(RawDnsRecord)^) then
         Continue;
-      newRaw.AddValue('name', DNSName);
+      if TDnsResourceRecord(dnsRecord.RecType) = drrPTR then
+        newRaw.AddValue('name', ReverseDnsToIP(Name, DNSName))
+      else
+        newRaw.AddValue('name', DNSName);
       newRaw.AddValue('data', DNSRecordDataToString(DNSRecord));
       newRaw.AddValue('_type', DNSRecord.RecType);
       newRaw.AddValue('type',  DnsResourceRecordToStr(TDnsResourceRecord(dnsRecord.RecType)));
