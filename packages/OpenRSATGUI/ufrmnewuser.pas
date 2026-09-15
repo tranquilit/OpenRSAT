@@ -22,6 +22,7 @@ type
 
   TFrmNewUser = class(TFrame)
     ComboBox1: TComboBox;
+    Label_ConfirmMessage: TLabel;
 
     Panel_Page0: TPanel;
       Label_FirstName: TLabel;
@@ -64,6 +65,8 @@ type
   private
     BaseObj: TLdapAttributeList;
 
+    function IsPasswordConfirmed: Boolean;
+    procedure UpdateConfirmPwdStatus;
     procedure OKBtn();
     procedure Load;
   public
@@ -270,6 +273,32 @@ begin
   Edit_nETBIOSName.Text := UpperCase(Edit_UserLogon.Text);
 end;
 
+function TFrmNewUser.IsPasswordConfirmed: Boolean;
+begin
+  result := (Edit_Confirm.Text <> '') and (Edit_Password.Text = Edit_Confirm.Text);
+end;
+
+procedure TFrmNewUser.UpdateConfirmPwdStatus;
+begin
+  if Edit_Confirm.Text = '' then
+  begin
+    Label_ConfirmMessage.Caption := 'The confirmation is empty.';
+    Label_ConfirmMessage.Font.Color := clRed;
+    Exit;
+  end;
+
+  if not IsPasswordConfirmed then
+  begin
+    Label_ConfirmMessage.Caption := 'The passwords do not match.';
+    Label_ConfirmMessage.Font.Color := clRed;
+  end
+  else
+  begin
+    Label_ConfirmMessage.Caption := 'The passwords match.';
+    Label_ConfirmMessage.Font.Color := clGreen;
+  end;
+end;
+
 procedure TFrmNewUser.NameChange(Sender: TObject);
 var
   values: TStringArray;
@@ -288,18 +317,12 @@ end;
 
 procedure TFrmNewUser.Edit_PasswordChange(Sender: TObject);
 begin
-  if Edit_Password.Text <> Edit_Confirm.Text then
-    Edit_Confirm.Font.Color := clRed
-  else
-    Edit_Confirm.Font.Color := clDefault;
+ UpdateConfirmPwdStatus;
 end;
 
 procedure TFrmNewUser.Edit_ConfirmChange(Sender: TObject);
 begin
-  if Edit_Password.Text <> Edit_Confirm.Text then
-    Edit_Confirm.Font.Color := clRed
-  else
-    Edit_Confirm.Font.Color := clDefault;
+  UpdateConfirmPwdStatus;
 end;
 
 procedure TFrmNewUser.CheckBox_PwdChange(Sender: TObject);
@@ -392,7 +415,7 @@ begin
     1:
     begin
       (owner as TVisNewObject).Btn_Next.Caption := rsNewObjectBtnNext;
-      Action_Next.Enabled := True;
+      Action_Next.Enabled := IsPasswordConfirmed;
     end;
     2:
     begin
