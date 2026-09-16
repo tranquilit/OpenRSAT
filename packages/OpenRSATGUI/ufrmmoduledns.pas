@@ -485,6 +485,8 @@ begin
   Label_StatusMessage.Caption := 'Starting...';
   Label_ErrorMessage.Caption := '';
   Label_NodeCountMessage.Caption := IntToStr(ZoneStorage.Count);
+  Label_RecordCountMessage.Caption := IntToStr(ZoneStorage.CountRecords);
+
   PageControl1.ActivePageIndex := 1;
 end;
 
@@ -494,6 +496,7 @@ begin
   Label_StatusMessage.Caption := 'Finished';
   Label_StatusMessage.Caption := '';
   Label_NodeCountMessage.Caption := IntToStr(ZoneStorage.Count);
+  Label_RecordCountMessage.Caption := IntToStr(ZoneStorage.CountRecords);
 
   PageControl1.ActivePageIndex := 0;
 
@@ -506,6 +509,7 @@ begin
   Label_StatusMessage.Caption := 'Running...';
   Label_ErrorMessage.Caption := '';
   Label_NodeCountMessage.Caption := IntToStr(ZoneStorage.Count);
+  Label_RecordCountMessage.Caption := IntToStr(ZoneStorage.CountRecords);
 end;
 
 procedure TFrmModuleDNS.OnRetrieveDNSZoneError(

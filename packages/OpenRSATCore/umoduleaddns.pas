@@ -90,6 +90,7 @@ type
     fWhenChanged: TRawUtf8DynArray;
 
     fDocVariantData: TDocVariantData;
+    function GetCountRecords: Integer;
     function GetIsReverseZone: Boolean;
   public
     constructor Create(AZoneObjectName: RawUtf8);
@@ -139,6 +140,7 @@ type
 
     /// Read-only property to know the number of object in the storage.
     property Count: Integer read fCount;
+    property CountRecords: Integer read GetCountRecords;
     /// Read-only property to know the storage objectName.
     property ZoneObjectName: RawUtf8 read fZoneObjectName;
 
@@ -299,6 +301,15 @@ end;
 function TZoneDnsStorage.GetIsReverseZone: Boolean;
 begin
   result := String(Name).EndsWith('in-addr.arpa');
+end;
+
+function TZoneDnsStorage.GetCountRecords: Integer;
+var
+  i: Integer;
+begin
+  result := 0;
+  for i := 0 to Count - 1 do
+    Inc(result, Length(fDnsRecords[i]));
 end;
 
 constructor TZoneDnsStorage.Create(AZoneObjectName: RawUtf8);
