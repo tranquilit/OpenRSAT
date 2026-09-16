@@ -101,7 +101,8 @@ type
     /// Empty the storage.
     procedure Clear;
 
-    function ToDocVariantData: PDocVariantData;
+    function ToDocVariantData(): PDocVariantData; overload;
+    function ToDocVariantData(const Path: RawUtf8): PDocVariantData; overload;
 
     /// Get a dnsNode index in storage from its objectName.
     function GetByObjectName(AObjectName: RawUtf8): Integer;
@@ -392,6 +393,25 @@ begin
   end;
 end;
 
+procedure DNSRecordToData(out D: TDocVariantData; const ZoneN, NodeN, ObjectN: RawUtf8; const R: RawByteString);
+var
+  DNSRecord: TDNSRecord;
+begin
+  D.Init(JSON_FAST);
+  if not DNSRecordBytesToRecord(DNSRecord, PByteArray(R)^) then
+    Exit;
+  if TDnsResourceRecord(DNSRecord.RecType) = drrPTR then
+    D.AddValue('name', ReverseDnsToIP(ZoneN, NodeN))
+  else
+    D.AddValue('name', NodeN);
+  D.AddValue('data', DNSRecordDataToString(DNSRecord));
+  D.AddValue('_type', DNSRecord.RecType);
+  D.AddValue('type',  DnsResourceRecordToStr(TDnsResourceRecord(dnsRecord.RecType)));
+  D.AddValue('timestamp', '');
+  D.AddValue('rawdata', R);
+  D.AddValue('objectName', ObjectN);
+end;
+
 function TZoneDnsStorage.ToDocVariantData(): PDocVariantData;
 var
   i: Integer;
@@ -408,18 +428,75 @@ begin
     DNSObjectName := GetObjectName(i);
     for RawDnsRecord in GetDnsRecord(i) do
     begin
-      if not DNSRecordBytesToRecord(DNSRecord, PByteArray(RawDnsRecord)^) then
-        Continue;
-      if TDnsResourceRecord(dnsRecord.RecType) = drrPTR then
-        newRaw.AddValue('name', ReverseDnsToIP(Name, DNSName))
-      else
-        newRaw.AddValue('name', DNSName);
-      newRaw.AddValue('data', DNSRecordDataToString(DNSRecord));
-      newRaw.AddValue('_type', DNSRecord.RecType);
-      newRaw.AddValue('type',  DnsResourceRecordToStr(TDnsResourceRecord(dnsRecord.RecType)));
-      newRaw.AddValue('timestamp', '');
-      newRaw.AddValue('rawdata', RawDnsRecord);
-      newRaw.AddValue('objectName', DNSObjectName);
+      DNSRecordToData(NewRaw, Name, DNSName, DNSObjectName, RawDnsRecord);
+      fDocVariantData.AddItem(newRaw);
+      newRaw.Clear;
+    end;
+  end;
+  result := @fDocVariantData;
+end;
+
+function TZoneDnsStorage.ToDocVariantData(const Path: RawUtf8): PDocVariantData;
+var
+  RawDnsRecord: RawByteString;
+  i, p: Integer;
+  DNSObjectName, ParentDNSName, DNSFullName, DNSRelativeName: RawUtf8;
+  NewRaw, Folders: TDocVariantData;
+  tmp: String;
+
+  function GetParentDNSName(const DNSName: RawUtf8): RawUtf8;
+  var
+    Idx: SizeInt;
+  begin
+    Idx := Pos('.', DNSName);
+    result := Copy(DNSName, Idx + 1, Length(DNSName) - Idx);
+  end;
+
+begin
+  Folders.Init(JSON_FAST);
+  fDocVariantData.Clear;
+  for i := 0 to Count - 1 do
+  begin
+    DNSFullName := GetName(i);
+    if (DNSFullName = '@') or not String(DNSFullName).EndsWith(Path) then
+    begin
+      tmp := Copy(Path, 2, Length(Path) - 1);
+      if (DNSFullName = '@') or (DNSFullName = tmp) then
+      begin
+        DNSObjectName := GetObjectName(i);
+        for RawDnsRecord in GetDnsRecord(i) do
+        begin
+          DNSRecordToData(NewRaw, Name, '(Same as parent folder)', DNSObjectName, RawDnsRecord);
+          fDocVariantData.AddItem(newRaw);
+          newRaw.Clear;
+        end;
+      end;
+      Continue;
+    end;
+
+    DNSRelativeName := Copy(DNSFullName, 0, Length(DNSFullName) - Length(Path));
+    p := Pos('.', DNSRelativeName);
+    if p <> 0 then
+    begin
+      p := Length(DNSRelativeName);
+      while (DNSRelativeName[p] <> '.') and (P > 0) do
+        Dec(p);
+      DNSRelativeName := Copy(DNSRelativeName, p + 1, Length(DNSRelativeName) - p);
+      if not Folders.Exists(DNSRelativeName) then
+      begin
+        Folders.AddValue(DNSRelativeName, True);
+        NewRaw.Init(JSON_FAST);
+        NewRaw.AddValue('name', DNSRelativeName);
+        fDocVariantData.AddItem(newRaw);
+        newRaw.Clear;
+      end;
+      Continue;
+    end;
+
+    DNSObjectName := GetObjectName(i);
+    for RawDnsRecord in GetDnsRecord(i) do
+    begin
+      DNSRecordToData(NewRaw, Name, DNSRelativeName, DNSObjectName, RawDnsRecord);
       fDocVariantData.AddItem(newRaw);
       newRaw.Clear;
     end;

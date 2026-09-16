@@ -175,6 +175,7 @@ type
 
     procedure ReloadZones;
     procedure TreeUpdateZones;
+    procedure TreeUpdateZoneFolders;
 
     procedure LdapConnectEvent(Sender: TObject);
     procedure LdapCloseEvent(Sender: TObject);
@@ -229,7 +230,7 @@ begin
   fType := AValue;
   case fType of
     dtntRoot, dtntCustom: ImageIndex := Ord(ileADContainer);
-    dtntZoneFolder: ImageIndex := 57;
+    dtntZoneFolder: ImageIndex := Ord(ileADContainer);
     dtntZone: ImageIndex := 59;
   end;
   SelectedIndex := ImageIndex;
@@ -363,14 +364,7 @@ begin
 end;
 
 procedure TFrmModuleDNS.UpdateNodeZoneFolder(Node: TDNSTreeNode);
-var
-  newRaw: TDocVariantData;
-  i, j: Integer;
-  DNSRecordAttribute: TLdapAttribute;
-  RecordName: String;
-  DNSRecord: TDNSRecord;
 begin
-  newRaw.Init();
   UpdateGridColumns(['name', 'type', 'data', 'timestamp']);
 
   UpdateGrid();
@@ -404,6 +398,24 @@ begin
 end;
 
 procedure TFrmModuleDNS.UpdateGrid(Node: TDNSTreeNode);
+var
+  Path: RawUtf8;
+
+  function GetParentZoneNode(const Node: TDNSTreeNode; out Path: RawUtf8): TDNSTreeNode;
+  var
+    N: TDNSTreeNode;
+  begin
+    result := nil;
+    Path := '';
+    N := Node;
+    while N.NodeType = dtntZoneFolder do
+    begin
+      Path := FormatUtf8('%.%', [Path, N.Text]);
+      N := (N.Parent as TDNSTreeNode);
+    end;
+    if N.NodeType = dtntZone then
+      result := N;
+  end;
 begin
   if not Assigned(Node) then
     Node := (TreeDNS.Selected as TDNSTreeNode);
@@ -414,7 +426,8 @@ begin
   case Node.fType of
     dtntRoot: ;
     dtntCustom: GridDNS.LoadData(fModule.ZoneStoragesToDocVariantData((Node = fReverseLookupZonesNode)));
-    dtntZone: GridDNS.LoadData(fModule.GetZoneDnsStorage(Node.DistinguishedName).ToDocVariantData);
+    dtntZone: GridDNS.LoadData(fModule.GetZoneDnsStorage(Node.DistinguishedName).ToDocVariantData(''));
+    dtntZoneFolder: GridDNS.LoadData(fModule.GetZoneDnsStorage(GetParentZoneNode(Node, Path).DistinguishedName).ToDocVariantData(Path));
   end;
 end;
 
@@ -468,6 +481,48 @@ begin
   end;
 end;
 
+procedure TFrmModuleDNS.TreeUpdateZoneFolders;
+var
+  Node: TDNSTreeNode;
+  ZoneStorage: TZoneDnsStorage;
+  N: RawUtf8;
+  i: Integer;
+
+  procedure AddDnsNode(const Node: TDNSTreeNode; const N: RawUtf8);
+  var
+    Paths: TStringDynArray;
+    ChildNode: TTreeNode;
+    ParentNode: TDNSTreeNode;
+    i: Integer;
+  begin
+    Paths := String(N).Split('.');
+    ParentNode := Node;
+    for i := High(Paths) downto 1 do
+    begin
+      ChildNode := ParentNode.FindNode(Paths[i]);
+      if not Assigned(ChildNode) then
+        ChildNode := TreeDNS.Items.AddChild(ParentNode, Paths[i]);
+      ParentNode := (ChildNode as TDNSTreeNode);
+      ParentNode.NodeType := dtntZoneFolder;
+    end;
+  end;
+
+begin
+  Node := (TreeDNS.Selected as TDNSTreeNode);
+  if not Assigned(Node) then
+    Exit;
+
+  ZoneStorage := fModule.GetZoneDnsStorage(Node.DistinguishedName);
+  if not Assigned(ZoneStorage) then
+    Exit;
+
+  for i := 0 to ZoneStorage.Count - 1 do
+  begin
+    N := ZoneStorage.GetName(i);
+    AddDnsNode(Node, N);
+  end;
+end;
+
 procedure TFrmModuleDNS.LdapConnectEvent(Sender: TObject);
 begin
   fModule.NeedRefresh := True;
@@ -500,6 +555,7 @@ begin
 
   PageControl1.ActivePageIndex := 0;
 
+  TreeUpdateZoneFolders;
   UpdateGrid();
 end;
 
@@ -585,8 +641,8 @@ begin
     NodeData := GridDNS.GetNodeAsPDocVariantData(Node);
     if Assigned(NodeData) and Assigned(TreeDNS.Selected) then
       NodeFound := (TreeDNS.Selected.FindNode(NodeData^.S['name']) as TDNSTreeNode);
-    if Assigned(TreeDNS.Selected) and Assigned(NodeFound) and NodeFound.HasChildren then
-      ImageIndex := Ord(ileADOU)
+    if Assigned(TreeDNS.Selected) and Assigned(NodeFound) then
+      ImageIndex := Ord(ileADContainer)
     else if Assigned(nodeData) then
     begin
       if NodeData^.Exists('_type') then
