@@ -20,10 +20,7 @@ type
 
   TZoneDnsStorage = class;
 
-  TThreadRefreshDNSZoneOnStartEvent = procedure(const ZoneStorage: TZoneDnsStorage) of object;
-  TThreadRefreshDNSZoneOnFinishEvent = procedure(const ZoneStorage: TZoneDnsStorage) of object;
-  TThreadRefreshDNSZoneOnUpdateEvent = procedure(const ZoneStorage: TZoneDnsStorage) of object;
-  TThreadRefreshDNSZoneOnErrorEvent = procedure(const ZoneStorage: TZoneDnsStorage) of object;
+  TThreadRefreshDNSZoneEvent = procedure(const ZoneStorage: TZoneDnsStorage) of object;
 
   { TThreadRefreshDNSZone }
 
@@ -36,10 +33,10 @@ type
     /// Zone Storage instance where dnsZone children data are located.
     fCurrentZoneStorage: TZoneDnsStorage;
 
-    fOnStart: TThreadRefreshDNSZoneOnStartEvent;
-    fOnFinish: TThreadRefreshDNSZoneOnFinishEvent;
-    fOnUpdate: TThreadRefreshDNSZoneOnUpdateEvent;
-    fOnError: TThreadRefreshDNSZoneOnErrorEvent;
+    fOnStart: TThreadRefreshDNSZoneEvent;
+    fOnFinish: TThreadRefreshDNSZoneEvent;
+    fOnUpdate: TThreadRefreshDNSZoneEvent;
+    fOnError: TThreadRefreshDNSZoneEvent;
 
     procedure OnSearchPage(Sender: TLdapClient);
   protected
@@ -52,10 +49,10 @@ type
   public
     constructor Create(ALdapClient: TLdapClient; ACurrentZone: TZoneDnsStorage); reintroduce;
 
-    property OnStart: TThreadRefreshDNSZoneOnStartEvent read fOnStart write fOnStart;
-    property OnFinish: TThreadRefreshDNSZoneOnFinishEvent read fOnFinish write fOnFinish;
-    property OnUpdate: TThreadRefreshDNSZoneOnUpdateEvent read fOnUpdate write fOnUpdate;
-    property OnError: TThreadRefreshDNSZoneOnErrorEvent read fOnError write fOnError;
+    property OnStart: TThreadRefreshDNSZoneEvent read fOnStart write fOnStart;
+    property OnFinish: TThreadRefreshDNSZoneEvent read fOnFinish write fOnFinish;
+    property OnUpdate: TThreadRefreshDNSZoneEvent read fOnUpdate write fOnUpdate;
+    property OnError: TThreadRefreshDNSZoneEvent read fOnError write fOnError;
   end;
 
   { TZoneDnsStorage }
@@ -162,6 +159,12 @@ type
     fCurrentZoneStorage: TZoneDnsStorage;
 
     fDocVariantData: TDocVariantData;
+
+    fOnStart: TThreadRefreshDNSZoneEvent;
+    fOnFinish: TThreadRefreshDNSZoneEvent;
+    fOnUpdate: TThreadRefreshDNSZoneEvent;
+    fOnError: TThreadRefreshDNSZoneEvent;
+
     function GetADDNSOption: TModuleADDNSOption;
   public
     constructor Create(ARSAT: TRSAT); reintroduce;
@@ -180,6 +183,11 @@ type
     procedure UpdateZoneStorage(DistinguishedName: RawUtf8; var UpdatedStorages: TRawUtf8DynArray);
     procedure AfterUpdateZoneStorage(UpdatedStorages: TRawUtf8DynArray);
     function GetZoneNames: TRawUtf8DynArray;
+
+    property OnStart: TThreadRefreshDNSZoneEvent read fOnStart write fOnStart;
+    property OnFinish: TThreadRefreshDNSZoneEvent read fOnFinish write fOnFinish;
+    property OnUpdate: TThreadRefreshDNSZoneEvent read fOnUpdate write fOnUpdate;
+    property OnError: TThreadRefreshDNSZoneEvent read fOnError write fOnError;
 
     property CurrentZoneStorage: TZoneDnsStorage read fCurrentZoneStorage;
     property ADDNSOption: TModuleADDNSOption read GetADDNSOption;
@@ -220,6 +228,7 @@ begin
     fCurrentZoneStorage.UpdateWhenChanged(idx, Item.Find('whenChanged').GetReadable());
     fCurrentZoneStorage.UpdateDnsRecord(idx, Item.Find('dnsRecord'));
   end;
+  Synchronize(@DoNotifyUpdate);
 end;
 
 procedure TThreadRefreshDNSZone.Execute;
@@ -227,6 +236,7 @@ var
   Bak: TOnLdapClientEvent;
   SearchResult: TDocVariantData;
 begin
+  Synchronize(@DoNotifyStart);
   try
     fCurrentZoneStorage.Clear;
 
@@ -279,7 +289,6 @@ begin
   FreeOnTerminate := False;
   fLdapClient := ALdapClient;
   fCurrentZoneStorage := ACurrentZone;
-
 end;
 
 { TZoneDnsStorage }

@@ -156,8 +156,6 @@ type
     procedure UpdateNodeCustom(Node: TDNSTreeNode);
     procedure UpdateNodeZoneFolder(Node: TDNSTreeNode);
     procedure UpdateNodeZone(Node: TDNSTreeNode);
-    procedure UpdateZoneOnStatus(const status: String);
-    procedure UpdateZoneOnFinished();
 
     /// Update data about a TreeNode.
     procedure UpdateNode(Node: TDNSTreeNode = nil);
@@ -169,6 +167,11 @@ type
 
     procedure LdapConnectEvent(Sender: TObject);
     procedure LdapCloseEvent(Sender: TObject);
+
+    procedure OnRetrieveDNSZoneStart(const ZoneStorage: TZoneDnsStorage);
+    procedure OnRetrieveDNSZoneFinish(const ZoneStorage: TZoneDnsStorage);
+    procedure OnRetrieveDNSZoneUpdate(const ZoneStorage: TZoneDnsStorage);
+    procedure OnRetrieveDNSZoneError(const ZoneStorage: TZoneDnsStorage);
   public
     constructor Create(Context: IOpenRSATUIContext);
     destructor Destroy; override;
@@ -369,22 +372,11 @@ begin
   Panel5.Visible := True;
   GridDNS.Visible := False;
   Label3.Caption := 'Starting...';
+  fModule.OnStart := @OnRetrieveDNSZoneStart;
+  fModule.OnFinish := @OnRetrieveDNSZoneFinish;
+  fModule.OnUpdate := @OnRetrieveDNSZoneUpdate;
+  fModule.OnError := @OnRetrieveDNSZoneError;
   fModule.UpdateZone(Node.DistinguishedName);
-end;
-
-procedure TFrmModuleDNS.UpdateZoneOnStatus(const status: String);
-begin
-  Label3.Caption := status;
-end;
-
-procedure TFrmModuleDNS.UpdateZoneOnFinished;
-begin
-  Label3.Caption := 'Terminated';
-
-  UpdateGrid();
-
-  GridDNS.Visible := True;
-  Panel5.Visible := False;
 end;
 
 procedure TFrmModuleDNS.UpdateNode(Node: TDNSTreeNode);
@@ -477,6 +469,30 @@ procedure TFrmModuleDNS.LdapCloseEvent(Sender: TObject);
 begin
   fRootNode.Text := '<EMPTY>';
   GridDNS.Clear;
+end;
+
+procedure TFrmModuleDNS.OnRetrieveDNSZoneStart(
+  const ZoneStorage: TZoneDnsStorage);
+begin
+
+end;
+
+procedure TFrmModuleDNS.OnRetrieveDNSZoneFinish(
+  const ZoneStorage: TZoneDnsStorage);
+begin
+
+end;
+
+procedure TFrmModuleDNS.OnRetrieveDNSZoneUpdate(
+  const ZoneStorage: TZoneDnsStorage);
+begin
+
+end;
+
+procedure TFrmModuleDNS.OnRetrieveDNSZoneError(
+  const ZoneStorage: TZoneDnsStorage);
+begin
+
 end;
 
 procedure TFrmModuleDNS.TreeDNSChange(Sender: TObject; Node: TTreeNode);
