@@ -483,6 +483,7 @@ procedure TFrmModuleDNS.OnRetrieveDNSZoneStart(
   const ZoneStorage: TZoneDnsStorage);
 begin
   Label_StatusMessage.Caption := 'Starting...';
+  Label_ErrorMessage.Caption := '';
   Label_NodeCountMessage.Caption := IntToStr(ZoneStorage.Count);
   PageControl1.ActivePageIndex := 1;
 end;
@@ -491,6 +492,7 @@ procedure TFrmModuleDNS.OnRetrieveDNSZoneFinish(
   const ZoneStorage: TZoneDnsStorage);
 begin
   Label_StatusMessage.Caption := 'Finished';
+  Label_StatusMessage.Caption := '';
   Label_NodeCountMessage.Caption := IntToStr(ZoneStorage.Count);
 
   PageControl1.ActivePageIndex := 0;
@@ -502,13 +504,17 @@ procedure TFrmModuleDNS.OnRetrieveDNSZoneUpdate(
   const ZoneStorage: TZoneDnsStorage);
 begin
   Label_StatusMessage.Caption := 'Running...';
+  Label_ErrorMessage.Caption := '';
   Label_NodeCountMessage.Caption := IntToStr(ZoneStorage.Count);
 end;
 
 procedure TFrmModuleDNS.OnRetrieveDNSZoneError(
   const ZoneStorage: TZoneDnsStorage);
 begin
+  Label_StatusMessage.Caption := 'Error';
+  Label_ErrorMessage.Caption := ZoneStorage.ErrorMessage;
 
+  PageControl1.ActivePageIndex := 0;
 end;
 
 procedure TFrmModuleDNS.TreeDNSChange(Sender: TObject; Node: TTreeNode);

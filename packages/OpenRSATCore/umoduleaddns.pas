@@ -63,6 +63,7 @@ type
   /// To retrieve the index of a dnsNode, you need its name or objectName.
   TZoneDnsStorage = class
   private
+    fErrorMessage: RawUtf8;
     /// DNSZone objectName.
     fZoneObjectName: RawUtf8;
     /// DNSZone dc
@@ -145,6 +146,7 @@ type
     property DnsProperties: TRawByteStringDynArray read fDnsProperties write fDnsProperties;
     property Name: RawUtf8 read fName write fName;
     property IsReverseZone: Boolean read GetIsReverseZone;
+    property ErrorMessage: RawUtf8 read fErrorMessage write fErrorMessage;
   end;
 
   TZoneDnsStorageDynArray = Array of TZoneDnsStorage;
@@ -246,6 +248,7 @@ begin
       fLdapClient.OnSearchPage := @OnSearchPage;
       if not fLdapClient.SearchAllDocRaw(SearchResult, fCurrentZoneStorage.ZoneObjectName, '', ['name', 'dnsRecord', 'whenChanged'], [roAutoRange, roKnownValuesAsArray, roObjectNameAtRoot, roRawValues]) then
       begin
+        fCurrentZoneStorage.ErrorMessage := FormatUtf8('LDAP: Search (%): %', [fLdapClient.ResultCode, fLdapClient.ResultString]);
         Synchronize(@DoNotifyError);
         Exit;
       end;
