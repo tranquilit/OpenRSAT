@@ -20,40 +20,42 @@ type
 
   TZoneDnsStorage = class;
 
-  TThreadUpdateZoneFinished = procedure() of object;
-  TThreadUpdateZoneStatus = procedure(const status: string) of object;
+  TThreadRefreshDNSZoneOnStartEvent = procedure(const ZoneStorage: TZoneDnsStorage) of object;
+  TThreadRefreshDNSZoneOnFinishEvent = procedure(const ZoneStorage: TZoneDnsStorage) of object;
+  TThreadRefreshDNSZoneOnUpdateEvent = procedure(const ZoneStorage: TZoneDnsStorage) of object;
+  TThreadRefreshDNSZoneOnErrorEvent = procedure(const ZoneStorage: TZoneDnsStorage) of object;
 
-  { TThreadUpdateZone }
+  { TThreadRefreshDNSZone }
 
   /// This thread retrieve all children of a dnsZone.
   /// It's usefull to provide GUI feedback while retrieving all nodes on huge domains.
-  TThreadUpdateZone = class(TThread)
+  TThreadRefreshDNSZone = class(TThread)
   private
     /// Ldap Client instance to perform LDAP operations.
     fLdapClient: TLdapClient;
     /// Zone Storage instance where dnsZone children data are located.
     fCurrentZoneStorage: TZoneDnsStorage;
-    /// Callback when LDAP operations finished.
-    fOnFinished: TThreadUpdateZoneFinished;
-    /// Callback for each search operation to give feedback on GUI.
-    fOnStatus: TThreadUpdateZoneStatus;
-    /// Status message. Used to provide item count.
-    fStatus: String;
 
-    Count: Integer;
+    fOnStart: TThreadRefreshDNSZoneOnStartEvent;
+    fOnFinish: TThreadRefreshDNSZoneOnFinishEvent;
+    fOnUpdate: TThreadRefreshDNSZoneOnUpdateEvent;
+    fOnError: TThreadRefreshDNSZoneOnErrorEvent;
 
     procedure OnSearchPage(Sender: TLdapClient);
-    /// Method to sync status with main thread.
-    procedure StatusChange;
-    /// Method to sync data when thread finished.
-    procedure SyncFinished;
-    /// Update the status message and call sync method.
-    procedure ReportStatus(const status: String);
   protected
     procedure Execute; override;
+
+    procedure DoNotifyStart;
+    procedure DoNotifyFinish;
+    procedure DoNotifyUpdate;
+    procedure DoNotifyError;
   public
-    constructor Create(ALdapClient: TLdapClient; ACurrentZone: TZoneDnsStorage; AOnFinished: TThreadUpdateZoneFinished;
-      AOnStatus: TThreadUpdateZoneStatus); reintroduce;
+    constructor Create(ALdapClient: TLdapClient; ACurrentZone: TZoneDnsStorage); reintroduce;
+
+    property OnStart: TThreadRefreshDNSZoneOnStartEvent read fOnStart write fOnStart;
+    property OnFinish: TThreadRefreshDNSZoneOnFinishEvent read fOnFinish write fOnFinish;
+    property OnUpdate: TThreadRefreshDNSZoneOnUpdateEvent read fOnUpdate write fOnUpdate;
+    property OnError: TThreadRefreshDNSZoneOnErrorEvent read fOnError write fOnError;
   end;
 
   { TZoneDnsStorage }
@@ -156,10 +158,7 @@ type
   private
     fZoneStorages: TZoneDnsStorageDynArray;
 
-    fUpdateZoneOnStatus: TThreadUpdateZoneStatus;
-    fUpdateZoneOnFinished: TThreadUpdateZoneFinished;
-
-    fUpdateZoneThread: TThreadUpdateZone;
+    fUpdateZoneThread: TThreadRefreshDNSZone;
     fCurrentZoneStorage: TZoneDnsStorage;
 
     fDocVariantData: TDocVariantData;
@@ -183,9 +182,6 @@ type
     function GetZoneNames: TRawUtf8DynArray;
 
     property CurrentZoneStorage: TZoneDnsStorage read fCurrentZoneStorage;
-    property UpdateZoneOnStatus: TThreadUpdateZoneStatus read fUpdateZoneOnStatus write fUpdateZoneOnStatus;
-    property UpdateZoneOnFinished: TThreadUpdateZoneFinished read fUpdateZoneOnFinished write fUpdateZoneOnFinished;
-
     property ADDNSOption: TModuleADDNSOption read GetADDNSOption;
   end;
 
@@ -200,15 +196,9 @@ const
   DOMAIN_DNS_ZONES: String = 'CN=MicrosoftDNS,DC=DomainDnsZones';
   FOREST_DNS_ZONES: String = 'CN=MicrosoftDNS,DC=ForestDnsZones';
 
-{ TThreadUpdateZone }
+{ TThreadRefreshDNSZone }
 
-procedure TThreadUpdateZone.StatusChange;
-begin
-  if Assigned(fOnStatus) then
-    fOnStatus(fStatus);
-end;
-
-procedure TThreadUpdateZone.OnSearchPage(Sender: TLdapClient);
+procedure TThreadRefreshDNSZone.OnSearchPage(Sender: TLdapClient);
 var
   Item: TLdapResult;
   idx: Integer;
@@ -217,9 +207,6 @@ begin
     Exit;
   if Terminated then
     Sender.SearchAllAbort;
-
-  Inc(Count, Sender.SearchResult.Count);
-  ReportStatus(IntToStr(Count));
 
   fCurrentZoneStorage.IncreaseStorageCapacity(Sender.SearchResult.Count);
   for Item in Sender.SearchResult.Items do
@@ -235,25 +222,12 @@ begin
   end;
 end;
 
-procedure TThreadUpdateZone.SyncFinished;
-begin
-  if Assigned(fOnFinished) then
-    fOnFinished();
-end;
-
-procedure TThreadUpdateZone.ReportStatus(const status: String);
-begin
-  fStatus := status;
-  Synchronize(@StatusChange);
-end;
-
-procedure TThreadUpdateZone.Execute;
+procedure TThreadRefreshDNSZone.Execute;
 var
   Bak: TOnLdapClientEvent;
   SearchResult: TDocVariantData;
 begin
   try
-    Count := 0;
     fCurrentZoneStorage.Clear;
 
     Bak := fLdapClient.OnSearchPage;
@@ -261,26 +235,51 @@ begin
       fLdapClient.SearchScope := lssSingleLevel;
       fLdapClient.OnSearchPage := @OnSearchPage;
       if not fLdapClient.SearchAllDocRaw(SearchResult, fCurrentZoneStorage.ZoneObjectName, '', ['name', 'dnsRecord', 'whenChanged'], [roAutoRange, roKnownValuesAsArray, roObjectNameAtRoot, roRawValues]) then
-        raise Exception.Create(FormatUtf8('Ldap Search Failed: %', [fLdapClient.ResultString]));
+      begin
+        Synchronize(@DoNotifyError);
+        Exit;
+      end;
     finally
       fLdapClient.OnSearchPage := Bak;
     end;
   finally
-    Synchronize(@SyncFinished);
+    Synchronize(@DoNotifyFinish);
   end;
 end;
 
-constructor TThreadUpdateZone.Create(ALdapClient: TLdapClient;
-  ACurrentZone: TZoneDnsStorage; AOnFinished: TThreadUpdateZoneFinished;
-  AOnStatus: TThreadUpdateZoneStatus);
+procedure TThreadRefreshDNSZone.DoNotifyStart;
+begin
+  if Assigned(fOnStart) then
+    fOnStart(fCurrentZoneStorage);
+end;
+
+procedure TThreadRefreshDNSZone.DoNotifyFinish;
+begin
+  if Assigned(fOnFinish) then
+    fOnFinish(fCurrentZoneStorage);
+end;
+
+procedure TThreadRefreshDNSZone.DoNotifyUpdate;
+begin
+  if Assigned(fOnUpdate) then
+    fOnUpdate(fCurrentZoneStorage);
+end;
+
+procedure TThreadRefreshDNSZone.DoNotifyError;
+begin
+  if Assigned(fOnError) then
+    fOnError(fCurrentZoneStorage);;
+end;
+
+constructor TThreadRefreshDNSZone.Create(ALdapClient: TLdapClient;
+  ACurrentZone: TZoneDnsStorage);
 begin
   inherited Create(True);
 
   FreeOnTerminate := False;
-  fOnFinished := AOnFinished;
-  fOnStatus := AOnStatus;
   fLdapClient := ALdapClient;
   fCurrentZoneStorage := ACurrentZone;
+
 end;
 
 { TZoneDnsStorage }
@@ -606,7 +605,7 @@ begin
   fCurrentZoneStorage := GetOrAddZoneDnsStorage(ADistinguishedName);
   if not Assigned(fCurrentZoneStorage) then
     Exit;
-  fUpdateZoneThread := TThreadUpdateZone.Create(fRSAT.LdapClient, fCurrentZoneStorage, fUpdateZoneOnFinished, fUpdateZoneOnStatus);
+  fUpdateZoneThread := TThreadRefreshDNSZone.Create(fRSAT.LdapClient, fCurrentZoneStorage);
   fUpdateZoneThread.Start;
 end;
 

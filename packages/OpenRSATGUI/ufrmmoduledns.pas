@@ -369,8 +369,6 @@ begin
   Panel5.Visible := True;
   GridDNS.Visible := False;
   Label3.Caption := 'Starting...';
-  fModule.UpdateZoneOnStatus := @UpdateZoneOnStatus;
-  fModule.UpdateZoneOnFinished := @UpdateZoneOnFinished;
   fModule.UpdateZone(Node.DistinguishedName);
 end;
 
