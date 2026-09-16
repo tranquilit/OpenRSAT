@@ -354,82 +354,6 @@ object FrmModuleDNS: TFrmModuleDNS
     ClientHeight = 349
     ClientWidth = 625
     TabOrder = 3
-    object GridDNS: TTisGrid
-      Left = 0
-      Height = 312
-      Top = 33
-      Width = 625
-      Align = alClient
-      BorderSpacing.Bottom = 4
-      Header.AutoSizeIndex = -1
-      Header.Columns = <      
-        item
-          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-          Position = 0
-          Text = 'Name'
-          Width = 200
-          PropertyName = 'name'
-        end      
-        item
-          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-          Position = 1
-          Text = 'Type'
-          Width = 150
-          PropertyName = 'type'
-        end      
-        item
-          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-          Position = 2
-          Text = 'Data'
-          Width = 300
-          PropertyName = 'data'
-        end      
-        item
-          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-          Position = 3
-          Text = 'Timestamp'
-          Width = 150
-          PropertyName = 'timestamp'
-        end      
-        item
-          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-          Position = 4
-          Text = 'Status'
-          Width = 100
-          PropertyName = 'status'
-        end      
-        item
-          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-          Position = 5
-          Text = 'DNSSEC Status'
-          Width = 100
-          PropertyName = 'dnssec'
-        end      
-        item
-          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
-          Position = 6
-          Text = 'Key Master'
-          Width = 100
-          PropertyName = 'keymaster'
-        end>
-      Header.DefaultHeight = 18
-      Header.Height = 28
-      Header.MaxHeight = 101
-      Header.MinHeight = 19
-      Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowImages, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
-      Header.Style = hsFlatButtons
-      Images = CoreDataModule.ImageList1
-      PopupMenu = PopupMenu_DNS
-      TabOrder = 1
-      SelectedAndTotalLabel = Label1
-      TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toFullRowDrag]
-      TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
-      ZebraColor = 15593713
-      OnDblClick = GridDNSDblClick
-      OnGetImageIndex = GridDNSGetImageIndex
-      OnKeyPress = GridDNSKeyPress
-      OnMouseDown = GridDNSMouseDown
-    end
     object Panel4: TPanel
       Left = 0
       Height = 33
@@ -456,73 +380,244 @@ object FrmModuleDNS: TFrmModuleDNS
         OnSearch = TisSearchEdit_GridDNSSearch
       end
     end
-    object Panel5: TPanel
+    object PageControl1: TPageControl
       Left = 0
       Height = 316
       Top = 33
       Width = 625
+      ActivePage = TabSheet2
       Align = alClient
-      BevelOuter = bvNone
-      ClientHeight = 316
-      ClientWidth = 625
-      TabOrder = 2
-      Visible = False
-      object Panel6: TPanel
-        AnchorSideLeft.Control = Panel5
-        AnchorSideLeft.Side = asrCenter
-        AnchorSideTop.Control = Panel5
-        AnchorSideTop.Side = asrCenter
-        Left = 229
-        Height = 59
-        Top = 129
-        Width = 166
-        AutoSize = True
-        BevelOuter = bvNone
-        ClientHeight = 59
-        ClientWidth = 166
-        TabOrder = 0
-        object ProgressBar1: TProgressBar
-          AnchorSideLeft.Control = Panel6
-          AnchorSideTop.Control = Label2
-          AnchorSideTop.Side = asrBottom
-          AnchorSideRight.Control = Panel6
-          AnchorSideRight.Side = asrBottom
-          AnchorSideBottom.Control = Panel6
-          AnchorSideBottom.Side = asrBottom
-          Left = 8
-          Height = 20
-          Top = 31
-          Width = 150
-          Anchors = [akTop, akLeft, akRight, akBottom]
-          BorderSpacing.Around = 8
-          Constraints.MaxWidth = 150
-          Constraints.MinWidth = 150
-          Style = pbstMarquee
+      Options = [nboDoChangeOnSetIndex]
+      ShowTabs = False
+      TabIndex = 1
+      TabOrder = 1
+      object TabSheet1: TTabSheet
+        Caption = 'TabSheet1'
+        ClientHeight = 308
+        ClientWidth = 617
+        object GridDNS: TTisGrid
+          Left = 0
+          Height = 304
+          Top = 0
+          Width = 617
+          Align = alClient
+          BorderSpacing.Bottom = 4
+          Header.AutoSizeIndex = -1
+          Header.Columns = <          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 0
+              Text = 'Name'
+              Width = 200
+              PropertyName = 'name'
+            end          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 1
+              Text = 'Type'
+              Width = 150
+              PropertyName = 'type'
+            end          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 2
+              Text = 'Data'
+              Width = 300
+              PropertyName = 'data'
+            end          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 3
+              Text = 'Timestamp'
+              Width = 150
+              PropertyName = 'timestamp'
+            end          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 4
+              Text = 'Status'
+              Width = 100
+              PropertyName = 'status'
+            end          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 5
+              Text = 'DNSSEC Status'
+              Width = 100
+              PropertyName = 'dnssec'
+            end          
+            item
+              Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+              Position = 6
+              Text = 'Key Master'
+              Width = 100
+              PropertyName = 'keymaster'
+            end>
+          Header.DefaultHeight = 18
+          Header.Height = 28
+          Header.MaxHeight = 101
+          Header.MinHeight = 19
+          Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowImages, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+          Header.Style = hsFlatButtons
+          Images = CoreDataModule.ImageList1
+          PopupMenu = PopupMenu_DNS
           TabOrder = 0
+          SelectedAndTotalLabel = Label1
+          TreeOptions.MiscOptions = [toFullRepaintOnResize, toGridExtensions, toInitOnSave, toReadOnly, toFullRowDrag]
+          TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+          ZebraColor = 15593713
+          OnDblClick = GridDNSDblClick
+          OnGetImageIndex = GridDNSGetImageIndex
+          OnKeyPress = GridDNSKeyPress
+          OnMouseDown = GridDNSMouseDown
         end
-        object Label2: TLabel
-          AnchorSideLeft.Control = Panel6
-          AnchorSideTop.Control = Panel6
-          Left = 8
-          Height = 15
-          Top = 8
-          Width = 90
-          BorderSpacing.Around = 8
-          Caption = 'Retrieve records: '
-        end
-        object Label3: TLabel
-          AnchorSideLeft.Control = Label2
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Control = Panel6
-          AnchorSideRight.Control = Panel6
-          AnchorSideRight.Side = asrBottom
-          Left = 106
-          Height = 15
-          Top = 8
-          Width = 52
-          Anchors = [akTop, akLeft, akRight]
-          BorderSpacing.Around = 8
-          Caption = '0'
+      end
+      object TabSheet2: TTabSheet
+        Caption = 'TabSheet2'
+        ClientHeight = 308
+        ClientWidth = 617
+        object Panel5: TPanel
+          Left = 0
+          Height = 308
+          Top = 0
+          Width = 617
+          Align = alClient
+          BevelOuter = bvNone
+          ClientHeight = 308
+          ClientWidth = 617
+          TabOrder = 0
+          object Panel_Status: TPanel
+            Left = 0
+            Height = 31
+            Top = 0
+            Width = 617
+            Align = alTop
+            AutoSize = True
+            BevelOuter = bvNone
+            ClientHeight = 31
+            ClientWidth = 617
+            TabOrder = 0
+            object Label_Status: TLabel
+              Left = 8
+              Height = 15
+              Top = 8
+              Width = 150
+              Align = alLeft
+              BorderSpacing.Around = 8
+              Caption = 'Status:'
+              Constraints.MinWidth = 150
+              Layout = tlCenter
+            end
+            object Label_StatusMessage: TLabel
+              Left = 166
+              Height = 15
+              Top = 8
+              Width = 443
+              Align = alClient
+              BorderSpacing.Around = 8
+              Layout = tlCenter
+              WordWrap = True
+            end
+          end
+          object Panel_NodeCount: TPanel
+            Left = 0
+            Height = 31
+            Top = 62
+            Width = 617
+            Align = alTop
+            AutoSize = True
+            BevelOuter = bvNone
+            ClientHeight = 31
+            ClientWidth = 617
+            TabOrder = 1
+            object Label_NodeCount: TLabel
+              Left = 8
+              Height = 15
+              Top = 8
+              Width = 150
+              Align = alLeft
+              BorderSpacing.Around = 8
+              Caption = 'Node count:'
+              Constraints.MinWidth = 150
+              Layout = tlCenter
+            end
+            object Label_NodeCountMessage: TLabel
+              Left = 166
+              Height = 15
+              Top = 8
+              Width = 443
+              Align = alClient
+              BorderSpacing.Around = 8
+              Layout = tlCenter
+              WordWrap = True
+            end
+          end
+          object Panel_RecordCount: TPanel
+            Left = 0
+            Height = 31
+            Top = 31
+            Width = 617
+            Align = alTop
+            AutoSize = True
+            BevelOuter = bvNone
+            ClientHeight = 31
+            ClientWidth = 617
+            TabOrder = 2
+            object Label_RecordCount: TLabel
+              Left = 8
+              Height = 15
+              Top = 8
+              Width = 150
+              Align = alLeft
+              BorderSpacing.Around = 8
+              Caption = 'Record count:'
+              Constraints.MinWidth = 150
+              Layout = tlCenter
+            end
+            object Label_RecordCountMessage: TLabel
+              Left = 166
+              Height = 15
+              Top = 8
+              Width = 443
+              Align = alClient
+              BorderSpacing.Around = 8
+              Layout = tlCenter
+              WordWrap = True
+            end
+          end
+          object Panel_Error: TPanel
+            Left = 0
+            Height = 31
+            Top = 93
+            Width = 617
+            Align = alTop
+            AutoSize = True
+            BevelOuter = bvNone
+            ClientHeight = 31
+            ClientWidth = 617
+            TabOrder = 3
+            object Label_Error: TLabel
+              Left = 8
+              Height = 15
+              Top = 8
+              Width = 150
+              Align = alLeft
+              BorderSpacing.Around = 8
+              Caption = 'Error:'
+              Constraints.MinWidth = 150
+              Layout = tlCenter
+            end
+            object Label_ErrorMessage: TLabel
+              Left = 166
+              Height = 15
+              Top = 8
+              Width = 443
+              Align = alClient
+              BorderSpacing.Around = 8
+              Layout = tlCenter
+              WordWrap = True
+            end
+          end
         end
       end
     end

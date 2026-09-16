@@ -615,6 +615,10 @@ begin
   if not Assigned(fCurrentZoneStorage) then
     Exit;
   fUpdateZoneThread := TThreadRefreshDNSZone.Create(fRSAT.LdapClient, fCurrentZoneStorage);
+  fUpdateZoneThread.OnStart := fOnStart;
+  fUpdateZoneThread.OnFinish := fOnFinish;
+  fUpdateZoneThread.OnUpdate := fOnUpdate;
+  fUpdateZoneThread.OnError := fOnError;
   fUpdateZoneThread.Start;
 end;
 

@@ -74,24 +74,35 @@ type
     Image1: TImage;
     Image2: TImage;
     Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
+    Label_StatusMessage: TLabel;
+    Label_NodeCountMessage: TLabel;
+    Label_RecordCountMessage: TLabel;
+    Label_ErrorMessage: TLabel;
+    Label_Error: TLabel;
+    Label_RecordCount: TLabel;
+    Label_Status: TLabel;
+    Label_NodeCount: TLabel;
     MenuItem10: TMenuItem;
     MenuItem6: TMenuItem;
     MenuItem7: TMenuItem;
     MenuItem8: TMenuItem;
     MenuItem9: TMenuItem;
+    PageControl1: TPageControl;
     Panel1: TPanel;
+    Panel_Error: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
     Panel5: TPanel;
-    Panel6: TPanel;
+    Panel_Status: TPanel;
+    Panel_NodeCount: TPanel;
+    Panel_RecordCount: TPanel;
     PopupMenu_DNS: TPopupMenu;
-    ProgressBar1: TProgressBar;
     Separator1: TMenuItem;
     Splitter1: TSplitter;
     GridDNS: TTisGrid;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
     Timer_TreeChangeNode: TTimer;
     Timer_SearchInGrid: TTimer;
     TisSearchEdit_GridDNS: TTisSearchEdit;
@@ -369,9 +380,6 @@ procedure TFrmModuleDNS.UpdateNodeZone(Node: TDNSTreeNode);
 begin
   UpdateGridColumns(['name', 'type', 'data', 'timestamp']);
 
-  Panel5.Visible := True;
-  GridDNS.Visible := False;
-  Label3.Caption := 'Starting...';
   fModule.OnStart := @OnRetrieveDNSZoneStart;
   fModule.OnFinish := @OnRetrieveDNSZoneFinish;
   fModule.OnUpdate := @OnRetrieveDNSZoneUpdate;
@@ -474,19 +482,27 @@ end;
 procedure TFrmModuleDNS.OnRetrieveDNSZoneStart(
   const ZoneStorage: TZoneDnsStorage);
 begin
-
+  Label_StatusMessage.Caption := 'Starting...';
+  Label_NodeCountMessage.Caption := IntToStr(ZoneStorage.Count);
+  PageControl1.ActivePageIndex := 1;
 end;
 
 procedure TFrmModuleDNS.OnRetrieveDNSZoneFinish(
   const ZoneStorage: TZoneDnsStorage);
 begin
+  Label_StatusMessage.Caption := 'Finished';
+  Label_NodeCountMessage.Caption := IntToStr(ZoneStorage.Count);
 
+  PageControl1.ActivePageIndex := 0;
+
+  UpdateGrid();
 end;
 
 procedure TFrmModuleDNS.OnRetrieveDNSZoneUpdate(
   const ZoneStorage: TZoneDnsStorage);
 begin
-
+  Label_StatusMessage.Caption := 'Running...';
+  Label_NodeCountMessage.Caption := IntToStr(ZoneStorage.Count);
 end;
 
 procedure TFrmModuleDNS.OnRetrieveDNSZoneError(
@@ -934,6 +950,8 @@ begin
 
   fRootNode.Expand(False);
   fRootNode.Selected := True;
+
+  PageControl1.ActivePageIndex := 0;
 end;
 
 destructor TFrmModuleDNS.Destroy;
