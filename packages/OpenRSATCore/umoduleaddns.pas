@@ -1,6 +1,7 @@
 unit umoduleaddns;
 
 {$mode objfpc}{$H+}
+{$WARN 6058 OFF}
 
 interface
 
@@ -416,11 +417,10 @@ function TZoneDnsStorage.ToDocVariantData(): PDocVariantData;
 var
   i: Integer;
   RawDnsRecord: RawByteString;
-  DNSRecord: TDNSRecord;
   newRaw: TDocVariantData;
   DNSName, DNSObjectName: RawUtf8;
 begin
-  newRaw.Init();
+  newRaw.Init(JSON_FAST);
   fDocVariantData.Clear;
   for i := 0 to Pred(Count) do
   begin
@@ -442,7 +442,7 @@ function TZoneDnsStorage.ToDocVariantData(const Path: RawUtf8): PDocVariantData;
 var
   RawDnsRecord: RawByteString;
   i, p: Integer;
-  DNSObjectName, ParentDNSName, DNSFullName, DNSRelativeName: RawUtf8;
+  DNSObjectName, DNSFullName, DNSRelativeName: RawUtf8;
   NewRaw, Folders: TDocVariantData;
   tmp: String;
 
@@ -561,12 +561,12 @@ end;
 
 function TZoneDnsStorage.DelByObjectName(AObjectName: RawUtf8): Integer;
 begin
-
+  result := -1;
 end;
 
 function TZoneDnsStorage.DelByName(AName: RawUtf8): Integer;
 begin
-
+  result := -1;
 end;
 
 procedure TZoneDnsStorage.UpdateName(AIndex: Integer; AName: RawUtf8);
@@ -807,6 +807,7 @@ begin
         Attribute := SearchResult.Find('dNSProperty');
         if Assigned(Attribute) then
         begin
+          DnsProperties := nil;
           SetLength(DnsProperties, Attribute.Count);
           for i := 0 to Pred(Attribute.Count) do
             DnsProperties[i] := Attribute.GetRaw(i);
@@ -848,6 +849,7 @@ var
   i: Integer;
   Len: SizeInt;
 begin
+  result := nil;
   Len := Length(fZoneStorages);
   SetLength(result, Len);
   for i := 0 to Pred(Len) do
