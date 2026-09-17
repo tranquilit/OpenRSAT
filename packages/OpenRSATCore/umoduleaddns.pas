@@ -49,6 +49,7 @@ type
     procedure DoNotifyError;
   public
     constructor Create(ALdapClient: TLdapClient; ACurrentZone: TZoneDnsStorage); reintroduce;
+    destructor Destroy; override;
 
     property OnStart: TThreadRefreshDNSZoneEvent read fOnStart write fOnStart;
     property OnFinish: TThreadRefreshDNSZoneEvent read fOnFinish write fOnFinish;
@@ -248,16 +249,20 @@ begin
 
     Bak := fLdapClient.OnSearchPage;
     try
+      fLdapClient.SearchBegin();
       fLdapClient.SearchScope := lssSingleLevel;
       fLdapClient.OnSearchPage := @OnSearchPage;
-      if not fLdapClient.SearchAllDocRaw(SearchResult, fCurrentZoneStorage.ZoneObjectName, '', ['name', 'dnsRecord', 'whenChanged'], [roAutoRange, roKnownValuesAsArray, roObjectNameAtRoot, roRawValues]) then
-      begin
-        fCurrentZoneStorage.ErrorMessage := FormatUtf8('LDAP: Search (%): %', [fLdapClient.ResultCode, fLdapClient.ResultString]);
-        Synchronize(@DoNotifyError);
-        Exit;
-      end;
+      repeat
+        if not fLdapClient.Search(fCurrentZoneStorage.ZoneObjectName, False, '', ['name', 'dnsRecord', 'whenChanged']) then
+        begin
+          fCurrentZoneStorage.ErrorMessage := FormatUtf8('LDAP: Search (%): %', [fLdapClient.ResultCode, fLdapClient.ResultString]);
+          Synchronize(@DoNotifyError);
+          Exit;
+        end;
+      until (fLdapClient.SearchCookie = '') or (Terminated);
     finally
       fLdapClient.OnSearchPage := Bak;
+      fLdapClient.SearchEnd;
     end;
   finally
     Synchronize(@DoNotifyFinish);
@@ -294,8 +299,16 @@ begin
   inherited Create(True);
 
   FreeOnTerminate := False;
-  fLdapClient := ALdapClient;
+  fLdapClient := TLdapClient.Create(ALdapClient.Settings);
+  fLdapClient.Connect();
   fCurrentZoneStorage := ACurrentZone;
+end;
+
+destructor TThreadRefreshDNSZone.Destroy;
+begin
+  FreeAndNil(fLdapClient);
+
+  inherited Destroy;
 end;
 
 { TZoneDnsStorage }
