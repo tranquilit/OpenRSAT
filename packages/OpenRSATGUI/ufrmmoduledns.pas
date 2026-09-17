@@ -516,6 +516,9 @@ begin
   if not Assigned(ZoneStorage) then
     Exit;
 
+  if ZoneStorage.IsReverseZone then
+    Exit;
+
   for i := 0 to ZoneStorage.Count - 1 do
   begin
     N := ZoneStorage.GetName(i);

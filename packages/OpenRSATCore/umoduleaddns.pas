@@ -425,6 +425,8 @@ begin
   for i := 0 to Pred(Count) do
   begin
     DNSName := GetName(i);
+    if DNSName = '@' then
+      DNSName := '(Same as parent folder)';
     DNSObjectName := GetObjectName(i);
     for RawDnsRecord in GetDnsRecord(i) do
     begin
@@ -453,6 +455,11 @@ var
   end;
 
 begin
+  if IsReverseZone then
+  begin
+    result := ToDocVariantData();
+    Exit;
+  end;
   Folders.Init(JSON_FAST);
   fDocVariantData.Clear;
   for i := 0 to Count - 1 do
