@@ -8,6 +8,7 @@
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
+        <OtherUnitFiles Value="network"/>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
@@ -155,6 +156,10 @@
       <Item>
         <Filename Value="uwindows.ncrypt.pas"/>
         <UnitName Value="uwindows.ncrypt"/>
+      </Item>
+      <Item>
+        <Filename Value="network\uldapclient.pas"/>
+        <UnitName Value="uldapclient"/>
       </Item>
     </Files>
     <i18n>
