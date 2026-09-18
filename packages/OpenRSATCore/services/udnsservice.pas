@@ -109,9 +109,9 @@ const
   FOREST_DNS_ZONES: RawUtf8 = 'CN=MicrosoftDNS,DC=ForestDnsZones';
 
   /// store the LDAP filter to retrieve only reverse zones
-  REVERSE_ZONES_FILTER: RawUtf8 = '(&(objectClass=dnsZone)(|(dc=*.in-addr.arpa)(dc=*.ip6.arpa)))';
+  REVERSE_ZONES_FILTER: RawUtf8 = '(&(objectClass=dnsZone)(|(dc=*.in-addr.arpa)(dc=*.ip6.arpa))(!(name=RootDNSServers)))';
   /// store the LDAP filter to retrieve only forward zones
-  FORWARD_ZONES_FILTER: RawUtf8 = '(&(objectClass=dnsZone)(!(|(dc=*.in-addr.arpa)(dc=*.ip6.arpa))))';
+  FORWARD_ZONES_FILTER: RawUtf8 = '(&(objectClass=dnsZone)(!(|(dc=*.in-addr.arpa)(dc=*.ip6.arpa)))(!(name=RootDNSServers)))';
 
 { TDNSService }
 
@@ -147,6 +147,8 @@ begin
   result.Name := SearchResult.Find('name').GetReadable();
   result.DC := SearchResult.Find('dc').GetReadable();
   DNSProperty := SearchResult.Find('dNSProperty');
+  if not Assigned(DNSProperty) then
+    Exit;
   SetLength(result.DNSProperties, DNSProperty.Count);
   for i := 0 to DNSProperty.Count - 1 do
     result.DNSProperties[i] := DNSProperty.GetRaw(i);
@@ -184,6 +186,8 @@ begin
   result.Name := SearchResult.Find('name').GetReadable();
   result.WhenChanged := SearchResult.Find('whenChanged').GetReadable();
   DNSRecord := SearchResult.Find('dnsRecord');
+  if not Assigned(DNSRecord) then
+    Exit;
   SetLength(result.DnsRecords, DNSRecord.Count);
   for i := 0 to DNSRecord.Count - 1 do
     result.DnsRecords[i] := DNSRecord.GetRaw(i);
