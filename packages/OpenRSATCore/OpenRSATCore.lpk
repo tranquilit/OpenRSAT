@@ -8,7 +8,7 @@
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <OtherUnitFiles Value="network"/>
+        <OtherUnitFiles Value="network;services"/>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
@@ -160,6 +160,10 @@
       <Item>
         <Filename Value="network\uldapclient.pas"/>
         <UnitName Value="uldapclient"/>
+      </Item>
+      <Item>
+        <Filename Value="services\udnsservice.pas"/>
+        <UnitName Value="udnsservice"/>
       </Item>
     </Files>
     <i18n>
