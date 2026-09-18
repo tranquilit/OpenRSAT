@@ -9,8 +9,7 @@ uses
   SysUtils,
   mormot.core.base,
   mormot.core.text,
-  mormot.core.variants,
-  mormot.net.ldap,
+  mormot.net.ldap, // should be removed
   uldapclient;
 
 type
@@ -66,11 +65,15 @@ type
     fOnSearchPageNodes: TOnSearchPageNodesEvent;
 
     /// convert a TLdapResultList from mormot2 into a TDNSZoneDynArray
-    function SearchResultToDNSZones(const SearchResults: TLdapResultList
+    function SearchResultListToDNSZones(const SearchResults: TLdapResultList
       ): TDNSZoneDynArray;
+    /// convert a TLdapResult from mormot2 into a TDNSZone
+    function SearchResultToDNSZone(const SearchResult: TLdapResult): TDNSZone;
     /// convert a TLdapResultList from mormot2 into a TDNSNodeDynArray
-    function SearchResultToDNSNodes(const SearchResults: TLdapResultList
+    function SearchResultListToDNSNodes(const SearchResults: TLdapResultList
       ): TDNSNodeDynArray;
+    /// convert a TLdapResult from mormot2 into a TDNSNode
+    function SearchResultToDNSNode(const SearchResult: TLdapResult): TDNSNode;
     /// generic function to search zones
     // - zones can be found on both domain and forest partitions, and can be forward or reverse zone
     function SearchZones(const DistinguishedName, Filter: RawUtf8): TDNSZoneDynArray;
@@ -85,7 +88,9 @@ type
     // - reverse zone can be found on both domain and forest partitions.
     function SearchReverseZones: TDNSZoneDynArray;
     /// search nodes based on a dnsZone
-    function SearchNodes(const DNSZone: TDNSZone): TDNSNodeDynArray;
+    function SearchNodes(const DNSZone: TDNSZone): TDNSNodeDynArray; overload;
+    /// search nodes based on a distinguishedName
+    function SearchNodes(const DistinguishedName: RawUtf8): TDNSNodeDynArray; overload;
 
     /// callback for the search zones function on ldap search page
     property OnSearchPageZones: TOnSearchPageZonesEvent read fOnSearchPageZones write fOnSearchPageZones;
@@ -110,12 +115,11 @@ const
 
 { TDNSService }
 
-function TDNSService.SearchResultToDNSZones(const SearchResults: TLdapResultList
-  ): TDNSZoneDynArray;
+function TDNSService.SearchResultListToDNSZones(
+  const SearchResults: TLdapResultList): TDNSZoneDynArray;
 var
-  i, j: Integer;
+  i: Integer;
   SearchResult: TLdapResult;
-  DNSProperty: TLdapAttribute;
 begin
   result := nil;
   SetLength(result, SearchResults.Count);
@@ -125,22 +129,34 @@ begin
     if not Assigned(SearchResult) then
       Continue;
 
-    result[i].DistinguishedName := SearchResult.ObjectName;
-    result[i].Name := SearchResult.Find('name').GetReadable();
-    result[i].DC := SearchResult.Find('dc').GetReadable();
-    DNSProperty := SearchResult.Find('dNSProperty');
-    SetLength(result[i].DNSProperties, DNSProperty.Count);
-    for j := 0 to DNSProperty.Count - 1 do
-      result[i].DNSProperties[j] := DNSProperty.GetRaw(j);
+    result[i] := SearchResultToDNSZone(SearchResult);
   end;
 end;
 
-function TDNSService.SearchResultToDNSNodes(const SearchResults: TLdapResultList
+function TDNSService.SearchResultToDNSZone(const SearchResult: TLdapResult
+  ): TDNSZone;
+var
+  DNSProperty: TLdapAttribute;
+  i: Integer;
+begin
+  result := Default(TDNSZone);
+  if not Assigned(SearchResult) then
+    Exit;
+
+  result.DistinguishedName := SearchResult.ObjectName;
+  result.Name := SearchResult.Find('name').GetReadable();
+  result.DC := SearchResult.Find('dc').GetReadable();
+  DNSProperty := SearchResult.Find('dNSProperty');
+  SetLength(result.DNSProperties, DNSProperty.Count);
+  for i := 0 to DNSProperty.Count - 1 do
+    result.DNSProperties[i] := DNSProperty.GetRaw(i);
+end;
+
+function TDNSService.SearchResultListToDNSNodes(const SearchResults: TLdapResultList
   ): TDNSNodeDynArray;
 var
-  i, j: Integer;
+  i: Integer;
   SearchResult: TLdapResult;
-  DNSRecord: TLdapAttribute;
 begin
   result := nil;
   SetLength(result, SearchResults.Count);
@@ -150,14 +166,27 @@ begin
     if not Assigned(SearchResult) then
       Continue;
 
-    result[i].DistinguishedName := SearchResult.ObjectName;
-    result[i].Name := SearchResult.Find('name').GetReadable();
-    result[i].WhenChanged := SearchResult.Find('whenChanged').GetReadable();
-    DNSRecord := SearchResult.Find('dnsRecord');
-    SetLength(result[i].DnsRecords, DNSRecord.Count);
-    for j := 0 to DNSRecord.Count - 1 do
-      result[i].DnsRecords[j] := DNSRecord.GetRaw(j);
+    result[i] := SearchResultToDNSNode(SearchResult);
   end;
+end;
+
+function TDNSService.SearchResultToDNSNode(const SearchResult: TLdapResult
+  ): TDNSNode;
+var
+  DNSRecord: TLdapAttribute;
+  i: Integer;
+begin
+  result := Default(TDNSNode);
+  if not Assigned(SearchResult) then
+    Exit;
+
+  result.DistinguishedName := SearchResult.ObjectName;
+  result.Name := SearchResult.Find('name').GetReadable();
+  result.WhenChanged := SearchResult.Find('whenChanged').GetReadable();
+  DNSRecord := SearchResult.Find('dnsRecord');
+  SetLength(result.DnsRecords, DNSRecord.Count);
+  for i := 0 to DNSRecord.Count - 1 do
+    result.DnsRecords[i] := DNSRecord.GetRaw(i);
 end;
 
 function TDNSService.SearchZones(const DistinguishedName, Filter: RawUtf8
@@ -175,7 +204,7 @@ begin
       if not fLdapConnection.Search(DistinguishedName, False, Filter, ['dc', 'name', 'dNSProperty']) then
         Exit;
 
-      DNSZones := SearchResultToDNSZones(fLdapConnection.SearchResult);
+      DNSZones := SearchResultListToDNSZones(fLdapConnection.SearchResult);
       if Assigned(OnSearchPageZones) then
         OnSearchPageZones(DNSZones);
       result := Concat(result, DNSZones);
@@ -215,6 +244,12 @@ begin
 end;
 
 function TDNSService.SearchNodes(const DNSZone: TDNSZone): TDNSNodeDynArray;
+begin
+  result := SearchNodes(DNSZone.DistinguishedName);
+end;
+
+function TDNSService.SearchNodes(const DistinguishedName: RawUtf8
+  ): TDNSNodeDynArray;
 var
   DNSNodes: TDNSNodeDynArray;
 begin
@@ -225,10 +260,10 @@ begin
   try
     fLdapConnection.SearchScope := lssSingleLevel;
     repeat
-      if not fLdapConnection.Search(DNSZone.DistinguishedName, False, '', ['name', 'dnsRecord', 'whenChanged']) then
+      if not fLdapConnection.Search(DistinguishedName, False, '', ['name', 'dnsRecord', 'whenChanged']) then
         Exit;
 
-      DNSNodes := SearchResultToDNSNodes(fLdapConnection.SearchResult);
+      DNSNodes := SearchResultListToDNSNodes(fLdapConnection.SearchResult);
       if Assigned(OnSearchPageNodes) then
         OnSearchPageNodes(DNSNodes);
       result := Concat(result, DNSNodes);
