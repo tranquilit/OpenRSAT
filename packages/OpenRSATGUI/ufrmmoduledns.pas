@@ -861,27 +861,32 @@ procedure TFrmModuleDNS.GridDNSGetImageIndex(Sender: TBaseVirtualTree;
 var
   NodeData: PDocVariantData;
   NodeIsFolder: Boolean;
+  Data: TDnsTreeNodeData;
 begin
   if GridDNS.FindColumnByIndex(Column).PropertyName = 'name' then
   begin
-    NodeIsFolder := False;
-    NodeData := GridDNS.GetNodeAsPDocVariantData(Node);
-    if Assigned(NodeData) and Assigned(TreeDNS.Selected) then
-      NodeIsFolder := Assigned(TreeDNS.Selected.FindNode(NodeData^.S['name']));
-    if NodeIsFolder then
-      ImageIndex := Ord(ileADContainer)
-    else if Assigned(nodeData) then
-    begin
-      if NodeData^.Exists('_type') then
+    ImageIndex := Ord(ileADUnknown);
+    if not Assigned(TreeDNS.Selected) then
+      Exit;
+
+    Data := TDNSTreeNodeData(TreeDNS.Selected.Data);
+    case Data.Kind of
+      dtnkZonesFolder: ImageIndex := 59;
+      dtnkRoot: ImageIndex := Ord(ileADContainer);
+      dtnkZone, dtnkNodesFolder:
       begin
-        case NodeData^.I['_type'] of
-          0: ImageIndex := Ord(ileADUnknown);
-          else
-            ImageIndex := 57;
+        NodeData := GridDNS.GetNodeAsPDocVariantData(Node);
+        if not Assigned(NodeData) then
+          Exit;
+        NodeIsFolder := Assigned(TreeDNS.Selected.FindNode(NodeData^.U['name']));
+        if NodeIsFolder then
+        begin
+          ImageIndex := Ord(ileADContainer);
+          Exit;
         end;
-      end
-      else
-        ImageIndex := Ord(ileADUnknown);
+        if NodeData^.Exists('_type') and (NodeData^.I['_type'] <> 0) then
+          ImageIndex := 57;
+      end;
     end;
   end;
 end;
