@@ -978,16 +978,8 @@ begin
 end;
 
 function IsValidIP(IP: RawUtf8): Boolean;
-var
-  IPAddr: TNetAddr;
 begin
-  result := False;
-  if IPAddr.SetFrom(IP, '0', nlTcp) <> nrOK then
-    Exit;
-  case IPAddr.Family of
-    nfIP4: result := IsValidIP4(IP);
-    nfIP6: result := IsValidIP6(IP);
-  end;
+  result := IsValidIP4(IP) or IsValidIP6(IP);
 end;
 
 function IsValidIP4(IP4: RawUtf8): Boolean;
