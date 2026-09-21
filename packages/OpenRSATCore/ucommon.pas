@@ -513,6 +513,12 @@ resourcestring
   rsPSOInvalidMaxPwdAge = 'Invalid maximum password age (1 <= X <= 999)';
   rsPSOInvalidMinPwdAge = 'Invalid minimum password age (0 <= X <= 998)';
 
+  rsDNSForwardLookupZones = 'Forward Lookup Zones';
+  rsDNSReverseLookupZones = 'Reverse Lookup Zones';
+  rsDNSSameAsParentFolder = '(same as parent folder)';
+
+  rsEmpty = '<EMPTY>';
+
 const
   DAYS_BETWEEN_1601_AND_1900 = 109205;
   HUNDRED_OF_MS_IN_A_DAY = 864000000000;
