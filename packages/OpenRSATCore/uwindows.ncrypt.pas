@@ -28,7 +28,10 @@ type
   PNCRYPT_ALLOC_PARA = ^NCRYPT_ALLOC_PARA;
 
 const
+  /// decodes only the header of the protected data blob.
+  /// No actual decryption takes place.
   NCRYPT_UNPROTECT_NO_DECRYPT = $00000001;
+  /// requests that the key service provider not display a user interface
   NCRYPT_SILENT_FLAG          = $00000040;
 
   NCRYPT_PROTECTION_INFO_TYPE_DESCRIPTOR_STRING = $00000001;
@@ -56,6 +59,29 @@ function NCryptGetProtectionDescriptorInfo(
   ppvInfo: PPointer
 ): LongInt; stdcall; external 'ncrypt.dll';
 
+/// Decrypts an encrypted LAPS value in Windows using DPAPI-NG.
+///
+/// The value provided must match the contents of the
+/// msLAPS-EncryptedPassword attribute encoded in hexadecimal format.
+///
+/// The function:
+/// - converts the hexadecimal representation to binary data;
+/// - validates and extracts the 16-byte LAPS header;
+/// - verifies the size of the encrypted content and the reserved field;
+/// - extracts the DPAPI-NG blob;
+/// - decrypts it using NCryptUnprotectSecret with the
+///   current Windows security context;
+/// - converts the UTF-16LE result to a RawByteString.
+///
+/// @param ProtectedData Hexadecimal value of msLAPS-EncryptedPassword.
+/// @returns The decrypted LAPS content, typically a JSON object containing
+///          the account name, password, and timestamp.
+///
+/// @raises Exception If the value is empty, if the LAPS header is invalid,
+///         if the sizes are inconsistent, or if DPAPI-NG cannot
+///         decrypt the secret. Decryption may fail, in particular, if
+///         the current Windows security context is not authorized to
+///         decrypt the password.
 function DecryptDpapiNgWindows(
   const ProtectedData: RawByteString
 ): RawByteString;
@@ -65,6 +91,8 @@ implementation
 
 {$IFDEF WINDOWS}
 
+/// convert a RawByteString into TBytes
+// - Used to convert the msLAPS-EncryptedPassword LDAP attribute
 function HexToBytes(const S: RawByteString): TBytes;
 var
   i, L: Integer;
@@ -97,6 +125,8 @@ begin
        HexNibble(S[i * 2 + 2]);
 end;
 
+/// convert a TBytes into a RawByteString
+// - Used to convert the result of NCryptUnprotectSecret
 function Utf16LeBytesToString(const AData: TBytes): RawByteString;
 begin
   Result := '';
@@ -111,6 +141,7 @@ begin
   );
 end;
 
+/// convert a SECURITY_STATUS into a hex code
 function StatusToHex(const AStatus: SECURITY_STATUS): string;
 var
   U: DWord absolute AStatus;
@@ -118,6 +149,7 @@ begin
   Result := '0x' + IntToHex(U, 8);
 end;
 
+/// read a UInt32 from a TBytes at offset
 function ReadUInt32LE(const Data: TBytes; Offset: Integer): Cardinal;
 begin
   result := Cardinal(Data[Offset]) or
@@ -126,6 +158,7 @@ begin
     (Cardinal(Data[Offset + 3]) shl 24);
 end;
 
+/// convert a PWideChar to a UnicodeString
 function PWideCharToUnicodeString(P: PWideChar): UnicodeString;
 var
   L: SizeInt;
