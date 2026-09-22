@@ -1239,6 +1239,8 @@ begin
     DNSCOUNTNAME.Length := Buffer[0];
     DNSCOUNTNAME.LabelCount := Buffer[1];
     SetLength(DNSCOUNTNAME.RawName, DNSCOUNTNAME.LabelCount);
+    if DNSCOUNTNAME.LabelCount = 0 then
+      Exit;
 
     idx := 2;
     for i := 0 to Pred(DNSCOUNTNAME.LabelCount) do
