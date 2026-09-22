@@ -159,9 +159,6 @@ var
 begin
   Message := GetLdapErrorCustomMessage(LdapClient);
 
-  if String(Message).ToLower.Contains('52e') then
-    Message := 'Invalid credentials.';
-
   result := ShowLdapError(FormatUtf8(rsLdapConnectFailed, [Message]));
 end;
 

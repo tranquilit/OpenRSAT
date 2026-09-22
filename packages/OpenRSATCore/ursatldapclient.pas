@@ -177,6 +177,9 @@ begin
 
   if (result = '') then
     result := LdapClient.ResultString;
+
+  if String(result).ToLower.Contains('error 1326') then
+    result := rsInvalidCredentials;
 end;
 
 function AceIsUseless(Ace: PSecAce): Boolean;
