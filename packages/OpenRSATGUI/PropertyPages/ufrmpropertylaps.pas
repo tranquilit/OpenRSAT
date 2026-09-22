@@ -183,9 +183,9 @@ procedure TFrmPropertyLAPS.Update(Props: TProperty);
 var
   LAPSInformation: PLAPSInformation;
   {$IFDEF WINDOWS}
-  UnencryptedData: TBytes;
   Account, Password: RawUtf8;
   WhenChanged: TDateTime;
+  UnencryptedData: RawByteString;
   {$ENDIF WINDOWS}
 begin
   if Assigned(fLog) then
@@ -225,11 +225,25 @@ begin
       {$IFDEF WINDOWS}
       if LAPSInformation^.LAPSV2.EncryptedPassword <> '' then
       begin
-        UnencryptedData := DecryptDpapiNgWindows(TBytes(LAPSInformation^.LAPSV2.EncryptedPassword));
-        if ConvertLAPSPassword(RawUtf8(UnencryptedData), Account, Password, WhenChanged) then
-        begin
-          Edit_v2_EncryptedLocalAdminAccountName.CaptionNoChange := Account;
-          Edit_v2_EncryptedLocalAdminAccountPassword.CaptionNoChange := Password;
+        try
+          UnencryptedData := DecryptDpapiNgWindows(LAPSInformation^.LAPSV2.EncryptedPassword);
+          if ConvertLAPSPassword(UnencryptedData, Account, Password, WhenChanged) then
+          begin
+            Label_v2_EncryptedLocalAdminAccountName.Enabled := True;
+            Edit_v2_EncryptedLocalAdminAccountName.Enabled := True;
+            Edit_v2_EncryptedLocalAdminAccountName.CaptionNoChange := Account;
+            Label_v2_EncryptedLocalAdminPassword.Enabled := True;
+            Edit_v2_EncryptedLocalAdminAccountPassword.Enabled := True;
+            Edit_v2_EncryptedLocalAdminAccountPassword.CaptionNoChange := Password;
+            Action_v2_EncryptedCopyPassword.Enabled := True;
+            Action_v2_EncryptedShowPassword.Enabled := True;
+          end;
+        Except
+          On E: Exception do
+          begin
+            fLog.Add.Log(sllError, E.Message);
+            Exit;
+          end;
         end;
       end;
       {$ENDIF WINDOWS}

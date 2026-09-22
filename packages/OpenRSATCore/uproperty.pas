@@ -53,7 +53,7 @@ type
 
   TLAPSV2Inforamtion = record
     Expiration: TDateTime;
-    EncryptedPassword: RawUtf8;
+    EncryptedPassword: RawByteString;
     WhenChanged: TDateTime;
     Account: RawUtf8;
     Password: SpiUtf8;
@@ -218,7 +218,7 @@ type
   end;
 
 
-function ConvertLAPSPassword(const LAPSPassword: RawUtf8; out Account: RawUtf8; out Password: RawUtf8; out WhenChanged: TDateTime): Boolean;
+function ConvertLAPSPassword(const LAPSPassword: RawByteString; out Account: RawUtf8; out Password: RawUtf8; out WhenChanged: TDateTime): Boolean;
 /// Invalid function (missing time)
 function BuildLAPSPassword(const Account: RawUtf8; const Password: RawUtf8; const WhenChanged: TDateTime): RawUtf8;
 
@@ -236,8 +236,8 @@ begin
   result := Iso8601ToDateTime(FileTime);
 end;
 
-function ConvertLAPSPassword(const LAPSPassword: RawUtf8; out Account: RawUtf8;
-  out Password: RawUtf8; out WhenChanged: TDateTime): Boolean;
+function ConvertLAPSPassword(const LAPSPassword: RawByteString; out
+  Account: RawUtf8; out Password: RawUtf8; out WhenChanged: TDateTime): Boolean;
 var
   PasswordData: TDocVariantData;
 begin
@@ -1053,7 +1053,7 @@ begin
   fLAPSInformation.LAPSV1.Password := GetReadable('ms-Mcs-AdmPwd');
 
   fLAPSInformation.LAPSV2.Expiration := ExpirationTimeToDateTime(GetReadable('msLAPS-PasswordExpirationTime'));
-  fLAPSInformation.LAPSV2.EncryptedPassword := GetReadable('msLAPS-EncryptedPassword');
+  fLAPSInformation.LAPSV2.EncryptedPassword := GetRaw('msLAPS-EncryptedPassword');
 
   ConvertLAPSPassword(GetReadable('msLAPS-Password'), AAccount, APassword, AWhenChanged);
 
