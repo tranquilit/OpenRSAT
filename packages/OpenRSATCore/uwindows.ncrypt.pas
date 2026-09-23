@@ -6,11 +6,13 @@ interface
 
 uses
   Classes,
-  SysUtils
+  SysUtils,
+  mormot.core.os
   {$IFDEF WINDOWS}
   ,windows
   {$ENDIF WINDOWS};
 
+{$IFDEF WINDOWS}
 type
   SECURITY_STATUS = LongInt;
 
@@ -27,6 +29,28 @@ type
   end;
   PNCRYPT_ALLOC_PARA = ^NCRYPT_ALLOC_PARA;
 
+  TNcryptUnprotectSecret = function(
+    phDescriptor: PNCRYPT_DESCRIPTOR_HANDLE;
+    dwFlags: Cardinal;
+    pbProtectedBlob: PByte;
+    cbProtectedBlob: Cardinal;
+    pMemPara: Pointer;
+    hWnd: HWND;
+    out ppbData: PByte;
+    out pcbData: Cardinal
+  ): LongInt; stdcall;
+
+  TNCryptCloseProtectionDescriptor = function(
+    hDescriptor: NCRYPT_DESCRIPTOR_HANDLE
+  ): LongInt; stdcall;
+
+  TNCryptGetProtectionDescriptorInfo = function(
+    hDescriptor: NCRYPT_DESCRIPTOR_HANDLE;
+    pMemPara: PNCRYPT_ALLOC_PARA;
+    dwInfoType: DWord;
+    ppvInfo: PPointer
+  ): LongInt; stdcall;
+
 const
   /// decodes only the header of the protected data blob.
   /// No actual decryption takes place.
@@ -36,28 +60,11 @@ const
 
   NCRYPT_PROTECTION_INFO_TYPE_DESCRIPTOR_STRING = $00000001;
 
-{$IFDEF WINDOWS}
-function NCryptUnprotectSecret(
-  phDescriptor: PNCRYPT_DESCRIPTOR_HANDLE;
-  dwFlags: Cardinal;
-  pbProtectedBlob: PByte;
-  cbProtectedBlob: Cardinal;
-  pMemPara: Pointer;
-  hWnd: HWND;
-  out ppbData: PByte;
-  out pcbData: Cardinal
-): LongInt; stdcall; external 'ncrypt.dll';
-
-function NCryptCloseProtectionDescriptor(
-  hDescriptor: NCRYPT_DESCRIPTOR_HANDLE
-): LongInt; stdcall; external 'ncrypt.dll';
-
-function NCryptGetProtectionDescriptorInfo(
-  hDescriptor: NCRYPT_DESCRIPTOR_HANDLE;
-  pMemPara: PNCRYPT_ALLOC_PARA;
-  dwInfoType: DWord;
-  ppvInfo: PPointer
-): LongInt; stdcall; external 'ncrypt.dll';
+var
+  NCryptDll: THandle;
+  NcryptUnprotectSecret: TNcryptUnprotectSecret;
+  NCryptCloseProtectionDescriptor: TNCryptCloseProtectionDescriptor;
+  NCryptGetProtectionDescriptorInfo: TNCryptGetProtectionDescriptorInfo;
 
 /// Decrypts an encrypted LAPS value in Windows using DPAPI-NG.
 ///
@@ -175,6 +182,18 @@ begin
   SetString(Result, P, L);
 end;
 
+function NcryptUnprotectSecretAvailable: Boolean;
+begin
+  result := Assigned(NcryptUnprotectSecret) or
+    DelayedProc(NcryptUnprotectSecret, NCryptDll, 'ncrypt.dll', 'NcryptUnprotectSecret');
+end;
+
+function NCryptCloseProtectionDescriptorAvailable: Boolean;
+begin
+  result := Assigned(NCryptCloseProtectionDescriptor) or
+    DelayedProc(NCryptCloseProtectionDescriptor, NCryptDll, 'ncrypt.dll', 'NCryptCloseProtectionDescriptor');
+end;
+
 function DecryptDpapiNgWindows(const ProtectedData: RawByteString
   ): RawByteString;
 var
@@ -189,6 +208,11 @@ begin
   Descriptor := nil;
   Plain := nil;
   PlainLen := 0;
+
+  if not NcryptUnprotectSecretAvailable then
+    raise Exception.Create('NcryptUnprotectSecret is not available on this version of Windows');
+  if not NCryptCloseProtectionDescriptorAvailable then
+    raise Exception.Create('NCryptCloseProtectionDescriptor is not available on this version of Windowss');
 
   ProtectedDataBytes := HexToBytes(ProtectedData);
 
