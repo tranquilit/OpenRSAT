@@ -158,6 +158,7 @@ implementation
 uses
   mormot.net.dns,
   mormot.core.base,
+  mormot.core.text,
   ursatldapclientui,
   udns;
 
@@ -305,6 +306,7 @@ var
   Buffer: Array[0..$ffff] of Byte;
   SOA: TRRSOA;
   NS: TRRNS;
+  DNSHostName, cn: RawUtf8;
 begin
   if RadioButton4.Checked then
     DistinguishedName := Format('DC=%s,CN=MicrosoftDNS,DC=DomainDnsZones,%s', [Edit1.Text, LdapClient.RootDN])
@@ -394,7 +396,8 @@ begin
     DNSRecord.Timestamp := 0;
     DNSRecord.TtlSeconds := 3600;
 
-    DNSRRSOABuild(SOA, 1, 60 * 15, 60 * 10, 60 * 60 * 24, 60 * 60, 'srvads.tprud.lan', 'hostmaster.tprud.lan');
+    cn := DNToCN(LdapClient.DefaultDN);
+    DNSRRSOABuild(SOA, 1, 60 * 15, 60 * 10, 60 * 60 * 24, 60 * 60, cn, FormatUtf8('hostmaster.%', [cn]));
     DNSRecord.RecType := Ord(drrSOA);
     DNSRecord.DataLength := DNSRRSOARecordToBytes(PByteArray(@DNSRecord.RData)^, SOA);
     len := DNSRecordRecordToBytes(PByteArray(@Buffer)^, DNSRecord);
@@ -402,7 +405,8 @@ begin
     Move(Buffer, RawDNSProperty[1], len);
     Attribute := AttributeList.Add('dnsRecord', RawDNSProperty);
 
-    DNSRRNSBuild(NS, 'srvads.tprud.lan');
+    DNSHostName := LdapClient.SearchObject('', '', 'dNSHostName').GetReadable();
+    DNSRRNSBuild(NS, DNSHostName);
     DNSRecord.RecType := Ord(drrNS);
     DNSRecord.DataLength := DNSRRNSRecordToBytes(PByteArray(@DNSRecord.RData)^, NS);
     len := DNSRecordRecordToBytes(PByteArray(@Buffer)^, DNSRecord);
