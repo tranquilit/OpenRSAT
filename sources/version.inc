@@ -1,2 +1,2 @@
 const
-  VERSION = '0.4.594';
+  VERSION = '0.4.595';

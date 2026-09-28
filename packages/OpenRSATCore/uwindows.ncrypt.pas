@@ -29,7 +29,7 @@ type
   end;
   PNCRYPT_ALLOC_PARA = ^NCRYPT_ALLOC_PARA;
 
-  TNcryptUnprotectSecret = function(
+  TNCryptUnprotectSecret = function(
     phDescriptor: PNCRYPT_DESCRIPTOR_HANDLE;
     dwFlags: Cardinal;
     pbProtectedBlob: PByte;
@@ -62,7 +62,7 @@ const
 
 var
   NCryptDll: THandle;
-  NcryptUnprotectSecret: TNcryptUnprotectSecret;
+  NCryptUnprotectSecret: TNCryptUnprotectSecret;
   NCryptCloseProtectionDescriptor: TNCryptCloseProtectionDescriptor;
   NCryptGetProtectionDescriptorInfo: TNCryptGetProtectionDescriptorInfo;
 
@@ -185,7 +185,7 @@ end;
 function NcryptUnprotectSecretAvailable: Boolean;
 begin
   result := Assigned(NcryptUnprotectSecret) or
-    DelayedProc(NcryptUnprotectSecret, NCryptDll, 'ncrypt.dll', 'NcryptUnprotectSecret');
+    DelayedProc(NCryptUnprotectSecret, NCryptDll, 'ncrypt.dll', 'NCryptUnprotectSecret');
 end;
 
 function NCryptCloseProtectionDescriptorAvailable: Boolean;
