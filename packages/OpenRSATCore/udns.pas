@@ -286,6 +286,9 @@ type
 
   TRRA = Cardinal;
 
+  // An IPv6 address, as 16 bytes in network byte order.
+  TRRAAAA = array[0..15] of Byte;
+
   TRRWKS = record
     Address: Cardinal;
     Protocol: Byte;
@@ -437,6 +440,13 @@ function DNSRRAToString(const A: TRRA): RawUtf8;
 // Make a DNS record A bytes array human readable.
 function DNSRRAToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 procedure DNSRRABuild(var A: TRRA; const AValue: RawUtf8);
+
+// Decode a DNS record AAAA bytes array into a TRRAAAA record.
+function DNSRRAAAABytesToRecord(out AAAA: TRRAAAA; const Buffer: TByteArray): Boolean;
+// Make a TRRAAAA record human readable, using the RFC 5952 text format.
+function DNSRRAAAAToString(const AAAA: TRRAAAA): RawUtf8;
+// Make a DNS record AAAA bytes array human readable.
+function DNSRRAAAAToStringFromBytes(const Buffer: TByteArray): RawUtf8;
 
 // Decode a DNS record SOA bytes array into a TRRSOA record.
 function DNSRRSOABytesToRecord(out SOA: TRRSOA; const Buffer: TByteArray): Boolean;
@@ -1372,6 +1382,9 @@ begin
     drrMX: result := DNSRRMXToStringFromBytes(BytesData^);
     drrPTR: result := DNSRRPTRToStringFromBytes(BytesData^);
     drrSRV: result := DNSRRSRVToStringFromBytes(BytesData^);
+    drrAAAA:
+      if DNSRecord.DataLength = SizeOf(TRRAAAA) then
+        result := DNSRRAAAAToStringFromBytes(BytesData^);
   end;
 end;
 
@@ -1457,6 +1470,33 @@ begin
     raise ExceptionInvalidIPFormat.Create('Invalid IP4 format.');
 
   A := ((StrToInt(AValueArray[3]) and $ff) shl 24) or ((StrToInt(AValueArray[2]) and $ff) shl 16) or ((StrToInt(AValueArray[1]) and $ff) shl 8) or (StrToInt(AValueArray[0]) and $ff);
+end;
+
+function DNSRRAAAABytesToRecord(out AAAA: TRRAAAA; const Buffer: TByteArray
+  ): Boolean;
+begin
+  Move(Buffer, AAAA, SizeOf(TRRAAAA));
+  result := True;
+end;
+
+function DNSRRAAAAToString(const AAAA: TRRAAAA): RawUtf8;
+var
+  s: TShort47;
+begin
+  // IP6Text() is not used on purpose: it returns '' for '::' and '127.0.0.1'
+  // for '::1', whereas the record value must be shown as stored.
+  result := '';
+  IP6Short(@AAAA, s);
+  FastSetString(result, @s[1], Ord(s[0]));
+end;
+
+function DNSRRAAAAToStringFromBytes(const Buffer: TByteArray): RawUtf8;
+var
+  AAAA: TRRAAAA;
+begin
+  result := '';
+  if DNSRRAAAABytesToRecord(AAAA, Buffer) then
+    result := DNSRRAAAAToString(AAAA);
 end;
 
 function DNSRRSOABytesToRecord(out SOA: TRRSOA; const Buffer: TByteArray
@@ -1688,6 +1728,7 @@ begin
     drrSRV: result := 'Service Location (SRV)';
     drrMX: result := 'Mail Exchanger (MX)';
     drrPTR: result := 'Pointer (PTR)';
+    drrAAAA: result := 'IPv6 Host (AAAA)';
   end;
 end;
 
