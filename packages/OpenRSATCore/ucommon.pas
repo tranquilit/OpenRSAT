@@ -166,6 +166,8 @@ resourcestring
   rsNewObjectBtnBack = '< Back';
   rsNewObjectBtnNext = 'Next >';
   rsNewObjectBtnOK = 'OK';
+  rsNewObjectNoContainer = 'Select a container or organizational unit first.';
+  rsNewObjectOUInvalidParent = 'An organizational unit can only be created under the domain root or another organizational unit.';
 
   rsNewUserFullName = 'Full name: %';
   rsNewUserLogonName = 'User logon name: %';

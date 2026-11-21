@@ -361,7 +361,12 @@ type
 
     fUpdating: Integer;
 
+    // Last control (tree or grid) that had the selection focus.
+    fLastFocused: TWinControl;
+
     function GetLdapClient: TRsatLdapClient;
+    function GetSelectionControl: TWinControl;
+    procedure SelectionControlEnter(Sender: TObject);
     procedure UpdateTreeImages(ANode: TADUCTreeNode);
 
     procedure UpdateGPLink(ANode: TADUCTreeNode; Flag: Integer);
@@ -1121,11 +1126,29 @@ begin
 end;
 
 procedure TFrmModuleADUC.Action_NewOUExecute(Sender: TObject);
+var
+  ObjectOU, ObjectClass: RawUtf8;
 begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewOU.Caption]);
 
-  With TVisNewObject.Create(Self, vnotOrganizationalUnit, GetFocusedObject(True), LdapClient.DefaultDN(), LdapClient) do
+  ObjectOU := GetFocusedObject(True);
+  if ObjectOU = '' then
+  begin
+    MessageDlg(Action_NewOU.Caption, rsNewObjectNoContainer, mtWarning,
+      [mbOK], 0);
+    Exit;
+  end;
+
+  ObjectClass := GetFocusedObjectClass;
+  if (ObjectClass <> 'domainDNS') and (ObjectClass <> 'organizationalUnit') then
+  begin
+    MessageDlg(Action_NewOU.Caption, rsNewObjectOUInvalidParent, mtWarning,
+      [mbOK], 0);
+    Exit;
+  end;
+
+  With TVisNewObject.Create(Self, vnotOrganizationalUnit, ObjectOU, LdapClient.DefaultDN(), LdapClient) do
   begin
     PageCount := 1;
     if ShowModal = mrOK then
@@ -1193,11 +1216,21 @@ begin
 end;
 
 procedure TFrmModuleADUC.Action_NewUserExecute(Sender: TObject);
+var
+  ObjectOU: RawUtf8;
 begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, '% - Execute', [Action_NewUser.Caption]);
 
-  With TVisNewObject.Create(Self, vnotUser, GetFocusedObject(True), LdapClient.DefaultDN, LdapClient) do
+  ObjectOU := GetFocusedObject(True);
+  if ObjectOU = '' then
+  begin
+    MessageDlg(Action_NewUser.Caption, rsNewObjectNoContainer, mtWarning,
+      [mbOK], 0);
+    Exit;
+  end;
+
+  With TVisNewObject.Create(Self, vnotUser, ObjectOU, LdapClient.DefaultDN, LdapClient) do
   begin
     PageCount := 3;
     if ShowModal = mrOK then
@@ -2993,6 +3026,24 @@ begin
   GridADUC.Refresh;
 end;
 
+function TFrmModuleADUC.GetSelectionControl: TWinControl;
+begin
+  if GridADUC.Focused then
+    result := GridADUC
+  else if TreeADUC.Focused then
+    result := TreeADUC
+  else if Assigned(fLastFocused) then
+    result := fLastFocused
+  else
+    result := TreeADUC;
+end;
+
+procedure TFrmModuleADUC.SelectionControlEnter(Sender: TObject);
+begin
+  if Sender is TWinControl then
+    fLastFocused := TWinControl(Sender);
+end;
+
 function TFrmModuleADUC.GetSelectedObjects: TRawUtf8DynArray;
 var
   SelectedRows: TDocVariantData;
@@ -3058,21 +3109,14 @@ var
 begin
   result := [];
 
-  if GridADUC.Focused then
+  if GetSelectionControl = GridADUC then
   begin
     result := GetSelectedObjectsInGrid;
     if (Length(result) = 0) then // If no result, fallback to tree selection
       result := GetSelectedObjectsInTree;
   end
-  else if TreeADUC.Focused then
-  begin
-    result := GetSelectedObjectsInTree;
-  end
   else
-  begin
-    if Assigned(fLog) then
-      fLog.Add.Log(sllWarning, 'Focus is not on grid nor tree.', Self);
-  end;
+    result := GetSelectedObjectsInTree;
 end;
 
 function TFrmModuleADUC.GetFocusedObject(OnlyContainer: Boolean): RawUtf8;
@@ -3126,22 +3170,17 @@ var
 begin
   result := '';
 
-  if GridADUC.Focused then
+  if GetSelectionControl = GridADUC then
   begin
     result := GetFocusedObjectInGrid(ObjectClass);
     if (result = '') then // If no result, fallback to tree selection
       result := GetFocusedObjectInTree(ObjectClass);
   end
-  else if TreeADUC.Focused then
-  begin
-    result := GetFocusedObjectInTree(ObjectClass);
-  end
   else
-  begin
-    if Assigned(fLog) then
-      fLog.Add.Log(sllWarning, 'Focus is not on grid nor tree.', Self);
-    Exit;
-  end;
+    result := GetFocusedObjectInTree(ObjectClass);
+
+  if (result = '') then // Last fallback: use the grid selection.
+    result := GetFocusedObjectInGrid(ObjectClass);
 
   if OnlyContainer and not IsContainer(ObjectClass) then
     result := GetParentDN(result);
@@ -3195,7 +3234,7 @@ var
 begin
   result := '';
 
-  if GridADUC.Focused then
+  if GetSelectionControl = GridADUC then
   begin
     Row := GridADUC.FocusedRow;
     if not Assigned(Row) or not Row^.Exists('objectClass') then
@@ -3207,15 +3246,14 @@ begin
     else
       Result := GetObjectClassFromRow(Row);
   end
-  else if TreeADUC.Focused then
-  begin
-    result := GetFocusedObjectClassInTree;
-  end
   else
+    result := GetFocusedObjectClassInTree;
+
+  if (result = '') then // Last fallback: use the grid selection.
   begin
-    if Assigned(fLog) then
-      fLog.Add.Log(sllWarning, 'Focus is not on grid nor tree.', Self);
-    Exit;
+    Row := GridADUC.FocusedRow;
+    if Assigned(Row) then
+      result := GetObjectClassFromRow(Row);
   end;
 end;
 
@@ -3378,6 +3416,10 @@ begin
   fModuleAduc := TModuleADUC.Create(fIContext.RSAT);
   fTreeSelectionHistory := TTreeSelectionHistory.Create;
 
+  fLastFocused := TreeADUC;
+  GridADUC.OnEnter := @SelectionControlEnter;
+  TreeADUC.OnEnter := @SelectionControlEnter;
+
   fADUCRootNode := (TreeADUC.Items.Add(nil, 'Active Directory Users and Computers') as TADUCTreeNode);
   fADUCRootNode.ImageIndex := Ord(ileAppIcon);
   fADUCRootNode.SelectedIndex := fADUCRootNode.ImageIndex;
@@ -3394,8 +3436,8 @@ begin
   RegisterNewMenuActions('domainDNS', [Action_NewComputer, Action_NewContact, Action_NewGroup, Action_NewInetOrgPerson, Action_NewMsDSShadowPrincipalContainer, Action_NewMsImagingPSPs, Action_NewOU, Action_NewPrinter, Action_NewUser, Action_NewSharedFolder]);
   RegisterNewMenuActions('builtinDomain', [Action_NewComputer, Action_NewGroup, Action_NewInetOrgPerson, Action_NewUser]);
   RegisterNewMenuActions('organizationalUnit', [Action_NewComputer, Action_NewContact, Action_NewGroup, Action_NewInetOrgPerson, Action_NewMsDSShadowPrincipalContainer, Action_NewMsImagingPSPs, Action_NewOU, Action_NewPrinter, Action_NewUser, Action_NewSharedFolder]);
-  RegisterNewMenuActions('container', [Action_NewComputer, Action_NewContact, Action_NewGroup, Action_NewInetOrgPerson, Action_NewMsDSKeyCredential, Action_NewResourcePropertyList, Action_NewMsDSShadowPrincipalContainer, Action_NewMsImagingPSPs, Action_NewOU, Action_NewPrinter, Action_NewUser, Action_NewSharedFolder]);
-  RegisterNewMenuActions('lostAndFound', [Action_NewComputer, Action_NewContact, Action_NewGroup, Action_NewInetOrgPerson, Action_NewMsDSKeyCredential, Action_NewResourcePropertyList, Action_NewMsDSShadowPrincipalContainer, Action_NewMsImagingPSPs, Action_NewOU, Action_NewPrinter, Action_NewUser, Action_NewSharedFolder]);
+  RegisterNewMenuActions('container', [Action_NewComputer, Action_NewContact, Action_NewGroup, Action_NewInetOrgPerson, Action_NewMsDSKeyCredential, Action_NewResourcePropertyList, Action_NewMsDSShadowPrincipalContainer, Action_NewMsImagingPSPs, Action_NewPrinter, Action_NewUser, Action_NewSharedFolder]);
+  RegisterNewMenuActions('lostAndFound', [Action_NewComputer, Action_NewContact, Action_NewGroup, Action_NewInetOrgPerson, Action_NewMsDSKeyCredential, Action_NewResourcePropertyList, Action_NewMsDSShadowPrincipalContainer, Action_NewMsImagingPSPs, Action_NewPrinter, Action_NewUser, Action_NewSharedFolder]);
   fIContext.IniPropStorage.IniSection := Name;
   CheckBox_IncludeSubContainer.Checked := fIContext.IniPropStorage.ReadBoolean(CheckBox_IncludeSubContainer.Name, False);
 end;
