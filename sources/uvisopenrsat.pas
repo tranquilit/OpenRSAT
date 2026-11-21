@@ -525,7 +525,7 @@ begin
     Lang := fRSAT.RsatOption.Lang;
     if Lang = '' then
       Lang := GetLanguageID.CountryCode;
-    TranslateFromResource(Lang);
+    SetLanguage(Lang);
   except
     on E: EResNotFound do
       if Assigned(fLog) then

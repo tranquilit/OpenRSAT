@@ -19,6 +19,7 @@ uses
   tis.ui.grid.core,
   uopenrsatuicontextinterface,
   upropertyframe,
+  uvisobjectsselector,
   ulog;
 
 type
@@ -70,8 +71,7 @@ uses
   mormot.net.ldap,
   ucommon,
   ucommonui,
-  uhelpersui,
-  uOmniselect;
+  uhelpersui;
 
 {$R *.lfm}
 
@@ -94,27 +94,25 @@ end;
 
 procedure TFrmPropertyOrganization.Action_ChangeExecute(Sender: TObject);
 var
-  Filter: RawUtf8;
-  Omniselect: TVisOmniselect;
-  DNarr: TRawUtf8DynArray;
+  SelectedObjects: TRawUtf8DynArray;
+  Vis: TVisObjectsSelector;
 begin
-  // Set Filter
-  Filter := FormatUtf8('(!(distinguishedName=%))', [LdapEscape(fProperty.DistinguishedName)]); // Dont allow self
-
-  // Omniselect
-  Omniselect := TVisOmniselect.Create(self, ['user'], fProperty.LdapClient.DefaultDN, False, Filter);
+  Vis := TVisObjectsSelector.Create(Self);
   try
-    Omniselect.LdapClient := fProperty.LdapClient;
-    Omniselect.Caption := rsTitleSelectNewManager;
-    if Omniselect.ShowModal() <> mrOK then
+    Vis.LdapClient := fProperty.LdapClient;
+    Vis.AllowedObjectTypes := [otfUser];
+    Vis.SelectedObjectTypes := [otfUser];
+    Vis.AllowMultiSelect := False;
+    Vis.ExcludedObjects := [fProperty.distinguishedName]; // Dont allow self
+    if (Vis.ShowModal <> mrOK) then
       Exit;
-    DNarr := Omniselect.SelectedObjects;
-    if Length(DNarr) <> 1 then
-      Exit;
-    fProperty.Add('manager', DNarr[0]);
+    SelectedObjects := Vis.SelectedObjects;
   finally
-    FreeAndNil(Omniselect);
+    FreeAndNil(Vis);
   end;
+  if Length(SelectedObjects) <> 1 then
+    Exit;
+  fProperty.Add('manager', SelectedObjects[0]);
   Update(fProperty);
 end;
 

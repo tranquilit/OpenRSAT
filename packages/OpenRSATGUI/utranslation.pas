@@ -10,6 +10,8 @@ uses
   LCLType,
   mormot.core.base;
 
+procedure SetLanguage(const Lang: RawUtf8);
+
 function TranslateFromResource(const ALang: RawUtf8; ForceUpdate: Boolean = True;
   const ResBaseName: RawUtf8 = 'TRANSLATION'): Boolean;
 
@@ -20,6 +22,27 @@ uses
   Translations,
   Forms,
   mormot.core.text;
+
+function LocaleFolderPath: RawUtf8;
+var
+  AppFolder: String;
+begin
+  AppFolder := ExtractFilePath(Application.ExeName);
+  {$IF Defined(WINDOWS)}
+  result := MakePath([AppFolder, 'locale']);
+  {$ELSEIF Defined(DARWIN)}
+  result := MakePath([AppFolder, '..', 'Resources', 'locale']);
+  {$ELSEIF Defined(LINUX)}
+  result := '/usr/share/openrsat/locale/';
+  {$ELSE}
+  result := MakePath([AppFolder, 'locale']);
+  {$ENDIF}
+end;
+
+procedure SetLanguage(const Lang: RawUtf8);
+begin
+  SetDefaultLang(Lang, LocaleFolderPath);
+end;
 
 function TranslateFromResource(const ALang: RawUtf8; ForceUpdate: Boolean;
   const ResBaseName: RawUtf8): Boolean;

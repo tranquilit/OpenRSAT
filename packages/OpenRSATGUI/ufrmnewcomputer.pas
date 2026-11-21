@@ -13,7 +13,8 @@ uses
   Forms,
   StdCtrls,
   // Submodules
-  mormot.core.os.security;
+  mormot.core.os.security,
+  uvisobjectsselector;
 
 type
 
@@ -55,7 +56,6 @@ uses
   mormot.crypt.core,
   mormot.net.ldap,
   // Rsat
-  uOmniselect,
   ucommon,
   ucoredatamodule,
   ursatldapclient,
@@ -91,27 +91,29 @@ end;
 
 procedure TFrmNewComputer.BitBtn_ChangeUserOrGroupClick(Sender: TObject);
 var
-  DNarr: TRawUtf8DynArray;
-  Omniselect: TVisOmniselect;
   Attr: TLdapAttribute;
+  Vis: TVisObjectsSelector;
+  SelectedObjects: TRawUtf8DynArray;
 begin
-  // Omniselect
-  DNarr := [''];
-  Omniselect := TVisOmniselect.Create(self, ['user', 'group'], (Owner as TVisNewObject).BaseDN, False, '');
+  Vis := TVisObjectsSelector.Create(Self);
   try
-    Omniselect.LdapClient := (owner as TVisNewObject).Ldap;
-    Omniselect.Caption := rsTitleSelectOwner;
-    if Omniselect.ShowModal() <> mrOK then
+    Vis.LdapClient := (Owner as TVisNewObject).Ldap;
+    Vis.AllowedObjectTypes := [otfUser, otfGroup];
+    Vis.SelectedObjectTypes := [otfUser, otfGroup];
+    Vis.AllowMultiSelect := False;
+    if (Vis.ShowModal <> mrOK) then
       Exit;
-    DNarr := Omniselect.SelectedObjects;
+    SelectedObjects := Vis.SelectedObjects;
   finally
-    FreeAndNil(Omniselect);
+    FreeAndNil(Vis);
   end;
+  if Length(SelectedObjects) < 1 then
+    Exit;
 
-  Attr := (owner as TVisNewObject).Ldap.SearchObject(atObjectSid, DNarr[0], '');
+  Attr := (owner as TVisNewObject).Ldap.SearchObject(atObjectSid, SelectedObjects[0], '');
   if not Assigned(Attr) then
     Exit;
-  Edit_UserOrGroup.Text := DNarr[0];
+  Edit_UserOrGroup.Text := SelectedObjects[0];
   Sid := Attr.GetRaw();
 end;
 

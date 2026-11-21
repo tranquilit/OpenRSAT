@@ -1,0 +1,379 @@
+object VisObjectsSelector: TVisObjectsSelector
+  Left = 829
+  Height = 538
+  Top = 223
+  Width = 663
+  Caption = 'Objects Selector'
+  ClientHeight = 538
+  ClientWidth = 663
+  LCLVersion = '4.5.0.0'
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  object Panel1: TPanel
+    Left = 0
+    Height = 497
+    Top = 0
+    Width = 493
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 497
+    ClientWidth = 493
+    TabOrder = 0
+    object Panel3: TPanel
+      Left = 0
+      Height = 244
+      Top = 0
+      Width = 493
+      Align = alTop
+      AutoSize = True
+      BevelOuter = bvNone
+      ClientHeight = 244
+      ClientWidth = 493
+      TabOrder = 0
+      object CheckGroup1: TCheckGroup
+        Left = 8
+        Height = 51
+        Top = 8
+        Width = 477
+        Align = alTop
+        AutoFill = True
+        AutoSize = True
+        BorderSpacing.Around = 8
+        Caption = 'Object types'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.TopBottomSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 4
+        ClientHeight = 31
+        ClientWidth = 473
+        Columns = 4
+        TabOrder = 0
+        object CheckBox1: TCheckBox
+          Left = 6
+          Height = 19
+          Top = 6
+          Width = 100
+          Caption = 'Users'
+          TabOrder = 0
+        end
+        object CheckBox2: TCheckBox
+          Left = 106
+          Height = 19
+          Top = 6
+          Width = 110
+          Caption = 'Groups'
+          TabOrder = 1
+        end
+        object CheckBox3: TCheckBox
+          Left = 216
+          Height = 19
+          Top = 6
+          Width = 132
+          Caption = 'Computers'
+          TabOrder = 2
+        end
+        object CheckBox4: TCheckBox
+          Left = 348
+          Height = 19
+          Top = 6
+          Width = 119
+          Caption = 'Contacts'
+          TabOrder = 3
+        end
+      end
+      object GroupBox1: TGroupBox
+        Left = 8
+        Height = 61
+        Top = 67
+        Width = 477
+        Align = alTop
+        AutoSize = True
+        BorderSpacing.Around = 8
+        Caption = 'Search by name'
+        ClientHeight = 41
+        ClientWidth = 473
+        TabOrder = 1
+        object Edit1: TEdit
+          Left = 8
+          Height = 25
+          Top = 8
+          Width = 388
+          Align = alClient
+          BorderSpacing.Around = 8
+          TabOrder = 0
+        end
+        object BitBtn3: TBitBtn
+          Left = 404
+          Height = 25
+          Top = 8
+          Width = 61
+          Align = alRight
+          AutoSize = True
+          BorderSpacing.Around = 8
+          Caption = 'Search'
+          Default = True
+          TabOrder = 1
+          OnClick = BitBtn3Click
+        end
+      end
+      object GroupBox2: TGroupBox
+        Left = 8
+        Height = 100
+        Top = 136
+        Width = 477
+        Align = alTop
+        AutoSize = True
+        BorderSpacing.Around = 8
+        Caption = 'Configurations'
+        ClientHeight = 80
+        ClientWidth = 473
+        TabOrder = 2
+        object Panel6: TPanel
+          Left = 0
+          Height = 39
+          Top = 41
+          Width = 473
+          Align = alTop
+          AutoSize = True
+          BevelOuter = bvNone
+          ClientHeight = 39
+          ClientWidth = 473
+          TabOrder = 1
+          object Label3: TLabel
+            Left = 8
+            Height = 23
+            Top = 8
+            Width = 100
+            Align = alLeft
+            BorderSpacing.Around = 8
+            Caption = 'Filter:'
+            Constraints.MinWidth = 100
+            Layout = tlCenter
+          end
+          object Edit2: TEdit
+            Left = 116
+            Height = 23
+            Top = 8
+            Width = 349
+            Align = alClient
+            BorderSpacing.Around = 8
+            TabOrder = 0
+          end
+        end
+        object Panel7: TPanel
+          Left = 0
+          Height = 41
+          Top = 0
+          Width = 473
+          Align = alTop
+          AutoSize = True
+          BevelOuter = bvNone
+          ClientHeight = 41
+          ClientWidth = 473
+          TabOrder = 0
+          object Label4: TLabel
+            Left = 8
+            Height = 25
+            Top = 8
+            Width = 100
+            Align = alLeft
+            BorderSpacing.Around = 8
+            Caption = 'Location:'
+            Constraints.MinWidth = 100
+            Layout = tlCenter
+          end
+          object Edit3: TEdit
+            Left = 116
+            Height = 25
+            Top = 8
+            Width = 284
+            Align = alClient
+            BorderSpacing.Around = 8
+            ReadOnly = True
+            TabOrder = 0
+          end
+          object BitBtn4: TBitBtn
+            Left = 408
+            Height = 25
+            Top = 8
+            Width = 57
+            Align = alRight
+            AutoSize = True
+            BorderSpacing.Around = 8
+            Caption = 'Select'
+            TabOrder = 1
+            OnClick = BitBtn4Click
+          end
+        end
+      end
+    end
+    object Panel4: TPanel
+      Left = 0
+      Height = 253
+      Top = 244
+      Width = 493
+      Align = alClient
+      BevelOuter = bvNone
+      ClientHeight = 253
+      ClientWidth = 493
+      TabOrder = 1
+      object TisGrid1: TTisGrid
+        Left = 4
+        Height = 245
+        Top = 4
+        Width = 485
+        Align = alClient
+        BorderSpacing.Around = 4
+        Header.AutoSizeIndex = -1
+        Header.Columns = <        
+          item
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus, coWrapCaption, coEditable]
+            Position = 0
+            Text = 'Object Name'
+            Width = 125
+            PropertyName = 'objectName'
+          end        
+          item
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+            Position = 1
+            Tag = 1
+            Text = 'Name'
+            Width = 130
+            PropertyName = 'name'
+          end        
+          item
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+            Position = 2
+            Tag = 2
+            Text = 'Description'
+            Width = 144
+            PropertyName = 'description'
+          end        
+          item
+            Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+            Position = 3
+            Tag = 3
+            Text = 'Folder'
+            Width = 123
+            PropertyName = 'folder'
+          end>
+        Header.DefaultHeight = 18
+        Header.Height = 28
+        Header.MaxHeight = 100
+        Header.MinHeight = 18
+        Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoVisible, hoHeaderClickAutoSort]
+        Header.Style = hsFlatButtons
+        TabOrder = 0
+        WantTabs = False
+        TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toFullRowSelect, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+        ZebraColor = 15593713
+        OnDblClick = TisGrid1DblClick
+        OnDragOver = TisGrid1DragOver
+        OnDragDrop = TisGrid1DragDrop
+        OnKeyDown = TisGrid1KeyDown
+        OnMouseDown = TisGrid1MouseDown
+        OnMouseMove = TisGrid1MouseMove
+        OnMouseUp = TisGrid1MouseUp
+      end
+    end
+  end
+  object Panel2: TPanel
+    Left = 493
+    Height = 497
+    Top = 0
+    Width = 170
+    Align = alRight
+    BevelOuter = bvNone
+    ClientHeight = 497
+    ClientWidth = 170
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 8
+      Height = 15
+      Top = 8
+      Width = 154
+      Align = alTop
+      BorderSpacing.Around = 8
+      Caption = 'Selected objects:'
+    end
+    object TisGrid2: TTisGrid
+      Left = 4
+      Height = 462
+      Top = 31
+      Width = 162
+      Align = alClient
+      BorderSpacing.Around = 4
+      Header.AutoSizeIndex = -1
+      Header.Columns = <      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coAllowFocus, coWrapCaption, coEditable]
+          Position = 0
+          Text = 'Object Name'
+          Width = 118
+          PropertyName = 'objectName'
+        end      
+        item
+          Options = [coAllowClick, coDraggable, coEnabled, coParentBidiMode, coParentColor, coResizable, coShowDropMark, coVisible, coAllowFocus, coWrapCaption, coEditable]
+          Position = 1
+          Text = 'Name'
+          Width = 113
+          PropertyName = 'name'
+        end>
+      Header.DefaultHeight = 18
+      Header.Height = 28
+      Header.MaxHeight = 100
+      Header.MinHeight = 18
+      Header.Options = [hoColumnResize, hoDblClickResize, hoDrag, hoShowSortGlyphs, hoHeaderClickAutoSort]
+      Header.Style = hsFlatButtons
+      TabOrder = 0
+      WantTabs = False
+      TreeOptions.SelectionOptions = [toDisableDrawSelection, toExtendedFocus, toFullRowSelect, toMultiSelect, toRightClickSelect, toSimpleDrawSelection]
+      ZebraColor = 15593713
+      OnDblClick = TisGrid2DblClick
+      OnDragOver = TisGrid2DragOver
+      OnDragDrop = TisGrid2DragDrop
+      OnKeyDown = TisGrid2KeyDown
+      OnMouseDown = TisGrid2MouseDown
+      OnMouseMove = TisGrid2MouseMove
+      OnMouseUp = TisGrid2MouseUp
+    end
+  end
+  object Panel5: TPanel
+    Left = 0
+    Height = 41
+    Top = 497
+    Width = 663
+    Align = alBottom
+    AutoSize = True
+    BevelOuter = bvNone
+    ClientHeight = 41
+    ClientWidth = 663
+    TabOrder = 2
+    object BitBtn1: TBitBtn
+      Left = 497
+      Height = 25
+      Top = 8
+      Width = 75
+      Align = alRight
+      BorderSpacing.Around = 8
+      Caption = 'OK'
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object BitBtn2: TBitBtn
+      Left = 580
+      Height = 25
+      Top = 8
+      Width = 75
+      Align = alRight
+      BorderSpacing.Around = 8
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+end

@@ -160,7 +160,10 @@ begin
 
     DN := FormatUtf8('CN=%,%', [Edit_FullName.Text, ObjectOU]);
     if not Ldap.Add(DN, NewUser) then
+    begin
+      ShowLdapAddError(Ldap);
       Exit;
+    end;
     if Assigned(BaseObj) then
     begin
       MemberOfAttr := BaseObj.Find('memberOf');
@@ -171,7 +174,10 @@ begin
           if MemberOf = '' then
             Continue;
           if not Ldap.Modify(MemberOf, lmoAdd, 'member', DN) then
+          begin
+            ShowLdapModifyError(Ldap);
             Exit;
+          end;
         end;
       end;
     end;
@@ -319,6 +325,27 @@ var
   NewObject: TVisNewObject;
 begin
   NewObject := (owner as TVisNewObject);
+  case NewObject.PageIdx of
+    0:
+    begin
+      NewObject.Ldap.SearchScope := lssWholeSubtree;
+      NewObject.Ldap.SearchBegin(1);
+      try
+        if not NewObject.Ldap.Search(NewObject.Ldap.DefaultDN, False, FormatUtf8('(samAccountName=%)', [Edit_nETBIOSName.Text]), ['cn']) then
+        begin
+          ShowLdapSearchError(NewObject.Ldap);
+          Exit;
+        end;
+      finally
+        NewObject.Ldap.SearchEnd;
+      end;
+      if NewObject.Ldap.SearchResult.Count > 0 then
+      begin
+        MessageDlg(rsNewObjectUser, rsUserCreationAlreadyExists, mtWarning, [mbOK], 0);
+        Exit;
+      end;
+    end;
+  end;
   Inc(NewObject.PageIdx);
   if NewObject.PageIdx = NewObject.PageCount then
   begin

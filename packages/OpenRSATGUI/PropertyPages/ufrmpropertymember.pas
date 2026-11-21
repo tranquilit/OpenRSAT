@@ -21,6 +21,7 @@ uses
   VirtualTrees,
   uopenrsatuicontextinterface,
   upropertyframe,
+  uvisobjectsselector,
   ulog;
 
 type
@@ -65,7 +66,6 @@ uses
   ucommon,
   ucommonui,
   uhelpersui,
-  uOmniselect,
   ursatldapclientui;
 
 {$R *.lfm}
@@ -138,29 +138,29 @@ end;
 
 procedure TFrmPropertyMember.Action_AddExecute(Sender: TObject);
 var
-  Filter, NewMember: RawUtf8;
+  Vis: TVisObjectsSelector;
+  NewMember: RawUtf8;
+  ExcludedObjects: TRawUtf8DynArray;
   i: Integer;
-  Omniselect: TVisOmniselect;
 begin
-  // Set Filter
-  Filter := '';
+  SetLength(ExcludedObjects, TisGrid_Members.TotalCount);
   for i := 0 to TisGrid_Members.TotalCount - 1 do
-    Filter := FormatUtf8('%(distinguishedName=%)', [Filter, LdapEscape(TisGrid_Members.Data._[i]^.U['distinguishedName'])]);
-  if Filter <> '' then
-    Filter := FormatUtf8('(!(|%))', [Filter]);
+    ExcludedObjects[i] := TisGrid_Members.Data._[i]^.U['distinguishedName'];
 
-  // Omniselect
-  Omniselect := TVisOmniselect.Create(self, ['group', 'user', 'computer', 'contact', 'Managed Service Accounts'], fProperty.LdapClient.DefaultDN, True, Filter);
+  Vis := TVisObjectsSelector.Create(Self);
   try
-    Omniselect.LdapClient := fProperty.LdapClient;
-    Omniselect.Caption := rsTitleSelectGroups;
-    if Omniselect.ShowModal() <> mrOK then
+    Vis.LdapClient := fProperty.LdapClient;
+    Vis.AllowedObjectTypes := [otfUser, otfGroup, otfContact, otfComputer];
+    Vis.SelectedObjectTypes := [otfUser, otfGroup, otfContact, otfComputer];
+    Vis.AllowMultiSelect := True;
+    Vis.ExcludedObjects := ExcludedObjects;
+    if Vis.ShowModal <> mrOK then
       Exit;
-    for NewMember in Omniselect.SelectedObjects do
+    for NewMember in Vis.SelectedObjects do
       if NewMember <> '' then
         fProperty.Add('member', NewMember, aoAlways);
   finally
-    FreeAndNil(Omniselect);
+    FreeAndNil(Vis);
   end;
   Update(fProperty);
 end;

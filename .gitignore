@@ -16,7 +16,6 @@ openrsattests
 .tgitconfig
 configure_lazarus.bat
 graph.txt
-update_language.py
 update_version.py
 
 # Folder
