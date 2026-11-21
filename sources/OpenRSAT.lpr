@@ -10,6 +10,7 @@ uses
   {$IFDEF HASAMIGA}
     athreads,
   {$ENDIF}
+  uthemeinit, // must be initialized before the LCL/GTK widgetset
   datetimectrls,
   Forms,
   Interfaces, // this includes the LCL widgetset

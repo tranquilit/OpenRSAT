@@ -461,6 +461,11 @@
         <UnitName Value="openrsat"/>
       </Unit>
       <Unit>
+        <Filename Value="uthemeinit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uthemeinit"/>
+      </Unit>
+      <Unit>
         <Filename Value="uvisopenrsat.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="VisOpenRSAT"/>

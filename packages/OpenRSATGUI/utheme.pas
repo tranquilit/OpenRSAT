@@ -78,8 +78,15 @@ end;
 
 {$IFDEF LINUX}
 function IsLinuxDarkMode: Boolean;
+var
+  DarkMode: String;
 begin
-  result := LowerCase(GetGtkThemeName).Contains('dark');
+  // OpenRSAT sets this before the LCL/GTK widgetset is initialized.
+  DarkMode := GetEnvironmentVariable('OPENRSAT_DARK_MODE');
+  if DarkMode <> '' then
+    result := DarkMode = '1'
+  else
+    result := LowerCase(GetGtkThemeName).Contains('dark');
 end;
 
 function GetGtkThemeName: String;
