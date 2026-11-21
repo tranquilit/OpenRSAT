@@ -272,7 +272,6 @@ uses
   mormot.core.text,
   mormot.core.os,
   mormot.crypt.secure,
-  uOmniselect,
   uvispropertieslist,
   uvisadvancedsecurity,
   uvislogonhours,

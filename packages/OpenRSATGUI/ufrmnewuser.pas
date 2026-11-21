@@ -331,8 +331,7 @@ begin
       NewObject.Ldap.SearchScope := lssWholeSubtree;
       NewObject.Ldap.SearchBegin(1);
       try
-        if not NewObject.Ldap.Search(NewObject.Ldap.DefaultDN, False,
-          FormatUtf8('(samAccountName=%)', [Edit_nETBIOSName.Text]), ['cn']) then
+        if not NewObject.Ldap.Search(NewObject.Ldap.DefaultDN, False, FormatUtf8('(samAccountName=%)', [Edit_nETBIOSName.Text]), ['cn']) then
         begin
           ShowLdapSearchError(NewObject.Ldap);
           Exit;
@@ -342,8 +341,7 @@ begin
       end;
       if NewObject.Ldap.SearchResult.Count > 0 then
       begin
-        MessageDlg(rsNewObjectUser, rsUserCreationAlreadyExists, mtWarning,
-          [mbOK], 0);
+        MessageDlg(rsNewObjectUser, rsUserCreationAlreadyExists, mtWarning, [mbOK], 0);
         Exit;
       end;
     end;

@@ -51,6 +51,13 @@ echo "Copy OpenRSAT.desktop file"
 [ -f "./OpenRSAT.desktop" ] || (echo "./OpenRSAT.desktop does not exists." && exit)
 cp ./OpenRSAT.desktop ~/rpmbuild/SOURCES/OpenRSAT.desktop
 
+echo "Copy locale files."
+for l in en fr pl el
+do
+  [ -f "../../../languages/OpenRSAT.$l.po" ] || (echo "../../../languages/OpenRSAT.$l.po does not exists." && exit)
+  cp ../../../languages/OpenRSAT.$l.po ~/rpmbuild/SOURCES/OpenRSAT.$l.po
+done
+
 echo "Copy OpenRSAT.spec file"
 [ -f "./OpenRSAT.spec" ] || (echo "./OpenRSAT.spec does not exists." && exit)
 cp ./OpenRSAT.spec ~/rpmbuild/SPECS/OpenRSAT.spec

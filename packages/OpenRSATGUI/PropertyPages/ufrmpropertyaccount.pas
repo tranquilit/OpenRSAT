@@ -349,11 +349,11 @@ const
   AES256 = $10;
 var
   UserAccountControl: TUserAccountControls;
-  pwdLastSet: RawUtf8;
   MsdsSupportedEncryptionTypes: TMsdsSupportedEncryptionTypes;
+  pwdLastSet: TLdapAttribute;
 begin
-  pwdLastSet := fProperty.GetReadable('pwdLastSet');
-  CheckBox_MustChange.CheckedNoChange := (pwdLastSet = '') or (pwdLastSet = '0');
+  pwdLastSet := fProperty.Get('pwdLastSet');
+  CheckBox_MustChange.CheckedNoChange := Assigned(pwdLastSet) and ((pwdLastSet.GetReadable() = '') or (pwdLastSet.GetReadable() = '0'));
 
   // https://ldapwiki.com/wiki/Wiki.jsp?page=User-Account-Control%20Attribute
   UserAccountControl := UserAccountControlsFromText(fProperty.GetReadable('userAccountControl'));

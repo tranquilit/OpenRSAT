@@ -41,6 +41,7 @@ uses
   ucoredatamodule,
   ufrmmoduleaducoption,
   uopenrsatuicontextinterface,
+  uvisobjectsselector,
   ufrmmodule,
   ufrmoption,
   umodule,
@@ -414,7 +415,6 @@ uses
   uvissearch,
   utheme,
   uvisnewobject,
-  uOmniselect,
   uvisdelegatecontrol,
   uvischangedn,
   uvistaskresetpassword,
@@ -1539,7 +1539,7 @@ procedure TFrmModuleADUC.Action_TaskAddToAGroupExecute(Sender: TObject);
 var
   DistinguishedName, SelectedDistinguishedName: String;
   selectedDistinguishedNameArray: TRawUtf8DynArray;
-  Vis: TVisOmniselect;
+  Vis: TVisObjectsSelector;
 
   // Create an attribute to add a member to a group.
   // It does a modify ldap request with an Add operation.
@@ -1565,38 +1565,21 @@ var
   // Search for groups that contains the focused object.
   // If so, create a ldap filter to exclude those groups.
   // It prevents the addition of a member in a group that already contains this member.
-  function ExclusionFilter(Member: RawUtf8): RawUtf8;
+  function GetExcludedObjects(Member: RawUtf8): TRawUtf8DynArray;
   var
-    SearchResult: TLdapResult;
-    memberOf: RawUtf8;
+    memberOf, ObjectName: RawUtf8;
+    SearchResult: TDocVariantData;
   begin
-    Result := '';
-    LdapClient.SearchBegin();
-    try
-      LdapClient.SearchScope := lssWholeSubtree;
-
-      repeat
-        if not LdapClient.Search(LdapClient.DefaultDN, False, FormatUtf8('(member=%)', [LdapEscape(Member)]), ['distinguishedName']) then
-        begin
-          if Assigned(fLog) then
-            fLog.Add.Log(sllError, 'Ldap Search Error: "%"', [LdapClient.ResultString]);
-          Exit;
-        end;
-
-        for SearchResult in LdapClient.SearchResult.Items do
-        begin
-          if not Assigned(SearchResult) then
-            continue;
-
-          memberOf := SearchResult.Find('distinguishedName').GetReadable();
-          Result := FormatUtf8('%(distinguishedName=%)', [Result, memberOf]);
-        end;
-      until LdapClient.SearchCookie = '';
-    finally
-      LdapClient.SearchEnd();
+    Result := nil;
+    LdapClient.SearchScope := lssWholeSubtree;
+    if not LdapClient.SearchAllDocRaw(SearchResult, LdapClient.DefaultDN, FormatUtf8('(member=%)', [LdapEscape(Member)]), ['distinguishedName'], [roAutoRange, roObjectNameAtRoot, roRawValues, roKnownValuesAsArray]) then
+    begin
+      if Assigned(fLog) then
+        fLog.Add.Log(sllError, 'Ldap Search Error: "%"', [LdapClient.ResultString]);
+      Exit;
     end;
-    if (Result <> '') then
-      Result := FormatUtf8('(!(|%))', [Result]);
+
+    result := SearchResult.Names;
   end;
 
 begin
@@ -1607,10 +1590,13 @@ begin
   DistinguishedName := GridADUC.FocusedRow^.S['objectName'];
 
   // Open the vis to let the user select groups
-  Vis := TVisOmniselect.Create(Self, ['group'], LdapClient.DefaultDN, True, ExclusionFilter(DistinguishedName));
+  Vis := TVisObjectsSelector.Create(Self);
   try
     Vis.LdapClient := LdapClient;
-    Vis.Caption := rsTitleSelectGroups;
+    Vis.AllowedObjectTypes := [otfGroup];
+    Vis.SelectedObjectTypes := [otfGroup];
+    Vis.AllowMultiSelect := True;
+    Vis.ExcludedObjects := GetExcludedObjects(DistinguishedName);
     if (Vis.ShowModal <> mrOK) then
       Exit;
     selectedDistinguishedNameArray := Vis.SelectedObjects;

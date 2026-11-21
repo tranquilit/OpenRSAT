@@ -173,7 +173,6 @@ resourcestring
   rsNewUserNOChangePassword = 'The user cannot change his password.';
   rsNewUserPasswordNoExpire = 'The Password never expires.';
   rsNewUserDisabled = 'The account is disabled.';
-  rsUserCreationAlreadyExists = 'The pre-Windows 2000 logon name you have chosen is already in use in this domain.' + LineEnding + 'Choose another pre-Windows 2000 logon name, and then try again.';
 
   rsReplicationAvailable = 'Replication Available';
   rsReplicationDenied = 'Replication Not Available';
@@ -607,6 +606,8 @@ resourcestring
   rsNotRequiredToChangePassword = 'The user will not be required to change the password at next logon.';
 
   rsVisAdvancedSecurityTitle = 'Advanced Security Settings for %';
+
+  rsUserCreationAlreadyExists = 'The pre-Windows 2000 logon name you have chosen is already in use in this domain.' + LineEnding + 'Choose another pre-Windows 2000 logon name, and then try again.';
 
 const
   DAYS_BETWEEN_1601_AND_1900 = 109205;
