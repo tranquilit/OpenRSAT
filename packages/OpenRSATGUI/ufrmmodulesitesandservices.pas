@@ -1221,6 +1221,8 @@ var
 begin
   if not Assigned(Node) then
     Node := (TreeView1.Selected as TADSSTreeNode);
+  if not Assigned(Node) then
+    Node := fADSSRootNode;
 
   if not Assigned(Node) or (fUpdating > 0) then
     Exit;
@@ -1338,9 +1340,11 @@ begin
   if not Assigned(Node) then
     Node := (TreeView1.Selected as TADSSTreeNode);
   if not Assigned(Node) then
+    Node := fADSSRootNode;
+  if not Assigned(Node) then
   begin
     if Assigned(fLog) then
-      fLog.Add.Log(sllError, '% - No node assigned.', [TisGrid1.Name]);
+      fLog.Add.Log(sllTrace, '% - No node selected.', [TisGrid1.Name]);
     Exit;
   end;
 
@@ -1808,6 +1812,7 @@ begin
   fADSSServiceNode.HasChildren := True;
   fADSSServiceNode.Visible := fModule.ShowService;
   fADSSRootNode.Expand(False);
+  fADSSRootNode.Selected := True;
 end;
 
 destructor TFrmModuleSitesAndServices.Destroy;

@@ -173,6 +173,7 @@ resourcestring
   rsNewUserNOChangePassword = 'The user cannot change his password.';
   rsNewUserPasswordNoExpire = 'The Password never expires.';
   rsNewUserDisabled = 'The account is disabled.';
+  rsUserCreationAlreadyExists = 'The pre-Windows 2000 logon name you have chosen is already in use in this domain.' + LineEnding + 'Choose another pre-Windows 2000 logon name, and then try again.';
 
   rsReplicationAvailable = 'Replication Available';
   rsReplicationDenied = 'Replication Not Available';

@@ -1480,6 +1480,12 @@ msgstr "Le serveur n'est pas disposé à traiter l'opération demandée pour une
 msgid "Current user credentials"
 msgstr "Identifiants actuels de l'utilisateur"
 
+#: ucommon.rsusercreationalreadyexists
+msgid ""
+"The pre-Windows 2000 logon name you have chosen is already in use in this domain.\n"
+"Choose another pre-Windows 2000 logon name, and then try again."
+msgstr ""
+
 #: ucommon.rsusermustchangepasswordandcannotchange
 msgid "You cannot check both User must change password at next logon and User cannot change password for the same user."
 msgstr ""

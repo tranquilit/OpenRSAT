@@ -70,8 +70,8 @@ type
     function GetUserName: RawUtf8;
     function GetPassword: RawUtf8;
     function FindSmbClient: RawUtf8;
-    function RunSmbClient(const AShareUrl, ACommand: RawUtf8;
-      out AOutput: RawUtf8): Boolean;
+    function RunSmbClient(const AShareUrl, ACommand: RawUtf8;
+      out AOutput: RawUtf8; AOptional: Boolean = False): Boolean;
     function WriteTempFile(const AContent: RawByteString;
       out ATempFile: RawUtf8): Boolean;
     {$IFDEF WINDOWS}
@@ -531,14 +531,22 @@ begin
   result := '';
 end;
 
-function TGPTCore.RunSmbClient(const AShareUrl, ACommand: RawUtf8;
-  out AOutput: RawUtf8): Boolean;
-var
-  Process: TProcess;
-  OutputStream: TStringStream;
-  ExePath: RawUtf8;
-  Credentials: RawUtf8;
-  UseKerberos: Boolean;
+function TGPTCore.RunSmbClient(const AShareUrl, ACommand: RawUtf8;
+  out AOutput: RawUtf8; AOptional: Boolean): Boolean;
+
+  function IsMissingFileError(const AMessage: RawUtf8): Boolean;
+  begin
+    result := (Pos('NT_STATUS_OBJECT_NAME_NOT_FOUND', AMessage) > 0)
+      or (Pos('NT_STATUS_OBJECT_PATH_NOT_FOUND', AMessage) > 0)
+      or (Pos('NT_STATUS_NO_SUCH_FILE', AMessage) > 0);
+  end;
+
+var
+  Process: TProcess;
+  OutputStream: TStringStream;
+  ExePath: RawUtf8;
+  Credentials: RawUtf8;
+  UseKerberos: Boolean;
 begin
   result := False;
   AOutput := '';
@@ -607,9 +615,15 @@ AOutput := Utf8Sanitize(OutputStream.DataString);
       if (fLastError = '') then
         fLastError := FormatUtf8('smbclient failed with exit code %',
           [Process.ExitStatus]);
-      if Assigned(fLog) then
-        fLog.Add.Log(sllError, 'smbclient: %', [fLastError], Self);
-      Exit;
+      if Assigned(fLog) then
+      begin
+        if AOptional and IsMissingFileError(fLastError) then
+          fLog.Add.Log(sllDebug, 'smbclient (optional file not found): %',
+            [fLastError], Self)
+        else
+          fLog.Add.Log(sllError, 'smbclient: %', [fLastError], Self);
+      end;
+      Exit;
     end;
 
     result := True;
@@ -674,8 +688,8 @@ begin
     IntToStr(GetProcessID) + '.tmp';
   SysUtils.DeleteFile(TempFile);
 
-  Command := FormatUtf8('cd "%"; get "%" "%"', [RelativePath, ARelativePath, TempFile]);
-  if not RunSmbClient(ShareUrl, Command, Output) then
+  Command := FormatUtf8('cd "%"; get "%" "%"', [RelativePath, ARelativePath, TempFile]);
+  if not RunSmbClient(ShareUrl, Command, Output, True) then
     Exit;
 
   if not FileExists(TempFile) then

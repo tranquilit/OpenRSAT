@@ -28,6 +28,7 @@ uses
   mormot.core.log,
   mormot.net.ldap,
   uopenrsatuicontextinterface,
+  ucoredatamodule,
   ursat,
   utranslation,
   umoduleaduc,
