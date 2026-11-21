@@ -19,7 +19,6 @@
       <Icon Value="0"/>
       <Resources Count="1">
         <Resource_0 FileName="..\languages\country_codes_en.json" Type="RCDATA" ResourceName="COUNTRY_CODES_EN"/>
-
       </Resources>
     </General>
     <i18n>

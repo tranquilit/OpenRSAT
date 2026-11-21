@@ -42,6 +42,7 @@ uses
   ufrmmoduleaducoption,
   uopenrsatuicontextinterface,
   uvisobjectsselector,
+  ufrmmodulegpo,
   ufrmmodule,
   ufrmoption,
   umodule,
@@ -182,6 +183,7 @@ type
     Panel3: TPanel;
     Panel4: TPanel;
     Panel5: TPanel;
+    Panel_GPO: TPanel;
     PopupMenu1: TPopupMenu;
     SelectDirectoryDialog1: TSelectDirectoryDialog;
     Separator1: TMenuItem;
@@ -360,6 +362,16 @@ type
     fADUCDomainNode: TADUCTreeNode;
 
     fUpdating: Integer;
+
+    // Embedded GPO editor, shown when a GPO node is selected.
+    fGPOFrame: TFrmModuleGPO;
+    fGPOEditorVisible: Boolean;
+    fSavedPanel4Visible: Boolean;
+    fSavedPanel5Visible: Boolean;
+    fSavedSplitter2Visible: Boolean;
+
+    procedure ShowGPOEditor(const ADistinguishedName: RawUtf8);
+    procedure HideGPOEditor;
 
     function GetLdapClient: TRsatLdapClient;
     procedure UpdateTreeImages(ANode: TADUCTreeNode);
@@ -1821,16 +1833,60 @@ begin
   Timer_SearchInGrid.Enabled := False;
 end;
 
+procedure TFrmModuleADUC.ShowGPOEditor(const ADistinguishedName: RawUtf8);
+begin
+  if not Assigned(fGPOFrame) then
+    Exit;
+
+  if not fGPOEditorVisible then
+  begin
+    fSavedPanel4Visible := Panel4.Visible;
+    fSavedPanel5Visible := Panel5.Visible;
+    fSavedSplitter2Visible := Splitter2.Visible;
+    fGPOEditorVisible := True;
+  end;
+
+  Panel4.Visible := False;
+  Panel5.Visible := False;
+  Splitter2.Visible := False;
+  GridADUC.Visible := False;
+  Panel_GPO.Visible := True;
+  fGPOFrame.SelectGPO(ADistinguishedName);
+end;
+
+procedure TFrmModuleADUC.HideGPOEditor;
+begin
+  if not fGPOEditorVisible then
+    Exit;
+
+  Panel_GPO.Visible := False;
+  GridADUC.Visible := True;
+  Panel4.Visible := fSavedPanel4Visible;
+  Panel5.Visible := fSavedPanel5Visible;
+  Splitter2.Visible := fSavedSplitter2Visible;
+  fGPOEditorVisible := False;
+end;
+
 procedure TFrmModuleADUC.Timer_TreeChangeNodeTimer(Sender: TObject);
+var
+  Node: TADUCTreeNode;
 begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, 'Tree Change Timer', Self);
 
   Timer_TreeChangeNode.Enabled := False;
 
-  RefreshADUCTreeNode((TreeADUC.Selected as TADUCTreeNode));
-  UpdateTreeImages((TreeADUC.Selected as TADUCTreeNode));
-  UpdateGridADUC((TreeADUC.Selected as TADUCTreeNode));
+  Node := TreeADUC.Selected as TADUCTreeNode;
+  if Assigned(Node) and (Node.NodeType = atntGPO) then
+  begin
+    ShowGPOEditor(Node.GetNodeDataGPO.DistinguishedName);
+    Exit;
+  end;
+
+  HideGPOEditor;
+  RefreshADUCTreeNode(Node);
+  UpdateTreeImages(Node);
+  UpdateGridADUC(Node);
 end;
 
 procedure TFrmModuleADUC.TisSearchEdit_TreeADUCSearch(Sender: TObject;
@@ -3239,6 +3295,8 @@ end;
 procedure TFrmModuleADUC.LdapConnectEvent(Sender: TObject);
 begin
   fModuleAduc.NeedRefresh := True;
+  if Assigned(fGPOFrame) then
+    fGPOFrame.Refresh;
 end;
 
 procedure TFrmModuleADUC.LdapCloseEvent(Sender: TObject);
@@ -3378,6 +3436,13 @@ begin
   fModuleAduc := TModuleADUC.Create(fIContext.RSAT);
   fTreeSelectionHistory := TTreeSelectionHistory.Create;
 
+  fGPOEditorVisible := False;
+  fGPOFrame := TFrmModuleGPO.Create(fIContext);
+  fGPOFrame.Parent := Panel_GPO;
+  fGPOFrame.Align := alClient;
+  fGPOFrame.Panel_Left.Visible := False;
+  fGPOFrame.Splitter1.Visible := False;
+
   fADUCRootNode := (TreeADUC.Items.Add(nil, 'Active Directory Users and Computers') as TADUCTreeNode);
   fADUCRootNode.ImageIndex := Ord(ileAppIcon);
   fADUCRootNode.SelectedIndex := fADUCRootNode.ImageIndex;
@@ -3408,6 +3473,7 @@ begin
   fIContext.IniPropStorage.IniSection := Name;
   fIContext.IniPropStorage.WriteBoolean(CheckBox_IncludeSubContainer.Name, CheckBox_IncludeSubContainer.Checked);
 
+  FreeAndNil(fGPOFrame);
   FreeAndNil(fTreeSelectionHistory);
   FreeAndNil(fModuleAduc);
 

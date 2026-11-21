@@ -176,7 +176,6 @@ uses
   uvisabout,
   ufrmmoduleaduc,
   ufrmmoduledns,
-  ufrmmodulegpo,
   ufrmmodulesitesandservices,
   ufrmmoduleserviceinterfaces;
 
@@ -610,7 +609,6 @@ begin
   RegisterModule(TFrmModuleDNS.Create(Self));
   RegisterModule(TFrmModuleSitesAndServices.Create(Self));
   RegisterModule(TFrmModuleADSI.Create(Self));
-  RegisterModule(TFrmModuleGPO.Create(Self));
   CreateTabFromRegisteredModules;
   fModules.Change(PageControl1.ActivePage.Name);
 
