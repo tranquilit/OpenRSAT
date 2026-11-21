@@ -655,6 +655,16 @@ object FrmModuleADUC: TFrmModuleADUC
       ResizeAnchor = akRight
       Visible = False
     end
+    object Panel_GPO: TPanel
+      Left = 0
+      Height = 316
+      Top = 33
+      Width = 625
+      Align = alClient
+      BevelOuter = bvNone
+      TabOrder = 4
+      Visible = False
+    end
   end
   object ActionList_ADUC: TActionList
     Images = CoreDataModule.ImageList1

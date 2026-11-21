@@ -197,9 +197,13 @@ type
     procedure LdapCloseEvent(Sender: TObject);
 
     procedure OnGPOOptionsChanged(Option: TOption);
+
+    function SelectGPOInGrid(const ADistinguishedName: RawUtf8): Boolean;
   public
     constructor Create(Context: IOpenRSATUIContext); reintroduce;
     destructor Destroy; override;
+
+    procedure SelectGPO(const ADistinguishedName: RawUtf8);
 
     property LdapClient: TRsatLdapClient read GetLdapClient;
   protected
@@ -703,6 +707,43 @@ begin
     if (GPO.DistinguishedName = Row^.U['distinguishedName']) then
       Exit(GPO);
   end;
+end;
+
+function TFrmModuleGPO.SelectGPOInGrid(const ADistinguishedName: RawUtf8): Boolean;
+var
+  Node: PVirtualNode;
+  Data: PDocVariantData;
+begin
+  result := False;
+
+  Node := TisGrid_GPOList.GetFirst;
+  while Assigned(Node) do
+  begin
+    Data := TisGrid_GPOList.GetNodeAsPDocVariantData(Node);
+    if Assigned(Data) and SameText(Data^.U['distinguishedName'],
+      ADistinguishedName) then
+    begin
+      TisGrid_GPOList.FocusedNode := Node;
+      TisGrid_GPOList.Selected[Node] := True;
+      result := True;
+      Exit;
+    end;
+    Node := TisGrid_GPOList.GetNext(Node);
+  end;
+end;
+
+procedure TFrmModuleGPO.SelectGPO(const ADistinguishedName: RawUtf8);
+begin
+  if SelectGPOInGrid(ADistinguishedName) then
+  begin
+    TisGrid_GPOListFocusChanged(nil, TisGrid_GPOList.FocusedNode, -1);
+    Exit;
+  end;
+
+  Refresh;
+
+  if SelectGPOInGrid(ADistinguishedName) then
+    TisGrid_GPOListFocusChanged(nil, TisGrid_GPOList.FocusedNode, -1);
 end;
 
 function TFrmModuleGPO.GetRegistrySourceIndex: Integer;
@@ -1686,9 +1727,16 @@ end;
 procedure TFrmModuleGPO.Refresh;
 var
   BackupCursor: TCursor;
+  SelectedDN: RawUtf8;
+  GPO: TGPO;
 begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, 'Refresh', Self);
+
+  SelectedDN := '';
+  GPO := GetFocusedGPO;
+  if Assigned(GPO) then
+    SelectedDN := GPO.DistinguishedName;
 
   // The catalog does not depend on the LDAP connection.
   UpdateCatalog;
@@ -1716,6 +1764,8 @@ begin
   end;
 
   UpdateGPOList;
+  if (SelectedDN <> '') then
+    SelectGPOInGrid(SelectedDN);
   UpdateSummary(GetFocusedGPO);
   UpdateAttributes(GetFocusedGPO);
   UpdateParameters(GetFocusedGPO);
