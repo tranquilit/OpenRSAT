@@ -97,7 +97,7 @@ object FrmModuleADUC: TFrmModuleADUC
         Action = Action_Filter
       end
       object ToolButton_Divider2: TToolButton
-        Left = 356
+        Left = 380
         Height = 24
         Top = 2
         Caption = 'ToolButton_Divider2'
@@ -121,39 +121,45 @@ object FrmModuleADUC: TFrmModuleADUC
         Top = 2
         Action = Action_NewOU
       end
-      object ToolButton_Divider3: TToolButton
+      object ToolButton_GPO: TToolButton
         Left = 231
+        Hint = 'New GPO'
+        Top = 2
+        Action = Action_NewGPO
+      end
+      object ToolButton_Divider3: TToolButton
+        Left = 255
         Height = 24
         Top = 2
         Caption = 'ToolButton_Divider3'
         Style = tbsDivider
       end
       object ToolButton_Copy: TToolButton
-        Left = 308
+        Left = 332
         Hint = 'Copy'
         Top = 2
         Action = Action_Copy
       end
       object ToolButton_Cut: TToolButton
-        Left = 284
+        Left = 308
         Hint = 'Cut'
         Top = 2
         Action = Action_Cut
       end
       object ToolButton_Paste: TToolButton
-        Left = 260
+        Left = 284
         Hint = 'Paste'
         Top = 2
         Action = Action_Paste
       end
       object ToolButton_Delete: TToolButton
-        Left = 236
+        Left = 260
         Hint = 'Delete'
         Top = 2
         Action = Action_Delete
       end
       object ToolButton_AddToGroup: TToolButton
-        Left = 332
+        Left = 356
         Hint = 'Add to a Group'
         Top = 2
         Action = Action_TaskAddToAGroup
@@ -165,14 +171,14 @@ object FrmModuleADUC: TFrmModuleADUC
         Style = tbsSeparator
       end
       object ToolButton_ShowRelation: TToolButton
-        Left = 361
+        Left = 385
         Top = 2
         Action = Action_ShowRelationShip
         Caption = 'Show group relation'
         Visible = False
       end
       object ToolButton_AttributesGrid: TToolButton
-        Left = 385
+        Left = 409
         Top = 2
         ImageIndex = 57
         OnClick = ToolButton_AttributesGridClick
@@ -767,6 +773,13 @@ object FrmModuleADUC: TFrmModuleADUC
       ImageIndex = 9
       OnExecute = Action_NewOUExecute
       OnUpdate = Action_NewOUUpdate
+    end
+    object Action_NewGPO: TAction
+      Category = 'New'
+      Caption = 'New GPO'
+      ImageIndex = 29
+      OnExecute = Action_NewGPOExecute
+      OnUpdate = Action_NewGPOUpdate
     end
     object Action_NewAll: TAction
       Category = 'New'

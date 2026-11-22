@@ -451,6 +451,10 @@ resourcestring
   // GPO module
   rsGPONewTitle = 'New GPO';
   rsGPONewPrompt = 'Display name of the new GPO:';
+  rsGPONoContainer = 'Select a domain, OU or container first.';
+  rsGPOCreateFailed = 'Unable to create the GPO.';
+  rsGPOCreateGptFailed = 'The GPO was created in AD, but its SYSVOL folder could not be created.';
+  rsGPOCreateLinkFailed = 'The GPO was created, but it could not be linked to the selected container.';
   rsGPORenameTitle = 'Rename GPO';
   rsGPORenamePrompt = 'New display name of the GPO:';
   rsGPODeleteTitle = 'Delete GPO';
