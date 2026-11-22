@@ -113,6 +113,13 @@ type
     /// Create a directory inside the GPT. Returns False on failure.
     function CreateDirectory(AGPO: TGPO; const ARelativePath: RawUtf8): Boolean;
 
+    /// Create the root directory of the GPT in the SYSVOL.
+    function CreateGPTPath(AGPO: TGPO): Boolean;
+
+    /// Create the GPT structure of a new GPO: root directory, Machine and
+    /// User directories, and the initial GPT.INI.
+    function CreateGPO(AGPO: TGPO; const ADisplayName: RawUtf8): Boolean;
+
     /// Read and parse the GPT.INI file of a GPO.
     function ReadGptIni(AGPO: TGPO; out AGptIni: TGptIni): Boolean;
 
@@ -828,11 +835,74 @@ begin
     Exit;
 
   Command := FormatUtf8('cd "%"; mkdir "%"', [RelativePath, ARelativePath]);
-  if not RunSmbClient(ShareUrl, Command, Output) then
+  if not RunSmbClient(ShareUrl, Command, Output, True) then
+  begin
+    // Creating an existing directory is fine.
+    if (Pos('NT_STATUS_OBJECT_NAME_COLLISION', fLastError) > 0) then
+      result := True;
     Exit;
+  end;
 
   result := True;
   {$ENDIF}
+end;
+
+function TGPTCore.CreateGPTPath(AGPO: TGPO): Boolean;
+var
+  Output, ShareUrl, RelativePath, Command: RawUtf8;
+begin
+  result := False;
+
+  if not Assigned(AGPO) then
+    Exit;
+
+  {$IFDEF WINDOWS}
+  result := CreateDirectoryUnc(AGPO, '');
+  {$ELSE}
+  ShareUrl := GetShareUrl(GetCredentials = '');
+  RelativePath := GetRelativePath(AGPO);
+  if (ShareUrl = '') or (RelativePath = '') then
+    Exit;
+
+  Command := FormatUtf8('mkdir "%"', [RelativePath]);
+  if not RunSmbClient(ShareUrl, Command, Output, True) then
+  begin
+    // Creating an existing directory is fine.
+    if (Pos('NT_STATUS_OBJECT_NAME_COLLISION', fLastError) > 0) then
+      result := True;
+    Exit;
+  end;
+
+  result := True;
+  {$ENDIF}
+end;
+
+function TGPTCore.CreateGPO(AGPO: TGPO; const ADisplayName: RawUtf8): Boolean;
+var
+  GptIni: TGptIni;
+begin
+  result := False;
+
+  if not Assigned(AGPO) then
+    Exit;
+
+  if not CreateGPTPath(AGPO) then
+    Exit;
+
+  if not CreateDirectory(AGPO, 'Machine') then
+    Exit;
+
+  if not CreateDirectory(AGPO, 'User') then
+    Exit;
+
+  GptIni.Version := 0;
+  GptIni.DisplayName := ADisplayName;
+  GptIni.Options := 0;
+  GptIni.HasVersion := True;
+  GptIni.HasDisplayName := True;
+  GptIni.HasOptions := True;
+
+  result := UpdateGptIni(AGPO, GptIni);
 end;
 
 function TGPTCore.ReadGptIni(AGPO: TGPO; out AGptIni: TGptIni): Boolean;

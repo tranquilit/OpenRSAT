@@ -90,6 +90,7 @@ type
     Action_NewGroup: TAction;
     Action_NewInetOrgPerson: TAction;
     Action_NewOU: TAction;
+    Action_NewGPO: TAction;
     Action_NewSharedFolder: TAction;
     Action_NewUser: TAction;
     Action_Next: TAction;
@@ -257,6 +258,8 @@ type
     procedure Action_NewMsImagingPSPsUpdate(Sender: TObject);
     procedure Action_NewOUExecute(Sender: TObject);
     procedure Action_NewOUUpdate(Sender: TObject);
+    procedure Action_NewGPOExecute(Sender: TObject);
+    procedure Action_NewGPOUpdate(Sender: TObject);
     procedure Action_NewPrinterExecute(Sender: TObject);
     procedure Action_NewPrinterUpdate(Sender: TObject);
     procedure Action_NewResourcePropertyListExecute(Sender: TObject);
@@ -376,6 +379,9 @@ type
     procedure ShowGPOEditor(const ADistinguishedName: RawUtf8);
     procedure HideGPOEditor;
 
+    function GetNewGPOParentDN: RawUtf8;
+    function LinkGPO(const AContainerDN, AGPODN: RawUtf8): Boolean;
+
     function GetLdapClient: TRsatLdapClient;
     function GetSelectionControl: TWinControl;
     procedure SelectionControlEnter(Sender: TObject);
@@ -450,6 +456,8 @@ uses
   mormot.crypt.secure,
   mormot.crypt.core,
   mormot.core.os,
+  ugpocore,
+  ugptcore,
   ugplink;
 
 {$R *.lfm}
@@ -1171,6 +1179,175 @@ end;
 procedure TFrmModuleADUC.Action_NewOUUpdate(Sender: TObject);
 begin
   Action_NewOU.Enabled := Assigned(LdapClient) and LdapClient.Connected;
+end;
+
+function TFrmModuleADUC.GetNewGPOParentDN: RawUtf8;
+var
+  Node: TADUCTreeNode;
+  ParentData: TADUCTreeNodeObject;
+begin
+  result := '';
+
+  Node := TreeADUC.Selected as TADUCTreeNode;
+  if not Assigned(Node) then
+    Exit;
+
+  if Node.NodeType = atntGPO then
+  begin
+    if not Assigned(Node.Parent) then
+      Exit;
+    ParentData := (Node.Parent as TADUCTreeNode).GetNodeDataObject;
+    if Assigned(ParentData) then
+      result := ParentData.DistinguishedName;
+  end
+  else
+    result := GetFocusedObject(True);
+end;
+
+function TFrmModuleADUC.LinkGPO(const AContainerDN, AGPODN: RawUtf8): Boolean;
+var
+  Obj: TLdapResult;
+  Attr: TLdapAttribute;
+  GPLinkArr: TGPLinkDynArr;
+  Link: TGPLink;
+  GPLink: RawUtf8;
+begin
+  result := False;
+
+  if (AContainerDN = '') or (AGPODN = '') then
+    Exit;
+
+  Obj := LdapClient.SearchObject(AContainerDN, '', ['gPLink']);
+  if Assigned(Obj) then
+  begin
+    Attr := Obj.Find('gPLink');
+    if Assigned(Attr) then
+      GPLink := Attr.GetReadable();
+  end;
+
+  try
+    GPLinkArr := GPLinkToGPLinkArr(GPLink);
+  except
+    Exit;
+  end;
+
+  Link.Link := '';
+  Link.DistinguishedName := AGPODN;
+  Link.Flag := 0;
+  Insert(Link, GPLinkArr, Length(GPLinkArr));
+
+  GPLink := GPLinkArrToGPLink(GPLinkArr);
+  result := LdapClient.Modify(AContainerDN, lmoReplace, 'gPLink', GPLink);
+end;
+
+procedure TFrmModuleADUC.Action_NewGPOExecute(Sender: TObject);
+var
+  DisplayName, ParentDN, GPCDN: RawUtf8;
+  Logic: TGPOLogic;
+  GPT: TGPTCore;
+  GPO: TGPO;
+  Node, ParentNode, GPONode: TADUCTreeNode;
+  BackupOnError: TNotifyEvent;
+begin
+  if Assigned(fLog) then
+    fLog.Add.Log(sllTrace, '% - Execute', [Action_NewGPO.Caption]);
+
+  ParentDN := GetNewGPOParentDN;
+  if ParentDN = '' then
+  begin
+    MessageDlg(rsGPONewTitle, rsGPONoContainer, mtWarning, [mbOK], 0);
+    Exit;
+  end;
+
+  DisplayName := InputBox(rsGPONewTitle, rsGPONewPrompt, '');
+  if DisplayName = '' then
+    Exit;
+
+  Logic := TGPOLogic.Create(LdapClient);
+  GPT := TGPTCore.Create(LdapClient);
+  GPO := nil;
+  BackupOnError := LdapClient.OnError;
+  LdapClient.OnError := nil;
+  try
+    try
+      GPCDN := Logic.Add(LdapClient.DefaultDN, DisplayName);
+    except
+      on E: EGPOException do
+      begin
+        MessageDlg(rsGPONewTitle, E.Message, mtError, [mbOK], 0);
+        Exit;
+      end;
+      on E: Exception do
+      begin
+        MessageDlg(rsGPONewTitle, E.Message, mtError, [mbOK], 0);
+        Exit;
+      end;
+    end;
+
+    if GPCDN = '' then
+    begin
+      MessageDlg(rsGPONewTitle, rsGPOCreateFailed, mtError, [mbOK], 0);
+      Exit;
+    end;
+
+    GPO := Logic.FindByName(LdapClient.DefaultDN, DisplayName);
+    if not Assigned(GPO) then
+    begin
+      MessageDlg(rsGPONewTitle, rsGPOCreateFailed, mtError, [mbOK], 0);
+      Logic.Delete(GPCDN);
+      Exit;
+    end;
+
+    if not GPT.CreateGPO(GPO, DisplayName) then
+    begin
+      MessageDlg(rsGPONewTitle,
+        FormatUtf8('%: %', [rsGPOCreateGptFailed, GPT.LastError]),
+        mtError, [mbOK], 0);
+      Logic.Delete(GPCDN);
+      Exit;
+    end;
+
+    if not LinkGPO(ParentDN, GPCDN) then
+      MessageDlg(rsGPONewTitle, rsGPOCreateLinkFailed, mtWarning, [mbOK], 0);
+
+    Node := TreeADUC.Selected as TADUCTreeNode;
+    ParentNode := Node;
+    if Assigned(Node) then
+    begin
+      if (Node.NodeType = atntGPO) then
+        ParentNode := Node.Parent as TADUCTreeNode
+      else if (Node.NodeType = atntObject) and
+              Assigned(Node.GetNodeDataObject) and
+              not IsContainer(Node.GetNodeDataObject.LastObjectClass) then
+        ParentNode := Node.Parent as TADUCTreeNode;
+    end;
+
+    if Assigned(ParentNode) then
+    begin
+      RefreshADUCTreeNode(ParentNode);
+      GPONode := ParentNode.GetFirstChildGPO;
+      while Assigned(GPONode) do
+      begin
+        if GPONode.GetNodeDataGPO.DistinguishedName = GPCDN then
+        begin
+          GPONode.Selected := True;
+          Break;
+        end;
+        GPONode := ParentNode.GetNextChildGPO(GPONode);
+      end;
+    end;
+  finally
+    GPO.Free;
+    GPT.Free;
+    Logic.Free;
+    LdapClient.OnError := BackupOnError;
+  end;
+end;
+
+procedure TFrmModuleADUC.Action_NewGPOUpdate(Sender: TObject);
+begin
+  Action_NewGPO.Enabled := Assigned(LdapClient) and LdapClient.Connected and
+    Assigned(TreeADUC.Selected);
 end;
 
 procedure TFrmModuleADUC.Action_NewPrinterExecute(Sender: TObject);
@@ -3484,6 +3661,10 @@ begin
   fGPOFrame.Align := alClient;
   fGPOFrame.Panel_Left.Visible := False;
   fGPOFrame.Splitter1.Visible := False;
+  // GPO creation is handled by the ADUC action, which also creates the GPT
+  // on the SYSVOL and links the GPO to the selected container.
+  fGPOFrame.Action_Create.Visible := False;
+  fGPOFrame.ToolButton_Create.Visible := False;
 
   fADUCRootNode := (TreeADUC.Items.Add(nil, 'Active Directory Users and Computers') as TADUCTreeNode);
   fADUCRootNode.ImageIndex := Ord(ileAppIcon);
