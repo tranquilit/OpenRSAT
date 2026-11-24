@@ -14,11 +14,13 @@ uses
   StdCtrls,
   ExtCtrls,
   ActnList,
-  mormot.core.base,
-  mormot.core.log, mormot.core.variants,
-  uproperty,
-  tis.ui.grid.core,
   VirtualTrees,
+  tis.ui.grid.core,
+  mormot.core.base,
+  mormot.core.log,
+  mormot.core.variants,
+  mormot.net.ldap,
+  uproperty,
   uopenrsatuicontextinterface,
   upropertyframe,
   uvisobjectsselector,
@@ -50,9 +52,21 @@ type
       var Ghosted: Boolean; var ImageIndex: Integer);
     procedure TisGrid_MembersKeyPress(Sender: TObject; var Key: char);
   private
+    function GetLdap: TLdapClient;
+  private
     fLog: TSynLogClass;
     fProperty: TProperty;
     fSearchWord: RawUtf8;
+
+    function DCFilter: RawUtf8;
+    function GCFilter: RawUtf8;
+
+    procedure ClearGrid;
+    procedure FillGrid(const Members: TRawUtf8DynArray);
+    procedure ExpandGridFromDC;
+    procedure ExpandGridFromGC;
+
+    property Ldap: TLdapClient read GetLdap;
   public
     constructor Create(TheOwner: TComponent); override;
     procedure Update(Props: TProperty); override;
@@ -61,7 +75,6 @@ type
 implementation
 uses
   mormot.core.text,
-  mormot.net.ldap,
   ucoredatamodule,
   ucommon,
   ucommonui,
@@ -100,6 +113,112 @@ procedure TFrmPropertyMember.TisGrid_MembersKeyPress(Sender: TObject; var Key: c
   );
 begin
   SearchInGrid(Timer_SearchInGrid, TisGrid_Members, fSearchWord, Key);
+end;
+
+function TFrmPropertyMember.GetLdap: TLdapClient;
+begin
+  result := fProperty.LdapClient;
+end;
+
+function TFrmPropertyMember.DCFilter: RawUtf8;
+var
+  Node: PVirtualNode;
+  NodeData: PDocVariantData;
+begin
+  result := '';
+
+  Node := TisGrid_Members.GetFirst();
+  while Assigned(Node) do
+  begin
+    NodeData := TisGrid_Members.GetNodeAsPDocVariantData(Node);
+    Node := TisGrid_Members.GetNext(Node);
+    if not Assigned(NodeData) or not NodeData^.Exists('distinguishedName') then
+      Continue;
+    result := FormatUtf8('%(distinguishedName=%)', [result, LdapEscape(NodeData^.U['distinguishedName'])]);
+  end;
+  if result = '' then
+    Exit;
+  result := FormatUtf8('(|%)', [result]);
+end;
+
+function TFrmPropertyMember.GCFilter: RawUtf8;
+begin
+  result := '';
+end;
+
+procedure TFrmPropertyMember.ClearGrid;
+begin
+  if Assigned(fLog) then
+    fLog.Add.Log(sllTrace, 'Clear grid', Self);
+  TisGrid_Members.Clear;
+end;
+
+procedure TFrmPropertyMember.FillGrid(const Members: TRawUtf8DynArray);
+var
+  MembersData: TDocVariantData;
+  i: Integer;
+  ILog: ISynLog;
+begin
+  ILog := nil;
+  if Assigned(fLog) then
+    fLog.EnterLocal(ILog, 'Fill grid', [], Self);
+
+  MembersData.InitArray([], JSON_FAST);
+
+  if Assigned(ILog) then
+    ILog.Log(sllTrace, 'Prepare % elements', [Length(Members)]);
+
+  for i := 0 to length(Members) - 1 do
+    MembersData.AddItem(_ObjFast(['name', GetDNName(Members[i]), 'distinguishedName', Members[i], 'objectClass', '', 'ADSF', DNToCN(GetParentDN(Members[i]))]));
+  if Assigned(ILog) then
+    ILog.Log(sllTrace, 'Load data in grid');
+  TisGrid_Members.LoadData(@MembersData);
+end;
+
+procedure TFrmPropertyMember.ExpandGridFromDC;
+var
+  Node, PrevNode: PVirtualNode;
+  NodeData, P: PDocVariantData;
+  Data: TDocVariantData;
+  ILog: ISynLog;
+begin
+  ILog := nil;
+  if Assigned(fLog) then
+    fLog.EnterLocal(ILog, 'Expand grid from DC(%)', [Ldap.Settings.TargetUri], Self);
+
+  Ldap.SearchScope := lssWholeSubtree;
+  if not Ldap.SearchAllDocRaw(Data, Ldap.DefaultDN, DCFilter, ['name', 'distinguishedName', 'objectClass'], [roAutoRange, roKnownValuesAsArray, roObjectNameAtRoot]) then
+    Exit;
+
+  if Assigned(ILog) then
+    ILog.Log(sllTrace, '% found / % total members', [Data.Count, TisGrid_Members.Data.Count]);
+
+  TisGrid_Members.BeginUpdate;
+  try
+    Node := TisGrid_Members.GetFirst();
+    while Assigned(Node) do
+    begin
+      NodeData := TisGrid_Members.GetNodeAsPDocVariantData(Node);
+      PrevNode := Node;
+      Node := TisGrid_Members.GetNext(Node);
+      if not Assigned(NodeData) then
+        Continue;
+      P := Data.O[NodeData^.U['distinguishedName']];
+      if not Assigned(P) then
+        Continue;
+      NodeData^.AddOrUpdateValue('objectClass', P^.GetValueOrEmpty('objectClass'));
+      NodeData^.AddOrUpdateValue('name', P^.GetValueOrDefault('name', NodeData^.GetValueOrEmpty('name')));
+      TisGrid_Members.InvalidateNode(PrevNode);
+    end;
+  finally
+    TisGrid_Members.EndUpdate;
+  end;
+end;
+
+procedure TFrmPropertyMember.ExpandGridFromGC;
+begin
+  if Assigned(fLog) then
+    fLog.Add.Log(sllWarning, 'Members from global catalog does not have expanded information such as objectClass.', Self);
 end;
 
 procedure TFrmPropertyMember.Action_DeleteExecute(Sender: TObject);
@@ -143,6 +262,7 @@ var
   ExcludedObjects: TRawUtf8DynArray;
   i: Integer;
 begin
+  ExcludedObjects := nil;
   SetLength(ExcludedObjects, TisGrid_Members.TotalCount);
   for i := 0 to TisGrid_Members.TotalCount - 1 do
     ExcludedObjects[i] := TisGrid_Members.Data._[i]^.U['distinguishedName'];
@@ -193,57 +313,16 @@ begin
 end;
 
 procedure TFrmPropertyMember.Update(Props: TProperty);
-var
-  Member, Filter: RawUtf8;
-  SearchResult: TLdapResult;
-  Row: TDocVariantData;
-  ObjectClass: TLdapAttribute;
 begin
   if Assigned(fLog) then
     fLog.Add.Log(sllTrace, 'Update', Self);
 
   fProperty := Props;
 
-  Filter := '';
-  for Member in fProperty.GetAllReadable('member') do
-    Filter := FormatUtf8('%(distinguishedName=%)', [Filter, LdapEscape(Member)]);
-  if Filter = '' then
-    Exit;
-  Filter := FormatUtf8('(|%)', [Filter]);
-
-  TisGrid_Members.Clear;
-
-  fProperty.LdapClient.SearchBegin();
-  try
-    Row.Init();
-    fProperty.LdapClient.SearchScope := lssWholeSubtree;
-    repeat
-      if not fProperty.LdapClient.Search(fProperty.LdapClient.DefaultDN, False, Filter, ['distinguishedName', 'objectClass', 'name']) then
-        Exit;
-
-      TisGrid_Members.BeginUpdate;
-      try
-        for SearchResult in fProperty.LdapClient.SearchResult.Items do
-        begin
-          if not Assigned(SearchResult) then
-            continue;
-
-          Row.AddValue('name', SearchResult.Find('name').GetReadable());
-          Row.AddValue('distinguishedName', SearchResult.Find('distinguishedName').GetReadable());
-          ObjectClass := SearchResult.Find('objectClass');
-          Row.AddValue('objectClass', ObjectClass.GetReadable(ObjectClass.Count - 1));
-          Row.AddValue('ADSF', DNToCN(GetParentDN(Row.U['distinguishedName'])));
-          TisGrid_Members.Data.AddItem(Row);
-          Row.Clear;
-        end;
-      finally
-        TisGrid_Members.EndUpdate;
-        TisGrid_Members.LoadData;
-      end;
-    until fProperty.LdapClient.SearchCookie = '';
-  finally
-    fProperty.LdapClient.SearchEnd;
-  end;
+  ClearGrid;
+  FillGrid(fProperty.GetAllReadable('member'));
+  ExpandGridFromDC;
+  ExpandGridFromGC;
 end;
 
 end.
