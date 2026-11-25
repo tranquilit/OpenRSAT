@@ -13,8 +13,8 @@ uses
   unittest.ugeneratekeytab,
   unittest.uviewkeytabpresenter,
   unittest.udoublelistlogic,
-  unittest.uscheduling,
-  unittest.udns;
+  unittest.udns,
+  unittest.uldapedit;
 
 type
 
@@ -39,8 +39,8 @@ begin
     TUnitTestGenerateKeyTab,
     TUnitTestViewKeyTabPresenter,
     TUnitTestDoubleListLogic,
-    TUnitTestScheduling,
-    TUnitTestDNS
+    TUnitTestDNS,
+    TUnitTestLdapEditSession
   ]);
 end;
 

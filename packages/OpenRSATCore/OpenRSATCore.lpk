@@ -165,6 +165,10 @@
         <Filename Value="services\udnsservice.pas"/>
         <UnitName Value="udnsservice"/>
       </Item>
+      <Item>
+        <Filename Value="uldapedit.pas"/>
+        <UnitName Value="uldapedit"/>
+      </Item>
     </Files>
     <i18n>
       <OutDir Value="languages"/>
